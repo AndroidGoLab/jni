@@ -43,6 +43,12 @@ var (
 	midnsdServiceInfoWriteToParcel    jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -69,102 +75,162 @@ func doInit(env *jni.Env) error {
 
 	midnsdServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.describeContents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.describeContents")
 	}
 
 	midnsdServiceInfoGetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHost", "()Ljava/net/InetAddress;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHost: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getHost")
 	}
 
 	midnsdServiceInfoGetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHostAddresses", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHostAddresses: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getHostAddresses")
 	}
 
 	midnsdServiceInfoGetHostname, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHostname", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHostname: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getHostname")
 	}
 
 	midnsdServiceInfoGetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getNetwork", "()Landroid/net/Network;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getNetwork: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getNetwork")
 	}
 
 	midnsdServiceInfoGetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getPort", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getPort: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getPort")
 	}
 
 	midnsdServiceInfoGetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getServiceName", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getServiceName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getServiceName")
 	}
 
 	midnsdServiceInfoGetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getServiceType", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getServiceType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getServiceType")
 	}
 
 	midnsdServiceInfoGetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getSubtypes", "()Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getSubtypes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getSubtypes")
 	}
 
 	midnsdServiceInfoRemoveAttribute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "removeAttribute", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.removeAttribute: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.removeAttribute")
 	}
 
 	midnsdServiceInfoSetAttribute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setAttribute", "(Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setAttribute: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setAttribute")
 	}
 
 	midnsdServiceInfoSetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setHost", "(Ljava/net/InetAddress;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setHost: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setHost")
 	}
 
 	midnsdServiceInfoSetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setHostAddresses", "(Ljava/util/List;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setHostAddresses: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setHostAddresses")
 	}
 
 	midnsdServiceInfoSetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setNetwork", "(Landroid/net/Network;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setNetwork: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setNetwork")
 	}
 
 	midnsdServiceInfoSetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setPort", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setPort: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setPort")
 	}
 
 	midnsdServiceInfoSetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setServiceName", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setServiceName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setServiceName")
 	}
 
 	midnsdServiceInfoSetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setServiceType", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setServiceType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setServiceType")
 	}
 
 	midnsdServiceInfoSetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setSubtypes", "(Ljava/util/Set;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setSubtypes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setSubtypes")
 	}
 
 	midnsdServiceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "toString", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.toString: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.toString")
 	}
 
 	midnsdServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.writeToParcel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.writeToParcel")
 	}
 
 	return nil

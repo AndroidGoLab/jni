@@ -1556,7 +1556,6 @@ type StartSystemDataTransferRequest struct {
 	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1608,13 +1607,6 @@ func (x *StartSystemDataTransferRequest) GetArg1() int64 {
 func (x *StartSystemDataTransferRequest) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
-	}
-	return 0
-}
-
-func (x *StartSystemDataTransferRequest) GetArg3() int64 {
-	if x != nil {
-		return x.Arg3
 	}
 	return 0
 }
@@ -1884,12 +1876,11 @@ const file_proto_companion_companion_proto_rawDesc = "" +
 	"%StartObservingDevicePresence1Response\"<\n" +
 	"&StartObservingDevicePresence1_1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\tR\x04arg0\")\n" +
-	"'StartObservingDevicePresence1_1Response\"p\n" +
+	"'StartObservingDevicePresence1_1Response\"\\\n" +
 	"\x1eStartSystemDataTransferRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"!\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"!\n" +
 	"\x1fStartSystemDataTransferResponse\"9\n" +
 	"#StopObservingDevicePresence1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"&\n" +

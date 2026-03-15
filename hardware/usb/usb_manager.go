@@ -32,6 +32,10 @@ func (m *usbManager) GetAccessoryList() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midusbManagerGetAccessoryList == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.getAccessoryList is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midusbManagerGetAccessoryList,
@@ -52,6 +56,10 @@ func (m *usbManager) HasPermission1(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusbManagerHasPermission1 == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.hasPermission is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -76,6 +84,10 @@ func (m *usbManager) HasPermission1_1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midusbManagerHasPermission1_1 == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.hasPermission is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -99,6 +111,10 @@ func (m *usbManager) OpenAccessory(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midusbManagerOpenAccessory == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.openAccessory is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -120,6 +136,10 @@ func (m *usbManager) OpenAccessoryInputStream(arg0 *jni.Object) (*jni.Object, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusbManagerOpenAccessoryInputStream == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.openAccessoryInputStream is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -143,6 +163,10 @@ func (m *usbManager) OpenAccessoryOutputStream(arg0 *jni.Object) (*jni.Object, e
 			callErr = err
 			return err
 		}
+		if midusbManagerOpenAccessoryOutputStream == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.openAccessoryOutputStream is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -164,6 +188,10 @@ func (m *usbManager) OpenDevice(arg0 *jni.Object) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusbManagerOpenDevice == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.openDevice is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -187,6 +215,10 @@ func (m *usbManager) RequestPermission2(arg0 *jni.Object, arg1 *jni.Object) erro
 			callErr = err
 			return err
 		}
+		if midusbManagerRequestPermission2 == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.requestPermission is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -205,6 +237,10 @@ func (m *usbManager) RequestPermission2_1(arg0 *jni.Object, arg1 *jni.Object) er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusbManagerRequestPermission2_1 == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbManager.requestPermission is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

@@ -32,6 +32,10 @@ func (m *account) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaccountDescribeContents == nil {
+			callErr = fmt.Errorf("android.accounts.Account.describeContents is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaccountDescribeContents,
@@ -52,6 +56,10 @@ func (m *account) Equals(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaccountEquals == nil {
+			callErr = fmt.Errorf("android.accounts.Account.equals is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -76,6 +84,10 @@ func (m *account) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaccountHashCode == nil {
+			callErr = fmt.Errorf("android.accounts.Account.hashCode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaccountHashCode,
@@ -96,6 +108,10 @@ func (m *account) ToString() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaccountToString == nil {
+			callErr = fmt.Errorf("android.accounts.Account.toString is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -118,6 +134,10 @@ func (m *account) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaccountWriteToParcel == nil {
+			callErr = fmt.Errorf("android.accounts.Account.writeToParcel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

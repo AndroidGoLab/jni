@@ -32,6 +32,10 @@ func (m *toast) AddCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midtoastAddCallback == nil {
+			callErr = fmt.Errorf("android.widget.Toast.addCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -51,6 +55,10 @@ func (m *toast) Cancel() error {
 			callErr = err
 			return err
 		}
+		if midtoastCancel == nil {
+			callErr = fmt.Errorf("android.widget.Toast.cancel is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midtoastCancel,
@@ -68,6 +76,10 @@ func (m *toast) GetDuration() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastGetDuration == nil {
+			callErr = fmt.Errorf("android.widget.Toast.getDuration is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -90,6 +102,10 @@ func (m *toast) GetGravity() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtoastGetGravity == nil {
+			callErr = fmt.Errorf("android.widget.Toast.getGravity is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtoastGetGravity,
@@ -110,6 +126,10 @@ func (m *toast) GetHorizontalMargin() (float32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastGetHorizontalMargin == nil {
+			callErr = fmt.Errorf("android.widget.Toast.getHorizontalMargin is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
@@ -132,6 +152,10 @@ func (m *toast) GetVerticalMargin() (float32, error) {
 			callErr = err
 			return err
 		}
+		if midtoastGetVerticalMargin == nil {
+			callErr = fmt.Errorf("android.widget.Toast.getVerticalMargin is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
 			midtoastGetVerticalMargin,
@@ -152,6 +176,10 @@ func (m *toast) GetView() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastGetView == nil {
+			callErr = fmt.Errorf("android.widget.Toast.getView is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -174,6 +202,10 @@ func (m *toast) GetXOffset() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtoastGetXOffset == nil {
+			callErr = fmt.Errorf("android.widget.Toast.getXOffset is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtoastGetXOffset,
@@ -194,6 +226,10 @@ func (m *toast) GetYOffset() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastGetYOffset == nil {
+			callErr = fmt.Errorf("android.widget.Toast.getYOffset is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -216,6 +252,10 @@ func (m *toast) RemoveCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midtoastRemoveCallback == nil {
+			callErr = fmt.Errorf("android.widget.Toast.removeCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -234,6 +274,10 @@ func (m *toast) SetDuration(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastSetDuration == nil {
+			callErr = fmt.Errorf("android.widget.Toast.setDuration is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -254,6 +298,10 @@ func (m *toast) SetGravity(arg0 int32, arg1 int32, arg2 int32) error {
 			callErr = err
 			return err
 		}
+		if midtoastSetGravity == nil {
+			callErr = fmt.Errorf("android.widget.Toast.setGravity is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -272,6 +320,10 @@ func (m *toast) SetMargin(arg0 float32, arg1 float32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastSetMargin == nil {
+			callErr = fmt.Errorf("android.widget.Toast.setMargin is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -292,6 +344,10 @@ func (m *toast) SetText1(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midtoastSetText1 == nil {
+			callErr = fmt.Errorf("android.widget.Toast.setText is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -310,6 +366,10 @@ func (m *toast) SetText1_1(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastSetText1_1 == nil {
+			callErr = fmt.Errorf("android.widget.Toast.setText is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -334,6 +394,10 @@ func (m *toast) SetView(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midtoastSetView == nil {
+			callErr = fmt.Errorf("android.widget.Toast.setView is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -353,6 +417,10 @@ func (m *toast) Show() error {
 			callErr = err
 			return err
 		}
+		if midtoastShow == nil {
+			callErr = fmt.Errorf("android.widget.Toast.show is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midtoastShow,
@@ -370,6 +438,10 @@ func (m *toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastMakeText3 == nil {
+			callErr = fmt.Errorf("android.widget.Toast.makeText is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -392,6 +464,10 @@ func (m *toast) MakeText3_1(arg0 *jni.Object, arg1 string, arg2 int32) (*jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtoastMakeText3_1 == nil {
+			callErr = fmt.Errorf("android.widget.Toast.makeText is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)

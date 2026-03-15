@@ -32,6 +32,10 @@ func (m *bluetoothLeAdvertiser) StartAdvertising3(arg0 *jni.Object, arg1 *jni.Ob
 			callErr = err
 			return err
 		}
+		if midbluetoothLeAdvertiserStartAdvertising3 == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -50,6 +54,10 @@ func (m *bluetoothLeAdvertiser) StartAdvertising4_1(arg0 *jni.Object, arg1 *jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothLeAdvertiserStartAdvertising4_1 == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -70,6 +78,10 @@ func (m *bluetoothLeAdvertiser) StartAdvertisingSet6(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
+		if midbluetoothLeAdvertiserStartAdvertisingSet6 == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -88,6 +100,10 @@ func (m *bluetoothLeAdvertiser) StartAdvertisingSet8_1(arg0 *jni.Object, arg1 *j
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothLeAdvertiserStartAdvertisingSet8_1 == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -108,6 +124,10 @@ func (m *bluetoothLeAdvertiser) StopAdvertising(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midbluetoothLeAdvertiserStopAdvertising == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertising is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -126,6 +146,10 @@ func (m *bluetoothLeAdvertiser) StopAdvertisingSet(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothLeAdvertiserStopAdvertisingSet == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertisingSet is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

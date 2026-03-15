@@ -156,9 +156,6 @@ var cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd = &cobra.Com
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
 		resp, err := client.IsConcurrentSessionConfigurationSupported(ctx, req)
 		if err != nil {
 			return err
@@ -332,7 +329,6 @@ func init() {
 	cameraCameraManagerIsCameraDeviceSetupSupportedCmd.Flags().String("arg0", "", "arg0 (string)")
 	cameraCameraManagerCmd.AddCommand(cameraCameraManagerIsCameraDeviceSetupSupportedCmd)
 	cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	cameraCameraManagerCmd.AddCommand(cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd)
 	cameraCameraManagerOpenCameraCmd.Flags().String("arg0", "", "arg0 (string)")
 	cameraCameraManagerOpenCameraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")

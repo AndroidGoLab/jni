@@ -32,6 +32,10 @@ func (m *ndef) CanMakeReadOnly() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midndefCanMakeReadOnly == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.canMakeReadOnly is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midndefCanMakeReadOnly,
@@ -54,6 +58,10 @@ func (m *ndef) Close() error {
 			callErr = err
 			return err
 		}
+		if midndefClose == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.close is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midndefClose,
@@ -72,6 +80,10 @@ func (m *ndef) Connect() error {
 			callErr = err
 			return err
 		}
+		if midndefConnect == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.connect is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midndefConnect,
@@ -89,6 +101,10 @@ func (m *ndef) GetCachedNdefMessage() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midndefGetCachedNdefMessage == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.getCachedNdefMessage is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -111,6 +127,10 @@ func (m *ndef) GetMaxSize() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midndefGetMaxSize == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.getMaxSize is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midndefGetMaxSize,
@@ -131,6 +151,10 @@ func (m *ndef) GetNdefMessage() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midndefGetNdefMessage == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.getNdefMessage is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -153,6 +177,10 @@ func (m *ndef) GetTag() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midndefGetTag == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.getTag is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midndefGetTag,
@@ -173,6 +201,10 @@ func (m *ndef) GetType() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midndefGetType == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.getType is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -196,6 +228,10 @@ func (m *ndef) IsConnected() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midndefIsConnected == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.isConnected is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midndefIsConnected,
@@ -217,6 +253,10 @@ func (m *ndef) IsWritable() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midndefIsWritable == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.isWritable is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -240,6 +280,10 @@ func (m *ndef) MakeReadOnly() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midndefMakeReadOnly == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.makeReadOnly is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midndefMakeReadOnly,
@@ -262,6 +306,10 @@ func (m *ndef) WriteNdefMessage(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midndefWriteNdefMessage == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.writeNdefMessage is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -280,6 +328,10 @@ func (m *ndef) Get(arg0 *jni.Object) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midndefGet == nil {
+			callErr = fmt.Errorf("android.nfc.tech.Ndef.get is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(

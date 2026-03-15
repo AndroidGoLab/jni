@@ -74,6 +74,10 @@ func (m *powerManager) AddThermalHeadroomListener1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midpowerManagerAddThermalHeadroomListener1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.addThermalHeadroomListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -92,6 +96,10 @@ func (m *powerManager) AddThermalHeadroomListener2_1(arg0 *jni.Object, arg1 *jni
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerAddThermalHeadroomListener2_1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.addThermalHeadroomListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -112,6 +120,10 @@ func (m *powerManager) AddThermalStatusListener1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midpowerManagerAddThermalStatusListener1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.addThermalStatusListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -131,6 +143,10 @@ func (m *powerManager) AddThermalStatusListener2_1(arg0 *jni.Object, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midpowerManagerAddThermalStatusListener2_1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.addThermalStatusListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -149,6 +165,10 @@ func (m *powerManager) GetBatteryDischargePrediction() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerGetBatteryDischargePrediction == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.getBatteryDischargePrediction is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -171,6 +191,10 @@ func (m *powerManager) GetCurrentThermalStatus() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerGetCurrentThermalStatus == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.getCurrentThermalStatus is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midpowerManagerGetCurrentThermalStatus,
@@ -192,6 +216,10 @@ func (m *powerManager) GetLocationPowerSaveMode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerGetLocationPowerSaveMode == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.getLocationPowerSaveMode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midpowerManagerGetLocationPowerSaveMode,
@@ -212,6 +240,10 @@ func (m *powerManager) GetThermalHeadroom(arg0 int32) (float32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerGetThermalHeadroom == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.getThermalHeadroom is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
@@ -235,6 +267,10 @@ func (m *powerManager) IsAllowedInLowPowerStandby1(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsAllowedInLowPowerStandby1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isAllowedInLowPowerStandby is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -257,6 +293,10 @@ func (m *powerManager) IsAllowedInLowPowerStandby1_1(arg0 string) (bool, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerIsAllowedInLowPowerStandby1_1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isAllowedInLowPowerStandby is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -285,6 +325,10 @@ func (m *powerManager) IsBatteryDischargePredictionPersonalized() (bool, error) 
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsBatteryDischargePredictionPersonalized == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isBatteryDischargePredictionPersonalized is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpowerManagerIsBatteryDischargePredictionPersonalized,
@@ -306,6 +350,10 @@ func (m *powerManager) IsDeviceIdleMode() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerIsDeviceIdleMode == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isDeviceIdleMode is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -329,6 +377,10 @@ func (m *powerManager) IsDeviceLightIdleMode() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsDeviceLightIdleMode == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isDeviceLightIdleMode is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpowerManagerIsDeviceLightIdleMode,
@@ -351,6 +403,10 @@ func (m *powerManager) IsExemptFromLowPowerStandby() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsExemptFromLowPowerStandby == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isExemptFromLowPowerStandby is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpowerManagerIsExemptFromLowPowerStandby,
@@ -372,6 +428,10 @@ func (m *powerManager) IsIgnoringBatteryOptimizations(arg0 string) (bool, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerIsIgnoringBatteryOptimizations == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isIgnoringBatteryOptimizations is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -400,6 +460,10 @@ func (m *powerManager) IsInteractive() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsInteractive == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isInteractive is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpowerManagerIsInteractive,
@@ -421,6 +485,10 @@ func (m *powerManager) IsLowPowerStandbyEnabled() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerIsLowPowerStandbyEnabled == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isLowPowerStandbyEnabled is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -444,6 +512,10 @@ func (m *powerManager) IsPowerSaveMode() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsPowerSaveMode == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isPowerSaveMode is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpowerManagerIsPowerSaveMode,
@@ -465,6 +537,10 @@ func (m *powerManager) IsRebootingUserspaceSupported() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerIsRebootingUserspaceSupported == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isRebootingUserspaceSupported is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -488,6 +564,10 @@ func (m *powerManager) IsScreenOn() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsScreenOn == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isScreenOn is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpowerManagerIsScreenOn,
@@ -509,6 +589,10 @@ func (m *powerManager) IsSustainedPerformanceModeSupported() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerIsSustainedPerformanceModeSupported == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isSustainedPerformanceModeSupported is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -532,6 +616,10 @@ func (m *powerManager) IsWakeLockLevelSupported(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpowerManagerIsWakeLockLevelSupported == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.isWakeLockLevelSupported is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -554,6 +642,10 @@ func (m *powerManager) NewWakeLock(arg0 int32, arg1 string) (*jni.Object, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerNewWakeLock == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.newWakeLock is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -582,6 +674,10 @@ func (m *powerManager) Reboot(arg0 string) error {
 			callErr = err
 			return err
 		}
+		if midpowerManagerReboot == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.reboot is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -605,6 +701,10 @@ func (m *powerManager) RemoveThermalHeadroomListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midpowerManagerRemoveThermalHeadroomListener == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.removeThermalHeadroomListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -623,6 +723,10 @@ func (m *powerManager) RemoveThermalStatusListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerRemoveThermalStatusListener == nil {
+			callErr = fmt.Errorf("android.os.PowerManager.removeThermalStatusListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

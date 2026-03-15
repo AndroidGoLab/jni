@@ -52,6 +52,18 @@ func ResolveType(javaType string) TypeConv {
 		}
 	}
 
+	// Handle Java varargs: "int..." becomes "int[]" in JNI (varargs are arrays).
+	if strings.HasSuffix(javaType, "...") {
+		elemType := strings.TrimSuffix(javaType, "...")
+		elemConv := ResolveType(elemType)
+		return TypeConv{
+			GoType:     "*jni.Object",
+			JNISig:     "[" + elemConv.JNISig,
+			CallSuffix: "Object",
+			IsObject:   true,
+		}
+	}
+
 	// Check array types first.
 	// JNI arrays are JNI objects, so the Go type is always *jni.Object.
 	// Callers can convert between Go slices and JNI arrays as needed.
@@ -167,6 +179,11 @@ func JNITypeSignature(javaType string) string {
 		return normalizeJNISig(javaType)
 	}
 
+	// Handle Java varargs: "int..." becomes "[I" in JNI (varargs are arrays).
+	if strings.HasSuffix(javaType, "...") {
+		return "[" + JNITypeSignature(strings.TrimSuffix(javaType, "..."))
+	}
+
 	// Array types.
 	if strings.HasSuffix(javaType, "[]") {
 		return "[" + JNITypeSignature(strings.TrimSuffix(javaType, "[]"))
@@ -239,11 +256,19 @@ func normalizeJNISig(sig string) string {
 
 // stripGenerics removes Java generic type parameters from a type name.
 // JNI uses erased types, so generics must be stripped before building
-// JNI signatures. Handles nested generics:
+// JNI signatures. Handles nested generics and incomplete generics
+// caused by YAML splitting on commas inside generic type parameters:
 //
 //	"java.util.Set<java.lang.String>"                → "java.util.Set"
 //	"java.util.Map<java.lang.String, java.util.List<java.lang.Integer>>" → "java.util.Map"
+//	"java.util.Map<java.lang.String"                 → "java.util.Map"     (split first half)
+//	"android.hardware.camera2.params.SessionConfiguration>" → "android.hardware.camera2.params.SessionConfiguration" (split second half)
 func stripGenerics(javaType string) string {
+	// Strip trailing '>' left over from YAML splitting on commas inside
+	// generic type parameters (e.g. "SomeType>" is the second half of
+	// "Map<String, SomeType>" that was split by YAML).
+	javaType = strings.TrimRight(javaType, ">")
+
 	idx := strings.IndexByte(javaType, '<')
 	if idx < 0 {
 		return javaType

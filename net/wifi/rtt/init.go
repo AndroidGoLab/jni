@@ -56,6 +56,12 @@ var (
 	midrangingResultWriteToParcel                            jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -82,167 +88,266 @@ func doInit(env *jni.Env) error {
 
 	midrangingResultDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.describeContents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.describeContents")
 	}
 
 	midrangingResultEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.equals: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.equals")
 	}
 
 	midrangingResultGet80211azInitiatorTxLtfRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azInitiatorTxLtfRepetitionsCount", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azInitiatorTxLtfRepetitionsCount: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.get80211azInitiatorTxLtfRepetitionsCount")
 	}
 
 	midrangingResultGet80211azNumberOfRxSpatialStreams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azNumberOfRxSpatialStreams", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azNumberOfRxSpatialStreams: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.get80211azNumberOfRxSpatialStreams")
 	}
 
 	midrangingResultGet80211azNumberOfTxSpatialStreams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azNumberOfTxSpatialStreams", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azNumberOfTxSpatialStreams: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.get80211azNumberOfTxSpatialStreams")
 	}
 
 	midrangingResultGet80211azResponderTxLtfRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azResponderTxLtfRepetitionsCount", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azResponderTxLtfRepetitionsCount: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.get80211azResponderTxLtfRepetitionsCount")
 	}
 
 	midrangingResultGetDistanceMm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getDistanceMm", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getDistanceMm: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getDistanceMm")
 	}
 
 	midrangingResultGetDistanceStdDevMm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getDistanceStdDevMm", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getDistanceStdDevMm: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getDistanceStdDevMm")
 	}
 
 	midrangingResultGetLci, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getLci", "()[B")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getLci: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getLci")
 	}
 
 	midrangingResultGetLcr, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getLcr", "()[B")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getLcr: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getLcr")
 	}
 
 	midrangingResultGetMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMacAddress", "()Landroid/net/MacAddress;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMacAddress: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getMacAddress")
 	}
 
 	midrangingResultGetMaxTimeBetweenNtbMeasurementsMicros, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMaxTimeBetweenNtbMeasurementsMicros", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMaxTimeBetweenNtbMeasurementsMicros: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getMaxTimeBetweenNtbMeasurementsMicros")
 	}
 
 	midrangingResultGetMeasurementBandwidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMeasurementBandwidth", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMeasurementBandwidth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getMeasurementBandwidth")
 	}
 
 	midrangingResultGetMeasurementChannelFrequencyMHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMeasurementChannelFrequencyMHz", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMeasurementChannelFrequencyMHz: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getMeasurementChannelFrequencyMHz")
 	}
 
 	midrangingResultGetMinTimeBetweenNtbMeasurementsMicros, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMinTimeBetweenNtbMeasurementsMicros", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMinTimeBetweenNtbMeasurementsMicros: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getMinTimeBetweenNtbMeasurementsMicros")
 	}
 
 	midrangingResultGetNumAttemptedMeasurements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getNumAttemptedMeasurements", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getNumAttemptedMeasurements: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getNumAttemptedMeasurements")
 	}
 
 	midrangingResultGetNumSuccessfulMeasurements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getNumSuccessfulMeasurements", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getNumSuccessfulMeasurements: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getNumSuccessfulMeasurements")
 	}
 
 	midrangingResultGetPasnComebackAfterMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getPasnComebackAfterMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getPasnComebackAfterMillis: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getPasnComebackAfterMillis")
 	}
 
 	midrangingResultGetPasnComebackCookie, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getPasnComebackCookie", "()[B")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getPasnComebackCookie: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getPasnComebackCookie")
 	}
 
 	midrangingResultGetPeerHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getPeerHandle", "()Landroid/net/wifi/aware/PeerHandle;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getPeerHandle: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getPeerHandle")
 	}
 
 	midrangingResultGetRangingTimestampMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getRangingTimestampMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getRangingTimestampMillis: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getRangingTimestampMillis")
 	}
 
 	midrangingResultGetRssi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getRssi", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getRssi: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getRssi")
 	}
 
 	midrangingResultGetSecureHeLtfProtocolVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getSecureHeLtfProtocolVersion", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getSecureHeLtfProtocolVersion: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getSecureHeLtfProtocolVersion")
 	}
 
 	midrangingResultGetStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getStatus", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getStatus: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getStatus")
 	}
 
 	midrangingResultGetUnverifiedResponderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getUnverifiedResponderLocation", "()Landroid/net/wifi/rtt/ResponderLocation;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getUnverifiedResponderLocation: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.getUnverifiedResponderLocation")
 	}
 
 	midrangingResultHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "hashCode", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.hashCode: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.hashCode")
 	}
 
 	midrangingResultIs80211azNtbMeasurement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "is80211azNtbMeasurement", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.is80211azNtbMeasurement: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.is80211azNtbMeasurement")
 	}
 
 	midrangingResultIs80211mcMeasurement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "is80211mcMeasurement", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.is80211mcMeasurement: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.is80211mcMeasurement")
 	}
 
 	midrangingResultIsRangingAuthenticated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "isRangingAuthenticated", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.isRangingAuthenticated: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.isRangingAuthenticated")
 	}
 
 	midrangingResultIsRangingFrameProtected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "isRangingFrameProtected", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.isRangingFrameProtected: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.isRangingFrameProtected")
 	}
 
 	midrangingResultIsSecureHeLtfEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "isSecureHeLtfEnabled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.isSecureHeLtfEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.isSecureHeLtfEnabled")
 	}
 
 	midrangingResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "toString", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.toString: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.toString")
 	}
 
 	midrangingResultWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.writeToParcel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.rtt.RangingResult.writeToParcel")
 	}
 
 	return nil

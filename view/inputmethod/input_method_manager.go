@@ -74,6 +74,10 @@ func (m *inputMethodManager) AcceptStylusHandwritingDelegation1(arg0 *jni.Object
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerAcceptStylusHandwritingDelegation1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -96,6 +100,10 @@ func (m *inputMethodManager) AcceptStylusHandwritingDelegation2_1(arg0 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerAcceptStylusHandwritingDelegation2_1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -125,6 +133,10 @@ func (m *inputMethodManager) AcceptStylusHandwritingDelegation5_2(arg0 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerAcceptStylusHandwritingDelegation5_2 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -148,6 +160,10 @@ func (m *inputMethodManager) AcceptStylusHandwritingDelegation4_3(arg0 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerAcceptStylusHandwritingDelegation4_3 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -173,6 +189,10 @@ func (m *inputMethodManager) DispatchKeyEventFromInputMethod(arg0 *jni.Object, a
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerDispatchKeyEventFromInputMethod == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.dispatchKeyEventFromInputMethod is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -192,6 +212,10 @@ func (m *inputMethodManager) DisplayCompletions(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerDisplayCompletions == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.displayCompletions is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -210,6 +234,10 @@ func (m *inputMethodManager) GetCurrentInputMethodInfo() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerGetCurrentInputMethodInfo == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getCurrentInputMethodInfo is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -232,6 +260,10 @@ func (m *inputMethodManager) GetCurrentInputMethodSubtype() (*jni.Object, error)
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerGetCurrentInputMethodSubtype == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getCurrentInputMethodSubtype is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midinputMethodManagerGetCurrentInputMethodSubtype,
@@ -253,6 +285,10 @@ func (m *inputMethodManager) GetEnabledInputMethodList() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerGetEnabledInputMethodList == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getEnabledInputMethodList is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midinputMethodManagerGetEnabledInputMethodList,
@@ -273,6 +309,10 @@ func (m *inputMethodManager) GetEnabledInputMethodSubtypeList(arg0 *jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerGetEnabledInputMethodSubtypeList == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getEnabledInputMethodSubtypeList is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -301,6 +341,10 @@ func (m *inputMethodManager) GetInputMethodList() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerGetInputMethodList == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getInputMethodList is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midinputMethodManagerGetInputMethodList,
@@ -321,6 +365,10 @@ func (m *inputMethodManager) GetLastInputMethodSubtype() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerGetLastInputMethodSubtype == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getLastInputMethodSubtype is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -343,6 +391,10 @@ func (m *inputMethodManager) HideSoftInputFromInputMethod(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerHideSoftInputFromInputMethod == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.hideSoftInputFromInputMethod is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -361,6 +413,10 @@ func (m *inputMethodManager) HideSoftInputFromWindow2(arg0 *jni.Object, arg1 int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerHideSoftInputFromWindow2 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -385,6 +441,10 @@ func (m *inputMethodManager) HideSoftInputFromWindow3_1(arg0 *jni.Object, arg1 i
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerHideSoftInputFromWindow3_1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -408,6 +468,10 @@ func (m *inputMethodManager) HideStatusIcon(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerHideStatusIcon == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.hideStatusIcon is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -427,6 +491,10 @@ func (m *inputMethodManager) InvalidateInput(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerInvalidateInput == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.invalidateInput is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -445,6 +513,10 @@ func (m *inputMethodManager) IsAcceptingText() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerIsAcceptingText == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isAcceptingText is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -468,6 +540,10 @@ func (m *inputMethodManager) IsActive0() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerIsActive0 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isActive is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midinputMethodManagerIsActive0,
@@ -489,6 +565,10 @@ func (m *inputMethodManager) IsActive1_1(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerIsActive1_1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isActive is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -513,6 +593,10 @@ func (m *inputMethodManager) IsConnectionlessStylusHandwritingAvailable() (bool,
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerIsConnectionlessStylusHandwritingAvailable == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isConnectionlessStylusHandwritingAvailable is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midinputMethodManagerIsConnectionlessStylusHandwritingAvailable,
@@ -534,6 +618,10 @@ func (m *inputMethodManager) IsFullscreenMode() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerIsFullscreenMode == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isFullscreenMode is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -557,6 +645,10 @@ func (m *inputMethodManager) IsInputMethodSuppressingSpellChecker() (bool, error
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerIsInputMethodSuppressingSpellChecker == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isInputMethodSuppressingSpellChecker is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midinputMethodManagerIsInputMethodSuppressingSpellChecker,
@@ -579,6 +671,10 @@ func (m *inputMethodManager) IsStylusHandwritingAvailable() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerIsStylusHandwritingAvailable == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isStylusHandwritingAvailable is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midinputMethodManagerIsStylusHandwritingAvailable,
@@ -600,6 +696,10 @@ func (m *inputMethodManager) IsWatchingCursor(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerIsWatchingCursor == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isWatchingCursor is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -624,6 +724,10 @@ func (m *inputMethodManager) PrepareStylusHandwritingDelegation1(arg0 *jni.Objec
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerPrepareStylusHandwritingDelegation1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.prepareStylusHandwritingDelegation is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -642,6 +746,10 @@ func (m *inputMethodManager) PrepareStylusHandwritingDelegation2_1(arg0 *jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerPrepareStylusHandwritingDelegation2_1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.prepareStylusHandwritingDelegation is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -667,6 +775,10 @@ func (m *inputMethodManager) RestartInput(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerRestartInput == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.restartInput is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -685,6 +797,10 @@ func (m *inputMethodManager) SendAppPrivateCommand(arg0 *jni.Object, arg1 string
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerSendAppPrivateCommand == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.sendAppPrivateCommand is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -710,6 +826,10 @@ func (m *inputMethodManager) SetAdditionalInputMethodSubtypes(arg0 string, arg1 
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerSetAdditionalInputMethodSubtypes == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.setAdditionalInputMethodSubtypes is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -732,6 +852,10 @@ func (m *inputMethodManager) SetCurrentInputMethodSubtype(arg0 *jni.Object) (boo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerSetCurrentInputMethodSubtype == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.setCurrentInputMethodSubtype is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -756,6 +880,10 @@ func (m *inputMethodManager) SetExplicitlyEnabledInputMethodSubtypes(arg0 string
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerSetExplicitlyEnabledInputMethodSubtypes == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.setExplicitlyEnabledInputMethodSubtypes is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -778,6 +906,10 @@ func (m *inputMethodManager) SetInputMethod(arg0 *jni.Object, arg1 string) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerSetInputMethod == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.setInputMethod is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -803,6 +935,10 @@ func (m *inputMethodManager) SetInputMethodAndSubtype(arg0 *jni.Object, arg1 str
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerSetInputMethodAndSubtype == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.setInputMethodAndSubtype is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -827,6 +963,10 @@ func (m *inputMethodManager) ShouldOfferSwitchingToNextInputMethod(arg0 *jni.Obj
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerShouldOfferSwitchingToNextInputMethod == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.shouldOfferSwitchingToNextInputMethod is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -849,6 +989,10 @@ func (m *inputMethodManager) ShowInputMethodAndSubtypeEnabler(arg0 string) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerShowInputMethodAndSubtypeEnabler == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.showInputMethodAndSubtypeEnabler is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -873,6 +1017,10 @@ func (m *inputMethodManager) ShowInputMethodPicker() error {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerShowInputMethodPicker == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.showInputMethodPicker is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midinputMethodManagerShowInputMethodPicker,
@@ -890,6 +1038,10 @@ func (m *inputMethodManager) ShowSoftInput2(arg0 *jni.Object, arg1 int32) (bool,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerShowSoftInput2 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.showSoftInput is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -914,6 +1066,10 @@ func (m *inputMethodManager) ShowSoftInput3_1(arg0 *jni.Object, arg1 int32, arg2
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerShowSoftInput3_1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.showSoftInput is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -937,6 +1093,10 @@ func (m *inputMethodManager) ShowSoftInputFromInputMethod(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerShowSoftInputFromInputMethod == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.showSoftInputFromInputMethod is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -955,6 +1115,10 @@ func (m *inputMethodManager) ShowStatusIcon(arg0 *jni.Object, arg1 string, arg2 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerShowStatusIcon == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.showStatusIcon is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -980,6 +1144,10 @@ func (m *inputMethodManager) StartConnectionlessStylusHandwriting(arg0 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerStartConnectionlessStylusHandwriting == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwriting is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -998,6 +1166,10 @@ func (m *inputMethodManager) StartConnectionlessStylusHandwritingForDelegation5(
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerStartConnectionlessStylusHandwritingForDelegation5 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwritingForDelegation is not available on this device")
+			return callErr
 		}
 
 		jArg2, err := env.NewStringUTF(arg2)
@@ -1023,6 +1195,10 @@ func (m *inputMethodManager) StartConnectionlessStylusHandwritingForDelegation4_
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1 == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwritingForDelegation is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1042,6 +1218,10 @@ func (m *inputMethodManager) StartStylusHandwriting(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerStartStylusHandwriting == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.startStylusHandwriting is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1060,6 +1240,10 @@ func (m *inputMethodManager) SwitchToLastInputMethod(arg0 *jni.Object) (bool, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerSwitchToLastInputMethod == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.switchToLastInputMethod is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1083,6 +1267,10 @@ func (m *inputMethodManager) SwitchToNextInputMethod(arg0 *jni.Object, arg1 bool
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerSwitchToNextInputMethod == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.switchToNextInputMethod is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -1112,6 +1300,10 @@ func (m *inputMethodManager) ToggleSoftInput(arg0 int32, arg1 int32) error {
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerToggleSoftInput == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.toggleSoftInput is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1130,6 +1322,10 @@ func (m *inputMethodManager) ToggleSoftInputFromWindow(arg0 *jni.Object, arg1 in
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerToggleSoftInputFromWindow == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.toggleSoftInputFromWindow is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1150,6 +1346,10 @@ func (m *inputMethodManager) UpdateCursor(arg0 *jni.Object, arg1 int32, arg2 int
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerUpdateCursor == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.updateCursor is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1168,6 +1368,10 @@ func (m *inputMethodManager) UpdateCursorAnchorInfo(arg0 *jni.Object, arg1 *jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerUpdateCursorAnchorInfo == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.updateCursorAnchorInfo is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1188,6 +1392,10 @@ func (m *inputMethodManager) UpdateExtractedText(arg0 *jni.Object, arg1 int32, a
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerUpdateExtractedText == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.updateExtractedText is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1207,6 +1415,10 @@ func (m *inputMethodManager) UpdateSelection(arg0 *jni.Object, arg1 int32, arg2 
 			callErr = err
 			return err
 		}
+		if midinputMethodManagerUpdateSelection == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.updateSelection is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1225,6 +1437,10 @@ func (m *inputMethodManager) ViewClicked(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midinputMethodManagerViewClicked == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.viewClicked is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

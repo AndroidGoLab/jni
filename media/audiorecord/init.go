@@ -65,6 +65,12 @@ var (
 	midaudioRecordGetMinBufferSize                     jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -91,212 +97,338 @@ func doInit(env *jni.Env) error {
 
 	midaudioRecordGetActiveMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getActiveMicrophones", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getActiveMicrophones: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getActiveMicrophones")
 	}
 
 	midaudioRecordGetActiveRecordingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getActiveRecordingConfiguration", "()Landroid/media/AudioRecordingConfiguration;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getActiveRecordingConfiguration: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getActiveRecordingConfiguration")
 	}
 
 	midaudioRecordGetAudioFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getAudioFormat", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getAudioFormat: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getAudioFormat")
 	}
 
 	midaudioRecordGetAudioSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getAudioSessionId", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getAudioSessionId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getAudioSessionId")
 	}
 
 	midaudioRecordGetAudioSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getAudioSource", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getAudioSource: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getAudioSource")
 	}
 
 	midaudioRecordGetBufferSizeInFrames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getBufferSizeInFrames", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getBufferSizeInFrames: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getBufferSizeInFrames")
 	}
 
 	midaudioRecordGetChannelConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getChannelConfiguration", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getChannelConfiguration: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getChannelConfiguration")
 	}
 
 	midaudioRecordGetChannelCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getChannelCount", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getChannelCount: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getChannelCount")
 	}
 
 	midaudioRecordGetFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getFormat", "()Landroid/media/AudioFormat;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getFormat: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getFormat")
 	}
 
 	midaudioRecordGetLogSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getLogSessionId", "()Landroid/media/metrics/LogSessionId;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getLogSessionId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getLogSessionId")
 	}
 
 	midaudioRecordGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getMetrics", "()Landroid/os/PersistableBundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getMetrics: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getMetrics")
 	}
 
 	midaudioRecordGetNotificationMarkerPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getNotificationMarkerPosition", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getNotificationMarkerPosition: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getNotificationMarkerPosition")
 	}
 
 	midaudioRecordGetPositionNotificationPeriod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getPositionNotificationPeriod", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getPositionNotificationPeriod: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getPositionNotificationPeriod")
 	}
 
 	midaudioRecordGetPreferredDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getPreferredDevice", "()Landroid/media/AudioDeviceInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getPreferredDevice: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getPreferredDevice")
 	}
 
 	midaudioRecordGetRecordingState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getRecordingState", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getRecordingState: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getRecordingState")
 	}
 
 	midaudioRecordGetRoutedDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getRoutedDevice", "()Landroid/media/AudioDeviceInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getRoutedDevice: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getRoutedDevice")
 	}
 
 	midaudioRecordGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getRoutedDevices", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getRoutedDevices: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getRoutedDevices")
 	}
 
 	midaudioRecordGetSampleRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getSampleRate", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getSampleRate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getSampleRate")
 	}
 
 	midaudioRecordGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getState", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getState: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getState")
 	}
 
 	midaudioRecordGetTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getTimestamp", "(Landroid/media/AudioTimestamp;I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getTimestamp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getTimestamp")
 	}
 
 	midaudioRecordIsPrivacySensitive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "isPrivacySensitive", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.isPrivacySensitive: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.isPrivacySensitive")
 	}
 
 	midaudioRecordRead3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "read", "([BII)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.read: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.read")
 	}
 
 	midaudioRecordRead4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "read", "([BIII)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.read: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.read")
 	}
 
 	midaudioRecordRead4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "read", "([FIII)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.read: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.read")
 	}
 
 	midaudioRecordRead3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "read", "([SII)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.read: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.read")
 	}
 
 	midaudioRecordRead4_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "read", "([SIII)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.read: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.read")
 	}
 
 	midaudioRecordRegisterAudioRecordingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "registerAudioRecordingCallback", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$AudioRecordingCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.registerAudioRecordingCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.registerAudioRecordingCallback")
 	}
 
 	midaudioRecordRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "release", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.release: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.release")
 	}
 
 	midaudioRecordRemoveOnRoutingChangedListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "removeOnRoutingChangedListener", "(Landroid/media/AudioRecord$OnRoutingChangedListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.removeOnRoutingChangedListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.removeOnRoutingChangedListener")
 	}
 
 	midaudioRecordRemoveOnRoutingChangedListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "removeOnRoutingChangedListener", "(Landroid/media/AudioRouting$OnRoutingChangedListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.removeOnRoutingChangedListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.removeOnRoutingChangedListener")
 	}
 
 	midaudioRecordSetLogSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "setLogSessionId", "(Landroid/media/metrics/LogSessionId;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.setLogSessionId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.setLogSessionId")
 	}
 
 	midaudioRecordSetNotificationMarkerPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "setNotificationMarkerPosition", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.setNotificationMarkerPosition: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.setNotificationMarkerPosition")
 	}
 
 	midaudioRecordSetPositionNotificationPeriod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "setPositionNotificationPeriod", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.setPositionNotificationPeriod: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.setPositionNotificationPeriod")
 	}
 
 	midaudioRecordSetPreferredDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "setPreferredDevice", "(Landroid/media/AudioDeviceInfo;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.setPreferredDevice: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.setPreferredDevice")
 	}
 
 	midaudioRecordSetPreferredMicrophoneDirection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "setPreferredMicrophoneDirection", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.setPreferredMicrophoneDirection: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.setPreferredMicrophoneDirection")
 	}
 
 	midaudioRecordSetPreferredMicrophoneFieldDimension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "setPreferredMicrophoneFieldDimension", "(F)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.setPreferredMicrophoneFieldDimension: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.setPreferredMicrophoneFieldDimension")
 	}
 
 	midaudioRecordSetRecordPositionUpdateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "setRecordPositionUpdateListener", "(Landroid/media/AudioRecord$OnRecordPositionUpdateListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.setRecordPositionUpdateListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.setRecordPositionUpdateListener")
 	}
 
 	midaudioRecordStartRecording0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "startRecording", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.startRecording: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.startRecording")
 	}
 
 	midaudioRecordStartRecording1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "startRecording", "(Landroid/media/MediaSyncEvent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.startRecording: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.startRecording")
 	}
 
 	midaudioRecordStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "stop", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.stop: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.stop")
 	}
 
 	midaudioRecordUnregisterAudioRecordingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "unregisterAudioRecordingCallback", "(Landroid/media/AudioManager$AudioRecordingCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.unregisterAudioRecordingCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.unregisterAudioRecordingCallback")
 	}
 
 	midaudioRecordGetMinBufferSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getMinBufferSize", "(III)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioRecord.getMinBufferSize: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioRecord.getMinBufferSize")
 	}
 
 	return nil

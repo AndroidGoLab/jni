@@ -92,6 +92,12 @@ var (
 	midjobInfoBuilderSetUserInitiated             jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -118,192 +124,306 @@ func doInit(env *jni.Env) error {
 
 	midjobInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.describeContents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.describeContents")
 	}
 
 	midjobInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.equals: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.equals")
 	}
 
 	midjobInfoGetBackoffPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getBackoffPolicy", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getBackoffPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getBackoffPolicy")
 	}
 
 	midjobInfoGetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getClipData", "()Landroid/content/ClipData;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getClipData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getClipData")
 	}
 
 	midjobInfoGetClipGrantFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getClipGrantFlags", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getClipGrantFlags: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getClipGrantFlags")
 	}
 
 	midjobInfoGetDebugTags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getDebugTags", "()Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getDebugTags: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getDebugTags")
 	}
 
 	midjobInfoGetEstimatedNetworkDownloadBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getEstimatedNetworkDownloadBytes", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getEstimatedNetworkDownloadBytes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getEstimatedNetworkDownloadBytes")
 	}
 
 	midjobInfoGetEstimatedNetworkUploadBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getEstimatedNetworkUploadBytes", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getEstimatedNetworkUploadBytes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getEstimatedNetworkUploadBytes")
 	}
 
 	midjobInfoGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getExtras", "()Landroid/os/PersistableBundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getExtras")
 	}
 
 	midjobInfoGetFlexMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getFlexMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getFlexMillis: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getFlexMillis")
 	}
 
 	midjobInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getId", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getId")
 	}
 
 	midjobInfoGetInitialBackoffMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getInitialBackoffMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getInitialBackoffMillis: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getInitialBackoffMillis")
 	}
 
 	midjobInfoGetIntervalMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getIntervalMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getIntervalMillis: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getIntervalMillis")
 	}
 
 	midjobInfoGetMaxExecutionDelayMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getMaxExecutionDelayMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getMaxExecutionDelayMillis: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getMaxExecutionDelayMillis")
 	}
 
 	midjobInfoGetMinLatencyMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getMinLatencyMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getMinLatencyMillis: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getMinLatencyMillis")
 	}
 
 	midjobInfoGetMinimumNetworkChunkBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getMinimumNetworkChunkBytes", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getMinimumNetworkChunkBytes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getMinimumNetworkChunkBytes")
 	}
 
 	midjobInfoGetNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getNetworkType", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getNetworkType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getNetworkType")
 	}
 
 	midjobInfoGetPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getPriority", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getPriority: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getPriority")
 	}
 
 	midjobInfoGetRequiredNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getRequiredNetwork", "()Landroid/net/NetworkRequest;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getRequiredNetwork: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getRequiredNetwork")
 	}
 
 	midjobInfoGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getService", "()Landroid/content/ComponentName;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getService: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getService")
 	}
 
 	midjobInfoGetTraceTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTraceTag", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getTraceTag: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getTraceTag")
 	}
 
 	midjobInfoGetTransientExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTransientExtras", "()Landroid/os/Bundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getTransientExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getTransientExtras")
 	}
 
 	midjobInfoGetTriggerContentMaxDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTriggerContentMaxDelay", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getTriggerContentMaxDelay: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getTriggerContentMaxDelay")
 	}
 
 	midjobInfoGetTriggerContentUpdateDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTriggerContentUpdateDelay", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getTriggerContentUpdateDelay: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getTriggerContentUpdateDelay")
 	}
 
 	midjobInfoGetTriggerContentUris, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTriggerContentUris", "()[Landroid/app/job/JobInfo$TriggerContentUri;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getTriggerContentUris: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.getTriggerContentUris")
 	}
 
 	midjobInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "hashCode", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.hashCode: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.hashCode")
 	}
 
 	midjobInfoIsExpedited, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isExpedited", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isExpedited: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isExpedited")
 	}
 
 	midjobInfoIsImportantWhileForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isImportantWhileForeground", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isImportantWhileForeground: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isImportantWhileForeground")
 	}
 
 	midjobInfoIsPeriodic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isPeriodic", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isPeriodic: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isPeriodic")
 	}
 
 	midjobInfoIsPersisted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isPersisted", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isPersisted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isPersisted")
 	}
 
 	midjobInfoIsPrefetch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isPrefetch", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isPrefetch: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isPrefetch")
 	}
 
 	midjobInfoIsRequireBatteryNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireBatteryNotLow", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireBatteryNotLow: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isRequireBatteryNotLow")
 	}
 
 	midjobInfoIsRequireCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireCharging", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireCharging: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isRequireCharging")
 	}
 
 	midjobInfoIsRequireDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireDeviceIdle", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireDeviceIdle: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isRequireDeviceIdle")
 	}
 
 	midjobInfoIsRequireStorageNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireStorageNotLow", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireStorageNotLow: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isRequireStorageNotLow")
 	}
 
 	midjobInfoIsUserInitiated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isUserInitiated", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isUserInitiated: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.isUserInitiated")
 	}
 
 	midjobInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "toString", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.toString: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.toString")
 	}
 
 	midjobInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.writeToParcel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo.writeToParcel")
 	}
 
 	c, err = env.FindClass("android/app/job/JobInfo$Builder")
@@ -314,147 +434,234 @@ func doInit(env *jni.Env) error {
 
 	midjobInfoBuilderAddDebugTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "addDebugTag", "(Ljava/lang/String;)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.addDebugTag: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.addDebugTag")
 	}
 
 	midjobInfoBuilderAddTriggerContentUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "addTriggerContentUri", "(Landroid/app/job/JobInfo$TriggerContentUri;)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.addTriggerContentUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.addTriggerContentUri")
 	}
 
 	midjobInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "build", "()Landroid/app/job/JobInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.build: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.build")
 	}
 
 	midjobInfoBuilderRemoveDebugTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "removeDebugTag", "(Ljava/lang/String;)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.removeDebugTag: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.removeDebugTag")
 	}
 
 	midjobInfoBuilderSetBackoffCriteria, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setBackoffCriteria", "(JI)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setBackoffCriteria: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setBackoffCriteria")
 	}
 
 	midjobInfoBuilderSetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setClipData", "(Landroid/content/ClipData;I)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setClipData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setClipData")
 	}
 
 	midjobInfoBuilderSetEstimatedNetworkBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setEstimatedNetworkBytes", "(JJ)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setEstimatedNetworkBytes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setEstimatedNetworkBytes")
 	}
 
 	midjobInfoBuilderSetExpedited, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setExpedited", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setExpedited: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setExpedited")
 	}
 
 	midjobInfoBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setExtras", "(Landroid/os/PersistableBundle;)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setExtras")
 	}
 
 	midjobInfoBuilderSetImportantWhileForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setImportantWhileForeground", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setImportantWhileForeground: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setImportantWhileForeground")
 	}
 
 	midjobInfoBuilderSetMinimumLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setMinimumLatency", "(J)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setMinimumLatency: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setMinimumLatency")
 	}
 
 	midjobInfoBuilderSetMinimumNetworkChunkBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setMinimumNetworkChunkBytes", "(J)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setMinimumNetworkChunkBytes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setMinimumNetworkChunkBytes")
 	}
 
 	midjobInfoBuilderSetOverrideDeadline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setOverrideDeadline", "(J)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setOverrideDeadline: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setOverrideDeadline")
 	}
 
 	midjobInfoBuilderSetPeriodic1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPeriodic", "(J)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPeriodic: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setPeriodic")
 	}
 
 	midjobInfoBuilderSetPeriodic2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPeriodic", "(JJ)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPeriodic: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setPeriodic")
 	}
 
 	midjobInfoBuilderSetPersisted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPersisted", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPersisted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setPersisted")
 	}
 
 	midjobInfoBuilderSetPrefetch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPrefetch", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPrefetch: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setPrefetch")
 	}
 
 	midjobInfoBuilderSetPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPriority", "(I)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPriority: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setPriority")
 	}
 
 	midjobInfoBuilderSetRequiredNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiredNetwork", "(Landroid/net/NetworkRequest;)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiredNetwork: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setRequiredNetwork")
 	}
 
 	midjobInfoBuilderSetRequiredNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiredNetworkType", "(I)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiredNetworkType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setRequiredNetworkType")
 	}
 
 	midjobInfoBuilderSetRequiresBatteryNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresBatteryNotLow", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresBatteryNotLow: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setRequiresBatteryNotLow")
 	}
 
 	midjobInfoBuilderSetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresCharging", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresCharging: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setRequiresCharging")
 	}
 
 	midjobInfoBuilderSetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresDeviceIdle", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresDeviceIdle: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setRequiresDeviceIdle")
 	}
 
 	midjobInfoBuilderSetRequiresStorageNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresStorageNotLow", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresStorageNotLow: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setRequiresStorageNotLow")
 	}
 
 	midjobInfoBuilderSetTraceTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTraceTag", "(Ljava/lang/String;)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTraceTag: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setTraceTag")
 	}
 
 	midjobInfoBuilderSetTransientExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTransientExtras", "(Landroid/os/Bundle;)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTransientExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setTransientExtras")
 	}
 
 	midjobInfoBuilderSetTriggerContentMaxDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTriggerContentMaxDelay", "(J)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTriggerContentMaxDelay: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setTriggerContentMaxDelay")
 	}
 
 	midjobInfoBuilderSetTriggerContentUpdateDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTriggerContentUpdateDelay", "(J)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTriggerContentUpdateDelay: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setTriggerContentUpdateDelay")
 	}
 
 	midjobInfoBuilderSetUserInitiated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setUserInitiated", "(Z)Landroid/app/job/JobInfo$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setUserInitiated: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setUserInitiated")
 	}
 
 	return nil

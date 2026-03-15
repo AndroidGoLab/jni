@@ -74,6 +74,10 @@ func (m *devicePolicyManager) AcknowledgeDeviceCompliant() error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerAcknowledgeDeviceCompliant == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.acknowledgeDeviceCompliant is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			middevicePolicyManagerAcknowledgeDeviceCompliant,
@@ -91,6 +95,10 @@ func (m *devicePolicyManager) AddCrossProfileIntentFilter(arg0 *jni.Object, arg1
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerAddCrossProfileIntentFilter == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.addCrossProfileIntentFilter is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -110,6 +118,10 @@ func (m *devicePolicyManager) AddCrossProfileWidgetProvider(arg0 *jni.Object, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerAddCrossProfileWidgetProvider == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.addCrossProfileWidgetProvider is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -139,6 +151,10 @@ func (m *devicePolicyManager) AddOverrideApn(arg0 *jni.Object, arg1 *jni.Object)
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerAddOverrideApn == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.addOverrideApn is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -161,6 +177,10 @@ func (m *devicePolicyManager) AddPersistentPreferredActivity(arg0 *jni.Object, a
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerAddPersistentPreferredActivity == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.addPersistentPreferredActivity is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -179,6 +199,10 @@ func (m *devicePolicyManager) AddUserRestriction(arg0 *jni.Object, arg1 string) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerAddUserRestriction == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.addUserRestriction is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -204,6 +228,10 @@ func (m *devicePolicyManager) AddUserRestrictionGlobally(arg0 string) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerAddUserRestrictionGlobally == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.addUserRestrictionGlobally is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -226,6 +254,10 @@ func (m *devicePolicyManager) BindDeviceAdminServiceAsUser5(arg0 *jni.Object, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerBindDeviceAdminServiceAsUser5 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.bindDeviceAdminServiceAsUser is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -250,6 +282,10 @@ func (m *devicePolicyManager) BindDeviceAdminServiceAsUser5_1(arg0 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerBindDeviceAdminServiceAsUser5_1 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.bindDeviceAdminServiceAsUser is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -273,6 +309,10 @@ func (m *devicePolicyManager) CanAdminGrantSensorsPermissions() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerCanAdminGrantSensorsPermissions == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.canAdminGrantSensorsPermissions is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerCanAdminGrantSensorsPermissions,
@@ -295,6 +335,10 @@ func (m *devicePolicyManager) CanUsbDataSignalingBeDisabled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerCanUsbDataSignalingBeDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.canUsbDataSignalingBeDisabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerCanUsbDataSignalingBeDisabled,
@@ -316,6 +360,10 @@ func (m *devicePolicyManager) ClearApplicationUserData(arg0 *jni.Object, arg1 st
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerClearApplicationUserData == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.clearApplicationUserData is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -341,6 +389,10 @@ func (m *devicePolicyManager) ClearCrossProfileIntentFilters(arg0 *jni.Object) e
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerClearCrossProfileIntentFilters == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.clearCrossProfileIntentFilters is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -359,6 +411,10 @@ func (m *devicePolicyManager) ClearDeviceOwnerApp(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerClearDeviceOwnerApp == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.clearDeviceOwnerApp is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -382,6 +438,10 @@ func (m *devicePolicyManager) ClearPackagePersistentPreferredActivities(arg0 *jn
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerClearPackagePersistentPreferredActivities == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.clearPackagePersistentPreferredActivities is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -407,6 +467,10 @@ func (m *devicePolicyManager) ClearProfileOwner(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerClearProfileOwner == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.clearProfileOwner is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -425,6 +489,10 @@ func (m *devicePolicyManager) ClearResetPasswordToken(arg0 *jni.Object) (bool, e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerClearResetPasswordToken == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.clearResetPasswordToken is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -449,6 +517,10 @@ func (m *devicePolicyManager) ClearUserRestriction(arg0 *jni.Object, arg1 string
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerClearUserRestriction == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.clearUserRestriction is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -472,6 +544,10 @@ func (m *devicePolicyManager) CreateAdminSupportIntent(arg0 string) (*jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerCreateAdminSupportIntent == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.createAdminSupportIntent is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -498,6 +574,10 @@ func (m *devicePolicyManager) CreateAndManageUser(arg0 *jni.Object, arg1 string,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerCreateAndManageUser == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.createAndManageUser is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -526,6 +606,10 @@ func (m *devicePolicyManager) EnableSystemApp2(arg0 *jni.Object, arg1 *jni.Objec
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerEnableSystemApp2 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.enableSystemApp is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -547,6 +631,10 @@ func (m *devicePolicyManager) EnableSystemApp2_1(arg0 *jni.Object, arg1 string) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerEnableSystemApp2_1 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.enableSystemApp is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -571,6 +659,10 @@ func (m *devicePolicyManager) GenerateKeyPair(arg0 *jni.Object, arg1 string, arg
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGenerateKeyPair == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.generateKeyPair is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -599,6 +691,10 @@ func (m *devicePolicyManager) GetAccountTypesWithManagementDisabled() (*jni.Obje
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetAccountTypesWithManagementDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAccountTypesWithManagementDisabled is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetAccountTypesWithManagementDisabled,
@@ -620,6 +716,10 @@ func (m *devicePolicyManager) GetActiveAdmins() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetActiveAdmins == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getActiveAdmins is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetActiveAdmins,
@@ -640,6 +740,10 @@ func (m *devicePolicyManager) GetAffiliationIds(arg0 *jni.Object) (*jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetAffiliationIds == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAffiliationIds is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -663,6 +767,10 @@ func (m *devicePolicyManager) GetAlwaysOnVpnLockdownWhitelist(arg0 *jni.Object) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetAlwaysOnVpnLockdownWhitelist == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAlwaysOnVpnLockdownWhitelist is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -684,6 +792,10 @@ func (m *devicePolicyManager) GetAlwaysOnVpnPackage(arg0 *jni.Object) (string, e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetAlwaysOnVpnPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAlwaysOnVpnPackage is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -708,6 +820,10 @@ func (m *devicePolicyManager) GetAppFunctionsPolicy() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetAppFunctionsPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAppFunctionsPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetAppFunctionsPolicy,
@@ -728,6 +844,10 @@ func (m *devicePolicyManager) GetApplicationRestrictions(arg0 *jni.Object, arg1 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetApplicationRestrictions == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getApplicationRestrictions is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -756,6 +876,10 @@ func (m *devicePolicyManager) GetApplicationRestrictionsManagingPackage(arg0 *jn
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetApplicationRestrictionsManagingPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getApplicationRestrictionsManagingPackage is not available on this device")
+			return callErr
+		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -778,6 +902,10 @@ func (m *devicePolicyManager) GetAutoTimeEnabled(arg0 *jni.Object) (bool, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetAutoTimeEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAutoTimeEnabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -802,6 +930,10 @@ func (m *devicePolicyManager) GetAutoTimePolicy() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetAutoTimePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAutoTimePolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetAutoTimePolicy,
@@ -822,6 +954,10 @@ func (m *devicePolicyManager) GetAutoTimeRequired() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetAutoTimeRequired == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAutoTimeRequired is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -844,6 +980,10 @@ func (m *devicePolicyManager) GetAutoTimeZoneEnabled(arg0 *jni.Object) (bool, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetAutoTimeZoneEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAutoTimeZoneEnabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -868,6 +1008,10 @@ func (m *devicePolicyManager) GetAutoTimeZonePolicy() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetAutoTimeZonePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAutoTimeZonePolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetAutoTimeZonePolicy,
@@ -888,6 +1032,10 @@ func (m *devicePolicyManager) GetBindDeviceAdminTargetUsers(arg0 *jni.Object) (*
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetBindDeviceAdminTargetUsers == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getBindDeviceAdminTargetUsers is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -910,6 +1058,10 @@ func (m *devicePolicyManager) GetBluetoothContactSharingDisabled(arg0 *jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetBluetoothContactSharingDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getBluetoothContactSharingDisabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -934,6 +1086,10 @@ func (m *devicePolicyManager) GetCameraDisabled(arg0 *jni.Object) (bool, error) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetCameraDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCameraDisabled is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -956,6 +1112,10 @@ func (m *devicePolicyManager) GetCertInstallerPackage(arg0 *jni.Object) (string,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetCertInstallerPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCertInstallerPackage is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -980,6 +1140,10 @@ func (m *devicePolicyManager) GetContentProtectionPolicy(arg0 *jni.Object) (int3
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetContentProtectionPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getContentProtectionPolicy is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1002,6 +1166,10 @@ func (m *devicePolicyManager) GetCredentialManagerPolicy() (*jni.Object, error) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetCredentialManagerPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCredentialManagerPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetCredentialManagerPolicy,
@@ -1022,6 +1190,10 @@ func (m *devicePolicyManager) GetCrossProfileCalendarPackages(arg0 *jni.Object) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetCrossProfileCalendarPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfileCalendarPackages is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1044,6 +1216,10 @@ func (m *devicePolicyManager) GetCrossProfileCallerIdDisabled(arg0 *jni.Object) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetCrossProfileCallerIdDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfileCallerIdDisabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1068,6 +1244,10 @@ func (m *devicePolicyManager) GetCrossProfileContactsSearchDisabled(arg0 *jni.Ob
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetCrossProfileContactsSearchDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfileContactsSearchDisabled is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1091,6 +1271,10 @@ func (m *devicePolicyManager) GetCrossProfilePackages(arg0 *jni.Object) (*jni.Ob
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetCrossProfilePackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfilePackages is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1112,6 +1296,10 @@ func (m *devicePolicyManager) GetCrossProfileWidgetProviders(arg0 *jni.Object) (
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetCrossProfileWidgetProviders == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfileWidgetProviders is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1135,6 +1323,10 @@ func (m *devicePolicyManager) GetCurrentFailedPasswordAttempts() (int32, error) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetCurrentFailedPasswordAttempts == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCurrentFailedPasswordAttempts is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetCurrentFailedPasswordAttempts,
@@ -1155,6 +1347,10 @@ func (m *devicePolicyManager) GetDelegatePackages(arg0 *jni.Object, arg1 string)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetDelegatePackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDelegatePackages is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -1183,6 +1379,10 @@ func (m *devicePolicyManager) GetDelegatedScopes(arg0 *jni.Object, arg1 string) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetDelegatedScopes == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDelegatedScopes is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -1210,6 +1410,10 @@ func (m *devicePolicyManager) GetDeviceOwnerLockScreenInfo() (string, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetDeviceOwnerLockScreenInfo == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDeviceOwnerLockScreenInfo is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetDeviceOwnerLockScreenInfo,
@@ -1232,6 +1436,10 @@ func (m *devicePolicyManager) GetDevicePolicyManagementRoleHolderPackage() (stri
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetDevicePolicyManagementRoleHolderPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDevicePolicyManagementRoleHolderPackage is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetDevicePolicyManagementRoleHolderPackage,
@@ -1253,6 +1461,10 @@ func (m *devicePolicyManager) GetEndUserSessionMessage(arg0 *jni.Object) (string
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetEndUserSessionMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getEndUserSessionMessage is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -1277,6 +1489,10 @@ func (m *devicePolicyManager) GetEnrollmentSpecificId() (string, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetEnrollmentSpecificId == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getEnrollmentSpecificId is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetEnrollmentSpecificId,
@@ -1299,6 +1515,10 @@ func (m *devicePolicyManager) GetFactoryResetProtectionPolicy(arg0 *jni.Object) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetFactoryResetProtectionPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getFactoryResetProtectionPolicy is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1320,6 +1540,10 @@ func (m *devicePolicyManager) GetGlobalPrivateDnsHost(arg0 *jni.Object) (string,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetGlobalPrivateDnsHost == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getGlobalPrivateDnsHost is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -1344,6 +1568,10 @@ func (m *devicePolicyManager) GetGlobalPrivateDnsMode(arg0 *jni.Object) (int32, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetGlobalPrivateDnsMode == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getGlobalPrivateDnsMode is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1365,6 +1593,10 @@ func (m *devicePolicyManager) GetInstalledCaCerts(arg0 *jni.Object) (*jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetInstalledCaCerts == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getInstalledCaCerts is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1388,6 +1620,10 @@ func (m *devicePolicyManager) GetKeepUninstalledPackages(arg0 *jni.Object) (*jni
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetKeepUninstalledPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getKeepUninstalledPackages is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1409,6 +1645,10 @@ func (m *devicePolicyManager) GetKeyguardDisabledFeatures(arg0 *jni.Object) (int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetKeyguardDisabledFeatures == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getKeyguardDisabledFeatures is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1432,6 +1672,10 @@ func (m *devicePolicyManager) GetLockTaskFeatures(arg0 *jni.Object) (int32, erro
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetLockTaskFeatures == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getLockTaskFeatures is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1454,6 +1698,10 @@ func (m *devicePolicyManager) GetLockTaskPackages(arg0 *jni.Object) (*jni.Object
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetLockTaskPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getLockTaskPackages is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1475,6 +1723,10 @@ func (m *devicePolicyManager) GetLongSupportMessage(arg0 *jni.Object) (string, e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetLongSupportMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getLongSupportMessage is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -1499,6 +1751,10 @@ func (m *devicePolicyManager) GetManagedProfileCallerIdAccessPolicy() (*jni.Obje
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetManagedProfileCallerIdAccessPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getManagedProfileCallerIdAccessPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetManagedProfileCallerIdAccessPolicy,
@@ -1520,6 +1776,10 @@ func (m *devicePolicyManager) GetManagedProfileContactsAccessPolicy() (*jni.Obje
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetManagedProfileContactsAccessPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getManagedProfileContactsAccessPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetManagedProfileContactsAccessPolicy,
@@ -1540,6 +1800,10 @@ func (m *devicePolicyManager) GetManagedProfileMaximumTimeOff(arg0 *jni.Object) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetManagedProfileMaximumTimeOff == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getManagedProfileMaximumTimeOff is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallLongMethod(
@@ -1563,6 +1827,10 @@ func (m *devicePolicyManager) GetManagedSubscriptionsPolicy() (*jni.Object, erro
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetManagedSubscriptionsPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getManagedSubscriptionsPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetManagedSubscriptionsPolicy,
@@ -1583,6 +1851,10 @@ func (m *devicePolicyManager) GetMaximumFailedPasswordsForWipe(arg0 *jni.Object)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetMaximumFailedPasswordsForWipe == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getMaximumFailedPasswordsForWipe is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1606,6 +1878,10 @@ func (m *devicePolicyManager) GetMaximumTimeToLock(arg0 *jni.Object) (int64, err
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetMaximumTimeToLock == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getMaximumTimeToLock is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -1627,6 +1903,10 @@ func (m *devicePolicyManager) GetMeteredDataDisabledPackages(arg0 *jni.Object) (
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetMeteredDataDisabledPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getMeteredDataDisabledPackages is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1650,6 +1930,10 @@ func (m *devicePolicyManager) GetMinimumRequiredWifiSecurityLevel() (int32, erro
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetMinimumRequiredWifiSecurityLevel == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getMinimumRequiredWifiSecurityLevel is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetMinimumRequiredWifiSecurityLevel,
@@ -1670,6 +1954,10 @@ func (m *devicePolicyManager) GetMtePolicy() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetMtePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getMtePolicy is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1692,6 +1980,10 @@ func (m *devicePolicyManager) GetNearbyAppStreamingPolicy() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetNearbyAppStreamingPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getNearbyAppStreamingPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetNearbyAppStreamingPolicy,
@@ -1712,6 +2004,10 @@ func (m *devicePolicyManager) GetNearbyNotificationStreamingPolicy() (int32, err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetNearbyNotificationStreamingPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getNearbyNotificationStreamingPolicy is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1734,6 +2030,10 @@ func (m *devicePolicyManager) GetOrganizationColor(arg0 *jni.Object) (int32, err
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetOrganizationColor == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getOrganizationColor is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1755,6 +2055,10 @@ func (m *devicePolicyManager) GetOrganizationName(arg0 *jni.Object) (string, err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetOrganizationName == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getOrganizationName is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -1779,6 +2083,10 @@ func (m *devicePolicyManager) GetOverrideApns(arg0 *jni.Object) (*jni.Object, er
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetOverrideApns == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getOverrideApns is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1800,6 +2108,10 @@ func (m *devicePolicyManager) GetParentProfileInstance(arg0 *jni.Object) (*jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetParentProfileInstance == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getParentProfileInstance is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1823,6 +2135,10 @@ func (m *devicePolicyManager) GetPasswordComplexity() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPasswordComplexity == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordComplexity is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetPasswordComplexity,
@@ -1843,6 +2159,10 @@ func (m *devicePolicyManager) GetPasswordExpiration(arg0 *jni.Object) (int64, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPasswordExpiration == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordExpiration is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallLongMethod(
@@ -1866,6 +2186,10 @@ func (m *devicePolicyManager) GetPasswordExpirationTimeout(arg0 *jni.Object) (in
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPasswordExpirationTimeout == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordExpirationTimeout is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -1887,6 +2211,10 @@ func (m *devicePolicyManager) GetPasswordHistoryLength(arg0 *jni.Object) (int32,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPasswordHistoryLength == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordHistoryLength is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1910,6 +2238,10 @@ func (m *devicePolicyManager) GetPasswordMaximumLength(arg0 int32) (int32, error
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPasswordMaximumLength == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMaximumLength is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1931,6 +2263,10 @@ func (m *devicePolicyManager) GetPasswordMinimumLength(arg0 *jni.Object) (int32,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPasswordMinimumLength == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMinimumLength is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1954,6 +2290,10 @@ func (m *devicePolicyManager) GetPasswordMinimumLetters(arg0 *jni.Object) (int32
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPasswordMinimumLetters == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMinimumLetters is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1975,6 +2315,10 @@ func (m *devicePolicyManager) GetPasswordMinimumLowerCase(arg0 *jni.Object) (int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPasswordMinimumLowerCase == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMinimumLowerCase is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1998,6 +2342,10 @@ func (m *devicePolicyManager) GetPasswordMinimumNonLetter(arg0 *jni.Object) (int
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPasswordMinimumNonLetter == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMinimumNonLetter is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -2019,6 +2367,10 @@ func (m *devicePolicyManager) GetPasswordMinimumNumeric(arg0 *jni.Object) (int32
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPasswordMinimumNumeric == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMinimumNumeric is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -2042,6 +2394,10 @@ func (m *devicePolicyManager) GetPasswordMinimumSymbols(arg0 *jni.Object) (int32
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPasswordMinimumSymbols == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMinimumSymbols is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -2063,6 +2419,10 @@ func (m *devicePolicyManager) GetPasswordMinimumUpperCase(arg0 *jni.Object) (int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPasswordMinimumUpperCase == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordMinimumUpperCase is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -2086,6 +2446,10 @@ func (m *devicePolicyManager) GetPasswordQuality(arg0 *jni.Object) (int32, error
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPasswordQuality == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPasswordQuality is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -2108,6 +2472,10 @@ func (m *devicePolicyManager) GetPendingSystemUpdate(arg0 *jni.Object) (*jni.Obj
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPendingSystemUpdate == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPendingSystemUpdate is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -2129,6 +2497,10 @@ func (m *devicePolicyManager) GetPermissionGrantState(arg0 *jni.Object, arg1 str
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPermissionGrantState == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermissionGrantState is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -2162,6 +2534,10 @@ func (m *devicePolicyManager) GetPermissionPolicy(arg0 *jni.Object) (int32, erro
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPermissionPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermissionPolicy is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -2183,6 +2559,10 @@ func (m *devicePolicyManager) GetPermittedAccessibilityServices(arg0 *jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPermittedAccessibilityServices == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermittedAccessibilityServices is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -2206,6 +2586,10 @@ func (m *devicePolicyManager) GetPermittedCrossProfileNotificationListeners(arg0
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPermittedCrossProfileNotificationListeners == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermittedCrossProfileNotificationListeners is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -2227,6 +2611,10 @@ func (m *devicePolicyManager) GetPermittedInputMethods(arg0 *jni.Object) (*jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetPermittedInputMethods == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermittedInputMethods is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -2250,6 +2638,10 @@ func (m *devicePolicyManager) GetPersonalAppsSuspendedReasons(arg0 *jni.Object) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPersonalAppsSuspendedReasons == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPersonalAppsSuspendedReasons is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -2272,6 +2664,10 @@ func (m *devicePolicyManager) GetPreferentialNetworkServiceConfigs() (*jni.Objec
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetPreferentialNetworkServiceConfigs == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPreferentialNetworkServiceConfigs is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetPreferentialNetworkServiceConfigs,
@@ -2293,6 +2689,10 @@ func (m *devicePolicyManager) GetRequiredPasswordComplexity() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetRequiredPasswordComplexity == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getRequiredPasswordComplexity is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetRequiredPasswordComplexity,
@@ -2313,6 +2713,10 @@ func (m *devicePolicyManager) GetRequiredStrongAuthTimeout(arg0 *jni.Object) (in
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetRequiredStrongAuthTimeout == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getRequiredStrongAuthTimeout is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallLongMethod(
@@ -2336,6 +2740,10 @@ func (m *devicePolicyManager) GetResources() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetResources == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getResources is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetResources,
@@ -2356,6 +2764,10 @@ func (m *devicePolicyManager) GetScreenCaptureDisabled(arg0 *jni.Object) (bool, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetScreenCaptureDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getScreenCaptureDisabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -2380,6 +2792,10 @@ func (m *devicePolicyManager) GetSecondaryUsers(arg0 *jni.Object) (*jni.Object, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetSecondaryUsers == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getSecondaryUsers is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -2401,6 +2817,10 @@ func (m *devicePolicyManager) GetShortSupportMessage(arg0 *jni.Object) (string, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetShortSupportMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getShortSupportMessage is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -2425,6 +2845,10 @@ func (m *devicePolicyManager) GetStartUserSessionMessage(arg0 *jni.Object) (stri
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetStartUserSessionMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getStartUserSessionMessage is not available on this device")
+			return callErr
+		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -2447,6 +2871,10 @@ func (m *devicePolicyManager) GetStorageEncryption(arg0 *jni.Object) (bool, erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetStorageEncryption == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getStorageEncryption is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -2471,6 +2899,10 @@ func (m *devicePolicyManager) GetStorageEncryptionStatus() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetStorageEncryptionStatus == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getStorageEncryptionStatus is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middevicePolicyManagerGetStorageEncryptionStatus,
@@ -2491,6 +2923,10 @@ func (m *devicePolicyManager) GetSubscriptionIds() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetSubscriptionIds == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getSubscriptionIds is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -2513,6 +2949,10 @@ func (m *devicePolicyManager) GetSystemUpdatePolicy() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetSystemUpdatePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getSystemUpdatePolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetSystemUpdatePolicy,
@@ -2534,6 +2974,10 @@ func (m *devicePolicyManager) GetTransferOwnershipBundle() (*jni.Object, error) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetTransferOwnershipBundle == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getTransferOwnershipBundle is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetTransferOwnershipBundle,
@@ -2554,6 +2998,10 @@ func (m *devicePolicyManager) GetTrustAgentConfiguration(arg0 *jni.Object, arg1 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetTrustAgentConfiguration == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getTrustAgentConfiguration is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -2577,6 +3025,10 @@ func (m *devicePolicyManager) GetUserControlDisabledPackages(arg0 *jni.Object) (
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetUserControlDisabledPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getUserControlDisabledPackages is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -2598,6 +3050,10 @@ func (m *devicePolicyManager) GetUserRestrictions(arg0 *jni.Object) (*jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetUserRestrictions == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getUserRestrictions is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -2621,6 +3077,10 @@ func (m *devicePolicyManager) GetUserRestrictionsGlobally() (*jni.Object, error)
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetUserRestrictionsGlobally == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getUserRestrictionsGlobally is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetUserRestrictionsGlobally,
@@ -2641,6 +3101,10 @@ func (m *devicePolicyManager) GetWifiMacAddress(arg0 *jni.Object) (string, error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGetWifiMacAddress == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getWifiMacAddress is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -2665,6 +3129,10 @@ func (m *devicePolicyManager) GetWifiSsidPolicy() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGetWifiSsidPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getWifiSsidPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerGetWifiSsidPolicy,
@@ -2685,6 +3153,10 @@ func (m *devicePolicyManager) GrantKeyPairToApp(arg0 *jni.Object, arg1 string, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerGrantKeyPairToApp == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.grantKeyPairToApp is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -2719,6 +3191,10 @@ func (m *devicePolicyManager) GrantKeyPairToWifiAuth(arg0 string) (bool, error) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerGrantKeyPairToWifiAuth == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.grantKeyPairToWifiAuth is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -2746,6 +3222,10 @@ func (m *devicePolicyManager) HasCaCertInstalled(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerHasCaCertInstalled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.hasCaCertInstalled is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2769,6 +3249,10 @@ func (m *devicePolicyManager) HasGrantedPolicy(arg0 *jni.Object, arg1 int32) (bo
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerHasGrantedPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.hasGrantedPolicy is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2791,6 +3275,10 @@ func (m *devicePolicyManager) HasKeyPair(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerHasKeyPair == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.hasKeyPair is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2819,6 +3307,10 @@ func (m *devicePolicyManager) HasLockdownAdminConfiguredNetworks(arg0 *jni.Objec
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerHasLockdownAdminConfiguredNetworks == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.hasLockdownAdminConfiguredNetworks is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2842,6 +3334,10 @@ func (m *devicePolicyManager) InstallCaCert(arg0 *jni.Object, arg1 *jni.Object) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerInstallCaCert == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.installCaCert is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2864,6 +3360,10 @@ func (m *devicePolicyManager) InstallExistingPackage(arg0 *jni.Object, arg1 stri
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerInstallExistingPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.installExistingPackage is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -2893,6 +3393,10 @@ func (m *devicePolicyManager) InstallKeyPair4(arg0 *jni.Object, arg1 *jni.Object
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerInstallKeyPair4 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.installKeyPair is not available on this device")
+			return callErr
+		}
 
 		jArg3, err := env.NewStringUTF(arg3)
 		if err != nil {
@@ -2920,6 +3424,10 @@ func (m *devicePolicyManager) InstallKeyPair5_1(arg0 *jni.Object, arg1 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerInstallKeyPair5_1 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.installKeyPair is not available on this device")
+			return callErr
 		}
 
 		jArg3, err := env.NewStringUTF(arg3)
@@ -2954,6 +3462,10 @@ func (m *devicePolicyManager) InstallKeyPair5_2(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerInstallKeyPair5_2 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.installKeyPair is not available on this device")
+			return callErr
+		}
 
 		jArg3, err := env.NewStringUTF(arg3)
 		if err != nil {
@@ -2982,6 +3494,10 @@ func (m *devicePolicyManager) InstallSystemUpdate(arg0 *jni.Object, arg1 *jni.Ob
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerInstallSystemUpdate == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.installSystemUpdate is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -3000,6 +3516,10 @@ func (m *devicePolicyManager) IsActivePasswordSufficient() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsActivePasswordSufficient == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isActivePasswordSufficient is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -3023,6 +3543,10 @@ func (m *devicePolicyManager) IsActivePasswordSufficientForDeviceRequirement() (
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsActivePasswordSufficientForDeviceRequirement == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isActivePasswordSufficientForDeviceRequirement is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsActivePasswordSufficientForDeviceRequirement,
@@ -3044,6 +3568,10 @@ func (m *devicePolicyManager) IsAdminActive(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsAdminActive == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isAdminActive is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3068,6 +3596,10 @@ func (m *devicePolicyManager) IsAffiliatedUser() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsAffiliatedUser == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isAffiliatedUser is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsAffiliatedUser,
@@ -3089,6 +3621,10 @@ func (m *devicePolicyManager) IsAlwaysOnVpnLockdownEnabled(arg0 *jni.Object) (bo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsAlwaysOnVpnLockdownEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isAlwaysOnVpnLockdownEnabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3112,6 +3648,10 @@ func (m *devicePolicyManager) IsApplicationHidden(arg0 *jni.Object, arg1 string)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsApplicationHidden == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isApplicationHidden is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -3141,6 +3681,10 @@ func (m *devicePolicyManager) IsBackupServiceEnabled(arg0 *jni.Object) (bool, er
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsBackupServiceEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isBackupServiceEnabled is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -3164,6 +3708,10 @@ func (m *devicePolicyManager) IsCallerApplicationRestrictionsManagingPackage() (
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsCallerApplicationRestrictionsManagingPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isCallerApplicationRestrictionsManagingPackage is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsCallerApplicationRestrictionsManagingPackage,
@@ -3185,6 +3733,10 @@ func (m *devicePolicyManager) IsCommonCriteriaModeEnabled(arg0 *jni.Object) (boo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsCommonCriteriaModeEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isCommonCriteriaModeEnabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3209,6 +3761,10 @@ func (m *devicePolicyManager) IsComplianceAcknowledgementRequired() (bool, error
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsComplianceAcknowledgementRequired == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isComplianceAcknowledgementRequired is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsComplianceAcknowledgementRequired,
@@ -3230,6 +3786,10 @@ func (m *devicePolicyManager) IsDeviceFinanced() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsDeviceFinanced == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isDeviceFinanced is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -3253,6 +3813,10 @@ func (m *devicePolicyManager) IsDeviceIdAttestationSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsDeviceIdAttestationSupported == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isDeviceIdAttestationSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsDeviceIdAttestationSupported,
@@ -3274,6 +3838,10 @@ func (m *devicePolicyManager) IsDeviceOwnerApp(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsDeviceOwnerApp == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isDeviceOwnerApp is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -3302,6 +3870,10 @@ func (m *devicePolicyManager) IsEphemeralUser(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsEphemeralUser == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isEphemeralUser is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -3324,6 +3896,10 @@ func (m *devicePolicyManager) IsKeyPairGrantedToWifiAuth(arg0 string) (bool, err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsKeyPairGrantedToWifiAuth == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isKeyPairGrantedToWifiAuth is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -3352,6 +3928,10 @@ func (m *devicePolicyManager) IsLockTaskPermitted(arg0 string) (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsLockTaskPermitted == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isLockTaskPermitted is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -3379,6 +3959,10 @@ func (m *devicePolicyManager) IsLogoutEnabled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsLogoutEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isLogoutEnabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsLogoutEnabled,
@@ -3400,6 +3984,10 @@ func (m *devicePolicyManager) IsManagedProfile(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsManagedProfile == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isManagedProfile is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3424,6 +4012,10 @@ func (m *devicePolicyManager) IsMasterVolumeMuted(arg0 *jni.Object) (bool, error
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsMasterVolumeMuted == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isMasterVolumeMuted is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -3446,6 +4038,10 @@ func (m *devicePolicyManager) IsNetworkLoggingEnabled(arg0 *jni.Object) (bool, e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsNetworkLoggingEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isNetworkLoggingEnabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3470,6 +4066,10 @@ func (m *devicePolicyManager) IsOrganizationOwnedDeviceWithManagedProfile() (boo
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsOrganizationOwnedDeviceWithManagedProfile == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsOrganizationOwnedDeviceWithManagedProfile,
@@ -3491,6 +4091,10 @@ func (m *devicePolicyManager) IsOverrideApnEnabled(arg0 *jni.Object) (bool, erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsOverrideApnEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isOverrideApnEnabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3514,6 +4118,10 @@ func (m *devicePolicyManager) IsPackageSuspended(arg0 *jni.Object, arg1 string) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsPackageSuspended == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isPackageSuspended is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -3543,6 +4151,10 @@ func (m *devicePolicyManager) IsPreferentialNetworkServiceEnabled() (bool, error
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsPreferentialNetworkServiceEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isPreferentialNetworkServiceEnabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsPreferentialNetworkServiceEnabled,
@@ -3564,6 +4176,10 @@ func (m *devicePolicyManager) IsProfileOwnerApp(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsProfileOwnerApp == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isProfileOwnerApp is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -3592,6 +4208,10 @@ func (m *devicePolicyManager) IsProvisioningAllowed(arg0 string) (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsProvisioningAllowed == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isProvisioningAllowed is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -3619,6 +4239,10 @@ func (m *devicePolicyManager) IsResetPasswordTokenActive(arg0 *jni.Object) (bool
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsResetPasswordTokenActive == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isResetPasswordTokenActive is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -3641,6 +4265,10 @@ func (m *devicePolicyManager) IsSafeOperation(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsSafeOperation == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isSafeOperation is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3665,6 +4293,10 @@ func (m *devicePolicyManager) IsSecurityLoggingEnabled(arg0 *jni.Object) (bool, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsSecurityLoggingEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isSecurityLoggingEnabled is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -3688,6 +4320,10 @@ func (m *devicePolicyManager) IsStatusBarDisabled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsStatusBarDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isStatusBarDisabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsStatusBarDisabled,
@@ -3709,6 +4345,10 @@ func (m *devicePolicyManager) IsUninstallBlocked(arg0 *jni.Object, arg1 string) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsUninstallBlocked == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isUninstallBlocked is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -3738,6 +4378,10 @@ func (m *devicePolicyManager) IsUniqueDeviceAttestationSupported() (bool, error)
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsUniqueDeviceAttestationSupported == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isUniqueDeviceAttestationSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsUniqueDeviceAttestationSupported,
@@ -3760,6 +4404,10 @@ func (m *devicePolicyManager) IsUsbDataSignalingEnabled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerIsUsbDataSignalingEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isUsbDataSignalingEnabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middevicePolicyManagerIsUsbDataSignalingEnabled,
@@ -3781,6 +4429,10 @@ func (m *devicePolicyManager) IsUsingUnifiedPassword(arg0 *jni.Object) (bool, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsUsingUnifiedPassword == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isUsingUnifiedPassword is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3805,6 +4457,10 @@ func (m *devicePolicyManager) ListForegroundAffiliatedUsers() (*jni.Object, erro
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerListForegroundAffiliatedUsers == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.listForegroundAffiliatedUsers is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middevicePolicyManagerListForegroundAffiliatedUsers,
@@ -3826,6 +4482,10 @@ func (m *devicePolicyManager) LockNow0() error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerLockNow0 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.lockNow is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			middevicePolicyManagerLockNow0,
@@ -3843,6 +4503,10 @@ func (m *devicePolicyManager) LockNow1_1(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerLockNow1_1 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.lockNow is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -3862,6 +4526,10 @@ func (m *devicePolicyManager) LogoutUser(arg0 *jni.Object) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerLogoutUser == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.logoutUser is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -3885,6 +4553,10 @@ func (m *devicePolicyManager) Reboot(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerReboot == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.reboot is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -3904,6 +4576,10 @@ func (m *devicePolicyManager) RemoveActiveAdmin(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerRemoveActiveAdmin == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.removeActiveAdmin is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -3922,6 +4598,10 @@ func (m *devicePolicyManager) RemoveCrossProfileWidgetProvider(arg0 *jni.Object,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerRemoveCrossProfileWidgetProvider == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.removeCrossProfileWidgetProvider is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -3951,6 +4631,10 @@ func (m *devicePolicyManager) RemoveKeyPair(arg0 *jni.Object, arg1 string) (bool
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerRemoveKeyPair == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.removeKeyPair is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -3979,6 +4663,10 @@ func (m *devicePolicyManager) RemoveOverrideApn(arg0 *jni.Object, arg1 int32) (b
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerRemoveOverrideApn == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.removeOverrideApn is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -4001,6 +4689,10 @@ func (m *devicePolicyManager) RemoveUser(arg0 *jni.Object, arg1 *jni.Object) (bo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerRemoveUser == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.removeUser is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -4025,6 +4717,10 @@ func (m *devicePolicyManager) RequestBugreport(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerRequestBugreport == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.requestBugreport is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -4047,6 +4743,10 @@ func (m *devicePolicyManager) ResetPassword(arg0 string, arg1 int32) (bool, erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerResetPassword == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.resetPassword is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -4074,6 +4774,10 @@ func (m *devicePolicyManager) ResetPasswordWithToken(arg0 *jni.Object, arg1 stri
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerResetPasswordWithToken == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.resetPasswordWithToken is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4103,6 +4807,10 @@ func (m *devicePolicyManager) RetrieveNetworkLogs(arg0 *jni.Object, arg1 int64) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerRetrieveNetworkLogs == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.retrieveNetworkLogs is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -4124,6 +4832,10 @@ func (m *devicePolicyManager) RetrievePreRebootSecurityLogs(arg0 *jni.Object) (*
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerRetrievePreRebootSecurityLogs == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.retrievePreRebootSecurityLogs is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -4147,6 +4859,10 @@ func (m *devicePolicyManager) RetrieveSecurityLogs(arg0 *jni.Object) (*jni.Objec
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerRetrieveSecurityLogs == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.retrieveSecurityLogs is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -4168,6 +4884,10 @@ func (m *devicePolicyManager) RevokeKeyPairFromApp(arg0 *jni.Object, arg1 string
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerRevokeKeyPairFromApp == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.revokeKeyPairFromApp is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4202,6 +4922,10 @@ func (m *devicePolicyManager) RevokeKeyPairFromWifiAuth(arg0 string) (bool, erro
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerRevokeKeyPairFromWifiAuth == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.revokeKeyPairFromWifiAuth is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -4228,6 +4952,10 @@ func (m *devicePolicyManager) SetAccountManagementDisabled(arg0 *jni.Object, arg
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetAccountManagementDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAccountManagementDisabled is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4258,6 +4986,10 @@ func (m *devicePolicyManager) SetAffiliationIds(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetAffiliationIds == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAffiliationIds is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4276,6 +5008,10 @@ func (m *devicePolicyManager) SetAlwaysOnVpnPackage3(arg0 *jni.Object, arg1 stri
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetAlwaysOnVpnPackage3 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4306,6 +5042,10 @@ func (m *devicePolicyManager) SetAlwaysOnVpnPackage4_1(arg0 *jni.Object, arg1 st
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetAlwaysOnVpnPackage4_1 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -4335,6 +5075,10 @@ func (m *devicePolicyManager) SetAppFunctionsPolicy(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetAppFunctionsPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAppFunctionsPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4353,6 +5097,10 @@ func (m *devicePolicyManager) SetApplicationHidden(arg0 *jni.Object, arg1 string
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetApplicationHidden == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setApplicationHidden is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4387,6 +5135,10 @@ func (m *devicePolicyManager) SetApplicationRestrictions(arg0 *jni.Object, arg1 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetApplicationRestrictions == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setApplicationRestrictions is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -4410,6 +5162,10 @@ func (m *devicePolicyManager) SetApplicationRestrictionsManagingPackage(arg0 *jn
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetApplicationRestrictionsManagingPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setApplicationRestrictionsManagingPackage is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4435,6 +5191,10 @@ func (m *devicePolicyManager) SetAutoTimeEnabled(arg0 *jni.Object, arg1 bool) er
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetAutoTimeEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAutoTimeEnabled is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -4459,6 +5219,10 @@ func (m *devicePolicyManager) SetAutoTimePolicy(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetAutoTimePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAutoTimePolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4477,6 +5241,10 @@ func (m *devicePolicyManager) SetAutoTimeRequired(arg0 *jni.Object, arg1 bool) e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetAutoTimeRequired == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAutoTimeRequired is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -4502,6 +5270,10 @@ func (m *devicePolicyManager) SetAutoTimeZoneEnabled(arg0 *jni.Object, arg1 bool
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetAutoTimeZoneEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAutoTimeZoneEnabled is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -4526,6 +5298,10 @@ func (m *devicePolicyManager) SetAutoTimeZonePolicy(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetAutoTimeZonePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAutoTimeZonePolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4544,6 +5320,10 @@ func (m *devicePolicyManager) SetBackupServiceEnabled(arg0 *jni.Object, arg1 boo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetBackupServiceEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setBackupServiceEnabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -4569,6 +5349,10 @@ func (m *devicePolicyManager) SetBluetoothContactSharingDisabled(arg0 *jni.Objec
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetBluetoothContactSharingDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setBluetoothContactSharingDisabled is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -4592,6 +5376,10 @@ func (m *devicePolicyManager) SetCameraDisabled(arg0 *jni.Object, arg1 bool) err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetCameraDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCameraDisabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -4617,6 +5405,10 @@ func (m *devicePolicyManager) SetCertInstallerPackage(arg0 *jni.Object, arg1 str
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetCertInstallerPackage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCertInstallerPackage is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -4640,6 +5432,10 @@ func (m *devicePolicyManager) SetCommonCriteriaModeEnabled(arg0 *jni.Object, arg
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetCommonCriteriaModeEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCommonCriteriaModeEnabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -4665,6 +5461,10 @@ func (m *devicePolicyManager) SetConfiguredNetworksLockdownState(arg0 *jni.Objec
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetConfiguredNetworksLockdownState == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setConfiguredNetworksLockdownState is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -4689,6 +5489,10 @@ func (m *devicePolicyManager) SetContentProtectionPolicy(arg0 *jni.Object, arg1 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetContentProtectionPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setContentProtectionPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4707,6 +5511,10 @@ func (m *devicePolicyManager) SetCredentialManagerPolicy(arg0 *jni.Object) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetCredentialManagerPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCredentialManagerPolicy is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -4727,6 +5535,10 @@ func (m *devicePolicyManager) SetCrossProfileCalendarPackages(arg0 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetCrossProfileCalendarPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCrossProfileCalendarPackages is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4745,6 +5557,10 @@ func (m *devicePolicyManager) SetCrossProfileCallerIdDisabled(arg0 *jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetCrossProfileCallerIdDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCrossProfileCallerIdDisabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -4770,6 +5586,10 @@ func (m *devicePolicyManager) SetCrossProfileContactsSearchDisabled(arg0 *jni.Ob
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetCrossProfileContactsSearchDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCrossProfileContactsSearchDisabled is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -4794,6 +5614,10 @@ func (m *devicePolicyManager) SetCrossProfilePackages(arg0 *jni.Object, arg1 *jn
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetCrossProfilePackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCrossProfilePackages is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4812,6 +5636,10 @@ func (m *devicePolicyManager) SetDefaultDialerApplication(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetDefaultDialerApplication == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setDefaultDialerApplication is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -4835,6 +5663,10 @@ func (m *devicePolicyManager) SetDefaultSmsApplication(arg0 *jni.Object, arg1 st
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetDefaultSmsApplication == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setDefaultSmsApplication is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4860,6 +5692,10 @@ func (m *devicePolicyManager) SetDelegatedScopes(arg0 *jni.Object, arg1 string, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetDelegatedScopes == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setDelegatedScopes is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -4883,6 +5719,10 @@ func (m *devicePolicyManager) SetDeviceOwnerLockScreenInfo(arg0 *jni.Object, arg
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetDeviceOwnerLockScreenInfo == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setDeviceOwnerLockScreenInfo is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4908,6 +5748,10 @@ func (m *devicePolicyManager) SetEndUserSessionMessage(arg0 *jni.Object, arg1 st
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetEndUserSessionMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setEndUserSessionMessage is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -4932,6 +5776,10 @@ func (m *devicePolicyManager) SetFactoryResetProtectionPolicy(arg0 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetFactoryResetProtectionPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setFactoryResetProtectionPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -4950,6 +5798,10 @@ func (m *devicePolicyManager) SetGlobalPrivateDnsModeOpportunistic(arg0 *jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetGlobalPrivateDnsModeOpportunistic == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setGlobalPrivateDnsModeOpportunistic is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -4972,6 +5824,10 @@ func (m *devicePolicyManager) SetGlobalPrivateDnsModeSpecifiedHost(arg0 *jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetGlobalPrivateDnsModeSpecifiedHost == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setGlobalPrivateDnsModeSpecifiedHost is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -4999,6 +5855,10 @@ func (m *devicePolicyManager) SetGlobalSetting(arg0 *jni.Object, arg1 string, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetGlobalSetting == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setGlobalSetting is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -5029,6 +5889,10 @@ func (m *devicePolicyManager) SetKeepUninstalledPackages(arg0 *jni.Object, arg1 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetKeepUninstalledPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setKeepUninstalledPackages is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5047,6 +5911,10 @@ func (m *devicePolicyManager) SetKeyPairCertificate(arg0 *jni.Object, arg1 strin
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetKeyPairCertificate == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setKeyPairCertificate is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -5081,6 +5949,10 @@ func (m *devicePolicyManager) SetKeyguardDisabled(arg0 *jni.Object, arg1 bool) (
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetKeyguardDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setKeyguardDisabled is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -5109,6 +5981,10 @@ func (m *devicePolicyManager) SetKeyguardDisabledFeatures(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetKeyguardDisabledFeatures == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setKeyguardDisabledFeatures is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5127,6 +6003,10 @@ func (m *devicePolicyManager) SetLocationEnabled(arg0 *jni.Object, arg1 bool) er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetLocationEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setLocationEnabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -5152,6 +6032,10 @@ func (m *devicePolicyManager) SetLockTaskFeatures(arg0 *jni.Object, arg1 int32) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetLockTaskFeatures == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setLockTaskFeatures is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5171,6 +6055,10 @@ func (m *devicePolicyManager) SetLockTaskPackages(arg0 *jni.Object, arg1 *jni.Ob
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetLockTaskPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setLockTaskPackages is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5189,6 +6077,10 @@ func (m *devicePolicyManager) SetLogoutEnabled(arg0 *jni.Object, arg1 bool) erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetLogoutEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setLogoutEnabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -5214,6 +6106,10 @@ func (m *devicePolicyManager) SetLongSupportMessage(arg0 *jni.Object, arg1 strin
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetLongSupportMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setLongSupportMessage is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -5238,6 +6134,10 @@ func (m *devicePolicyManager) SetManagedProfileCallerIdAccessPolicy(arg0 *jni.Ob
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetManagedProfileCallerIdAccessPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setManagedProfileCallerIdAccessPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5256,6 +6156,10 @@ func (m *devicePolicyManager) SetManagedProfileContactsAccessPolicy(arg0 *jni.Ob
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetManagedProfileContactsAccessPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setManagedProfileContactsAccessPolicy is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -5276,6 +6180,10 @@ func (m *devicePolicyManager) SetManagedProfileMaximumTimeOff(arg0 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetManagedProfileMaximumTimeOff == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setManagedProfileMaximumTimeOff is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5295,6 +6203,10 @@ func (m *devicePolicyManager) SetManagedSubscriptionsPolicy(arg0 *jni.Object) er
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetManagedSubscriptionsPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setManagedSubscriptionsPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5313,6 +6225,10 @@ func (m *devicePolicyManager) SetMasterVolumeMuted(arg0 *jni.Object, arg1 bool) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetMasterVolumeMuted == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setMasterVolumeMuted is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -5338,6 +6254,10 @@ func (m *devicePolicyManager) SetMaximumFailedPasswordsForWipe(arg0 *jni.Object,
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetMaximumFailedPasswordsForWipe == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setMaximumFailedPasswordsForWipe is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5357,6 +6277,10 @@ func (m *devicePolicyManager) SetMaximumTimeToLock(arg0 *jni.Object, arg1 int64)
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetMaximumTimeToLock == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setMaximumTimeToLock is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5375,6 +6299,10 @@ func (m *devicePolicyManager) SetMeteredDataDisabledPackages(arg0 *jni.Object, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetMeteredDataDisabledPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setMeteredDataDisabledPackages is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -5398,6 +6326,10 @@ func (m *devicePolicyManager) SetMinimumRequiredWifiSecurityLevel(arg0 int32) er
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetMinimumRequiredWifiSecurityLevel == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setMinimumRequiredWifiSecurityLevel is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5416,6 +6348,10 @@ func (m *devicePolicyManager) SetMtePolicy(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetMtePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setMtePolicy is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -5436,6 +6372,10 @@ func (m *devicePolicyManager) SetNearbyAppStreamingPolicy(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetNearbyAppStreamingPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setNearbyAppStreamingPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5455,6 +6395,10 @@ func (m *devicePolicyManager) SetNearbyNotificationStreamingPolicy(arg0 int32) e
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetNearbyNotificationStreamingPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setNearbyNotificationStreamingPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5473,6 +6417,10 @@ func (m *devicePolicyManager) SetNetworkLoggingEnabled(arg0 *jni.Object, arg1 bo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetNetworkLoggingEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setNetworkLoggingEnabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -5498,6 +6446,10 @@ func (m *devicePolicyManager) SetOrganizationColor(arg0 *jni.Object, arg1 int32)
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetOrganizationColor == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setOrganizationColor is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5516,6 +6468,10 @@ func (m *devicePolicyManager) SetOrganizationId(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetOrganizationId == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setOrganizationId is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -5539,6 +6495,10 @@ func (m *devicePolicyManager) SetOrganizationName(arg0 *jni.Object, arg1 string)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetOrganizationName == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setOrganizationName is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -5564,6 +6524,10 @@ func (m *devicePolicyManager) SetOverrideApnsEnabled(arg0 *jni.Object, arg1 bool
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetOverrideApnsEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setOverrideApnsEnabled is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -5587,6 +6551,10 @@ func (m *devicePolicyManager) SetPackagesSuspended(arg0 *jni.Object, arg1 *jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPackagesSuspended == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPackagesSuspended is not available on this device")
+			return callErr
 		}
 
 		var jArg2 uint8
@@ -5615,6 +6583,10 @@ func (m *devicePolicyManager) SetPasswordExpirationTimeout(arg0 *jni.Object, arg
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPasswordExpirationTimeout == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordExpirationTimeout is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5633,6 +6605,10 @@ func (m *devicePolicyManager) SetPasswordHistoryLength(arg0 *jni.Object, arg1 in
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPasswordHistoryLength == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordHistoryLength is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -5653,6 +6629,10 @@ func (m *devicePolicyManager) SetPasswordMinimumLength(arg0 *jni.Object, arg1 in
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPasswordMinimumLength == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordMinimumLength is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5671,6 +6651,10 @@ func (m *devicePolicyManager) SetPasswordMinimumLetters(arg0 *jni.Object, arg1 i
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPasswordMinimumLetters == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordMinimumLetters is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -5691,6 +6675,10 @@ func (m *devicePolicyManager) SetPasswordMinimumLowerCase(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPasswordMinimumLowerCase == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordMinimumLowerCase is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5709,6 +6697,10 @@ func (m *devicePolicyManager) SetPasswordMinimumNonLetter(arg0 *jni.Object, arg1
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPasswordMinimumNonLetter == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordMinimumNonLetter is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -5729,6 +6721,10 @@ func (m *devicePolicyManager) SetPasswordMinimumNumeric(arg0 *jni.Object, arg1 i
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPasswordMinimumNumeric == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordMinimumNumeric is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5747,6 +6743,10 @@ func (m *devicePolicyManager) SetPasswordMinimumSymbols(arg0 *jni.Object, arg1 i
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPasswordMinimumSymbols == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordMinimumSymbols is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -5767,6 +6767,10 @@ func (m *devicePolicyManager) SetPasswordMinimumUpperCase(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPasswordMinimumUpperCase == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordMinimumUpperCase is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5786,6 +6790,10 @@ func (m *devicePolicyManager) SetPasswordQuality(arg0 *jni.Object, arg1 int32) e
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPasswordQuality == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPasswordQuality is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5804,6 +6812,10 @@ func (m *devicePolicyManager) SetPermissionGrantState(arg0 *jni.Object, arg1 str
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPermissionGrantState == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermissionGrantState is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -5838,6 +6850,10 @@ func (m *devicePolicyManager) SetPermissionPolicy(arg0 *jni.Object, arg1 int32) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPermissionPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermissionPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5856,6 +6872,10 @@ func (m *devicePolicyManager) SetPermittedAccessibilityServices(arg0 *jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPermittedAccessibilityServices == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermittedAccessibilityServices is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -5880,6 +6900,10 @@ func (m *devicePolicyManager) SetPermittedCrossProfileNotificationListeners(arg0
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPermittedCrossProfileNotificationListeners == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermittedCrossProfileNotificationListeners is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -5903,6 +6927,10 @@ func (m *devicePolicyManager) SetPermittedInputMethods(arg0 *jni.Object, arg1 *j
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPermittedInputMethods == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermittedInputMethods is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -5925,6 +6953,10 @@ func (m *devicePolicyManager) SetPersonalAppsSuspended(arg0 *jni.Object, arg1 bo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPersonalAppsSuspended == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPersonalAppsSuspended is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -5950,6 +6982,10 @@ func (m *devicePolicyManager) SetPreferentialNetworkServiceConfigs(arg0 *jni.Obj
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetPreferentialNetworkServiceConfigs == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceConfigs is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5968,6 +7004,10 @@ func (m *devicePolicyManager) SetPreferentialNetworkServiceEnabled(arg0 bool) er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetPreferentialNetworkServiceEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceEnabled is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -5992,6 +7032,10 @@ func (m *devicePolicyManager) SetProfileEnabled(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetProfileEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setProfileEnabled is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6010,6 +7054,10 @@ func (m *devicePolicyManager) SetProfileName(arg0 *jni.Object, arg1 string) erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetProfileName == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setProfileName is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -6035,6 +7083,10 @@ func (m *devicePolicyManager) SetRecommendedGlobalProxy(arg0 *jni.Object, arg1 *
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetRecommendedGlobalProxy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setRecommendedGlobalProxy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6053,6 +7105,10 @@ func (m *devicePolicyManager) SetRequiredPasswordComplexity(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetRequiredPasswordComplexity == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setRequiredPasswordComplexity is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -6073,6 +7129,10 @@ func (m *devicePolicyManager) SetRequiredStrongAuthTimeout(arg0 *jni.Object, arg
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetRequiredStrongAuthTimeout == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setRequiredStrongAuthTimeout is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6091,6 +7151,10 @@ func (m *devicePolicyManager) SetResetPasswordToken(arg0 *jni.Object, arg1 *jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetResetPasswordToken == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setResetPasswordToken is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -6115,6 +7179,10 @@ func (m *devicePolicyManager) SetRestrictionsProvider(arg0 *jni.Object, arg1 *jn
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetRestrictionsProvider == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setRestrictionsProvider is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6133,6 +7201,10 @@ func (m *devicePolicyManager) SetScreenCaptureDisabled(arg0 *jni.Object, arg1 bo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetScreenCaptureDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setScreenCaptureDisabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -6157,6 +7229,10 @@ func (m *devicePolicyManager) SetSecureSetting(arg0 *jni.Object, arg1 string, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetSecureSetting == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setSecureSetting is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -6187,6 +7263,10 @@ func (m *devicePolicyManager) SetSecurityLoggingEnabled(arg0 *jni.Object, arg1 b
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetSecurityLoggingEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setSecurityLoggingEnabled is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -6210,6 +7290,10 @@ func (m *devicePolicyManager) SetShortSupportMessage(arg0 *jni.Object, arg1 stri
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetShortSupportMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setShortSupportMessage is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -6235,6 +7319,10 @@ func (m *devicePolicyManager) SetStartUserSessionMessage(arg0 *jni.Object, arg1 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetStartUserSessionMessage == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setStartUserSessionMessage is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -6258,6 +7346,10 @@ func (m *devicePolicyManager) SetStatusBarDisabled(arg0 *jni.Object, arg1 bool) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetStatusBarDisabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setStatusBarDisabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -6287,6 +7379,10 @@ func (m *devicePolicyManager) SetStorageEncryption(arg0 *jni.Object, arg1 bool) 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetStorageEncryption == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setStorageEncryption is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -6313,6 +7409,10 @@ func (m *devicePolicyManager) SetSystemSetting(arg0 *jni.Object, arg1 string, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetSystemSetting == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setSystemSetting is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -6343,6 +7443,10 @@ func (m *devicePolicyManager) SetSystemUpdatePolicy(arg0 *jni.Object, arg1 *jni.
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetSystemUpdatePolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setSystemUpdatePolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6361,6 +7465,10 @@ func (m *devicePolicyManager) SetTime(arg0 *jni.Object, arg1 int64) (bool, error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetTime == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setTime is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -6384,6 +7492,10 @@ func (m *devicePolicyManager) SetTimeZone(arg0 *jni.Object, arg1 string) (bool, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetTimeZone == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setTimeZone is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -6413,6 +7525,10 @@ func (m *devicePolicyManager) SetTrustAgentConfiguration(arg0 *jni.Object, arg1 
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetTrustAgentConfiguration == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setTrustAgentConfiguration is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6431,6 +7547,10 @@ func (m *devicePolicyManager) SetUninstallBlocked(arg0 *jni.Object, arg1 string,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetUninstallBlocked == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setUninstallBlocked is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -6461,6 +7581,10 @@ func (m *devicePolicyManager) SetUsbDataSignalingEnabled(arg0 bool) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetUsbDataSignalingEnabled == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setUsbDataSignalingEnabled is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -6484,6 +7608,10 @@ func (m *devicePolicyManager) SetUserControlDisabledPackages(arg0 *jni.Object, a
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetUserControlDisabledPackages == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setUserControlDisabledPackages is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6502,6 +7630,10 @@ func (m *devicePolicyManager) SetUserIcon(arg0 *jni.Object, arg1 *jni.Object) er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSetUserIcon == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setUserIcon is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -6522,6 +7654,10 @@ func (m *devicePolicyManager) SetWifiSsidPolicy(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerSetWifiSsidPolicy == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setWifiSsidPolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6540,6 +7676,10 @@ func (m *devicePolicyManager) StartUserInBackground(arg0 *jni.Object, arg1 *jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerStartUserInBackground == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.startUserInBackground is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -6563,6 +7703,10 @@ func (m *devicePolicyManager) StopUser(arg0 *jni.Object, arg1 *jni.Object) (int3
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerStopUser == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.stopUser is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -6584,6 +7728,10 @@ func (m *devicePolicyManager) SwitchUser(arg0 *jni.Object, arg1 *jni.Object) (bo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerSwitchUser == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.switchUser is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -6608,6 +7756,10 @@ func (m *devicePolicyManager) TransferOwnership(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerTransferOwnership == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.transferOwnership is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6626,6 +7778,10 @@ func (m *devicePolicyManager) UninstallAllUserCaCerts(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerUninstallAllUserCaCerts == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.uninstallAllUserCaCerts is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -6646,6 +7802,10 @@ func (m *devicePolicyManager) UninstallCaCert(arg0 *jni.Object, arg1 *jni.Object
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerUninstallCaCert == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.uninstallCaCert is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6664,6 +7824,10 @@ func (m *devicePolicyManager) UpdateOverrideApn(arg0 *jni.Object, arg1 int32, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerUpdateOverrideApn == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.updateOverrideApn is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -6688,6 +7852,10 @@ func (m *devicePolicyManager) WipeData1(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerWipeData1 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.wipeData is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6706,6 +7874,10 @@ func (m *devicePolicyManager) WipeData2_1(arg0 int32, arg1 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerWipeData2_1 == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.wipeData is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -6731,6 +7903,10 @@ func (m *devicePolicyManager) WipeDevice(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if middevicePolicyManagerWipeDevice == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.wipeDevice is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6749,6 +7925,10 @@ func (m *devicePolicyManager) IsMtePolicyEnforced() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middevicePolicyManagerIsMtePolicyEnforced == nil {
+			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isMtePolicyEnforced is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)),

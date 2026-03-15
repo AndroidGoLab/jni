@@ -32,6 +32,10 @@ func (m *downloadManager) AddCompletedDownload7(arg0 string, arg1 string, arg2 b
 			callErr = err
 			return err
 		}
+		if middownloadManagerAddCompletedDownload7 == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.addCompletedDownload is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -82,6 +86,10 @@ func (m *downloadManager) AddCompletedDownload9_1(arg0 string, arg1 string, arg2
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerAddCompletedDownload9_1 == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.addCompletedDownload is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -134,6 +142,10 @@ func (m *downloadManager) Enqueue(arg0 *jni.Object) (int64, error) {
 			callErr = err
 			return err
 		}
+		if middownloadManagerEnqueue == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.enqueue is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -155,6 +167,10 @@ func (m *downloadManager) GetMimeTypeForDownloadedFile(arg0 int64) (string, erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerGetMimeTypeForDownloadedFile == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.getMimeTypeForDownloadedFile is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -179,6 +195,10 @@ func (m *downloadManager) GetUriForDownloadedFile(arg0 int64) (*jni.Object, erro
 			callErr = err
 			return err
 		}
+		if middownloadManagerGetUriForDownloadedFile == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.getUriForDownloadedFile is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -200,6 +220,10 @@ func (m *downloadManager) OpenDownloadedFile(arg0 int64) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerOpenDownloadedFile == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.openDownloadedFile is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -223,6 +247,10 @@ func (m *downloadManager) Query(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middownloadManagerQuery == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.query is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -244,6 +272,10 @@ func (m *downloadManager) Remove(arg0 *jni.Object) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRemove == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.remove is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -267,6 +299,10 @@ func (m *downloadManager) GetMaxBytesOverMobile(arg0 *jni.Object) (*jni.Object, 
 			callErr = err
 			return err
 		}
+		if middownloadManagerGetMaxBytesOverMobile == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.getMaxBytesOverMobile is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdownloadManager)),
@@ -288,6 +324,10 @@ func (m *downloadManager) GetRecommendedMaxBytesOverMobile(arg0 *jni.Object) (*j
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerGetRecommendedMaxBytesOverMobile == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager.getRecommendedMaxBytesOverMobile is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(

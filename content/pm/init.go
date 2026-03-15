@@ -88,6 +88,12 @@ var (
 	midpackageManagerGetVerifiedSigningInfo                jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -114,327 +120,522 @@ func doInit(env *jni.Env) error {
 
 	midpackageManagerAddWhitelistedRestrictedPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "addWhitelistedRestrictedPermission", "(Ljava/lang/String;Ljava/lang/String;I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.addWhitelistedRestrictedPermission: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.addWhitelistedRestrictedPermission")
 	}
 
 	midpackageManagerCanPackageQuery2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "canPackageQuery", "(Ljava/lang/String;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.canPackageQuery: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.canPackageQuery")
 	}
 
 	midpackageManagerCanPackageQuery2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "canPackageQuery", "(Ljava/lang/String;[Ljava/lang/String;)[Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.canPackageQuery: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.canPackageQuery")
 	}
 
 	midpackageManagerGetActivityInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getActivityInfo", "(Landroid/content/ComponentName;Landroid/content/pm/PackageManager$ComponentInfoFlags;)Landroid/content/pm/ActivityInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getActivityInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getActivityInfo")
 	}
 
 	midpackageManagerGetApplicationInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getApplicationInfo", "(Ljava/lang/String;Landroid/content/pm/PackageManager$ApplicationInfoFlags;)Landroid/content/pm/ApplicationInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getApplicationInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getApplicationInfo")
 	}
 
 	midpackageManagerGetArchivedPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getArchivedPackage", "(Ljava/lang/String;)Landroid/content/pm/ArchivedPackageInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getArchivedPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getArchivedPackage")
 	}
 
 	midpackageManagerGetBackgroundPermissionOptionLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getBackgroundPermissionOptionLabel", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getBackgroundPermissionOptionLabel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getBackgroundPermissionOptionLabel")
 	}
 
 	midpackageManagerGetGroupOfPlatformPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getGroupOfPlatformPermission", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getGroupOfPlatformPermission: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getGroupOfPlatformPermission")
 	}
 
 	midpackageManagerGetInstallSourceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstallSourceInfo", "(Ljava/lang/String;)Landroid/content/pm/InstallSourceInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getInstallSourceInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getInstallSourceInfo")
 	}
 
 	midpackageManagerGetInstalledApplications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledApplications", "(Landroid/content/pm/PackageManager$ApplicationInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getInstalledApplications: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getInstalledApplications")
 	}
 
 	midpackageManagerGetInstalledModules, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledModules", "(I)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getInstalledModules: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getInstalledModules")
 	}
 
 	midpackageManagerGetInstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledPackages", "(Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getInstalledPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getInstalledPackages")
 	}
 
 	midpackageManagerGetLaunchIntentSenderForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getLaunchIntentSenderForPackage", "(Ljava/lang/String;)Landroid/content/IntentSender;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getLaunchIntentSenderForPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getLaunchIntentSenderForPackage")
 	}
 
 	midpackageManagerGetMimeGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getMimeGroup", "(Ljava/lang/String;)Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getMimeGroup: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getMimeGroup")
 	}
 
 	midpackageManagerGetModuleInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getModuleInfo", "(Ljava/lang/String;I)Landroid/content/pm/ModuleInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getModuleInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getModuleInfo")
 	}
 
 	midpackageManagerGetPackageArchiveInfo2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackageArchiveInfo", "(Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)Landroid/content/pm/PackageInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPackageArchiveInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPackageArchiveInfo")
 	}
 
 	midpackageManagerGetPackageArchiveInfo2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackageArchiveInfo", "(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPackageArchiveInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPackageArchiveInfo")
 	}
 
 	midpackageManagerGetPackageGids, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackageGids", "(Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)[I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPackageGids: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPackageGids")
 	}
 
 	midpackageManagerGetPackageInfo2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackageInfo", "(Landroid/content/pm/VersionedPackage;Landroid/content/pm/PackageManager$PackageInfoFlags;)Landroid/content/pm/PackageInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPackageInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPackageInfo")
 	}
 
 	midpackageManagerGetPackageInfo2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackageInfo", "(Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)Landroid/content/pm/PackageInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPackageInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPackageInfo")
 	}
 
 	midpackageManagerGetPackageUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackageUid", "(Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPackageUid: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPackageUid")
 	}
 
 	midpackageManagerGetPackagesHoldingPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackagesHoldingPermissions", "([Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPackagesHoldingPermissions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPackagesHoldingPermissions")
 	}
 
 	midpackageManagerGetPlatformPermissionsForGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPlatformPermissionsForGroup", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getPlatformPermissionsForGroup: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getPlatformPermissionsForGroup")
 	}
 
 	midpackageManagerGetProperty2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getProperty", "(Ljava/lang/String;Landroid/content/ComponentName;)Landroid/content/pm/PackageManager$Property;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getProperty: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getProperty")
 	}
 
 	midpackageManagerGetProperty2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getProperty", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/pm/PackageManager$Property;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getProperty: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getProperty")
 	}
 
 	midpackageManagerGetProviderInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getProviderInfo", "(Landroid/content/ComponentName;Landroid/content/pm/PackageManager$ComponentInfoFlags;)Landroid/content/pm/ProviderInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getProviderInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getProviderInfo")
 	}
 
 	midpackageManagerGetReceiverInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getReceiverInfo", "(Landroid/content/ComponentName;Landroid/content/pm/PackageManager$ComponentInfoFlags;)Landroid/content/pm/ActivityInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getReceiverInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getReceiverInfo")
 	}
 
 	midpackageManagerGetResourcesForApplication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getResourcesForApplication", "(Landroid/content/pm/ApplicationInfo;Landroid/content/res/Configuration;)Landroid/content/res/Resources;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getResourcesForApplication: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getResourcesForApplication")
 	}
 
 	midpackageManagerGetServiceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getServiceInfo", "(Landroid/content/ComponentName;Landroid/content/pm/PackageManager$ComponentInfoFlags;)Landroid/content/pm/ServiceInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getServiceInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getServiceInfo")
 	}
 
 	midpackageManagerGetSharedLibraries, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getSharedLibraries", "(Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getSharedLibraries: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getSharedLibraries")
 	}
 
 	midpackageManagerGetSuspendedPackageAppExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getSuspendedPackageAppExtras", "()Landroid/os/Bundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getSuspendedPackageAppExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getSuspendedPackageAppExtras")
 	}
 
 	midpackageManagerGetSyntheticAppDetailsActivityEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getSyntheticAppDetailsActivityEnabled", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getSyntheticAppDetailsActivityEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getSyntheticAppDetailsActivityEnabled")
 	}
 
 	midpackageManagerGetTargetSdkVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getTargetSdkVersion", "(Ljava/lang/String;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getTargetSdkVersion: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getTargetSdkVersion")
 	}
 
 	midpackageManagerGetWhitelistedRestrictedPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getWhitelistedRestrictedPermissions", "(Ljava/lang/String;I)Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getWhitelistedRestrictedPermissions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getWhitelistedRestrictedPermissions")
 	}
 
 	midpackageManagerHasSigningCertificate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "hasSigningCertificate", "(I[BI)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.hasSigningCertificate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.hasSigningCertificate")
 	}
 
 	midpackageManagerHasSigningCertificate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "hasSigningCertificate", "(Ljava/lang/String;[BI)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.hasSigningCertificate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.hasSigningCertificate")
 	}
 
 	midpackageManagerIsAppArchivable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isAppArchivable", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isAppArchivable: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isAppArchivable")
 	}
 
 	midpackageManagerIsAutoRevokeWhitelisted0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isAutoRevokeWhitelisted", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isAutoRevokeWhitelisted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isAutoRevokeWhitelisted")
 	}
 
 	midpackageManagerIsAutoRevokeWhitelisted1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isAutoRevokeWhitelisted", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isAutoRevokeWhitelisted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isAutoRevokeWhitelisted")
 	}
 
 	midpackageManagerIsDefaultApplicationIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isDefaultApplicationIcon", "(Landroid/graphics/drawable/Drawable;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isDefaultApplicationIcon: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isDefaultApplicationIcon")
 	}
 
 	midpackageManagerIsDeviceUpgrading, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isDeviceUpgrading", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isDeviceUpgrading: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isDeviceUpgrading")
 	}
 
 	midpackageManagerIsPackageStopped, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isPackageStopped", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isPackageStopped: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isPackageStopped")
 	}
 
 	midpackageManagerIsPackageSuspended0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isPackageSuspended", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isPackageSuspended: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isPackageSuspended")
 	}
 
 	midpackageManagerIsPackageSuspended1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "isPackageSuspended", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.isPackageSuspended: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.isPackageSuspended")
 	}
 
 	midpackageManagerQueryActivityProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryActivityProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryActivityProperty: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryActivityProperty")
 	}
 
 	midpackageManagerQueryApplicationProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryApplicationProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryApplicationProperty: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryApplicationProperty")
 	}
 
 	midpackageManagerQueryBroadcastReceivers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryBroadcastReceivers", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryBroadcastReceivers: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryBroadcastReceivers")
 	}
 
 	midpackageManagerQueryContentProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryContentProviders", "(Ljava/lang/String;ILandroid/content/pm/PackageManager$ComponentInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryContentProviders: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryContentProviders")
 	}
 
 	midpackageManagerQueryIntentActivities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentActivities", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentActivities: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryIntentActivities")
 	}
 
 	midpackageManagerQueryIntentActivityOptions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentActivityOptions", "(Landroid/content/ComponentName;Ljava/util/List;Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentActivityOptions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryIntentActivityOptions")
 	}
 
 	midpackageManagerQueryIntentContentProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentContentProviders", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentContentProviders: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryIntentContentProviders")
 	}
 
 	midpackageManagerQueryIntentServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentServices", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentServices: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryIntentServices")
 	}
 
 	midpackageManagerQueryProviderProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryProviderProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryProviderProperty: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryProviderProperty")
 	}
 
 	midpackageManagerQueryReceiverProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryReceiverProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryReceiverProperty: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryReceiverProperty")
 	}
 
 	midpackageManagerQueryServiceProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryServiceProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.queryServiceProperty: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.queryServiceProperty")
 	}
 
 	midpackageManagerRelinquishUpdateOwnership, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "relinquishUpdateOwnership", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.relinquishUpdateOwnership: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.relinquishUpdateOwnership")
 	}
 
 	midpackageManagerRemoveWhitelistedRestrictedPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "removeWhitelistedRestrictedPermission", "(Ljava/lang/String;Ljava/lang/String;I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.removeWhitelistedRestrictedPermission: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.removeWhitelistedRestrictedPermission")
 	}
 
 	midpackageManagerRequestChecksums, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "requestChecksums", "(Ljava/lang/String;ZILjava/util/List;Landroid/content/pm/PackageManager$OnChecksumsReadyListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.requestChecksums: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.requestChecksums")
 	}
 
 	midpackageManagerResolveActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "resolveActivity", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Landroid/content/pm/ResolveInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.resolveActivity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.resolveActivity")
 	}
 
 	midpackageManagerResolveContentProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "resolveContentProvider", "(Ljava/lang/String;Landroid/content/pm/PackageManager$ComponentInfoFlags;)Landroid/content/pm/ProviderInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.resolveContentProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.resolveContentProvider")
 	}
 
 	midpackageManagerResolveService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "resolveService", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Landroid/content/pm/ResolveInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.resolveService: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.resolveService")
 	}
 
 	midpackageManagerSetAutoRevokeWhitelisted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "setAutoRevokeWhitelisted", "(Ljava/lang/String;Z)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.setAutoRevokeWhitelisted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.setAutoRevokeWhitelisted")
 	}
 
 	midpackageManagerSetComponentEnabledSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "setComponentEnabledSettings", "(Ljava/util/List;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.setComponentEnabledSettings: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.setComponentEnabledSettings")
 	}
 
 	midpackageManagerSetMimeGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "setMimeGroup", "(Ljava/lang/String;Ljava/util/Set;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.setMimeGroup: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.setMimeGroup")
 	}
 
 	midpackageManagerGetVerifiedSigningInfo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getVerifiedSigningInfo", "(Ljava/lang/String;I)Landroid/content/pm/SigningInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.pm.PackageManager.getVerifiedSigningInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getVerifiedSigningInfo")
 	}
 
 	return nil

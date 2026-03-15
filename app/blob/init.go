@@ -34,6 +34,12 @@ var (
 	midblobStoreManagerReleaseLease                jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -60,57 +66,90 @@ func doInit(env *jni.Env) error {
 
 	midblobStoreManagerAbandonSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "abandonSession", "(J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.abandonSession: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.abandonSession")
 	}
 
 	midblobStoreManagerAcquireLease2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.acquireLease: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
 	midblobStoreManagerAcquireLease3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;IJ)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.acquireLease: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
 	midblobStoreManagerAcquireLease2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.acquireLease: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
 	midblobStoreManagerAcquireLease3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;Ljava/lang/String;J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.acquireLease: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
 	midblobStoreManagerCreateSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "createSession", "(Landroid/app/blob/BlobHandle;)J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.createSession: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.createSession")
 	}
 
 	midblobStoreManagerGetLeasedBlobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "getLeasedBlobs", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.getLeasedBlobs: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.getLeasedBlobs")
 	}
 
 	midblobStoreManagerGetRemainingLeaseQuotaBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "getRemainingLeaseQuotaBytes", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.getRemainingLeaseQuotaBytes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.getRemainingLeaseQuotaBytes")
 	}
 
 	midblobStoreManagerOpenBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "openBlob", "(Landroid/app/blob/BlobHandle;)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.openBlob: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.openBlob")
 	}
 
 	midblobStoreManagerOpenSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "openSession", "(J)Landroid/app/blob/BlobStoreManager$Session;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.openSession: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.openSession")
 	}
 
 	midblobStoreManagerReleaseLease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "releaseLease", "(Landroid/app/blob/BlobHandle;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.blob.BlobStoreManager.releaseLease: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.releaseLease")
 	}
 
 	return nil

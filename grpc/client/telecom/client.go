@@ -49,14 +49,13 @@ func (c *Client) AcceptRingingCall1_1(ctx context.Context, arg0 int32) error {
 }
 
 // AddCall calls the AddCall RPC.
-func (c *Client) AddCall(ctx context.Context, arg0 int64, arg1 int64, arg2 int64, arg3 int64, arg4 int64, arg5 int64) error {
+func (c *Client) AddCall(ctx context.Context, arg0 int64, arg1 int64, arg2 int64, arg3 int64, arg4 int64) error {
 	_, err := c.svc.AddCall(ctx, &pb.AddCallRequest{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,
 		Arg3: arg3,
 		Arg4: arg4,
-		Arg5: arg5,
 	})
 	return err
 }

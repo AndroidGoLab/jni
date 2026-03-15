@@ -219,10 +219,8 @@ classes:
           params:
             - java_type: java.util.concurrent.Executor
               go_name: arg0
-            - java_type: android.os.OutcomeReceiver<android.telephony.data.NetworkSlicingConfig
+            - java_type: "android.os.OutcomeReceiver<android.telephony.data.NetworkSlicingConfig, android.telephony.TelephonyManager$NetworkSlicingException>"
               go_name: arg1
-            - java_type: android.telephony.TelephonyManager$NetworkSlicingException>
-              go_name: arg2
           returns: void
           error: true
         - java_method: getNetworkSpecifier
@@ -837,10 +835,8 @@ classes:
               go_name: arg1
             - java_type: java.util.concurrent.Executor
               go_name: arg2
-            - java_type: android.os.OutcomeReceiver<android.os.ParcelUuid
+            - java_type: "android.os.OutcomeReceiver<android.os.ParcelUuid, android.telephony.TelephonyManager$CallComposerException>"
               go_name: arg3
-            - java_type: android.telephony.TelephonyManager$CallComposerException>
-              go_name: arg4
           returns: void
           error: true
         - java_method: uploadCallComposerPicture
@@ -852,10 +848,8 @@ classes:
               go_name: arg1
             - java_type: java.util.concurrent.Executor
               go_name: arg2
-            - java_type: android.os.OutcomeReceiver<android.os.ParcelUuid
+            - java_type: "android.os.OutcomeReceiver<android.os.ParcelUuid, android.telephony.TelephonyManager$CallComposerException>"
               go_name: arg3
-            - java_type: android.telephony.TelephonyManager$CallComposerException>
-              go_name: arg4
           returns: void
           error: true
       static_methods:

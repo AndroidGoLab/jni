@@ -53,10 +53,8 @@ classes:
         - java_method: isConcurrentSessionConfigurationSupported
           go_name: IsConcurrentSessionConfigurationSupported
           params:
-            - java_type: java.util.Map<java.lang.String
+            - java_type: "java.util.Map<java.lang.String, android.hardware.camera2.params.SessionConfiguration>"
               go_name: arg0
-            - java_type: android.hardware.camera2.params.SessionConfiguration>
-              go_name: arg1
           returns: boolean
           error: true
         - java_method: openCamera

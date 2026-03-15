@@ -32,6 +32,10 @@ func (m *biometricManager) CanAuthenticate0() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midbiometricManagerCanAuthenticate0 == nil {
+			callErr = fmt.Errorf("android.hardware.biometrics.BiometricManager.canAuthenticate is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midbiometricManagerCanAuthenticate0,
@@ -52,6 +56,10 @@ func (m *biometricManager) CanAuthenticate1_1(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbiometricManagerCanAuthenticate1_1 == nil {
+			callErr = fmt.Errorf("android.hardware.biometrics.BiometricManager.canAuthenticate is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -75,6 +83,10 @@ func (m *biometricManager) GetLastAuthenticationTime(arg0 int32) (int64, error) 
 			callErr = err
 			return err
 		}
+		if midbiometricManagerGetLastAuthenticationTime == nil {
+			callErr = fmt.Errorf("android.hardware.biometrics.BiometricManager.getLastAuthenticationTime is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -96,6 +108,10 @@ func (m *biometricManager) GetStrings(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbiometricManagerGetStrings == nil {
+			callErr = fmt.Errorf("android.hardware.biometrics.BiometricManager.getStrings is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(

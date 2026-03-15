@@ -32,6 +32,10 @@ func (m *contactsContract) IsProfileId(arg0 int64) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midcontactsContractIsProfileId == nil {
+			callErr = fmt.Errorf("android.provider.ContactsContract.isProfileId is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clscontactsContract)),

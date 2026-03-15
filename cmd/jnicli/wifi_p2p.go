@@ -698,9 +698,6 @@ var wifip2pWifiP2pManagerRequestDirInfoCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
 		resp, err := client.RequestDirInfo(ctx, req)
 		if err != nil {
 			return err
@@ -1155,9 +1152,6 @@ var wifip2pWifiP2pManagerValidateDirInfoCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
 			req.Arg3 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
 		resp, err := client.ValidateDirInfo(ctx, req)
 		if err != nil {
 			return err
@@ -1277,7 +1271,6 @@ func init() {
 	wifip2pWifiP2pManagerRequestDirInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	wifip2pWifiP2pManagerRequestDirInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	wifip2pWifiP2pManagerRequestDirInfoCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerRequestDirInfoCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
 	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestDirInfoCmd)
 	wifip2pWifiP2pManagerRequestDiscoveryStateCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	wifip2pWifiP2pManagerRequestDiscoveryStateCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
@@ -1347,7 +1340,6 @@ func init() {
 	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
 	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg4", 0, "arg4 (int64)")
 	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerValidateDirInfoCmd)
 	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytesCmd)
 	wifip2pCmd.AddCommand(wifip2pWifiP2pManagerCmd)

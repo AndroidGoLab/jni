@@ -32,6 +32,10 @@ func (m *mediaPlayer) AddTimedTextSource3(arg0 *jni.Object, arg1 *jni.Object, ar
 			callErr = err
 			return err
 		}
+		if midmediaPlayerAddTimedTextSource3 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.addTimedTextSource is not available on this device")
+			return callErr
+		}
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
@@ -55,6 +59,10 @@ func (m *mediaPlayer) AddTimedTextSource2_1(arg0 *jni.Object, arg1 string) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerAddTimedTextSource2_1 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.addTimedTextSource is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -80,6 +88,10 @@ func (m *mediaPlayer) AddTimedTextSource4_2(arg0 *jni.Object, arg1 int64, arg2 i
 			callErr = err
 			return err
 		}
+		if midmediaPlayerAddTimedTextSource4_2 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.addTimedTextSource is not available on this device")
+			return callErr
+		}
 
 		jArg3, err := env.NewStringUTF(arg3)
 		if err != nil {
@@ -103,6 +115,10 @@ func (m *mediaPlayer) AddTimedTextSource2_3(arg0 string, arg1 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerAddTimedTextSource2_3 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.addTimedTextSource is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -132,6 +148,10 @@ func (m *mediaPlayer) ClearOnMediaTimeDiscontinuityListener() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerClearOnMediaTimeDiscontinuityListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.clearOnMediaTimeDiscontinuityListener is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerClearOnMediaTimeDiscontinuityListener,
@@ -150,6 +170,10 @@ func (m *mediaPlayer) ClearOnSubtitleDataListener() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerClearOnSubtitleDataListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.clearOnSubtitleDataListener is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerClearOnSubtitleDataListener,
@@ -167,6 +191,10 @@ func (m *mediaPlayer) CreateVolumeShaper(arg0 *jni.Object) (*jni.Object, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerCreateVolumeShaper == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.createVolumeShaper is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -190,6 +218,10 @@ func (m *mediaPlayer) DeselectTrack(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerDeselectTrack == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.deselectTrack is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -208,6 +240,10 @@ func (m *mediaPlayer) GetDrmInfo() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerGetDrmInfo == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getDrmInfo is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -230,6 +266,10 @@ func (m *mediaPlayer) GetDrmPropertyString(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerGetDrmPropertyString == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getDrmPropertyString is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -249,13 +289,17 @@ func (m *mediaPlayer) GetDrmPropertyString(arg0 string) (string, error) {
 }
 
 // GetKeyRequest calls android.media.MediaPlayer.getKeyRequest.
-func (m *mediaPlayer) GetKeyRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 int32, arg4 *jni.Object, arg5 *jni.Object) (*jni.Object, error) {
+func (m *mediaPlayer) GetKeyRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerGetKeyRequest == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getKeyRequest is not available on this device")
+			return callErr
 		}
 
 		jArg2, err := env.NewStringUTF(arg2)
@@ -265,7 +309,7 @@ func (m *mediaPlayer) GetKeyRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 str
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaPlayerGetKeyRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5),
+			midmediaPlayerGetKeyRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3), jni.ObjectValue(arg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -283,6 +327,10 @@ func (m *mediaPlayer) GetMetrics() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerGetMetrics == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getMetrics is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -305,6 +353,10 @@ func (m *mediaPlayer) GetPreferredDevice() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerGetPreferredDevice == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getPreferredDevice is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midmediaPlayerGetPreferredDevice,
@@ -325,6 +377,10 @@ func (m *mediaPlayer) GetRoutedDevice() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerGetRoutedDevice == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getRoutedDevice is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -347,6 +403,10 @@ func (m *mediaPlayer) GetRoutedDevices() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerGetRoutedDevices == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getRoutedDevices is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midmediaPlayerGetRoutedDevices,
@@ -367,6 +427,10 @@ func (m *mediaPlayer) GetSelectedTrack(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerGetSelectedTrack == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getSelectedTrack is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -390,6 +454,10 @@ func (m *mediaPlayer) GetTimestamp() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerGetTimestamp == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getTimestamp is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midmediaPlayerGetTimestamp,
@@ -410,6 +478,10 @@ func (m *mediaPlayer) GetTrackInfo() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerGetTrackInfo == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getTrackInfo is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -432,6 +504,10 @@ func (m *mediaPlayer) Pause() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerPause == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.pause is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerPause,
@@ -449,6 +525,10 @@ func (m *mediaPlayer) Prepare() error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerPrepare == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.prepare is not available on this device")
+			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -468,6 +548,10 @@ func (m *mediaPlayer) PrepareAsync() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerPrepareAsync == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.prepareAsync is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerPrepareAsync,
@@ -485,6 +569,10 @@ func (m *mediaPlayer) PrepareDrm(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerPrepareDrm == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.prepareDrm is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -504,6 +592,10 @@ func (m *mediaPlayer) ProvideKeyResponse(arg0 *jni.Object, arg1 *jni.Object) (*j
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerProvideKeyResponse == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.provideKeyResponse is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -527,6 +619,10 @@ func (m *mediaPlayer) Release() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerRelease == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.release is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerRelease,
@@ -545,6 +641,10 @@ func (m *mediaPlayer) ReleaseDrm() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerReleaseDrm == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.releaseDrm is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerReleaseDrm,
@@ -562,6 +662,10 @@ func (m *mediaPlayer) RemoveOnRoutingChangedListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerRemoveOnRoutingChangedListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.removeOnRoutingChangedListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -582,6 +686,10 @@ func (m *mediaPlayer) Reset() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerReset == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.reset is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerReset,
@@ -599,6 +707,10 @@ func (m *mediaPlayer) RestoreKeys(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerRestoreKeys == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.restoreKeys is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -619,6 +731,10 @@ func (m *mediaPlayer) SeekTo1(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSeekTo1 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.seekTo is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -637,6 +753,10 @@ func (m *mediaPlayer) SeekTo2_1(arg0 int64, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSeekTo2_1 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.seekTo is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -657,6 +777,10 @@ func (m *mediaPlayer) SelectTrack(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSelectTrack == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.selectTrack is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -675,6 +799,10 @@ func (m *mediaPlayer) SetAudioAttributes(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetAudioAttributes == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setAudioAttributes is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -695,6 +823,10 @@ func (m *mediaPlayer) SetAudioSessionId(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetAudioSessionId == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setAudioSessionId is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -713,6 +845,10 @@ func (m *mediaPlayer) SetAudioStreamType(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetAudioStreamType == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setAudioStreamType is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -733,6 +869,10 @@ func (m *mediaPlayer) SetAuxEffectSendLevel(arg0 float32) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetAuxEffectSendLevel == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setAuxEffectSendLevel is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -752,6 +892,10 @@ func (m *mediaPlayer) SetDataSource2(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetDataSource2 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -763,7 +907,7 @@ func (m *mediaPlayer) SetDataSource2(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // SetDataSource4_1 calls android.media.MediaPlayer.setDataSource.
-func (m *mediaPlayer) SetDataSource4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *mediaPlayer) SetDataSource4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -771,10 +915,14 @@ func (m *mediaPlayer) SetDataSource4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetDataSource4_1 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaPlayerSetDataSource4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midmediaPlayerSetDataSource4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -782,7 +930,7 @@ func (m *mediaPlayer) SetDataSource4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 
 }
 
 // SetDataSource5_2 calls android.media.MediaPlayer.setDataSource.
-func (m *mediaPlayer) SetDataSource5_2(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *mediaPlayer) SetDataSource5_2(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -790,10 +938,14 @@ func (m *mediaPlayer) SetDataSource5_2(arg0 *jni.Object, arg1 *jni.Object, arg2 
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetDataSource5_2 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaPlayerSetDataSource5_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
+			midmediaPlayerSetDataSource5_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -808,6 +960,10 @@ func (m *mediaPlayer) SetDataSource1_3(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetDataSource1_3 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -828,6 +984,10 @@ func (m *mediaPlayer) SetDataSource1_4(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetDataSource1_4 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -846,6 +1006,10 @@ func (m *mediaPlayer) SetDataSource1_5(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetDataSource1_5 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -866,6 +1030,10 @@ func (m *mediaPlayer) SetDataSource3_6(arg0 *jni.Object, arg1 int64, arg2 int64)
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetDataSource3_6 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -884,6 +1052,10 @@ func (m *mediaPlayer) SetDataSource1_7(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetDataSource1_7 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -908,6 +1080,10 @@ func (m *mediaPlayer) SetDisplay(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetDisplay == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDisplay is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -926,6 +1102,10 @@ func (m *mediaPlayer) SetDrmPropertyString(arg0 string, arg1 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetDrmPropertyString == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setDrmPropertyString is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -955,6 +1135,10 @@ func (m *mediaPlayer) SetOnBufferingUpdateListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnBufferingUpdateListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnBufferingUpdateListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -973,6 +1157,10 @@ func (m *mediaPlayer) SetOnCompletionListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetOnCompletionListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnCompletionListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -993,6 +1181,10 @@ func (m *mediaPlayer) SetOnDrmConfigHelper(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnDrmConfigHelper == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnDrmConfigHelper is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1011,6 +1203,10 @@ func (m *mediaPlayer) SetOnDrmInfoListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetOnDrmInfoListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnDrmInfoListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1031,6 +1227,10 @@ func (m *mediaPlayer) SetOnDrmPreparedListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnDrmPreparedListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnDrmPreparedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1049,6 +1249,10 @@ func (m *mediaPlayer) SetOnErrorListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetOnErrorListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnErrorListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1069,6 +1273,10 @@ func (m *mediaPlayer) SetOnInfoListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnInfoListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnInfoListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1087,6 +1295,10 @@ func (m *mediaPlayer) SetOnMediaTimeDiscontinuityListener(arg0 *jni.Object) erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetOnMediaTimeDiscontinuityListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnMediaTimeDiscontinuityListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1107,6 +1319,10 @@ func (m *mediaPlayer) SetOnPreparedListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnPreparedListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnPreparedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1125,6 +1341,10 @@ func (m *mediaPlayer) SetOnSeekCompleteListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetOnSeekCompleteListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnSeekCompleteListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1145,6 +1365,10 @@ func (m *mediaPlayer) SetOnSubtitleDataListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnSubtitleDataListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnSubtitleDataListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1163,6 +1387,10 @@ func (m *mediaPlayer) SetOnTimedMetaDataAvailableListener(arg0 *jni.Object) erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetOnTimedMetaDataAvailableListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnTimedMetaDataAvailableListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1183,6 +1411,10 @@ func (m *mediaPlayer) SetOnTimedTextListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnTimedTextListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnTimedTextListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1202,6 +1434,10 @@ func (m *mediaPlayer) SetOnVideoSizeChangedListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetOnVideoSizeChangedListener == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setOnVideoSizeChangedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1220,6 +1456,10 @@ func (m *mediaPlayer) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetPreferredDevice == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setPreferredDevice is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1244,6 +1484,10 @@ func (m *mediaPlayer) SetScreenOnWhilePlaying(arg0 bool) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetScreenOnWhilePlaying == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setScreenOnWhilePlaying is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -1267,6 +1511,10 @@ func (m *mediaPlayer) SetSurface(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetSurface == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setSurface is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1285,6 +1533,10 @@ func (m *mediaPlayer) SetVideoScalingMode(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetVideoScalingMode == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setVideoScalingMode is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1305,6 +1557,10 @@ func (m *mediaPlayer) SetVolume(arg0 float32, arg1 float32) error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerSetVolume == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setVolume is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1323,6 +1579,10 @@ func (m *mediaPlayer) SetWakeMode(arg0 *jni.Object, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerSetWakeMode == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setWakeMode is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1343,6 +1603,10 @@ func (m *mediaPlayer) Start() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerStart == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.start is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerStart,
@@ -1361,6 +1625,10 @@ func (m *mediaPlayer) Stop() error {
 			callErr = err
 			return err
 		}
+		if midmediaPlayerStop == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.stop is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaPlayerStop,
@@ -1378,6 +1646,10 @@ func (m *mediaPlayer) Create2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerCreate2 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.create is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -1401,6 +1673,10 @@ func (m *mediaPlayer) Create3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Ob
 			callErr = err
 			return err
 		}
+		if midmediaPlayerCreate3_1 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.create is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsmediaPlayer)),
@@ -1422,6 +1698,10 @@ func (m *mediaPlayer) Create5_2(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Ob
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerCreate5_2 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.create is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -1445,6 +1725,10 @@ func (m *mediaPlayer) Create2_3(arg0 *jni.Object, arg1 int32) (*jni.Object, erro
 			callErr = err
 			return err
 		}
+		if midmediaPlayerCreate2_3 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.create is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsmediaPlayer)),
@@ -1466,6 +1750,10 @@ func (m *mediaPlayer) Create4_4(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaPlayerCreate4_4 == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.create is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(

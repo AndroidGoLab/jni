@@ -32,6 +32,10 @@ func (m *storageVolume) CreateAccessIntent(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeCreateAccessIntent == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.createAccessIntent is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -58,6 +62,10 @@ func (m *storageVolume) CreateOpenDocumentTreeIntent() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeCreateOpenDocumentTreeIntent == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.createOpenDocumentTreeIntent is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midstorageVolumeCreateOpenDocumentTreeIntent,
@@ -79,6 +87,10 @@ func (m *storageVolume) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeDescribeContents == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.describeContents is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midstorageVolumeDescribeContents,
@@ -99,6 +111,10 @@ func (m *storageVolume) Equals(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midstorageVolumeEquals == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.equals is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -123,6 +139,10 @@ func (m *storageVolume) GetDescription(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeGetDescription == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.getDescription is not available on this device")
+			return callErr
+		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -146,6 +166,10 @@ func (m *storageVolume) GetDirectory() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeGetDirectory == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.getDirectory is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midstorageVolumeGetDirectory,
@@ -166,6 +190,10 @@ func (m *storageVolume) GetMediaStoreVolumeName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midstorageVolumeGetMediaStoreVolumeName == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.getMediaStoreVolumeName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -189,6 +217,10 @@ func (m *storageVolume) GetOwner() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeGetOwner == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.getOwner is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midstorageVolumeGetOwner,
@@ -209,6 +241,10 @@ func (m *storageVolume) GetState() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midstorageVolumeGetState == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.getState is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -232,6 +268,10 @@ func (m *storageVolume) GetStorageUuid() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeGetStorageUuid == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.getStorageUuid is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midstorageVolumeGetStorageUuid,
@@ -252,6 +292,10 @@ func (m *storageVolume) GetUuid() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midstorageVolumeGetUuid == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.getUuid is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -275,6 +319,10 @@ func (m *storageVolume) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeHashCode == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.hashCode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midstorageVolumeHashCode,
@@ -295,6 +343,10 @@ func (m *storageVolume) IsEmulated() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midstorageVolumeIsEmulated == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.isEmulated is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -318,6 +370,10 @@ func (m *storageVolume) IsPrimary() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeIsPrimary == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.isPrimary is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midstorageVolumeIsPrimary,
@@ -339,6 +395,10 @@ func (m *storageVolume) IsRemovable() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midstorageVolumeIsRemovable == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.isRemovable is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -362,6 +422,10 @@ func (m *storageVolume) ToString() (string, error) {
 			callErr = err
 			return err
 		}
+		if midstorageVolumeToString == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.toString is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midstorageVolumeToString,
@@ -383,6 +447,10 @@ func (m *storageVolume) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midstorageVolumeWriteToParcel == nil {
+			callErr = fmt.Errorf("android.os.storage.StorageVolume.writeToParcel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

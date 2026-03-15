@@ -32,6 +32,10 @@ func (m *downloadManagerQuery) SetFilterById(arg0 *jni.Object) (*jni.Object, err
 			callErr = err
 			return err
 		}
+		if middownloadManagerQuerySetFilterById == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Query.setFilterById is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -53,6 +57,10 @@ func (m *downloadManagerQuery) SetFilterByStatus(arg0 int32) (*jni.Object, error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerQuerySetFilterByStatus == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Query.setFilterByStatus is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(

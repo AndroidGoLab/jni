@@ -678,7 +678,7 @@ func (s *TelephonyManagerServer) GetNetworkSlicingConfiguration(_ context.Contex
 	}
 	defer mgr.Close()
 
-	if err := mgr.GetNetworkSlicingConfiguration(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2())); err != nil {
+	if err := mgr.GetNetworkSlicingConfiguration(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.GetNetworkSlicingConfigurationResponse{}, nil
@@ -2085,7 +2085,7 @@ func (s *TelephonyManagerServer) UploadCallComposerPicture5(_ context.Context, r
 	}
 	defer mgr.Close()
 
-	if err := mgr.UploadCallComposerPicture5(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3()), s.Handles.Get(req.GetArg4())); err != nil {
+	if err := mgr.UploadCallComposerPicture5(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.UploadCallComposerPicture5Response{}, nil
@@ -2098,7 +2098,7 @@ func (s *TelephonyManagerServer) UploadCallComposerPicture5_1(_ context.Context,
 	}
 	defer mgr.Close()
 
-	if err := mgr.UploadCallComposerPicture5_1(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3()), s.Handles.Get(req.GetArg4())); err != nil {
+	if err := mgr.UploadCallComposerPicture5_1(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.UploadCallComposerPicture5_1Response{}, nil

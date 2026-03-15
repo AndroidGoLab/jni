@@ -278,7 +278,6 @@ type AddCallRequest struct {
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
 	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
-	Arg5          int64                  `protobuf:"varint,6,opt,name=arg5,proto3" json:"arg5,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -344,13 +343,6 @@ func (x *AddCallRequest) GetArg3() int64 {
 func (x *AddCallRequest) GetArg4() int64 {
 	if x != nil {
 		return x.Arg4
-	}
-	return 0
-}
-
-func (x *AddCallRequest) GetArg5() int64 {
-	if x != nil {
-		return x.Arg5
 	}
 	return 0
 }
@@ -3245,14 +3237,13 @@ const file_proto_telecom_telecom_proto_rawDesc = "" +
 	"\x1aAcceptRingingCall0Response\"1\n" +
 	"\x1bAcceptRingingCall1_1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x1e\n" +
-	"\x1cAcceptRingingCall1_1Response\"\x88\x01\n" +
+	"\x1cAcceptRingingCall1_1Response\"t\n" +
 	"\x0eAddCallRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
 	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\x12\x12\n" +
-	"\x04arg5\x18\x06 \x01(\x03R\x04arg5\"\x11\n" +
+	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\"\x11\n" +
 	"\x0fAddCallResponse\"C\n" +
 	"\x19AddNewIncomingCallRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +

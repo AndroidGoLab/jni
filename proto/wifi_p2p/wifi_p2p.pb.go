@@ -2732,7 +2732,6 @@ type RequestDirInfoRequest struct {
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2784,13 +2783,6 @@ func (x *RequestDirInfoRequest) GetArg1() int64 {
 func (x *RequestDirInfoRequest) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
-	}
-	return 0
-}
-
-func (x *RequestDirInfoRequest) GetArg3() int64 {
-	if x != nil {
-		return x.Arg3
 	}
 	return 0
 }
@@ -4501,7 +4493,6 @@ type ValidateDirInfoRequest struct {
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
-	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4560,13 +4551,6 @@ func (x *ValidateDirInfoRequest) GetArg2() int64 {
 func (x *ValidateDirInfoRequest) GetArg3() int64 {
 	if x != nil {
 		return x.Arg3
-	}
-	return 0
-}
-
-func (x *ValidateDirInfoRequest) GetArg4() int64 {
-	if x != nil {
-		return x.Arg4
 	}
 	return 0
 }
@@ -4819,12 +4803,11 @@ const file_proto_wifi_p2p_wifi_p2p_proto_rawDesc = "" +
 	"\x18RequestDeviceInfoRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x1b\n" +
-	"\x19RequestDeviceInfoResponse\"g\n" +
+	"\x19RequestDeviceInfoResponse\"S\n" +
 	"\x15RequestDirInfoRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x18\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x18\n" +
 	"\x16RequestDirInfoResponse\"F\n" +
 	"\x1cRequestDiscoveryStateRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
@@ -4907,13 +4890,12 @@ const file_proto_wifi_p2p_wifi_p2p_proto_rawDesc = "" +
 	"\x19StopPeerDiscoveryResponse\"6\n" +
 	" UnregisterWifiP2pListenerRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"#\n" +
-	"!UnregisterWifiP2pListenerResponse\"|\n" +
+	"!UnregisterWifiP2pListenerResponse\"h\n" +
 	"\x16ValidateDirInfoRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\"\x19\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x19\n" +
 	"\x17ValidateDirInfoResponse\"2\n" +
 	"0GetP2pMaxAllowedVendorElementsLengthBytesRequest\"K\n" +
 	"1GetP2pMaxAllowedVendorElementsLengthBytesResponse\x12\x16\n" +

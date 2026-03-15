@@ -626,7 +626,6 @@ func (x *IsCameraDeviceSetupSupportedResponse) GetResult() bool {
 type IsConcurrentSessionConfigurationSupportedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -664,13 +663,6 @@ func (*IsConcurrentSessionConfigurationSupportedRequest) Descriptor() ([]byte, [
 func (x *IsConcurrentSessionConfigurationSupportedRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
-	}
-	return 0
-}
-
-func (x *IsConcurrentSessionConfigurationSupportedRequest) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
 	}
 	return 0
 }
@@ -1357,10 +1349,9 @@ const file_proto_camera_camera_proto_rawDesc = "" +
 	"#IsCameraDeviceSetupSupportedRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\tR\x04arg0\">\n" +
 	"$IsCameraDeviceSetupSupportedResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"Z\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"F\n" +
 	"0IsConcurrentSessionConfigurationSupportedRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"K\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"K\n" +
 	"1IsConcurrentSessionConfigurationSupportedResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result\"O\n" +
 	"\x11OpenCameraRequest\x12\x12\n" +

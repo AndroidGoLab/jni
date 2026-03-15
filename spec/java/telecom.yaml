@@ -36,14 +36,12 @@ classes:
               go_name: arg0
             - java_type: java.util.concurrent.Executor
               go_name: arg1
-            - java_type: android.os.OutcomeReceiver<android.telecom.CallControl
+            - java_type: "android.os.OutcomeReceiver<android.telecom.CallControl, android.telecom.CallException>"
               go_name: arg2
-            - java_type: android.telecom.CallException>
-              go_name: arg3
             - java_type: android.telecom.CallControlCallback
-              go_name: arg4
+              go_name: arg3
             - java_type: android.telecom.CallEventCallback
-              go_name: arg5
+              go_name: arg4
           returns: void
           error: true
         - java_method: addNewIncomingCall

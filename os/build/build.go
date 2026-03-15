@@ -32,6 +32,10 @@ func (m *build) GetFingerprintedPartitions() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midbuildGetFingerprintedPartitions == nil {
+			callErr = fmt.Errorf("android.os.Build.getFingerprintedPartitions is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsbuild)),
 			midbuildGetFingerprintedPartitions,
@@ -52,6 +56,10 @@ func (m *build) GetMajorSdkVersion(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbuildGetMajorSdkVersion == nil {
+			callErr = fmt.Errorf("android.os.Build.getMajorSdkVersion is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticIntMethod(
@@ -75,6 +83,10 @@ func (m *build) GetMinorSdkVersion(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midbuildGetMinorSdkVersion == nil {
+			callErr = fmt.Errorf("android.os.Build.getMinorSdkVersion is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticIntMethod(
 			(*jni.Class)(unsafe.Pointer(clsbuild)),
@@ -97,6 +109,10 @@ func (m *build) GetRadioVersion() (string, error) {
 			callErr = err
 			return err
 		}
+		if midbuildGetRadioVersion == nil {
+			callErr = fmt.Errorf("android.os.Build.getRadioVersion is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsbuild)),
 			midbuildGetRadioVersion,
@@ -118,6 +134,10 @@ func (m *build) GetSerial() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbuildGetSerial == nil {
+			callErr = fmt.Errorf("android.os.Build.getSerial is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsbuild)),

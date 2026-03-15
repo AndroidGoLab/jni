@@ -32,6 +32,10 @@ func (m *uri) CompareTo1(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
+		if miduriCompareTo1 == nil {
+			callErr = fmt.Errorf("android.net.Uri.compareTo is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -53,6 +57,10 @@ func (m *uri) Equals(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriEquals == nil {
+			callErr = fmt.Errorf("android.net.Uri.equals is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -76,6 +84,10 @@ func (m *uri) GetBooleanQueryParameter(arg0 string, arg1 bool) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriGetBooleanQueryParameter == nil {
+			callErr = fmt.Errorf("android.net.Uri.getBooleanQueryParameter is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -109,6 +121,10 @@ func (m *uri) GetQueryParameter(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
+		if miduriGetQueryParameter == nil {
+			callErr = fmt.Errorf("android.net.Uri.getQueryParameter is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -136,6 +152,10 @@ func (m *uri) GetQueryParameterNames() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if miduriGetQueryParameterNames == nil {
+			callErr = fmt.Errorf("android.net.Uri.getQueryParameterNames is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			miduriGetQueryParameterNames,
@@ -156,6 +176,10 @@ func (m *uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriGetQueryParameters == nil {
+			callErr = fmt.Errorf("android.net.Uri.getQueryParameters is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -183,6 +207,10 @@ func (m *uri) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if miduriHashCode == nil {
+			callErr = fmt.Errorf("android.net.Uri.hashCode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			miduriHashCode,
@@ -203,6 +231,10 @@ func (m *uri) IsAbsolute() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriIsAbsolute == nil {
+			callErr = fmt.Errorf("android.net.Uri.isAbsolute is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -226,6 +258,10 @@ func (m *uri) IsOpaque() (bool, error) {
 			callErr = err
 			return err
 		}
+		if miduriIsOpaque == nil {
+			callErr = fmt.Errorf("android.net.Uri.isOpaque is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			miduriIsOpaque,
@@ -248,6 +284,10 @@ func (m *uri) NormalizeScheme() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if miduriNormalizeScheme == nil {
+			callErr = fmt.Errorf("android.net.Uri.normalizeScheme is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			miduriNormalizeScheme,
@@ -268,6 +308,10 @@ func (m *uri) CompareTo1_1(arg0 *jni.Object) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriCompareTo1_1 == nil {
+			callErr = fmt.Errorf("android.net.Uri.compareTo is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -290,6 +334,10 @@ func (m *uri) Decode(arg0 string) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriDecode == nil {
+			callErr = fmt.Errorf("android.net.Uri.decode is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -318,6 +366,10 @@ func (m *uri) Encode1(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
+		if miduriEncode1 == nil {
+			callErr = fmt.Errorf("android.net.Uri.encode is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -344,6 +396,10 @@ func (m *uri) Encode2_1(arg0 string, arg1 string) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriEncode2_1 == nil {
+			callErr = fmt.Errorf("android.net.Uri.encode is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -377,6 +433,10 @@ func (m *uri) FromFile(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if miduriFromFile == nil {
+			callErr = fmt.Errorf("android.net.Uri.fromFile is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsuri)),
@@ -398,6 +458,10 @@ func (m *uri) FromParts(arg0 string, arg1 string, arg2 string) (*jni.Object, err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriFromParts == nil {
+			callErr = fmt.Errorf("android.net.Uri.fromParts is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -435,6 +499,10 @@ func (m *uri) Parse(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if miduriParse == nil {
+			callErr = fmt.Errorf("android.net.Uri.parse is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -460,6 +528,10 @@ func (m *uri) WithAppendedPath(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriWithAppendedPath == nil {
+			callErr = fmt.Errorf("android.net.Uri.withAppendedPath is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -487,6 +559,10 @@ func (m *uri) WriteToParcel(arg0 *jni.Object, arg1 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if miduriWriteToParcel == nil {
+			callErr = fmt.Errorf("android.net.Uri.writeToParcel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallStaticVoidMethod(

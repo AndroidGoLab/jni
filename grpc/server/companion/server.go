@@ -306,7 +306,7 @@ func (s *CompanionDeviceManagerServer) StartSystemDataTransfer(_ context.Context
 	}
 	defer mgr.Close()
 
-	if err := mgr.StartSystemDataTransfer(req.GetArg0(), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
+	if err := mgr.StartSystemDataTransfer(req.GetArg0(), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.StartSystemDataTransferResponse{}, nil

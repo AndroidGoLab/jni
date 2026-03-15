@@ -30,6 +30,12 @@ var (
 	clsbuildVERSION *jni.GlobalRef
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -56,27 +62,42 @@ func doInit(env *jni.Env) error {
 
 	midbuildGetFingerprintedPartitions, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getFingerprintedPartitions", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Build.getFingerprintedPartitions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Build.getFingerprintedPartitions")
 	}
 
 	midbuildGetMajorSdkVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getMajorSdkVersion", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Build.getMajorSdkVersion: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Build.getMajorSdkVersion")
 	}
 
 	midbuildGetMinorSdkVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getMinorSdkVersion", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Build.getMinorSdkVersion: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Build.getMinorSdkVersion")
 	}
 
 	midbuildGetRadioVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getRadioVersion", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Build.getRadioVersion: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Build.getRadioVersion")
 	}
 
 	midbuildGetSerial, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getSerial", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Build.getSerial: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Build.getSerial")
 	}
 
 	c, err = env.FindClass("android/os/Build$VERSION")

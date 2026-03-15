@@ -74,6 +74,10 @@ func (m *audioManager) AbandonAudioFocus(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerAbandonAudioFocus == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.abandonAudioFocus is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -95,6 +99,10 @@ func (m *audioManager) AbandonAudioFocusRequest(arg0 *jni.Object) (int32, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerAbandonAudioFocusRequest == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.abandonAudioFocusRequest is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -118,6 +126,10 @@ func (m *audioManager) AddOnCommunicationDeviceChangedListener(arg0 *jni.Object,
 			callErr = err
 			return err
 		}
+		if midaudioManagerAddOnCommunicationDeviceChangedListener == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.addOnCommunicationDeviceChangedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -136,6 +148,10 @@ func (m *audioManager) AddOnModeChangedListener(arg0 *jni.Object, arg1 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerAddOnModeChangedListener == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.addOnModeChangedListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -156,6 +172,10 @@ func (m *audioManager) AddOnPreferredMixerAttributesChangedListener(arg0 *jni.Ob
 			callErr = err
 			return err
 		}
+		if midaudioManagerAddOnPreferredMixerAttributesChangedListener == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.addOnPreferredMixerAttributesChangedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -174,6 +194,10 @@ func (m *audioManager) AdjustStreamVolume(arg0 int32, arg1 int32, arg2 int32) er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerAdjustStreamVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.adjustStreamVolume is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -194,6 +218,10 @@ func (m *audioManager) AdjustSuggestedStreamVolume(arg0 int32, arg1 int32, arg2 
 			callErr = err
 			return err
 		}
+		if midaudioManagerAdjustSuggestedStreamVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.adjustSuggestedStreamVolume is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -212,6 +240,10 @@ func (m *audioManager) AdjustVolume(arg0 int32, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerAdjustVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.adjustVolume is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -232,6 +264,10 @@ func (m *audioManager) AdjustVolumeGroupVolume(arg0 int32, arg1 int32, arg2 int3
 			callErr = err
 			return err
 		}
+		if midaudioManagerAdjustVolumeGroupVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.adjustVolumeGroupVolume is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -251,6 +287,10 @@ func (m *audioManager) ClearCommunicationDevice() error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerClearCommunicationDevice == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.clearCommunicationDevice is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midaudioManagerClearCommunicationDevice,
@@ -268,6 +308,10 @@ func (m *audioManager) ClearPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerClearPreferredMixerAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.clearPreferredMixerAttributes is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -292,6 +336,10 @@ func (m *audioManager) DispatchMediaKeyEvent(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerDispatchMediaKeyEvent == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.dispatchMediaKeyEvent is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -310,6 +358,10 @@ func (m *audioManager) GenerateAudioSessionId() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGenerateAudioSessionId == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.generateAudioSessionId is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -332,6 +384,10 @@ func (m *audioManager) GetActivePlaybackConfigurations() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetActivePlaybackConfigurations == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getActivePlaybackConfigurations is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioManagerGetActivePlaybackConfigurations,
@@ -352,6 +408,10 @@ func (m *audioManager) GetActiveRecordingConfigurations() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetActiveRecordingConfigurations == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getActiveRecordingConfigurations is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -374,6 +434,10 @@ func (m *audioManager) GetAllowedCapturePolicy() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetAllowedCapturePolicy == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getAllowedCapturePolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioManagerGetAllowedCapturePolicy,
@@ -394,6 +458,10 @@ func (m *audioManager) GetAudioDevicesForAttributes(arg0 *jni.Object) (*jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetAudioDevicesForAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getAudioDevicesForAttributes is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -417,6 +485,10 @@ func (m *audioManager) GetAudioHwSyncForSession(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetAudioHwSyncForSession == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getAudioHwSyncForSession is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -439,6 +511,10 @@ func (m *audioManager) GetAvailableCommunicationDevices() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetAvailableCommunicationDevices == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getAvailableCommunicationDevices is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioManagerGetAvailableCommunicationDevices,
@@ -460,6 +536,10 @@ func (m *audioManager) GetCommunicationDevice() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetCommunicationDevice == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getCommunicationDevice is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioManagerGetCommunicationDevice,
@@ -480,6 +560,10 @@ func (m *audioManager) GetDevices(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetDevices == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getDevices is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -503,6 +587,10 @@ func (m *audioManager) GetDirectProfilesForAttributes(arg0 *jni.Object) (*jni.Ob
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetDirectProfilesForAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getDirectProfilesForAttributes is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -525,6 +613,10 @@ func (m *audioManager) GetEncodedSurroundMode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetEncodedSurroundMode == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getEncodedSurroundMode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioManagerGetEncodedSurroundMode,
@@ -545,6 +637,10 @@ func (m *audioManager) GetMicrophones() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetMicrophones == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getMicrophones is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -567,6 +663,10 @@ func (m *audioManager) GetMode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetMode == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getMode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioManagerGetMode,
@@ -587,6 +687,10 @@ func (m *audioManager) GetParameters(arg0 string) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetParameters == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getParameters is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -615,6 +719,10 @@ func (m *audioManager) GetPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetPreferredMixerAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getPreferredMixerAttributes is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -636,6 +744,10 @@ func (m *audioManager) GetProperty(arg0 string) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetProperty == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getProperty is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -664,6 +776,10 @@ func (m *audioManager) GetRingerMode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetRingerMode == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getRingerMode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioManagerGetRingerMode,
@@ -684,6 +800,10 @@ func (m *audioManager) GetRouting(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetRouting == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getRouting is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -707,6 +827,10 @@ func (m *audioManager) GetSpatializer() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetSpatializer == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getSpatializer is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioManagerGetSpatializer,
@@ -727,6 +851,10 @@ func (m *audioManager) GetStreamMaxVolume(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetStreamMaxVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getStreamMaxVolume is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -750,6 +878,10 @@ func (m *audioManager) GetStreamMinVolume(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetStreamMinVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getStreamMinVolume is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -771,6 +903,10 @@ func (m *audioManager) GetStreamVolume(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetStreamVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getStreamVolume is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -794,6 +930,10 @@ func (m *audioManager) GetStreamVolumeDb(arg0 int32, arg1 int32, arg2 int32) (fl
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetStreamVolumeDb == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getStreamVolumeDb is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
@@ -815,6 +955,10 @@ func (m *audioManager) GetSupportedDeviceTypes(arg0 int32) (*jni.Object, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetSupportedDeviceTypes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getSupportedDeviceTypes is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -838,6 +982,10 @@ func (m *audioManager) GetSupportedMixerAttributes(arg0 *jni.Object) (*jni.Objec
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetSupportedMixerAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getSupportedMixerAttributes is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -859,6 +1007,10 @@ func (m *audioManager) GetVibrateSetting(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetVibrateSetting == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getVibrateSetting is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -882,6 +1034,10 @@ func (m *audioManager) GetVolumeGroupIdForAttributes(arg0 *jni.Object) (int32, e
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetVolumeGroupIdForAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getVolumeGroupIdForAttributes is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -903,6 +1059,10 @@ func (m *audioManager) IsBluetoothA2dpOn() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerIsBluetoothA2dpOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isBluetoothA2dpOn is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -926,6 +1086,10 @@ func (m *audioManager) IsBluetoothScoAvailableOffCall() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsBluetoothScoAvailableOffCall == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isBluetoothScoAvailableOffCall is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midaudioManagerIsBluetoothScoAvailableOffCall,
@@ -947,6 +1111,10 @@ func (m *audioManager) IsBluetoothScoOn() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerIsBluetoothScoOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isBluetoothScoOn is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -970,6 +1138,10 @@ func (m *audioManager) IsCallScreeningModeSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsCallScreeningModeSupported == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isCallScreeningModeSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midaudioManagerIsCallScreeningModeSupported,
@@ -991,6 +1163,10 @@ func (m *audioManager) IsMicrophoneMute() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerIsMicrophoneMute == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isMicrophoneMute is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1014,6 +1190,10 @@ func (m *audioManager) IsMusicActive() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsMusicActive == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isMusicActive is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midaudioManagerIsMusicActive,
@@ -1035,6 +1215,10 @@ func (m *audioManager) IsRampingRingerEnabled() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerIsRampingRingerEnabled == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isRampingRingerEnabled is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1058,6 +1242,10 @@ func (m *audioManager) IsSpeakerphoneOn() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsSpeakerphoneOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isSpeakerphoneOn is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midaudioManagerIsSpeakerphoneOn,
@@ -1079,6 +1267,10 @@ func (m *audioManager) IsStreamMute(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerIsStreamMute == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isStreamMute is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1103,6 +1295,10 @@ func (m *audioManager) IsSurroundFormatEnabled(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsSurroundFormatEnabled == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isSurroundFormatEnabled is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1126,6 +1322,10 @@ func (m *audioManager) IsVolumeFixed() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsVolumeFixed == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isVolumeFixed is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midaudioManagerIsVolumeFixed,
@@ -1147,6 +1347,10 @@ func (m *audioManager) IsVolumeGroupMuted(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerIsVolumeGroupMuted == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isVolumeGroupMuted is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1171,6 +1375,10 @@ func (m *audioManager) IsWiredHeadsetOn() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsWiredHeadsetOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isWiredHeadsetOn is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midaudioManagerIsWiredHeadsetOn,
@@ -1193,6 +1401,10 @@ func (m *audioManager) LoadSoundEffects() error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerLoadSoundEffects == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.loadSoundEffects is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midaudioManagerLoadSoundEffects,
@@ -1210,6 +1422,10 @@ func (m *audioManager) PlaySoundEffect1(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerPlaySoundEffect1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.playSoundEffect is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1230,6 +1446,10 @@ func (m *audioManager) PlaySoundEffect2_1(arg0 int32, arg1 float32) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerPlaySoundEffect2_1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.playSoundEffect is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1248,6 +1468,10 @@ func (m *audioManager) RegisterMediaButtonEventReceiver1(arg0 *jni.Object) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerRegisterMediaButtonEventReceiver1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.registerMediaButtonEventReceiver is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1268,6 +1492,10 @@ func (m *audioManager) RegisterMediaButtonEventReceiver1_1(arg0 *jni.Object) err
 			callErr = err
 			return err
 		}
+		if midaudioManagerRegisterMediaButtonEventReceiver1_1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.registerMediaButtonEventReceiver is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1287,6 +1515,10 @@ func (m *audioManager) RegisterRemoteControlClient(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerRegisterRemoteControlClient == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.registerRemoteControlClient is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1305,6 +1537,10 @@ func (m *audioManager) RegisterRemoteController(arg0 *jni.Object) (bool, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerRegisterRemoteController == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.registerRemoteController is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1329,6 +1565,10 @@ func (m *audioManager) RemoveOnCommunicationDeviceChangedListener(arg0 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midaudioManagerRemoveOnCommunicationDeviceChangedListener == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.removeOnCommunicationDeviceChangedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1347,6 +1587,10 @@ func (m *audioManager) RemoveOnModeChangedListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerRemoveOnModeChangedListener == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.removeOnModeChangedListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1367,6 +1611,10 @@ func (m *audioManager) RemoveOnPreferredMixerAttributesChangedListener(arg0 *jni
 			callErr = err
 			return err
 		}
+		if midaudioManagerRemoveOnPreferredMixerAttributesChangedListener == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.removeOnPreferredMixerAttributesChangedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1385,6 +1633,10 @@ func (m *audioManager) RequestAudioFocus1(arg0 *jni.Object) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerRequestAudioFocus1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.requestAudioFocus is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1408,6 +1660,10 @@ func (m *audioManager) RequestAudioFocus3_1(arg0 *jni.Object, arg1 int32, arg2 i
 			callErr = err
 			return err
 		}
+		if midaudioManagerRequestAudioFocus3_1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.requestAudioFocus is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1430,6 +1686,10 @@ func (m *audioManager) SetAllowedCapturePolicy(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetAllowedCapturePolicy == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setAllowedCapturePolicy is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1448,6 +1708,10 @@ func (m *audioManager) SetBluetoothA2dpOn(arg0 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetBluetoothA2dpOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setBluetoothA2dpOn is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -1472,6 +1736,10 @@ func (m *audioManager) SetBluetoothScoOn(arg0 bool) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetBluetoothScoOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setBluetoothScoOn is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -1494,6 +1762,10 @@ func (m *audioManager) SetCommunicationDevice(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetCommunicationDevice == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setCommunicationDevice is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1518,6 +1790,10 @@ func (m *audioManager) SetEncodedSurroundMode(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetEncodedSurroundMode == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setEncodedSurroundMode is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1540,6 +1816,10 @@ func (m *audioManager) SetMicrophoneMute(arg0 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetMicrophoneMute == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setMicrophoneMute is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -1564,6 +1844,10 @@ func (m *audioManager) SetMode(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetMode == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setMode is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1582,6 +1866,10 @@ func (m *audioManager) SetParameters(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetParameters == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setParameters is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1606,6 +1894,10 @@ func (m *audioManager) SetPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetPreferredMixerAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setPreferredMixerAttributes is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1629,6 +1921,10 @@ func (m *audioManager) SetRingerMode(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetRingerMode == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setRingerMode is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1648,6 +1944,10 @@ func (m *audioManager) SetRouting(arg0 int32, arg1 int32, arg2 int32) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetRouting == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setRouting is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1666,6 +1966,10 @@ func (m *audioManager) SetSpeakerphoneOn(arg0 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetSpeakerphoneOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setSpeakerphoneOn is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -1689,6 +1993,10 @@ func (m *audioManager) SetStreamMute(arg0 int32, arg1 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetStreamMute == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setStreamMute is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -1714,6 +2022,10 @@ func (m *audioManager) SetStreamSolo(arg0 int32, arg1 bool) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetStreamSolo == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setStreamSolo is not available on this device")
+			return callErr
+		}
 
 		var jArg1 uint8
 		if arg1 {
@@ -1738,6 +2050,10 @@ func (m *audioManager) SetStreamVolume(arg0 int32, arg1 int32, arg2 int32) error
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetStreamVolume == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setStreamVolume is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1756,6 +2072,10 @@ func (m *audioManager) SetSurroundFormatEnabled(arg0 int32, arg1 bool) (bool, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetSurroundFormatEnabled == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setSurroundFormatEnabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -1785,6 +2105,10 @@ func (m *audioManager) SetVibrateSetting(arg0 int32, arg1 int32) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerSetVibrateSetting == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setVibrateSetting is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1803,6 +2127,10 @@ func (m *audioManager) SetWiredHeadsetOn(arg0 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerSetWiredHeadsetOn == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.setWiredHeadsetOn is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -1827,6 +2155,10 @@ func (m *audioManager) ShouldVibrate(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerShouldVibrate == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.shouldVibrate is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1850,6 +2182,10 @@ func (m *audioManager) StartBluetoothSco() error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerStartBluetoothSco == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.startBluetoothSco is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midaudioManagerStartBluetoothSco,
@@ -1867,6 +2203,10 @@ func (m *audioManager) StopBluetoothSco() error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerStopBluetoothSco == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.stopBluetoothSco is not available on this device")
+			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1886,6 +2226,10 @@ func (m *audioManager) UnloadSoundEffects() error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerUnloadSoundEffects == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unloadSoundEffects is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midaudioManagerUnloadSoundEffects,
@@ -1903,6 +2247,10 @@ func (m *audioManager) UnregisterAudioDeviceCallback(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerUnregisterAudioDeviceCallback == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unregisterAudioDeviceCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1923,6 +2271,10 @@ func (m *audioManager) UnregisterAudioPlaybackCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerUnregisterAudioPlaybackCallback == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unregisterAudioPlaybackCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1941,6 +2293,10 @@ func (m *audioManager) UnregisterAudioRecordingCallback(arg0 *jni.Object) error 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerUnregisterAudioRecordingCallback == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unregisterAudioRecordingCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1961,6 +2317,10 @@ func (m *audioManager) UnregisterMediaButtonEventReceiver1(arg0 *jni.Object) err
 			callErr = err
 			return err
 		}
+		if midaudioManagerUnregisterMediaButtonEventReceiver1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unregisterMediaButtonEventReceiver is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1979,6 +2339,10 @@ func (m *audioManager) UnregisterMediaButtonEventReceiver1_1(arg0 *jni.Object) e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerUnregisterMediaButtonEventReceiver1_1 == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unregisterMediaButtonEventReceiver is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1999,6 +2363,10 @@ func (m *audioManager) UnregisterRemoteControlClient(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerUnregisterRemoteControlClient == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unregisterRemoteControlClient is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2018,6 +2386,10 @@ func (m *audioManager) UnregisterRemoteController(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midaudioManagerUnregisterRemoteController == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.unregisterRemoteController is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2036,6 +2408,10 @@ func (m *audioManager) GetDirectPlaybackSupport(arg0 *jni.Object, arg1 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerGetDirectPlaybackSupport == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getDirectPlaybackSupport is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticIntMethod(
@@ -2059,6 +2435,10 @@ func (m *audioManager) GetPlaybackOffloadSupport(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if midaudioManagerGetPlaybackOffloadSupport == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getPlaybackOffloadSupport is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticIntMethod(
 			(*jni.Class)(unsafe.Pointer(clsaudioManager)),
@@ -2081,6 +2461,10 @@ func (m *audioManager) IsHapticPlaybackSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioManagerIsHapticPlaybackSupported == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isHapticPlaybackSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsaudioManager)),
 			midaudioManagerIsHapticPlaybackSupported,
@@ -2102,6 +2486,10 @@ func (m *audioManager) IsOffloadedPlaybackSupported(arg0 *jni.Object, arg1 *jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioManagerIsOffloadedPlaybackSupported == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.isOffloadedPlaybackSupported is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(

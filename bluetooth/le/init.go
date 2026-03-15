@@ -29,6 +29,12 @@ var (
 	midbluetoothLeAdvertiserStopAdvertisingSet     jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -55,32 +61,50 @@ func doInit(env *jni.Env) error {
 
 	midbluetoothLeAdvertiserStartAdvertising3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeAdvertiser)), "startAdvertising", "(Landroid/bluetooth/le/AdvertiseSettings;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/AdvertiseCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising")
 	}
 
 	midbluetoothLeAdvertiserStartAdvertising4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeAdvertiser)), "startAdvertising", "(Landroid/bluetooth/le/AdvertiseSettings;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/AdvertiseCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising")
 	}
 
 	midbluetoothLeAdvertiserStartAdvertisingSet6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeAdvertiser)), "startAdvertisingSet", "(Landroid/bluetooth/le/AdvertisingSetParameters;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/PeriodicAdvertisingParameters;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/AdvertisingSetCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet")
 	}
 
 	midbluetoothLeAdvertiserStartAdvertisingSet8_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeAdvertiser)), "startAdvertisingSet", "(Landroid/bluetooth/le/AdvertisingSetParameters;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/PeriodicAdvertisingParameters;Landroid/bluetooth/le/AdvertiseData;IILandroid/bluetooth/le/AdvertisingSetCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet")
 	}
 
 	midbluetoothLeAdvertiserStopAdvertising, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeAdvertiser)), "stopAdvertising", "(Landroid/bluetooth/le/AdvertiseCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertising: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertising")
 	}
 
 	midbluetoothLeAdvertiserStopAdvertisingSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeAdvertiser)), "stopAdvertisingSet", "(Landroid/bluetooth/le/AdvertisingSetCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertisingSet: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertisingSet")
 	}
 
 	return nil

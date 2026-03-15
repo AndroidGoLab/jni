@@ -32,6 +32,10 @@ func (m *altitudeConverter) AddMslAltitudeToLocation(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
+		if midaltitudeConverterAddMslAltitudeToLocation == nil {
+			callErr = fmt.Errorf("android.location.altitude.AltitudeConverter.addMslAltitudeToLocation is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -50,6 +54,10 @@ func (m *altitudeConverter) TryAddMslAltitudeToLocation(arg0 *jni.Object) (bool,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaltitudeConverterTryAddMslAltitudeToLocation == nil {
+			callErr = fmt.Errorf("android.location.altitude.AltitudeConverter.tryAddMslAltitudeToLocation is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(

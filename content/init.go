@@ -26,6 +26,12 @@ var (
 	midbroadcastReceiverPeekService        jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -52,17 +58,26 @@ func doInit(env *jni.Env) error {
 
 	midbroadcastReceiverGetSentFromPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbroadcastReceiver)), "getSentFromPackage", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.BroadcastReceiver.getSentFromPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.BroadcastReceiver.getSentFromPackage")
 	}
 
 	midbroadcastReceiverGetSentFromUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbroadcastReceiver)), "getSentFromUid", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.BroadcastReceiver.getSentFromUid: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.BroadcastReceiver.getSentFromUid")
 	}
 
 	midbroadcastReceiverPeekService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbroadcastReceiver)), "peekService", "(Landroid/content/Context;Landroid/content/Intent;)Landroid/os/IBinder;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.BroadcastReceiver.peekService: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.BroadcastReceiver.peekService")
 	}
 
 	return nil

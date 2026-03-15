@@ -74,6 +74,10 @@ func (m *wifiP2pManager) AddExternalApprover(arg0 *jni.Object, arg1 *jni.Object,
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerAddExternalApprover == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.addExternalApprover is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -92,6 +96,10 @@ func (m *wifiP2pManager) AddLocalService(arg0 *jni.Object, arg1 *jni.Object, arg
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerAddLocalService == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.addLocalService is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -112,6 +120,10 @@ func (m *wifiP2pManager) AddServiceRequest(arg0 *jni.Object, arg1 *jni.Object, a
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerAddServiceRequest == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.addServiceRequest is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -130,6 +142,10 @@ func (m *wifiP2pManager) CancelConnect(arg0 *jni.Object, arg1 *jni.Object) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerCancelConnect == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.cancelConnect is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -150,6 +166,10 @@ func (m *wifiP2pManager) ClearLocalServices(arg0 *jni.Object, arg1 *jni.Object) 
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerClearLocalServices == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.clearLocalServices is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -168,6 +188,10 @@ func (m *wifiP2pManager) ClearServiceRequests(arg0 *jni.Object, arg1 *jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerClearServiceRequests == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.clearServiceRequests is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -188,6 +212,10 @@ func (m *wifiP2pManager) Connect(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.O
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerConnect == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.connect is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -206,6 +234,10 @@ func (m *wifiP2pManager) CreateGroup3(arg0 *jni.Object, arg1 *jni.Object, arg2 *
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerCreateGroup3 == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.createGroup is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -226,6 +258,10 @@ func (m *wifiP2pManager) CreateGroup2_1(arg0 *jni.Object, arg1 *jni.Object) erro
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerCreateGroup2_1 == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.createGroup is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -244,6 +280,10 @@ func (m *wifiP2pManager) DiscoverPeers(arg0 *jni.Object, arg1 *jni.Object) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerDiscoverPeers == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.discoverPeers is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -264,6 +304,10 @@ func (m *wifiP2pManager) DiscoverPeersOnSocialChannels(arg0 *jni.Object, arg1 *j
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerDiscoverPeersOnSocialChannels == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.discoverPeersOnSocialChannels is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -282,6 +326,10 @@ func (m *wifiP2pManager) DiscoverPeersOnSpecificFrequency(arg0 *jni.Object, arg1
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerDiscoverPeersOnSpecificFrequency == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.discoverPeersOnSpecificFrequency is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -302,6 +350,10 @@ func (m *wifiP2pManager) DiscoverServices(arg0 *jni.Object, arg1 *jni.Object) er
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerDiscoverServices == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.discoverServices is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -320,6 +372,10 @@ func (m *wifiP2pManager) DiscoverUsdBasedServices(arg0 *jni.Object, arg1 *jni.Ob
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerDiscoverUsdBasedServices == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.discoverUsdBasedServices is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -340,6 +396,10 @@ func (m *wifiP2pManager) GetListenState(arg0 *jni.Object, arg1 *jni.Object, arg2
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerGetListenState == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.getListenState is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -358,6 +418,10 @@ func (m *wifiP2pManager) Initialize(arg0 *jni.Object, arg1 *jni.Object, arg2 *jn
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerInitialize == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.initialize is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -381,6 +445,10 @@ func (m *wifiP2pManager) IsChannelConstrainedDiscoverySupported() (bool, error) 
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerIsChannelConstrainedDiscoverySupported == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isChannelConstrainedDiscoverySupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midwifiP2pManagerIsChannelConstrainedDiscoverySupported,
@@ -402,6 +470,10 @@ func (m *wifiP2pManager) IsGroupClientRemovalSupported() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerIsGroupClientRemovalSupported == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isGroupClientRemovalSupported is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -425,6 +497,10 @@ func (m *wifiP2pManager) IsGroupOwnerIPv6LinkLocalAddressProvided() (bool, error
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerIsGroupOwnerIPv6LinkLocalAddressProvided == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isGroupOwnerIPv6LinkLocalAddressProvided is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midwifiP2pManagerIsGroupOwnerIPv6LinkLocalAddressProvided,
@@ -446,6 +522,10 @@ func (m *wifiP2pManager) IsPccModeSupported() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerIsPccModeSupported == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isPccModeSupported is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -469,6 +549,10 @@ func (m *wifiP2pManager) IsSetVendorElementsSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerIsSetVendorElementsSupported == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isSetVendorElementsSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midwifiP2pManagerIsSetVendorElementsSupported,
@@ -490,6 +574,10 @@ func (m *wifiP2pManager) IsWiFiDirectR2Supported() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerIsWiFiDirectR2Supported == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isWiFiDirectR2Supported is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -513,6 +601,10 @@ func (m *wifiP2pManager) RegisterWifiP2pListener(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRegisterWifiP2pListener == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.registerWifiP2pListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -531,6 +623,10 @@ func (m *wifiP2pManager) RemoveClient(arg0 *jni.Object, arg1 *jni.Object, arg2 *
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerRemoveClient == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.removeClient is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -551,6 +647,10 @@ func (m *wifiP2pManager) RemoveExternalApprover(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRemoveExternalApprover == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.removeExternalApprover is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -569,6 +669,10 @@ func (m *wifiP2pManager) RemoveGroup(arg0 *jni.Object, arg1 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerRemoveGroup == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.removeGroup is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -589,6 +693,10 @@ func (m *wifiP2pManager) RemoveLocalService(arg0 *jni.Object, arg1 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRemoveLocalService == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.removeLocalService is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -607,6 +715,10 @@ func (m *wifiP2pManager) RemoveServiceRequest(arg0 *jni.Object, arg1 *jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerRemoveServiceRequest == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.removeServiceRequest is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -627,6 +739,10 @@ func (m *wifiP2pManager) RequestConnectionInfo(arg0 *jni.Object, arg1 *jni.Objec
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRequestConnectionInfo == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestConnectionInfo is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -646,6 +762,10 @@ func (m *wifiP2pManager) RequestDeviceInfo(arg0 *jni.Object, arg1 *jni.Object) e
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRequestDeviceInfo == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestDeviceInfo is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -657,7 +777,7 @@ func (m *wifiP2pManager) RequestDeviceInfo(arg0 *jni.Object, arg1 *jni.Object) e
 }
 
 // RequestDirInfo calls android.net.wifi.p2p.WifiP2pManager.requestDirInfo.
-func (m *wifiP2pManager) RequestDirInfo(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *wifiP2pManager) RequestDirInfo(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -665,10 +785,14 @@ func (m *wifiP2pManager) RequestDirInfo(arg0 *jni.Object, arg1 *jni.Object, arg2
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRequestDirInfo == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestDirInfo is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midwifiP2pManagerRequestDirInfo, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midwifiP2pManagerRequestDirInfo, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -683,6 +807,10 @@ func (m *wifiP2pManager) RequestDiscoveryState(arg0 *jni.Object, arg1 *jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerRequestDiscoveryState == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestDiscoveryState is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -703,6 +831,10 @@ func (m *wifiP2pManager) RequestGroupInfo(arg0 *jni.Object, arg1 *jni.Object) er
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRequestGroupInfo == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestGroupInfo is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -721,6 +853,10 @@ func (m *wifiP2pManager) RequestNetworkInfo(arg0 *jni.Object, arg1 *jni.Object) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerRequestNetworkInfo == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestNetworkInfo is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -741,6 +877,10 @@ func (m *wifiP2pManager) RequestP2pState(arg0 *jni.Object, arg1 *jni.Object) err
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerRequestP2pState == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestP2pState is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -759,6 +899,10 @@ func (m *wifiP2pManager) RequestPeers(arg0 *jni.Object, arg1 *jni.Object) error 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerRequestPeers == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestPeers is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -779,6 +923,10 @@ func (m *wifiP2pManager) SetConnectionRequestResult4(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerSetConnectionRequestResult4 == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setConnectionRequestResult is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -797,6 +945,10 @@ func (m *wifiP2pManager) SetConnectionRequestResult5_1(arg0 *jni.Object, arg1 *j
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerSetConnectionRequestResult5_1 == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setConnectionRequestResult is not available on this device")
+			return callErr
 		}
 
 		jArg3, err := env.NewStringUTF(arg3)
@@ -822,6 +974,10 @@ func (m *wifiP2pManager) SetDnsSdResponseListeners(arg0 *jni.Object, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerSetDnsSdResponseListeners == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setDnsSdResponseListeners is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -840,6 +996,10 @@ func (m *wifiP2pManager) SetServiceResponseListener(arg0 *jni.Object, arg1 *jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerSetServiceResponseListener == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setServiceResponseListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -860,6 +1020,10 @@ func (m *wifiP2pManager) SetUpnpServiceResponseListener(arg0 *jni.Object, arg1 *
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerSetUpnpServiceResponseListener == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setUpnpServiceResponseListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -878,6 +1042,10 @@ func (m *wifiP2pManager) SetVendorElements(arg0 *jni.Object, arg1 *jni.Object, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerSetVendorElements == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setVendorElements is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -898,6 +1066,10 @@ func (m *wifiP2pManager) SetWfdInfo(arg0 *jni.Object, arg1 *jni.Object, arg2 *jn
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerSetWfdInfo == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setWfdInfo is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -916,6 +1088,10 @@ func (m *wifiP2pManager) StartListening(arg0 *jni.Object, arg1 *jni.Object) erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerStartListening == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.startListening is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -936,6 +1112,10 @@ func (m *wifiP2pManager) StartPeerDiscovery(arg0 *jni.Object, arg1 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerStartPeerDiscovery == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.startPeerDiscovery is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -954,6 +1134,10 @@ func (m *wifiP2pManager) StartUsdBasedLocalServiceAdvertisement(arg0 *jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerStartUsdBasedLocalServiceAdvertisement == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.startUsdBasedLocalServiceAdvertisement is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -974,6 +1158,10 @@ func (m *wifiP2pManager) StopListening(arg0 *jni.Object, arg1 *jni.Object) error
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerStopListening == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.stopListening is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -992,6 +1180,10 @@ func (m *wifiP2pManager) StopPeerDiscovery(arg0 *jni.Object, arg1 *jni.Object) e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerStopPeerDiscovery == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.stopPeerDiscovery is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1012,6 +1204,10 @@ func (m *wifiP2pManager) UnregisterWifiP2pListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerUnregisterWifiP2pListener == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.unregisterWifiP2pListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1023,7 +1219,7 @@ func (m *wifiP2pManager) UnregisterWifiP2pListener(arg0 *jni.Object) error {
 }
 
 // ValidateDirInfo calls android.net.wifi.p2p.WifiP2pManager.validateDirInfo.
-func (m *wifiP2pManager) ValidateDirInfo(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *wifiP2pManager) ValidateDirInfo(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1031,10 +1227,14 @@ func (m *wifiP2pManager) ValidateDirInfo(arg0 *jni.Object, arg1 *jni.Object, arg
 			callErr = err
 			return err
 		}
+		if midwifiP2pManagerValidateDirInfo == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.validateDirInfo is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midwifiP2pManagerValidateDirInfo, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
+			midwifiP2pManagerValidateDirInfo, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -1049,6 +1249,10 @@ func (m *wifiP2pManager) GetP2pMaxAllowedVendorElementsLengthBytes() (int32, err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midwifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytes == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.getP2pMaxAllowedVendorElementsLengthBytes is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallStaticIntMethod(
 			(*jni.Class)(unsafe.Pointer(clswifiP2pManager)),

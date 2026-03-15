@@ -3483,7 +3483,6 @@ type GetNetworkSlicingConfigurationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3528,13 +3527,6 @@ func (x *GetNetworkSlicingConfigurationRequest) GetArg0() int64 {
 func (x *GetNetworkSlicingConfigurationRequest) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
-	}
-	return 0
-}
-
-func (x *GetNetworkSlicingConfigurationRequest) GetArg2() int64 {
-	if x != nil {
-		return x.Arg2
 	}
 	return 0
 }
@@ -11661,7 +11653,6 @@ type UploadCallComposerPicture5Request struct {
 	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
-	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -11724,13 +11715,6 @@ func (x *UploadCallComposerPicture5Request) GetArg3() int64 {
 	return 0
 }
 
-func (x *UploadCallComposerPicture5Request) GetArg4() int64 {
-	if x != nil {
-		return x.Arg4
-	}
-	return 0
-}
-
 type UploadCallComposerPicture5Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -11773,7 +11757,6 @@ type UploadCallComposerPicture5_1Request struct {
 	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
-	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -11832,13 +11815,6 @@ func (x *UploadCallComposerPicture5_1Request) GetArg2() int64 {
 func (x *UploadCallComposerPicture5_1Request) GetArg3() int64 {
 	if x != nil {
 		return x.Arg3
-	}
-	return 0
-}
-
-func (x *UploadCallComposerPicture5_1Request) GetArg4() int64 {
-	if x != nil {
-		return x.Arg4
 	}
 	return 0
 }
@@ -12101,11 +12077,10 @@ const file_proto_telephony_telephony_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\tR\x06result\" \n" +
 	"\x1eGetNetworkSelectionModeRequest\"9\n" +
 	"\x1fGetNetworkSelectionModeResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result\"c\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"O\n" +
 	"%GetNetworkSlicingConfigurationRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"(\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"(\n" +
 	"&GetNetworkSlicingConfigurationResponse\"\x1c\n" +
 	"\x1aGetNetworkSpecifierRequest\"5\n" +
 	"\x1bGetNetworkSpecifierResponse\x12\x16\n" +
@@ -12458,20 +12433,18 @@ const file_proto_telephony_telephony_proto_rawDesc = "" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"!\n" +
-	"\x1fUpdateAvailableNetworksResponse\"\x87\x01\n" +
+	"\x1fUpdateAvailableNetworksResponse\"s\n" +
 	"!UploadCallComposerPicture5Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\"$\n" +
-	"\"UploadCallComposerPicture5Response\"\x89\x01\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"$\n" +
+	"\"UploadCallComposerPicture5Response\"u\n" +
 	"#UploadCallComposerPicture5_1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\"&\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"&\n" +
 	"$UploadCallComposerPicture5_1Response\"*\n" +
 	"(GetMaximumCallComposerPictureSizeRequest\"C\n" +
 	")GetMaximumCallComposerPictureSizeResponse\x12\x16\n" +

@@ -89,6 +89,12 @@ var (
 	midlocationManagerUnregisterGnssStatusCallback             jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -115,332 +121,530 @@ func doInit(env *jni.Env) error {
 
 	midlocationManagerAddGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addGpsStatusListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addGpsStatusListener")
 	}
 
 	midlocationManagerAddNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addNmeaListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addNmeaListener")
 	}
 
 	midlocationManagerAddNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Landroid/location/OnNmeaMessageListener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addNmeaListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addNmeaListener")
 	}
 
 	midlocationManagerAddNmeaListener2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Ljava/util/concurrent/Executor;Landroid/location/OnNmeaMessageListener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addNmeaListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addNmeaListener")
 	}
 
 	midlocationManagerAddProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addProximityAlert", "(DDFJLandroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addProximityAlert: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addProximityAlert")
 	}
 
 	midlocationManagerAddTestProvider2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addTestProvider")
 	}
 
 	midlocationManagerAddTestProvider3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;Ljava/util/Set;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addTestProvider")
 	}
 
 	midlocationManagerAddTestProvider10_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;ZZZZZZZII)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.addTestProvider")
 	}
 
 	midlocationManagerClearTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderEnabled", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.clearTestProviderEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.clearTestProviderEnabled")
 	}
 
 	midlocationManagerClearTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderLocation", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.clearTestProviderLocation: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.clearTestProviderLocation")
 	}
 
 	midlocationManagerClearTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderStatus", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.clearTestProviderStatus: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.clearTestProviderStatus")
 	}
 
 	midlocationManagerGetAllProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getAllProviders", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getAllProviders: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getAllProviders")
 	}
 
 	midlocationManagerGetBestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getBestProvider", "(Landroid/location/Criteria;Z)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getBestProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getBestProvider")
 	}
 
 	midlocationManagerGetCurrentLocation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getCurrentLocation: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getCurrentLocation")
 	}
 
 	midlocationManagerGetCurrentLocation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getCurrentLocation: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getCurrentLocation")
 	}
 
 	midlocationManagerGetGnssAntennaInfos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssAntennaInfos", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getGnssAntennaInfos: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssAntennaInfos")
 	}
 
 	midlocationManagerGetGnssCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssCapabilities", "()Landroid/location/GnssCapabilities;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getGnssCapabilities: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssCapabilities")
 	}
 
 	midlocationManagerGetGnssHardwareModelName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssHardwareModelName", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getGnssHardwareModelName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssHardwareModelName")
 	}
 
 	midlocationManagerGetGnssYearOfHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssYearOfHardware", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getGnssYearOfHardware: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssYearOfHardware")
 	}
 
 	midlocationManagerGetGpsStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGpsStatus", "(Landroid/location/GpsStatus;)Landroid/location/GpsStatus;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getGpsStatus: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getGpsStatus")
 	}
 
 	midlocationManagerGetLastKnownLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getLastKnownLocation", "(Ljava/lang/String;)Landroid/location/Location;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getLastKnownLocation: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getLastKnownLocation")
 	}
 
 	midlocationManagerGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProvider", "(Ljava/lang/String;)Landroid/location/LocationProvider;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getProvider")
 	}
 
 	midlocationManagerGetProviderProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviderProperties", "(Ljava/lang/String;)Landroid/location/provider/ProviderProperties;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getProviderProperties: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getProviderProperties")
 	}
 
 	midlocationManagerGetProviders2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Landroid/location/Criteria;Z)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getProviders: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getProviders")
 	}
 
 	midlocationManagerGetProviders1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Z)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getProviders: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.getProviders")
 	}
 
 	midlocationManagerHasProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "hasProvider", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.hasProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.hasProvider")
 	}
 
 	midlocationManagerIsLocationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "isLocationEnabled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.isLocationEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.isLocationEnabled")
 	}
 
 	midlocationManagerIsProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "isProviderEnabled", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.isProviderEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.isProviderEnabled")
 	}
 
 	midlocationManagerRegisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerAntennaInfoListener", "(Ljava/util/concurrent/Executor;Landroid/location/GnssAntennaInfo$Listener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerAntennaInfoListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerAntennaInfoListener")
 	}
 
 	midlocationManagerRegisterGnssMeasurementsCallback3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementRequest;Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerGnssMeasurementsCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssMeasurementsCallback")
 	}
 
 	midlocationManagerRegisterGnssMeasurementsCallback1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerGnssMeasurementsCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssMeasurementsCallback")
 	}
 
 	midlocationManagerRegisterGnssMeasurementsCallback2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerGnssMeasurementsCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssMeasurementsCallback")
 	}
 
 	midlocationManagerRegisterGnssNavigationMessageCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerGnssNavigationMessageCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssNavigationMessageCallback")
 	}
 
 	midlocationManagerRegisterGnssNavigationMessageCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssNavigationMessageCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssNavigationMessage$Callback;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerGnssNavigationMessageCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssNavigationMessageCallback")
 	}
 
 	midlocationManagerRegisterGnssStatusCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerGnssStatusCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssStatusCallback")
 	}
 
 	midlocationManagerRegisterGnssStatusCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssStatusCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssStatus$Callback;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.registerGnssStatusCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssStatusCallback")
 	}
 
 	midlocationManagerRemoveGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeGpsStatusListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.removeGpsStatusListener")
 	}
 
 	midlocationManagerRemoveNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeNmeaListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.removeNmeaListener")
 	}
 
 	midlocationManagerRemoveNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeNmeaListener", "(Landroid/location/OnNmeaMessageListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeNmeaListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.removeNmeaListener")
 	}
 
 	midlocationManagerRemoveProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeProximityAlert", "(Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeProximityAlert: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.removeProximityAlert")
 	}
 
 	midlocationManagerRemoveTestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeTestProvider", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeTestProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.removeTestProvider")
 	}
 
 	midlocationManagerRemoveUpdates1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeUpdates", "(Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.removeUpdates")
 	}
 
 	midlocationManagerRemoveUpdates1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeUpdates", "(Landroid/location/LocationListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.removeUpdates")
 	}
 
 	midlocationManagerRequestFlush3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestFlush", "(Ljava/lang/String;Landroid/app/PendingIntent;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestFlush: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestFlush")
 	}
 
 	midlocationManagerRequestFlush3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestFlush", "(Ljava/lang/String;Landroid/location/LocationListener;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestFlush: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestFlush")
 	}
 
 	midlocationManagerRequestLocationUpdates3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLjava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates4_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates5_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestLocationUpdates5_8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
 	midlocationManagerRequestSingleUpdate2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
 	midlocationManagerRequestSingleUpdate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
 	midlocationManagerRequestSingleUpdate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
 	midlocationManagerRequestSingleUpdate3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
 	midlocationManagerSendExtraCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "sendExtraCommand", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.sendExtraCommand: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.sendExtraCommand")
 	}
 
 	midlocationManagerSetTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderEnabled", "(Ljava/lang/String;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.setTestProviderEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.setTestProviderEnabled")
 	}
 
 	midlocationManagerSetTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderLocation", "(Ljava/lang/String;Landroid/location/Location;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.setTestProviderLocation: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.setTestProviderLocation")
 	}
 
 	midlocationManagerSetTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderStatus", "(Ljava/lang/String;ILandroid/os/Bundle;J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.setTestProviderStatus: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.setTestProviderStatus")
 	}
 
 	midlocationManagerUnregisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterAntennaInfoListener", "(Landroid/location/GnssAntennaInfo$Listener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.unregisterAntennaInfoListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterAntennaInfoListener")
 	}
 
 	midlocationManagerUnregisterGnssMeasurementsCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.unregisterGnssMeasurementsCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterGnssMeasurementsCallback")
 	}
 
 	midlocationManagerUnregisterGnssNavigationMessageCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.unregisterGnssNavigationMessageCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterGnssNavigationMessageCallback")
 	}
 
 	midlocationManagerUnregisterGnssStatusCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.unregisterGnssStatusCallback: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterGnssStatusCallback")
 	}
 
 	return nil

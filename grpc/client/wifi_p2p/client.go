@@ -316,12 +316,11 @@ func (c *Client) RequestDeviceInfo(ctx context.Context, arg0 int64, arg1 int64) 
 }
 
 // RequestDirInfo calls the RequestDirInfo RPC.
-func (c *Client) RequestDirInfo(ctx context.Context, arg0 int64, arg1 int64, arg2 int64, arg3 int64) error {
+func (c *Client) RequestDirInfo(ctx context.Context, arg0 int64, arg1 int64, arg2 int64) error {
 	_, err := c.svc.RequestDirInfo(ctx, &pb.RequestDirInfoRequest{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,
-		Arg3: arg3,
 	})
 	return err
 }
@@ -499,13 +498,12 @@ func (c *Client) UnregisterWifiP2PListener(ctx context.Context, arg0 int64) erro
 }
 
 // ValidateDirInfo calls the ValidateDirInfo RPC.
-func (c *Client) ValidateDirInfo(ctx context.Context, arg0 int64, arg1 int64, arg2 int64, arg3 int64, arg4 int64) error {
+func (c *Client) ValidateDirInfo(ctx context.Context, arg0 int64, arg1 int64, arg2 int64, arg3 int64) error {
 	_, err := c.svc.ValidateDirInfo(ctx, &pb.ValidateDirInfoRequest{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,
 		Arg3: arg3,
-		Arg4: arg4,
 	})
 	return err
 }

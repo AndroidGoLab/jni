@@ -746,9 +746,6 @@ var telephonyTelephonyManagerGetNetworkSlicingConfigurationCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
 			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
 		resp, err := client.GetNetworkSlicingConfiguration(ctx, req)
 		if err != nil {
 			return err
@@ -2554,9 +2551,6 @@ var telephonyTelephonyManagerUploadCallComposerPicture5Cmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
 			req.Arg3 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
 		resp, err := client.UploadCallComposerPicture5(ctx, req)
 		if err != nil {
 			return err
@@ -2584,9 +2578,6 @@ var telephonyTelephonyManagerUploadCallComposerPicture5_1Cmd = &cobra.Command{
 		}
 		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
 			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
 		}
 		resp, err := client.UploadCallComposerPicture5_1(ctx, req)
 		if err != nil {
@@ -2671,7 +2662,6 @@ func init() {
 	telephonyTelephonyManagerCmd.AddCommand(telephonyTelephonyManagerGetNetworkSelectionModeCmd)
 	telephonyTelephonyManagerGetNetworkSlicingConfigurationCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	telephonyTelephonyManagerGetNetworkSlicingConfigurationCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	telephonyTelephonyManagerGetNetworkSlicingConfigurationCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
 	telephonyTelephonyManagerCmd.AddCommand(telephonyTelephonyManagerGetNetworkSlicingConfigurationCmd)
 	telephonyTelephonyManagerCmd.AddCommand(telephonyTelephonyManagerGetNetworkSpecifierCmd)
 	telephonyTelephonyManagerCmd.AddCommand(telephonyTelephonyManagerGetNetworkTypeCmd)
@@ -2862,13 +2852,11 @@ func init() {
 	telephonyTelephonyManagerUploadCallComposerPicture5Cmd.Flags().String("arg1", "", "arg1 (string)")
 	telephonyTelephonyManagerUploadCallComposerPicture5Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
 	telephonyTelephonyManagerUploadCallComposerPicture5Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	telephonyTelephonyManagerUploadCallComposerPicture5Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
 	telephonyTelephonyManagerCmd.AddCommand(telephonyTelephonyManagerUploadCallComposerPicture5Cmd)
 	telephonyTelephonyManagerUploadCallComposerPicture5_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	telephonyTelephonyManagerUploadCallComposerPicture5_1Cmd.Flags().String("arg1", "", "arg1 (string)")
 	telephonyTelephonyManagerUploadCallComposerPicture5_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
 	telephonyTelephonyManagerUploadCallComposerPicture5_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	telephonyTelephonyManagerUploadCallComposerPicture5_1Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
 	telephonyTelephonyManagerCmd.AddCommand(telephonyTelephonyManagerUploadCallComposerPicture5_1Cmd)
 	telephonyTelephonyManagerCmd.AddCommand(telephonyTelephonyManagerGetMaximumCallComposerPictureSizeCmd)
 	telephonyCmd.AddCommand(telephonyTelephonyManagerCmd)

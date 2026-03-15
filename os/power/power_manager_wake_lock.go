@@ -32,6 +32,10 @@ func (m *powerManagerWakeLock) Acquire0() error {
 			callErr = err
 			return err
 		}
+		if midpowerManagerWakeLockAcquire0 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.acquire is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midpowerManagerWakeLockAcquire0,
@@ -49,6 +53,10 @@ func (m *powerManagerWakeLock) Acquire1_1(arg0 int64) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerWakeLockAcquire1_1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.acquire is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -68,6 +76,10 @@ func (m *powerManagerWakeLock) IsHeld() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerWakeLockIsHeld == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.isHeld is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -91,6 +103,10 @@ func (m *powerManagerWakeLock) Release0() error {
 			callErr = err
 			return err
 		}
+		if midpowerManagerWakeLockRelease0 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.release is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midpowerManagerWakeLockRelease0,
@@ -108,6 +124,10 @@ func (m *powerManagerWakeLock) Release1_1(arg0 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerWakeLockRelease1_1 == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.release is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -127,6 +147,10 @@ func (m *powerManagerWakeLock) SetReferenceCounted(arg0 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerWakeLockSetReferenceCounted == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.setReferenceCounted is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -151,6 +175,10 @@ func (m *powerManagerWakeLock) SetStateListener(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midpowerManagerWakeLockSetStateListener == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.setStateListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -170,6 +198,10 @@ func (m *powerManagerWakeLock) SetWorkSource(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midpowerManagerWakeLockSetWorkSource == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.setWorkSource is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -188,6 +220,10 @@ func (m *powerManagerWakeLock) ToString() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpowerManagerWakeLockToString == nil {
+			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.toString is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,

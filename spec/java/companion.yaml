@@ -145,10 +145,8 @@ classes:
               go_name: arg0
             - java_type: java.util.concurrent.Executor
               go_name: arg1
-            - java_type: android.os.OutcomeReceiver<java.lang.Void
+            - java_type: "android.os.OutcomeReceiver<java.lang.Void, android.companion.CompanionException>"
               go_name: arg2
-            - java_type: android.companion.CompanionException>
-              go_name: arg3
           returns: void
           error: true
         - java_method: stopObservingDevicePresence

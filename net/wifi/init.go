@@ -41,6 +41,12 @@ var (
 	midscanResultConvertFrequencyMhzToChannelIfSupported jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -67,92 +73,146 @@ func doInit(env *jni.Env) error {
 
 	midscanResultDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.describeContents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.describeContents")
 	}
 
 	midscanResultGetAffiliatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getAffiliatedMloLinks", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.getAffiliatedMloLinks: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getAffiliatedMloLinks")
 	}
 
 	midscanResultGetApMldMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getApMldMacAddress", "()Landroid/net/MacAddress;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.getApMldMacAddress: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getApMldMacAddress")
 	}
 
 	midscanResultGetApMloLinkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getApMloLinkId", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.getApMloLinkId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getApMloLinkId")
 	}
 
 	midscanResultGetInformationElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getInformationElements", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.getInformationElements: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getInformationElements")
 	}
 
 	midscanResultGetSecurityTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getSecurityTypes", "()[I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.getSecurityTypes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getSecurityTypes")
 	}
 
 	midscanResultGetWifiSsid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getWifiSsid", "()Landroid/net/wifi/WifiSsid;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.getWifiSsid: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getWifiSsid")
 	}
 
 	midscanResultGetWifiStandard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getWifiStandard", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.getWifiStandard: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getWifiStandard")
 	}
 
 	midscanResultIs80211azNtbResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "is80211azNtbResponder", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.is80211azNtbResponder: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.is80211azNtbResponder")
 	}
 
 	midscanResultIs80211mcResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "is80211mcResponder", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.is80211mcResponder: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.is80211mcResponder")
 	}
 
 	midscanResultIsPasspointNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isPasspointNetwork", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.isPasspointNetwork: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isPasspointNetwork")
 	}
 
 	midscanResultIsRangingFrameProtectionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isRangingFrameProtectionRequired", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.isRangingFrameProtectionRequired: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isRangingFrameProtectionRequired")
 	}
 
 	midscanResultIsSecureHeLtfSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isSecureHeLtfSupported", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.isSecureHeLtfSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isSecureHeLtfSupported")
 	}
 
 	midscanResultIsTwtResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isTwtResponder", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.isTwtResponder: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isTwtResponder")
 	}
 
 	midscanResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "toString", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.toString: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.toString")
 	}
 
 	midscanResultWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.writeToParcel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.writeToParcel")
 	}
 
 	midscanResultConvertChannelToFrequencyMhzIfSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "convertChannelToFrequencyMhzIfSupported", "(II)I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.convertChannelToFrequencyMhzIfSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.convertChannelToFrequencyMhzIfSupported")
 	}
 
 	midscanResultConvertFrequencyMhzToChannelIfSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "convertFrequencyMhzToChannelIfSupported", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.ScanResult.convertFrequencyMhzToChannelIfSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.convertFrequencyMhzToChannelIfSupported")
 	}
 
 	return nil

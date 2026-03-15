@@ -32,6 +32,10 @@ func (m *speechRecognizer) Cancel() error {
 			callErr = err
 			return err
 		}
+		if midspeechRecognizerCancel == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.cancel is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midspeechRecognizerCancel,
@@ -49,6 +53,10 @@ func (m *speechRecognizer) CheckRecognitionSupport(arg0 *jni.Object, arg1 *jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midspeechRecognizerCheckRecognitionSupport == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.checkRecognitionSupport is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -69,6 +77,10 @@ func (m *speechRecognizer) Destroy() error {
 			callErr = err
 			return err
 		}
+		if midspeechRecognizerDestroy == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.destroy is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midspeechRecognizerDestroy,
@@ -86,6 +98,10 @@ func (m *speechRecognizer) SetRecognitionListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midspeechRecognizerSetRecognitionListener == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.setRecognitionListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -106,6 +122,10 @@ func (m *speechRecognizer) StartListening(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midspeechRecognizerStartListening == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.startListening is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -125,6 +145,10 @@ func (m *speechRecognizer) StopListening() error {
 			callErr = err
 			return err
 		}
+		if midspeechRecognizerStopListening == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.stopListening is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midspeechRecognizerStopListening,
@@ -142,6 +166,10 @@ func (m *speechRecognizer) TriggerModelDownload1(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midspeechRecognizerTriggerModelDownload1 == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.triggerModelDownload is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -162,6 +190,10 @@ func (m *speechRecognizer) TriggerModelDownload3_1(arg0 *jni.Object, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midspeechRecognizerTriggerModelDownload3_1 == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.triggerModelDownload is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -180,6 +212,10 @@ func (m *speechRecognizer) CreateOnDeviceSpeechRecognizer(arg0 *jni.Object) (*jn
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midspeechRecognizerCreateOnDeviceSpeechRecognizer == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.createOnDeviceSpeechRecognizer is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -203,6 +239,10 @@ func (m *speechRecognizer) CreateSpeechRecognizer1(arg0 *jni.Object) (*jni.Objec
 			callErr = err
 			return err
 		}
+		if midspeechRecognizerCreateSpeechRecognizer1 == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.createSpeechRecognizer is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsspeechRecognizer)),
@@ -224,6 +264,10 @@ func (m *speechRecognizer) CreateSpeechRecognizer2_1(arg0 *jni.Object, arg1 *jni
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midspeechRecognizerCreateSpeechRecognizer2_1 == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.createSpeechRecognizer is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -247,6 +291,10 @@ func (m *speechRecognizer) IsOnDeviceRecognitionAvailable(arg0 *jni.Object) (boo
 			callErr = err
 			return err
 		}
+		if midspeechRecognizerIsOnDeviceRecognitionAvailable == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.isOnDeviceRecognitionAvailable is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsspeechRecognizer)),
@@ -269,6 +317,10 @@ func (m *speechRecognizer) IsRecognitionAvailable(arg0 *jni.Object) (bool, error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midspeechRecognizerIsRecognitionAvailable == nil {
+			callErr = fmt.Errorf("android.speech.SpeechRecognizer.isRecognitionAvailable is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(

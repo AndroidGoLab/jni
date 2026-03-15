@@ -141,6 +141,24 @@ func TestResolveType_Array(t *testing.T) {
 	}
 }
 
+func TestResolveType_Varargs(t *testing.T) {
+	tc := ResolveType("int...")
+	if tc.GoType != "*jni.Object" {
+		t.Errorf("GoType = %q, want *jni.Object", tc.GoType)
+	}
+	if tc.JNISig != "[I" {
+		t.Errorf("JNISig = %q, want [I", tc.JNISig)
+	}
+	if !tc.IsObject {
+		t.Error("varargs should be IsObject (arrays)")
+	}
+
+	tc2 := ResolveType("long...")
+	if tc2.JNISig != "[J" {
+		t.Errorf("long... JNISig = %q, want [J", tc2.JNISig)
+	}
+}
+
 func TestJNITypeSignature(t *testing.T) {
 	tests := []struct {
 		javaType string
@@ -160,6 +178,14 @@ func TestJNITypeSignature(t *testing.T) {
 		{"java.util.Map<java.lang.String, java.util.List<java.lang.Integer>>", "Ljava/util/Map;"},
 		{"java.util.function.Consumer<android.location.Location>", "Ljava/util/function/Consumer;"},
 		{"java.util.Set<java.util.Set<java.lang.String>>", "Ljava/util/Set;"},
+		// Java varargs become arrays in JNI.
+		{"int...", "[I"},
+		{"long...", "[J"},
+		// Incomplete generics from YAML splitting on commas inside generic types.
+		// First half: "Map<String" (has '<' without '>').
+		{"java.util.Map<java.lang.String", "Ljava/util/Map;"},
+		// Second half: "SessionConfiguration>" (has '>' without '<').
+		{"android.hardware.camera2.params.SessionConfiguration>", "Landroid/hardware/camera2/params/SessionConfiguration;"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.javaType, func(t *testing.T) {
@@ -182,6 +208,10 @@ func TestStripGenerics(t *testing.T) {
 		{"java.lang.String", "java.lang.String"},
 		{"int", "int"},
 		{"", ""},
+		// Incomplete generics from YAML splitting on commas.
+		{"java.util.Map<java.lang.String", "java.util.Map"},
+		{"android.hardware.camera2.params.SessionConfiguration>", "android.hardware.camera2.params.SessionConfiguration"},
+		{"android.telephony.TelephonyManager$NetworkSlicingException>", "android.telephony.TelephonyManager$NetworkSlicingException"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.input, func(t *testing.T) {

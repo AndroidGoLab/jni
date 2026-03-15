@@ -101,9 +101,6 @@ var telecomTelecomManagerAddCallCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
 			req.Arg4 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg5"); err == nil {
-			req.Arg5 = v
-		}
 		resp, err := client.AddCall(ctx, req)
 		if err != nil {
 			return err
@@ -741,7 +738,6 @@ func init() {
 	telecomTelecomManagerAddCallCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
 	telecomTelecomManagerAddCallCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
 	telecomTelecomManagerAddCallCmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	telecomTelecomManagerAddCallCmd.Flags().Int64("arg5", 0, "arg5 (int64)")
 	telecomTelecomManagerCmd.AddCommand(telecomTelecomManagerAddCallCmd)
 	telecomTelecomManagerAddNewIncomingCallCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	telecomTelecomManagerAddNewIncomingCallCmd.Flags().Int64("arg1", 0, "arg1 (int64)")

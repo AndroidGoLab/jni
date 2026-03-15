@@ -32,6 +32,10 @@ func (m *alarmManagerAlarmClockInfo) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midalarmManagerAlarmClockInfoDescribeContents == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager$AlarmClockInfo.describeContents is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midalarmManagerAlarmClockInfoDescribeContents,
@@ -52,6 +56,10 @@ func (m *alarmManagerAlarmClockInfo) GetShowIntent() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerAlarmClockInfoGetShowIntent == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager$AlarmClockInfo.getShowIntent is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -74,6 +82,10 @@ func (m *alarmManagerAlarmClockInfo) GetTriggerTime() (int64, error) {
 			callErr = err
 			return err
 		}
+		if midalarmManagerAlarmClockInfoGetTriggerTime == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager$AlarmClockInfo.getTriggerTime is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			midalarmManagerAlarmClockInfoGetTriggerTime,
@@ -94,6 +106,10 @@ func (m *alarmManagerAlarmClockInfo) WriteToParcel(arg0 *jni.Object, arg1 int32)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerAlarmClockInfoWriteToParcel == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager$AlarmClockInfo.writeToParcel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

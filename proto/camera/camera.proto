@@ -62,7 +62,6 @@ message IsCameraDeviceSetupSupportedResponse {
 
 message IsConcurrentSessionConfigurationSupportedRequest {
   int64 arg0 = 1;
-  int64 arg1 = 2;
 }
 
 message IsConcurrentSessionConfigurationSupportedResponse {

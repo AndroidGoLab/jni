@@ -74,6 +74,10 @@ func (m *locationManager) AddGpsStatusListener(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerAddGpsStatusListener == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addGpsStatusListener is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -96,6 +100,10 @@ func (m *locationManager) AddNmeaListener1(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerAddNmeaListener1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addNmeaListener is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -120,6 +128,10 @@ func (m *locationManager) AddNmeaListener1_1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerAddNmeaListener1_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addNmeaListener is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -142,6 +154,10 @@ func (m *locationManager) AddNmeaListener2_2(arg0 *jni.Object, arg1 *jni.Object)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerAddNmeaListener2_2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addNmeaListener is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -166,6 +182,10 @@ func (m *locationManager) AddProximityAlert(arg0 float64, arg1 float64, arg2 flo
 			callErr = err
 			return err
 		}
+		if midlocationManagerAddProximityAlert == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addProximityAlert is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -184,6 +204,10 @@ func (m *locationManager) AddTestProvider2(arg0 string, arg1 *jni.Object) error 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerAddTestProvider2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addTestProvider is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -208,6 +232,10 @@ func (m *locationManager) AddTestProvider3_1(arg0 string, arg1 *jni.Object, arg2
 			callErr = err
 			return err
 		}
+		if midlocationManagerAddTestProvider3_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addTestProvider is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -230,6 +258,10 @@ func (m *locationManager) AddTestProvider10_2(arg0 string, arg1 bool, arg2 bool,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerAddTestProvider10_2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.addTestProvider is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -289,6 +321,10 @@ func (m *locationManager) ClearTestProviderEnabled(arg0 string) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerClearTestProviderEnabled == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.clearTestProviderEnabled is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -311,6 +347,10 @@ func (m *locationManager) ClearTestProviderLocation(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerClearTestProviderLocation == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.clearTestProviderLocation is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -335,6 +375,10 @@ func (m *locationManager) ClearTestProviderStatus(arg0 string) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerClearTestProviderStatus == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.clearTestProviderStatus is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -358,6 +402,10 @@ func (m *locationManager) GetAllProviders() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetAllProviders == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getAllProviders is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midlocationManagerGetAllProviders,
@@ -378,6 +426,10 @@ func (m *locationManager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerGetBestProvider == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getBestProvider is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -407,6 +459,10 @@ func (m *locationManager) GetCurrentLocation5(arg0 string, arg1 *jni.Object, arg
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetCurrentLocation5 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getCurrentLocation is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -429,6 +485,10 @@ func (m *locationManager) GetCurrentLocation4_1(arg0 string, arg1 *jni.Object, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerGetCurrentLocation4_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getCurrentLocation is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -453,6 +513,10 @@ func (m *locationManager) GetGnssAntennaInfos() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetGnssAntennaInfos == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getGnssAntennaInfos is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midlocationManagerGetGnssAntennaInfos,
@@ -474,6 +538,10 @@ func (m *locationManager) GetGnssCapabilities() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetGnssCapabilities == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getGnssCapabilities is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midlocationManagerGetGnssCapabilities,
@@ -494,6 +562,10 @@ func (m *locationManager) GetGnssHardwareModelName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerGetGnssHardwareModelName == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getGnssHardwareModelName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -517,6 +589,10 @@ func (m *locationManager) GetGnssYearOfHardware() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetGnssYearOfHardware == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getGnssYearOfHardware is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midlocationManagerGetGnssYearOfHardware,
@@ -537,6 +613,10 @@ func (m *locationManager) GetGpsStatus(arg0 *jni.Object) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerGetGpsStatus == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getGpsStatus is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -559,6 +639,10 @@ func (m *locationManager) GetLastKnownLocation(arg0 string) (*jni.Object, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerGetLastKnownLocation == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getLastKnownLocation is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -586,6 +670,10 @@ func (m *locationManager) GetProvider(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetProvider == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getProvider is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -612,6 +700,10 @@ func (m *locationManager) GetProviderProperties(arg0 string) (*jni.Object, error
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetProviderProperties == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getProviderProperties is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -637,6 +729,10 @@ func (m *locationManager) GetProviders2(arg0 *jni.Object, arg1 bool) (*jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerGetProviders2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getProviders is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -665,6 +761,10 @@ func (m *locationManager) GetProviders1_1(arg0 bool) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerGetProviders1_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getProviders is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -690,6 +790,10 @@ func (m *locationManager) HasProvider(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerHasProvider == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.hasProvider is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -718,6 +822,10 @@ func (m *locationManager) IsLocationEnabled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midlocationManagerIsLocationEnabled == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.isLocationEnabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midlocationManagerIsLocationEnabled,
@@ -739,6 +847,10 @@ func (m *locationManager) IsProviderEnabled(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerIsProviderEnabled == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.isProviderEnabled is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -767,6 +879,10 @@ func (m *locationManager) RegisterAntennaInfoListener(arg0 *jni.Object, arg1 *jn
 			callErr = err
 			return err
 		}
+		if midlocationManagerRegisterAntennaInfoListener == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerAntennaInfoListener is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -789,6 +905,10 @@ func (m *locationManager) RegisterGnssMeasurementsCallback3(arg0 *jni.Object, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRegisterGnssMeasurementsCallback3 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerGnssMeasurementsCallback is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -813,6 +933,10 @@ func (m *locationManager) RegisterGnssMeasurementsCallback1_1(arg0 *jni.Object) 
 			callErr = err
 			return err
 		}
+		if midlocationManagerRegisterGnssMeasurementsCallback1_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerGnssMeasurementsCallback is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -835,6 +959,10 @@ func (m *locationManager) RegisterGnssMeasurementsCallback2_2(arg0 *jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRegisterGnssMeasurementsCallback2_2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerGnssMeasurementsCallback is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -859,6 +987,10 @@ func (m *locationManager) RegisterGnssNavigationMessageCallback1(arg0 *jni.Objec
 			callErr = err
 			return err
 		}
+		if midlocationManagerRegisterGnssNavigationMessageCallback1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerGnssNavigationMessageCallback is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -881,6 +1013,10 @@ func (m *locationManager) RegisterGnssNavigationMessageCallback2_1(arg0 *jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRegisterGnssNavigationMessageCallback2_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerGnssNavigationMessageCallback is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -905,6 +1041,10 @@ func (m *locationManager) RegisterGnssStatusCallback1(arg0 *jni.Object) (bool, e
 			callErr = err
 			return err
 		}
+		if midlocationManagerRegisterGnssStatusCallback1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerGnssStatusCallback is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -927,6 +1067,10 @@ func (m *locationManager) RegisterGnssStatusCallback2_1(arg0 *jni.Object, arg1 *
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRegisterGnssStatusCallback2_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.registerGnssStatusCallback is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -951,6 +1095,10 @@ func (m *locationManager) RemoveGpsStatusListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerRemoveGpsStatusListener == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.removeGpsStatusListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -969,6 +1117,10 @@ func (m *locationManager) RemoveNmeaListener1(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRemoveNmeaListener1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.removeNmeaListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -989,6 +1141,10 @@ func (m *locationManager) RemoveNmeaListener1_1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerRemoveNmeaListener1_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.removeNmeaListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1008,6 +1164,10 @@ func (m *locationManager) RemoveProximityAlert(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerRemoveProximityAlert == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.removeProximityAlert is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1026,6 +1186,10 @@ func (m *locationManager) RemoveTestProvider(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRemoveTestProvider == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.removeTestProvider is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1050,6 +1214,10 @@ func (m *locationManager) RemoveUpdates1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerRemoveUpdates1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.removeUpdates is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1069,6 +1237,10 @@ func (m *locationManager) RemoveUpdates1_1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerRemoveUpdates1_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.removeUpdates is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1087,6 +1259,10 @@ func (m *locationManager) RequestFlush3(arg0 string, arg1 *jni.Object, arg2 int3
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRequestFlush3 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestFlush is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1111,6 +1287,10 @@ func (m *locationManager) RequestFlush3_1(arg0 string, arg1 *jni.Object, arg2 in
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestFlush3_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestFlush is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1133,6 +1313,10 @@ func (m *locationManager) RequestLocationUpdates3(arg0 string, arg1 *jni.Object,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRequestLocationUpdates3 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1157,6 +1341,10 @@ func (m *locationManager) RequestLocationUpdates4_1(arg0 string, arg1 *jni.Objec
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestLocationUpdates4_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1179,6 +1367,10 @@ func (m *locationManager) RequestLocationUpdates4_2(arg0 string, arg1 int64, arg
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRequestLocationUpdates4_2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1203,6 +1395,10 @@ func (m *locationManager) RequestLocationUpdates4_3(arg0 string, arg1 int64, arg
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestLocationUpdates4_3 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1225,6 +1421,10 @@ func (m *locationManager) RequestLocationUpdates5_4(arg0 string, arg1 int64, arg
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRequestLocationUpdates5_4 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1249,6 +1449,10 @@ func (m *locationManager) RequestLocationUpdates5_5(arg0 string, arg1 int64, arg
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestLocationUpdates5_5 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1272,6 +1476,10 @@ func (m *locationManager) RequestLocationUpdates4_6(arg0 int64, arg1 float32, ar
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestLocationUpdates4_6 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1290,6 +1498,10 @@ func (m *locationManager) RequestLocationUpdates5_7(arg0 int64, arg1 float32, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRequestLocationUpdates5_7 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1310,6 +1522,10 @@ func (m *locationManager) RequestLocationUpdates5_8(arg0 int64, arg1 float32, ar
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestLocationUpdates5_8 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestLocationUpdates is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1328,6 +1544,10 @@ func (m *locationManager) RequestSingleUpdate2(arg0 *jni.Object, arg1 *jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRequestSingleUpdate2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestSingleUpdate is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1348,6 +1568,10 @@ func (m *locationManager) RequestSingleUpdate3_1(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestSingleUpdate3_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestSingleUpdate is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1366,6 +1590,10 @@ func (m *locationManager) RequestSingleUpdate2_2(arg0 string, arg1 *jni.Object) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerRequestSingleUpdate2_2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestSingleUpdate is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1390,6 +1618,10 @@ func (m *locationManager) RequestSingleUpdate3_3(arg0 string, arg1 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if midlocationManagerRequestSingleUpdate3_3 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.requestSingleUpdate is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1412,6 +1644,10 @@ func (m *locationManager) SendExtraCommand(arg0 string, arg1 string, arg2 *jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerSendExtraCommand == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.sendExtraCommand is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1445,6 +1681,10 @@ func (m *locationManager) SetTestProviderEnabled(arg0 string, arg1 bool) error {
 			callErr = err
 			return err
 		}
+		if midlocationManagerSetTestProviderEnabled == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.setTestProviderEnabled is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1473,6 +1713,10 @@ func (m *locationManager) SetTestProviderLocation(arg0 string, arg1 *jni.Object)
 			callErr = err
 			return err
 		}
+		if midlocationManagerSetTestProviderLocation == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.setTestProviderLocation is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1495,6 +1739,10 @@ func (m *locationManager) SetTestProviderStatus(arg0 string, arg1 int32, arg2 *j
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerSetTestProviderStatus == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.setTestProviderStatus is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1519,6 +1767,10 @@ func (m *locationManager) UnregisterAntennaInfoListener(arg0 *jni.Object) error 
 			callErr = err
 			return err
 		}
+		if midlocationManagerUnregisterAntennaInfoListener == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.unregisterAntennaInfoListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1537,6 +1789,10 @@ func (m *locationManager) UnregisterGnssMeasurementsCallback(arg0 *jni.Object) e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerUnregisterGnssMeasurementsCallback == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.unregisterGnssMeasurementsCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1557,6 +1813,10 @@ func (m *locationManager) UnregisterGnssNavigationMessageCallback(arg0 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midlocationManagerUnregisterGnssNavigationMessageCallback == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.unregisterGnssNavigationMessageCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1575,6 +1835,10 @@ func (m *locationManager) UnregisterGnssStatusCallback(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midlocationManagerUnregisterGnssStatusCallback == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.unregisterGnssStatusCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

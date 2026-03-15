@@ -193,12 +193,11 @@ func (c *Client) StartObservingDevicePresence1_1(ctx context.Context, arg0 strin
 }
 
 // StartSystemDataTransfer calls the StartSystemDataTransfer RPC.
-func (c *Client) StartSystemDataTransfer(ctx context.Context, arg0 int32, arg1 int64, arg2 int64, arg3 int64) error {
+func (c *Client) StartSystemDataTransfer(ctx context.Context, arg0 int32, arg1 int64, arg2 int64) error {
 	_, err := c.svc.StartSystemDataTransfer(ctx, &pb.StartSystemDataTransferRequest{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,
-		Arg3: arg3,
 	})
 	return err
 }

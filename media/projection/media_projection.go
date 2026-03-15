@@ -32,6 +32,10 @@ func (m *mediaProjection) Stop() error {
 			callErr = err
 			return err
 		}
+		if midmediaProjectionStop == nil {
+			callErr = fmt.Errorf("android.media.projection.MediaProjection.stop is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midmediaProjectionStop,
@@ -49,6 +53,10 @@ func (m *mediaProjection) UnregisterCallback(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midmediaProjectionUnregisterCallback == nil {
+			callErr = fmt.Errorf("android.media.projection.MediaProjection.unregisterCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

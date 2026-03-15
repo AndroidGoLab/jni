@@ -32,6 +32,10 @@ func (m *broadcastReceiver) GetSentFromPackage() (string, error) {
 			callErr = err
 			return err
 		}
+		if midbroadcastReceiverGetSentFromPackage == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.getSentFromPackage is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midbroadcastReceiverGetSentFromPackage,
@@ -54,6 +58,10 @@ func (m *broadcastReceiver) GetSentFromUid() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midbroadcastReceiverGetSentFromUid == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.getSentFromUid is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midbroadcastReceiverGetSentFromUid,
@@ -74,6 +82,10 @@ func (m *broadcastReceiver) PeekService(arg0 *jni.Object, arg1 *jni.Object) (*jn
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbroadcastReceiverPeekService == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.peekService is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(

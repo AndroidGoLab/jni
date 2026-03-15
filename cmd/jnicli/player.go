@@ -243,9 +243,6 @@ var playerMediaPlayerGetKeyRequestCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
 			req.Arg4 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg5"); err == nil {
-			req.Arg5 = v
-		}
 		resp, err := client.GetKeyRequest(ctx, req)
 		if err != nil {
 			return err
@@ -719,9 +716,6 @@ var playerMediaPlayerSetDataSource4_1Cmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
 		resp, err := client.SetDataSource4_1(ctx, req)
 		if err != nil {
 			return err
@@ -749,9 +743,6 @@ var playerMediaPlayerSetDataSource5_2Cmd = &cobra.Command{
 		}
 		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
 			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
 		}
 		resp, err := client.SetDataSource5_2(ctx, req)
 		if err != nil {
@@ -1479,7 +1470,6 @@ func init() {
 	playerMediaPlayerGetKeyRequestCmd.Flags().String("arg2", "", "arg2 (string)")
 	playerMediaPlayerGetKeyRequestCmd.Flags().Int32("arg3", 0, "arg3 (int32)")
 	playerMediaPlayerGetKeyRequestCmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	playerMediaPlayerGetKeyRequestCmd.Flags().Int64("arg5", 0, "arg5 (int64)")
 	playerMediaPlayerCmd.AddCommand(playerMediaPlayerGetKeyRequestCmd)
 	playerMediaPlayerCmd.AddCommand(playerMediaPlayerGetMetricsCmd)
 	playerMediaPlayerCmd.AddCommand(playerMediaPlayerGetPreferredDeviceCmd)
@@ -1525,13 +1515,11 @@ func init() {
 	playerMediaPlayerSetDataSource4_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	playerMediaPlayerSetDataSource4_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	playerMediaPlayerSetDataSource4_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	playerMediaPlayerSetDataSource4_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
 	playerMediaPlayerCmd.AddCommand(playerMediaPlayerSetDataSource4_1Cmd)
 	playerMediaPlayerSetDataSource5_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	playerMediaPlayerSetDataSource5_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	playerMediaPlayerSetDataSource5_2Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
 	playerMediaPlayerSetDataSource5_2Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	playerMediaPlayerSetDataSource5_2Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
 	playerMediaPlayerCmd.AddCommand(playerMediaPlayerSetDataSource5_2Cmd)
 	playerMediaPlayerSetDataSource1_3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	playerMediaPlayerCmd.AddCommand(playerMediaPlayerSetDataSource1_3Cmd)

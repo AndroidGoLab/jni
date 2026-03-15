@@ -34,6 +34,12 @@ var (
 	midkeyguardManagerRequestDismissKeyguard              jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -60,57 +66,90 @@ func doInit(env *jni.Env) error {
 
 	midkeyguardManagerAddKeyguardLockedStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "addKeyguardLockedStateListener", "(Ljava/util/concurrent/Executor;Landroid/app/KeyguardManager$KeyguardLockedStateListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.addKeyguardLockedStateListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.addKeyguardLockedStateListener")
 	}
 
 	midkeyguardManagerCreateConfirmDeviceCredentialIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "createConfirmDeviceCredentialIntent", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.createConfirmDeviceCredentialIntent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.createConfirmDeviceCredentialIntent")
 	}
 
 	midkeyguardManagerExitKeyguardSecurely, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "exitKeyguardSecurely", "(Landroid/app/KeyguardManager$OnKeyguardExitResult;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.exitKeyguardSecurely: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.exitKeyguardSecurely")
 	}
 
 	midkeyguardManagerInKeyguardRestrictedInputMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "inKeyguardRestrictedInputMode", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.inKeyguardRestrictedInputMode: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.inKeyguardRestrictedInputMode")
 	}
 
 	midkeyguardManagerIsDeviceLocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isDeviceLocked", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isDeviceLocked: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.isDeviceLocked")
 	}
 
 	midkeyguardManagerIsDeviceSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isDeviceSecure", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isDeviceSecure: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.isDeviceSecure")
 	}
 
 	midkeyguardManagerIsKeyguardLocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isKeyguardLocked", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isKeyguardLocked: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.isKeyguardLocked")
 	}
 
 	midkeyguardManagerIsKeyguardSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isKeyguardSecure", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isKeyguardSecure: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.isKeyguardSecure")
 	}
 
 	midkeyguardManagerNewKeyguardLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "newKeyguardLock", "(Ljava/lang/String;)Landroid/app/KeyguardManager$KeyguardLock;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.newKeyguardLock: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.newKeyguardLock")
 	}
 
 	midkeyguardManagerRemoveKeyguardLockedStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "removeKeyguardLockedStateListener", "(Landroid/app/KeyguardManager$KeyguardLockedStateListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.removeKeyguardLockedStateListener: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.removeKeyguardLockedStateListener")
 	}
 
 	midkeyguardManagerRequestDismissKeyguard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "requestDismissKeyguard", "(Landroid/app/Activity;Landroid/app/KeyguardManager$KeyguardDismissCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.requestDismissKeyguard: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.KeyguardManager.requestDismissKeyguard")
 	}
 
 	return nil

@@ -32,6 +32,10 @@ func (m *nsdServiceInfo) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoDescribeContents == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.describeContents is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midnsdServiceInfoDescribeContents,
@@ -52,6 +56,10 @@ func (m *nsdServiceInfo) GetHost() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoGetHost == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getHost is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -74,6 +82,10 @@ func (m *nsdServiceInfo) GetHostAddresses() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoGetHostAddresses == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getHostAddresses is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midnsdServiceInfoGetHostAddresses,
@@ -94,6 +106,10 @@ func (m *nsdServiceInfo) GetHostname() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoGetHostname == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getHostname is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -117,6 +133,10 @@ func (m *nsdServiceInfo) GetNetwork() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoGetNetwork == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getNetwork is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midnsdServiceInfoGetNetwork,
@@ -138,6 +158,10 @@ func (m *nsdServiceInfo) GetPort() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoGetPort == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getPort is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midnsdServiceInfoGetPort,
@@ -158,6 +182,10 @@ func (m *nsdServiceInfo) GetServiceName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoGetServiceName == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getServiceName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -181,6 +209,10 @@ func (m *nsdServiceInfo) GetServiceType() (string, error) {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoGetServiceType == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getServiceType is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midnsdServiceInfoGetServiceType,
@@ -203,6 +235,10 @@ func (m *nsdServiceInfo) GetSubtypes() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoGetSubtypes == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getSubtypes is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midnsdServiceInfoGetSubtypes,
@@ -223,6 +259,10 @@ func (m *nsdServiceInfo) RemoveAttribute(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoRemoveAttribute == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.removeAttribute is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -246,6 +286,10 @@ func (m *nsdServiceInfo) SetAttribute(arg0 string, arg1 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoSetAttribute == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setAttribute is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -275,6 +319,10 @@ func (m *nsdServiceInfo) SetHost(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoSetHost == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setHost is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -293,6 +341,10 @@ func (m *nsdServiceInfo) SetHostAddresses(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoSetHostAddresses == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setHostAddresses is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -313,6 +365,10 @@ func (m *nsdServiceInfo) SetNetwork(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoSetNetwork == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setNetwork is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -332,6 +388,10 @@ func (m *nsdServiceInfo) SetPort(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoSetPort == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setPort is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -350,6 +410,10 @@ func (m *nsdServiceInfo) SetServiceName(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoSetServiceName == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setServiceName is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -374,6 +438,10 @@ func (m *nsdServiceInfo) SetServiceType(arg0 string) error {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoSetServiceType == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setServiceType is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -397,6 +465,10 @@ func (m *nsdServiceInfo) SetSubtypes(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midnsdServiceInfoSetSubtypes == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.setSubtypes is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -415,6 +487,10 @@ func (m *nsdServiceInfo) ToString() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoToString == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.toString is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -437,6 +513,10 @@ func (m *nsdServiceInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midnsdServiceInfoWriteToParcel == nil {
+			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.writeToParcel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

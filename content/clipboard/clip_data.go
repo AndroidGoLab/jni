@@ -32,6 +32,10 @@ func (m *clipData) AddItem1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midclipDataAddItem1 == nil {
+			callErr = fmt.Errorf("android.content.ClipData.addItem is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -51,6 +55,10 @@ func (m *clipData) AddItem2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midclipDataAddItem2_1 == nil {
+			callErr = fmt.Errorf("android.content.ClipData.addItem is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -69,6 +77,10 @@ func (m *clipData) DescribeContents() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midclipDataDescribeContents == nil {
+			callErr = fmt.Errorf("android.content.ClipData.describeContents is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -91,6 +103,10 @@ func (m *clipData) GetDescription() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midclipDataGetDescription == nil {
+			callErr = fmt.Errorf("android.content.ClipData.getDescription is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midclipDataGetDescription,
@@ -111,6 +127,10 @@ func (m *clipData) GetItemAt(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midclipDataGetItemAt == nil {
+			callErr = fmt.Errorf("android.content.ClipData.getItemAt is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -134,6 +154,10 @@ func (m *clipData) GetItemCount() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midclipDataGetItemCount == nil {
+			callErr = fmt.Errorf("android.content.ClipData.getItemCount is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midclipDataGetItemCount,
@@ -154,6 +178,10 @@ func (m *clipData) ToString() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midclipDataToString == nil {
+			callErr = fmt.Errorf("android.content.ClipData.toString is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -177,6 +205,10 @@ func (m *clipData) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
+		if midclipDataWriteToParcel == nil {
+			callErr = fmt.Errorf("android.content.ClipData.writeToParcel is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -195,6 +227,10 @@ func (m *clipData) NewHtmlText(arg0 string, arg1 string, arg2 string) (*jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midclipDataNewHtmlText == nil {
+			callErr = fmt.Errorf("android.content.ClipData.newHtmlText is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -232,6 +268,10 @@ func (m *clipData) NewIntent(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
+		if midclipDataNewIntent == nil {
+			callErr = fmt.Errorf("android.content.ClipData.newIntent is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -257,6 +297,10 @@ func (m *clipData) NewPlainText(arg0 string, arg1 string) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midclipDataNewPlainText == nil {
+			callErr = fmt.Errorf("android.content.ClipData.newPlainText is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -289,6 +333,10 @@ func (m *clipData) NewRawUri(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
+		if midclipDataNewRawUri == nil {
+			callErr = fmt.Errorf("android.content.ClipData.newRawUri is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -314,6 +362,10 @@ func (m *clipData) NewUri(arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*jni
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midclipDataNewUri == nil {
+			callErr = fmt.Errorf("android.content.ClipData.newUri is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)

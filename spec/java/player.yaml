@@ -90,10 +90,8 @@ classes:
               go_name: arg2
             - java_type: int
               go_name: arg3
-            - java_type: java.util.Map<java.lang.String
+            - java_type: "java.util.Map<java.lang.String, java.lang.String>"
               go_name: arg4
-            - java_type: java.lang.String>
-              go_name: arg5
           returns: android.media.MediaDrm$KeyRequest
           error: true
         - java_method: getMetrics
@@ -248,10 +246,8 @@ classes:
               go_name: arg0
             - java_type: android.net.Uri
               go_name: arg1
-            - java_type: java.util.Map<java.lang.String
+            - java_type: "java.util.Map<java.lang.String, java.lang.String>"
               go_name: arg2
-            - java_type: java.lang.String>
-              go_name: arg3
           returns: void
           error: true
         - java_method: setDataSource
@@ -261,12 +257,10 @@ classes:
               go_name: arg0
             - java_type: android.net.Uri
               go_name: arg1
-            - java_type: java.util.Map<java.lang.String
+            - java_type: "java.util.Map<java.lang.String, java.lang.String>"
               go_name: arg2
-            - java_type: java.lang.String>
-              go_name: arg3
             - java_type: java.util.List<java.net.HttpCookie>
-              go_name: arg4
+              go_name: arg3
           returns: void
           error: true
         - java_method: setDataSource

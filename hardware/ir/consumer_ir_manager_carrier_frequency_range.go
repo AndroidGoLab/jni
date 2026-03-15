@@ -32,6 +32,10 @@ func (m *consumerIrManagerCarrierFrequencyRange) GetMaxFrequency() (int32, error
 			callErr = err
 			return err
 		}
+		if midconsumerIrManagerCarrierFrequencyRangeGetMaxFrequency == nil {
+			callErr = fmt.Errorf("android.hardware.ConsumerIrManager$CarrierFrequencyRange.getMaxFrequency is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midconsumerIrManagerCarrierFrequencyRangeGetMaxFrequency,
@@ -52,6 +56,10 @@ func (m *consumerIrManagerCarrierFrequencyRange) GetMinFrequency() (int32, error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midconsumerIrManagerCarrierFrequencyRangeGetMinFrequency == nil {
+			callErr = fmt.Errorf("android.hardware.ConsumerIrManager$CarrierFrequencyRange.getMinFrequency is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,

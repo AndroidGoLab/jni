@@ -74,6 +74,10 @@ func (m *cameraManager) GetCameraCharacteristics(arg0 string) (*jni.Object, erro
 			callErr = err
 			return err
 		}
+		if midcameraManagerGetCameraCharacteristics == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.getCameraCharacteristics is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -99,6 +103,10 @@ func (m *cameraManager) GetCameraDeviceSetup(arg0 string) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcameraManagerGetCameraDeviceSetup == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.getCameraDeviceSetup is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -126,6 +134,10 @@ func (m *cameraManager) GetCameraExtensionCharacteristics(arg0 string) (*jni.Obj
 			callErr = err
 			return err
 		}
+		if midcameraManagerGetCameraExtensionCharacteristics == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.getCameraExtensionCharacteristics is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -152,6 +164,10 @@ func (m *cameraManager) GetCameraIdList() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midcameraManagerGetCameraIdList == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.getCameraIdList is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midcameraManagerGetCameraIdList,
@@ -173,6 +189,10 @@ func (m *cameraManager) GetConcurrentCameraIds() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midcameraManagerGetConcurrentCameraIds == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.getConcurrentCameraIds is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midcameraManagerGetConcurrentCameraIds,
@@ -193,6 +213,10 @@ func (m *cameraManager) GetTorchStrengthLevel(arg0 string) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcameraManagerGetTorchStrengthLevel == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.getTorchStrengthLevel is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -220,6 +244,10 @@ func (m *cameraManager) IsCameraDeviceSetupSupported(arg0 string) (bool, error) 
 			callErr = err
 			return err
 		}
+		if midcameraManagerIsCameraDeviceSetupSupported == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.isCameraDeviceSetupSupported is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -239,7 +267,7 @@ func (m *cameraManager) IsCameraDeviceSetupSupported(arg0 string) (bool, error) 
 }
 
 // IsConcurrentSessionConfigurationSupported calls android.hardware.camera2.CameraManager.isConcurrentSessionConfigurationSupported.
-func (m *cameraManager) IsConcurrentSessionConfigurationSupported(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
+func (m *cameraManager) IsConcurrentSessionConfigurationSupported(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -247,10 +275,14 @@ func (m *cameraManager) IsConcurrentSessionConfigurationSupported(arg0 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midcameraManagerIsConcurrentSessionConfigurationSupported == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.isConcurrentSessionConfigurationSupported is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midcameraManagerIsConcurrentSessionConfigurationSupported, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midcameraManagerIsConcurrentSessionConfigurationSupported, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -269,6 +301,10 @@ func (m *cameraManager) OpenCamera(arg0 string, arg1 *jni.Object, arg2 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcameraManagerOpenCamera == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.openCamera is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -293,6 +329,10 @@ func (m *cameraManager) RegisterAvailabilityCallback(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
+		if midcameraManagerRegisterAvailabilityCallback == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.registerAvailabilityCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -312,6 +352,10 @@ func (m *cameraManager) RegisterTorchCallback(arg0 *jni.Object, arg1 *jni.Object
 			callErr = err
 			return err
 		}
+		if midcameraManagerRegisterTorchCallback == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.registerTorchCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -330,6 +374,10 @@ func (m *cameraManager) SetTorchMode(arg0 string, arg1 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcameraManagerSetTorchMode == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.setTorchMode is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -359,6 +407,10 @@ func (m *cameraManager) TurnOnTorchWithStrengthLevel(arg0 string, arg1 int32) er
 			callErr = err
 			return err
 		}
+		if midcameraManagerTurnOnTorchWithStrengthLevel == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.turnOnTorchWithStrengthLevel is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -382,6 +434,10 @@ func (m *cameraManager) UnregisterAvailabilityCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midcameraManagerUnregisterAvailabilityCallback == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.unregisterAvailabilityCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -400,6 +456,10 @@ func (m *cameraManager) UnregisterTorchCallback(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcameraManagerUnregisterTorchCallback == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.unregisterTorchCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

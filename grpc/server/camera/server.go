@@ -172,7 +172,7 @@ func (s *CameraManagerServer) IsConcurrentSessionConfigurationSupported(_ contex
 	}
 	defer mgr.Close()
 
-	result, err := mgr.IsConcurrentSessionConfigurationSupported(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()))
+	result, err := mgr.IsConcurrentSessionConfigurationSupported(s.Handles.Get(req.GetArg0()))
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}

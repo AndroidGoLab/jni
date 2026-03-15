@@ -32,6 +32,10 @@ func (m *ringtoneManager) GetCursor() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerGetCursor == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getCursor is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midringtoneManagerGetCursor,
@@ -52,6 +56,10 @@ func (m *ringtoneManager) GetIncludeDrm() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerGetIncludeDrm == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getIncludeDrm is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -75,6 +83,10 @@ func (m *ringtoneManager) GetRingtone1_1(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerGetRingtone1_1 == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getRingtone is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -96,6 +108,10 @@ func (m *ringtoneManager) GetRingtonePosition(arg0 *jni.Object) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerGetRingtonePosition == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getRingtonePosition is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -119,6 +135,10 @@ func (m *ringtoneManager) GetRingtoneUri(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerGetRingtoneUri == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getRingtoneUri is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -141,6 +161,10 @@ func (m *ringtoneManager) GetStopPreviousRingtone() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerGetStopPreviousRingtone == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getStopPreviousRingtone is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midringtoneManagerGetStopPreviousRingtone,
@@ -162,6 +186,10 @@ func (m *ringtoneManager) HasHapticChannels1_2(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerHasHapticChannels1_2 == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.hasHapticChannels is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -186,6 +214,10 @@ func (m *ringtoneManager) InferStreamType() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerInferStreamType == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.inferStreamType is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midringtoneManagerInferStreamType,
@@ -206,6 +238,10 @@ func (m *ringtoneManager) SetIncludeDrm(arg0 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerSetIncludeDrm == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.setIncludeDrm is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -230,6 +266,10 @@ func (m *ringtoneManager) SetStopPreviousRingtone(arg0 bool) error {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerSetStopPreviousRingtone == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.setStopPreviousRingtone is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -253,6 +293,10 @@ func (m *ringtoneManager) SetType(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerSetType == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.setType is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -272,6 +316,10 @@ func (m *ringtoneManager) StopPreviousRingtone() error {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerStopPreviousRingtone == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.stopPreviousRingtone is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midringtoneManagerStopPreviousRingtone,
@@ -289,6 +337,10 @@ func (m *ringtoneManager) GetActualDefaultRingtoneUri(arg0 *jni.Object, arg1 int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerGetActualDefaultRingtoneUri == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getActualDefaultRingtoneUri is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -312,6 +364,10 @@ func (m *ringtoneManager) GetDefaultType(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerGetDefaultType == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getDefaultType is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticIntMethod(
 			(*jni.Class)(unsafe.Pointer(clsringtoneManager)),
@@ -333,6 +389,10 @@ func (m *ringtoneManager) GetDefaultUri(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerGetDefaultUri == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getDefaultUri is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -356,6 +416,10 @@ func (m *ringtoneManager) GetRingtone2(arg0 *jni.Object, arg1 *jni.Object) (*jni
 			callErr = err
 			return err
 		}
+		if midringtoneManagerGetRingtone2 == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getRingtone is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsringtoneManager)),
@@ -378,6 +442,10 @@ func (m *ringtoneManager) GetValidRingtoneUri(arg0 *jni.Object) (*jni.Object, er
 			callErr = err
 			return err
 		}
+		if midringtoneManagerGetValidRingtoneUri == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.getValidRingtoneUri is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsringtoneManager)),
@@ -399,6 +467,10 @@ func (m *ringtoneManager) HasHapticChannels2(arg0 *jni.Object, arg1 *jni.Object)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerHasHapticChannels2 == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.hasHapticChannels is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
@@ -423,6 +495,10 @@ func (m *ringtoneManager) HasHapticChannels1_1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midringtoneManagerHasHapticChannels1_1 == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.hasHapticChannels is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsringtoneManager)),
@@ -445,6 +521,10 @@ func (m *ringtoneManager) IsDefault(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerIsDefault == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.isDefault is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
@@ -469,6 +549,10 @@ func (m *ringtoneManager) OpenDefaultRingtoneUri(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if midringtoneManagerOpenDefaultRingtoneUri == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.openDefaultRingtoneUri is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsringtoneManager)),
@@ -490,6 +574,10 @@ func (m *ringtoneManager) SetActualDefaultRingtoneUri(arg0 *jni.Object, arg1 int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midringtoneManagerSetActualDefaultRingtoneUri == nil {
+			callErr = fmt.Errorf("android.media.RingtoneManager.setActualDefaultRingtoneUri is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallStaticVoidMethod(

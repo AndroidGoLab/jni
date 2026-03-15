@@ -32,6 +32,10 @@ func (m *packageManager) AddWhitelistedRestrictedPermission(arg0 string, arg1 st
 			callErr = err
 			return err
 		}
+		if midpackageManagerAddWhitelistedRestrictedPermission == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.addWhitelistedRestrictedPermission is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -63,6 +67,10 @@ func (m *packageManager) CanPackageQuery2(arg0 string, arg1 string) (bool, error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerCanPackageQuery2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.canPackageQuery is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -96,6 +104,10 @@ func (m *packageManager) CanPackageQuery2_1(arg0 string, arg1 *jni.Object) (*jni
 			callErr = err
 			return err
 		}
+		if midpackageManagerCanPackageQuery2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.canPackageQuery is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -122,6 +134,10 @@ func (m *packageManager) GetActivityInfo(arg0 *jni.Object, arg1 *jni.Object) (*j
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetActivityInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getActivityInfo is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -143,6 +159,10 @@ func (m *packageManager) GetApplicationInfo(arg0 string, arg1 *jni.Object) (*jni
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetApplicationInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getApplicationInfo is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -170,6 +190,10 @@ func (m *packageManager) GetArchivedPackage(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetArchivedPackage == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getArchivedPackage is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -196,6 +220,10 @@ func (m *packageManager) GetBackgroundPermissionOptionLabel() (string, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetBackgroundPermissionOptionLabel == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getBackgroundPermissionOptionLabel is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midpackageManagerGetBackgroundPermissionOptionLabel,
@@ -217,6 +245,10 @@ func (m *packageManager) GetGroupOfPlatformPermission(arg0 string, arg1 *jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetGroupOfPlatformPermission == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getGroupOfPlatformPermission is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -240,6 +272,10 @@ func (m *packageManager) GetInstallSourceInfo(arg0 string) (*jni.Object, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetInstallSourceInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstallSourceInfo is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -267,6 +303,10 @@ func (m *packageManager) GetInstalledApplications(arg0 *jni.Object) (*jni.Object
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetInstalledApplications == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledApplications is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -288,6 +328,10 @@ func (m *packageManager) GetInstalledModules(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetInstalledModules == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledModules is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -311,6 +355,10 @@ func (m *packageManager) GetInstalledPackages(arg0 *jni.Object) (*jni.Object, er
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetInstalledPackages == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledPackages is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -332,6 +380,10 @@ func (m *packageManager) GetLaunchIntentSenderForPackage(arg0 string) (*jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetLaunchIntentSenderForPackage == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getLaunchIntentSenderForPackage is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -359,6 +411,10 @@ func (m *packageManager) GetMimeGroup(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetMimeGroup == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getMimeGroup is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -384,6 +440,10 @@ func (m *packageManager) GetModuleInfo(arg0 string, arg1 int32) (*jni.Object, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetModuleInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getModuleInfo is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -411,6 +471,10 @@ func (m *packageManager) GetPackageArchiveInfo2(arg0 string, arg1 *jni.Object) (
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetPackageArchiveInfo2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackageArchiveInfo is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -436,6 +500,10 @@ func (m *packageManager) GetPackageArchiveInfo2_1(arg0 string, arg1 int32) (*jni
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetPackageArchiveInfo2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackageArchiveInfo is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -463,6 +531,10 @@ func (m *packageManager) GetPackageGids(arg0 string, arg1 *jni.Object) (*jni.Obj
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetPackageGids == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackageGids is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -489,6 +561,10 @@ func (m *packageManager) GetPackageInfo2(arg0 *jni.Object, arg1 *jni.Object) (*j
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetPackageInfo2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackageInfo is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -510,6 +586,10 @@ func (m *packageManager) GetPackageInfo2_1(arg0 string, arg1 *jni.Object) (*jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetPackageInfo2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackageInfo is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -537,6 +617,10 @@ func (m *packageManager) GetPackageUid(arg0 string, arg1 *jni.Object) (int32, er
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetPackageUid == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackageUid is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -563,6 +647,10 @@ func (m *packageManager) GetPackagesHoldingPermissions(arg0 *jni.Object, arg1 *j
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetPackagesHoldingPermissions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackagesHoldingPermissions is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -584,6 +672,10 @@ func (m *packageManager) GetPlatformPermissionsForGroup(arg0 string, arg1 *jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetPlatformPermissionsForGroup == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPlatformPermissionsForGroup is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -607,6 +699,10 @@ func (m *packageManager) GetProperty2(arg0 string, arg1 *jni.Object) (*jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetProperty2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getProperty is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -633,6 +729,10 @@ func (m *packageManager) GetProperty2_1(arg0 string, arg1 string) (*jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetProperty2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getProperty is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -665,6 +765,10 @@ func (m *packageManager) GetProviderInfo(arg0 *jni.Object, arg1 *jni.Object) (*j
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetProviderInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getProviderInfo is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -686,6 +790,10 @@ func (m *packageManager) GetReceiverInfo(arg0 *jni.Object, arg1 *jni.Object) (*j
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetReceiverInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getReceiverInfo is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -709,6 +817,10 @@ func (m *packageManager) GetResourcesForApplication(arg0 *jni.Object, arg1 *jni.
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetResourcesForApplication == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getResourcesForApplication is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -730,6 +842,10 @@ func (m *packageManager) GetServiceInfo(arg0 *jni.Object, arg1 *jni.Object) (*jn
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetServiceInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getServiceInfo is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -753,6 +869,10 @@ func (m *packageManager) GetSharedLibraries(arg0 *jni.Object) (*jni.Object, erro
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetSharedLibraries == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getSharedLibraries is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -775,6 +895,10 @@ func (m *packageManager) GetSuspendedPackageAppExtras() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetSuspendedPackageAppExtras == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getSuspendedPackageAppExtras is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midpackageManagerGetSuspendedPackageAppExtras,
@@ -795,6 +919,10 @@ func (m *packageManager) GetSyntheticAppDetailsActivityEnabled(arg0 string) (boo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetSyntheticAppDetailsActivityEnabled == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getSyntheticAppDetailsActivityEnabled is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -823,6 +951,10 @@ func (m *packageManager) GetTargetSdkVersion(arg0 string) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerGetTargetSdkVersion == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getTargetSdkVersion is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -848,6 +980,10 @@ func (m *packageManager) GetWhitelistedRestrictedPermissions(arg0 string, arg1 i
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetWhitelistedRestrictedPermissions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getWhitelistedRestrictedPermissions is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -875,6 +1011,10 @@ func (m *packageManager) HasSigningCertificate3(arg0 int32, arg1 *jni.Object, ar
 			callErr = err
 			return err
 		}
+		if midpackageManagerHasSigningCertificate3 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.hasSigningCertificate is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -897,6 +1037,10 @@ func (m *packageManager) HasSigningCertificate3_1(arg0 string, arg1 *jni.Object,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerHasSigningCertificate3_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.hasSigningCertificate is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -925,6 +1069,10 @@ func (m *packageManager) IsAppArchivable(arg0 string) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerIsAppArchivable == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isAppArchivable is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -952,6 +1100,10 @@ func (m *packageManager) IsAutoRevokeWhitelisted0() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerIsAutoRevokeWhitelisted0 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isAutoRevokeWhitelisted is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpackageManagerIsAutoRevokeWhitelisted0,
@@ -973,6 +1125,10 @@ func (m *packageManager) IsAutoRevokeWhitelisted1_1(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerIsAutoRevokeWhitelisted1_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isAutoRevokeWhitelisted is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1001,6 +1157,10 @@ func (m *packageManager) IsDefaultApplicationIcon(arg0 *jni.Object) (bool, error
 			callErr = err
 			return err
 		}
+		if midpackageManagerIsDefaultApplicationIcon == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isDefaultApplicationIcon is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1024,6 +1184,10 @@ func (m *packageManager) IsDeviceUpgrading() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerIsDeviceUpgrading == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isDeviceUpgrading is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpackageManagerIsDeviceUpgrading,
@@ -1045,6 +1209,10 @@ func (m *packageManager) IsPackageStopped(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerIsPackageStopped == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isPackageStopped is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1073,6 +1241,10 @@ func (m *packageManager) IsPackageSuspended0() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midpackageManagerIsPackageSuspended0 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isPackageSuspended is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midpackageManagerIsPackageSuspended0,
@@ -1094,6 +1266,10 @@ func (m *packageManager) IsPackageSuspended1_1(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerIsPackageSuspended1_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.isPackageSuspended is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1122,6 +1298,10 @@ func (m *packageManager) QueryActivityProperty(arg0 string) (*jni.Object, error)
 			callErr = err
 			return err
 		}
+		if midpackageManagerQueryActivityProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryActivityProperty is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1147,6 +1327,10 @@ func (m *packageManager) QueryApplicationProperty(arg0 string) (*jni.Object, err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerQueryApplicationProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryApplicationProperty is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1174,6 +1358,10 @@ func (m *packageManager) QueryBroadcastReceivers(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if midpackageManagerQueryBroadcastReceivers == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryBroadcastReceivers is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1195,6 +1383,10 @@ func (m *packageManager) QueryContentProviders(arg0 string, arg1 int32, arg2 *jn
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerQueryContentProviders == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryContentProviders is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1222,6 +1414,10 @@ func (m *packageManager) QueryIntentActivities(arg0 *jni.Object, arg1 *jni.Objec
 			callErr = err
 			return err
 		}
+		if midpackageManagerQueryIntentActivities == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentActivities is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1243,6 +1439,10 @@ func (m *packageManager) QueryIntentActivityOptions(arg0 *jni.Object, arg1 *jni.
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerQueryIntentActivityOptions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentActivityOptions is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1266,6 +1466,10 @@ func (m *packageManager) QueryIntentContentProviders(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
+		if midpackageManagerQueryIntentContentProviders == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentContentProviders is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1288,6 +1492,10 @@ func (m *packageManager) QueryIntentServices(arg0 *jni.Object, arg1 *jni.Object)
 			callErr = err
 			return err
 		}
+		if midpackageManagerQueryIntentServices == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentServices is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1309,6 +1517,10 @@ func (m *packageManager) QueryProviderProperty(arg0 string) (*jni.Object, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerQueryProviderProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryProviderProperty is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1336,6 +1548,10 @@ func (m *packageManager) QueryReceiverProperty(arg0 string) (*jni.Object, error)
 			callErr = err
 			return err
 		}
+		if midpackageManagerQueryReceiverProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryReceiverProperty is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1361,6 +1577,10 @@ func (m *packageManager) QueryServiceProperty(arg0 string) (*jni.Object, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerQueryServiceProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryServiceProperty is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1388,6 +1608,10 @@ func (m *packageManager) RelinquishUpdateOwnership(arg0 string) error {
 			callErr = err
 			return err
 		}
+		if midpackageManagerRelinquishUpdateOwnership == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.relinquishUpdateOwnership is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1410,6 +1634,10 @@ func (m *packageManager) RemoveWhitelistedRestrictedPermission(arg0 string, arg1
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerRemoveWhitelistedRestrictedPermission == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.removeWhitelistedRestrictedPermission is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1443,6 +1671,10 @@ func (m *packageManager) RequestChecksums(arg0 string, arg1 bool, arg2 int32, ar
 			callErr = err
 			return err
 		}
+		if midpackageManagerRequestChecksums == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.requestChecksums is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1471,6 +1703,10 @@ func (m *packageManager) ResolveActivity(arg0 *jni.Object, arg1 *jni.Object) (*j
 			callErr = err
 			return err
 		}
+		if midpackageManagerResolveActivity == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.resolveActivity is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1492,6 +1728,10 @@ func (m *packageManager) ResolveContentProvider(arg0 string, arg1 *jni.Object) (
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerResolveContentProvider == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.resolveContentProvider is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1519,6 +1759,10 @@ func (m *packageManager) ResolveService(arg0 *jni.Object, arg1 *jni.Object) (*jn
 			callErr = err
 			return err
 		}
+		if midpackageManagerResolveService == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.resolveService is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1540,6 +1784,10 @@ func (m *packageManager) SetAutoRevokeWhitelisted(arg0 string, arg1 bool) (bool,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerSetAutoRevokeWhitelisted == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.setAutoRevokeWhitelisted is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1573,6 +1821,10 @@ func (m *packageManager) SetComponentEnabledSettings(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midpackageManagerSetComponentEnabledSettings == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.setComponentEnabledSettings is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1591,6 +1843,10 @@ func (m *packageManager) SetMimeGroup(arg0 string, arg1 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerSetMimeGroup == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.setMimeGroup is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -1614,6 +1870,10 @@ func (m *packageManager) GetVerifiedSigningInfo(arg0 string, arg1 int32) (*jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midpackageManagerGetVerifiedSigningInfo == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getVerifiedSigningInfo is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {

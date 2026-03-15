@@ -74,6 +74,10 @@ func (m *consumerIrManager) GetCarrierFrequencies() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midconsumerIrManagerGetCarrierFrequencies == nil {
+			callErr = fmt.Errorf("android.hardware.ConsumerIrManager.getCarrierFrequencies is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midconsumerIrManagerGetCarrierFrequencies,
@@ -94,6 +98,10 @@ func (m *consumerIrManager) HasIrEmitter() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midconsumerIrManagerHasIrEmitter == nil {
+			callErr = fmt.Errorf("android.hardware.ConsumerIrManager.hasIrEmitter is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -116,6 +124,10 @@ func (m *consumerIrManager) Transmit(arg0 int32, arg1 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midconsumerIrManagerTransmit == nil {
+			callErr = fmt.Errorf("android.hardware.ConsumerIrManager.transmit is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

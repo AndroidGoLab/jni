@@ -45,6 +45,12 @@ var (
 	midringtoneManagerSetActualDefaultRingtoneUri jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -71,112 +77,178 @@ func doInit(env *jni.Env) error {
 
 	midringtoneManagerGetCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getCursor", "()Landroid/database/Cursor;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getCursor: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getCursor")
 	}
 
 	midringtoneManagerGetIncludeDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getIncludeDrm", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getIncludeDrm: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getIncludeDrm")
 	}
 
 	midringtoneManagerGetRingtone1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getRingtone", "(I)Landroid/media/Ringtone;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getRingtone: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getRingtone")
 	}
 
 	midringtoneManagerGetRingtonePosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getRingtonePosition", "(Landroid/net/Uri;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getRingtonePosition: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getRingtonePosition")
 	}
 
 	midringtoneManagerGetRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getRingtoneUri", "(I)Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getRingtoneUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getRingtoneUri")
 	}
 
 	midringtoneManagerGetStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getStopPreviousRingtone", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getStopPreviousRingtone: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getStopPreviousRingtone")
 	}
 
 	midringtoneManagerHasHapticChannels1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "hasHapticChannels", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.hasHapticChannels: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.hasHapticChannels")
 	}
 
 	midringtoneManagerInferStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "inferStreamType", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.inferStreamType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.inferStreamType")
 	}
 
 	midringtoneManagerSetIncludeDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "setIncludeDrm", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.setIncludeDrm: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.setIncludeDrm")
 	}
 
 	midringtoneManagerSetStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "setStopPreviousRingtone", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.setStopPreviousRingtone: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.setStopPreviousRingtone")
 	}
 
 	midringtoneManagerSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "setType", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.setType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.setType")
 	}
 
 	midringtoneManagerStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "stopPreviousRingtone", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.stopPreviousRingtone: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.stopPreviousRingtone")
 	}
 
 	midringtoneManagerGetActualDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getActualDefaultRingtoneUri", "(Landroid/content/Context;I)Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getActualDefaultRingtoneUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getActualDefaultRingtoneUri")
 	}
 
 	midringtoneManagerGetDefaultType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getDefaultType", "(Landroid/net/Uri;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getDefaultType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getDefaultType")
 	}
 
 	midringtoneManagerGetDefaultUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getDefaultUri", "(I)Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getDefaultUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getDefaultUri")
 	}
 
 	midringtoneManagerGetRingtone2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getRingtone", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getRingtone: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getRingtone")
 	}
 
 	midringtoneManagerGetValidRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "getValidRingtoneUri", "(Landroid/content/Context;)Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.getValidRingtoneUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.getValidRingtoneUri")
 	}
 
 	midringtoneManagerHasHapticChannels2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "hasHapticChannels", "(Landroid/content/Context;Landroid/net/Uri;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.hasHapticChannels: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.hasHapticChannels")
 	}
 
 	midringtoneManagerHasHapticChannels1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "hasHapticChannels", "(Landroid/net/Uri;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.hasHapticChannels: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.hasHapticChannels")
 	}
 
 	midringtoneManagerIsDefault, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "isDefault", "(Landroid/net/Uri;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.isDefault: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.isDefault")
 	}
 
 	midringtoneManagerOpenDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "openDefaultRingtoneUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/content/res/AssetFileDescriptor;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.openDefaultRingtoneUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.openDefaultRingtoneUri")
 	}
 
 	midringtoneManagerSetActualDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsringtoneManager)), "setActualDefaultRingtoneUri", "(Landroid/content/Context;ILandroid/net/Uri;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.RingtoneManager.setActualDefaultRingtoneUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.RingtoneManager.setActualDefaultRingtoneUri")
 	}
 
 	return nil

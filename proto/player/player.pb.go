@@ -886,7 +886,6 @@ type GetKeyRequestRequest struct {
 	Arg2          string                 `protobuf:"bytes,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	Arg3          int32                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
 	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
-	Arg5          int64                  `protobuf:"varint,6,opt,name=arg5,proto3" json:"arg5,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -952,13 +951,6 @@ func (x *GetKeyRequestRequest) GetArg3() int32 {
 func (x *GetKeyRequestRequest) GetArg4() int64 {
 	if x != nil {
 		return x.Arg4
-	}
-	return 0
-}
-
-func (x *GetKeyRequestRequest) GetArg5() int64 {
-	if x != nil {
-		return x.Arg5
 	}
 	return 0
 }
@@ -3004,7 +2996,6 @@ type SetDataSource4_1Request struct {
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3060,13 +3051,6 @@ func (x *SetDataSource4_1Request) GetArg2() int64 {
 	return 0
 }
 
-func (x *SetDataSource4_1Request) GetArg3() int64 {
-	if x != nil {
-		return x.Arg3
-	}
-	return 0
-}
-
 type SetDataSource4_1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -3109,7 +3093,6 @@ type SetDataSource5_2Request struct {
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
-	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3168,13 +3151,6 @@ func (x *SetDataSource5_2Request) GetArg2() int64 {
 func (x *SetDataSource5_2Request) GetArg3() int64 {
 	if x != nil {
 		return x.Arg3
-	}
-	return 0
-}
-
-func (x *SetDataSource5_2Request) GetArg4() int64 {
-	if x != nil {
-		return x.Arg4
 	}
 	return 0
 }
@@ -6136,14 +6112,13 @@ const file_proto_player_player_proto_rawDesc = "" +
 	"\x1bGetDrmPropertyStringRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"6\n" +
 	"\x1cGetDrmPropertyStringResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\"\x8e\x01\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"z\n" +
 	"\x14GetKeyRequestRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\tR\x04arg2\x12\x12\n" +
 	"\x04arg3\x18\x04 \x01(\x05R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\x12\x12\n" +
-	"\x04arg5\x18\x06 \x01(\x03R\x04arg5\"/\n" +
+	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\"/\n" +
 	"\x15GetKeyRequestResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
 	"\x11GetMetricsRequest\",\n" +
@@ -6219,19 +6194,17 @@ const file_proto_player_player_proto_rawDesc = "" +
 	"\x15SetDataSource2Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x18\n" +
-	"\x16SetDataSource2Response\"i\n" +
+	"\x16SetDataSource2Response\"U\n" +
 	"\x17SetDataSource4_1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x1a\n" +
-	"\x18SetDataSource4_1Response\"}\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x1a\n" +
+	"\x18SetDataSource4_1Response\"i\n" +
 	"\x17SetDataSource5_2Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\"\x1a\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x1a\n" +
 	"\x18SetDataSource5_2Response\"-\n" +
 	"\x17SetDataSource1_3Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1a\n" +

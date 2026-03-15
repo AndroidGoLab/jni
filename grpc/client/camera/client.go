@@ -99,10 +99,9 @@ func (c *Client) IsCameraDeviceSetupSupported(ctx context.Context, arg0 string) 
 }
 
 // IsConcurrentSessionConfigurationSupported calls the IsConcurrentSessionConfigurationSupported RPC.
-func (c *Client) IsConcurrentSessionConfigurationSupported(ctx context.Context, arg0 int64, arg1 int64) (bool, error) {
+func (c *Client) IsConcurrentSessionConfigurationSupported(ctx context.Context, arg0 int64) (bool, error) {
 	resp, err := c.svc.IsConcurrentSessionConfigurationSupported(ctx, &pb.IsConcurrentSessionConfigurationSupportedRequest{
 		Arg0: arg0,
-		Arg1: arg1,
 	})
 	if err != nil {
 		return false, err

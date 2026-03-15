@@ -74,6 +74,10 @@ func (m *companionDeviceManager) Associate(arg0 *jni.Object, arg1 *jni.Object, a
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerAssociate == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.associate is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -93,6 +97,10 @@ func (m *companionDeviceManager) AttachSystemDataTransport(arg0 int32, arg1 *jni
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerAttachSystemDataTransport == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.attachSystemDataTransport is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -111,6 +119,10 @@ func (m *companionDeviceManager) BuildAssociationCancellationIntent() (*jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerBuildAssociationCancellationIntent == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.buildAssociationCancellationIntent is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -132,6 +144,10 @@ func (m *companionDeviceManager) BuildPermissionTransferUserConsentIntent(arg0 i
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerBuildPermissionTransferUserConsentIntent == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.buildPermissionTransferUserConsentIntent is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -155,6 +171,10 @@ func (m *companionDeviceManager) DetachSystemDataTransport(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerDetachSystemDataTransport == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.detachSystemDataTransport is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -173,6 +193,10 @@ func (m *companionDeviceManager) DisableSystemDataSyncForTypes(arg0 int32, arg1 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerDisableSystemDataSyncForTypes == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.disableSystemDataSyncForTypes is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -193,6 +217,10 @@ func (m *companionDeviceManager) Disassociate1(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerDisassociate1 == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.disassociate is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -211,6 +239,10 @@ func (m *companionDeviceManager) Disassociate1_1(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerDisassociate1_1 == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.disassociate is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -235,6 +267,10 @@ func (m *companionDeviceManager) EnableSystemDataSyncForTypes(arg0 int32, arg1 i
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerEnableSystemDataSyncForTypes == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.enableSystemDataSyncForTypes is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -253,6 +289,10 @@ func (m *companionDeviceManager) GetAssociations() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerGetAssociations == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.getAssociations is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -275,6 +315,10 @@ func (m *companionDeviceManager) GetMyAssociations() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerGetMyAssociations == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.getMyAssociations is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midcompanionDeviceManagerGetMyAssociations,
@@ -295,6 +339,10 @@ func (m *companionDeviceManager) HasNotificationAccess(arg0 *jni.Object) (bool, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerHasNotificationAccess == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.hasNotificationAccess is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -319,6 +367,10 @@ func (m *companionDeviceManager) IsPermissionTransferUserConsented(arg0 int32) (
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerIsPermissionTransferUserConsented == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.isPermissionTransferUserConsented is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -341,6 +393,10 @@ func (m *companionDeviceManager) RemoveBond(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerRemoveBond == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.removeBond is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -365,6 +421,10 @@ func (m *companionDeviceManager) RequestNotificationAccess(arg0 *jni.Object) err
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerRequestNotificationAccess == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.requestNotificationAccess is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -383,6 +443,10 @@ func (m *companionDeviceManager) SetDeviceId(arg0 int32, arg1 *jni.Object) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerSetDeviceId == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.setDeviceId is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -403,6 +467,10 @@ func (m *companionDeviceManager) StartObservingDevicePresence1(arg0 *jni.Object)
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerStartObservingDevicePresence1 == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.startObservingDevicePresence is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -422,6 +490,10 @@ func (m *companionDeviceManager) StartObservingDevicePresence1_1(arg0 string) er
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerStartObservingDevicePresence1_1 == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.startObservingDevicePresence is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -437,7 +509,7 @@ func (m *companionDeviceManager) StartObservingDevicePresence1_1(arg0 string) er
 }
 
 // StartSystemDataTransfer calls android.companion.CompanionDeviceManager.startSystemDataTransfer.
-func (m *companionDeviceManager) StartSystemDataTransfer(arg0 int32, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *companionDeviceManager) StartSystemDataTransfer(arg0 int32, arg1 *jni.Object, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -445,10 +517,14 @@ func (m *companionDeviceManager) StartSystemDataTransfer(arg0 int32, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midcompanionDeviceManagerStartSystemDataTransfer == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.startSystemDataTransfer is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midcompanionDeviceManagerStartSystemDataTransfer, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midcompanionDeviceManagerStartSystemDataTransfer, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -463,6 +539,10 @@ func (m *companionDeviceManager) StopObservingDevicePresence1(arg0 *jni.Object) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerStopObservingDevicePresence1 == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.stopObservingDevicePresence is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -482,6 +562,10 @@ func (m *companionDeviceManager) StopObservingDevicePresence1_1(arg0 string) err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcompanionDeviceManagerStopObservingDevicePresence1_1 == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.stopObservingDevicePresence is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {

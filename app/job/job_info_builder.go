@@ -32,6 +32,10 @@ func (m *jobInfoBuilder) AddDebugTag(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderAddDebugTag == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.addDebugTag is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -58,6 +62,10 @@ func (m *jobInfoBuilder) AddTriggerContentUri(arg0 *jni.Object) (*jni.Object, er
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderAddTriggerContentUri == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.addTriggerContentUri is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -80,6 +88,10 @@ func (m *jobInfoBuilder) Build() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderBuild == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.build is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midjobInfoBuilderBuild,
@@ -100,6 +112,10 @@ func (m *jobInfoBuilder) RemoveDebugTag(arg0 string) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderRemoveDebugTag == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.removeDebugTag is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -127,6 +143,10 @@ func (m *jobInfoBuilder) SetBackoffCriteria(arg0 int64, arg1 int32) (*jni.Object
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetBackoffCriteria == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setBackoffCriteria is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -148,6 +168,10 @@ func (m *jobInfoBuilder) SetClipData(arg0 *jni.Object, arg1 int32) (*jni.Object,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetClipData == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setClipData is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -171,6 +195,10 @@ func (m *jobInfoBuilder) SetEstimatedNetworkBytes(arg0 int64, arg1 int64) (*jni.
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetEstimatedNetworkBytes == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setEstimatedNetworkBytes is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -192,6 +220,10 @@ func (m *jobInfoBuilder) SetExpedited(arg0 bool) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetExpedited == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setExpedited is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -219,6 +251,10 @@ func (m *jobInfoBuilder) SetExtras(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetExtras == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setExtras is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -240,6 +276,10 @@ func (m *jobInfoBuilder) SetImportantWhileForeground(arg0 bool) (*jni.Object, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetImportantWhileForeground == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setImportantWhileForeground is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -267,6 +307,10 @@ func (m *jobInfoBuilder) SetMinimumLatency(arg0 int64) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetMinimumLatency == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setMinimumLatency is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -288,6 +332,10 @@ func (m *jobInfoBuilder) SetMinimumNetworkChunkBytes(arg0 int64) (*jni.Object, e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetMinimumNetworkChunkBytes == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setMinimumNetworkChunkBytes is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -311,6 +359,10 @@ func (m *jobInfoBuilder) SetOverrideDeadline(arg0 int64) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetOverrideDeadline == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setOverrideDeadline is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -332,6 +384,10 @@ func (m *jobInfoBuilder) SetPeriodic1(arg0 int64) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetPeriodic1 == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setPeriodic is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -355,6 +411,10 @@ func (m *jobInfoBuilder) SetPeriodic2_1(arg0 int64, arg1 int64) (*jni.Object, er
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetPeriodic2_1 == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setPeriodic is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -376,6 +436,10 @@ func (m *jobInfoBuilder) SetPersisted(arg0 bool) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetPersisted == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setPersisted is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -403,6 +467,10 @@ func (m *jobInfoBuilder) SetPrefetch(arg0 bool) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetPrefetch == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setPrefetch is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -429,6 +497,10 @@ func (m *jobInfoBuilder) SetPriority(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetPriority == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setPriority is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -450,6 +522,10 @@ func (m *jobInfoBuilder) SetRequiredNetwork(arg0 *jni.Object) (*jni.Object, erro
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetRequiredNetwork == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setRequiredNetwork is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -473,6 +549,10 @@ func (m *jobInfoBuilder) SetRequiredNetworkType(arg0 int32) (*jni.Object, error)
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetRequiredNetworkType == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setRequiredNetworkType is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -494,6 +574,10 @@ func (m *jobInfoBuilder) SetRequiresBatteryNotLow(arg0 bool) (*jni.Object, error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetRequiresBatteryNotLow == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setRequiresBatteryNotLow is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -521,6 +605,10 @@ func (m *jobInfoBuilder) SetRequiresCharging(arg0 bool) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetRequiresCharging == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setRequiresCharging is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -546,6 +634,10 @@ func (m *jobInfoBuilder) SetRequiresDeviceIdle(arg0 bool) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetRequiresDeviceIdle == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setRequiresDeviceIdle is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -573,6 +665,10 @@ func (m *jobInfoBuilder) SetRequiresStorageNotLow(arg0 bool) (*jni.Object, error
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetRequiresStorageNotLow == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setRequiresStorageNotLow is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -598,6 +694,10 @@ func (m *jobInfoBuilder) SetTraceTag(arg0 string) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetTraceTag == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setTraceTag is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -625,6 +725,10 @@ func (m *jobInfoBuilder) SetTransientExtras(arg0 *jni.Object) (*jni.Object, erro
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetTransientExtras == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setTransientExtras is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -646,6 +750,10 @@ func (m *jobInfoBuilder) SetTriggerContentMaxDelay(arg0 int64) (*jni.Object, err
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetTriggerContentMaxDelay == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setTriggerContentMaxDelay is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -669,6 +777,10 @@ func (m *jobInfoBuilder) SetTriggerContentUpdateDelay(arg0 int64) (*jni.Object, 
 			callErr = err
 			return err
 		}
+		if midjobInfoBuilderSetTriggerContentUpdateDelay == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setTriggerContentUpdateDelay is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -690,6 +802,10 @@ func (m *jobInfoBuilder) SetUserInitiated(arg0 bool) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoBuilderSetUserInitiated == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo$Builder.setUserInitiated is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {

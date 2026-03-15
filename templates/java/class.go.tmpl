@@ -151,6 +151,10 @@ func (m *{{$.GoType}}) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} {
 			{{if .HasError}}callErr = err{{end}}
 			return err
 		}
+		if mid{{$.GoType}}{{.GoName}} == nil {
+			{{if .HasError}}callErr = fmt.Errorf("{{$.JavaClass}}.{{.JavaMethod}} is not available on this device")
+			return callErr{{else}}return nil{{end}}
+		}
 {{range .Params}}		{{paramConversionCode .}}
 {{end}}
 {{- if eq .ReturnKind "void"}}		{{if .HasError}}callErr = {{end}}env.Call{{if .Static}}Static{{end}}VoidMethod(

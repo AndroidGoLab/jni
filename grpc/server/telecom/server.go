@@ -68,7 +68,7 @@ func (s *TelecomManagerServer) AddCall(_ context.Context, req *pb.AddCallRequest
 	}
 	defer mgr.Close()
 
-	if err := mgr.AddCall(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3()), s.Handles.Get(req.GetArg4()), s.Handles.Get(req.GetArg5())); err != nil {
+	if err := mgr.AddCall(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3()), s.Handles.Get(req.GetArg4())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.AddCallResponse{}, nil

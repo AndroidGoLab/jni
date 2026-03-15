@@ -318,6 +318,12 @@ var (
 	middevicePolicyManagerIsMtePolicyEnforced                            jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -344,1477 +350,2362 @@ func doInit(env *jni.Env) error {
 
 	middevicePolicyManagerAcknowledgeDeviceCompliant, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "acknowledgeDeviceCompliant", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.acknowledgeDeviceCompliant: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.acknowledgeDeviceCompliant")
 	}
 
 	middevicePolicyManagerAddCrossProfileIntentFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "addCrossProfileIntentFilter", "(Landroid/content/ComponentName;Landroid/content/IntentFilter;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.addCrossProfileIntentFilter: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.addCrossProfileIntentFilter")
 	}
 
 	middevicePolicyManagerAddCrossProfileWidgetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "addCrossProfileWidgetProvider", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.addCrossProfileWidgetProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.addCrossProfileWidgetProvider")
 	}
 
 	middevicePolicyManagerAddOverrideApn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "addOverrideApn", "(Landroid/content/ComponentName;Landroid/telephony/data/ApnSetting;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.addOverrideApn: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.addOverrideApn")
 	}
 
 	middevicePolicyManagerAddPersistentPreferredActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "addPersistentPreferredActivity", "(Landroid/content/ComponentName;Landroid/content/IntentFilter;Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.addPersistentPreferredActivity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.addPersistentPreferredActivity")
 	}
 
 	middevicePolicyManagerAddUserRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "addUserRestriction", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.addUserRestriction: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.addUserRestriction")
 	}
 
 	middevicePolicyManagerAddUserRestrictionGlobally, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "addUserRestrictionGlobally", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.addUserRestrictionGlobally: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.addUserRestrictionGlobally")
 	}
 
 	middevicePolicyManagerBindDeviceAdminServiceAsUser5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "bindDeviceAdminServiceAsUser", "(Landroid/content/ComponentName;Landroid/content/Intent;Landroid/content/ServiceConnection;Landroid/content/Context$BindServiceFlags;Landroid/os/UserHandle;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.bindDeviceAdminServiceAsUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.bindDeviceAdminServiceAsUser")
 	}
 
 	middevicePolicyManagerBindDeviceAdminServiceAsUser5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "bindDeviceAdminServiceAsUser", "(Landroid/content/ComponentName;Landroid/content/Intent;Landroid/content/ServiceConnection;ILandroid/os/UserHandle;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.bindDeviceAdminServiceAsUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.bindDeviceAdminServiceAsUser")
 	}
 
 	middevicePolicyManagerCanAdminGrantSensorsPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "canAdminGrantSensorsPermissions", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.canAdminGrantSensorsPermissions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.canAdminGrantSensorsPermissions")
 	}
 
 	middevicePolicyManagerCanUsbDataSignalingBeDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "canUsbDataSignalingBeDisabled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.canUsbDataSignalingBeDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.canUsbDataSignalingBeDisabled")
 	}
 
 	middevicePolicyManagerClearApplicationUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "clearApplicationUserData", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/app/admin/DevicePolicyManager$OnClearApplicationUserDataListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.clearApplicationUserData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.clearApplicationUserData")
 	}
 
 	middevicePolicyManagerClearCrossProfileIntentFilters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "clearCrossProfileIntentFilters", "(Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.clearCrossProfileIntentFilters: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.clearCrossProfileIntentFilters")
 	}
 
 	middevicePolicyManagerClearDeviceOwnerApp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "clearDeviceOwnerApp", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.clearDeviceOwnerApp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.clearDeviceOwnerApp")
 	}
 
 	middevicePolicyManagerClearPackagePersistentPreferredActivities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "clearPackagePersistentPreferredActivities", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.clearPackagePersistentPreferredActivities: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.clearPackagePersistentPreferredActivities")
 	}
 
 	middevicePolicyManagerClearProfileOwner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "clearProfileOwner", "(Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.clearProfileOwner: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.clearProfileOwner")
 	}
 
 	middevicePolicyManagerClearResetPasswordToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "clearResetPasswordToken", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.clearResetPasswordToken: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.clearResetPasswordToken")
 	}
 
 	middevicePolicyManagerClearUserRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "clearUserRestriction", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.clearUserRestriction: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.clearUserRestriction")
 	}
 
 	middevicePolicyManagerCreateAdminSupportIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "createAdminSupportIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.createAdminSupportIntent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.createAdminSupportIntent")
 	}
 
 	middevicePolicyManagerCreateAndManageUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "createAndManageUser", "(Landroid/content/ComponentName;Ljava/lang/String;Landroid/content/ComponentName;Landroid/os/PersistableBundle;I)Landroid/os/UserHandle;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.createAndManageUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.createAndManageUser")
 	}
 
 	middevicePolicyManagerEnableSystemApp2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "enableSystemApp", "(Landroid/content/ComponentName;Landroid/content/Intent;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.enableSystemApp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.enableSystemApp")
 	}
 
 	middevicePolicyManagerEnableSystemApp2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "enableSystemApp", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.enableSystemApp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.enableSystemApp")
 	}
 
 	middevicePolicyManagerGenerateKeyPair, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "generateKeyPair", "(Landroid/content/ComponentName;Ljava/lang/String;Landroid/security/keystore/KeyGenParameterSpec;I)Landroid/security/AttestedKeyPair;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.generateKeyPair: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.generateKeyPair")
 	}
 
 	middevicePolicyManagerGetAccountTypesWithManagementDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAccountTypesWithManagementDisabled", "()[Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAccountTypesWithManagementDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAccountTypesWithManagementDisabled")
 	}
 
 	middevicePolicyManagerGetActiveAdmins, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getActiveAdmins", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getActiveAdmins: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getActiveAdmins")
 	}
 
 	middevicePolicyManagerGetAffiliationIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAffiliationIds", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAffiliationIds: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAffiliationIds")
 	}
 
 	middevicePolicyManagerGetAlwaysOnVpnLockdownWhitelist, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAlwaysOnVpnLockdownWhitelist", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAlwaysOnVpnLockdownWhitelist: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAlwaysOnVpnLockdownWhitelist")
 	}
 
 	middevicePolicyManagerGetAlwaysOnVpnPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAlwaysOnVpnPackage", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAlwaysOnVpnPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAlwaysOnVpnPackage")
 	}
 
 	middevicePolicyManagerGetAppFunctionsPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAppFunctionsPolicy", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAppFunctionsPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAppFunctionsPolicy")
 	}
 
 	middevicePolicyManagerGetApplicationRestrictions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getApplicationRestrictions", "(Landroid/content/ComponentName;Ljava/lang/String;)Landroid/os/Bundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getApplicationRestrictions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getApplicationRestrictions")
 	}
 
 	middevicePolicyManagerGetApplicationRestrictionsManagingPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getApplicationRestrictionsManagingPackage", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getApplicationRestrictionsManagingPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getApplicationRestrictionsManagingPackage")
 	}
 
 	middevicePolicyManagerGetAutoTimeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAutoTimeEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAutoTimeEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAutoTimeEnabled")
 	}
 
 	middevicePolicyManagerGetAutoTimePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAutoTimePolicy", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAutoTimePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAutoTimePolicy")
 	}
 
 	middevicePolicyManagerGetAutoTimeRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAutoTimeRequired", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAutoTimeRequired: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAutoTimeRequired")
 	}
 
 	middevicePolicyManagerGetAutoTimeZoneEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAutoTimeZoneEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAutoTimeZoneEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAutoTimeZoneEnabled")
 	}
 
 	middevicePolicyManagerGetAutoTimeZonePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAutoTimeZonePolicy", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAutoTimeZonePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getAutoTimeZonePolicy")
 	}
 
 	middevicePolicyManagerGetBindDeviceAdminTargetUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getBindDeviceAdminTargetUsers", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getBindDeviceAdminTargetUsers: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getBindDeviceAdminTargetUsers")
 	}
 
 	middevicePolicyManagerGetBluetoothContactSharingDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getBluetoothContactSharingDisabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getBluetoothContactSharingDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getBluetoothContactSharingDisabled")
 	}
 
 	middevicePolicyManagerGetCameraDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCameraDisabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCameraDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCameraDisabled")
 	}
 
 	middevicePolicyManagerGetCertInstallerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCertInstallerPackage", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCertInstallerPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCertInstallerPackage")
 	}
 
 	middevicePolicyManagerGetContentProtectionPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getContentProtectionPolicy", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getContentProtectionPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getContentProtectionPolicy")
 	}
 
 	middevicePolicyManagerGetCredentialManagerPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCredentialManagerPolicy", "()Landroid/app/admin/PackagePolicy;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCredentialManagerPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCredentialManagerPolicy")
 	}
 
 	middevicePolicyManagerGetCrossProfileCalendarPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileCalendarPackages", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfileCalendarPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCrossProfileCalendarPackages")
 	}
 
 	middevicePolicyManagerGetCrossProfileCallerIdDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileCallerIdDisabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfileCallerIdDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCrossProfileCallerIdDisabled")
 	}
 
 	middevicePolicyManagerGetCrossProfileContactsSearchDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileContactsSearchDisabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfileContactsSearchDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCrossProfileContactsSearchDisabled")
 	}
 
 	middevicePolicyManagerGetCrossProfilePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfilePackages", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfilePackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCrossProfilePackages")
 	}
 
 	middevicePolicyManagerGetCrossProfileWidgetProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileWidgetProviders", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfileWidgetProviders: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCrossProfileWidgetProviders")
 	}
 
 	middevicePolicyManagerGetCurrentFailedPasswordAttempts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCurrentFailedPasswordAttempts", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCurrentFailedPasswordAttempts: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getCurrentFailedPasswordAttempts")
 	}
 
 	middevicePolicyManagerGetDelegatePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDelegatePackages", "(Landroid/content/ComponentName;Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getDelegatePackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getDelegatePackages")
 	}
 
 	middevicePolicyManagerGetDelegatedScopes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDelegatedScopes", "(Landroid/content/ComponentName;Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getDelegatedScopes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getDelegatedScopes")
 	}
 
 	middevicePolicyManagerGetDeviceOwnerLockScreenInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDeviceOwnerLockScreenInfo", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getDeviceOwnerLockScreenInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getDeviceOwnerLockScreenInfo")
 	}
 
 	middevicePolicyManagerGetDevicePolicyManagementRoleHolderPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDevicePolicyManagementRoleHolderPackage", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getDevicePolicyManagementRoleHolderPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getDevicePolicyManagementRoleHolderPackage")
 	}
 
 	middevicePolicyManagerGetEndUserSessionMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getEndUserSessionMessage", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getEndUserSessionMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getEndUserSessionMessage")
 	}
 
 	middevicePolicyManagerGetEnrollmentSpecificId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getEnrollmentSpecificId", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getEnrollmentSpecificId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getEnrollmentSpecificId")
 	}
 
 	middevicePolicyManagerGetFactoryResetProtectionPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getFactoryResetProtectionPolicy", "(Landroid/content/ComponentName;)Landroid/app/admin/FactoryResetProtectionPolicy;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getFactoryResetProtectionPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getFactoryResetProtectionPolicy")
 	}
 
 	middevicePolicyManagerGetGlobalPrivateDnsHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getGlobalPrivateDnsHost", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getGlobalPrivateDnsHost: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getGlobalPrivateDnsHost")
 	}
 
 	middevicePolicyManagerGetGlobalPrivateDnsMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getGlobalPrivateDnsMode", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getGlobalPrivateDnsMode: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getGlobalPrivateDnsMode")
 	}
 
 	middevicePolicyManagerGetInstalledCaCerts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getInstalledCaCerts", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getInstalledCaCerts: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getInstalledCaCerts")
 	}
 
 	middevicePolicyManagerGetKeepUninstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getKeepUninstalledPackages", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getKeepUninstalledPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getKeepUninstalledPackages")
 	}
 
 	middevicePolicyManagerGetKeyguardDisabledFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getKeyguardDisabledFeatures", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getKeyguardDisabledFeatures: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getKeyguardDisabledFeatures")
 	}
 
 	middevicePolicyManagerGetLockTaskFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getLockTaskFeatures", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getLockTaskFeatures: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getLockTaskFeatures")
 	}
 
 	middevicePolicyManagerGetLockTaskPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getLockTaskPackages", "(Landroid/content/ComponentName;)[Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getLockTaskPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getLockTaskPackages")
 	}
 
 	middevicePolicyManagerGetLongSupportMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getLongSupportMessage", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getLongSupportMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getLongSupportMessage")
 	}
 
 	middevicePolicyManagerGetManagedProfileCallerIdAccessPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getManagedProfileCallerIdAccessPolicy", "()Landroid/app/admin/PackagePolicy;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getManagedProfileCallerIdAccessPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getManagedProfileCallerIdAccessPolicy")
 	}
 
 	middevicePolicyManagerGetManagedProfileContactsAccessPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getManagedProfileContactsAccessPolicy", "()Landroid/app/admin/PackagePolicy;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getManagedProfileContactsAccessPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getManagedProfileContactsAccessPolicy")
 	}
 
 	middevicePolicyManagerGetManagedProfileMaximumTimeOff, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getManagedProfileMaximumTimeOff", "(Landroid/content/ComponentName;)J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getManagedProfileMaximumTimeOff: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getManagedProfileMaximumTimeOff")
 	}
 
 	middevicePolicyManagerGetManagedSubscriptionsPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getManagedSubscriptionsPolicy", "()Landroid/app/admin/ManagedSubscriptionsPolicy;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getManagedSubscriptionsPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getManagedSubscriptionsPolicy")
 	}
 
 	middevicePolicyManagerGetMaximumFailedPasswordsForWipe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getMaximumFailedPasswordsForWipe", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getMaximumFailedPasswordsForWipe: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getMaximumFailedPasswordsForWipe")
 	}
 
 	middevicePolicyManagerGetMaximumTimeToLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getMaximumTimeToLock", "(Landroid/content/ComponentName;)J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getMaximumTimeToLock: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getMaximumTimeToLock")
 	}
 
 	middevicePolicyManagerGetMeteredDataDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getMeteredDataDisabledPackages", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getMeteredDataDisabledPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getMeteredDataDisabledPackages")
 	}
 
 	middevicePolicyManagerGetMinimumRequiredWifiSecurityLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getMinimumRequiredWifiSecurityLevel", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getMinimumRequiredWifiSecurityLevel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getMinimumRequiredWifiSecurityLevel")
 	}
 
 	middevicePolicyManagerGetMtePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getMtePolicy", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getMtePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getMtePolicy")
 	}
 
 	middevicePolicyManagerGetNearbyAppStreamingPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getNearbyAppStreamingPolicy", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getNearbyAppStreamingPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getNearbyAppStreamingPolicy")
 	}
 
 	middevicePolicyManagerGetNearbyNotificationStreamingPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getNearbyNotificationStreamingPolicy", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getNearbyNotificationStreamingPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getNearbyNotificationStreamingPolicy")
 	}
 
 	middevicePolicyManagerGetOrganizationColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getOrganizationColor", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getOrganizationColor: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getOrganizationColor")
 	}
 
 	middevicePolicyManagerGetOrganizationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getOrganizationName", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getOrganizationName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getOrganizationName")
 	}
 
 	middevicePolicyManagerGetOverrideApns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getOverrideApns", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getOverrideApns: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getOverrideApns")
 	}
 
 	middevicePolicyManagerGetParentProfileInstance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getParentProfileInstance", "(Landroid/content/ComponentName;)Landroid/app/admin/DevicePolicyManager;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getParentProfileInstance: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getParentProfileInstance")
 	}
 
 	middevicePolicyManagerGetPasswordComplexity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordComplexity", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordComplexity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordComplexity")
 	}
 
 	middevicePolicyManagerGetPasswordExpiration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordExpiration", "(Landroid/content/ComponentName;)J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordExpiration: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordExpiration")
 	}
 
 	middevicePolicyManagerGetPasswordExpirationTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordExpirationTimeout", "(Landroid/content/ComponentName;)J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordExpirationTimeout: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordExpirationTimeout")
 	}
 
 	middevicePolicyManagerGetPasswordHistoryLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordHistoryLength", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordHistoryLength: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordHistoryLength")
 	}
 
 	middevicePolicyManagerGetPasswordMaximumLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMaximumLength", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMaximumLength: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMaximumLength")
 	}
 
 	middevicePolicyManagerGetPasswordMinimumLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMinimumLength", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMinimumLength: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMinimumLength")
 	}
 
 	middevicePolicyManagerGetPasswordMinimumLetters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMinimumLetters", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMinimumLetters: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMinimumLetters")
 	}
 
 	middevicePolicyManagerGetPasswordMinimumLowerCase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMinimumLowerCase", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMinimumLowerCase: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMinimumLowerCase")
 	}
 
 	middevicePolicyManagerGetPasswordMinimumNonLetter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMinimumNonLetter", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMinimumNonLetter: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMinimumNonLetter")
 	}
 
 	middevicePolicyManagerGetPasswordMinimumNumeric, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMinimumNumeric", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMinimumNumeric: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMinimumNumeric")
 	}
 
 	middevicePolicyManagerGetPasswordMinimumSymbols, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMinimumSymbols", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMinimumSymbols: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMinimumSymbols")
 	}
 
 	middevicePolicyManagerGetPasswordMinimumUpperCase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordMinimumUpperCase", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordMinimumUpperCase: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordMinimumUpperCase")
 	}
 
 	middevicePolicyManagerGetPasswordQuality, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPasswordQuality", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPasswordQuality: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPasswordQuality")
 	}
 
 	middevicePolicyManagerGetPendingSystemUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPendingSystemUpdate", "(Landroid/content/ComponentName;)Landroid/app/admin/SystemUpdateInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPendingSystemUpdate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPendingSystemUpdate")
 	}
 
 	middevicePolicyManagerGetPermissionGrantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermissionGrantState", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermissionGrantState: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPermissionGrantState")
 	}
 
 	middevicePolicyManagerGetPermissionPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermissionPolicy", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermissionPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPermissionPolicy")
 	}
 
 	middevicePolicyManagerGetPermittedAccessibilityServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedAccessibilityServices", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermittedAccessibilityServices: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPermittedAccessibilityServices")
 	}
 
 	middevicePolicyManagerGetPermittedCrossProfileNotificationListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedCrossProfileNotificationListeners", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermittedCrossProfileNotificationListeners: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPermittedCrossProfileNotificationListeners")
 	}
 
 	middevicePolicyManagerGetPermittedInputMethods, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedInputMethods", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermittedInputMethods: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPermittedInputMethods")
 	}
 
 	middevicePolicyManagerGetPersonalAppsSuspendedReasons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPersonalAppsSuspendedReasons", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPersonalAppsSuspendedReasons: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPersonalAppsSuspendedReasons")
 	}
 
 	middevicePolicyManagerGetPreferentialNetworkServiceConfigs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPreferentialNetworkServiceConfigs", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPreferentialNetworkServiceConfigs: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getPreferentialNetworkServiceConfigs")
 	}
 
 	middevicePolicyManagerGetRequiredPasswordComplexity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getRequiredPasswordComplexity", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getRequiredPasswordComplexity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getRequiredPasswordComplexity")
 	}
 
 	middevicePolicyManagerGetRequiredStrongAuthTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getRequiredStrongAuthTimeout", "(Landroid/content/ComponentName;)J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getRequiredStrongAuthTimeout: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getRequiredStrongAuthTimeout")
 	}
 
 	middevicePolicyManagerGetResources, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getResources", "()Landroid/app/admin/DevicePolicyResourcesManager;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getResources: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getResources")
 	}
 
 	middevicePolicyManagerGetScreenCaptureDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getScreenCaptureDisabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getScreenCaptureDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getScreenCaptureDisabled")
 	}
 
 	middevicePolicyManagerGetSecondaryUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getSecondaryUsers", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getSecondaryUsers: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getSecondaryUsers")
 	}
 
 	middevicePolicyManagerGetShortSupportMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getShortSupportMessage", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getShortSupportMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getShortSupportMessage")
 	}
 
 	middevicePolicyManagerGetStartUserSessionMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getStartUserSessionMessage", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getStartUserSessionMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getStartUserSessionMessage")
 	}
 
 	middevicePolicyManagerGetStorageEncryption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getStorageEncryption", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getStorageEncryption: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getStorageEncryption")
 	}
 
 	middevicePolicyManagerGetStorageEncryptionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getStorageEncryptionStatus", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getStorageEncryptionStatus: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getStorageEncryptionStatus")
 	}
 
 	middevicePolicyManagerGetSubscriptionIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getSubscriptionIds", "()Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getSubscriptionIds: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getSubscriptionIds")
 	}
 
 	middevicePolicyManagerGetSystemUpdatePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getSystemUpdatePolicy", "()Landroid/app/admin/SystemUpdatePolicy;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getSystemUpdatePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getSystemUpdatePolicy")
 	}
 
 	middevicePolicyManagerGetTransferOwnershipBundle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getTransferOwnershipBundle", "()Landroid/os/PersistableBundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getTransferOwnershipBundle: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getTransferOwnershipBundle")
 	}
 
 	middevicePolicyManagerGetTrustAgentConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getTrustAgentConfiguration", "(Landroid/content/ComponentName;Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getTrustAgentConfiguration: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getTrustAgentConfiguration")
 	}
 
 	middevicePolicyManagerGetUserControlDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getUserControlDisabledPackages", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getUserControlDisabledPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getUserControlDisabledPackages")
 	}
 
 	middevicePolicyManagerGetUserRestrictions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getUserRestrictions", "(Landroid/content/ComponentName;)Landroid/os/Bundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getUserRestrictions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getUserRestrictions")
 	}
 
 	middevicePolicyManagerGetUserRestrictionsGlobally, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getUserRestrictionsGlobally", "()Landroid/os/Bundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getUserRestrictionsGlobally: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getUserRestrictionsGlobally")
 	}
 
 	middevicePolicyManagerGetWifiMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getWifiMacAddress", "(Landroid/content/ComponentName;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getWifiMacAddress: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getWifiMacAddress")
 	}
 
 	middevicePolicyManagerGetWifiSsidPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getWifiSsidPolicy", "()Landroid/app/admin/WifiSsidPolicy;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getWifiSsidPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.getWifiSsidPolicy")
 	}
 
 	middevicePolicyManagerGrantKeyPairToApp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "grantKeyPairToApp", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.grantKeyPairToApp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.grantKeyPairToApp")
 	}
 
 	middevicePolicyManagerGrantKeyPairToWifiAuth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "grantKeyPairToWifiAuth", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.grantKeyPairToWifiAuth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.grantKeyPairToWifiAuth")
 	}
 
 	middevicePolicyManagerHasCaCertInstalled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "hasCaCertInstalled", "(Landroid/content/ComponentName;[B)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.hasCaCertInstalled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.hasCaCertInstalled")
 	}
 
 	middevicePolicyManagerHasGrantedPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "hasGrantedPolicy", "(Landroid/content/ComponentName;I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.hasGrantedPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.hasGrantedPolicy")
 	}
 
 	middevicePolicyManagerHasKeyPair, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "hasKeyPair", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.hasKeyPair: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.hasKeyPair")
 	}
 
 	middevicePolicyManagerHasLockdownAdminConfiguredNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "hasLockdownAdminConfiguredNetworks", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.hasLockdownAdminConfiguredNetworks: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.hasLockdownAdminConfiguredNetworks")
 	}
 
 	middevicePolicyManagerInstallCaCert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "installCaCert", "(Landroid/content/ComponentName;[B)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.installCaCert: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.installCaCert")
 	}
 
 	middevicePolicyManagerInstallExistingPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "installExistingPackage", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.installExistingPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.installExistingPackage")
 	}
 
 	middevicePolicyManagerInstallKeyPair4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "installKeyPair", "(Landroid/content/ComponentName;Ljava/security/PrivateKey;Ljava/security/cert/Certificate;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.installKeyPair: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.installKeyPair")
 	}
 
 	middevicePolicyManagerInstallKeyPair5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "installKeyPair", "(Landroid/content/ComponentName;Ljava/security/PrivateKey;[Ljava/security/cert/Certificate;Ljava/lang/String;Z)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.installKeyPair: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.installKeyPair")
 	}
 
 	middevicePolicyManagerInstallKeyPair5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "installKeyPair", "(Landroid/content/ComponentName;Ljava/security/PrivateKey;[Ljava/security/cert/Certificate;Ljava/lang/String;I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.installKeyPair: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.installKeyPair")
 	}
 
 	middevicePolicyManagerInstallSystemUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "installSystemUpdate", "(Landroid/content/ComponentName;Landroid/net/Uri;Ljava/util/concurrent/Executor;Landroid/app/admin/DevicePolicyManager$InstallSystemUpdateCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.installSystemUpdate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.installSystemUpdate")
 	}
 
 	middevicePolicyManagerIsActivePasswordSufficient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isActivePasswordSufficient", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isActivePasswordSufficient: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isActivePasswordSufficient")
 	}
 
 	middevicePolicyManagerIsActivePasswordSufficientForDeviceRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isActivePasswordSufficientForDeviceRequirement", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isActivePasswordSufficientForDeviceRequirement: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isActivePasswordSufficientForDeviceRequirement")
 	}
 
 	middevicePolicyManagerIsAdminActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isAdminActive", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isAdminActive: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isAdminActive")
 	}
 
 	middevicePolicyManagerIsAffiliatedUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isAffiliatedUser", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isAffiliatedUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isAffiliatedUser")
 	}
 
 	middevicePolicyManagerIsAlwaysOnVpnLockdownEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isAlwaysOnVpnLockdownEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isAlwaysOnVpnLockdownEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isAlwaysOnVpnLockdownEnabled")
 	}
 
 	middevicePolicyManagerIsApplicationHidden, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isApplicationHidden", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isApplicationHidden: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isApplicationHidden")
 	}
 
 	middevicePolicyManagerIsBackupServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isBackupServiceEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isBackupServiceEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isBackupServiceEnabled")
 	}
 
 	middevicePolicyManagerIsCallerApplicationRestrictionsManagingPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isCallerApplicationRestrictionsManagingPackage", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isCallerApplicationRestrictionsManagingPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isCallerApplicationRestrictionsManagingPackage")
 	}
 
 	middevicePolicyManagerIsCommonCriteriaModeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isCommonCriteriaModeEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isCommonCriteriaModeEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isCommonCriteriaModeEnabled")
 	}
 
 	middevicePolicyManagerIsComplianceAcknowledgementRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isComplianceAcknowledgementRequired", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isComplianceAcknowledgementRequired: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isComplianceAcknowledgementRequired")
 	}
 
 	middevicePolicyManagerIsDeviceFinanced, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isDeviceFinanced", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isDeviceFinanced: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isDeviceFinanced")
 	}
 
 	middevicePolicyManagerIsDeviceIdAttestationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isDeviceIdAttestationSupported", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isDeviceIdAttestationSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isDeviceIdAttestationSupported")
 	}
 
 	middevicePolicyManagerIsDeviceOwnerApp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isDeviceOwnerApp", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isDeviceOwnerApp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isDeviceOwnerApp")
 	}
 
 	middevicePolicyManagerIsEphemeralUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isEphemeralUser", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isEphemeralUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isEphemeralUser")
 	}
 
 	middevicePolicyManagerIsKeyPairGrantedToWifiAuth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isKeyPairGrantedToWifiAuth", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isKeyPairGrantedToWifiAuth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isKeyPairGrantedToWifiAuth")
 	}
 
 	middevicePolicyManagerIsLockTaskPermitted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isLockTaskPermitted", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isLockTaskPermitted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isLockTaskPermitted")
 	}
 
 	middevicePolicyManagerIsLogoutEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isLogoutEnabled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isLogoutEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isLogoutEnabled")
 	}
 
 	middevicePolicyManagerIsManagedProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isManagedProfile", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isManagedProfile: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isManagedProfile")
 	}
 
 	middevicePolicyManagerIsMasterVolumeMuted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isMasterVolumeMuted", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isMasterVolumeMuted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isMasterVolumeMuted")
 	}
 
 	middevicePolicyManagerIsNetworkLoggingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isNetworkLoggingEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isNetworkLoggingEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isNetworkLoggingEnabled")
 	}
 
 	middevicePolicyManagerIsOrganizationOwnedDeviceWithManagedProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isOrganizationOwnedDeviceWithManagedProfile", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile")
 	}
 
 	middevicePolicyManagerIsOverrideApnEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isOverrideApnEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isOverrideApnEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isOverrideApnEnabled")
 	}
 
 	middevicePolicyManagerIsPackageSuspended, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isPackageSuspended", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isPackageSuspended: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isPackageSuspended")
 	}
 
 	middevicePolicyManagerIsPreferentialNetworkServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isPreferentialNetworkServiceEnabled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isPreferentialNetworkServiceEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isPreferentialNetworkServiceEnabled")
 	}
 
 	middevicePolicyManagerIsProfileOwnerApp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isProfileOwnerApp", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isProfileOwnerApp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isProfileOwnerApp")
 	}
 
 	middevicePolicyManagerIsProvisioningAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isProvisioningAllowed", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isProvisioningAllowed: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isProvisioningAllowed")
 	}
 
 	middevicePolicyManagerIsResetPasswordTokenActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isResetPasswordTokenActive", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isResetPasswordTokenActive: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isResetPasswordTokenActive")
 	}
 
 	middevicePolicyManagerIsSafeOperation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isSafeOperation", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isSafeOperation: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isSafeOperation")
 	}
 
 	middevicePolicyManagerIsSecurityLoggingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isSecurityLoggingEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isSecurityLoggingEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isSecurityLoggingEnabled")
 	}
 
 	middevicePolicyManagerIsStatusBarDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isStatusBarDisabled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isStatusBarDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isStatusBarDisabled")
 	}
 
 	middevicePolicyManagerIsUninstallBlocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isUninstallBlocked", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isUninstallBlocked: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isUninstallBlocked")
 	}
 
 	middevicePolicyManagerIsUniqueDeviceAttestationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isUniqueDeviceAttestationSupported", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isUniqueDeviceAttestationSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isUniqueDeviceAttestationSupported")
 	}
 
 	middevicePolicyManagerIsUsbDataSignalingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isUsbDataSignalingEnabled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isUsbDataSignalingEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isUsbDataSignalingEnabled")
 	}
 
 	middevicePolicyManagerIsUsingUnifiedPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isUsingUnifiedPassword", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isUsingUnifiedPassword: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isUsingUnifiedPassword")
 	}
 
 	middevicePolicyManagerListForegroundAffiliatedUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "listForegroundAffiliatedUsers", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.listForegroundAffiliatedUsers: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.listForegroundAffiliatedUsers")
 	}
 
 	middevicePolicyManagerLockNow0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "lockNow", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.lockNow: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.lockNow")
 	}
 
 	middevicePolicyManagerLockNow1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "lockNow", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.lockNow: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.lockNow")
 	}
 
 	middevicePolicyManagerLogoutUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "logoutUser", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.logoutUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.logoutUser")
 	}
 
 	middevicePolicyManagerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "reboot", "(Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.reboot: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.reboot")
 	}
 
 	middevicePolicyManagerRemoveActiveAdmin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "removeActiveAdmin", "(Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.removeActiveAdmin: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.removeActiveAdmin")
 	}
 
 	middevicePolicyManagerRemoveCrossProfileWidgetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "removeCrossProfileWidgetProvider", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.removeCrossProfileWidgetProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.removeCrossProfileWidgetProvider")
 	}
 
 	middevicePolicyManagerRemoveKeyPair, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "removeKeyPair", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.removeKeyPair: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.removeKeyPair")
 	}
 
 	middevicePolicyManagerRemoveOverrideApn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "removeOverrideApn", "(Landroid/content/ComponentName;I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.removeOverrideApn: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.removeOverrideApn")
 	}
 
 	middevicePolicyManagerRemoveUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "removeUser", "(Landroid/content/ComponentName;Landroid/os/UserHandle;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.removeUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.removeUser")
 	}
 
 	middevicePolicyManagerRequestBugreport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "requestBugreport", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.requestBugreport: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.requestBugreport")
 	}
 
 	middevicePolicyManagerResetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "resetPassword", "(Ljava/lang/String;I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.resetPassword: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.resetPassword")
 	}
 
 	middevicePolicyManagerResetPasswordWithToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "resetPasswordWithToken", "(Landroid/content/ComponentName;Ljava/lang/String;[BI)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.resetPasswordWithToken: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.resetPasswordWithToken")
 	}
 
 	middevicePolicyManagerRetrieveNetworkLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrieveNetworkLogs", "(Landroid/content/ComponentName;J)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.retrieveNetworkLogs: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.retrieveNetworkLogs")
 	}
 
 	middevicePolicyManagerRetrievePreRebootSecurityLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrievePreRebootSecurityLogs", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.retrievePreRebootSecurityLogs: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.retrievePreRebootSecurityLogs")
 	}
 
 	middevicePolicyManagerRetrieveSecurityLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrieveSecurityLogs", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.retrieveSecurityLogs: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.retrieveSecurityLogs")
 	}
 
 	middevicePolicyManagerRevokeKeyPairFromApp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "revokeKeyPairFromApp", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.revokeKeyPairFromApp: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.revokeKeyPairFromApp")
 	}
 
 	middevicePolicyManagerRevokeKeyPairFromWifiAuth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "revokeKeyPairFromWifiAuth", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.revokeKeyPairFromWifiAuth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.revokeKeyPairFromWifiAuth")
 	}
 
 	middevicePolicyManagerSetAccountManagementDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAccountManagementDisabled", "(Landroid/content/ComponentName;Ljava/lang/String;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAccountManagementDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAccountManagementDisabled")
 	}
 
 	middevicePolicyManagerSetAffiliationIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAffiliationIds", "(Landroid/content/ComponentName;Ljava/util/Set;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAffiliationIds: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAffiliationIds")
 	}
 
 	middevicePolicyManagerSetAlwaysOnVpnPackage3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAlwaysOnVpnPackage", "(Landroid/content/ComponentName;Ljava/lang/String;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage")
 	}
 
 	middevicePolicyManagerSetAlwaysOnVpnPackage4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAlwaysOnVpnPackage", "(Landroid/content/ComponentName;Ljava/lang/String;ZLjava/util/Set;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage")
 	}
 
 	middevicePolicyManagerSetAppFunctionsPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAppFunctionsPolicy", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAppFunctionsPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAppFunctionsPolicy")
 	}
 
 	middevicePolicyManagerSetApplicationHidden, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setApplicationHidden", "(Landroid/content/ComponentName;Ljava/lang/String;Z)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setApplicationHidden: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setApplicationHidden")
 	}
 
 	middevicePolicyManagerSetApplicationRestrictions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setApplicationRestrictions", "(Landroid/content/ComponentName;Ljava/lang/String;Landroid/os/Bundle;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setApplicationRestrictions: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setApplicationRestrictions")
 	}
 
 	middevicePolicyManagerSetApplicationRestrictionsManagingPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setApplicationRestrictionsManagingPackage", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setApplicationRestrictionsManagingPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setApplicationRestrictionsManagingPackage")
 	}
 
 	middevicePolicyManagerSetAutoTimeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAutoTimeEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAutoTimeEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAutoTimeEnabled")
 	}
 
 	middevicePolicyManagerSetAutoTimePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAutoTimePolicy", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAutoTimePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAutoTimePolicy")
 	}
 
 	middevicePolicyManagerSetAutoTimeRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAutoTimeRequired", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAutoTimeRequired: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAutoTimeRequired")
 	}
 
 	middevicePolicyManagerSetAutoTimeZoneEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAutoTimeZoneEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAutoTimeZoneEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAutoTimeZoneEnabled")
 	}
 
 	middevicePolicyManagerSetAutoTimeZonePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAutoTimeZonePolicy", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAutoTimeZonePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setAutoTimeZonePolicy")
 	}
 
 	middevicePolicyManagerSetBackupServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setBackupServiceEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setBackupServiceEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setBackupServiceEnabled")
 	}
 
 	middevicePolicyManagerSetBluetoothContactSharingDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setBluetoothContactSharingDisabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setBluetoothContactSharingDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setBluetoothContactSharingDisabled")
 	}
 
 	middevicePolicyManagerSetCameraDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCameraDisabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCameraDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCameraDisabled")
 	}
 
 	middevicePolicyManagerSetCertInstallerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCertInstallerPackage", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCertInstallerPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCertInstallerPackage")
 	}
 
 	middevicePolicyManagerSetCommonCriteriaModeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCommonCriteriaModeEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCommonCriteriaModeEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCommonCriteriaModeEnabled")
 	}
 
 	middevicePolicyManagerSetConfiguredNetworksLockdownState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setConfiguredNetworksLockdownState", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setConfiguredNetworksLockdownState: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setConfiguredNetworksLockdownState")
 	}
 
 	middevicePolicyManagerSetContentProtectionPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setContentProtectionPolicy", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setContentProtectionPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setContentProtectionPolicy")
 	}
 
 	middevicePolicyManagerSetCredentialManagerPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCredentialManagerPolicy", "(Landroid/app/admin/PackagePolicy;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCredentialManagerPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCredentialManagerPolicy")
 	}
 
 	middevicePolicyManagerSetCrossProfileCalendarPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfileCalendarPackages", "(Landroid/content/ComponentName;Ljava/util/Set;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCrossProfileCalendarPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCrossProfileCalendarPackages")
 	}
 
 	middevicePolicyManagerSetCrossProfileCallerIdDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfileCallerIdDisabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCrossProfileCallerIdDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCrossProfileCallerIdDisabled")
 	}
 
 	middevicePolicyManagerSetCrossProfileContactsSearchDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfileContactsSearchDisabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCrossProfileContactsSearchDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCrossProfileContactsSearchDisabled")
 	}
 
 	middevicePolicyManagerSetCrossProfilePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfilePackages", "(Landroid/content/ComponentName;Ljava/util/Set;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCrossProfilePackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setCrossProfilePackages")
 	}
 
 	middevicePolicyManagerSetDefaultDialerApplication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setDefaultDialerApplication", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setDefaultDialerApplication: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setDefaultDialerApplication")
 	}
 
 	middevicePolicyManagerSetDefaultSmsApplication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setDefaultSmsApplication", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setDefaultSmsApplication: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setDefaultSmsApplication")
 	}
 
 	middevicePolicyManagerSetDelegatedScopes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setDelegatedScopes", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/util/List;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setDelegatedScopes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setDelegatedScopes")
 	}
 
 	middevicePolicyManagerSetDeviceOwnerLockScreenInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setDeviceOwnerLockScreenInfo", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setDeviceOwnerLockScreenInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setDeviceOwnerLockScreenInfo")
 	}
 
 	middevicePolicyManagerSetEndUserSessionMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setEndUserSessionMessage", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setEndUserSessionMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setEndUserSessionMessage")
 	}
 
 	middevicePolicyManagerSetFactoryResetProtectionPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setFactoryResetProtectionPolicy", "(Landroid/content/ComponentName;Landroid/app/admin/FactoryResetProtectionPolicy;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setFactoryResetProtectionPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setFactoryResetProtectionPolicy")
 	}
 
 	middevicePolicyManagerSetGlobalPrivateDnsModeOpportunistic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setGlobalPrivateDnsModeOpportunistic", "(Landroid/content/ComponentName;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setGlobalPrivateDnsModeOpportunistic: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setGlobalPrivateDnsModeOpportunistic")
 	}
 
 	middevicePolicyManagerSetGlobalPrivateDnsModeSpecifiedHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setGlobalPrivateDnsModeSpecifiedHost", "(Landroid/content/ComponentName;Ljava/lang/String;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setGlobalPrivateDnsModeSpecifiedHost: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setGlobalPrivateDnsModeSpecifiedHost")
 	}
 
 	middevicePolicyManagerSetGlobalSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setGlobalSetting", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setGlobalSetting: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setGlobalSetting")
 	}
 
 	middevicePolicyManagerSetKeepUninstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeepUninstalledPackages", "(Landroid/content/ComponentName;Ljava/util/List;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setKeepUninstalledPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setKeepUninstalledPackages")
 	}
 
 	middevicePolicyManagerSetKeyPairCertificate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeyPairCertificate", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/util/List;Z)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setKeyPairCertificate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setKeyPairCertificate")
 	}
 
 	middevicePolicyManagerSetKeyguardDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeyguardDisabled", "(Landroid/content/ComponentName;Z)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setKeyguardDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setKeyguardDisabled")
 	}
 
 	middevicePolicyManagerSetKeyguardDisabledFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeyguardDisabledFeatures", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setKeyguardDisabledFeatures: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setKeyguardDisabledFeatures")
 	}
 
 	middevicePolicyManagerSetLocationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setLocationEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setLocationEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setLocationEnabled")
 	}
 
 	middevicePolicyManagerSetLockTaskFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setLockTaskFeatures", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setLockTaskFeatures: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setLockTaskFeatures")
 	}
 
 	middevicePolicyManagerSetLockTaskPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setLockTaskPackages", "(Landroid/content/ComponentName;[Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setLockTaskPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setLockTaskPackages")
 	}
 
 	middevicePolicyManagerSetLogoutEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setLogoutEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setLogoutEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setLogoutEnabled")
 	}
 
 	middevicePolicyManagerSetLongSupportMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setLongSupportMessage", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setLongSupportMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setLongSupportMessage")
 	}
 
 	middevicePolicyManagerSetManagedProfileCallerIdAccessPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setManagedProfileCallerIdAccessPolicy", "(Landroid/app/admin/PackagePolicy;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setManagedProfileCallerIdAccessPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setManagedProfileCallerIdAccessPolicy")
 	}
 
 	middevicePolicyManagerSetManagedProfileContactsAccessPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setManagedProfileContactsAccessPolicy", "(Landroid/app/admin/PackagePolicy;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setManagedProfileContactsAccessPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setManagedProfileContactsAccessPolicy")
 	}
 
 	middevicePolicyManagerSetManagedProfileMaximumTimeOff, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setManagedProfileMaximumTimeOff", "(Landroid/content/ComponentName;J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setManagedProfileMaximumTimeOff: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setManagedProfileMaximumTimeOff")
 	}
 
 	middevicePolicyManagerSetManagedSubscriptionsPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setManagedSubscriptionsPolicy", "(Landroid/app/admin/ManagedSubscriptionsPolicy;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setManagedSubscriptionsPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setManagedSubscriptionsPolicy")
 	}
 
 	middevicePolicyManagerSetMasterVolumeMuted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMasterVolumeMuted", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMasterVolumeMuted: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setMasterVolumeMuted")
 	}
 
 	middevicePolicyManagerSetMaximumFailedPasswordsForWipe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMaximumFailedPasswordsForWipe", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMaximumFailedPasswordsForWipe: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setMaximumFailedPasswordsForWipe")
 	}
 
 	middevicePolicyManagerSetMaximumTimeToLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMaximumTimeToLock", "(Landroid/content/ComponentName;J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMaximumTimeToLock: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setMaximumTimeToLock")
 	}
 
 	middevicePolicyManagerSetMeteredDataDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMeteredDataDisabledPackages", "(Landroid/content/ComponentName;Ljava/util/List;)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMeteredDataDisabledPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setMeteredDataDisabledPackages")
 	}
 
 	middevicePolicyManagerSetMinimumRequiredWifiSecurityLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMinimumRequiredWifiSecurityLevel", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMinimumRequiredWifiSecurityLevel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setMinimumRequiredWifiSecurityLevel")
 	}
 
 	middevicePolicyManagerSetMtePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMtePolicy", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMtePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setMtePolicy")
 	}
 
 	middevicePolicyManagerSetNearbyAppStreamingPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setNearbyAppStreamingPolicy", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setNearbyAppStreamingPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setNearbyAppStreamingPolicy")
 	}
 
 	middevicePolicyManagerSetNearbyNotificationStreamingPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setNearbyNotificationStreamingPolicy", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setNearbyNotificationStreamingPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setNearbyNotificationStreamingPolicy")
 	}
 
 	middevicePolicyManagerSetNetworkLoggingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setNetworkLoggingEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setNetworkLoggingEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setNetworkLoggingEnabled")
 	}
 
 	middevicePolicyManagerSetOrganizationColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setOrganizationColor", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setOrganizationColor: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setOrganizationColor")
 	}
 
 	middevicePolicyManagerSetOrganizationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setOrganizationId", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setOrganizationId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setOrganizationId")
 	}
 
 	middevicePolicyManagerSetOrganizationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setOrganizationName", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setOrganizationName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setOrganizationName")
 	}
 
 	middevicePolicyManagerSetOverrideApnsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setOverrideApnsEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setOverrideApnsEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setOverrideApnsEnabled")
 	}
 
 	middevicePolicyManagerSetPackagesSuspended, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPackagesSuspended", "(Landroid/content/ComponentName;[Ljava/lang/String;Z)[Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPackagesSuspended: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPackagesSuspended")
 	}
 
 	middevicePolicyManagerSetPasswordExpirationTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordExpirationTimeout", "(Landroid/content/ComponentName;J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordExpirationTimeout: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordExpirationTimeout")
 	}
 
 	middevicePolicyManagerSetPasswordHistoryLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordHistoryLength", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordHistoryLength: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordHistoryLength")
 	}
 
 	middevicePolicyManagerSetPasswordMinimumLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordMinimumLength", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordMinimumLength: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordMinimumLength")
 	}
 
 	middevicePolicyManagerSetPasswordMinimumLetters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordMinimumLetters", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordMinimumLetters: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordMinimumLetters")
 	}
 
 	middevicePolicyManagerSetPasswordMinimumLowerCase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordMinimumLowerCase", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordMinimumLowerCase: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordMinimumLowerCase")
 	}
 
 	middevicePolicyManagerSetPasswordMinimumNonLetter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordMinimumNonLetter", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordMinimumNonLetter: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordMinimumNonLetter")
 	}
 
 	middevicePolicyManagerSetPasswordMinimumNumeric, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordMinimumNumeric", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordMinimumNumeric: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordMinimumNumeric")
 	}
 
 	middevicePolicyManagerSetPasswordMinimumSymbols, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordMinimumSymbols", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordMinimumSymbols: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordMinimumSymbols")
 	}
 
 	middevicePolicyManagerSetPasswordMinimumUpperCase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordMinimumUpperCase", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordMinimumUpperCase: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordMinimumUpperCase")
 	}
 
 	middevicePolicyManagerSetPasswordQuality, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPasswordQuality", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPasswordQuality: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPasswordQuality")
 	}
 
 	middevicePolicyManagerSetPermissionGrantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermissionGrantState", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermissionGrantState: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPermissionGrantState")
 	}
 
 	middevicePolicyManagerSetPermissionPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermissionPolicy", "(Landroid/content/ComponentName;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermissionPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPermissionPolicy")
 	}
 
 	middevicePolicyManagerSetPermittedAccessibilityServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedAccessibilityServices", "(Landroid/content/ComponentName;Ljava/util/List;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermittedAccessibilityServices: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPermittedAccessibilityServices")
 	}
 
 	middevicePolicyManagerSetPermittedCrossProfileNotificationListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedCrossProfileNotificationListeners", "(Landroid/content/ComponentName;Ljava/util/List;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermittedCrossProfileNotificationListeners: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPermittedCrossProfileNotificationListeners")
 	}
 
 	middevicePolicyManagerSetPermittedInputMethods, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedInputMethods", "(Landroid/content/ComponentName;Ljava/util/List;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermittedInputMethods: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPermittedInputMethods")
 	}
 
 	middevicePolicyManagerSetPersonalAppsSuspended, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPersonalAppsSuspended", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPersonalAppsSuspended: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPersonalAppsSuspended")
 	}
 
 	middevicePolicyManagerSetPreferentialNetworkServiceConfigs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPreferentialNetworkServiceConfigs", "(Ljava/util/List;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceConfigs: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceConfigs")
 	}
 
 	middevicePolicyManagerSetPreferentialNetworkServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPreferentialNetworkServiceEnabled", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceEnabled")
 	}
 
 	middevicePolicyManagerSetProfileEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setProfileEnabled", "(Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setProfileEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setProfileEnabled")
 	}
 
 	middevicePolicyManagerSetProfileName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setProfileName", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setProfileName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setProfileName")
 	}
 
 	middevicePolicyManagerSetRecommendedGlobalProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setRecommendedGlobalProxy", "(Landroid/content/ComponentName;Landroid/net/ProxyInfo;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setRecommendedGlobalProxy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setRecommendedGlobalProxy")
 	}
 
 	middevicePolicyManagerSetRequiredPasswordComplexity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setRequiredPasswordComplexity", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setRequiredPasswordComplexity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setRequiredPasswordComplexity")
 	}
 
 	middevicePolicyManagerSetRequiredStrongAuthTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setRequiredStrongAuthTimeout", "(Landroid/content/ComponentName;J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setRequiredStrongAuthTimeout: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setRequiredStrongAuthTimeout")
 	}
 
 	middevicePolicyManagerSetResetPasswordToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setResetPasswordToken", "(Landroid/content/ComponentName;[B)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setResetPasswordToken: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setResetPasswordToken")
 	}
 
 	middevicePolicyManagerSetRestrictionsProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setRestrictionsProvider", "(Landroid/content/ComponentName;Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setRestrictionsProvider: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setRestrictionsProvider")
 	}
 
 	middevicePolicyManagerSetScreenCaptureDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setScreenCaptureDisabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setScreenCaptureDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setScreenCaptureDisabled")
 	}
 
 	middevicePolicyManagerSetSecureSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setSecureSetting", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setSecureSetting: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setSecureSetting")
 	}
 
 	middevicePolicyManagerSetSecurityLoggingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setSecurityLoggingEnabled", "(Landroid/content/ComponentName;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setSecurityLoggingEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setSecurityLoggingEnabled")
 	}
 
 	middevicePolicyManagerSetShortSupportMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setShortSupportMessage", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setShortSupportMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setShortSupportMessage")
 	}
 
 	middevicePolicyManagerSetStartUserSessionMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setStartUserSessionMessage", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setStartUserSessionMessage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setStartUserSessionMessage")
 	}
 
 	middevicePolicyManagerSetStatusBarDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setStatusBarDisabled", "(Landroid/content/ComponentName;Z)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setStatusBarDisabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setStatusBarDisabled")
 	}
 
 	middevicePolicyManagerSetStorageEncryption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setStorageEncryption", "(Landroid/content/ComponentName;Z)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setStorageEncryption: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setStorageEncryption")
 	}
 
 	middevicePolicyManagerSetSystemSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setSystemSetting", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setSystemSetting: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setSystemSetting")
 	}
 
 	middevicePolicyManagerSetSystemUpdatePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setSystemUpdatePolicy", "(Landroid/content/ComponentName;Landroid/app/admin/SystemUpdatePolicy;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setSystemUpdatePolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setSystemUpdatePolicy")
 	}
 
 	middevicePolicyManagerSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setTime", "(Landroid/content/ComponentName;J)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setTime: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setTime")
 	}
 
 	middevicePolicyManagerSetTimeZone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setTimeZone", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setTimeZone: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setTimeZone")
 	}
 
 	middevicePolicyManagerSetTrustAgentConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setTrustAgentConfiguration", "(Landroid/content/ComponentName;Landroid/content/ComponentName;Landroid/os/PersistableBundle;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setTrustAgentConfiguration: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setTrustAgentConfiguration")
 	}
 
 	middevicePolicyManagerSetUninstallBlocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setUninstallBlocked", "(Landroid/content/ComponentName;Ljava/lang/String;Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setUninstallBlocked: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setUninstallBlocked")
 	}
 
 	middevicePolicyManagerSetUsbDataSignalingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setUsbDataSignalingEnabled", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setUsbDataSignalingEnabled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setUsbDataSignalingEnabled")
 	}
 
 	middevicePolicyManagerSetUserControlDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setUserControlDisabledPackages", "(Landroid/content/ComponentName;Ljava/util/List;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setUserControlDisabledPackages: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setUserControlDisabledPackages")
 	}
 
 	middevicePolicyManagerSetUserIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setUserIcon", "(Landroid/content/ComponentName;Landroid/graphics/Bitmap;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setUserIcon: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setUserIcon")
 	}
 
 	middevicePolicyManagerSetWifiSsidPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setWifiSsidPolicy", "(Landroid/app/admin/WifiSsidPolicy;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setWifiSsidPolicy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.setWifiSsidPolicy")
 	}
 
 	middevicePolicyManagerStartUserInBackground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "startUserInBackground", "(Landroid/content/ComponentName;Landroid/os/UserHandle;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.startUserInBackground: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.startUserInBackground")
 	}
 
 	middevicePolicyManagerStopUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "stopUser", "(Landroid/content/ComponentName;Landroid/os/UserHandle;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.stopUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.stopUser")
 	}
 
 	middevicePolicyManagerSwitchUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "switchUser", "(Landroid/content/ComponentName;Landroid/os/UserHandle;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.switchUser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.switchUser")
 	}
 
 	middevicePolicyManagerTransferOwnership, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "transferOwnership", "(Landroid/content/ComponentName;Landroid/content/ComponentName;Landroid/os/PersistableBundle;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.transferOwnership: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.transferOwnership")
 	}
 
 	middevicePolicyManagerUninstallAllUserCaCerts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "uninstallAllUserCaCerts", "(Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.uninstallAllUserCaCerts: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.uninstallAllUserCaCerts")
 	}
 
 	middevicePolicyManagerUninstallCaCert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "uninstallCaCert", "(Landroid/content/ComponentName;[B)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.uninstallCaCert: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.uninstallCaCert")
 	}
 
 	middevicePolicyManagerUpdateOverrideApn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "updateOverrideApn", "(Landroid/content/ComponentName;ILandroid/telephony/data/ApnSetting;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.updateOverrideApn: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.updateOverrideApn")
 	}
 
 	middevicePolicyManagerWipeData1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "wipeData", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.wipeData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.wipeData")
 	}
 
 	middevicePolicyManagerWipeData2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "wipeData", "(ILjava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.wipeData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.wipeData")
 	}
 
 	middevicePolicyManagerWipeDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "wipeDevice", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.wipeDevice: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.wipeDevice")
 	}
 
 	middevicePolicyManagerIsMtePolicyEnforced, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "isMtePolicyEnforced", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isMtePolicyEnforced: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.admin.DevicePolicyManager.isMtePolicyEnforced")
 	}
 
 	return nil

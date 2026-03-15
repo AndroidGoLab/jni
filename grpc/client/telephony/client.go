@@ -452,11 +452,10 @@ func (c *Client) GetNetworkSelectionMode(ctx context.Context) (int32, error) {
 }
 
 // GetNetworkSlicingConfiguration calls the GetNetworkSlicingConfiguration RPC.
-func (c *Client) GetNetworkSlicingConfiguration(ctx context.Context, arg0 int64, arg1 int64, arg2 int64) error {
+func (c *Client) GetNetworkSlicingConfiguration(ctx context.Context, arg0 int64, arg1 int64) error {
 	_, err := c.svc.GetNetworkSlicingConfiguration(ctx, &pb.GetNetworkSlicingConfigurationRequest{
 		Arg0: arg0,
 		Arg1: arg1,
-		Arg2: arg2,
 	})
 	return err
 }
@@ -1430,25 +1429,23 @@ func (c *Client) UpdateAvailableNetworks(ctx context.Context, arg0 int64, arg1 i
 }
 
 // UploadCallComposerPicture5 calls the UploadCallComposerPicture5 RPC.
-func (c *Client) UploadCallComposerPicture5(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64, arg4 int64) error {
+func (c *Client) UploadCallComposerPicture5(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64) error {
 	_, err := c.svc.UploadCallComposerPicture5(ctx, &pb.UploadCallComposerPicture5Request{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,
 		Arg3: arg3,
-		Arg4: arg4,
 	})
 	return err
 }
 
 // UploadCallComposerPicture5_1 calls the UploadCallComposerPicture5_1 RPC.
-func (c *Client) UploadCallComposerPicture5_1(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64, arg4 int64) error {
+func (c *Client) UploadCallComposerPicture5_1(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64) error {
 	_, err := c.svc.UploadCallComposerPicture5_1(ctx, &pb.UploadCallComposerPicture5_1Request{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,
 		Arg3: arg3,
-		Arg4: arg4,
 	})
 	return err
 }

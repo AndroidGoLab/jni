@@ -32,6 +32,10 @@ func (m *calendarContract) StartViewCalendarEventInManagedProfile(arg0 *jni.Obje
 			callErr = err
 			return err
 		}
+		if midcalendarContractStartViewCalendarEventInManagedProfile == nil {
+			callErr = fmt.Errorf("android.provider.CalendarContract.startViewCalendarEventInManagedProfile is not available on this device")
+			return callErr
+		}
 
 		var jArg4 uint8
 		if arg4 {

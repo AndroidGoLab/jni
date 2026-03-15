@@ -28,6 +28,12 @@ var (
 	midsEServiceShutdown      jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -54,27 +60,42 @@ func doInit(env *jni.Env) error {
 
 	midsEServiceGetReaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getReaders", "()[Landroid/se/omapi/Reader;")
 	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.SEService.getReaders: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.getReaders")
 	}
 
 	midsEServiceGetUiccReader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getUiccReader", "(I)Landroid/se/omapi/Reader;")
 	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.SEService.getUiccReader: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.getUiccReader")
 	}
 
 	midsEServiceGetVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getVersion", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.SEService.getVersion: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.getVersion")
 	}
 
 	midsEServiceIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "isConnected", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.SEService.isConnected: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.isConnected")
 	}
 
 	midsEServiceShutdown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "shutdown", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.SEService.shutdown: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.shutdown")
 	}
 
 	return nil

@@ -74,6 +74,10 @@ func (m *blobStoreManager) AbandonSession(arg0 int64) error {
 			callErr = err
 			return err
 		}
+		if midblobStoreManagerAbandonSession == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.abandonSession is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -92,6 +96,10 @@ func (m *blobStoreManager) AcquireLease2(arg0 *jni.Object, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midblobStoreManagerAcquireLease2 == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.acquireLease is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -112,6 +120,10 @@ func (m *blobStoreManager) AcquireLease3_1(arg0 *jni.Object, arg1 int32, arg2 in
 			callErr = err
 			return err
 		}
+		if midblobStoreManagerAcquireLease3_1 == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.acquireLease is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -130,6 +142,10 @@ func (m *blobStoreManager) AcquireLease2_2(arg0 *jni.Object, arg1 string) error 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midblobStoreManagerAcquireLease2_2 == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.acquireLease is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -155,6 +171,10 @@ func (m *blobStoreManager) AcquireLease3_3(arg0 *jni.Object, arg1 string, arg2 i
 			callErr = err
 			return err
 		}
+		if midblobStoreManagerAcquireLease3_3 == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.acquireLease is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -179,6 +199,10 @@ func (m *blobStoreManager) CreateSession(arg0 *jni.Object) (int64, error) {
 			callErr = err
 			return err
 		}
+		if midblobStoreManagerCreateSession == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.createSession is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -201,6 +225,10 @@ func (m *blobStoreManager) GetLeasedBlobs() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midblobStoreManagerGetLeasedBlobs == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.getLeasedBlobs is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midblobStoreManagerGetLeasedBlobs,
@@ -222,6 +250,10 @@ func (m *blobStoreManager) GetRemainingLeaseQuotaBytes() (int64, error) {
 			callErr = err
 			return err
 		}
+		if midblobStoreManagerGetRemainingLeaseQuotaBytes == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.getRemainingLeaseQuotaBytes is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			midblobStoreManagerGetRemainingLeaseQuotaBytes,
@@ -242,6 +274,10 @@ func (m *blobStoreManager) OpenBlob(arg0 *jni.Object) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midblobStoreManagerOpenBlob == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.openBlob is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -265,6 +301,10 @@ func (m *blobStoreManager) OpenSession(arg0 int64) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midblobStoreManagerOpenSession == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.openSession is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -286,6 +326,10 @@ func (m *blobStoreManager) ReleaseLease(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midblobStoreManagerReleaseLease == nil {
+			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.releaseLease is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

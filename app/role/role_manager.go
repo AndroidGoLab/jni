@@ -74,6 +74,10 @@ func (m *roleManager) CreateRequestRoleIntent(arg0 string) (*jni.Object, error) 
 			callErr = err
 			return err
 		}
+		if midroleManagerCreateRequestRoleIntent == nil {
+			callErr = fmt.Errorf("android.app.role.RoleManager.createRequestRoleIntent is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -99,6 +103,10 @@ func (m *roleManager) IsRoleAvailable(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midroleManagerIsRoleAvailable == nil {
+			callErr = fmt.Errorf("android.app.role.RoleManager.isRoleAvailable is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -126,6 +134,10 @@ func (m *roleManager) IsRoleHeld(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midroleManagerIsRoleHeld == nil {
+			callErr = fmt.Errorf("android.app.role.RoleManager.isRoleHeld is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {

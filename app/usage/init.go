@@ -31,6 +31,12 @@ var (
 	midusageStatsManagerQueryUsageStats     jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -57,42 +63,66 @@ func doInit(env *jni.Env) error {
 
 	midusageStatsManagerGetAppStandbyBucket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "getAppStandbyBucket", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.getAppStandbyBucket: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.getAppStandbyBucket")
 	}
 
 	midusageStatsManagerIsAppInactive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "isAppInactive", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.isAppInactive: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.isAppInactive")
 	}
 
 	midusageStatsManagerQueryConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryConfigurations", "(IJJ)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryConfigurations: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.queryConfigurations")
 	}
 
 	midusageStatsManagerQueryEventStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEventStats", "(IJJ)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEventStats: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.queryEventStats")
 	}
 
 	midusageStatsManagerQueryEvents1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEvents", "(Landroid/app/usage/UsageEventsQuery;)Landroid/app/usage/UsageEvents;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEvents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.queryEvents")
 	}
 
 	midusageStatsManagerQueryEvents2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEvents", "(JJ)Landroid/app/usage/UsageEvents;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEvents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.queryEvents")
 	}
 
 	midusageStatsManagerQueryEventsForSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEventsForSelf", "(JJ)Landroid/app/usage/UsageEvents;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEventsForSelf: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.queryEventsForSelf")
 	}
 
 	midusageStatsManagerQueryUsageStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryUsageStats", "(IJJ)Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryUsageStats: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.queryUsageStats")
 	}
 
 	return nil

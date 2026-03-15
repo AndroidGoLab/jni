@@ -32,6 +32,10 @@ func (m *documentsContract) BuildChildDocumentsUri(arg0 string, arg1 string) (*j
 			callErr = err
 			return err
 		}
+		if middocumentsContractBuildChildDocumentsUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildChildDocumentsUri is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -63,6 +67,10 @@ func (m *documentsContract) BuildChildDocumentsUriUsingTree(arg0 *jni.Object, ar
 			callErr = err
 			return err
 		}
+		if middocumentsContractBuildChildDocumentsUriUsingTree == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildChildDocumentsUriUsingTree is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -89,6 +97,10 @@ func (m *documentsContract) BuildDocumentUri(arg0 string, arg1 string) (*jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractBuildDocumentUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildDocumentUri is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -121,6 +133,10 @@ func (m *documentsContract) BuildDocumentUriUsingTree(arg0 *jni.Object, arg1 str
 			callErr = err
 			return err
 		}
+		if middocumentsContractBuildDocumentUriUsingTree == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildDocumentUriUsingTree is not available on this device")
+			return callErr
+		}
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
@@ -147,6 +163,10 @@ func (m *documentsContract) BuildRecentDocumentsUri(arg0 string, arg1 string) (*
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractBuildRecentDocumentsUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildRecentDocumentsUri is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -179,6 +199,10 @@ func (m *documentsContract) BuildRootUri(arg0 string, arg1 string) (*jni.Object,
 			callErr = err
 			return err
 		}
+		if middocumentsContractBuildRootUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildRootUri is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -210,6 +234,10 @@ func (m *documentsContract) BuildRootsUri(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middocumentsContractBuildRootsUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildRootsUri is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -235,6 +263,10 @@ func (m *documentsContract) BuildSearchDocumentsUri(arg0 string, arg1 string, ar
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractBuildSearchDocumentsUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildSearchDocumentsUri is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -272,6 +304,10 @@ func (m *documentsContract) BuildTreeDocumentUri(arg0 string, arg1 string) (*jni
 			callErr = err
 			return err
 		}
+		if middocumentsContractBuildTreeDocumentUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.buildTreeDocumentUri is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -303,6 +339,10 @@ func (m *documentsContract) CopyDocument(arg0 *jni.Object, arg1 *jni.Object, arg
 			callErr = err
 			return err
 		}
+		if middocumentsContractCopyDocument == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.copyDocument is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -324,6 +364,10 @@ func (m *documentsContract) CreateDocument(arg0 *jni.Object, arg1 *jni.Object, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractCreateDocument == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.createDocument is not available on this device")
+			return callErr
 		}
 
 		jArg2, err := env.NewStringUTF(arg2)
@@ -357,6 +401,10 @@ func (m *documentsContract) CreateWebLinkIntent(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if middocumentsContractCreateWebLinkIntent == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.createWebLinkIntent is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -378,6 +426,10 @@ func (m *documentsContract) DeleteDocument(arg0 *jni.Object, arg1 *jni.Object) (
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractDeleteDocument == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.deleteDocument is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
@@ -402,6 +454,10 @@ func (m *documentsContract) EjectRoot(arg0 *jni.Object, arg1 *jni.Object) error 
 			callErr = err
 			return err
 		}
+		if middocumentsContractEjectRoot == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.ejectRoot is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -420,6 +476,10 @@ func (m *documentsContract) FindDocumentPath(arg0 *jni.Object, arg1 *jni.Object)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractFindDocumentPath == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.findDocumentPath is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -442,6 +502,10 @@ func (m *documentsContract) GetDocumentId(arg0 *jni.Object) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractGetDocumentId == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.getDocumentId is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
@@ -466,6 +530,10 @@ func (m *documentsContract) GetDocumentMetadata(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
+		if middocumentsContractGetDocumentMetadata == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.getDocumentMetadata is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -488,6 +556,10 @@ func (m *documentsContract) GetDocumentThumbnail(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if middocumentsContractGetDocumentThumbnail == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.getDocumentThumbnail is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -509,6 +581,10 @@ func (m *documentsContract) GetRootId(arg0 *jni.Object) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractGetRootId == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.getRootId is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
@@ -533,6 +609,10 @@ func (m *documentsContract) GetSearchDocumentsQuery(arg0 *jni.Object) (string, e
 			callErr = err
 			return err
 		}
+		if middocumentsContractGetSearchDocumentsQuery == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.getSearchDocumentsQuery is not available on this device")
+			return callErr
+		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -555,6 +635,10 @@ func (m *documentsContract) GetTreeDocumentId(arg0 *jni.Object) (string, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractGetTreeDocumentId == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.getTreeDocumentId is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
@@ -579,6 +663,10 @@ func (m *documentsContract) IsChildDocument(arg0 *jni.Object, arg1 *jni.Object, 
 			callErr = err
 			return err
 		}
+		if middocumentsContractIsChildDocument == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.isChildDocument is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -601,6 +689,10 @@ func (m *documentsContract) IsDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (b
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractIsDocumentUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.isDocumentUri is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
@@ -625,6 +717,10 @@ func (m *documentsContract) IsRootUri(arg0 *jni.Object, arg1 *jni.Object) (bool,
 			callErr = err
 			return err
 		}
+		if middocumentsContractIsRootUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.isRootUri is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -647,6 +743,10 @@ func (m *documentsContract) IsRootsUri(arg0 *jni.Object, arg1 *jni.Object) (bool
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractIsRootsUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.isRootsUri is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
@@ -671,6 +771,10 @@ func (m *documentsContract) IsTreeUri(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if middocumentsContractIsTreeUri == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.isTreeUri is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -694,6 +798,10 @@ func (m *documentsContract) MoveDocument(arg0 *jni.Object, arg1 *jni.Object, arg
 			callErr = err
 			return err
 		}
+		if middocumentsContractMoveDocument == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.moveDocument is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
@@ -715,6 +823,10 @@ func (m *documentsContract) RemoveDocument(arg0 *jni.Object, arg1 *jni.Object, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractRemoveDocument == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.removeDocument is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
@@ -738,6 +850,10 @@ func (m *documentsContract) RenameDocument(arg0 *jni.Object, arg1 *jni.Object, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middocumentsContractRenameDocument == nil {
+			callErr = fmt.Errorf("android.provider.DocumentsContract.renameDocument is not available on this device")
+			return callErr
 		}
 
 		jArg2, err := env.NewStringUTF(arg2)

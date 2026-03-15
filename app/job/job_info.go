@@ -32,6 +32,10 @@ func (m *jobInfo) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoDescribeContents == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.describeContents is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midjobInfoDescribeContents,
@@ -52,6 +56,10 @@ func (m *jobInfo) Equals(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoEquals == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.equals is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -76,6 +84,10 @@ func (m *jobInfo) GetBackoffPolicy() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetBackoffPolicy == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getBackoffPolicy is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midjobInfoGetBackoffPolicy,
@@ -96,6 +108,10 @@ func (m *jobInfo) GetClipData() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetClipData == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getClipData is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -118,6 +134,10 @@ func (m *jobInfo) GetClipGrantFlags() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetClipGrantFlags == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getClipGrantFlags is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midjobInfoGetClipGrantFlags,
@@ -138,6 +158,10 @@ func (m *jobInfo) GetDebugTags() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetDebugTags == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getDebugTags is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -160,6 +184,10 @@ func (m *jobInfo) GetEstimatedNetworkDownloadBytes() (int64, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetEstimatedNetworkDownloadBytes == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getEstimatedNetworkDownloadBytes is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			midjobInfoGetEstimatedNetworkDownloadBytes,
@@ -180,6 +208,10 @@ func (m *jobInfo) GetEstimatedNetworkUploadBytes() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetEstimatedNetworkUploadBytes == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getEstimatedNetworkUploadBytes is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -202,6 +234,10 @@ func (m *jobInfo) GetExtras() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetExtras == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getExtras is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midjobInfoGetExtras,
@@ -222,6 +258,10 @@ func (m *jobInfo) GetFlexMillis() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetFlexMillis == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getFlexMillis is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -244,6 +284,10 @@ func (m *jobInfo) GetId() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetId == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getId is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midjobInfoGetId,
@@ -264,6 +308,10 @@ func (m *jobInfo) GetInitialBackoffMillis() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetInitialBackoffMillis == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getInitialBackoffMillis is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -286,6 +334,10 @@ func (m *jobInfo) GetIntervalMillis() (int64, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetIntervalMillis == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getIntervalMillis is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			midjobInfoGetIntervalMillis,
@@ -306,6 +358,10 @@ func (m *jobInfo) GetMaxExecutionDelayMillis() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetMaxExecutionDelayMillis == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getMaxExecutionDelayMillis is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -328,6 +384,10 @@ func (m *jobInfo) GetMinLatencyMillis() (int64, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetMinLatencyMillis == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getMinLatencyMillis is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			midjobInfoGetMinLatencyMillis,
@@ -348,6 +408,10 @@ func (m *jobInfo) GetMinimumNetworkChunkBytes() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetMinimumNetworkChunkBytes == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getMinimumNetworkChunkBytes is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -370,6 +434,10 @@ func (m *jobInfo) GetNetworkType() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetNetworkType == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getNetworkType is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midjobInfoGetNetworkType,
@@ -390,6 +458,10 @@ func (m *jobInfo) GetPriority() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetPriority == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getPriority is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -412,6 +484,10 @@ func (m *jobInfo) GetRequiredNetwork() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetRequiredNetwork == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getRequiredNetwork is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midjobInfoGetRequiredNetwork,
@@ -433,6 +509,10 @@ func (m *jobInfo) GetService() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetService == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getService is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midjobInfoGetService,
@@ -453,6 +533,10 @@ func (m *jobInfo) GetTraceTag() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetTraceTag == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getTraceTag is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -476,6 +560,10 @@ func (m *jobInfo) GetTransientExtras() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetTransientExtras == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getTransientExtras is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midjobInfoGetTransientExtras,
@@ -496,6 +584,10 @@ func (m *jobInfo) GetTriggerContentMaxDelay() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetTriggerContentMaxDelay == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getTriggerContentMaxDelay is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -518,6 +610,10 @@ func (m *jobInfo) GetTriggerContentUpdateDelay() (int64, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoGetTriggerContentUpdateDelay == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getTriggerContentUpdateDelay is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			midjobInfoGetTriggerContentUpdateDelay,
@@ -538,6 +634,10 @@ func (m *jobInfo) GetTriggerContentUris() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoGetTriggerContentUris == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.getTriggerContentUris is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -560,6 +660,10 @@ func (m *jobInfo) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoHashCode == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.hashCode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midjobInfoHashCode,
@@ -580,6 +684,10 @@ func (m *jobInfo) IsExpedited() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoIsExpedited == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isExpedited is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -603,6 +711,10 @@ func (m *jobInfo) IsImportantWhileForeground() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoIsImportantWhileForeground == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isImportantWhileForeground is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midjobInfoIsImportantWhileForeground,
@@ -624,6 +736,10 @@ func (m *jobInfo) IsPeriodic() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoIsPeriodic == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isPeriodic is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -647,6 +763,10 @@ func (m *jobInfo) IsPersisted() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoIsPersisted == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isPersisted is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midjobInfoIsPersisted,
@@ -668,6 +788,10 @@ func (m *jobInfo) IsPrefetch() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoIsPrefetch == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isPrefetch is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -691,6 +815,10 @@ func (m *jobInfo) IsRequireBatteryNotLow() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoIsRequireBatteryNotLow == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireBatteryNotLow is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midjobInfoIsRequireBatteryNotLow,
@@ -712,6 +840,10 @@ func (m *jobInfo) IsRequireCharging() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoIsRequireCharging == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireCharging is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -735,6 +867,10 @@ func (m *jobInfo) IsRequireDeviceIdle() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoIsRequireDeviceIdle == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireDeviceIdle is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midjobInfoIsRequireDeviceIdle,
@@ -756,6 +892,10 @@ func (m *jobInfo) IsRequireStorageNotLow() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoIsRequireStorageNotLow == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireStorageNotLow is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -779,6 +919,10 @@ func (m *jobInfo) IsUserInitiated() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoIsUserInitiated == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.isUserInitiated is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midjobInfoIsUserInitiated,
@@ -801,6 +945,10 @@ func (m *jobInfo) ToString() (string, error) {
 			callErr = err
 			return err
 		}
+		if midjobInfoToString == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.toString is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midjobInfoToString,
@@ -822,6 +970,10 @@ func (m *jobInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midjobInfoWriteToParcel == nil {
+			callErr = fmt.Errorf("android.app.job.JobInfo.writeToParcel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

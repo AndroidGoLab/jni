@@ -32,6 +32,10 @@ func (m *printJob) Cancel() error {
 			callErr = err
 			return err
 		}
+		if midprintJobCancel == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.cancel is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midprintJobCancel,
@@ -49,6 +53,10 @@ func (m *printJob) Equals(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midprintJobEquals == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.equals is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -73,6 +81,10 @@ func (m *printJob) GetId() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midprintJobGetId == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.getId is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midprintJobGetId,
@@ -93,6 +105,10 @@ func (m *printJob) GetInfo() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midprintJobGetInfo == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.getInfo is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -115,6 +131,10 @@ func (m *printJob) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midprintJobHashCode == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.hashCode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midprintJobHashCode,
@@ -135,6 +155,10 @@ func (m *printJob) IsBlocked() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midprintJobIsBlocked == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.isBlocked is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -158,6 +182,10 @@ func (m *printJob) IsCancelled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midprintJobIsCancelled == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.isCancelled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midprintJobIsCancelled,
@@ -179,6 +207,10 @@ func (m *printJob) IsCompleted() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midprintJobIsCompleted == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.isCompleted is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -202,6 +234,10 @@ func (m *printJob) IsFailed() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midprintJobIsFailed == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.isFailed is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midprintJobIsFailed,
@@ -223,6 +259,10 @@ func (m *printJob) IsQueued() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midprintJobIsQueued == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.isQueued is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -246,6 +286,10 @@ func (m *printJob) IsStarted() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midprintJobIsStarted == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.isStarted is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midprintJobIsStarted,
@@ -267,6 +311,10 @@ func (m *printJob) Restart() error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midprintJobRestart == nil {
+			callErr = fmt.Errorf("android.print.PrintJob.restart is not available on this device")
+			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,

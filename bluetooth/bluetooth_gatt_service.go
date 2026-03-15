@@ -32,6 +32,10 @@ func (m *bluetoothGattService) AddCharacteristic(arg0 *jni.Object) (bool, error)
 			callErr = err
 			return err
 		}
+		if midbluetoothGattServiceAddCharacteristic == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.addCharacteristic is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -54,6 +58,10 @@ func (m *bluetoothGattService) AddService(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothGattServiceAddService == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.addService is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -78,6 +86,10 @@ func (m *bluetoothGattService) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midbluetoothGattServiceDescribeContents == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.describeContents is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midbluetoothGattServiceDescribeContents,
@@ -98,6 +110,10 @@ func (m *bluetoothGattService) GetCharacteristic(arg0 *jni.Object) (*jni.Object,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothGattServiceGetCharacteristic == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getCharacteristic is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -121,6 +137,10 @@ func (m *bluetoothGattService) GetCharacteristics() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midbluetoothGattServiceGetCharacteristics == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getCharacteristics is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midbluetoothGattServiceGetCharacteristics,
@@ -141,6 +161,10 @@ func (m *bluetoothGattService) GetIncludedServices() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothGattServiceGetIncludedServices == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getIncludedServices is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -163,6 +187,10 @@ func (m *bluetoothGattService) GetInstanceId() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midbluetoothGattServiceGetInstanceId == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getInstanceId is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midbluetoothGattServiceGetInstanceId,
@@ -183,6 +211,10 @@ func (m *bluetoothGattService) GetType() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothGattServiceGetType == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getType is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -205,6 +237,10 @@ func (m *bluetoothGattService) GetUuid() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midbluetoothGattServiceGetUuid == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getUuid is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midbluetoothGattServiceGetUuid,
@@ -225,6 +261,10 @@ func (m *bluetoothGattService) WriteToParcel(arg0 *jni.Object, arg1 int32) error
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbluetoothGattServiceWriteToParcel == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.writeToParcel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

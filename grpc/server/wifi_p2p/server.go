@@ -435,7 +435,7 @@ func (s *WifiP2pManagerServer) RequestDirInfo(_ context.Context, req *pb.Request
 	}
 	defer mgr.Close()
 
-	if err := mgr.RequestDirInfo(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
+	if err := mgr.RequestDirInfo(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.RequestDirInfoResponse{}, nil
@@ -682,7 +682,7 @@ func (s *WifiP2pManagerServer) ValidateDirInfo(_ context.Context, req *pb.Valida
 	}
 	defer mgr.Close()
 
-	if err := mgr.ValidateDirInfo(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3()), s.Handles.Get(req.GetArg4())); err != nil {
+	if err := mgr.ValidateDirInfo(s.Handles.Get(req.GetArg0()), s.Handles.Get(req.GetArg1()), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.ValidateDirInfoResponse{}, nil

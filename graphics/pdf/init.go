@@ -93,6 +93,12 @@ var (
 	midbitmapWrapHardwareBuffer     jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -119,352 +125,562 @@ func doInit(env *jni.Env) error {
 
 	midbitmapAsShared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "asShared", "()Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.asShared: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.asShared")
 	}
 
 	midbitmapCompress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "compress", "(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.compress: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.compress")
 	}
 
 	midbitmapCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copy", "(Landroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.copy: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.copy")
 	}
 
 	midbitmapCopyPixelsFromBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsFromBuffer", "(Ljava/nio/Buffer;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.copyPixelsFromBuffer: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.copyPixelsFromBuffer")
 	}
 
 	midbitmapCopyPixelsToBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsToBuffer", "(Ljava/nio/Buffer;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.copyPixelsToBuffer: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.copyPixelsToBuffer")
 	}
 
 	midbitmapDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.describeContents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.describeContents")
 	}
 
 	midbitmapEraseColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.eraseColor: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.eraseColor")
 	}
 
 	midbitmapEraseColor1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.eraseColor: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.eraseColor")
 	}
 
 	midbitmapExtractAlpha0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "()Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.extractAlpha: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.extractAlpha")
 	}
 
 	midbitmapExtractAlpha2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "(Landroid/graphics/Paint;[I)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.extractAlpha: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.extractAlpha")
 	}
 
 	midbitmapGetAllocationByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getAllocationByteCount", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getAllocationByteCount: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getAllocationByteCount")
 	}
 
 	midbitmapGetByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getByteCount", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getByteCount: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getByteCount")
 	}
 
 	midbitmapGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColor", "(II)Landroid/graphics/Color;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getColor: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getColor")
 	}
 
 	midbitmapGetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColorSpace", "()Landroid/graphics/ColorSpace;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getColorSpace: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getColorSpace")
 	}
 
 	midbitmapGetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getConfig", "()Landroid/graphics/Bitmap$Config;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getConfig: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getConfig")
 	}
 
 	midbitmapGetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getDensity", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getDensity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getDensity")
 	}
 
 	midbitmapGetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGainmap", "()Landroid/graphics/Gainmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getGainmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getGainmap")
 	}
 
 	midbitmapGetGenerationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGenerationId", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getGenerationId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getGenerationId")
 	}
 
 	midbitmapGetHardwareBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHardwareBuffer", "()Landroid/hardware/HardwareBuffer;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getHardwareBuffer: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getHardwareBuffer")
 	}
 
 	midbitmapGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHeight", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getHeight: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getHeight")
 	}
 
 	midbitmapGetNinePatchChunk, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getNinePatchChunk", "()[B")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getNinePatchChunk: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getNinePatchChunk")
 	}
 
 	midbitmapGetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixel", "(II)I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getPixel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getPixel")
 	}
 
 	midbitmapGetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixels", "([IIIIIII)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getPixels: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getPixels")
 	}
 
 	midbitmapGetRowBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getRowBytes", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getRowBytes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getRowBytes")
 	}
 
 	midbitmapGetScaledHeight1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/graphics/Canvas;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getScaledHeight: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
 	}
 
 	midbitmapGetScaledHeight1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/util/DisplayMetrics;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getScaledHeight: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
 	}
 
 	midbitmapGetScaledHeight1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getScaledHeight: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
 	}
 
 	midbitmapGetScaledWidth1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/graphics/Canvas;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getScaledWidth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
 	}
 
 	midbitmapGetScaledWidth1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/util/DisplayMetrics;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getScaledWidth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
 	}
 
 	midbitmapGetScaledWidth1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getScaledWidth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
 	}
 
 	midbitmapGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getWidth", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.getWidth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.getWidth")
 	}
 
 	midbitmapHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasAlpha", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.hasAlpha: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasAlpha")
 	}
 
 	midbitmapHasGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasGainmap", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.hasGainmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasGainmap")
 	}
 
 	midbitmapHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasMipMap", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.hasMipMap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasMipMap")
 	}
 
 	midbitmapIsMutable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isMutable", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.isMutable: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.isMutable")
 	}
 
 	midbitmapIsPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isPremultiplied", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.isPremultiplied: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.isPremultiplied")
 	}
 
 	midbitmapIsRecycled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isRecycled", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.isRecycled: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.isRecycled")
 	}
 
 	midbitmapPrepareToDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "prepareToDraw", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.prepareToDraw: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.prepareToDraw")
 	}
 
 	midbitmapReconfigure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "reconfigure", "(IILandroid/graphics/Bitmap$Config;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.reconfigure: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.reconfigure")
 	}
 
 	midbitmapRecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "recycle", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.recycle: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.recycle")
 	}
 
 	midbitmapSameAs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "sameAs", "(Landroid/graphics/Bitmap;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.sameAs: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.sameAs")
 	}
 
 	midbitmapSetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setColorSpace", "(Landroid/graphics/ColorSpace;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setColorSpace: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setColorSpace")
 	}
 
 	midbitmapSetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setConfig", "(Landroid/graphics/Bitmap$Config;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setConfig: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setConfig")
 	}
 
 	midbitmapSetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setDensity", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setDensity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setDensity")
 	}
 
 	midbitmapSetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setGainmap", "(Landroid/graphics/Gainmap;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setGainmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setGainmap")
 	}
 
 	midbitmapSetHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasAlpha", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setHasAlpha: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHasAlpha")
 	}
 
 	midbitmapSetHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasMipMap", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setHasMipMap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHasMipMap")
 	}
 
 	midbitmapSetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHeight", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setHeight: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHeight")
 	}
 
 	midbitmapSetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixel", "(III)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setPixel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPixel")
 	}
 
 	midbitmapSetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixels", "([IIIIIII)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setPixels: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPixels")
 	}
 
 	midbitmapSetPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPremultiplied", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setPremultiplied: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPremultiplied")
 	}
 
 	midbitmapSetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setWidth", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.setWidth: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.setWidth")
 	}
 
 	midbitmapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.writeToParcel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.writeToParcel")
 	}
 
 	midbitmapCreateBitmap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIII)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap7_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap1_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap4_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap4_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap5_6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap6_7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap5_8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap7_9, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap3_10, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap4_11, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap5_12, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap4_13, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateBitmap6_14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
 	midbitmapCreateScaledBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createScaledBitmap", "(Landroid/graphics/Bitmap;IIZ)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.createScaledBitmap: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.createScaledBitmap")
 	}
 
 	midbitmapWrapHardwareBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "wrapHardwareBuffer", "(Landroid/hardware/HardwareBuffer;Landroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.wrapHardwareBuffer: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Bitmap.wrapHardwareBuffer")
 	}
 
 	return nil

@@ -74,6 +74,10 @@ func (m *usageStatsManager) GetAppStandbyBucket() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midusageStatsManagerGetAppStandbyBucket == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.getAppStandbyBucket is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midusageStatsManagerGetAppStandbyBucket,
@@ -94,6 +98,10 @@ func (m *usageStatsManager) IsAppInactive(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusageStatsManagerIsAppInactive == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.isAppInactive is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -122,6 +130,10 @@ func (m *usageStatsManager) QueryConfigurations(arg0 int32, arg1 int64, arg2 int
 			callErr = err
 			return err
 		}
+		if midusageStatsManagerQueryConfigurations == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryConfigurations is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -143,6 +155,10 @@ func (m *usageStatsManager) QueryEventStats(arg0 int32, arg1 int64, arg2 int64) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusageStatsManagerQueryEventStats == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryEventStats is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -166,6 +182,10 @@ func (m *usageStatsManager) QueryEvents1(arg0 *jni.Object) (*jni.Object, error) 
 			callErr = err
 			return err
 		}
+		if midusageStatsManagerQueryEvents1 == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryEvents is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -187,6 +207,10 @@ func (m *usageStatsManager) QueryEvents2_1(arg0 int64, arg1 int64) (*jni.Object,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusageStatsManagerQueryEvents2_1 == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryEvents is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -210,6 +234,10 @@ func (m *usageStatsManager) QueryEventsForSelf(arg0 int64, arg1 int64) (*jni.Obj
 			callErr = err
 			return err
 		}
+		if midusageStatsManagerQueryEventsForSelf == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryEventsForSelf is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -231,6 +259,10 @@ func (m *usageStatsManager) QueryUsageStats(arg0 int32, arg1 int64, arg2 int64) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midusageStatsManagerQueryUsageStats == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryUsageStats is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(

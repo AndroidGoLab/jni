@@ -74,6 +74,10 @@ func (m *batteryManager) ComputeChargeTimeRemaining() (int64, error) {
 			callErr = err
 			return err
 		}
+		if midbatteryManagerComputeChargeTimeRemaining == nil {
+			callErr = fmt.Errorf("android.os.BatteryManager.computeChargeTimeRemaining is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			midbatteryManagerComputeChargeTimeRemaining,
@@ -94,6 +98,10 @@ func (m *batteryManager) GetIntProperty(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbatteryManagerGetIntProperty == nil {
+			callErr = fmt.Errorf("android.os.BatteryManager.getIntProperty is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -117,6 +125,10 @@ func (m *batteryManager) GetLongProperty(arg0 int32) (int64, error) {
 			callErr = err
 			return err
 		}
+		if midbatteryManagerGetLongProperty == nil {
+			callErr = fmt.Errorf("android.os.BatteryManager.getLongProperty is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -138,6 +150,10 @@ func (m *batteryManager) GetStringProperty(arg0 int32) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbatteryManagerGetStringProperty == nil {
+			callErr = fmt.Errorf("android.os.BatteryManager.getStringProperty is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -161,6 +177,10 @@ func (m *batteryManager) IsCharging() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midbatteryManagerIsCharging == nil {
+			callErr = fmt.Errorf("android.os.BatteryManager.isCharging is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,

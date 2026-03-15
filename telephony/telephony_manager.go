@@ -74,6 +74,10 @@ func (m *telephonyManager) CanChangeDtmfToneLength() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerCanChangeDtmfToneLength == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.canChangeDtmfToneLength is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerCanChangeDtmfToneLength,
@@ -96,6 +100,10 @@ func (m *telephonyManager) ClearSignalStrengthUpdateRequest(arg0 *jni.Object) er
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerClearSignalStrengthUpdateRequest == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.clearSignalStrengthUpdateRequest is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -114,6 +122,10 @@ func (m *telephonyManager) CreateForPhoneAccountHandle(arg0 *jni.Object) (*jni.O
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerCreateForPhoneAccountHandle == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.createForPhoneAccountHandle is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -137,6 +149,10 @@ func (m *telephonyManager) CreateForSubscriptionId(arg0 int32) (*jni.Object, err
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerCreateForSubscriptionId == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.createForSubscriptionId is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -158,6 +174,10 @@ func (m *telephonyManager) DoesSwitchMultiSimConfigTriggerReboot() (bool, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerDoesSwitchMultiSimConfigTriggerReboot == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.doesSwitchMultiSimConfigTriggerReboot is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -181,6 +201,10 @@ func (m *telephonyManager) GetActiveModemCount() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetActiveModemCount == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getActiveModemCount is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetActiveModemCount,
@@ -202,6 +226,10 @@ func (m *telephonyManager) GetAllCellInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetAllCellInfo == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getAllCellInfo is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetAllCellInfo,
@@ -222,6 +250,10 @@ func (m *telephonyManager) GetAllowedNetworkTypesForReason(arg0 int32) (int64, e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetAllowedNetworkTypesForReason == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getAllowedNetworkTypesForReason is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallLongMethod(
@@ -245,6 +277,10 @@ func (m *telephonyManager) GetCallComposerStatus() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetCallComposerStatus == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCallComposerStatus is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetCallComposerStatus,
@@ -265,6 +301,10 @@ func (m *telephonyManager) GetCallState() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetCallState == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCallState is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -287,6 +327,10 @@ func (m *telephonyManager) GetCallStateForSubscription() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetCallStateForSubscription == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCallStateForSubscription is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetCallStateForSubscription,
@@ -307,6 +351,10 @@ func (m *telephonyManager) GetCardIdForDefaultEuicc() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetCardIdForDefaultEuicc == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCardIdForDefaultEuicc is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -329,6 +377,10 @@ func (m *telephonyManager) GetCarrierConfig() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetCarrierConfig == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCarrierConfig is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetCarrierConfig,
@@ -349,6 +401,10 @@ func (m *telephonyManager) GetCarrierIdFromSimMccMnc() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetCarrierIdFromSimMccMnc == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCarrierIdFromSimMccMnc is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -371,6 +427,10 @@ func (m *telephonyManager) GetCarrierRestrictionStatus(arg0 *jni.Object, arg1 *j
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetCarrierRestrictionStatus == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCarrierRestrictionStatus is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -389,6 +449,10 @@ func (m *telephonyManager) GetCellLocation() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetCellLocation == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCellLocation is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -411,6 +475,10 @@ func (m *telephonyManager) GetDataActivity() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetDataActivity == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getDataActivity is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetDataActivity,
@@ -431,6 +499,10 @@ func (m *telephonyManager) GetDataNetworkType() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetDataNetworkType == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getDataNetworkType is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -453,6 +525,10 @@ func (m *telephonyManager) GetDataState() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetDataState == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getDataState is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetDataState,
@@ -473,6 +549,10 @@ func (m *telephonyManager) GetDeviceId0() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetDeviceId0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getDeviceId is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -495,6 +575,10 @@ func (m *telephonyManager) GetDeviceId1_1(arg0 int32) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetDeviceId1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getDeviceId is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -519,6 +603,10 @@ func (m *telephonyManager) GetDeviceSoftwareVersion() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetDeviceSoftwareVersion == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getDeviceSoftwareVersion is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetDeviceSoftwareVersion,
@@ -541,6 +629,10 @@ func (m *telephonyManager) GetEquivalentHomePlmns() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetEquivalentHomePlmns == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getEquivalentHomePlmns is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetEquivalentHomePlmns,
@@ -561,6 +653,10 @@ func (m *telephonyManager) GetForbiddenPlmns() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetForbiddenPlmns == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getForbiddenPlmns is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -583,6 +679,10 @@ func (m *telephonyManager) GetGroupIdLevel1() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetGroupIdLevel1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getGroupIdLevel1 is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetGroupIdLevel1,
@@ -604,6 +704,10 @@ func (m *telephonyManager) GetIccAuthentication(arg0 int32, arg1 int32, arg2 str
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetIccAuthentication == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getIccAuthentication is not available on this device")
+			return callErr
 		}
 
 		jArg2, err := env.NewStringUTF(arg2)
@@ -633,6 +737,10 @@ func (m *telephonyManager) GetImei0() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetImei0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getImei is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetImei0,
@@ -654,6 +762,10 @@ func (m *telephonyManager) GetImei1_1(arg0 int32) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetImei1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getImei is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -678,6 +790,10 @@ func (m *telephonyManager) GetLine1Number() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetLine1Number == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getLine1Number is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetLine1Number,
@@ -699,6 +815,10 @@ func (m *telephonyManager) GetManualNetworkSelectionPlmn() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetManualNetworkSelectionPlmn == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getManualNetworkSelectionPlmn is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -722,6 +842,10 @@ func (m *telephonyManager) GetManufacturerCode0() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetManufacturerCode0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getManufacturerCode is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetManufacturerCode0,
@@ -743,6 +867,10 @@ func (m *telephonyManager) GetManufacturerCode1_1(arg0 int32) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetManufacturerCode1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getManufacturerCode is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -767,6 +895,10 @@ func (m *telephonyManager) GetMeid0() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetMeid0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getMeid is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetMeid0,
@@ -788,6 +920,10 @@ func (m *telephonyManager) GetMeid1_1(arg0 int32) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetMeid1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getMeid is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -812,6 +948,10 @@ func (m *telephonyManager) GetMmsUAProfUrl() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetMmsUAProfUrl == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getMmsUAProfUrl is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetMmsUAProfUrl,
@@ -833,6 +973,10 @@ func (m *telephonyManager) GetMmsUserAgent() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetMmsUserAgent == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getMmsUserAgent is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -856,6 +1000,10 @@ func (m *telephonyManager) GetNai() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetNai == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNai is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetNai,
@@ -878,6 +1026,10 @@ func (m *telephonyManager) GetNetworkCountryIso0() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetNetworkCountryIso0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkCountryIso is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetNetworkCountryIso0,
@@ -899,6 +1051,10 @@ func (m *telephonyManager) GetNetworkCountryIso1_1(arg0 int32) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetNetworkCountryIso1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkCountryIso is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -923,6 +1079,10 @@ func (m *telephonyManager) GetNetworkOperator() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetNetworkOperator == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkOperator is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetNetworkOperator,
@@ -944,6 +1104,10 @@ func (m *telephonyManager) GetNetworkOperatorName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetNetworkOperatorName == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkOperatorName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -967,6 +1131,10 @@ func (m *telephonyManager) GetNetworkSelectionMode() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetNetworkSelectionMode == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkSelectionMode is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetNetworkSelectionMode,
@@ -980,7 +1148,7 @@ func (m *telephonyManager) GetNetworkSelectionMode() (int32, error) {
 }
 
 // GetNetworkSlicingConfiguration calls android.telephony.TelephonyManager.getNetworkSlicingConfiguration.
-func (m *telephonyManager) GetNetworkSlicingConfiguration(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *telephonyManager) GetNetworkSlicingConfiguration(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -988,10 +1156,14 @@ func (m *telephonyManager) GetNetworkSlicingConfiguration(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetNetworkSlicingConfiguration == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkSlicingConfiguration is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtelephonyManagerGetNetworkSlicingConfiguration, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midtelephonyManagerGetNetworkSlicingConfiguration, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1006,6 +1178,10 @@ func (m *telephonyManager) GetNetworkSpecifier() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetNetworkSpecifier == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkSpecifier is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1029,6 +1205,10 @@ func (m *telephonyManager) GetNetworkType() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetNetworkType == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkType is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetNetworkType,
@@ -1049,6 +1229,10 @@ func (m *telephonyManager) GetPhoneAccountHandle() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetPhoneAccountHandle == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getPhoneAccountHandle is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1071,6 +1255,10 @@ func (m *telephonyManager) GetPhoneCount() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetPhoneCount == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getPhoneCount is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetPhoneCount,
@@ -1091,6 +1279,10 @@ func (m *telephonyManager) GetPhoneType() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetPhoneType == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getPhoneType is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1113,6 +1305,10 @@ func (m *telephonyManager) GetPreferredOpportunisticDataSubscription() (int32, e
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetPreferredOpportunisticDataSubscription == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getPreferredOpportunisticDataSubscription is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetPreferredOpportunisticDataSubscription,
@@ -1133,6 +1329,10 @@ func (m *telephonyManager) GetPrimaryImei() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetPrimaryImei == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getPrimaryImei is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1156,6 +1356,10 @@ func (m *telephonyManager) GetServiceState0() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetServiceState0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getServiceState is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetServiceState0,
@@ -1176,6 +1380,10 @@ func (m *telephonyManager) GetServiceState1_1(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetServiceState1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getServiceState is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1199,6 +1407,10 @@ func (m *telephonyManager) GetSignalStrength() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSignalStrength == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSignalStrength is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetSignalStrength,
@@ -1220,6 +1432,10 @@ func (m *telephonyManager) GetSimCarrierId() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSimCarrierId == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimCarrierId is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetSimCarrierId,
@@ -1240,6 +1456,10 @@ func (m *telephonyManager) GetSimCarrierIdName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetSimCarrierIdName == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimCarrierIdName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1263,6 +1483,10 @@ func (m *telephonyManager) GetSimCountryIso() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSimCountryIso == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimCountryIso is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetSimCountryIso,
@@ -1284,6 +1508,10 @@ func (m *telephonyManager) GetSimOperator() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetSimOperator == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimOperator is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1307,6 +1535,10 @@ func (m *telephonyManager) GetSimOperatorName() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSimOperatorName == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimOperatorName is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetSimOperatorName,
@@ -1328,6 +1560,10 @@ func (m *telephonyManager) GetSimSerialNumber() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetSimSerialNumber == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimSerialNumber is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1351,6 +1587,10 @@ func (m *telephonyManager) GetSimSpecificCarrierId() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSimSpecificCarrierId == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimSpecificCarrierId is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetSimSpecificCarrierId,
@@ -1371,6 +1611,10 @@ func (m *telephonyManager) GetSimSpecificCarrierIdName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetSimSpecificCarrierIdName == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimSpecificCarrierIdName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1394,6 +1638,10 @@ func (m *telephonyManager) GetSimState0() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSimState0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimState is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetSimState0,
@@ -1414,6 +1662,10 @@ func (m *telephonyManager) GetSimState1_1(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetSimState1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSimState is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1437,6 +1689,10 @@ func (m *telephonyManager) GetSubscriberId() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSubscriberId == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSubscriberId is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetSubscriberId,
@@ -1459,6 +1715,10 @@ func (m *telephonyManager) GetSubscriptionId0() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSubscriptionId0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSubscriptionId is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetSubscriptionId0,
@@ -1479,6 +1739,10 @@ func (m *telephonyManager) GetSubscriptionId1_1(arg0 *jni.Object) (int32, error)
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetSubscriptionId1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSubscriptionId is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -1502,6 +1766,10 @@ func (m *telephonyManager) GetSupportedModemCount() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetSupportedModemCount == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSupportedModemCount is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetSupportedModemCount,
@@ -1522,6 +1790,10 @@ func (m *telephonyManager) GetSupportedRadioAccessFamily() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetSupportedRadioAccessFamily == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getSupportedRadioAccessFamily is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -1544,6 +1816,10 @@ func (m *telephonyManager) GetTypeAllocationCode0() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetTypeAllocationCode0 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getTypeAllocationCode is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetTypeAllocationCode0,
@@ -1565,6 +1841,10 @@ func (m *telephonyManager) GetTypeAllocationCode1_1(arg0 int32) (string, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetTypeAllocationCode1_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getTypeAllocationCode is not available on this device")
+			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -1589,6 +1869,10 @@ func (m *telephonyManager) GetUiccCardsInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetUiccCardsInfo == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getUiccCardsInfo is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetUiccCardsInfo,
@@ -1609,6 +1893,10 @@ func (m *telephonyManager) GetVisualVoicemailPackageName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetVisualVoicemailPackageName == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getVisualVoicemailPackageName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1632,6 +1920,10 @@ func (m *telephonyManager) GetVoiceMailAlphaTag() (string, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetVoiceMailAlphaTag == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getVoiceMailAlphaTag is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midtelephonyManagerGetVoiceMailAlphaTag,
@@ -1653,6 +1945,10 @@ func (m *telephonyManager) GetVoiceMailNumber() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetVoiceMailNumber == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getVoiceMailNumber is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -1676,6 +1972,10 @@ func (m *telephonyManager) GetVoiceNetworkType() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerGetVoiceNetworkType == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getVoiceNetworkType is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerGetVoiceNetworkType,
@@ -1696,6 +1996,10 @@ func (m *telephonyManager) GetVoicemailRingtoneUri(arg0 *jni.Object) (*jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetVoicemailRingtoneUri == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getVoicemailRingtoneUri is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -1719,6 +2023,10 @@ func (m *telephonyManager) HasCarrierPrivileges() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerHasCarrierPrivileges == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.hasCarrierPrivileges is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerHasCarrierPrivileges,
@@ -1740,6 +2048,10 @@ func (m *telephonyManager) HasIccCard() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerHasIccCard == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.hasIccCard is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1763,6 +2075,10 @@ func (m *telephonyManager) IccCloseLogicalChannel(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIccCloseLogicalChannel == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.iccCloseLogicalChannel is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1785,6 +2101,10 @@ func (m *telephonyManager) IccExchangeSimIO(arg0 int32, arg1 int32, arg2 int32, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIccExchangeSimIO == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.iccExchangeSimIO is not available on this device")
+			return callErr
 		}
 
 		jArg5, err := env.NewStringUTF(arg5)
@@ -1813,6 +2133,10 @@ func (m *telephonyManager) IccOpenLogicalChannel1(arg0 string) (*jni.Object, err
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIccOpenLogicalChannel1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.iccOpenLogicalChannel is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1839,6 +2163,10 @@ func (m *telephonyManager) IccOpenLogicalChannel2_1(arg0 string, arg1 int32) (*j
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIccOpenLogicalChannel2_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.iccOpenLogicalChannel is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -1864,6 +2192,10 @@ func (m *telephonyManager) IccTransmitApduBasicChannel(arg0 int32, arg1 int32, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIccTransmitApduBasicChannel == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.iccTransmitApduBasicChannel is not available on this device")
+			return callErr
 		}
 
 		jArg5, err := env.NewStringUTF(arg5)
@@ -1893,6 +2225,10 @@ func (m *telephonyManager) IccTransmitApduLogicalChannel(arg0 int32, arg1 int32,
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIccTransmitApduLogicalChannel == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.iccTransmitApduLogicalChannel is not available on this device")
+			return callErr
+		}
 
 		jArg6, err := env.NewStringUTF(arg6)
 		if err != nil {
@@ -1921,6 +2257,10 @@ func (m *telephonyManager) IsConcurrentVoiceAndDataSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsConcurrentVoiceAndDataSupported == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isConcurrentVoiceAndDataSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsConcurrentVoiceAndDataSupported,
@@ -1942,6 +2282,10 @@ func (m *telephonyManager) IsDataCapable() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsDataCapable == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isDataCapable is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -1965,6 +2309,10 @@ func (m *telephonyManager) IsDataConnectionAllowed() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsDataConnectionAllowed == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isDataConnectionAllowed is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsDataConnectionAllowed,
@@ -1987,6 +2335,10 @@ func (m *telephonyManager) IsDataEnabled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsDataEnabled == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isDataEnabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsDataEnabled,
@@ -2008,6 +2360,10 @@ func (m *telephonyManager) IsDataEnabledForReason(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsDataEnabledForReason == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isDataEnabledForReason is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -2032,6 +2388,10 @@ func (m *telephonyManager) IsDataRoamingEnabled() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsDataRoamingEnabled == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isDataRoamingEnabled is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsDataRoamingEnabled,
@@ -2053,6 +2413,10 @@ func (m *telephonyManager) IsDeviceSmsCapable() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsDeviceSmsCapable == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isDeviceSmsCapable is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2076,6 +2440,10 @@ func (m *telephonyManager) IsDeviceVoiceCapable() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsDeviceVoiceCapable == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isDeviceVoiceCapable is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsDeviceVoiceCapable,
@@ -2097,6 +2465,10 @@ func (m *telephonyManager) IsEmergencyNumber(arg0 string) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsEmergencyNumber == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isEmergencyNumber is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2125,6 +2497,10 @@ func (m *telephonyManager) IsHearingAidCompatibilitySupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsHearingAidCompatibilitySupported == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isHearingAidCompatibilitySupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsHearingAidCompatibilitySupported,
@@ -2147,6 +2523,10 @@ func (m *telephonyManager) IsManualNetworkSelectionAllowed() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsManualNetworkSelectionAllowed == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isManualNetworkSelectionAllowed is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsManualNetworkSelectionAllowed,
@@ -2168,6 +2548,10 @@ func (m *telephonyManager) IsModemEnabledForSlot(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsModemEnabledForSlot == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isModemEnabledForSlot is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -2192,6 +2576,10 @@ func (m *telephonyManager) IsMultiSimSupported() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsMultiSimSupported == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isMultiSimSupported is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midtelephonyManagerIsMultiSimSupported,
@@ -2212,6 +2600,10 @@ func (m *telephonyManager) IsNetworkRoaming() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsNetworkRoaming == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isNetworkRoaming is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2235,6 +2627,10 @@ func (m *telephonyManager) IsPremiumCapabilityAvailableForPurchase(arg0 int32) (
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsPremiumCapabilityAvailableForPurchase == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isPremiumCapabilityAvailableForPurchase is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2257,6 +2653,10 @@ func (m *telephonyManager) IsRadioInterfaceCapabilitySupported(arg0 string) (boo
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsRadioInterfaceCapabilitySupported == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isRadioInterfaceCapabilitySupported is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2285,6 +2685,10 @@ func (m *telephonyManager) IsRttSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsRttSupported == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isRttSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsRttSupported,
@@ -2306,6 +2710,10 @@ func (m *telephonyManager) IsSmsCapable() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsSmsCapable == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isSmsCapable is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -2329,6 +2737,10 @@ func (m *telephonyManager) IsTtyModeSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsTtyModeSupported == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isTtyModeSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsTtyModeSupported,
@@ -2351,6 +2763,10 @@ func (m *telephonyManager) IsVoiceCapable() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsVoiceCapable == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isVoiceCapable is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsVoiceCapable,
@@ -2372,6 +2788,10 @@ func (m *telephonyManager) IsVoicemailVibrationEnabled(arg0 *jni.Object) (bool, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerIsVoicemailVibrationEnabled == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isVoicemailVibrationEnabled is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -2396,6 +2816,10 @@ func (m *telephonyManager) IsWorldPhone() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerIsWorldPhone == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.isWorldPhone is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerIsWorldPhone,
@@ -2418,6 +2842,10 @@ func (m *telephonyManager) Listen(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerListen == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.listen is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2436,6 +2864,10 @@ func (m *telephonyManager) PurchasePremiumCapability(arg0 int32, arg1 *jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerPurchasePremiumCapability == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.purchasePremiumCapability is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -2456,6 +2888,10 @@ func (m *telephonyManager) RebootModem() error {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerRebootModem == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.rebootModem is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midtelephonyManagerRebootModem,
@@ -2473,6 +2909,10 @@ func (m *telephonyManager) RegisterTelephonyCallback3(arg0 int32, arg1 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerRegisterTelephonyCallback3 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.registerTelephonyCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -2493,6 +2933,10 @@ func (m *telephonyManager) RegisterTelephonyCallback2_1(arg0 *jni.Object, arg1 *
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerRegisterTelephonyCallback2_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.registerTelephonyCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2512,6 +2956,10 @@ func (m *telephonyManager) RequestCellInfoUpdate(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerRequestCellInfoUpdate == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.requestCellInfoUpdate is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2530,6 +2978,10 @@ func (m *telephonyManager) RequestNetworkScan3(arg0 *jni.Object, arg1 *jni.Objec
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerRequestNetworkScan3 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.requestNetworkScan is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -2553,6 +3005,10 @@ func (m *telephonyManager) RequestNetworkScan4_1(arg0 int32, arg1 *jni.Object, a
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerRequestNetworkScan4_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.requestNetworkScan is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -2574,6 +3030,10 @@ func (m *telephonyManager) SendDialerSpecialCode(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSendDialerSpecialCode == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.sendDialerSpecialCode is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2597,6 +3057,10 @@ func (m *telephonyManager) SendEnvelopeWithStatus(arg0 string) (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSendEnvelopeWithStatus == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.sendEnvelopeWithStatus is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2624,6 +3088,10 @@ func (m *telephonyManager) SendVisualVoicemailSms(arg0 string, arg1 int32, arg2 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSendVisualVoicemailSms == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.sendVisualVoicemailSms is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2653,6 +3121,10 @@ func (m *telephonyManager) SetAllowedNetworkTypesForReason(arg0 int32, arg1 int6
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetAllowedNetworkTypesForReason == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setAllowedNetworkTypesForReason is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2672,6 +3144,10 @@ func (m *telephonyManager) SetCallComposerStatus(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetCallComposerStatus == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setCallComposerStatus is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2690,6 +3166,10 @@ func (m *telephonyManager) SetDataEnabled(arg0 bool) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSetDataEnabled == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setDataEnabled is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -2713,6 +3193,10 @@ func (m *telephonyManager) SetDataEnabledForReason(arg0 int32, arg1 bool) error 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSetDataEnabledForReason == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setDataEnabledForReason is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -2738,6 +3222,10 @@ func (m *telephonyManager) SetForbiddenPlmns(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetForbiddenPlmns == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setForbiddenPlmns is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -2759,6 +3247,10 @@ func (m *telephonyManager) SetLine1NumberForDisplay(arg0 string, arg1 string) (b
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSetLine1NumberForDisplay == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setLine1NumberForDisplay is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2792,6 +3284,10 @@ func (m *telephonyManager) SetNetworkSelectionModeAutomatic() error {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetNetworkSelectionModeAutomatic == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setNetworkSelectionModeAutomatic is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midtelephonyManagerSetNetworkSelectionModeAutomatic,
@@ -2809,6 +3305,10 @@ func (m *telephonyManager) SetNetworkSelectionModeManual2(arg0 string, arg1 bool
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSetNetworkSelectionModeManual2 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setNetworkSelectionModeManual is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -2842,6 +3342,10 @@ func (m *telephonyManager) SetNetworkSelectionModeManual3_1(arg0 string, arg1 bo
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetNetworkSelectionModeManual3_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setNetworkSelectionModeManual is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -2874,6 +3378,10 @@ func (m *telephonyManager) SetOperatorBrandOverride(arg0 string) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetOperatorBrandOverride == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setOperatorBrandOverride is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -2901,6 +3409,10 @@ func (m *telephonyManager) SetPreferredNetworkTypeToGlobal() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetPreferredNetworkTypeToGlobal == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setPreferredNetworkTypeToGlobal is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midtelephonyManagerSetPreferredNetworkTypeToGlobal,
@@ -2922,6 +3434,10 @@ func (m *telephonyManager) SetPreferredOpportunisticDataSubscription(arg0 int32,
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSetPreferredOpportunisticDataSubscription == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setPreferredOpportunisticDataSubscription is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -2947,6 +3463,10 @@ func (m *telephonyManager) SetSignalStrengthUpdateRequest(arg0 *jni.Object) erro
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetSignalStrengthUpdateRequest == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setSignalStrengthUpdateRequest is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2966,6 +3486,10 @@ func (m *telephonyManager) SetVisualVoicemailSmsFilterSettings(arg0 *jni.Object)
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetVisualVoicemailSmsFilterSettings == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setVisualVoicemailSmsFilterSettings is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -2984,6 +3508,10 @@ func (m *telephonyManager) SetVoiceMailNumber(arg0 string, arg1 string) (bool, e
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSetVoiceMailNumber == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setVoiceMailNumber is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -3017,6 +3545,10 @@ func (m *telephonyManager) SetVoicemailRingtoneUri(arg0 *jni.Object, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSetVoicemailRingtoneUri == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setVoicemailRingtoneUri is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -3035,6 +3567,10 @@ func (m *telephonyManager) SetVoicemailVibrationEnabled(arg0 *jni.Object, arg1 b
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerSetVoicemailVibrationEnabled == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.setVoicemailVibrationEnabled is not available on this device")
+			return callErr
 		}
 
 		var jArg1 uint8
@@ -3060,6 +3596,10 @@ func (m *telephonyManager) SwitchMultiSimConfig(arg0 int32) error {
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerSwitchMultiSimConfig == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.switchMultiSimConfig is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -3078,6 +3618,10 @@ func (m *telephonyManager) UnregisterTelephonyCallback(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerUnregisterTelephonyCallback == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.unregisterTelephonyCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -3098,6 +3642,10 @@ func (m *telephonyManager) UpdateAvailableNetworks(arg0 *jni.Object, arg1 *jni.O
 			callErr = err
 			return err
 		}
+		if midtelephonyManagerUpdateAvailableNetworks == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.updateAvailableNetworks is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -3109,13 +3657,17 @@ func (m *telephonyManager) UpdateAvailableNetworks(arg0 *jni.Object, arg1 *jni.O
 }
 
 // UploadCallComposerPicture5 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *telephonyManager) UploadCallComposerPicture5(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *telephonyManager) UploadCallComposerPicture5(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerUploadCallComposerPicture5 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.uploadCallComposerPicture is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -3125,7 +3677,7 @@ func (m *telephonyManager) UploadCallComposerPicture5(arg0 *jni.Object, arg1 str
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtelephonyManagerUploadCallComposerPicture5, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
+			midtelephonyManagerUploadCallComposerPicture5, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -3133,13 +3685,17 @@ func (m *telephonyManager) UploadCallComposerPicture5(arg0 *jni.Object, arg1 str
 }
 
 // UploadCallComposerPicture5_1 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *telephonyManager) UploadCallComposerPicture5_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *telephonyManager) UploadCallComposerPicture5_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerUploadCallComposerPicture5_1 == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.uploadCallComposerPicture is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -3149,7 +3705,7 @@ func (m *telephonyManager) UploadCallComposerPicture5_1(arg0 *jni.Object, arg1 s
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtelephonyManagerUploadCallComposerPicture5_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
+			midtelephonyManagerUploadCallComposerPicture5_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -3164,6 +3720,10 @@ func (m *telephonyManager) GetMaximumCallComposerPictureSize() (int64, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midtelephonyManagerGetMaximumCallComposerPictureSize == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getMaximumCallComposerPictureSize is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallStaticLongMethod(
 			(*jni.Class)(unsafe.Pointer(clstelephonyManager)),

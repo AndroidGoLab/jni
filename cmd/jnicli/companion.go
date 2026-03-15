@@ -389,9 +389,6 @@ var companionCompanionDeviceManagerStartSystemDataTransferCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
 		resp, err := client.StartSystemDataTransfer(ctx, req)
 		if err != nil {
 			return err
@@ -482,7 +479,6 @@ func init() {
 	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
 	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
 	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerStartSystemDataTransferCmd)
 	companionCompanionDeviceManagerStopObservingDevicePresence1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerStopObservingDevicePresence1Cmd)

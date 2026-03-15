@@ -39,6 +39,12 @@ var (
 	midvibratorVibrate3_6                  jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -63,84 +69,132 @@ func doInit(env *jni.Env) error {
 	}
 	clsvibrator = env.NewGlobalRef(&c.Object)
 
-	midvibratorAreEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "areEffectsSupported", "(Lint///;)[I")
+	midvibratorAreEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "areEffectsSupported", "([I)[I")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.areEffectsSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.areEffectsSupported")
 	}
 
 	midvibratorAreEnvelopeEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "areEnvelopeEffectsSupported", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.areEnvelopeEffectsSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.areEnvelopeEffectsSupported")
 	}
 
-	midvibratorArePrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "arePrimitivesSupported", "(Lint///;)[Z")
+	midvibratorArePrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "arePrimitivesSupported", "([I)[Z")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.arePrimitivesSupported: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.arePrimitivesSupported")
 	}
 
 	midvibratorGetEnvelopeEffectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getEnvelopeEffectInfo", "()Landroid/os/vibrator/VibratorEnvelopeEffectInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.getEnvelopeEffectInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.getEnvelopeEffectInfo")
 	}
 
 	midvibratorGetFrequencyProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getFrequencyProfile", "()Landroid/os/vibrator/VibratorFrequencyProfile;")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.getFrequencyProfile: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.getFrequencyProfile")
 	}
 
 	midvibratorGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getId", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.getId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.getId")
 	}
 
-	midvibratorGetPrimitiveDurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getPrimitiveDurations", "(Lint///;)[I")
+	midvibratorGetPrimitiveDurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getPrimitiveDurations", "([I)[I")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.getPrimitiveDurations: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.getPrimitiveDurations")
 	}
 
 	midvibratorGetQFactor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getQFactor", "()F")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.getQFactor: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.getQFactor")
 	}
 
 	midvibratorGetResonantFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getResonantFrequency", "()F")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.getResonantFrequency: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.getResonantFrequency")
 	}
 
 	midvibratorVibrate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(Landroid/os/VibrationEffect;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.vibrate")
 	}
 
 	midvibratorVibrate2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/media/AudioAttributes;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.vibrate")
 	}
 
 	midvibratorVibrate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/os/VibrationAttributes;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.vibrate")
 	}
 
 	midvibratorVibrate1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(J)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.vibrate")
 	}
 
 	midvibratorVibrate2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(JLandroid/media/AudioAttributes;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.vibrate")
 	}
 
 	midvibratorVibrate2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "([JI)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.vibrate")
 	}
 
 	midvibratorVibrate3_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "([JILandroid/media/AudioAttributes;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.vibrate")
 	}
 
 	return nil

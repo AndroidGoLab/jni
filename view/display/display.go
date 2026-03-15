@@ -32,6 +32,10 @@ func (m *display) GetAppVsyncOffsetNanos() (int64, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetAppVsyncOffsetNanos == nil {
+			callErr = fmt.Errorf("android.view.Display.getAppVsyncOffsetNanos is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			middisplayGetAppVsyncOffsetNanos,
@@ -53,6 +57,10 @@ func (m *display) GetCurrentSizeRange(arg0 *jni.Object, arg1 *jni.Object) error 
 			callErr = err
 			return err
 		}
+		if middisplayGetCurrentSizeRange == nil {
+			callErr = fmt.Errorf("android.view.Display.getCurrentSizeRange is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -71,6 +79,10 @@ func (m *display) GetCutout() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetCutout == nil {
+			callErr = fmt.Errorf("android.view.Display.getCutout is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -93,6 +105,10 @@ func (m *display) GetDeviceProductInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetDeviceProductInfo == nil {
+			callErr = fmt.Errorf("android.view.Display.getDeviceProductInfo is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middisplayGetDeviceProductInfo,
@@ -113,6 +129,10 @@ func (m *display) GetDisplayId() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetDisplayId == nil {
+			callErr = fmt.Errorf("android.view.Display.getDisplayId is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -135,6 +155,10 @@ func (m *display) GetFlags() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetFlags == nil {
+			callErr = fmt.Errorf("android.view.Display.getFlags is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middisplayGetFlags,
@@ -155,6 +179,10 @@ func (m *display) GetHdrCapabilities() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetHdrCapabilities == nil {
+			callErr = fmt.Errorf("android.view.Display.getHdrCapabilities is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -177,6 +205,10 @@ func (m *display) GetHdrSdrRatio() (float32, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetHdrSdrRatio == nil {
+			callErr = fmt.Errorf("android.view.Display.getHdrSdrRatio is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
 			middisplayGetHdrSdrRatio,
@@ -197,6 +229,10 @@ func (m *display) GetHeight() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetHeight == nil {
+			callErr = fmt.Errorf("android.view.Display.getHeight is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -219,6 +255,10 @@ func (m *display) GetHighestHdrSdrRatio() (float32, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetHighestHdrSdrRatio == nil {
+			callErr = fmt.Errorf("android.view.Display.getHighestHdrSdrRatio is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
 			middisplayGetHighestHdrSdrRatio,
@@ -240,6 +280,10 @@ func (m *display) GetMetrics(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middisplayGetMetrics == nil {
+			callErr = fmt.Errorf("android.view.Display.getMetrics is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -258,6 +302,10 @@ func (m *display) GetMode() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetMode == nil {
+			callErr = fmt.Errorf("android.view.Display.getMode is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -279,6 +327,10 @@ func (m *display) GetName() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetName == nil {
+			callErr = fmt.Errorf("android.view.Display.getName is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -302,6 +354,10 @@ func (m *display) GetOrientation() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetOrientation == nil {
+			callErr = fmt.Errorf("android.view.Display.getOrientation is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middisplayGetOrientation,
@@ -322,6 +378,10 @@ func (m *display) GetOverlaySupport() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetOverlaySupport == nil {
+			callErr = fmt.Errorf("android.view.Display.getOverlaySupport is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -344,6 +404,10 @@ func (m *display) GetPixelFormat() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetPixelFormat == nil {
+			callErr = fmt.Errorf("android.view.Display.getPixelFormat is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middisplayGetPixelFormat,
@@ -364,6 +428,10 @@ func (m *display) GetPreferredWideGamutColorSpace() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetPreferredWideGamutColorSpace == nil {
+			callErr = fmt.Errorf("android.view.Display.getPreferredWideGamutColorSpace is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -386,6 +454,10 @@ func (m *display) GetPresentationDeadlineNanos() (int64, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetPresentationDeadlineNanos == nil {
+			callErr = fmt.Errorf("android.view.Display.getPresentationDeadlineNanos is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
 			middisplayGetPresentationDeadlineNanos,
@@ -407,6 +479,10 @@ func (m *display) GetRealMetrics(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middisplayGetRealMetrics == nil {
+			callErr = fmt.Errorf("android.view.Display.getRealMetrics is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -425,6 +501,10 @@ func (m *display) GetRealSize(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetRealSize == nil {
+			callErr = fmt.Errorf("android.view.Display.getRealSize is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -445,6 +525,10 @@ func (m *display) GetRectSize(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middisplayGetRectSize == nil {
+			callErr = fmt.Errorf("android.view.Display.getRectSize is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -463,6 +547,10 @@ func (m *display) GetRefreshRate() (float32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetRefreshRate == nil {
+			callErr = fmt.Errorf("android.view.Display.getRefreshRate is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
@@ -485,6 +573,10 @@ func (m *display) GetRotation() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetRotation == nil {
+			callErr = fmt.Errorf("android.view.Display.getRotation is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middisplayGetRotation,
@@ -505,6 +597,10 @@ func (m *display) GetRoundedCorner(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetRoundedCorner == nil {
+			callErr = fmt.Errorf("android.view.Display.getRoundedCorner is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -528,6 +624,10 @@ func (m *display) GetShape() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetShape == nil {
+			callErr = fmt.Errorf("android.view.Display.getShape is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middisplayGetShape,
@@ -549,6 +649,10 @@ func (m *display) GetSize(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if middisplayGetSize == nil {
+			callErr = fmt.Errorf("android.view.Display.getSize is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -567,6 +671,10 @@ func (m *display) GetState() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetState == nil {
+			callErr = fmt.Errorf("android.view.Display.getState is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -588,6 +696,10 @@ func (m *display) GetSuggestedFrameRate(arg0 int32) (float32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetSuggestedFrameRate == nil {
+			callErr = fmt.Errorf("android.view.Display.getSuggestedFrameRate is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
@@ -611,6 +723,10 @@ func (m *display) GetSupportedModes() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetSupportedModes == nil {
+			callErr = fmt.Errorf("android.view.Display.getSupportedModes is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			middisplayGetSupportedModes,
@@ -631,6 +747,10 @@ func (m *display) GetSupportedRefreshRates() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayGetSupportedRefreshRates == nil {
+			callErr = fmt.Errorf("android.view.Display.getSupportedRefreshRates is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -653,6 +773,10 @@ func (m *display) GetWidth() (int32, error) {
 			callErr = err
 			return err
 		}
+		if middisplayGetWidth == nil {
+			callErr = fmt.Errorf("android.view.Display.getWidth is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			middisplayGetWidth,
@@ -673,6 +797,10 @@ func (m *display) HasArrSupport() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayHasArrSupport == nil {
+			callErr = fmt.Errorf("android.view.Display.hasArrSupport is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -696,6 +824,10 @@ func (m *display) IsHdr() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middisplayIsHdr == nil {
+			callErr = fmt.Errorf("android.view.Display.isHdr is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middisplayIsHdr,
@@ -717,6 +849,10 @@ func (m *display) IsHdrSdrRatioAvailable() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayIsHdrSdrRatioAvailable == nil {
+			callErr = fmt.Errorf("android.view.Display.isHdrSdrRatioAvailable is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -740,6 +876,10 @@ func (m *display) IsMinimalPostProcessingSupported() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middisplayIsMinimalPostProcessingSupported == nil {
+			callErr = fmt.Errorf("android.view.Display.isMinimalPostProcessingSupported is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middisplayIsMinimalPostProcessingSupported,
@@ -761,6 +901,10 @@ func (m *display) IsValid() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayIsValid == nil {
+			callErr = fmt.Errorf("android.view.Display.isValid is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -784,6 +928,10 @@ func (m *display) IsWideColorGamut() (bool, error) {
 			callErr = err
 			return err
 		}
+		if middisplayIsWideColorGamut == nil {
+			callErr = fmt.Errorf("android.view.Display.isWideColorGamut is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			middisplayIsWideColorGamut,
@@ -806,6 +954,10 @@ func (m *display) RegisterHdrSdrRatioChangedListener(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
+		if middisplayRegisterHdrSdrRatioChangedListener == nil {
+			callErr = fmt.Errorf("android.view.Display.registerHdrSdrRatioChangedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -824,6 +976,10 @@ func (m *display) ToString() (string, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayToString == nil {
+			callErr = fmt.Errorf("android.view.Display.toString is not available on this device")
+			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
@@ -846,6 +1002,10 @@ func (m *display) UnregisterHdrSdrRatioChangedListener(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middisplayUnregisterHdrSdrRatioChangedListener == nil {
+			callErr = fmt.Errorf("android.view.Display.unregisterHdrSdrRatioChangedListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

@@ -32,6 +32,10 @@ func (m *vpnService) OnBind(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midvpnServiceOnBind == nil {
+			callErr = fmt.Errorf("android.net.VpnService.onBind is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -54,6 +58,10 @@ func (m *vpnService) OnRevoke() error {
 			callErr = err
 			return err
 		}
+		if midvpnServiceOnRevoke == nil {
+			callErr = fmt.Errorf("android.net.VpnService.onRevoke is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midvpnServiceOnRevoke,
@@ -71,6 +79,10 @@ func (m *vpnService) Protect1(arg0 int32) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midvpnServiceProtect1 == nil {
+			callErr = fmt.Errorf("android.net.VpnService.protect is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -95,6 +107,10 @@ func (m *vpnService) Protect1_1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midvpnServiceProtect1_1 == nil {
+			callErr = fmt.Errorf("android.net.VpnService.protect is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -117,6 +133,10 @@ func (m *vpnService) Protect1_2(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midvpnServiceProtect1_2 == nil {
+			callErr = fmt.Errorf("android.net.VpnService.protect is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -141,6 +161,10 @@ func (m *vpnService) SetUnderlyingNetworks(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
+		if midvpnServiceSetUnderlyingNetworks == nil {
+			callErr = fmt.Errorf("android.net.VpnService.setUnderlyingNetworks is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -163,6 +187,10 @@ func (m *vpnService) Prepare(arg0 *jni.Object) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midvpnServicePrepare == nil {
+			callErr = fmt.Errorf("android.net.VpnService.prepare is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(

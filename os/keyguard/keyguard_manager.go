@@ -74,6 +74,10 @@ func (m *keyguardManager) AddKeyguardLockedStateListener(arg0 *jni.Object, arg1 
 			callErr = err
 			return err
 		}
+		if midkeyguardManagerAddKeyguardLockedStateListener == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.addKeyguardLockedStateListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -92,6 +96,10 @@ func (m *keyguardManager) CreateConfirmDeviceCredentialIntent(arg0 string, arg1 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyguardManagerCreateConfirmDeviceCredentialIntent == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.createConfirmDeviceCredentialIntent is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -124,6 +132,10 @@ func (m *keyguardManager) ExitKeyguardSecurely(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midkeyguardManagerExitKeyguardSecurely == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.exitKeyguardSecurely is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -142,6 +154,10 @@ func (m *keyguardManager) InKeyguardRestrictedInputMode() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyguardManagerInKeyguardRestrictedInputMode == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.inKeyguardRestrictedInputMode is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -165,6 +181,10 @@ func (m *keyguardManager) IsDeviceLocked() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midkeyguardManagerIsDeviceLocked == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.isDeviceLocked is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midkeyguardManagerIsDeviceLocked,
@@ -186,6 +206,10 @@ func (m *keyguardManager) IsDeviceSecure() (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyguardManagerIsDeviceSecure == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.isDeviceSecure is not available on this device")
+			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -209,6 +233,10 @@ func (m *keyguardManager) IsKeyguardLocked() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midkeyguardManagerIsKeyguardLocked == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.isKeyguardLocked is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midkeyguardManagerIsKeyguardLocked,
@@ -231,6 +259,10 @@ func (m *keyguardManager) IsKeyguardSecure() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midkeyguardManagerIsKeyguardSecure == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.isKeyguardSecure is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midkeyguardManagerIsKeyguardSecure,
@@ -252,6 +284,10 @@ func (m *keyguardManager) NewKeyguardLock(arg0 string) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyguardManagerNewKeyguardLock == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.newKeyguardLock is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -279,6 +315,10 @@ func (m *keyguardManager) RemoveKeyguardLockedStateListener(arg0 *jni.Object) er
 			callErr = err
 			return err
 		}
+		if midkeyguardManagerRemoveKeyguardLockedStateListener == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.removeKeyguardLockedStateListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -297,6 +337,10 @@ func (m *keyguardManager) RequestDismissKeyguard(arg0 *jni.Object, arg1 *jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyguardManagerRequestDismissKeyguard == nil {
+			callErr = fmt.Errorf("android.app.KeyguardManager.requestDismissKeyguard is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(

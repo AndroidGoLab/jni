@@ -32,6 +32,10 @@ func (m *sEService) GetReaders() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midsEServiceGetReaders == nil {
+			callErr = fmt.Errorf("android.se.omapi.SEService.getReaders is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midsEServiceGetReaders,
@@ -52,6 +56,10 @@ func (m *sEService) GetUiccReader(arg0 int32) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midsEServiceGetUiccReader == nil {
+			callErr = fmt.Errorf("android.se.omapi.SEService.getUiccReader is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -75,6 +83,10 @@ func (m *sEService) GetVersion() (string, error) {
 			callErr = err
 			return err
 		}
+		if midsEServiceGetVersion == nil {
+			callErr = fmt.Errorf("android.se.omapi.SEService.getVersion is not available on this device")
+			return callErr
+		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
 			midsEServiceGetVersion,
@@ -97,6 +109,10 @@ func (m *sEService) IsConnected() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midsEServiceIsConnected == nil {
+			callErr = fmt.Errorf("android.se.omapi.SEService.isConnected is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midsEServiceIsConnected,
@@ -118,6 +134,10 @@ func (m *sEService) Shutdown() error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midsEServiceShutdown == nil {
+			callErr = fmt.Errorf("android.se.omapi.SEService.shutdown is not available on this device")
+			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,

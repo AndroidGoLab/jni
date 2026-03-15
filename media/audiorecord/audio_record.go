@@ -32,6 +32,10 @@ func (m *audioRecord) GetActiveMicrophones() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetActiveMicrophones == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getActiveMicrophones is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioRecordGetActiveMicrophones,
@@ -52,6 +56,10 @@ func (m *audioRecord) GetActiveRecordingConfiguration() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetActiveRecordingConfiguration == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getActiveRecordingConfiguration is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -74,6 +82,10 @@ func (m *audioRecord) GetAudioFormat() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetAudioFormat == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getAudioFormat is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioRecordGetAudioFormat,
@@ -94,6 +106,10 @@ func (m *audioRecord) GetAudioSessionId() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetAudioSessionId == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getAudioSessionId is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -116,6 +132,10 @@ func (m *audioRecord) GetAudioSource() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetAudioSource == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getAudioSource is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioRecordGetAudioSource,
@@ -136,6 +156,10 @@ func (m *audioRecord) GetBufferSizeInFrames() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetBufferSizeInFrames == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getBufferSizeInFrames is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -158,6 +182,10 @@ func (m *audioRecord) GetChannelConfiguration() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetChannelConfiguration == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getChannelConfiguration is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioRecordGetChannelConfiguration,
@@ -178,6 +206,10 @@ func (m *audioRecord) GetChannelCount() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetChannelCount == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getChannelCount is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -200,6 +232,10 @@ func (m *audioRecord) GetFormat() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetFormat == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getFormat is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioRecordGetFormat,
@@ -220,6 +256,10 @@ func (m *audioRecord) GetLogSessionId() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetLogSessionId == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getLogSessionId is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -242,6 +282,10 @@ func (m *audioRecord) GetMetrics() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetMetrics == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getMetrics is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioRecordGetMetrics,
@@ -262,6 +306,10 @@ func (m *audioRecord) GetNotificationMarkerPosition() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetNotificationMarkerPosition == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getNotificationMarkerPosition is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -284,6 +332,10 @@ func (m *audioRecord) GetPositionNotificationPeriod() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetPositionNotificationPeriod == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getPositionNotificationPeriod is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioRecordGetPositionNotificationPeriod,
@@ -304,6 +356,10 @@ func (m *audioRecord) GetPreferredDevice() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetPreferredDevice == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getPreferredDevice is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -326,6 +382,10 @@ func (m *audioRecord) GetRecordingState() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetRecordingState == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getRecordingState is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioRecordGetRecordingState,
@@ -346,6 +406,10 @@ func (m *audioRecord) GetRoutedDevice() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetRoutedDevice == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getRoutedDevice is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -368,6 +432,10 @@ func (m *audioRecord) GetRoutedDevices() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetRoutedDevices == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getRoutedDevices is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midaudioRecordGetRoutedDevices,
@@ -388,6 +456,10 @@ func (m *audioRecord) GetSampleRate() (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetSampleRate == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getSampleRate is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -410,6 +482,10 @@ func (m *audioRecord) GetState() (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordGetState == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getState is not available on this device")
+			return callErr
+		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midaudioRecordGetState,
@@ -430,6 +506,10 @@ func (m *audioRecord) GetTimestamp(arg0 *jni.Object, arg1 int32) (int32, error) 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetTimestamp == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getTimestamp is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -453,6 +533,10 @@ func (m *audioRecord) IsPrivacySensitive() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordIsPrivacySensitive == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.isPrivacySensitive is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midaudioRecordIsPrivacySensitive,
@@ -474,6 +558,10 @@ func (m *audioRecord) Read3(arg0 *jni.Object, arg1 int32, arg2 int32) (int32, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordRead3 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.read is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -497,6 +585,10 @@ func (m *audioRecord) Read4_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int
 			callErr = err
 			return err
 		}
+		if midaudioRecordRead4_1 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.read is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -518,6 +610,10 @@ func (m *audioRecord) Read4_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordRead4_2 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.read is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -541,6 +637,10 @@ func (m *audioRecord) Read3_3(arg0 *jni.Object, arg1 int32, arg2 int32) (int32, 
 			callErr = err
 			return err
 		}
+		if midaudioRecordRead3_3 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.read is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -562,6 +662,10 @@ func (m *audioRecord) Read4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordRead4_4 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.read is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -585,6 +689,10 @@ func (m *audioRecord) RegisterAudioRecordingCallback(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
+		if midaudioRecordRegisterAudioRecordingCallback == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.registerAudioRecordingCallback is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -604,6 +712,10 @@ func (m *audioRecord) Release() error {
 			callErr = err
 			return err
 		}
+		if midaudioRecordRelease == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.release is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midaudioRecordRelease,
@@ -621,6 +733,10 @@ func (m *audioRecord) RemoveOnRoutingChangedListener1(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordRemoveOnRoutingChangedListener1 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.removeOnRoutingChangedListener is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -641,6 +757,10 @@ func (m *audioRecord) RemoveOnRoutingChangedListener1_1(arg0 *jni.Object) error 
 			callErr = err
 			return err
 		}
+		if midaudioRecordRemoveOnRoutingChangedListener1_1 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.removeOnRoutingChangedListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -660,6 +780,10 @@ func (m *audioRecord) SetLogSessionId(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midaudioRecordSetLogSessionId == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.setLogSessionId is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -678,6 +802,10 @@ func (m *audioRecord) SetNotificationMarkerPosition(arg0 int32) (int32, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordSetNotificationMarkerPosition == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.setNotificationMarkerPosition is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -701,6 +829,10 @@ func (m *audioRecord) SetPositionNotificationPeriod(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
+		if midaudioRecordSetPositionNotificationPeriod == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.setPositionNotificationPeriod is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -722,6 +854,10 @@ func (m *audioRecord) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordSetPreferredDevice == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.setPreferredDevice is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -746,6 +882,10 @@ func (m *audioRecord) SetPreferredMicrophoneDirection(arg0 int32) (bool, error) 
 			callErr = err
 			return err
 		}
+		if midaudioRecordSetPreferredMicrophoneDirection == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.setPreferredMicrophoneDirection is not available on this device")
+			return callErr
+		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
@@ -768,6 +908,10 @@ func (m *audioRecord) SetPreferredMicrophoneFieldDimension(arg0 float32) (bool, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordSetPreferredMicrophoneFieldDimension == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.setPreferredMicrophoneFieldDimension is not available on this device")
+			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -792,6 +936,10 @@ func (m *audioRecord) SetRecordPositionUpdateListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midaudioRecordSetRecordPositionUpdateListener == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.setRecordPositionUpdateListener is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -811,6 +959,10 @@ func (m *audioRecord) StartRecording0() error {
 			callErr = err
 			return err
 		}
+		if midaudioRecordStartRecording0 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.startRecording is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midaudioRecordStartRecording0,
@@ -828,6 +980,10 @@ func (m *audioRecord) StartRecording1_1(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordStartRecording1_1 == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.startRecording is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -848,6 +1004,10 @@ func (m *audioRecord) Stop() error {
 			callErr = err
 			return err
 		}
+		if midaudioRecordStop == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.stop is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midaudioRecordStop,
@@ -865,6 +1025,10 @@ func (m *audioRecord) UnregisterAudioRecordingCallback(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordUnregisterAudioRecordingCallback == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.unregisterAudioRecordingCallback is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -884,6 +1048,10 @@ func (m *audioRecord) GetMinBufferSize(arg0 int32, arg1 int32, arg2 int32) (int3
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midaudioRecordGetMinBufferSize == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getMinBufferSize is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticIntMethod(

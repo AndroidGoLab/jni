@@ -149,6 +149,12 @@ var (
 	midintentParseUri                       jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -175,632 +181,1010 @@ func doInit(env *jni.Env) error {
 
 	midintentAddCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "addCategory", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.addCategory: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.addCategory")
 	}
 
 	midintentAddFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "addFlags", "(I)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.addFlags: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.addFlags")
 	}
 
 	midintentClone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "clone", "()Ljava/lang/Object;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.clone: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.clone")
 	}
 
 	midintentCloneFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "cloneFilter", "()Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.cloneFilter: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.cloneFilter")
 	}
 
 	midintentDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.describeContents: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.describeContents")
 	}
 
 	midintentFillIn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "fillIn", "(Landroid/content/Intent;I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.fillIn: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.fillIn")
 	}
 
 	midintentFilterEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "filterEquals", "(Landroid/content/Intent;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.filterEquals: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.filterEquals")
 	}
 
 	midintentFilterHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "filterHashCode", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.filterHashCode: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.filterHashCode")
 	}
 
 	midintentGetAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getAction", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getAction: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getAction")
 	}
 
 	midintentGetBooleanArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getBooleanArrayExtra", "(Ljava/lang/String;)[Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getBooleanArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getBooleanArrayExtra")
 	}
 
 	midintentGetBooleanExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getBooleanExtra", "(Ljava/lang/String;Z)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getBooleanExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getBooleanExtra")
 	}
 
 	midintentGetBundleExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getBundleExtra", "(Ljava/lang/String;)Landroid/os/Bundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getBundleExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getBundleExtra")
 	}
 
 	midintentGetByteArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getByteArrayExtra", "(Ljava/lang/String;)[B")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getByteArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getByteArrayExtra")
 	}
 
 	midintentGetByteExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getByteExtra", "(Ljava/lang/String;B)B")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getByteExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getByteExtra")
 	}
 
 	midintentGetCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCategories", "()Ljava/util/Set;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getCategories: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getCategories")
 	}
 
 	midintentGetCharArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharArrayExtra", "(Ljava/lang/String;)[C")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getCharArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getCharArrayExtra")
 	}
 
 	midintentGetCharExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharExtra", "(Ljava/lang/String;C)C")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getCharExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getCharExtra")
 	}
 
 	midintentGetCharSequenceArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceArrayExtra", "(Ljava/lang/String;)[Ljava/lang/CharSequence;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getCharSequenceArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getCharSequenceArrayExtra")
 	}
 
 	midintentGetCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getCharSequenceArrayListExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getCharSequenceArrayListExtra")
 	}
 
 	midintentGetCharSequenceExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceExtra", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getCharSequenceExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getCharSequenceExtra")
 	}
 
 	midintentGetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getClipData", "()Landroid/content/ClipData;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getClipData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getClipData")
 	}
 
 	midintentGetComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getComponent", "()Landroid/content/ComponentName;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getComponent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getComponent")
 	}
 
 	midintentGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getData", "()Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getData")
 	}
 
 	midintentGetDataString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getDataString", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getDataString: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getDataString")
 	}
 
 	midintentGetDoubleArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getDoubleArrayExtra", "(Ljava/lang/String;)[D")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getDoubleArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getDoubleArrayExtra")
 	}
 
 	midintentGetDoubleExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getDoubleExtra", "(Ljava/lang/String;D)D")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getDoubleExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getDoubleExtra")
 	}
 
 	midintentGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getExtras", "()Landroid/os/Bundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getExtras")
 	}
 
 	midintentGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getFlags", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getFlags: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getFlags")
 	}
 
 	midintentGetFloatArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getFloatArrayExtra", "(Ljava/lang/String;)[F")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getFloatArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getFloatArrayExtra")
 	}
 
 	midintentGetFloatExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getFloatExtra", "(Ljava/lang/String;F)F")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getFloatExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getFloatExtra")
 	}
 
 	midintentGetIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIdentifier", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getIdentifier: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getIdentifier")
 	}
 
 	midintentGetIntArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntArrayExtra", "(Ljava/lang/String;)[I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getIntArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getIntArrayExtra")
 	}
 
 	midintentGetIntExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntExtra", "(Ljava/lang/String;I)I")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getIntExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getIntExtra")
 	}
 
 	midintentGetIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntegerArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getIntegerArrayListExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getIntegerArrayListExtra")
 	}
 
 	midintentGetLongArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getLongArrayExtra", "(Ljava/lang/String;)[J")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getLongArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getLongArrayExtra")
 	}
 
 	midintentGetLongExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getLongExtra", "(Ljava/lang/String;J)J")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getLongExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getLongExtra")
 	}
 
 	midintentGetPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getPackage", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getPackage")
 	}
 
 	midintentGetParcelableArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getParcelableArrayExtra", "(Ljava/lang/String;)[Landroid/os/Parcelable;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getParcelableArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getParcelableArrayExtra")
 	}
 
 	midintentGetScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getScheme", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getScheme: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getScheme")
 	}
 
 	midintentGetSelector, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getSelector", "()Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getSelector: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getSelector")
 	}
 
 	midintentGetSerializableExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getSerializableExtra", "(Ljava/lang/String;)Ljava/io/Serializable;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getSerializableExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getSerializableExtra")
 	}
 
 	midintentGetShortArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getShortArrayExtra", "(Ljava/lang/String;)[S")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getShortArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getShortArrayExtra")
 	}
 
 	midintentGetShortExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getShortExtra", "(Ljava/lang/String;S)S")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getShortExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getShortExtra")
 	}
 
 	midintentGetSourceBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getSourceBounds", "()Landroid/graphics/Rect;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getSourceBounds: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getSourceBounds")
 	}
 
 	midintentGetStringArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringArrayExtra", "(Ljava/lang/String;)[Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getStringArrayExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getStringArrayExtra")
 	}
 
 	midintentGetStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getStringArrayListExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getStringArrayListExtra")
 	}
 
 	midintentGetStringExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringExtra", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getStringExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getStringExtra")
 	}
 
 	midintentGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getType", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getType")
 	}
 
 	midintentHasCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "hasCategory", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.hasCategory: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.hasCategory")
 	}
 
 	midintentHasExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "hasExtra", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.hasExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.hasExtra")
 	}
 
 	midintentHasFileDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "hasFileDescriptors", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.hasFileDescriptors: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.hasFileDescriptors")
 	}
 
 	midintentIsMismatchingFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "isMismatchingFilter", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.isMismatchingFilter: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.isMismatchingFilter")
 	}
 
 	midintentPutCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putCharSequenceArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putCharSequenceArrayListExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putCharSequenceArrayListExtra")
 	}
 
 	midintentPutExtra2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Landroid/os/Parcelable;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Z)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Z)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;B)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[B)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;C)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[C)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_9, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;D)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_10, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[D)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_11, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;F)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_12, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[F)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_13, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;I)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_14, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[I)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_15, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_16, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_17, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Ljava/lang/CharSequence;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_18, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_19, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_20, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;J)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_21, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[J)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_22, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;S)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtra2_23, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[S)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
 	midintentPutExtras1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtras", "(Landroid/content/Intent;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtras")
 	}
 
 	midintentPutExtras1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtras", "(Landroid/os/Bundle;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putExtras")
 	}
 
 	midintentPutIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putIntegerArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putIntegerArrayListExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putIntegerArrayListExtra")
 	}
 
 	midintentPutParcelableArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putParcelableArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putParcelableArrayListExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putParcelableArrayListExtra")
 	}
 
 	midintentPutStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putStringArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.putStringArrayListExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.putStringArrayListExtra")
 	}
 
 	midintentReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "readFromParcel", "(Landroid/os/Parcel;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.readFromParcel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.readFromParcel")
 	}
 
 	midintentRemoveCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeCategory", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.removeCategory: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.removeCategory")
 	}
 
 	midintentRemoveExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeExtra", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.removeExtra: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.removeExtra")
 	}
 
 	midintentRemoveFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeFlags", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.removeFlags: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.removeFlags")
 	}
 
 	midintentRemoveLaunchSecurityProtection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeLaunchSecurityProtection", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.removeLaunchSecurityProtection: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.removeLaunchSecurityProtection")
 	}
 
 	midintentReplaceExtras1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "replaceExtras", "(Landroid/content/Intent;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.replaceExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.replaceExtras")
 	}
 
 	midintentReplaceExtras1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "replaceExtras", "(Landroid/os/Bundle;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.replaceExtras: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.replaceExtras")
 	}
 
 	midintentResolveActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveActivity", "(Landroid/content/pm/PackageManager;)Landroid/content/ComponentName;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.resolveActivity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.resolveActivity")
 	}
 
 	midintentResolveActivityInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveActivityInfo", "(Landroid/content/pm/PackageManager;I)Landroid/content/pm/ActivityInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.resolveActivityInfo: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.resolveActivityInfo")
 	}
 
 	midintentResolveType1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveType", "(Landroid/content/ContentResolver;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.resolveType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.resolveType")
 	}
 
 	midintentResolveType1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveType", "(Landroid/content/Context;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.resolveType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.resolveType")
 	}
 
 	midintentResolveTypeIfNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveTypeIfNeeded", "(Landroid/content/ContentResolver;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.resolveTypeIfNeeded: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.resolveTypeIfNeeded")
 	}
 
 	midintentSetAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setAction", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setAction: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setAction")
 	}
 
 	midintentSetClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClass", "(Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setClass: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setClass")
 	}
 
 	midintentSetClassName2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClassName", "(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setClassName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setClassName")
 	}
 
 	midintentSetClassName2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClassName", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setClassName: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setClassName")
 	}
 
 	midintentSetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClipData", "(Landroid/content/ClipData;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setClipData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setClipData")
 	}
 
 	midintentSetComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setComponent", "(Landroid/content/ComponentName;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setComponent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setComponent")
 	}
 
 	midintentSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setData", "(Landroid/net/Uri;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setData: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setData")
 	}
 
 	midintentSetDataAndNormalize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setDataAndNormalize", "(Landroid/net/Uri;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setDataAndNormalize: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setDataAndNormalize")
 	}
 
 	midintentSetDataAndType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setDataAndType", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setDataAndType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setDataAndType")
 	}
 
 	midintentSetDataAndTypeAndNormalize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setDataAndTypeAndNormalize", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setDataAndTypeAndNormalize: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setDataAndTypeAndNormalize")
 	}
 
 	midintentSetExtrasClassLoader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setExtrasClassLoader", "(Ljava/lang/ClassLoader;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setExtrasClassLoader: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setExtrasClassLoader")
 	}
 
 	midintentSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setFlags", "(I)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setFlags: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setFlags")
 	}
 
 	midintentSetIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setIdentifier", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setIdentifier: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setIdentifier")
 	}
 
 	midintentSetPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setPackage", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setPackage: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setPackage")
 	}
 
 	midintentSetSelector, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setSelector", "(Landroid/content/Intent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setSelector: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setSelector")
 	}
 
 	midintentSetSourceBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setSourceBounds", "(Landroid/graphics/Rect;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setSourceBounds: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setSourceBounds")
 	}
 
 	midintentSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setType", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setType")
 	}
 
 	midintentSetTypeAndNormalize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setTypeAndNormalize", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setTypeAndNormalize: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.setTypeAndNormalize")
 	}
 
 	midintentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "toString", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.toString: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.toString")
 	}
 
 	midintentToURI, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "toURI", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.toURI: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.toURI")
 	}
 
 	midintentToUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "toUri", "(I)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.toUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.toUri")
 	}
 
 	midintentWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.writeToParcel: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.writeToParcel")
 	}
 
 	midintentCreateChooser2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.createChooser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.createChooser")
 	}
 
 	midintentCreateChooser3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/String;Landroid/content/IntentSender;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.createChooser: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.createChooser")
 	}
 
 	midintentGetIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getIntent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getIntent")
 	}
 
 	midintentGetIntentOld, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntentOld", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getIntentOld: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.getIntentOld")
 	}
 
 	midintentMakeMainActivity, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "makeMainActivity", "(Landroid/content/ComponentName;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.makeMainActivity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.makeMainActivity")
 	}
 
 	midintentMakeMainSelectorActivity, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "makeMainSelectorActivity", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.makeMainSelectorActivity: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.makeMainSelectorActivity")
 	}
 
 	midintentMakeRestartActivityTask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "makeRestartActivityTask", "(Landroid/content/ComponentName;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.makeRestartActivityTask: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.makeRestartActivityTask")
 	}
 
 	midintentNormalizeMimeType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "normalizeMimeType", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.normalizeMimeType: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.normalizeMimeType")
 	}
 
 	midintentParseIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "parseIntent", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.parseIntent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.parseIntent")
 	}
 
 	midintentParseUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "parseUri", "(Ljava/lang/String;I)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.parseUri: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.Intent.parseUri")
 	}
 
 	return nil

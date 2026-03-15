@@ -44,6 +44,12 @@ var (
 	midcompanionDeviceManagerStopObservingDevicePresence1_1           jni.MethodID
 )
 
+// initSkipped records methods that were not found during init.
+// These are typically methods that do not exist on the current device's
+// Android API level. Calls to such methods will return an error at
+// invocation time instead of preventing the entire service from loading.
+var initSkipped []string
+
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -70,107 +76,170 @@ func doInit(env *jni.Env) error {
 
 	midcompanionDeviceManagerAssociate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "associate", "(Landroid/companion/AssociationRequest;Ljava/util/concurrent/Executor;Landroid/companion/CompanionDeviceManager$Callback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.associate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.associate")
 	}
 
 	midcompanionDeviceManagerAttachSystemDataTransport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "attachSystemDataTransport", "(ILjava/io/InputStream;Ljava/io/OutputStream;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.attachSystemDataTransport: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.attachSystemDataTransport")
 	}
 
 	midcompanionDeviceManagerBuildAssociationCancellationIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "buildAssociationCancellationIntent", "()Landroid/content/IntentSender;")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.buildAssociationCancellationIntent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.buildAssociationCancellationIntent")
 	}
 
 	midcompanionDeviceManagerBuildPermissionTransferUserConsentIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "buildPermissionTransferUserConsentIntent", "(I)Landroid/content/IntentSender;")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.buildPermissionTransferUserConsentIntent: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.buildPermissionTransferUserConsentIntent")
 	}
 
 	midcompanionDeviceManagerDetachSystemDataTransport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "detachSystemDataTransport", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.detachSystemDataTransport: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.detachSystemDataTransport")
 	}
 
 	midcompanionDeviceManagerDisableSystemDataSyncForTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "disableSystemDataSyncForTypes", "(II)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.disableSystemDataSyncForTypes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.disableSystemDataSyncForTypes")
 	}
 
 	midcompanionDeviceManagerDisassociate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "disassociate", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.disassociate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.disassociate")
 	}
 
 	midcompanionDeviceManagerDisassociate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "disassociate", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.disassociate: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.disassociate")
 	}
 
 	midcompanionDeviceManagerEnableSystemDataSyncForTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "enableSystemDataSyncForTypes", "(II)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.enableSystemDataSyncForTypes: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.enableSystemDataSyncForTypes")
 	}
 
 	midcompanionDeviceManagerGetAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getAssociations", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.getAssociations: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.getAssociations")
 	}
 
 	midcompanionDeviceManagerGetMyAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getMyAssociations", "()Ljava/util/List;")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.getMyAssociations: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.getMyAssociations")
 	}
 
 	midcompanionDeviceManagerHasNotificationAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "hasNotificationAccess", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.hasNotificationAccess: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.hasNotificationAccess")
 	}
 
 	midcompanionDeviceManagerIsPermissionTransferUserConsented, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "isPermissionTransferUserConsented", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.isPermissionTransferUserConsented: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.isPermissionTransferUserConsented")
 	}
 
 	midcompanionDeviceManagerRemoveBond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "removeBond", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.removeBond: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.removeBond")
 	}
 
 	midcompanionDeviceManagerRequestNotificationAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "requestNotificationAccess", "(Landroid/content/ComponentName;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.requestNotificationAccess: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.requestNotificationAccess")
 	}
 
 	midcompanionDeviceManagerSetDeviceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "setDeviceId", "(ILandroid/companion/DeviceId;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.setDeviceId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.setDeviceId")
 	}
 
 	midcompanionDeviceManagerStartObservingDevicePresence1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startObservingDevicePresence", "(Landroid/companion/ObservingDevicePresenceRequest;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startObservingDevicePresence: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.startObservingDevicePresence")
 	}
 
 	midcompanionDeviceManagerStartObservingDevicePresence1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startObservingDevicePresence", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startObservingDevicePresence: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.startObservingDevicePresence")
 	}
 
-	midcompanionDeviceManagerStartSystemDataTransfer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startSystemDataTransfer", "(ILjava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Landroid/companion/CompanionException>;)V")
+	midcompanionDeviceManagerStartSystemDataTransfer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startSystemDataTransfer", "(ILjava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startSystemDataTransfer: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.startSystemDataTransfer")
 	}
 
 	midcompanionDeviceManagerStopObservingDevicePresence1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "stopObservingDevicePresence", "(Landroid/companion/ObservingDevicePresenceRequest;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.stopObservingDevicePresence: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.stopObservingDevicePresence")
 	}
 
 	midcompanionDeviceManagerStopObservingDevicePresence1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "stopObservingDevicePresence", "(Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.CompanionDeviceManager.stopObservingDevicePresence: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.companion.CompanionDeviceManager.stopObservingDevicePresence")
 	}
 
 	return nil

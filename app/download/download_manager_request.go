@@ -32,6 +32,10 @@ func (m *downloadManagerRequest) AddRequestHeader(arg0 string, arg1 string) (*jn
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestAddRequestHeader == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.addRequestHeader is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -63,6 +67,10 @@ func (m *downloadManagerRequest) AllowScanningByMediaScanner() error {
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestAllowScanningByMediaScanner == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.allowScanningByMediaScanner is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			middownloadManagerRequestAllowScanningByMediaScanner,
@@ -80,6 +88,10 @@ func (m *downloadManagerRequest) SetAllowedNetworkTypes(arg0 int32) (*jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRequestSetAllowedNetworkTypes == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setAllowedNetworkTypes is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -102,6 +114,10 @@ func (m *downloadManagerRequest) SetAllowedOverMetered(arg0 bool) (*jni.Object, 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRequestSetAllowedOverMetered == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setAllowedOverMetered is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -129,6 +145,10 @@ func (m *downloadManagerRequest) SetAllowedOverRoaming(arg0 bool) (*jni.Object, 
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestSetAllowedOverRoaming == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setAllowedOverRoaming is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -155,6 +175,10 @@ func (m *downloadManagerRequest) SetDescription(arg0 string) (*jni.Object, error
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestSetDescription == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setDescription is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -180,6 +204,10 @@ func (m *downloadManagerRequest) SetDestinationInExternalFilesDir(arg0 *jni.Obje
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRequestSetDestinationInExternalFilesDir == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setDestinationInExternalFilesDir is not available on this device")
+			return callErr
 		}
 
 		jArg1, err := env.NewStringUTF(arg1)
@@ -213,6 +241,10 @@ func (m *downloadManagerRequest) SetDestinationInExternalPublicDir(arg0 string, 
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestSetDestinationInExternalPublicDir == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setDestinationInExternalPublicDir is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -244,6 +276,10 @@ func (m *downloadManagerRequest) SetDestinationUri(arg0 *jni.Object) (*jni.Objec
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestSetDestinationUri == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setDestinationUri is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -265,6 +301,10 @@ func (m *downloadManagerRequest) SetMimeType(arg0 string) (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRequestSetMimeType == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setMimeType is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -292,6 +332,10 @@ func (m *downloadManagerRequest) SetNotificationVisibility(arg0 int32) (*jni.Obj
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestSetNotificationVisibility == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setNotificationVisibility is not available on this device")
+			return callErr
+		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -313,6 +357,10 @@ func (m *downloadManagerRequest) SetRequiresCharging(arg0 bool) (*jni.Object, er
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRequestSetRequiresCharging == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setRequiresCharging is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -340,6 +388,10 @@ func (m *downloadManagerRequest) SetRequiresDeviceIdle(arg0 bool) (*jni.Object, 
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestSetRequiresDeviceIdle == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setRequiresDeviceIdle is not available on this device")
+			return callErr
+		}
 		var jArg0 uint8
 		if arg0 {
 			jArg0 = 1
@@ -365,6 +417,10 @@ func (m *downloadManagerRequest) SetShowRunningNotification(arg0 bool) (*jni.Obj
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRequestSetShowRunningNotification == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setShowRunningNotification is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {
@@ -392,6 +448,10 @@ func (m *downloadManagerRequest) SetTitle(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
+		if middownloadManagerRequestSetTitle == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setTitle is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -417,6 +477,10 @@ func (m *downloadManagerRequest) SetVisibleInDownloadsUi(arg0 bool) (*jni.Object
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if middownloadManagerRequestSetVisibleInDownloadsUi == nil {
+			callErr = fmt.Errorf("android.app.DownloadManager$Request.setVisibleInDownloadsUi is not available on this device")
+			return callErr
 		}
 		var jArg0 uint8
 		if arg0 {

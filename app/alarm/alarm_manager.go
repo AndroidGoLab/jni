@@ -74,6 +74,10 @@ func (m *alarmManager) CanScheduleExactAlarms() (bool, error) {
 			callErr = err
 			return err
 		}
+		if midalarmManagerCanScheduleExactAlarms == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.canScheduleExactAlarms is not available on this device")
+			return callErr
+		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
 			midalarmManagerCanScheduleExactAlarms,
@@ -96,6 +100,10 @@ func (m *alarmManager) Cancel1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midalarmManagerCancel1 == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.cancel is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -114,6 +122,10 @@ func (m *alarmManager) Cancel1_1(arg0 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerCancel1_1 == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.cancel is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -134,6 +146,10 @@ func (m *alarmManager) CancelAll() error {
 			callErr = err
 			return err
 		}
+		if midalarmManagerCancelAll == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.cancelAll is not available on this device")
+			return callErr
+		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midalarmManagerCancelAll,
@@ -151,6 +167,10 @@ func (m *alarmManager) GetNextAlarmClock() (*jni.Object, error) {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerGetNextAlarmClock == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.getNextAlarmClock is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -173,6 +193,10 @@ func (m *alarmManager) Set(arg0 int32, arg1 int64, arg2 *jni.Object) error {
 			callErr = err
 			return err
 		}
+		if midalarmManagerSet == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.set is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -191,6 +215,10 @@ func (m *alarmManager) SetAlarmClock(arg0 *jni.Object, arg1 *jni.Object) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerSetAlarmClock == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setAlarmClock is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -211,6 +239,10 @@ func (m *alarmManager) SetAndAllowWhileIdle(arg0 int32, arg1 int64, arg2 *jni.Ob
 			callErr = err
 			return err
 		}
+		if midalarmManagerSetAndAllowWhileIdle == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setAndAllowWhileIdle is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -229,6 +261,10 @@ func (m *alarmManager) SetExact(arg0 int32, arg1 int64, arg2 *jni.Object) error 
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerSetExact == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setExact is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -249,6 +285,10 @@ func (m *alarmManager) SetExactAndAllowWhileIdle(arg0 int32, arg1 int64, arg2 *j
 			callErr = err
 			return err
 		}
+		if midalarmManagerSetExactAndAllowWhileIdle == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setExactAndAllowWhileIdle is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -267,6 +307,10 @@ func (m *alarmManager) SetInexactRepeating(arg0 int32, arg1 int64, arg2 int64, a
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerSetInexactRepeating == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setInexactRepeating is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -287,6 +331,10 @@ func (m *alarmManager) SetRepeating(arg0 int32, arg1 int64, arg2 int64, arg3 *jn
 			callErr = err
 			return err
 		}
+		if midalarmManagerSetRepeating == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setRepeating is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -306,6 +354,10 @@ func (m *alarmManager) SetTime(arg0 int64) error {
 			callErr = err
 			return err
 		}
+		if midalarmManagerSetTime == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setTime is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -324,6 +376,10 @@ func (m *alarmManager) SetTimeZone(arg0 string) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerSetTimeZone == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setTimeZone is not available on this device")
+			return callErr
 		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
@@ -348,6 +404,10 @@ func (m *alarmManager) SetWindow4(arg0 int32, arg1 int64, arg2 int64, arg3 *jni.
 			callErr = err
 			return err
 		}
+		if midalarmManagerSetWindow4 == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setWindow is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -366,6 +426,10 @@ func (m *alarmManager) SetWindow6_1(arg0 int32, arg1 int64, arg2 int64, arg3 str
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midalarmManagerSetWindow6_1 == nil {
+			callErr = fmt.Errorf("android.app.AlarmManager.setWindow is not available on this device")
+			return callErr
 		}
 
 		jArg3, err := env.NewStringUTF(arg3)
