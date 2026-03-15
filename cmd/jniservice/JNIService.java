@@ -19,8 +19,15 @@ public class JNIService {
             System.err.println("jniservice: load failed: " + t);
             System.exit(1);
         }
-        // runServer (called from JNI_OnLoad) blocks until the gRPC server
-        // shuts down, so this point is reached only on clean exit.
-        System.err.println("jniservice: server exited");
+        System.err.println("jniservice: server started, waiting...");
+        // Keep the JVM alive so the Go goroutine serving gRPC can run.
+        // JNI_OnLoad starts the server in a goroutine and returns.
+        synchronized (JNIService.class) {
+            try {
+                JNIService.class.wait();
+            } catch (InterruptedException e) {
+                // Exit on interrupt.
+            }
+        }
     }
 }

@@ -339,6 +339,20 @@ flowchart TD
 | `make lint` | Run golangci-lint | golangci-lint |
 | `make clean` | Remove all generated files | -- |
 
+## E2E Test Verification
+
+Run `make test-emulator` to test against a connected device or emulator. Tests skip when `JNICTL_E2E_ADDR` is not set.
+
+<details>
+<summary>Verified platforms (click to expand)</summary>
+
+| Type | Device | Android | API | ABI | Build | Date | Passed | Total |
+|------|--------|---------|-----|-----|-------|------|--------|-------|
+| Phone | Pixel 8a | 16 | 36 | arm64-v8a | BP4A.260205.001 | 2026-03-14 | 21 | 21 |
+| Emulator | sdk_gphone64_x86_64 | 15 | 35 | x86_64 | | 2026-03-14 | 21 | 21 |
+
+</details>
+
 ## Adding a New Android API Package
 
 1. Create `spec/java/{package}.yaml` with the Java class, methods, and `go_import` path.
