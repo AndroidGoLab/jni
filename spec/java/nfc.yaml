@@ -1,13 +1,9 @@
 package: nfc
 go_import: github.com/xaionaro-go/jni/nfc
 classes:
-    - java_class: android.nfc.tech.Ndef
-      go_type: ndef
+    - java_class: android.nfc.tech.IsoDep
+      go_type: isoDep
       methods:
-        - java_method: canMakeReadOnly
-          go_name: CanMakeReadOnly
-          returns: boolean
-          error: true
         - java_method: close
           go_name: Close
           returns: void
@@ -16,44 +12,47 @@ classes:
           go_name: Connect
           returns: void
           error: true
-        - java_method: getCachedNdefMessage
-          go_name: GetCachedNdefMessage
-          returns: android.nfc.NdefMessage
+        - java_method: getHiLayerResponse
+          go_name: GetHiLayerResponse
+          returns: '[B'
           error: true
-        - java_method: getMaxSize
-          go_name: GetMaxSize
+        - java_method: getHistoricalBytes
+          go_name: GetHistoricalBytes
+          returns: '[B'
+          error: true
+        - java_method: getMaxTransceiveLength
+          go_name: GetMaxTransceiveLength
           returns: int
-          error: true
-        - java_method: getNdefMessage
-          go_name: GetNdefMessage
-          returns: android.nfc.NdefMessage
           error: true
         - java_method: getTag
           go_name: GetTag
           returns: android.nfc.Tag
           error: true
-        - java_method: getType
-          go_name: GetType
-          returns: String
+        - java_method: getTimeout
+          go_name: GetTimeout
+          returns: int
           error: true
         - java_method: isConnected
           go_name: IsConnected
           returns: boolean
           error: true
-        - java_method: isWritable
-          go_name: IsWritable
+        - java_method: isExtendedLengthApduSupported
+          go_name: IsExtendedLengthApduSupported
           returns: boolean
           error: true
-        - java_method: makeReadOnly
-          go_name: MakeReadOnly
-          returns: boolean
-          error: true
-        - java_method: writeNdefMessage
-          go_name: WriteNdefMessage
+        - java_method: setTimeout
+          go_name: SetTimeout
           params:
-            - java_type: android.nfc.NdefMessage
+            - java_type: int
               go_name: arg0
           returns: void
+          error: true
+        - java_method: transceive
+          go_name: Transceive
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: '[B'
           error: true
       static_methods:
         - java_method: get
@@ -61,21 +60,5 @@ classes:
           params:
             - java_type: android.nfc.Tag
               go_name: arg0
-          returns: android.nfc.tech.Ndef
+          returns: android.nfc.tech.IsoDep
           error: true
-constants:
-    - go_name: MifareClassic
-      value: '""'
-      go_type: string
-    - go_name: NfcForumType1
-      value: '""'
-      go_type: string
-    - go_name: NfcForumType2
-      value: '""'
-      go_type: string
-    - go_name: NfcForumType3
-      value: '""'
-      go_type: string
-    - go_name: NfcForumType4
-      value: '""'
-      go_type: string

@@ -13,34 +13,18 @@ var nfcCmd = &cobra.Command{
 	Short: "nfc service operations",
 }
 
-var nfcNdefCmd = &cobra.Command{
-	Use:   "ndef",
-	Short: "NdefService operations",
+var nfcIsoDepCmd = &cobra.Command{
+	Use:   "iso-dep",
+	Short: "IsoDepService operations",
 }
 
-var nfcNdefCanMakeReadOnlyCmd = &cobra.Command{
-	Use:   "can-make-read-only",
-	Short: "CanMakeReadOnly RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.CanMakeReadOnlyRequest{}
-		resp, err := client.CanMakeReadOnly(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefCloseCmd = &cobra.Command{
+var nfcIsoDepCloseCmd = &cobra.Command{
 	Use:   "close",
 	Short: "Close RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
+		client := pb.NewIsoDepServiceClient(grpcConn)
 		req := &pb.CloseRequest{}
 		resp, err := client.Close(ctx, req)
 		if err != nil {
@@ -50,13 +34,13 @@ var nfcNdefCloseCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefConnectCmd = &cobra.Command{
+var nfcIsoDepConnectCmd = &cobra.Command{
 	Use:   "connect",
 	Short: "Connect RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
+		client := pb.NewIsoDepServiceClient(grpcConn)
 		req := &pb.ConnectRequest{}
 		resp, err := client.Connect(ctx, req)
 		if err != nil {
@@ -66,15 +50,15 @@ var nfcNdefConnectCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefGetCachedNdefMessageCmd = &cobra.Command{
-	Use:   "get-cached-ndef-message",
-	Short: "GetCachedNdefMessage RPC",
+var nfcIsoDepGetHiLayerResponseCmd = &cobra.Command{
+	Use:   "get-hi-layer-response",
+	Short: "GetHiLayerResponse RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.GetCachedNdefMessageRequest{}
-		resp, err := client.GetCachedNdefMessage(ctx, req)
+		client := pb.NewIsoDepServiceClient(grpcConn)
+		req := &pb.GetHiLayerResponseRequest{}
+		resp, err := client.GetHiLayerResponse(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -82,15 +66,15 @@ var nfcNdefGetCachedNdefMessageCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefGetMaxSizeCmd = &cobra.Command{
-	Use:   "get-max-size",
-	Short: "GetMaxSize RPC",
+var nfcIsoDepGetHistoricalBytesCmd = &cobra.Command{
+	Use:   "get-historical-bytes",
+	Short: "GetHistoricalBytes RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.GetMaxSizeRequest{}
-		resp, err := client.GetMaxSize(ctx, req)
+		client := pb.NewIsoDepServiceClient(grpcConn)
+		req := &pb.GetHistoricalBytesRequest{}
+		resp, err := client.GetHistoricalBytes(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -98,15 +82,15 @@ var nfcNdefGetMaxSizeCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefGetNdefMessageCmd = &cobra.Command{
-	Use:   "get-ndef-message",
-	Short: "GetNdefMessage RPC",
+var nfcIsoDepGetMaxTransceiveLengthCmd = &cobra.Command{
+	Use:   "get-max-transceive-length",
+	Short: "GetMaxTransceiveLength RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.GetNdefMessageRequest{}
-		resp, err := client.GetNdefMessage(ctx, req)
+		client := pb.NewIsoDepServiceClient(grpcConn)
+		req := &pb.GetMaxTransceiveLengthRequest{}
+		resp, err := client.GetMaxTransceiveLength(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -114,13 +98,13 @@ var nfcNdefGetNdefMessageCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefGetTagCmd = &cobra.Command{
+var nfcIsoDepGetTagCmd = &cobra.Command{
 	Use:   "get-tag",
 	Short: "GetTag RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
+		client := pb.NewIsoDepServiceClient(grpcConn)
 		req := &pb.GetTagRequest{}
 		resp, err := client.GetTag(ctx, req)
 		if err != nil {
@@ -130,15 +114,15 @@ var nfcNdefGetTagCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefGetTypeCmd = &cobra.Command{
-	Use:   "get-type",
-	Short: "GetType RPC",
+var nfcIsoDepGetTimeoutCmd = &cobra.Command{
+	Use:   "get-timeout",
+	Short: "GetTimeout RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.GetTypeRequest{}
-		resp, err := client.GetType(ctx, req)
+		client := pb.NewIsoDepServiceClient(grpcConn)
+		req := &pb.GetTimeoutRequest{}
+		resp, err := client.GetTimeout(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -146,13 +130,13 @@ var nfcNdefGetTypeCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefIsConnectedCmd = &cobra.Command{
+var nfcIsoDepIsConnectedCmd = &cobra.Command{
 	Use:   "is-connected",
 	Short: "IsConnected RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
+		client := pb.NewIsoDepServiceClient(grpcConn)
 		req := &pb.IsConnectedRequest{}
 		resp, err := client.IsConnected(ctx, req)
 		if err != nil {
@@ -162,15 +146,15 @@ var nfcNdefIsConnectedCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefIsWritableCmd = &cobra.Command{
-	Use:   "is-writable",
-	Short: "IsWritable RPC",
+var nfcIsoDepIsExtendedLengthApduSupportedCmd = &cobra.Command{
+	Use:   "is-extended-length-apdu-supported",
+	Short: "IsExtendedLengthApduSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.IsWritableRequest{}
-		resp, err := client.IsWritable(ctx, req)
+		client := pb.NewIsoDepServiceClient(grpcConn)
+		req := &pb.IsExtendedLengthApduSupportedRequest{}
+		resp, err := client.IsExtendedLengthApduSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -178,15 +162,18 @@ var nfcNdefIsWritableCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefMakeReadOnlyCmd = &cobra.Command{
-	Use:   "make-read-only",
-	Short: "MakeReadOnly RPC",
+var nfcIsoDepSetTimeoutCmd = &cobra.Command{
+	Use:   "set-timeout",
+	Short: "SetTimeout RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.MakeReadOnlyRequest{}
-		resp, err := client.MakeReadOnly(ctx, req)
+		client := pb.NewIsoDepServiceClient(grpcConn)
+		req := &pb.SetTimeoutRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetTimeout(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -194,18 +181,18 @@ var nfcNdefMakeReadOnlyCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefWriteNdefMessageCmd = &cobra.Command{
-	Use:   "write-ndef-message",
-	Short: "WriteNdefMessage RPC",
+var nfcIsoDepTransceiveCmd = &cobra.Command{
+	Use:   "transceive",
+	Short: "Transceive RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
-		req := &pb.WriteNdefMessageRequest{}
+		client := pb.NewIsoDepServiceClient(grpcConn)
+		req := &pb.TransceiveRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.WriteNdefMessage(ctx, req)
+		resp, err := client.Transceive(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -213,13 +200,13 @@ var nfcNdefWriteNdefMessageCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefGetCmd = &cobra.Command{
+var nfcIsoDepGetCmd = &cobra.Command{
 	Use:   "get",
 	Short: "Get RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefServiceClient(grpcConn)
+		client := pb.NewIsoDepServiceClient(grpcConn)
 		req := &pb.GetRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
@@ -233,21 +220,21 @@ var nfcNdefGetCmd = &cobra.Command{
 }
 
 func init() {
-	nfcNdefCmd.AddCommand(nfcNdefCanMakeReadOnlyCmd)
-	nfcNdefCmd.AddCommand(nfcNdefCloseCmd)
-	nfcNdefCmd.AddCommand(nfcNdefConnectCmd)
-	nfcNdefCmd.AddCommand(nfcNdefGetCachedNdefMessageCmd)
-	nfcNdefCmd.AddCommand(nfcNdefGetMaxSizeCmd)
-	nfcNdefCmd.AddCommand(nfcNdefGetNdefMessageCmd)
-	nfcNdefCmd.AddCommand(nfcNdefGetTagCmd)
-	nfcNdefCmd.AddCommand(nfcNdefGetTypeCmd)
-	nfcNdefCmd.AddCommand(nfcNdefIsConnectedCmd)
-	nfcNdefCmd.AddCommand(nfcNdefIsWritableCmd)
-	nfcNdefCmd.AddCommand(nfcNdefMakeReadOnlyCmd)
-	nfcNdefWriteNdefMessageCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	nfcNdefCmd.AddCommand(nfcNdefWriteNdefMessageCmd)
-	nfcNdefGetCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	nfcNdefCmd.AddCommand(nfcNdefGetCmd)
-	nfcCmd.AddCommand(nfcNdefCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepCloseCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepConnectCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepGetHiLayerResponseCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepGetHistoricalBytesCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepGetMaxTransceiveLengthCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepGetTagCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepGetTimeoutCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepIsConnectedCmd)
+	nfcIsoDepCmd.AddCommand(nfcIsoDepIsExtendedLengthApduSupportedCmd)
+	nfcIsoDepSetTimeoutCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	nfcIsoDepCmd.AddCommand(nfcIsoDepSetTimeoutCmd)
+	nfcIsoDepTransceiveCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nfcIsoDepCmd.AddCommand(nfcIsoDepTransceiveCmd)
+	nfcIsoDepGetCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nfcIsoDepCmd.AddCommand(nfcIsoDepGetCmd)
+	nfcCmd.AddCommand(nfcIsoDepCmd)
 	rootCmd.AddCommand(nfcCmd)
 }

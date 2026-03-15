@@ -1,17 +1,29 @@
 package: projection
 go_import: github.com/xaionaro-go/jni/media/projection
 classes:
-    - java_class: android.media.projection.MediaProjection
-      go_type: mediaProjection
+    - java_class: android.media.projection.MediaProjectionManager
+      go_type: mediaProjectionManager
+      obtain: system_service
+      service_name: media_projection
+      close: true
       methods:
-        - java_method: stop
-          go_name: Stop
-          returns: void
+        - java_method: createScreenCaptureIntent
+          go_name: CreateScreenCaptureIntent0
+          returns: android.content.Intent
           error: true
-        - java_method: unregisterCallback
-          go_name: UnregisterCallback
+        - java_method: createScreenCaptureIntent
+          go_name: CreateScreenCaptureIntent1_1
           params:
-            - java_type: android.media.projection.MediaProjection$Callback
+            - java_type: android.media.projection.MediaProjectionConfig
               go_name: arg0
-          returns: void
+          returns: android.content.Intent
+          error: true
+        - java_method: getMediaProjection
+          go_name: GetMediaProjection
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+          returns: android.media.projection.MediaProjection
           error: true

@@ -13,23 +13,246 @@ var bluetoothCmd = &cobra.Command{
 	Short: "bluetooth service operations",
 }
 
-var bluetoothBluetoothGattServiceCmd = &cobra.Command{
-	Use:   "bluetooth-gatt-service",
-	Short: "BluetoothGattServiceService operations",
+var bluetoothBluetoothAdapterCmd = &cobra.Command{
+	Use:   "bluetooth-adapter",
+	Short: "BluetoothAdapterService operations",
 }
 
-var bluetoothBluetoothGattServiceAddCharacteristicCmd = &cobra.Command{
-	Use:   "add-characteristic",
-	Short: "AddCharacteristic RPC",
+var bluetoothBluetoothAdapterCancelDiscoveryCmd = &cobra.Command{
+	Use:   "cancel-discovery",
+	Short: "CancelDiscovery RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.AddCharacteristicRequest{}
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.CancelDiscoveryRequest{}
+		resp, err := client.CancelDiscovery(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterCloseProfileProxyCmd = &cobra.Command{
+	Use:   "close-profile-proxy",
+	Short: "CloseProfileProxy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.CloseProfileProxyRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.CloseProfileProxy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterDisableCmd = &cobra.Command{
+	Use:   "disable",
+	Short: "Disable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.DisableRequest{}
+		resp, err := client.Disable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterEnableCmd = &cobra.Command{
+	Use:   "enable",
+	Short: "Enable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.EnableRequest{}
+		resp, err := client.Enable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetAddressCmd = &cobra.Command{
+	Use:   "get-address",
+	Short: "GetAddress RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetAddressRequest{}
+		resp, err := client.GetAddress(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetBluetoothLeAdvertiserCmd = &cobra.Command{
+	Use:   "get-bluetooth-le-advertiser",
+	Short: "GetBluetoothLeAdvertiser RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetBluetoothLeAdvertiserRequest{}
+		resp, err := client.GetBluetoothLeAdvertiser(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetBluetoothLeScannerCmd = &cobra.Command{
+	Use:   "get-bluetooth-le-scanner",
+	Short: "GetBluetoothLeScanner RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetBluetoothLeScannerRequest{}
+		resp, err := client.GetBluetoothLeScanner(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetBondedDevicesCmd = &cobra.Command{
+	Use:   "get-bonded-devices",
+	Short: "GetBondedDevices RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetBondedDevicesRequest{}
+		resp, err := client.GetBondedDevices(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetDiscoverableTimeoutCmd = &cobra.Command{
+	Use:   "get-discoverable-timeout",
+	Short: "GetDiscoverableTimeout RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetDiscoverableTimeoutRequest{}
+		resp, err := client.GetDiscoverableTimeout(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetLeMaximumAdvertisingDataLengthCmd = &cobra.Command{
+	Use:   "get-le-maximum-advertising-data-length",
+	Short: "GetLeMaximumAdvertisingDataLength RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetLeMaximumAdvertisingDataLengthRequest{}
+		resp, err := client.GetLeMaximumAdvertisingDataLength(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetMaxConnectedAudioDevicesCmd = &cobra.Command{
+	Use:   "get-max-connected-audio-devices",
+	Short: "GetMaxConnectedAudioDevices RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetMaxConnectedAudioDevicesRequest{}
+		resp, err := client.GetMaxConnectedAudioDevices(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetNameCmd = &cobra.Command{
+	Use:   "get-name",
+	Short: "GetName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetNameRequest{}
+		resp, err := client.GetName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetProfileConnectionStateCmd = &cobra.Command{
+	Use:   "get-profile-connection-state",
+	Short: "GetProfileConnectionState RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetProfileConnectionStateRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetProfileConnectionState(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetProfileProxyCmd = &cobra.Command{
+	Use:   "get-profile-proxy",
+	Short: "GetProfileProxy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetProfileProxyRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.AddCharacteristic(ctx, req)
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.GetProfileProxy(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -37,18 +260,18 @@ var bluetoothBluetoothGattServiceAddCharacteristicCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattServiceAddServiceCmd = &cobra.Command{
-	Use:   "add-service",
-	Short: "AddService RPC",
+var bluetoothBluetoothAdapterGetRemoteDevice1Cmd = &cobra.Command{
+	Use:   "get-remote-device1",
+	Short: "GetRemoteDevice1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.AddServiceRequest{}
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetRemoteDevice1Request{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.AddService(ctx, req)
+		resp, err := client.GetRemoteDevice1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -56,34 +279,18 @@ var bluetoothBluetoothGattServiceAddServiceCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattServiceDescribeContentsCmd = &cobra.Command{
-	Use:   "describe-contents",
-	Short: "DescribeContents RPC",
+var bluetoothBluetoothAdapterGetRemoteDevice1_1Cmd = &cobra.Command{
+	Use:   "get-remote-device1_1",
+	Short: "GetRemoteDevice1_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.DescribeContentsRequest{}
-		resp, err := client.DescribeContents(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattServiceGetCharacteristicCmd = &cobra.Command{
-	Use:   "get-characteristic",
-	Short: "GetCharacteristic RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.GetCharacteristicRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetRemoteDevice1_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.GetCharacteristic(ctx, req)
+		resp, err := client.GetRemoteDevice1_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -91,101 +298,454 @@ var bluetoothBluetoothGattServiceGetCharacteristicCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattServiceGetCharacteristicsCmd = &cobra.Command{
-	Use:   "get-characteristics",
-	Short: "GetCharacteristics RPC",
+var bluetoothBluetoothAdapterGetRemoteLeDeviceCmd = &cobra.Command{
+	Use:   "get-remote-le-device",
+	Short: "GetRemoteLeDevice RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.GetCharacteristicsRequest{}
-		resp, err := client.GetCharacteristics(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattServiceGetIncludedServicesCmd = &cobra.Command{
-	Use:   "get-included-services",
-	Short: "GetIncludedServices RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.GetIncludedServicesRequest{}
-		resp, err := client.GetIncludedServices(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattServiceGetInstanceIdCmd = &cobra.Command{
-	Use:   "get-instance-id",
-	Short: "GetInstanceId RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.GetInstanceIdRequest{}
-		resp, err := client.GetInstanceId(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattServiceGetTypeCmd = &cobra.Command{
-	Use:   "get-type",
-	Short: "GetType RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.GetTypeRequest{}
-		resp, err := client.GetType(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattServiceGetUuidCmd = &cobra.Command{
-	Use:   "get-uuid",
-	Short: "GetUuid RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.GetUuidRequest{}
-		resp, err := client.GetUuid(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattServiceWriteToParcelCmd = &cobra.Command{
-	Use:   "write-to-parcel",
-	Short: "WriteToParcel RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
-		req := &pb.WriteToParcelRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetRemoteLeDeviceRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
 		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
 			req.Arg1 = v
 		}
-		resp, err := client.WriteToParcel(ctx, req)
+		resp, err := client.GetRemoteLeDevice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetScanModeCmd = &cobra.Command{
+	Use:   "get-scan-mode",
+	Short: "GetScanMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetScanModeRequest{}
+		resp, err := client.GetScanMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterGetStateCmd = &cobra.Command{
+	Use:   "get-state",
+	Short: "GetState RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.GetStateRequest{}
+		resp, err := client.GetState(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsDiscoveringCmd = &cobra.Command{
+	Use:   "is-discovering",
+	Short: "IsDiscovering RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsDiscoveringRequest{}
+		resp, err := client.IsDiscovering(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsEnabledCmd = &cobra.Command{
+	Use:   "is-enabled",
+	Short: "IsEnabled RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsEnabledRequest{}
+		resp, err := client.IsEnabled(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsLe2MPhySupportedCmd = &cobra.Command{
+	Use:   "is-le2m-phy-supported",
+	Short: "IsLe2MPhySupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsLe2MPhySupportedRequest{}
+		resp, err := client.IsLe2MPhySupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsLeAudioBroadcastAssistantSupportedCmd = &cobra.Command{
+	Use:   "is-le-audio-broadcast-assistant-supported",
+	Short: "IsLeAudioBroadcastAssistantSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsLeAudioBroadcastAssistantSupportedRequest{}
+		resp, err := client.IsLeAudioBroadcastAssistantSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsLeAudioBroadcastSourceSupportedCmd = &cobra.Command{
+	Use:   "is-le-audio-broadcast-source-supported",
+	Short: "IsLeAudioBroadcastSourceSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsLeAudioBroadcastSourceSupportedRequest{}
+		resp, err := client.IsLeAudioBroadcastSourceSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsLeAudioSupportedCmd = &cobra.Command{
+	Use:   "is-le-audio-supported",
+	Short: "IsLeAudioSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsLeAudioSupportedRequest{}
+		resp, err := client.IsLeAudioSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsLeCodedPhySupportedCmd = &cobra.Command{
+	Use:   "is-le-coded-phy-supported",
+	Short: "IsLeCodedPhySupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsLeCodedPhySupportedRequest{}
+		resp, err := client.IsLeCodedPhySupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsLeExtendedAdvertisingSupportedCmd = &cobra.Command{
+	Use:   "is-le-extended-advertising-supported",
+	Short: "IsLeExtendedAdvertisingSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsLeExtendedAdvertisingSupportedRequest{}
+		resp, err := client.IsLeExtendedAdvertisingSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsLePeriodicAdvertisingSupportedCmd = &cobra.Command{
+	Use:   "is-le-periodic-advertising-supported",
+	Short: "IsLePeriodicAdvertisingSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsLePeriodicAdvertisingSupportedRequest{}
+		resp, err := client.IsLePeriodicAdvertisingSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsMultipleAdvertisementSupportedCmd = &cobra.Command{
+	Use:   "is-multiple-advertisement-supported",
+	Short: "IsMultipleAdvertisementSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsMultipleAdvertisementSupportedRequest{}
+		resp, err := client.IsMultipleAdvertisementSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsOffloadedFilteringSupportedCmd = &cobra.Command{
+	Use:   "is-offloaded-filtering-supported",
+	Short: "IsOffloadedFilteringSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsOffloadedFilteringSupportedRequest{}
+		resp, err := client.IsOffloadedFilteringSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterIsOffloadedScanBatchingSupportedCmd = &cobra.Command{
+	Use:   "is-offloaded-scan-batching-supported",
+	Short: "IsOffloadedScanBatchingSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.IsOffloadedScanBatchingSupportedRequest{}
+		resp, err := client.IsOffloadedScanBatchingSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterListenUsingInsecureL2capChannelCmd = &cobra.Command{
+	Use:   "listen-using-insecure-l2cap-channel",
+	Short: "ListenUsingInsecureL2capChannel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.ListenUsingInsecureL2CapChannelRequest{}
+		resp, err := client.ListenUsingInsecureL2CapChannel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterListenUsingInsecureRfcommWithServiceRecordCmd = &cobra.Command{
+	Use:   "listen-using-insecure-rfcomm-with-service-record",
+	Short: "ListenUsingInsecureRfcommWithServiceRecord RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.ListenUsingInsecureRfcommWithServiceRecordRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ListenUsingInsecureRfcommWithServiceRecord(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterListenUsingL2capChannelCmd = &cobra.Command{
+	Use:   "listen-using-l2cap-channel",
+	Short: "ListenUsingL2capChannel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.ListenUsingL2CapChannelRequest{}
+		resp, err := client.ListenUsingL2CapChannel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterListenUsingRfcommWithServiceRecordCmd = &cobra.Command{
+	Use:   "listen-using-rfcomm-with-service-record",
+	Short: "ListenUsingRfcommWithServiceRecord RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.ListenUsingRfcommWithServiceRecordRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ListenUsingRfcommWithServiceRecord(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterListenUsingSocketSettingsCmd = &cobra.Command{
+	Use:   "listen-using-socket-settings",
+	Short: "ListenUsingSocketSettings RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.ListenUsingSocketSettingsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ListenUsingSocketSettings(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterSetNameCmd = &cobra.Command{
+	Use:   "set-name",
+	Short: "SetName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.SetNameRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterStartDiscoveryCmd = &cobra.Command{
+	Use:   "start-discovery",
+	Short: "StartDiscovery RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.StartDiscoveryRequest{}
+		resp, err := client.StartDiscovery(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterStartLeScan1Cmd = &cobra.Command{
+	Use:   "start-le-scan1",
+	Short: "StartLeScan1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.StartLeScan1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StartLeScan1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterStartLeScan2_1Cmd = &cobra.Command{
+	Use:   "start-le-scan2_1",
+	Short: "StartLeScan2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.StartLeScan2_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.StartLeScan2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterStopLeScanCmd = &cobra.Command{
+	Use:   "stop-le-scan",
+	Short: "StopLeScan RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.StopLeScanRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StopLeScan(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothAdapterCheckBluetoothAddressCmd = &cobra.Command{
+	Use:   "check-bluetooth-address",
+	Short: "CheckBluetoothAddress RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothAdapterServiceClient(grpcConn)
+		req := &pb.CheckBluetoothAddressRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.CheckBluetoothAddress(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -194,21 +754,69 @@ var bluetoothBluetoothGattServiceWriteToParcelCmd = &cobra.Command{
 }
 
 func init() {
-	bluetoothBluetoothGattServiceAddCharacteristicCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceAddCharacteristicCmd)
-	bluetoothBluetoothGattServiceAddServiceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceAddServiceCmd)
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceDescribeContentsCmd)
-	bluetoothBluetoothGattServiceGetCharacteristicCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetCharacteristicCmd)
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetCharacteristicsCmd)
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetIncludedServicesCmd)
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetInstanceIdCmd)
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetTypeCmd)
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetUuidCmd)
-	bluetoothBluetoothGattServiceWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattServiceWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceWriteToParcelCmd)
-	bluetoothCmd.AddCommand(bluetoothBluetoothGattServiceCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterCancelDiscoveryCmd)
+	bluetoothBluetoothAdapterCloseProfileProxyCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	bluetoothBluetoothAdapterCloseProfileProxyCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterCloseProfileProxyCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterDisableCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterEnableCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetAddressCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetBluetoothLeAdvertiserCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetBluetoothLeScannerCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetBondedDevicesCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetDiscoverableTimeoutCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetLeMaximumAdvertisingDataLengthCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetMaxConnectedAudioDevicesCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetNameCmd)
+	bluetoothBluetoothAdapterGetProfileConnectionStateCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetProfileConnectionStateCmd)
+	bluetoothBluetoothAdapterGetProfileProxyCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothAdapterGetProfileProxyCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	bluetoothBluetoothAdapterGetProfileProxyCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetProfileProxyCmd)
+	bluetoothBluetoothAdapterGetRemoteDevice1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetRemoteDevice1Cmd)
+	bluetoothBluetoothAdapterGetRemoteDevice1_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetRemoteDevice1_1Cmd)
+	bluetoothBluetoothAdapterGetRemoteLeDeviceCmd.Flags().String("arg0", "", "arg0 (string)")
+	bluetoothBluetoothAdapterGetRemoteLeDeviceCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetRemoteLeDeviceCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetScanModeCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterGetStateCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsDiscoveringCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsEnabledCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsLe2MPhySupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsLeAudioBroadcastAssistantSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsLeAudioBroadcastSourceSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsLeAudioSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsLeCodedPhySupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsLeExtendedAdvertisingSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsLePeriodicAdvertisingSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsMultipleAdvertisementSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsOffloadedFilteringSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterIsOffloadedScanBatchingSupportedCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterListenUsingInsecureL2capChannelCmd)
+	bluetoothBluetoothAdapterListenUsingInsecureRfcommWithServiceRecordCmd.Flags().String("arg0", "", "arg0 (string)")
+	bluetoothBluetoothAdapterListenUsingInsecureRfcommWithServiceRecordCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterListenUsingInsecureRfcommWithServiceRecordCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterListenUsingL2capChannelCmd)
+	bluetoothBluetoothAdapterListenUsingRfcommWithServiceRecordCmd.Flags().String("arg0", "", "arg0 (string)")
+	bluetoothBluetoothAdapterListenUsingRfcommWithServiceRecordCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterListenUsingRfcommWithServiceRecordCmd)
+	bluetoothBluetoothAdapterListenUsingSocketSettingsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterListenUsingSocketSettingsCmd)
+	bluetoothBluetoothAdapterSetNameCmd.Flags().String("arg0", "", "arg0 (string)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterSetNameCmd)
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterStartDiscoveryCmd)
+	bluetoothBluetoothAdapterStartLeScan1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterStartLeScan1Cmd)
+	bluetoothBluetoothAdapterStartLeScan2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothAdapterStartLeScan2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterStartLeScan2_1Cmd)
+	bluetoothBluetoothAdapterStopLeScanCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterStopLeScanCmd)
+	bluetoothBluetoothAdapterCheckBluetoothAddressCmd.Flags().String("arg0", "", "arg0 (string)")
+	bluetoothBluetoothAdapterCmd.AddCommand(bluetoothBluetoothAdapterCheckBluetoothAddressCmd)
+	bluetoothCmd.AddCommand(bluetoothBluetoothAdapterCmd)
 	rootCmd.AddCommand(bluetoothCmd)
 }

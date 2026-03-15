@@ -23,26 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetAccessoryListRequest struct {
+type DescribeContentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetAccessoryListRequest) Reset() {
-	*x = GetAccessoryListRequest{}
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetAccessoryListRequest) String() string {
+func (x *DescribeContentsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAccessoryListRequest) ProtoMessage() {}
+func (*DescribeContentsRequest) ProtoMessage() {}
 
-func (x *GetAccessoryListRequest) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,32 +54,32 @@ func (x *GetAccessoryListRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAccessoryListRequest.ProtoReflect.Descriptor instead.
-func (*GetAccessoryListRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{0}
 }
 
-type GetAccessoryListResponse struct {
+type DescribeContentsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetAccessoryListResponse) Reset() {
-	*x = GetAccessoryListResponse{}
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetAccessoryListResponse) String() string {
+func (x *DescribeContentsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAccessoryListResponse) ProtoMessage() {}
+func (*DescribeContentsResponse) ProtoMessage() {}
 
-func (x *GetAccessoryListResponse) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -91,39 +91,38 @@ func (x *GetAccessoryListResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAccessoryListResponse.ProtoReflect.Descriptor instead.
-func (*GetAccessoryListResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetAccessoryListResponse) GetResult() int64 {
+func (x *DescribeContentsResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type HasPermission1Request struct {
+type GetAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HasPermission1Request) Reset() {
-	*x = HasPermission1Request{}
+func (x *GetAddressRequest) Reset() {
+	*x = GetAddressRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HasPermission1Request) String() string {
+func (x *GetAddressRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HasPermission1Request) ProtoMessage() {}
+func (*GetAddressRequest) ProtoMessage() {}
 
-func (x *HasPermission1Request) ProtoReflect() protoreflect.Message {
+func (x *GetAddressRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -135,39 +134,32 @@ func (x *HasPermission1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HasPermission1Request.ProtoReflect.Descriptor instead.
-func (*HasPermission1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAddressRequest.ProtoReflect.Descriptor instead.
+func (*GetAddressRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *HasPermission1Request) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type HasPermission1Response struct {
+type GetAddressResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HasPermission1Response) Reset() {
-	*x = HasPermission1Response{}
+func (x *GetAddressResponse) Reset() {
+	*x = GetAddressResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HasPermission1Response) String() string {
+func (x *GetAddressResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HasPermission1Response) ProtoMessage() {}
+func (*GetAddressResponse) ProtoMessage() {}
 
-func (x *HasPermission1Response) ProtoReflect() protoreflect.Message {
+func (x *GetAddressResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -179,39 +171,38 @@ func (x *HasPermission1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HasPermission1Response.ProtoReflect.Descriptor instead.
-func (*HasPermission1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAddressResponse.ProtoReflect.Descriptor instead.
+func (*GetAddressResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *HasPermission1Response) GetResult() bool {
+func (x *GetAddressResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
-	return false
+	return 0
 }
 
-type HasPermission1_1Request struct {
+type GetAttributesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HasPermission1_1Request) Reset() {
-	*x = HasPermission1_1Request{}
+func (x *GetAttributesRequest) Reset() {
+	*x = GetAttributesRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HasPermission1_1Request) String() string {
+func (x *GetAttributesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HasPermission1_1Request) ProtoMessage() {}
+func (*GetAttributesRequest) ProtoMessage() {}
 
-func (x *HasPermission1_1Request) ProtoReflect() protoreflect.Message {
+func (x *GetAttributesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -223,39 +214,32 @@ func (x *HasPermission1_1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HasPermission1_1Request.ProtoReflect.Descriptor instead.
-func (*HasPermission1_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAttributesRequest.ProtoReflect.Descriptor instead.
+func (*GetAttributesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *HasPermission1_1Request) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type HasPermission1_1Response struct {
+type GetAttributesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HasPermission1_1Response) Reset() {
-	*x = HasPermission1_1Response{}
+func (x *GetAttributesResponse) Reset() {
+	*x = GetAttributesResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HasPermission1_1Response) String() string {
+func (x *GetAttributesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HasPermission1_1Response) ProtoMessage() {}
+func (*GetAttributesResponse) ProtoMessage() {}
 
-func (x *HasPermission1_1Response) ProtoReflect() protoreflect.Message {
+func (x *GetAttributesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -267,39 +251,38 @@ func (x *HasPermission1_1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HasPermission1_1Response.ProtoReflect.Descriptor instead.
-func (*HasPermission1_1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAttributesResponse.ProtoReflect.Descriptor instead.
+func (*GetAttributesResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *HasPermission1_1Response) GetResult() bool {
+func (x *GetAttributesResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
-	return false
+	return 0
 }
 
-type OpenAccessoryRequest struct {
+type GetDirectionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenAccessoryRequest) Reset() {
-	*x = OpenAccessoryRequest{}
+func (x *GetDirectionRequest) Reset() {
+	*x = GetDirectionRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenAccessoryRequest) String() string {
+func (x *GetDirectionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenAccessoryRequest) ProtoMessage() {}
+func (*GetDirectionRequest) ProtoMessage() {}
 
-func (x *OpenAccessoryRequest) ProtoReflect() protoreflect.Message {
+func (x *GetDirectionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -311,39 +294,32 @@ func (x *OpenAccessoryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenAccessoryRequest.ProtoReflect.Descriptor instead.
-func (*OpenAccessoryRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDirectionRequest.ProtoReflect.Descriptor instead.
+func (*GetDirectionRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *OpenAccessoryRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type OpenAccessoryResponse struct {
+type GetDirectionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenAccessoryResponse) Reset() {
-	*x = OpenAccessoryResponse{}
+func (x *GetDirectionResponse) Reset() {
+	*x = GetDirectionResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenAccessoryResponse) String() string {
+func (x *GetDirectionResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenAccessoryResponse) ProtoMessage() {}
+func (*GetDirectionResponse) ProtoMessage() {}
 
-func (x *OpenAccessoryResponse) ProtoReflect() protoreflect.Message {
+func (x *GetDirectionResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -355,39 +331,38 @@ func (x *OpenAccessoryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenAccessoryResponse.ProtoReflect.Descriptor instead.
-func (*OpenAccessoryResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDirectionResponse.ProtoReflect.Descriptor instead.
+func (*GetDirectionResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *OpenAccessoryResponse) GetResult() int64 {
+func (x *GetDirectionResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type OpenAccessoryInputStreamRequest struct {
+type GetEndpointNumberRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenAccessoryInputStreamRequest) Reset() {
-	*x = OpenAccessoryInputStreamRequest{}
+func (x *GetEndpointNumberRequest) Reset() {
+	*x = GetEndpointNumberRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenAccessoryInputStreamRequest) String() string {
+func (x *GetEndpointNumberRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenAccessoryInputStreamRequest) ProtoMessage() {}
+func (*GetEndpointNumberRequest) ProtoMessage() {}
 
-func (x *OpenAccessoryInputStreamRequest) ProtoReflect() protoreflect.Message {
+func (x *GetEndpointNumberRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -399,39 +374,32 @@ func (x *OpenAccessoryInputStreamRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenAccessoryInputStreamRequest.ProtoReflect.Descriptor instead.
-func (*OpenAccessoryInputStreamRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetEndpointNumberRequest.ProtoReflect.Descriptor instead.
+func (*GetEndpointNumberRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *OpenAccessoryInputStreamRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type OpenAccessoryInputStreamResponse struct {
+type GetEndpointNumberResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenAccessoryInputStreamResponse) Reset() {
-	*x = OpenAccessoryInputStreamResponse{}
+func (x *GetEndpointNumberResponse) Reset() {
+	*x = GetEndpointNumberResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenAccessoryInputStreamResponse) String() string {
+func (x *GetEndpointNumberResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenAccessoryInputStreamResponse) ProtoMessage() {}
+func (*GetEndpointNumberResponse) ProtoMessage() {}
 
-func (x *OpenAccessoryInputStreamResponse) ProtoReflect() protoreflect.Message {
+func (x *GetEndpointNumberResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -443,39 +411,38 @@ func (x *OpenAccessoryInputStreamResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenAccessoryInputStreamResponse.ProtoReflect.Descriptor instead.
-func (*OpenAccessoryInputStreamResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetEndpointNumberResponse.ProtoReflect.Descriptor instead.
+func (*GetEndpointNumberResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *OpenAccessoryInputStreamResponse) GetResult() int64 {
+func (x *GetEndpointNumberResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type OpenAccessoryOutputStreamRequest struct {
+type GetIntervalRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenAccessoryOutputStreamRequest) Reset() {
-	*x = OpenAccessoryOutputStreamRequest{}
+func (x *GetIntervalRequest) Reset() {
+	*x = GetIntervalRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenAccessoryOutputStreamRequest) String() string {
+func (x *GetIntervalRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenAccessoryOutputStreamRequest) ProtoMessage() {}
+func (*GetIntervalRequest) ProtoMessage() {}
 
-func (x *OpenAccessoryOutputStreamRequest) ProtoReflect() protoreflect.Message {
+func (x *GetIntervalRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -487,39 +454,32 @@ func (x *OpenAccessoryOutputStreamRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenAccessoryOutputStreamRequest.ProtoReflect.Descriptor instead.
-func (*OpenAccessoryOutputStreamRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetIntervalRequest.ProtoReflect.Descriptor instead.
+func (*GetIntervalRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *OpenAccessoryOutputStreamRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type OpenAccessoryOutputStreamResponse struct {
+type GetIntervalResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenAccessoryOutputStreamResponse) Reset() {
-	*x = OpenAccessoryOutputStreamResponse{}
+func (x *GetIntervalResponse) Reset() {
+	*x = GetIntervalResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenAccessoryOutputStreamResponse) String() string {
+func (x *GetIntervalResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenAccessoryOutputStreamResponse) ProtoMessage() {}
+func (*GetIntervalResponse) ProtoMessage() {}
 
-func (x *OpenAccessoryOutputStreamResponse) ProtoReflect() protoreflect.Message {
+func (x *GetIntervalResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -531,39 +491,38 @@ func (x *OpenAccessoryOutputStreamResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenAccessoryOutputStreamResponse.ProtoReflect.Descriptor instead.
-func (*OpenAccessoryOutputStreamResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetIntervalResponse.ProtoReflect.Descriptor instead.
+func (*GetIntervalResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *OpenAccessoryOutputStreamResponse) GetResult() int64 {
+func (x *GetIntervalResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type OpenDeviceRequest struct {
+type GetMaxPacketSizeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenDeviceRequest) Reset() {
-	*x = OpenDeviceRequest{}
+func (x *GetMaxPacketSizeRequest) Reset() {
+	*x = GetMaxPacketSizeRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenDeviceRequest) String() string {
+func (x *GetMaxPacketSizeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenDeviceRequest) ProtoMessage() {}
+func (*GetMaxPacketSizeRequest) ProtoMessage() {}
 
-func (x *OpenDeviceRequest) ProtoReflect() protoreflect.Message {
+func (x *GetMaxPacketSizeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -575,39 +534,32 @@ func (x *OpenDeviceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenDeviceRequest.ProtoReflect.Descriptor instead.
-func (*OpenDeviceRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetMaxPacketSizeRequest.ProtoReflect.Descriptor instead.
+func (*GetMaxPacketSizeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *OpenDeviceRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type OpenDeviceResponse struct {
+type GetMaxPacketSizeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OpenDeviceResponse) Reset() {
-	*x = OpenDeviceResponse{}
+func (x *GetMaxPacketSizeResponse) Reset() {
+	*x = GetMaxPacketSizeResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OpenDeviceResponse) String() string {
+func (x *GetMaxPacketSizeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OpenDeviceResponse) ProtoMessage() {}
+func (*GetMaxPacketSizeResponse) ProtoMessage() {}
 
-func (x *OpenDeviceResponse) ProtoReflect() protoreflect.Message {
+func (x *GetMaxPacketSizeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -619,40 +571,38 @@ func (x *OpenDeviceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OpenDeviceResponse.ProtoReflect.Descriptor instead.
-func (*OpenDeviceResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetMaxPacketSizeResponse.ProtoReflect.Descriptor instead.
+func (*GetMaxPacketSizeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *OpenDeviceResponse) GetResult() int64 {
+func (x *GetMaxPacketSizeResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type RequestPermission2Request struct {
+type GetTypeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RequestPermission2Request) Reset() {
-	*x = RequestPermission2Request{}
+func (x *GetTypeRequest) Reset() {
+	*x = GetTypeRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestPermission2Request) String() string {
+func (x *GetTypeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestPermission2Request) ProtoMessage() {}
+func (*GetTypeRequest) ProtoMessage() {}
 
-func (x *RequestPermission2Request) ProtoReflect() protoreflect.Message {
+func (x *GetTypeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -664,45 +614,32 @@ func (x *RequestPermission2Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RequestPermission2Request.ProtoReflect.Descriptor instead.
-func (*RequestPermission2Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetTypeRequest.ProtoReflect.Descriptor instead.
+func (*GetTypeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *RequestPermission2Request) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *RequestPermission2Request) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type RequestPermission2Response struct {
+type GetTypeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RequestPermission2Response) Reset() {
-	*x = RequestPermission2Response{}
+func (x *GetTypeResponse) Reset() {
+	*x = GetTypeResponse{}
 	mi := &file_proto_usb_usb_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestPermission2Response) String() string {
+func (x *GetTypeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestPermission2Response) ProtoMessage() {}
+func (*GetTypeResponse) ProtoMessage() {}
 
-func (x *RequestPermission2Response) ProtoReflect() protoreflect.Message {
+func (x *GetTypeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -714,33 +651,38 @@ func (x *RequestPermission2Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RequestPermission2Response.ProtoReflect.Descriptor instead.
-func (*RequestPermission2Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetTypeResponse.ProtoReflect.Descriptor instead.
+func (*GetTypeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{15}
 }
 
-type RequestPermission2_1Request struct {
+func (x *GetTypeResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ToStringRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RequestPermission2_1Request) Reset() {
-	*x = RequestPermission2_1Request{}
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
 	mi := &file_proto_usb_usb_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestPermission2_1Request) String() string {
+func (x *ToStringRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestPermission2_1Request) ProtoMessage() {}
+func (*ToStringRequest) ProtoMessage() {}
 
-func (x *RequestPermission2_1Request) ProtoReflect() protoreflect.Message {
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_usb_usb_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -752,46 +694,128 @@ func (x *RequestPermission2_1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RequestPermission2_1Request.ProtoReflect.Descriptor instead.
-func (*RequestPermission2_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
 	return file_proto_usb_usb_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *RequestPermission2_1Request) GetArg0() int64 {
+type ToStringResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
+	mi := &file_proto_usb_usb_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringResponse) ProtoMessage() {}
+
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_usb_usb_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
+	return file_proto_usb_usb_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ToStringResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type WriteToParcelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
+	mi := &file_proto_usb_usb_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelRequest) ProtoMessage() {}
+
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_usb_usb_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_usb_usb_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *WriteToParcelRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *RequestPermission2_1Request) GetArg1() int64 {
+func (x *WriteToParcelRequest) GetArg1() int32 {
 	if x != nil {
 		return x.Arg1
 	}
 	return 0
 }
 
-type RequestPermission2_1Response struct {
+type WriteToParcelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RequestPermission2_1Response) Reset() {
-	*x = RequestPermission2_1Response{}
-	mi := &file_proto_usb_usb_proto_msgTypes[17]
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
+	mi := &file_proto_usb_usb_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestPermission2_1Response) String() string {
+func (x *WriteToParcelResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestPermission2_1Response) ProtoMessage() {}
+func (*WriteToParcelResponse) ProtoMessage() {}
 
-func (x *RequestPermission2_1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_usb_usb_proto_msgTypes[17]
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_usb_usb_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -802,9 +826,9 @@ func (x *RequestPermission2_1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RequestPermission2_1Response.ProtoReflect.Descriptor instead.
-func (*RequestPermission2_1Response) Descriptor() ([]byte, []int) {
-	return file_proto_usb_usb_proto_rawDescGZIP(), []int{17}
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_usb_usb_proto_rawDescGZIP(), []int{19}
 }
 
 var File_proto_usb_usb_proto protoreflect.FileDescriptor
@@ -812,52 +836,49 @@ var File_proto_usb_usb_proto protoreflect.FileDescriptor
 const file_proto_usb_usb_proto_rawDesc = "" +
 	"\n" +
 	"\x13proto/usb/usb.proto\x12\x03usb\"\x19\n" +
-	"\x17GetAccessoryListRequest\"2\n" +
-	"\x18GetAccessoryListResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"+\n" +
-	"\x15HasPermission1Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"0\n" +
-	"\x16HasPermission1Response\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"-\n" +
-	"\x17HasPermission1_1Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"2\n" +
-	"\x18HasPermission1_1Response\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"*\n" +
-	"\x14OpenAccessoryRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"/\n" +
-	"\x15OpenAccessoryResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"5\n" +
-	"\x1fOpenAccessoryInputStreamRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\":\n" +
-	" OpenAccessoryInputStreamResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"6\n" +
-	" OpenAccessoryOutputStreamRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\";\n" +
-	"!OpenAccessoryOutputStreamResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"'\n" +
-	"\x11OpenDeviceRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\",\n" +
-	"\x12OpenDeviceResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"C\n" +
-	"\x19RequestPermission2Request\x12\x12\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x13\n" +
+	"\x11GetAddressRequest\",\n" +
+	"\x12GetAddressResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x16\n" +
+	"\x14GetAttributesRequest\"/\n" +
+	"\x15GetAttributesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x15\n" +
+	"\x13GetDirectionRequest\".\n" +
+	"\x14GetDirectionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x1a\n" +
+	"\x18GetEndpointNumberRequest\"3\n" +
+	"\x19GetEndpointNumberResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x14\n" +
+	"\x12GetIntervalRequest\"-\n" +
+	"\x13GetIntervalResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x19\n" +
+	"\x17GetMaxPacketSizeRequest\"2\n" +
+	"\x18GetMaxPacketSizeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x10\n" +
+	"\x0eGetTypeRequest\")\n" +
+	"\x0fGetTypeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x1c\n" +
-	"\x1aRequestPermission2Response\"E\n" +
-	"\x1bRequestPermission2_1Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x1e\n" +
-	"\x1cRequestPermission2_1Response2\x90\x06\n" +
-	"\x11UsbManagerService\x12O\n" +
-	"\x10GetAccessoryList\x12\x1c.usb.GetAccessoryListRequest\x1a\x1d.usb.GetAccessoryListResponse\x12I\n" +
-	"\x0eHasPermission1\x12\x1a.usb.HasPermission1Request\x1a\x1b.usb.HasPermission1Response\x12O\n" +
-	"\x10HasPermission1_1\x12\x1c.usb.HasPermission1_1Request\x1a\x1d.usb.HasPermission1_1Response\x12F\n" +
-	"\rOpenAccessory\x12\x19.usb.OpenAccessoryRequest\x1a\x1a.usb.OpenAccessoryResponse\x12g\n" +
-	"\x18OpenAccessoryInputStream\x12$.usb.OpenAccessoryInputStreamRequest\x1a%.usb.OpenAccessoryInputStreamResponse\x12j\n" +
-	"\x19OpenAccessoryOutputStream\x12%.usb.OpenAccessoryOutputStreamRequest\x1a&.usb.OpenAccessoryOutputStreamResponse\x12=\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse2\xcf\x05\n" +
+	"\x12UsbEndpointService\x12O\n" +
+	"\x10DescribeContents\x12\x1c.usb.DescribeContentsRequest\x1a\x1d.usb.DescribeContentsResponse\x12=\n" +
 	"\n" +
-	"OpenDevice\x12\x16.usb.OpenDeviceRequest\x1a\x17.usb.OpenDeviceResponse\x12U\n" +
-	"\x12RequestPermission2\x12\x1e.usb.RequestPermission2Request\x1a\x1f.usb.RequestPermission2Response\x12[\n" +
-	"\x14RequestPermission2_1\x12 .usb.RequestPermission2_1Request\x1a!.usb.RequestPermission2_1ResponseB&Z$github.com/xaionaro-go/jni/proto/usbb\x06proto3"
+	"GetAddress\x12\x16.usb.GetAddressRequest\x1a\x17.usb.GetAddressResponse\x12F\n" +
+	"\rGetAttributes\x12\x19.usb.GetAttributesRequest\x1a\x1a.usb.GetAttributesResponse\x12C\n" +
+	"\fGetDirection\x12\x18.usb.GetDirectionRequest\x1a\x19.usb.GetDirectionResponse\x12R\n" +
+	"\x11GetEndpointNumber\x12\x1d.usb.GetEndpointNumberRequest\x1a\x1e.usb.GetEndpointNumberResponse\x12@\n" +
+	"\vGetInterval\x12\x17.usb.GetIntervalRequest\x1a\x18.usb.GetIntervalResponse\x12O\n" +
+	"\x10GetMaxPacketSize\x12\x1c.usb.GetMaxPacketSizeRequest\x1a\x1d.usb.GetMaxPacketSizeResponse\x124\n" +
+	"\aGetType\x12\x13.usb.GetTypeRequest\x1a\x14.usb.GetTypeResponse\x127\n" +
+	"\bToString\x12\x14.usb.ToStringRequest\x1a\x15.usb.ToStringResponse\x12F\n" +
+	"\rWriteToParcel\x12\x19.usb.WriteToParcelRequest\x1a\x1a.usb.WriteToParcelResponseB&Z$github.com/xaionaro-go/jni/proto/usbb\x06proto3"
 
 var (
 	file_proto_usb_usb_proto_rawDescOnce sync.Once
@@ -871,48 +892,52 @@ func file_proto_usb_usb_proto_rawDescGZIP() []byte {
 	return file_proto_usb_usb_proto_rawDescData
 }
 
-var file_proto_usb_usb_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_proto_usb_usb_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_proto_usb_usb_proto_goTypes = []any{
-	(*GetAccessoryListRequest)(nil),           // 0: usb.GetAccessoryListRequest
-	(*GetAccessoryListResponse)(nil),          // 1: usb.GetAccessoryListResponse
-	(*HasPermission1Request)(nil),             // 2: usb.HasPermission1Request
-	(*HasPermission1Response)(nil),            // 3: usb.HasPermission1Response
-	(*HasPermission1_1Request)(nil),           // 4: usb.HasPermission1_1Request
-	(*HasPermission1_1Response)(nil),          // 5: usb.HasPermission1_1Response
-	(*OpenAccessoryRequest)(nil),              // 6: usb.OpenAccessoryRequest
-	(*OpenAccessoryResponse)(nil),             // 7: usb.OpenAccessoryResponse
-	(*OpenAccessoryInputStreamRequest)(nil),   // 8: usb.OpenAccessoryInputStreamRequest
-	(*OpenAccessoryInputStreamResponse)(nil),  // 9: usb.OpenAccessoryInputStreamResponse
-	(*OpenAccessoryOutputStreamRequest)(nil),  // 10: usb.OpenAccessoryOutputStreamRequest
-	(*OpenAccessoryOutputStreamResponse)(nil), // 11: usb.OpenAccessoryOutputStreamResponse
-	(*OpenDeviceRequest)(nil),                 // 12: usb.OpenDeviceRequest
-	(*OpenDeviceResponse)(nil),                // 13: usb.OpenDeviceResponse
-	(*RequestPermission2Request)(nil),         // 14: usb.RequestPermission2Request
-	(*RequestPermission2Response)(nil),        // 15: usb.RequestPermission2Response
-	(*RequestPermission2_1Request)(nil),       // 16: usb.RequestPermission2_1Request
-	(*RequestPermission2_1Response)(nil),      // 17: usb.RequestPermission2_1Response
+	(*DescribeContentsRequest)(nil),   // 0: usb.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil),  // 1: usb.DescribeContentsResponse
+	(*GetAddressRequest)(nil),         // 2: usb.GetAddressRequest
+	(*GetAddressResponse)(nil),        // 3: usb.GetAddressResponse
+	(*GetAttributesRequest)(nil),      // 4: usb.GetAttributesRequest
+	(*GetAttributesResponse)(nil),     // 5: usb.GetAttributesResponse
+	(*GetDirectionRequest)(nil),       // 6: usb.GetDirectionRequest
+	(*GetDirectionResponse)(nil),      // 7: usb.GetDirectionResponse
+	(*GetEndpointNumberRequest)(nil),  // 8: usb.GetEndpointNumberRequest
+	(*GetEndpointNumberResponse)(nil), // 9: usb.GetEndpointNumberResponse
+	(*GetIntervalRequest)(nil),        // 10: usb.GetIntervalRequest
+	(*GetIntervalResponse)(nil),       // 11: usb.GetIntervalResponse
+	(*GetMaxPacketSizeRequest)(nil),   // 12: usb.GetMaxPacketSizeRequest
+	(*GetMaxPacketSizeResponse)(nil),  // 13: usb.GetMaxPacketSizeResponse
+	(*GetTypeRequest)(nil),            // 14: usb.GetTypeRequest
+	(*GetTypeResponse)(nil),           // 15: usb.GetTypeResponse
+	(*ToStringRequest)(nil),           // 16: usb.ToStringRequest
+	(*ToStringResponse)(nil),          // 17: usb.ToStringResponse
+	(*WriteToParcelRequest)(nil),      // 18: usb.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),     // 19: usb.WriteToParcelResponse
 }
 var file_proto_usb_usb_proto_depIdxs = []int32{
-	0,  // 0: usb.UsbManagerService.GetAccessoryList:input_type -> usb.GetAccessoryListRequest
-	2,  // 1: usb.UsbManagerService.HasPermission1:input_type -> usb.HasPermission1Request
-	4,  // 2: usb.UsbManagerService.HasPermission1_1:input_type -> usb.HasPermission1_1Request
-	6,  // 3: usb.UsbManagerService.OpenAccessory:input_type -> usb.OpenAccessoryRequest
-	8,  // 4: usb.UsbManagerService.OpenAccessoryInputStream:input_type -> usb.OpenAccessoryInputStreamRequest
-	10, // 5: usb.UsbManagerService.OpenAccessoryOutputStream:input_type -> usb.OpenAccessoryOutputStreamRequest
-	12, // 6: usb.UsbManagerService.OpenDevice:input_type -> usb.OpenDeviceRequest
-	14, // 7: usb.UsbManagerService.RequestPermission2:input_type -> usb.RequestPermission2Request
-	16, // 8: usb.UsbManagerService.RequestPermission2_1:input_type -> usb.RequestPermission2_1Request
-	1,  // 9: usb.UsbManagerService.GetAccessoryList:output_type -> usb.GetAccessoryListResponse
-	3,  // 10: usb.UsbManagerService.HasPermission1:output_type -> usb.HasPermission1Response
-	5,  // 11: usb.UsbManagerService.HasPermission1_1:output_type -> usb.HasPermission1_1Response
-	7,  // 12: usb.UsbManagerService.OpenAccessory:output_type -> usb.OpenAccessoryResponse
-	9,  // 13: usb.UsbManagerService.OpenAccessoryInputStream:output_type -> usb.OpenAccessoryInputStreamResponse
-	11, // 14: usb.UsbManagerService.OpenAccessoryOutputStream:output_type -> usb.OpenAccessoryOutputStreamResponse
-	13, // 15: usb.UsbManagerService.OpenDevice:output_type -> usb.OpenDeviceResponse
-	15, // 16: usb.UsbManagerService.RequestPermission2:output_type -> usb.RequestPermission2Response
-	17, // 17: usb.UsbManagerService.RequestPermission2_1:output_type -> usb.RequestPermission2_1Response
-	9,  // [9:18] is the sub-list for method output_type
-	0,  // [0:9] is the sub-list for method input_type
+	0,  // 0: usb.UsbEndpointService.DescribeContents:input_type -> usb.DescribeContentsRequest
+	2,  // 1: usb.UsbEndpointService.GetAddress:input_type -> usb.GetAddressRequest
+	4,  // 2: usb.UsbEndpointService.GetAttributes:input_type -> usb.GetAttributesRequest
+	6,  // 3: usb.UsbEndpointService.GetDirection:input_type -> usb.GetDirectionRequest
+	8,  // 4: usb.UsbEndpointService.GetEndpointNumber:input_type -> usb.GetEndpointNumberRequest
+	10, // 5: usb.UsbEndpointService.GetInterval:input_type -> usb.GetIntervalRequest
+	12, // 6: usb.UsbEndpointService.GetMaxPacketSize:input_type -> usb.GetMaxPacketSizeRequest
+	14, // 7: usb.UsbEndpointService.GetType:input_type -> usb.GetTypeRequest
+	16, // 8: usb.UsbEndpointService.ToString:input_type -> usb.ToStringRequest
+	18, // 9: usb.UsbEndpointService.WriteToParcel:input_type -> usb.WriteToParcelRequest
+	1,  // 10: usb.UsbEndpointService.DescribeContents:output_type -> usb.DescribeContentsResponse
+	3,  // 11: usb.UsbEndpointService.GetAddress:output_type -> usb.GetAddressResponse
+	5,  // 12: usb.UsbEndpointService.GetAttributes:output_type -> usb.GetAttributesResponse
+	7,  // 13: usb.UsbEndpointService.GetDirection:output_type -> usb.GetDirectionResponse
+	9,  // 14: usb.UsbEndpointService.GetEndpointNumber:output_type -> usb.GetEndpointNumberResponse
+	11, // 15: usb.UsbEndpointService.GetInterval:output_type -> usb.GetIntervalResponse
+	13, // 16: usb.UsbEndpointService.GetMaxPacketSize:output_type -> usb.GetMaxPacketSizeResponse
+	15, // 17: usb.UsbEndpointService.GetType:output_type -> usb.GetTypeResponse
+	17, // 18: usb.UsbEndpointService.ToString:output_type -> usb.ToStringResponse
+	19, // 19: usb.UsbEndpointService.WriteToParcel:output_type -> usb.WriteToParcelResponse
+	10, // [10:20] is the sub-list for method output_type
+	0,  // [0:10] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -929,7 +954,7 @@ func file_proto_usb_usb_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_usb_usb_proto_rawDesc), len(file_proto_usb_usb_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

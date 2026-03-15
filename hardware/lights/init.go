@@ -20,18 +20,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clslight                     *jni.GlobalRef
-	midlightDescribeContents     jni.MethodID
-	midlightEquals               jni.MethodID
-	midlightGetId                jni.MethodID
-	midlightGetName              jni.MethodID
-	midlightGetOrdinal           jni.MethodID
-	midlightGetType              jni.MethodID
-	midlightHasBrightnessControl jni.MethodID
-	midlightHasRgbControl        jni.MethodID
-	midlightHashCode             jni.MethodID
-	midlightToString             jni.MethodID
-	midlightWriteToParcel        jni.MethodID
+	clslightsManager *jni.GlobalRef
+
+	clslightsManagerLightsSession *jni.GlobalRef
 )
 
 // initSkipped records methods that were not found during init.
@@ -58,99 +49,17 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/hardware/lights/Light")
+	c, err = env.FindClass("android/hardware/lights/LightsManager")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.lights.Light: %w", err)
+		return fmt.Errorf("find class android.hardware.lights.LightsManager: %w", err)
 	}
-	clslight = env.NewGlobalRef(&c.Object)
+	clslightsManager = env.NewGlobalRef(&c.Object)
 
-	midlightDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "describeContents", "()I")
+	c, err = env.FindClass("android/hardware/lights/LightsManager$LightsSession")
 	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.describeContents")
+		return fmt.Errorf("find class android.hardware.lights.LightsManager$LightsSession: %w", err)
 	}
-
-	midlightEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.equals")
-	}
-
-	midlightGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getId")
-	}
-
-	midlightGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getName")
-	}
-
-	midlightGetOrdinal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getOrdinal", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getOrdinal")
-	}
-
-	midlightGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getType")
-	}
-
-	midlightHasBrightnessControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "hasBrightnessControl", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.hasBrightnessControl")
-	}
-
-	midlightHasRgbControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "hasRgbControl", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.hasRgbControl")
-	}
-
-	midlightHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.hashCode")
-	}
-
-	midlightToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.toString")
-	}
-
-	midlightWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.writeToParcel")
-	}
+	clslightsManagerLightsSession = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

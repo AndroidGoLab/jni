@@ -13,20 +13,20 @@ var projectionCmd = &cobra.Command{
 	Short: "projection service operations",
 }
 
-var projectionMediaProjectionCmd = &cobra.Command{
-	Use:   "media-projection",
-	Short: "MediaProjectionService operations",
+var projectionMediaProjectionManagerCmd = &cobra.Command{
+	Use:   "media-projection-manager",
+	Short: "MediaProjectionManagerService operations",
 }
 
-var projectionMediaProjectionStopCmd = &cobra.Command{
-	Use:   "stop",
-	Short: "Stop RPC",
+var projectionMediaProjectionManagerCreateScreenCaptureIntent0Cmd = &cobra.Command{
+	Use:   "create-screen-capture-intent0",
+	Short: "CreateScreenCaptureIntent0 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewMediaProjectionServiceClient(grpcConn)
-		req := &pb.StopRequest{}
-		resp, err := client.Stop(ctx, req)
+		client := pb.NewMediaProjectionManagerServiceClient(grpcConn)
+		req := &pb.CreateScreenCaptureIntent0Request{}
+		resp, err := client.CreateScreenCaptureIntent0(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +34,40 @@ var projectionMediaProjectionStopCmd = &cobra.Command{
 	},
 }
 
-var projectionMediaProjectionUnregisterCallbackCmd = &cobra.Command{
-	Use:   "unregister-callback",
-	Short: "UnregisterCallback RPC",
+var projectionMediaProjectionManagerCreateScreenCaptureIntent1_1Cmd = &cobra.Command{
+	Use:   "create-screen-capture-intent1_1",
+	Short: "CreateScreenCaptureIntent1_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewMediaProjectionServiceClient(grpcConn)
-		req := &pb.UnregisterCallbackRequest{}
+		client := pb.NewMediaProjectionManagerServiceClient(grpcConn)
+		req := &pb.CreateScreenCaptureIntent1_1Request{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.UnregisterCallback(ctx, req)
+		resp, err := client.CreateScreenCaptureIntent1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var projectionMediaProjectionManagerGetMediaProjectionCmd = &cobra.Command{
+	Use:   "get-media-projection",
+	Short: "GetMediaProjection RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaProjectionManagerServiceClient(grpcConn)
+		req := &pb.GetMediaProjectionRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetMediaProjection(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -54,9 +76,12 @@ var projectionMediaProjectionUnregisterCallbackCmd = &cobra.Command{
 }
 
 func init() {
-	projectionMediaProjectionCmd.AddCommand(projectionMediaProjectionStopCmd)
-	projectionMediaProjectionUnregisterCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	projectionMediaProjectionCmd.AddCommand(projectionMediaProjectionUnregisterCallbackCmd)
-	projectionCmd.AddCommand(projectionMediaProjectionCmd)
+	projectionMediaProjectionManagerCmd.AddCommand(projectionMediaProjectionManagerCreateScreenCaptureIntent0Cmd)
+	projectionMediaProjectionManagerCreateScreenCaptureIntent1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	projectionMediaProjectionManagerCmd.AddCommand(projectionMediaProjectionManagerCreateScreenCaptureIntent1_1Cmd)
+	projectionMediaProjectionManagerGetMediaProjectionCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	projectionMediaProjectionManagerGetMediaProjectionCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	projectionMediaProjectionManagerCmd.AddCommand(projectionMediaProjectionManagerGetMediaProjectionCmd)
+	projectionCmd.AddCommand(projectionMediaProjectionManagerCmd)
 	rootCmd.AddCommand(projectionCmd)
 }

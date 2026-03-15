@@ -13,29 +13,20 @@ var wifip2pCmd = &cobra.Command{
 	Short: "wifi_p2p service operations",
 }
 
-var wifip2pWifiP2pManagerCmd = &cobra.Command{
-	Use:   "wifi-p2p-manager",
-	Short: "WifiP2pManagerService operations",
+var wifip2pWifiP2pDeviceCmd = &cobra.Command{
+	Use:   "wifi-p2p-device",
+	Short: "WifiP2pDeviceService operations",
 }
 
-var wifip2pWifiP2pManagerAddExternalApproverCmd = &cobra.Command{
-	Use:   "add-external-approver",
-	Short: "AddExternalApprover RPC",
+var wifip2pWifiP2pDeviceDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.AddExternalApproverRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.AddExternalApprover(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -43,24 +34,18 @@ var wifip2pWifiP2pManagerAddExternalApproverCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerAddLocalServiceCmd = &cobra.Command{
-	Use:   "add-local-service",
-	Short: "AddLocalService RPC",
+var wifip2pWifiP2pDeviceEqualsCmd = &cobra.Command{
+	Use:   "equals",
+	Short: "Equals RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.AddLocalServiceRequest{}
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.EqualsRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.AddLocalService(ctx, req)
+		resp, err := client.Equals(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -68,24 +53,15 @@ var wifip2pWifiP2pManagerAddLocalServiceCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerAddServiceRequestCmd = &cobra.Command{
-	Use:   "add-service-request",
-	Short: "AddServiceRequest RPC",
+var wifip2pWifiP2pDeviceGetIpAddressCmd = &cobra.Command{
+	Use:   "get-ip-address",
+	Short: "GetIpAddress RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.AddServiceRequestRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.AddServiceRequest(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.GetIpAddressRequest{}
+		resp, err := client.GetIpAddress(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -93,21 +69,15 @@ var wifip2pWifiP2pManagerAddServiceRequestCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerCancelConnectCmd = &cobra.Command{
-	Use:   "cancel-connect",
-	Short: "CancelConnect RPC",
+var wifip2pWifiP2pDeviceGetVendorElementsCmd = &cobra.Command{
+	Use:   "get-vendor-elements",
+	Short: "GetVendorElements RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.CancelConnectRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.CancelConnect(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.GetVendorElementsRequest{}
+		resp, err := client.GetVendorElements(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -115,21 +85,15 @@ var wifip2pWifiP2pManagerCancelConnectCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerClearLocalServicesCmd = &cobra.Command{
-	Use:   "clear-local-services",
-	Short: "ClearLocalServices RPC",
+var wifip2pWifiP2pDeviceGetWfdInfoCmd = &cobra.Command{
+	Use:   "get-wfd-info",
+	Short: "GetWfdInfo RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.ClearLocalServicesRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.ClearLocalServices(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.GetWfdInfoRequest{}
+		resp, err := client.GetWfdInfo(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -137,21 +101,15 @@ var wifip2pWifiP2pManagerClearLocalServicesCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerClearServiceRequestsCmd = &cobra.Command{
-	Use:   "clear-service-requests",
-	Short: "ClearServiceRequests RPC",
+var wifip2pWifiP2pDeviceHashCodeCmd = &cobra.Command{
+	Use:   "hash-code",
+	Short: "HashCode RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.ClearServiceRequestsRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.ClearServiceRequests(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.HashCodeRequest{}
+		resp, err := client.HashCode(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -159,24 +117,15 @@ var wifip2pWifiP2pManagerClearServiceRequestsCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerConnectCmd = &cobra.Command{
-	Use:   "connect",
-	Short: "Connect RPC",
+var wifip2pWifiP2pDeviceIsGroupOwnerCmd = &cobra.Command{
+	Use:   "is-group-owner",
+	Short: "IsGroupOwner RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.ConnectRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.Connect(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.IsGroupOwnerRequest{}
+		resp, err := client.IsGroupOwner(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -184,24 +133,15 @@ var wifip2pWifiP2pManagerConnectCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerCreateGroup3Cmd = &cobra.Command{
-	Use:   "create-group3",
-	Short: "CreateGroup3 RPC",
+var wifip2pWifiP2pDeviceIsOpportunisticBootstrappingMethodSupportedCmd = &cobra.Command{
+	Use:   "is-opportunistic-bootstrapping-method-supported",
+	Short: "IsOpportunisticBootstrappingMethodSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.CreateGroup3Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.CreateGroup3(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.IsOpportunisticBootstrappingMethodSupportedRequest{}
+		resp, err := client.IsOpportunisticBootstrappingMethodSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -209,21 +149,15 @@ var wifip2pWifiP2pManagerCreateGroup3Cmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerCreateGroup2_1Cmd = &cobra.Command{
-	Use:   "create-group2_1",
-	Short: "CreateGroup2_1 RPC",
+var wifip2pWifiP2pDeviceIsPassphraseDisplayBootstrappingMethodSupportedCmd = &cobra.Command{
+	Use:   "is-passphrase-display-bootstrapping-method-supported",
+	Short: "IsPassphraseDisplayBootstrappingMethodSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.CreateGroup2_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.CreateGroup2_1(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.IsPassphraseDisplayBootstrappingMethodSupportedRequest{}
+		resp, err := client.IsPassphraseDisplayBootstrappingMethodSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -231,21 +165,15 @@ var wifip2pWifiP2pManagerCreateGroup2_1Cmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerDiscoverPeersCmd = &cobra.Command{
-	Use:   "discover-peers",
-	Short: "DiscoverPeers RPC",
+var wifip2pWifiP2pDeviceIsPassphraseKeypadBootstrappingMethodSupportedCmd = &cobra.Command{
+	Use:   "is-passphrase-keypad-bootstrapping-method-supported",
+	Short: "IsPassphraseKeypadBootstrappingMethodSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.DiscoverPeersRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.DiscoverPeers(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.IsPassphraseKeypadBootstrappingMethodSupportedRequest{}
+		resp, err := client.IsPassphraseKeypadBootstrappingMethodSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -253,21 +181,15 @@ var wifip2pWifiP2pManagerDiscoverPeersCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerDiscoverPeersOnSocialChannelsCmd = &cobra.Command{
-	Use:   "discover-peers-on-social-channels",
-	Short: "DiscoverPeersOnSocialChannels RPC",
+var wifip2pWifiP2pDeviceIsPinCodeDisplayBootstrappingMethodSupportedCmd = &cobra.Command{
+	Use:   "is-pin-code-display-bootstrapping-method-supported",
+	Short: "IsPinCodeDisplayBootstrappingMethodSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.DiscoverPeersOnSocialChannelsRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.DiscoverPeersOnSocialChannels(ctx, req)
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.IsPinCodeDisplayBootstrappingMethodSupportedRequest{}
+		resp, err := client.IsPinCodeDisplayBootstrappingMethodSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -275,900 +197,136 @@ var wifip2pWifiP2pManagerDiscoverPeersOnSocialChannelsCmd = &cobra.Command{
 	},
 }
 
-var wifip2pWifiP2pManagerDiscoverPeersOnSpecificFrequencyCmd = &cobra.Command{
-	Use:   "discover-peers-on-specific-frequency",
-	Short: "DiscoverPeersOnSpecificFrequency RPC",
+var wifip2pWifiP2pDeviceIsPinCodeKeypadBootstrappingMethodSupportedCmd = &cobra.Command{
+	Use:   "is-pin-code-keypad-bootstrapping-method-supported",
+	Short: "IsPinCodeKeypadBootstrappingMethodSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.DiscoverPeersOnSpecificFrequencyRequest{}
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.IsPinCodeKeypadBootstrappingMethodSupportedRequest{}
+		resp, err := client.IsPinCodeKeypadBootstrappingMethodSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifip2pWifiP2pDeviceIsServiceDiscoveryCapableCmd = &cobra.Command{
+	Use:   "is-service-discovery-capable",
+	Short: "IsServiceDiscoveryCapable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.IsServiceDiscoveryCapableRequest{}
+		resp, err := client.IsServiceDiscoveryCapable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifip2pWifiP2pDeviceToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifip2pWifiP2pDeviceUpdateCmd = &cobra.Command{
+	Use:   "update",
+	Short: "Update RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.UpdateRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Update(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifip2pWifiP2pDeviceWpsDisplaySupportedCmd = &cobra.Command{
+	Use:   "wps-display-supported",
+	Short: "WpsDisplaySupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.WpsDisplaySupportedRequest{}
+		resp, err := client.WpsDisplaySupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifip2pWifiP2pDeviceWpsKeypadSupportedCmd = &cobra.Command{
+	Use:   "wps-keypad-supported",
+	Short: "WpsKeypadSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.WpsKeypadSupportedRequest{}
+		resp, err := client.WpsKeypadSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifip2pWifiP2pDeviceWpsPbcSupportedCmd = &cobra.Command{
+	Use:   "wps-pbc-supported",
+	Short: "WpsPbcSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.WpsPbcSupportedRequest{}
+		resp, err := client.WpsPbcSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifip2pWifiP2pDeviceWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiP2PDeviceServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
 		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
 			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.DiscoverPeersOnSpecificFrequency(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerDiscoverServicesCmd = &cobra.Command{
-	Use:   "discover-services",
-	Short: "DiscoverServices RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.DiscoverServicesRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.DiscoverServices(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerDiscoverUsdBasedServicesCmd = &cobra.Command{
-	Use:   "discover-usd-based-services",
-	Short: "DiscoverUsdBasedServices RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.DiscoverUsdBasedServicesRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.DiscoverUsdBasedServices(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerGetListenStateCmd = &cobra.Command{
-	Use:   "get-listen-state",
-	Short: "GetListenState RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.GetListenStateRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.GetListenState(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerInitializeCmd = &cobra.Command{
-	Use:   "initialize",
-	Short: "Initialize RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.InitializeRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.Initialize(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerIsChannelConstrainedDiscoverySupportedCmd = &cobra.Command{
-	Use:   "is-channel-constrained-discovery-supported",
-	Short: "IsChannelConstrainedDiscoverySupported RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.IsChannelConstrainedDiscoverySupportedRequest{}
-		resp, err := client.IsChannelConstrainedDiscoverySupported(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerIsGroupClientRemovalSupportedCmd = &cobra.Command{
-	Use:   "is-group-client-removal-supported",
-	Short: "IsGroupClientRemovalSupported RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.IsGroupClientRemovalSupportedRequest{}
-		resp, err := client.IsGroupClientRemovalSupported(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerIsGroupOwnerIPv6LinkLocalAddressProvidedCmd = &cobra.Command{
-	Use:   "is-group-owner-i-pv6link-local-address-provided",
-	Short: "IsGroupOwnerIPv6LinkLocalAddressProvided RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.IsGroupOwnerIPv6LinkLocalAddressProvidedRequest{}
-		resp, err := client.IsGroupOwnerIPv6LinkLocalAddressProvided(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerIsPccModeSupportedCmd = &cobra.Command{
-	Use:   "is-pcc-mode-supported",
-	Short: "IsPccModeSupported RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.IsPccModeSupportedRequest{}
-		resp, err := client.IsPccModeSupported(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerIsSetVendorElementsSupportedCmd = &cobra.Command{
-	Use:   "is-set-vendor-elements-supported",
-	Short: "IsSetVendorElementsSupported RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.IsSetVendorElementsSupportedRequest{}
-		resp, err := client.IsSetVendorElementsSupported(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerIsWiFiDirectR2SupportedCmd = &cobra.Command{
-	Use:   "is-wi-fi-direct-r2supported",
-	Short: "IsWiFiDirectR2Supported RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.IsWiFiDirectR2SupportedRequest{}
-		resp, err := client.IsWiFiDirectR2Supported(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRegisterWifiP2pListenerCmd = &cobra.Command{
-	Use:   "register-wifi-p2p-listener",
-	Short: "RegisterWifiP2pListener RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RegisterWifiP2PListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RegisterWifiP2PListener(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRemoveClientCmd = &cobra.Command{
-	Use:   "remove-client",
-	Short: "RemoveClient RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RemoveClientRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RemoveClient(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRemoveExternalApproverCmd = &cobra.Command{
-	Use:   "remove-external-approver",
-	Short: "RemoveExternalApprover RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RemoveExternalApproverRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RemoveExternalApprover(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRemoveGroupCmd = &cobra.Command{
-	Use:   "remove-group",
-	Short: "RemoveGroup RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RemoveGroupRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RemoveGroup(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRemoveLocalServiceCmd = &cobra.Command{
-	Use:   "remove-local-service",
-	Short: "RemoveLocalService RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RemoveLocalServiceRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RemoveLocalService(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRemoveServiceRequestCmd = &cobra.Command{
-	Use:   "remove-service-request",
-	Short: "RemoveServiceRequest RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RemoveServiceRequestRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RemoveServiceRequest(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestConnectionInfoCmd = &cobra.Command{
-	Use:   "request-connection-info",
-	Short: "RequestConnectionInfo RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestConnectionInfoRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestConnectionInfo(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestDeviceInfoCmd = &cobra.Command{
-	Use:   "request-device-info",
-	Short: "RequestDeviceInfo RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestDeviceInfoRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestDeviceInfo(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestDirInfoCmd = &cobra.Command{
-	Use:   "request-dir-info",
-	Short: "RequestDirInfo RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestDirInfoRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RequestDirInfo(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestDiscoveryStateCmd = &cobra.Command{
-	Use:   "request-discovery-state",
-	Short: "RequestDiscoveryState RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestDiscoveryStateRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestDiscoveryState(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestGroupInfoCmd = &cobra.Command{
-	Use:   "request-group-info",
-	Short: "RequestGroupInfo RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestGroupInfoRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestGroupInfo(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestNetworkInfoCmd = &cobra.Command{
-	Use:   "request-network-info",
-	Short: "RequestNetworkInfo RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestNetworkInfoRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestNetworkInfo(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestP2pStateCmd = &cobra.Command{
-	Use:   "request-p2p-state",
-	Short: "RequestP2pState RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestP2PStateRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestP2PState(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerRequestPeersCmd = &cobra.Command{
-	Use:   "request-peers",
-	Short: "RequestPeers RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.RequestPeersRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestPeers(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerSetConnectionRequestResult4Cmd = &cobra.Command{
-	Use:   "set-connection-request-result4",
-	Short: "SetConnectionRequestResult4 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.SetConnectionRequestResult4Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.SetConnectionRequestResult4(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerSetConnectionRequestResult5_1Cmd = &cobra.Command{
-	Use:   "set-connection-request-result5_1",
-	Short: "SetConnectionRequestResult5_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.SetConnectionRequestResult5_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetString("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		resp, err := client.SetConnectionRequestResult5_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerSetDnsSdResponseListenersCmd = &cobra.Command{
-	Use:   "set-dns-sd-response-listeners",
-	Short: "SetDnsSdResponseListeners RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.SetDnsSdResponseListenersRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.SetDnsSdResponseListeners(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerSetServiceResponseListenerCmd = &cobra.Command{
-	Use:   "set-service-response-listener",
-	Short: "SetServiceResponseListener RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.SetServiceResponseListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.SetServiceResponseListener(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerSetUpnpServiceResponseListenerCmd = &cobra.Command{
-	Use:   "set-upnp-service-response-listener",
-	Short: "SetUpnpServiceResponseListener RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.SetUpnpServiceResponseListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.SetUpnpServiceResponseListener(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerSetVendorElementsCmd = &cobra.Command{
-	Use:   "set-vendor-elements",
-	Short: "SetVendorElements RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.SetVendorElementsRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.SetVendorElements(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerSetWfdInfoCmd = &cobra.Command{
-	Use:   "set-wfd-info",
-	Short: "SetWfdInfo RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.SetWfdInfoRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.SetWfdInfo(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerStartListeningCmd = &cobra.Command{
-	Use:   "start-listening",
-	Short: "StartListening RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.StartListeningRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.StartListening(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerStartPeerDiscoveryCmd = &cobra.Command{
-	Use:   "start-peer-discovery",
-	Short: "StartPeerDiscovery RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.StartPeerDiscoveryRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.StartPeerDiscovery(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerStartUsdBasedLocalServiceAdvertisementCmd = &cobra.Command{
-	Use:   "start-usd-based-local-service-advertisement",
-	Short: "StartUsdBasedLocalServiceAdvertisement RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.StartUsdBasedLocalServiceAdvertisementRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.StartUsdBasedLocalServiceAdvertisement(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerStopListeningCmd = &cobra.Command{
-	Use:   "stop-listening",
-	Short: "StopListening RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.StopListeningRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.StopListening(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerStopPeerDiscoveryCmd = &cobra.Command{
-	Use:   "stop-peer-discovery",
-	Short: "StopPeerDiscovery RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.StopPeerDiscoveryRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.StopPeerDiscovery(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerUnregisterWifiP2pListenerCmd = &cobra.Command{
-	Use:   "unregister-wifi-p2p-listener",
-	Short: "UnregisterWifiP2pListener RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.UnregisterWifiP2PListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.UnregisterWifiP2PListener(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerValidateDirInfoCmd = &cobra.Command{
-	Use:   "validate-dir-info",
-	Short: "ValidateDirInfo RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.ValidateDirInfoRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.ValidateDirInfo(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var wifip2pWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytesCmd = &cobra.Command{
-	Use:   "get-p2p-max-allowed-vendor-elements-length-bytes",
-	Short: "GetP2pMaxAllowedVendorElementsLengthBytes RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewWifiP2PManagerServiceClient(grpcConn)
-		req := &pb.GetP2PMaxAllowedVendorElementsLengthBytesRequest{}
-		resp, err := client.GetP2PMaxAllowedVendorElementsLengthBytes(ctx, req)
+		resp, err := client.WriteToParcel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -1177,171 +335,29 @@ var wifip2pWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytesCmd = &cobra.C
 }
 
 func init() {
-	wifip2pWifiP2pManagerAddExternalApproverCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerAddExternalApproverCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerAddExternalApproverCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerAddExternalApproverCmd)
-	wifip2pWifiP2pManagerAddLocalServiceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerAddLocalServiceCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerAddLocalServiceCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerAddLocalServiceCmd)
-	wifip2pWifiP2pManagerAddServiceRequestCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerAddServiceRequestCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerAddServiceRequestCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerAddServiceRequestCmd)
-	wifip2pWifiP2pManagerCancelConnectCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerCancelConnectCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerCancelConnectCmd)
-	wifip2pWifiP2pManagerClearLocalServicesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerClearLocalServicesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerClearLocalServicesCmd)
-	wifip2pWifiP2pManagerClearServiceRequestsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerClearServiceRequestsCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerClearServiceRequestsCmd)
-	wifip2pWifiP2pManagerConnectCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerConnectCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerConnectCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerConnectCmd)
-	wifip2pWifiP2pManagerCreateGroup3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerCreateGroup3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCreateGroup3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerCreateGroup3Cmd)
-	wifip2pWifiP2pManagerCreateGroup2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerCreateGroup2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerCreateGroup2_1Cmd)
-	wifip2pWifiP2pManagerDiscoverPeersCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerDiscoverPeersCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerDiscoverPeersCmd)
-	wifip2pWifiP2pManagerDiscoverPeersOnSocialChannelsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerDiscoverPeersOnSocialChannelsCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerDiscoverPeersOnSocialChannelsCmd)
-	wifip2pWifiP2pManagerDiscoverPeersOnSpecificFrequencyCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerDiscoverPeersOnSpecificFrequencyCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	wifip2pWifiP2pManagerDiscoverPeersOnSpecificFrequencyCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerDiscoverPeersOnSpecificFrequencyCmd)
-	wifip2pWifiP2pManagerDiscoverServicesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerDiscoverServicesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerDiscoverServicesCmd)
-	wifip2pWifiP2pManagerDiscoverUsdBasedServicesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerDiscoverUsdBasedServicesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerDiscoverUsdBasedServicesCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerDiscoverUsdBasedServicesCmd)
-	wifip2pWifiP2pManagerGetListenStateCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerGetListenStateCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerGetListenStateCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerGetListenStateCmd)
-	wifip2pWifiP2pManagerInitializeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerInitializeCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerInitializeCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerInitializeCmd)
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerIsChannelConstrainedDiscoverySupportedCmd)
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerIsGroupClientRemovalSupportedCmd)
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerIsGroupOwnerIPv6LinkLocalAddressProvidedCmd)
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerIsPccModeSupportedCmd)
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerIsSetVendorElementsSupportedCmd)
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerIsWiFiDirectR2SupportedCmd)
-	wifip2pWifiP2pManagerRegisterWifiP2pListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRegisterWifiP2pListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRegisterWifiP2pListenerCmd)
-	wifip2pWifiP2pManagerRemoveClientCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRemoveClientCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerRemoveClientCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRemoveClientCmd)
-	wifip2pWifiP2pManagerRemoveExternalApproverCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRemoveExternalApproverCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerRemoveExternalApproverCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRemoveExternalApproverCmd)
-	wifip2pWifiP2pManagerRemoveGroupCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRemoveGroupCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRemoveGroupCmd)
-	wifip2pWifiP2pManagerRemoveLocalServiceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRemoveLocalServiceCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerRemoveLocalServiceCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRemoveLocalServiceCmd)
-	wifip2pWifiP2pManagerRemoveServiceRequestCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRemoveServiceRequestCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerRemoveServiceRequestCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRemoveServiceRequestCmd)
-	wifip2pWifiP2pManagerRequestConnectionInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestConnectionInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestConnectionInfoCmd)
-	wifip2pWifiP2pManagerRequestDeviceInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestDeviceInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestDeviceInfoCmd)
-	wifip2pWifiP2pManagerRequestDirInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestDirInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerRequestDirInfoCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestDirInfoCmd)
-	wifip2pWifiP2pManagerRequestDiscoveryStateCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestDiscoveryStateCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestDiscoveryStateCmd)
-	wifip2pWifiP2pManagerRequestGroupInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestGroupInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestGroupInfoCmd)
-	wifip2pWifiP2pManagerRequestNetworkInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestNetworkInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestNetworkInfoCmd)
-	wifip2pWifiP2pManagerRequestP2pStateCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestP2pStateCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestP2pStateCmd)
-	wifip2pWifiP2pManagerRequestPeersCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerRequestPeersCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerRequestPeersCmd)
-	wifip2pWifiP2pManagerSetConnectionRequestResult4Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerSetConnectionRequestResult4Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerSetConnectionRequestResult4Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
-	wifip2pWifiP2pManagerSetConnectionRequestResult4Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerSetConnectionRequestResult4Cmd)
-	wifip2pWifiP2pManagerSetConnectionRequestResult5_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerSetConnectionRequestResult5_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerSetConnectionRequestResult5_1Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
-	wifip2pWifiP2pManagerSetConnectionRequestResult5_1Cmd.Flags().String("arg3", "", "arg3 (string)")
-	wifip2pWifiP2pManagerSetConnectionRequestResult5_1Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerSetConnectionRequestResult5_1Cmd)
-	wifip2pWifiP2pManagerSetDnsSdResponseListenersCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerSetDnsSdResponseListenersCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerSetDnsSdResponseListenersCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerSetDnsSdResponseListenersCmd)
-	wifip2pWifiP2pManagerSetServiceResponseListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerSetServiceResponseListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerSetServiceResponseListenerCmd)
-	wifip2pWifiP2pManagerSetUpnpServiceResponseListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerSetUpnpServiceResponseListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerSetUpnpServiceResponseListenerCmd)
-	wifip2pWifiP2pManagerSetVendorElementsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerSetVendorElementsCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerSetVendorElementsCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerSetVendorElementsCmd)
-	wifip2pWifiP2pManagerSetWfdInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerSetWfdInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerSetWfdInfoCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerSetWfdInfoCmd)
-	wifip2pWifiP2pManagerStartListeningCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerStartListeningCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerStartListeningCmd)
-	wifip2pWifiP2pManagerStartPeerDiscoveryCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerStartPeerDiscoveryCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerStartPeerDiscoveryCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerStartPeerDiscoveryCmd)
-	wifip2pWifiP2pManagerStartUsdBasedLocalServiceAdvertisementCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerStartUsdBasedLocalServiceAdvertisementCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerStartUsdBasedLocalServiceAdvertisementCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerStartUsdBasedLocalServiceAdvertisementCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerStartUsdBasedLocalServiceAdvertisementCmd)
-	wifip2pWifiP2pManagerStopListeningCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerStopListeningCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerStopListeningCmd)
-	wifip2pWifiP2pManagerStopPeerDiscoveryCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerStopPeerDiscoveryCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerStopPeerDiscoveryCmd)
-	wifip2pWifiP2pManagerUnregisterWifiP2pListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerUnregisterWifiP2pListenerCmd)
-	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	wifip2pWifiP2pManagerValidateDirInfoCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerValidateDirInfoCmd)
-	wifip2pWifiP2pManagerCmd.AddCommand(wifip2pWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytesCmd)
-	wifip2pCmd.AddCommand(wifip2pWifiP2pManagerCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceDescribeContentsCmd)
+	wifip2pWifiP2pDeviceEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceEqualsCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceGetIpAddressCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceGetVendorElementsCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceGetWfdInfoCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceHashCodeCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceIsGroupOwnerCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceIsOpportunisticBootstrappingMethodSupportedCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceIsPassphraseDisplayBootstrappingMethodSupportedCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceIsPassphraseKeypadBootstrappingMethodSupportedCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceIsPinCodeDisplayBootstrappingMethodSupportedCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceIsPinCodeKeypadBootstrappingMethodSupportedCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceIsServiceDiscoveryCapableCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceToStringCmd)
+	wifip2pWifiP2pDeviceUpdateCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceUpdateCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceWpsDisplaySupportedCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceWpsKeypadSupportedCmd)
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceWpsPbcSupportedCmd)
+	wifip2pWifiP2pDeviceWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	wifip2pWifiP2pDeviceWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	wifip2pWifiP2pDeviceCmd.AddCommand(wifip2pWifiP2pDeviceWriteToParcelCmd)
+	wifip2pCmd.AddCommand(wifip2pWifiP2pDeviceCmd)
 	rootCmd.AddCommand(wifip2pCmd)
 }

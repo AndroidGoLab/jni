@@ -1,162 +1,56 @@
 package: wifi_rtt
 go_import: github.com/xaionaro-go/jni/net/wifi/rtt
 classes:
-    - java_class: android.net.wifi.rtt.RangingResult
-      go_type: rangingResult
+    - java_class: android.net.wifi.rtt.WifiRttManager
+      go_type: wifiRttManager
+      obtain: system_service
+      service_name: wifirtt
+      close: true
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
+        - java_method: getRttCharacteristics
+          go_name: GetRttCharacteristics
+          returns: android.os.Bundle
           error: true
-        - java_method: equals
-          go_name: Equals
+        - java_method: isAvailable
+          go_name: IsAvailable
+          returns: boolean
+          error: true
+        - java_method: startRanging
+          go_name: StartRanging
           params:
-            - java_type: java.lang.Object
+            - java_type: android.net.wifi.rtt.RangingRequest
               go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: get80211azInitiatorTxLtfRepetitionsCount
-          go_name: Get80211azInitiatorTxLtfRepetitionsCount
-          returns: int
-          error: true
-        - java_method: get80211azNumberOfRxSpatialStreams
-          go_name: Get80211azNumberOfRxSpatialStreams
-          returns: int
-          error: true
-        - java_method: get80211azNumberOfTxSpatialStreams
-          go_name: Get80211azNumberOfTxSpatialStreams
-          returns: int
-          error: true
-        - java_method: get80211azResponderTxLtfRepetitionsCount
-          go_name: Get80211azResponderTxLtfRepetitionsCount
-          returns: int
-          error: true
-        - java_method: getDistanceMm
-          go_name: GetDistanceMm
-          returns: int
-          error: true
-        - java_method: getDistanceStdDevMm
-          go_name: GetDistanceStdDevMm
-          returns: int
-          error: true
-        - java_method: getLci
-          go_name: GetLci
-          returns: '[B'
-          error: true
-        - java_method: getLcr
-          go_name: GetLcr
-          returns: '[B'
-          error: true
-        - java_method: getMacAddress
-          go_name: GetMacAddress
-          returns: android.net.MacAddress
-          error: true
-        - java_method: getMaxTimeBetweenNtbMeasurementsMicros
-          go_name: GetMaxTimeBetweenNtbMeasurementsMicros
-          returns: long
-          error: true
-        - java_method: getMeasurementBandwidth
-          go_name: GetMeasurementBandwidth
-          returns: int
-          error: true
-        - java_method: getMeasurementChannelFrequencyMHz
-          go_name: GetMeasurementChannelFrequencyMHz
-          returns: int
-          error: true
-        - java_method: getMinTimeBetweenNtbMeasurementsMicros
-          go_name: GetMinTimeBetweenNtbMeasurementsMicros
-          returns: long
-          error: true
-        - java_method: getNumAttemptedMeasurements
-          go_name: GetNumAttemptedMeasurements
-          returns: int
-          error: true
-        - java_method: getNumSuccessfulMeasurements
-          go_name: GetNumSuccessfulMeasurements
-          returns: int
-          error: true
-        - java_method: getPasnComebackAfterMillis
-          go_name: GetPasnComebackAfterMillis
-          returns: long
-          error: true
-        - java_method: getPasnComebackCookie
-          go_name: GetPasnComebackCookie
-          returns: '[B'
-          error: true
-        - java_method: getPeerHandle
-          go_name: GetPeerHandle
-          returns: android.net.wifi.aware.PeerHandle
-          error: true
-        - java_method: getRangingTimestampMillis
-          go_name: GetRangingTimestampMillis
-          returns: long
-          error: true
-        - java_method: getRssi
-          go_name: GetRssi
-          returns: int
-          error: true
-        - java_method: getSecureHeLtfProtocolVersion
-          go_name: GetSecureHeLtfProtocolVersion
-          returns: int
-          error: true
-        - java_method: getStatus
-          go_name: GetStatus
-          returns: int
-          error: true
-        - java_method: getUnverifiedResponderLocation
-          go_name: GetUnverifiedResponderLocation
-          returns: android.net.wifi.rtt.ResponderLocation
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: is80211azNtbMeasurement
-          go_name: Is80211azNtbMeasurement
-          returns: boolean
-          error: true
-        - java_method: is80211mcMeasurement
-          go_name: Is80211mcMeasurement
-          returns: boolean
-          error: true
-        - java_method: isRangingAuthenticated
-          go_name: IsRangingAuthenticated
-          returns: boolean
-          error: true
-        - java_method: isRangingFrameProtected
-          go_name: IsRangingFrameProtected
-          returns: boolean
-          error: true
-        - java_method: isSecureHeLtfEnabled
-          go_name: IsSecureHeLtfEnabled
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
+            - java_type: java.util.concurrent.Executor
               go_name: arg1
+            - java_type: android.net.wifi.rtt.RangingResultCallback
+              go_name: arg2
           returns: void
           error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: StatusFail
-      value: "0"
-      go_type: int
-    - go_name: StatusResponderDoesNotSupportIeee80211mc
-      value: "0"
-      go_type: int
-    - go_name: StatusSuccess
-      value: "0"
-      go_type: int
-    - go_name: Unspecified
-      value: "0"
-      go_type: int
+    - go_name: ActionWifiRttStateChanged
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyBooleanLci
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyBooleanLcr
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyBooleanNtbInitiator
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyBooleanOneSidedRtt
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyBooleanRangingFrameProtectionSupported
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyBooleanSecureHeLtfSupported
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyBooleanStaResponder
+      value: '""'
+      go_type: string
+    - go_name: CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion
+      value: '""'
+      go_type: string

@@ -13,20 +13,20 @@ var usbCmd = &cobra.Command{
 	Short: "usb service operations",
 }
 
-var usbUsbManagerCmd = &cobra.Command{
-	Use:   "usb-manager",
-	Short: "UsbManagerService operations",
+var usbUsbEndpointCmd = &cobra.Command{
+	Use:   "usb-endpoint",
+	Short: "UsbEndpointService operations",
 }
 
-var usbUsbManagerGetAccessoryListCmd = &cobra.Command{
-	Use:   "get-accessory-list",
-	Short: "GetAccessoryList RPC",
+var usbUsbEndpointDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.GetAccessoryListRequest{}
-		resp, err := client.GetAccessoryList(ctx, req)
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +34,15 @@ var usbUsbManagerGetAccessoryListCmd = &cobra.Command{
 	},
 }
 
-var usbUsbManagerHasPermission1Cmd = &cobra.Command{
-	Use:   "has-permission1",
-	Short: "HasPermission1 RPC",
+var usbUsbEndpointGetAddressCmd = &cobra.Command{
+	Use:   "get-address",
+	Short: "GetAddress RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.HasPermission1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.HasPermission1(ctx, req)
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.GetAddressRequest{}
+		resp, err := client.GetAddress(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,18 +50,15 @@ var usbUsbManagerHasPermission1Cmd = &cobra.Command{
 	},
 }
 
-var usbUsbManagerHasPermission1_1Cmd = &cobra.Command{
-	Use:   "has-permission1_1",
-	Short: "HasPermission1_1 RPC",
+var usbUsbEndpointGetAttributesCmd = &cobra.Command{
+	Use:   "get-attributes",
+	Short: "GetAttributes RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.HasPermission1_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.HasPermission1_1(ctx, req)
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.GetAttributesRequest{}
+		resp, err := client.GetAttributes(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -72,18 +66,15 @@ var usbUsbManagerHasPermission1_1Cmd = &cobra.Command{
 	},
 }
 
-var usbUsbManagerOpenAccessoryCmd = &cobra.Command{
-	Use:   "open-accessory",
-	Short: "OpenAccessory RPC",
+var usbUsbEndpointGetDirectionCmd = &cobra.Command{
+	Use:   "get-direction",
+	Short: "GetDirection RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.OpenAccessoryRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.OpenAccessory(ctx, req)
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.GetDirectionRequest{}
+		resp, err := client.GetDirection(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -91,18 +82,15 @@ var usbUsbManagerOpenAccessoryCmd = &cobra.Command{
 	},
 }
 
-var usbUsbManagerOpenAccessoryInputStreamCmd = &cobra.Command{
-	Use:   "open-accessory-input-stream",
-	Short: "OpenAccessoryInputStream RPC",
+var usbUsbEndpointGetEndpointNumberCmd = &cobra.Command{
+	Use:   "get-endpoint-number",
+	Short: "GetEndpointNumber RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.OpenAccessoryInputStreamRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.OpenAccessoryInputStream(ctx, req)
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.GetEndpointNumberRequest{}
+		resp, err := client.GetEndpointNumber(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -110,18 +98,15 @@ var usbUsbManagerOpenAccessoryInputStreamCmd = &cobra.Command{
 	},
 }
 
-var usbUsbManagerOpenAccessoryOutputStreamCmd = &cobra.Command{
-	Use:   "open-accessory-output-stream",
-	Short: "OpenAccessoryOutputStream RPC",
+var usbUsbEndpointGetIntervalCmd = &cobra.Command{
+	Use:   "get-interval",
+	Short: "GetInterval RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.OpenAccessoryOutputStreamRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.OpenAccessoryOutputStream(ctx, req)
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.GetIntervalRequest{}
+		resp, err := client.GetInterval(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -129,18 +114,15 @@ var usbUsbManagerOpenAccessoryOutputStreamCmd = &cobra.Command{
 	},
 }
 
-var usbUsbManagerOpenDeviceCmd = &cobra.Command{
-	Use:   "open-device",
-	Short: "OpenDevice RPC",
+var usbUsbEndpointGetMaxPacketSizeCmd = &cobra.Command{
+	Use:   "get-max-packet-size",
+	Short: "GetMaxPacketSize RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.OpenDeviceRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.OpenDevice(ctx, req)
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.GetMaxPacketSizeRequest{}
+		resp, err := client.GetMaxPacketSize(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -148,43 +130,53 @@ var usbUsbManagerOpenDeviceCmd = &cobra.Command{
 	},
 }
 
-var usbUsbManagerRequestPermission2Cmd = &cobra.Command{
-	Use:   "request-permission2",
-	Short: "RequestPermission2 RPC",
+var usbUsbEndpointGetTypeCmd = &cobra.Command{
+	Use:   "get-type",
+	Short: "GetType RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.RequestPermission2Request{}
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.GetTypeRequest{}
+		resp, err := client.GetType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var usbUsbEndpointToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var usbUsbEndpointWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewUsbEndpointServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
 			req.Arg1 = v
 		}
-		resp, err := client.RequestPermission2(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var usbUsbManagerRequestPermission2_1Cmd = &cobra.Command{
-	Use:   "request-permission2_1",
-	Short: "RequestPermission2_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewUsbManagerServiceClient(grpcConn)
-		req := &pb.RequestPermission2_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestPermission2_1(ctx, req)
+		resp, err := client.WriteToParcel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -193,25 +185,18 @@ var usbUsbManagerRequestPermission2_1Cmd = &cobra.Command{
 }
 
 func init() {
-	usbUsbManagerCmd.AddCommand(usbUsbManagerGetAccessoryListCmd)
-	usbUsbManagerHasPermission1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerHasPermission1Cmd)
-	usbUsbManagerHasPermission1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerHasPermission1_1Cmd)
-	usbUsbManagerOpenAccessoryCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerOpenAccessoryCmd)
-	usbUsbManagerOpenAccessoryInputStreamCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerOpenAccessoryInputStreamCmd)
-	usbUsbManagerOpenAccessoryOutputStreamCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerOpenAccessoryOutputStreamCmd)
-	usbUsbManagerOpenDeviceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerOpenDeviceCmd)
-	usbUsbManagerRequestPermission2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerRequestPermission2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerRequestPermission2Cmd)
-	usbUsbManagerRequestPermission2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	usbUsbManagerRequestPermission2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	usbUsbManagerCmd.AddCommand(usbUsbManagerRequestPermission2_1Cmd)
-	usbCmd.AddCommand(usbUsbManagerCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointDescribeContentsCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointGetAddressCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointGetAttributesCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointGetDirectionCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointGetEndpointNumberCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointGetIntervalCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointGetMaxPacketSizeCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointGetTypeCmd)
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointToStringCmd)
+	usbUsbEndpointWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	usbUsbEndpointWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	usbUsbEndpointCmd.AddCommand(usbUsbEndpointWriteToParcelCmd)
+	usbCmd.AddCommand(usbUsbEndpointCmd)
 	rootCmd.AddCommand(usbCmd)
 }

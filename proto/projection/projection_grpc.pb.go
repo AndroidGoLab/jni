@@ -21,140 +21,178 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MediaProjectionService_Stop_FullMethodName               = "/projection.MediaProjectionService/Stop"
-	MediaProjectionService_UnregisterCallback_FullMethodName = "/projection.MediaProjectionService/UnregisterCallback"
+	MediaProjectionManagerService_CreateScreenCaptureIntent0_FullMethodName   = "/projection.MediaProjectionManagerService/CreateScreenCaptureIntent0"
+	MediaProjectionManagerService_CreateScreenCaptureIntent1_1_FullMethodName = "/projection.MediaProjectionManagerService/CreateScreenCaptureIntent1_1"
+	MediaProjectionManagerService_GetMediaProjection_FullMethodName           = "/projection.MediaProjectionManagerService/GetMediaProjection"
 )
 
-// MediaProjectionServiceClient is the client API for MediaProjectionService service.
+// MediaProjectionManagerServiceClient is the client API for MediaProjectionManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MediaProjectionServiceClient interface {
-	Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error)
-	UnregisterCallback(ctx context.Context, in *UnregisterCallbackRequest, opts ...grpc.CallOption) (*UnregisterCallbackResponse, error)
+type MediaProjectionManagerServiceClient interface {
+	CreateScreenCaptureIntent0(ctx context.Context, in *CreateScreenCaptureIntent0Request, opts ...grpc.CallOption) (*CreateScreenCaptureIntent0Response, error)
+	CreateScreenCaptureIntent1_1(ctx context.Context, in *CreateScreenCaptureIntent1_1Request, opts ...grpc.CallOption) (*CreateScreenCaptureIntent1_1Response, error)
+	GetMediaProjection(ctx context.Context, in *GetMediaProjectionRequest, opts ...grpc.CallOption) (*GetMediaProjectionResponse, error)
 }
 
-type mediaProjectionServiceClient struct {
+type mediaProjectionManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMediaProjectionServiceClient(cc grpc.ClientConnInterface) MediaProjectionServiceClient {
-	return &mediaProjectionServiceClient{cc}
+func NewMediaProjectionManagerServiceClient(cc grpc.ClientConnInterface) MediaProjectionManagerServiceClient {
+	return &mediaProjectionManagerServiceClient{cc}
 }
 
-func (c *mediaProjectionServiceClient) Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error) {
+func (c *mediaProjectionManagerServiceClient) CreateScreenCaptureIntent0(ctx context.Context, in *CreateScreenCaptureIntent0Request, opts ...grpc.CallOption) (*CreateScreenCaptureIntent0Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StopResponse)
-	err := c.cc.Invoke(ctx, MediaProjectionService_Stop_FullMethodName, in, out, cOpts...)
+	out := new(CreateScreenCaptureIntent0Response)
+	err := c.cc.Invoke(ctx, MediaProjectionManagerService_CreateScreenCaptureIntent0_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaProjectionServiceClient) UnregisterCallback(ctx context.Context, in *UnregisterCallbackRequest, opts ...grpc.CallOption) (*UnregisterCallbackResponse, error) {
+func (c *mediaProjectionManagerServiceClient) CreateScreenCaptureIntent1_1(ctx context.Context, in *CreateScreenCaptureIntent1_1Request, opts ...grpc.CallOption) (*CreateScreenCaptureIntent1_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UnregisterCallbackResponse)
-	err := c.cc.Invoke(ctx, MediaProjectionService_UnregisterCallback_FullMethodName, in, out, cOpts...)
+	out := new(CreateScreenCaptureIntent1_1Response)
+	err := c.cc.Invoke(ctx, MediaProjectionManagerService_CreateScreenCaptureIntent1_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// MediaProjectionServiceServer is the server API for MediaProjectionService service.
-// All implementations must embed UnimplementedMediaProjectionServiceServer
+func (c *mediaProjectionManagerServiceClient) GetMediaProjection(ctx context.Context, in *GetMediaProjectionRequest, opts ...grpc.CallOption) (*GetMediaProjectionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMediaProjectionResponse)
+	err := c.cc.Invoke(ctx, MediaProjectionManagerService_GetMediaProjection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MediaProjectionManagerServiceServer is the server API for MediaProjectionManagerService service.
+// All implementations must embed UnimplementedMediaProjectionManagerServiceServer
 // for forward compatibility.
-type MediaProjectionServiceServer interface {
-	Stop(context.Context, *StopRequest) (*StopResponse, error)
-	UnregisterCallback(context.Context, *UnregisterCallbackRequest) (*UnregisterCallbackResponse, error)
-	mustEmbedUnimplementedMediaProjectionServiceServer()
+type MediaProjectionManagerServiceServer interface {
+	CreateScreenCaptureIntent0(context.Context, *CreateScreenCaptureIntent0Request) (*CreateScreenCaptureIntent0Response, error)
+	CreateScreenCaptureIntent1_1(context.Context, *CreateScreenCaptureIntent1_1Request) (*CreateScreenCaptureIntent1_1Response, error)
+	GetMediaProjection(context.Context, *GetMediaProjectionRequest) (*GetMediaProjectionResponse, error)
+	mustEmbedUnimplementedMediaProjectionManagerServiceServer()
 }
 
-// UnimplementedMediaProjectionServiceServer must be embedded to have
+// UnimplementedMediaProjectionManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedMediaProjectionServiceServer struct{}
+type UnimplementedMediaProjectionManagerServiceServer struct{}
 
-func (UnimplementedMediaProjectionServiceServer) Stop(context.Context, *StopRequest) (*StopResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
+func (UnimplementedMediaProjectionManagerServiceServer) CreateScreenCaptureIntent0(context.Context, *CreateScreenCaptureIntent0Request) (*CreateScreenCaptureIntent0Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateScreenCaptureIntent0 not implemented")
 }
-func (UnimplementedMediaProjectionServiceServer) UnregisterCallback(context.Context, *UnregisterCallbackRequest) (*UnregisterCallbackResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UnregisterCallback not implemented")
+func (UnimplementedMediaProjectionManagerServiceServer) CreateScreenCaptureIntent1_1(context.Context, *CreateScreenCaptureIntent1_1Request) (*CreateScreenCaptureIntent1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateScreenCaptureIntent1_1 not implemented")
 }
-func (UnimplementedMediaProjectionServiceServer) mustEmbedUnimplementedMediaProjectionServiceServer() {
+func (UnimplementedMediaProjectionManagerServiceServer) GetMediaProjection(context.Context, *GetMediaProjectionRequest) (*GetMediaProjectionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMediaProjection not implemented")
 }
-func (UnimplementedMediaProjectionServiceServer) testEmbeddedByValue() {}
+func (UnimplementedMediaProjectionManagerServiceServer) mustEmbedUnimplementedMediaProjectionManagerServiceServer() {
+}
+func (UnimplementedMediaProjectionManagerServiceServer) testEmbeddedByValue() {}
 
-// UnsafeMediaProjectionServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MediaProjectionServiceServer will
+// UnsafeMediaProjectionManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MediaProjectionManagerServiceServer will
 // result in compilation errors.
-type UnsafeMediaProjectionServiceServer interface {
-	mustEmbedUnimplementedMediaProjectionServiceServer()
+type UnsafeMediaProjectionManagerServiceServer interface {
+	mustEmbedUnimplementedMediaProjectionManagerServiceServer()
 }
 
-func RegisterMediaProjectionServiceServer(s grpc.ServiceRegistrar, srv MediaProjectionServiceServer) {
-	// If the following call panics, it indicates UnimplementedMediaProjectionServiceServer was
+func RegisterMediaProjectionManagerServiceServer(s grpc.ServiceRegistrar, srv MediaProjectionManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedMediaProjectionManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&MediaProjectionService_ServiceDesc, srv)
+	s.RegisterService(&MediaProjectionManagerService_ServiceDesc, srv)
 }
 
-func _MediaProjectionService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopRequest)
+func _MediaProjectionManagerService_CreateScreenCaptureIntent0_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateScreenCaptureIntent0Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaProjectionServiceServer).Stop(ctx, in)
+		return srv.(MediaProjectionManagerServiceServer).CreateScreenCaptureIntent0(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaProjectionService_Stop_FullMethodName,
+		FullMethod: MediaProjectionManagerService_CreateScreenCaptureIntent0_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaProjectionServiceServer).Stop(ctx, req.(*StopRequest))
+		return srv.(MediaProjectionManagerServiceServer).CreateScreenCaptureIntent0(ctx, req.(*CreateScreenCaptureIntent0Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaProjectionService_UnregisterCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UnregisterCallbackRequest)
+func _MediaProjectionManagerService_CreateScreenCaptureIntent1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateScreenCaptureIntent1_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaProjectionServiceServer).UnregisterCallback(ctx, in)
+		return srv.(MediaProjectionManagerServiceServer).CreateScreenCaptureIntent1_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaProjectionService_UnregisterCallback_FullMethodName,
+		FullMethod: MediaProjectionManagerService_CreateScreenCaptureIntent1_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaProjectionServiceServer).UnregisterCallback(ctx, req.(*UnregisterCallbackRequest))
+		return srv.(MediaProjectionManagerServiceServer).CreateScreenCaptureIntent1_1(ctx, req.(*CreateScreenCaptureIntent1_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// MediaProjectionService_ServiceDesc is the grpc.ServiceDesc for MediaProjectionService service.
+func _MediaProjectionManagerService_GetMediaProjection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMediaProjectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaProjectionManagerServiceServer).GetMediaProjection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaProjectionManagerService_GetMediaProjection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaProjectionManagerServiceServer).GetMediaProjection(ctx, req.(*GetMediaProjectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MediaProjectionManagerService_ServiceDesc is the grpc.ServiceDesc for MediaProjectionManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var MediaProjectionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "projection.MediaProjectionService",
-	HandlerType: (*MediaProjectionServiceServer)(nil),
+var MediaProjectionManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "projection.MediaProjectionManagerService",
+	HandlerType: (*MediaProjectionManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Stop",
-			Handler:    _MediaProjectionService_Stop_Handler,
+			MethodName: "CreateScreenCaptureIntent0",
+			Handler:    _MediaProjectionManagerService_CreateScreenCaptureIntent0_Handler,
 		},
 		{
-			MethodName: "UnregisterCallback",
-			Handler:    _MediaProjectionService_UnregisterCallback_Handler,
+			MethodName: "CreateScreenCaptureIntent1_1",
+			Handler:    _MediaProjectionManagerService_CreateScreenCaptureIntent1_1_Handler,
+		},
+		{
+			MethodName: "GetMediaProjection",
+			Handler:    _MediaProjectionManagerService_GetMediaProjection_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

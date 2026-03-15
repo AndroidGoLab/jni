@@ -23,29 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type StartAdvertising3Request struct {
+type FlushPendingScanResultsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertising3Request) Reset() {
-	*x = StartAdvertising3Request{}
+func (x *FlushPendingScanResultsRequest) Reset() {
+	*x = FlushPendingScanResultsRequest{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertising3Request) String() string {
+func (x *FlushPendingScanResultsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertising3Request) ProtoMessage() {}
+func (*FlushPendingScanResultsRequest) ProtoMessage() {}
 
-func (x *StartAdvertising3Request) ProtoReflect() protoreflect.Message {
+func (x *FlushPendingScanResultsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,52 +55,38 @@ func (x *StartAdvertising3Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertising3Request.ProtoReflect.Descriptor instead.
-func (*StartAdvertising3Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use FlushPendingScanResultsRequest.ProtoReflect.Descriptor instead.
+func (*FlushPendingScanResultsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *StartAdvertising3Request) GetArg0() int64 {
+func (x *FlushPendingScanResultsRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *StartAdvertising3Request) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-func (x *StartAdvertising3Request) GetArg2() int64 {
-	if x != nil {
-		return x.Arg2
-	}
-	return 0
-}
-
-type StartAdvertising3Response struct {
+type FlushPendingScanResultsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertising3Response) Reset() {
-	*x = StartAdvertising3Response{}
+func (x *FlushPendingScanResultsResponse) Reset() {
+	*x = FlushPendingScanResultsResponse{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertising3Response) String() string {
+func (x *FlushPendingScanResultsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertising3Response) ProtoMessage() {}
+func (*FlushPendingScanResultsResponse) ProtoMessage() {}
 
-func (x *StartAdvertising3Response) ProtoReflect() protoreflect.Message {
+func (x *FlushPendingScanResultsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -114,35 +98,32 @@ func (x *StartAdvertising3Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertising3Response.ProtoReflect.Descriptor instead.
-func (*StartAdvertising3Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use FlushPendingScanResultsResponse.ProtoReflect.Descriptor instead.
+func (*FlushPendingScanResultsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{1}
 }
 
-type StartAdvertising4_1Request struct {
+type StartScan1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertising4_1Request) Reset() {
-	*x = StartAdvertising4_1Request{}
+func (x *StartScan1Request) Reset() {
+	*x = StartScan1Request{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertising4_1Request) String() string {
+func (x *StartScan1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertising4_1Request) ProtoMessage() {}
+func (*StartScan1Request) ProtoMessage() {}
 
-func (x *StartAdvertising4_1Request) ProtoReflect() protoreflect.Message {
+func (x *StartScan1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -154,59 +135,38 @@ func (x *StartAdvertising4_1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertising4_1Request.ProtoReflect.Descriptor instead.
-func (*StartAdvertising4_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use StartScan1Request.ProtoReflect.Descriptor instead.
+func (*StartScan1Request) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *StartAdvertising4_1Request) GetArg0() int64 {
+func (x *StartScan1Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *StartAdvertising4_1Request) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-func (x *StartAdvertising4_1Request) GetArg2() int64 {
-	if x != nil {
-		return x.Arg2
-	}
-	return 0
-}
-
-func (x *StartAdvertising4_1Request) GetArg3() int64 {
-	if x != nil {
-		return x.Arg3
-	}
-	return 0
-}
-
-type StartAdvertising4_1Response struct {
+type StartScan1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertising4_1Response) Reset() {
-	*x = StartAdvertising4_1Response{}
+func (x *StartScan1Response) Reset() {
+	*x = StartScan1Response{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertising4_1Response) String() string {
+func (x *StartScan1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertising4_1Response) ProtoMessage() {}
+func (*StartScan1Response) ProtoMessage() {}
 
-func (x *StartAdvertising4_1Response) ProtoReflect() protoreflect.Message {
+func (x *StartScan1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -218,37 +178,34 @@ func (x *StartAdvertising4_1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertising4_1Response.ProtoReflect.Descriptor instead.
-func (*StartAdvertising4_1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use StartScan1Response.ProtoReflect.Descriptor instead.
+func (*StartScan1Response) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{3}
 }
 
-type StartAdvertisingSet6Request struct {
+type StartScan3_1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
-	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
-	Arg5          int64                  `protobuf:"varint,6,opt,name=arg5,proto3" json:"arg5,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertisingSet6Request) Reset() {
-	*x = StartAdvertisingSet6Request{}
+func (x *StartScan3_1Request) Reset() {
+	*x = StartScan3_1Request{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertisingSet6Request) String() string {
+func (x *StartScan3_1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertisingSet6Request) ProtoMessage() {}
+func (*StartScan3_1Request) ProtoMessage() {}
 
-func (x *StartAdvertisingSet6Request) ProtoReflect() protoreflect.Message {
+func (x *StartScan3_1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -260,73 +217,53 @@ func (x *StartAdvertisingSet6Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertisingSet6Request.ProtoReflect.Descriptor instead.
-func (*StartAdvertisingSet6Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use StartScan3_1Request.ProtoReflect.Descriptor instead.
+func (*StartScan3_1Request) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *StartAdvertisingSet6Request) GetArg0() int64 {
+func (x *StartScan3_1Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *StartAdvertisingSet6Request) GetArg1() int64 {
+func (x *StartScan3_1Request) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
 	}
 	return 0
 }
 
-func (x *StartAdvertisingSet6Request) GetArg2() int64 {
+func (x *StartScan3_1Request) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
 	}
 	return 0
 }
 
-func (x *StartAdvertisingSet6Request) GetArg3() int64 {
-	if x != nil {
-		return x.Arg3
-	}
-	return 0
-}
-
-func (x *StartAdvertisingSet6Request) GetArg4() int64 {
-	if x != nil {
-		return x.Arg4
-	}
-	return 0
-}
-
-func (x *StartAdvertisingSet6Request) GetArg5() int64 {
-	if x != nil {
-		return x.Arg5
-	}
-	return 0
-}
-
-type StartAdvertisingSet6Response struct {
+type StartScan3_1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertisingSet6Response) Reset() {
-	*x = StartAdvertisingSet6Response{}
+func (x *StartScan3_1Response) Reset() {
+	*x = StartScan3_1Response{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertisingSet6Response) String() string {
+func (x *StartScan3_1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertisingSet6Response) ProtoMessage() {}
+func (*StartScan3_1Response) ProtoMessage() {}
 
-func (x *StartAdvertisingSet6Response) ProtoReflect() protoreflect.Message {
+func (x *StartScan3_1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -338,39 +275,41 @@ func (x *StartAdvertisingSet6Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertisingSet6Response.ProtoReflect.Descriptor instead.
-func (*StartAdvertisingSet6Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use StartScan3_1Response.ProtoReflect.Descriptor instead.
+func (*StartScan3_1Response) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{5}
 }
 
-type StartAdvertisingSet8_1Request struct {
+func (x *StartScan3_1Response) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type StartScan3_2Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
-	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
-	Arg5          int32                  `protobuf:"varint,6,opt,name=arg5,proto3" json:"arg5,omitempty"`
-	Arg6          int32                  `protobuf:"varint,7,opt,name=arg6,proto3" json:"arg6,omitempty"`
-	Arg7          int64                  `protobuf:"varint,8,opt,name=arg7,proto3" json:"arg7,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertisingSet8_1Request) Reset() {
-	*x = StartAdvertisingSet8_1Request{}
+func (x *StartScan3_2Request) Reset() {
+	*x = StartScan3_2Request{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertisingSet8_1Request) String() string {
+func (x *StartScan3_2Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertisingSet8_1Request) ProtoMessage() {}
+func (*StartScan3_2Request) ProtoMessage() {}
 
-func (x *StartAdvertisingSet8_1Request) ProtoReflect() protoreflect.Message {
+func (x *StartScan3_2Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -382,87 +321,52 @@ func (x *StartAdvertisingSet8_1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertisingSet8_1Request.ProtoReflect.Descriptor instead.
-func (*StartAdvertisingSet8_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use StartScan3_2Request.ProtoReflect.Descriptor instead.
+func (*StartScan3_2Request) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *StartAdvertisingSet8_1Request) GetArg0() int64 {
+func (x *StartScan3_2Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *StartAdvertisingSet8_1Request) GetArg1() int64 {
+func (x *StartScan3_2Request) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
 	}
 	return 0
 }
 
-func (x *StartAdvertisingSet8_1Request) GetArg2() int64 {
+func (x *StartScan3_2Request) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
 	}
 	return 0
 }
 
-func (x *StartAdvertisingSet8_1Request) GetArg3() int64 {
-	if x != nil {
-		return x.Arg3
-	}
-	return 0
-}
-
-func (x *StartAdvertisingSet8_1Request) GetArg4() int64 {
-	if x != nil {
-		return x.Arg4
-	}
-	return 0
-}
-
-func (x *StartAdvertisingSet8_1Request) GetArg5() int32 {
-	if x != nil {
-		return x.Arg5
-	}
-	return 0
-}
-
-func (x *StartAdvertisingSet8_1Request) GetArg6() int32 {
-	if x != nil {
-		return x.Arg6
-	}
-	return 0
-}
-
-func (x *StartAdvertisingSet8_1Request) GetArg7() int64 {
-	if x != nil {
-		return x.Arg7
-	}
-	return 0
-}
-
-type StartAdvertisingSet8_1Response struct {
+type StartScan3_2Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartAdvertisingSet8_1Response) Reset() {
-	*x = StartAdvertisingSet8_1Response{}
+func (x *StartScan3_2Response) Reset() {
+	*x = StartScan3_2Response{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAdvertisingSet8_1Response) String() string {
+func (x *StartScan3_2Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAdvertisingSet8_1Response) ProtoMessage() {}
+func (*StartScan3_2Response) ProtoMessage() {}
 
-func (x *StartAdvertisingSet8_1Response) ProtoReflect() protoreflect.Message {
+func (x *StartScan3_2Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -474,32 +378,32 @@ func (x *StartAdvertisingSet8_1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartAdvertisingSet8_1Response.ProtoReflect.Descriptor instead.
-func (*StartAdvertisingSet8_1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use StartScan3_2Response.ProtoReflect.Descriptor instead.
+func (*StartScan3_2Response) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{7}
 }
 
-type StopAdvertisingRequest struct {
+type StopScan1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StopAdvertisingRequest) Reset() {
-	*x = StopAdvertisingRequest{}
+func (x *StopScan1Request) Reset() {
+	*x = StopScan1Request{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopAdvertisingRequest) String() string {
+func (x *StopScan1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopAdvertisingRequest) ProtoMessage() {}
+func (*StopScan1Request) ProtoMessage() {}
 
-func (x *StopAdvertisingRequest) ProtoReflect() protoreflect.Message {
+func (x *StopScan1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -511,38 +415,38 @@ func (x *StopAdvertisingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopAdvertisingRequest.ProtoReflect.Descriptor instead.
-func (*StopAdvertisingRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use StopScan1Request.ProtoReflect.Descriptor instead.
+func (*StopScan1Request) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *StopAdvertisingRequest) GetArg0() int64 {
+func (x *StopScan1Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type StopAdvertisingResponse struct {
+type StopScan1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StopAdvertisingResponse) Reset() {
-	*x = StopAdvertisingResponse{}
+func (x *StopScan1Response) Reset() {
+	*x = StopScan1Response{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopAdvertisingResponse) String() string {
+func (x *StopScan1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopAdvertisingResponse) ProtoMessage() {}
+func (*StopScan1Response) ProtoMessage() {}
 
-func (x *StopAdvertisingResponse) ProtoReflect() protoreflect.Message {
+func (x *StopScan1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -554,32 +458,32 @@ func (x *StopAdvertisingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopAdvertisingResponse.ProtoReflect.Descriptor instead.
-func (*StopAdvertisingResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use StopScan1Response.ProtoReflect.Descriptor instead.
+func (*StopScan1Response) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{9}
 }
 
-type StopAdvertisingSetRequest struct {
+type StopScan1_1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StopAdvertisingSetRequest) Reset() {
-	*x = StopAdvertisingSetRequest{}
+func (x *StopScan1_1Request) Reset() {
+	*x = StopScan1_1Request{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopAdvertisingSetRequest) String() string {
+func (x *StopScan1_1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopAdvertisingSetRequest) ProtoMessage() {}
+func (*StopScan1_1Request) ProtoMessage() {}
 
-func (x *StopAdvertisingSetRequest) ProtoReflect() protoreflect.Message {
+func (x *StopScan1_1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -591,38 +495,38 @@ func (x *StopAdvertisingSetRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopAdvertisingSetRequest.ProtoReflect.Descriptor instead.
-func (*StopAdvertisingSetRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use StopScan1_1Request.ProtoReflect.Descriptor instead.
+func (*StopScan1_1Request) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *StopAdvertisingSetRequest) GetArg0() int64 {
+func (x *StopScan1_1Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type StopAdvertisingSetResponse struct {
+type StopScan1_1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StopAdvertisingSetResponse) Reset() {
-	*x = StopAdvertisingSetResponse{}
+func (x *StopScan1_1Response) Reset() {
+	*x = StopScan1_1Response{}
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopAdvertisingSetResponse) String() string {
+func (x *StopScan1_1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopAdvertisingSetResponse) ProtoMessage() {}
+func (*StopScan1_1Response) ProtoMessage() {}
 
-func (x *StopAdvertisingSetResponse) ProtoReflect() protoreflect.Message {
+func (x *StopScan1_1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_bluetooth_le_bluetooth_le_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -634,8 +538,8 @@ func (x *StopAdvertisingSetResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopAdvertisingSetResponse.ProtoReflect.Descriptor instead.
-func (*StopAdvertisingSetResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use StopScan1_1Response.ProtoReflect.Descriptor instead.
+func (*StopScan1_1Response) Descriptor() ([]byte, []int) {
 	return file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP(), []int{11}
 }
 
@@ -643,49 +547,38 @@ var File_proto_bluetooth_le_bluetooth_le_proto protoreflect.FileDescriptor
 
 const file_proto_bluetooth_le_bluetooth_le_proto_rawDesc = "" +
 	"\n" +
-	"%proto/bluetooth_le/bluetooth_le.proto\x12\fbluetooth_le\"V\n" +
-	"\x18StartAdvertising3Request\x12\x12\n" +
+	"%proto/bluetooth_le/bluetooth_le.proto\x12\fbluetooth_le\"4\n" +
+	"\x1eFlushPendingScanResultsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"!\n" +
+	"\x1fFlushPendingScanResultsResponse\"'\n" +
+	"\x11StartScan1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x14\n" +
+	"\x12StartScan1Response\"Q\n" +
+	"\x13StartScan3_1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x1b\n" +
-	"\x19StartAdvertising3Response\"l\n" +
-	"\x1aStartAdvertising4_1Request\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\".\n" +
+	"\x14StartScan3_1Response\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"Q\n" +
+	"\x13StartScan3_2Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x1d\n" +
-	"\x1bStartAdvertising4_1Response\"\x95\x01\n" +
-	"\x1bStartAdvertisingSet6Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\x12\x12\n" +
-	"\x04arg5\x18\x06 \x01(\x03R\x04arg5\"\x1e\n" +
-	"\x1cStartAdvertisingSet6Response\"\xbf\x01\n" +
-	"\x1dStartAdvertisingSet8_1Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
-	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
-	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\x12\x12\n" +
-	"\x04arg5\x18\x06 \x01(\x05R\x04arg5\x12\x12\n" +
-	"\x04arg6\x18\a \x01(\x05R\x04arg6\x12\x12\n" +
-	"\x04arg7\x18\b \x01(\x03R\x04arg7\" \n" +
-	"\x1eStartAdvertisingSet8_1Response\",\n" +
-	"\x16StopAdvertisingRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x19\n" +
-	"\x17StopAdvertisingResponse\"/\n" +
-	"\x19StopAdvertisingSetRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1c\n" +
-	"\x1aStopAdvertisingSetResponse2\x9d\x05\n" +
-	"\x1cBluetoothLeAdvertiserService\x12d\n" +
-	"\x11StartAdvertising3\x12&.bluetooth_le.StartAdvertising3Request\x1a'.bluetooth_le.StartAdvertising3Response\x12j\n" +
-	"\x13StartAdvertising4_1\x12(.bluetooth_le.StartAdvertising4_1Request\x1a).bluetooth_le.StartAdvertising4_1Response\x12m\n" +
-	"\x14StartAdvertisingSet6\x12).bluetooth_le.StartAdvertisingSet6Request\x1a*.bluetooth_le.StartAdvertisingSet6Response\x12s\n" +
-	"\x16StartAdvertisingSet8_1\x12+.bluetooth_le.StartAdvertisingSet8_1Request\x1a,.bluetooth_le.StartAdvertisingSet8_1Response\x12^\n" +
-	"\x0fStopAdvertising\x12$.bluetooth_le.StopAdvertisingRequest\x1a%.bluetooth_le.StopAdvertisingResponse\x12g\n" +
-	"\x12StopAdvertisingSet\x12'.bluetooth_le.StopAdvertisingSetRequest\x1a(.bluetooth_le.StopAdvertisingSetResponseB/Z-github.com/xaionaro-go/jni/proto/bluetooth_leb\x06proto3"
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x16\n" +
+	"\x14StartScan3_2Response\"&\n" +
+	"\x10StopScan1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x13\n" +
+	"\x11StopScan1Response\"(\n" +
+	"\x12StopScan1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x15\n" +
+	"\x13StopScan1_1Response2\xb4\x04\n" +
+	"\x19BluetoothLeScannerService\x12v\n" +
+	"\x17FlushPendingScanResults\x12,.bluetooth_le.FlushPendingScanResultsRequest\x1a-.bluetooth_le.FlushPendingScanResultsResponse\x12O\n" +
+	"\n" +
+	"StartScan1\x12\x1f.bluetooth_le.StartScan1Request\x1a .bluetooth_le.StartScan1Response\x12U\n" +
+	"\fStartScan3_1\x12!.bluetooth_le.StartScan3_1Request\x1a\".bluetooth_le.StartScan3_1Response\x12U\n" +
+	"\fStartScan3_2\x12!.bluetooth_le.StartScan3_2Request\x1a\".bluetooth_le.StartScan3_2Response\x12L\n" +
+	"\tStopScan1\x12\x1e.bluetooth_le.StopScan1Request\x1a\x1f.bluetooth_le.StopScan1Response\x12R\n" +
+	"\vStopScan1_1\x12 .bluetooth_le.StopScan1_1Request\x1a!.bluetooth_le.StopScan1_1ResponseB/Z-github.com/xaionaro-go/jni/proto/bluetooth_leb\x06proto3"
 
 var (
 	file_proto_bluetooth_le_bluetooth_le_proto_rawDescOnce sync.Once
@@ -701,32 +594,32 @@ func file_proto_bluetooth_le_bluetooth_le_proto_rawDescGZIP() []byte {
 
 var file_proto_bluetooth_le_bluetooth_le_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_proto_bluetooth_le_bluetooth_le_proto_goTypes = []any{
-	(*StartAdvertising3Request)(nil),       // 0: bluetooth_le.StartAdvertising3Request
-	(*StartAdvertising3Response)(nil),      // 1: bluetooth_le.StartAdvertising3Response
-	(*StartAdvertising4_1Request)(nil),     // 2: bluetooth_le.StartAdvertising4_1Request
-	(*StartAdvertising4_1Response)(nil),    // 3: bluetooth_le.StartAdvertising4_1Response
-	(*StartAdvertisingSet6Request)(nil),    // 4: bluetooth_le.StartAdvertisingSet6Request
-	(*StartAdvertisingSet6Response)(nil),   // 5: bluetooth_le.StartAdvertisingSet6Response
-	(*StartAdvertisingSet8_1Request)(nil),  // 6: bluetooth_le.StartAdvertisingSet8_1Request
-	(*StartAdvertisingSet8_1Response)(nil), // 7: bluetooth_le.StartAdvertisingSet8_1Response
-	(*StopAdvertisingRequest)(nil),         // 8: bluetooth_le.StopAdvertisingRequest
-	(*StopAdvertisingResponse)(nil),        // 9: bluetooth_le.StopAdvertisingResponse
-	(*StopAdvertisingSetRequest)(nil),      // 10: bluetooth_le.StopAdvertisingSetRequest
-	(*StopAdvertisingSetResponse)(nil),     // 11: bluetooth_le.StopAdvertisingSetResponse
+	(*FlushPendingScanResultsRequest)(nil),  // 0: bluetooth_le.FlushPendingScanResultsRequest
+	(*FlushPendingScanResultsResponse)(nil), // 1: bluetooth_le.FlushPendingScanResultsResponse
+	(*StartScan1Request)(nil),               // 2: bluetooth_le.StartScan1Request
+	(*StartScan1Response)(nil),              // 3: bluetooth_le.StartScan1Response
+	(*StartScan3_1Request)(nil),             // 4: bluetooth_le.StartScan3_1Request
+	(*StartScan3_1Response)(nil),            // 5: bluetooth_le.StartScan3_1Response
+	(*StartScan3_2Request)(nil),             // 6: bluetooth_le.StartScan3_2Request
+	(*StartScan3_2Response)(nil),            // 7: bluetooth_le.StartScan3_2Response
+	(*StopScan1Request)(nil),                // 8: bluetooth_le.StopScan1Request
+	(*StopScan1Response)(nil),               // 9: bluetooth_le.StopScan1Response
+	(*StopScan1_1Request)(nil),              // 10: bluetooth_le.StopScan1_1Request
+	(*StopScan1_1Response)(nil),             // 11: bluetooth_le.StopScan1_1Response
 }
 var file_proto_bluetooth_le_bluetooth_le_proto_depIdxs = []int32{
-	0,  // 0: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertising3:input_type -> bluetooth_le.StartAdvertising3Request
-	2,  // 1: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertising4_1:input_type -> bluetooth_le.StartAdvertising4_1Request
-	4,  // 2: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertisingSet6:input_type -> bluetooth_le.StartAdvertisingSet6Request
-	6,  // 3: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertisingSet8_1:input_type -> bluetooth_le.StartAdvertisingSet8_1Request
-	8,  // 4: bluetooth_le.BluetoothLeAdvertiserService.StopAdvertising:input_type -> bluetooth_le.StopAdvertisingRequest
-	10, // 5: bluetooth_le.BluetoothLeAdvertiserService.StopAdvertisingSet:input_type -> bluetooth_le.StopAdvertisingSetRequest
-	1,  // 6: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertising3:output_type -> bluetooth_le.StartAdvertising3Response
-	3,  // 7: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertising4_1:output_type -> bluetooth_le.StartAdvertising4_1Response
-	5,  // 8: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertisingSet6:output_type -> bluetooth_le.StartAdvertisingSet6Response
-	7,  // 9: bluetooth_le.BluetoothLeAdvertiserService.StartAdvertisingSet8_1:output_type -> bluetooth_le.StartAdvertisingSet8_1Response
-	9,  // 10: bluetooth_le.BluetoothLeAdvertiserService.StopAdvertising:output_type -> bluetooth_le.StopAdvertisingResponse
-	11, // 11: bluetooth_le.BluetoothLeAdvertiserService.StopAdvertisingSet:output_type -> bluetooth_le.StopAdvertisingSetResponse
+	0,  // 0: bluetooth_le.BluetoothLeScannerService.FlushPendingScanResults:input_type -> bluetooth_le.FlushPendingScanResultsRequest
+	2,  // 1: bluetooth_le.BluetoothLeScannerService.StartScan1:input_type -> bluetooth_le.StartScan1Request
+	4,  // 2: bluetooth_le.BluetoothLeScannerService.StartScan3_1:input_type -> bluetooth_le.StartScan3_1Request
+	6,  // 3: bluetooth_le.BluetoothLeScannerService.StartScan3_2:input_type -> bluetooth_le.StartScan3_2Request
+	8,  // 4: bluetooth_le.BluetoothLeScannerService.StopScan1:input_type -> bluetooth_le.StopScan1Request
+	10, // 5: bluetooth_le.BluetoothLeScannerService.StopScan1_1:input_type -> bluetooth_le.StopScan1_1Request
+	1,  // 6: bluetooth_le.BluetoothLeScannerService.FlushPendingScanResults:output_type -> bluetooth_le.FlushPendingScanResultsResponse
+	3,  // 7: bluetooth_le.BluetoothLeScannerService.StartScan1:output_type -> bluetooth_le.StartScan1Response
+	5,  // 8: bluetooth_le.BluetoothLeScannerService.StartScan3_1:output_type -> bluetooth_le.StartScan3_1Response
+	7,  // 9: bluetooth_le.BluetoothLeScannerService.StartScan3_2:output_type -> bluetooth_le.StartScan3_2Response
+	9,  // 10: bluetooth_le.BluetoothLeScannerService.StopScan1:output_type -> bluetooth_le.StopScan1Response
+	11, // 11: bluetooth_le.BluetoothLeScannerService.StopScan1_1:output_type -> bluetooth_le.StopScan1_1Response
 	6,  // [6:12] is the sub-list for method output_type
 	0,  // [0:6] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name

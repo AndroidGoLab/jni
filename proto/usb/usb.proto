@@ -6,85 +6,86 @@ package usb;
 
 option go_package = "github.com/xaionaro-go/jni/proto/usb";
 
-message GetAccessoryListRequest {
+message DescribeContentsRequest {
 }
 
-message GetAccessoryListResponse {
-  int64 result = 1;
+message DescribeContentsResponse {
+  int32 result = 1;
 }
 
-message HasPermission1Request {
+message GetAddressRequest {
+}
+
+message GetAddressResponse {
+  int32 result = 1;
+}
+
+message GetAttributesRequest {
+}
+
+message GetAttributesResponse {
+  int32 result = 1;
+}
+
+message GetDirectionRequest {
+}
+
+message GetDirectionResponse {
+  int32 result = 1;
+}
+
+message GetEndpointNumberRequest {
+}
+
+message GetEndpointNumberResponse {
+  int32 result = 1;
+}
+
+message GetIntervalRequest {
+}
+
+message GetIntervalResponse {
+  int32 result = 1;
+}
+
+message GetMaxPacketSizeRequest {
+}
+
+message GetMaxPacketSizeResponse {
+  int32 result = 1;
+}
+
+message GetTypeRequest {
+}
+
+message GetTypeResponse {
+  int32 result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
   int64 arg0 = 1;
+  int32 arg1 = 2;
 }
 
-message HasPermission1Response {
-  bool result = 1;
+message WriteToParcelResponse {
 }
 
-message HasPermission1_1Request {
-  int64 arg0 = 1;
-}
-
-message HasPermission1_1Response {
-  bool result = 1;
-}
-
-message OpenAccessoryRequest {
-  int64 arg0 = 1;
-}
-
-message OpenAccessoryResponse {
-  int64 result = 1;
-}
-
-message OpenAccessoryInputStreamRequest {
-  int64 arg0 = 1;
-}
-
-message OpenAccessoryInputStreamResponse {
-  int64 result = 1;
-}
-
-message OpenAccessoryOutputStreamRequest {
-  int64 arg0 = 1;
-}
-
-message OpenAccessoryOutputStreamResponse {
-  int64 result = 1;
-}
-
-message OpenDeviceRequest {
-  int64 arg0 = 1;
-}
-
-message OpenDeviceResponse {
-  int64 result = 1;
-}
-
-message RequestPermission2Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message RequestPermission2Response {
-}
-
-message RequestPermission2_1Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message RequestPermission2_1Response {
-}
-
-service UsbManagerService {
-  rpc GetAccessoryList (GetAccessoryListRequest) returns (GetAccessoryListResponse);
-  rpc HasPermission1 (HasPermission1Request) returns (HasPermission1Response);
-  rpc HasPermission1_1 (HasPermission1_1Request) returns (HasPermission1_1Response);
-  rpc OpenAccessory (OpenAccessoryRequest) returns (OpenAccessoryResponse);
-  rpc OpenAccessoryInputStream (OpenAccessoryInputStreamRequest) returns (OpenAccessoryInputStreamResponse);
-  rpc OpenAccessoryOutputStream (OpenAccessoryOutputStreamRequest) returns (OpenAccessoryOutputStreamResponse);
-  rpc OpenDevice (OpenDeviceRequest) returns (OpenDeviceResponse);
-  rpc RequestPermission2 (RequestPermission2Request) returns (RequestPermission2Response);
-  rpc RequestPermission2_1 (RequestPermission2_1Request) returns (RequestPermission2_1Response);
+service UsbEndpointService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetAddress (GetAddressRequest) returns (GetAddressResponse);
+  rpc GetAttributes (GetAttributesRequest) returns (GetAttributesResponse);
+  rpc GetDirection (GetDirectionRequest) returns (GetDirectionResponse);
+  rpc GetEndpointNumber (GetEndpointNumberRequest) returns (GetEndpointNumberResponse);
+  rpc GetInterval (GetIntervalRequest) returns (GetIntervalResponse);
+  rpc GetMaxPacketSize (GetMaxPacketSizeRequest) returns (GetMaxPacketSizeResponse);
+  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

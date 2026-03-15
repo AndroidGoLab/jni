@@ -20,24 +20,45 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsnetworkCapabilities                               *jni.GlobalRef
-	midnetworkCapabilitiesDescribeContents               jni.MethodID
-	midnetworkCapabilitiesEquals                         jni.MethodID
-	midnetworkCapabilitiesGetCapabilities                jni.MethodID
-	midnetworkCapabilitiesGetEnterpriseIds               jni.MethodID
-	midnetworkCapabilitiesGetLinkDownstreamBandwidthKbps jni.MethodID
-	midnetworkCapabilitiesGetLinkUpstreamBandwidthKbps   jni.MethodID
-	midnetworkCapabilitiesGetNetworkSpecifier            jni.MethodID
-	midnetworkCapabilitiesGetOwnerUid                    jni.MethodID
-	midnetworkCapabilitiesGetSignalStrength              jni.MethodID
-	midnetworkCapabilitiesGetSubscriptionIds             jni.MethodID
-	midnetworkCapabilitiesGetTransportInfo               jni.MethodID
-	midnetworkCapabilitiesHasCapability                  jni.MethodID
-	midnetworkCapabilitiesHasEnterpriseId                jni.MethodID
-	midnetworkCapabilitiesHasTransport                   jni.MethodID
-	midnetworkCapabilitiesHashCode                       jni.MethodID
-	midnetworkCapabilitiesToString                       jni.MethodID
-	midnetworkCapabilitiesWriteToParcel                  jni.MethodID
+	clsconnectivityManager                                   *jni.GlobalRef
+	midconnectivityManagerAddDefaultNetworkActiveListener    jni.MethodID
+	midconnectivityManagerBindProcessToNetwork               jni.MethodID
+	midconnectivityManagerCreateSocketKeepalive              jni.MethodID
+	midconnectivityManagerGetActiveNetwork                   jni.MethodID
+	midconnectivityManagerGetActiveNetworkInfo               jni.MethodID
+	midconnectivityManagerGetAllNetworkInfo                  jni.MethodID
+	midconnectivityManagerGetAllNetworks                     jni.MethodID
+	midconnectivityManagerGetBackgroundDataSetting           jni.MethodID
+	midconnectivityManagerGetBoundNetworkForProcess          jni.MethodID
+	midconnectivityManagerGetConnectionOwnerUid              jni.MethodID
+	midconnectivityManagerGetDefaultProxy                    jni.MethodID
+	midconnectivityManagerGetLinkProperties                  jni.MethodID
+	midconnectivityManagerGetMultipathPreference             jni.MethodID
+	midconnectivityManagerGetNetworkCapabilities             jni.MethodID
+	midconnectivityManagerGetNetworkInfo1                    jni.MethodID
+	midconnectivityManagerGetNetworkInfo1_1                  jni.MethodID
+	midconnectivityManagerGetNetworkPreference               jni.MethodID
+	midconnectivityManagerGetNetworkWatchlistConfigHash      jni.MethodID
+	midconnectivityManagerGetRestrictBackgroundStatus        jni.MethodID
+	midconnectivityManagerIsActiveNetworkMetered             jni.MethodID
+	midconnectivityManagerIsDefaultNetworkActive             jni.MethodID
+	midconnectivityManagerRegisterDefaultNetworkCallback     jni.MethodID
+	midconnectivityManagerRegisterNetworkCallback2           jni.MethodID
+	midconnectivityManagerRegisterNetworkCallback2_1         jni.MethodID
+	midconnectivityManagerReleaseNetworkRequest              jni.MethodID
+	midconnectivityManagerRemoveDefaultNetworkActiveListener jni.MethodID
+	midconnectivityManagerReportBadNetwork                   jni.MethodID
+	midconnectivityManagerReportNetworkConnectivity          jni.MethodID
+	midconnectivityManagerRequestBandwidthUpdate             jni.MethodID
+	midconnectivityManagerRequestNetwork2                    jni.MethodID
+	midconnectivityManagerRequestNetwork2_1                  jni.MethodID
+	midconnectivityManagerRequestNetwork3_2                  jni.MethodID
+	midconnectivityManagerSetNetworkPreference               jni.MethodID
+	midconnectivityManagerUnregisterNetworkCallback1         jni.MethodID
+	midconnectivityManagerUnregisterNetworkCallback1_1       jni.MethodID
+	midconnectivityManagerGetProcessDefaultNetwork           jni.MethodID
+	midconnectivityManagerIsNetworkTypeValid                 jni.MethodID
+	midconnectivityManagerSetProcessDefaultNetwork           jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -64,146 +85,314 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/net/NetworkCapabilities")
+	c, err = env.FindClass("android/net/ConnectivityManager")
 	if err != nil {
-		return fmt.Errorf("find class android.net.NetworkCapabilities: %w", err)
+		return fmt.Errorf("find class android.net.ConnectivityManager: %w", err)
 	}
-	clsnetworkCapabilities = env.NewGlobalRef(&c.Object)
+	clsconnectivityManager = env.NewGlobalRef(&c.Object)
 
-	midnetworkCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "describeContents", "()I")
+	midconnectivityManagerAddDefaultNetworkActiveListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "addDefaultNetworkActiveListener", "(Landroid/net/ConnectivityManager$OnNetworkActiveListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.describeContents")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.addDefaultNetworkActiveListener")
 	}
 
-	midnetworkCapabilitiesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "equals", "(Ljava/lang/Object;)Z")
+	midconnectivityManagerBindProcessToNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "bindProcessToNetwork", "(Landroid/net/Network;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.equals")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.bindProcessToNetwork")
 	}
 
-	midnetworkCapabilitiesGetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getCapabilities", "()[I")
+	midconnectivityManagerCreateSocketKeepalive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "createSocketKeepalive", "(Landroid/net/Network;Landroid/net/IpSecManager$UdpEncapsulationSocket;Ljava/net/InetAddress;Ljava/net/InetAddress;Ljava/util/concurrent/Executor;Landroid/net/SocketKeepalive$Callback;)Landroid/net/SocketKeepalive;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getCapabilities")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.createSocketKeepalive")
 	}
 
-	midnetworkCapabilitiesGetEnterpriseIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getEnterpriseIds", "()[I")
+	midconnectivityManagerGetActiveNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getActiveNetwork", "()Landroid/net/Network;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getEnterpriseIds")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getActiveNetwork")
 	}
 
-	midnetworkCapabilitiesGetLinkDownstreamBandwidthKbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getLinkDownstreamBandwidthKbps", "()I")
+	midconnectivityManagerGetActiveNetworkInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getActiveNetworkInfo", "()Landroid/net/NetworkInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getLinkDownstreamBandwidthKbps")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getActiveNetworkInfo")
 	}
 
-	midnetworkCapabilitiesGetLinkUpstreamBandwidthKbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getLinkUpstreamBandwidthKbps", "()I")
+	midconnectivityManagerGetAllNetworkInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getAllNetworkInfo", "()[Landroid/net/NetworkInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getLinkUpstreamBandwidthKbps")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getAllNetworkInfo")
 	}
 
-	midnetworkCapabilitiesGetNetworkSpecifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getNetworkSpecifier", "()Landroid/net/NetworkSpecifier;")
+	midconnectivityManagerGetAllNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getAllNetworks", "()[Landroid/net/Network;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getNetworkSpecifier")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getAllNetworks")
 	}
 
-	midnetworkCapabilitiesGetOwnerUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getOwnerUid", "()I")
+	midconnectivityManagerGetBackgroundDataSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getBackgroundDataSetting", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getOwnerUid")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getBackgroundDataSetting")
 	}
 
-	midnetworkCapabilitiesGetSignalStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getSignalStrength", "()I")
+	midconnectivityManagerGetBoundNetworkForProcess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getBoundNetworkForProcess", "()Landroid/net/Network;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getSignalStrength")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getBoundNetworkForProcess")
 	}
 
-	midnetworkCapabilitiesGetSubscriptionIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getSubscriptionIds", "()Ljava/util/Set;")
+	midconnectivityManagerGetConnectionOwnerUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getConnectionOwnerUid", "(ILjava/net/InetSocketAddress;Ljava/net/InetSocketAddress;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getSubscriptionIds")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getConnectionOwnerUid")
 	}
 
-	midnetworkCapabilitiesGetTransportInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getTransportInfo", "()Landroid/net/TransportInfo;")
+	midconnectivityManagerGetDefaultProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getDefaultProxy", "()Landroid/net/ProxyInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.getTransportInfo")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getDefaultProxy")
 	}
 
-	midnetworkCapabilitiesHasCapability, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hasCapability", "(I)Z")
+	midconnectivityManagerGetLinkProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getLinkProperties", "(Landroid/net/Network;)Landroid/net/LinkProperties;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.hasCapability")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getLinkProperties")
 	}
 
-	midnetworkCapabilitiesHasEnterpriseId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hasEnterpriseId", "(I)Z")
+	midconnectivityManagerGetMultipathPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getMultipathPreference", "(Landroid/net/Network;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.hasEnterpriseId")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getMultipathPreference")
 	}
 
-	midnetworkCapabilitiesHasTransport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hasTransport", "(I)Z")
+	midconnectivityManagerGetNetworkCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getNetworkCapabilities", "(Landroid/net/Network;)Landroid/net/NetworkCapabilities;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.hasTransport")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getNetworkCapabilities")
 	}
 
-	midnetworkCapabilitiesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hashCode", "()I")
+	midconnectivityManagerGetNetworkInfo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getNetworkInfo", "(Landroid/net/Network;)Landroid/net/NetworkInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.hashCode")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getNetworkInfo")
 	}
 
-	midnetworkCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "toString", "()Ljava/lang/String;")
+	midconnectivityManagerGetNetworkInfo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getNetworkInfo", "(I)Landroid/net/NetworkInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.toString")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getNetworkInfo")
 	}
 
-	midnetworkCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midconnectivityManagerGetNetworkPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getNetworkPreference", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.NetworkCapabilities.writeToParcel")
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getNetworkPreference")
+	}
+
+	midconnectivityManagerGetNetworkWatchlistConfigHash, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getNetworkWatchlistConfigHash", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getNetworkWatchlistConfigHash")
+	}
+
+	midconnectivityManagerGetRestrictBackgroundStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getRestrictBackgroundStatus", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getRestrictBackgroundStatus")
+	}
+
+	midconnectivityManagerIsActiveNetworkMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "isActiveNetworkMetered", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.isActiveNetworkMetered")
+	}
+
+	midconnectivityManagerIsDefaultNetworkActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "isDefaultNetworkActive", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.isDefaultNetworkActive")
+	}
+
+	midconnectivityManagerRegisterDefaultNetworkCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "registerDefaultNetworkCallback", "(Landroid/net/ConnectivityManager$NetworkCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.registerDefaultNetworkCallback")
+	}
+
+	midconnectivityManagerRegisterNetworkCallback2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "registerNetworkCallback", "(Landroid/net/NetworkRequest;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.registerNetworkCallback")
+	}
+
+	midconnectivityManagerRegisterNetworkCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "registerNetworkCallback", "(Landroid/net/NetworkRequest;Landroid/net/ConnectivityManager$NetworkCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.registerNetworkCallback")
+	}
+
+	midconnectivityManagerReleaseNetworkRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "releaseNetworkRequest", "(Landroid/app/PendingIntent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.releaseNetworkRequest")
+	}
+
+	midconnectivityManagerRemoveDefaultNetworkActiveListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "removeDefaultNetworkActiveListener", "(Landroid/net/ConnectivityManager$OnNetworkActiveListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.removeDefaultNetworkActiveListener")
+	}
+
+	midconnectivityManagerReportBadNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "reportBadNetwork", "(Landroid/net/Network;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.reportBadNetwork")
+	}
+
+	midconnectivityManagerReportNetworkConnectivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "reportNetworkConnectivity", "(Landroid/net/Network;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.reportNetworkConnectivity")
+	}
+
+	midconnectivityManagerRequestBandwidthUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "requestBandwidthUpdate", "(Landroid/net/Network;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.requestBandwidthUpdate")
+	}
+
+	midconnectivityManagerRequestNetwork2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "requestNetwork", "(Landroid/net/NetworkRequest;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.requestNetwork")
+	}
+
+	midconnectivityManagerRequestNetwork2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "requestNetwork", "(Landroid/net/NetworkRequest;Landroid/net/ConnectivityManager$NetworkCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.requestNetwork")
+	}
+
+	midconnectivityManagerRequestNetwork3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "requestNetwork", "(Landroid/net/NetworkRequest;Landroid/net/ConnectivityManager$NetworkCallback;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.requestNetwork")
+	}
+
+	midconnectivityManagerSetNetworkPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "setNetworkPreference", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.setNetworkPreference")
+	}
+
+	midconnectivityManagerUnregisterNetworkCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "unregisterNetworkCallback", "(Landroid/app/PendingIntent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.unregisterNetworkCallback")
+	}
+
+	midconnectivityManagerUnregisterNetworkCallback1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "unregisterNetworkCallback", "(Landroid/net/ConnectivityManager$NetworkCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.unregisterNetworkCallback")
+	}
+
+	midconnectivityManagerGetProcessDefaultNetwork, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "getProcessDefaultNetwork", "()Landroid/net/Network;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.getProcessDefaultNetwork")
+	}
+
+	midconnectivityManagerIsNetworkTypeValid, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "isNetworkTypeValid", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.isNetworkTypeValid")
+	}
+
+	midconnectivityManagerSetProcessDefaultNetwork, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsconnectivityManager)), "setProcessDefaultNetwork", "(Landroid/net/Network;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.ConnectivityManager.setProcessDefaultNetwork")
 	}
 
 	return nil

@@ -6,89 +6,360 @@ package bluetooth;
 
 option go_package = "github.com/xaionaro-go/jni/proto/bluetooth";
 
-message AddCharacteristicRequest {
-  int64 arg0 = 1;
+message CancelDiscoveryRequest {
 }
 
-message AddCharacteristicResponse {
+message CancelDiscoveryResponse {
   bool result = 1;
 }
 
-message AddServiceRequest {
-  int64 arg0 = 1;
+message CloseProfileProxyRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message AddServiceResponse {
+message CloseProfileProxyResponse {
+}
+
+message DisableRequest {
+}
+
+message DisableResponse {
   bool result = 1;
 }
 
-message DescribeContentsRequest {
+message EnableRequest {
 }
 
-message DescribeContentsResponse {
+message EnableResponse {
+  bool result = 1;
+}
+
+message GetAddressRequest {
+}
+
+message GetAddressResponse {
+  string result = 1;
+}
+
+message GetBluetoothLeAdvertiserRequest {
+}
+
+message GetBluetoothLeAdvertiserResponse {
+  int64 result = 1;
+}
+
+message GetBluetoothLeScannerRequest {
+}
+
+message GetBluetoothLeScannerResponse {
+  int64 result = 1;
+}
+
+message GetBondedDevicesRequest {
+}
+
+message GetBondedDevicesResponse {
+  int64 result = 1;
+}
+
+message GetDiscoverableTimeoutRequest {
+}
+
+message GetDiscoverableTimeoutResponse {
+  int64 result = 1;
+}
+
+message GetLeMaximumAdvertisingDataLengthRequest {
+}
+
+message GetLeMaximumAdvertisingDataLengthResponse {
   int32 result = 1;
 }
 
-message GetCharacteristicRequest {
+message GetMaxConnectedAudioDevicesRequest {
+}
+
+message GetMaxConnectedAudioDevicesResponse {
+  int32 result = 1;
+}
+
+message GetNameRequest {
+}
+
+message GetNameResponse {
+  string result = 1;
+}
+
+message GetProfileConnectionStateRequest {
+  int32 arg0 = 1;
+}
+
+message GetProfileConnectionStateResponse {
+  int32 result = 1;
+}
+
+message GetProfileProxyRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message GetProfileProxyResponse {
+  bool result = 1;
+}
+
+message GetRemoteDevice1Request {
   int64 arg0 = 1;
 }
 
-message GetCharacteristicResponse {
+message GetRemoteDevice1Response {
   int64 result = 1;
 }
 
-message GetCharacteristicsRequest {
+message GetRemoteDevice1_1Request {
+  string arg0 = 1;
 }
 
-message GetCharacteristicsResponse {
+message GetRemoteDevice1_1Response {
   int64 result = 1;
 }
 
-message GetIncludedServicesRequest {
-}
-
-message GetIncludedServicesResponse {
-  int64 result = 1;
-}
-
-message GetInstanceIdRequest {
-}
-
-message GetInstanceIdResponse {
-  int32 result = 1;
-}
-
-message GetTypeRequest {
-}
-
-message GetTypeResponse {
-  int32 result = 1;
-}
-
-message GetUuidRequest {
-}
-
-message GetUuidResponse {
-  int64 result = 1;
-}
-
-message WriteToParcelRequest {
-  int64 arg0 = 1;
+message GetRemoteLeDeviceRequest {
+  string arg0 = 1;
   int32 arg1 = 2;
 }
 
-message WriteToParcelResponse {
+message GetRemoteLeDeviceResponse {
+  int64 result = 1;
 }
 
-service BluetoothGattServiceService {
-  rpc AddCharacteristic (AddCharacteristicRequest) returns (AddCharacteristicResponse);
-  rpc AddService (AddServiceRequest) returns (AddServiceResponse);
-  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc GetCharacteristic (GetCharacteristicRequest) returns (GetCharacteristicResponse);
-  rpc GetCharacteristics (GetCharacteristicsRequest) returns (GetCharacteristicsResponse);
-  rpc GetIncludedServices (GetIncludedServicesRequest) returns (GetIncludedServicesResponse);
-  rpc GetInstanceId (GetInstanceIdRequest) returns (GetInstanceIdResponse);
-  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
-  rpc GetUuid (GetUuidRequest) returns (GetUuidResponse);
-  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+message GetScanModeRequest {
+}
+
+message GetScanModeResponse {
+  int32 result = 1;
+}
+
+message GetStateRequest {
+}
+
+message GetStateResponse {
+  int32 result = 1;
+}
+
+message IsDiscoveringRequest {
+}
+
+message IsDiscoveringResponse {
+  bool result = 1;
+}
+
+message IsEnabledRequest {
+}
+
+message IsEnabledResponse {
+  bool result = 1;
+}
+
+message IsLe2MPhySupportedRequest {
+}
+
+message IsLe2MPhySupportedResponse {
+  bool result = 1;
+}
+
+message IsLeAudioBroadcastAssistantSupportedRequest {
+}
+
+message IsLeAudioBroadcastAssistantSupportedResponse {
+  int32 result = 1;
+}
+
+message IsLeAudioBroadcastSourceSupportedRequest {
+}
+
+message IsLeAudioBroadcastSourceSupportedResponse {
+  int32 result = 1;
+}
+
+message IsLeAudioSupportedRequest {
+}
+
+message IsLeAudioSupportedResponse {
+  int32 result = 1;
+}
+
+message IsLeCodedPhySupportedRequest {
+}
+
+message IsLeCodedPhySupportedResponse {
+  bool result = 1;
+}
+
+message IsLeExtendedAdvertisingSupportedRequest {
+}
+
+message IsLeExtendedAdvertisingSupportedResponse {
+  bool result = 1;
+}
+
+message IsLePeriodicAdvertisingSupportedRequest {
+}
+
+message IsLePeriodicAdvertisingSupportedResponse {
+  bool result = 1;
+}
+
+message IsMultipleAdvertisementSupportedRequest {
+}
+
+message IsMultipleAdvertisementSupportedResponse {
+  bool result = 1;
+}
+
+message IsOffloadedFilteringSupportedRequest {
+}
+
+message IsOffloadedFilteringSupportedResponse {
+  bool result = 1;
+}
+
+message IsOffloadedScanBatchingSupportedRequest {
+}
+
+message IsOffloadedScanBatchingSupportedResponse {
+  bool result = 1;
+}
+
+message ListenUsingInsecureL2capChannelRequest {
+}
+
+message ListenUsingInsecureL2capChannelResponse {
+  int64 result = 1;
+}
+
+message ListenUsingInsecureRfcommWithServiceRecordRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message ListenUsingInsecureRfcommWithServiceRecordResponse {
+  int64 result = 1;
+}
+
+message ListenUsingL2capChannelRequest {
+}
+
+message ListenUsingL2capChannelResponse {
+  int64 result = 1;
+}
+
+message ListenUsingRfcommWithServiceRecordRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message ListenUsingRfcommWithServiceRecordResponse {
+  int64 result = 1;
+}
+
+message ListenUsingSocketSettingsRequest {
+  int64 arg0 = 1;
+}
+
+message ListenUsingSocketSettingsResponse {
+  int64 result = 1;
+}
+
+message SetNameRequest {
+  string arg0 = 1;
+}
+
+message SetNameResponse {
+  bool result = 1;
+}
+
+message StartDiscoveryRequest {
+}
+
+message StartDiscoveryResponse {
+  bool result = 1;
+}
+
+message StartLeScan1Request {
+  int64 arg0 = 1;
+}
+
+message StartLeScan1Response {
+  bool result = 1;
+}
+
+message StartLeScan2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message StartLeScan2_1Response {
+  bool result = 1;
+}
+
+message StopLeScanRequest {
+  int64 arg0 = 1;
+}
+
+message StopLeScanResponse {
+}
+
+message CheckBluetoothAddressRequest {
+  string arg0 = 1;
+}
+
+message CheckBluetoothAddressResponse {
+  bool result = 1;
+}
+
+service BluetoothAdapterService {
+  rpc CancelDiscovery (CancelDiscoveryRequest) returns (CancelDiscoveryResponse);
+  rpc CloseProfileProxy (CloseProfileProxyRequest) returns (CloseProfileProxyResponse);
+  rpc Disable (DisableRequest) returns (DisableResponse);
+  rpc Enable (EnableRequest) returns (EnableResponse);
+  rpc GetAddress (GetAddressRequest) returns (GetAddressResponse);
+  rpc GetBluetoothLeAdvertiser (GetBluetoothLeAdvertiserRequest) returns (GetBluetoothLeAdvertiserResponse);
+  rpc GetBluetoothLeScanner (GetBluetoothLeScannerRequest) returns (GetBluetoothLeScannerResponse);
+  rpc GetBondedDevices (GetBondedDevicesRequest) returns (GetBondedDevicesResponse);
+  rpc GetDiscoverableTimeout (GetDiscoverableTimeoutRequest) returns (GetDiscoverableTimeoutResponse);
+  rpc GetLeMaximumAdvertisingDataLength (GetLeMaximumAdvertisingDataLengthRequest) returns (GetLeMaximumAdvertisingDataLengthResponse);
+  rpc GetMaxConnectedAudioDevices (GetMaxConnectedAudioDevicesRequest) returns (GetMaxConnectedAudioDevicesResponse);
+  rpc GetName (GetNameRequest) returns (GetNameResponse);
+  rpc GetProfileConnectionState (GetProfileConnectionStateRequest) returns (GetProfileConnectionStateResponse);
+  rpc GetProfileProxy (GetProfileProxyRequest) returns (GetProfileProxyResponse);
+  rpc GetRemoteDevice1 (GetRemoteDevice1Request) returns (GetRemoteDevice1Response);
+  rpc GetRemoteDevice1_1 (GetRemoteDevice1_1Request) returns (GetRemoteDevice1_1Response);
+  rpc GetRemoteLeDevice (GetRemoteLeDeviceRequest) returns (GetRemoteLeDeviceResponse);
+  rpc GetScanMode (GetScanModeRequest) returns (GetScanModeResponse);
+  rpc GetState (GetStateRequest) returns (GetStateResponse);
+  rpc IsDiscovering (IsDiscoveringRequest) returns (IsDiscoveringResponse);
+  rpc IsEnabled (IsEnabledRequest) returns (IsEnabledResponse);
+  rpc IsLe2MPhySupported (IsLe2MPhySupportedRequest) returns (IsLe2MPhySupportedResponse);
+  rpc IsLeAudioBroadcastAssistantSupported (IsLeAudioBroadcastAssistantSupportedRequest) returns (IsLeAudioBroadcastAssistantSupportedResponse);
+  rpc IsLeAudioBroadcastSourceSupported (IsLeAudioBroadcastSourceSupportedRequest) returns (IsLeAudioBroadcastSourceSupportedResponse);
+  rpc IsLeAudioSupported (IsLeAudioSupportedRequest) returns (IsLeAudioSupportedResponse);
+  rpc IsLeCodedPhySupported (IsLeCodedPhySupportedRequest) returns (IsLeCodedPhySupportedResponse);
+  rpc IsLeExtendedAdvertisingSupported (IsLeExtendedAdvertisingSupportedRequest) returns (IsLeExtendedAdvertisingSupportedResponse);
+  rpc IsLePeriodicAdvertisingSupported (IsLePeriodicAdvertisingSupportedRequest) returns (IsLePeriodicAdvertisingSupportedResponse);
+  rpc IsMultipleAdvertisementSupported (IsMultipleAdvertisementSupportedRequest) returns (IsMultipleAdvertisementSupportedResponse);
+  rpc IsOffloadedFilteringSupported (IsOffloadedFilteringSupportedRequest) returns (IsOffloadedFilteringSupportedResponse);
+  rpc IsOffloadedScanBatchingSupported (IsOffloadedScanBatchingSupportedRequest) returns (IsOffloadedScanBatchingSupportedResponse);
+  rpc ListenUsingInsecureL2capChannel (ListenUsingInsecureL2capChannelRequest) returns (ListenUsingInsecureL2capChannelResponse);
+  rpc ListenUsingInsecureRfcommWithServiceRecord (ListenUsingInsecureRfcommWithServiceRecordRequest) returns (ListenUsingInsecureRfcommWithServiceRecordResponse);
+  rpc ListenUsingL2capChannel (ListenUsingL2capChannelRequest) returns (ListenUsingL2capChannelResponse);
+  rpc ListenUsingRfcommWithServiceRecord (ListenUsingRfcommWithServiceRecordRequest) returns (ListenUsingRfcommWithServiceRecordResponse);
+  rpc ListenUsingSocketSettings (ListenUsingSocketSettingsRequest) returns (ListenUsingSocketSettingsResponse);
+  rpc SetName (SetNameRequest) returns (SetNameResponse);
+  rpc StartDiscovery (StartDiscoveryRequest) returns (StartDiscoveryResponse);
+  rpc StartLeScan1 (StartLeScan1Request) returns (StartLeScan1Response);
+  rpc StartLeScan2_1 (StartLeScan2_1Request) returns (StartLeScan2_1Response);
+  rpc StopLeScan (StopLeScanRequest) returns (StopLeScanResponse);
+  rpc CheckBluetoothAddress (CheckBluetoothAddressRequest) returns (CheckBluetoothAddressResponse);
 }

@@ -3,11 +3,5 @@
 package usb
 
 const (
-	ActionUsbAccessoryAttached = ""
-	ActionUsbAccessoryDetached = ""
-	ActionUsbDeviceAttached    = ""
-	ActionUsbDeviceDetached    = ""
-	ExtraAccessory             = ""
-	ExtraDevice                = ""
-	ExtraPermissionGranted     = ""
+	Creator = 0
 )

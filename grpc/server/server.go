@@ -12,8 +12,6 @@ import (
 	adminpb "github.com/xaionaro-go/jni/proto/admin"
 	alarmserver "github.com/xaionaro-go/jni/grpc/server/alarm"
 	alarmpb "github.com/xaionaro-go/jni/proto/alarm"
-	audiomanagerserver "github.com/xaionaro-go/jni/grpc/server/audiomanager"
-	audiomanagerpb "github.com/xaionaro-go/jni/proto/audiomanager"
 	batteryserver "github.com/xaionaro-go/jni/grpc/server/battery"
 	batterypb "github.com/xaionaro-go/jni/proto/battery"
 	blobserver "github.com/xaionaro-go/jni/grpc/server/blob"
@@ -28,12 +26,16 @@ import (
 	irpb "github.com/xaionaro-go/jni/proto/ir"
 	keyguardserver "github.com/xaionaro-go/jni/grpc/server/keyguard"
 	keyguardpb "github.com/xaionaro-go/jni/proto/keyguard"
-	locationserver "github.com/xaionaro-go/jni/grpc/server/location"
-	locationpb "github.com/xaionaro-go/jni/proto/location"
+	netserver "github.com/xaionaro-go/jni/grpc/server/net"
+	netpb "github.com/xaionaro-go/jni/proto/net"
 	powerserver "github.com/xaionaro-go/jni/grpc/server/power"
 	powerpb "github.com/xaionaro-go/jni/proto/power"
+	projectionserver "github.com/xaionaro-go/jni/grpc/server/projection"
+	projectionpb "github.com/xaionaro-go/jni/proto/projection"
 	roleserver "github.com/xaionaro-go/jni/grpc/server/role"
 	rolepb "github.com/xaionaro-go/jni/proto/role"
+	sessionserver "github.com/xaionaro-go/jni/grpc/server/session"
+	sessionpb "github.com/xaionaro-go/jni/proto/session"
 	telecomserver "github.com/xaionaro-go/jni/grpc/server/telecom"
 	telecompb "github.com/xaionaro-go/jni/proto/telecom"
 	telephonyserver "github.com/xaionaro-go/jni/grpc/server/telephony"
@@ -42,8 +44,10 @@ import (
 	usagepb "github.com/xaionaro-go/jni/proto/usage"
 	vibratorserver "github.com/xaionaro-go/jni/grpc/server/vibrator"
 	vibratorpb "github.com/xaionaro-go/jni/proto/vibrator"
-	wifi_p2pserver "github.com/xaionaro-go/jni/grpc/server/wifi_p2p"
-	wifi_p2ppb "github.com/xaionaro-go/jni/proto/wifi_p2p"
+	wifiserver "github.com/xaionaro-go/jni/grpc/server/wifi"
+	wifipb "github.com/xaionaro-go/jni/proto/wifi"
+	wifi_rttserver "github.com/xaionaro-go/jni/grpc/server/wifi_rtt"
+	wifi_rttpb "github.com/xaionaro-go/jni/proto/wifi_rtt"
 )
 
 // RegisterAll registers all generated gRPC service servers.
@@ -53,7 +57,6 @@ func RegisterAll(s grpc.ServiceRegistrar, ctx *app.Context, handles *handlestore
 	handlepb.RegisterHandleStoreServiceServer(s, &handlestore.Server{VM: ctx.VM, Handles: handles})
 	adminpb.RegisterDevicePolicyManagerServiceServer(s, &adminserver.DevicePolicyManagerServer{Ctx: ctx, Handles: handles})
 	alarmpb.RegisterAlarmManagerServiceServer(s, &alarmserver.AlarmManagerServer{Ctx: ctx, Handles: handles})
-	audiomanagerpb.RegisterAudioManagerServiceServer(s, &audiomanagerserver.AudioManagerServer{Ctx: ctx, Handles: handles})
 	batterypb.RegisterBatteryManagerServiceServer(s, &batteryserver.BatteryManagerServer{Ctx: ctx})
 	blobpb.RegisterBlobStoreManagerServiceServer(s, &blobserver.BlobStoreManagerServer{Ctx: ctx, Handles: handles})
 	camerapb.RegisterCameraManagerServiceServer(s, &cameraserver.CameraManagerServer{Ctx: ctx, Handles: handles})
@@ -61,12 +64,15 @@ func RegisterAll(s grpc.ServiceRegistrar, ctx *app.Context, handles *handlestore
 	inputmethodpb.RegisterInputMethodManagerServiceServer(s, &inputmethodserver.InputMethodManagerServer{Ctx: ctx, Handles: handles})
 	irpb.RegisterConsumerIrManagerServiceServer(s, &irserver.ConsumerIrManagerServer{Ctx: ctx, Handles: handles})
 	keyguardpb.RegisterKeyguardManagerServiceServer(s, &keyguardserver.KeyguardManagerServer{Ctx: ctx, Handles: handles})
-	locationpb.RegisterLocationManagerServiceServer(s, &locationserver.LocationManagerServer{Ctx: ctx, Handles: handles})
+	netpb.RegisterConnectivityManagerServiceServer(s, &netserver.ConnectivityManagerServer{Ctx: ctx, Handles: handles})
 	powerpb.RegisterPowerManagerServiceServer(s, &powerserver.PowerManagerServer{Ctx: ctx, Handles: handles})
+	projectionpb.RegisterMediaProjectionManagerServiceServer(s, &projectionserver.MediaProjectionManagerServer{Ctx: ctx, Handles: handles})
 	rolepb.RegisterRoleManagerServiceServer(s, &roleserver.RoleManagerServer{Ctx: ctx, Handles: handles})
+	sessionpb.RegisterMediaSessionManagerServiceServer(s, &sessionserver.MediaSessionManagerServer{Ctx: ctx, Handles: handles})
 	telecompb.RegisterTelecomManagerServiceServer(s, &telecomserver.TelecomManagerServer{Ctx: ctx, Handles: handles})
 	telephonypb.RegisterTelephonyManagerServiceServer(s, &telephonyserver.TelephonyManagerServer{Ctx: ctx, Handles: handles})
 	usagepb.RegisterUsageStatsManagerServiceServer(s, &usageserver.UsageStatsManagerServer{Ctx: ctx, Handles: handles})
 	vibratorpb.RegisterVibratorServiceServer(s, &vibratorserver.VibratorServer{Ctx: ctx, Handles: handles})
-	wifi_p2ppb.RegisterWifiP2PManagerServiceServer(s, &wifi_p2pserver.WifiP2pManagerServer{Ctx: ctx, Handles: handles})
+	wifipb.RegisterWifiManagerServiceServer(s, &wifiserver.WifiManagerServer{Ctx: ctx, Handles: handles})
+	wifi_rttpb.RegisterWifiRttManagerServiceServer(s, &wifi_rttserver.WifiRttManagerServer{Ctx: ctx, Handles: handles})
 }

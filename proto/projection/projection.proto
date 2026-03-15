@@ -6,20 +6,32 @@ package projection;
 
 option go_package = "github.com/xaionaro-go/jni/proto/projection";
 
-message StopRequest {
+message CreateScreenCaptureIntent0Request {
 }
 
-message StopResponse {
+message CreateScreenCaptureIntent0Response {
+  int64 result = 1;
 }
 
-message UnregisterCallbackRequest {
+message CreateScreenCaptureIntent1_1Request {
   int64 arg0 = 1;
 }
 
-message UnregisterCallbackResponse {
+message CreateScreenCaptureIntent1_1Response {
+  int64 result = 1;
 }
 
-service MediaProjectionService {
-  rpc Stop (StopRequest) returns (StopResponse);
-  rpc UnregisterCallback (UnregisterCallbackRequest) returns (UnregisterCallbackResponse);
+message GetMediaProjectionRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetMediaProjectionResponse {
+  int64 result = 1;
+}
+
+service MediaProjectionManagerService {
+  rpc CreateScreenCaptureIntent0 (CreateScreenCaptureIntent0Request) returns (CreateScreenCaptureIntent0Response);
+  rpc CreateScreenCaptureIntent1_1 (CreateScreenCaptureIntent1_1Request) returns (CreateScreenCaptureIntent1_1Response);
+  rpc GetMediaProjection (GetMediaProjectionRequest) returns (GetMediaProjectionResponse);
 }

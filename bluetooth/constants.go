@@ -3,7 +3,35 @@
 package bluetooth
 
 const (
-	Creator              = 0
-	ServiceTypePrimary   = 0
-	ServiceTypeSecondary = 0
+	ActionConnectionStateChanged = ""
+	ActionDiscoveryFinished      = ""
+	ActionDiscoveryStarted       = ""
+	ActionLocalNameChanged       = ""
+	ActionRequestDiscoverable    = ""
+	ActionRequestEnable          = ""
+	ActionScanModeChanged        = ""
+	ActionStateChanged           = ""
+	ExtraConnectionState         = ""
+	ExtraDiscoverableDuration    = ""
+	ExtraLocalName               = ""
+	ExtraPreviousConnectionState = ""
+	ExtraPreviousScanMode        = ""
+	ExtraPreviousState           = ""
+	ExtraScanMode                = ""
+	ExtraState                   = ""
+)
+
+const (
+	Error                           = 0
+	ScanModeConnectable             = 0
+	ScanModeConnectableDiscoverable = 0
+	ScanModeNone                    = 0
+	StateConnected                  = 0
+	StateConnecting                 = 0
+	StateDisconnected               = 0
+	StateDisconnecting              = 0
+	StateOff                        = 0
+	StateOn                         = 0
+	StateTurningOff                 = 0
+	StateTurningOn                  = 0
 )

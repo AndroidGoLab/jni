@@ -13,23 +13,23 @@ var locationCmd = &cobra.Command{
 	Short: "location service operations",
 }
 
-var locationLocationManagerCmd = &cobra.Command{
-	Use:   "location-manager",
-	Short: "LocationManagerService operations",
+var locationLocationCmd = &cobra.Command{
+	Use:   "location",
+	Short: "LocationService operations",
 }
 
-var locationLocationManagerAddGpsStatusListenerCmd = &cobra.Command{
-	Use:   "add-gps-status-listener",
-	Short: "AddGpsStatusListener RPC",
+var locationLocationBearingToCmd = &cobra.Command{
+	Use:   "bearing-to",
+	Short: "BearingTo RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddGpsStatusListenerRequest{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.BearingToRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.AddGpsStatusListener(ctx, req)
+		resp, err := client.BearingTo(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -37,18 +37,34 @@ var locationLocationManagerAddGpsStatusListenerCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerAddNmeaListener1Cmd = &cobra.Command{
-	Use:   "add-nmea-listener1",
-	Short: "AddNmeaListener1 RPC",
+var locationLocationDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddNmeaListener1Request{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationDistanceToCmd = &cobra.Command{
+	Use:   "distance-to",
+	Short: "DistanceTo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.DistanceToRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.AddNmeaListener1(ctx, req)
+		resp, err := client.DistanceTo(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -56,18 +72,21 @@ var locationLocationManagerAddNmeaListener1Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerAddNmeaListener1_1Cmd = &cobra.Command{
-	Use:   "add-nmea-listener1_1",
-	Short: "AddNmeaListener1_1 RPC",
+var locationLocationDumpCmd = &cobra.Command{
+	Use:   "dump",
+	Short: "Dump RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddNmeaListener1_1Request{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.DumpRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.AddNmeaListener1_1(ctx, req)
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.Dump(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -75,21 +94,18 @@ var locationLocationManagerAddNmeaListener1_1Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerAddNmeaListener2_2Cmd = &cobra.Command{
-	Use:   "add-nmea-listener2_2",
-	Short: "AddNmeaListener2_2 RPC",
+var locationLocationEqualsCmd = &cobra.Command{
+	Use:   "equals",
+	Short: "Equals RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddNmeaListener2_2Request{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.EqualsRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.AddNmeaListener2_2(ctx, req)
+		resp, err := client.Equals(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -97,30 +113,15 @@ var locationLocationManagerAddNmeaListener2_2Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerAddProximityAlertCmd = &cobra.Command{
-	Use:   "add-proximity-alert",
-	Short: "AddProximityAlert RPC",
+var locationLocationGetAccuracyCmd = &cobra.Command{
+	Use:   "get-accuracy",
+	Short: "GetAccuracy RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddProximityAlertRequest{}
-		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetFloat64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		resp, err := client.AddProximityAlert(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetAccuracyRequest{}
+		resp, err := client.GetAccuracy(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -128,21 +129,15 @@ var locationLocationManagerAddProximityAlertCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerAddTestProvider2Cmd = &cobra.Command{
-	Use:   "add-test-provider2",
-	Short: "AddTestProvider2 RPC",
+var locationLocationGetAltitudeCmd = &cobra.Command{
+	Use:   "get-altitude",
+	Short: "GetAltitude RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddTestProvider2Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.AddTestProvider2(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetAltitudeRequest{}
+		resp, err := client.GetAltitude(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -150,24 +145,15 @@ var locationLocationManagerAddTestProvider2Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerAddTestProvider3_1Cmd = &cobra.Command{
-	Use:   "add-test-provider3_1",
-	Short: "AddTestProvider3_1 RPC",
+var locationLocationGetBearingCmd = &cobra.Command{
+	Use:   "get-bearing",
+	Short: "GetBearing RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddTestProvider3_1Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.AddTestProvider3_1(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetBearingRequest{}
+		resp, err := client.GetBearing(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -175,45 +161,15 @@ var locationLocationManagerAddTestProvider3_1Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerAddTestProvider10_2Cmd = &cobra.Command{
-	Use:   "add-test-provider10_2",
-	Short: "AddTestProvider10_2 RPC",
+var locationLocationGetBearingAccuracyDegreesCmd = &cobra.Command{
+	Use:   "get-bearing-accuracy-degrees",
+	Short: "GetBearingAccuracyDegrees RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.AddTestProvider10_2Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg5"); err == nil {
-			req.Arg5 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg6"); err == nil {
-			req.Arg6 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg7"); err == nil {
-			req.Arg7 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg8"); err == nil {
-			req.Arg8 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg9"); err == nil {
-			req.Arg9 = v
-		}
-		resp, err := client.AddTestProvider10_2(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetBearingAccuracyDegreesRequest{}
+		resp, err := client.GetBearingAccuracyDegrees(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -221,18 +177,15 @@ var locationLocationManagerAddTestProvider10_2Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerClearTestProviderEnabledCmd = &cobra.Command{
-	Use:   "clear-test-provider-enabled",
-	Short: "ClearTestProviderEnabled RPC",
+var locationLocationGetElapsedRealtimeAgeMillis0Cmd = &cobra.Command{
+	Use:   "get-elapsed-realtime-age-millis0",
+	Short: "GetElapsedRealtimeAgeMillis0 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.ClearTestProviderEnabledRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.ClearTestProviderEnabled(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetElapsedRealtimeAgeMillis0Request{}
+		resp, err := client.GetElapsedRealtimeAgeMillis0(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -240,75 +193,18 @@ var locationLocationManagerClearTestProviderEnabledCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerClearTestProviderLocationCmd = &cobra.Command{
-	Use:   "clear-test-provider-location",
-	Short: "ClearTestProviderLocation RPC",
+var locationLocationGetElapsedRealtimeAgeMillis1_1Cmd = &cobra.Command{
+	Use:   "get-elapsed-realtime-age-millis1_1",
+	Short: "GetElapsedRealtimeAgeMillis1_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.ClearTestProviderLocationRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.ClearTestProviderLocation(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerClearTestProviderStatusCmd = &cobra.Command{
-	Use:   "clear-test-provider-status",
-	Short: "ClearTestProviderStatus RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.ClearTestProviderStatusRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.ClearTestProviderStatus(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerGetAllProvidersCmd = &cobra.Command{
-	Use:   "get-all-providers",
-	Short: "GetAllProviders RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetAllProvidersRequest{}
-		resp, err := client.GetAllProviders(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerGetBestProviderCmd = &cobra.Command{
-	Use:   "get-best-provider",
-	Short: "GetBestProvider RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetBestProviderRequest{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetElapsedRealtimeAgeMillis1_1Request{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.GetBestProvider(ctx, req)
+		resp, err := client.GetElapsedRealtimeAgeMillis1_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -316,30 +212,15 @@ var locationLocationManagerGetBestProviderCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetCurrentLocation5Cmd = &cobra.Command{
-	Use:   "get-current-location5",
-	Short: "GetCurrentLocation5 RPC",
+var locationLocationGetElapsedRealtimeMillisCmd = &cobra.Command{
+	Use:   "get-elapsed-realtime-millis",
+	Short: "GetElapsedRealtimeMillis RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetCurrentLocation5Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		resp, err := client.GetCurrentLocation5(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetElapsedRealtimeMillisRequest{}
+		resp, err := client.GetElapsedRealtimeMillis(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -347,27 +228,15 @@ var locationLocationManagerGetCurrentLocation5Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetCurrentLocation4_1Cmd = &cobra.Command{
-	Use:   "get-current-location4_1",
-	Short: "GetCurrentLocation4_1 RPC",
+var locationLocationGetElapsedRealtimeNanosCmd = &cobra.Command{
+	Use:   "get-elapsed-realtime-nanos",
+	Short: "GetElapsedRealtimeNanos RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetCurrentLocation4_1Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.GetCurrentLocation4_1(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetElapsedRealtimeNanosRequest{}
+		resp, err := client.GetElapsedRealtimeNanos(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -375,15 +244,15 @@ var locationLocationManagerGetCurrentLocation4_1Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetGnssAntennaInfosCmd = &cobra.Command{
-	Use:   "get-gnss-antenna-infos",
-	Short: "GetGnssAntennaInfos RPC",
+var locationLocationGetElapsedRealtimeUncertaintyNanosCmd = &cobra.Command{
+	Use:   "get-elapsed-realtime-uncertainty-nanos",
+	Short: "GetElapsedRealtimeUncertaintyNanos RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetGnssAntennaInfosRequest{}
-		resp, err := client.GetGnssAntennaInfos(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetElapsedRealtimeUncertaintyNanosRequest{}
+		resp, err := client.GetElapsedRealtimeUncertaintyNanos(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -391,15 +260,15 @@ var locationLocationManagerGetGnssAntennaInfosCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetGnssCapabilitiesCmd = &cobra.Command{
-	Use:   "get-gnss-capabilities",
-	Short: "GetGnssCapabilities RPC",
+var locationLocationGetExtrasCmd = &cobra.Command{
+	Use:   "get-extras",
+	Short: "GetExtras RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetGnssCapabilitiesRequest{}
-		resp, err := client.GetGnssCapabilities(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetExtrasRequest{}
+		resp, err := client.GetExtras(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -407,15 +276,15 @@ var locationLocationManagerGetGnssCapabilitiesCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetGnssHardwareModelNameCmd = &cobra.Command{
-	Use:   "get-gnss-hardware-model-name",
-	Short: "GetGnssHardwareModelName RPC",
+var locationLocationGetLatitudeCmd = &cobra.Command{
+	Use:   "get-latitude",
+	Short: "GetLatitude RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetGnssHardwareModelNameRequest{}
-		resp, err := client.GetGnssHardwareModelName(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetLatitudeRequest{}
+		resp, err := client.GetLatitude(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -423,15 +292,15 @@ var locationLocationManagerGetGnssHardwareModelNameCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetGnssYearOfHardwareCmd = &cobra.Command{
-	Use:   "get-gnss-year-of-hardware",
-	Short: "GetGnssYearOfHardware RPC",
+var locationLocationGetLongitudeCmd = &cobra.Command{
+	Use:   "get-longitude",
+	Short: "GetLongitude RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetGnssYearOfHardwareRequest{}
-		resp, err := client.GetGnssYearOfHardware(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetLongitudeRequest{}
+		resp, err := client.GetLongitude(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -439,18 +308,15 @@ var locationLocationManagerGetGnssYearOfHardwareCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetGpsStatusCmd = &cobra.Command{
-	Use:   "get-gps-status",
-	Short: "GetGpsStatus RPC",
+var locationLocationGetMslAltitudeAccuracyMetersCmd = &cobra.Command{
+	Use:   "get-msl-altitude-accuracy-meters",
+	Short: "GetMslAltitudeAccuracyMeters RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetGpsStatusRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.GetGpsStatus(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetMslAltitudeAccuracyMetersRequest{}
+		resp, err := client.GetMslAltitudeAccuracyMeters(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -458,18 +324,15 @@ var locationLocationManagerGetGpsStatusCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetLastKnownLocationCmd = &cobra.Command{
-	Use:   "get-last-known-location",
-	Short: "GetLastKnownLocation RPC",
+var locationLocationGetMslAltitudeMetersCmd = &cobra.Command{
+	Use:   "get-msl-altitude-meters",
+	Short: "GetMslAltitudeMeters RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetLastKnownLocationRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.GetLastKnownLocation(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetMslAltitudeMetersRequest{}
+		resp, err := client.GetMslAltitudeMeters(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -477,17 +340,14 @@ var locationLocationManagerGetLastKnownLocationCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetProviderCmd = &cobra.Command{
+var locationLocationGetProviderCmd = &cobra.Command{
 	Use:   "get-provider",
 	Short: "GetProvider RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
+		client := pb.NewLocationServiceClient(grpcConn)
 		req := &pb.GetProviderRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
 		resp, err := client.GetProvider(ctx, req)
 		if err != nil {
 			return err
@@ -496,18 +356,15 @@ var locationLocationManagerGetProviderCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetProviderPropertiesCmd = &cobra.Command{
-	Use:   "get-provider-properties",
-	Short: "GetProviderProperties RPC",
+var locationLocationGetSpeedCmd = &cobra.Command{
+	Use:   "get-speed",
+	Short: "GetSpeed RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetProviderPropertiesRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.GetProviderProperties(ctx, req)
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetSpeedRequest{}
+		resp, err := client.GetSpeed(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -515,21 +372,466 @@ var locationLocationManagerGetProviderPropertiesCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetProviders2Cmd = &cobra.Command{
-	Use:   "get-providers2",
-	Short: "GetProviders2 RPC",
+var locationLocationGetSpeedAccuracyMetersPerSecondCmd = &cobra.Command{
+	Use:   "get-speed-accuracy-meters-per-second",
+	Short: "GetSpeedAccuracyMetersPerSecond RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetProviders2Request{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetSpeedAccuracyMetersPerSecondRequest{}
+		resp, err := client.GetSpeedAccuracyMetersPerSecond(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationGetTimeCmd = &cobra.Command{
+	Use:   "get-time",
+	Short: "GetTime RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetTimeRequest{}
+		resp, err := client.GetTime(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationGetVerticalAccuracyMetersCmd = &cobra.Command{
+	Use:   "get-vertical-accuracy-meters",
+	Short: "GetVerticalAccuracyMeters RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.GetVerticalAccuracyMetersRequest{}
+		resp, err := client.GetVerticalAccuracyMeters(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasAccuracyCmd = &cobra.Command{
+	Use:   "has-accuracy",
+	Short: "HasAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasAccuracyRequest{}
+		resp, err := client.HasAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasAltitudeCmd = &cobra.Command{
+	Use:   "has-altitude",
+	Short: "HasAltitude RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasAltitudeRequest{}
+		resp, err := client.HasAltitude(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasBearingCmd = &cobra.Command{
+	Use:   "has-bearing",
+	Short: "HasBearing RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasBearingRequest{}
+		resp, err := client.HasBearing(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasBearingAccuracyCmd = &cobra.Command{
+	Use:   "has-bearing-accuracy",
+	Short: "HasBearingAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasBearingAccuracyRequest{}
+		resp, err := client.HasBearingAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasElapsedRealtimeUncertaintyNanosCmd = &cobra.Command{
+	Use:   "has-elapsed-realtime-uncertainty-nanos",
+	Short: "HasElapsedRealtimeUncertaintyNanos RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasElapsedRealtimeUncertaintyNanosRequest{}
+		resp, err := client.HasElapsedRealtimeUncertaintyNanos(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasMslAltitudeCmd = &cobra.Command{
+	Use:   "has-msl-altitude",
+	Short: "HasMslAltitude RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasMslAltitudeRequest{}
+		resp, err := client.HasMslAltitude(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasMslAltitudeAccuracyCmd = &cobra.Command{
+	Use:   "has-msl-altitude-accuracy",
+	Short: "HasMslAltitudeAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasMslAltitudeAccuracyRequest{}
+		resp, err := client.HasMslAltitudeAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasSpeedCmd = &cobra.Command{
+	Use:   "has-speed",
+	Short: "HasSpeed RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasSpeedRequest{}
+		resp, err := client.HasSpeed(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasSpeedAccuracyCmd = &cobra.Command{
+	Use:   "has-speed-accuracy",
+	Short: "HasSpeedAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasSpeedAccuracyRequest{}
+		resp, err := client.HasSpeedAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHasVerticalAccuracyCmd = &cobra.Command{
+	Use:   "has-vertical-accuracy",
+	Short: "HasVerticalAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HasVerticalAccuracyRequest{}
+		resp, err := client.HasVerticalAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationHashCodeCmd = &cobra.Command{
+	Use:   "hash-code",
+	Short: "HashCode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.HashCodeRequest{}
+		resp, err := client.HashCode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationIsCompleteCmd = &cobra.Command{
+	Use:   "is-complete",
+	Short: "IsComplete RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.IsCompleteRequest{}
+		resp, err := client.IsComplete(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationIsFromMockProviderCmd = &cobra.Command{
+	Use:   "is-from-mock-provider",
+	Short: "IsFromMockProvider RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.IsFromMockProviderRequest{}
+		resp, err := client.IsFromMockProvider(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationIsMockCmd = &cobra.Command{
+	Use:   "is-mock",
+	Short: "IsMock RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.IsMockRequest{}
+		resp, err := client.IsMock(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveAccuracyCmd = &cobra.Command{
+	Use:   "remove-accuracy",
+	Short: "RemoveAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveAccuracyRequest{}
+		resp, err := client.RemoveAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveAltitudeCmd = &cobra.Command{
+	Use:   "remove-altitude",
+	Short: "RemoveAltitude RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveAltitudeRequest{}
+		resp, err := client.RemoveAltitude(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveBearingCmd = &cobra.Command{
+	Use:   "remove-bearing",
+	Short: "RemoveBearing RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveBearingRequest{}
+		resp, err := client.RemoveBearing(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveBearingAccuracyCmd = &cobra.Command{
+	Use:   "remove-bearing-accuracy",
+	Short: "RemoveBearingAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveBearingAccuracyRequest{}
+		resp, err := client.RemoveBearingAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveElapsedRealtimeUncertaintyNanosCmd = &cobra.Command{
+	Use:   "remove-elapsed-realtime-uncertainty-nanos",
+	Short: "RemoveElapsedRealtimeUncertaintyNanos RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveElapsedRealtimeUncertaintyNanosRequest{}
+		resp, err := client.RemoveElapsedRealtimeUncertaintyNanos(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveMslAltitudeCmd = &cobra.Command{
+	Use:   "remove-msl-altitude",
+	Short: "RemoveMslAltitude RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveMslAltitudeRequest{}
+		resp, err := client.RemoveMslAltitude(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveMslAltitudeAccuracyCmd = &cobra.Command{
+	Use:   "remove-msl-altitude-accuracy",
+	Short: "RemoveMslAltitudeAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveMslAltitudeAccuracyRequest{}
+		resp, err := client.RemoveMslAltitudeAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveSpeedCmd = &cobra.Command{
+	Use:   "remove-speed",
+	Short: "RemoveSpeed RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveSpeedRequest{}
+		resp, err := client.RemoveSpeed(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveSpeedAccuracyCmd = &cobra.Command{
+	Use:   "remove-speed-accuracy",
+	Short: "RemoveSpeedAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveSpeedAccuracyRequest{}
+		resp, err := client.RemoveSpeedAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationRemoveVerticalAccuracyCmd = &cobra.Command{
+	Use:   "remove-vertical-accuracy",
+	Short: "RemoveVerticalAccuracy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.RemoveVerticalAccuracyRequest{}
+		resp, err := client.RemoveVerticalAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationResetCmd = &cobra.Command{
+	Use:   "reset",
+	Short: "Reset RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.ResetRequest{}
+		resp, err := client.Reset(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetCmd = &cobra.Command{
+	Use:   "set",
+	Short: "Set RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.GetProviders2(ctx, req)
+		resp, err := client.Set(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -537,18 +839,189 @@ var locationLocationManagerGetProviders2Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerGetProviders1_1Cmd = &cobra.Command{
-	Use:   "get-providers1_1",
-	Short: "GetProviders1_1 RPC",
+var locationLocationSetAccuracyCmd = &cobra.Command{
+	Use:   "set-accuracy",
+	Short: "SetAccuracy RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.GetProviders1_1Request{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetAccuracyRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAccuracy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetAltitudeCmd = &cobra.Command{
+	Use:   "set-altitude",
+	Short: "SetAltitude RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetAltitudeRequest{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAltitude(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetBearingCmd = &cobra.Command{
+	Use:   "set-bearing",
+	Short: "SetBearing RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetBearingRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetBearing(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetBearingAccuracyDegreesCmd = &cobra.Command{
+	Use:   "set-bearing-accuracy-degrees",
+	Short: "SetBearingAccuracyDegrees RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetBearingAccuracyDegreesRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetBearingAccuracyDegrees(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetElapsedRealtimeNanosCmd = &cobra.Command{
+	Use:   "set-elapsed-realtime-nanos",
+	Short: "SetElapsedRealtimeNanos RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetElapsedRealtimeNanosRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetElapsedRealtimeNanos(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetElapsedRealtimeUncertaintyNanosCmd = &cobra.Command{
+	Use:   "set-elapsed-realtime-uncertainty-nanos",
+	Short: "SetElapsedRealtimeUncertaintyNanos RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetElapsedRealtimeUncertaintyNanosRequest{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetElapsedRealtimeUncertaintyNanos(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetExtrasCmd = &cobra.Command{
+	Use:   "set-extras",
+	Short: "SetExtras RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetExtrasRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetExtras(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetLatitudeCmd = &cobra.Command{
+	Use:   "set-latitude",
+	Short: "SetLatitude RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetLatitudeRequest{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetLatitude(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetLongitudeCmd = &cobra.Command{
+	Use:   "set-longitude",
+	Short: "SetLongitude RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetLongitudeRequest{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetLongitude(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetMockCmd = &cobra.Command{
+	Use:   "set-mock",
+	Short: "SetMock RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetMockRequest{}
 		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.GetProviders1_1(ctx, req)
+		resp, err := client.SetMock(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -556,18 +1029,56 @@ var locationLocationManagerGetProviders1_1Cmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerHasProviderCmd = &cobra.Command{
-	Use:   "has-provider",
-	Short: "HasProvider RPC",
+var locationLocationSetMslAltitudeAccuracyMetersCmd = &cobra.Command{
+	Use:   "set-msl-altitude-accuracy-meters",
+	Short: "SetMslAltitudeAccuracyMeters RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.HasProviderRequest{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetMslAltitudeAccuracyMetersRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetMslAltitudeAccuracyMeters(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetMslAltitudeMetersCmd = &cobra.Command{
+	Use:   "set-msl-altitude-meters",
+	Short: "SetMslAltitudeMeters RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetMslAltitudeMetersRequest{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetMslAltitudeMeters(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetProviderCmd = &cobra.Command{
+	Use:   "set-provider",
+	Short: "SetProvider RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetProviderRequest{}
 		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.HasProvider(ctx, req)
+		resp, err := client.SetProvider(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -575,34 +1086,18 @@ var locationLocationManagerHasProviderCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerIsLocationEnabledCmd = &cobra.Command{
-	Use:   "is-location-enabled",
-	Short: "IsLocationEnabled RPC",
+var locationLocationSetSpeedCmd = &cobra.Command{
+	Use:   "set-speed",
+	Short: "SetSpeed RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.IsLocationEnabledRequest{}
-		resp, err := client.IsLocationEnabled(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerIsProviderEnabledCmd = &cobra.Command{
-	Use:   "is-provider-enabled",
-	Short: "IsProviderEnabled RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.IsProviderEnabledRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetSpeedRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.IsProviderEnabled(ctx, req)
+		resp, err := client.SetSpeed(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -610,21 +1105,37 @@ var locationLocationManagerIsProviderEnabledCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerRegisterAntennaInfoListenerCmd = &cobra.Command{
-	Use:   "register-antenna-info-listener",
-	Short: "RegisterAntennaInfoListener RPC",
+var locationLocationSetSpeedAccuracyMetersPerSecondCmd = &cobra.Command{
+	Use:   "set-speed-accuracy-meters-per-second",
+	Short: "SetSpeedAccuracyMetersPerSecond RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterAntennaInfoListenerRequest{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetSpeedAccuracyMetersPerSecondRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetSpeedAccuracyMetersPerSecond(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationSetTimeCmd = &cobra.Command{
+	Use:   "set-time",
+	Short: "SetTime RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetTimeRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RegisterAntennaInfoListener(ctx, req)
+		resp, err := client.SetTime(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -632,858 +1143,128 @@ var locationLocationManagerRegisterAntennaInfoListenerCmd = &cobra.Command{
 	},
 }
 
-var locationLocationManagerRegisterGnssMeasurementsCallback3Cmd = &cobra.Command{
-	Use:   "register-gnss-measurements-callback3",
-	Short: "RegisterGnssMeasurementsCallback3 RPC",
+var locationLocationSetVerticalAccuracyMetersCmd = &cobra.Command{
+	Use:   "set-vertical-accuracy-meters",
+	Short: "SetVerticalAccuracyMeters RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterGnssMeasurementsCallback3Request{}
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.SetVerticalAccuracyMetersRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetVerticalAccuracyMeters(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RegisterGnssMeasurementsCallback3(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRegisterGnssMeasurementsCallback1_1Cmd = &cobra.Command{
-	Use:   "register-gnss-measurements-callback1_1",
-	Short: "RegisterGnssMeasurementsCallback1_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterGnssMeasurementsCallback1_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RegisterGnssMeasurementsCallback1_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRegisterGnssMeasurementsCallback2_2Cmd = &cobra.Command{
-	Use:   "register-gnss-measurements-callback2_2",
-	Short: "RegisterGnssMeasurementsCallback2_2 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterGnssMeasurementsCallback2_2Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RegisterGnssMeasurementsCallback2_2(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRegisterGnssNavigationMessageCallback1Cmd = &cobra.Command{
-	Use:   "register-gnss-navigation-message-callback1",
-	Short: "RegisterGnssNavigationMessageCallback1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterGnssNavigationMessageCallback1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RegisterGnssNavigationMessageCallback1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRegisterGnssNavigationMessageCallback2_1Cmd = &cobra.Command{
-	Use:   "register-gnss-navigation-message-callback2_1",
-	Short: "RegisterGnssNavigationMessageCallback2_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterGnssNavigationMessageCallback2_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RegisterGnssNavigationMessageCallback2_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRegisterGnssStatusCallback1Cmd = &cobra.Command{
-	Use:   "register-gnss-status-callback1",
-	Short: "RegisterGnssStatusCallback1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterGnssStatusCallback1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RegisterGnssStatusCallback1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRegisterGnssStatusCallback2_1Cmd = &cobra.Command{
-	Use:   "register-gnss-status-callback2_1",
-	Short: "RegisterGnssStatusCallback2_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RegisterGnssStatusCallback2_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RegisterGnssStatusCallback2_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRemoveGpsStatusListenerCmd = &cobra.Command{
-	Use:   "remove-gps-status-listener",
-	Short: "RemoveGpsStatusListener RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RemoveGpsStatusListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RemoveGpsStatusListener(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRemoveNmeaListener1Cmd = &cobra.Command{
-	Use:   "remove-nmea-listener1",
-	Short: "RemoveNmeaListener1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RemoveNmeaListener1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RemoveNmeaListener1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRemoveNmeaListener1_1Cmd = &cobra.Command{
-	Use:   "remove-nmea-listener1_1",
-	Short: "RemoveNmeaListener1_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RemoveNmeaListener1_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RemoveNmeaListener1_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRemoveProximityAlertCmd = &cobra.Command{
-	Use:   "remove-proximity-alert",
-	Short: "RemoveProximityAlert RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RemoveProximityAlertRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RemoveProximityAlert(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRemoveTestProviderCmd = &cobra.Command{
-	Use:   "remove-test-provider",
-	Short: "RemoveTestProvider RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RemoveTestProviderRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RemoveTestProvider(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRemoveUpdates1Cmd = &cobra.Command{
-	Use:   "remove-updates1",
-	Short: "RemoveUpdates1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RemoveUpdates1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RemoveUpdates1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRemoveUpdates1_1Cmd = &cobra.Command{
-	Use:   "remove-updates1_1",
-	Short: "RemoveUpdates1_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RemoveUpdates1_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.RemoveUpdates1_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestFlush3Cmd = &cobra.Command{
-	Use:   "request-flush3",
-	Short: "RequestFlush3 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestFlush3Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RequestFlush3(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestFlush3_1Cmd = &cobra.Command{
-	Use:   "request-flush3_1",
-	Short: "RequestFlush3_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestFlush3_1Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RequestFlush3_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates3Cmd = &cobra.Command{
-	Use:   "request-location-updates3",
-	Short: "RequestLocationUpdates3 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates3Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RequestLocationUpdates3(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates4_1Cmd = &cobra.Command{
-	Use:   "request-location-updates4_1",
-	Short: "RequestLocationUpdates4_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates4_1Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.RequestLocationUpdates4_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates4_2Cmd = &cobra.Command{
-	Use:   "request-location-updates4_2",
-	Short: "RequestLocationUpdates4_2 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates4_2Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.RequestLocationUpdates4_2(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates4_3Cmd = &cobra.Command{
-	Use:   "request-location-updates4_3",
-	Short: "RequestLocationUpdates4_3 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates4_3Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.RequestLocationUpdates4_3(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates5_4Cmd = &cobra.Command{
-	Use:   "request-location-updates5_4",
-	Short: "RequestLocationUpdates5_4 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates5_4Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		resp, err := client.RequestLocationUpdates5_4(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates5_5Cmd = &cobra.Command{
-	Use:   "request-location-updates5_5",
-	Short: "RequestLocationUpdates5_5 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates5_5Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		resp, err := client.RequestLocationUpdates5_5(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates4_6Cmd = &cobra.Command{
-	Use:   "request-location-updates4_6",
-	Short: "RequestLocationUpdates4_6 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates4_6Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.RequestLocationUpdates4_6(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates5_7Cmd = &cobra.Command{
-	Use:   "request-location-updates5_7",
-	Short: "RequestLocationUpdates5_7 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates5_7Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		resp, err := client.RequestLocationUpdates5_7(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestLocationUpdates5_8Cmd = &cobra.Command{
-	Use:   "request-location-updates5_8",
-	Short: "RequestLocationUpdates5_8 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestLocationUpdates5_8Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetFloat32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		resp, err := client.RequestLocationUpdates5_8(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestSingleUpdate2Cmd = &cobra.Command{
-	Use:   "request-single-update2",
-	Short: "RequestSingleUpdate2 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestSingleUpdate2Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestSingleUpdate2(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestSingleUpdate3_1Cmd = &cobra.Command{
-	Use:   "request-single-update3_1",
-	Short: "RequestSingleUpdate3_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestSingleUpdate3_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RequestSingleUpdate3_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestSingleUpdate2_2Cmd = &cobra.Command{
-	Use:   "request-single-update2_2",
-	Short: "RequestSingleUpdate2_2 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestSingleUpdate2_2Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.RequestSingleUpdate2_2(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerRequestSingleUpdate3_3Cmd = &cobra.Command{
-	Use:   "request-single-update3_3",
-	Short: "RequestSingleUpdate3_3 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.RequestSingleUpdate3_3Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.RequestSingleUpdate3_3(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerSendExtraCommandCmd = &cobra.Command{
-	Use:   "send-extra-command",
-	Short: "SendExtraCommand RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.SendExtraCommandRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetString("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.SendExtraCommand(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerSetTestProviderEnabledCmd = &cobra.Command{
-	Use:   "set-test-provider-enabled",
-	Short: "SetTestProviderEnabled RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.SetTestProviderEnabledRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.SetTestProviderEnabled(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerSetTestProviderLocationCmd = &cobra.Command{
-	Use:   "set-test-provider-location",
-	Short: "SetTestProviderLocation RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.SetTestProviderLocationRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.SetTestProviderLocation(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerSetTestProviderStatusCmd = &cobra.Command{
-	Use:   "set-test-provider-status",
-	Short: "SetTestProviderStatus RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.SetTestProviderStatusRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
 		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
 			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+		resp, err := client.WriteToParcel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationConvert2Cmd = &cobra.Command{
+	Use:   "convert2",
+	Short: "Convert2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.Convert2Request{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.Convert2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationConvert1_1Cmd = &cobra.Command{
+	Use:   "convert1_1",
+	Short: "Convert1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.Convert1_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Convert1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var locationLocationDistanceBetweenCmd = &cobra.Command{
+	Use:   "distance-between",
+	Short: "DistanceBetween RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLocationServiceClient(grpcConn)
+		req := &pb.DistanceBetweenRequest{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetFloat64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetFloat64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+		if v, err := cmd.Flags().GetFloat64("arg3"); err == nil {
 			req.Arg3 = v
 		}
-		resp, err := client.SetTestProviderStatus(ctx, req)
-		if err != nil {
-			return err
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
 		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerUnregisterAntennaInfoListenerCmd = &cobra.Command{
-	Use:   "unregister-antenna-info-listener",
-	Short: "UnregisterAntennaInfoListener RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.UnregisterAntennaInfoListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.UnregisterAntennaInfoListener(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerUnregisterGnssMeasurementsCallbackCmd = &cobra.Command{
-	Use:   "unregister-gnss-measurements-callback",
-	Short: "UnregisterGnssMeasurementsCallback RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.UnregisterGnssMeasurementsCallbackRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.UnregisterGnssMeasurementsCallback(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerUnregisterGnssNavigationMessageCallbackCmd = &cobra.Command{
-	Use:   "unregister-gnss-navigation-message-callback",
-	Short: "UnregisterGnssNavigationMessageCallback RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.UnregisterGnssNavigationMessageCallbackRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.UnregisterGnssNavigationMessageCallback(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var locationLocationManagerUnregisterGnssStatusCallbackCmd = &cobra.Command{
-	Use:   "unregister-gnss-status-callback",
-	Short: "UnregisterGnssStatusCallback RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLocationManagerServiceClient(grpcConn)
-		req := &pb.UnregisterGnssStatusCallbackRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.UnregisterGnssStatusCallback(ctx, req)
+		resp, err := client.DistanceBetween(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -1492,211 +1273,112 @@ var locationLocationManagerUnregisterGnssStatusCallbackCmd = &cobra.Command{
 }
 
 func init() {
-	locationLocationManagerAddGpsStatusListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddGpsStatusListenerCmd)
-	locationLocationManagerAddNmeaListener1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddNmeaListener1Cmd)
-	locationLocationManagerAddNmeaListener1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddNmeaListener1_1Cmd)
-	locationLocationManagerAddNmeaListener2_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerAddNmeaListener2_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddNmeaListener2_2Cmd)
-	locationLocationManagerAddProximityAlertCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
-	locationLocationManagerAddProximityAlertCmd.Flags().Float64("arg1", 0, "arg1 (float64)")
-	locationLocationManagerAddProximityAlertCmd.Flags().Float32("arg2", 0, "arg2 (float32)")
-	locationLocationManagerAddProximityAlertCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerAddProximityAlertCmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddProximityAlertCmd)
-	locationLocationManagerAddTestProvider2Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerAddTestProvider2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddTestProvider2Cmd)
-	locationLocationManagerAddTestProvider3_1Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerAddTestProvider3_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerAddTestProvider3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddTestProvider3_1Cmd)
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Bool("arg1", false, "arg1 (bool)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Bool("arg2", false, "arg2 (bool)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Bool("arg3", false, "arg3 (bool)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Bool("arg4", false, "arg4 (bool)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Bool("arg5", false, "arg5 (bool)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Bool("arg6", false, "arg6 (bool)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Bool("arg7", false, "arg7 (bool)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Int32("arg8", 0, "arg8 (int32)")
-	locationLocationManagerAddTestProvider10_2Cmd.Flags().Int32("arg9", 0, "arg9 (int32)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerAddTestProvider10_2Cmd)
-	locationLocationManagerClearTestProviderEnabledCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerClearTestProviderEnabledCmd)
-	locationLocationManagerClearTestProviderLocationCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerClearTestProviderLocationCmd)
-	locationLocationManagerClearTestProviderStatusCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerClearTestProviderStatusCmd)
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetAllProvidersCmd)
-	locationLocationManagerGetBestProviderCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerGetBestProviderCmd.Flags().Bool("arg1", false, "arg1 (bool)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetBestProviderCmd)
-	locationLocationManagerGetCurrentLocation5Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerGetCurrentLocation5Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerGetCurrentLocation5Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerGetCurrentLocation5Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerGetCurrentLocation5Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetCurrentLocation5Cmd)
-	locationLocationManagerGetCurrentLocation4_1Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerGetCurrentLocation4_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerGetCurrentLocation4_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerGetCurrentLocation4_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetCurrentLocation4_1Cmd)
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetGnssAntennaInfosCmd)
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetGnssCapabilitiesCmd)
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetGnssHardwareModelNameCmd)
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetGnssYearOfHardwareCmd)
-	locationLocationManagerGetGpsStatusCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetGpsStatusCmd)
-	locationLocationManagerGetLastKnownLocationCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetLastKnownLocationCmd)
-	locationLocationManagerGetProviderCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetProviderCmd)
-	locationLocationManagerGetProviderPropertiesCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetProviderPropertiesCmd)
-	locationLocationManagerGetProviders2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerGetProviders2Cmd.Flags().Bool("arg1", false, "arg1 (bool)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetProviders2Cmd)
-	locationLocationManagerGetProviders1_1Cmd.Flags().Bool("arg0", false, "arg0 (bool)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerGetProviders1_1Cmd)
-	locationLocationManagerHasProviderCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerHasProviderCmd)
-	locationLocationManagerCmd.AddCommand(locationLocationManagerIsLocationEnabledCmd)
-	locationLocationManagerIsProviderEnabledCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerIsProviderEnabledCmd)
-	locationLocationManagerRegisterAntennaInfoListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRegisterAntennaInfoListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterAntennaInfoListenerCmd)
-	locationLocationManagerRegisterGnssMeasurementsCallback3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRegisterGnssMeasurementsCallback3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRegisterGnssMeasurementsCallback3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterGnssMeasurementsCallback3Cmd)
-	locationLocationManagerRegisterGnssMeasurementsCallback1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterGnssMeasurementsCallback1_1Cmd)
-	locationLocationManagerRegisterGnssMeasurementsCallback2_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRegisterGnssMeasurementsCallback2_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterGnssMeasurementsCallback2_2Cmd)
-	locationLocationManagerRegisterGnssNavigationMessageCallback1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterGnssNavigationMessageCallback1Cmd)
-	locationLocationManagerRegisterGnssNavigationMessageCallback2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRegisterGnssNavigationMessageCallback2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterGnssNavigationMessageCallback2_1Cmd)
-	locationLocationManagerRegisterGnssStatusCallback1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterGnssStatusCallback1Cmd)
-	locationLocationManagerRegisterGnssStatusCallback2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRegisterGnssStatusCallback2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRegisterGnssStatusCallback2_1Cmd)
-	locationLocationManagerRemoveGpsStatusListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRemoveGpsStatusListenerCmd)
-	locationLocationManagerRemoveNmeaListener1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRemoveNmeaListener1Cmd)
-	locationLocationManagerRemoveNmeaListener1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRemoveNmeaListener1_1Cmd)
-	locationLocationManagerRemoveProximityAlertCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRemoveProximityAlertCmd)
-	locationLocationManagerRemoveTestProviderCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRemoveTestProviderCmd)
-	locationLocationManagerRemoveUpdates1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRemoveUpdates1Cmd)
-	locationLocationManagerRemoveUpdates1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRemoveUpdates1_1Cmd)
-	locationLocationManagerRequestFlush3Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestFlush3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestFlush3Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestFlush3Cmd)
-	locationLocationManagerRequestFlush3_1Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestFlush3_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestFlush3_1Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestFlush3_1Cmd)
-	locationLocationManagerRequestLocationUpdates3Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestLocationUpdates3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestLocationUpdates3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates3Cmd)
-	locationLocationManagerRequestLocationUpdates4_1Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestLocationUpdates4_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestLocationUpdates4_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerRequestLocationUpdates4_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates4_1Cmd)
-	locationLocationManagerRequestLocationUpdates4_2Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestLocationUpdates4_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestLocationUpdates4_2Cmd.Flags().Float32("arg2", 0, "arg2 (float32)")
-	locationLocationManagerRequestLocationUpdates4_2Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates4_2Cmd)
-	locationLocationManagerRequestLocationUpdates4_3Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestLocationUpdates4_3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestLocationUpdates4_3Cmd.Flags().Float32("arg2", 0, "arg2 (float32)")
-	locationLocationManagerRequestLocationUpdates4_3Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates4_3Cmd)
-	locationLocationManagerRequestLocationUpdates5_4Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestLocationUpdates5_4Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestLocationUpdates5_4Cmd.Flags().Float32("arg2", 0, "arg2 (float32)")
-	locationLocationManagerRequestLocationUpdates5_4Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerRequestLocationUpdates5_4Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates5_4Cmd)
-	locationLocationManagerRequestLocationUpdates5_5Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestLocationUpdates5_5Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestLocationUpdates5_5Cmd.Flags().Float32("arg2", 0, "arg2 (float32)")
-	locationLocationManagerRequestLocationUpdates5_5Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerRequestLocationUpdates5_5Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates5_5Cmd)
-	locationLocationManagerRequestLocationUpdates4_6Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRequestLocationUpdates4_6Cmd.Flags().Float32("arg1", 0, "arg1 (float32)")
-	locationLocationManagerRequestLocationUpdates4_6Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerRequestLocationUpdates4_6Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates4_6Cmd)
-	locationLocationManagerRequestLocationUpdates5_7Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRequestLocationUpdates5_7Cmd.Flags().Float32("arg1", 0, "arg1 (float32)")
-	locationLocationManagerRequestLocationUpdates5_7Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerRequestLocationUpdates5_7Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerRequestLocationUpdates5_7Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates5_7Cmd)
-	locationLocationManagerRequestLocationUpdates5_8Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRequestLocationUpdates5_8Cmd.Flags().Float32("arg1", 0, "arg1 (float32)")
-	locationLocationManagerRequestLocationUpdates5_8Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerRequestLocationUpdates5_8Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerRequestLocationUpdates5_8Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestLocationUpdates5_8Cmd)
-	locationLocationManagerRequestSingleUpdate2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRequestSingleUpdate2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestSingleUpdate2Cmd)
-	locationLocationManagerRequestSingleUpdate3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerRequestSingleUpdate3_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestSingleUpdate3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestSingleUpdate3_1Cmd)
-	locationLocationManagerRequestSingleUpdate2_2Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestSingleUpdate2_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestSingleUpdate2_2Cmd)
-	locationLocationManagerRequestSingleUpdate3_3Cmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerRequestSingleUpdate3_3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerRequestSingleUpdate3_3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerRequestSingleUpdate3_3Cmd)
-	locationLocationManagerSendExtraCommandCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerSendExtraCommandCmd.Flags().String("arg1", "", "arg1 (string)")
-	locationLocationManagerSendExtraCommandCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerSendExtraCommandCmd)
-	locationLocationManagerSetTestProviderEnabledCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerSetTestProviderEnabledCmd.Flags().Bool("arg1", false, "arg1 (bool)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerSetTestProviderEnabledCmd)
-	locationLocationManagerSetTestProviderLocationCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerSetTestProviderLocationCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerSetTestProviderLocationCmd)
-	locationLocationManagerSetTestProviderStatusCmd.Flags().String("arg0", "", "arg0 (string)")
-	locationLocationManagerSetTestProviderStatusCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	locationLocationManagerSetTestProviderStatusCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	locationLocationManagerSetTestProviderStatusCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerSetTestProviderStatusCmd)
-	locationLocationManagerUnregisterAntennaInfoListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerUnregisterAntennaInfoListenerCmd)
-	locationLocationManagerUnregisterGnssMeasurementsCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerUnregisterGnssMeasurementsCallbackCmd)
-	locationLocationManagerUnregisterGnssNavigationMessageCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerUnregisterGnssNavigationMessageCallbackCmd)
-	locationLocationManagerUnregisterGnssStatusCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	locationLocationManagerCmd.AddCommand(locationLocationManagerUnregisterGnssStatusCallbackCmd)
-	locationCmd.AddCommand(locationLocationManagerCmd)
+	locationLocationBearingToCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationBearingToCmd)
+	locationLocationCmd.AddCommand(locationLocationDescribeContentsCmd)
+	locationLocationDistanceToCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationDistanceToCmd)
+	locationLocationDumpCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationDumpCmd.Flags().String("arg1", "", "arg1 (string)")
+	locationLocationCmd.AddCommand(locationLocationDumpCmd)
+	locationLocationEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationEqualsCmd)
+	locationLocationCmd.AddCommand(locationLocationGetAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationGetAltitudeCmd)
+	locationLocationCmd.AddCommand(locationLocationGetBearingCmd)
+	locationLocationCmd.AddCommand(locationLocationGetBearingAccuracyDegreesCmd)
+	locationLocationCmd.AddCommand(locationLocationGetElapsedRealtimeAgeMillis0Cmd)
+	locationLocationGetElapsedRealtimeAgeMillis1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationGetElapsedRealtimeAgeMillis1_1Cmd)
+	locationLocationCmd.AddCommand(locationLocationGetElapsedRealtimeMillisCmd)
+	locationLocationCmd.AddCommand(locationLocationGetElapsedRealtimeNanosCmd)
+	locationLocationCmd.AddCommand(locationLocationGetElapsedRealtimeUncertaintyNanosCmd)
+	locationLocationCmd.AddCommand(locationLocationGetExtrasCmd)
+	locationLocationCmd.AddCommand(locationLocationGetLatitudeCmd)
+	locationLocationCmd.AddCommand(locationLocationGetLongitudeCmd)
+	locationLocationCmd.AddCommand(locationLocationGetMslAltitudeAccuracyMetersCmd)
+	locationLocationCmd.AddCommand(locationLocationGetMslAltitudeMetersCmd)
+	locationLocationCmd.AddCommand(locationLocationGetProviderCmd)
+	locationLocationCmd.AddCommand(locationLocationGetSpeedCmd)
+	locationLocationCmd.AddCommand(locationLocationGetSpeedAccuracyMetersPerSecondCmd)
+	locationLocationCmd.AddCommand(locationLocationGetTimeCmd)
+	locationLocationCmd.AddCommand(locationLocationGetVerticalAccuracyMetersCmd)
+	locationLocationCmd.AddCommand(locationLocationHasAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationHasAltitudeCmd)
+	locationLocationCmd.AddCommand(locationLocationHasBearingCmd)
+	locationLocationCmd.AddCommand(locationLocationHasBearingAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationHasElapsedRealtimeUncertaintyNanosCmd)
+	locationLocationCmd.AddCommand(locationLocationHasMslAltitudeCmd)
+	locationLocationCmd.AddCommand(locationLocationHasMslAltitudeAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationHasSpeedCmd)
+	locationLocationCmd.AddCommand(locationLocationHasSpeedAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationHasVerticalAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationHashCodeCmd)
+	locationLocationCmd.AddCommand(locationLocationIsCompleteCmd)
+	locationLocationCmd.AddCommand(locationLocationIsFromMockProviderCmd)
+	locationLocationCmd.AddCommand(locationLocationIsMockCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveAltitudeCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveBearingCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveBearingAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveElapsedRealtimeUncertaintyNanosCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveMslAltitudeCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveMslAltitudeAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveSpeedCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveSpeedAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationRemoveVerticalAccuracyCmd)
+	locationLocationCmd.AddCommand(locationLocationResetCmd)
+	locationLocationSetCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationSetCmd)
+	locationLocationSetAccuracyCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	locationLocationCmd.AddCommand(locationLocationSetAccuracyCmd)
+	locationLocationSetAltitudeCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	locationLocationCmd.AddCommand(locationLocationSetAltitudeCmd)
+	locationLocationSetBearingCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	locationLocationCmd.AddCommand(locationLocationSetBearingCmd)
+	locationLocationSetBearingAccuracyDegreesCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	locationLocationCmd.AddCommand(locationLocationSetBearingAccuracyDegreesCmd)
+	locationLocationSetElapsedRealtimeNanosCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationSetElapsedRealtimeNanosCmd)
+	locationLocationSetElapsedRealtimeUncertaintyNanosCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	locationLocationCmd.AddCommand(locationLocationSetElapsedRealtimeUncertaintyNanosCmd)
+	locationLocationSetExtrasCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationSetExtrasCmd)
+	locationLocationSetLatitudeCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	locationLocationCmd.AddCommand(locationLocationSetLatitudeCmd)
+	locationLocationSetLongitudeCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	locationLocationCmd.AddCommand(locationLocationSetLongitudeCmd)
+	locationLocationSetMockCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	locationLocationCmd.AddCommand(locationLocationSetMockCmd)
+	locationLocationSetMslAltitudeAccuracyMetersCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	locationLocationCmd.AddCommand(locationLocationSetMslAltitudeAccuracyMetersCmd)
+	locationLocationSetMslAltitudeMetersCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	locationLocationCmd.AddCommand(locationLocationSetMslAltitudeMetersCmd)
+	locationLocationSetProviderCmd.Flags().String("arg0", "", "arg0 (string)")
+	locationLocationCmd.AddCommand(locationLocationSetProviderCmd)
+	locationLocationSetSpeedCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	locationLocationCmd.AddCommand(locationLocationSetSpeedCmd)
+	locationLocationSetSpeedAccuracyMetersPerSecondCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	locationLocationCmd.AddCommand(locationLocationSetSpeedAccuracyMetersPerSecondCmd)
+	locationLocationSetTimeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationCmd.AddCommand(locationLocationSetTimeCmd)
+	locationLocationSetVerticalAccuracyMetersCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	locationLocationCmd.AddCommand(locationLocationSetVerticalAccuracyMetersCmd)
+	locationLocationCmd.AddCommand(locationLocationToStringCmd)
+	locationLocationWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	locationLocationWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	locationLocationCmd.AddCommand(locationLocationWriteToParcelCmd)
+	locationLocationConvert2Cmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	locationLocationConvert2Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	locationLocationCmd.AddCommand(locationLocationConvert2Cmd)
+	locationLocationConvert1_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	locationLocationCmd.AddCommand(locationLocationConvert1_1Cmd)
+	locationLocationDistanceBetweenCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	locationLocationDistanceBetweenCmd.Flags().Float64("arg1", 0, "arg1 (float64)")
+	locationLocationDistanceBetweenCmd.Flags().Float64("arg2", 0, "arg2 (float64)")
+	locationLocationDistanceBetweenCmd.Flags().Float64("arg3", 0, "arg3 (float64)")
+	locationLocationDistanceBetweenCmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	locationLocationCmd.AddCommand(locationLocationDistanceBetweenCmd)
+	locationCmd.AddCommand(locationLocationCmd)
 	rootCmd.AddCommand(locationCmd)
 }

@@ -6,70 +6,58 @@ package bluetooth_le;
 
 option go_package = "github.com/xaionaro-go/jni/proto/bluetooth_le";
 
-message StartAdvertising3Request {
+message FlushPendingScanResultsRequest {
+  int64 arg0 = 1;
+}
+
+message FlushPendingScanResultsResponse {
+}
+
+message StartScan1Request {
+  int64 arg0 = 1;
+}
+
+message StartScan1Response {
+}
+
+message StartScan3_1Request {
   int64 arg0 = 1;
   int64 arg1 = 2;
   int64 arg2 = 3;
 }
 
-message StartAdvertising3Response {
+message StartScan3_1Response {
+  int32 result = 1;
 }
 
-message StartAdvertising4_1Request {
+message StartScan3_2Request {
   int64 arg0 = 1;
   int64 arg1 = 2;
   int64 arg2 = 3;
-  int64 arg3 = 4;
 }
 
-message StartAdvertising4_1Response {
+message StartScan3_2Response {
 }
 
-message StartAdvertisingSet6Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-  int64 arg3 = 4;
-  int64 arg4 = 5;
-  int64 arg5 = 6;
-}
-
-message StartAdvertisingSet6Response {
-}
-
-message StartAdvertisingSet8_1Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-  int64 arg3 = 4;
-  int64 arg4 = 5;
-  int32 arg5 = 6;
-  int32 arg6 = 7;
-  int64 arg7 = 8;
-}
-
-message StartAdvertisingSet8_1Response {
-}
-
-message StopAdvertisingRequest {
+message StopScan1Request {
   int64 arg0 = 1;
 }
 
-message StopAdvertisingResponse {
+message StopScan1Response {
 }
 
-message StopAdvertisingSetRequest {
+message StopScan1_1Request {
   int64 arg0 = 1;
 }
 
-message StopAdvertisingSetResponse {
+message StopScan1_1Response {
 }
 
-service BluetoothLeAdvertiserService {
-  rpc StartAdvertising3 (StartAdvertising3Request) returns (StartAdvertising3Response);
-  rpc StartAdvertising4_1 (StartAdvertising4_1Request) returns (StartAdvertising4_1Response);
-  rpc StartAdvertisingSet6 (StartAdvertisingSet6Request) returns (StartAdvertisingSet6Response);
-  rpc StartAdvertisingSet8_1 (StartAdvertisingSet8_1Request) returns (StartAdvertisingSet8_1Response);
-  rpc StopAdvertising (StopAdvertisingRequest) returns (StopAdvertisingResponse);
-  rpc StopAdvertisingSet (StopAdvertisingSetRequest) returns (StopAdvertisingSetResponse);
+service BluetoothLeScannerService {
+  rpc FlushPendingScanResults (FlushPendingScanResultsRequest) returns (FlushPendingScanResultsResponse);
+  rpc StartScan1 (StartScan1Request) returns (StartScan1Response);
+  rpc StartScan3_1 (StartScan3_1Request) returns (StartScan3_1Response);
+  rpc StartScan3_2 (StartScan3_2Request) returns (StartScan3_2Response);
+  rpc StopScan1 (StopScan1Request) returns (StopScan1Response);
+  rpc StopScan1_1 (StopScan1_1Request) returns (StopScan1_1Response);
 }

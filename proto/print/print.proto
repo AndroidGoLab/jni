@@ -6,18 +6,48 @@ package print;
 
 option go_package = "github.com/xaionaro-go/jni/proto/print";
 
-message CancelRequest {
+message DescribeContentsRequest {
 }
 
-message CancelResponse {
+message DescribeContentsResponse {
+  int32 result = 1;
 }
 
-message EqualsRequest {
-  int64 arg0 = 1;
+message GetAdvancedIntOptionRequest {
+  string arg0 = 1;
 }
 
-message EqualsResponse {
-  bool result = 1;
+message GetAdvancedIntOptionResponse {
+  int32 result = 1;
+}
+
+message GetAdvancedStringOptionRequest {
+  string arg0 = 1;
+}
+
+message GetAdvancedStringOptionResponse {
+  string result = 1;
+}
+
+message GetAttributesRequest {
+}
+
+message GetAttributesResponse {
+  int64 result = 1;
+}
+
+message GetCopiesRequest {
+}
+
+message GetCopiesResponse {
+  int32 result = 1;
+}
+
+message GetCreationTimeRequest {
+}
+
+message GetCreationTimeResponse {
+  int64 result = 1;
 }
 
 message GetIdRequest {
@@ -27,79 +57,70 @@ message GetIdResponse {
   int64 result = 1;
 }
 
-message GetInfoRequest {
+message GetLabelRequest {
 }
 
-message GetInfoResponse {
+message GetLabelResponse {
+  string result = 1;
+}
+
+message GetPagesRequest {
+}
+
+message GetPagesResponse {
   int64 result = 1;
 }
 
-message HashCodeRequest {
+message GetPrinterIdRequest {
 }
 
-message HashCodeResponse {
+message GetPrinterIdResponse {
+  int64 result = 1;
+}
+
+message GetStateRequest {
+}
+
+message GetStateResponse {
   int32 result = 1;
 }
 
-message IsBlockedRequest {
+message HasAdvancedOptionRequest {
+  string arg0 = 1;
 }
 
-message IsBlockedResponse {
+message HasAdvancedOptionResponse {
   bool result = 1;
 }
 
-message IsCancelledRequest {
+message ToStringRequest {
 }
 
-message IsCancelledResponse {
-  bool result = 1;
+message ToStringResponse {
+  string result = 1;
 }
 
-message IsCompletedRequest {
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
 }
 
-message IsCompletedResponse {
-  bool result = 1;
+message WriteToParcelResponse {
 }
 
-message IsFailedRequest {
-}
-
-message IsFailedResponse {
-  bool result = 1;
-}
-
-message IsQueuedRequest {
-}
-
-message IsQueuedResponse {
-  bool result = 1;
-}
-
-message IsStartedRequest {
-}
-
-message IsStartedResponse {
-  bool result = 1;
-}
-
-message RestartRequest {
-}
-
-message RestartResponse {
-}
-
-service PrintJobService {
-  rpc Cancel (CancelRequest) returns (CancelResponse);
-  rpc Equals (EqualsRequest) returns (EqualsResponse);
+service PrintJobInfoService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetAdvancedIntOption (GetAdvancedIntOptionRequest) returns (GetAdvancedIntOptionResponse);
+  rpc GetAdvancedStringOption (GetAdvancedStringOptionRequest) returns (GetAdvancedStringOptionResponse);
+  rpc GetAttributes (GetAttributesRequest) returns (GetAttributesResponse);
+  rpc GetCopies (GetCopiesRequest) returns (GetCopiesResponse);
+  rpc GetCreationTime (GetCreationTimeRequest) returns (GetCreationTimeResponse);
   rpc GetId (GetIdRequest) returns (GetIdResponse);
-  rpc GetInfo (GetInfoRequest) returns (GetInfoResponse);
-  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
-  rpc IsBlocked (IsBlockedRequest) returns (IsBlockedResponse);
-  rpc IsCancelled (IsCancelledRequest) returns (IsCancelledResponse);
-  rpc IsCompleted (IsCompletedRequest) returns (IsCompletedResponse);
-  rpc IsFailed (IsFailedRequest) returns (IsFailedResponse);
-  rpc IsQueued (IsQueuedRequest) returns (IsQueuedResponse);
-  rpc IsStarted (IsStartedRequest) returns (IsStartedResponse);
-  rpc Restart (RestartRequest) returns (RestartResponse);
+  rpc GetLabel (GetLabelRequest) returns (GetLabelResponse);
+  rpc GetPages (GetPagesRequest) returns (GetPagesResponse);
+  rpc GetPrinterId (GetPrinterIdRequest) returns (GetPrinterIdResponse);
+  rpc GetState (GetStateRequest) returns (GetStateResponse);
+  rpc HasAdvancedOption (HasAdvancedOptionRequest) returns (HasAdvancedOptionResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

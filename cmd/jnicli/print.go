@@ -13,20 +13,20 @@ var printCmd = &cobra.Command{
 	Short: "print service operations",
 }
 
-var printPrintJobCmd = &cobra.Command{
-	Use:   "print-job",
-	Short: "PrintJobService operations",
+var printPrintJobInfoCmd = &cobra.Command{
+	Use:   "print-job-info",
+	Short: "PrintJobInfoService operations",
 }
 
-var printPrintJobCancelCmd = &cobra.Command{
-	Use:   "cancel",
-	Short: "Cancel RPC",
+var printPrintJobInfoDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.CancelRequest{}
-		resp, err := client.Cancel(ctx, req)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +34,18 @@ var printPrintJobCancelCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobEqualsCmd = &cobra.Command{
-	Use:   "equals",
-	Short: "Equals RPC",
+var printPrintJobInfoGetAdvancedIntOptionCmd = &cobra.Command{
+	Use:   "get-advanced-int-option",
+	Short: "GetAdvancedIntOption RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.EqualsRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetAdvancedIntOptionRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.Equals(ctx, req)
+		resp, err := client.GetAdvancedIntOption(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,13 +53,80 @@ var printPrintJobEqualsCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobGetIdCmd = &cobra.Command{
+var printPrintJobInfoGetAdvancedStringOptionCmd = &cobra.Command{
+	Use:   "get-advanced-string-option",
+	Short: "GetAdvancedStringOption RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetAdvancedStringOptionRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetAdvancedStringOption(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobInfoGetAttributesCmd = &cobra.Command{
+	Use:   "get-attributes",
+	Short: "GetAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetAttributesRequest{}
+		resp, err := client.GetAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobInfoGetCopiesCmd = &cobra.Command{
+	Use:   "get-copies",
+	Short: "GetCopies RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetCopiesRequest{}
+		resp, err := client.GetCopies(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobInfoGetCreationTimeCmd = &cobra.Command{
+	Use:   "get-creation-time",
+	Short: "GetCreationTime RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetCreationTimeRequest{}
+		resp, err := client.GetCreationTime(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobInfoGetIdCmd = &cobra.Command{
 	Use:   "get-id",
 	Short: "GetId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
 		req := &pb.GetIdRequest{}
 		resp, err := client.GetId(ctx, req)
 		if err != nil {
@@ -69,15 +136,15 @@ var printPrintJobGetIdCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobGetInfoCmd = &cobra.Command{
-	Use:   "get-info",
-	Short: "GetInfo RPC",
+var printPrintJobInfoGetLabelCmd = &cobra.Command{
+	Use:   "get-label",
+	Short: "GetLabel RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.GetInfoRequest{}
-		resp, err := client.GetInfo(ctx, req)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetLabelRequest{}
+		resp, err := client.GetLabel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -85,15 +152,15 @@ var printPrintJobGetInfoCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobHashCodeCmd = &cobra.Command{
-	Use:   "hash-code",
-	Short: "HashCode RPC",
+var printPrintJobInfoGetPagesCmd = &cobra.Command{
+	Use:   "get-pages",
+	Short: "GetPages RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.HashCodeRequest{}
-		resp, err := client.HashCode(ctx, req)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetPagesRequest{}
+		resp, err := client.GetPages(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -101,15 +168,15 @@ var printPrintJobHashCodeCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobIsBlockedCmd = &cobra.Command{
-	Use:   "is-blocked",
-	Short: "IsBlocked RPC",
+var printPrintJobInfoGetPrinterIdCmd = &cobra.Command{
+	Use:   "get-printer-id",
+	Short: "GetPrinterId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.IsBlockedRequest{}
-		resp, err := client.IsBlocked(ctx, req)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetPrinterIdRequest{}
+		resp, err := client.GetPrinterId(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -117,15 +184,15 @@ var printPrintJobIsBlockedCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobIsCancelledCmd = &cobra.Command{
-	Use:   "is-cancelled",
-	Short: "IsCancelled RPC",
+var printPrintJobInfoGetStateCmd = &cobra.Command{
+	Use:   "get-state",
+	Short: "GetState RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.IsCancelledRequest{}
-		resp, err := client.IsCancelled(ctx, req)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.GetStateRequest{}
+		resp, err := client.GetState(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -133,15 +200,18 @@ var printPrintJobIsCancelledCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobIsCompletedCmd = &cobra.Command{
-	Use:   "is-completed",
-	Short: "IsCompleted RPC",
+var printPrintJobInfoHasAdvancedOptionCmd = &cobra.Command{
+	Use:   "has-advanced-option",
+	Short: "HasAdvancedOption RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.IsCompletedRequest{}
-		resp, err := client.IsCompleted(ctx, req)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.HasAdvancedOptionRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.HasAdvancedOption(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -149,15 +219,15 @@ var printPrintJobIsCompletedCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobIsFailedCmd = &cobra.Command{
-	Use:   "is-failed",
-	Short: "IsFailed RPC",
+var printPrintJobInfoToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.IsFailedRequest{}
-		resp, err := client.IsFailed(ctx, req)
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -165,47 +235,21 @@ var printPrintJobIsFailedCmd = &cobra.Command{
 	},
 }
 
-var printPrintJobIsQueuedCmd = &cobra.Command{
-	Use:   "is-queued",
-	Short: "IsQueued RPC",
+var printPrintJobInfoWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.IsQueuedRequest{}
-		resp, err := client.IsQueued(ctx, req)
-		if err != nil {
-			return err
+		client := pb.NewPrintJobInfoServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		return printProtoMessage(resp)
-	},
-}
-
-var printPrintJobIsStartedCmd = &cobra.Command{
-	Use:   "is-started",
-	Short: "IsStarted RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.IsStartedRequest{}
-		resp, err := client.IsStarted(ctx, req)
-		if err != nil {
-			return err
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		return printProtoMessage(resp)
-	},
-}
-
-var printPrintJobRestartCmd = &cobra.Command{
-	Use:   "restart",
-	Short: "Restart RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewPrintJobServiceClient(grpcConn)
-		req := &pb.RestartRequest{}
-		resp, err := client.Restart(ctx, req)
+		resp, err := client.WriteToParcel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -214,19 +258,25 @@ var printPrintJobRestartCmd = &cobra.Command{
 }
 
 func init() {
-	printPrintJobCmd.AddCommand(printPrintJobCancelCmd)
-	printPrintJobEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	printPrintJobCmd.AddCommand(printPrintJobEqualsCmd)
-	printPrintJobCmd.AddCommand(printPrintJobGetIdCmd)
-	printPrintJobCmd.AddCommand(printPrintJobGetInfoCmd)
-	printPrintJobCmd.AddCommand(printPrintJobHashCodeCmd)
-	printPrintJobCmd.AddCommand(printPrintJobIsBlockedCmd)
-	printPrintJobCmd.AddCommand(printPrintJobIsCancelledCmd)
-	printPrintJobCmd.AddCommand(printPrintJobIsCompletedCmd)
-	printPrintJobCmd.AddCommand(printPrintJobIsFailedCmd)
-	printPrintJobCmd.AddCommand(printPrintJobIsQueuedCmd)
-	printPrintJobCmd.AddCommand(printPrintJobIsStartedCmd)
-	printPrintJobCmd.AddCommand(printPrintJobRestartCmd)
-	printCmd.AddCommand(printPrintJobCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoDescribeContentsCmd)
+	printPrintJobInfoGetAdvancedIntOptionCmd.Flags().String("arg0", "", "arg0 (string)")
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetAdvancedIntOptionCmd)
+	printPrintJobInfoGetAdvancedStringOptionCmd.Flags().String("arg0", "", "arg0 (string)")
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetAdvancedStringOptionCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetAttributesCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetCopiesCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetCreationTimeCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetIdCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetLabelCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetPagesCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetPrinterIdCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoGetStateCmd)
+	printPrintJobInfoHasAdvancedOptionCmd.Flags().String("arg0", "", "arg0 (string)")
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoHasAdvancedOptionCmd)
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoToStringCmd)
+	printPrintJobInfoWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	printPrintJobInfoWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	printPrintJobInfoCmd.AddCommand(printPrintJobInfoWriteToParcelCmd)
+	printCmd.AddCommand(printPrintJobInfoCmd)
 	rootCmd.AddCommand(printCmd)
 }

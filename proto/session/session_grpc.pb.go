@@ -21,824 +21,520 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MediaControllerService_AdjustVolume_FullMethodName             = "/session.MediaControllerService/AdjustVolume"
-	MediaControllerService_DispatchMediaButtonEvent_FullMethodName = "/session.MediaControllerService/DispatchMediaButtonEvent"
-	MediaControllerService_GetExtras_FullMethodName                = "/session.MediaControllerService/GetExtras"
-	MediaControllerService_GetFlags_FullMethodName                 = "/session.MediaControllerService/GetFlags"
-	MediaControllerService_GetMetadata_FullMethodName              = "/session.MediaControllerService/GetMetadata"
-	MediaControllerService_GetPackageName_FullMethodName           = "/session.MediaControllerService/GetPackageName"
-	MediaControllerService_GetPlaybackInfo_FullMethodName          = "/session.MediaControllerService/GetPlaybackInfo"
-	MediaControllerService_GetPlaybackState_FullMethodName         = "/session.MediaControllerService/GetPlaybackState"
-	MediaControllerService_GetQueue_FullMethodName                 = "/session.MediaControllerService/GetQueue"
-	MediaControllerService_GetQueueTitle_FullMethodName            = "/session.MediaControllerService/GetQueueTitle"
-	MediaControllerService_GetRatingType_FullMethodName            = "/session.MediaControllerService/GetRatingType"
-	MediaControllerService_GetSessionActivity_FullMethodName       = "/session.MediaControllerService/GetSessionActivity"
-	MediaControllerService_GetSessionInfo_FullMethodName           = "/session.MediaControllerService/GetSessionInfo"
-	MediaControllerService_GetSessionToken_FullMethodName          = "/session.MediaControllerService/GetSessionToken"
-	MediaControllerService_GetTag_FullMethodName                   = "/session.MediaControllerService/GetTag"
-	MediaControllerService_GetTransportControls_FullMethodName     = "/session.MediaControllerService/GetTransportControls"
-	MediaControllerService_RegisterCallback_FullMethodName         = "/session.MediaControllerService/RegisterCallback"
-	MediaControllerService_SendCommand_FullMethodName              = "/session.MediaControllerService/SendCommand"
-	MediaControllerService_SetVolumeTo_FullMethodName              = "/session.MediaControllerService/SetVolumeTo"
-	MediaControllerService_UnregisterCallback_FullMethodName       = "/session.MediaControllerService/UnregisterCallback"
+	MediaSessionManagerService_AddOnActiveSessionsChangedListener_FullMethodName          = "/session.MediaSessionManagerService/AddOnActiveSessionsChangedListener"
+	MediaSessionManagerService_AddOnMediaKeyEventSessionChangedListener_FullMethodName    = "/session.MediaSessionManagerService/AddOnMediaKeyEventSessionChangedListener"
+	MediaSessionManagerService_AddOnSession2TokensChangedListener_FullMethodName          = "/session.MediaSessionManagerService/AddOnSession2TokensChangedListener"
+	MediaSessionManagerService_GetActiveSessions_FullMethodName                           = "/session.MediaSessionManagerService/GetActiveSessions"
+	MediaSessionManagerService_GetMediaKeyEventSession_FullMethodName                     = "/session.MediaSessionManagerService/GetMediaKeyEventSession"
+	MediaSessionManagerService_GetMediaKeyEventSessionPackageName_FullMethodName          = "/session.MediaSessionManagerService/GetMediaKeyEventSessionPackageName"
+	MediaSessionManagerService_GetSession2Tokens_FullMethodName                           = "/session.MediaSessionManagerService/GetSession2Tokens"
+	MediaSessionManagerService_IsTrustedForMediaControl_FullMethodName                    = "/session.MediaSessionManagerService/IsTrustedForMediaControl"
+	MediaSessionManagerService_NotifySession2Created_FullMethodName                       = "/session.MediaSessionManagerService/NotifySession2Created"
+	MediaSessionManagerService_RemoveOnActiveSessionsChangedListener_FullMethodName       = "/session.MediaSessionManagerService/RemoveOnActiveSessionsChangedListener"
+	MediaSessionManagerService_RemoveOnMediaKeyEventSessionChangedListener_FullMethodName = "/session.MediaSessionManagerService/RemoveOnMediaKeyEventSessionChangedListener"
+	MediaSessionManagerService_RemoveOnSession2TokensChangedListener_FullMethodName       = "/session.MediaSessionManagerService/RemoveOnSession2TokensChangedListener"
 )
 
-// MediaControllerServiceClient is the client API for MediaControllerService service.
+// MediaSessionManagerServiceClient is the client API for MediaSessionManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MediaControllerServiceClient interface {
-	AdjustVolume(ctx context.Context, in *AdjustVolumeRequest, opts ...grpc.CallOption) (*AdjustVolumeResponse, error)
-	DispatchMediaButtonEvent(ctx context.Context, in *DispatchMediaButtonEventRequest, opts ...grpc.CallOption) (*DispatchMediaButtonEventResponse, error)
-	GetExtras(ctx context.Context, in *GetExtrasRequest, opts ...grpc.CallOption) (*GetExtrasResponse, error)
-	GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error)
-	GetMetadata(ctx context.Context, in *GetMetadataRequest, opts ...grpc.CallOption) (*GetMetadataResponse, error)
-	GetPackageName(ctx context.Context, in *GetPackageNameRequest, opts ...grpc.CallOption) (*GetPackageNameResponse, error)
-	GetPlaybackInfo(ctx context.Context, in *GetPlaybackInfoRequest, opts ...grpc.CallOption) (*GetPlaybackInfoResponse, error)
-	GetPlaybackState(ctx context.Context, in *GetPlaybackStateRequest, opts ...grpc.CallOption) (*GetPlaybackStateResponse, error)
-	GetQueue(ctx context.Context, in *GetQueueRequest, opts ...grpc.CallOption) (*GetQueueResponse, error)
-	GetQueueTitle(ctx context.Context, in *GetQueueTitleRequest, opts ...grpc.CallOption) (*GetQueueTitleResponse, error)
-	GetRatingType(ctx context.Context, in *GetRatingTypeRequest, opts ...grpc.CallOption) (*GetRatingTypeResponse, error)
-	GetSessionActivity(ctx context.Context, in *GetSessionActivityRequest, opts ...grpc.CallOption) (*GetSessionActivityResponse, error)
-	GetSessionInfo(ctx context.Context, in *GetSessionInfoRequest, opts ...grpc.CallOption) (*GetSessionInfoResponse, error)
-	GetSessionToken(ctx context.Context, in *GetSessionTokenRequest, opts ...grpc.CallOption) (*GetSessionTokenResponse, error)
-	GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error)
-	GetTransportControls(ctx context.Context, in *GetTransportControlsRequest, opts ...grpc.CallOption) (*GetTransportControlsResponse, error)
-	RegisterCallback(ctx context.Context, in *RegisterCallbackRequest, opts ...grpc.CallOption) (*RegisterCallbackResponse, error)
-	SendCommand(ctx context.Context, in *SendCommandRequest, opts ...grpc.CallOption) (*SendCommandResponse, error)
-	SetVolumeTo(ctx context.Context, in *SetVolumeToRequest, opts ...grpc.CallOption) (*SetVolumeToResponse, error)
-	UnregisterCallback(ctx context.Context, in *UnregisterCallbackRequest, opts ...grpc.CallOption) (*UnregisterCallbackResponse, error)
+type MediaSessionManagerServiceClient interface {
+	AddOnActiveSessionsChangedListener(ctx context.Context, in *AddOnActiveSessionsChangedListenerRequest, opts ...grpc.CallOption) (*AddOnActiveSessionsChangedListenerResponse, error)
+	AddOnMediaKeyEventSessionChangedListener(ctx context.Context, in *AddOnMediaKeyEventSessionChangedListenerRequest, opts ...grpc.CallOption) (*AddOnMediaKeyEventSessionChangedListenerResponse, error)
+	AddOnSession2TokensChangedListener(ctx context.Context, in *AddOnSession2TokensChangedListenerRequest, opts ...grpc.CallOption) (*AddOnSession2TokensChangedListenerResponse, error)
+	GetActiveSessions(ctx context.Context, in *GetActiveSessionsRequest, opts ...grpc.CallOption) (*GetActiveSessionsResponse, error)
+	GetMediaKeyEventSession(ctx context.Context, in *GetMediaKeyEventSessionRequest, opts ...grpc.CallOption) (*GetMediaKeyEventSessionResponse, error)
+	GetMediaKeyEventSessionPackageName(ctx context.Context, in *GetMediaKeyEventSessionPackageNameRequest, opts ...grpc.CallOption) (*GetMediaKeyEventSessionPackageNameResponse, error)
+	GetSession2Tokens(ctx context.Context, in *GetSession2TokensRequest, opts ...grpc.CallOption) (*GetSession2TokensResponse, error)
+	IsTrustedForMediaControl(ctx context.Context, in *IsTrustedForMediaControlRequest, opts ...grpc.CallOption) (*IsTrustedForMediaControlResponse, error)
+	NotifySession2Created(ctx context.Context, in *NotifySession2CreatedRequest, opts ...grpc.CallOption) (*NotifySession2CreatedResponse, error)
+	RemoveOnActiveSessionsChangedListener(ctx context.Context, in *RemoveOnActiveSessionsChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnActiveSessionsChangedListenerResponse, error)
+	RemoveOnMediaKeyEventSessionChangedListener(ctx context.Context, in *RemoveOnMediaKeyEventSessionChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnMediaKeyEventSessionChangedListenerResponse, error)
+	RemoveOnSession2TokensChangedListener(ctx context.Context, in *RemoveOnSession2TokensChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnSession2TokensChangedListenerResponse, error)
 }
 
-type mediaControllerServiceClient struct {
+type mediaSessionManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMediaControllerServiceClient(cc grpc.ClientConnInterface) MediaControllerServiceClient {
-	return &mediaControllerServiceClient{cc}
+func NewMediaSessionManagerServiceClient(cc grpc.ClientConnInterface) MediaSessionManagerServiceClient {
+	return &mediaSessionManagerServiceClient{cc}
 }
 
-func (c *mediaControllerServiceClient) AdjustVolume(ctx context.Context, in *AdjustVolumeRequest, opts ...grpc.CallOption) (*AdjustVolumeResponse, error) {
+func (c *mediaSessionManagerServiceClient) AddOnActiveSessionsChangedListener(ctx context.Context, in *AddOnActiveSessionsChangedListenerRequest, opts ...grpc.CallOption) (*AddOnActiveSessionsChangedListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AdjustVolumeResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_AdjustVolume_FullMethodName, in, out, cOpts...)
+	out := new(AddOnActiveSessionsChangedListenerResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_AddOnActiveSessionsChangedListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) DispatchMediaButtonEvent(ctx context.Context, in *DispatchMediaButtonEventRequest, opts ...grpc.CallOption) (*DispatchMediaButtonEventResponse, error) {
+func (c *mediaSessionManagerServiceClient) AddOnMediaKeyEventSessionChangedListener(ctx context.Context, in *AddOnMediaKeyEventSessionChangedListenerRequest, opts ...grpc.CallOption) (*AddOnMediaKeyEventSessionChangedListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DispatchMediaButtonEventResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_DispatchMediaButtonEvent_FullMethodName, in, out, cOpts...)
+	out := new(AddOnMediaKeyEventSessionChangedListenerResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_AddOnMediaKeyEventSessionChangedListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetExtras(ctx context.Context, in *GetExtrasRequest, opts ...grpc.CallOption) (*GetExtrasResponse, error) {
+func (c *mediaSessionManagerServiceClient) AddOnSession2TokensChangedListener(ctx context.Context, in *AddOnSession2TokensChangedListenerRequest, opts ...grpc.CallOption) (*AddOnSession2TokensChangedListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetExtrasResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetExtras_FullMethodName, in, out, cOpts...)
+	out := new(AddOnSession2TokensChangedListenerResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_AddOnSession2TokensChangedListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error) {
+func (c *mediaSessionManagerServiceClient) GetActiveSessions(ctx context.Context, in *GetActiveSessionsRequest, opts ...grpc.CallOption) (*GetActiveSessionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetFlagsResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetFlags_FullMethodName, in, out, cOpts...)
+	out := new(GetActiveSessionsResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_GetActiveSessions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetMetadata(ctx context.Context, in *GetMetadataRequest, opts ...grpc.CallOption) (*GetMetadataResponse, error) {
+func (c *mediaSessionManagerServiceClient) GetMediaKeyEventSession(ctx context.Context, in *GetMediaKeyEventSessionRequest, opts ...grpc.CallOption) (*GetMediaKeyEventSessionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMetadataResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetMetadata_FullMethodName, in, out, cOpts...)
+	out := new(GetMediaKeyEventSessionResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_GetMediaKeyEventSession_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetPackageName(ctx context.Context, in *GetPackageNameRequest, opts ...grpc.CallOption) (*GetPackageNameResponse, error) {
+func (c *mediaSessionManagerServiceClient) GetMediaKeyEventSessionPackageName(ctx context.Context, in *GetMediaKeyEventSessionPackageNameRequest, opts ...grpc.CallOption) (*GetMediaKeyEventSessionPackageNameResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPackageNameResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetPackageName_FullMethodName, in, out, cOpts...)
+	out := new(GetMediaKeyEventSessionPackageNameResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_GetMediaKeyEventSessionPackageName_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetPlaybackInfo(ctx context.Context, in *GetPlaybackInfoRequest, opts ...grpc.CallOption) (*GetPlaybackInfoResponse, error) {
+func (c *mediaSessionManagerServiceClient) GetSession2Tokens(ctx context.Context, in *GetSession2TokensRequest, opts ...grpc.CallOption) (*GetSession2TokensResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPlaybackInfoResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetPlaybackInfo_FullMethodName, in, out, cOpts...)
+	out := new(GetSession2TokensResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_GetSession2Tokens_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetPlaybackState(ctx context.Context, in *GetPlaybackStateRequest, opts ...grpc.CallOption) (*GetPlaybackStateResponse, error) {
+func (c *mediaSessionManagerServiceClient) IsTrustedForMediaControl(ctx context.Context, in *IsTrustedForMediaControlRequest, opts ...grpc.CallOption) (*IsTrustedForMediaControlResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPlaybackStateResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetPlaybackState_FullMethodName, in, out, cOpts...)
+	out := new(IsTrustedForMediaControlResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_IsTrustedForMediaControl_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetQueue(ctx context.Context, in *GetQueueRequest, opts ...grpc.CallOption) (*GetQueueResponse, error) {
+func (c *mediaSessionManagerServiceClient) NotifySession2Created(ctx context.Context, in *NotifySession2CreatedRequest, opts ...grpc.CallOption) (*NotifySession2CreatedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetQueueResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetQueue_FullMethodName, in, out, cOpts...)
+	out := new(NotifySession2CreatedResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_NotifySession2Created_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetQueueTitle(ctx context.Context, in *GetQueueTitleRequest, opts ...grpc.CallOption) (*GetQueueTitleResponse, error) {
+func (c *mediaSessionManagerServiceClient) RemoveOnActiveSessionsChangedListener(ctx context.Context, in *RemoveOnActiveSessionsChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnActiveSessionsChangedListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetQueueTitleResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetQueueTitle_FullMethodName, in, out, cOpts...)
+	out := new(RemoveOnActiveSessionsChangedListenerResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_RemoveOnActiveSessionsChangedListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetRatingType(ctx context.Context, in *GetRatingTypeRequest, opts ...grpc.CallOption) (*GetRatingTypeResponse, error) {
+func (c *mediaSessionManagerServiceClient) RemoveOnMediaKeyEventSessionChangedListener(ctx context.Context, in *RemoveOnMediaKeyEventSessionChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnMediaKeyEventSessionChangedListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRatingTypeResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetRatingType_FullMethodName, in, out, cOpts...)
+	out := new(RemoveOnMediaKeyEventSessionChangedListenerResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_RemoveOnMediaKeyEventSessionChangedListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetSessionActivity(ctx context.Context, in *GetSessionActivityRequest, opts ...grpc.CallOption) (*GetSessionActivityResponse, error) {
+func (c *mediaSessionManagerServiceClient) RemoveOnSession2TokensChangedListener(ctx context.Context, in *RemoveOnSession2TokensChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnSession2TokensChangedListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSessionActivityResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetSessionActivity_FullMethodName, in, out, cOpts...)
+	out := new(RemoveOnSession2TokensChangedListenerResponse)
+	err := c.cc.Invoke(ctx, MediaSessionManagerService_RemoveOnSession2TokensChangedListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaControllerServiceClient) GetSessionInfo(ctx context.Context, in *GetSessionInfoRequest, opts ...grpc.CallOption) (*GetSessionInfoResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSessionInfoResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetSessionInfo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mediaControllerServiceClient) GetSessionToken(ctx context.Context, in *GetSessionTokenRequest, opts ...grpc.CallOption) (*GetSessionTokenResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSessionTokenResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetSessionToken_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mediaControllerServiceClient) GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTagResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetTag_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mediaControllerServiceClient) GetTransportControls(ctx context.Context, in *GetTransportControlsRequest, opts ...grpc.CallOption) (*GetTransportControlsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTransportControlsResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_GetTransportControls_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mediaControllerServiceClient) RegisterCallback(ctx context.Context, in *RegisterCallbackRequest, opts ...grpc.CallOption) (*RegisterCallbackResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RegisterCallbackResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_RegisterCallback_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mediaControllerServiceClient) SendCommand(ctx context.Context, in *SendCommandRequest, opts ...grpc.CallOption) (*SendCommandResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SendCommandResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_SendCommand_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mediaControllerServiceClient) SetVolumeTo(ctx context.Context, in *SetVolumeToRequest, opts ...grpc.CallOption) (*SetVolumeToResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetVolumeToResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_SetVolumeTo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *mediaControllerServiceClient) UnregisterCallback(ctx context.Context, in *UnregisterCallbackRequest, opts ...grpc.CallOption) (*UnregisterCallbackResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UnregisterCallbackResponse)
-	err := c.cc.Invoke(ctx, MediaControllerService_UnregisterCallback_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// MediaControllerServiceServer is the server API for MediaControllerService service.
-// All implementations must embed UnimplementedMediaControllerServiceServer
+// MediaSessionManagerServiceServer is the server API for MediaSessionManagerService service.
+// All implementations must embed UnimplementedMediaSessionManagerServiceServer
 // for forward compatibility.
-type MediaControllerServiceServer interface {
-	AdjustVolume(context.Context, *AdjustVolumeRequest) (*AdjustVolumeResponse, error)
-	DispatchMediaButtonEvent(context.Context, *DispatchMediaButtonEventRequest) (*DispatchMediaButtonEventResponse, error)
-	GetExtras(context.Context, *GetExtrasRequest) (*GetExtrasResponse, error)
-	GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error)
-	GetMetadata(context.Context, *GetMetadataRequest) (*GetMetadataResponse, error)
-	GetPackageName(context.Context, *GetPackageNameRequest) (*GetPackageNameResponse, error)
-	GetPlaybackInfo(context.Context, *GetPlaybackInfoRequest) (*GetPlaybackInfoResponse, error)
-	GetPlaybackState(context.Context, *GetPlaybackStateRequest) (*GetPlaybackStateResponse, error)
-	GetQueue(context.Context, *GetQueueRequest) (*GetQueueResponse, error)
-	GetQueueTitle(context.Context, *GetQueueTitleRequest) (*GetQueueTitleResponse, error)
-	GetRatingType(context.Context, *GetRatingTypeRequest) (*GetRatingTypeResponse, error)
-	GetSessionActivity(context.Context, *GetSessionActivityRequest) (*GetSessionActivityResponse, error)
-	GetSessionInfo(context.Context, *GetSessionInfoRequest) (*GetSessionInfoResponse, error)
-	GetSessionToken(context.Context, *GetSessionTokenRequest) (*GetSessionTokenResponse, error)
-	GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error)
-	GetTransportControls(context.Context, *GetTransportControlsRequest) (*GetTransportControlsResponse, error)
-	RegisterCallback(context.Context, *RegisterCallbackRequest) (*RegisterCallbackResponse, error)
-	SendCommand(context.Context, *SendCommandRequest) (*SendCommandResponse, error)
-	SetVolumeTo(context.Context, *SetVolumeToRequest) (*SetVolumeToResponse, error)
-	UnregisterCallback(context.Context, *UnregisterCallbackRequest) (*UnregisterCallbackResponse, error)
-	mustEmbedUnimplementedMediaControllerServiceServer()
+type MediaSessionManagerServiceServer interface {
+	AddOnActiveSessionsChangedListener(context.Context, *AddOnActiveSessionsChangedListenerRequest) (*AddOnActiveSessionsChangedListenerResponse, error)
+	AddOnMediaKeyEventSessionChangedListener(context.Context, *AddOnMediaKeyEventSessionChangedListenerRequest) (*AddOnMediaKeyEventSessionChangedListenerResponse, error)
+	AddOnSession2TokensChangedListener(context.Context, *AddOnSession2TokensChangedListenerRequest) (*AddOnSession2TokensChangedListenerResponse, error)
+	GetActiveSessions(context.Context, *GetActiveSessionsRequest) (*GetActiveSessionsResponse, error)
+	GetMediaKeyEventSession(context.Context, *GetMediaKeyEventSessionRequest) (*GetMediaKeyEventSessionResponse, error)
+	GetMediaKeyEventSessionPackageName(context.Context, *GetMediaKeyEventSessionPackageNameRequest) (*GetMediaKeyEventSessionPackageNameResponse, error)
+	GetSession2Tokens(context.Context, *GetSession2TokensRequest) (*GetSession2TokensResponse, error)
+	IsTrustedForMediaControl(context.Context, *IsTrustedForMediaControlRequest) (*IsTrustedForMediaControlResponse, error)
+	NotifySession2Created(context.Context, *NotifySession2CreatedRequest) (*NotifySession2CreatedResponse, error)
+	RemoveOnActiveSessionsChangedListener(context.Context, *RemoveOnActiveSessionsChangedListenerRequest) (*RemoveOnActiveSessionsChangedListenerResponse, error)
+	RemoveOnMediaKeyEventSessionChangedListener(context.Context, *RemoveOnMediaKeyEventSessionChangedListenerRequest) (*RemoveOnMediaKeyEventSessionChangedListenerResponse, error)
+	RemoveOnSession2TokensChangedListener(context.Context, *RemoveOnSession2TokensChangedListenerRequest) (*RemoveOnSession2TokensChangedListenerResponse, error)
+	mustEmbedUnimplementedMediaSessionManagerServiceServer()
 }
 
-// UnimplementedMediaControllerServiceServer must be embedded to have
+// UnimplementedMediaSessionManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedMediaControllerServiceServer struct{}
+type UnimplementedMediaSessionManagerServiceServer struct{}
 
-func (UnimplementedMediaControllerServiceServer) AdjustVolume(context.Context, *AdjustVolumeRequest) (*AdjustVolumeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AdjustVolume not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) AddOnActiveSessionsChangedListener(context.Context, *AddOnActiveSessionsChangedListenerRequest) (*AddOnActiveSessionsChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddOnActiveSessionsChangedListener not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) DispatchMediaButtonEvent(context.Context, *DispatchMediaButtonEventRequest) (*DispatchMediaButtonEventResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DispatchMediaButtonEvent not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) AddOnMediaKeyEventSessionChangedListener(context.Context, *AddOnMediaKeyEventSessionChangedListenerRequest) (*AddOnMediaKeyEventSessionChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddOnMediaKeyEventSessionChangedListener not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetExtras(context.Context, *GetExtrasRequest) (*GetExtrasResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetExtras not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) AddOnSession2TokensChangedListener(context.Context, *AddOnSession2TokensChangedListenerRequest) (*AddOnSession2TokensChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddOnSession2TokensChangedListener not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetFlags not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) GetActiveSessions(context.Context, *GetActiveSessionsRequest) (*GetActiveSessionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetActiveSessions not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetMetadata(context.Context, *GetMetadataRequest) (*GetMetadataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMetadata not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) GetMediaKeyEventSession(context.Context, *GetMediaKeyEventSessionRequest) (*GetMediaKeyEventSessionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMediaKeyEventSession not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetPackageName(context.Context, *GetPackageNameRequest) (*GetPackageNameResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPackageName not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) GetMediaKeyEventSessionPackageName(context.Context, *GetMediaKeyEventSessionPackageNameRequest) (*GetMediaKeyEventSessionPackageNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMediaKeyEventSessionPackageName not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetPlaybackInfo(context.Context, *GetPlaybackInfoRequest) (*GetPlaybackInfoResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPlaybackInfo not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) GetSession2Tokens(context.Context, *GetSession2TokensRequest) (*GetSession2TokensResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSession2Tokens not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetPlaybackState(context.Context, *GetPlaybackStateRequest) (*GetPlaybackStateResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPlaybackState not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) IsTrustedForMediaControl(context.Context, *IsTrustedForMediaControlRequest) (*IsTrustedForMediaControlResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsTrustedForMediaControl not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetQueue(context.Context, *GetQueueRequest) (*GetQueueResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetQueue not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) NotifySession2Created(context.Context, *NotifySession2CreatedRequest) (*NotifySession2CreatedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifySession2Created not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetQueueTitle(context.Context, *GetQueueTitleRequest) (*GetQueueTitleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetQueueTitle not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) RemoveOnActiveSessionsChangedListener(context.Context, *RemoveOnActiveSessionsChangedListenerRequest) (*RemoveOnActiveSessionsChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveOnActiveSessionsChangedListener not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetRatingType(context.Context, *GetRatingTypeRequest) (*GetRatingTypeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRatingType not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) RemoveOnMediaKeyEventSessionChangedListener(context.Context, *RemoveOnMediaKeyEventSessionChangedListenerRequest) (*RemoveOnMediaKeyEventSessionChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveOnMediaKeyEventSessionChangedListener not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetSessionActivity(context.Context, *GetSessionActivityRequest) (*GetSessionActivityResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSessionActivity not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) RemoveOnSession2TokensChangedListener(context.Context, *RemoveOnSession2TokensChangedListenerRequest) (*RemoveOnSession2TokensChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveOnSession2TokensChangedListener not implemented")
 }
-func (UnimplementedMediaControllerServiceServer) GetSessionInfo(context.Context, *GetSessionInfoRequest) (*GetSessionInfoResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSessionInfo not implemented")
+func (UnimplementedMediaSessionManagerServiceServer) mustEmbedUnimplementedMediaSessionManagerServiceServer() {
 }
-func (UnimplementedMediaControllerServiceServer) GetSessionToken(context.Context, *GetSessionTokenRequest) (*GetSessionTokenResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSessionToken not implemented")
-}
-func (UnimplementedMediaControllerServiceServer) GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTag not implemented")
-}
-func (UnimplementedMediaControllerServiceServer) GetTransportControls(context.Context, *GetTransportControlsRequest) (*GetTransportControlsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTransportControls not implemented")
-}
-func (UnimplementedMediaControllerServiceServer) RegisterCallback(context.Context, *RegisterCallbackRequest) (*RegisterCallbackResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RegisterCallback not implemented")
-}
-func (UnimplementedMediaControllerServiceServer) SendCommand(context.Context, *SendCommandRequest) (*SendCommandResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SendCommand not implemented")
-}
-func (UnimplementedMediaControllerServiceServer) SetVolumeTo(context.Context, *SetVolumeToRequest) (*SetVolumeToResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetVolumeTo not implemented")
-}
-func (UnimplementedMediaControllerServiceServer) UnregisterCallback(context.Context, *UnregisterCallbackRequest) (*UnregisterCallbackResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UnregisterCallback not implemented")
-}
-func (UnimplementedMediaControllerServiceServer) mustEmbedUnimplementedMediaControllerServiceServer() {
-}
-func (UnimplementedMediaControllerServiceServer) testEmbeddedByValue() {}
+func (UnimplementedMediaSessionManagerServiceServer) testEmbeddedByValue() {}
 
-// UnsafeMediaControllerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MediaControllerServiceServer will
+// UnsafeMediaSessionManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MediaSessionManagerServiceServer will
 // result in compilation errors.
-type UnsafeMediaControllerServiceServer interface {
-	mustEmbedUnimplementedMediaControllerServiceServer()
+type UnsafeMediaSessionManagerServiceServer interface {
+	mustEmbedUnimplementedMediaSessionManagerServiceServer()
 }
 
-func RegisterMediaControllerServiceServer(s grpc.ServiceRegistrar, srv MediaControllerServiceServer) {
-	// If the following call panics, it indicates UnimplementedMediaControllerServiceServer was
+func RegisterMediaSessionManagerServiceServer(s grpc.ServiceRegistrar, srv MediaSessionManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedMediaSessionManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&MediaControllerService_ServiceDesc, srv)
+	s.RegisterService(&MediaSessionManagerService_ServiceDesc, srv)
 }
 
-func _MediaControllerService_AdjustVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AdjustVolumeRequest)
+func _MediaSessionManagerService_AddOnActiveSessionsChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOnActiveSessionsChangedListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).AdjustVolume(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).AddOnActiveSessionsChangedListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_AdjustVolume_FullMethodName,
+		FullMethod: MediaSessionManagerService_AddOnActiveSessionsChangedListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).AdjustVolume(ctx, req.(*AdjustVolumeRequest))
+		return srv.(MediaSessionManagerServiceServer).AddOnActiveSessionsChangedListener(ctx, req.(*AddOnActiveSessionsChangedListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_DispatchMediaButtonEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DispatchMediaButtonEventRequest)
+func _MediaSessionManagerService_AddOnMediaKeyEventSessionChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOnMediaKeyEventSessionChangedListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).DispatchMediaButtonEvent(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).AddOnMediaKeyEventSessionChangedListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_DispatchMediaButtonEvent_FullMethodName,
+		FullMethod: MediaSessionManagerService_AddOnMediaKeyEventSessionChangedListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).DispatchMediaButtonEvent(ctx, req.(*DispatchMediaButtonEventRequest))
+		return srv.(MediaSessionManagerServiceServer).AddOnMediaKeyEventSessionChangedListener(ctx, req.(*AddOnMediaKeyEventSessionChangedListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetExtras_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetExtrasRequest)
+func _MediaSessionManagerService_AddOnSession2TokensChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOnSession2TokensChangedListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetExtras(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).AddOnSession2TokensChangedListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetExtras_FullMethodName,
+		FullMethod: MediaSessionManagerService_AddOnSession2TokensChangedListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetExtras(ctx, req.(*GetExtrasRequest))
+		return srv.(MediaSessionManagerServiceServer).AddOnSession2TokensChangedListener(ctx, req.(*AddOnSession2TokensChangedListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFlagsRequest)
+func _MediaSessionManagerService_GetActiveSessions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveSessionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetFlags(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).GetActiveSessions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetFlags_FullMethodName,
+		FullMethod: MediaSessionManagerService_GetActiveSessions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetFlags(ctx, req.(*GetFlagsRequest))
+		return srv.(MediaSessionManagerServiceServer).GetActiveSessions(ctx, req.(*GetActiveSessionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMetadataRequest)
+func _MediaSessionManagerService_GetMediaKeyEventSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMediaKeyEventSessionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetMetadata(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).GetMediaKeyEventSession(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetMetadata_FullMethodName,
+		FullMethod: MediaSessionManagerService_GetMediaKeyEventSession_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetMetadata(ctx, req.(*GetMetadataRequest))
+		return srv.(MediaSessionManagerServiceServer).GetMediaKeyEventSession(ctx, req.(*GetMediaKeyEventSessionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetPackageName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPackageNameRequest)
+func _MediaSessionManagerService_GetMediaKeyEventSessionPackageName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMediaKeyEventSessionPackageNameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetPackageName(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).GetMediaKeyEventSessionPackageName(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetPackageName_FullMethodName,
+		FullMethod: MediaSessionManagerService_GetMediaKeyEventSessionPackageName_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetPackageName(ctx, req.(*GetPackageNameRequest))
+		return srv.(MediaSessionManagerServiceServer).GetMediaKeyEventSessionPackageName(ctx, req.(*GetMediaKeyEventSessionPackageNameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetPlaybackInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPlaybackInfoRequest)
+func _MediaSessionManagerService_GetSession2Tokens_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSession2TokensRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetPlaybackInfo(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).GetSession2Tokens(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetPlaybackInfo_FullMethodName,
+		FullMethod: MediaSessionManagerService_GetSession2Tokens_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetPlaybackInfo(ctx, req.(*GetPlaybackInfoRequest))
+		return srv.(MediaSessionManagerServiceServer).GetSession2Tokens(ctx, req.(*GetSession2TokensRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetPlaybackState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPlaybackStateRequest)
+func _MediaSessionManagerService_IsTrustedForMediaControl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsTrustedForMediaControlRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetPlaybackState(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).IsTrustedForMediaControl(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetPlaybackState_FullMethodName,
+		FullMethod: MediaSessionManagerService_IsTrustedForMediaControl_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetPlaybackState(ctx, req.(*GetPlaybackStateRequest))
+		return srv.(MediaSessionManagerServiceServer).IsTrustedForMediaControl(ctx, req.(*IsTrustedForMediaControlRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetQueue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetQueueRequest)
+func _MediaSessionManagerService_NotifySession2Created_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifySession2CreatedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetQueue(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).NotifySession2Created(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetQueue_FullMethodName,
+		FullMethod: MediaSessionManagerService_NotifySession2Created_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetQueue(ctx, req.(*GetQueueRequest))
+		return srv.(MediaSessionManagerServiceServer).NotifySession2Created(ctx, req.(*NotifySession2CreatedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetQueueTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetQueueTitleRequest)
+func _MediaSessionManagerService_RemoveOnActiveSessionsChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveOnActiveSessionsChangedListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetQueueTitle(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).RemoveOnActiveSessionsChangedListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetQueueTitle_FullMethodName,
+		FullMethod: MediaSessionManagerService_RemoveOnActiveSessionsChangedListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetQueueTitle(ctx, req.(*GetQueueTitleRequest))
+		return srv.(MediaSessionManagerServiceServer).RemoveOnActiveSessionsChangedListener(ctx, req.(*RemoveOnActiveSessionsChangedListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetRatingType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRatingTypeRequest)
+func _MediaSessionManagerService_RemoveOnMediaKeyEventSessionChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveOnMediaKeyEventSessionChangedListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetRatingType(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).RemoveOnMediaKeyEventSessionChangedListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetRatingType_FullMethodName,
+		FullMethod: MediaSessionManagerService_RemoveOnMediaKeyEventSessionChangedListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetRatingType(ctx, req.(*GetRatingTypeRequest))
+		return srv.(MediaSessionManagerServiceServer).RemoveOnMediaKeyEventSessionChangedListener(ctx, req.(*RemoveOnMediaKeyEventSessionChangedListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetSessionActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSessionActivityRequest)
+func _MediaSessionManagerService_RemoveOnSession2TokensChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveOnSession2TokensChangedListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetSessionActivity(ctx, in)
+		return srv.(MediaSessionManagerServiceServer).RemoveOnSession2TokensChangedListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaControllerService_GetSessionActivity_FullMethodName,
+		FullMethod: MediaSessionManagerService_RemoveOnSession2TokensChangedListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetSessionActivity(ctx, req.(*GetSessionActivityRequest))
+		return srv.(MediaSessionManagerServiceServer).RemoveOnSession2TokensChangedListener(ctx, req.(*RemoveOnSession2TokensChangedListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaControllerService_GetSessionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSessionInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetSessionInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_GetSessionInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetSessionInfo(ctx, req.(*GetSessionInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MediaControllerService_GetSessionToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSessionTokenRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetSessionToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_GetSessionToken_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetSessionToken(ctx, req.(*GetSessionTokenRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MediaControllerService_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTagRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetTag(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_GetTag_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetTag(ctx, req.(*GetTagRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MediaControllerService_GetTransportControls_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTransportControlsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).GetTransportControls(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_GetTransportControls_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).GetTransportControls(ctx, req.(*GetTransportControlsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MediaControllerService_RegisterCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterCallbackRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).RegisterCallback(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_RegisterCallback_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).RegisterCallback(ctx, req.(*RegisterCallbackRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MediaControllerService_SendCommand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendCommandRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).SendCommand(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_SendCommand_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).SendCommand(ctx, req.(*SendCommandRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MediaControllerService_SetVolumeTo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetVolumeToRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).SetVolumeTo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_SetVolumeTo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).SetVolumeTo(ctx, req.(*SetVolumeToRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MediaControllerService_UnregisterCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UnregisterCallbackRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MediaControllerServiceServer).UnregisterCallback(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MediaControllerService_UnregisterCallback_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaControllerServiceServer).UnregisterCallback(ctx, req.(*UnregisterCallbackRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// MediaControllerService_ServiceDesc is the grpc.ServiceDesc for MediaControllerService service.
+// MediaSessionManagerService_ServiceDesc is the grpc.ServiceDesc for MediaSessionManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var MediaControllerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "session.MediaControllerService",
-	HandlerType: (*MediaControllerServiceServer)(nil),
+var MediaSessionManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "session.MediaSessionManagerService",
+	HandlerType: (*MediaSessionManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AdjustVolume",
-			Handler:    _MediaControllerService_AdjustVolume_Handler,
+			MethodName: "AddOnActiveSessionsChangedListener",
+			Handler:    _MediaSessionManagerService_AddOnActiveSessionsChangedListener_Handler,
 		},
 		{
-			MethodName: "DispatchMediaButtonEvent",
-			Handler:    _MediaControllerService_DispatchMediaButtonEvent_Handler,
+			MethodName: "AddOnMediaKeyEventSessionChangedListener",
+			Handler:    _MediaSessionManagerService_AddOnMediaKeyEventSessionChangedListener_Handler,
 		},
 		{
-			MethodName: "GetExtras",
-			Handler:    _MediaControllerService_GetExtras_Handler,
+			MethodName: "AddOnSession2TokensChangedListener",
+			Handler:    _MediaSessionManagerService_AddOnSession2TokensChangedListener_Handler,
 		},
 		{
-			MethodName: "GetFlags",
-			Handler:    _MediaControllerService_GetFlags_Handler,
+			MethodName: "GetActiveSessions",
+			Handler:    _MediaSessionManagerService_GetActiveSessions_Handler,
 		},
 		{
-			MethodName: "GetMetadata",
-			Handler:    _MediaControllerService_GetMetadata_Handler,
+			MethodName: "GetMediaKeyEventSession",
+			Handler:    _MediaSessionManagerService_GetMediaKeyEventSession_Handler,
 		},
 		{
-			MethodName: "GetPackageName",
-			Handler:    _MediaControllerService_GetPackageName_Handler,
+			MethodName: "GetMediaKeyEventSessionPackageName",
+			Handler:    _MediaSessionManagerService_GetMediaKeyEventSessionPackageName_Handler,
 		},
 		{
-			MethodName: "GetPlaybackInfo",
-			Handler:    _MediaControllerService_GetPlaybackInfo_Handler,
+			MethodName: "GetSession2Tokens",
+			Handler:    _MediaSessionManagerService_GetSession2Tokens_Handler,
 		},
 		{
-			MethodName: "GetPlaybackState",
-			Handler:    _MediaControllerService_GetPlaybackState_Handler,
+			MethodName: "IsTrustedForMediaControl",
+			Handler:    _MediaSessionManagerService_IsTrustedForMediaControl_Handler,
 		},
 		{
-			MethodName: "GetQueue",
-			Handler:    _MediaControllerService_GetQueue_Handler,
+			MethodName: "NotifySession2Created",
+			Handler:    _MediaSessionManagerService_NotifySession2Created_Handler,
 		},
 		{
-			MethodName: "GetQueueTitle",
-			Handler:    _MediaControllerService_GetQueueTitle_Handler,
+			MethodName: "RemoveOnActiveSessionsChangedListener",
+			Handler:    _MediaSessionManagerService_RemoveOnActiveSessionsChangedListener_Handler,
 		},
 		{
-			MethodName: "GetRatingType",
-			Handler:    _MediaControllerService_GetRatingType_Handler,
+			MethodName: "RemoveOnMediaKeyEventSessionChangedListener",
+			Handler:    _MediaSessionManagerService_RemoveOnMediaKeyEventSessionChangedListener_Handler,
 		},
 		{
-			MethodName: "GetSessionActivity",
-			Handler:    _MediaControllerService_GetSessionActivity_Handler,
-		},
-		{
-			MethodName: "GetSessionInfo",
-			Handler:    _MediaControllerService_GetSessionInfo_Handler,
-		},
-		{
-			MethodName: "GetSessionToken",
-			Handler:    _MediaControllerService_GetSessionToken_Handler,
-		},
-		{
-			MethodName: "GetTag",
-			Handler:    _MediaControllerService_GetTag_Handler,
-		},
-		{
-			MethodName: "GetTransportControls",
-			Handler:    _MediaControllerService_GetTransportControls_Handler,
-		},
-		{
-			MethodName: "RegisterCallback",
-			Handler:    _MediaControllerService_RegisterCallback_Handler,
-		},
-		{
-			MethodName: "SendCommand",
-			Handler:    _MediaControllerService_SendCommand_Handler,
-		},
-		{
-			MethodName: "SetVolumeTo",
-			Handler:    _MediaControllerService_SetVolumeTo_Handler,
-		},
-		{
-			MethodName: "UnregisterCallback",
-			Handler:    _MediaControllerService_UnregisterCallback_Handler,
+			MethodName: "RemoveOnSession2TokensChangedListener",
+			Handler:    _MediaSessionManagerService_RemoveOnSession2TokensChangedListener_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

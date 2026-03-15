@@ -21,405 +21,443 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UsbManagerService_GetAccessoryList_FullMethodName          = "/usb.UsbManagerService/GetAccessoryList"
-	UsbManagerService_HasPermission1_FullMethodName            = "/usb.UsbManagerService/HasPermission1"
-	UsbManagerService_HasPermission1_1_FullMethodName          = "/usb.UsbManagerService/HasPermission1_1"
-	UsbManagerService_OpenAccessory_FullMethodName             = "/usb.UsbManagerService/OpenAccessory"
-	UsbManagerService_OpenAccessoryInputStream_FullMethodName  = "/usb.UsbManagerService/OpenAccessoryInputStream"
-	UsbManagerService_OpenAccessoryOutputStream_FullMethodName = "/usb.UsbManagerService/OpenAccessoryOutputStream"
-	UsbManagerService_OpenDevice_FullMethodName                = "/usb.UsbManagerService/OpenDevice"
-	UsbManagerService_RequestPermission2_FullMethodName        = "/usb.UsbManagerService/RequestPermission2"
-	UsbManagerService_RequestPermission2_1_FullMethodName      = "/usb.UsbManagerService/RequestPermission2_1"
+	UsbEndpointService_DescribeContents_FullMethodName  = "/usb.UsbEndpointService/DescribeContents"
+	UsbEndpointService_GetAddress_FullMethodName        = "/usb.UsbEndpointService/GetAddress"
+	UsbEndpointService_GetAttributes_FullMethodName     = "/usb.UsbEndpointService/GetAttributes"
+	UsbEndpointService_GetDirection_FullMethodName      = "/usb.UsbEndpointService/GetDirection"
+	UsbEndpointService_GetEndpointNumber_FullMethodName = "/usb.UsbEndpointService/GetEndpointNumber"
+	UsbEndpointService_GetInterval_FullMethodName       = "/usb.UsbEndpointService/GetInterval"
+	UsbEndpointService_GetMaxPacketSize_FullMethodName  = "/usb.UsbEndpointService/GetMaxPacketSize"
+	UsbEndpointService_GetType_FullMethodName           = "/usb.UsbEndpointService/GetType"
+	UsbEndpointService_ToString_FullMethodName          = "/usb.UsbEndpointService/ToString"
+	UsbEndpointService_WriteToParcel_FullMethodName     = "/usb.UsbEndpointService/WriteToParcel"
 )
 
-// UsbManagerServiceClient is the client API for UsbManagerService service.
+// UsbEndpointServiceClient is the client API for UsbEndpointService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UsbManagerServiceClient interface {
-	GetAccessoryList(ctx context.Context, in *GetAccessoryListRequest, opts ...grpc.CallOption) (*GetAccessoryListResponse, error)
-	HasPermission1(ctx context.Context, in *HasPermission1Request, opts ...grpc.CallOption) (*HasPermission1Response, error)
-	HasPermission1_1(ctx context.Context, in *HasPermission1_1Request, opts ...grpc.CallOption) (*HasPermission1_1Response, error)
-	OpenAccessory(ctx context.Context, in *OpenAccessoryRequest, opts ...grpc.CallOption) (*OpenAccessoryResponse, error)
-	OpenAccessoryInputStream(ctx context.Context, in *OpenAccessoryInputStreamRequest, opts ...grpc.CallOption) (*OpenAccessoryInputStreamResponse, error)
-	OpenAccessoryOutputStream(ctx context.Context, in *OpenAccessoryOutputStreamRequest, opts ...grpc.CallOption) (*OpenAccessoryOutputStreamResponse, error)
-	OpenDevice(ctx context.Context, in *OpenDeviceRequest, opts ...grpc.CallOption) (*OpenDeviceResponse, error)
-	RequestPermission2(ctx context.Context, in *RequestPermission2Request, opts ...grpc.CallOption) (*RequestPermission2Response, error)
-	RequestPermission2_1(ctx context.Context, in *RequestPermission2_1Request, opts ...grpc.CallOption) (*RequestPermission2_1Response, error)
+type UsbEndpointServiceClient interface {
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error)
+	GetAttributes(ctx context.Context, in *GetAttributesRequest, opts ...grpc.CallOption) (*GetAttributesResponse, error)
+	GetDirection(ctx context.Context, in *GetDirectionRequest, opts ...grpc.CallOption) (*GetDirectionResponse, error)
+	GetEndpointNumber(ctx context.Context, in *GetEndpointNumberRequest, opts ...grpc.CallOption) (*GetEndpointNumberResponse, error)
+	GetInterval(ctx context.Context, in *GetIntervalRequest, opts ...grpc.CallOption) (*GetIntervalResponse, error)
+	GetMaxPacketSize(ctx context.Context, in *GetMaxPacketSizeRequest, opts ...grpc.CallOption) (*GetMaxPacketSizeResponse, error)
+	GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
 }
 
-type usbManagerServiceClient struct {
+type usbEndpointServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUsbManagerServiceClient(cc grpc.ClientConnInterface) UsbManagerServiceClient {
-	return &usbManagerServiceClient{cc}
+func NewUsbEndpointServiceClient(cc grpc.ClientConnInterface) UsbEndpointServiceClient {
+	return &usbEndpointServiceClient{cc}
 }
 
-func (c *usbManagerServiceClient) GetAccessoryList(ctx context.Context, in *GetAccessoryListRequest, opts ...grpc.CallOption) (*GetAccessoryListResponse, error) {
+func (c *usbEndpointServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAccessoryListResponse)
-	err := c.cc.Invoke(ctx, UsbManagerService_GetAccessoryList_FullMethodName, in, out, cOpts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_DescribeContents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) HasPermission1(ctx context.Context, in *HasPermission1Request, opts ...grpc.CallOption) (*HasPermission1Response, error) {
+func (c *usbEndpointServiceClient) GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HasPermission1Response)
-	err := c.cc.Invoke(ctx, UsbManagerService_HasPermission1_FullMethodName, in, out, cOpts...)
+	out := new(GetAddressResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_GetAddress_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) HasPermission1_1(ctx context.Context, in *HasPermission1_1Request, opts ...grpc.CallOption) (*HasPermission1_1Response, error) {
+func (c *usbEndpointServiceClient) GetAttributes(ctx context.Context, in *GetAttributesRequest, opts ...grpc.CallOption) (*GetAttributesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HasPermission1_1Response)
-	err := c.cc.Invoke(ctx, UsbManagerService_HasPermission1_1_FullMethodName, in, out, cOpts...)
+	out := new(GetAttributesResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_GetAttributes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) OpenAccessory(ctx context.Context, in *OpenAccessoryRequest, opts ...grpc.CallOption) (*OpenAccessoryResponse, error) {
+func (c *usbEndpointServiceClient) GetDirection(ctx context.Context, in *GetDirectionRequest, opts ...grpc.CallOption) (*GetDirectionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OpenAccessoryResponse)
-	err := c.cc.Invoke(ctx, UsbManagerService_OpenAccessory_FullMethodName, in, out, cOpts...)
+	out := new(GetDirectionResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_GetDirection_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) OpenAccessoryInputStream(ctx context.Context, in *OpenAccessoryInputStreamRequest, opts ...grpc.CallOption) (*OpenAccessoryInputStreamResponse, error) {
+func (c *usbEndpointServiceClient) GetEndpointNumber(ctx context.Context, in *GetEndpointNumberRequest, opts ...grpc.CallOption) (*GetEndpointNumberResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OpenAccessoryInputStreamResponse)
-	err := c.cc.Invoke(ctx, UsbManagerService_OpenAccessoryInputStream_FullMethodName, in, out, cOpts...)
+	out := new(GetEndpointNumberResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_GetEndpointNumber_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) OpenAccessoryOutputStream(ctx context.Context, in *OpenAccessoryOutputStreamRequest, opts ...grpc.CallOption) (*OpenAccessoryOutputStreamResponse, error) {
+func (c *usbEndpointServiceClient) GetInterval(ctx context.Context, in *GetIntervalRequest, opts ...grpc.CallOption) (*GetIntervalResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OpenAccessoryOutputStreamResponse)
-	err := c.cc.Invoke(ctx, UsbManagerService_OpenAccessoryOutputStream_FullMethodName, in, out, cOpts...)
+	out := new(GetIntervalResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_GetInterval_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) OpenDevice(ctx context.Context, in *OpenDeviceRequest, opts ...grpc.CallOption) (*OpenDeviceResponse, error) {
+func (c *usbEndpointServiceClient) GetMaxPacketSize(ctx context.Context, in *GetMaxPacketSizeRequest, opts ...grpc.CallOption) (*GetMaxPacketSizeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OpenDeviceResponse)
-	err := c.cc.Invoke(ctx, UsbManagerService_OpenDevice_FullMethodName, in, out, cOpts...)
+	out := new(GetMaxPacketSizeResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_GetMaxPacketSize_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) RequestPermission2(ctx context.Context, in *RequestPermission2Request, opts ...grpc.CallOption) (*RequestPermission2Response, error) {
+func (c *usbEndpointServiceClient) GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RequestPermission2Response)
-	err := c.cc.Invoke(ctx, UsbManagerService_RequestPermission2_FullMethodName, in, out, cOpts...)
+	out := new(GetTypeResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_GetType_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *usbManagerServiceClient) RequestPermission2_1(ctx context.Context, in *RequestPermission2_1Request, opts ...grpc.CallOption) (*RequestPermission2_1Response, error) {
+func (c *usbEndpointServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RequestPermission2_1Response)
-	err := c.cc.Invoke(ctx, UsbManagerService_RequestPermission2_1_FullMethodName, in, out, cOpts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_ToString_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UsbManagerServiceServer is the server API for UsbManagerService service.
-// All implementations must embed UnimplementedUsbManagerServiceServer
+func (c *usbEndpointServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, UsbEndpointService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UsbEndpointServiceServer is the server API for UsbEndpointService service.
+// All implementations must embed UnimplementedUsbEndpointServiceServer
 // for forward compatibility.
-type UsbManagerServiceServer interface {
-	GetAccessoryList(context.Context, *GetAccessoryListRequest) (*GetAccessoryListResponse, error)
-	HasPermission1(context.Context, *HasPermission1Request) (*HasPermission1Response, error)
-	HasPermission1_1(context.Context, *HasPermission1_1Request) (*HasPermission1_1Response, error)
-	OpenAccessory(context.Context, *OpenAccessoryRequest) (*OpenAccessoryResponse, error)
-	OpenAccessoryInputStream(context.Context, *OpenAccessoryInputStreamRequest) (*OpenAccessoryInputStreamResponse, error)
-	OpenAccessoryOutputStream(context.Context, *OpenAccessoryOutputStreamRequest) (*OpenAccessoryOutputStreamResponse, error)
-	OpenDevice(context.Context, *OpenDeviceRequest) (*OpenDeviceResponse, error)
-	RequestPermission2(context.Context, *RequestPermission2Request) (*RequestPermission2Response, error)
-	RequestPermission2_1(context.Context, *RequestPermission2_1Request) (*RequestPermission2_1Response, error)
-	mustEmbedUnimplementedUsbManagerServiceServer()
+type UsbEndpointServiceServer interface {
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error)
+	GetAttributes(context.Context, *GetAttributesRequest) (*GetAttributesResponse, error)
+	GetDirection(context.Context, *GetDirectionRequest) (*GetDirectionResponse, error)
+	GetEndpointNumber(context.Context, *GetEndpointNumberRequest) (*GetEndpointNumberResponse, error)
+	GetInterval(context.Context, *GetIntervalRequest) (*GetIntervalResponse, error)
+	GetMaxPacketSize(context.Context, *GetMaxPacketSizeRequest) (*GetMaxPacketSizeResponse, error)
+	GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedUsbEndpointServiceServer()
 }
 
-// UnimplementedUsbManagerServiceServer must be embedded to have
+// UnimplementedUsbEndpointServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedUsbManagerServiceServer struct{}
+type UnimplementedUsbEndpointServiceServer struct{}
 
-func (UnimplementedUsbManagerServiceServer) GetAccessoryList(context.Context, *GetAccessoryListRequest) (*GetAccessoryListResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAccessoryList not implemented")
+func (UnimplementedUsbEndpointServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) HasPermission1(context.Context, *HasPermission1Request) (*HasPermission1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method HasPermission1 not implemented")
+func (UnimplementedUsbEndpointServiceServer) GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAddress not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) HasPermission1_1(context.Context, *HasPermission1_1Request) (*HasPermission1_1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method HasPermission1_1 not implemented")
+func (UnimplementedUsbEndpointServiceServer) GetAttributes(context.Context, *GetAttributesRequest) (*GetAttributesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAttributes not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) OpenAccessory(context.Context, *OpenAccessoryRequest) (*OpenAccessoryResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method OpenAccessory not implemented")
+func (UnimplementedUsbEndpointServiceServer) GetDirection(context.Context, *GetDirectionRequest) (*GetDirectionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDirection not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) OpenAccessoryInputStream(context.Context, *OpenAccessoryInputStreamRequest) (*OpenAccessoryInputStreamResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method OpenAccessoryInputStream not implemented")
+func (UnimplementedUsbEndpointServiceServer) GetEndpointNumber(context.Context, *GetEndpointNumberRequest) (*GetEndpointNumberResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetEndpointNumber not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) OpenAccessoryOutputStream(context.Context, *OpenAccessoryOutputStreamRequest) (*OpenAccessoryOutputStreamResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method OpenAccessoryOutputStream not implemented")
+func (UnimplementedUsbEndpointServiceServer) GetInterval(context.Context, *GetIntervalRequest) (*GetIntervalResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInterval not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) OpenDevice(context.Context, *OpenDeviceRequest) (*OpenDeviceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method OpenDevice not implemented")
+func (UnimplementedUsbEndpointServiceServer) GetMaxPacketSize(context.Context, *GetMaxPacketSizeRequest) (*GetMaxPacketSizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxPacketSize not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) RequestPermission2(context.Context, *RequestPermission2Request) (*RequestPermission2Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method RequestPermission2 not implemented")
+func (UnimplementedUsbEndpointServiceServer) GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetType not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) RequestPermission2_1(context.Context, *RequestPermission2_1Request) (*RequestPermission2_1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method RequestPermission2_1 not implemented")
+func (UnimplementedUsbEndpointServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
 }
-func (UnimplementedUsbManagerServiceServer) mustEmbedUnimplementedUsbManagerServiceServer() {}
-func (UnimplementedUsbManagerServiceServer) testEmbeddedByValue()                           {}
+func (UnimplementedUsbEndpointServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedUsbEndpointServiceServer) mustEmbedUnimplementedUsbEndpointServiceServer() {}
+func (UnimplementedUsbEndpointServiceServer) testEmbeddedByValue()                            {}
 
-// UnsafeUsbManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UsbManagerServiceServer will
+// UnsafeUsbEndpointServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UsbEndpointServiceServer will
 // result in compilation errors.
-type UnsafeUsbManagerServiceServer interface {
-	mustEmbedUnimplementedUsbManagerServiceServer()
+type UnsafeUsbEndpointServiceServer interface {
+	mustEmbedUnimplementedUsbEndpointServiceServer()
 }
 
-func RegisterUsbManagerServiceServer(s grpc.ServiceRegistrar, srv UsbManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedUsbManagerServiceServer was
+func RegisterUsbEndpointServiceServer(s grpc.ServiceRegistrar, srv UsbEndpointServiceServer) {
+	// If the following call panics, it indicates UnimplementedUsbEndpointServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&UsbManagerService_ServiceDesc, srv)
+	s.RegisterService(&UsbEndpointService_ServiceDesc, srv)
 }
 
-func _UsbManagerService_GetAccessoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccessoryListRequest)
+func _UsbEndpointService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).GetAccessoryList(ctx, in)
+		return srv.(UsbEndpointServiceServer).DescribeContents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_GetAccessoryList_FullMethodName,
+		FullMethod: UsbEndpointService_DescribeContents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).GetAccessoryList(ctx, req.(*GetAccessoryListRequest))
+		return srv.(UsbEndpointServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_HasPermission1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HasPermission1Request)
+func _UsbEndpointService_GetAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAddressRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).HasPermission1(ctx, in)
+		return srv.(UsbEndpointServiceServer).GetAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_HasPermission1_FullMethodName,
+		FullMethod: UsbEndpointService_GetAddress_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).HasPermission1(ctx, req.(*HasPermission1Request))
+		return srv.(UsbEndpointServiceServer).GetAddress(ctx, req.(*GetAddressRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_HasPermission1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HasPermission1_1Request)
+func _UsbEndpointService_GetAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAttributesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).HasPermission1_1(ctx, in)
+		return srv.(UsbEndpointServiceServer).GetAttributes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_HasPermission1_1_FullMethodName,
+		FullMethod: UsbEndpointService_GetAttributes_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).HasPermission1_1(ctx, req.(*HasPermission1_1Request))
+		return srv.(UsbEndpointServiceServer).GetAttributes(ctx, req.(*GetAttributesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_OpenAccessory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OpenAccessoryRequest)
+func _UsbEndpointService_GetDirection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDirectionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).OpenAccessory(ctx, in)
+		return srv.(UsbEndpointServiceServer).GetDirection(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_OpenAccessory_FullMethodName,
+		FullMethod: UsbEndpointService_GetDirection_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).OpenAccessory(ctx, req.(*OpenAccessoryRequest))
+		return srv.(UsbEndpointServiceServer).GetDirection(ctx, req.(*GetDirectionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_OpenAccessoryInputStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OpenAccessoryInputStreamRequest)
+func _UsbEndpointService_GetEndpointNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEndpointNumberRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).OpenAccessoryInputStream(ctx, in)
+		return srv.(UsbEndpointServiceServer).GetEndpointNumber(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_OpenAccessoryInputStream_FullMethodName,
+		FullMethod: UsbEndpointService_GetEndpointNumber_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).OpenAccessoryInputStream(ctx, req.(*OpenAccessoryInputStreamRequest))
+		return srv.(UsbEndpointServiceServer).GetEndpointNumber(ctx, req.(*GetEndpointNumberRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_OpenAccessoryOutputStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OpenAccessoryOutputStreamRequest)
+func _UsbEndpointService_GetInterval_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntervalRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).OpenAccessoryOutputStream(ctx, in)
+		return srv.(UsbEndpointServiceServer).GetInterval(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_OpenAccessoryOutputStream_FullMethodName,
+		FullMethod: UsbEndpointService_GetInterval_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).OpenAccessoryOutputStream(ctx, req.(*OpenAccessoryOutputStreamRequest))
+		return srv.(UsbEndpointServiceServer).GetInterval(ctx, req.(*GetIntervalRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_OpenDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OpenDeviceRequest)
+func _UsbEndpointService_GetMaxPacketSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxPacketSizeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).OpenDevice(ctx, in)
+		return srv.(UsbEndpointServiceServer).GetMaxPacketSize(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_OpenDevice_FullMethodName,
+		FullMethod: UsbEndpointService_GetMaxPacketSize_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).OpenDevice(ctx, req.(*OpenDeviceRequest))
+		return srv.(UsbEndpointServiceServer).GetMaxPacketSize(ctx, req.(*GetMaxPacketSizeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_RequestPermission2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestPermission2Request)
+func _UsbEndpointService_GetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTypeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).RequestPermission2(ctx, in)
+		return srv.(UsbEndpointServiceServer).GetType(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_RequestPermission2_FullMethodName,
+		FullMethod: UsbEndpointService_GetType_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).RequestPermission2(ctx, req.(*RequestPermission2Request))
+		return srv.(UsbEndpointServiceServer).GetType(ctx, req.(*GetTypeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsbManagerService_RequestPermission2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestPermission2_1Request)
+func _UsbEndpointService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsbManagerServiceServer).RequestPermission2_1(ctx, in)
+		return srv.(UsbEndpointServiceServer).ToString(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsbManagerService_RequestPermission2_1_FullMethodName,
+		FullMethod: UsbEndpointService_ToString_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsbManagerServiceServer).RequestPermission2_1(ctx, req.(*RequestPermission2_1Request))
+		return srv.(UsbEndpointServiceServer).ToString(ctx, req.(*ToStringRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// UsbManagerService_ServiceDesc is the grpc.ServiceDesc for UsbManagerService service.
+func _UsbEndpointService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsbEndpointServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsbEndpointService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsbEndpointServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UsbEndpointService_ServiceDesc is the grpc.ServiceDesc for UsbEndpointService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var UsbManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "usb.UsbManagerService",
-	HandlerType: (*UsbManagerServiceServer)(nil),
+var UsbEndpointService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "usb.UsbEndpointService",
+	HandlerType: (*UsbEndpointServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetAccessoryList",
-			Handler:    _UsbManagerService_GetAccessoryList_Handler,
+			MethodName: "DescribeContents",
+			Handler:    _UsbEndpointService_DescribeContents_Handler,
 		},
 		{
-			MethodName: "HasPermission1",
-			Handler:    _UsbManagerService_HasPermission1_Handler,
+			MethodName: "GetAddress",
+			Handler:    _UsbEndpointService_GetAddress_Handler,
 		},
 		{
-			MethodName: "HasPermission1_1",
-			Handler:    _UsbManagerService_HasPermission1_1_Handler,
+			MethodName: "GetAttributes",
+			Handler:    _UsbEndpointService_GetAttributes_Handler,
 		},
 		{
-			MethodName: "OpenAccessory",
-			Handler:    _UsbManagerService_OpenAccessory_Handler,
+			MethodName: "GetDirection",
+			Handler:    _UsbEndpointService_GetDirection_Handler,
 		},
 		{
-			MethodName: "OpenAccessoryInputStream",
-			Handler:    _UsbManagerService_OpenAccessoryInputStream_Handler,
+			MethodName: "GetEndpointNumber",
+			Handler:    _UsbEndpointService_GetEndpointNumber_Handler,
 		},
 		{
-			MethodName: "OpenAccessoryOutputStream",
-			Handler:    _UsbManagerService_OpenAccessoryOutputStream_Handler,
+			MethodName: "GetInterval",
+			Handler:    _UsbEndpointService_GetInterval_Handler,
 		},
 		{
-			MethodName: "OpenDevice",
-			Handler:    _UsbManagerService_OpenDevice_Handler,
+			MethodName: "GetMaxPacketSize",
+			Handler:    _UsbEndpointService_GetMaxPacketSize_Handler,
 		},
 		{
-			MethodName: "RequestPermission2",
-			Handler:    _UsbManagerService_RequestPermission2_Handler,
+			MethodName: "GetType",
+			Handler:    _UsbEndpointService_GetType_Handler,
 		},
 		{
-			MethodName: "RequestPermission2_1",
-			Handler:    _UsbManagerService_RequestPermission2_1_Handler,
+			MethodName: "ToString",
+			Handler:    _UsbEndpointService_ToString_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _UsbEndpointService_WriteToParcel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

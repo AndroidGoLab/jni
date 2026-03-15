@@ -3,9 +3,13 @@
 package rtt
 
 const (
-	Creator                                  = 0
-	StatusFail                               = 0
-	StatusResponderDoesNotSupportIeee80211mc = 0
-	StatusSuccess                            = 0
-	Unspecified                              = 0
+	ActionWifiRttStateChanged                                = ""
+	CharacteristicsKeyBooleanLci                             = ""
+	CharacteristicsKeyBooleanLcr                             = ""
+	CharacteristicsKeyBooleanNtbInitiator                    = ""
+	CharacteristicsKeyBooleanOneSidedRtt                     = ""
+	CharacteristicsKeyBooleanRangingFrameProtectionSupported = ""
+	CharacteristicsKeyBooleanSecureHeLtfSupported            = ""
+	CharacteristicsKeyBooleanStaResponder                    = ""
+	CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion = ""
 )

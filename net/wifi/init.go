@@ -20,25 +20,123 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsscanResult                                        *jni.GlobalRef
-	midscanResultDescribeContents                        jni.MethodID
-	midscanResultGetAffiliatedMloLinks                   jni.MethodID
-	midscanResultGetApMldMacAddress                      jni.MethodID
-	midscanResultGetApMloLinkId                          jni.MethodID
-	midscanResultGetInformationElements                  jni.MethodID
-	midscanResultGetSecurityTypes                        jni.MethodID
-	midscanResultGetWifiSsid                             jni.MethodID
-	midscanResultGetWifiStandard                         jni.MethodID
-	midscanResultIs80211azNtbResponder                   jni.MethodID
-	midscanResultIs80211mcResponder                      jni.MethodID
-	midscanResultIsPasspointNetwork                      jni.MethodID
-	midscanResultIsRangingFrameProtectionRequired        jni.MethodID
-	midscanResultIsSecureHeLtfSupported                  jni.MethodID
-	midscanResultIsTwtResponder                          jni.MethodID
-	midscanResultToString                                jni.MethodID
-	midscanResultWriteToParcel                           jni.MethodID
-	midscanResultConvertChannelToFrequencyMhzIfSupported jni.MethodID
-	midscanResultConvertFrequencyMhzToChannelIfSupported jni.MethodID
+	clswifiManager                                                 *jni.GlobalRef
+	midwifiManagerAddLocalOnlyConnectionFailureListener            jni.MethodID
+	midwifiManagerAddNetwork                                       jni.MethodID
+	midwifiManagerAddNetworkPrivileged                             jni.MethodID
+	midwifiManagerAddNetworkSuggestions                            jni.MethodID
+	midwifiManagerAddOrUpdatePasspointConfiguration                jni.MethodID
+	midwifiManagerAddSuggestionConnectionStatusListener            jni.MethodID
+	midwifiManagerAddSuggestionUserApprovalStatusListener          jni.MethodID
+	midwifiManagerAddWifiStateChangedListener                      jni.MethodID
+	midwifiManagerAllowAutojoinGlobal                              jni.MethodID
+	midwifiManagerCalculateSignalLevel1                            jni.MethodID
+	midwifiManagerCancelWps                                        jni.MethodID
+	midwifiManagerCreateMulticastLock                              jni.MethodID
+	midwifiManagerCreateWifiLock2                                  jni.MethodID
+	midwifiManagerCreateWifiLock1_1                                jni.MethodID
+	midwifiManagerDisableNetwork                                   jni.MethodID
+	midwifiManagerDisallowCurrentSuggestedNetwork                  jni.MethodID
+	midwifiManagerDisconnect                                       jni.MethodID
+	midwifiManagerEnableNetwork                                    jni.MethodID
+	midwifiManagerFlushPasspointAnqpCache                          jni.MethodID
+	midwifiManagerGetAllowedChannels                               jni.MethodID
+	midwifiManagerGetCallerConfiguredNetworks                      jni.MethodID
+	midwifiManagerGetChannelData                                   jni.MethodID
+	midwifiManagerGetConfiguredNetworks                            jni.MethodID
+	midwifiManagerGetConnectionInfo                                jni.MethodID
+	midwifiManagerGetDhcpInfo                                      jni.MethodID
+	midwifiManagerGetMaxNumberOfChannelsPerNetworkSpecifierRequest jni.MethodID
+	midwifiManagerGetMaxNumberOfNetworkSuggestionsPerApp           jni.MethodID
+	midwifiManagerGetMaxSignalLevel                                jni.MethodID
+	midwifiManagerGetMaxSupportedConcurrentTdlsSessions            jni.MethodID
+	midwifiManagerGetNetworkSuggestions                            jni.MethodID
+	midwifiManagerGetNumberOfEnabledTdlsSessions                   jni.MethodID
+	midwifiManagerGetPasspointConfigurations                       jni.MethodID
+	midwifiManagerGetPerSsidRoamingModes                           jni.MethodID
+	midwifiManagerGetScanResults                                   jni.MethodID
+	midwifiManagerGetStaConcurrencyForMultiInternetMode            jni.MethodID
+	midwifiManagerGetUsableChannels                                jni.MethodID
+	midwifiManagerGetWifiState                                     jni.MethodID
+	midwifiManagerIs24GHzBandSupported                             jni.MethodID
+	midwifiManagerIs5GHzBandSupported                              jni.MethodID
+	midwifiManagerIs60GHzBandSupported                             jni.MethodID
+	midwifiManagerIs6GHzBandSupported                              jni.MethodID
+	midwifiManagerIsAggressiveRoamingModeSupported                 jni.MethodID
+	midwifiManagerIsAutoWakeupEnabled                              jni.MethodID
+	midwifiManagerIsBridgedApConcurrencySupported                  jni.MethodID
+	midwifiManagerIsCarrierNetworkOffloadEnabled                   jni.MethodID
+	midwifiManagerIsD2dSupportedWhenInfraStaDisabled               jni.MethodID
+	midwifiManagerIsDecoratedIdentitySupported                     jni.MethodID
+	midwifiManagerIsDeviceToApRttSupported                         jni.MethodID
+	midwifiManagerIsDualBandSimultaneousSupported                  jni.MethodID
+	midwifiManagerIsEasyConnectDppAkmSupported                     jni.MethodID
+	midwifiManagerIsEasyConnectEnrolleeResponderModeSupported      jni.MethodID
+	midwifiManagerIsEasyConnectSupported                           jni.MethodID
+	midwifiManagerIsEnhancedOpenSupported                          jni.MethodID
+	midwifiManagerIsEnhancedPowerReportingSupported                jni.MethodID
+	midwifiManagerIsMakeBeforeBreakWifiSwitchingSupported          jni.MethodID
+	midwifiManagerIsP2pSupported                                   jni.MethodID
+	midwifiManagerIsPasspointTermsAndConditionsSupported           jni.MethodID
+	midwifiManagerIsPreferredNetworkOffloadSupported               jni.MethodID
+	midwifiManagerIsScanAlwaysAvailable                            jni.MethodID
+	midwifiManagerIsScanThrottleEnabled                            jni.MethodID
+	midwifiManagerIsStaApConcurrencySupported                      jni.MethodID
+	midwifiManagerIsStaBridgedApConcurrencySupported               jni.MethodID
+	midwifiManagerIsStaConcurrencyForLocalOnlyConnectionsSupported jni.MethodID
+	midwifiManagerIsStaConcurrencyForMultiInternetSupported        jni.MethodID
+	midwifiManagerIsTdlsOperationCurrentlyAvailable                jni.MethodID
+	midwifiManagerIsTdlsSupported                                  jni.MethodID
+	midwifiManagerIsTidToLinkMappingNegotiationSupported           jni.MethodID
+	midwifiManagerIsTlsMinimumVersionSupported                     jni.MethodID
+	midwifiManagerIsTlsV13Supported                                jni.MethodID
+	midwifiManagerIsTrustOnFirstUseSupported                       jni.MethodID
+	midwifiManagerIsWapiSupported                                  jni.MethodID
+	midwifiManagerIsWepSupported                                   jni.MethodID
+	midwifiManagerIsWifiDisplayR2Supported                         jni.MethodID
+	midwifiManagerIsWifiEnabled                                    jni.MethodID
+	midwifiManagerIsWifiPasspointEnabled                           jni.MethodID
+	midwifiManagerIsWifiStandardSupported                          jni.MethodID
+	midwifiManagerIsWpa3SaeH2eSupported                            jni.MethodID
+	midwifiManagerIsWpa3SaePublicKeySupported                      jni.MethodID
+	midwifiManagerIsWpa3SaeSupported                               jni.MethodID
+	midwifiManagerIsWpa3SuiteBSupported                            jni.MethodID
+	midwifiManagerIsWpaPersonalSupported                           jni.MethodID
+	midwifiManagerPingSupplicant                                   jni.MethodID
+	midwifiManagerQueryAutojoinGlobal                              jni.MethodID
+	midwifiManagerQuerySendDhcpHostnameRestriction                 jni.MethodID
+	midwifiManagerReassociate                                      jni.MethodID
+	midwifiManagerReconnect                                        jni.MethodID
+	midwifiManagerRegisterScanResultsCallback                      jni.MethodID
+	midwifiManagerRegisterSubsystemRestartTrackingCallback         jni.MethodID
+	midwifiManagerRemoveLocalOnlyConnectionFailureListener         jni.MethodID
+	midwifiManagerRemoveNetwork                                    jni.MethodID
+	midwifiManagerRemoveNetworkSuggestions1                        jni.MethodID
+	midwifiManagerRemoveNetworkSuggestions2_1                      jni.MethodID
+	midwifiManagerRemoveNonCallerConfiguredNetworks                jni.MethodID
+	midwifiManagerRemovePasspointConfiguration                     jni.MethodID
+	midwifiManagerRemovePerSsidRoamingMode                         jni.MethodID
+	midwifiManagerRemoveSuggestionConnectionStatusListener         jni.MethodID
+	midwifiManagerRemoveSuggestionUserApprovalStatusListener       jni.MethodID
+	midwifiManagerRemoveWifiStateChangedListener                   jni.MethodID
+	midwifiManagerReportCreateInterfaceImpact                      jni.MethodID
+	midwifiManagerSaveConfiguration                                jni.MethodID
+	midwifiManagerSetPerSsidRoamingMode                            jni.MethodID
+	midwifiManagerSetSendDhcpHostnameRestriction                   jni.MethodID
+	midwifiManagerSetTdlsEnabled2                                  jni.MethodID
+	midwifiManagerSetTdlsEnabled4_1                                jni.MethodID
+	midwifiManagerSetTdlsEnabledWithMacAddress2                    jni.MethodID
+	midwifiManagerSetTdlsEnabledWithMacAddress4_1                  jni.MethodID
+	midwifiManagerSetWifiEnabled                                   jni.MethodID
+	midwifiManagerStartLocalOnlyHotspotWithConfiguration           jni.MethodID
+	midwifiManagerStartScan                                        jni.MethodID
+	midwifiManagerStartWps                                         jni.MethodID
+	midwifiManagerUnregisterScanResultsCallback                    jni.MethodID
+	midwifiManagerUnregisterSubsystemRestartTrackingCallback       jni.MethodID
+	midwifiManagerUpdateNetwork                                    jni.MethodID
+	midwifiManagerValidateSoftApConfiguration                      jni.MethodID
+	midwifiManagerCalculateSignalLevel2_1                          jni.MethodID
+	midwifiManagerCompareSignalLevel                               jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -65,154 +163,938 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/net/wifi/ScanResult")
+	c, err = env.FindClass("android/net/wifi/WifiManager")
 	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.ScanResult: %w", err)
+		return fmt.Errorf("find class android.net.wifi.WifiManager: %w", err)
 	}
-	clsscanResult = env.NewGlobalRef(&c.Object)
+	clswifiManager = env.NewGlobalRef(&c.Object)
 
-	midscanResultDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "describeContents", "()I")
+	midwifiManagerAddLocalOnlyConnectionFailureListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addLocalOnlyConnectionFailureListener", "(Ljava/util/concurrent/Executor;Landroid/net/wifi/WifiManager$LocalOnlyConnectionFailureListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.describeContents")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addLocalOnlyConnectionFailureListener")
 	}
 
-	midscanResultGetAffiliatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getAffiliatedMloLinks", "()Ljava/util/List;")
+	midwifiManagerAddNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addNetwork", "(Landroid/net/wifi/WifiConfiguration;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getAffiliatedMloLinks")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addNetwork")
 	}
 
-	midscanResultGetApMldMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getApMldMacAddress", "()Landroid/net/MacAddress;")
+	midwifiManagerAddNetworkPrivileged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addNetworkPrivileged", "(Landroid/net/wifi/WifiConfiguration;)Landroid/net/wifi/WifiManager$AddNetworkResult;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getApMldMacAddress")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addNetworkPrivileged")
 	}
 
-	midscanResultGetApMloLinkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getApMloLinkId", "()I")
+	midwifiManagerAddNetworkSuggestions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addNetworkSuggestions", "(Ljava/util/List;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getApMloLinkId")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addNetworkSuggestions")
 	}
 
-	midscanResultGetInformationElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getInformationElements", "()Ljava/util/List;")
+	midwifiManagerAddOrUpdatePasspointConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addOrUpdatePasspointConfiguration", "(Landroid/net/wifi/hotspot2/PasspointConfiguration;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getInformationElements")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addOrUpdatePasspointConfiguration")
 	}
 
-	midscanResultGetSecurityTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getSecurityTypes", "()[I")
+	midwifiManagerAddSuggestionConnectionStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addSuggestionConnectionStatusListener", "(Ljava/util/concurrent/Executor;Landroid/net/wifi/WifiManager$SuggestionConnectionStatusListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getSecurityTypes")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addSuggestionConnectionStatusListener")
 	}
 
-	midscanResultGetWifiSsid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getWifiSsid", "()Landroid/net/wifi/WifiSsid;")
+	midwifiManagerAddSuggestionUserApprovalStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addSuggestionUserApprovalStatusListener", "(Ljava/util/concurrent/Executor;Landroid/net/wifi/WifiManager$SuggestionUserApprovalStatusListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getWifiSsid")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addSuggestionUserApprovalStatusListener")
 	}
 
-	midscanResultGetWifiStandard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getWifiStandard", "()I")
+	midwifiManagerAddWifiStateChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "addWifiStateChangedListener", "(Ljava/util/concurrent/Executor;Landroid/net/wifi/WifiManager$WifiStateChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.getWifiStandard")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.addWifiStateChangedListener")
 	}
 
-	midscanResultIs80211azNtbResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "is80211azNtbResponder", "()Z")
+	midwifiManagerAllowAutojoinGlobal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "allowAutojoinGlobal", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.is80211azNtbResponder")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.allowAutojoinGlobal")
 	}
 
-	midscanResultIs80211mcResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "is80211mcResponder", "()Z")
+	midwifiManagerCalculateSignalLevel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "calculateSignalLevel", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.is80211mcResponder")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.calculateSignalLevel")
 	}
 
-	midscanResultIsPasspointNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isPasspointNetwork", "()Z")
+	midwifiManagerCancelWps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "cancelWps", "(Landroid/net/wifi/WifiManager$WpsCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isPasspointNetwork")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.cancelWps")
 	}
 
-	midscanResultIsRangingFrameProtectionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isRangingFrameProtectionRequired", "()Z")
+	midwifiManagerCreateMulticastLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "createMulticastLock", "(Ljava/lang/String;)Landroid/net/wifi/WifiManager$MulticastLock;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isRangingFrameProtectionRequired")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.createMulticastLock")
 	}
 
-	midscanResultIsSecureHeLtfSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isSecureHeLtfSupported", "()Z")
+	midwifiManagerCreateWifiLock2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "createWifiLock", "(ILjava/lang/String;)Landroid/net/wifi/WifiManager$WifiLock;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isSecureHeLtfSupported")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.createWifiLock")
 	}
 
-	midscanResultIsTwtResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isTwtResponder", "()Z")
+	midwifiManagerCreateWifiLock1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "createWifiLock", "(Ljava/lang/String;)Landroid/net/wifi/WifiManager$WifiLock;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.isTwtResponder")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.createWifiLock")
 	}
 
-	midscanResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "toString", "()Ljava/lang/String;")
+	midwifiManagerDisableNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "disableNetwork", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.toString")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.disableNetwork")
 	}
 
-	midscanResultWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midwifiManagerDisallowCurrentSuggestedNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "disallowCurrentSuggestedNetwork", "(Landroid/net/wifi/BlockingOption;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.writeToParcel")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.disallowCurrentSuggestedNetwork")
 	}
 
-	midscanResultConvertChannelToFrequencyMhzIfSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "convertChannelToFrequencyMhzIfSupported", "(II)I")
+	midwifiManagerDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "disconnect", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.convertChannelToFrequencyMhzIfSupported")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.disconnect")
 	}
 
-	midscanResultConvertFrequencyMhzToChannelIfSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "convertFrequencyMhzToChannelIfSupported", "(I)I")
+	midwifiManagerEnableNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "enableNetwork", "(IZ)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.ScanResult.convertFrequencyMhzToChannelIfSupported")
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.enableNetwork")
+	}
+
+	midwifiManagerFlushPasspointAnqpCache, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "flushPasspointAnqpCache", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.flushPasspointAnqpCache")
+	}
+
+	midwifiManagerGetAllowedChannels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getAllowedChannels", "(II)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getAllowedChannels")
+	}
+
+	midwifiManagerGetCallerConfiguredNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getCallerConfiguredNetworks", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getCallerConfiguredNetworks")
+	}
+
+	midwifiManagerGetChannelData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getChannelData", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getChannelData")
+	}
+
+	midwifiManagerGetConfiguredNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getConfiguredNetworks", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getConfiguredNetworks")
+	}
+
+	midwifiManagerGetConnectionInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getConnectionInfo", "()Landroid/net/wifi/WifiInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getConnectionInfo")
+	}
+
+	midwifiManagerGetDhcpInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getDhcpInfo", "()Landroid/net/DhcpInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getDhcpInfo")
+	}
+
+	midwifiManagerGetMaxNumberOfChannelsPerNetworkSpecifierRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getMaxNumberOfChannelsPerNetworkSpecifierRequest", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getMaxNumberOfChannelsPerNetworkSpecifierRequest")
+	}
+
+	midwifiManagerGetMaxNumberOfNetworkSuggestionsPerApp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getMaxNumberOfNetworkSuggestionsPerApp", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getMaxNumberOfNetworkSuggestionsPerApp")
+	}
+
+	midwifiManagerGetMaxSignalLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getMaxSignalLevel", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getMaxSignalLevel")
+	}
+
+	midwifiManagerGetMaxSupportedConcurrentTdlsSessions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getMaxSupportedConcurrentTdlsSessions", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getMaxSupportedConcurrentTdlsSessions")
+	}
+
+	midwifiManagerGetNetworkSuggestions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getNetworkSuggestions", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getNetworkSuggestions")
+	}
+
+	midwifiManagerGetNumberOfEnabledTdlsSessions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getNumberOfEnabledTdlsSessions", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getNumberOfEnabledTdlsSessions")
+	}
+
+	midwifiManagerGetPasspointConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getPasspointConfigurations", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getPasspointConfigurations")
+	}
+
+	midwifiManagerGetPerSsidRoamingModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getPerSsidRoamingModes", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getPerSsidRoamingModes")
+	}
+
+	midwifiManagerGetScanResults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getScanResults", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getScanResults")
+	}
+
+	midwifiManagerGetStaConcurrencyForMultiInternetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getStaConcurrencyForMultiInternetMode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getStaConcurrencyForMultiInternetMode")
+	}
+
+	midwifiManagerGetUsableChannels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getUsableChannels", "(II)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getUsableChannels")
+	}
+
+	midwifiManagerGetWifiState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "getWifiState", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.getWifiState")
+	}
+
+	midwifiManagerIs24GHzBandSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "is24GHzBandSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.is24GHzBandSupported")
+	}
+
+	midwifiManagerIs5GHzBandSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "is5GHzBandSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.is5GHzBandSupported")
+	}
+
+	midwifiManagerIs60GHzBandSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "is60GHzBandSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.is60GHzBandSupported")
+	}
+
+	midwifiManagerIs6GHzBandSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "is6GHzBandSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.is6GHzBandSupported")
+	}
+
+	midwifiManagerIsAggressiveRoamingModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isAggressiveRoamingModeSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isAggressiveRoamingModeSupported")
+	}
+
+	midwifiManagerIsAutoWakeupEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isAutoWakeupEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isAutoWakeupEnabled")
+	}
+
+	midwifiManagerIsBridgedApConcurrencySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isBridgedApConcurrencySupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isBridgedApConcurrencySupported")
+	}
+
+	midwifiManagerIsCarrierNetworkOffloadEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isCarrierNetworkOffloadEnabled", "(IZ)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isCarrierNetworkOffloadEnabled")
+	}
+
+	midwifiManagerIsD2dSupportedWhenInfraStaDisabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isD2dSupportedWhenInfraStaDisabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isD2dSupportedWhenInfraStaDisabled")
+	}
+
+	midwifiManagerIsDecoratedIdentitySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isDecoratedIdentitySupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isDecoratedIdentitySupported")
+	}
+
+	midwifiManagerIsDeviceToApRttSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isDeviceToApRttSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isDeviceToApRttSupported")
+	}
+
+	midwifiManagerIsDualBandSimultaneousSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isDualBandSimultaneousSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isDualBandSimultaneousSupported")
+	}
+
+	midwifiManagerIsEasyConnectDppAkmSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isEasyConnectDppAkmSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isEasyConnectDppAkmSupported")
+	}
+
+	midwifiManagerIsEasyConnectEnrolleeResponderModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isEasyConnectEnrolleeResponderModeSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isEasyConnectEnrolleeResponderModeSupported")
+	}
+
+	midwifiManagerIsEasyConnectSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isEasyConnectSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isEasyConnectSupported")
+	}
+
+	midwifiManagerIsEnhancedOpenSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isEnhancedOpenSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isEnhancedOpenSupported")
+	}
+
+	midwifiManagerIsEnhancedPowerReportingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isEnhancedPowerReportingSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isEnhancedPowerReportingSupported")
+	}
+
+	midwifiManagerIsMakeBeforeBreakWifiSwitchingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isMakeBeforeBreakWifiSwitchingSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isMakeBeforeBreakWifiSwitchingSupported")
+	}
+
+	midwifiManagerIsP2pSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isP2pSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isP2pSupported")
+	}
+
+	midwifiManagerIsPasspointTermsAndConditionsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isPasspointTermsAndConditionsSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isPasspointTermsAndConditionsSupported")
+	}
+
+	midwifiManagerIsPreferredNetworkOffloadSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isPreferredNetworkOffloadSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isPreferredNetworkOffloadSupported")
+	}
+
+	midwifiManagerIsScanAlwaysAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isScanAlwaysAvailable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isScanAlwaysAvailable")
+	}
+
+	midwifiManagerIsScanThrottleEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isScanThrottleEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isScanThrottleEnabled")
+	}
+
+	midwifiManagerIsStaApConcurrencySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isStaApConcurrencySupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isStaApConcurrencySupported")
+	}
+
+	midwifiManagerIsStaBridgedApConcurrencySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isStaBridgedApConcurrencySupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isStaBridgedApConcurrencySupported")
+	}
+
+	midwifiManagerIsStaConcurrencyForLocalOnlyConnectionsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isStaConcurrencyForLocalOnlyConnectionsSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isStaConcurrencyForLocalOnlyConnectionsSupported")
+	}
+
+	midwifiManagerIsStaConcurrencyForMultiInternetSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isStaConcurrencyForMultiInternetSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isStaConcurrencyForMultiInternetSupported")
+	}
+
+	midwifiManagerIsTdlsOperationCurrentlyAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isTdlsOperationCurrentlyAvailable", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isTdlsOperationCurrentlyAvailable")
+	}
+
+	midwifiManagerIsTdlsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isTdlsSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isTdlsSupported")
+	}
+
+	midwifiManagerIsTidToLinkMappingNegotiationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isTidToLinkMappingNegotiationSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isTidToLinkMappingNegotiationSupported")
+	}
+
+	midwifiManagerIsTlsMinimumVersionSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isTlsMinimumVersionSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isTlsMinimumVersionSupported")
+	}
+
+	midwifiManagerIsTlsV13Supported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isTlsV13Supported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isTlsV13Supported")
+	}
+
+	midwifiManagerIsTrustOnFirstUseSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isTrustOnFirstUseSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isTrustOnFirstUseSupported")
+	}
+
+	midwifiManagerIsWapiSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWapiSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWapiSupported")
+	}
+
+	midwifiManagerIsWepSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWepSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWepSupported")
+	}
+
+	midwifiManagerIsWifiDisplayR2Supported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWifiDisplayR2Supported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWifiDisplayR2Supported")
+	}
+
+	midwifiManagerIsWifiEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWifiEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWifiEnabled")
+	}
+
+	midwifiManagerIsWifiPasspointEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWifiPasspointEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWifiPasspointEnabled")
+	}
+
+	midwifiManagerIsWifiStandardSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWifiStandardSupported", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWifiStandardSupported")
+	}
+
+	midwifiManagerIsWpa3SaeH2eSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWpa3SaeH2eSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWpa3SaeH2eSupported")
+	}
+
+	midwifiManagerIsWpa3SaePublicKeySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWpa3SaePublicKeySupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWpa3SaePublicKeySupported")
+	}
+
+	midwifiManagerIsWpa3SaeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWpa3SaeSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWpa3SaeSupported")
+	}
+
+	midwifiManagerIsWpa3SuiteBSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWpa3SuiteBSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWpa3SuiteBSupported")
+	}
+
+	midwifiManagerIsWpaPersonalSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "isWpaPersonalSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.isWpaPersonalSupported")
+	}
+
+	midwifiManagerPingSupplicant, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "pingSupplicant", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.pingSupplicant")
+	}
+
+	midwifiManagerQueryAutojoinGlobal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "queryAutojoinGlobal", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.queryAutojoinGlobal")
+	}
+
+	midwifiManagerQuerySendDhcpHostnameRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "querySendDhcpHostnameRestriction", "(Ljava/util/concurrent/Executor;Ljava/util/function/IntConsumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.querySendDhcpHostnameRestriction")
+	}
+
+	midwifiManagerReassociate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "reassociate", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.reassociate")
+	}
+
+	midwifiManagerReconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "reconnect", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.reconnect")
+	}
+
+	midwifiManagerRegisterScanResultsCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "registerScanResultsCallback", "(Ljava/util/concurrent/Executor;Landroid/net/wifi/WifiManager$ScanResultsCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.registerScanResultsCallback")
+	}
+
+	midwifiManagerRegisterSubsystemRestartTrackingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "registerSubsystemRestartTrackingCallback", "(Ljava/util/concurrent/Executor;Landroid/net/wifi/WifiManager$SubsystemRestartTrackingCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.registerSubsystemRestartTrackingCallback")
+	}
+
+	midwifiManagerRemoveLocalOnlyConnectionFailureListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeLocalOnlyConnectionFailureListener", "(Landroid/net/wifi/WifiManager$LocalOnlyConnectionFailureListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeLocalOnlyConnectionFailureListener")
+	}
+
+	midwifiManagerRemoveNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeNetwork", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeNetwork")
+	}
+
+	midwifiManagerRemoveNetworkSuggestions1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeNetworkSuggestions", "(Ljava/util/List;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeNetworkSuggestions")
+	}
+
+	midwifiManagerRemoveNetworkSuggestions2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeNetworkSuggestions", "(Ljava/util/List;I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeNetworkSuggestions")
+	}
+
+	midwifiManagerRemoveNonCallerConfiguredNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeNonCallerConfiguredNetworks", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeNonCallerConfiguredNetworks")
+	}
+
+	midwifiManagerRemovePasspointConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removePasspointConfiguration", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removePasspointConfiguration")
+	}
+
+	midwifiManagerRemovePerSsidRoamingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removePerSsidRoamingMode", "(Landroid/net/wifi/WifiSsid;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removePerSsidRoamingMode")
+	}
+
+	midwifiManagerRemoveSuggestionConnectionStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeSuggestionConnectionStatusListener", "(Landroid/net/wifi/WifiManager$SuggestionConnectionStatusListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeSuggestionConnectionStatusListener")
+	}
+
+	midwifiManagerRemoveSuggestionUserApprovalStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeSuggestionUserApprovalStatusListener", "(Landroid/net/wifi/WifiManager$SuggestionUserApprovalStatusListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeSuggestionUserApprovalStatusListener")
+	}
+
+	midwifiManagerRemoveWifiStateChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "removeWifiStateChangedListener", "(Landroid/net/wifi/WifiManager$WifiStateChangedListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.removeWifiStateChangedListener")
+	}
+
+	midwifiManagerReportCreateInterfaceImpact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "reportCreateInterfaceImpact", "(IZLjava/util/concurrent/Executor;Ljava/util/function/BiConsumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.reportCreateInterfaceImpact")
+	}
+
+	midwifiManagerSaveConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "saveConfiguration", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.saveConfiguration")
+	}
+
+	midwifiManagerSetPerSsidRoamingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "setPerSsidRoamingMode", "(Landroid/net/wifi/WifiSsid;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.setPerSsidRoamingMode")
+	}
+
+	midwifiManagerSetSendDhcpHostnameRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "setSendDhcpHostnameRestriction", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.setSendDhcpHostnameRestriction")
+	}
+
+	midwifiManagerSetTdlsEnabled2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "setTdlsEnabled", "(Ljava/net/InetAddress;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.setTdlsEnabled")
+	}
+
+	midwifiManagerSetTdlsEnabled4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "setTdlsEnabled", "(Ljava/net/InetAddress;ZLjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.setTdlsEnabled")
+	}
+
+	midwifiManagerSetTdlsEnabledWithMacAddress2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "setTdlsEnabledWithMacAddress", "(Ljava/lang/String;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.setTdlsEnabledWithMacAddress")
+	}
+
+	midwifiManagerSetTdlsEnabledWithMacAddress4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "setTdlsEnabledWithMacAddress", "(Ljava/lang/String;ZLjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.setTdlsEnabledWithMacAddress")
+	}
+
+	midwifiManagerSetWifiEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "setWifiEnabled", "(Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.setWifiEnabled")
+	}
+
+	midwifiManagerStartLocalOnlyHotspotWithConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "startLocalOnlyHotspotWithConfiguration", "(Landroid/net/wifi/SoftApConfiguration;Ljava/util/concurrent/Executor;Landroid/net/wifi/WifiManager$LocalOnlyHotspotCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.startLocalOnlyHotspotWithConfiguration")
+	}
+
+	midwifiManagerStartScan, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "startScan", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.startScan")
+	}
+
+	midwifiManagerStartWps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "startWps", "(Landroid/net/wifi/WpsInfo;Landroid/net/wifi/WifiManager$WpsCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.startWps")
+	}
+
+	midwifiManagerUnregisterScanResultsCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "unregisterScanResultsCallback", "(Landroid/net/wifi/WifiManager$ScanResultsCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.unregisterScanResultsCallback")
+	}
+
+	midwifiManagerUnregisterSubsystemRestartTrackingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "unregisterSubsystemRestartTrackingCallback", "(Landroid/net/wifi/WifiManager$SubsystemRestartTrackingCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.unregisterSubsystemRestartTrackingCallback")
+	}
+
+	midwifiManagerUpdateNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "updateNetwork", "(Landroid/net/wifi/WifiConfiguration;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.updateNetwork")
+	}
+
+	midwifiManagerValidateSoftApConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "validateSoftApConfiguration", "(Landroid/net/wifi/SoftApConfiguration;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.validateSoftApConfiguration")
+	}
+
+	midwifiManagerCalculateSignalLevel2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "calculateSignalLevel", "(II)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.calculateSignalLevel")
+	}
+
+	midwifiManagerCompareSignalLevel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clswifiManager)), "compareSignalLevel", "(II)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.compareSignalLevel")
 	}
 
 	return nil

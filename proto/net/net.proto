@@ -6,146 +6,334 @@ package net;
 
 option go_package = "github.com/xaionaro-go/jni/proto/net";
 
-message DescribeContentsRequest {
-}
-
-message DescribeContentsResponse {
-  int32 result = 1;
-}
-
-message EqualsRequest {
+message AddDefaultNetworkActiveListenerRequest {
   int64 arg0 = 1;
 }
 
-message EqualsResponse {
-  bool result = 1;
+message AddDefaultNetworkActiveListenerResponse {
 }
 
-message GetCapabilitiesRequest {
-}
-
-message GetCapabilitiesResponse {
-  int64 result = 1;
-}
-
-message GetEnterpriseIdsRequest {
-}
-
-message GetEnterpriseIdsResponse {
-  int64 result = 1;
-}
-
-message GetLinkDownstreamBandwidthKbpsRequest {
-}
-
-message GetLinkDownstreamBandwidthKbpsResponse {
-  int32 result = 1;
-}
-
-message GetLinkUpstreamBandwidthKbpsRequest {
-}
-
-message GetLinkUpstreamBandwidthKbpsResponse {
-  int32 result = 1;
-}
-
-message GetNetworkSpecifierRequest {
-}
-
-message GetNetworkSpecifierResponse {
-  int64 result = 1;
-}
-
-message GetOwnerUidRequest {
-}
-
-message GetOwnerUidResponse {
-  int32 result = 1;
-}
-
-message GetSignalStrengthRequest {
-}
-
-message GetSignalStrengthResponse {
-  int32 result = 1;
-}
-
-message GetSubscriptionIdsRequest {
-}
-
-message GetSubscriptionIdsResponse {
-  int64 result = 1;
-}
-
-message GetTransportInfoRequest {
-}
-
-message GetTransportInfoResponse {
-  int64 result = 1;
-}
-
-message HasCapabilityRequest {
-  int32 arg0 = 1;
-}
-
-message HasCapabilityResponse {
-  bool result = 1;
-}
-
-message HasEnterpriseIdRequest {
-  int32 arg0 = 1;
-}
-
-message HasEnterpriseIdResponse {
-  bool result = 1;
-}
-
-message HasTransportRequest {
-  int32 arg0 = 1;
-}
-
-message HasTransportResponse {
-  bool result = 1;
-}
-
-message HashCodeRequest {
-}
-
-message HashCodeResponse {
-  int32 result = 1;
-}
-
-message ToStringRequest {
-}
-
-message ToStringResponse {
-  string result = 1;
-}
-
-message WriteToParcelRequest {
+message BindProcessToNetworkRequest {
   int64 arg0 = 1;
-  int32 arg1 = 2;
 }
 
-message WriteToParcelResponse {
+message BindProcessToNetworkResponse {
+  bool result = 1;
 }
 
-service NetworkCapabilitiesService {
-  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc Equals (EqualsRequest) returns (EqualsResponse);
-  rpc GetCapabilities (GetCapabilitiesRequest) returns (GetCapabilitiesResponse);
-  rpc GetEnterpriseIds (GetEnterpriseIdsRequest) returns (GetEnterpriseIdsResponse);
-  rpc GetLinkDownstreamBandwidthKbps (GetLinkDownstreamBandwidthKbpsRequest) returns (GetLinkDownstreamBandwidthKbpsResponse);
-  rpc GetLinkUpstreamBandwidthKbps (GetLinkUpstreamBandwidthKbpsRequest) returns (GetLinkUpstreamBandwidthKbpsResponse);
-  rpc GetNetworkSpecifier (GetNetworkSpecifierRequest) returns (GetNetworkSpecifierResponse);
-  rpc GetOwnerUid (GetOwnerUidRequest) returns (GetOwnerUidResponse);
-  rpc GetSignalStrength (GetSignalStrengthRequest) returns (GetSignalStrengthResponse);
-  rpc GetSubscriptionIds (GetSubscriptionIdsRequest) returns (GetSubscriptionIdsResponse);
-  rpc GetTransportInfo (GetTransportInfoRequest) returns (GetTransportInfoResponse);
-  rpc HasCapability (HasCapabilityRequest) returns (HasCapabilityResponse);
-  rpc HasEnterpriseId (HasEnterpriseIdRequest) returns (HasEnterpriseIdResponse);
-  rpc HasTransport (HasTransportRequest) returns (HasTransportResponse);
-  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
-  rpc ToString (ToStringRequest) returns (ToStringResponse);
-  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+message CreateSocketKeepaliveRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+  int64 arg5 = 6;
+}
+
+message CreateSocketKeepaliveResponse {
+  int64 result = 1;
+}
+
+message GetActiveNetworkRequest {
+}
+
+message GetActiveNetworkResponse {
+  int64 result = 1;
+}
+
+message GetActiveNetworkInfoRequest {
+}
+
+message GetActiveNetworkInfoResponse {
+  int64 result = 1;
+}
+
+message GetAllNetworkInfoRequest {
+}
+
+message GetAllNetworkInfoResponse {
+  int64 result = 1;
+}
+
+message GetAllNetworksRequest {
+}
+
+message GetAllNetworksResponse {
+  int64 result = 1;
+}
+
+message GetBackgroundDataSettingRequest {
+}
+
+message GetBackgroundDataSettingResponse {
+  bool result = 1;
+}
+
+message GetBoundNetworkForProcessRequest {
+}
+
+message GetBoundNetworkForProcessResponse {
+  int64 result = 1;
+}
+
+message GetConnectionOwnerUidRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message GetConnectionOwnerUidResponse {
+  int32 result = 1;
+}
+
+message GetDefaultProxyRequest {
+}
+
+message GetDefaultProxyResponse {
+  int64 result = 1;
+}
+
+message GetLinkPropertiesRequest {
+  int64 arg0 = 1;
+}
+
+message GetLinkPropertiesResponse {
+  int64 result = 1;
+}
+
+message GetMultipathPreferenceRequest {
+  int64 arg0 = 1;
+}
+
+message GetMultipathPreferenceResponse {
+  int32 result = 1;
+}
+
+message GetNetworkCapabilitiesRequest {
+  int64 arg0 = 1;
+}
+
+message GetNetworkCapabilitiesResponse {
+  int64 result = 1;
+}
+
+message GetNetworkInfo1Request {
+  int64 arg0 = 1;
+}
+
+message GetNetworkInfo1Response {
+  int64 result = 1;
+}
+
+message GetNetworkInfo1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetNetworkInfo1_1Response {
+  int64 result = 1;
+}
+
+message GetNetworkPreferenceRequest {
+}
+
+message GetNetworkPreferenceResponse {
+  int32 result = 1;
+}
+
+message GetNetworkWatchlistConfigHashRequest {
+}
+
+message GetNetworkWatchlistConfigHashResponse {
+  int64 result = 1;
+}
+
+message GetRestrictBackgroundStatusRequest {
+}
+
+message GetRestrictBackgroundStatusResponse {
+  int32 result = 1;
+}
+
+message IsActiveNetworkMeteredRequest {
+}
+
+message IsActiveNetworkMeteredResponse {
+  bool result = 1;
+}
+
+message IsDefaultNetworkActiveRequest {
+}
+
+message IsDefaultNetworkActiveResponse {
+  bool result = 1;
+}
+
+message RegisterDefaultNetworkCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message RegisterDefaultNetworkCallbackResponse {
+}
+
+message RegisterNetworkCallback2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterNetworkCallback2Response {
+}
+
+message RegisterNetworkCallback2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterNetworkCallback2_1Response {
+}
+
+message ReleaseNetworkRequestRequest {
+  int64 arg0 = 1;
+}
+
+message ReleaseNetworkRequestResponse {
+}
+
+message RemoveDefaultNetworkActiveListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveDefaultNetworkActiveListenerResponse {
+}
+
+message ReportBadNetworkRequest {
+  int64 arg0 = 1;
+}
+
+message ReportBadNetworkResponse {
+}
+
+message ReportNetworkConnectivityRequest {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message ReportNetworkConnectivityResponse {
+}
+
+message RequestBandwidthUpdateRequest {
+  int64 arg0 = 1;
+}
+
+message RequestBandwidthUpdateResponse {
+  bool result = 1;
+}
+
+message RequestNetwork2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestNetwork2Response {
+}
+
+message RequestNetwork2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestNetwork2_1Response {
+}
+
+message RequestNetwork3_2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message RequestNetwork3_2Response {
+}
+
+message SetNetworkPreferenceRequest {
+  int32 arg0 = 1;
+}
+
+message SetNetworkPreferenceResponse {
+}
+
+message UnregisterNetworkCallback1Request {
+  int64 arg0 = 1;
+}
+
+message UnregisterNetworkCallback1Response {
+}
+
+message UnregisterNetworkCallback1_1Request {
+  int64 arg0 = 1;
+}
+
+message UnregisterNetworkCallback1_1Response {
+}
+
+message GetProcessDefaultNetworkRequest {
+}
+
+message GetProcessDefaultNetworkResponse {
+  int64 result = 1;
+}
+
+message IsNetworkTypeValidRequest {
+  int32 arg0 = 1;
+}
+
+message IsNetworkTypeValidResponse {
+  bool result = 1;
+}
+
+message SetProcessDefaultNetworkRequest {
+  int64 arg0 = 1;
+}
+
+message SetProcessDefaultNetworkResponse {
+  bool result = 1;
+}
+
+service ConnectivityManagerService {
+  rpc AddDefaultNetworkActiveListener (AddDefaultNetworkActiveListenerRequest) returns (AddDefaultNetworkActiveListenerResponse);
+  rpc BindProcessToNetwork (BindProcessToNetworkRequest) returns (BindProcessToNetworkResponse);
+  rpc CreateSocketKeepalive (CreateSocketKeepaliveRequest) returns (CreateSocketKeepaliveResponse);
+  rpc GetActiveNetwork (GetActiveNetworkRequest) returns (GetActiveNetworkResponse);
+  rpc GetActiveNetworkInfo (GetActiveNetworkInfoRequest) returns (GetActiveNetworkInfoResponse);
+  rpc GetAllNetworkInfo (GetAllNetworkInfoRequest) returns (GetAllNetworkInfoResponse);
+  rpc GetAllNetworks (GetAllNetworksRequest) returns (GetAllNetworksResponse);
+  rpc GetBackgroundDataSetting (GetBackgroundDataSettingRequest) returns (GetBackgroundDataSettingResponse);
+  rpc GetBoundNetworkForProcess (GetBoundNetworkForProcessRequest) returns (GetBoundNetworkForProcessResponse);
+  rpc GetConnectionOwnerUid (GetConnectionOwnerUidRequest) returns (GetConnectionOwnerUidResponse);
+  rpc GetDefaultProxy (GetDefaultProxyRequest) returns (GetDefaultProxyResponse);
+  rpc GetLinkProperties (GetLinkPropertiesRequest) returns (GetLinkPropertiesResponse);
+  rpc GetMultipathPreference (GetMultipathPreferenceRequest) returns (GetMultipathPreferenceResponse);
+  rpc GetNetworkCapabilities (GetNetworkCapabilitiesRequest) returns (GetNetworkCapabilitiesResponse);
+  rpc GetNetworkInfo1 (GetNetworkInfo1Request) returns (GetNetworkInfo1Response);
+  rpc GetNetworkInfo1_1 (GetNetworkInfo1_1Request) returns (GetNetworkInfo1_1Response);
+  rpc GetNetworkPreference (GetNetworkPreferenceRequest) returns (GetNetworkPreferenceResponse);
+  rpc GetNetworkWatchlistConfigHash (GetNetworkWatchlistConfigHashRequest) returns (GetNetworkWatchlistConfigHashResponse);
+  rpc GetRestrictBackgroundStatus (GetRestrictBackgroundStatusRequest) returns (GetRestrictBackgroundStatusResponse);
+  rpc IsActiveNetworkMetered (IsActiveNetworkMeteredRequest) returns (IsActiveNetworkMeteredResponse);
+  rpc IsDefaultNetworkActive (IsDefaultNetworkActiveRequest) returns (IsDefaultNetworkActiveResponse);
+  rpc RegisterDefaultNetworkCallback (RegisterDefaultNetworkCallbackRequest) returns (RegisterDefaultNetworkCallbackResponse);
+  rpc RegisterNetworkCallback2 (RegisterNetworkCallback2Request) returns (RegisterNetworkCallback2Response);
+  rpc RegisterNetworkCallback2_1 (RegisterNetworkCallback2_1Request) returns (RegisterNetworkCallback2_1Response);
+  rpc ReleaseNetworkRequest (ReleaseNetworkRequestRequest) returns (ReleaseNetworkRequestResponse);
+  rpc RemoveDefaultNetworkActiveListener (RemoveDefaultNetworkActiveListenerRequest) returns (RemoveDefaultNetworkActiveListenerResponse);
+  rpc ReportBadNetwork (ReportBadNetworkRequest) returns (ReportBadNetworkResponse);
+  rpc ReportNetworkConnectivity (ReportNetworkConnectivityRequest) returns (ReportNetworkConnectivityResponse);
+  rpc RequestBandwidthUpdate (RequestBandwidthUpdateRequest) returns (RequestBandwidthUpdateResponse);
+  rpc RequestNetwork2 (RequestNetwork2Request) returns (RequestNetwork2Response);
+  rpc RequestNetwork2_1 (RequestNetwork2_1Request) returns (RequestNetwork2_1Response);
+  rpc RequestNetwork3_2 (RequestNetwork3_2Request) returns (RequestNetwork3_2Response);
+  rpc SetNetworkPreference (SetNetworkPreferenceRequest) returns (SetNetworkPreferenceResponse);
+  rpc UnregisterNetworkCallback1 (UnregisterNetworkCallback1Request) returns (UnregisterNetworkCallback1Response);
+  rpc UnregisterNetworkCallback1_1 (UnregisterNetworkCallback1_1Request) returns (UnregisterNetworkCallback1_1Response);
+  rpc GetProcessDefaultNetwork (GetProcessDefaultNetworkRequest) returns (GetProcessDefaultNetworkResponse);
+  rpc IsNetworkTypeValid (IsNetworkTypeValidRequest) returns (IsNetworkTypeValidResponse);
+  rpc SetProcessDefaultNetwork (SetProcessDefaultNetworkRequest) returns (SetProcessDefaultNetworkResponse);
 }

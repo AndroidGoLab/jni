@@ -21,557 +21,519 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NdefService_CanMakeReadOnly_FullMethodName      = "/nfc.NdefService/CanMakeReadOnly"
-	NdefService_Close_FullMethodName                = "/nfc.NdefService/Close"
-	NdefService_Connect_FullMethodName              = "/nfc.NdefService/Connect"
-	NdefService_GetCachedNdefMessage_FullMethodName = "/nfc.NdefService/GetCachedNdefMessage"
-	NdefService_GetMaxSize_FullMethodName           = "/nfc.NdefService/GetMaxSize"
-	NdefService_GetNdefMessage_FullMethodName       = "/nfc.NdefService/GetNdefMessage"
-	NdefService_GetTag_FullMethodName               = "/nfc.NdefService/GetTag"
-	NdefService_GetType_FullMethodName              = "/nfc.NdefService/GetType"
-	NdefService_IsConnected_FullMethodName          = "/nfc.NdefService/IsConnected"
-	NdefService_IsWritable_FullMethodName           = "/nfc.NdefService/IsWritable"
-	NdefService_MakeReadOnly_FullMethodName         = "/nfc.NdefService/MakeReadOnly"
-	NdefService_WriteNdefMessage_FullMethodName     = "/nfc.NdefService/WriteNdefMessage"
-	NdefService_Get_FullMethodName                  = "/nfc.NdefService/Get"
+	IsoDepService_Close_FullMethodName                         = "/nfc.IsoDepService/Close"
+	IsoDepService_Connect_FullMethodName                       = "/nfc.IsoDepService/Connect"
+	IsoDepService_GetHiLayerResponse_FullMethodName            = "/nfc.IsoDepService/GetHiLayerResponse"
+	IsoDepService_GetHistoricalBytes_FullMethodName            = "/nfc.IsoDepService/GetHistoricalBytes"
+	IsoDepService_GetMaxTransceiveLength_FullMethodName        = "/nfc.IsoDepService/GetMaxTransceiveLength"
+	IsoDepService_GetTag_FullMethodName                        = "/nfc.IsoDepService/GetTag"
+	IsoDepService_GetTimeout_FullMethodName                    = "/nfc.IsoDepService/GetTimeout"
+	IsoDepService_IsConnected_FullMethodName                   = "/nfc.IsoDepService/IsConnected"
+	IsoDepService_IsExtendedLengthApduSupported_FullMethodName = "/nfc.IsoDepService/IsExtendedLengthApduSupported"
+	IsoDepService_SetTimeout_FullMethodName                    = "/nfc.IsoDepService/SetTimeout"
+	IsoDepService_Transceive_FullMethodName                    = "/nfc.IsoDepService/Transceive"
+	IsoDepService_Get_FullMethodName                           = "/nfc.IsoDepService/Get"
 )
 
-// NdefServiceClient is the client API for NdefService service.
+// IsoDepServiceClient is the client API for IsoDepService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NdefServiceClient interface {
-	CanMakeReadOnly(ctx context.Context, in *CanMakeReadOnlyRequest, opts ...grpc.CallOption) (*CanMakeReadOnlyResponse, error)
+type IsoDepServiceClient interface {
 	Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error)
 	Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectResponse, error)
-	GetCachedNdefMessage(ctx context.Context, in *GetCachedNdefMessageRequest, opts ...grpc.CallOption) (*GetCachedNdefMessageResponse, error)
-	GetMaxSize(ctx context.Context, in *GetMaxSizeRequest, opts ...grpc.CallOption) (*GetMaxSizeResponse, error)
-	GetNdefMessage(ctx context.Context, in *GetNdefMessageRequest, opts ...grpc.CallOption) (*GetNdefMessageResponse, error)
+	GetHiLayerResponse(ctx context.Context, in *GetHiLayerResponseRequest, opts ...grpc.CallOption) (*GetHiLayerResponseResponse, error)
+	GetHistoricalBytes(ctx context.Context, in *GetHistoricalBytesRequest, opts ...grpc.CallOption) (*GetHistoricalBytesResponse, error)
+	GetMaxTransceiveLength(ctx context.Context, in *GetMaxTransceiveLengthRequest, opts ...grpc.CallOption) (*GetMaxTransceiveLengthResponse, error)
 	GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error)
-	GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error)
+	GetTimeout(ctx context.Context, in *GetTimeoutRequest, opts ...grpc.CallOption) (*GetTimeoutResponse, error)
 	IsConnected(ctx context.Context, in *IsConnectedRequest, opts ...grpc.CallOption) (*IsConnectedResponse, error)
-	IsWritable(ctx context.Context, in *IsWritableRequest, opts ...grpc.CallOption) (*IsWritableResponse, error)
-	MakeReadOnly(ctx context.Context, in *MakeReadOnlyRequest, opts ...grpc.CallOption) (*MakeReadOnlyResponse, error)
-	WriteNdefMessage(ctx context.Context, in *WriteNdefMessageRequest, opts ...grpc.CallOption) (*WriteNdefMessageResponse, error)
+	IsExtendedLengthApduSupported(ctx context.Context, in *IsExtendedLengthApduSupportedRequest, opts ...grpc.CallOption) (*IsExtendedLengthApduSupportedResponse, error)
+	SetTimeout(ctx context.Context, in *SetTimeoutRequest, opts ...grpc.CallOption) (*SetTimeoutResponse, error)
+	Transceive(ctx context.Context, in *TransceiveRequest, opts ...grpc.CallOption) (*TransceiveResponse, error)
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
 }
 
-type ndefServiceClient struct {
+type isoDepServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewNdefServiceClient(cc grpc.ClientConnInterface) NdefServiceClient {
-	return &ndefServiceClient{cc}
+func NewIsoDepServiceClient(cc grpc.ClientConnInterface) IsoDepServiceClient {
+	return &isoDepServiceClient{cc}
 }
 
-func (c *ndefServiceClient) CanMakeReadOnly(ctx context.Context, in *CanMakeReadOnlyRequest, opts ...grpc.CallOption) (*CanMakeReadOnlyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CanMakeReadOnlyResponse)
-	err := c.cc.Invoke(ctx, NdefService_CanMakeReadOnly_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *ndefServiceClient) Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error) {
+func (c *isoDepServiceClient) Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CloseResponse)
-	err := c.cc.Invoke(ctx, NdefService_Close_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, IsoDepService_Close_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectResponse, error) {
+func (c *isoDepServiceClient) Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ConnectResponse)
-	err := c.cc.Invoke(ctx, NdefService_Connect_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, IsoDepService_Connect_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) GetCachedNdefMessage(ctx context.Context, in *GetCachedNdefMessageRequest, opts ...grpc.CallOption) (*GetCachedNdefMessageResponse, error) {
+func (c *isoDepServiceClient) GetHiLayerResponse(ctx context.Context, in *GetHiLayerResponseRequest, opts ...grpc.CallOption) (*GetHiLayerResponseResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCachedNdefMessageResponse)
-	err := c.cc.Invoke(ctx, NdefService_GetCachedNdefMessage_FullMethodName, in, out, cOpts...)
+	out := new(GetHiLayerResponseResponse)
+	err := c.cc.Invoke(ctx, IsoDepService_GetHiLayerResponse_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) GetMaxSize(ctx context.Context, in *GetMaxSizeRequest, opts ...grpc.CallOption) (*GetMaxSizeResponse, error) {
+func (c *isoDepServiceClient) GetHistoricalBytes(ctx context.Context, in *GetHistoricalBytesRequest, opts ...grpc.CallOption) (*GetHistoricalBytesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMaxSizeResponse)
-	err := c.cc.Invoke(ctx, NdefService_GetMaxSize_FullMethodName, in, out, cOpts...)
+	out := new(GetHistoricalBytesResponse)
+	err := c.cc.Invoke(ctx, IsoDepService_GetHistoricalBytes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) GetNdefMessage(ctx context.Context, in *GetNdefMessageRequest, opts ...grpc.CallOption) (*GetNdefMessageResponse, error) {
+func (c *isoDepServiceClient) GetMaxTransceiveLength(ctx context.Context, in *GetMaxTransceiveLengthRequest, opts ...grpc.CallOption) (*GetMaxTransceiveLengthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNdefMessageResponse)
-	err := c.cc.Invoke(ctx, NdefService_GetNdefMessage_FullMethodName, in, out, cOpts...)
+	out := new(GetMaxTransceiveLengthResponse)
+	err := c.cc.Invoke(ctx, IsoDepService_GetMaxTransceiveLength_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error) {
+func (c *isoDepServiceClient) GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTagResponse)
-	err := c.cc.Invoke(ctx, NdefService_GetTag_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, IsoDepService_GetTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error) {
+func (c *isoDepServiceClient) GetTimeout(ctx context.Context, in *GetTimeoutRequest, opts ...grpc.CallOption) (*GetTimeoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTypeResponse)
-	err := c.cc.Invoke(ctx, NdefService_GetType_FullMethodName, in, out, cOpts...)
+	out := new(GetTimeoutResponse)
+	err := c.cc.Invoke(ctx, IsoDepService_GetTimeout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) IsConnected(ctx context.Context, in *IsConnectedRequest, opts ...grpc.CallOption) (*IsConnectedResponse, error) {
+func (c *isoDepServiceClient) IsConnected(ctx context.Context, in *IsConnectedRequest, opts ...grpc.CallOption) (*IsConnectedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IsConnectedResponse)
-	err := c.cc.Invoke(ctx, NdefService_IsConnected_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, IsoDepService_IsConnected_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) IsWritable(ctx context.Context, in *IsWritableRequest, opts ...grpc.CallOption) (*IsWritableResponse, error) {
+func (c *isoDepServiceClient) IsExtendedLengthApduSupported(ctx context.Context, in *IsExtendedLengthApduSupportedRequest, opts ...grpc.CallOption) (*IsExtendedLengthApduSupportedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsWritableResponse)
-	err := c.cc.Invoke(ctx, NdefService_IsWritable_FullMethodName, in, out, cOpts...)
+	out := new(IsExtendedLengthApduSupportedResponse)
+	err := c.cc.Invoke(ctx, IsoDepService_IsExtendedLengthApduSupported_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) MakeReadOnly(ctx context.Context, in *MakeReadOnlyRequest, opts ...grpc.CallOption) (*MakeReadOnlyResponse, error) {
+func (c *isoDepServiceClient) SetTimeout(ctx context.Context, in *SetTimeoutRequest, opts ...grpc.CallOption) (*SetTimeoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MakeReadOnlyResponse)
-	err := c.cc.Invoke(ctx, NdefService_MakeReadOnly_FullMethodName, in, out, cOpts...)
+	out := new(SetTimeoutResponse)
+	err := c.cc.Invoke(ctx, IsoDepService_SetTimeout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) WriteNdefMessage(ctx context.Context, in *WriteNdefMessageRequest, opts ...grpc.CallOption) (*WriteNdefMessageResponse, error) {
+func (c *isoDepServiceClient) Transceive(ctx context.Context, in *TransceiveRequest, opts ...grpc.CallOption) (*TransceiveResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WriteNdefMessageResponse)
-	err := c.cc.Invoke(ctx, NdefService_WriteNdefMessage_FullMethodName, in, out, cOpts...)
+	out := new(TransceiveResponse)
+	err := c.cc.Invoke(ctx, IsoDepService_Transceive_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ndefServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *isoDepServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, NdefService_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, IsoDepService_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// NdefServiceServer is the server API for NdefService service.
-// All implementations must embed UnimplementedNdefServiceServer
+// IsoDepServiceServer is the server API for IsoDepService service.
+// All implementations must embed UnimplementedIsoDepServiceServer
 // for forward compatibility.
-type NdefServiceServer interface {
-	CanMakeReadOnly(context.Context, *CanMakeReadOnlyRequest) (*CanMakeReadOnlyResponse, error)
+type IsoDepServiceServer interface {
 	Close(context.Context, *CloseRequest) (*CloseResponse, error)
 	Connect(context.Context, *ConnectRequest) (*ConnectResponse, error)
-	GetCachedNdefMessage(context.Context, *GetCachedNdefMessageRequest) (*GetCachedNdefMessageResponse, error)
-	GetMaxSize(context.Context, *GetMaxSizeRequest) (*GetMaxSizeResponse, error)
-	GetNdefMessage(context.Context, *GetNdefMessageRequest) (*GetNdefMessageResponse, error)
+	GetHiLayerResponse(context.Context, *GetHiLayerResponseRequest) (*GetHiLayerResponseResponse, error)
+	GetHistoricalBytes(context.Context, *GetHistoricalBytesRequest) (*GetHistoricalBytesResponse, error)
+	GetMaxTransceiveLength(context.Context, *GetMaxTransceiveLengthRequest) (*GetMaxTransceiveLengthResponse, error)
 	GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error)
-	GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error)
+	GetTimeout(context.Context, *GetTimeoutRequest) (*GetTimeoutResponse, error)
 	IsConnected(context.Context, *IsConnectedRequest) (*IsConnectedResponse, error)
-	IsWritable(context.Context, *IsWritableRequest) (*IsWritableResponse, error)
-	MakeReadOnly(context.Context, *MakeReadOnlyRequest) (*MakeReadOnlyResponse, error)
-	WriteNdefMessage(context.Context, *WriteNdefMessageRequest) (*WriteNdefMessageResponse, error)
+	IsExtendedLengthApduSupported(context.Context, *IsExtendedLengthApduSupportedRequest) (*IsExtendedLengthApduSupportedResponse, error)
+	SetTimeout(context.Context, *SetTimeoutRequest) (*SetTimeoutResponse, error)
+	Transceive(context.Context, *TransceiveRequest) (*TransceiveResponse, error)
 	Get(context.Context, *GetRequest) (*GetResponse, error)
-	mustEmbedUnimplementedNdefServiceServer()
+	mustEmbedUnimplementedIsoDepServiceServer()
 }
 
-// UnimplementedNdefServiceServer must be embedded to have
+// UnimplementedIsoDepServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedNdefServiceServer struct{}
+type UnimplementedIsoDepServiceServer struct{}
 
-func (UnimplementedNdefServiceServer) CanMakeReadOnly(context.Context, *CanMakeReadOnlyRequest) (*CanMakeReadOnlyResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CanMakeReadOnly not implemented")
-}
-func (UnimplementedNdefServiceServer) Close(context.Context, *CloseRequest) (*CloseResponse, error) {
+func (UnimplementedIsoDepServiceServer) Close(context.Context, *CloseRequest) (*CloseResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Close not implemented")
 }
-func (UnimplementedNdefServiceServer) Connect(context.Context, *ConnectRequest) (*ConnectResponse, error) {
+func (UnimplementedIsoDepServiceServer) Connect(context.Context, *ConnectRequest) (*ConnectResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Connect not implemented")
 }
-func (UnimplementedNdefServiceServer) GetCachedNdefMessage(context.Context, *GetCachedNdefMessageRequest) (*GetCachedNdefMessageResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetCachedNdefMessage not implemented")
+func (UnimplementedIsoDepServiceServer) GetHiLayerResponse(context.Context, *GetHiLayerResponseRequest) (*GetHiLayerResponseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHiLayerResponse not implemented")
 }
-func (UnimplementedNdefServiceServer) GetMaxSize(context.Context, *GetMaxSizeRequest) (*GetMaxSizeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMaxSize not implemented")
+func (UnimplementedIsoDepServiceServer) GetHistoricalBytes(context.Context, *GetHistoricalBytesRequest) (*GetHistoricalBytesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHistoricalBytes not implemented")
 }
-func (UnimplementedNdefServiceServer) GetNdefMessage(context.Context, *GetNdefMessageRequest) (*GetNdefMessageResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetNdefMessage not implemented")
+func (UnimplementedIsoDepServiceServer) GetMaxTransceiveLength(context.Context, *GetMaxTransceiveLengthRequest) (*GetMaxTransceiveLengthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxTransceiveLength not implemented")
 }
-func (UnimplementedNdefServiceServer) GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error) {
+func (UnimplementedIsoDepServiceServer) GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTag not implemented")
 }
-func (UnimplementedNdefServiceServer) GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetType not implemented")
+func (UnimplementedIsoDepServiceServer) GetTimeout(context.Context, *GetTimeoutRequest) (*GetTimeoutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTimeout not implemented")
 }
-func (UnimplementedNdefServiceServer) IsConnected(context.Context, *IsConnectedRequest) (*IsConnectedResponse, error) {
+func (UnimplementedIsoDepServiceServer) IsConnected(context.Context, *IsConnectedRequest) (*IsConnectedResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IsConnected not implemented")
 }
-func (UnimplementedNdefServiceServer) IsWritable(context.Context, *IsWritableRequest) (*IsWritableResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsWritable not implemented")
+func (UnimplementedIsoDepServiceServer) IsExtendedLengthApduSupported(context.Context, *IsExtendedLengthApduSupportedRequest) (*IsExtendedLengthApduSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsExtendedLengthApduSupported not implemented")
 }
-func (UnimplementedNdefServiceServer) MakeReadOnly(context.Context, *MakeReadOnlyRequest) (*MakeReadOnlyResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method MakeReadOnly not implemented")
+func (UnimplementedIsoDepServiceServer) SetTimeout(context.Context, *SetTimeoutRequest) (*SetTimeoutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTimeout not implemented")
 }
-func (UnimplementedNdefServiceServer) WriteNdefMessage(context.Context, *WriteNdefMessageRequest) (*WriteNdefMessageResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method WriteNdefMessage not implemented")
+func (UnimplementedIsoDepServiceServer) Transceive(context.Context, *TransceiveRequest) (*TransceiveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Transceive not implemented")
 }
-func (UnimplementedNdefServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
+func (UnimplementedIsoDepServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedNdefServiceServer) mustEmbedUnimplementedNdefServiceServer() {}
-func (UnimplementedNdefServiceServer) testEmbeddedByValue()                     {}
+func (UnimplementedIsoDepServiceServer) mustEmbedUnimplementedIsoDepServiceServer() {}
+func (UnimplementedIsoDepServiceServer) testEmbeddedByValue()                       {}
 
-// UnsafeNdefServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NdefServiceServer will
+// UnsafeIsoDepServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to IsoDepServiceServer will
 // result in compilation errors.
-type UnsafeNdefServiceServer interface {
-	mustEmbedUnimplementedNdefServiceServer()
+type UnsafeIsoDepServiceServer interface {
+	mustEmbedUnimplementedIsoDepServiceServer()
 }
 
-func RegisterNdefServiceServer(s grpc.ServiceRegistrar, srv NdefServiceServer) {
-	// If the following call panics, it indicates UnimplementedNdefServiceServer was
+func RegisterIsoDepServiceServer(s grpc.ServiceRegistrar, srv IsoDepServiceServer) {
+	// If the following call panics, it indicates UnimplementedIsoDepServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&NdefService_ServiceDesc, srv)
+	s.RegisterService(&IsoDepService_ServiceDesc, srv)
 }
 
-func _NdefService_CanMakeReadOnly_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CanMakeReadOnlyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NdefServiceServer).CanMakeReadOnly(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NdefService_CanMakeReadOnly_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).CanMakeReadOnly(ctx, req.(*CanMakeReadOnlyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NdefService_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IsoDepService_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CloseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).Close(ctx, in)
+		return srv.(IsoDepServiceServer).Close(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_Close_FullMethodName,
+		FullMethod: IsoDepService_Close_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).Close(ctx, req.(*CloseRequest))
+		return srv.(IsoDepServiceServer).Close(ctx, req.(*CloseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_Connect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IsoDepService_Connect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConnectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).Connect(ctx, in)
+		return srv.(IsoDepServiceServer).Connect(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_Connect_FullMethodName,
+		FullMethod: IsoDepService_Connect_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).Connect(ctx, req.(*ConnectRequest))
+		return srv.(IsoDepServiceServer).Connect(ctx, req.(*ConnectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_GetCachedNdefMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCachedNdefMessageRequest)
+func _IsoDepService_GetHiLayerResponse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHiLayerResponseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).GetCachedNdefMessage(ctx, in)
+		return srv.(IsoDepServiceServer).GetHiLayerResponse(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_GetCachedNdefMessage_FullMethodName,
+		FullMethod: IsoDepService_GetHiLayerResponse_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).GetCachedNdefMessage(ctx, req.(*GetCachedNdefMessageRequest))
+		return srv.(IsoDepServiceServer).GetHiLayerResponse(ctx, req.(*GetHiLayerResponseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_GetMaxSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMaxSizeRequest)
+func _IsoDepService_GetHistoricalBytes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHistoricalBytesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).GetMaxSize(ctx, in)
+		return srv.(IsoDepServiceServer).GetHistoricalBytes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_GetMaxSize_FullMethodName,
+		FullMethod: IsoDepService_GetHistoricalBytes_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).GetMaxSize(ctx, req.(*GetMaxSizeRequest))
+		return srv.(IsoDepServiceServer).GetHistoricalBytes(ctx, req.(*GetHistoricalBytesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_GetNdefMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNdefMessageRequest)
+func _IsoDepService_GetMaxTransceiveLength_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxTransceiveLengthRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).GetNdefMessage(ctx, in)
+		return srv.(IsoDepServiceServer).GetMaxTransceiveLength(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_GetNdefMessage_FullMethodName,
+		FullMethod: IsoDepService_GetMaxTransceiveLength_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).GetNdefMessage(ctx, req.(*GetNdefMessageRequest))
+		return srv.(IsoDepServiceServer).GetMaxTransceiveLength(ctx, req.(*GetMaxTransceiveLengthRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IsoDepService_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).GetTag(ctx, in)
+		return srv.(IsoDepServiceServer).GetTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_GetTag_FullMethodName,
+		FullMethod: IsoDepService_GetTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).GetTag(ctx, req.(*GetTagRequest))
+		return srv.(IsoDepServiceServer).GetTag(ctx, req.(*GetTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_GetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTypeRequest)
+func _IsoDepService_GetTimeout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTimeoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).GetType(ctx, in)
+		return srv.(IsoDepServiceServer).GetTimeout(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_GetType_FullMethodName,
+		FullMethod: IsoDepService_GetTimeout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).GetType(ctx, req.(*GetTypeRequest))
+		return srv.(IsoDepServiceServer).GetTimeout(ctx, req.(*GetTimeoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_IsConnected_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IsoDepService_IsConnected_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IsConnectedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).IsConnected(ctx, in)
+		return srv.(IsoDepServiceServer).IsConnected(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_IsConnected_FullMethodName,
+		FullMethod: IsoDepService_IsConnected_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).IsConnected(ctx, req.(*IsConnectedRequest))
+		return srv.(IsoDepServiceServer).IsConnected(ctx, req.(*IsConnectedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_IsWritable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsWritableRequest)
+func _IsoDepService_IsExtendedLengthApduSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsExtendedLengthApduSupportedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).IsWritable(ctx, in)
+		return srv.(IsoDepServiceServer).IsExtendedLengthApduSupported(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_IsWritable_FullMethodName,
+		FullMethod: IsoDepService_IsExtendedLengthApduSupported_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).IsWritable(ctx, req.(*IsWritableRequest))
+		return srv.(IsoDepServiceServer).IsExtendedLengthApduSupported(ctx, req.(*IsExtendedLengthApduSupportedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_MakeReadOnly_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MakeReadOnlyRequest)
+func _IsoDepService_SetTimeout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTimeoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).MakeReadOnly(ctx, in)
+		return srv.(IsoDepServiceServer).SetTimeout(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_MakeReadOnly_FullMethodName,
+		FullMethod: IsoDepService_SetTimeout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).MakeReadOnly(ctx, req.(*MakeReadOnlyRequest))
+		return srv.(IsoDepServiceServer).SetTimeout(ctx, req.(*SetTimeoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_WriteNdefMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WriteNdefMessageRequest)
+func _IsoDepService_Transceive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransceiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).WriteNdefMessage(ctx, in)
+		return srv.(IsoDepServiceServer).Transceive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_WriteNdefMessage_FullMethodName,
+		FullMethod: IsoDepService_Transceive_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).WriteNdefMessage(ctx, req.(*WriteNdefMessageRequest))
+		return srv.(IsoDepServiceServer).Transceive(ctx, req.(*TransceiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NdefService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IsoDepService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NdefServiceServer).Get(ctx, in)
+		return srv.(IsoDepServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NdefService_Get_FullMethodName,
+		FullMethod: IsoDepService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NdefServiceServer).Get(ctx, req.(*GetRequest))
+		return srv.(IsoDepServiceServer).Get(ctx, req.(*GetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// NdefService_ServiceDesc is the grpc.ServiceDesc for NdefService service.
+// IsoDepService_ServiceDesc is the grpc.ServiceDesc for IsoDepService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var NdefService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "nfc.NdefService",
-	HandlerType: (*NdefServiceServer)(nil),
+var IsoDepService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nfc.IsoDepService",
+	HandlerType: (*IsoDepServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CanMakeReadOnly",
-			Handler:    _NdefService_CanMakeReadOnly_Handler,
-		},
-		{
 			MethodName: "Close",
-			Handler:    _NdefService_Close_Handler,
+			Handler:    _IsoDepService_Close_Handler,
 		},
 		{
 			MethodName: "Connect",
-			Handler:    _NdefService_Connect_Handler,
+			Handler:    _IsoDepService_Connect_Handler,
 		},
 		{
-			MethodName: "GetCachedNdefMessage",
-			Handler:    _NdefService_GetCachedNdefMessage_Handler,
+			MethodName: "GetHiLayerResponse",
+			Handler:    _IsoDepService_GetHiLayerResponse_Handler,
 		},
 		{
-			MethodName: "GetMaxSize",
-			Handler:    _NdefService_GetMaxSize_Handler,
+			MethodName: "GetHistoricalBytes",
+			Handler:    _IsoDepService_GetHistoricalBytes_Handler,
 		},
 		{
-			MethodName: "GetNdefMessage",
-			Handler:    _NdefService_GetNdefMessage_Handler,
+			MethodName: "GetMaxTransceiveLength",
+			Handler:    _IsoDepService_GetMaxTransceiveLength_Handler,
 		},
 		{
 			MethodName: "GetTag",
-			Handler:    _NdefService_GetTag_Handler,
+			Handler:    _IsoDepService_GetTag_Handler,
 		},
 		{
-			MethodName: "GetType",
-			Handler:    _NdefService_GetType_Handler,
+			MethodName: "GetTimeout",
+			Handler:    _IsoDepService_GetTimeout_Handler,
 		},
 		{
 			MethodName: "IsConnected",
-			Handler:    _NdefService_IsConnected_Handler,
+			Handler:    _IsoDepService_IsConnected_Handler,
 		},
 		{
-			MethodName: "IsWritable",
-			Handler:    _NdefService_IsWritable_Handler,
+			MethodName: "IsExtendedLengthApduSupported",
+			Handler:    _IsoDepService_IsExtendedLengthApduSupported_Handler,
 		},
 		{
-			MethodName: "MakeReadOnly",
-			Handler:    _NdefService_MakeReadOnly_Handler,
+			MethodName: "SetTimeout",
+			Handler:    _IsoDepService_SetTimeout_Handler,
 		},
 		{
-			MethodName: "WriteNdefMessage",
-			Handler:    _NdefService_WriteNdefMessage_Handler,
+			MethodName: "Transceive",
+			Handler:    _IsoDepService_Transceive_Handler,
 		},
 		{
 			MethodName: "Get",
-			Handler:    _NdefService_Get_Handler,
+			Handler:    _IsoDepService_Get_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

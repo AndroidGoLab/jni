@@ -21,292 +21,292 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BluetoothLeAdvertiserService_StartAdvertising3_FullMethodName      = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertising3"
-	BluetoothLeAdvertiserService_StartAdvertising4_1_FullMethodName    = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertising4_1"
-	BluetoothLeAdvertiserService_StartAdvertisingSet6_FullMethodName   = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertisingSet6"
-	BluetoothLeAdvertiserService_StartAdvertisingSet8_1_FullMethodName = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertisingSet8_1"
-	BluetoothLeAdvertiserService_StopAdvertising_FullMethodName        = "/bluetooth_le.BluetoothLeAdvertiserService/StopAdvertising"
-	BluetoothLeAdvertiserService_StopAdvertisingSet_FullMethodName     = "/bluetooth_le.BluetoothLeAdvertiserService/StopAdvertisingSet"
+	BluetoothLeScannerService_FlushPendingScanResults_FullMethodName = "/bluetooth_le.BluetoothLeScannerService/FlushPendingScanResults"
+	BluetoothLeScannerService_StartScan1_FullMethodName              = "/bluetooth_le.BluetoothLeScannerService/StartScan1"
+	BluetoothLeScannerService_StartScan3_1_FullMethodName            = "/bluetooth_le.BluetoothLeScannerService/StartScan3_1"
+	BluetoothLeScannerService_StartScan3_2_FullMethodName            = "/bluetooth_le.BluetoothLeScannerService/StartScan3_2"
+	BluetoothLeScannerService_StopScan1_FullMethodName               = "/bluetooth_le.BluetoothLeScannerService/StopScan1"
+	BluetoothLeScannerService_StopScan1_1_FullMethodName             = "/bluetooth_le.BluetoothLeScannerService/StopScan1_1"
 )
 
-// BluetoothLeAdvertiserServiceClient is the client API for BluetoothLeAdvertiserService service.
+// BluetoothLeScannerServiceClient is the client API for BluetoothLeScannerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BluetoothLeAdvertiserServiceClient interface {
-	StartAdvertising3(ctx context.Context, in *StartAdvertising3Request, opts ...grpc.CallOption) (*StartAdvertising3Response, error)
-	StartAdvertising4_1(ctx context.Context, in *StartAdvertising4_1Request, opts ...grpc.CallOption) (*StartAdvertising4_1Response, error)
-	StartAdvertisingSet6(ctx context.Context, in *StartAdvertisingSet6Request, opts ...grpc.CallOption) (*StartAdvertisingSet6Response, error)
-	StartAdvertisingSet8_1(ctx context.Context, in *StartAdvertisingSet8_1Request, opts ...grpc.CallOption) (*StartAdvertisingSet8_1Response, error)
-	StopAdvertising(ctx context.Context, in *StopAdvertisingRequest, opts ...grpc.CallOption) (*StopAdvertisingResponse, error)
-	StopAdvertisingSet(ctx context.Context, in *StopAdvertisingSetRequest, opts ...grpc.CallOption) (*StopAdvertisingSetResponse, error)
+type BluetoothLeScannerServiceClient interface {
+	FlushPendingScanResults(ctx context.Context, in *FlushPendingScanResultsRequest, opts ...grpc.CallOption) (*FlushPendingScanResultsResponse, error)
+	StartScan1(ctx context.Context, in *StartScan1Request, opts ...grpc.CallOption) (*StartScan1Response, error)
+	StartScan3_1(ctx context.Context, in *StartScan3_1Request, opts ...grpc.CallOption) (*StartScan3_1Response, error)
+	StartScan3_2(ctx context.Context, in *StartScan3_2Request, opts ...grpc.CallOption) (*StartScan3_2Response, error)
+	StopScan1(ctx context.Context, in *StopScan1Request, opts ...grpc.CallOption) (*StopScan1Response, error)
+	StopScan1_1(ctx context.Context, in *StopScan1_1Request, opts ...grpc.CallOption) (*StopScan1_1Response, error)
 }
 
-type bluetoothLeAdvertiserServiceClient struct {
+type bluetoothLeScannerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBluetoothLeAdvertiserServiceClient(cc grpc.ClientConnInterface) BluetoothLeAdvertiserServiceClient {
-	return &bluetoothLeAdvertiserServiceClient{cc}
+func NewBluetoothLeScannerServiceClient(cc grpc.ClientConnInterface) BluetoothLeScannerServiceClient {
+	return &bluetoothLeScannerServiceClient{cc}
 }
 
-func (c *bluetoothLeAdvertiserServiceClient) StartAdvertising3(ctx context.Context, in *StartAdvertising3Request, opts ...grpc.CallOption) (*StartAdvertising3Response, error) {
+func (c *bluetoothLeScannerServiceClient) FlushPendingScanResults(ctx context.Context, in *FlushPendingScanResultsRequest, opts ...grpc.CallOption) (*FlushPendingScanResultsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartAdvertising3Response)
-	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertising3_FullMethodName, in, out, cOpts...)
+	out := new(FlushPendingScanResultsResponse)
+	err := c.cc.Invoke(ctx, BluetoothLeScannerService_FlushPendingScanResults_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothLeAdvertiserServiceClient) StartAdvertising4_1(ctx context.Context, in *StartAdvertising4_1Request, opts ...grpc.CallOption) (*StartAdvertising4_1Response, error) {
+func (c *bluetoothLeScannerServiceClient) StartScan1(ctx context.Context, in *StartScan1Request, opts ...grpc.CallOption) (*StartScan1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartAdvertising4_1Response)
-	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertising4_1_FullMethodName, in, out, cOpts...)
+	out := new(StartScan1Response)
+	err := c.cc.Invoke(ctx, BluetoothLeScannerService_StartScan1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothLeAdvertiserServiceClient) StartAdvertisingSet6(ctx context.Context, in *StartAdvertisingSet6Request, opts ...grpc.CallOption) (*StartAdvertisingSet6Response, error) {
+func (c *bluetoothLeScannerServiceClient) StartScan3_1(ctx context.Context, in *StartScan3_1Request, opts ...grpc.CallOption) (*StartScan3_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartAdvertisingSet6Response)
-	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertisingSet6_FullMethodName, in, out, cOpts...)
+	out := new(StartScan3_1Response)
+	err := c.cc.Invoke(ctx, BluetoothLeScannerService_StartScan3_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothLeAdvertiserServiceClient) StartAdvertisingSet8_1(ctx context.Context, in *StartAdvertisingSet8_1Request, opts ...grpc.CallOption) (*StartAdvertisingSet8_1Response, error) {
+func (c *bluetoothLeScannerServiceClient) StartScan3_2(ctx context.Context, in *StartScan3_2Request, opts ...grpc.CallOption) (*StartScan3_2Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartAdvertisingSet8_1Response)
-	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertisingSet8_1_FullMethodName, in, out, cOpts...)
+	out := new(StartScan3_2Response)
+	err := c.cc.Invoke(ctx, BluetoothLeScannerService_StartScan3_2_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothLeAdvertiserServiceClient) StopAdvertising(ctx context.Context, in *StopAdvertisingRequest, opts ...grpc.CallOption) (*StopAdvertisingResponse, error) {
+func (c *bluetoothLeScannerServiceClient) StopScan1(ctx context.Context, in *StopScan1Request, opts ...grpc.CallOption) (*StopScan1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StopAdvertisingResponse)
-	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StopAdvertising_FullMethodName, in, out, cOpts...)
+	out := new(StopScan1Response)
+	err := c.cc.Invoke(ctx, BluetoothLeScannerService_StopScan1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothLeAdvertiserServiceClient) StopAdvertisingSet(ctx context.Context, in *StopAdvertisingSetRequest, opts ...grpc.CallOption) (*StopAdvertisingSetResponse, error) {
+func (c *bluetoothLeScannerServiceClient) StopScan1_1(ctx context.Context, in *StopScan1_1Request, opts ...grpc.CallOption) (*StopScan1_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StopAdvertisingSetResponse)
-	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StopAdvertisingSet_FullMethodName, in, out, cOpts...)
+	out := new(StopScan1_1Response)
+	err := c.cc.Invoke(ctx, BluetoothLeScannerService_StopScan1_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BluetoothLeAdvertiserServiceServer is the server API for BluetoothLeAdvertiserService service.
-// All implementations must embed UnimplementedBluetoothLeAdvertiserServiceServer
+// BluetoothLeScannerServiceServer is the server API for BluetoothLeScannerService service.
+// All implementations must embed UnimplementedBluetoothLeScannerServiceServer
 // for forward compatibility.
-type BluetoothLeAdvertiserServiceServer interface {
-	StartAdvertising3(context.Context, *StartAdvertising3Request) (*StartAdvertising3Response, error)
-	StartAdvertising4_1(context.Context, *StartAdvertising4_1Request) (*StartAdvertising4_1Response, error)
-	StartAdvertisingSet6(context.Context, *StartAdvertisingSet6Request) (*StartAdvertisingSet6Response, error)
-	StartAdvertisingSet8_1(context.Context, *StartAdvertisingSet8_1Request) (*StartAdvertisingSet8_1Response, error)
-	StopAdvertising(context.Context, *StopAdvertisingRequest) (*StopAdvertisingResponse, error)
-	StopAdvertisingSet(context.Context, *StopAdvertisingSetRequest) (*StopAdvertisingSetResponse, error)
-	mustEmbedUnimplementedBluetoothLeAdvertiserServiceServer()
+type BluetoothLeScannerServiceServer interface {
+	FlushPendingScanResults(context.Context, *FlushPendingScanResultsRequest) (*FlushPendingScanResultsResponse, error)
+	StartScan1(context.Context, *StartScan1Request) (*StartScan1Response, error)
+	StartScan3_1(context.Context, *StartScan3_1Request) (*StartScan3_1Response, error)
+	StartScan3_2(context.Context, *StartScan3_2Request) (*StartScan3_2Response, error)
+	StopScan1(context.Context, *StopScan1Request) (*StopScan1Response, error)
+	StopScan1_1(context.Context, *StopScan1_1Request) (*StopScan1_1Response, error)
+	mustEmbedUnimplementedBluetoothLeScannerServiceServer()
 }
 
-// UnimplementedBluetoothLeAdvertiserServiceServer must be embedded to have
+// UnimplementedBluetoothLeScannerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBluetoothLeAdvertiserServiceServer struct{}
+type UnimplementedBluetoothLeScannerServiceServer struct{}
 
-func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertising3(context.Context, *StartAdvertising3Request) (*StartAdvertising3Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartAdvertising3 not implemented")
+func (UnimplementedBluetoothLeScannerServiceServer) FlushPendingScanResults(context.Context, *FlushPendingScanResultsRequest) (*FlushPendingScanResultsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FlushPendingScanResults not implemented")
 }
-func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertising4_1(context.Context, *StartAdvertising4_1Request) (*StartAdvertising4_1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartAdvertising4_1 not implemented")
+func (UnimplementedBluetoothLeScannerServiceServer) StartScan1(context.Context, *StartScan1Request) (*StartScan1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartScan1 not implemented")
 }
-func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertisingSet6(context.Context, *StartAdvertisingSet6Request) (*StartAdvertisingSet6Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartAdvertisingSet6 not implemented")
+func (UnimplementedBluetoothLeScannerServiceServer) StartScan3_1(context.Context, *StartScan3_1Request) (*StartScan3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartScan3_1 not implemented")
 }
-func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertisingSet8_1(context.Context, *StartAdvertisingSet8_1Request) (*StartAdvertisingSet8_1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartAdvertisingSet8_1 not implemented")
+func (UnimplementedBluetoothLeScannerServiceServer) StartScan3_2(context.Context, *StartScan3_2Request) (*StartScan3_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartScan3_2 not implemented")
 }
-func (UnimplementedBluetoothLeAdvertiserServiceServer) StopAdvertising(context.Context, *StopAdvertisingRequest) (*StopAdvertisingResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StopAdvertising not implemented")
+func (UnimplementedBluetoothLeScannerServiceServer) StopScan1(context.Context, *StopScan1Request) (*StopScan1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopScan1 not implemented")
 }
-func (UnimplementedBluetoothLeAdvertiserServiceServer) StopAdvertisingSet(context.Context, *StopAdvertisingSetRequest) (*StopAdvertisingSetResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StopAdvertisingSet not implemented")
+func (UnimplementedBluetoothLeScannerServiceServer) StopScan1_1(context.Context, *StopScan1_1Request) (*StopScan1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopScan1_1 not implemented")
 }
-func (UnimplementedBluetoothLeAdvertiserServiceServer) mustEmbedUnimplementedBluetoothLeAdvertiserServiceServer() {
+func (UnimplementedBluetoothLeScannerServiceServer) mustEmbedUnimplementedBluetoothLeScannerServiceServer() {
 }
-func (UnimplementedBluetoothLeAdvertiserServiceServer) testEmbeddedByValue() {}
+func (UnimplementedBluetoothLeScannerServiceServer) testEmbeddedByValue() {}
 
-// UnsafeBluetoothLeAdvertiserServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BluetoothLeAdvertiserServiceServer will
+// UnsafeBluetoothLeScannerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothLeScannerServiceServer will
 // result in compilation errors.
-type UnsafeBluetoothLeAdvertiserServiceServer interface {
-	mustEmbedUnimplementedBluetoothLeAdvertiserServiceServer()
+type UnsafeBluetoothLeScannerServiceServer interface {
+	mustEmbedUnimplementedBluetoothLeScannerServiceServer()
 }
 
-func RegisterBluetoothLeAdvertiserServiceServer(s grpc.ServiceRegistrar, srv BluetoothLeAdvertiserServiceServer) {
-	// If the following call panics, it indicates UnimplementedBluetoothLeAdvertiserServiceServer was
+func RegisterBluetoothLeScannerServiceServer(s grpc.ServiceRegistrar, srv BluetoothLeScannerServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothLeScannerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&BluetoothLeAdvertiserService_ServiceDesc, srv)
+	s.RegisterService(&BluetoothLeScannerService_ServiceDesc, srv)
 }
 
-func _BluetoothLeAdvertiserService_StartAdvertising3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartAdvertising3Request)
+func _BluetoothLeScannerService_FlushPendingScanResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FlushPendingScanResultsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising3(ctx, in)
+		return srv.(BluetoothLeScannerServiceServer).FlushPendingScanResults(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothLeAdvertiserService_StartAdvertising3_FullMethodName,
+		FullMethod: BluetoothLeScannerService_FlushPendingScanResults_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising3(ctx, req.(*StartAdvertising3Request))
+		return srv.(BluetoothLeScannerServiceServer).FlushPendingScanResults(ctx, req.(*FlushPendingScanResultsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothLeAdvertiserService_StartAdvertising4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartAdvertising4_1Request)
+func _BluetoothLeScannerService_StartScan1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartScan1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising4_1(ctx, in)
+		return srv.(BluetoothLeScannerServiceServer).StartScan1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothLeAdvertiserService_StartAdvertising4_1_FullMethodName,
+		FullMethod: BluetoothLeScannerService_StartScan1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising4_1(ctx, req.(*StartAdvertising4_1Request))
+		return srv.(BluetoothLeScannerServiceServer).StartScan1(ctx, req.(*StartScan1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothLeAdvertiserService_StartAdvertisingSet6_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartAdvertisingSet6Request)
+func _BluetoothLeScannerService_StartScan3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartScan3_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet6(ctx, in)
+		return srv.(BluetoothLeScannerServiceServer).StartScan3_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothLeAdvertiserService_StartAdvertisingSet6_FullMethodName,
+		FullMethod: BluetoothLeScannerService_StartScan3_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet6(ctx, req.(*StartAdvertisingSet6Request))
+		return srv.(BluetoothLeScannerServiceServer).StartScan3_1(ctx, req.(*StartScan3_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothLeAdvertiserService_StartAdvertisingSet8_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartAdvertisingSet8_1Request)
+func _BluetoothLeScannerService_StartScan3_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartScan3_2Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet8_1(ctx, in)
+		return srv.(BluetoothLeScannerServiceServer).StartScan3_2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothLeAdvertiserService_StartAdvertisingSet8_1_FullMethodName,
+		FullMethod: BluetoothLeScannerService_StartScan3_2_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet8_1(ctx, req.(*StartAdvertisingSet8_1Request))
+		return srv.(BluetoothLeScannerServiceServer).StartScan3_2(ctx, req.(*StartScan3_2Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothLeAdvertiserService_StopAdvertising_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopAdvertisingRequest)
+func _BluetoothLeScannerService_StopScan1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopScan1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertising(ctx, in)
+		return srv.(BluetoothLeScannerServiceServer).StopScan1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothLeAdvertiserService_StopAdvertising_FullMethodName,
+		FullMethod: BluetoothLeScannerService_StopScan1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertising(ctx, req.(*StopAdvertisingRequest))
+		return srv.(BluetoothLeScannerServiceServer).StopScan1(ctx, req.(*StopScan1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothLeAdvertiserService_StopAdvertisingSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopAdvertisingSetRequest)
+func _BluetoothLeScannerService_StopScan1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopScan1_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertisingSet(ctx, in)
+		return srv.(BluetoothLeScannerServiceServer).StopScan1_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothLeAdvertiserService_StopAdvertisingSet_FullMethodName,
+		FullMethod: BluetoothLeScannerService_StopScan1_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertisingSet(ctx, req.(*StopAdvertisingSetRequest))
+		return srv.(BluetoothLeScannerServiceServer).StopScan1_1(ctx, req.(*StopScan1_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// BluetoothLeAdvertiserService_ServiceDesc is the grpc.ServiceDesc for BluetoothLeAdvertiserService service.
+// BluetoothLeScannerService_ServiceDesc is the grpc.ServiceDesc for BluetoothLeScannerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var BluetoothLeAdvertiserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth_le.BluetoothLeAdvertiserService",
-	HandlerType: (*BluetoothLeAdvertiserServiceServer)(nil),
+var BluetoothLeScannerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth_le.BluetoothLeScannerService",
+	HandlerType: (*BluetoothLeScannerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "StartAdvertising3",
-			Handler:    _BluetoothLeAdvertiserService_StartAdvertising3_Handler,
+			MethodName: "FlushPendingScanResults",
+			Handler:    _BluetoothLeScannerService_FlushPendingScanResults_Handler,
 		},
 		{
-			MethodName: "StartAdvertising4_1",
-			Handler:    _BluetoothLeAdvertiserService_StartAdvertising4_1_Handler,
+			MethodName: "StartScan1",
+			Handler:    _BluetoothLeScannerService_StartScan1_Handler,
 		},
 		{
-			MethodName: "StartAdvertisingSet6",
-			Handler:    _BluetoothLeAdvertiserService_StartAdvertisingSet6_Handler,
+			MethodName: "StartScan3_1",
+			Handler:    _BluetoothLeScannerService_StartScan3_1_Handler,
 		},
 		{
-			MethodName: "StartAdvertisingSet8_1",
-			Handler:    _BluetoothLeAdvertiserService_StartAdvertisingSet8_1_Handler,
+			MethodName: "StartScan3_2",
+			Handler:    _BluetoothLeScannerService_StartScan3_2_Handler,
 		},
 		{
-			MethodName: "StopAdvertising",
-			Handler:    _BluetoothLeAdvertiserService_StopAdvertising_Handler,
+			MethodName: "StopScan1",
+			Handler:    _BluetoothLeScannerService_StopScan1_Handler,
 		},
 		{
-			MethodName: "StopAdvertisingSet",
-			Handler:    _BluetoothLeAdvertiserService_StopAdvertisingSet_Handler,
+			MethodName: "StopScan1_1",
+			Handler:    _BluetoothLeScannerService_StopScan1_1_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

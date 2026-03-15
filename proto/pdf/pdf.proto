@@ -6,145 +6,100 @@ package pdf;
 
 option go_package = "github.com/xaionaro-go/jni/proto/pdf";
 
-message AsSharedRequest {
+message CloseRequest {
 }
 
-message AsSharedResponse {
+message CloseResponse {
+}
+
+message GetDocumentLinearizationTypeRequest {
+}
+
+message GetDocumentLinearizationTypeResponse {
+  int32 result = 1;
+}
+
+message GetPageCountRequest {
+}
+
+message GetPageCountResponse {
+  int32 result = 1;
+}
+
+message GetPdfFormTypeRequest {
+}
+
+message GetPdfFormTypeResponse {
+  int32 result = 1;
+}
+
+message OpenPageRequest {
+  int32 arg0 = 1;
+}
+
+message OpenPageResponse {
   int64 result = 1;
 }
 
-message CompressRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int64 arg2 = 3;
+message ShouldScaleForPrintingRequest {
 }
 
-message CompressResponse {
+message ShouldScaleForPrintingResponse {
   bool result = 1;
 }
 
-message CopyRequest {
+message WriteRequest {
   int64 arg0 = 1;
   bool arg1 = 2;
 }
 
-message CopyResponse {
+message WriteResponse {
+}
+
+message ApplyEditRequest {
+  int64 arg0 = 1;
+}
+
+message ApplyEditResponse {
   int64 result = 1;
 }
 
-message CopyPixelsFromBufferRequest {
-  int64 arg0 = 1;
-}
-
-message CopyPixelsFromBufferResponse {
-}
-
-message CopyPixelsToBufferRequest {
-  int64 arg0 = 1;
-}
-
-message CopyPixelsToBufferResponse {
-}
-
-message DescribeContentsRequest {
-}
-
-message DescribeContentsResponse {
-  int32 result = 1;
-}
-
-message EraseColor1Request {
+message GetFormWidgetInfoAtIndexRequest {
   int32 arg0 = 1;
 }
 
-message EraseColor1Response {
-}
-
-message EraseColor1_1Request {
-  int64 arg0 = 1;
-}
-
-message EraseColor1_1Response {
-}
-
-message ExtractAlpha0Request {
-}
-
-message ExtractAlpha0Response {
+message GetFormWidgetInfoAtIndexResponse {
   int64 result = 1;
 }
 
-message ExtractAlpha2_1Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message ExtractAlpha2_1Response {
-  int64 result = 1;
-}
-
-message GetAllocationByteCountRequest {
-}
-
-message GetAllocationByteCountResponse {
-  int32 result = 1;
-}
-
-message GetByteCountRequest {
-}
-
-message GetByteCountResponse {
-  int32 result = 1;
-}
-
-message GetColorRequest {
+message GetFormWidgetInfoAtPositionRequest {
   int32 arg0 = 1;
   int32 arg1 = 2;
 }
 
-message GetColorResponse {
+message GetFormWidgetInfoAtPositionResponse {
   int64 result = 1;
 }
 
-message GetColorSpaceRequest {
+message GetFormWidgetInfos0Request {
 }
 
-message GetColorSpaceResponse {
+message GetFormWidgetInfos0Response {
   int64 result = 1;
 }
 
-message GetConfigRequest {
+message GetFormWidgetInfos1_1Request {
+  int64 arg0 = 1;
 }
 
-message GetConfigResponse {
+message GetFormWidgetInfos1_1Response {
   int64 result = 1;
 }
 
-message GetDensityRequest {
+message GetGotoLinksRequest {
 }
 
-message GetDensityResponse {
-  int32 result = 1;
-}
-
-message GetGainmapRequest {
-}
-
-message GetGainmapResponse {
-  int64 result = 1;
-}
-
-message GetGenerationIdRequest {
-}
-
-message GetGenerationIdResponse {
-  int32 result = 1;
-}
-
-message GetHardwareBufferRequest {
-}
-
-message GetHardwareBufferResponse {
+message GetGotoLinksResponse {
   int64 result = 1;
 }
 
@@ -155,88 +110,32 @@ message GetHeightResponse {
   int32 result = 1;
 }
 
-message GetNinePatchChunkRequest {
+message GetImageContentsRequest {
 }
 
-message GetNinePatchChunkResponse {
+message GetImageContentsResponse {
   int64 result = 1;
 }
 
-message GetPixelRequest {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
+message GetIndexRequest {
 }
 
-message GetPixelResponse {
+message GetIndexResponse {
   int32 result = 1;
 }
 
-message GetPixelsRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int32 arg3 = 4;
-  int32 arg4 = 5;
-  int32 arg5 = 6;
-  int32 arg6 = 7;
+message GetLinkContentsRequest {
 }
 
-message GetPixelsResponse {
+message GetLinkContentsResponse {
+  int64 result = 1;
 }
 
-message GetRowBytesRequest {
+message GetTextContentsRequest {
 }
 
-message GetRowBytesResponse {
-  int32 result = 1;
-}
-
-message GetScaledHeight1Request {
-  int64 arg0 = 1;
-}
-
-message GetScaledHeight1Response {
-  int32 result = 1;
-}
-
-message GetScaledHeight1_1Request {
-  int64 arg0 = 1;
-}
-
-message GetScaledHeight1_1Response {
-  int32 result = 1;
-}
-
-message GetScaledHeight1_2Request {
-  int32 arg0 = 1;
-}
-
-message GetScaledHeight1_2Response {
-  int32 result = 1;
-}
-
-message GetScaledWidth1Request {
-  int64 arg0 = 1;
-}
-
-message GetScaledWidth1Response {
-  int32 result = 1;
-}
-
-message GetScaledWidth1_1Request {
-  int64 arg0 = 1;
-}
-
-message GetScaledWidth1_1Response {
-  int32 result = 1;
-}
-
-message GetScaledWidth1_2Request {
-  int32 arg0 = 1;
-}
-
-message GetScaledWidth1_2Response {
-  int32 result = 1;
+message GetTextContentsResponse {
+  int64 result = 1;
 }
 
 message GetWidthRequest {
@@ -246,431 +145,69 @@ message GetWidthResponse {
   int32 result = 1;
 }
 
-message HasAlphaRequest {
-}
-
-message HasAlphaResponse {
-  bool result = 1;
-}
-
-message HasGainmapRequest {
-}
-
-message HasGainmapResponse {
-  bool result = 1;
-}
-
-message HasMipMapRequest {
-}
-
-message HasMipMapResponse {
-  bool result = 1;
-}
-
-message IsMutableRequest {
-}
-
-message IsMutableResponse {
-  bool result = 1;
-}
-
-message IsPremultipliedRequest {
-}
-
-message IsPremultipliedResponse {
-  bool result = 1;
-}
-
-message IsRecycledRequest {
-}
-
-message IsRecycledResponse {
-  bool result = 1;
-}
-
-message PrepareToDrawRequest {
-}
-
-message PrepareToDrawResponse {
-}
-
-message ReconfigureRequest {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message ReconfigureResponse {
-}
-
-message RecycleRequest {
-}
-
-message RecycleResponse {
-}
-
-message SameAsRequest {
-  int64 arg0 = 1;
-}
-
-message SameAsResponse {
-  bool result = 1;
-}
-
-message SetColorSpaceRequest {
-  int64 arg0 = 1;
-}
-
-message SetColorSpaceResponse {
-}
-
-message SetConfigRequest {
-  int64 arg0 = 1;
-}
-
-message SetConfigResponse {
-}
-
-message SetDensityRequest {
-  int32 arg0 = 1;
-}
-
-message SetDensityResponse {
-}
-
-message SetGainmapRequest {
-  int64 arg0 = 1;
-}
-
-message SetGainmapResponse {
-}
-
-message SetHasAlphaRequest {
-  bool arg0 = 1;
-}
-
-message SetHasAlphaResponse {
-}
-
-message SetHasMipMapRequest {
-  bool arg0 = 1;
-}
-
-message SetHasMipMapResponse {
-}
-
-message SetHeightRequest {
-  int32 arg0 = 1;
-}
-
-message SetHeightResponse {
-}
-
-message SetPixelRequest {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-}
-
-message SetPixelResponse {
-}
-
-message SetPixelsRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int32 arg3 = 4;
-  int32 arg4 = 5;
-  int32 arg5 = 6;
-  int32 arg6 = 7;
-}
-
-message SetPixelsResponse {
-}
-
-message SetPremultipliedRequest {
-  bool arg0 = 1;
-}
-
-message SetPremultipliedResponse {
-}
-
-message SetWidthRequest {
-  int32 arg0 = 1;
-}
-
-message SetWidthResponse {
-}
-
-message WriteToParcelRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-}
-
-message WriteToParcelResponse {
-}
-
-message CreateBitmap1Request {
-  int64 arg0 = 1;
-}
-
-message CreateBitmap1Response {
-  int64 result = 1;
-}
-
-message CreateBitmap5_1Request {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int32 arg3 = 4;
-  int32 arg4 = 5;
-}
-
-message CreateBitmap5_1Response {
-  int64 result = 1;
-}
-
-message CreateBitmap7_2Request {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int32 arg3 = 4;
-  int32 arg4 = 5;
-  int64 arg5 = 6;
-  bool arg6 = 7;
-}
-
-message CreateBitmap7_2Response {
-  int64 result = 1;
-}
-
-message CreateBitmap1_3Request {
-  int64 arg0 = 1;
-}
-
-message CreateBitmap1_3Response {
-  int64 result = 1;
-}
-
-message CreateBitmap4_4Request {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int64 arg3 = 4;
-}
-
-message CreateBitmap4_4Response {
-  int64 result = 1;
-}
-
-message CreateBitmap4_5Request {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int64 arg3 = 4;
-}
-
-message CreateBitmap4_5Response {
-  int64 result = 1;
-}
-
-message CreateBitmap5_6Request {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int64 arg3 = 4;
-  bool arg4 = 5;
-}
-
-message CreateBitmap5_6Response {
-  int64 result = 1;
-}
-
-message CreateBitmap6_7Request {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int64 arg3 = 4;
-  bool arg4 = 5;
-  int64 arg5 = 6;
-}
-
-message CreateBitmap6_7Response {
-  int64 result = 1;
-}
-
-message CreateBitmap5_8Request {
+message Render4Request {
   int64 arg0 = 1;
   int64 arg1 = 2;
-  int32 arg2 = 3;
-  int32 arg3 = 4;
-  int64 arg4 = 5;
-}
-
-message CreateBitmap5_8Response {
-  int64 result = 1;
-}
-
-message CreateBitmap7_9Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int32 arg2 = 3;
-  int32 arg3 = 4;
-  int32 arg4 = 5;
-  int32 arg5 = 6;
-  int64 arg6 = 7;
-}
-
-message CreateBitmap7_9Response {
-  int64 result = 1;
-}
-
-message CreateBitmap3_10Request {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
   int64 arg2 = 3;
-}
-
-message CreateBitmap3_10Response {
-  int64 result = 1;
-}
-
-message CreateBitmap4_11Request {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
-  int64 arg2 = 3;
-  bool arg3 = 4;
-}
-
-message CreateBitmap4_11Response {
-  int64 result = 1;
-}
-
-message CreateBitmap5_12Request {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
-  int64 arg2 = 3;
-  bool arg3 = 4;
-  int64 arg4 = 5;
-}
-
-message CreateBitmap5_12Response {
-  int64 result = 1;
-}
-
-message CreateBitmap4_13Request {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
   int64 arg3 = 4;
 }
 
-message CreateBitmap4_13Response {
-  int64 result = 1;
+message Render4Response {
 }
 
-message CreateBitmap6_14Request {
+message Render4_1Request {
   int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
   int32 arg3 = 4;
-  int32 arg4 = 5;
-  int64 arg5 = 6;
 }
 
-message CreateBitmap6_14Response {
+message Render4_1Response {
+}
+
+message SearchTextRequest {
+  string arg0 = 1;
+}
+
+message SearchTextResponse {
   int64 result = 1;
 }
 
-message CreateScaledBitmapRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  bool arg3 = 4;
-}
-
-message CreateScaledBitmapResponse {
-  int64 result = 1;
-}
-
-message WrapHardwareBufferRequest {
+message SelectContentRequest {
   int64 arg0 = 1;
   int64 arg1 = 2;
 }
 
-message WrapHardwareBufferResponse {
+message SelectContentResponse {
   int64 result = 1;
 }
 
-service BitmapService {
-  rpc AsShared (AsSharedRequest) returns (AsSharedResponse);
-  rpc Compress (CompressRequest) returns (CompressResponse);
-  rpc Copy (CopyRequest) returns (CopyResponse);
-  rpc CopyPixelsFromBuffer (CopyPixelsFromBufferRequest) returns (CopyPixelsFromBufferResponse);
-  rpc CopyPixelsToBuffer (CopyPixelsToBufferRequest) returns (CopyPixelsToBufferResponse);
-  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc EraseColor1 (EraseColor1Request) returns (EraseColor1Response);
-  rpc EraseColor1_1 (EraseColor1_1Request) returns (EraseColor1_1Response);
-  rpc ExtractAlpha0 (ExtractAlpha0Request) returns (ExtractAlpha0Response);
-  rpc ExtractAlpha2_1 (ExtractAlpha2_1Request) returns (ExtractAlpha2_1Response);
-  rpc GetAllocationByteCount (GetAllocationByteCountRequest) returns (GetAllocationByteCountResponse);
-  rpc GetByteCount (GetByteCountRequest) returns (GetByteCountResponse);
-  rpc GetColor (GetColorRequest) returns (GetColorResponse);
-  rpc GetColorSpace (GetColorSpaceRequest) returns (GetColorSpaceResponse);
-  rpc GetConfig (GetConfigRequest) returns (GetConfigResponse);
-  rpc GetDensity (GetDensityRequest) returns (GetDensityResponse);
-  rpc GetGainmap (GetGainmapRequest) returns (GetGainmapResponse);
-  rpc GetGenerationId (GetGenerationIdRequest) returns (GetGenerationIdResponse);
-  rpc GetHardwareBuffer (GetHardwareBufferRequest) returns (GetHardwareBufferResponse);
+service PdfRendererService {
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc GetDocumentLinearizationType (GetDocumentLinearizationTypeRequest) returns (GetDocumentLinearizationTypeResponse);
+  rpc GetPageCount (GetPageCountRequest) returns (GetPageCountResponse);
+  rpc GetPdfFormType (GetPdfFormTypeRequest) returns (GetPdfFormTypeResponse);
+  rpc OpenPage (OpenPageRequest) returns (OpenPageResponse);
+  rpc ShouldScaleForPrinting (ShouldScaleForPrintingRequest) returns (ShouldScaleForPrintingResponse);
+  rpc Write (WriteRequest) returns (WriteResponse);
+}
+
+service PdfRendererPageService {
+  rpc ApplyEdit (ApplyEditRequest) returns (ApplyEditResponse);
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc GetFormWidgetInfoAtIndex (GetFormWidgetInfoAtIndexRequest) returns (GetFormWidgetInfoAtIndexResponse);
+  rpc GetFormWidgetInfoAtPosition (GetFormWidgetInfoAtPositionRequest) returns (GetFormWidgetInfoAtPositionResponse);
+  rpc GetFormWidgetInfos0 (GetFormWidgetInfos0Request) returns (GetFormWidgetInfos0Response);
+  rpc GetFormWidgetInfos1_1 (GetFormWidgetInfos1_1Request) returns (GetFormWidgetInfos1_1Response);
+  rpc GetGotoLinks (GetGotoLinksRequest) returns (GetGotoLinksResponse);
   rpc GetHeight (GetHeightRequest) returns (GetHeightResponse);
-  rpc GetNinePatchChunk (GetNinePatchChunkRequest) returns (GetNinePatchChunkResponse);
-  rpc GetPixel (GetPixelRequest) returns (GetPixelResponse);
-  rpc GetPixels (GetPixelsRequest) returns (GetPixelsResponse);
-  rpc GetRowBytes (GetRowBytesRequest) returns (GetRowBytesResponse);
-  rpc GetScaledHeight1 (GetScaledHeight1Request) returns (GetScaledHeight1Response);
-  rpc GetScaledHeight1_1 (GetScaledHeight1_1Request) returns (GetScaledHeight1_1Response);
-  rpc GetScaledHeight1_2 (GetScaledHeight1_2Request) returns (GetScaledHeight1_2Response);
-  rpc GetScaledWidth1 (GetScaledWidth1Request) returns (GetScaledWidth1Response);
-  rpc GetScaledWidth1_1 (GetScaledWidth1_1Request) returns (GetScaledWidth1_1Response);
-  rpc GetScaledWidth1_2 (GetScaledWidth1_2Request) returns (GetScaledWidth1_2Response);
+  rpc GetImageContents (GetImageContentsRequest) returns (GetImageContentsResponse);
+  rpc GetIndex (GetIndexRequest) returns (GetIndexResponse);
+  rpc GetLinkContents (GetLinkContentsRequest) returns (GetLinkContentsResponse);
+  rpc GetTextContents (GetTextContentsRequest) returns (GetTextContentsResponse);
   rpc GetWidth (GetWidthRequest) returns (GetWidthResponse);
-  rpc HasAlpha (HasAlphaRequest) returns (HasAlphaResponse);
-  rpc HasGainmap (HasGainmapRequest) returns (HasGainmapResponse);
-  rpc HasMipMap (HasMipMapRequest) returns (HasMipMapResponse);
-  rpc IsMutable (IsMutableRequest) returns (IsMutableResponse);
-  rpc IsPremultiplied (IsPremultipliedRequest) returns (IsPremultipliedResponse);
-  rpc IsRecycled (IsRecycledRequest) returns (IsRecycledResponse);
-  rpc PrepareToDraw (PrepareToDrawRequest) returns (PrepareToDrawResponse);
-  rpc Reconfigure (ReconfigureRequest) returns (ReconfigureResponse);
-  rpc Recycle (RecycleRequest) returns (RecycleResponse);
-  rpc SameAs (SameAsRequest) returns (SameAsResponse);
-  rpc SetColorSpace (SetColorSpaceRequest) returns (SetColorSpaceResponse);
-  rpc SetConfig (SetConfigRequest) returns (SetConfigResponse);
-  rpc SetDensity (SetDensityRequest) returns (SetDensityResponse);
-  rpc SetGainmap (SetGainmapRequest) returns (SetGainmapResponse);
-  rpc SetHasAlpha (SetHasAlphaRequest) returns (SetHasAlphaResponse);
-  rpc SetHasMipMap (SetHasMipMapRequest) returns (SetHasMipMapResponse);
-  rpc SetHeight (SetHeightRequest) returns (SetHeightResponse);
-  rpc SetPixel (SetPixelRequest) returns (SetPixelResponse);
-  rpc SetPixels (SetPixelsRequest) returns (SetPixelsResponse);
-  rpc SetPremultiplied (SetPremultipliedRequest) returns (SetPremultipliedResponse);
-  rpc SetWidth (SetWidthRequest) returns (SetWidthResponse);
-  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
-  rpc CreateBitmap1 (CreateBitmap1Request) returns (CreateBitmap1Response);
-  rpc CreateBitmap5_1 (CreateBitmap5_1Request) returns (CreateBitmap5_1Response);
-  rpc CreateBitmap7_2 (CreateBitmap7_2Request) returns (CreateBitmap7_2Response);
-  rpc CreateBitmap1_3 (CreateBitmap1_3Request) returns (CreateBitmap1_3Response);
-  rpc CreateBitmap4_4 (CreateBitmap4_4Request) returns (CreateBitmap4_4Response);
-  rpc CreateBitmap4_5 (CreateBitmap4_5Request) returns (CreateBitmap4_5Response);
-  rpc CreateBitmap5_6 (CreateBitmap5_6Request) returns (CreateBitmap5_6Response);
-  rpc CreateBitmap6_7 (CreateBitmap6_7Request) returns (CreateBitmap6_7Response);
-  rpc CreateBitmap5_8 (CreateBitmap5_8Request) returns (CreateBitmap5_8Response);
-  rpc CreateBitmap7_9 (CreateBitmap7_9Request) returns (CreateBitmap7_9Response);
-  rpc CreateBitmap3_10 (CreateBitmap3_10Request) returns (CreateBitmap3_10Response);
-  rpc CreateBitmap4_11 (CreateBitmap4_11Request) returns (CreateBitmap4_11Response);
-  rpc CreateBitmap5_12 (CreateBitmap5_12Request) returns (CreateBitmap5_12Response);
-  rpc CreateBitmap4_13 (CreateBitmap4_13Request) returns (CreateBitmap4_13Response);
-  rpc CreateBitmap6_14 (CreateBitmap6_14Request) returns (CreateBitmap6_14Response);
-  rpc CreateScaledBitmap (CreateScaledBitmapRequest) returns (CreateScaledBitmapResponse);
-  rpc WrapHardwareBuffer (WrapHardwareBufferRequest) returns (WrapHardwareBufferResponse);
+  rpc Render4 (Render4Request) returns (Render4Response);
+  rpc Render4_1 (Render4_1Request) returns (Render4_1Response);
+  rpc SearchText (SearchTextRequest) returns (SearchTextResponse);
+  rpc SelectContent (SelectContentRequest) returns (SelectContentResponse);
 }

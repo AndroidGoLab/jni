@@ -6,13 +6,6 @@ package nfc;
 
 option go_package = "github.com/xaionaro-go/jni/proto/nfc";
 
-message CanMakeReadOnlyRequest {
-}
-
-message CanMakeReadOnlyResponse {
-  bool result = 1;
-}
-
 message CloseRequest {
 }
 
@@ -25,25 +18,25 @@ message ConnectRequest {
 message ConnectResponse {
 }
 
-message GetCachedNdefMessageRequest {
+message GetHiLayerResponseRequest {
 }
 
-message GetCachedNdefMessageResponse {
+message GetHiLayerResponseResponse {
   int64 result = 1;
 }
 
-message GetMaxSizeRequest {
+message GetHistoricalBytesRequest {
 }
 
-message GetMaxSizeResponse {
+message GetHistoricalBytesResponse {
+  int64 result = 1;
+}
+
+message GetMaxTransceiveLengthRequest {
+}
+
+message GetMaxTransceiveLengthResponse {
   int32 result = 1;
-}
-
-message GetNdefMessageRequest {
-}
-
-message GetNdefMessageResponse {
-  int64 result = 1;
 }
 
 message GetTagRequest {
@@ -53,11 +46,11 @@ message GetTagResponse {
   int64 result = 1;
 }
 
-message GetTypeRequest {
+message GetTimeoutRequest {
 }
 
-message GetTypeResponse {
-  string result = 1;
+message GetTimeoutResponse {
+  int32 result = 1;
 }
 
 message IsConnectedRequest {
@@ -67,25 +60,26 @@ message IsConnectedResponse {
   bool result = 1;
 }
 
-message IsWritableRequest {
+message IsExtendedLengthApduSupportedRequest {
 }
 
-message IsWritableResponse {
+message IsExtendedLengthApduSupportedResponse {
   bool result = 1;
 }
 
-message MakeReadOnlyRequest {
+message SetTimeoutRequest {
+  int32 arg0 = 1;
 }
 
-message MakeReadOnlyResponse {
-  bool result = 1;
+message SetTimeoutResponse {
 }
 
-message WriteNdefMessageRequest {
+message TransceiveRequest {
   int64 arg0 = 1;
 }
 
-message WriteNdefMessageResponse {
+message TransceiveResponse {
+  int64 result = 1;
 }
 
 message GetRequest {
@@ -96,18 +90,17 @@ message GetResponse {
   int64 result = 1;
 }
 
-service NdefService {
-  rpc CanMakeReadOnly (CanMakeReadOnlyRequest) returns (CanMakeReadOnlyResponse);
+service IsoDepService {
   rpc Close (CloseRequest) returns (CloseResponse);
   rpc Connect (ConnectRequest) returns (ConnectResponse);
-  rpc GetCachedNdefMessage (GetCachedNdefMessageRequest) returns (GetCachedNdefMessageResponse);
-  rpc GetMaxSize (GetMaxSizeRequest) returns (GetMaxSizeResponse);
-  rpc GetNdefMessage (GetNdefMessageRequest) returns (GetNdefMessageResponse);
+  rpc GetHiLayerResponse (GetHiLayerResponseRequest) returns (GetHiLayerResponseResponse);
+  rpc GetHistoricalBytes (GetHistoricalBytesRequest) returns (GetHistoricalBytesResponse);
+  rpc GetMaxTransceiveLength (GetMaxTransceiveLengthRequest) returns (GetMaxTransceiveLengthResponse);
   rpc GetTag (GetTagRequest) returns (GetTagResponse);
-  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
+  rpc GetTimeout (GetTimeoutRequest) returns (GetTimeoutResponse);
   rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
-  rpc IsWritable (IsWritableRequest) returns (IsWritableResponse);
-  rpc MakeReadOnly (MakeReadOnlyRequest) returns (MakeReadOnlyResponse);
-  rpc WriteNdefMessage (WriteNdefMessageRequest) returns (WriteNdefMessageResponse);
+  rpc IsExtendedLengthApduSupported (IsExtendedLengthApduSupportedRequest) returns (IsExtendedLengthApduSupportedResponse);
+  rpc SetTimeout (SetTimeoutRequest) returns (SetTimeoutResponse);
+  rpc Transceive (TransceiveRequest) returns (TransceiveResponse);
   rpc Get (GetRequest) returns (GetResponse);
 }

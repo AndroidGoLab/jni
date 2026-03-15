@@ -3,6 +3,9 @@
 package resolver
 
 const (
-	Creator = 0
-	Empty   = 0
+	FieldTypeBlob    = 0
+	FieldTypeFloat   = 0
+	FieldTypeInteger = 0
+	FieldTypeNull    = 0
+	FieldTypeString  = 0
 )

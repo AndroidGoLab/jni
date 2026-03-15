@@ -20,77 +20,33 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsbitmap                       *jni.GlobalRef
-	midbitmapAsShared               jni.MethodID
-	midbitmapCompress               jni.MethodID
-	midbitmapCopy                   jni.MethodID
-	midbitmapCopyPixelsFromBuffer   jni.MethodID
-	midbitmapCopyPixelsToBuffer     jni.MethodID
-	midbitmapDescribeContents       jni.MethodID
-	midbitmapEraseColor1            jni.MethodID
-	midbitmapEraseColor1_1          jni.MethodID
-	midbitmapExtractAlpha0          jni.MethodID
-	midbitmapExtractAlpha2_1        jni.MethodID
-	midbitmapGetAllocationByteCount jni.MethodID
-	midbitmapGetByteCount           jni.MethodID
-	midbitmapGetColor               jni.MethodID
-	midbitmapGetColorSpace          jni.MethodID
-	midbitmapGetConfig              jni.MethodID
-	midbitmapGetDensity             jni.MethodID
-	midbitmapGetGainmap             jni.MethodID
-	midbitmapGetGenerationId        jni.MethodID
-	midbitmapGetHardwareBuffer      jni.MethodID
-	midbitmapGetHeight              jni.MethodID
-	midbitmapGetNinePatchChunk      jni.MethodID
-	midbitmapGetPixel               jni.MethodID
-	midbitmapGetPixels              jni.MethodID
-	midbitmapGetRowBytes            jni.MethodID
-	midbitmapGetScaledHeight1       jni.MethodID
-	midbitmapGetScaledHeight1_1     jni.MethodID
-	midbitmapGetScaledHeight1_2     jni.MethodID
-	midbitmapGetScaledWidth1        jni.MethodID
-	midbitmapGetScaledWidth1_1      jni.MethodID
-	midbitmapGetScaledWidth1_2      jni.MethodID
-	midbitmapGetWidth               jni.MethodID
-	midbitmapHasAlpha               jni.MethodID
-	midbitmapHasGainmap             jni.MethodID
-	midbitmapHasMipMap              jni.MethodID
-	midbitmapIsMutable              jni.MethodID
-	midbitmapIsPremultiplied        jni.MethodID
-	midbitmapIsRecycled             jni.MethodID
-	midbitmapPrepareToDraw          jni.MethodID
-	midbitmapReconfigure            jni.MethodID
-	midbitmapRecycle                jni.MethodID
-	midbitmapSameAs                 jni.MethodID
-	midbitmapSetColorSpace          jni.MethodID
-	midbitmapSetConfig              jni.MethodID
-	midbitmapSetDensity             jni.MethodID
-	midbitmapSetGainmap             jni.MethodID
-	midbitmapSetHasAlpha            jni.MethodID
-	midbitmapSetHasMipMap           jni.MethodID
-	midbitmapSetHeight              jni.MethodID
-	midbitmapSetPixel               jni.MethodID
-	midbitmapSetPixels              jni.MethodID
-	midbitmapSetPremultiplied       jni.MethodID
-	midbitmapSetWidth               jni.MethodID
-	midbitmapWriteToParcel          jni.MethodID
-	midbitmapCreateBitmap1          jni.MethodID
-	midbitmapCreateBitmap5_1        jni.MethodID
-	midbitmapCreateBitmap7_2        jni.MethodID
-	midbitmapCreateBitmap1_3        jni.MethodID
-	midbitmapCreateBitmap4_4        jni.MethodID
-	midbitmapCreateBitmap4_5        jni.MethodID
-	midbitmapCreateBitmap5_6        jni.MethodID
-	midbitmapCreateBitmap6_7        jni.MethodID
-	midbitmapCreateBitmap5_8        jni.MethodID
-	midbitmapCreateBitmap7_9        jni.MethodID
-	midbitmapCreateBitmap3_10       jni.MethodID
-	midbitmapCreateBitmap4_11       jni.MethodID
-	midbitmapCreateBitmap5_12       jni.MethodID
-	midbitmapCreateBitmap4_13       jni.MethodID
-	midbitmapCreateBitmap6_14       jni.MethodID
-	midbitmapCreateScaledBitmap     jni.MethodID
-	midbitmapWrapHardwareBuffer     jni.MethodID
+	clspdfRenderer                             *jni.GlobalRef
+	midpdfRendererClose                        jni.MethodID
+	midpdfRendererGetDocumentLinearizationType jni.MethodID
+	midpdfRendererGetPageCount                 jni.MethodID
+	midpdfRendererGetPdfFormType               jni.MethodID
+	midpdfRendererOpenPage                     jni.MethodID
+	midpdfRendererShouldScaleForPrinting       jni.MethodID
+	midpdfRendererWrite                        jni.MethodID
+
+	clspdfRendererPage                            *jni.GlobalRef
+	midpdfRendererPageApplyEdit                   jni.MethodID
+	midpdfRendererPageClose                       jni.MethodID
+	midpdfRendererPageGetFormWidgetInfoAtIndex    jni.MethodID
+	midpdfRendererPageGetFormWidgetInfoAtPosition jni.MethodID
+	midpdfRendererPageGetFormWidgetInfos0         jni.MethodID
+	midpdfRendererPageGetFormWidgetInfos1_1       jni.MethodID
+	midpdfRendererPageGetGotoLinks                jni.MethodID
+	midpdfRendererPageGetHeight                   jni.MethodID
+	midpdfRendererPageGetImageContents            jni.MethodID
+	midpdfRendererPageGetIndex                    jni.MethodID
+	midpdfRendererPageGetLinkContents             jni.MethodID
+	midpdfRendererPageGetTextContents             jni.MethodID
+	midpdfRendererPageGetWidth                    jni.MethodID
+	midpdfRendererPageRender4                     jni.MethodID
+	midpdfRendererPageRender4_1                   jni.MethodID
+	midpdfRendererPageSearchText                  jni.MethodID
+	midpdfRendererPageSelectContent               jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -117,570 +73,208 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/graphics/Bitmap")
+	c, err = env.FindClass("android/graphics/pdf/PdfRenderer")
 	if err != nil {
-		return fmt.Errorf("find class android.graphics.Bitmap: %w", err)
+		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer: %w", err)
 	}
-	clsbitmap = env.NewGlobalRef(&c.Object)
+	clspdfRenderer = env.NewGlobalRef(&c.Object)
 
-	midbitmapAsShared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "asShared", "()Landroid/graphics/Bitmap;")
+	midpdfRendererClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.asShared")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.close")
 	}
 
-	midbitmapCompress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "compress", "(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z")
+	midpdfRendererGetDocumentLinearizationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getDocumentLinearizationType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.compress")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getDocumentLinearizationType")
 	}
 
-	midbitmapCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copy", "(Landroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	midpdfRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPageCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.copy")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPageCount")
 	}
 
-	midbitmapCopyPixelsFromBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsFromBuffer", "(Ljava/nio/Buffer;)V")
+	midpdfRendererGetPdfFormType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPdfFormType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.copyPixelsFromBuffer")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPdfFormType")
 	}
 
-	midbitmapCopyPixelsToBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsToBuffer", "(Ljava/nio/Buffer;)V")
+	midpdfRendererOpenPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.copyPixelsToBuffer")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.openPage")
 	}
 
-	midbitmapDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "describeContents", "()I")
+	midpdfRendererShouldScaleForPrinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "shouldScaleForPrinting", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.describeContents")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.shouldScaleForPrinting")
 	}
 
-	midbitmapEraseColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(I)V")
+	midpdfRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.eraseColor")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.write")
 	}
 
-	midbitmapEraseColor1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(J)V")
+	c, err = env.FindClass("android/graphics/pdf/PdfRenderer$Page")
 	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.eraseColor")
-	}
-
-	midbitmapExtractAlpha0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "()Landroid/graphics/Bitmap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.extractAlpha")
-	}
-
-	midbitmapExtractAlpha2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "(Landroid/graphics/Paint;[I)Landroid/graphics/Bitmap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.extractAlpha")
-	}
-
-	midbitmapGetAllocationByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getAllocationByteCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getAllocationByteCount")
-	}
-
-	midbitmapGetByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getByteCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getByteCount")
-	}
-
-	midbitmapGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColor", "(II)Landroid/graphics/Color;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getColor")
-	}
-
-	midbitmapGetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColorSpace", "()Landroid/graphics/ColorSpace;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getColorSpace")
-	}
-
-	midbitmapGetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getConfig", "()Landroid/graphics/Bitmap$Config;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getConfig")
-	}
-
-	midbitmapGetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getDensity", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getDensity")
-	}
-
-	midbitmapGetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGainmap", "()Landroid/graphics/Gainmap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getGainmap")
-	}
-
-	midbitmapGetGenerationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGenerationId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getGenerationId")
-	}
-
-	midbitmapGetHardwareBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHardwareBuffer", "()Landroid/hardware/HardwareBuffer;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getHardwareBuffer")
-	}
-
-	midbitmapGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getHeight")
-	}
-
-	midbitmapGetNinePatchChunk, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getNinePatchChunk", "()[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getNinePatchChunk")
-	}
-
-	midbitmapGetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixel", "(II)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getPixel")
-	}
-
-	midbitmapGetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixels", "([IIIIIII)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getPixels")
-	}
-
-	midbitmapGetRowBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getRowBytes", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getRowBytes")
-	}
-
-	midbitmapGetScaledHeight1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/graphics/Canvas;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
-	}
-
-	midbitmapGetScaledHeight1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/util/DisplayMetrics;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
-	}
-
-	midbitmapGetScaledHeight1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
-	}
-
-	midbitmapGetScaledWidth1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/graphics/Canvas;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
-	}
-
-	midbitmapGetScaledWidth1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/util/DisplayMetrics;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
-	}
-
-	midbitmapGetScaledWidth1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
-	}
-
-	midbitmapGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.getWidth")
-	}
-
-	midbitmapHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasAlpha", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasAlpha")
-	}
-
-	midbitmapHasGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasGainmap", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasGainmap")
-	}
-
-	midbitmapHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasMipMap", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasMipMap")
-	}
-
-	midbitmapIsMutable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isMutable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.isMutable")
-	}
-
-	midbitmapIsPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isPremultiplied", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.isPremultiplied")
-	}
-
-	midbitmapIsRecycled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isRecycled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.isRecycled")
-	}
-
-	midbitmapPrepareToDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "prepareToDraw", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.prepareToDraw")
-	}
-
-	midbitmapReconfigure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "reconfigure", "(IILandroid/graphics/Bitmap$Config;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.reconfigure")
-	}
-
-	midbitmapRecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "recycle", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.recycle")
-	}
-
-	midbitmapSameAs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "sameAs", "(Landroid/graphics/Bitmap;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.sameAs")
-	}
-
-	midbitmapSetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setColorSpace", "(Landroid/graphics/ColorSpace;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setColorSpace")
-	}
-
-	midbitmapSetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setConfig", "(Landroid/graphics/Bitmap$Config;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setConfig")
-	}
-
-	midbitmapSetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setDensity", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setDensity")
-	}
-
-	midbitmapSetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setGainmap", "(Landroid/graphics/Gainmap;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setGainmap")
-	}
-
-	midbitmapSetHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasAlpha", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHasAlpha")
-	}
-
-	midbitmapSetHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasMipMap", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHasMipMap")
-	}
-
-	midbitmapSetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHeight", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHeight")
-	}
-
-	midbitmapSetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixel", "(III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPixel")
-	}
-
-	midbitmapSetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixels", "([IIIIIII)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPixels")
-	}
-
-	midbitmapSetPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPremultiplied", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPremultiplied")
-	}
-
-	midbitmapSetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setWidth", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.setWidth")
-	}
-
-	midbitmapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.writeToParcel")
+		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer$Page: %w", err)
 	}
+	clspdfRendererPage = env.NewGlobalRef(&c.Object)
 
-	midbitmapCreateBitmap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageApplyEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "applyEdit", "(Landroid/graphics/pdf/models/FormEditRecord;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.applyEdit")
 	}
 
-	midbitmapCreateBitmap5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIII)Landroid/graphics/Bitmap;")
+	midpdfRendererPageClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.close")
 	}
 
-	midbitmapCreateBitmap7_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetFormWidgetInfoAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtIndex", "(I)Landroid/graphics/pdf/models/FormWidgetInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtIndex")
 	}
 
-	midbitmapCreateBitmap1_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetFormWidgetInfoAtPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtPosition", "(II)Landroid/graphics/pdf/models/FormWidgetInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtPosition")
 	}
 
-	midbitmapCreateBitmap4_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetFormWidgetInfos0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
 	}
 
-	midbitmapCreateBitmap4_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetFormWidgetInfos1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "([I)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
 	}
 
-	midbitmapCreateBitmap5_6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetGotoLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getGotoLinks", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getGotoLinks")
 	}
 
-	midbitmapCreateBitmap6_7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getHeight", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getHeight")
 	}
 
-	midbitmapCreateBitmap5_8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetImageContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getImageContents", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getImageContents")
 	}
 
-	midbitmapCreateBitmap7_9, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getIndex", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getIndex")
 	}
 
-	midbitmapCreateBitmap3_10, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetLinkContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getLinkContents", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getLinkContents")
 	}
 
-	midbitmapCreateBitmap4_11, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getTextContents", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getTextContents")
 	}
 
-	midbitmapCreateBitmap5_12, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getWidth", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getWidth")
 	}
 
-	midbitmapCreateBitmap4_13, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageRender4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;Landroid/graphics/pdf/RenderParams;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
 	}
 
-	midbitmapCreateBitmap6_14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageRender4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
 	}
 
-	midbitmapCreateScaledBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createScaledBitmap", "(Landroid/graphics/Bitmap;IIZ)Landroid/graphics/Bitmap;")
+	midpdfRendererPageSearchText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "searchText", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.createScaledBitmap")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.searchText")
 	}
 
-	midbitmapWrapHardwareBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "wrapHardwareBuffer", "(Landroid/hardware/HardwareBuffer;Landroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	midpdfRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.Bitmap.wrapHardwareBuffer")
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.selectContent")
 	}
 
 	return nil

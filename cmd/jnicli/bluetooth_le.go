@@ -13,19 +13,57 @@ var bluetoothleCmd = &cobra.Command{
 	Short: "bluetooth_le service operations",
 }
 
-var bluetoothleBluetoothLeAdvertiserCmd = &cobra.Command{
-	Use:   "bluetooth-le-advertiser",
-	Short: "BluetoothLeAdvertiserService operations",
+var bluetoothleBluetoothLeScannerCmd = &cobra.Command{
+	Use:   "bluetooth-le-scanner",
+	Short: "BluetoothLeScannerService operations",
 }
 
-var bluetoothleBluetoothLeAdvertiserStartAdvertising3Cmd = &cobra.Command{
-	Use:   "start-advertising3",
-	Short: "StartAdvertising3 RPC",
+var bluetoothleBluetoothLeScannerFlushPendingScanResultsCmd = &cobra.Command{
+	Use:   "flush-pending-scan-results",
+	Short: "FlushPendingScanResults RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothLeAdvertiserServiceClient(grpcConn)
-		req := &pb.StartAdvertising3Request{}
+		client := pb.NewBluetoothLeScannerServiceClient(grpcConn)
+		req := &pb.FlushPendingScanResultsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.FlushPendingScanResults(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothleBluetoothLeScannerStartScan1Cmd = &cobra.Command{
+	Use:   "start-scan1",
+	Short: "StartScan1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothLeScannerServiceClient(grpcConn)
+		req := &pb.StartScan1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StartScan1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothleBluetoothLeScannerStartScan3_1Cmd = &cobra.Command{
+	Use:   "start-scan3_1",
+	Short: "StartScan3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothLeScannerServiceClient(grpcConn)
+		req := &pb.StartScan3_1Request{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
@@ -35,7 +73,7 @@ var bluetoothleBluetoothLeAdvertiserStartAdvertising3Cmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		resp, err := client.StartAdvertising3(ctx, req)
+		resp, err := client.StartScan3_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -43,14 +81,14 @@ var bluetoothleBluetoothLeAdvertiserStartAdvertising3Cmd = &cobra.Command{
 	},
 }
 
-var bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd = &cobra.Command{
-	Use:   "start-advertising4_1",
-	Short: "StartAdvertising4_1 RPC",
+var bluetoothleBluetoothLeScannerStartScan3_2Cmd = &cobra.Command{
+	Use:   "start-scan3_2",
+	Short: "StartScan3_2 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothLeAdvertiserServiceClient(grpcConn)
-		req := &pb.StartAdvertising4_1Request{}
+		client := pb.NewBluetoothLeScannerServiceClient(grpcConn)
+		req := &pb.StartScan3_2Request{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
@@ -60,10 +98,7 @@ var bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.StartAdvertising4_1(ctx, req)
+		resp, err := client.StartScan3_2(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -71,33 +106,18 @@ var bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd = &cobra.Command{
 	},
 }
 
-var bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd = &cobra.Command{
-	Use:   "start-advertising-set6",
-	Short: "StartAdvertisingSet6 RPC",
+var bluetoothleBluetoothLeScannerStopScan1Cmd = &cobra.Command{
+	Use:   "stop-scan1",
+	Short: "StopScan1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothLeAdvertiserServiceClient(grpcConn)
-		req := &pb.StartAdvertisingSet6Request{}
+		client := pb.NewBluetoothLeScannerServiceClient(grpcConn)
+		req := &pb.StopScan1Request{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg5"); err == nil {
-			req.Arg5 = v
-		}
-		resp, err := client.StartAdvertisingSet6(ctx, req)
+		resp, err := client.StopScan1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -105,77 +125,18 @@ var bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd = &cobra.Command{
 	},
 }
 
-var bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd = &cobra.Command{
-	Use:   "start-advertising-set8_1",
-	Short: "StartAdvertisingSet8_1 RPC",
+var bluetoothleBluetoothLeScannerStopScan1_1Cmd = &cobra.Command{
+	Use:   "stop-scan1_1",
+	Short: "StopScan1_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothLeAdvertiserServiceClient(grpcConn)
-		req := &pb.StartAdvertisingSet8_1Request{}
+		client := pb.NewBluetoothLeScannerServiceClient(grpcConn)
+		req := &pb.StopScan1_1Request{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
-			req.Arg4 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg5"); err == nil {
-			req.Arg5 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg6"); err == nil {
-			req.Arg6 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg7"); err == nil {
-			req.Arg7 = v
-		}
-		resp, err := client.StartAdvertisingSet8_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothleBluetoothLeAdvertiserStopAdvertisingCmd = &cobra.Command{
-	Use:   "stop-advertising",
-	Short: "StopAdvertising RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothLeAdvertiserServiceClient(grpcConn)
-		req := &pb.StopAdvertisingRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.StopAdvertising(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothleBluetoothLeAdvertiserStopAdvertisingSetCmd = &cobra.Command{
-	Use:   "stop-advertising-set",
-	Short: "StopAdvertisingSet RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothLeAdvertiserServiceClient(grpcConn)
-		req := &pb.StopAdvertisingSetRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.StopAdvertisingSet(ctx, req)
+		resp, err := client.StopScan1_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -184,35 +145,22 @@ var bluetoothleBluetoothLeAdvertiserStopAdvertisingSetCmd = &cobra.Command{
 }
 
 func init() {
-	bluetoothleBluetoothLeAdvertiserStartAdvertising3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertising3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertising3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	bluetoothleBluetoothLeAdvertiserCmd.AddCommand(bluetoothleBluetoothLeAdvertiserStartAdvertising3Cmd)
-	bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	bluetoothleBluetoothLeAdvertiserCmd.AddCommand(bluetoothleBluetoothLeAdvertiserStartAdvertising4_1Cmd)
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd.Flags().Int64("arg5", 0, "arg5 (int64)")
-	bluetoothleBluetoothLeAdvertiserCmd.AddCommand(bluetoothleBluetoothLeAdvertiserStartAdvertisingSet6Cmd)
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int32("arg5", 0, "arg5 (int32)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int32("arg6", 0, "arg6 (int32)")
-	bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd.Flags().Int64("arg7", 0, "arg7 (int64)")
-	bluetoothleBluetoothLeAdvertiserCmd.AddCommand(bluetoothleBluetoothLeAdvertiserStartAdvertisingSet8_1Cmd)
-	bluetoothleBluetoothLeAdvertiserStopAdvertisingCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothleBluetoothLeAdvertiserCmd.AddCommand(bluetoothleBluetoothLeAdvertiserStopAdvertisingCmd)
-	bluetoothleBluetoothLeAdvertiserStopAdvertisingSetCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothleBluetoothLeAdvertiserCmd.AddCommand(bluetoothleBluetoothLeAdvertiserStopAdvertisingSetCmd)
-	bluetoothleCmd.AddCommand(bluetoothleBluetoothLeAdvertiserCmd)
+	bluetoothleBluetoothLeScannerFlushPendingScanResultsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothleBluetoothLeScannerCmd.AddCommand(bluetoothleBluetoothLeScannerFlushPendingScanResultsCmd)
+	bluetoothleBluetoothLeScannerStartScan1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothleBluetoothLeScannerCmd.AddCommand(bluetoothleBluetoothLeScannerStartScan1Cmd)
+	bluetoothleBluetoothLeScannerStartScan3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothleBluetoothLeScannerStartScan3_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	bluetoothleBluetoothLeScannerStartScan3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	bluetoothleBluetoothLeScannerCmd.AddCommand(bluetoothleBluetoothLeScannerStartScan3_1Cmd)
+	bluetoothleBluetoothLeScannerStartScan3_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothleBluetoothLeScannerStartScan3_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	bluetoothleBluetoothLeScannerStartScan3_2Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	bluetoothleBluetoothLeScannerCmd.AddCommand(bluetoothleBluetoothLeScannerStartScan3_2Cmd)
+	bluetoothleBluetoothLeScannerStopScan1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothleBluetoothLeScannerCmd.AddCommand(bluetoothleBluetoothLeScannerStopScan1Cmd)
+	bluetoothleBluetoothLeScannerStopScan1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothleBluetoothLeScannerCmd.AddCommand(bluetoothleBluetoothLeScannerStopScan1_1Cmd)
+	bluetoothleCmd.AddCommand(bluetoothleBluetoothLeScannerCmd)
 	rootCmd.AddCommand(bluetoothleCmd)
 }

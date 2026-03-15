@@ -3,6 +3,12 @@
 package pdf
 
 const (
-	Creator     = 0
-	DensityNone = 0
+	DocumentLinearizedTypeLinearized    = 0
+	DocumentLinearizedTypeNonLinearized = 0
+	PdfFormTypeAcroForm                 = 0
+	PdfFormTypeNone                     = 0
+	PdfFormTypeXfaForeground            = 0
+	PdfFormTypeXfaFull                  = 0
+	RenderModeForDisplay                = 0
+	RenderModeForPrint                  = 0
 )

@@ -6,45 +6,81 @@ package omapi;
 
 option go_package = "github.com/xaionaro-go/jni/proto/omapi";
 
-message GetReadersRequest {
+message CloseRequest {
 }
 
-message GetReadersResponse {
+message CloseResponse {
+}
+
+message CloseChannelsRequest {
+}
+
+message CloseChannelsResponse {
+}
+
+message GetATRRequest {
+}
+
+message GetATRResponse {
   int64 result = 1;
 }
 
-message GetUiccReaderRequest {
-  int32 arg0 = 1;
+message GetReaderRequest {
 }
 
-message GetUiccReaderResponse {
+message GetReaderResponse {
   int64 result = 1;
 }
 
-message GetVersionRequest {
+message IsClosedRequest {
 }
 
-message GetVersionResponse {
-  string result = 1;
-}
-
-message IsConnectedRequest {
-}
-
-message IsConnectedResponse {
+message IsClosedResponse {
   bool result = 1;
 }
 
-message ShutdownRequest {
+message OpenBasicChannel1Request {
+  int64 arg0 = 1;
 }
 
-message ShutdownResponse {
+message OpenBasicChannel1Response {
+  int64 result = 1;
 }
 
-service SEServiceService {
-  rpc GetReaders (GetReadersRequest) returns (GetReadersResponse);
-  rpc GetUiccReader (GetUiccReaderRequest) returns (GetUiccReaderResponse);
-  rpc GetVersion (GetVersionRequest) returns (GetVersionResponse);
-  rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
-  rpc Shutdown (ShutdownRequest) returns (ShutdownResponse);
+message OpenBasicChannel2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message OpenBasicChannel2_1Response {
+  int64 result = 1;
+}
+
+message OpenLogicalChannel1Request {
+  int64 arg0 = 1;
+}
+
+message OpenLogicalChannel1Response {
+  int64 result = 1;
+}
+
+message OpenLogicalChannel2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message OpenLogicalChannel2_1Response {
+  int64 result = 1;
+}
+
+service SessionService {
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc CloseChannels (CloseChannelsRequest) returns (CloseChannelsResponse);
+  rpc GetATR (GetATRRequest) returns (GetATRResponse);
+  rpc GetReader (GetReaderRequest) returns (GetReaderResponse);
+  rpc IsClosed (IsClosedRequest) returns (IsClosedResponse);
+  rpc OpenBasicChannel1 (OpenBasicChannel1Request) returns (OpenBasicChannel1Response);
+  rpc OpenBasicChannel2_1 (OpenBasicChannel2_1Request) returns (OpenBasicChannel2_1Response);
+  rpc OpenLogicalChannel1 (OpenLogicalChannel1Request) returns (OpenLogicalChannel1Response);
+  rpc OpenLogicalChannel2_1 (OpenLogicalChannel2_1Request) returns (OpenLogicalChannel2_1Response);
 }

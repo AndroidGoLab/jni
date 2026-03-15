@@ -13,20 +13,26 @@ var speechCmd = &cobra.Command{
 	Short: "speech service operations",
 }
 
-var speechSpeechRecognizerCmd = &cobra.Command{
-	Use:   "speech-recognizer",
-	Short: "SpeechRecognizerService operations",
+var speechTextToSpeechCmd = &cobra.Command{
+	Use:   "text-to-speech",
+	Short: "TextToSpeechService operations",
 }
 
-var speechSpeechRecognizerCancelCmd = &cobra.Command{
-	Use:   "cancel",
-	Short: "Cancel RPC",
+var speechTextToSpeechAddEarcon2Cmd = &cobra.Command{
+	Use:   "add-earcon2",
+	Short: "AddEarcon2 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.CancelRequest{}
-		resp, err := client.Cancel(ctx, req)
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddEarcon2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddEarcon2(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,15 +40,738 @@ var speechSpeechRecognizerCancelCmd = &cobra.Command{
 	},
 }
 
-var speechSpeechRecognizerCheckRecognitionSupportCmd = &cobra.Command{
-	Use:   "check-recognition-support",
-	Short: "CheckRecognitionSupport RPC",
+var speechTextToSpeechAddEarcon2_1Cmd = &cobra.Command{
+	Use:   "add-earcon2_1",
+	Short: "AddEarcon2_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.CheckRecognitionSupportRequest{}
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddEarcon2_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddEarcon2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAddEarcon2_2Cmd = &cobra.Command{
+	Use:   "add-earcon2_2",
+	Short: "AddEarcon2_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddEarcon2_2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddEarcon2_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAddEarcon3_3Cmd = &cobra.Command{
+	Use:   "add-earcon3_3",
+	Short: "AddEarcon3_3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddEarcon3_3Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.AddEarcon3_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAddSpeech2Cmd = &cobra.Command{
+	Use:   "add-speech2",
+	Short: "AddSpeech2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddSpeech2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddSpeech2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAddSpeech2_1Cmd = &cobra.Command{
+	Use:   "add-speech2_1",
+	Short: "AddSpeech2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddSpeech2_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddSpeech2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAddSpeech3_2Cmd = &cobra.Command{
+	Use:   "add-speech3_2",
+	Short: "AddSpeech3_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddSpeech3_2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.AddSpeech3_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAddSpeech2_3Cmd = &cobra.Command{
+	Use:   "add-speech2_3",
+	Short: "AddSpeech2_3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddSpeech2_3Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddSpeech2_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAddSpeech3_4Cmd = &cobra.Command{
+	Use:   "add-speech3_4",
+	Short: "AddSpeech3_4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AddSpeech3_4Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.AddSpeech3_4(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechAreDefaultsEnforcedCmd = &cobra.Command{
+	Use:   "are-defaults-enforced",
+	Short: "AreDefaultsEnforced RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.AreDefaultsEnforcedRequest{}
+		resp, err := client.AreDefaultsEnforced(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetAvailableLanguagesCmd = &cobra.Command{
+	Use:   "get-available-languages",
+	Short: "GetAvailableLanguages RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetAvailableLanguagesRequest{}
+		resp, err := client.GetAvailableLanguages(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetDefaultEngineCmd = &cobra.Command{
+	Use:   "get-default-engine",
+	Short: "GetDefaultEngine RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetDefaultEngineRequest{}
+		resp, err := client.GetDefaultEngine(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetDefaultLanguageCmd = &cobra.Command{
+	Use:   "get-default-language",
+	Short: "GetDefaultLanguage RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetDefaultLanguageRequest{}
+		resp, err := client.GetDefaultLanguage(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetDefaultVoiceCmd = &cobra.Command{
+	Use:   "get-default-voice",
+	Short: "GetDefaultVoice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetDefaultVoiceRequest{}
+		resp, err := client.GetDefaultVoice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetEnginesCmd = &cobra.Command{
+	Use:   "get-engines",
+	Short: "GetEngines RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetEnginesRequest{}
+		resp, err := client.GetEngines(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetFeaturesCmd = &cobra.Command{
+	Use:   "get-features",
+	Short: "GetFeatures RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetFeaturesRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetFeatures(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetLanguageCmd = &cobra.Command{
+	Use:   "get-language",
+	Short: "GetLanguage RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetLanguageRequest{}
+		resp, err := client.GetLanguage(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetVoiceCmd = &cobra.Command{
+	Use:   "get-voice",
+	Short: "GetVoice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetVoiceRequest{}
+		resp, err := client.GetVoice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechGetVoicesCmd = &cobra.Command{
+	Use:   "get-voices",
+	Short: "GetVoices RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetVoicesRequest{}
+		resp, err := client.GetVoices(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechIsLanguageAvailableCmd = &cobra.Command{
+	Use:   "is-language-available",
+	Short: "IsLanguageAvailable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.IsLanguageAvailableRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsLanguageAvailable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechIsSpeakingCmd = &cobra.Command{
+	Use:   "is-speaking",
+	Short: "IsSpeaking RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.IsSpeakingRequest{}
+		resp, err := client.IsSpeaking(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechPlayEarcon4Cmd = &cobra.Command{
+	Use:   "play-earcon4",
+	Short: "PlayEarcon4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.PlayEarcon4Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetString("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.PlayEarcon4(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechPlayEarcon3_1Cmd = &cobra.Command{
+	Use:   "play-earcon3_1",
+	Short: "PlayEarcon3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.PlayEarcon3_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.PlayEarcon3_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechPlaySilenceCmd = &cobra.Command{
+	Use:   "play-silence",
+	Short: "PlaySilence RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.PlaySilenceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.PlaySilence(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechPlaySilentUtteranceCmd = &cobra.Command{
+	Use:   "play-silent-utterance",
+	Short: "PlaySilentUtterance RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.PlaySilentUtteranceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetString("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.PlaySilentUtterance(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetAudioAttributesCmd = &cobra.Command{
+	Use:   "set-audio-attributes",
+	Short: "SetAudioAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetAudioAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAudioAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetEngineByPackageNameCmd = &cobra.Command{
+	Use:   "set-engine-by-package-name",
+	Short: "SetEngineByPackageName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetEngineByPackageNameRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetEngineByPackageName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetLanguageCmd = &cobra.Command{
+	Use:   "set-language",
+	Short: "SetLanguage RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetLanguageRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetLanguage(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetOnUtteranceCompletedListenerCmd = &cobra.Command{
+	Use:   "set-on-utterance-completed-listener",
+	Short: "SetOnUtteranceCompletedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetOnUtteranceCompletedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetOnUtteranceCompletedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetOnUtteranceProgressListenerCmd = &cobra.Command{
+	Use:   "set-on-utterance-progress-listener",
+	Short: "SetOnUtteranceProgressListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetOnUtteranceProgressListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetOnUtteranceProgressListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetPitchCmd = &cobra.Command{
+	Use:   "set-pitch",
+	Short: "SetPitch RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetPitchRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPitch(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetSpeechRateCmd = &cobra.Command{
+	Use:   "set-speech-rate",
+	Short: "SetSpeechRate RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetSpeechRateRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetSpeechRate(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSetVoiceCmd = &cobra.Command{
+	Use:   "set-voice",
+	Short: "SetVoice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SetVoiceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetVoice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechShutdownCmd = &cobra.Command{
+	Use:   "shutdown",
+	Short: "Shutdown RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.ShutdownRequest{}
+		resp, err := client.Shutdown(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSpeak4Cmd = &cobra.Command{
+	Use:   "speak4",
+	Short: "Speak4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.Speak4Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetString("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.Speak4(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSpeak3_1Cmd = &cobra.Command{
+	Use:   "speak3_1",
+	Short: "Speak3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.Speak3_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.Speak3_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechStopCmd = &cobra.Command{
+	Use:   "stop",
+	Short: "Stop RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.StopRequest{}
+		resp, err := client.Stop(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var speechTextToSpeechSynthesizeToFile4Cmd = &cobra.Command{
+	Use:   "synthesize-to-file4",
+	Short: "SynthesizeToFile4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SynthesizeToFile4Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
 		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
@@ -51,7 +780,10 @@ var speechSpeechRecognizerCheckRecognitionSupportCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		resp, err := client.CheckRecognitionSupport(ctx, req)
+		if v, err := cmd.Flags().GetString("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.SynthesizeToFile4(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -59,104 +791,15 @@ var speechSpeechRecognizerCheckRecognitionSupportCmd = &cobra.Command{
 	},
 }
 
-var speechSpeechRecognizerDestroyCmd = &cobra.Command{
-	Use:   "destroy",
-	Short: "Destroy RPC",
+var speechTextToSpeechSynthesizeToFile4_1Cmd = &cobra.Command{
+	Use:   "synthesize-to-file4_1",
+	Short: "SynthesizeToFile4_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.DestroyRequest{}
-		resp, err := client.Destroy(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerSetRecognitionListenerCmd = &cobra.Command{
-	Use:   "set-recognition-listener",
-	Short: "SetRecognitionListener RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.SetRecognitionListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.SetRecognitionListener(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerStartListeningCmd = &cobra.Command{
-	Use:   "start-listening",
-	Short: "StartListening RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.StartListeningRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.StartListening(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerStopListeningCmd = &cobra.Command{
-	Use:   "stop-listening",
-	Short: "StopListening RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.StopListeningRequest{}
-		resp, err := client.StopListening(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerTriggerModelDownload1Cmd = &cobra.Command{
-	Use:   "trigger-model-download1",
-	Short: "TriggerModelDownload1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.TriggerModelDownload1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.TriggerModelDownload1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerTriggerModelDownload3_1Cmd = &cobra.Command{
-	Use:   "trigger-model-download3_1",
-	Short: "TriggerModelDownload3_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.TriggerModelDownload3_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SynthesizeToFile4_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
 		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
@@ -165,7 +808,10 @@ var speechSpeechRecognizerTriggerModelDownload3_1Cmd = &cobra.Command{
 		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
 			req.Arg2 = v
 		}
-		resp, err := client.TriggerModelDownload3_1(ctx, req)
+		if v, err := cmd.Flags().GetString("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.SynthesizeToFile4_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -173,59 +819,24 @@ var speechSpeechRecognizerTriggerModelDownload3_1Cmd = &cobra.Command{
 	},
 }
 
-var speechSpeechRecognizerCreateOnDeviceSpeechRecognizerCmd = &cobra.Command{
-	Use:   "create-on-device-speech-recognizer",
-	Short: "CreateOnDeviceSpeechRecognizer RPC",
+var speechTextToSpeechSynthesizeToFile3_2Cmd = &cobra.Command{
+	Use:   "synthesize-to-file3_2",
+	Short: "SynthesizeToFile3_2 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.CreateOnDeviceSpeechRecognizerRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.CreateOnDeviceSpeechRecognizer(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerCreateSpeechRecognizer1Cmd = &cobra.Command{
-	Use:   "create-speech-recognizer1",
-	Short: "CreateSpeechRecognizer1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.CreateSpeechRecognizer1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.CreateSpeechRecognizer1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerCreateSpeechRecognizer2_1Cmd = &cobra.Command{
-	Use:   "create-speech-recognizer2_1",
-	Short: "CreateSpeechRecognizer2_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.CreateSpeechRecognizer2_1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.SynthesizeToFile3_2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
 		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
 			req.Arg1 = v
 		}
-		resp, err := client.CreateSpeechRecognizer2_1(ctx, req)
+		if v, err := cmd.Flags().GetString("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SynthesizeToFile3_2(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -233,37 +844,15 @@ var speechSpeechRecognizerCreateSpeechRecognizer2_1Cmd = &cobra.Command{
 	},
 }
 
-var speechSpeechRecognizerIsOnDeviceRecognitionAvailableCmd = &cobra.Command{
-	Use:   "is-on-device-recognition-available",
-	Short: "IsOnDeviceRecognitionAvailable RPC",
+var speechTextToSpeechGetMaxSpeechInputLengthCmd = &cobra.Command{
+	Use:   "get-max-speech-input-length",
+	Short: "GetMaxSpeechInputLength RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.IsOnDeviceRecognitionAvailableRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.IsOnDeviceRecognitionAvailable(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var speechSpeechRecognizerIsRecognitionAvailableCmd = &cobra.Command{
-	Use:   "is-recognition-available",
-	Short: "IsRecognitionAvailable RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewSpeechRecognizerServiceClient(grpcConn)
-		req := &pb.IsRecognitionAvailableRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.IsRecognitionAvailable(ctx, req)
+		client := pb.NewTextToSpeechServiceClient(grpcConn)
+		req := &pb.GetMaxSpeechInputLengthRequest{}
+		resp, err := client.GetMaxSpeechInputLength(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -272,34 +861,109 @@ var speechSpeechRecognizerIsRecognitionAvailableCmd = &cobra.Command{
 }
 
 func init() {
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerCancelCmd)
-	speechSpeechRecognizerCheckRecognitionSupportCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCheckRecognitionSupportCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	speechSpeechRecognizerCheckRecognitionSupportCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerCheckRecognitionSupportCmd)
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerDestroyCmd)
-	speechSpeechRecognizerSetRecognitionListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerSetRecognitionListenerCmd)
-	speechSpeechRecognizerStartListeningCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerStartListeningCmd)
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerStopListeningCmd)
-	speechSpeechRecognizerTriggerModelDownload1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerTriggerModelDownload1Cmd)
-	speechSpeechRecognizerTriggerModelDownload3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerTriggerModelDownload3_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	speechSpeechRecognizerTriggerModelDownload3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerTriggerModelDownload3_1Cmd)
-	speechSpeechRecognizerCreateOnDeviceSpeechRecognizerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerCreateOnDeviceSpeechRecognizerCmd)
-	speechSpeechRecognizerCreateSpeechRecognizer1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerCreateSpeechRecognizer1Cmd)
-	speechSpeechRecognizerCreateSpeechRecognizer2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCreateSpeechRecognizer2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerCreateSpeechRecognizer2_1Cmd)
-	speechSpeechRecognizerIsOnDeviceRecognitionAvailableCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerIsOnDeviceRecognitionAvailableCmd)
-	speechSpeechRecognizerIsRecognitionAvailableCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	speechSpeechRecognizerCmd.AddCommand(speechSpeechRecognizerIsRecognitionAvailableCmd)
-	speechCmd.AddCommand(speechSpeechRecognizerCmd)
+	speechTextToSpeechAddEarcon2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddEarcon2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddEarcon2Cmd)
+	speechTextToSpeechAddEarcon2_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddEarcon2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddEarcon2_1Cmd)
+	speechTextToSpeechAddEarcon2_2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddEarcon2_2Cmd.Flags().String("arg1", "", "arg1 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddEarcon2_2Cmd)
+	speechTextToSpeechAddEarcon3_3Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddEarcon3_3Cmd.Flags().String("arg1", "", "arg1 (string)")
+	speechTextToSpeechAddEarcon3_3Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddEarcon3_3Cmd)
+	speechTextToSpeechAddSpeech2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddSpeech2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddSpeech2Cmd)
+	speechTextToSpeechAddSpeech2_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddSpeech2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddSpeech2_1Cmd)
+	speechTextToSpeechAddSpeech3_2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddSpeech3_2Cmd.Flags().String("arg1", "", "arg1 (string)")
+	speechTextToSpeechAddSpeech3_2Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddSpeech3_2Cmd)
+	speechTextToSpeechAddSpeech2_3Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddSpeech2_3Cmd.Flags().String("arg1", "", "arg1 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddSpeech2_3Cmd)
+	speechTextToSpeechAddSpeech3_4Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechAddSpeech3_4Cmd.Flags().String("arg1", "", "arg1 (string)")
+	speechTextToSpeechAddSpeech3_4Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAddSpeech3_4Cmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechAreDefaultsEnforcedCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetAvailableLanguagesCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetDefaultEngineCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetDefaultLanguageCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetDefaultVoiceCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetEnginesCmd)
+	speechTextToSpeechGetFeaturesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetFeaturesCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetLanguageCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetVoiceCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetVoicesCmd)
+	speechTextToSpeechIsLanguageAvailableCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechIsLanguageAvailableCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechIsSpeakingCmd)
+	speechTextToSpeechPlayEarcon4Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechPlayEarcon4Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	speechTextToSpeechPlayEarcon4Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	speechTextToSpeechPlayEarcon4Cmd.Flags().String("arg3", "", "arg3 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechPlayEarcon4Cmd)
+	speechTextToSpeechPlayEarcon3_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechPlayEarcon3_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	speechTextToSpeechPlayEarcon3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechPlayEarcon3_1Cmd)
+	speechTextToSpeechPlaySilenceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechPlaySilenceCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	speechTextToSpeechPlaySilenceCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechPlaySilenceCmd)
+	speechTextToSpeechPlaySilentUtteranceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechPlaySilentUtteranceCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	speechTextToSpeechPlaySilentUtteranceCmd.Flags().String("arg2", "", "arg2 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechPlaySilentUtteranceCmd)
+	speechTextToSpeechSetAudioAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetAudioAttributesCmd)
+	speechTextToSpeechSetEngineByPackageNameCmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetEngineByPackageNameCmd)
+	speechTextToSpeechSetLanguageCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetLanguageCmd)
+	speechTextToSpeechSetOnUtteranceCompletedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetOnUtteranceCompletedListenerCmd)
+	speechTextToSpeechSetOnUtteranceProgressListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetOnUtteranceProgressListenerCmd)
+	speechTextToSpeechSetPitchCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetPitchCmd)
+	speechTextToSpeechSetSpeechRateCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetSpeechRateCmd)
+	speechTextToSpeechSetVoiceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSetVoiceCmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechShutdownCmd)
+	speechTextToSpeechSpeak4Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechSpeak4Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	speechTextToSpeechSpeak4Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	speechTextToSpeechSpeak4Cmd.Flags().String("arg3", "", "arg3 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSpeak4Cmd)
+	speechTextToSpeechSpeak3_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechSpeak3_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	speechTextToSpeechSpeak3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSpeak3_1Cmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechStopCmd)
+	speechTextToSpeechSynthesizeToFile4Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechSynthesizeToFile4Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	speechTextToSpeechSynthesizeToFile4Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	speechTextToSpeechSynthesizeToFile4Cmd.Flags().String("arg3", "", "arg3 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSynthesizeToFile4Cmd)
+	speechTextToSpeechSynthesizeToFile4_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechSynthesizeToFile4_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	speechTextToSpeechSynthesizeToFile4_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	speechTextToSpeechSynthesizeToFile4_1Cmd.Flags().String("arg3", "", "arg3 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSynthesizeToFile4_1Cmd)
+	speechTextToSpeechSynthesizeToFile3_2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	speechTextToSpeechSynthesizeToFile3_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	speechTextToSpeechSynthesizeToFile3_2Cmd.Flags().String("arg2", "", "arg2 (string)")
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechSynthesizeToFile3_2Cmd)
+	speechTextToSpeechCmd.AddCommand(speechTextToSpeechGetMaxSpeechInputLengthCmd)
+	speechCmd.AddCommand(speechTextToSpeechCmd)
 	rootCmd.AddCommand(speechCmd)
 }

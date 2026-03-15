@@ -3,48 +3,10 @@
 package p2p
 
 const (
-	ActionWifiP2pListenStateChanged     = ""
-	ActionWifiP2pRequestResponseChanged = ""
-	ExtraDiscoveryState                 = ""
-	ExtraListenState                    = ""
-	ExtraNetworkInfo                    = ""
-	ExtraP2pDeviceList                  = ""
-	ExtraRequestConfig                  = ""
-	ExtraRequestResponse                = ""
-	ExtraWifiP2pDevice                  = ""
-	ExtraWifiP2pGroup                   = ""
-	ExtraWifiP2pInfo                    = ""
-	ExtraWifiState                      = ""
-	WifiP2pConnectionChangedAction      = ""
-	WifiP2pDiscoveryChangedAction       = ""
-	WifiP2pPeersChangedAction           = ""
-	WifiP2pStateChangedAction           = ""
-	WifiP2pThisDeviceChangedAction      = ""
-)
-
-const (
-	Busy                                               = 0
-	ConnectionRequestAccept                            = 0
-	ConnectionRequestDeferShowPinToService             = 0
-	ConnectionRequestDeferToService                    = 0
-	ConnectionRequestReject                            = 0
-	Error                                              = 0
-	GroupCreationFailureReasonConnectionCancelled      = 0
-	GroupCreationFailureReasonGroupRemoved             = 0
-	GroupCreationFailureReasonInvitationFailed         = 0
-	GroupCreationFailureReasonProvisionDiscoveryFailed = 0
-	GroupCreationFailureReasonTimedOut                 = 0
-	GroupCreationFailureReasonUserRejected             = 0
-	NoPermission                                       = 0
-	NoServiceRequests                                  = 0
-	P2pUnsupported                                     = 0
-	WifiP2pDiscoveryStarted                            = 0
-	WifiP2pDiscoveryStopped                            = 0
-	WifiP2pListenStarted                               = 0
-	WifiP2pListenStopped                               = 0
-	WifiP2pScanFull                                    = 0
-	WifiP2pScanSingleFreq                              = 0
-	WifiP2pScanSocial                                  = 0
-	WifiP2pStateDisabled                               = 0
-	WifiP2pStateEnabled                                = 0
+	Available   = 0
+	Connected   = 0
+	Creator     = 0
+	Failed      = 0
+	Invited     = 0
+	Unavailable = 0
 )

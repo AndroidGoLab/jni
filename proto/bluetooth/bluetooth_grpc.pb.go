@@ -21,444 +21,1660 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BluetoothGattServiceService_AddCharacteristic_FullMethodName   = "/bluetooth.BluetoothGattServiceService/AddCharacteristic"
-	BluetoothGattServiceService_AddService_FullMethodName          = "/bluetooth.BluetoothGattServiceService/AddService"
-	BluetoothGattServiceService_DescribeContents_FullMethodName    = "/bluetooth.BluetoothGattServiceService/DescribeContents"
-	BluetoothGattServiceService_GetCharacteristic_FullMethodName   = "/bluetooth.BluetoothGattServiceService/GetCharacteristic"
-	BluetoothGattServiceService_GetCharacteristics_FullMethodName  = "/bluetooth.BluetoothGattServiceService/GetCharacteristics"
-	BluetoothGattServiceService_GetIncludedServices_FullMethodName = "/bluetooth.BluetoothGattServiceService/GetIncludedServices"
-	BluetoothGattServiceService_GetInstanceId_FullMethodName       = "/bluetooth.BluetoothGattServiceService/GetInstanceId"
-	BluetoothGattServiceService_GetType_FullMethodName             = "/bluetooth.BluetoothGattServiceService/GetType"
-	BluetoothGattServiceService_GetUuid_FullMethodName             = "/bluetooth.BluetoothGattServiceService/GetUuid"
-	BluetoothGattServiceService_WriteToParcel_FullMethodName       = "/bluetooth.BluetoothGattServiceService/WriteToParcel"
+	BluetoothAdapterService_CancelDiscovery_FullMethodName                            = "/bluetooth.BluetoothAdapterService/CancelDiscovery"
+	BluetoothAdapterService_CloseProfileProxy_FullMethodName                          = "/bluetooth.BluetoothAdapterService/CloseProfileProxy"
+	BluetoothAdapterService_Disable_FullMethodName                                    = "/bluetooth.BluetoothAdapterService/Disable"
+	BluetoothAdapterService_Enable_FullMethodName                                     = "/bluetooth.BluetoothAdapterService/Enable"
+	BluetoothAdapterService_GetAddress_FullMethodName                                 = "/bluetooth.BluetoothAdapterService/GetAddress"
+	BluetoothAdapterService_GetBluetoothLeAdvertiser_FullMethodName                   = "/bluetooth.BluetoothAdapterService/GetBluetoothLeAdvertiser"
+	BluetoothAdapterService_GetBluetoothLeScanner_FullMethodName                      = "/bluetooth.BluetoothAdapterService/GetBluetoothLeScanner"
+	BluetoothAdapterService_GetBondedDevices_FullMethodName                           = "/bluetooth.BluetoothAdapterService/GetBondedDevices"
+	BluetoothAdapterService_GetDiscoverableTimeout_FullMethodName                     = "/bluetooth.BluetoothAdapterService/GetDiscoverableTimeout"
+	BluetoothAdapterService_GetLeMaximumAdvertisingDataLength_FullMethodName          = "/bluetooth.BluetoothAdapterService/GetLeMaximumAdvertisingDataLength"
+	BluetoothAdapterService_GetMaxConnectedAudioDevices_FullMethodName                = "/bluetooth.BluetoothAdapterService/GetMaxConnectedAudioDevices"
+	BluetoothAdapterService_GetName_FullMethodName                                    = "/bluetooth.BluetoothAdapterService/GetName"
+	BluetoothAdapterService_GetProfileConnectionState_FullMethodName                  = "/bluetooth.BluetoothAdapterService/GetProfileConnectionState"
+	BluetoothAdapterService_GetProfileProxy_FullMethodName                            = "/bluetooth.BluetoothAdapterService/GetProfileProxy"
+	BluetoothAdapterService_GetRemoteDevice1_FullMethodName                           = "/bluetooth.BluetoothAdapterService/GetRemoteDevice1"
+	BluetoothAdapterService_GetRemoteDevice1_1_FullMethodName                         = "/bluetooth.BluetoothAdapterService/GetRemoteDevice1_1"
+	BluetoothAdapterService_GetRemoteLeDevice_FullMethodName                          = "/bluetooth.BluetoothAdapterService/GetRemoteLeDevice"
+	BluetoothAdapterService_GetScanMode_FullMethodName                                = "/bluetooth.BluetoothAdapterService/GetScanMode"
+	BluetoothAdapterService_GetState_FullMethodName                                   = "/bluetooth.BluetoothAdapterService/GetState"
+	BluetoothAdapterService_IsDiscovering_FullMethodName                              = "/bluetooth.BluetoothAdapterService/IsDiscovering"
+	BluetoothAdapterService_IsEnabled_FullMethodName                                  = "/bluetooth.BluetoothAdapterService/IsEnabled"
+	BluetoothAdapterService_IsLe2MPhySupported_FullMethodName                         = "/bluetooth.BluetoothAdapterService/IsLe2MPhySupported"
+	BluetoothAdapterService_IsLeAudioBroadcastAssistantSupported_FullMethodName       = "/bluetooth.BluetoothAdapterService/IsLeAudioBroadcastAssistantSupported"
+	BluetoothAdapterService_IsLeAudioBroadcastSourceSupported_FullMethodName          = "/bluetooth.BluetoothAdapterService/IsLeAudioBroadcastSourceSupported"
+	BluetoothAdapterService_IsLeAudioSupported_FullMethodName                         = "/bluetooth.BluetoothAdapterService/IsLeAudioSupported"
+	BluetoothAdapterService_IsLeCodedPhySupported_FullMethodName                      = "/bluetooth.BluetoothAdapterService/IsLeCodedPhySupported"
+	BluetoothAdapterService_IsLeExtendedAdvertisingSupported_FullMethodName           = "/bluetooth.BluetoothAdapterService/IsLeExtendedAdvertisingSupported"
+	BluetoothAdapterService_IsLePeriodicAdvertisingSupported_FullMethodName           = "/bluetooth.BluetoothAdapterService/IsLePeriodicAdvertisingSupported"
+	BluetoothAdapterService_IsMultipleAdvertisementSupported_FullMethodName           = "/bluetooth.BluetoothAdapterService/IsMultipleAdvertisementSupported"
+	BluetoothAdapterService_IsOffloadedFilteringSupported_FullMethodName              = "/bluetooth.BluetoothAdapterService/IsOffloadedFilteringSupported"
+	BluetoothAdapterService_IsOffloadedScanBatchingSupported_FullMethodName           = "/bluetooth.BluetoothAdapterService/IsOffloadedScanBatchingSupported"
+	BluetoothAdapterService_ListenUsingInsecureL2CapChannel_FullMethodName            = "/bluetooth.BluetoothAdapterService/ListenUsingInsecureL2capChannel"
+	BluetoothAdapterService_ListenUsingInsecureRfcommWithServiceRecord_FullMethodName = "/bluetooth.BluetoothAdapterService/ListenUsingInsecureRfcommWithServiceRecord"
+	BluetoothAdapterService_ListenUsingL2CapChannel_FullMethodName                    = "/bluetooth.BluetoothAdapterService/ListenUsingL2capChannel"
+	BluetoothAdapterService_ListenUsingRfcommWithServiceRecord_FullMethodName         = "/bluetooth.BluetoothAdapterService/ListenUsingRfcommWithServiceRecord"
+	BluetoothAdapterService_ListenUsingSocketSettings_FullMethodName                  = "/bluetooth.BluetoothAdapterService/ListenUsingSocketSettings"
+	BluetoothAdapterService_SetName_FullMethodName                                    = "/bluetooth.BluetoothAdapterService/SetName"
+	BluetoothAdapterService_StartDiscovery_FullMethodName                             = "/bluetooth.BluetoothAdapterService/StartDiscovery"
+	BluetoothAdapterService_StartLeScan1_FullMethodName                               = "/bluetooth.BluetoothAdapterService/StartLeScan1"
+	BluetoothAdapterService_StartLeScan2_1_FullMethodName                             = "/bluetooth.BluetoothAdapterService/StartLeScan2_1"
+	BluetoothAdapterService_StopLeScan_FullMethodName                                 = "/bluetooth.BluetoothAdapterService/StopLeScan"
+	BluetoothAdapterService_CheckBluetoothAddress_FullMethodName                      = "/bluetooth.BluetoothAdapterService/CheckBluetoothAddress"
 )
 
-// BluetoothGattServiceServiceClient is the client API for BluetoothGattServiceService service.
+// BluetoothAdapterServiceClient is the client API for BluetoothAdapterService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BluetoothGattServiceServiceClient interface {
-	AddCharacteristic(ctx context.Context, in *AddCharacteristicRequest, opts ...grpc.CallOption) (*AddCharacteristicResponse, error)
-	AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error)
-	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
-	GetCharacteristic(ctx context.Context, in *GetCharacteristicRequest, opts ...grpc.CallOption) (*GetCharacteristicResponse, error)
-	GetCharacteristics(ctx context.Context, in *GetCharacteristicsRequest, opts ...grpc.CallOption) (*GetCharacteristicsResponse, error)
-	GetIncludedServices(ctx context.Context, in *GetIncludedServicesRequest, opts ...grpc.CallOption) (*GetIncludedServicesResponse, error)
-	GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error)
-	GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error)
-	GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error)
-	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+type BluetoothAdapterServiceClient interface {
+	CancelDiscovery(ctx context.Context, in *CancelDiscoveryRequest, opts ...grpc.CallOption) (*CancelDiscoveryResponse, error)
+	CloseProfileProxy(ctx context.Context, in *CloseProfileProxyRequest, opts ...grpc.CallOption) (*CloseProfileProxyResponse, error)
+	Disable(ctx context.Context, in *DisableRequest, opts ...grpc.CallOption) (*DisableResponse, error)
+	Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error)
+	GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error)
+	GetBluetoothLeAdvertiser(ctx context.Context, in *GetBluetoothLeAdvertiserRequest, opts ...grpc.CallOption) (*GetBluetoothLeAdvertiserResponse, error)
+	GetBluetoothLeScanner(ctx context.Context, in *GetBluetoothLeScannerRequest, opts ...grpc.CallOption) (*GetBluetoothLeScannerResponse, error)
+	GetBondedDevices(ctx context.Context, in *GetBondedDevicesRequest, opts ...grpc.CallOption) (*GetBondedDevicesResponse, error)
+	GetDiscoverableTimeout(ctx context.Context, in *GetDiscoverableTimeoutRequest, opts ...grpc.CallOption) (*GetDiscoverableTimeoutResponse, error)
+	GetLeMaximumAdvertisingDataLength(ctx context.Context, in *GetLeMaximumAdvertisingDataLengthRequest, opts ...grpc.CallOption) (*GetLeMaximumAdvertisingDataLengthResponse, error)
+	GetMaxConnectedAudioDevices(ctx context.Context, in *GetMaxConnectedAudioDevicesRequest, opts ...grpc.CallOption) (*GetMaxConnectedAudioDevicesResponse, error)
+	GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error)
+	GetProfileConnectionState(ctx context.Context, in *GetProfileConnectionStateRequest, opts ...grpc.CallOption) (*GetProfileConnectionStateResponse, error)
+	GetProfileProxy(ctx context.Context, in *GetProfileProxyRequest, opts ...grpc.CallOption) (*GetProfileProxyResponse, error)
+	GetRemoteDevice1(ctx context.Context, in *GetRemoteDevice1Request, opts ...grpc.CallOption) (*GetRemoteDevice1Response, error)
+	GetRemoteDevice1_1(ctx context.Context, in *GetRemoteDevice1_1Request, opts ...grpc.CallOption) (*GetRemoteDevice1_1Response, error)
+	GetRemoteLeDevice(ctx context.Context, in *GetRemoteLeDeviceRequest, opts ...grpc.CallOption) (*GetRemoteLeDeviceResponse, error)
+	GetScanMode(ctx context.Context, in *GetScanModeRequest, opts ...grpc.CallOption) (*GetScanModeResponse, error)
+	GetState(ctx context.Context, in *GetStateRequest, opts ...grpc.CallOption) (*GetStateResponse, error)
+	IsDiscovering(ctx context.Context, in *IsDiscoveringRequest, opts ...grpc.CallOption) (*IsDiscoveringResponse, error)
+	IsEnabled(ctx context.Context, in *IsEnabledRequest, opts ...grpc.CallOption) (*IsEnabledResponse, error)
+	IsLe2MPhySupported(ctx context.Context, in *IsLe2MPhySupportedRequest, opts ...grpc.CallOption) (*IsLe2MPhySupportedResponse, error)
+	IsLeAudioBroadcastAssistantSupported(ctx context.Context, in *IsLeAudioBroadcastAssistantSupportedRequest, opts ...grpc.CallOption) (*IsLeAudioBroadcastAssistantSupportedResponse, error)
+	IsLeAudioBroadcastSourceSupported(ctx context.Context, in *IsLeAudioBroadcastSourceSupportedRequest, opts ...grpc.CallOption) (*IsLeAudioBroadcastSourceSupportedResponse, error)
+	IsLeAudioSupported(ctx context.Context, in *IsLeAudioSupportedRequest, opts ...grpc.CallOption) (*IsLeAudioSupportedResponse, error)
+	IsLeCodedPhySupported(ctx context.Context, in *IsLeCodedPhySupportedRequest, opts ...grpc.CallOption) (*IsLeCodedPhySupportedResponse, error)
+	IsLeExtendedAdvertisingSupported(ctx context.Context, in *IsLeExtendedAdvertisingSupportedRequest, opts ...grpc.CallOption) (*IsLeExtendedAdvertisingSupportedResponse, error)
+	IsLePeriodicAdvertisingSupported(ctx context.Context, in *IsLePeriodicAdvertisingSupportedRequest, opts ...grpc.CallOption) (*IsLePeriodicAdvertisingSupportedResponse, error)
+	IsMultipleAdvertisementSupported(ctx context.Context, in *IsMultipleAdvertisementSupportedRequest, opts ...grpc.CallOption) (*IsMultipleAdvertisementSupportedResponse, error)
+	IsOffloadedFilteringSupported(ctx context.Context, in *IsOffloadedFilteringSupportedRequest, opts ...grpc.CallOption) (*IsOffloadedFilteringSupportedResponse, error)
+	IsOffloadedScanBatchingSupported(ctx context.Context, in *IsOffloadedScanBatchingSupportedRequest, opts ...grpc.CallOption) (*IsOffloadedScanBatchingSupportedResponse, error)
+	ListenUsingInsecureL2CapChannel(ctx context.Context, in *ListenUsingInsecureL2CapChannelRequest, opts ...grpc.CallOption) (*ListenUsingInsecureL2CapChannelResponse, error)
+	ListenUsingInsecureRfcommWithServiceRecord(ctx context.Context, in *ListenUsingInsecureRfcommWithServiceRecordRequest, opts ...grpc.CallOption) (*ListenUsingInsecureRfcommWithServiceRecordResponse, error)
+	ListenUsingL2CapChannel(ctx context.Context, in *ListenUsingL2CapChannelRequest, opts ...grpc.CallOption) (*ListenUsingL2CapChannelResponse, error)
+	ListenUsingRfcommWithServiceRecord(ctx context.Context, in *ListenUsingRfcommWithServiceRecordRequest, opts ...grpc.CallOption) (*ListenUsingRfcommWithServiceRecordResponse, error)
+	ListenUsingSocketSettings(ctx context.Context, in *ListenUsingSocketSettingsRequest, opts ...grpc.CallOption) (*ListenUsingSocketSettingsResponse, error)
+	SetName(ctx context.Context, in *SetNameRequest, opts ...grpc.CallOption) (*SetNameResponse, error)
+	StartDiscovery(ctx context.Context, in *StartDiscoveryRequest, opts ...grpc.CallOption) (*StartDiscoveryResponse, error)
+	StartLeScan1(ctx context.Context, in *StartLeScan1Request, opts ...grpc.CallOption) (*StartLeScan1Response, error)
+	StartLeScan2_1(ctx context.Context, in *StartLeScan2_1Request, opts ...grpc.CallOption) (*StartLeScan2_1Response, error)
+	StopLeScan(ctx context.Context, in *StopLeScanRequest, opts ...grpc.CallOption) (*StopLeScanResponse, error)
+	CheckBluetoothAddress(ctx context.Context, in *CheckBluetoothAddressRequest, opts ...grpc.CallOption) (*CheckBluetoothAddressResponse, error)
 }
 
-type bluetoothGattServiceServiceClient struct {
+type bluetoothAdapterServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBluetoothGattServiceServiceClient(cc grpc.ClientConnInterface) BluetoothGattServiceServiceClient {
-	return &bluetoothGattServiceServiceClient{cc}
+func NewBluetoothAdapterServiceClient(cc grpc.ClientConnInterface) BluetoothAdapterServiceClient {
+	return &bluetoothAdapterServiceClient{cc}
 }
 
-func (c *bluetoothGattServiceServiceClient) AddCharacteristic(ctx context.Context, in *AddCharacteristicRequest, opts ...grpc.CallOption) (*AddCharacteristicResponse, error) {
+func (c *bluetoothAdapterServiceClient) CancelDiscovery(ctx context.Context, in *CancelDiscoveryRequest, opts ...grpc.CallOption) (*CancelDiscoveryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddCharacteristicResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_AddCharacteristic_FullMethodName, in, out, cOpts...)
+	out := new(CancelDiscoveryResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_CancelDiscovery_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error) {
+func (c *bluetoothAdapterServiceClient) CloseProfileProxy(ctx context.Context, in *CloseProfileProxyRequest, opts ...grpc.CallOption) (*CloseProfileProxyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddServiceResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_AddService_FullMethodName, in, out, cOpts...)
+	out := new(CloseProfileProxyResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_CloseProfileProxy_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+func (c *bluetoothAdapterServiceClient) Disable(ctx context.Context, in *DisableRequest, opts ...grpc.CallOption) (*DisableResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DescribeContentsResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_DescribeContents_FullMethodName, in, out, cOpts...)
+	out := new(DisableResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_Disable_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) GetCharacteristic(ctx context.Context, in *GetCharacteristicRequest, opts ...grpc.CallOption) (*GetCharacteristicResponse, error) {
+func (c *bluetoothAdapterServiceClient) Enable(ctx context.Context, in *EnableRequest, opts ...grpc.CallOption) (*EnableResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCharacteristicResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetCharacteristic_FullMethodName, in, out, cOpts...)
+	out := new(EnableResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_Enable_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) GetCharacteristics(ctx context.Context, in *GetCharacteristicsRequest, opts ...grpc.CallOption) (*GetCharacteristicsResponse, error) {
+func (c *bluetoothAdapterServiceClient) GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCharacteristicsResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetCharacteristics_FullMethodName, in, out, cOpts...)
+	out := new(GetAddressResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetAddress_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) GetIncludedServices(ctx context.Context, in *GetIncludedServicesRequest, opts ...grpc.CallOption) (*GetIncludedServicesResponse, error) {
+func (c *bluetoothAdapterServiceClient) GetBluetoothLeAdvertiser(ctx context.Context, in *GetBluetoothLeAdvertiserRequest, opts ...grpc.CallOption) (*GetBluetoothLeAdvertiserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIncludedServicesResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetIncludedServices_FullMethodName, in, out, cOpts...)
+	out := new(GetBluetoothLeAdvertiserResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetBluetoothLeAdvertiser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error) {
+func (c *bluetoothAdapterServiceClient) GetBluetoothLeScanner(ctx context.Context, in *GetBluetoothLeScannerRequest, opts ...grpc.CallOption) (*GetBluetoothLeScannerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetInstanceIdResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetInstanceId_FullMethodName, in, out, cOpts...)
+	out := new(GetBluetoothLeScannerResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetBluetoothLeScanner_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error) {
+func (c *bluetoothAdapterServiceClient) GetBondedDevices(ctx context.Context, in *GetBondedDevicesRequest, opts ...grpc.CallOption) (*GetBondedDevicesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTypeResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetType_FullMethodName, in, out, cOpts...)
+	out := new(GetBondedDevicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetBondedDevices_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error) {
+func (c *bluetoothAdapterServiceClient) GetDiscoverableTimeout(ctx context.Context, in *GetDiscoverableTimeoutRequest, opts ...grpc.CallOption) (*GetDiscoverableTimeoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUuidResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetUuid_FullMethodName, in, out, cOpts...)
+	out := new(GetDiscoverableTimeoutResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetDiscoverableTimeout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bluetoothGattServiceServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+func (c *bluetoothAdapterServiceClient) GetLeMaximumAdvertisingDataLength(ctx context.Context, in *GetLeMaximumAdvertisingDataLengthRequest, opts ...grpc.CallOption) (*GetLeMaximumAdvertisingDataLengthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WriteToParcelResponse)
-	err := c.cc.Invoke(ctx, BluetoothGattServiceService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	out := new(GetLeMaximumAdvertisingDataLengthResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetLeMaximumAdvertisingDataLength_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BluetoothGattServiceServiceServer is the server API for BluetoothGattServiceService service.
-// All implementations must embed UnimplementedBluetoothGattServiceServiceServer
+func (c *bluetoothAdapterServiceClient) GetMaxConnectedAudioDevices(ctx context.Context, in *GetMaxConnectedAudioDevicesRequest, opts ...grpc.CallOption) (*GetMaxConnectedAudioDevicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMaxConnectedAudioDevicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetMaxConnectedAudioDevices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNameResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetProfileConnectionState(ctx context.Context, in *GetProfileConnectionStateRequest, opts ...grpc.CallOption) (*GetProfileConnectionStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProfileConnectionStateResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetProfileConnectionState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetProfileProxy(ctx context.Context, in *GetProfileProxyRequest, opts ...grpc.CallOption) (*GetProfileProxyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProfileProxyResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetProfileProxy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetRemoteDevice1(ctx context.Context, in *GetRemoteDevice1Request, opts ...grpc.CallOption) (*GetRemoteDevice1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRemoteDevice1Response)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetRemoteDevice1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetRemoteDevice1_1(ctx context.Context, in *GetRemoteDevice1_1Request, opts ...grpc.CallOption) (*GetRemoteDevice1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRemoteDevice1_1Response)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetRemoteDevice1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetRemoteLeDevice(ctx context.Context, in *GetRemoteLeDeviceRequest, opts ...grpc.CallOption) (*GetRemoteLeDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRemoteLeDeviceResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetRemoteLeDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetScanMode(ctx context.Context, in *GetScanModeRequest, opts ...grpc.CallOption) (*GetScanModeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetScanModeResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetScanMode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) GetState(ctx context.Context, in *GetStateRequest, opts ...grpc.CallOption) (*GetStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStateResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_GetState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsDiscovering(ctx context.Context, in *IsDiscoveringRequest, opts ...grpc.CallOption) (*IsDiscoveringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsDiscoveringResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsDiscovering_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsEnabled(ctx context.Context, in *IsEnabledRequest, opts ...grpc.CallOption) (*IsEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsEnabledResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsLe2MPhySupported(ctx context.Context, in *IsLe2MPhySupportedRequest, opts ...grpc.CallOption) (*IsLe2MPhySupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLe2MPhySupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsLe2MPhySupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsLeAudioBroadcastAssistantSupported(ctx context.Context, in *IsLeAudioBroadcastAssistantSupportedRequest, opts ...grpc.CallOption) (*IsLeAudioBroadcastAssistantSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLeAudioBroadcastAssistantSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsLeAudioBroadcastAssistantSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsLeAudioBroadcastSourceSupported(ctx context.Context, in *IsLeAudioBroadcastSourceSupportedRequest, opts ...grpc.CallOption) (*IsLeAudioBroadcastSourceSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLeAudioBroadcastSourceSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsLeAudioBroadcastSourceSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsLeAudioSupported(ctx context.Context, in *IsLeAudioSupportedRequest, opts ...grpc.CallOption) (*IsLeAudioSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLeAudioSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsLeAudioSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsLeCodedPhySupported(ctx context.Context, in *IsLeCodedPhySupportedRequest, opts ...grpc.CallOption) (*IsLeCodedPhySupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLeCodedPhySupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsLeCodedPhySupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsLeExtendedAdvertisingSupported(ctx context.Context, in *IsLeExtendedAdvertisingSupportedRequest, opts ...grpc.CallOption) (*IsLeExtendedAdvertisingSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLeExtendedAdvertisingSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsLeExtendedAdvertisingSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsLePeriodicAdvertisingSupported(ctx context.Context, in *IsLePeriodicAdvertisingSupportedRequest, opts ...grpc.CallOption) (*IsLePeriodicAdvertisingSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLePeriodicAdvertisingSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsLePeriodicAdvertisingSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsMultipleAdvertisementSupported(ctx context.Context, in *IsMultipleAdvertisementSupportedRequest, opts ...grpc.CallOption) (*IsMultipleAdvertisementSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsMultipleAdvertisementSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsMultipleAdvertisementSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsOffloadedFilteringSupported(ctx context.Context, in *IsOffloadedFilteringSupportedRequest, opts ...grpc.CallOption) (*IsOffloadedFilteringSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsOffloadedFilteringSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsOffloadedFilteringSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) IsOffloadedScanBatchingSupported(ctx context.Context, in *IsOffloadedScanBatchingSupportedRequest, opts ...grpc.CallOption) (*IsOffloadedScanBatchingSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsOffloadedScanBatchingSupportedResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_IsOffloadedScanBatchingSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) ListenUsingInsecureL2CapChannel(ctx context.Context, in *ListenUsingInsecureL2CapChannelRequest, opts ...grpc.CallOption) (*ListenUsingInsecureL2CapChannelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListenUsingInsecureL2CapChannelResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_ListenUsingInsecureL2CapChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) ListenUsingInsecureRfcommWithServiceRecord(ctx context.Context, in *ListenUsingInsecureRfcommWithServiceRecordRequest, opts ...grpc.CallOption) (*ListenUsingInsecureRfcommWithServiceRecordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListenUsingInsecureRfcommWithServiceRecordResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_ListenUsingInsecureRfcommWithServiceRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) ListenUsingL2CapChannel(ctx context.Context, in *ListenUsingL2CapChannelRequest, opts ...grpc.CallOption) (*ListenUsingL2CapChannelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListenUsingL2CapChannelResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_ListenUsingL2CapChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) ListenUsingRfcommWithServiceRecord(ctx context.Context, in *ListenUsingRfcommWithServiceRecordRequest, opts ...grpc.CallOption) (*ListenUsingRfcommWithServiceRecordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListenUsingRfcommWithServiceRecordResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_ListenUsingRfcommWithServiceRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) ListenUsingSocketSettings(ctx context.Context, in *ListenUsingSocketSettingsRequest, opts ...grpc.CallOption) (*ListenUsingSocketSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListenUsingSocketSettingsResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_ListenUsingSocketSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) SetName(ctx context.Context, in *SetNameRequest, opts ...grpc.CallOption) (*SetNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNameResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_SetName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) StartDiscovery(ctx context.Context, in *StartDiscoveryRequest, opts ...grpc.CallOption) (*StartDiscoveryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartDiscoveryResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_StartDiscovery_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) StartLeScan1(ctx context.Context, in *StartLeScan1Request, opts ...grpc.CallOption) (*StartLeScan1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartLeScan1Response)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_StartLeScan1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) StartLeScan2_1(ctx context.Context, in *StartLeScan2_1Request, opts ...grpc.CallOption) (*StartLeScan2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartLeScan2_1Response)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_StartLeScan2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) StopLeScan(ctx context.Context, in *StopLeScanRequest, opts ...grpc.CallOption) (*StopLeScanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StopLeScanResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_StopLeScan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothAdapterServiceClient) CheckBluetoothAddress(ctx context.Context, in *CheckBluetoothAddressRequest, opts ...grpc.CallOption) (*CheckBluetoothAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckBluetoothAddressResponse)
+	err := c.cc.Invoke(ctx, BluetoothAdapterService_CheckBluetoothAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothAdapterServiceServer is the server API for BluetoothAdapterService service.
+// All implementations must embed UnimplementedBluetoothAdapterServiceServer
 // for forward compatibility.
-type BluetoothGattServiceServiceServer interface {
-	AddCharacteristic(context.Context, *AddCharacteristicRequest) (*AddCharacteristicResponse, error)
-	AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error)
-	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
-	GetCharacteristic(context.Context, *GetCharacteristicRequest) (*GetCharacteristicResponse, error)
-	GetCharacteristics(context.Context, *GetCharacteristicsRequest) (*GetCharacteristicsResponse, error)
-	GetIncludedServices(context.Context, *GetIncludedServicesRequest) (*GetIncludedServicesResponse, error)
-	GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error)
-	GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error)
-	GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error)
-	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
-	mustEmbedUnimplementedBluetoothGattServiceServiceServer()
+type BluetoothAdapterServiceServer interface {
+	CancelDiscovery(context.Context, *CancelDiscoveryRequest) (*CancelDiscoveryResponse, error)
+	CloseProfileProxy(context.Context, *CloseProfileProxyRequest) (*CloseProfileProxyResponse, error)
+	Disable(context.Context, *DisableRequest) (*DisableResponse, error)
+	Enable(context.Context, *EnableRequest) (*EnableResponse, error)
+	GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error)
+	GetBluetoothLeAdvertiser(context.Context, *GetBluetoothLeAdvertiserRequest) (*GetBluetoothLeAdvertiserResponse, error)
+	GetBluetoothLeScanner(context.Context, *GetBluetoothLeScannerRequest) (*GetBluetoothLeScannerResponse, error)
+	GetBondedDevices(context.Context, *GetBondedDevicesRequest) (*GetBondedDevicesResponse, error)
+	GetDiscoverableTimeout(context.Context, *GetDiscoverableTimeoutRequest) (*GetDiscoverableTimeoutResponse, error)
+	GetLeMaximumAdvertisingDataLength(context.Context, *GetLeMaximumAdvertisingDataLengthRequest) (*GetLeMaximumAdvertisingDataLengthResponse, error)
+	GetMaxConnectedAudioDevices(context.Context, *GetMaxConnectedAudioDevicesRequest) (*GetMaxConnectedAudioDevicesResponse, error)
+	GetName(context.Context, *GetNameRequest) (*GetNameResponse, error)
+	GetProfileConnectionState(context.Context, *GetProfileConnectionStateRequest) (*GetProfileConnectionStateResponse, error)
+	GetProfileProxy(context.Context, *GetProfileProxyRequest) (*GetProfileProxyResponse, error)
+	GetRemoteDevice1(context.Context, *GetRemoteDevice1Request) (*GetRemoteDevice1Response, error)
+	GetRemoteDevice1_1(context.Context, *GetRemoteDevice1_1Request) (*GetRemoteDevice1_1Response, error)
+	GetRemoteLeDevice(context.Context, *GetRemoteLeDeviceRequest) (*GetRemoteLeDeviceResponse, error)
+	GetScanMode(context.Context, *GetScanModeRequest) (*GetScanModeResponse, error)
+	GetState(context.Context, *GetStateRequest) (*GetStateResponse, error)
+	IsDiscovering(context.Context, *IsDiscoveringRequest) (*IsDiscoveringResponse, error)
+	IsEnabled(context.Context, *IsEnabledRequest) (*IsEnabledResponse, error)
+	IsLe2MPhySupported(context.Context, *IsLe2MPhySupportedRequest) (*IsLe2MPhySupportedResponse, error)
+	IsLeAudioBroadcastAssistantSupported(context.Context, *IsLeAudioBroadcastAssistantSupportedRequest) (*IsLeAudioBroadcastAssistantSupportedResponse, error)
+	IsLeAudioBroadcastSourceSupported(context.Context, *IsLeAudioBroadcastSourceSupportedRequest) (*IsLeAudioBroadcastSourceSupportedResponse, error)
+	IsLeAudioSupported(context.Context, *IsLeAudioSupportedRequest) (*IsLeAudioSupportedResponse, error)
+	IsLeCodedPhySupported(context.Context, *IsLeCodedPhySupportedRequest) (*IsLeCodedPhySupportedResponse, error)
+	IsLeExtendedAdvertisingSupported(context.Context, *IsLeExtendedAdvertisingSupportedRequest) (*IsLeExtendedAdvertisingSupportedResponse, error)
+	IsLePeriodicAdvertisingSupported(context.Context, *IsLePeriodicAdvertisingSupportedRequest) (*IsLePeriodicAdvertisingSupportedResponse, error)
+	IsMultipleAdvertisementSupported(context.Context, *IsMultipleAdvertisementSupportedRequest) (*IsMultipleAdvertisementSupportedResponse, error)
+	IsOffloadedFilteringSupported(context.Context, *IsOffloadedFilteringSupportedRequest) (*IsOffloadedFilteringSupportedResponse, error)
+	IsOffloadedScanBatchingSupported(context.Context, *IsOffloadedScanBatchingSupportedRequest) (*IsOffloadedScanBatchingSupportedResponse, error)
+	ListenUsingInsecureL2CapChannel(context.Context, *ListenUsingInsecureL2CapChannelRequest) (*ListenUsingInsecureL2CapChannelResponse, error)
+	ListenUsingInsecureRfcommWithServiceRecord(context.Context, *ListenUsingInsecureRfcommWithServiceRecordRequest) (*ListenUsingInsecureRfcommWithServiceRecordResponse, error)
+	ListenUsingL2CapChannel(context.Context, *ListenUsingL2CapChannelRequest) (*ListenUsingL2CapChannelResponse, error)
+	ListenUsingRfcommWithServiceRecord(context.Context, *ListenUsingRfcommWithServiceRecordRequest) (*ListenUsingRfcommWithServiceRecordResponse, error)
+	ListenUsingSocketSettings(context.Context, *ListenUsingSocketSettingsRequest) (*ListenUsingSocketSettingsResponse, error)
+	SetName(context.Context, *SetNameRequest) (*SetNameResponse, error)
+	StartDiscovery(context.Context, *StartDiscoveryRequest) (*StartDiscoveryResponse, error)
+	StartLeScan1(context.Context, *StartLeScan1Request) (*StartLeScan1Response, error)
+	StartLeScan2_1(context.Context, *StartLeScan2_1Request) (*StartLeScan2_1Response, error)
+	StopLeScan(context.Context, *StopLeScanRequest) (*StopLeScanResponse, error)
+	CheckBluetoothAddress(context.Context, *CheckBluetoothAddressRequest) (*CheckBluetoothAddressResponse, error)
+	mustEmbedUnimplementedBluetoothAdapterServiceServer()
 }
 
-// UnimplementedBluetoothGattServiceServiceServer must be embedded to have
+// UnimplementedBluetoothAdapterServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBluetoothGattServiceServiceServer struct{}
+type UnimplementedBluetoothAdapterServiceServer struct{}
 
-func (UnimplementedBluetoothGattServiceServiceServer) AddCharacteristic(context.Context, *AddCharacteristicRequest) (*AddCharacteristicResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddCharacteristic not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) CancelDiscovery(context.Context, *CancelDiscoveryRequest) (*CancelDiscoveryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelDiscovery not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddService not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) CloseProfileProxy(context.Context, *CloseProfileProxyRequest) (*CloseProfileProxyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloseProfileProxy not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) Disable(context.Context, *DisableRequest) (*DisableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Disable not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) GetCharacteristic(context.Context, *GetCharacteristicRequest) (*GetCharacteristicResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetCharacteristic not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) Enable(context.Context, *EnableRequest) (*EnableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Enable not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) GetCharacteristics(context.Context, *GetCharacteristicsRequest) (*GetCharacteristicsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetCharacteristics not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAddress not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) GetIncludedServices(context.Context, *GetIncludedServicesRequest) (*GetIncludedServicesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetIncludedServices not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) GetBluetoothLeAdvertiser(context.Context, *GetBluetoothLeAdvertiserRequest) (*GetBluetoothLeAdvertiserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBluetoothLeAdvertiser not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetInstanceId not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) GetBluetoothLeScanner(context.Context, *GetBluetoothLeScannerRequest) (*GetBluetoothLeScannerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBluetoothLeScanner not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetType not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) GetBondedDevices(context.Context, *GetBondedDevicesRequest) (*GetBondedDevicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBondedDevices not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetUuid not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) GetDiscoverableTimeout(context.Context, *GetDiscoverableTimeoutRequest) (*GetDiscoverableTimeoutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDiscoverableTimeout not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+func (UnimplementedBluetoothAdapterServiceServer) GetLeMaximumAdvertisingDataLength(context.Context, *GetLeMaximumAdvertisingDataLengthRequest) (*GetLeMaximumAdvertisingDataLengthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLeMaximumAdvertisingDataLength not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) mustEmbedUnimplementedBluetoothGattServiceServiceServer() {
+func (UnimplementedBluetoothAdapterServiceServer) GetMaxConnectedAudioDevices(context.Context, *GetMaxConnectedAudioDevicesRequest) (*GetMaxConnectedAudioDevicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxConnectedAudioDevices not implemented")
 }
-func (UnimplementedBluetoothGattServiceServiceServer) testEmbeddedByValue() {}
+func (UnimplementedBluetoothAdapterServiceServer) GetName(context.Context, *GetNameRequest) (*GetNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetName not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) GetProfileConnectionState(context.Context, *GetProfileConnectionStateRequest) (*GetProfileConnectionStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProfileConnectionState not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) GetProfileProxy(context.Context, *GetProfileProxyRequest) (*GetProfileProxyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProfileProxy not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) GetRemoteDevice1(context.Context, *GetRemoteDevice1Request) (*GetRemoteDevice1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRemoteDevice1 not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) GetRemoteDevice1_1(context.Context, *GetRemoteDevice1_1Request) (*GetRemoteDevice1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRemoteDevice1_1 not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) GetRemoteLeDevice(context.Context, *GetRemoteLeDeviceRequest) (*GetRemoteLeDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRemoteLeDevice not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) GetScanMode(context.Context, *GetScanModeRequest) (*GetScanModeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetScanMode not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) GetState(context.Context, *GetStateRequest) (*GetStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetState not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsDiscovering(context.Context, *IsDiscoveringRequest) (*IsDiscoveringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsDiscovering not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsEnabled(context.Context, *IsEnabledRequest) (*IsEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsEnabled not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsLe2MPhySupported(context.Context, *IsLe2MPhySupportedRequest) (*IsLe2MPhySupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLe2MPhySupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsLeAudioBroadcastAssistantSupported(context.Context, *IsLeAudioBroadcastAssistantSupportedRequest) (*IsLeAudioBroadcastAssistantSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLeAudioBroadcastAssistantSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsLeAudioBroadcastSourceSupported(context.Context, *IsLeAudioBroadcastSourceSupportedRequest) (*IsLeAudioBroadcastSourceSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLeAudioBroadcastSourceSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsLeAudioSupported(context.Context, *IsLeAudioSupportedRequest) (*IsLeAudioSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLeAudioSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsLeCodedPhySupported(context.Context, *IsLeCodedPhySupportedRequest) (*IsLeCodedPhySupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLeCodedPhySupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsLeExtendedAdvertisingSupported(context.Context, *IsLeExtendedAdvertisingSupportedRequest) (*IsLeExtendedAdvertisingSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLeExtendedAdvertisingSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsLePeriodicAdvertisingSupported(context.Context, *IsLePeriodicAdvertisingSupportedRequest) (*IsLePeriodicAdvertisingSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLePeriodicAdvertisingSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsMultipleAdvertisementSupported(context.Context, *IsMultipleAdvertisementSupportedRequest) (*IsMultipleAdvertisementSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsMultipleAdvertisementSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsOffloadedFilteringSupported(context.Context, *IsOffloadedFilteringSupportedRequest) (*IsOffloadedFilteringSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsOffloadedFilteringSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) IsOffloadedScanBatchingSupported(context.Context, *IsOffloadedScanBatchingSupportedRequest) (*IsOffloadedScanBatchingSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsOffloadedScanBatchingSupported not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) ListenUsingInsecureL2CapChannel(context.Context, *ListenUsingInsecureL2CapChannelRequest) (*ListenUsingInsecureL2CapChannelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListenUsingInsecureL2CapChannel not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) ListenUsingInsecureRfcommWithServiceRecord(context.Context, *ListenUsingInsecureRfcommWithServiceRecordRequest) (*ListenUsingInsecureRfcommWithServiceRecordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListenUsingInsecureRfcommWithServiceRecord not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) ListenUsingL2CapChannel(context.Context, *ListenUsingL2CapChannelRequest) (*ListenUsingL2CapChannelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListenUsingL2CapChannel not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) ListenUsingRfcommWithServiceRecord(context.Context, *ListenUsingRfcommWithServiceRecordRequest) (*ListenUsingRfcommWithServiceRecordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListenUsingRfcommWithServiceRecord not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) ListenUsingSocketSettings(context.Context, *ListenUsingSocketSettingsRequest) (*ListenUsingSocketSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListenUsingSocketSettings not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) SetName(context.Context, *SetNameRequest) (*SetNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetName not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) StartDiscovery(context.Context, *StartDiscoveryRequest) (*StartDiscoveryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartDiscovery not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) StartLeScan1(context.Context, *StartLeScan1Request) (*StartLeScan1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartLeScan1 not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) StartLeScan2_1(context.Context, *StartLeScan2_1Request) (*StartLeScan2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartLeScan2_1 not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) StopLeScan(context.Context, *StopLeScanRequest) (*StopLeScanResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopLeScan not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) CheckBluetoothAddress(context.Context, *CheckBluetoothAddressRequest) (*CheckBluetoothAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckBluetoothAddress not implemented")
+}
+func (UnimplementedBluetoothAdapterServiceServer) mustEmbedUnimplementedBluetoothAdapterServiceServer() {
+}
+func (UnimplementedBluetoothAdapterServiceServer) testEmbeddedByValue() {}
 
-// UnsafeBluetoothGattServiceServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BluetoothGattServiceServiceServer will
+// UnsafeBluetoothAdapterServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothAdapterServiceServer will
 // result in compilation errors.
-type UnsafeBluetoothGattServiceServiceServer interface {
-	mustEmbedUnimplementedBluetoothGattServiceServiceServer()
+type UnsafeBluetoothAdapterServiceServer interface {
+	mustEmbedUnimplementedBluetoothAdapterServiceServer()
 }
 
-func RegisterBluetoothGattServiceServiceServer(s grpc.ServiceRegistrar, srv BluetoothGattServiceServiceServer) {
-	// If the following call panics, it indicates UnimplementedBluetoothGattServiceServiceServer was
+func RegisterBluetoothAdapterServiceServer(s grpc.ServiceRegistrar, srv BluetoothAdapterServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothAdapterServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&BluetoothGattServiceService_ServiceDesc, srv)
+	s.RegisterService(&BluetoothAdapterService_ServiceDesc, srv)
 }
 
-func _BluetoothGattServiceService_AddCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCharacteristicRequest)
+func _BluetoothAdapterService_CancelDiscovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelDiscoveryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).AddCharacteristic(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).CancelDiscovery(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_AddCharacteristic_FullMethodName,
+		FullMethod: BluetoothAdapterService_CancelDiscovery_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).AddCharacteristic(ctx, req.(*AddCharacteristicRequest))
+		return srv.(BluetoothAdapterServiceServer).CancelDiscovery(ctx, req.(*CancelDiscoveryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_AddService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddServiceRequest)
+func _BluetoothAdapterService_CloseProfileProxy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseProfileProxyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).AddService(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).CloseProfileProxy(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_AddService_FullMethodName,
+		FullMethod: BluetoothAdapterService_CloseProfileProxy_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).AddService(ctx, req.(*AddServiceRequest))
+		return srv.(BluetoothAdapterServiceServer).CloseProfileProxy(ctx, req.(*CloseProfileProxyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DescribeContentsRequest)
+func _BluetoothAdapterService_Disable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisableRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).DescribeContents(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).Disable(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_DescribeContents_FullMethodName,
+		FullMethod: BluetoothAdapterService_Disable_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+		return srv.(BluetoothAdapterServiceServer).Disable(ctx, req.(*DisableRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_GetCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCharacteristicRequest)
+func _BluetoothAdapterService_Enable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).GetCharacteristic(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).Enable(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_GetCharacteristic_FullMethodName,
+		FullMethod: BluetoothAdapterService_Enable_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).GetCharacteristic(ctx, req.(*GetCharacteristicRequest))
+		return srv.(BluetoothAdapterServiceServer).Enable(ctx, req.(*EnableRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_GetCharacteristics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCharacteristicsRequest)
+func _BluetoothAdapterService_GetAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAddressRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).GetCharacteristics(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).GetAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_GetCharacteristics_FullMethodName,
+		FullMethod: BluetoothAdapterService_GetAddress_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).GetCharacteristics(ctx, req.(*GetCharacteristicsRequest))
+		return srv.(BluetoothAdapterServiceServer).GetAddress(ctx, req.(*GetAddressRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_GetIncludedServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIncludedServicesRequest)
+func _BluetoothAdapterService_GetBluetoothLeAdvertiser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBluetoothLeAdvertiserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).GetIncludedServices(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).GetBluetoothLeAdvertiser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_GetIncludedServices_FullMethodName,
+		FullMethod: BluetoothAdapterService_GetBluetoothLeAdvertiser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).GetIncludedServices(ctx, req.(*GetIncludedServicesRequest))
+		return srv.(BluetoothAdapterServiceServer).GetBluetoothLeAdvertiser(ctx, req.(*GetBluetoothLeAdvertiserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_GetInstanceId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetInstanceIdRequest)
+func _BluetoothAdapterService_GetBluetoothLeScanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBluetoothLeScannerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).GetInstanceId(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).GetBluetoothLeScanner(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_GetInstanceId_FullMethodName,
+		FullMethod: BluetoothAdapterService_GetBluetoothLeScanner_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).GetInstanceId(ctx, req.(*GetInstanceIdRequest))
+		return srv.(BluetoothAdapterServiceServer).GetBluetoothLeScanner(ctx, req.(*GetBluetoothLeScannerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_GetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTypeRequest)
+func _BluetoothAdapterService_GetBondedDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBondedDevicesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).GetType(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).GetBondedDevices(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_GetType_FullMethodName,
+		FullMethod: BluetoothAdapterService_GetBondedDevices_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).GetType(ctx, req.(*GetTypeRequest))
+		return srv.(BluetoothAdapterServiceServer).GetBondedDevices(ctx, req.(*GetBondedDevicesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_GetUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUuidRequest)
+func _BluetoothAdapterService_GetDiscoverableTimeout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDiscoverableTimeoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).GetUuid(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).GetDiscoverableTimeout(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_GetUuid_FullMethodName,
+		FullMethod: BluetoothAdapterService_GetDiscoverableTimeout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).GetUuid(ctx, req.(*GetUuidRequest))
+		return srv.(BluetoothAdapterServiceServer).GetDiscoverableTimeout(ctx, req.(*GetDiscoverableTimeoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BluetoothGattServiceService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WriteToParcelRequest)
+func _BluetoothAdapterService_GetLeMaximumAdvertisingDataLength_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeMaximumAdvertisingDataLengthRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BluetoothGattServiceServiceServer).WriteToParcel(ctx, in)
+		return srv.(BluetoothAdapterServiceServer).GetLeMaximumAdvertisingDataLength(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BluetoothGattServiceService_WriteToParcel_FullMethodName,
+		FullMethod: BluetoothAdapterService_GetLeMaximumAdvertisingDataLength_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BluetoothGattServiceServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+		return srv.(BluetoothAdapterServiceServer).GetLeMaximumAdvertisingDataLength(ctx, req.(*GetLeMaximumAdvertisingDataLengthRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// BluetoothGattServiceService_ServiceDesc is the grpc.ServiceDesc for BluetoothGattServiceService service.
+func _BluetoothAdapterService_GetMaxConnectedAudioDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxConnectedAudioDevicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetMaxConnectedAudioDevices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetMaxConnectedAudioDevices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetMaxConnectedAudioDevices(ctx, req.(*GetMaxConnectedAudioDevicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetName(ctx, req.(*GetNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetProfileConnectionState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProfileConnectionStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetProfileConnectionState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetProfileConnectionState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetProfileConnectionState(ctx, req.(*GetProfileConnectionStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetProfileProxy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProfileProxyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetProfileProxy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetProfileProxy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetProfileProxy(ctx, req.(*GetProfileProxyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetRemoteDevice1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRemoteDevice1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetRemoteDevice1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetRemoteDevice1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetRemoteDevice1(ctx, req.(*GetRemoteDevice1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetRemoteDevice1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRemoteDevice1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetRemoteDevice1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetRemoteDevice1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetRemoteDevice1_1(ctx, req.(*GetRemoteDevice1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetRemoteLeDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRemoteLeDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetRemoteLeDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetRemoteLeDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetRemoteLeDevice(ctx, req.(*GetRemoteLeDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetScanMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetScanModeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetScanMode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetScanMode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetScanMode(ctx, req.(*GetScanModeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_GetState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).GetState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_GetState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).GetState(ctx, req.(*GetStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsDiscovering_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsDiscoveringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsDiscovering(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsDiscovering_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsDiscovering(ctx, req.(*IsDiscoveringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsEnabled(ctx, req.(*IsEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsLe2MPhySupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLe2MPhySupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsLe2MPhySupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsLe2MPhySupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsLe2MPhySupported(ctx, req.(*IsLe2MPhySupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsLeAudioBroadcastAssistantSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLeAudioBroadcastAssistantSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsLeAudioBroadcastAssistantSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsLeAudioBroadcastAssistantSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsLeAudioBroadcastAssistantSupported(ctx, req.(*IsLeAudioBroadcastAssistantSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsLeAudioBroadcastSourceSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLeAudioBroadcastSourceSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsLeAudioBroadcastSourceSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsLeAudioBroadcastSourceSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsLeAudioBroadcastSourceSupported(ctx, req.(*IsLeAudioBroadcastSourceSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsLeAudioSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLeAudioSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsLeAudioSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsLeAudioSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsLeAudioSupported(ctx, req.(*IsLeAudioSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsLeCodedPhySupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLeCodedPhySupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsLeCodedPhySupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsLeCodedPhySupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsLeCodedPhySupported(ctx, req.(*IsLeCodedPhySupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsLeExtendedAdvertisingSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLeExtendedAdvertisingSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsLeExtendedAdvertisingSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsLeExtendedAdvertisingSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsLeExtendedAdvertisingSupported(ctx, req.(*IsLeExtendedAdvertisingSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsLePeriodicAdvertisingSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLePeriodicAdvertisingSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsLePeriodicAdvertisingSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsLePeriodicAdvertisingSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsLePeriodicAdvertisingSupported(ctx, req.(*IsLePeriodicAdvertisingSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsMultipleAdvertisementSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsMultipleAdvertisementSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsMultipleAdvertisementSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsMultipleAdvertisementSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsMultipleAdvertisementSupported(ctx, req.(*IsMultipleAdvertisementSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsOffloadedFilteringSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsOffloadedFilteringSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsOffloadedFilteringSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsOffloadedFilteringSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsOffloadedFilteringSupported(ctx, req.(*IsOffloadedFilteringSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_IsOffloadedScanBatchingSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsOffloadedScanBatchingSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).IsOffloadedScanBatchingSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_IsOffloadedScanBatchingSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).IsOffloadedScanBatchingSupported(ctx, req.(*IsOffloadedScanBatchingSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_ListenUsingInsecureL2CapChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListenUsingInsecureL2CapChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingInsecureL2CapChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_ListenUsingInsecureL2CapChannel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingInsecureL2CapChannel(ctx, req.(*ListenUsingInsecureL2CapChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_ListenUsingInsecureRfcommWithServiceRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListenUsingInsecureRfcommWithServiceRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingInsecureRfcommWithServiceRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_ListenUsingInsecureRfcommWithServiceRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingInsecureRfcommWithServiceRecord(ctx, req.(*ListenUsingInsecureRfcommWithServiceRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_ListenUsingL2CapChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListenUsingL2CapChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingL2CapChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_ListenUsingL2CapChannel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingL2CapChannel(ctx, req.(*ListenUsingL2CapChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_ListenUsingRfcommWithServiceRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListenUsingRfcommWithServiceRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingRfcommWithServiceRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_ListenUsingRfcommWithServiceRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingRfcommWithServiceRecord(ctx, req.(*ListenUsingRfcommWithServiceRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_ListenUsingSocketSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListenUsingSocketSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingSocketSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_ListenUsingSocketSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).ListenUsingSocketSettings(ctx, req.(*ListenUsingSocketSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_SetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).SetName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_SetName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).SetName(ctx, req.(*SetNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_StartDiscovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartDiscoveryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).StartDiscovery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_StartDiscovery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).StartDiscovery(ctx, req.(*StartDiscoveryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_StartLeScan1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartLeScan1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).StartLeScan1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_StartLeScan1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).StartLeScan1(ctx, req.(*StartLeScan1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_StartLeScan2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartLeScan2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).StartLeScan2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_StartLeScan2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).StartLeScan2_1(ctx, req.(*StartLeScan2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_StopLeScan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopLeScanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).StopLeScan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_StopLeScan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).StopLeScan(ctx, req.(*StopLeScanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothAdapterService_CheckBluetoothAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckBluetoothAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothAdapterServiceServer).CheckBluetoothAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothAdapterService_CheckBluetoothAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothAdapterServiceServer).CheckBluetoothAddress(ctx, req.(*CheckBluetoothAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothAdapterService_ServiceDesc is the grpc.ServiceDesc for BluetoothAdapterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var BluetoothGattServiceService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.BluetoothGattServiceService",
-	HandlerType: (*BluetoothGattServiceServiceServer)(nil),
+var BluetoothAdapterService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothAdapterService",
+	HandlerType: (*BluetoothAdapterServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddCharacteristic",
-			Handler:    _BluetoothGattServiceService_AddCharacteristic_Handler,
+			MethodName: "CancelDiscovery",
+			Handler:    _BluetoothAdapterService_CancelDiscovery_Handler,
 		},
 		{
-			MethodName: "AddService",
-			Handler:    _BluetoothGattServiceService_AddService_Handler,
+			MethodName: "CloseProfileProxy",
+			Handler:    _BluetoothAdapterService_CloseProfileProxy_Handler,
 		},
 		{
-			MethodName: "DescribeContents",
-			Handler:    _BluetoothGattServiceService_DescribeContents_Handler,
+			MethodName: "Disable",
+			Handler:    _BluetoothAdapterService_Disable_Handler,
 		},
 		{
-			MethodName: "GetCharacteristic",
-			Handler:    _BluetoothGattServiceService_GetCharacteristic_Handler,
+			MethodName: "Enable",
+			Handler:    _BluetoothAdapterService_Enable_Handler,
 		},
 		{
-			MethodName: "GetCharacteristics",
-			Handler:    _BluetoothGattServiceService_GetCharacteristics_Handler,
+			MethodName: "GetAddress",
+			Handler:    _BluetoothAdapterService_GetAddress_Handler,
 		},
 		{
-			MethodName: "GetIncludedServices",
-			Handler:    _BluetoothGattServiceService_GetIncludedServices_Handler,
+			MethodName: "GetBluetoothLeAdvertiser",
+			Handler:    _BluetoothAdapterService_GetBluetoothLeAdvertiser_Handler,
 		},
 		{
-			MethodName: "GetInstanceId",
-			Handler:    _BluetoothGattServiceService_GetInstanceId_Handler,
+			MethodName: "GetBluetoothLeScanner",
+			Handler:    _BluetoothAdapterService_GetBluetoothLeScanner_Handler,
 		},
 		{
-			MethodName: "GetType",
-			Handler:    _BluetoothGattServiceService_GetType_Handler,
+			MethodName: "GetBondedDevices",
+			Handler:    _BluetoothAdapterService_GetBondedDevices_Handler,
 		},
 		{
-			MethodName: "GetUuid",
-			Handler:    _BluetoothGattServiceService_GetUuid_Handler,
+			MethodName: "GetDiscoverableTimeout",
+			Handler:    _BluetoothAdapterService_GetDiscoverableTimeout_Handler,
 		},
 		{
-			MethodName: "WriteToParcel",
-			Handler:    _BluetoothGattServiceService_WriteToParcel_Handler,
+			MethodName: "GetLeMaximumAdvertisingDataLength",
+			Handler:    _BluetoothAdapterService_GetLeMaximumAdvertisingDataLength_Handler,
+		},
+		{
+			MethodName: "GetMaxConnectedAudioDevices",
+			Handler:    _BluetoothAdapterService_GetMaxConnectedAudioDevices_Handler,
+		},
+		{
+			MethodName: "GetName",
+			Handler:    _BluetoothAdapterService_GetName_Handler,
+		},
+		{
+			MethodName: "GetProfileConnectionState",
+			Handler:    _BluetoothAdapterService_GetProfileConnectionState_Handler,
+		},
+		{
+			MethodName: "GetProfileProxy",
+			Handler:    _BluetoothAdapterService_GetProfileProxy_Handler,
+		},
+		{
+			MethodName: "GetRemoteDevice1",
+			Handler:    _BluetoothAdapterService_GetRemoteDevice1_Handler,
+		},
+		{
+			MethodName: "GetRemoteDevice1_1",
+			Handler:    _BluetoothAdapterService_GetRemoteDevice1_1_Handler,
+		},
+		{
+			MethodName: "GetRemoteLeDevice",
+			Handler:    _BluetoothAdapterService_GetRemoteLeDevice_Handler,
+		},
+		{
+			MethodName: "GetScanMode",
+			Handler:    _BluetoothAdapterService_GetScanMode_Handler,
+		},
+		{
+			MethodName: "GetState",
+			Handler:    _BluetoothAdapterService_GetState_Handler,
+		},
+		{
+			MethodName: "IsDiscovering",
+			Handler:    _BluetoothAdapterService_IsDiscovering_Handler,
+		},
+		{
+			MethodName: "IsEnabled",
+			Handler:    _BluetoothAdapterService_IsEnabled_Handler,
+		},
+		{
+			MethodName: "IsLe2MPhySupported",
+			Handler:    _BluetoothAdapterService_IsLe2MPhySupported_Handler,
+		},
+		{
+			MethodName: "IsLeAudioBroadcastAssistantSupported",
+			Handler:    _BluetoothAdapterService_IsLeAudioBroadcastAssistantSupported_Handler,
+		},
+		{
+			MethodName: "IsLeAudioBroadcastSourceSupported",
+			Handler:    _BluetoothAdapterService_IsLeAudioBroadcastSourceSupported_Handler,
+		},
+		{
+			MethodName: "IsLeAudioSupported",
+			Handler:    _BluetoothAdapterService_IsLeAudioSupported_Handler,
+		},
+		{
+			MethodName: "IsLeCodedPhySupported",
+			Handler:    _BluetoothAdapterService_IsLeCodedPhySupported_Handler,
+		},
+		{
+			MethodName: "IsLeExtendedAdvertisingSupported",
+			Handler:    _BluetoothAdapterService_IsLeExtendedAdvertisingSupported_Handler,
+		},
+		{
+			MethodName: "IsLePeriodicAdvertisingSupported",
+			Handler:    _BluetoothAdapterService_IsLePeriodicAdvertisingSupported_Handler,
+		},
+		{
+			MethodName: "IsMultipleAdvertisementSupported",
+			Handler:    _BluetoothAdapterService_IsMultipleAdvertisementSupported_Handler,
+		},
+		{
+			MethodName: "IsOffloadedFilteringSupported",
+			Handler:    _BluetoothAdapterService_IsOffloadedFilteringSupported_Handler,
+		},
+		{
+			MethodName: "IsOffloadedScanBatchingSupported",
+			Handler:    _BluetoothAdapterService_IsOffloadedScanBatchingSupported_Handler,
+		},
+		{
+			MethodName: "ListenUsingInsecureL2capChannel",
+			Handler:    _BluetoothAdapterService_ListenUsingInsecureL2CapChannel_Handler,
+		},
+		{
+			MethodName: "ListenUsingInsecureRfcommWithServiceRecord",
+			Handler:    _BluetoothAdapterService_ListenUsingInsecureRfcommWithServiceRecord_Handler,
+		},
+		{
+			MethodName: "ListenUsingL2capChannel",
+			Handler:    _BluetoothAdapterService_ListenUsingL2CapChannel_Handler,
+		},
+		{
+			MethodName: "ListenUsingRfcommWithServiceRecord",
+			Handler:    _BluetoothAdapterService_ListenUsingRfcommWithServiceRecord_Handler,
+		},
+		{
+			MethodName: "ListenUsingSocketSettings",
+			Handler:    _BluetoothAdapterService_ListenUsingSocketSettings_Handler,
+		},
+		{
+			MethodName: "SetName",
+			Handler:    _BluetoothAdapterService_SetName_Handler,
+		},
+		{
+			MethodName: "StartDiscovery",
+			Handler:    _BluetoothAdapterService_StartDiscovery_Handler,
+		},
+		{
+			MethodName: "StartLeScan1",
+			Handler:    _BluetoothAdapterService_StartLeScan1_Handler,
+		},
+		{
+			MethodName: "StartLeScan2_1",
+			Handler:    _BluetoothAdapterService_StartLeScan2_1_Handler,
+		},
+		{
+			MethodName: "StopLeScan",
+			Handler:    _BluetoothAdapterService_StopLeScan_Handler,
+		},
+		{
+			MethodName: "CheckBluetoothAddress",
+			Handler:    _BluetoothAdapterService_CheckBluetoothAddress_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
