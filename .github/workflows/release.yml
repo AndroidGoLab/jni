@@ -51,10 +51,14 @@ jobs:
 
       - name: Build jnictl (android)
         env:
-          CGO_ENABLED: '0'
+          CGO_ENABLED: '1'
           GOOS: android
           GOARCH: ${{ matrix.goarch }}
-        run: go build -o dist/jnictl-android-${{ matrix.goarch }} ./cmd/jnictl/
+          NDK_HOME: /usr/local/lib/android/sdk/ndk/27.0.12077973
+          CC_TRIPLE: ${{ matrix.ndk_triple }}
+        run: |
+          CC=$NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/${CC_TRIPLE}30-clang \
+          go build -o dist/jnictl-android-${{ matrix.goarch }} ./cmd/jnictl/
 
       - name: Build jniservice shared library
         env:
