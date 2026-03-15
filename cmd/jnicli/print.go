@@ -13,20 +13,20 @@ var printCmd = &cobra.Command{
 	Short: "print service operations",
 }
 
-var printPrintManagerCmd = &cobra.Command{
-	Use:   "print-manager",
-	Short: "PrintManagerService operations",
+var printPrintJobCmd = &cobra.Command{
+	Use:   "print-job",
+	Short: "PrintJobService operations",
 }
 
-var printPrintManagerGetPrintJobsCmd = &cobra.Command{
-	Use:   "get-print-jobs",
-	Short: "GetPrintJobs RPC",
+var printPrintJobCancelCmd = &cobra.Command{
+	Use:   "cancel",
+	Short: "Cancel RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintManagerServiceClient(grpcConn)
-		req := &pb.GetPrintJobsRequest{}
-		resp, err := client.GetPrintJobs(ctx, req)
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.CancelRequest{}
+		resp, err := client.Cancel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +34,18 @@ var printPrintManagerGetPrintJobsCmd = &cobra.Command{
 	},
 }
 
-var printPrintManagerIsPrintServiceEnabledCmd = &cobra.Command{
-	Use:   "is-print-service-enabled",
-	Short: "IsPrintServiceEnabled RPC",
+var printPrintJobEqualsCmd = &cobra.Command{
+	Use:   "equals",
+	Short: "Equals RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintManagerServiceClient(grpcConn)
-		req := &pb.IsPrintServiceEnabledRequest{}
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.EqualsRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.IsPrintServiceEnabled(ctx, req)
+		resp, err := client.Equals(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,24 +53,159 @@ var printPrintManagerIsPrintServiceEnabledCmd = &cobra.Command{
 	},
 }
 
-var printPrintManagerPrintCmd = &cobra.Command{
-	Use:   "print",
-	Short: "Print RPC",
+var printPrintJobGetIdCmd = &cobra.Command{
+	Use:   "get-id",
+	Short: "GetId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPrintManagerServiceClient(grpcConn)
-		req := &pb.PrintRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.GetIdRequest{}
+		resp, err := client.GetId(ctx, req)
+		if err != nil {
+			return err
 		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobGetInfoCmd = &cobra.Command{
+	Use:   "get-info",
+	Short: "GetInfo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.GetInfoRequest{}
+		resp, err := client.GetInfo(ctx, req)
+		if err != nil {
+			return err
 		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobHashCodeCmd = &cobra.Command{
+	Use:   "hash-code",
+	Short: "HashCode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.HashCodeRequest{}
+		resp, err := client.HashCode(ctx, req)
+		if err != nil {
+			return err
 		}
-		resp, err := client.Print(ctx, req)
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobIsBlockedCmd = &cobra.Command{
+	Use:   "is-blocked",
+	Short: "IsBlocked RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.IsBlockedRequest{}
+		resp, err := client.IsBlocked(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobIsCancelledCmd = &cobra.Command{
+	Use:   "is-cancelled",
+	Short: "IsCancelled RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.IsCancelledRequest{}
+		resp, err := client.IsCancelled(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobIsCompletedCmd = &cobra.Command{
+	Use:   "is-completed",
+	Short: "IsCompleted RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.IsCompletedRequest{}
+		resp, err := client.IsCompleted(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobIsFailedCmd = &cobra.Command{
+	Use:   "is-failed",
+	Short: "IsFailed RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.IsFailedRequest{}
+		resp, err := client.IsFailed(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobIsQueuedCmd = &cobra.Command{
+	Use:   "is-queued",
+	Short: "IsQueued RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.IsQueuedRequest{}
+		resp, err := client.IsQueued(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobIsStartedCmd = &cobra.Command{
+	Use:   "is-started",
+	Short: "IsStarted RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.IsStartedRequest{}
+		resp, err := client.IsStarted(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintJobRestartCmd = &cobra.Command{
+	Use:   "restart",
+	Short: "Restart RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintJobServiceClient(grpcConn)
+		req := &pb.RestartRequest{}
+		resp, err := client.Restart(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -79,13 +214,19 @@ var printPrintManagerPrintCmd = &cobra.Command{
 }
 
 func init() {
-	printPrintManagerCmd.AddCommand(printPrintManagerGetPrintJobsCmd)
-	printPrintManagerIsPrintServiceEnabledCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	printPrintManagerCmd.AddCommand(printPrintManagerIsPrintServiceEnabledCmd)
-	printPrintManagerPrintCmd.Flags().String("arg0", "", "arg0 (string)")
-	printPrintManagerPrintCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	printPrintManagerPrintCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	printPrintManagerCmd.AddCommand(printPrintManagerPrintCmd)
-	printCmd.AddCommand(printPrintManagerCmd)
+	printPrintJobCmd.AddCommand(printPrintJobCancelCmd)
+	printPrintJobEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	printPrintJobCmd.AddCommand(printPrintJobEqualsCmd)
+	printPrintJobCmd.AddCommand(printPrintJobGetIdCmd)
+	printPrintJobCmd.AddCommand(printPrintJobGetInfoCmd)
+	printPrintJobCmd.AddCommand(printPrintJobHashCodeCmd)
+	printPrintJobCmd.AddCommand(printPrintJobIsBlockedCmd)
+	printPrintJobCmd.AddCommand(printPrintJobIsCancelledCmd)
+	printPrintJobCmd.AddCommand(printPrintJobIsCompletedCmd)
+	printPrintJobCmd.AddCommand(printPrintJobIsFailedCmd)
+	printPrintJobCmd.AddCommand(printPrintJobIsQueuedCmd)
+	printPrintJobCmd.AddCommand(printPrintJobIsStartedCmd)
+	printPrintJobCmd.AddCommand(printPrintJobRestartCmd)
+	printCmd.AddCommand(printPrintJobCmd)
 	rootCmd.AddCommand(printCmd)
 }

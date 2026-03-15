@@ -109,7 +109,7 @@ message GetByteArrayExtraResponse {
 
 message GetByteExtraRequest {
   string arg0 = 1;
-  uint32 arg1 = 2;
+  int64 arg1 = 2;
 }
 
 message GetByteExtraResponse {
@@ -467,7 +467,7 @@ message PutExtra2_4Response {
 
 message PutExtra2_5Request {
   string arg0 = 1;
-  uint32 arg1 = 2;
+  int64 arg1 = 2;
 }
 
 message PutExtra2_5Response {

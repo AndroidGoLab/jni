@@ -13,20 +13,20 @@ var nfcCmd = &cobra.Command{
 	Short: "nfc service operations",
 }
 
-var nfcNdefRecordCmd = &cobra.Command{
-	Use:   "ndef-record",
-	Short: "NdefRecordService operations",
+var nfcNdefCmd = &cobra.Command{
+	Use:   "ndef",
+	Short: "NdefService operations",
 }
 
-var nfcNdefRecordDescribeContentsCmd = &cobra.Command{
-	Use:   "describe-contents",
-	Short: "DescribeContents RPC",
+var nfcNdefCanMakeReadOnlyCmd = &cobra.Command{
+	Use:   "can-make-read-only",
+	Short: "CanMakeReadOnly RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.DescribeContentsRequest{}
-		resp, err := client.DescribeContents(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.CanMakeReadOnlyRequest{}
+		resp, err := client.CanMakeReadOnly(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +34,15 @@ var nfcNdefRecordDescribeContentsCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordEqualsCmd = &cobra.Command{
-	Use:   "equals",
-	Short: "Equals RPC",
+var nfcNdefCloseCmd = &cobra.Command{
+	Use:   "close",
+	Short: "Close RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.EqualsRequest{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.Equals(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.CloseRequest{}
+		resp, err := client.Close(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,15 +50,15 @@ var nfcNdefRecordEqualsCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordGetIdCmd = &cobra.Command{
-	Use:   "get-id",
-	Short: "GetId RPC",
+var nfcNdefConnectCmd = &cobra.Command{
+	Use:   "connect",
+	Short: "Connect RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.GetIdRequest{}
-		resp, err := client.GetId(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.ConnectRequest{}
+		resp, err := client.Connect(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -69,15 +66,15 @@ var nfcNdefRecordGetIdCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordGetPayloadCmd = &cobra.Command{
-	Use:   "get-payload",
-	Short: "GetPayload RPC",
+var nfcNdefGetCachedNdefMessageCmd = &cobra.Command{
+	Use:   "get-cached-ndef-message",
+	Short: "GetCachedNdefMessage RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.GetPayloadRequest{}
-		resp, err := client.GetPayload(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.GetCachedNdefMessageRequest{}
+		resp, err := client.GetCachedNdefMessage(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -85,15 +82,15 @@ var nfcNdefRecordGetPayloadCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordGetTnfCmd = &cobra.Command{
-	Use:   "get-tnf",
-	Short: "GetTnf RPC",
+var nfcNdefGetMaxSizeCmd = &cobra.Command{
+	Use:   "get-max-size",
+	Short: "GetMaxSize RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.GetTnfRequest{}
-		resp, err := client.GetTnf(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.GetMaxSizeRequest{}
+		resp, err := client.GetMaxSize(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -101,13 +98,45 @@ var nfcNdefRecordGetTnfCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordGetTypeCmd = &cobra.Command{
+var nfcNdefGetNdefMessageCmd = &cobra.Command{
+	Use:   "get-ndef-message",
+	Short: "GetNdefMessage RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.GetNdefMessageRequest{}
+		resp, err := client.GetNdefMessage(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nfcNdefGetTagCmd = &cobra.Command{
+	Use:   "get-tag",
+	Short: "GetTag RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.GetTagRequest{}
+		resp, err := client.GetTag(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nfcNdefGetTypeCmd = &cobra.Command{
 	Use:   "get-type",
 	Short: "GetType RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
+		client := pb.NewNdefServiceClient(grpcConn)
 		req := &pb.GetTypeRequest{}
 		resp, err := client.GetType(ctx, req)
 		if err != nil {
@@ -117,15 +146,15 @@ var nfcNdefRecordGetTypeCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordHashCodeCmd = &cobra.Command{
-	Use:   "hash-code",
-	Short: "HashCode RPC",
+var nfcNdefIsConnectedCmd = &cobra.Command{
+	Use:   "is-connected",
+	Short: "IsConnected RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.HashCodeRequest{}
-		resp, err := client.HashCode(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.IsConnectedRequest{}
+		resp, err := client.IsConnected(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -133,15 +162,15 @@ var nfcNdefRecordHashCodeCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordToByteArrayCmd = &cobra.Command{
-	Use:   "to-byte-array",
-	Short: "ToByteArray RPC",
+var nfcNdefIsWritableCmd = &cobra.Command{
+	Use:   "is-writable",
+	Short: "IsWritable RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.ToByteArrayRequest{}
-		resp, err := client.ToByteArray(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.IsWritableRequest{}
+		resp, err := client.IsWritable(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -149,15 +178,15 @@ var nfcNdefRecordToByteArrayCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordToMimeTypeCmd = &cobra.Command{
-	Use:   "to-mime-type",
-	Short: "ToMimeType RPC",
+var nfcNdefMakeReadOnlyCmd = &cobra.Command{
+	Use:   "make-read-only",
+	Short: "MakeReadOnly RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.ToMimeTypeRequest{}
-		resp, err := client.ToMimeType(ctx, req)
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.MakeReadOnlyRequest{}
+		resp, err := client.MakeReadOnly(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -165,53 +194,18 @@ var nfcNdefRecordToMimeTypeCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordToStringCmd = &cobra.Command{
-	Use:   "to-string",
-	Short: "ToString RPC",
+var nfcNdefWriteNdefMessageCmd = &cobra.Command{
+	Use:   "write-ndef-message",
+	Short: "WriteNdefMessage RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.ToStringRequest{}
-		resp, err := client.ToString(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefRecordToUriCmd = &cobra.Command{
-	Use:   "to-uri",
-	Short: "ToUri RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.ToUriRequest{}
-		resp, err := client.ToUri(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefRecordWriteToParcelCmd = &cobra.Command{
-	Use:   "write-to-parcel",
-	Short: "WriteToParcel RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.WriteToParcelRequest{}
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.WriteNdefMessageRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.WriteToParcel(ctx, req)
+		resp, err := client.WriteNdefMessage(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -219,125 +213,18 @@ var nfcNdefRecordWriteToParcelCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefRecordCreateApplicationRecordCmd = &cobra.Command{
-	Use:   "create-application-record",
-	Short: "CreateApplicationRecord RPC",
+var nfcNdefGetCmd = &cobra.Command{
+	Use:   "get",
+	Short: "Get RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.CreateApplicationRecordRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.CreateApplicationRecord(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefRecordCreateExternalCmd = &cobra.Command{
-	Use:   "create-external",
-	Short: "CreateExternal RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.CreateExternalRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetString("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.CreateExternal(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefRecordCreateMimeCmd = &cobra.Command{
-	Use:   "create-mime",
-	Short: "CreateMime RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.CreateMimeRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.CreateMime(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefRecordCreateTextRecordCmd = &cobra.Command{
-	Use:   "create-text-record",
-	Short: "CreateTextRecord RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.CreateTextRecordRequest{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetString("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.CreateTextRecord(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefRecordCreateUri1Cmd = &cobra.Command{
-	Use:   "create-uri1",
-	Short: "CreateUri1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.CreateUri1Request{}
+		client := pb.NewNdefServiceClient(grpcConn)
+		req := &pb.GetRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.CreateUri1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var nfcNdefRecordCreateUri1_1Cmd = &cobra.Command{
-	Use:   "create-uri1_1",
-	Short: "CreateUri1_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewNdefRecordServiceClient(grpcConn)
-		req := &pb.CreateUri1_1Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.CreateUri1_1(ctx, req)
+		resp, err := client.Get(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -346,37 +233,21 @@ var nfcNdefRecordCreateUri1_1Cmd = &cobra.Command{
 }
 
 func init() {
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordDescribeContentsCmd)
-	nfcNdefRecordEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordEqualsCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetIdCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetPayloadCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetTnfCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetTypeCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordHashCodeCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToByteArrayCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToMimeTypeCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToStringCmd)
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToUriCmd)
-	nfcNdefRecordWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	nfcNdefRecordWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordWriteToParcelCmd)
-	nfcNdefRecordCreateApplicationRecordCmd.Flags().String("arg0", "", "arg0 (string)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateApplicationRecordCmd)
-	nfcNdefRecordCreateExternalCmd.Flags().String("arg0", "", "arg0 (string)")
-	nfcNdefRecordCreateExternalCmd.Flags().String("arg1", "", "arg1 (string)")
-	nfcNdefRecordCreateExternalCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateExternalCmd)
-	nfcNdefRecordCreateMimeCmd.Flags().String("arg0", "", "arg0 (string)")
-	nfcNdefRecordCreateMimeCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateMimeCmd)
-	nfcNdefRecordCreateTextRecordCmd.Flags().String("arg0", "", "arg0 (string)")
-	nfcNdefRecordCreateTextRecordCmd.Flags().String("arg1", "", "arg1 (string)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateTextRecordCmd)
-	nfcNdefRecordCreateUri1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateUri1Cmd)
-	nfcNdefRecordCreateUri1_1Cmd.Flags().String("arg0", "", "arg0 (string)")
-	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateUri1_1Cmd)
-	nfcCmd.AddCommand(nfcNdefRecordCmd)
+	nfcNdefCmd.AddCommand(nfcNdefCanMakeReadOnlyCmd)
+	nfcNdefCmd.AddCommand(nfcNdefCloseCmd)
+	nfcNdefCmd.AddCommand(nfcNdefConnectCmd)
+	nfcNdefCmd.AddCommand(nfcNdefGetCachedNdefMessageCmd)
+	nfcNdefCmd.AddCommand(nfcNdefGetMaxSizeCmd)
+	nfcNdefCmd.AddCommand(nfcNdefGetNdefMessageCmd)
+	nfcNdefCmd.AddCommand(nfcNdefGetTagCmd)
+	nfcNdefCmd.AddCommand(nfcNdefGetTypeCmd)
+	nfcNdefCmd.AddCommand(nfcNdefIsConnectedCmd)
+	nfcNdefCmd.AddCommand(nfcNdefIsWritableCmd)
+	nfcNdefCmd.AddCommand(nfcNdefMakeReadOnlyCmd)
+	nfcNdefWriteNdefMessageCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nfcNdefCmd.AddCommand(nfcNdefWriteNdefMessageCmd)
+	nfcNdefGetCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nfcNdefCmd.AddCommand(nfcNdefGetCmd)
+	nfcCmd.AddCommand(nfcNdefCmd)
 	rootCmd.AddCommand(nfcCmd)
 }

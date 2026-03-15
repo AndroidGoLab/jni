@@ -1146,7 +1146,7 @@ func (x *GetByteArrayExtraResponse) GetResult() int64 {
 type GetByteExtraRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          uint32                 `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1188,7 +1188,7 @@ func (x *GetByteExtraRequest) GetArg0() string {
 	return ""
 }
 
-func (x *GetByteExtraRequest) GetArg1() uint32 {
+func (x *GetByteExtraRequest) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
 	}
@@ -5090,7 +5090,7 @@ func (x *PutExtra2_4Response) GetResult() int64 {
 type PutExtra2_5Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          uint32                 `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5132,7 +5132,7 @@ func (x *PutExtra2_5Request) GetArg0() string {
 	return ""
 }
 
-func (x *PutExtra2_5Request) GetArg1() uint32 {
+func (x *PutExtra2_5Request) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
 	}
@@ -11311,7 +11311,7 @@ const file_proto_app_app_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"=\n" +
 	"\x13GetByteExtraRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\rR\x04arg1\".\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\".\n" +
 	"\x14GetByteExtraResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\rR\x06result\"\x16\n" +
 	"\x14GetCategoriesRequest\"/\n" +
@@ -11489,7 +11489,7 @@ const file_proto_app_app_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"<\n" +
 	"\x12PutExtra2_5Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\rR\x04arg1\"-\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"-\n" +
 	"\x13PutExtra2_5Response\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"<\n" +
 	"\x12PutExtra2_6Request\x12\x12\n" +

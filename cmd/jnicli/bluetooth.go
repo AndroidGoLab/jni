@@ -13,23 +13,23 @@ var bluetoothCmd = &cobra.Command{
 	Short: "bluetooth service operations",
 }
 
-var bluetoothBluetoothGattCharacteristicCmd = &cobra.Command{
-	Use:   "bluetooth-gatt-characteristic",
-	Short: "BluetoothGattCharacteristicService operations",
+var bluetoothBluetoothGattServiceCmd = &cobra.Command{
+	Use:   "bluetooth-gatt-service",
+	Short: "BluetoothGattServiceService operations",
 }
 
-var bluetoothBluetoothGattCharacteristicAddDescriptorCmd = &cobra.Command{
-	Use:   "add-descriptor",
-	Short: "AddDescriptor RPC",
+var bluetoothBluetoothGattServiceAddCharacteristicCmd = &cobra.Command{
+	Use:   "add-characteristic",
+	Short: "AddCharacteristic RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.AddDescriptorRequest{}
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
+		req := &pb.AddCharacteristicRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.AddDescriptor(ctx, req)
+		resp, err := client.AddCharacteristic(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -37,13 +37,32 @@ var bluetoothBluetoothGattCharacteristicAddDescriptorCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicDescribeContentsCmd = &cobra.Command{
+var bluetoothBluetoothGattServiceAddServiceCmd = &cobra.Command{
+	Use:   "add-service",
+	Short: "AddService RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
+		req := &pb.AddServiceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.AddService(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothBluetoothGattServiceDescribeContentsCmd = &cobra.Command{
 	Use:   "describe-contents",
 	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
 		req := &pb.DescribeContentsRequest{}
 		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
@@ -53,18 +72,18 @@ var bluetoothBluetoothGattCharacteristicDescribeContentsCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicGetDescriptorCmd = &cobra.Command{
-	Use:   "get-descriptor",
-	Short: "GetDescriptor RPC",
+var bluetoothBluetoothGattServiceGetCharacteristicCmd = &cobra.Command{
+	Use:   "get-characteristic",
+	Short: "GetCharacteristic RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetDescriptorRequest{}
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
+		req := &pb.GetCharacteristicRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.GetDescriptor(ctx, req)
+		resp, err := client.GetCharacteristic(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -72,15 +91,15 @@ var bluetoothBluetoothGattCharacteristicGetDescriptorCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicGetDescriptorsCmd = &cobra.Command{
-	Use:   "get-descriptors",
-	Short: "GetDescriptors RPC",
+var bluetoothBluetoothGattServiceGetCharacteristicsCmd = &cobra.Command{
+	Use:   "get-characteristics",
+	Short: "GetCharacteristics RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetDescriptorsRequest{}
-		resp, err := client.GetDescriptors(ctx, req)
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
+		req := &pb.GetCharacteristicsRequest{}
+		resp, err := client.GetCharacteristics(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -88,21 +107,15 @@ var bluetoothBluetoothGattCharacteristicGetDescriptorsCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicGetFloatValueCmd = &cobra.Command{
-	Use:   "get-float-value",
-	Short: "GetFloatValue RPC",
+var bluetoothBluetoothGattServiceGetIncludedServicesCmd = &cobra.Command{
+	Use:   "get-included-services",
+	Short: "GetIncludedServices RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetFloatValueRequest{}
-		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.GetFloatValue(ctx, req)
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
+		req := &pb.GetIncludedServicesRequest{}
+		resp, err := client.GetIncludedServices(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -110,13 +123,13 @@ var bluetoothBluetoothGattCharacteristicGetFloatValueCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicGetInstanceIdCmd = &cobra.Command{
+var bluetoothBluetoothGattServiceGetInstanceIdCmd = &cobra.Command{
 	Use:   "get-instance-id",
 	Short: "GetInstanceId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
 		req := &pb.GetInstanceIdRequest{}
 		resp, err := client.GetInstanceId(ctx, req)
 		if err != nil {
@@ -126,21 +139,15 @@ var bluetoothBluetoothGattCharacteristicGetInstanceIdCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicGetIntValueCmd = &cobra.Command{
-	Use:   "get-int-value",
-	Short: "GetIntValue RPC",
+var bluetoothBluetoothGattServiceGetTypeCmd = &cobra.Command{
+	Use:   "get-type",
+	Short: "GetType RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetIntValueRequest{}
-		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		resp, err := client.GetIntValue(ctx, req)
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
+		req := &pb.GetTypeRequest{}
+		resp, err := client.GetType(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -148,80 +155,13 @@ var bluetoothBluetoothGattCharacteristicGetIntValueCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicGetPermissionsCmd = &cobra.Command{
-	Use:   "get-permissions",
-	Short: "GetPermissions RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetPermissionsRequest{}
-		resp, err := client.GetPermissions(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicGetPropertiesCmd = &cobra.Command{
-	Use:   "get-properties",
-	Short: "GetProperties RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetPropertiesRequest{}
-		resp, err := client.GetProperties(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicGetServiceCmd = &cobra.Command{
-	Use:   "get-service",
-	Short: "GetService RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetServiceRequest{}
-		resp, err := client.GetService(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicGetStringValueCmd = &cobra.Command{
-	Use:   "get-string-value",
-	Short: "GetStringValue RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetStringValueRequest{}
-		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.GetStringValue(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicGetUuidCmd = &cobra.Command{
+var bluetoothBluetoothGattServiceGetUuidCmd = &cobra.Command{
 	Use:   "get-uuid",
 	Short: "GetUuid RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
 		req := &pb.GetUuidRequest{}
 		resp, err := client.GetUuid(ctx, req)
 		if err != nil {
@@ -231,155 +171,13 @@ var bluetoothBluetoothGattCharacteristicGetUuidCmd = &cobra.Command{
 	},
 }
 
-var bluetoothBluetoothGattCharacteristicGetValueCmd = &cobra.Command{
-	Use:   "get-value",
-	Short: "GetValue RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetValueRequest{}
-		resp, err := client.GetValue(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicGetWriteTypeCmd = &cobra.Command{
-	Use:   "get-write-type",
-	Short: "GetWriteType RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.GetWriteTypeRequest{}
-		resp, err := client.GetWriteType(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicSetValue1Cmd = &cobra.Command{
-	Use:   "set-value1",
-	Short: "SetValue1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.SetValue1Request{}
-		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.SetValue1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicSetValue3_1Cmd = &cobra.Command{
-	Use:   "set-value3_1",
-	Short: "SetValue3_1 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.SetValue3_1Request{}
-		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		resp, err := client.SetValue3_1(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicSetValue4_2Cmd = &cobra.Command{
-	Use:   "set-value4_2",
-	Short: "SetValue4_2 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.SetValue4_2Request{}
-		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
-			req.Arg1 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
-			req.Arg2 = v
-		}
-		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
-			req.Arg3 = v
-		}
-		resp, err := client.SetValue4_2(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicSetValue1_3Cmd = &cobra.Command{
-	Use:   "set-value1_3",
-	Short: "SetValue1_3 RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.SetValue1_3Request{}
-		if v, err := cmd.Flags().GetString("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.SetValue1_3(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicSetWriteTypeCmd = &cobra.Command{
-	Use:   "set-write-type",
-	Short: "SetWriteType RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
-		req := &pb.SetWriteTypeRequest{}
-		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
-			req.Arg0 = v
-		}
-		resp, err := client.SetWriteType(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var bluetoothBluetoothGattCharacteristicWriteToParcelCmd = &cobra.Command{
+var bluetoothBluetoothGattServiceWriteToParcelCmd = &cobra.Command{
 	Use:   "write-to-parcel",
 	Short: "WriteToParcel RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBluetoothGattCharacteristicServiceClient(grpcConn)
+		client := pb.NewBluetoothGattServiceServiceClient(grpcConn)
 		req := &pb.WriteToParcelRequest{}
 		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
 			req.Arg0 = v
@@ -396,45 +194,21 @@ var bluetoothBluetoothGattCharacteristicWriteToParcelCmd = &cobra.Command{
 }
 
 func init() {
-	bluetoothBluetoothGattCharacteristicAddDescriptorCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicAddDescriptorCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicDescribeContentsCmd)
-	bluetoothBluetoothGattCharacteristicGetDescriptorCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetDescriptorCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetDescriptorsCmd)
-	bluetoothBluetoothGattCharacteristicGetFloatValueCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
-	bluetoothBluetoothGattCharacteristicGetFloatValueCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetFloatValueCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetInstanceIdCmd)
-	bluetoothBluetoothGattCharacteristicGetIntValueCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
-	bluetoothBluetoothGattCharacteristicGetIntValueCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetIntValueCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetPermissionsCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetPropertiesCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetServiceCmd)
-	bluetoothBluetoothGattCharacteristicGetStringValueCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetStringValueCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetUuidCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetValueCmd)
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicGetWriteTypeCmd)
-	bluetoothBluetoothGattCharacteristicSetValue1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicSetValue1Cmd)
-	bluetoothBluetoothGattCharacteristicSetValue3_1Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
-	bluetoothBluetoothGattCharacteristicSetValue3_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	bluetoothBluetoothGattCharacteristicSetValue3_1Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicSetValue3_1Cmd)
-	bluetoothBluetoothGattCharacteristicSetValue4_2Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
-	bluetoothBluetoothGattCharacteristicSetValue4_2Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	bluetoothBluetoothGattCharacteristicSetValue4_2Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
-	bluetoothBluetoothGattCharacteristicSetValue4_2Cmd.Flags().Int32("arg3", 0, "arg3 (int32)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicSetValue4_2Cmd)
-	bluetoothBluetoothGattCharacteristicSetValue1_3Cmd.Flags().String("arg0", "", "arg0 (string)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicSetValue1_3Cmd)
-	bluetoothBluetoothGattCharacteristicSetWriteTypeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicSetWriteTypeCmd)
-	bluetoothBluetoothGattCharacteristicWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	bluetoothBluetoothGattCharacteristicWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
-	bluetoothBluetoothGattCharacteristicCmd.AddCommand(bluetoothBluetoothGattCharacteristicWriteToParcelCmd)
-	bluetoothCmd.AddCommand(bluetoothBluetoothGattCharacteristicCmd)
+	bluetoothBluetoothGattServiceAddCharacteristicCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceAddCharacteristicCmd)
+	bluetoothBluetoothGattServiceAddServiceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceAddServiceCmd)
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceDescribeContentsCmd)
+	bluetoothBluetoothGattServiceGetCharacteristicCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetCharacteristicCmd)
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetCharacteristicsCmd)
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetIncludedServicesCmd)
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetInstanceIdCmd)
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetTypeCmd)
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceGetUuidCmd)
+	bluetoothBluetoothGattServiceWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	bluetoothBluetoothGattServiceWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	bluetoothBluetoothGattServiceCmd.AddCommand(bluetoothBluetoothGattServiceWriteToParcelCmd)
+	bluetoothCmd.AddCommand(bluetoothBluetoothGattServiceCmd)
 	rootCmd.AddCommand(bluetoothCmd)
 }

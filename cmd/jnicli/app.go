@@ -267,7 +267,7 @@ var appIntentGetByteExtraCmd = &cobra.Command{
 		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetUint32("arg1"); err == nil {
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
 			req.Arg1 = v
 		}
 		resp, err := client.GetByteExtra(ctx, req)
@@ -1116,7 +1116,7 @@ var appIntentPutExtra2_5Cmd = &cobra.Command{
 		if v, err := cmd.Flags().GetString("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetUint32("arg1"); err == nil {
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
 			req.Arg1 = v
 		}
 		resp, err := client.PutExtra2_5(ctx, req)
@@ -2521,7 +2521,7 @@ func init() {
 	appIntentGetByteArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
 	appIntentCmd.AddCommand(appIntentGetByteArrayExtraCmd)
 	appIntentGetByteExtraCmd.Flags().String("arg0", "", "arg0 (string)")
-	appIntentGetByteExtraCmd.Flags().Uint32("arg1", 0, "arg1 (uint32)")
+	appIntentGetByteExtraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	appIntentCmd.AddCommand(appIntentGetByteExtraCmd)
 	appIntentCmd.AddCommand(appIntentGetCategoriesCmd)
 	appIntentGetCharArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
@@ -2609,7 +2609,7 @@ func init() {
 	appIntentPutExtra2_4Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	appIntentCmd.AddCommand(appIntentPutExtra2_4Cmd)
 	appIntentPutExtra2_5Cmd.Flags().String("arg0", "", "arg0 (string)")
-	appIntentPutExtra2_5Cmd.Flags().Uint32("arg1", 0, "arg1 (uint32)")
+	appIntentPutExtra2_5Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
 	appIntentCmd.AddCommand(appIntentPutExtra2_5Cmd)
 	appIntentPutExtra2_6Cmd.Flags().String("arg0", "", "arg0 (string)")
 	appIntentPutExtra2_6Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
