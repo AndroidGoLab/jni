@@ -73,16 +73,8 @@ var cameraPhotoCmd = &cobra.Command{
 	},
 }
 
-var cameraVideoCmd = &cobra.Command{
-	Use:   "video",
-	Short: "Record a video (not yet implemented)",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		return fmt.Errorf("not yet implemented; requires MediaRecorder Java helper")
-	},
-}
-
 func init() {
 	cameraPhotoCmd.Flags().Int("index", 0, "camera index (0=back, 1=front)")
 	cameraPhotoCmd.Flags().StringP("output", "o", "", "output file (default: stdout)")
-	cameraCmd.AddCommand(cameraPhotoCmd, cameraVideoCmd)
+	cameraCmd.AddCommand(cameraPhotoCmd)
 }
