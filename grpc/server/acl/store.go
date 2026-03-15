@@ -155,6 +155,27 @@ func (s *Store) Grant(
 	return nil
 }
 
+// RevokeClient deletes the client record and all associated grants.
+// Both operations run in a single transaction.
+func (s *Store) RevokeClient(clientID string) error {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("beginning transaction: %w", err)
+	}
+	defer func() {
+		_ = tx.Rollback()
+	}()
+
+	if _, err := tx.Exec(`DELETE FROM grants WHERE client_id = ?`, clientID); err != nil {
+		return fmt.Errorf("deleting grants for client %q: %w", clientID, err)
+	}
+	if _, err := tx.Exec(`DELETE FROM clients WHERE client_id = ?`, clientID); err != nil {
+		return fmt.Errorf("deleting client %q: %w", clientID, err)
+	}
+
+	return tx.Commit()
+}
+
 // Revoke removes the grant for the given client and method pattern.
 func (s *Store) Revoke(
 	clientID string,
