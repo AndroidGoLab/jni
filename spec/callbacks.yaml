@@ -1,0 +1,41 @@
+# Abstract callback classes that need generated adapters for gRPC proxy support.
+# callbackgen reads this file and generates Java adapter classes.
+callbacks:
+  - class: android.hardware.camera2.CameraDevice.StateCallback
+    adapter: CameraDeviceStateCallbackAdapter
+    methods:
+      - name: onOpened
+        params:
+          - type: android.hardware.camera2.CameraDevice
+            name: camera
+      - name: onDisconnected
+        params:
+          - type: android.hardware.camera2.CameraDevice
+            name: camera
+      - name: onError
+        params:
+          - type: android.hardware.camera2.CameraDevice
+            name: camera
+          - type: int
+            name: error
+
+  - class: android.hardware.camera2.CameraCaptureSession.StateCallback
+    adapter: CameraCaptureSessionStateCallbackAdapter
+    methods:
+      - name: onConfigured
+        params:
+          - type: android.hardware.camera2.CameraCaptureSession
+            name: session
+      - name: onConfigureFailed
+        params:
+          - type: android.hardware.camera2.CameraCaptureSession
+            name: session
+
+  - class: android.media.ImageReader.OnImageAvailableListener
+    adapter: ImageReaderOnImageAvailableListenerAdapter
+    interface: true
+    methods:
+      - name: onImageAvailable
+        params:
+          - type: android.media.ImageReader
+            name: reader
