@@ -1,6 +1,6 @@
 .PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator \
 	build build-server list-commands dist dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex \
-	magisk deploy push start-server stop-server forward
+	magisk apk deploy push start-server stop-server forward
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -243,3 +243,57 @@ magisk: dist-jniservice dist-dex
 	@touch build/magisk-staging/META-INF/com/google/android/updater-script
 	cd build/magisk-staging && zip -r ../jniservice-magisk-$(DIST_ANDROID_ABI).zip . -x '*.DS_Store'
 	@echo "Built: build/jniservice-magisk-$(DIST_ANDROID_ABI).zip"
+
+# ---- APK ----
+# Usage: make apk [DIST_GOARCH=arm64]
+# Builds a signed APK with jniservice foreground service.
+# Uses JNISERVICE_KEYSTORE / JNISERVICE_KEYSTORE_PASSWORD for release signing.
+# Falls back to a generated debug keystore if not set.
+
+APK_SRC := cmd/jniservice/apk
+APK_STAGING := build/apk-staging
+APK_BUILD_TOOLS ?= $(shell ls -d $(ANDROID_SDK)/build-tools/* 2>/dev/null | sort -V | tail -1)
+APK_PLATFORM ?= $(shell ls -d $(ANDROID_SDK)/platforms/android-* 2>/dev/null | sort -V | tail -1)
+
+apk: dist-jniservice
+	@rm -rf $(APK_STAGING)
+	@mkdir -p $(APK_STAGING)/lib/$(DIST_ANDROID_ABI) $(APK_STAGING)/classes
+	cp build/libjniservice-$(DIST_ANDROID_ABI).so $(APK_STAGING)/lib/$(DIST_ANDROID_ABI)/libjniservice.so
+	$(APK_BUILD_TOOLS)/aapt2 link \
+		-I $(APK_PLATFORM)/android.jar \
+		--manifest $(APK_SRC)/AndroidManifest.xml \
+		-o $(APK_STAGING)/base.apk \
+		--auto-add-overlay
+	javac --release 17 \
+		-cp $(APK_PLATFORM)/android.jar \
+		-d $(APK_STAGING)/classes \
+		$(APK_SRC)/src/com/xaionaro/jniservice/*.java
+	$(APK_BUILD_TOOLS)/d8 \
+		--lib $(APK_PLATFORM)/android.jar \
+		--output $(APK_STAGING) \
+		$$(find $(APK_STAGING)/classes -name '*.class')
+	cd $(APK_STAGING) && zip -u base.apk classes.dex
+	cd $(APK_STAGING) && zip -u -r base.apk lib/
+	$(APK_BUILD_TOOLS)/zipalign -f 4 $(APK_STAGING)/base.apk $(APK_STAGING)/aligned.apk
+	@if [ -n "$$JNISERVICE_KEYSTORE" ]; then \
+		echo "Signing with provided keystore"; \
+		$(APK_BUILD_TOOLS)/apksigner sign \
+			--ks "$$JNISERVICE_KEYSTORE" \
+			--ks-pass "pass:$$JNISERVICE_KEYSTORE_PASSWORD" \
+			--out build/jniservice-$(DIST_ANDROID_ABI).apk \
+			$(APK_STAGING)/aligned.apk; \
+	else \
+		echo "Signing with debug keystore"; \
+		if [ ! -f build/debug.keystore ]; then \
+			keytool -genkeypair -v -keystore build/debug.keystore \
+				-storepass android -keypass android \
+				-alias androiddebugkey -keyalg RSA -keysize 2048 \
+				-validity 10000 -dname "CN=Debug"; \
+		fi; \
+		$(APK_BUILD_TOOLS)/apksigner sign \
+			--ks build/debug.keystore \
+			--ks-pass pass:android \
+			--out build/jniservice-$(DIST_ANDROID_ABI).apk \
+			$(APK_STAGING)/aligned.apk; \
+	fi
+	@echo "Built: build/jniservice-$(DIST_ANDROID_ABI).apk"
