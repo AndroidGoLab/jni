@@ -89,6 +89,7 @@ build:
 
 # Cross-compile jniservice as c-shared library for Android
 build-server:
+	@mkdir -p build
 	CGO_ENABLED=1 \
 	GOOS=android \
 	GOARCH=arm64 \
@@ -106,7 +107,7 @@ test-emulator:
 
 # ---- Release artifacts ----
 # Usage: make dist GOARCH=arm64   (or GOARCH=amd64)
-# Builds all release artifacts into dist/.
+# Builds all release artifacts into build/.
 
 DIST_GOARCH ?= arm64
 ANDROID_SDK ?= $(HOME)/Android/Sdk
@@ -128,28 +129,28 @@ DIST_CC := $(DIST_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/$(DIST_NDK_TRIP
 dist: dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex
 
 dist-jnictl-linux:
-	@mkdir -p dist
+	@mkdir -p build
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(DIST_GOARCH) \
-		go build -o dist/jnictl-linux-$(DIST_GOARCH) ./cmd/jnictl/
+		go build -o build/jnictl-linux-$(DIST_GOARCH) ./cmd/jnictl/
 
 # android/amd64 requires external (CGO) linking for PIE (Go toolchain limitation:
 # InternalLinkPIESupported lists android/arm64 but not android/amd64).
 # Use CGO_ENABLED=1 unconditionally since arm64 also works fine with it.
 dist-jnictl-android:
-	@mkdir -p dist
+	@mkdir -p build
 	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
-		go build -o dist/jnictl-android-$(DIST_GOARCH) ./cmd/jnictl/
+		go build -o build/jnictl-android-$(DIST_GOARCH) ./cmd/jnictl/
 
 dist-jniservice:
-	@mkdir -p dist
+	@mkdir -p build
 	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
 		go build -buildmode=c-shared \
-			-o dist/libjniservice-$(DIST_ANDROID_ABI).so ./cmd/jniservice/
+			-o build/libjniservice-$(DIST_ANDROID_ABI).so ./cmd/jniservice/
 
 dist-dex:
-	@mkdir -p dist
-	javac --release 17 -d dist cmd/jniservice/JNIService.java
+	@mkdir -p build
+	javac --release 17 -d build cmd/jniservice/JNIService.java
 	$(ANDROID_SDK)/build-tools/$$(ls $(ANDROID_SDK)/build-tools | sort -V | tail -1)/d8 \
 		--lib $$(ls -d $(ANDROID_SDK)/platforms/android-* | sort -V | tail -1)/android.jar \
-		--output dist dist/JNIService.class
-	rm -f dist/JNIService.class
+		--output build build/JNIService.class
+	rm -f build/JNIService.class
