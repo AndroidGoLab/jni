@@ -2,12 +2,16 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/xaionaro-go/jni/grpc/client"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
@@ -17,6 +21,9 @@ var (
 	flagInsecure bool
 	flagTimeout  time.Duration
 	flagFormat   string
+	flagCert     string
+	flagKey      string
+	flagCA       string
 )
 
 var grpcConn *grpc.ClientConn
@@ -33,9 +40,18 @@ var rootCmd = &cobra.Command{
 		}
 
 		var opts []grpc.DialOption
-		if flagInsecure {
+
+		switch {
+		case flagCert != "" && flagKey != "":
+			tlsCreds, err := buildMTLSCredentials()
+			if err != nil {
+				return fmt.Errorf("setting up mTLS: %w", err)
+			}
+			opts = append(opts, grpc.WithTransportCredentials(tlsCreds))
+		case flagInsecure:
 			opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 		}
+
 		if flagToken != "" {
 			opts = append(opts, grpc.WithPerRPCCredentials(tokenCredentials{token: flagToken}))
 		}
@@ -62,6 +78,9 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&flagInsecure, "insecure", false, "use insecure connection (no TLS)")
 	rootCmd.PersistentFlags().DurationVar(&flagTimeout, "timeout", 10*time.Second, "request timeout")
 	rootCmd.PersistentFlags().StringVarP(&flagFormat, "format", "f", "json", "output format (json|text)")
+	rootCmd.PersistentFlags().StringVar(&flagCert, "cert", "", "path to client certificate PEM file (for mTLS)")
+	rootCmd.PersistentFlags().StringVar(&flagKey, "key", "", "path to client private key PEM file (for mTLS)")
+	rootCmd.PersistentFlags().StringVar(&flagCA, "ca", "", "path to CA certificate PEM file (for mTLS)")
 }
 
 func requestContext(cmd *cobra.Command) (context.Context, context.CancelFunc) {
@@ -82,4 +101,34 @@ func (t tokenCredentials) GetRequestMetadata(
 
 func (t tokenCredentials) RequireTransportSecurity() bool {
 	return false
+}
+
+func buildMTLSCredentials() (credentials.TransportCredentials, error) {
+	cert, err := tls.LoadX509KeyPair(flagCert, flagKey)
+	if err != nil {
+		return nil, fmt.Errorf("loading client cert/key: %w", err)
+	}
+
+	tlsCfg := &tls.Config{
+		Certificates: []tls.Certificate{cert},
+	}
+
+	if flagCA != "" {
+		caPEM, err := os.ReadFile(flagCA)
+		if err != nil {
+			return nil, fmt.Errorf("reading CA cert: %w", err)
+		}
+
+		caPool := x509.NewCertPool()
+		if !caPool.AppendCertsFromPEM(caPEM) {
+			return nil, fmt.Errorf("failed to parse CA certificate from %s", flagCA)
+		}
+		tlsCfg.RootCAs = caPool
+	}
+
+	if flagInsecure {
+		tlsCfg.InsecureSkipVerify = true
+	}
+
+	return credentials.NewTLS(tlsCfg), nil
 }
