@@ -39,6 +39,10 @@ var rootCmd = &cobra.Command{
 		}
 
 		var opts []grpc.DialOption
+		// Allow large messages for binary data transfer (camera photos, videos).
+		opts = append(opts,
+			grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(128*1024*1024)),
+		)
 
 		switch {
 		case flagCert != "" && flagKey != "":

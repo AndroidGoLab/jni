@@ -950,6 +950,23 @@ func (s *Server) SetObjectArrayElement(_ context.Context, req *pb.SetObjectArray
 	return &pb.SetObjectArrayElementResponse{}, nil
 }
 
+func (s *Server) NewPrimitiveArray(_ context.Context, req *pb.NewPrimitiveArrayRequest) (*pb.NewPrimitiveArrayResponse, error) {
+	var handle int64
+	if err := s.withEnv(func(env *jni.Env) error {
+		switch req.GetElementType() {
+		case pb.JType_BYTE:
+			arr := env.NewByteArray(req.GetLength())
+			handle = s.putObject(env, &arr.Object)
+		default:
+			return fmt.Errorf("unsupported element type: %v (only byte arrays currently supported)", req.GetElementType())
+		}
+		return nil
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.NewPrimitiveArrayResponse{ArrayHandle: handle}, nil
+}
+
 // ---- Bulk byte array transfer ----
 
 func (s *Server) GetByteArrayData(_ context.Context, req *pb.GetByteArrayDataRequest) (*pb.GetByteArrayDataResponse, error) {

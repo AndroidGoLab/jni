@@ -204,6 +204,8 @@ func runServer(cvm *C.JavaVM) {
 		grpc.Creds(credentials.NewTLS(tlsConfig)),
 		grpc.ChainUnaryInterceptor(server.UnaryAuthInterceptor(auth)),
 		grpc.ChainStreamInterceptor(server.StreamAuthInterceptor(auth)),
+		grpc.MaxRecvMsgSize(128 * 1024 * 1024), // 128 MB for large binary transfers
+		grpc.MaxSendMsgSize(128 * 1024 * 1024),
 	}
 	fmt.Fprintf(os.Stderr, "jniservice: mTLS enabled\n")
 
