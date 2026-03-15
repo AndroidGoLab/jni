@@ -57,13 +57,18 @@ jobs:
           JNISERVICE_KEYSTORE_B64: ${{ secrets.JNISERVICE_KEYSTORE_B64 }}
 
       - name: Build APK
-        run: make apk
+        run: |
+          EXTRA_ENV=""
+          if [ -f build/release.keystore ]; then
+            export JNISERVICE_KEYSTORE=build/release.keystore
+            export JNISERVICE_KEYSTORE_PASSWORD="${KS_PASSWORD}"
+          fi
+          make apk
         env:
           DIST_GOARCH: ${{ matrix.goarch }}
           ANDROID_SDK: /usr/local/lib/android/sdk
           DIST_NDK: /usr/local/lib/android/sdk/ndk/27.0.12077973
-          JNISERVICE_KEYSTORE: build/release.keystore
-          JNISERVICE_KEYSTORE_PASSWORD: ${{ secrets.JNISERVICE_KEYSTORE_PASSWORD }}
+          KS_PASSWORD: ${{ secrets.JNISERVICE_KEYSTORE_PASSWORD }}
 
       - name: Prepare release artifacts with descriptive names
         run: |
