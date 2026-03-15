@@ -15,11 +15,17 @@ import (
 // returns a result object (or nil for void methods) and an optional error.
 type ProxyHandler func(env *Env, methodName string, args []*Object) (*Object, error)
 
+// ProxyHandlerFull is like ProxyHandler but also receives the
+// java.lang.reflect.Method object for return type inspection
+// (e.g. detecting void callbacks via method.getReturnType()).
+type ProxyHandlerFull func(env *Env, method *Object, methodName string, args []*Object) (*Object, error)
+
 // Global registry mapping callback IDs to Go handler closures.
 var (
-	proxyMu       sync.Mutex
-	proxyHandlers = map[int64]ProxyHandler{}
-	proxyNextID   atomic.Int64
+	proxyMu           sync.Mutex
+	proxyHandlers     = map[int64]ProxyHandler{}
+	proxyFullHandlers = map[int64]ProxyHandlerFull{}
+	proxyNextID       atomic.Int64
 )
 
 // registerProxy stores a handler and returns a unique ID.
@@ -31,10 +37,20 @@ func registerProxy(h ProxyHandler) int64 {
 	return id
 }
 
-// unregisterProxy removes a handler by ID.
+// registerProxyFull stores a full handler and returns a unique ID.
+func registerProxyFull(h ProxyHandlerFull) int64 {
+	id := proxyNextID.Add(1)
+	proxyMu.Lock()
+	proxyFullHandlers[id] = h
+	proxyMu.Unlock()
+	return id
+}
+
+// unregisterProxy removes a handler by ID from both registries.
 func unregisterProxy(id int64) {
 	proxyMu.Lock()
 	delete(proxyHandlers, id)
+	delete(proxyFullHandlers, id)
 	proxyMu.Unlock()
 }
 
@@ -42,6 +58,14 @@ func unregisterProxy(id int64) {
 func lookupProxy(id int64) (ProxyHandler, bool) {
 	proxyMu.Lock()
 	h, ok := proxyHandlers[id]
+	proxyMu.Unlock()
+	return h, ok
+}
+
+// lookupProxyFull retrieves a full handler by ID.
+func lookupProxyFull(id int64) (ProxyHandlerFull, bool) {
+	proxyMu.Lock()
+	h, ok := proxyFullHandlers[id]
 	proxyMu.Unlock()
 	return h, ok
 }
@@ -278,6 +302,87 @@ func (e *Env) NewProxy(
 	return &Object{ref: proxyObj}, cleanup, nil
 }
 
+// NewProxyFull creates a java.lang.reflect.Proxy like NewProxy, but
+// dispatches to a ProxyHandlerFull that also receives the
+// java.lang.reflect.Method object. This allows the handler to inspect
+// the method's return type (e.g. to detect void callbacks).
+//
+// See NewProxy for full documentation on usage and cleanup semantics.
+func (e *Env) NewProxyFull(
+	ifaces []*Class,
+	handler ProxyHandlerFull,
+) (proxy *Object, cleanup func(), err error) {
+	if len(ifaces) == 0 {
+		return nil, nil, fmt.Errorf("jni: NewProxyFull: at least one interface required")
+	}
+
+	if err := ensureProxyInit(e); err != nil {
+		return nil, nil, err
+	}
+
+	// Register the handler in the global map.
+	handlerID := registerProxyFull(handler)
+
+	// Create the GoInvocationHandler instance, passing handlerID as a jlong.
+	var idVal capi.Jvalue
+	binary.NativeEndian.PutUint64(idVal[:], uint64(handlerID))
+	invHandler := capi.NewObjectA(e.ptr, clsGoHandler, midHandlerCtr, &idVal)
+	if invHandler == 0 {
+		capi.ExceptionClear(e.ptr)
+		unregisterProxy(handlerID)
+		return nil, nil, fmt.Errorf("jni: NewProxyFull: failed to create GoInvocationHandler")
+	}
+	defer capi.DeleteLocalRef(e.ptr, invHandler)
+
+	// Build the Class[] array for the interfaces.
+	ifaceArray := capi.NewObjectArray(e.ptr, capi.Jsize(len(ifaces)), clsClass, 0)
+	if ifaceArray == 0 {
+		capi.ExceptionClear(e.ptr)
+		unregisterProxy(handlerID)
+		return nil, nil, fmt.Errorf("jni: NewProxyFull: failed to create interface array")
+	}
+	defer capi.DeleteLocalRef(e.ptr, capi.Object(ifaceArray))
+
+	for i, iface := range ifaces {
+		capi.SetObjectArrayElement(e.ptr, ifaceArray, capi.Jint(i), iface.ref)
+	}
+
+	// Get the class loader from the first interface.
+	classLoader := capi.CallObjectMethodA(e.ptr, capi.Object(ifaces[0].ref), midGetClassLoader, nil)
+	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
+		capi.ExceptionClear(e.ptr)
+		unregisterProxy(handlerID)
+		return nil, nil, fmt.Errorf("jni: NewProxyFull: failed to get class loader")
+	}
+	if classLoader != 0 {
+		defer capi.DeleteLocalRef(e.ptr, classLoader)
+	}
+	// classLoader may be nil (bootstrap loader); that's valid for Proxy.newProxyInstance.
+
+	// Call Proxy.newProxyInstance(classLoader, interfaces, handler).
+	args := [3]capi.Jvalue{}
+	binary.NativeEndian.PutUint64(args[0][:], uint64(classLoader))
+	binary.NativeEndian.PutUint64(args[1][:], uint64(ifaceArray))
+	binary.NativeEndian.PutUint64(args[2][:], uint64(invHandler))
+
+	proxyObj := capi.CallStaticObjectMethodA(e.ptr, clsProxy, midNewProxyInstance, &args[0])
+	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
+		capi.ExceptionClear(e.ptr)
+		unregisterProxy(handlerID)
+		return nil, nil, fmt.Errorf("jni: NewProxyFull: Proxy.newProxyInstance failed")
+	}
+	if proxyObj == 0 {
+		unregisterProxy(handlerID)
+		return nil, nil, fmt.Errorf("jni: NewProxyFull: Proxy.newProxyInstance returned null")
+	}
+
+	cleanup = func() {
+		unregisterProxy(handlerID)
+	}
+
+	return &Object{ref: proxyObj}, cleanup, nil
+}
+
 // throwGoError throws a Java RuntimeException with the given Go error
 // message. Uses raw capi calls to avoid checkException recursion.
 func throwGoError(env *Env, goErr error) {
@@ -306,6 +411,7 @@ func dispatchProxyInvocation(
 	handlerID int64,
 	methodNameStr capi.String,
 	argsArray capi.ObjectArray,
+	methodObj capi.Object,
 ) capi.Object {
 	goEnv := &Env{ptr: envPtr}
 
@@ -323,6 +429,25 @@ func dispatchProxyInvocation(
 				goArgs[i] = &Object{ref: elem}
 			}
 		}
+	}
+
+	// Check full handlers first (they receive the Method object).
+	if hf, ok := lookupProxyFull(handlerID); ok {
+		var goMethod *Object
+		if methodObj != 0 {
+			goMethod = &Object{ref: methodObj}
+		}
+
+		result, err := hf(goEnv, goMethod, name, goArgs)
+		if err != nil {
+			throwGoError(goEnv, err)
+			return 0
+		}
+
+		if result == nil {
+			return 0
+		}
+		return result.ref
 	}
 
 	h, ok := lookupProxy(handlerID)

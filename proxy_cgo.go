@@ -18,7 +18,8 @@ static inline jint proxy_register_natives(JNIEnv *env, jclass cls) {
 }
 
 extern jobject goProxyDispatchInner(JNIEnv *env, jlong handlerID,
-                                    jstring methodName, jobjectArray args);
+                                    jstring methodName, jobjectArray args,
+                                    jobject method);
 
 // proxy_invoke is the full native dispatch: extract fields in C, call Go.
 // It handles standard Object methods (hashCode, equals, toString) in C
@@ -78,8 +79,9 @@ static inline jobject proxy_invoke(JNIEnv *env, jobject thiz, jobject proxy,
 
     (*env)->ReleaseStringUTFChars(env, name, nameStr);
 
-    // Delegate all other methods to Go.
-    jobject result = goProxyDispatchInner(env, handlerID, name, args);
+    // Delegate all other methods to Go, passing the Method object
+    // so handlers can inspect return type (e.g. to detect void).
+    jobject result = goProxyDispatchInner(env, handlerID, name, args, method);
     (*env)->DeleteLocalRef(env, name);
     return result;
 }
@@ -131,13 +133,15 @@ func goProxyDispatchInner(
 	handlerID C.jlong,
 	methodName C.jstring,
 	args C.jobjectArray,
+	method C.jobject,
 ) C.jobject {
 	envPtr := *(*(*capi.Env))(unsafe.Pointer(&cenv))
 
 	capiMethodName := *(*capi.String)(unsafe.Pointer(&methodName))
 	capiArgs := *(*capi.ObjectArray)(unsafe.Pointer(&args))
+	capiMethod := *(*capi.Object)(unsafe.Pointer(&method))
 
-	result := dispatchProxyInvocation(envPtr, int64(handlerID), capiMethodName, capiArgs)
+	result := dispatchProxyInvocation(envPtr, int64(handlerID), capiMethodName, capiArgs, capiMethod)
 
 	return *(*C.jobject)(unsafe.Pointer(&result))
 }
