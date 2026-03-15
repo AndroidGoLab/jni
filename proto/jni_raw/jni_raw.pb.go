@@ -3327,6 +3327,95 @@ func (*SetArrayRegionResponse) Descriptor() ([]byte, []int) {
 	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{62}
 }
 
+// Bulk byte array transfer.
+type GetByteArrayDataRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ArrayHandle   int64                  `protobuf:"varint,1,opt,name=array_handle,json=arrayHandle,proto3" json:"array_handle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetByteArrayDataRequest) Reset() {
+	*x = GetByteArrayDataRequest{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetByteArrayDataRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetByteArrayDataRequest) ProtoMessage() {}
+
+func (x *GetByteArrayDataRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetByteArrayDataRequest.ProtoReflect.Descriptor instead.
+func (*GetByteArrayDataRequest) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *GetByteArrayDataRequest) GetArrayHandle() int64 {
+	if x != nil {
+		return x.ArrayHandle
+	}
+	return 0
+}
+
+type GetByteArrayDataResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetByteArrayDataResponse) Reset() {
+	*x = GetByteArrayDataResponse{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetByteArrayDataResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetByteArrayDataResponse) ProtoMessage() {}
+
+func (x *GetByteArrayDataResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetByteArrayDataResponse.ProtoReflect.Descriptor instead.
+func (*GetByteArrayDataResponse) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *GetByteArrayDataResponse) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 // ---- Reference management ----
 type NewGlobalRefRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -3337,7 +3426,7 @@ type NewGlobalRefRequest struct {
 
 func (x *NewGlobalRefRequest) Reset() {
 	*x = NewGlobalRefRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[63]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3349,7 +3438,7 @@ func (x *NewGlobalRefRequest) String() string {
 func (*NewGlobalRefRequest) ProtoMessage() {}
 
 func (x *NewGlobalRefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[63]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3362,7 +3451,7 @@ func (x *NewGlobalRefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewGlobalRefRequest.ProtoReflect.Descriptor instead.
 func (*NewGlobalRefRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{63}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *NewGlobalRefRequest) GetObjectHandle() int64 {
@@ -3381,7 +3470,7 @@ type NewGlobalRefResponse struct {
 
 func (x *NewGlobalRefResponse) Reset() {
 	*x = NewGlobalRefResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[64]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3393,7 +3482,7 @@ func (x *NewGlobalRefResponse) String() string {
 func (*NewGlobalRefResponse) ProtoMessage() {}
 
 func (x *NewGlobalRefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[64]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3406,7 +3495,7 @@ func (x *NewGlobalRefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewGlobalRefResponse.ProtoReflect.Descriptor instead.
 func (*NewGlobalRefResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{64}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *NewGlobalRefResponse) GetRefHandle() int64 {
@@ -3425,7 +3514,7 @@ type DeleteGlobalRefRequest struct {
 
 func (x *DeleteGlobalRefRequest) Reset() {
 	*x = DeleteGlobalRefRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[65]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3437,7 +3526,7 @@ func (x *DeleteGlobalRefRequest) String() string {
 func (*DeleteGlobalRefRequest) ProtoMessage() {}
 
 func (x *DeleteGlobalRefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[65]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3450,7 +3539,7 @@ func (x *DeleteGlobalRefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGlobalRefRequest.ProtoReflect.Descriptor instead.
 func (*DeleteGlobalRefRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{65}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *DeleteGlobalRefRequest) GetRefHandle() int64 {
@@ -3468,7 +3557,7 @@ type DeleteGlobalRefResponse struct {
 
 func (x *DeleteGlobalRefResponse) Reset() {
 	*x = DeleteGlobalRefResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[66]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3480,7 +3569,7 @@ func (x *DeleteGlobalRefResponse) String() string {
 func (*DeleteGlobalRefResponse) ProtoMessage() {}
 
 func (x *DeleteGlobalRefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[66]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3493,7 +3582,7 @@ func (x *DeleteGlobalRefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGlobalRefResponse.ProtoReflect.Descriptor instead.
 func (*DeleteGlobalRefResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{66}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{68}
 }
 
 type NewLocalRefRequest struct {
@@ -3505,7 +3594,7 @@ type NewLocalRefRequest struct {
 
 func (x *NewLocalRefRequest) Reset() {
 	*x = NewLocalRefRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[67]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3517,7 +3606,7 @@ func (x *NewLocalRefRequest) String() string {
 func (*NewLocalRefRequest) ProtoMessage() {}
 
 func (x *NewLocalRefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[67]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3530,7 +3619,7 @@ func (x *NewLocalRefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewLocalRefRequest.ProtoReflect.Descriptor instead.
 func (*NewLocalRefRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{67}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *NewLocalRefRequest) GetObjectHandle() int64 {
@@ -3549,7 +3638,7 @@ type NewLocalRefResponse struct {
 
 func (x *NewLocalRefResponse) Reset() {
 	*x = NewLocalRefResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[68]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3561,7 +3650,7 @@ func (x *NewLocalRefResponse) String() string {
 func (*NewLocalRefResponse) ProtoMessage() {}
 
 func (x *NewLocalRefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[68]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3574,7 +3663,7 @@ func (x *NewLocalRefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewLocalRefResponse.ProtoReflect.Descriptor instead.
 func (*NewLocalRefResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{68}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *NewLocalRefResponse) GetRefHandle() int64 {
@@ -3593,7 +3682,7 @@ type DeleteLocalRefRequest struct {
 
 func (x *DeleteLocalRefRequest) Reset() {
 	*x = DeleteLocalRefRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[69]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3605,7 +3694,7 @@ func (x *DeleteLocalRefRequest) String() string {
 func (*DeleteLocalRefRequest) ProtoMessage() {}
 
 func (x *DeleteLocalRefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[69]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3618,7 +3707,7 @@ func (x *DeleteLocalRefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLocalRefRequest.ProtoReflect.Descriptor instead.
 func (*DeleteLocalRefRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{69}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *DeleteLocalRefRequest) GetRefHandle() int64 {
@@ -3636,7 +3725,7 @@ type DeleteLocalRefResponse struct {
 
 func (x *DeleteLocalRefResponse) Reset() {
 	*x = DeleteLocalRefResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[70]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3648,7 +3737,7 @@ func (x *DeleteLocalRefResponse) String() string {
 func (*DeleteLocalRefResponse) ProtoMessage() {}
 
 func (x *DeleteLocalRefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[70]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3661,7 +3750,7 @@ func (x *DeleteLocalRefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLocalRefResponse.ProtoReflect.Descriptor instead.
 func (*DeleteLocalRefResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{70}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{72}
 }
 
 type NewWeakGlobalRefRequest struct {
@@ -3673,7 +3762,7 @@ type NewWeakGlobalRefRequest struct {
 
 func (x *NewWeakGlobalRefRequest) Reset() {
 	*x = NewWeakGlobalRefRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[71]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3685,7 +3774,7 @@ func (x *NewWeakGlobalRefRequest) String() string {
 func (*NewWeakGlobalRefRequest) ProtoMessage() {}
 
 func (x *NewWeakGlobalRefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[71]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3698,7 +3787,7 @@ func (x *NewWeakGlobalRefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewWeakGlobalRefRequest.ProtoReflect.Descriptor instead.
 func (*NewWeakGlobalRefRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{71}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *NewWeakGlobalRefRequest) GetObjectHandle() int64 {
@@ -3717,7 +3806,7 @@ type NewWeakGlobalRefResponse struct {
 
 func (x *NewWeakGlobalRefResponse) Reset() {
 	*x = NewWeakGlobalRefResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[72]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3729,7 +3818,7 @@ func (x *NewWeakGlobalRefResponse) String() string {
 func (*NewWeakGlobalRefResponse) ProtoMessage() {}
 
 func (x *NewWeakGlobalRefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[72]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3742,7 +3831,7 @@ func (x *NewWeakGlobalRefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewWeakGlobalRefResponse.ProtoReflect.Descriptor instead.
 func (*NewWeakGlobalRefResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{72}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *NewWeakGlobalRefResponse) GetRefHandle() int64 {
@@ -3761,7 +3850,7 @@ type DeleteWeakGlobalRefRequest struct {
 
 func (x *DeleteWeakGlobalRefRequest) Reset() {
 	*x = DeleteWeakGlobalRefRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[73]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3773,7 +3862,7 @@ func (x *DeleteWeakGlobalRefRequest) String() string {
 func (*DeleteWeakGlobalRefRequest) ProtoMessage() {}
 
 func (x *DeleteWeakGlobalRefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[73]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3786,7 +3875,7 @@ func (x *DeleteWeakGlobalRefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteWeakGlobalRefRequest.ProtoReflect.Descriptor instead.
 func (*DeleteWeakGlobalRefRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{73}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *DeleteWeakGlobalRefRequest) GetRefHandle() int64 {
@@ -3804,7 +3893,7 @@ type DeleteWeakGlobalRefResponse struct {
 
 func (x *DeleteWeakGlobalRefResponse) Reset() {
 	*x = DeleteWeakGlobalRefResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[74]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3816,7 +3905,7 @@ func (x *DeleteWeakGlobalRefResponse) String() string {
 func (*DeleteWeakGlobalRefResponse) ProtoMessage() {}
 
 func (x *DeleteWeakGlobalRefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[74]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3829,7 +3918,7 @@ func (x *DeleteWeakGlobalRefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteWeakGlobalRefResponse.ProtoReflect.Descriptor instead.
 func (*DeleteWeakGlobalRefResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{74}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{76}
 }
 
 // ---- Exception handling ----
@@ -3841,7 +3930,7 @@ type ExceptionCheckRequest struct {
 
 func (x *ExceptionCheckRequest) Reset() {
 	*x = ExceptionCheckRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[75]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3853,7 +3942,7 @@ func (x *ExceptionCheckRequest) String() string {
 func (*ExceptionCheckRequest) ProtoMessage() {}
 
 func (x *ExceptionCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[75]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3866,7 +3955,7 @@ func (x *ExceptionCheckRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionCheckRequest.ProtoReflect.Descriptor instead.
 func (*ExceptionCheckRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{75}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{77}
 }
 
 type ExceptionCheckResponse struct {
@@ -3878,7 +3967,7 @@ type ExceptionCheckResponse struct {
 
 func (x *ExceptionCheckResponse) Reset() {
 	*x = ExceptionCheckResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[76]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3890,7 +3979,7 @@ func (x *ExceptionCheckResponse) String() string {
 func (*ExceptionCheckResponse) ProtoMessage() {}
 
 func (x *ExceptionCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[76]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3903,7 +3992,7 @@ func (x *ExceptionCheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionCheckResponse.ProtoReflect.Descriptor instead.
 func (*ExceptionCheckResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{76}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *ExceptionCheckResponse) GetHasException() bool {
@@ -3921,7 +4010,7 @@ type ExceptionClearRequest struct {
 
 func (x *ExceptionClearRequest) Reset() {
 	*x = ExceptionClearRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[77]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3933,7 +4022,7 @@ func (x *ExceptionClearRequest) String() string {
 func (*ExceptionClearRequest) ProtoMessage() {}
 
 func (x *ExceptionClearRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[77]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3946,7 +4035,7 @@ func (x *ExceptionClearRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionClearRequest.ProtoReflect.Descriptor instead.
 func (*ExceptionClearRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{77}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{79}
 }
 
 type ExceptionClearResponse struct {
@@ -3957,7 +4046,7 @@ type ExceptionClearResponse struct {
 
 func (x *ExceptionClearResponse) Reset() {
 	*x = ExceptionClearResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[78]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3969,7 +4058,7 @@ func (x *ExceptionClearResponse) String() string {
 func (*ExceptionClearResponse) ProtoMessage() {}
 
 func (x *ExceptionClearResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[78]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3982,7 +4071,7 @@ func (x *ExceptionClearResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionClearResponse.ProtoReflect.Descriptor instead.
 func (*ExceptionClearResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{78}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{80}
 }
 
 type ExceptionDescribeRequest struct {
@@ -3993,7 +4082,7 @@ type ExceptionDescribeRequest struct {
 
 func (x *ExceptionDescribeRequest) Reset() {
 	*x = ExceptionDescribeRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[79]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4005,7 +4094,7 @@ func (x *ExceptionDescribeRequest) String() string {
 func (*ExceptionDescribeRequest) ProtoMessage() {}
 
 func (x *ExceptionDescribeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[79]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4018,7 +4107,7 @@ func (x *ExceptionDescribeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionDescribeRequest.ProtoReflect.Descriptor instead.
 func (*ExceptionDescribeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{79}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{81}
 }
 
 type ExceptionDescribeResponse struct {
@@ -4029,7 +4118,7 @@ type ExceptionDescribeResponse struct {
 
 func (x *ExceptionDescribeResponse) Reset() {
 	*x = ExceptionDescribeResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[80]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4041,7 +4130,7 @@ func (x *ExceptionDescribeResponse) String() string {
 func (*ExceptionDescribeResponse) ProtoMessage() {}
 
 func (x *ExceptionDescribeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[80]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4054,7 +4143,7 @@ func (x *ExceptionDescribeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionDescribeResponse.ProtoReflect.Descriptor instead.
 func (*ExceptionDescribeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{80}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{82}
 }
 
 type ExceptionOccurredRequest struct {
@@ -4065,7 +4154,7 @@ type ExceptionOccurredRequest struct {
 
 func (x *ExceptionOccurredRequest) Reset() {
 	*x = ExceptionOccurredRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[81]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4077,7 +4166,7 @@ func (x *ExceptionOccurredRequest) String() string {
 func (*ExceptionOccurredRequest) ProtoMessage() {}
 
 func (x *ExceptionOccurredRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[81]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4090,7 +4179,7 @@ func (x *ExceptionOccurredRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionOccurredRequest.ProtoReflect.Descriptor instead.
 func (*ExceptionOccurredRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{81}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{83}
 }
 
 type ExceptionOccurredResponse struct {
@@ -4102,7 +4191,7 @@ type ExceptionOccurredResponse struct {
 
 func (x *ExceptionOccurredResponse) Reset() {
 	*x = ExceptionOccurredResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[82]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4114,7 +4203,7 @@ func (x *ExceptionOccurredResponse) String() string {
 func (*ExceptionOccurredResponse) ProtoMessage() {}
 
 func (x *ExceptionOccurredResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[82]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4127,7 +4216,7 @@ func (x *ExceptionOccurredResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExceptionOccurredResponse.ProtoReflect.Descriptor instead.
 func (*ExceptionOccurredResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{82}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *ExceptionOccurredResponse) GetThrowableHandle() int64 {
@@ -4146,7 +4235,7 @@ type ThrowRequest struct {
 
 func (x *ThrowRequest) Reset() {
 	*x = ThrowRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[83]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4158,7 +4247,7 @@ func (x *ThrowRequest) String() string {
 func (*ThrowRequest) ProtoMessage() {}
 
 func (x *ThrowRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[83]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4171,7 +4260,7 @@ func (x *ThrowRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ThrowRequest.ProtoReflect.Descriptor instead.
 func (*ThrowRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{83}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *ThrowRequest) GetThrowableHandle() int64 {
@@ -4189,7 +4278,7 @@ type ThrowResponse struct {
 
 func (x *ThrowResponse) Reset() {
 	*x = ThrowResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[84]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4201,7 +4290,7 @@ func (x *ThrowResponse) String() string {
 func (*ThrowResponse) ProtoMessage() {}
 
 func (x *ThrowResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[84]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4214,7 +4303,7 @@ func (x *ThrowResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ThrowResponse.ProtoReflect.Descriptor instead.
 func (*ThrowResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{84}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{86}
 }
 
 type ThrowNewRequest struct {
@@ -4227,7 +4316,7 @@ type ThrowNewRequest struct {
 
 func (x *ThrowNewRequest) Reset() {
 	*x = ThrowNewRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[85]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4239,7 +4328,7 @@ func (x *ThrowNewRequest) String() string {
 func (*ThrowNewRequest) ProtoMessage() {}
 
 func (x *ThrowNewRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[85]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4252,7 +4341,7 @@ func (x *ThrowNewRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ThrowNewRequest.ProtoReflect.Descriptor instead.
 func (*ThrowNewRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{85}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *ThrowNewRequest) GetClassHandle() int64 {
@@ -4277,7 +4366,7 @@ type ThrowNewResponse struct {
 
 func (x *ThrowNewResponse) Reset() {
 	*x = ThrowNewResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[86]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4289,7 +4378,7 @@ func (x *ThrowNewResponse) String() string {
 func (*ThrowNewResponse) ProtoMessage() {}
 
 func (x *ThrowNewResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[86]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4302,7 +4391,7 @@ func (x *ThrowNewResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ThrowNewResponse.ProtoReflect.Descriptor instead.
 func (*ThrowNewResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{86}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{88}
 }
 
 // ---- Monitor ----
@@ -4315,7 +4404,7 @@ type MonitorEnterRequest struct {
 
 func (x *MonitorEnterRequest) Reset() {
 	*x = MonitorEnterRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[87]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4327,7 +4416,7 @@ func (x *MonitorEnterRequest) String() string {
 func (*MonitorEnterRequest) ProtoMessage() {}
 
 func (x *MonitorEnterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[87]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4340,7 +4429,7 @@ func (x *MonitorEnterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonitorEnterRequest.ProtoReflect.Descriptor instead.
 func (*MonitorEnterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{87}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *MonitorEnterRequest) GetObjectHandle() int64 {
@@ -4358,7 +4447,7 @@ type MonitorEnterResponse struct {
 
 func (x *MonitorEnterResponse) Reset() {
 	*x = MonitorEnterResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[88]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4370,7 +4459,7 @@ func (x *MonitorEnterResponse) String() string {
 func (*MonitorEnterResponse) ProtoMessage() {}
 
 func (x *MonitorEnterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[88]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4383,7 +4472,7 @@ func (x *MonitorEnterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonitorEnterResponse.ProtoReflect.Descriptor instead.
 func (*MonitorEnterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{88}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{90}
 }
 
 type MonitorExitRequest struct {
@@ -4395,7 +4484,7 @@ type MonitorExitRequest struct {
 
 func (x *MonitorExitRequest) Reset() {
 	*x = MonitorExitRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[89]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4407,7 +4496,7 @@ func (x *MonitorExitRequest) String() string {
 func (*MonitorExitRequest) ProtoMessage() {}
 
 func (x *MonitorExitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[89]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4420,7 +4509,7 @@ func (x *MonitorExitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonitorExitRequest.ProtoReflect.Descriptor instead.
 func (*MonitorExitRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{89}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *MonitorExitRequest) GetObjectHandle() int64 {
@@ -4438,7 +4527,7 @@ type MonitorExitResponse struct {
 
 func (x *MonitorExitResponse) Reset() {
 	*x = MonitorExitResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[90]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4450,7 +4539,7 @@ func (x *MonitorExitResponse) String() string {
 func (*MonitorExitResponse) ProtoMessage() {}
 
 func (x *MonitorExitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[90]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4463,7 +4552,7 @@ func (x *MonitorExitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonitorExitResponse.ProtoReflect.Descriptor instead.
 func (*MonitorExitResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{90}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{92}
 }
 
 // ---- Local frame ----
@@ -4476,7 +4565,7 @@ type PushLocalFrameRequest struct {
 
 func (x *PushLocalFrameRequest) Reset() {
 	*x = PushLocalFrameRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[91]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4488,7 +4577,7 @@ func (x *PushLocalFrameRequest) String() string {
 func (*PushLocalFrameRequest) ProtoMessage() {}
 
 func (x *PushLocalFrameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[91]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4501,7 +4590,7 @@ func (x *PushLocalFrameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushLocalFrameRequest.ProtoReflect.Descriptor instead.
 func (*PushLocalFrameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{91}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *PushLocalFrameRequest) GetCapacity() int32 {
@@ -4519,7 +4608,7 @@ type PushLocalFrameResponse struct {
 
 func (x *PushLocalFrameResponse) Reset() {
 	*x = PushLocalFrameResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[92]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4531,7 +4620,7 @@ func (x *PushLocalFrameResponse) String() string {
 func (*PushLocalFrameResponse) ProtoMessage() {}
 
 func (x *PushLocalFrameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[92]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4544,7 +4633,7 @@ func (x *PushLocalFrameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushLocalFrameResponse.ProtoReflect.Descriptor instead.
 func (*PushLocalFrameResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{92}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{94}
 }
 
 type PopLocalFrameRequest struct {
@@ -4556,7 +4645,7 @@ type PopLocalFrameRequest struct {
 
 func (x *PopLocalFrameRequest) Reset() {
 	*x = PopLocalFrameRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[93]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4568,7 +4657,7 @@ func (x *PopLocalFrameRequest) String() string {
 func (*PopLocalFrameRequest) ProtoMessage() {}
 
 func (x *PopLocalFrameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[93]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4581,7 +4670,7 @@ func (x *PopLocalFrameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PopLocalFrameRequest.ProtoReflect.Descriptor instead.
 func (*PopLocalFrameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{93}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *PopLocalFrameRequest) GetResultHandle() int64 {
@@ -4600,7 +4689,7 @@ type PopLocalFrameResponse struct {
 
 func (x *PopLocalFrameResponse) Reset() {
 	*x = PopLocalFrameResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[94]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4612,7 +4701,7 @@ func (x *PopLocalFrameResponse) String() string {
 func (*PopLocalFrameResponse) ProtoMessage() {}
 
 func (x *PopLocalFrameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[94]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4625,7 +4714,7 @@ func (x *PopLocalFrameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PopLocalFrameResponse.ProtoReflect.Descriptor instead.
 func (*PopLocalFrameResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{94}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *PopLocalFrameResponse) GetResultHandle() int64 {
@@ -4644,7 +4733,7 @@ type EnsureLocalCapacityRequest struct {
 
 func (x *EnsureLocalCapacityRequest) Reset() {
 	*x = EnsureLocalCapacityRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[95]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4656,7 +4745,7 @@ func (x *EnsureLocalCapacityRequest) String() string {
 func (*EnsureLocalCapacityRequest) ProtoMessage() {}
 
 func (x *EnsureLocalCapacityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[95]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4669,7 +4758,7 @@ func (x *EnsureLocalCapacityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnsureLocalCapacityRequest.ProtoReflect.Descriptor instead.
 func (*EnsureLocalCapacityRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{95}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *EnsureLocalCapacityRequest) GetCapacity() int32 {
@@ -4687,7 +4776,7 @@ type EnsureLocalCapacityResponse struct {
 
 func (x *EnsureLocalCapacityResponse) Reset() {
 	*x = EnsureLocalCapacityResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[96]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4699,7 +4788,7 @@ func (x *EnsureLocalCapacityResponse) String() string {
 func (*EnsureLocalCapacityResponse) ProtoMessage() {}
 
 func (x *EnsureLocalCapacityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[96]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4712,7 +4801,7 @@ func (x *EnsureLocalCapacityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnsureLocalCapacityResponse.ProtoReflect.Descriptor instead.
 func (*EnsureLocalCapacityResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{96}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{98}
 }
 
 // ---- Reflection ----
@@ -4725,7 +4814,7 @@ type FromReflectedMethodRequest struct {
 
 func (x *FromReflectedMethodRequest) Reset() {
 	*x = FromReflectedMethodRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[97]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4737,7 +4826,7 @@ func (x *FromReflectedMethodRequest) String() string {
 func (*FromReflectedMethodRequest) ProtoMessage() {}
 
 func (x *FromReflectedMethodRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[97]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4750,7 +4839,7 @@ func (x *FromReflectedMethodRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FromReflectedMethodRequest.ProtoReflect.Descriptor instead.
 func (*FromReflectedMethodRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{97}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *FromReflectedMethodRequest) GetMethodObject() int64 {
@@ -4769,7 +4858,7 @@ type FromReflectedMethodResponse struct {
 
 func (x *FromReflectedMethodResponse) Reset() {
 	*x = FromReflectedMethodResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[98]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4781,7 +4870,7 @@ func (x *FromReflectedMethodResponse) String() string {
 func (*FromReflectedMethodResponse) ProtoMessage() {}
 
 func (x *FromReflectedMethodResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[98]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4794,7 +4883,7 @@ func (x *FromReflectedMethodResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FromReflectedMethodResponse.ProtoReflect.Descriptor instead.
 func (*FromReflectedMethodResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{98}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *FromReflectedMethodResponse) GetMethodId() int64 {
@@ -4813,7 +4902,7 @@ type FromReflectedFieldRequest struct {
 
 func (x *FromReflectedFieldRequest) Reset() {
 	*x = FromReflectedFieldRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[99]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4825,7 +4914,7 @@ func (x *FromReflectedFieldRequest) String() string {
 func (*FromReflectedFieldRequest) ProtoMessage() {}
 
 func (x *FromReflectedFieldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[99]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4838,7 +4927,7 @@ func (x *FromReflectedFieldRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FromReflectedFieldRequest.ProtoReflect.Descriptor instead.
 func (*FromReflectedFieldRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{99}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *FromReflectedFieldRequest) GetFieldObject() int64 {
@@ -4857,7 +4946,7 @@ type FromReflectedFieldResponse struct {
 
 func (x *FromReflectedFieldResponse) Reset() {
 	*x = FromReflectedFieldResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[100]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4869,7 +4958,7 @@ func (x *FromReflectedFieldResponse) String() string {
 func (*FromReflectedFieldResponse) ProtoMessage() {}
 
 func (x *FromReflectedFieldResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[100]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4882,7 +4971,7 @@ func (x *FromReflectedFieldResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FromReflectedFieldResponse.ProtoReflect.Descriptor instead.
 func (*FromReflectedFieldResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{100}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *FromReflectedFieldResponse) GetFieldId() int64 {
@@ -4903,7 +4992,7 @@ type ToReflectedMethodRequest struct {
 
 func (x *ToReflectedMethodRequest) Reset() {
 	*x = ToReflectedMethodRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[101]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4915,7 +5004,7 @@ func (x *ToReflectedMethodRequest) String() string {
 func (*ToReflectedMethodRequest) ProtoMessage() {}
 
 func (x *ToReflectedMethodRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[101]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4928,7 +5017,7 @@ func (x *ToReflectedMethodRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToReflectedMethodRequest.ProtoReflect.Descriptor instead.
 func (*ToReflectedMethodRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{101}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *ToReflectedMethodRequest) GetClassHandle() int64 {
@@ -4961,7 +5050,7 @@ type ToReflectedMethodResponse struct {
 
 func (x *ToReflectedMethodResponse) Reset() {
 	*x = ToReflectedMethodResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[102]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4973,7 +5062,7 @@ func (x *ToReflectedMethodResponse) String() string {
 func (*ToReflectedMethodResponse) ProtoMessage() {}
 
 func (x *ToReflectedMethodResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[102]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4986,7 +5075,7 @@ func (x *ToReflectedMethodResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToReflectedMethodResponse.ProtoReflect.Descriptor instead.
 func (*ToReflectedMethodResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{102}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{104}
 }
 
 func (x *ToReflectedMethodResponse) GetMethodObject() int64 {
@@ -5007,7 +5096,7 @@ type ToReflectedFieldRequest struct {
 
 func (x *ToReflectedFieldRequest) Reset() {
 	*x = ToReflectedFieldRequest{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[103]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5019,7 +5108,7 @@ func (x *ToReflectedFieldRequest) String() string {
 func (*ToReflectedFieldRequest) ProtoMessage() {}
 
 func (x *ToReflectedFieldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[103]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5032,7 +5121,7 @@ func (x *ToReflectedFieldRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToReflectedFieldRequest.ProtoReflect.Descriptor instead.
 func (*ToReflectedFieldRequest) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{103}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *ToReflectedFieldRequest) GetClassHandle() int64 {
@@ -5065,7 +5154,7 @@ type ToReflectedFieldResponse struct {
 
 func (x *ToReflectedFieldResponse) Reset() {
 	*x = ToReflectedFieldResponse{}
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[104]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5077,7 +5166,7 @@ func (x *ToReflectedFieldResponse) String() string {
 func (*ToReflectedFieldResponse) ProtoMessage() {}
 
 func (x *ToReflectedFieldResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[104]
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5090,7 +5179,7 @@ func (x *ToReflectedFieldResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToReflectedFieldResponse.ProtoReflect.Descriptor instead.
 func (*ToReflectedFieldResponse) Descriptor() ([]byte, []int) {
-	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{104}
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *ToReflectedFieldResponse) GetFieldObject() int64 {
@@ -5282,7 +5371,11 @@ const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
 	"\felement_type\x18\x02 \x01(\x0e2\x0e.jni_raw.JTypeR\velementType\x12\x14\n" +
 	"\x05start\x18\x03 \x01(\x05R\x05start\x12+\n" +
 	"\belements\x18\x04 \x03(\v2\x0f.jni_raw.JValueR\belements\"\x18\n" +
-	"\x16SetArrayRegionResponse\":\n" +
+	"\x16SetArrayRegionResponse\"<\n" +
+	"\x17GetByteArrayDataRequest\x12!\n" +
+	"\farray_handle\x18\x01 \x01(\x03R\varrayHandle\".\n" +
+	"\x18GetByteArrayDataResponse\x12\x12\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\":\n" +
 	"\x13NewGlobalRefRequest\x12#\n" +
 	"\robject_handle\x18\x01 \x01(\x03R\fobjectHandle\"5\n" +
 	"\x14NewGlobalRefResponse\x12\x1d\n" +
@@ -5375,7 +5468,7 @@ const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
 	"\n" +
 	"\x06DOUBLE\x10\b\x12\n" +
 	"\n" +
-	"\x06OBJECT\x10\t2\x8a\"\n" +
+	"\x06OBJECT\x10\t2\xe3\"\n" +
 	"\n" +
 	"JNIService\x12E\n" +
 	"\n" +
@@ -5411,7 +5504,8 @@ const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
 	"\x15GetObjectArrayElement\x12%.jni_raw.GetObjectArrayElementRequest\x1a&.jni_raw.GetObjectArrayElementResponse\x12f\n" +
 	"\x15SetObjectArrayElement\x12%.jni_raw.SetObjectArrayElementRequest\x1a&.jni_raw.SetObjectArrayElementResponse\x12Q\n" +
 	"\x0eGetArrayRegion\x12\x1e.jni_raw.GetArrayRegionRequest\x1a\x1f.jni_raw.GetArrayRegionResponse\x12Q\n" +
-	"\x0eSetArrayRegion\x12\x1e.jni_raw.SetArrayRegionRequest\x1a\x1f.jni_raw.SetArrayRegionResponse\x12K\n" +
+	"\x0eSetArrayRegion\x12\x1e.jni_raw.SetArrayRegionRequest\x1a\x1f.jni_raw.SetArrayRegionResponse\x12W\n" +
+	"\x10GetByteArrayData\x12 .jni_raw.GetByteArrayDataRequest\x1a!.jni_raw.GetByteArrayDataResponse\x12K\n" +
 	"\fNewGlobalRef\x12\x1c.jni_raw.NewGlobalRefRequest\x1a\x1d.jni_raw.NewGlobalRefResponse\x12T\n" +
 	"\x0fDeleteGlobalRef\x12\x1f.jni_raw.DeleteGlobalRefRequest\x1a .jni_raw.DeleteGlobalRefResponse\x12H\n" +
 	"\vNewLocalRef\x12\x1b.jni_raw.NewLocalRefRequest\x1a\x1c.jni_raw.NewLocalRefResponse\x12Q\n" +
@@ -5447,7 +5541,7 @@ func file_proto_jni_raw_jni_raw_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_jni_raw_jni_raw_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_jni_raw_jni_raw_proto_msgTypes = make([]protoimpl.MessageInfo, 105)
+var file_proto_jni_raw_jni_raw_proto_msgTypes = make([]protoimpl.MessageInfo, 107)
 var file_proto_jni_raw_jni_raw_proto_goTypes = []any{
 	(JType)(0),                            // 0: jni_raw.JType
 	(*JValue)(nil),                        // 1: jni_raw.JValue
@@ -5513,48 +5607,50 @@ var file_proto_jni_raw_jni_raw_proto_goTypes = []any{
 	(*GetArrayRegionResponse)(nil),        // 61: jni_raw.GetArrayRegionResponse
 	(*SetArrayRegionRequest)(nil),         // 62: jni_raw.SetArrayRegionRequest
 	(*SetArrayRegionResponse)(nil),        // 63: jni_raw.SetArrayRegionResponse
-	(*NewGlobalRefRequest)(nil),           // 64: jni_raw.NewGlobalRefRequest
-	(*NewGlobalRefResponse)(nil),          // 65: jni_raw.NewGlobalRefResponse
-	(*DeleteGlobalRefRequest)(nil),        // 66: jni_raw.DeleteGlobalRefRequest
-	(*DeleteGlobalRefResponse)(nil),       // 67: jni_raw.DeleteGlobalRefResponse
-	(*NewLocalRefRequest)(nil),            // 68: jni_raw.NewLocalRefRequest
-	(*NewLocalRefResponse)(nil),           // 69: jni_raw.NewLocalRefResponse
-	(*DeleteLocalRefRequest)(nil),         // 70: jni_raw.DeleteLocalRefRequest
-	(*DeleteLocalRefResponse)(nil),        // 71: jni_raw.DeleteLocalRefResponse
-	(*NewWeakGlobalRefRequest)(nil),       // 72: jni_raw.NewWeakGlobalRefRequest
-	(*NewWeakGlobalRefResponse)(nil),      // 73: jni_raw.NewWeakGlobalRefResponse
-	(*DeleteWeakGlobalRefRequest)(nil),    // 74: jni_raw.DeleteWeakGlobalRefRequest
-	(*DeleteWeakGlobalRefResponse)(nil),   // 75: jni_raw.DeleteWeakGlobalRefResponse
-	(*ExceptionCheckRequest)(nil),         // 76: jni_raw.ExceptionCheckRequest
-	(*ExceptionCheckResponse)(nil),        // 77: jni_raw.ExceptionCheckResponse
-	(*ExceptionClearRequest)(nil),         // 78: jni_raw.ExceptionClearRequest
-	(*ExceptionClearResponse)(nil),        // 79: jni_raw.ExceptionClearResponse
-	(*ExceptionDescribeRequest)(nil),      // 80: jni_raw.ExceptionDescribeRequest
-	(*ExceptionDescribeResponse)(nil),     // 81: jni_raw.ExceptionDescribeResponse
-	(*ExceptionOccurredRequest)(nil),      // 82: jni_raw.ExceptionOccurredRequest
-	(*ExceptionOccurredResponse)(nil),     // 83: jni_raw.ExceptionOccurredResponse
-	(*ThrowRequest)(nil),                  // 84: jni_raw.ThrowRequest
-	(*ThrowResponse)(nil),                 // 85: jni_raw.ThrowResponse
-	(*ThrowNewRequest)(nil),               // 86: jni_raw.ThrowNewRequest
-	(*ThrowNewResponse)(nil),              // 87: jni_raw.ThrowNewResponse
-	(*MonitorEnterRequest)(nil),           // 88: jni_raw.MonitorEnterRequest
-	(*MonitorEnterResponse)(nil),          // 89: jni_raw.MonitorEnterResponse
-	(*MonitorExitRequest)(nil),            // 90: jni_raw.MonitorExitRequest
-	(*MonitorExitResponse)(nil),           // 91: jni_raw.MonitorExitResponse
-	(*PushLocalFrameRequest)(nil),         // 92: jni_raw.PushLocalFrameRequest
-	(*PushLocalFrameResponse)(nil),        // 93: jni_raw.PushLocalFrameResponse
-	(*PopLocalFrameRequest)(nil),          // 94: jni_raw.PopLocalFrameRequest
-	(*PopLocalFrameResponse)(nil),         // 95: jni_raw.PopLocalFrameResponse
-	(*EnsureLocalCapacityRequest)(nil),    // 96: jni_raw.EnsureLocalCapacityRequest
-	(*EnsureLocalCapacityResponse)(nil),   // 97: jni_raw.EnsureLocalCapacityResponse
-	(*FromReflectedMethodRequest)(nil),    // 98: jni_raw.FromReflectedMethodRequest
-	(*FromReflectedMethodResponse)(nil),   // 99: jni_raw.FromReflectedMethodResponse
-	(*FromReflectedFieldRequest)(nil),     // 100: jni_raw.FromReflectedFieldRequest
-	(*FromReflectedFieldResponse)(nil),    // 101: jni_raw.FromReflectedFieldResponse
-	(*ToReflectedMethodRequest)(nil),      // 102: jni_raw.ToReflectedMethodRequest
-	(*ToReflectedMethodResponse)(nil),     // 103: jni_raw.ToReflectedMethodResponse
-	(*ToReflectedFieldRequest)(nil),       // 104: jni_raw.ToReflectedFieldRequest
-	(*ToReflectedFieldResponse)(nil),      // 105: jni_raw.ToReflectedFieldResponse
+	(*GetByteArrayDataRequest)(nil),       // 64: jni_raw.GetByteArrayDataRequest
+	(*GetByteArrayDataResponse)(nil),      // 65: jni_raw.GetByteArrayDataResponse
+	(*NewGlobalRefRequest)(nil),           // 66: jni_raw.NewGlobalRefRequest
+	(*NewGlobalRefResponse)(nil),          // 67: jni_raw.NewGlobalRefResponse
+	(*DeleteGlobalRefRequest)(nil),        // 68: jni_raw.DeleteGlobalRefRequest
+	(*DeleteGlobalRefResponse)(nil),       // 69: jni_raw.DeleteGlobalRefResponse
+	(*NewLocalRefRequest)(nil),            // 70: jni_raw.NewLocalRefRequest
+	(*NewLocalRefResponse)(nil),           // 71: jni_raw.NewLocalRefResponse
+	(*DeleteLocalRefRequest)(nil),         // 72: jni_raw.DeleteLocalRefRequest
+	(*DeleteLocalRefResponse)(nil),        // 73: jni_raw.DeleteLocalRefResponse
+	(*NewWeakGlobalRefRequest)(nil),       // 74: jni_raw.NewWeakGlobalRefRequest
+	(*NewWeakGlobalRefResponse)(nil),      // 75: jni_raw.NewWeakGlobalRefResponse
+	(*DeleteWeakGlobalRefRequest)(nil),    // 76: jni_raw.DeleteWeakGlobalRefRequest
+	(*DeleteWeakGlobalRefResponse)(nil),   // 77: jni_raw.DeleteWeakGlobalRefResponse
+	(*ExceptionCheckRequest)(nil),         // 78: jni_raw.ExceptionCheckRequest
+	(*ExceptionCheckResponse)(nil),        // 79: jni_raw.ExceptionCheckResponse
+	(*ExceptionClearRequest)(nil),         // 80: jni_raw.ExceptionClearRequest
+	(*ExceptionClearResponse)(nil),        // 81: jni_raw.ExceptionClearResponse
+	(*ExceptionDescribeRequest)(nil),      // 82: jni_raw.ExceptionDescribeRequest
+	(*ExceptionDescribeResponse)(nil),     // 83: jni_raw.ExceptionDescribeResponse
+	(*ExceptionOccurredRequest)(nil),      // 84: jni_raw.ExceptionOccurredRequest
+	(*ExceptionOccurredResponse)(nil),     // 85: jni_raw.ExceptionOccurredResponse
+	(*ThrowRequest)(nil),                  // 86: jni_raw.ThrowRequest
+	(*ThrowResponse)(nil),                 // 87: jni_raw.ThrowResponse
+	(*ThrowNewRequest)(nil),               // 88: jni_raw.ThrowNewRequest
+	(*ThrowNewResponse)(nil),              // 89: jni_raw.ThrowNewResponse
+	(*MonitorEnterRequest)(nil),           // 90: jni_raw.MonitorEnterRequest
+	(*MonitorEnterResponse)(nil),          // 91: jni_raw.MonitorEnterResponse
+	(*MonitorExitRequest)(nil),            // 92: jni_raw.MonitorExitRequest
+	(*MonitorExitResponse)(nil),           // 93: jni_raw.MonitorExitResponse
+	(*PushLocalFrameRequest)(nil),         // 94: jni_raw.PushLocalFrameRequest
+	(*PushLocalFrameResponse)(nil),        // 95: jni_raw.PushLocalFrameResponse
+	(*PopLocalFrameRequest)(nil),          // 96: jni_raw.PopLocalFrameRequest
+	(*PopLocalFrameResponse)(nil),         // 97: jni_raw.PopLocalFrameResponse
+	(*EnsureLocalCapacityRequest)(nil),    // 98: jni_raw.EnsureLocalCapacityRequest
+	(*EnsureLocalCapacityResponse)(nil),   // 99: jni_raw.EnsureLocalCapacityResponse
+	(*FromReflectedMethodRequest)(nil),    // 100: jni_raw.FromReflectedMethodRequest
+	(*FromReflectedMethodResponse)(nil),   // 101: jni_raw.FromReflectedMethodResponse
+	(*FromReflectedFieldRequest)(nil),     // 102: jni_raw.FromReflectedFieldRequest
+	(*FromReflectedFieldResponse)(nil),    // 103: jni_raw.FromReflectedFieldResponse
+	(*ToReflectedMethodRequest)(nil),      // 104: jni_raw.ToReflectedMethodRequest
+	(*ToReflectedMethodResponse)(nil),     // 105: jni_raw.ToReflectedMethodResponse
+	(*ToReflectedFieldRequest)(nil),       // 106: jni_raw.ToReflectedFieldRequest
+	(*ToReflectedFieldResponse)(nil),      // 107: jni_raw.ToReflectedFieldResponse
 }
 var file_proto_jni_raw_jni_raw_proto_depIdxs = []int32{
 	1,   // 0: jni_raw.NewObjectRequest.args:type_name -> jni_raw.JValue
@@ -5609,81 +5705,83 @@ var file_proto_jni_raw_jni_raw_proto_depIdxs = []int32{
 	58,  // 49: jni_raw.JNIService.SetObjectArrayElement:input_type -> jni_raw.SetObjectArrayElementRequest
 	60,  // 50: jni_raw.JNIService.GetArrayRegion:input_type -> jni_raw.GetArrayRegionRequest
 	62,  // 51: jni_raw.JNIService.SetArrayRegion:input_type -> jni_raw.SetArrayRegionRequest
-	64,  // 52: jni_raw.JNIService.NewGlobalRef:input_type -> jni_raw.NewGlobalRefRequest
-	66,  // 53: jni_raw.JNIService.DeleteGlobalRef:input_type -> jni_raw.DeleteGlobalRefRequest
-	68,  // 54: jni_raw.JNIService.NewLocalRef:input_type -> jni_raw.NewLocalRefRequest
-	70,  // 55: jni_raw.JNIService.DeleteLocalRef:input_type -> jni_raw.DeleteLocalRefRequest
-	72,  // 56: jni_raw.JNIService.NewWeakGlobalRef:input_type -> jni_raw.NewWeakGlobalRefRequest
-	74,  // 57: jni_raw.JNIService.DeleteWeakGlobalRef:input_type -> jni_raw.DeleteWeakGlobalRefRequest
-	76,  // 58: jni_raw.JNIService.ExceptionCheck:input_type -> jni_raw.ExceptionCheckRequest
-	78,  // 59: jni_raw.JNIService.ExceptionClear:input_type -> jni_raw.ExceptionClearRequest
-	80,  // 60: jni_raw.JNIService.ExceptionDescribe:input_type -> jni_raw.ExceptionDescribeRequest
-	82,  // 61: jni_raw.JNIService.ExceptionOccurred:input_type -> jni_raw.ExceptionOccurredRequest
-	84,  // 62: jni_raw.JNIService.Throw:input_type -> jni_raw.ThrowRequest
-	86,  // 63: jni_raw.JNIService.ThrowNew:input_type -> jni_raw.ThrowNewRequest
-	88,  // 64: jni_raw.JNIService.MonitorEnter:input_type -> jni_raw.MonitorEnterRequest
-	90,  // 65: jni_raw.JNIService.MonitorExit:input_type -> jni_raw.MonitorExitRequest
-	92,  // 66: jni_raw.JNIService.PushLocalFrame:input_type -> jni_raw.PushLocalFrameRequest
-	94,  // 67: jni_raw.JNIService.PopLocalFrame:input_type -> jni_raw.PopLocalFrameRequest
-	96,  // 68: jni_raw.JNIService.EnsureLocalCapacity:input_type -> jni_raw.EnsureLocalCapacityRequest
-	98,  // 69: jni_raw.JNIService.FromReflectedMethod:input_type -> jni_raw.FromReflectedMethodRequest
-	100, // 70: jni_raw.JNIService.FromReflectedField:input_type -> jni_raw.FromReflectedFieldRequest
-	102, // 71: jni_raw.JNIService.ToReflectedMethod:input_type -> jni_raw.ToReflectedMethodRequest
-	104, // 72: jni_raw.JNIService.ToReflectedField:input_type -> jni_raw.ToReflectedFieldRequest
-	3,   // 73: jni_raw.JNIService.GetVersion:output_type -> jni_raw.GetVersionResponse
-	5,   // 74: jni_raw.JNIService.FindClass:output_type -> jni_raw.FindClassResponse
-	7,   // 75: jni_raw.JNIService.GetSuperclass:output_type -> jni_raw.GetSuperclassResponse
-	9,   // 76: jni_raw.JNIService.IsAssignableFrom:output_type -> jni_raw.IsAssignableFromResponse
-	11,  // 77: jni_raw.JNIService.AllocObject:output_type -> jni_raw.AllocObjectResponse
-	13,  // 78: jni_raw.JNIService.NewObject:output_type -> jni_raw.NewObjectResponse
-	15,  // 79: jni_raw.JNIService.GetObjectClass:output_type -> jni_raw.GetObjectClassResponse
-	17,  // 80: jni_raw.JNIService.IsInstanceOf:output_type -> jni_raw.IsInstanceOfResponse
-	19,  // 81: jni_raw.JNIService.IsSameObject:output_type -> jni_raw.IsSameObjectResponse
-	21,  // 82: jni_raw.JNIService.GetObjectRefType:output_type -> jni_raw.GetObjectRefTypeResponse
-	23,  // 83: jni_raw.JNIService.GetMethodID:output_type -> jni_raw.GetMethodIDResponse
-	25,  // 84: jni_raw.JNIService.GetStaticMethodID:output_type -> jni_raw.GetStaticMethodIDResponse
-	27,  // 85: jni_raw.JNIService.GetFieldID:output_type -> jni_raw.GetFieldIDResponse
-	29,  // 86: jni_raw.JNIService.GetStaticFieldID:output_type -> jni_raw.GetStaticFieldIDResponse
-	31,  // 87: jni_raw.JNIService.CallMethod:output_type -> jni_raw.CallMethodResponse
-	33,  // 88: jni_raw.JNIService.CallStaticMethod:output_type -> jni_raw.CallStaticMethodResponse
-	35,  // 89: jni_raw.JNIService.CallNonvirtualMethod:output_type -> jni_raw.CallNonvirtualMethodResponse
-	37,  // 90: jni_raw.JNIService.GetField:output_type -> jni_raw.GetFieldValueResponse
-	39,  // 91: jni_raw.JNIService.SetField:output_type -> jni_raw.SetFieldValueResponse
-	41,  // 92: jni_raw.JNIService.GetStaticField:output_type -> jni_raw.GetStaticFieldValueResponse
-	43,  // 93: jni_raw.JNIService.SetStaticField:output_type -> jni_raw.SetStaticFieldValueResponse
-	45,  // 94: jni_raw.JNIService.NewStringUTF:output_type -> jni_raw.NewStringUTFResponse
-	47,  // 95: jni_raw.JNIService.GetStringUTFChars:output_type -> jni_raw.GetStringUTFCharsResponse
-	49,  // 96: jni_raw.JNIService.GetStringLength:output_type -> jni_raw.GetStringLengthResponse
-	51,  // 97: jni_raw.JNIService.NewPrimitiveArray:output_type -> jni_raw.NewPrimitiveArrayResponse
-	53,  // 98: jni_raw.JNIService.NewObjectArray:output_type -> jni_raw.NewObjectArrayResponse
-	55,  // 99: jni_raw.JNIService.GetArrayLength:output_type -> jni_raw.GetArrayLengthResponse
-	57,  // 100: jni_raw.JNIService.GetObjectArrayElement:output_type -> jni_raw.GetObjectArrayElementResponse
-	59,  // 101: jni_raw.JNIService.SetObjectArrayElement:output_type -> jni_raw.SetObjectArrayElementResponse
-	61,  // 102: jni_raw.JNIService.GetArrayRegion:output_type -> jni_raw.GetArrayRegionResponse
-	63,  // 103: jni_raw.JNIService.SetArrayRegion:output_type -> jni_raw.SetArrayRegionResponse
-	65,  // 104: jni_raw.JNIService.NewGlobalRef:output_type -> jni_raw.NewGlobalRefResponse
-	67,  // 105: jni_raw.JNIService.DeleteGlobalRef:output_type -> jni_raw.DeleteGlobalRefResponse
-	69,  // 106: jni_raw.JNIService.NewLocalRef:output_type -> jni_raw.NewLocalRefResponse
-	71,  // 107: jni_raw.JNIService.DeleteLocalRef:output_type -> jni_raw.DeleteLocalRefResponse
-	73,  // 108: jni_raw.JNIService.NewWeakGlobalRef:output_type -> jni_raw.NewWeakGlobalRefResponse
-	75,  // 109: jni_raw.JNIService.DeleteWeakGlobalRef:output_type -> jni_raw.DeleteWeakGlobalRefResponse
-	77,  // 110: jni_raw.JNIService.ExceptionCheck:output_type -> jni_raw.ExceptionCheckResponse
-	79,  // 111: jni_raw.JNIService.ExceptionClear:output_type -> jni_raw.ExceptionClearResponse
-	81,  // 112: jni_raw.JNIService.ExceptionDescribe:output_type -> jni_raw.ExceptionDescribeResponse
-	83,  // 113: jni_raw.JNIService.ExceptionOccurred:output_type -> jni_raw.ExceptionOccurredResponse
-	85,  // 114: jni_raw.JNIService.Throw:output_type -> jni_raw.ThrowResponse
-	87,  // 115: jni_raw.JNIService.ThrowNew:output_type -> jni_raw.ThrowNewResponse
-	89,  // 116: jni_raw.JNIService.MonitorEnter:output_type -> jni_raw.MonitorEnterResponse
-	91,  // 117: jni_raw.JNIService.MonitorExit:output_type -> jni_raw.MonitorExitResponse
-	93,  // 118: jni_raw.JNIService.PushLocalFrame:output_type -> jni_raw.PushLocalFrameResponse
-	95,  // 119: jni_raw.JNIService.PopLocalFrame:output_type -> jni_raw.PopLocalFrameResponse
-	97,  // 120: jni_raw.JNIService.EnsureLocalCapacity:output_type -> jni_raw.EnsureLocalCapacityResponse
-	99,  // 121: jni_raw.JNIService.FromReflectedMethod:output_type -> jni_raw.FromReflectedMethodResponse
-	101, // 122: jni_raw.JNIService.FromReflectedField:output_type -> jni_raw.FromReflectedFieldResponse
-	103, // 123: jni_raw.JNIService.ToReflectedMethod:output_type -> jni_raw.ToReflectedMethodResponse
-	105, // 124: jni_raw.JNIService.ToReflectedField:output_type -> jni_raw.ToReflectedFieldResponse
-	73,  // [73:125] is the sub-list for method output_type
-	21,  // [21:73] is the sub-list for method input_type
+	64,  // 52: jni_raw.JNIService.GetByteArrayData:input_type -> jni_raw.GetByteArrayDataRequest
+	66,  // 53: jni_raw.JNIService.NewGlobalRef:input_type -> jni_raw.NewGlobalRefRequest
+	68,  // 54: jni_raw.JNIService.DeleteGlobalRef:input_type -> jni_raw.DeleteGlobalRefRequest
+	70,  // 55: jni_raw.JNIService.NewLocalRef:input_type -> jni_raw.NewLocalRefRequest
+	72,  // 56: jni_raw.JNIService.DeleteLocalRef:input_type -> jni_raw.DeleteLocalRefRequest
+	74,  // 57: jni_raw.JNIService.NewWeakGlobalRef:input_type -> jni_raw.NewWeakGlobalRefRequest
+	76,  // 58: jni_raw.JNIService.DeleteWeakGlobalRef:input_type -> jni_raw.DeleteWeakGlobalRefRequest
+	78,  // 59: jni_raw.JNIService.ExceptionCheck:input_type -> jni_raw.ExceptionCheckRequest
+	80,  // 60: jni_raw.JNIService.ExceptionClear:input_type -> jni_raw.ExceptionClearRequest
+	82,  // 61: jni_raw.JNIService.ExceptionDescribe:input_type -> jni_raw.ExceptionDescribeRequest
+	84,  // 62: jni_raw.JNIService.ExceptionOccurred:input_type -> jni_raw.ExceptionOccurredRequest
+	86,  // 63: jni_raw.JNIService.Throw:input_type -> jni_raw.ThrowRequest
+	88,  // 64: jni_raw.JNIService.ThrowNew:input_type -> jni_raw.ThrowNewRequest
+	90,  // 65: jni_raw.JNIService.MonitorEnter:input_type -> jni_raw.MonitorEnterRequest
+	92,  // 66: jni_raw.JNIService.MonitorExit:input_type -> jni_raw.MonitorExitRequest
+	94,  // 67: jni_raw.JNIService.PushLocalFrame:input_type -> jni_raw.PushLocalFrameRequest
+	96,  // 68: jni_raw.JNIService.PopLocalFrame:input_type -> jni_raw.PopLocalFrameRequest
+	98,  // 69: jni_raw.JNIService.EnsureLocalCapacity:input_type -> jni_raw.EnsureLocalCapacityRequest
+	100, // 70: jni_raw.JNIService.FromReflectedMethod:input_type -> jni_raw.FromReflectedMethodRequest
+	102, // 71: jni_raw.JNIService.FromReflectedField:input_type -> jni_raw.FromReflectedFieldRequest
+	104, // 72: jni_raw.JNIService.ToReflectedMethod:input_type -> jni_raw.ToReflectedMethodRequest
+	106, // 73: jni_raw.JNIService.ToReflectedField:input_type -> jni_raw.ToReflectedFieldRequest
+	3,   // 74: jni_raw.JNIService.GetVersion:output_type -> jni_raw.GetVersionResponse
+	5,   // 75: jni_raw.JNIService.FindClass:output_type -> jni_raw.FindClassResponse
+	7,   // 76: jni_raw.JNIService.GetSuperclass:output_type -> jni_raw.GetSuperclassResponse
+	9,   // 77: jni_raw.JNIService.IsAssignableFrom:output_type -> jni_raw.IsAssignableFromResponse
+	11,  // 78: jni_raw.JNIService.AllocObject:output_type -> jni_raw.AllocObjectResponse
+	13,  // 79: jni_raw.JNIService.NewObject:output_type -> jni_raw.NewObjectResponse
+	15,  // 80: jni_raw.JNIService.GetObjectClass:output_type -> jni_raw.GetObjectClassResponse
+	17,  // 81: jni_raw.JNIService.IsInstanceOf:output_type -> jni_raw.IsInstanceOfResponse
+	19,  // 82: jni_raw.JNIService.IsSameObject:output_type -> jni_raw.IsSameObjectResponse
+	21,  // 83: jni_raw.JNIService.GetObjectRefType:output_type -> jni_raw.GetObjectRefTypeResponse
+	23,  // 84: jni_raw.JNIService.GetMethodID:output_type -> jni_raw.GetMethodIDResponse
+	25,  // 85: jni_raw.JNIService.GetStaticMethodID:output_type -> jni_raw.GetStaticMethodIDResponse
+	27,  // 86: jni_raw.JNIService.GetFieldID:output_type -> jni_raw.GetFieldIDResponse
+	29,  // 87: jni_raw.JNIService.GetStaticFieldID:output_type -> jni_raw.GetStaticFieldIDResponse
+	31,  // 88: jni_raw.JNIService.CallMethod:output_type -> jni_raw.CallMethodResponse
+	33,  // 89: jni_raw.JNIService.CallStaticMethod:output_type -> jni_raw.CallStaticMethodResponse
+	35,  // 90: jni_raw.JNIService.CallNonvirtualMethod:output_type -> jni_raw.CallNonvirtualMethodResponse
+	37,  // 91: jni_raw.JNIService.GetField:output_type -> jni_raw.GetFieldValueResponse
+	39,  // 92: jni_raw.JNIService.SetField:output_type -> jni_raw.SetFieldValueResponse
+	41,  // 93: jni_raw.JNIService.GetStaticField:output_type -> jni_raw.GetStaticFieldValueResponse
+	43,  // 94: jni_raw.JNIService.SetStaticField:output_type -> jni_raw.SetStaticFieldValueResponse
+	45,  // 95: jni_raw.JNIService.NewStringUTF:output_type -> jni_raw.NewStringUTFResponse
+	47,  // 96: jni_raw.JNIService.GetStringUTFChars:output_type -> jni_raw.GetStringUTFCharsResponse
+	49,  // 97: jni_raw.JNIService.GetStringLength:output_type -> jni_raw.GetStringLengthResponse
+	51,  // 98: jni_raw.JNIService.NewPrimitiveArray:output_type -> jni_raw.NewPrimitiveArrayResponse
+	53,  // 99: jni_raw.JNIService.NewObjectArray:output_type -> jni_raw.NewObjectArrayResponse
+	55,  // 100: jni_raw.JNIService.GetArrayLength:output_type -> jni_raw.GetArrayLengthResponse
+	57,  // 101: jni_raw.JNIService.GetObjectArrayElement:output_type -> jni_raw.GetObjectArrayElementResponse
+	59,  // 102: jni_raw.JNIService.SetObjectArrayElement:output_type -> jni_raw.SetObjectArrayElementResponse
+	61,  // 103: jni_raw.JNIService.GetArrayRegion:output_type -> jni_raw.GetArrayRegionResponse
+	63,  // 104: jni_raw.JNIService.SetArrayRegion:output_type -> jni_raw.SetArrayRegionResponse
+	65,  // 105: jni_raw.JNIService.GetByteArrayData:output_type -> jni_raw.GetByteArrayDataResponse
+	67,  // 106: jni_raw.JNIService.NewGlobalRef:output_type -> jni_raw.NewGlobalRefResponse
+	69,  // 107: jni_raw.JNIService.DeleteGlobalRef:output_type -> jni_raw.DeleteGlobalRefResponse
+	71,  // 108: jni_raw.JNIService.NewLocalRef:output_type -> jni_raw.NewLocalRefResponse
+	73,  // 109: jni_raw.JNIService.DeleteLocalRef:output_type -> jni_raw.DeleteLocalRefResponse
+	75,  // 110: jni_raw.JNIService.NewWeakGlobalRef:output_type -> jni_raw.NewWeakGlobalRefResponse
+	77,  // 111: jni_raw.JNIService.DeleteWeakGlobalRef:output_type -> jni_raw.DeleteWeakGlobalRefResponse
+	79,  // 112: jni_raw.JNIService.ExceptionCheck:output_type -> jni_raw.ExceptionCheckResponse
+	81,  // 113: jni_raw.JNIService.ExceptionClear:output_type -> jni_raw.ExceptionClearResponse
+	83,  // 114: jni_raw.JNIService.ExceptionDescribe:output_type -> jni_raw.ExceptionDescribeResponse
+	85,  // 115: jni_raw.JNIService.ExceptionOccurred:output_type -> jni_raw.ExceptionOccurredResponse
+	87,  // 116: jni_raw.JNIService.Throw:output_type -> jni_raw.ThrowResponse
+	89,  // 117: jni_raw.JNIService.ThrowNew:output_type -> jni_raw.ThrowNewResponse
+	91,  // 118: jni_raw.JNIService.MonitorEnter:output_type -> jni_raw.MonitorEnterResponse
+	93,  // 119: jni_raw.JNIService.MonitorExit:output_type -> jni_raw.MonitorExitResponse
+	95,  // 120: jni_raw.JNIService.PushLocalFrame:output_type -> jni_raw.PushLocalFrameResponse
+	97,  // 121: jni_raw.JNIService.PopLocalFrame:output_type -> jni_raw.PopLocalFrameResponse
+	99,  // 122: jni_raw.JNIService.EnsureLocalCapacity:output_type -> jni_raw.EnsureLocalCapacityResponse
+	101, // 123: jni_raw.JNIService.FromReflectedMethod:output_type -> jni_raw.FromReflectedMethodResponse
+	103, // 124: jni_raw.JNIService.FromReflectedField:output_type -> jni_raw.FromReflectedFieldResponse
+	105, // 125: jni_raw.JNIService.ToReflectedMethod:output_type -> jni_raw.ToReflectedMethodResponse
+	107, // 126: jni_raw.JNIService.ToReflectedField:output_type -> jni_raw.ToReflectedFieldResponse
+	74,  // [74:127] is the sub-list for method output_type
+	21,  // [21:74] is the sub-list for method input_type
 	21,  // [21:21] is the sub-list for extension type_name
 	21,  // [21:21] is the sub-list for extension extendee
 	0,   // [0:21] is the sub-list for field type_name
@@ -5711,7 +5809,7 @@ func file_proto_jni_raw_jni_raw_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_jni_raw_jni_raw_proto_rawDesc), len(file_proto_jni_raw_jni_raw_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   105,
+			NumMessages:   107,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

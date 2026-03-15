@@ -870,6 +870,27 @@ func (s *Server) ToReflectedField(_ context.Context, req *pb.ToReflectedFieldReq
 	return &pb.ToReflectedFieldResponse{FieldObject: handle}, nil
 }
 
+// ---- Bulk byte array transfer ----
+
+func (s *Server) GetByteArrayData(_ context.Context, req *pb.GetByteArrayDataRequest) (*pb.GetByteArrayDataResponse, error) {
+	obj, err := s.requireObject(req.GetArrayHandle())
+	if err != nil {
+		return nil, err
+	}
+	var data []byte
+	if err := s.withEnv(func(env *jni.Env) error {
+		arr := (*jni.Array)(unsafe.Pointer(obj))
+		byteArr := (*jni.ByteArray)(unsafe.Pointer(obj))
+		length := env.GetArrayLength(arr)
+		data = make([]byte, length)
+		env.GetByteArrayRegion(byteArr, 0, length, unsafe.Pointer(&data[0]))
+		return nil
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.GetByteArrayDataResponse{Data: data}, nil
+}
+
 // ---- Field access ----
 
 func (s *Server) GetField(_ context.Context, req *pb.GetFieldValueRequest) (*pb.GetFieldValueResponse, error) {

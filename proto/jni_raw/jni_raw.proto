@@ -82,6 +82,9 @@ service JNIService {
   rpc GetArrayRegion         (GetArrayRegionRequest)         returns (GetArrayRegionResponse);
   rpc SetArrayRegion         (SetArrayRegionRequest)         returns (SetArrayRegionResponse);
 
+  // Bulk byte array transfer (efficient alternative to GetArrayRegion for byte[]).
+  rpc GetByteArrayData       (GetByteArrayDataRequest)       returns (GetByteArrayDataResponse);
+
   // Reference management
   rpc NewGlobalRef       (NewGlobalRefRequest)       returns (NewGlobalRefResponse);
   rpc DeleteGlobalRef    (DeleteGlobalRefRequest)    returns (DeleteGlobalRefResponse);
@@ -261,6 +264,10 @@ message SetArrayRegionRequest {
   repeated JValue elements = 4;
 }
 message SetArrayRegionResponse {}
+
+// Bulk byte array transfer.
+message GetByteArrayDataRequest { int64 array_handle = 1; }
+message GetByteArrayDataResponse { bytes data = 1; }
 
 // ---- Reference management ----
 message NewGlobalRefRequest { int64 object_handle = 1; }

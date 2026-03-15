@@ -50,6 +50,7 @@ const (
 	JNIService_SetObjectArrayElement_FullMethodName = "/jni_raw.JNIService/SetObjectArrayElement"
 	JNIService_GetArrayRegion_FullMethodName        = "/jni_raw.JNIService/GetArrayRegion"
 	JNIService_SetArrayRegion_FullMethodName        = "/jni_raw.JNIService/SetArrayRegion"
+	JNIService_GetByteArrayData_FullMethodName      = "/jni_raw.JNIService/GetByteArrayData"
 	JNIService_NewGlobalRef_FullMethodName          = "/jni_raw.JNIService/NewGlobalRef"
 	JNIService_DeleteGlobalRef_FullMethodName       = "/jni_raw.JNIService/DeleteGlobalRef"
 	JNIService_NewLocalRef_FullMethodName           = "/jni_raw.JNIService/NewLocalRef"
@@ -120,6 +121,8 @@ type JNIServiceClient interface {
 	SetObjectArrayElement(ctx context.Context, in *SetObjectArrayElementRequest, opts ...grpc.CallOption) (*SetObjectArrayElementResponse, error)
 	GetArrayRegion(ctx context.Context, in *GetArrayRegionRequest, opts ...grpc.CallOption) (*GetArrayRegionResponse, error)
 	SetArrayRegion(ctx context.Context, in *SetArrayRegionRequest, opts ...grpc.CallOption) (*SetArrayRegionResponse, error)
+	// Bulk byte array transfer (efficient alternative to GetArrayRegion for byte[]).
+	GetByteArrayData(ctx context.Context, in *GetByteArrayDataRequest, opts ...grpc.CallOption) (*GetByteArrayDataResponse, error)
 	// Reference management
 	NewGlobalRef(ctx context.Context, in *NewGlobalRefRequest, opts ...grpc.CallOption) (*NewGlobalRefResponse, error)
 	DeleteGlobalRef(ctx context.Context, in *DeleteGlobalRefRequest, opts ...grpc.CallOption) (*DeleteGlobalRefResponse, error)
@@ -466,6 +469,16 @@ func (c *jNIServiceClient) SetArrayRegion(ctx context.Context, in *SetArrayRegio
 	return out, nil
 }
 
+func (c *jNIServiceClient) GetByteArrayData(ctx context.Context, in *GetByteArrayDataRequest, opts ...grpc.CallOption) (*GetByteArrayDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetByteArrayDataResponse)
+	err := c.cc.Invoke(ctx, JNIService_GetByteArrayData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *jNIServiceClient) NewGlobalRef(ctx context.Context, in *NewGlobalRefRequest, opts ...grpc.CallOption) (*NewGlobalRefResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(NewGlobalRefResponse)
@@ -723,6 +736,8 @@ type JNIServiceServer interface {
 	SetObjectArrayElement(context.Context, *SetObjectArrayElementRequest) (*SetObjectArrayElementResponse, error)
 	GetArrayRegion(context.Context, *GetArrayRegionRequest) (*GetArrayRegionResponse, error)
 	SetArrayRegion(context.Context, *SetArrayRegionRequest) (*SetArrayRegionResponse, error)
+	// Bulk byte array transfer (efficient alternative to GetArrayRegion for byte[]).
+	GetByteArrayData(context.Context, *GetByteArrayDataRequest) (*GetByteArrayDataResponse, error)
 	// Reference management
 	NewGlobalRef(context.Context, *NewGlobalRefRequest) (*NewGlobalRefResponse, error)
 	DeleteGlobalRef(context.Context, *DeleteGlobalRefRequest) (*DeleteGlobalRefResponse, error)
@@ -851,6 +866,9 @@ func (UnimplementedJNIServiceServer) GetArrayRegion(context.Context, *GetArrayRe
 }
 func (UnimplementedJNIServiceServer) SetArrayRegion(context.Context, *SetArrayRegionRequest) (*SetArrayRegionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetArrayRegion not implemented")
+}
+func (UnimplementedJNIServiceServer) GetByteArrayData(context.Context, *GetByteArrayDataRequest) (*GetByteArrayDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetByteArrayData not implemented")
 }
 func (UnimplementedJNIServiceServer) NewGlobalRef(context.Context, *NewGlobalRefRequest) (*NewGlobalRefResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method NewGlobalRef not implemented")
@@ -1494,6 +1512,24 @@ func _JNIService_SetArrayRegion_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _JNIService_GetByteArrayData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetByteArrayDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JNIServiceServer).GetByteArrayData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JNIService_GetByteArrayData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JNIServiceServer).GetByteArrayData(ctx, req.(*GetByteArrayDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _JNIService_NewGlobalRef_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NewGlobalRefRequest)
 	if err := dec(in); err != nil {
@@ -2002,6 +2038,10 @@ var JNIService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetArrayRegion",
 			Handler:    _JNIService_SetArrayRegion_Handler,
+		},
+		{
+			MethodName: "GetByteArrayData",
+			Handler:    _JNIService_GetByteArrayData_Handler,
 		},
 		{
 			MethodName: "NewGlobalRef",
