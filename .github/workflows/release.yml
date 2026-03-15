@@ -91,14 +91,6 @@ jobs:
           cp build/jniservice-magisk-${ABI}.zip \
              "release/jniservice-magisk-${TAG}-${ABI}.zip"
 
-          # Shared library (for app_process deployment or custom integration)
-          cp build/libjniservice-${ABI}.so \
-             "release/libjniservice-${TAG}-${ABI}.so"
-
-          # Java entrypoint DEX (for app_process deployment)
-          cp build/classes.dex \
-             "release/jniservice-entrypoint-${TAG}.dex"
-
           ls -la release/
 
       - name: Upload artifacts
