@@ -86,6 +86,9 @@ var (
 	fidHandlerID        capi.JfieldID  // GoInvocationHandler.handlerID
 	midMethodGetName    capi.JmethodID // java.lang.reflect.Method.getName()
 
+	// center.dx.jni.internal.GoAbstractDispatch (loaded at init time)
+	clsGoAbstractDispatch capi.Class
+
 	// java.lang.Class.getClassLoader()
 	midGetClassLoader capi.JmethodID
 
@@ -96,6 +99,10 @@ var (
 // proxyNativeRegistrar is set by proxy_cgo.go's init() to register
 // the native invoke() method on GoInvocationHandler via RegisterNatives.
 var proxyNativeRegistrar func(envPtr *capi.Env, cls capi.Class) error
+
+// proxyAbstractRegistrar is set by proxy_cgo.go's init() to register
+// the native invoke() method on GoAbstractDispatch via RegisterNatives.
+var proxyAbstractRegistrar func(envPtr *capi.Env, cls capi.Class) error
 
 // proxyClassLoader is an optional fallback ClassLoader for finding
 // GoInvocationHandler in APK mode (where JNI FindClass from native
@@ -238,6 +245,49 @@ func doProxyInit(env *Env) error {
 	// Register native invoke() method on GoInvocationHandler if CGo bridge is available.
 	if proxyNativeRegistrar != nil {
 		if err := proxyNativeRegistrar(env.ptr, clsGoHandler); err != nil {
+			return err
+		}
+	}
+
+	// Find center.dx.jni.internal.GoAbstractDispatch using the same
+	// ClassLoader fallback pattern as GoInvocationHandler.
+	abstractClassName := cstringLiteral("center/dx/jni/internal/GoAbstractDispatch")
+	ac := capi.FindClass(env.ptr, abstractClassName)
+	if ac == 0 {
+		capi.ExceptionClear(env.ptr)
+		if proxyClassLoader != 0 {
+			clCls := capi.FindClass(env.ptr, cstringLiteral("java/lang/ClassLoader"))
+			if clCls != 0 {
+				loadMID := capi.GetMethodID(env.ptr, clCls, cstringLiteral("loadClass"),
+					cstringLiteral("(Ljava/lang/String;)Ljava/lang/Class;"))
+				if loadMID != nil {
+					javaName := capi.NewStringUTF(env.ptr, cstringLiteral("center.dx.jni.internal.GoAbstractDispatch"))
+					if javaName != 0 {
+						var nameVal capi.Jvalue
+						binary.NativeEndian.PutUint64(nameVal[:], uint64(javaName))
+						loaded := capi.CallObjectMethodA(env.ptr, proxyClassLoader, loadMID, &nameVal)
+						capi.DeleteLocalRef(env.ptr, capi.Object(javaName))
+						if capi.ExceptionCheck(env.ptr) == capi.JNI_TRUE {
+							capi.ExceptionClear(env.ptr)
+						} else if loaded != 0 {
+							ac = capi.Class(loaded)
+						}
+					}
+				}
+				capi.DeleteLocalRef(env.ptr, capi.Object(clCls))
+			}
+		}
+		if ac == 0 {
+			return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoAbstractDispatch — " +
+				"ensure the helper class is on the classpath")
+		}
+	}
+	clsGoAbstractDispatch = capi.Class(capi.NewGlobalRef(env.ptr, capi.Object(ac)))
+	capi.DeleteLocalRef(env.ptr, capi.Object(ac))
+
+	// Register native invoke() method on GoAbstractDispatch if CGo bridge is available.
+	if proxyAbstractRegistrar != nil {
+		if err := proxyAbstractRegistrar(env.ptr, clsGoAbstractDispatch); err != nil {
 			return err
 		}
 	}

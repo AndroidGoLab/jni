@@ -21,6 +21,18 @@ extern jobject goProxyDispatchInner(JNIEnv *env, jlong handlerID,
                                     jstring methodName, jobjectArray args,
                                     jobject method);
 
+extern jobject goAbstractDispatch(JNIEnv *env, jclass cls, jlong handlerID,
+                                  jstring methodName, jobjectArray args);
+
+static inline jint abstract_register_natives(JNIEnv *env, jclass cls) {
+    JNINativeMethod m = {
+        "invoke",
+        "(JLjava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;",
+        (void*)goAbstractDispatch
+    };
+    return (*env)->RegisterNatives(env, cls, &m, 1);
+}
+
 // proxy_invoke is the full native dispatch: extract fields in C, call Go.
 // It handles standard Object methods (hashCode, equals, toString) in C
 // to avoid NullPointerException when Java unboxes null to a primitive.
@@ -96,6 +108,7 @@ import (
 
 func init() {
 	proxyNativeRegistrar = registerProxyNativesImpl
+	proxyAbstractRegistrar = registerAbstractNativesImpl
 }
 
 func registerProxyNativesImpl(envPtr *capi.Env, cls capi.Class) error {
@@ -108,6 +121,17 @@ func registerProxyNativesImpl(envPtr *capi.Env, cls capi.Class) error {
 	rc := C.proxy_register_natives(cenv, ccls)
 	if rc != 0 {
 		return fmt.Errorf("jni: RegisterNatives for GoInvocationHandler.invoke failed (rc=%d)", rc)
+	}
+	return nil
+}
+
+func registerAbstractNativesImpl(envPtr *capi.Env, cls capi.Class) error {
+	cenv := *(*(*C.JNIEnv))(unsafe.Pointer(&envPtr))
+	ccls := *(*C.jclass)(unsafe.Pointer(&cls))
+
+	rc := C.abstract_register_natives(cenv, ccls)
+	if rc != 0 {
+		return fmt.Errorf("jni: RegisterNatives for GoAbstractDispatch.invoke failed (rc=%d)", rc)
 	}
 	return nil
 }
@@ -142,6 +166,26 @@ func goProxyDispatchInner(
 	capiMethod := *(*capi.Object)(unsafe.Pointer(&method))
 
 	result := dispatchProxyInvocation(envPtr, int64(handlerID), capiMethodName, capiArgs, capiMethod)
+
+	return *(*C.jobject)(unsafe.Pointer(&result))
+}
+
+//export goAbstractDispatch
+func goAbstractDispatch(
+	cenv *C.JNIEnv,
+	cls C.jclass,
+	handlerID C.jlong,
+	methodName C.jstring,
+	args C.jobjectArray,
+) C.jobject {
+	envPtr := *(*(*capi.Env))(unsafe.Pointer(&cenv))
+
+	capiMethodName := *(*capi.String)(unsafe.Pointer(&methodName))
+	capiArgs := *(*capi.ObjectArray)(unsafe.Pointer(&args))
+
+	// Abstract adapters don't have a Method object; pass 0 to fall back
+	// to the basic handler in dispatchProxyInvocation.
+	result := dispatchProxyInvocation(envPtr, int64(handlerID), capiMethodName, capiArgs, 0)
 
 	return *(*C.jobject)(unsafe.Pointer(&result))
 }
