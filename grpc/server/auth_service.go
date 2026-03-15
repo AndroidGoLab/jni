@@ -14,11 +14,17 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// PermissionRequestNotifier is called when a new permission request is
+// created. The implementation should notify the device user (e.g. launch
+// a dialog Activity or push a notification).
+type PermissionRequestNotifier func(requestID int64, clientID string, methods []string)
+
 // AuthServiceServer implements pb.AuthServiceServer.
 type AuthServiceServer struct {
 	pb.UnimplementedAuthServiceServer
-	CA    *certauth.CA
-	Store *acl.Store
+	CA       *certauth.CA
+	Store    *acl.Store
+	OnPermissionRequest PermissionRequestNotifier
 }
 
 // Register handles unauthenticated registration: it signs the submitted CSR
@@ -64,6 +70,11 @@ func (s *AuthServiceServer) RequestPermission(
 	reqID, err := s.Store.CreateRequest(clientID, req.GetMethods())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create request: %v", err)
+	}
+
+	// Notify the device user (launch approval dialog).
+	if s.OnPermissionRequest != nil {
+		s.OnPermissionRequest(reqID, clientID, req.GetMethods())
 	}
 
 	return &pb.RequestPermissionResponse{

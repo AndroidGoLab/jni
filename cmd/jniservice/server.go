@@ -220,6 +220,12 @@ func runServer(cvm *C.JavaVM) {
 	authpb.RegisterAuthServiceServer(grpcServer, &server.AuthServiceServer{
 		CA:    ca,
 		Store: aclStore,
+		OnPermissionRequest: func(requestID int64, clientID string, methods []string) {
+			// Launch PermissionDialogActivity via JNI Intent.
+			vm.Do(func(env *jni.Env) error {
+				return launchPermissionDialog(env, handles, requestID, clientID, methods)
+			})
+		},
 	})
 	fmt.Fprintf(os.Stderr, "jniservice: registered auth service\n")
 
@@ -392,6 +398,122 @@ func initAndroidContext(vm *jni.VM, handles *handlestore.HandleStore) {
 		return
 	}
 	fmt.Fprintf(os.Stderr, "jniservice: android context initialized (handle=%d)\n", contextHandle)
+}
+
+// launchPermissionDialog starts the PermissionDialogActivity via an Intent,
+// passing the request details as extras. The user sees a dialog with
+// Approve/Deny buttons.
+func launchPermissionDialog(
+	env *jni.Env,
+	handles *handlestore.HandleStore,
+	requestID int64,
+	clientID string,
+	methods []string,
+) error {
+	// Get the app context (handle 2 from setAppContext).
+	ctx := handles.Get(2)
+	if ctx == nil {
+		fmt.Fprintf(os.Stderr, "jniservice: no app context for permission dialog\n")
+		return nil
+	}
+
+	// Intent intent = new Intent(context, PermissionDialogActivity.class);
+	intentCls, err := env.FindClass("android/content/Intent")
+	if err != nil {
+		return fmt.Errorf("finding Intent class: %w", err)
+	}
+	ctxCls, err := env.FindClass("android/content/Context")
+	if err != nil {
+		return fmt.Errorf("finding Context class: %w", err)
+	}
+	// Find PermissionDialogActivity class via ClassLoader.
+	clObj := handles.Get(3) // AppClassLoader handle
+	if clObj == nil {
+		fmt.Fprintf(os.Stderr, "jniservice: no ClassLoader for permission dialog\n")
+		return nil
+	}
+	clCls, err := env.FindClass("java/lang/ClassLoader")
+	if err != nil {
+		return err
+	}
+	loadMID, err := env.GetMethodID(clCls, "loadClass", "(Ljava/lang/String;)Ljava/lang/Class;")
+	if err != nil {
+		return err
+	}
+	actClassName, err := env.NewStringUTF("center.dx.jni.jniservice.PermissionDialogActivity")
+	if err != nil {
+		return err
+	}
+	actCls, err := env.CallObjectMethod(clObj, loadMID, jni.ObjectValue(&actClassName.Object))
+	if err != nil {
+		return fmt.Errorf("loading PermissionDialogActivity: %w", err)
+	}
+
+	// new Intent(context, activityClass)
+	intentInit, err := env.GetMethodID(intentCls, "<init>",
+		"(Landroid/content/Context;Ljava/lang/Class;)V")
+	if err != nil {
+		return err
+	}
+	intent, err := env.NewObject(intentCls, intentInit,
+		jni.ObjectValue(ctx), jni.ObjectValue(actCls))
+	if err != nil {
+		return fmt.Errorf("creating Intent: %w", err)
+	}
+
+	// intent.addFlags(FLAG_ACTIVITY_NEW_TASK) — required when starting from non-Activity context.
+	addFlagsMID, err := env.GetMethodID(intentCls, "addFlags",
+		"(I)Landroid/content/Intent;")
+	if err != nil {
+		return err
+	}
+	env.CallObjectMethod(intent, addFlagsMID, jni.IntValue(0x10000000)) // FLAG_ACTIVITY_NEW_TASK
+
+	// intent.putExtra("request_id", requestID)
+	putLongMID, err := env.GetMethodID(intentCls, "putExtra",
+		"(Ljava/lang/String;J)Landroid/content/Intent;")
+	if err != nil {
+		return err
+	}
+	reqIDKey, _ := env.NewStringUTF("request_id")
+	env.CallObjectMethod(intent, putLongMID, jni.ObjectValue(&reqIDKey.Object), jni.LongValue(requestID))
+
+	// intent.putExtra("client_id", clientID)
+	putStringMID, err := env.GetMethodID(intentCls, "putExtra",
+		"(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return err
+	}
+	clientIDKey, _ := env.NewStringUTF("client_id")
+	clientIDVal, _ := env.NewStringUTF(clientID)
+	env.CallObjectMethod(intent, putStringMID,
+		jni.ObjectValue(&clientIDKey.Object), jni.ObjectValue(&clientIDVal.Object))
+
+	// intent.putExtra("methods", joinedMethods)
+	methodsKey, _ := env.NewStringUTF("methods")
+	joinedMethods := ""
+	for i, m := range methods {
+		if i > 0 {
+			joinedMethods += ","
+		}
+		joinedMethods += m
+	}
+	methodsVal, _ := env.NewStringUTF(joinedMethods)
+	env.CallObjectMethod(intent, putStringMID,
+		jni.ObjectValue(&methodsKey.Object), jni.ObjectValue(&methodsVal.Object))
+
+	// context.startActivity(intent)
+	startMID, err := env.GetMethodID(ctxCls, "startActivity",
+		"(Landroid/content/Intent;)V")
+	if err != nil {
+		return err
+	}
+	if err := env.CallVoidMethod(ctx, startMID, jni.ObjectValue(intent)); err != nil {
+		return fmt.Errorf("startActivity: %w", err)
+	}
+
+	fmt.Fprintf(os.Stderr, "jniservice: launched permission dialog for request %d (client=%s)\n", requestID, clientID)
+	return nil
 }
 
 func main() {} // Required for c-shared build mode.

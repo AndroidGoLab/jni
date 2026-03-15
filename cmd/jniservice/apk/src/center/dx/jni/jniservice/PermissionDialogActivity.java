@@ -20,7 +20,7 @@ import android.widget.TextView;
  * Android's built-in SQLiteDatabase API.
  */
 public class PermissionDialogActivity extends Activity {
-    private static final String DB_PATH = "/data/local/tmp/jniservice.db";
+    private String dbPath;
 
     private long requestId;
     private String clientId;
@@ -29,6 +29,10 @@ public class PermissionDialogActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // DB path matches the Go server's data dir detection.
+        java.io.File filesDir = new java.io.File(getApplicationInfo().dataDir, "files/jniservice");
+        dbPath = new java.io.File(filesDir, "acl.db").getAbsolutePath();
 
         requestId = getIntent().getLongExtra("request_id", -1);
         clientId = getIntent().getStringExtra("client_id");
@@ -85,7 +89,7 @@ public class PermissionDialogActivity extends Activity {
 
     private void handleApprove() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(
-                DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+                dbPath, null, SQLiteDatabase.OPEN_READWRITE);
         try {
             db.beginTransaction();
             db.execSQL("UPDATE pending_requests SET status='approved' WHERE id=?",
@@ -94,8 +98,9 @@ public class PermissionDialogActivity extends Activity {
             for (String method : methodList) {
                 String trimmed = method.trim();
                 if (!trimmed.isEmpty()) {
-                    db.execSQL("INSERT OR IGNORE INTO grants (client_id, method_pattern, granted_at, granted_by) VALUES (?, ?, datetime('now'), 'ui')",
-                            new Object[]{clientId, trimmed});
+                    String now = java.time.Instant.now().toString();
+                    db.execSQL("INSERT OR IGNORE INTO grants (client_id, method_pattern, granted_at, granted_by) VALUES (?, ?, ?, 'ui')",
+                            new Object[]{clientId, trimmed, now});
                 }
             }
             db.setTransactionSuccessful();
@@ -103,11 +108,30 @@ public class PermissionDialogActivity extends Activity {
             db.endTransaction();
             db.close();
         }
+
+        // Also request Android runtime permissions that the client's methods
+        // might need. This ensures the SERVICE has the permissions, not just
+        // the client's ACL grant.
+        java.util.List<String> needed = new java.util.ArrayList<>();
+        String[] dangerous = {
+            android.Manifest.permission.CAMERA,
+            android.Manifest.permission.RECORD_AUDIO,
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+        };
+        for (String perm : dangerous) {
+            if (checkSelfPermission(perm) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                needed.add(perm);
+            }
+        }
+        if (!needed.isEmpty()) {
+            requestPermissions(needed.toArray(new String[0]), 100);
+        }
     }
 
     private void handleDeny() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(
-                DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+                dbPath, null, SQLiteDatabase.OPEN_READWRITE);
         try {
             db.execSQL("UPDATE pending_requests SET status='denied' WHERE id=?",
                     new Object[]{requestId});
