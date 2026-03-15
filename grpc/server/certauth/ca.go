@@ -25,6 +25,10 @@ type CA struct {
 // LoadOrCreateCA loads an existing CA from dir, or creates a new one
 // if ca.key and ca.crt do not exist yet.
 func LoadOrCreateCA(dir string) (*CA, error) {
+	if err := os.MkdirAll(dir, 0700); err != nil {
+		return nil, fmt.Errorf("creating CA directory: %w", err)
+	}
+
 	keyPath := filepath.Join(dir, "ca.key")
 	certPath := filepath.Join(dir, "ca.crt")
 

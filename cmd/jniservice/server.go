@@ -12,8 +12,6 @@
 //
 //	JNISERVICE_PORT   TCP port (default "50051")
 //	JNISERVICE_LISTEN Listen address (default "0.0.0.0")
-//	JNISERVICE_TOKEN  Bearer token for auth (empty = no auth)
-//	JNISERVICE_MTLS   Set to "1" to enable mTLS with ACL-based auth
 package main
 
 /*
@@ -108,6 +106,13 @@ func Java_center_dx_jni_jniservice_JNIServiceForeground_setAppContext(cenv *C.JN
 func runServer(cvm *C.JavaVM) {
 	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
 
+	// In APK mode, Go's os.Stderr goes to /dev/null. Redirect to a file
+	// so we can debug startup failures.
+	if logFile, err := os.OpenFile("/data/data/center.dx.jni.jniservice/cache/jniservice.log",
+		os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600); err == nil {
+		os.Stderr = logFile
+	}
+
 	listenAddr := os.Getenv("JNISERVICE_LISTEN")
 	if listenAddr == "" {
 		listenAddr = "0.0.0.0"
@@ -118,9 +123,6 @@ func runServer(cvm *C.JavaVM) {
 		port = "50051"
 	}
 
-	token := os.Getenv("JNISERVICE_TOKEN")
-	mtlsEnabled := os.Getenv("JNISERVICE_MTLS") == "1"
-
 	handles := handlestore.New()
 
 	globalVM = vm
@@ -130,63 +132,74 @@ func runServer(cvm *C.JavaVM) {
 	// This makes the Context handle available for Android API calls.
 	initAndroidContext(vm, handles)
 
-	// Build the auth interceptor chain and server options.
-	var (
-		auth    server.Authorizer
-		opts    []grpc.ServerOption
-		ca      *certauth.CA
-		aclStore *acl.Store
-	)
-
-	switch {
-	case mtlsEnabled:
-		var err error
-		ca, err = certauth.LoadOrCreateCA("/data/local/tmp/jniservice-ca/")
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "jniservice: load/create CA: %v\n", err)
+	// Determine data directory. Try the APK's files dir first (writable by the
+	// app process), fall back to /data/local/tmp (writable by shell user in
+	// app_process mode).
+	dataDir := os.Getenv("JNISERVICE_DATA_DIR")
+	if dataDir == "" {
+		candidates := []string{
+			"/data/data/center.dx.jni.jniservice/files/jniservice",
+			"/data/local/tmp/jniservice",
+		}
+		for _, dir := range candidates {
+			if err := os.MkdirAll(dir, 0700); err == nil {
+				dataDir = dir
+				break
+			}
+		}
+		if dataDir == "" {
+			fmt.Fprintf(os.Stderr, "jniservice: no writable data directory found\n")
 			os.Exit(1)
 		}
-		fmt.Fprintf(os.Stderr, "jniservice: CA loaded\n")
-
-		aclStore, err = acl.OpenStore("/data/local/tmp/jniservice.db")
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "jniservice: open ACL store: %v\n", err)
+	} else {
+		if err := os.MkdirAll(dataDir, 0700); err != nil {
+			fmt.Fprintf(os.Stderr, "jniservice: create data dir %s: %v\n", dataDir, err)
 			os.Exit(1)
 		}
-		fmt.Fprintf(os.Stderr, "jniservice: ACL store opened\n")
+	}
+	fmt.Fprintf(os.Stderr, "jniservice: data dir: %s\n", dataDir)
 
-		serverTLS, err := generateServerTLS(ca)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "jniservice: generate server TLS: %v\n", err)
-			os.Exit(1)
-		}
+	// mTLS is always enabled. The only unauthenticated RPC is Register
+	// (client enrollment via CSR). All other RPCs require a valid client
+	// certificate and per-method ACL grants.
+	ca, err := certauth.LoadOrCreateCA(dataDir + "/ca")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "jniservice: load/create CA: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Fprintf(os.Stderr, "jniservice: CA loaded\n")
 
-		caPool := x509.NewCertPool()
-		caPool.AddCert(ca.Cert)
+	aclStore, err := acl.OpenStore(dataDir + "/acl.db")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "jniservice: open ACL store: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Fprintf(os.Stderr, "jniservice: ACL store opened\n")
 
-		tlsConfig := &tls.Config{
-			Certificates: []tls.Certificate{serverTLS},
-			// VerifyClientCertIfGiven allows Register to work without a cert.
-			ClientAuth: tls.VerifyClientCertIfGiven,
-			ClientCAs:  caPool,
-			MinVersion: tls.VersionTLS12,
-		}
-
-		opts = append(opts, grpc.Creds(credentials.NewTLS(tlsConfig)))
-		auth = server.ACLAuth{Store: aclStore}
-		fmt.Fprintf(os.Stderr, "jniservice: mTLS enabled\n")
-
-	case token != "":
-		auth = server.TokenAuth{Token: token}
-
-	default:
-		auth = server.NoAuth{}
+	serverTLS, err := generateServerTLS(ca)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "jniservice: generate server TLS: %v\n", err)
+		os.Exit(1)
 	}
 
-	opts = append(opts,
+	caPool := x509.NewCertPool()
+	caPool.AddCert(ca.Cert)
+
+	tlsConfig := &tls.Config{
+		Certificates: []tls.Certificate{serverTLS},
+		// VerifyClientCertIfGiven allows Register to work without a cert.
+		ClientAuth: tls.VerifyClientCertIfGiven,
+		ClientCAs:  caPool,
+		MinVersion: tls.VersionTLS12,
+	}
+
+	auth := server.ACLAuth{Store: aclStore}
+	opts := []grpc.ServerOption{
+		grpc.Creds(credentials.NewTLS(tlsConfig)),
 		grpc.ChainUnaryInterceptor(server.UnaryAuthInterceptor(auth)),
 		grpc.ChainStreamInterceptor(server.StreamAuthInterceptor(auth)),
-	)
+	}
+	fmt.Fprintf(os.Stderr, "jniservice: mTLS enabled\n")
 
 	grpcServer := grpc.NewServer(opts...)
 
@@ -194,14 +207,13 @@ func runServer(cvm *C.JavaVM) {
 	server.RegisterAll(grpcServer, vm, handles)
 	fmt.Fprintf(os.Stderr, "jniservice: registered handlestore\n")
 
-	// Register AuthService when mTLS is enabled.
-	if mtlsEnabled {
-		authpb.RegisterAuthServiceServer(grpcServer, &server.AuthServiceServer{
-			CA:    ca,
-			Store: aclStore,
-		})
-		fmt.Fprintf(os.Stderr, "jniservice: registered auth service\n")
-	}
+	// Register AuthService (always available — Register is the unauthenticated
+	// entry point for client enrollment).
+	authpb.RegisterAuthServiceServer(grpcServer, &server.AuthServiceServer{
+		CA:    ca,
+		Store: aclStore,
+	})
+	fmt.Fprintf(os.Stderr, "jniservice: registered auth service\n")
 
 	// Register the raw JNI service for low-level JNI access.
 	globalJNIServer = &jnirawserver.Server{

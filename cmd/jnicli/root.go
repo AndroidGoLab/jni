@@ -12,7 +12,6 @@ import (
 	"github.com/xaionaro-go/jni/grpc/client"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/insecure"
 )
 
 var (
@@ -49,7 +48,11 @@ var rootCmd = &cobra.Command{
 			}
 			opts = append(opts, grpc.WithTransportCredentials(tlsCreds))
 		case flagInsecure:
-			opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+			// TLS with InsecureSkipVerify — connects to the server over TLS but
+			// does not verify the server certificate. Required for self-signed
+			// CA (jniservice generates its own CA). This is NOT plaintext.
+			opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(
+				&tls.Config{InsecureSkipVerify: true})))
 		}
 
 		if flagToken != "" {
