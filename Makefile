@@ -1,6 +1,6 @@
 .PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator \
 	build build-server list-commands dist dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex \
-	deploy push start-server stop-server forward
+	magisk deploy push start-server stop-server forward
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -223,3 +223,23 @@ dist-dex:
 		--lib $$(ls -d $(ANDROID_SDK)/platforms/android-* | sort -V | tail -1)/android.jar \
 		--output build build/JNIService.class
 	rm -f build/JNIService.class
+
+# ---- Magisk module ----
+# Usage: make magisk [DIST_GOARCH=arm64]
+# Builds a self-contained Magisk module zip.
+
+magisk: dist-jniservice dist-dex
+	@rm -rf build/magisk-staging
+	@mkdir -p build/magisk-staging/jniservice
+	@mkdir -p build/magisk-staging/META-INF/com/google/android
+	cp cmd/jniservice/magisk/module.prop build/magisk-staging/
+	cp cmd/jniservice/magisk/service.sh build/magisk-staging/
+	cp cmd/jniservice/magisk/customize.sh build/magisk-staging/
+	cp build/libjniservice-$(DIST_ANDROID_ABI).so build/magisk-staging/jniservice/libjniservice.so
+	cp build/classes.dex build/magisk-staging/jniservice/jniservice.dex
+	@# Magisk update-binary: the standard installer stub delegates to customize.sh.
+	@printf '#!/sbin/sh\n. "$$MODPATH/customize.sh"\n' > build/magisk-staging/META-INF/com/google/android/update-binary
+	@chmod 755 build/magisk-staging/META-INF/com/google/android/update-binary
+	@touch build/magisk-staging/META-INF/com/google/android/updater-script
+	cd build/magisk-staging && zip -r ../jniservice-magisk-$(DIST_ANDROID_ABI).zip . -x '*.DS_Store'
+	@echo "Built: build/jniservice-magisk-$(DIST_ANDROID_ABI).zip"
