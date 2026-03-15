@@ -23,28 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AllocateBytes2Request struct {
+type CreateAccessIntentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AllocateBytes2Request) Reset() {
-	*x = AllocateBytes2Request{}
+func (x *CreateAccessIntentRequest) Reset() {
+	*x = CreateAccessIntentRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AllocateBytes2Request) String() string {
+func (x *CreateAccessIntentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AllocateBytes2Request) ProtoMessage() {}
+func (*CreateAccessIntentRequest) ProtoMessage() {}
 
-func (x *AllocateBytes2Request) ProtoReflect() protoreflect.Message {
+func (x *CreateAccessIntentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,45 +55,39 @@ func (x *AllocateBytes2Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AllocateBytes2Request.ProtoReflect.Descriptor instead.
-func (*AllocateBytes2Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateAccessIntentRequest.ProtoReflect.Descriptor instead.
+func (*CreateAccessIntentRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AllocateBytes2Request) GetArg0() int64 {
+func (x *CreateAccessIntentRequest) GetArg0() string {
 	if x != nil {
 		return x.Arg0
 	}
-	return 0
+	return ""
 }
 
-func (x *AllocateBytes2Request) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type AllocateBytes2Response struct {
+type CreateAccessIntentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AllocateBytes2Response) Reset() {
-	*x = AllocateBytes2Response{}
+func (x *CreateAccessIntentResponse) Reset() {
+	*x = CreateAccessIntentResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AllocateBytes2Response) String() string {
+func (x *CreateAccessIntentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AllocateBytes2Response) ProtoMessage() {}
+func (*CreateAccessIntentResponse) ProtoMessage() {}
 
-func (x *AllocateBytes2Response) ProtoReflect() protoreflect.Message {
+func (x *CreateAccessIntentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -106,33 +99,38 @@ func (x *AllocateBytes2Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AllocateBytes2Response.ProtoReflect.Descriptor instead.
-func (*AllocateBytes2Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateAccessIntentResponse.ProtoReflect.Descriptor instead.
+func (*CreateAccessIntentResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{1}
 }
 
-type AllocateBytes2_1Request struct {
+func (x *CreateAccessIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateOpenDocumentTreeIntentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AllocateBytes2_1Request) Reset() {
-	*x = AllocateBytes2_1Request{}
+func (x *CreateOpenDocumentTreeIntentRequest) Reset() {
+	*x = CreateOpenDocumentTreeIntentRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AllocateBytes2_1Request) String() string {
+func (x *CreateOpenDocumentTreeIntentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AllocateBytes2_1Request) ProtoMessage() {}
+func (*CreateOpenDocumentTreeIntentRequest) ProtoMessage() {}
 
-func (x *AllocateBytes2_1Request) ProtoReflect() protoreflect.Message {
+func (x *CreateOpenDocumentTreeIntentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -144,45 +142,32 @@ func (x *AllocateBytes2_1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AllocateBytes2_1Request.ProtoReflect.Descriptor instead.
-func (*AllocateBytes2_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateOpenDocumentTreeIntentRequest.ProtoReflect.Descriptor instead.
+func (*CreateOpenDocumentTreeIntentRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *AllocateBytes2_1Request) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *AllocateBytes2_1Request) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type AllocateBytes2_1Response struct {
+type CreateOpenDocumentTreeIntentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AllocateBytes2_1Response) Reset() {
-	*x = AllocateBytes2_1Response{}
+func (x *CreateOpenDocumentTreeIntentResponse) Reset() {
+	*x = CreateOpenDocumentTreeIntentResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AllocateBytes2_1Response) String() string {
+func (x *CreateOpenDocumentTreeIntentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AllocateBytes2_1Response) ProtoMessage() {}
+func (*CreateOpenDocumentTreeIntentResponse) ProtoMessage() {}
 
-func (x *AllocateBytes2_1Response) ProtoReflect() protoreflect.Message {
+func (x *CreateOpenDocumentTreeIntentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -194,32 +179,38 @@ func (x *AllocateBytes2_1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AllocateBytes2_1Response.ProtoReflect.Descriptor instead.
-func (*AllocateBytes2_1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateOpenDocumentTreeIntentResponse.ProtoReflect.Descriptor instead.
+func (*CreateOpenDocumentTreeIntentResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{3}
 }
 
-type GetAllocatableBytesRequest struct {
+func (x *CreateOpenDocumentTreeIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type DescribeContentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetAllocatableBytesRequest) Reset() {
-	*x = GetAllocatableBytesRequest{}
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetAllocatableBytesRequest) String() string {
+func (x *DescribeContentsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAllocatableBytesRequest) ProtoMessage() {}
+func (*DescribeContentsRequest) ProtoMessage() {}
 
-func (x *GetAllocatableBytesRequest) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -231,39 +222,32 @@ func (x *GetAllocatableBytesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAllocatableBytesRequest.ProtoReflect.Descriptor instead.
-func (*GetAllocatableBytesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetAllocatableBytesRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type GetAllocatableBytesResponse struct {
+type DescribeContentsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetAllocatableBytesResponse) Reset() {
-	*x = GetAllocatableBytesResponse{}
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetAllocatableBytesResponse) String() string {
+func (x *DescribeContentsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAllocatableBytesResponse) ProtoMessage() {}
+func (*DescribeContentsResponse) ProtoMessage() {}
 
-func (x *GetAllocatableBytesResponse) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -275,39 +259,39 @@ func (x *GetAllocatableBytesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAllocatableBytesResponse.ProtoReflect.Descriptor instead.
-func (*GetAllocatableBytesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetAllocatableBytesResponse) GetResult() int64 {
+func (x *DescribeContentsResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type GetCacheQuotaBytesRequest struct {
+type EqualsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCacheQuotaBytesRequest) Reset() {
-	*x = GetCacheQuotaBytesRequest{}
+func (x *EqualsRequest) Reset() {
+	*x = EqualsRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCacheQuotaBytesRequest) String() string {
+func (x *EqualsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCacheQuotaBytesRequest) ProtoMessage() {}
+func (*EqualsRequest) ProtoMessage() {}
 
-func (x *GetCacheQuotaBytesRequest) ProtoReflect() protoreflect.Message {
+func (x *EqualsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -319,39 +303,39 @@ func (x *GetCacheQuotaBytesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCacheQuotaBytesRequest.ProtoReflect.Descriptor instead.
-func (*GetCacheQuotaBytesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use EqualsRequest.ProtoReflect.Descriptor instead.
+func (*EqualsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *GetCacheQuotaBytesRequest) GetArg0() int64 {
+func (x *EqualsRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type GetCacheQuotaBytesResponse struct {
+type EqualsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCacheQuotaBytesResponse) Reset() {
-	*x = GetCacheQuotaBytesResponse{}
+func (x *EqualsResponse) Reset() {
+	*x = EqualsResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCacheQuotaBytesResponse) String() string {
+func (x *EqualsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCacheQuotaBytesResponse) ProtoMessage() {}
+func (*EqualsResponse) ProtoMessage() {}
 
-func (x *GetCacheQuotaBytesResponse) ProtoReflect() protoreflect.Message {
+func (x *EqualsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -363,39 +347,39 @@ func (x *GetCacheQuotaBytesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCacheQuotaBytesResponse.ProtoReflect.Descriptor instead.
-func (*GetCacheQuotaBytesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use EqualsResponse.ProtoReflect.Descriptor instead.
+func (*EqualsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *GetCacheQuotaBytesResponse) GetResult() int64 {
+func (x *EqualsResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return false
 }
 
-type GetCacheSizeBytesRequest struct {
+type GetDescriptionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetCacheSizeBytesRequest) Reset() {
-	*x = GetCacheSizeBytesRequest{}
+func (x *GetDescriptionRequest) Reset() {
+	*x = GetDescriptionRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetCacheSizeBytesRequest) String() string {
+func (x *GetDescriptionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetCacheSizeBytesRequest) ProtoMessage() {}
+func (*GetDescriptionRequest) ProtoMessage() {}
 
-func (x *GetCacheSizeBytesRequest) ProtoReflect() protoreflect.Message {
+func (x *GetDescriptionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -407,223 +391,199 @@ func (x *GetCacheSizeBytesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetCacheSizeBytesRequest.ProtoReflect.Descriptor instead.
-func (*GetCacheSizeBytesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDescriptionRequest.ProtoReflect.Descriptor instead.
+func (*GetDescriptionRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetCacheSizeBytesRequest) GetArg0() int64 {
+func (x *GetDescriptionRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type GetCacheSizeBytesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetCacheSizeBytesResponse) Reset() {
-	*x = GetCacheSizeBytesResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetCacheSizeBytesResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetCacheSizeBytesResponse) ProtoMessage() {}
-
-func (x *GetCacheSizeBytesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetCacheSizeBytesResponse.ProtoReflect.Descriptor instead.
-func (*GetCacheSizeBytesResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *GetCacheSizeBytesResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type GetManageSpaceActivityIntentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetManageSpaceActivityIntentRequest) Reset() {
-	*x = GetManageSpaceActivityIntentRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetManageSpaceActivityIntentRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetManageSpaceActivityIntentRequest) ProtoMessage() {}
-
-func (x *GetManageSpaceActivityIntentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetManageSpaceActivityIntentRequest.ProtoReflect.Descriptor instead.
-func (*GetManageSpaceActivityIntentRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *GetManageSpaceActivityIntentRequest) GetArg0() string {
-	if x != nil {
-		return x.Arg0
-	}
-	return ""
-}
-
-func (x *GetManageSpaceActivityIntentRequest) GetArg1() int32 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type GetManageSpaceActivityIntentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetManageSpaceActivityIntentResponse) Reset() {
-	*x = GetManageSpaceActivityIntentResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetManageSpaceActivityIntentResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetManageSpaceActivityIntentResponse) ProtoMessage() {}
-
-func (x *GetManageSpaceActivityIntentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetManageSpaceActivityIntentResponse.ProtoReflect.Descriptor instead.
-func (*GetManageSpaceActivityIntentResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *GetManageSpaceActivityIntentResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type GetMountedObbPathRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetMountedObbPathRequest) Reset() {
-	*x = GetMountedObbPathRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetMountedObbPathRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetMountedObbPathRequest) ProtoMessage() {}
-
-func (x *GetMountedObbPathRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetMountedObbPathRequest.ProtoReflect.Descriptor instead.
-func (*GetMountedObbPathRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *GetMountedObbPathRequest) GetArg0() string {
-	if x != nil {
-		return x.Arg0
-	}
-	return ""
-}
-
-type GetMountedObbPathResponse struct {
+type GetDescriptionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMountedObbPathResponse) Reset() {
-	*x = GetMountedObbPathResponse{}
+func (x *GetDescriptionResponse) Reset() {
+	*x = GetDescriptionResponse{}
+	mi := &file_proto_storage_storage_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDescriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDescriptionResponse) ProtoMessage() {}
+
+func (x *GetDescriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_storage_storage_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDescriptionResponse.ProtoReflect.Descriptor instead.
+func (*GetDescriptionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_storage_storage_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetDescriptionResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetDirectoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDirectoryRequest) Reset() {
+	*x = GetDirectoryRequest{}
+	mi := &file_proto_storage_storage_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDirectoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDirectoryRequest) ProtoMessage() {}
+
+func (x *GetDirectoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_storage_storage_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDirectoryRequest.ProtoReflect.Descriptor instead.
+func (*GetDirectoryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_storage_storage_proto_rawDescGZIP(), []int{10}
+}
+
+type GetDirectoryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDirectoryResponse) Reset() {
+	*x = GetDirectoryResponse{}
+	mi := &file_proto_storage_storage_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDirectoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDirectoryResponse) ProtoMessage() {}
+
+func (x *GetDirectoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_storage_storage_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDirectoryResponse.ProtoReflect.Descriptor instead.
+func (*GetDirectoryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_storage_storage_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetDirectoryResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMediaStoreVolumeNameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMediaStoreVolumeNameRequest) Reset() {
+	*x = GetMediaStoreVolumeNameRequest{}
+	mi := &file_proto_storage_storage_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMediaStoreVolumeNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMediaStoreVolumeNameRequest) ProtoMessage() {}
+
+func (x *GetMediaStoreVolumeNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_storage_storage_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMediaStoreVolumeNameRequest.ProtoReflect.Descriptor instead.
+func (*GetMediaStoreVolumeNameRequest) Descriptor() ([]byte, []int) {
+	return file_proto_storage_storage_proto_rawDescGZIP(), []int{12}
+}
+
+type GetMediaStoreVolumeNameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMediaStoreVolumeNameResponse) Reset() {
+	*x = GetMediaStoreVolumeNameResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMountedObbPathResponse) String() string {
+func (x *GetMediaStoreVolumeNameResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMountedObbPathResponse) ProtoMessage() {}
+func (*GetMediaStoreVolumeNameResponse) ProtoMessage() {}
 
-func (x *GetMountedObbPathResponse) ProtoReflect() protoreflect.Message {
+func (x *GetMediaStoreVolumeNameResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -635,38 +595,38 @@ func (x *GetMountedObbPathResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMountedObbPathResponse.ProtoReflect.Descriptor instead.
-func (*GetMountedObbPathResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetMediaStoreVolumeNameResponse.ProtoReflect.Descriptor instead.
+func (*GetMediaStoreVolumeNameResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *GetMountedObbPathResponse) GetResult() string {
+func (x *GetMediaStoreVolumeNameResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
 	return ""
 }
 
-type GetPrimaryStorageVolumeRequest struct {
+type GetOwnerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPrimaryStorageVolumeRequest) Reset() {
-	*x = GetPrimaryStorageVolumeRequest{}
+func (x *GetOwnerRequest) Reset() {
+	*x = GetOwnerRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPrimaryStorageVolumeRequest) String() string {
+func (x *GetOwnerRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPrimaryStorageVolumeRequest) ProtoMessage() {}
+func (*GetOwnerRequest) ProtoMessage() {}
 
-func (x *GetPrimaryStorageVolumeRequest) ProtoReflect() protoreflect.Message {
+func (x *GetOwnerRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -678,32 +638,32 @@ func (x *GetPrimaryStorageVolumeRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPrimaryStorageVolumeRequest.ProtoReflect.Descriptor instead.
-func (*GetPrimaryStorageVolumeRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOwnerRequest.ProtoReflect.Descriptor instead.
+func (*GetOwnerRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{14}
 }
 
-type GetPrimaryStorageVolumeResponse struct {
+type GetOwnerResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPrimaryStorageVolumeResponse) Reset() {
-	*x = GetPrimaryStorageVolumeResponse{}
+func (x *GetOwnerResponse) Reset() {
+	*x = GetOwnerResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPrimaryStorageVolumeResponse) String() string {
+func (x *GetOwnerResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPrimaryStorageVolumeResponse) ProtoMessage() {}
+func (*GetOwnerResponse) ProtoMessage() {}
 
-func (x *GetPrimaryStorageVolumeResponse) ProtoReflect() protoreflect.Message {
+func (x *GetOwnerResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -715,38 +675,38 @@ func (x *GetPrimaryStorageVolumeResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPrimaryStorageVolumeResponse.ProtoReflect.Descriptor instead.
-func (*GetPrimaryStorageVolumeResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOwnerResponse.ProtoReflect.Descriptor instead.
+func (*GetOwnerResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *GetPrimaryStorageVolumeResponse) GetResult() int64 {
+func (x *GetOwnerResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type GetRecentStorageVolumesRequest struct {
+type GetStateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetRecentStorageVolumesRequest) Reset() {
-	*x = GetRecentStorageVolumesRequest{}
+func (x *GetStateRequest) Reset() {
+	*x = GetStateRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetRecentStorageVolumesRequest) String() string {
+func (x *GetStateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetRecentStorageVolumesRequest) ProtoMessage() {}
+func (*GetStateRequest) ProtoMessage() {}
 
-func (x *GetRecentStorageVolumesRequest) ProtoReflect() protoreflect.Message {
+func (x *GetStateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -758,32 +718,32 @@ func (x *GetRecentStorageVolumesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetRecentStorageVolumesRequest.ProtoReflect.Descriptor instead.
-func (*GetRecentStorageVolumesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetStateRequest.ProtoReflect.Descriptor instead.
+func (*GetStateRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{16}
 }
 
-type GetRecentStorageVolumesResponse struct {
+type GetStateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetRecentStorageVolumesResponse) Reset() {
-	*x = GetRecentStorageVolumesResponse{}
+func (x *GetStateResponse) Reset() {
+	*x = GetStateResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetRecentStorageVolumesResponse) String() string {
+func (x *GetStateResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetRecentStorageVolumesResponse) ProtoMessage() {}
+func (*GetStateResponse) ProtoMessage() {}
 
-func (x *GetRecentStorageVolumesResponse) ProtoReflect() protoreflect.Message {
+func (x *GetStateResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -795,39 +755,38 @@ func (x *GetRecentStorageVolumesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetRecentStorageVolumesResponse.ProtoReflect.Descriptor instead.
-func (*GetRecentStorageVolumesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetStateResponse.ProtoReflect.Descriptor instead.
+func (*GetStateResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *GetRecentStorageVolumesResponse) GetResult() int64 {
+func (x *GetStateResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return ""
 }
 
-type GetStorageVolume1Request struct {
+type GetStorageUuidRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolume1Request) Reset() {
-	*x = GetStorageVolume1Request{}
+func (x *GetStorageUuidRequest) Reset() {
+	*x = GetStorageUuidRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolume1Request) String() string {
+func (x *GetStorageUuidRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolume1Request) ProtoMessage() {}
+func (*GetStorageUuidRequest) ProtoMessage() {}
 
-func (x *GetStorageVolume1Request) ProtoReflect() protoreflect.Message {
+func (x *GetStorageUuidRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -839,39 +798,32 @@ func (x *GetStorageVolume1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolume1Request.ProtoReflect.Descriptor instead.
-func (*GetStorageVolume1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetStorageUuidRequest.ProtoReflect.Descriptor instead.
+func (*GetStorageUuidRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *GetStorageVolume1Request) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type GetStorageVolume1Response struct {
+type GetStorageUuidResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolume1Response) Reset() {
-	*x = GetStorageVolume1Response{}
+func (x *GetStorageUuidResponse) Reset() {
+	*x = GetStorageUuidResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolume1Response) String() string {
+func (x *GetStorageUuidResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolume1Response) ProtoMessage() {}
+func (*GetStorageUuidResponse) ProtoMessage() {}
 
-func (x *GetStorageVolume1Response) ProtoReflect() protoreflect.Message {
+func (x *GetStorageUuidResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -883,39 +835,38 @@ func (x *GetStorageVolume1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolume1Response.ProtoReflect.Descriptor instead.
-func (*GetStorageVolume1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetStorageUuidResponse.ProtoReflect.Descriptor instead.
+func (*GetStorageUuidResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *GetStorageVolume1Response) GetResult() int64 {
+func (x *GetStorageUuidResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type GetStorageVolume1_1Request struct {
+type GetUuidRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolume1_1Request) Reset() {
-	*x = GetStorageVolume1_1Request{}
+func (x *GetUuidRequest) Reset() {
+	*x = GetUuidRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolume1_1Request) String() string {
+func (x *GetUuidRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolume1_1Request) ProtoMessage() {}
+func (*GetUuidRequest) ProtoMessage() {}
 
-func (x *GetStorageVolume1_1Request) ProtoReflect() protoreflect.Message {
+func (x *GetUuidRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -927,39 +878,32 @@ func (x *GetStorageVolume1_1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolume1_1Request.ProtoReflect.Descriptor instead.
-func (*GetStorageVolume1_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUuidRequest.ProtoReflect.Descriptor instead.
+func (*GetUuidRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *GetStorageVolume1_1Request) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type GetStorageVolume1_1Response struct {
+type GetUuidResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolume1_1Response) Reset() {
-	*x = GetStorageVolume1_1Response{}
+func (x *GetUuidResponse) Reset() {
+	*x = GetUuidResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolume1_1Response) String() string {
+func (x *GetUuidResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolume1_1Response) ProtoMessage() {}
+func (*GetUuidResponse) ProtoMessage() {}
 
-func (x *GetStorageVolume1_1Response) ProtoReflect() protoreflect.Message {
+func (x *GetUuidResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -971,38 +915,38 @@ func (x *GetStorageVolume1_1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolume1_1Response.ProtoReflect.Descriptor instead.
-func (*GetStorageVolume1_1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUuidResponse.ProtoReflect.Descriptor instead.
+func (*GetUuidResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *GetStorageVolume1_1Response) GetResult() int64 {
+func (x *GetUuidResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return ""
 }
 
-type GetStorageVolumesRequest struct {
+type HashCodeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolumesRequest) Reset() {
-	*x = GetStorageVolumesRequest{}
+func (x *HashCodeRequest) Reset() {
+	*x = HashCodeRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolumesRequest) String() string {
+func (x *HashCodeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolumesRequest) ProtoMessage() {}
+func (*HashCodeRequest) ProtoMessage() {}
 
-func (x *GetStorageVolumesRequest) ProtoReflect() protoreflect.Message {
+func (x *HashCodeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1014,32 +958,32 @@ func (x *GetStorageVolumesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolumesRequest.ProtoReflect.Descriptor instead.
-func (*GetStorageVolumesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use HashCodeRequest.ProtoReflect.Descriptor instead.
+func (*HashCodeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{22}
 }
 
-type GetStorageVolumesResponse struct {
+type HashCodeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolumesResponse) Reset() {
-	*x = GetStorageVolumesResponse{}
+func (x *HashCodeResponse) Reset() {
+	*x = HashCodeResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolumesResponse) String() string {
+func (x *HashCodeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolumesResponse) ProtoMessage() {}
+func (*HashCodeResponse) ProtoMessage() {}
 
-func (x *GetStorageVolumesResponse) ProtoReflect() protoreflect.Message {
+func (x *HashCodeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1051,38 +995,38 @@ func (x *GetStorageVolumesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolumesResponse.ProtoReflect.Descriptor instead.
-func (*GetStorageVolumesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use HashCodeResponse.ProtoReflect.Descriptor instead.
+func (*HashCodeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *GetStorageVolumesResponse) GetResult() int64 {
+func (x *HashCodeResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type GetStorageVolumesIncludingSharedProfilesRequest struct {
+type IsEmulatedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolumesIncludingSharedProfilesRequest) Reset() {
-	*x = GetStorageVolumesIncludingSharedProfilesRequest{}
+func (x *IsEmulatedRequest) Reset() {
+	*x = IsEmulatedRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolumesIncludingSharedProfilesRequest) String() string {
+func (x *IsEmulatedRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolumesIncludingSharedProfilesRequest) ProtoMessage() {}
+func (*IsEmulatedRequest) ProtoMessage() {}
 
-func (x *GetStorageVolumesIncludingSharedProfilesRequest) ProtoReflect() protoreflect.Message {
+func (x *IsEmulatedRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1094,32 +1038,32 @@ func (x *GetStorageVolumesIncludingSharedProfilesRequest) ProtoReflect() protore
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolumesIncludingSharedProfilesRequest.ProtoReflect.Descriptor instead.
-func (*GetStorageVolumesIncludingSharedProfilesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsEmulatedRequest.ProtoReflect.Descriptor instead.
+func (*IsEmulatedRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{24}
 }
 
-type GetStorageVolumesIncludingSharedProfilesResponse struct {
+type IsEmulatedResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetStorageVolumesIncludingSharedProfilesResponse) Reset() {
-	*x = GetStorageVolumesIncludingSharedProfilesResponse{}
+func (x *IsEmulatedResponse) Reset() {
+	*x = IsEmulatedResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetStorageVolumesIncludingSharedProfilesResponse) String() string {
+func (x *IsEmulatedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetStorageVolumesIncludingSharedProfilesResponse) ProtoMessage() {}
+func (*IsEmulatedResponse) ProtoMessage() {}
 
-func (x *GetStorageVolumesIncludingSharedProfilesResponse) ProtoReflect() protoreflect.Message {
+func (x *IsEmulatedResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1131,39 +1075,38 @@ func (x *GetStorageVolumesIncludingSharedProfilesResponse) ProtoReflect() protor
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetStorageVolumesIncludingSharedProfilesResponse.ProtoReflect.Descriptor instead.
-func (*GetStorageVolumesIncludingSharedProfilesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsEmulatedResponse.ProtoReflect.Descriptor instead.
+func (*IsEmulatedResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *GetStorageVolumesIncludingSharedProfilesResponse) GetResult() int64 {
+func (x *IsEmulatedResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return false
 }
 
-type GetUuidForPathRequest struct {
+type IsPrimaryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetUuidForPathRequest) Reset() {
-	*x = GetUuidForPathRequest{}
+func (x *IsPrimaryRequest) Reset() {
+	*x = IsPrimaryRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetUuidForPathRequest) String() string {
+func (x *IsPrimaryRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetUuidForPathRequest) ProtoMessage() {}
+func (*IsPrimaryRequest) ProtoMessage() {}
 
-func (x *GetUuidForPathRequest) ProtoReflect() protoreflect.Message {
+func (x *IsPrimaryRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1175,39 +1118,32 @@ func (x *GetUuidForPathRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetUuidForPathRequest.ProtoReflect.Descriptor instead.
-func (*GetUuidForPathRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsPrimaryRequest.ProtoReflect.Descriptor instead.
+func (*IsPrimaryRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *GetUuidForPathRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type GetUuidForPathResponse struct {
+type IsPrimaryResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetUuidForPathResponse) Reset() {
-	*x = GetUuidForPathResponse{}
+func (x *IsPrimaryResponse) Reset() {
+	*x = IsPrimaryResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetUuidForPathResponse) String() string {
+func (x *IsPrimaryResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetUuidForPathResponse) ProtoMessage() {}
+func (*IsPrimaryResponse) ProtoMessage() {}
 
-func (x *GetUuidForPathResponse) ProtoReflect() protoreflect.Message {
+func (x *IsPrimaryResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1219,39 +1155,38 @@ func (x *GetUuidForPathResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetUuidForPathResponse.ProtoReflect.Descriptor instead.
-func (*GetUuidForPathResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsPrimaryResponse.ProtoReflect.Descriptor instead.
+func (*IsPrimaryResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *GetUuidForPathResponse) GetResult() int64 {
+func (x *IsPrimaryResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return false
 }
 
-type IsAllocationSupportedRequest struct {
+type IsRemovableRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsAllocationSupportedRequest) Reset() {
-	*x = IsAllocationSupportedRequest{}
+func (x *IsRemovableRequest) Reset() {
+	*x = IsRemovableRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsAllocationSupportedRequest) String() string {
+func (x *IsRemovableRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsAllocationSupportedRequest) ProtoMessage() {}
+func (*IsRemovableRequest) ProtoMessage() {}
 
-func (x *IsAllocationSupportedRequest) ProtoReflect() protoreflect.Message {
+func (x *IsRemovableRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1263,39 +1198,32 @@ func (x *IsAllocationSupportedRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsAllocationSupportedRequest.ProtoReflect.Descriptor instead.
-func (*IsAllocationSupportedRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsRemovableRequest.ProtoReflect.Descriptor instead.
+func (*IsRemovableRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *IsAllocationSupportedRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type IsAllocationSupportedResponse struct {
+type IsRemovableResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsAllocationSupportedResponse) Reset() {
-	*x = IsAllocationSupportedResponse{}
+func (x *IsRemovableResponse) Reset() {
+	*x = IsRemovableResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsAllocationSupportedResponse) String() string {
+func (x *IsRemovableResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsAllocationSupportedResponse) ProtoMessage() {}
+func (*IsRemovableResponse) ProtoMessage() {}
 
-func (x *IsAllocationSupportedResponse) ProtoReflect() protoreflect.Message {
+func (x *IsRemovableResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1307,39 +1235,38 @@ func (x *IsAllocationSupportedResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsAllocationSupportedResponse.ProtoReflect.Descriptor instead.
-func (*IsAllocationSupportedResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsRemovableResponse.ProtoReflect.Descriptor instead.
+func (*IsRemovableResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *IsAllocationSupportedResponse) GetResult() bool {
+func (x *IsRemovableResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
 	return false
 }
 
-type IsCacheBehaviorGroupRequest struct {
+type ToStringRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsCacheBehaviorGroupRequest) Reset() {
-	*x = IsCacheBehaviorGroupRequest{}
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsCacheBehaviorGroupRequest) String() string {
+func (x *ToStringRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsCacheBehaviorGroupRequest) ProtoMessage() {}
+func (*ToStringRequest) ProtoMessage() {}
 
-func (x *IsCacheBehaviorGroupRequest) ProtoReflect() protoreflect.Message {
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1351,39 +1278,32 @@ func (x *IsCacheBehaviorGroupRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsCacheBehaviorGroupRequest.ProtoReflect.Descriptor instead.
-func (*IsCacheBehaviorGroupRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *IsCacheBehaviorGroupRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type IsCacheBehaviorGroupResponse struct {
+type ToStringResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsCacheBehaviorGroupResponse) Reset() {
-	*x = IsCacheBehaviorGroupResponse{}
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsCacheBehaviorGroupResponse) String() string {
+func (x *ToStringResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsCacheBehaviorGroupResponse) ProtoMessage() {}
+func (*ToStringResponse) ProtoMessage() {}
 
-func (x *IsCacheBehaviorGroupResponse) ProtoReflect() protoreflect.Message {
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1395,39 +1315,40 @@ func (x *IsCacheBehaviorGroupResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsCacheBehaviorGroupResponse.ProtoReflect.Descriptor instead.
-func (*IsCacheBehaviorGroupResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *IsCacheBehaviorGroupResponse) GetResult() bool {
+func (x *ToStringResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
-	return false
+	return ""
 }
 
-type IsCacheBehaviorTombstoneRequest struct {
+type WriteToParcelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsCacheBehaviorTombstoneRequest) Reset() {
-	*x = IsCacheBehaviorTombstoneRequest{}
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
 	mi := &file_proto_storage_storage_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsCacheBehaviorTombstoneRequest) String() string {
+func (x *WriteToParcelRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsCacheBehaviorTombstoneRequest) ProtoMessage() {}
+func (*WriteToParcelRequest) ProtoMessage() {}
 
-func (x *IsCacheBehaviorTombstoneRequest) ProtoReflect() protoreflect.Message {
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1439,39 +1360,45 @@ func (x *IsCacheBehaviorTombstoneRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsCacheBehaviorTombstoneRequest.ProtoReflect.Descriptor instead.
-func (*IsCacheBehaviorTombstoneRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *IsCacheBehaviorTombstoneRequest) GetArg0() int64 {
+func (x *WriteToParcelRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type IsCacheBehaviorTombstoneResponse struct {
+func (x *WriteToParcelRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type WriteToParcelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsCacheBehaviorTombstoneResponse) Reset() {
-	*x = IsCacheBehaviorTombstoneResponse{}
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
 	mi := &file_proto_storage_storage_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsCacheBehaviorTombstoneResponse) String() string {
+func (x *WriteToParcelResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsCacheBehaviorTombstoneResponse) ProtoMessage() {}
+func (*WriteToParcelResponse) ProtoMessage() {}
 
-func (x *IsCacheBehaviorTombstoneResponse) ProtoReflect() protoreflect.Message {
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_storage_storage_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1483,962 +1410,91 @@ func (x *IsCacheBehaviorTombstoneResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsCacheBehaviorTombstoneResponse.ProtoReflect.Descriptor instead.
-func (*IsCacheBehaviorTombstoneResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
 	return file_proto_storage_storage_proto_rawDescGZIP(), []int{33}
-}
-
-func (x *IsCacheBehaviorTombstoneResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type IsCheckpointSupportedRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsCheckpointSupportedRequest) Reset() {
-	*x = IsCheckpointSupportedRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[34]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsCheckpointSupportedRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsCheckpointSupportedRequest) ProtoMessage() {}
-
-func (x *IsCheckpointSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[34]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsCheckpointSupportedRequest.ProtoReflect.Descriptor instead.
-func (*IsCheckpointSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{34}
-}
-
-type IsCheckpointSupportedResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsCheckpointSupportedResponse) Reset() {
-	*x = IsCheckpointSupportedResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[35]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsCheckpointSupportedResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsCheckpointSupportedResponse) ProtoMessage() {}
-
-func (x *IsCheckpointSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[35]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsCheckpointSupportedResponse.ProtoReflect.Descriptor instead.
-func (*IsCheckpointSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{35}
-}
-
-func (x *IsCheckpointSupportedResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type IsEncryptedRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsEncryptedRequest) Reset() {
-	*x = IsEncryptedRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[36]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsEncryptedRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsEncryptedRequest) ProtoMessage() {}
-
-func (x *IsEncryptedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[36]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsEncryptedRequest.ProtoReflect.Descriptor instead.
-func (*IsEncryptedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{36}
-}
-
-func (x *IsEncryptedRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type IsEncryptedResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsEncryptedResponse) Reset() {
-	*x = IsEncryptedResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[37]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsEncryptedResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsEncryptedResponse) ProtoMessage() {}
-
-func (x *IsEncryptedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[37]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsEncryptedResponse.ProtoReflect.Descriptor instead.
-func (*IsEncryptedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{37}
-}
-
-func (x *IsEncryptedResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type IsObbMountedRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsObbMountedRequest) Reset() {
-	*x = IsObbMountedRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[38]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsObbMountedRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsObbMountedRequest) ProtoMessage() {}
-
-func (x *IsObbMountedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[38]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsObbMountedRequest.ProtoReflect.Descriptor instead.
-func (*IsObbMountedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{38}
-}
-
-func (x *IsObbMountedRequest) GetArg0() string {
-	if x != nil {
-		return x.Arg0
-	}
-	return ""
-}
-
-type IsObbMountedResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsObbMountedResponse) Reset() {
-	*x = IsObbMountedResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[39]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsObbMountedResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsObbMountedResponse) ProtoMessage() {}
-
-func (x *IsObbMountedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[39]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsObbMountedResponse.ProtoReflect.Descriptor instead.
-func (*IsObbMountedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{39}
-}
-
-func (x *IsObbMountedResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type MountObbRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *MountObbRequest) Reset() {
-	*x = MountObbRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[40]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MountObbRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MountObbRequest) ProtoMessage() {}
-
-func (x *MountObbRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[40]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MountObbRequest.ProtoReflect.Descriptor instead.
-func (*MountObbRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{40}
-}
-
-func (x *MountObbRequest) GetArg0() string {
-	if x != nil {
-		return x.Arg0
-	}
-	return ""
-}
-
-func (x *MountObbRequest) GetArg1() string {
-	if x != nil {
-		return x.Arg1
-	}
-	return ""
-}
-
-func (x *MountObbRequest) GetArg2() int64 {
-	if x != nil {
-		return x.Arg2
-	}
-	return 0
-}
-
-type MountObbResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *MountObbResponse) Reset() {
-	*x = MountObbResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[41]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MountObbResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MountObbResponse) ProtoMessage() {}
-
-func (x *MountObbResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[41]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MountObbResponse.ProtoReflect.Descriptor instead.
-func (*MountObbResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{41}
-}
-
-func (x *MountObbResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type RegisterStorageVolumeCallbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterStorageVolumeCallbackRequest) Reset() {
-	*x = RegisterStorageVolumeCallbackRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[42]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterStorageVolumeCallbackRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterStorageVolumeCallbackRequest) ProtoMessage() {}
-
-func (x *RegisterStorageVolumeCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[42]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterStorageVolumeCallbackRequest.ProtoReflect.Descriptor instead.
-func (*RegisterStorageVolumeCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{42}
-}
-
-func (x *RegisterStorageVolumeCallbackRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *RegisterStorageVolumeCallbackRequest) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type RegisterStorageVolumeCallbackResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterStorageVolumeCallbackResponse) Reset() {
-	*x = RegisterStorageVolumeCallbackResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[43]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterStorageVolumeCallbackResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterStorageVolumeCallbackResponse) ProtoMessage() {}
-
-func (x *RegisterStorageVolumeCallbackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[43]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterStorageVolumeCallbackResponse.ProtoReflect.Descriptor instead.
-func (*RegisterStorageVolumeCallbackResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{43}
-}
-
-type SetCacheBehaviorGroupRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          bool                   `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetCacheBehaviorGroupRequest) Reset() {
-	*x = SetCacheBehaviorGroupRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[44]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetCacheBehaviorGroupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetCacheBehaviorGroupRequest) ProtoMessage() {}
-
-func (x *SetCacheBehaviorGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[44]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetCacheBehaviorGroupRequest.ProtoReflect.Descriptor instead.
-func (*SetCacheBehaviorGroupRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{44}
-}
-
-func (x *SetCacheBehaviorGroupRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *SetCacheBehaviorGroupRequest) GetArg1() bool {
-	if x != nil {
-		return x.Arg1
-	}
-	return false
-}
-
-type SetCacheBehaviorGroupResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetCacheBehaviorGroupResponse) Reset() {
-	*x = SetCacheBehaviorGroupResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[45]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetCacheBehaviorGroupResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetCacheBehaviorGroupResponse) ProtoMessage() {}
-
-func (x *SetCacheBehaviorGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[45]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetCacheBehaviorGroupResponse.ProtoReflect.Descriptor instead.
-func (*SetCacheBehaviorGroupResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{45}
-}
-
-type SetCacheBehaviorTombstoneRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          bool                   `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetCacheBehaviorTombstoneRequest) Reset() {
-	*x = SetCacheBehaviorTombstoneRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[46]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetCacheBehaviorTombstoneRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetCacheBehaviorTombstoneRequest) ProtoMessage() {}
-
-func (x *SetCacheBehaviorTombstoneRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[46]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetCacheBehaviorTombstoneRequest.ProtoReflect.Descriptor instead.
-func (*SetCacheBehaviorTombstoneRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{46}
-}
-
-func (x *SetCacheBehaviorTombstoneRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *SetCacheBehaviorTombstoneRequest) GetArg1() bool {
-	if x != nil {
-		return x.Arg1
-	}
-	return false
-}
-
-type SetCacheBehaviorTombstoneResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetCacheBehaviorTombstoneResponse) Reset() {
-	*x = SetCacheBehaviorTombstoneResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[47]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetCacheBehaviorTombstoneResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetCacheBehaviorTombstoneResponse) ProtoMessage() {}
-
-func (x *SetCacheBehaviorTombstoneResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[47]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetCacheBehaviorTombstoneResponse.ProtoReflect.Descriptor instead.
-func (*SetCacheBehaviorTombstoneResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{47}
-}
-
-type UnmountObbRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          bool                   `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UnmountObbRequest) Reset() {
-	*x = UnmountObbRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[48]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UnmountObbRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UnmountObbRequest) ProtoMessage() {}
-
-func (x *UnmountObbRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[48]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UnmountObbRequest.ProtoReflect.Descriptor instead.
-func (*UnmountObbRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{48}
-}
-
-func (x *UnmountObbRequest) GetArg0() string {
-	if x != nil {
-		return x.Arg0
-	}
-	return ""
-}
-
-func (x *UnmountObbRequest) GetArg1() bool {
-	if x != nil {
-		return x.Arg1
-	}
-	return false
-}
-
-func (x *UnmountObbRequest) GetArg2() int64 {
-	if x != nil {
-		return x.Arg2
-	}
-	return 0
-}
-
-type UnmountObbResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UnmountObbResponse) Reset() {
-	*x = UnmountObbResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[49]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UnmountObbResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UnmountObbResponse) ProtoMessage() {}
-
-func (x *UnmountObbResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[49]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UnmountObbResponse.ProtoReflect.Descriptor instead.
-func (*UnmountObbResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{49}
-}
-
-func (x *UnmountObbResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type UnregisterStorageVolumeCallbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UnregisterStorageVolumeCallbackRequest) Reset() {
-	*x = UnregisterStorageVolumeCallbackRequest{}
-	mi := &file_proto_storage_storage_proto_msgTypes[50]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UnregisterStorageVolumeCallbackRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UnregisterStorageVolumeCallbackRequest) ProtoMessage() {}
-
-func (x *UnregisterStorageVolumeCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[50]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UnregisterStorageVolumeCallbackRequest.ProtoReflect.Descriptor instead.
-func (*UnregisterStorageVolumeCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{50}
-}
-
-func (x *UnregisterStorageVolumeCallbackRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type UnregisterStorageVolumeCallbackResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UnregisterStorageVolumeCallbackResponse) Reset() {
-	*x = UnregisterStorageVolumeCallbackResponse{}
-	mi := &file_proto_storage_storage_proto_msgTypes[51]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UnregisterStorageVolumeCallbackResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UnregisterStorageVolumeCallbackResponse) ProtoMessage() {}
-
-func (x *UnregisterStorageVolumeCallbackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_storage_storage_proto_msgTypes[51]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UnregisterStorageVolumeCallbackResponse.ProtoReflect.Descriptor instead.
-func (*UnregisterStorageVolumeCallbackResponse) Descriptor() ([]byte, []int) {
-	return file_proto_storage_storage_proto_rawDescGZIP(), []int{51}
 }
 
 var File_proto_storage_storage_proto protoreflect.FileDescriptor
 
 const file_proto_storage_storage_proto_rawDesc = "" +
 	"\n" +
-	"\x1bproto/storage/storage.proto\x12\astorage\"?\n" +
-	"\x15AllocateBytes2Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x18\n" +
-	"\x16AllocateBytes2Response\"A\n" +
-	"\x17AllocateBytes2_1Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x1a\n" +
-	"\x18AllocateBytes2_1Response\"0\n" +
-	"\x1aGetAllocatableBytesRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"5\n" +
-	"\x1bGetAllocatableBytesResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"/\n" +
-	"\x19GetCacheQuotaBytesRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"4\n" +
-	"\x1aGetCacheQuotaBytesResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
-	"\x18GetCacheSizeBytesRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"3\n" +
-	"\x19GetCacheSizeBytesResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"M\n" +
-	"#GetManageSpaceActivityIntentRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\">\n" +
-	"$GetManageSpaceActivityIntentResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
-	"\x18GetMountedObbPathRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"3\n" +
-	"\x19GetMountedObbPathResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\" \n" +
-	"\x1eGetPrimaryStorageVolumeRequest\"9\n" +
-	"\x1fGetPrimaryStorageVolumeResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\" \n" +
-	"\x1eGetRecentStorageVolumesRequest\"9\n" +
-	"\x1fGetRecentStorageVolumesResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
-	"\x18GetStorageVolume1Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"3\n" +
-	"\x19GetStorageVolume1Response\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"0\n" +
-	"\x1aGetStorageVolume1_1Request\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"5\n" +
-	"\x1bGetStorageVolume1_1Response\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1a\n" +
-	"\x18GetStorageVolumesRequest\"3\n" +
-	"\x19GetStorageVolumesResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"1\n" +
-	"/GetStorageVolumesIncludingSharedProfilesRequest\"J\n" +
-	"0GetStorageVolumesIncludingSharedProfilesResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"+\n" +
-	"\x15GetUuidForPathRequest\x12\x12\n" +
+	"\x1bproto/storage/storage.proto\x12\astorage\"/\n" +
+	"\x19CreateAccessIntentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"4\n" +
+	"\x1aCreateAccessIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"%\n" +
+	"#CreateOpenDocumentTreeIntentRequest\">\n" +
+	"$CreateOpenDocumentTreeIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x19\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"#\n" +
+	"\rEqualsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"(\n" +
+	"\x0eEqualsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"+\n" +
+	"\x15GetDescriptionRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"0\n" +
-	"\x16GetUuidForPathResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"2\n" +
-	"\x1cIsAllocationSupportedRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"7\n" +
-	"\x1dIsAllocationSupportedResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"1\n" +
-	"\x1bIsCacheBehaviorGroupRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"6\n" +
-	"\x1cIsCacheBehaviorGroupResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"5\n" +
-	"\x1fIsCacheBehaviorTombstoneRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\":\n" +
-	" IsCacheBehaviorTombstoneResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"\x1e\n" +
-	"\x1cIsCheckpointSupportedRequest\"7\n" +
-	"\x1dIsCheckpointSupportedResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"(\n" +
-	"\x12IsEncryptedRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"-\n" +
-	"\x13IsEncryptedResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\")\n" +
-	"\x13IsObbMountedRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\".\n" +
-	"\x14IsObbMountedResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"M\n" +
-	"\x0fMountObbRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"*\n" +
-	"\x10MountObbResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"N\n" +
-	"$RegisterStorageVolumeCallbackRequest\x12\x12\n" +
+	"\x16GetDescriptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x15\n" +
+	"\x13GetDirectoryRequest\".\n" +
+	"\x14GetDirectoryResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\" \n" +
+	"\x1eGetMediaStoreVolumeNameRequest\"9\n" +
+	"\x1fGetMediaStoreVolumeNameResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x11\n" +
+	"\x0fGetOwnerRequest\"*\n" +
+	"\x10GetOwnerResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x11\n" +
+	"\x0fGetStateRequest\"*\n" +
+	"\x10GetStateResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x17\n" +
+	"\x15GetStorageUuidRequest\"0\n" +
+	"\x16GetStorageUuidResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
+	"\x0eGetUuidRequest\")\n" +
+	"\x0fGetUuidResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x11\n" +
+	"\x0fHashCodeRequest\"*\n" +
+	"\x10HashCodeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x13\n" +
+	"\x11IsEmulatedRequest\",\n" +
+	"\x12IsEmulatedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x12\n" +
+	"\x10IsPrimaryRequest\"+\n" +
+	"\x11IsPrimaryResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x14\n" +
+	"\x12IsRemovableRequest\"-\n" +
+	"\x13IsRemovableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"'\n" +
-	"%RegisterStorageVolumeCallbackResponse\"F\n" +
-	"\x1cSetCacheBehaviorGroupRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\bR\x04arg1\"\x1f\n" +
-	"\x1dSetCacheBehaviorGroupResponse\"J\n" +
-	" SetCacheBehaviorTombstoneRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\bR\x04arg1\"#\n" +
-	"!SetCacheBehaviorTombstoneResponse\"O\n" +
-	"\x11UnmountObbRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\bR\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\",\n" +
-	"\x12UnmountObbResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"<\n" +
-	"&UnregisterStorageVolumeCallbackRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\")\n" +
-	"'UnregisterStorageVolumeCallbackResponse2\xcc\x14\n" +
-	"\x15StorageManagerService\x12Q\n" +
-	"\x0eAllocateBytes2\x12\x1e.storage.AllocateBytes2Request\x1a\x1f.storage.AllocateBytes2Response\x12W\n" +
-	"\x10AllocateBytes2_1\x12 .storage.AllocateBytes2_1Request\x1a!.storage.AllocateBytes2_1Response\x12`\n" +
-	"\x13GetAllocatableBytes\x12#.storage.GetAllocatableBytesRequest\x1a$.storage.GetAllocatableBytesResponse\x12]\n" +
-	"\x12GetCacheQuotaBytes\x12\".storage.GetCacheQuotaBytesRequest\x1a#.storage.GetCacheQuotaBytesResponse\x12Z\n" +
-	"\x11GetCacheSizeBytes\x12!.storage.GetCacheSizeBytesRequest\x1a\".storage.GetCacheSizeBytesResponse\x12{\n" +
-	"\x1cGetManageSpaceActivityIntent\x12,.storage.GetManageSpaceActivityIntentRequest\x1a-.storage.GetManageSpaceActivityIntentResponse\x12Z\n" +
-	"\x11GetMountedObbPath\x12!.storage.GetMountedObbPathRequest\x1a\".storage.GetMountedObbPathResponse\x12l\n" +
-	"\x17GetPrimaryStorageVolume\x12'.storage.GetPrimaryStorageVolumeRequest\x1a(.storage.GetPrimaryStorageVolumeResponse\x12l\n" +
-	"\x17GetRecentStorageVolumes\x12'.storage.GetRecentStorageVolumesRequest\x1a(.storage.GetRecentStorageVolumesResponse\x12Z\n" +
-	"\x11GetStorageVolume1\x12!.storage.GetStorageVolume1Request\x1a\".storage.GetStorageVolume1Response\x12`\n" +
-	"\x13GetStorageVolume1_1\x12#.storage.GetStorageVolume1_1Request\x1a$.storage.GetStorageVolume1_1Response\x12Z\n" +
-	"\x11GetStorageVolumes\x12!.storage.GetStorageVolumesRequest\x1a\".storage.GetStorageVolumesResponse\x12\x9f\x01\n" +
-	"(GetStorageVolumesIncludingSharedProfiles\x128.storage.GetStorageVolumesIncludingSharedProfilesRequest\x1a9.storage.GetStorageVolumesIncludingSharedProfilesResponse\x12Q\n" +
-	"\x0eGetUuidForPath\x12\x1e.storage.GetUuidForPathRequest\x1a\x1f.storage.GetUuidForPathResponse\x12f\n" +
-	"\x15IsAllocationSupported\x12%.storage.IsAllocationSupportedRequest\x1a&.storage.IsAllocationSupportedResponse\x12c\n" +
-	"\x14IsCacheBehaviorGroup\x12$.storage.IsCacheBehaviorGroupRequest\x1a%.storage.IsCacheBehaviorGroupResponse\x12o\n" +
-	"\x18IsCacheBehaviorTombstone\x12(.storage.IsCacheBehaviorTombstoneRequest\x1a).storage.IsCacheBehaviorTombstoneResponse\x12f\n" +
-	"\x15IsCheckpointSupported\x12%.storage.IsCheckpointSupportedRequest\x1a&.storage.IsCheckpointSupportedResponse\x12H\n" +
-	"\vIsEncrypted\x12\x1b.storage.IsEncryptedRequest\x1a\x1c.storage.IsEncryptedResponse\x12K\n" +
-	"\fIsObbMounted\x12\x1c.storage.IsObbMountedRequest\x1a\x1d.storage.IsObbMountedResponse\x12?\n" +
-	"\bMountObb\x12\x18.storage.MountObbRequest\x1a\x19.storage.MountObbResponse\x12~\n" +
-	"\x1dRegisterStorageVolumeCallback\x12-.storage.RegisterStorageVolumeCallbackRequest\x1a..storage.RegisterStorageVolumeCallbackResponse\x12f\n" +
-	"\x15SetCacheBehaviorGroup\x12%.storage.SetCacheBehaviorGroupRequest\x1a&.storage.SetCacheBehaviorGroupResponse\x12r\n" +
-	"\x19SetCacheBehaviorTombstone\x12).storage.SetCacheBehaviorTombstoneRequest\x1a*.storage.SetCacheBehaviorTombstoneResponse\x12E\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse2\xce\n" +
 	"\n" +
-	"UnmountObb\x12\x1a.storage.UnmountObbRequest\x1a\x1b.storage.UnmountObbResponse\x12\x84\x01\n" +
-	"\x1fUnregisterStorageVolumeCallback\x12/.storage.UnregisterStorageVolumeCallbackRequest\x1a0.storage.UnregisterStorageVolumeCallbackResponseB*Z(github.com/xaionaro-go/jni/proto/storageb\x06proto3"
+	"\x14StorageVolumeService\x12]\n" +
+	"\x12CreateAccessIntent\x12\".storage.CreateAccessIntentRequest\x1a#.storage.CreateAccessIntentResponse\x12{\n" +
+	"\x1cCreateOpenDocumentTreeIntent\x12,.storage.CreateOpenDocumentTreeIntentRequest\x1a-.storage.CreateOpenDocumentTreeIntentResponse\x12W\n" +
+	"\x10DescribeContents\x12 .storage.DescribeContentsRequest\x1a!.storage.DescribeContentsResponse\x129\n" +
+	"\x06Equals\x12\x16.storage.EqualsRequest\x1a\x17.storage.EqualsResponse\x12Q\n" +
+	"\x0eGetDescription\x12\x1e.storage.GetDescriptionRequest\x1a\x1f.storage.GetDescriptionResponse\x12K\n" +
+	"\fGetDirectory\x12\x1c.storage.GetDirectoryRequest\x1a\x1d.storage.GetDirectoryResponse\x12l\n" +
+	"\x17GetMediaStoreVolumeName\x12'.storage.GetMediaStoreVolumeNameRequest\x1a(.storage.GetMediaStoreVolumeNameResponse\x12?\n" +
+	"\bGetOwner\x12\x18.storage.GetOwnerRequest\x1a\x19.storage.GetOwnerResponse\x12?\n" +
+	"\bGetState\x12\x18.storage.GetStateRequest\x1a\x19.storage.GetStateResponse\x12Q\n" +
+	"\x0eGetStorageUuid\x12\x1e.storage.GetStorageUuidRequest\x1a\x1f.storage.GetStorageUuidResponse\x12<\n" +
+	"\aGetUuid\x12\x17.storage.GetUuidRequest\x1a\x18.storage.GetUuidResponse\x12?\n" +
+	"\bHashCode\x12\x18.storage.HashCodeRequest\x1a\x19.storage.HashCodeResponse\x12E\n" +
+	"\n" +
+	"IsEmulated\x12\x1a.storage.IsEmulatedRequest\x1a\x1b.storage.IsEmulatedResponse\x12B\n" +
+	"\tIsPrimary\x12\x19.storage.IsPrimaryRequest\x1a\x1a.storage.IsPrimaryResponse\x12H\n" +
+	"\vIsRemovable\x12\x1b.storage.IsRemovableRequest\x1a\x1c.storage.IsRemovableResponse\x12?\n" +
+	"\bToString\x12\x18.storage.ToStringRequest\x1a\x19.storage.ToStringResponse\x12N\n" +
+	"\rWriteToParcel\x12\x1d.storage.WriteToParcelRequest\x1a\x1e.storage.WriteToParcelResponseB*Z(github.com/xaionaro-go/jni/proto/storageb\x06proto3"
 
 var (
 	file_proto_storage_storage_proto_rawDescOnce sync.Once
@@ -2452,116 +1508,80 @@ func file_proto_storage_storage_proto_rawDescGZIP() []byte {
 	return file_proto_storage_storage_proto_rawDescData
 }
 
-var file_proto_storage_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
+var file_proto_storage_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_proto_storage_storage_proto_goTypes = []any{
-	(*AllocateBytes2Request)(nil),                            // 0: storage.AllocateBytes2Request
-	(*AllocateBytes2Response)(nil),                           // 1: storage.AllocateBytes2Response
-	(*AllocateBytes2_1Request)(nil),                          // 2: storage.AllocateBytes2_1Request
-	(*AllocateBytes2_1Response)(nil),                         // 3: storage.AllocateBytes2_1Response
-	(*GetAllocatableBytesRequest)(nil),                       // 4: storage.GetAllocatableBytesRequest
-	(*GetAllocatableBytesResponse)(nil),                      // 5: storage.GetAllocatableBytesResponse
-	(*GetCacheQuotaBytesRequest)(nil),                        // 6: storage.GetCacheQuotaBytesRequest
-	(*GetCacheQuotaBytesResponse)(nil),                       // 7: storage.GetCacheQuotaBytesResponse
-	(*GetCacheSizeBytesRequest)(nil),                         // 8: storage.GetCacheSizeBytesRequest
-	(*GetCacheSizeBytesResponse)(nil),                        // 9: storage.GetCacheSizeBytesResponse
-	(*GetManageSpaceActivityIntentRequest)(nil),              // 10: storage.GetManageSpaceActivityIntentRequest
-	(*GetManageSpaceActivityIntentResponse)(nil),             // 11: storage.GetManageSpaceActivityIntentResponse
-	(*GetMountedObbPathRequest)(nil),                         // 12: storage.GetMountedObbPathRequest
-	(*GetMountedObbPathResponse)(nil),                        // 13: storage.GetMountedObbPathResponse
-	(*GetPrimaryStorageVolumeRequest)(nil),                   // 14: storage.GetPrimaryStorageVolumeRequest
-	(*GetPrimaryStorageVolumeResponse)(nil),                  // 15: storage.GetPrimaryStorageVolumeResponse
-	(*GetRecentStorageVolumesRequest)(nil),                   // 16: storage.GetRecentStorageVolumesRequest
-	(*GetRecentStorageVolumesResponse)(nil),                  // 17: storage.GetRecentStorageVolumesResponse
-	(*GetStorageVolume1Request)(nil),                         // 18: storage.GetStorageVolume1Request
-	(*GetStorageVolume1Response)(nil),                        // 19: storage.GetStorageVolume1Response
-	(*GetStorageVolume1_1Request)(nil),                       // 20: storage.GetStorageVolume1_1Request
-	(*GetStorageVolume1_1Response)(nil),                      // 21: storage.GetStorageVolume1_1Response
-	(*GetStorageVolumesRequest)(nil),                         // 22: storage.GetStorageVolumesRequest
-	(*GetStorageVolumesResponse)(nil),                        // 23: storage.GetStorageVolumesResponse
-	(*GetStorageVolumesIncludingSharedProfilesRequest)(nil),  // 24: storage.GetStorageVolumesIncludingSharedProfilesRequest
-	(*GetStorageVolumesIncludingSharedProfilesResponse)(nil), // 25: storage.GetStorageVolumesIncludingSharedProfilesResponse
-	(*GetUuidForPathRequest)(nil),                            // 26: storage.GetUuidForPathRequest
-	(*GetUuidForPathResponse)(nil),                           // 27: storage.GetUuidForPathResponse
-	(*IsAllocationSupportedRequest)(nil),                     // 28: storage.IsAllocationSupportedRequest
-	(*IsAllocationSupportedResponse)(nil),                    // 29: storage.IsAllocationSupportedResponse
-	(*IsCacheBehaviorGroupRequest)(nil),                      // 30: storage.IsCacheBehaviorGroupRequest
-	(*IsCacheBehaviorGroupResponse)(nil),                     // 31: storage.IsCacheBehaviorGroupResponse
-	(*IsCacheBehaviorTombstoneRequest)(nil),                  // 32: storage.IsCacheBehaviorTombstoneRequest
-	(*IsCacheBehaviorTombstoneResponse)(nil),                 // 33: storage.IsCacheBehaviorTombstoneResponse
-	(*IsCheckpointSupportedRequest)(nil),                     // 34: storage.IsCheckpointSupportedRequest
-	(*IsCheckpointSupportedResponse)(nil),                    // 35: storage.IsCheckpointSupportedResponse
-	(*IsEncryptedRequest)(nil),                               // 36: storage.IsEncryptedRequest
-	(*IsEncryptedResponse)(nil),                              // 37: storage.IsEncryptedResponse
-	(*IsObbMountedRequest)(nil),                              // 38: storage.IsObbMountedRequest
-	(*IsObbMountedResponse)(nil),                             // 39: storage.IsObbMountedResponse
-	(*MountObbRequest)(nil),                                  // 40: storage.MountObbRequest
-	(*MountObbResponse)(nil),                                 // 41: storage.MountObbResponse
-	(*RegisterStorageVolumeCallbackRequest)(nil),             // 42: storage.RegisterStorageVolumeCallbackRequest
-	(*RegisterStorageVolumeCallbackResponse)(nil),            // 43: storage.RegisterStorageVolumeCallbackResponse
-	(*SetCacheBehaviorGroupRequest)(nil),                     // 44: storage.SetCacheBehaviorGroupRequest
-	(*SetCacheBehaviorGroupResponse)(nil),                    // 45: storage.SetCacheBehaviorGroupResponse
-	(*SetCacheBehaviorTombstoneRequest)(nil),                 // 46: storage.SetCacheBehaviorTombstoneRequest
-	(*SetCacheBehaviorTombstoneResponse)(nil),                // 47: storage.SetCacheBehaviorTombstoneResponse
-	(*UnmountObbRequest)(nil),                                // 48: storage.UnmountObbRequest
-	(*UnmountObbResponse)(nil),                               // 49: storage.UnmountObbResponse
-	(*UnregisterStorageVolumeCallbackRequest)(nil),           // 50: storage.UnregisterStorageVolumeCallbackRequest
-	(*UnregisterStorageVolumeCallbackResponse)(nil),          // 51: storage.UnregisterStorageVolumeCallbackResponse
+	(*CreateAccessIntentRequest)(nil),            // 0: storage.CreateAccessIntentRequest
+	(*CreateAccessIntentResponse)(nil),           // 1: storage.CreateAccessIntentResponse
+	(*CreateOpenDocumentTreeIntentRequest)(nil),  // 2: storage.CreateOpenDocumentTreeIntentRequest
+	(*CreateOpenDocumentTreeIntentResponse)(nil), // 3: storage.CreateOpenDocumentTreeIntentResponse
+	(*DescribeContentsRequest)(nil),              // 4: storage.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil),             // 5: storage.DescribeContentsResponse
+	(*EqualsRequest)(nil),                        // 6: storage.EqualsRequest
+	(*EqualsResponse)(nil),                       // 7: storage.EqualsResponse
+	(*GetDescriptionRequest)(nil),                // 8: storage.GetDescriptionRequest
+	(*GetDescriptionResponse)(nil),               // 9: storage.GetDescriptionResponse
+	(*GetDirectoryRequest)(nil),                  // 10: storage.GetDirectoryRequest
+	(*GetDirectoryResponse)(nil),                 // 11: storage.GetDirectoryResponse
+	(*GetMediaStoreVolumeNameRequest)(nil),       // 12: storage.GetMediaStoreVolumeNameRequest
+	(*GetMediaStoreVolumeNameResponse)(nil),      // 13: storage.GetMediaStoreVolumeNameResponse
+	(*GetOwnerRequest)(nil),                      // 14: storage.GetOwnerRequest
+	(*GetOwnerResponse)(nil),                     // 15: storage.GetOwnerResponse
+	(*GetStateRequest)(nil),                      // 16: storage.GetStateRequest
+	(*GetStateResponse)(nil),                     // 17: storage.GetStateResponse
+	(*GetStorageUuidRequest)(nil),                // 18: storage.GetStorageUuidRequest
+	(*GetStorageUuidResponse)(nil),               // 19: storage.GetStorageUuidResponse
+	(*GetUuidRequest)(nil),                       // 20: storage.GetUuidRequest
+	(*GetUuidResponse)(nil),                      // 21: storage.GetUuidResponse
+	(*HashCodeRequest)(nil),                      // 22: storage.HashCodeRequest
+	(*HashCodeResponse)(nil),                     // 23: storage.HashCodeResponse
+	(*IsEmulatedRequest)(nil),                    // 24: storage.IsEmulatedRequest
+	(*IsEmulatedResponse)(nil),                   // 25: storage.IsEmulatedResponse
+	(*IsPrimaryRequest)(nil),                     // 26: storage.IsPrimaryRequest
+	(*IsPrimaryResponse)(nil),                    // 27: storage.IsPrimaryResponse
+	(*IsRemovableRequest)(nil),                   // 28: storage.IsRemovableRequest
+	(*IsRemovableResponse)(nil),                  // 29: storage.IsRemovableResponse
+	(*ToStringRequest)(nil),                      // 30: storage.ToStringRequest
+	(*ToStringResponse)(nil),                     // 31: storage.ToStringResponse
+	(*WriteToParcelRequest)(nil),                 // 32: storage.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),                // 33: storage.WriteToParcelResponse
 }
 var file_proto_storage_storage_proto_depIdxs = []int32{
-	0,  // 0: storage.StorageManagerService.AllocateBytes2:input_type -> storage.AllocateBytes2Request
-	2,  // 1: storage.StorageManagerService.AllocateBytes2_1:input_type -> storage.AllocateBytes2_1Request
-	4,  // 2: storage.StorageManagerService.GetAllocatableBytes:input_type -> storage.GetAllocatableBytesRequest
-	6,  // 3: storage.StorageManagerService.GetCacheQuotaBytes:input_type -> storage.GetCacheQuotaBytesRequest
-	8,  // 4: storage.StorageManagerService.GetCacheSizeBytes:input_type -> storage.GetCacheSizeBytesRequest
-	10, // 5: storage.StorageManagerService.GetManageSpaceActivityIntent:input_type -> storage.GetManageSpaceActivityIntentRequest
-	12, // 6: storage.StorageManagerService.GetMountedObbPath:input_type -> storage.GetMountedObbPathRequest
-	14, // 7: storage.StorageManagerService.GetPrimaryStorageVolume:input_type -> storage.GetPrimaryStorageVolumeRequest
-	16, // 8: storage.StorageManagerService.GetRecentStorageVolumes:input_type -> storage.GetRecentStorageVolumesRequest
-	18, // 9: storage.StorageManagerService.GetStorageVolume1:input_type -> storage.GetStorageVolume1Request
-	20, // 10: storage.StorageManagerService.GetStorageVolume1_1:input_type -> storage.GetStorageVolume1_1Request
-	22, // 11: storage.StorageManagerService.GetStorageVolumes:input_type -> storage.GetStorageVolumesRequest
-	24, // 12: storage.StorageManagerService.GetStorageVolumesIncludingSharedProfiles:input_type -> storage.GetStorageVolumesIncludingSharedProfilesRequest
-	26, // 13: storage.StorageManagerService.GetUuidForPath:input_type -> storage.GetUuidForPathRequest
-	28, // 14: storage.StorageManagerService.IsAllocationSupported:input_type -> storage.IsAllocationSupportedRequest
-	30, // 15: storage.StorageManagerService.IsCacheBehaviorGroup:input_type -> storage.IsCacheBehaviorGroupRequest
-	32, // 16: storage.StorageManagerService.IsCacheBehaviorTombstone:input_type -> storage.IsCacheBehaviorTombstoneRequest
-	34, // 17: storage.StorageManagerService.IsCheckpointSupported:input_type -> storage.IsCheckpointSupportedRequest
-	36, // 18: storage.StorageManagerService.IsEncrypted:input_type -> storage.IsEncryptedRequest
-	38, // 19: storage.StorageManagerService.IsObbMounted:input_type -> storage.IsObbMountedRequest
-	40, // 20: storage.StorageManagerService.MountObb:input_type -> storage.MountObbRequest
-	42, // 21: storage.StorageManagerService.RegisterStorageVolumeCallback:input_type -> storage.RegisterStorageVolumeCallbackRequest
-	44, // 22: storage.StorageManagerService.SetCacheBehaviorGroup:input_type -> storage.SetCacheBehaviorGroupRequest
-	46, // 23: storage.StorageManagerService.SetCacheBehaviorTombstone:input_type -> storage.SetCacheBehaviorTombstoneRequest
-	48, // 24: storage.StorageManagerService.UnmountObb:input_type -> storage.UnmountObbRequest
-	50, // 25: storage.StorageManagerService.UnregisterStorageVolumeCallback:input_type -> storage.UnregisterStorageVolumeCallbackRequest
-	1,  // 26: storage.StorageManagerService.AllocateBytes2:output_type -> storage.AllocateBytes2Response
-	3,  // 27: storage.StorageManagerService.AllocateBytes2_1:output_type -> storage.AllocateBytes2_1Response
-	5,  // 28: storage.StorageManagerService.GetAllocatableBytes:output_type -> storage.GetAllocatableBytesResponse
-	7,  // 29: storage.StorageManagerService.GetCacheQuotaBytes:output_type -> storage.GetCacheQuotaBytesResponse
-	9,  // 30: storage.StorageManagerService.GetCacheSizeBytes:output_type -> storage.GetCacheSizeBytesResponse
-	11, // 31: storage.StorageManagerService.GetManageSpaceActivityIntent:output_type -> storage.GetManageSpaceActivityIntentResponse
-	13, // 32: storage.StorageManagerService.GetMountedObbPath:output_type -> storage.GetMountedObbPathResponse
-	15, // 33: storage.StorageManagerService.GetPrimaryStorageVolume:output_type -> storage.GetPrimaryStorageVolumeResponse
-	17, // 34: storage.StorageManagerService.GetRecentStorageVolumes:output_type -> storage.GetRecentStorageVolumesResponse
-	19, // 35: storage.StorageManagerService.GetStorageVolume1:output_type -> storage.GetStorageVolume1Response
-	21, // 36: storage.StorageManagerService.GetStorageVolume1_1:output_type -> storage.GetStorageVolume1_1Response
-	23, // 37: storage.StorageManagerService.GetStorageVolumes:output_type -> storage.GetStorageVolumesResponse
-	25, // 38: storage.StorageManagerService.GetStorageVolumesIncludingSharedProfiles:output_type -> storage.GetStorageVolumesIncludingSharedProfilesResponse
-	27, // 39: storage.StorageManagerService.GetUuidForPath:output_type -> storage.GetUuidForPathResponse
-	29, // 40: storage.StorageManagerService.IsAllocationSupported:output_type -> storage.IsAllocationSupportedResponse
-	31, // 41: storage.StorageManagerService.IsCacheBehaviorGroup:output_type -> storage.IsCacheBehaviorGroupResponse
-	33, // 42: storage.StorageManagerService.IsCacheBehaviorTombstone:output_type -> storage.IsCacheBehaviorTombstoneResponse
-	35, // 43: storage.StorageManagerService.IsCheckpointSupported:output_type -> storage.IsCheckpointSupportedResponse
-	37, // 44: storage.StorageManagerService.IsEncrypted:output_type -> storage.IsEncryptedResponse
-	39, // 45: storage.StorageManagerService.IsObbMounted:output_type -> storage.IsObbMountedResponse
-	41, // 46: storage.StorageManagerService.MountObb:output_type -> storage.MountObbResponse
-	43, // 47: storage.StorageManagerService.RegisterStorageVolumeCallback:output_type -> storage.RegisterStorageVolumeCallbackResponse
-	45, // 48: storage.StorageManagerService.SetCacheBehaviorGroup:output_type -> storage.SetCacheBehaviorGroupResponse
-	47, // 49: storage.StorageManagerService.SetCacheBehaviorTombstone:output_type -> storage.SetCacheBehaviorTombstoneResponse
-	49, // 50: storage.StorageManagerService.UnmountObb:output_type -> storage.UnmountObbResponse
-	51, // 51: storage.StorageManagerService.UnregisterStorageVolumeCallback:output_type -> storage.UnregisterStorageVolumeCallbackResponse
-	26, // [26:52] is the sub-list for method output_type
-	0,  // [0:26] is the sub-list for method input_type
+	0,  // 0: storage.StorageVolumeService.CreateAccessIntent:input_type -> storage.CreateAccessIntentRequest
+	2,  // 1: storage.StorageVolumeService.CreateOpenDocumentTreeIntent:input_type -> storage.CreateOpenDocumentTreeIntentRequest
+	4,  // 2: storage.StorageVolumeService.DescribeContents:input_type -> storage.DescribeContentsRequest
+	6,  // 3: storage.StorageVolumeService.Equals:input_type -> storage.EqualsRequest
+	8,  // 4: storage.StorageVolumeService.GetDescription:input_type -> storage.GetDescriptionRequest
+	10, // 5: storage.StorageVolumeService.GetDirectory:input_type -> storage.GetDirectoryRequest
+	12, // 6: storage.StorageVolumeService.GetMediaStoreVolumeName:input_type -> storage.GetMediaStoreVolumeNameRequest
+	14, // 7: storage.StorageVolumeService.GetOwner:input_type -> storage.GetOwnerRequest
+	16, // 8: storage.StorageVolumeService.GetState:input_type -> storage.GetStateRequest
+	18, // 9: storage.StorageVolumeService.GetStorageUuid:input_type -> storage.GetStorageUuidRequest
+	20, // 10: storage.StorageVolumeService.GetUuid:input_type -> storage.GetUuidRequest
+	22, // 11: storage.StorageVolumeService.HashCode:input_type -> storage.HashCodeRequest
+	24, // 12: storage.StorageVolumeService.IsEmulated:input_type -> storage.IsEmulatedRequest
+	26, // 13: storage.StorageVolumeService.IsPrimary:input_type -> storage.IsPrimaryRequest
+	28, // 14: storage.StorageVolumeService.IsRemovable:input_type -> storage.IsRemovableRequest
+	30, // 15: storage.StorageVolumeService.ToString:input_type -> storage.ToStringRequest
+	32, // 16: storage.StorageVolumeService.WriteToParcel:input_type -> storage.WriteToParcelRequest
+	1,  // 17: storage.StorageVolumeService.CreateAccessIntent:output_type -> storage.CreateAccessIntentResponse
+	3,  // 18: storage.StorageVolumeService.CreateOpenDocumentTreeIntent:output_type -> storage.CreateOpenDocumentTreeIntentResponse
+	5,  // 19: storage.StorageVolumeService.DescribeContents:output_type -> storage.DescribeContentsResponse
+	7,  // 20: storage.StorageVolumeService.Equals:output_type -> storage.EqualsResponse
+	9,  // 21: storage.StorageVolumeService.GetDescription:output_type -> storage.GetDescriptionResponse
+	11, // 22: storage.StorageVolumeService.GetDirectory:output_type -> storage.GetDirectoryResponse
+	13, // 23: storage.StorageVolumeService.GetMediaStoreVolumeName:output_type -> storage.GetMediaStoreVolumeNameResponse
+	15, // 24: storage.StorageVolumeService.GetOwner:output_type -> storage.GetOwnerResponse
+	17, // 25: storage.StorageVolumeService.GetState:output_type -> storage.GetStateResponse
+	19, // 26: storage.StorageVolumeService.GetStorageUuid:output_type -> storage.GetStorageUuidResponse
+	21, // 27: storage.StorageVolumeService.GetUuid:output_type -> storage.GetUuidResponse
+	23, // 28: storage.StorageVolumeService.HashCode:output_type -> storage.HashCodeResponse
+	25, // 29: storage.StorageVolumeService.IsEmulated:output_type -> storage.IsEmulatedResponse
+	27, // 30: storage.StorageVolumeService.IsPrimary:output_type -> storage.IsPrimaryResponse
+	29, // 31: storage.StorageVolumeService.IsRemovable:output_type -> storage.IsRemovableResponse
+	31, // 32: storage.StorageVolumeService.ToString:output_type -> storage.ToStringResponse
+	33, // 33: storage.StorageVolumeService.WriteToParcel:output_type -> storage.WriteToParcelResponse
+	17, // [17:34] is the sub-list for method output_type
+	0,  // [0:17] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -2578,7 +1598,7 @@ func file_proto_storage_storage_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_storage_storage_proto_rawDesc), len(file_proto_storage_storage_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   52,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -21,709 +21,292 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ScanResultService_DescribeContents_FullMethodName               = "/bluetooth_le.ScanResultService/DescribeContents"
-	ScanResultService_Equals_FullMethodName                         = "/bluetooth_le.ScanResultService/Equals"
-	ScanResultService_GetAdvertisingSid_FullMethodName              = "/bluetooth_le.ScanResultService/GetAdvertisingSid"
-	ScanResultService_GetDataStatus_FullMethodName                  = "/bluetooth_le.ScanResultService/GetDataStatus"
-	ScanResultService_GetDevice_FullMethodName                      = "/bluetooth_le.ScanResultService/GetDevice"
-	ScanResultService_GetPeriodicAdvertisingInterval_FullMethodName = "/bluetooth_le.ScanResultService/GetPeriodicAdvertisingInterval"
-	ScanResultService_GetPrimaryPhy_FullMethodName                  = "/bluetooth_le.ScanResultService/GetPrimaryPhy"
-	ScanResultService_GetRssi_FullMethodName                        = "/bluetooth_le.ScanResultService/GetRssi"
-	ScanResultService_GetScanRecord_FullMethodName                  = "/bluetooth_le.ScanResultService/GetScanRecord"
-	ScanResultService_GetSecondaryPhy_FullMethodName                = "/bluetooth_le.ScanResultService/GetSecondaryPhy"
-	ScanResultService_GetTimestampNanos_FullMethodName              = "/bluetooth_le.ScanResultService/GetTimestampNanos"
-	ScanResultService_GetTxPower_FullMethodName                     = "/bluetooth_le.ScanResultService/GetTxPower"
-	ScanResultService_HashCode_FullMethodName                       = "/bluetooth_le.ScanResultService/HashCode"
-	ScanResultService_IsConnectable_FullMethodName                  = "/bluetooth_le.ScanResultService/IsConnectable"
-	ScanResultService_IsLegacy_FullMethodName                       = "/bluetooth_le.ScanResultService/IsLegacy"
-	ScanResultService_ToString_FullMethodName                       = "/bluetooth_le.ScanResultService/ToString"
-	ScanResultService_WriteToParcel_FullMethodName                  = "/bluetooth_le.ScanResultService/WriteToParcel"
+	BluetoothLeAdvertiserService_StartAdvertising3_FullMethodName      = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertising3"
+	BluetoothLeAdvertiserService_StartAdvertising4_1_FullMethodName    = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertising4_1"
+	BluetoothLeAdvertiserService_StartAdvertisingSet6_FullMethodName   = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertisingSet6"
+	BluetoothLeAdvertiserService_StartAdvertisingSet8_1_FullMethodName = "/bluetooth_le.BluetoothLeAdvertiserService/StartAdvertisingSet8_1"
+	BluetoothLeAdvertiserService_StopAdvertising_FullMethodName        = "/bluetooth_le.BluetoothLeAdvertiserService/StopAdvertising"
+	BluetoothLeAdvertiserService_StopAdvertisingSet_FullMethodName     = "/bluetooth_le.BluetoothLeAdvertiserService/StopAdvertisingSet"
 )
 
-// ScanResultServiceClient is the client API for ScanResultService service.
+// BluetoothLeAdvertiserServiceClient is the client API for BluetoothLeAdvertiserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ScanResultServiceClient interface {
-	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
-	Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error)
-	GetAdvertisingSid(ctx context.Context, in *GetAdvertisingSidRequest, opts ...grpc.CallOption) (*GetAdvertisingSidResponse, error)
-	GetDataStatus(ctx context.Context, in *GetDataStatusRequest, opts ...grpc.CallOption) (*GetDataStatusResponse, error)
-	GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error)
-	GetPeriodicAdvertisingInterval(ctx context.Context, in *GetPeriodicAdvertisingIntervalRequest, opts ...grpc.CallOption) (*GetPeriodicAdvertisingIntervalResponse, error)
-	GetPrimaryPhy(ctx context.Context, in *GetPrimaryPhyRequest, opts ...grpc.CallOption) (*GetPrimaryPhyResponse, error)
-	GetRssi(ctx context.Context, in *GetRssiRequest, opts ...grpc.CallOption) (*GetRssiResponse, error)
-	GetScanRecord(ctx context.Context, in *GetScanRecordRequest, opts ...grpc.CallOption) (*GetScanRecordResponse, error)
-	GetSecondaryPhy(ctx context.Context, in *GetSecondaryPhyRequest, opts ...grpc.CallOption) (*GetSecondaryPhyResponse, error)
-	GetTimestampNanos(ctx context.Context, in *GetTimestampNanosRequest, opts ...grpc.CallOption) (*GetTimestampNanosResponse, error)
-	GetTxPower(ctx context.Context, in *GetTxPowerRequest, opts ...grpc.CallOption) (*GetTxPowerResponse, error)
-	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
-	IsConnectable(ctx context.Context, in *IsConnectableRequest, opts ...grpc.CallOption) (*IsConnectableResponse, error)
-	IsLegacy(ctx context.Context, in *IsLegacyRequest, opts ...grpc.CallOption) (*IsLegacyResponse, error)
-	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
-	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+type BluetoothLeAdvertiserServiceClient interface {
+	StartAdvertising3(ctx context.Context, in *StartAdvertising3Request, opts ...grpc.CallOption) (*StartAdvertising3Response, error)
+	StartAdvertising4_1(ctx context.Context, in *StartAdvertising4_1Request, opts ...grpc.CallOption) (*StartAdvertising4_1Response, error)
+	StartAdvertisingSet6(ctx context.Context, in *StartAdvertisingSet6Request, opts ...grpc.CallOption) (*StartAdvertisingSet6Response, error)
+	StartAdvertisingSet8_1(ctx context.Context, in *StartAdvertisingSet8_1Request, opts ...grpc.CallOption) (*StartAdvertisingSet8_1Response, error)
+	StopAdvertising(ctx context.Context, in *StopAdvertisingRequest, opts ...grpc.CallOption) (*StopAdvertisingResponse, error)
+	StopAdvertisingSet(ctx context.Context, in *StopAdvertisingSetRequest, opts ...grpc.CallOption) (*StopAdvertisingSetResponse, error)
 }
 
-type scanResultServiceClient struct {
+type bluetoothLeAdvertiserServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewScanResultServiceClient(cc grpc.ClientConnInterface) ScanResultServiceClient {
-	return &scanResultServiceClient{cc}
+func NewBluetoothLeAdvertiserServiceClient(cc grpc.ClientConnInterface) BluetoothLeAdvertiserServiceClient {
+	return &bluetoothLeAdvertiserServiceClient{cc}
 }
 
-func (c *scanResultServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+func (c *bluetoothLeAdvertiserServiceClient) StartAdvertising3(ctx context.Context, in *StartAdvertising3Request, opts ...grpc.CallOption) (*StartAdvertising3Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DescribeContentsResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_DescribeContents_FullMethodName, in, out, cOpts...)
+	out := new(StartAdvertising3Response)
+	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertising3_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *scanResultServiceClient) Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error) {
+func (c *bluetoothLeAdvertiserServiceClient) StartAdvertising4_1(ctx context.Context, in *StartAdvertising4_1Request, opts ...grpc.CallOption) (*StartAdvertising4_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EqualsResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_Equals_FullMethodName, in, out, cOpts...)
+	out := new(StartAdvertising4_1Response)
+	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertising4_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *scanResultServiceClient) GetAdvertisingSid(ctx context.Context, in *GetAdvertisingSidRequest, opts ...grpc.CallOption) (*GetAdvertisingSidResponse, error) {
+func (c *bluetoothLeAdvertiserServiceClient) StartAdvertisingSet6(ctx context.Context, in *StartAdvertisingSet6Request, opts ...grpc.CallOption) (*StartAdvertisingSet6Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAdvertisingSidResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetAdvertisingSid_FullMethodName, in, out, cOpts...)
+	out := new(StartAdvertisingSet6Response)
+	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertisingSet6_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *scanResultServiceClient) GetDataStatus(ctx context.Context, in *GetDataStatusRequest, opts ...grpc.CallOption) (*GetDataStatusResponse, error) {
+func (c *bluetoothLeAdvertiserServiceClient) StartAdvertisingSet8_1(ctx context.Context, in *StartAdvertisingSet8_1Request, opts ...grpc.CallOption) (*StartAdvertisingSet8_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDataStatusResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetDataStatus_FullMethodName, in, out, cOpts...)
+	out := new(StartAdvertisingSet8_1Response)
+	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StartAdvertisingSet8_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *scanResultServiceClient) GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error) {
+func (c *bluetoothLeAdvertiserServiceClient) StopAdvertising(ctx context.Context, in *StopAdvertisingRequest, opts ...grpc.CallOption) (*StopAdvertisingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDeviceResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetDevice_FullMethodName, in, out, cOpts...)
+	out := new(StopAdvertisingResponse)
+	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StopAdvertising_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *scanResultServiceClient) GetPeriodicAdvertisingInterval(ctx context.Context, in *GetPeriodicAdvertisingIntervalRequest, opts ...grpc.CallOption) (*GetPeriodicAdvertisingIntervalResponse, error) {
+func (c *bluetoothLeAdvertiserServiceClient) StopAdvertisingSet(ctx context.Context, in *StopAdvertisingSetRequest, opts ...grpc.CallOption) (*StopAdvertisingSetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPeriodicAdvertisingIntervalResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetPeriodicAdvertisingInterval_FullMethodName, in, out, cOpts...)
+	out := new(StopAdvertisingSetResponse)
+	err := c.cc.Invoke(ctx, BluetoothLeAdvertiserService_StopAdvertisingSet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *scanResultServiceClient) GetPrimaryPhy(ctx context.Context, in *GetPrimaryPhyRequest, opts ...grpc.CallOption) (*GetPrimaryPhyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPrimaryPhyResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetPrimaryPhy_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) GetRssi(ctx context.Context, in *GetRssiRequest, opts ...grpc.CallOption) (*GetRssiResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRssiResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetRssi_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) GetScanRecord(ctx context.Context, in *GetScanRecordRequest, opts ...grpc.CallOption) (*GetScanRecordResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetScanRecordResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetScanRecord_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) GetSecondaryPhy(ctx context.Context, in *GetSecondaryPhyRequest, opts ...grpc.CallOption) (*GetSecondaryPhyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSecondaryPhyResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetSecondaryPhy_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) GetTimestampNanos(ctx context.Context, in *GetTimestampNanosRequest, opts ...grpc.CallOption) (*GetTimestampNanosResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTimestampNanosResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetTimestampNanos_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) GetTxPower(ctx context.Context, in *GetTxPowerRequest, opts ...grpc.CallOption) (*GetTxPowerResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTxPowerResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_GetTxPower_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HashCodeResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_HashCode_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) IsConnectable(ctx context.Context, in *IsConnectableRequest, opts ...grpc.CallOption) (*IsConnectableResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsConnectableResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_IsConnectable_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) IsLegacy(ctx context.Context, in *IsLegacyRequest, opts ...grpc.CallOption) (*IsLegacyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsLegacyResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_IsLegacy_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ToStringResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_ToString_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanResultServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WriteToParcelResponse)
-	err := c.cc.Invoke(ctx, ScanResultService_WriteToParcel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ScanResultServiceServer is the server API for ScanResultService service.
-// All implementations must embed UnimplementedScanResultServiceServer
+// BluetoothLeAdvertiserServiceServer is the server API for BluetoothLeAdvertiserService service.
+// All implementations must embed UnimplementedBluetoothLeAdvertiserServiceServer
 // for forward compatibility.
-type ScanResultServiceServer interface {
-	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
-	Equals(context.Context, *EqualsRequest) (*EqualsResponse, error)
-	GetAdvertisingSid(context.Context, *GetAdvertisingSidRequest) (*GetAdvertisingSidResponse, error)
-	GetDataStatus(context.Context, *GetDataStatusRequest) (*GetDataStatusResponse, error)
-	GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error)
-	GetPeriodicAdvertisingInterval(context.Context, *GetPeriodicAdvertisingIntervalRequest) (*GetPeriodicAdvertisingIntervalResponse, error)
-	GetPrimaryPhy(context.Context, *GetPrimaryPhyRequest) (*GetPrimaryPhyResponse, error)
-	GetRssi(context.Context, *GetRssiRequest) (*GetRssiResponse, error)
-	GetScanRecord(context.Context, *GetScanRecordRequest) (*GetScanRecordResponse, error)
-	GetSecondaryPhy(context.Context, *GetSecondaryPhyRequest) (*GetSecondaryPhyResponse, error)
-	GetTimestampNanos(context.Context, *GetTimestampNanosRequest) (*GetTimestampNanosResponse, error)
-	GetTxPower(context.Context, *GetTxPowerRequest) (*GetTxPowerResponse, error)
-	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
-	IsConnectable(context.Context, *IsConnectableRequest) (*IsConnectableResponse, error)
-	IsLegacy(context.Context, *IsLegacyRequest) (*IsLegacyResponse, error)
-	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
-	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
-	mustEmbedUnimplementedScanResultServiceServer()
+type BluetoothLeAdvertiserServiceServer interface {
+	StartAdvertising3(context.Context, *StartAdvertising3Request) (*StartAdvertising3Response, error)
+	StartAdvertising4_1(context.Context, *StartAdvertising4_1Request) (*StartAdvertising4_1Response, error)
+	StartAdvertisingSet6(context.Context, *StartAdvertisingSet6Request) (*StartAdvertisingSet6Response, error)
+	StartAdvertisingSet8_1(context.Context, *StartAdvertisingSet8_1Request) (*StartAdvertisingSet8_1Response, error)
+	StopAdvertising(context.Context, *StopAdvertisingRequest) (*StopAdvertisingResponse, error)
+	StopAdvertisingSet(context.Context, *StopAdvertisingSetRequest) (*StopAdvertisingSetResponse, error)
+	mustEmbedUnimplementedBluetoothLeAdvertiserServiceServer()
 }
 
-// UnimplementedScanResultServiceServer must be embedded to have
+// UnimplementedBluetoothLeAdvertiserServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedScanResultServiceServer struct{}
+type UnimplementedBluetoothLeAdvertiserServiceServer struct{}
 
-func (UnimplementedScanResultServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertising3(context.Context, *StartAdvertising3Request) (*StartAdvertising3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartAdvertising3 not implemented")
 }
-func (UnimplementedScanResultServiceServer) Equals(context.Context, *EqualsRequest) (*EqualsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Equals not implemented")
+func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertising4_1(context.Context, *StartAdvertising4_1Request) (*StartAdvertising4_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartAdvertising4_1 not implemented")
 }
-func (UnimplementedScanResultServiceServer) GetAdvertisingSid(context.Context, *GetAdvertisingSidRequest) (*GetAdvertisingSidResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAdvertisingSid not implemented")
+func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertisingSet6(context.Context, *StartAdvertisingSet6Request) (*StartAdvertisingSet6Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartAdvertisingSet6 not implemented")
 }
-func (UnimplementedScanResultServiceServer) GetDataStatus(context.Context, *GetDataStatusRequest) (*GetDataStatusResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetDataStatus not implemented")
+func (UnimplementedBluetoothLeAdvertiserServiceServer) StartAdvertisingSet8_1(context.Context, *StartAdvertisingSet8_1Request) (*StartAdvertisingSet8_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartAdvertisingSet8_1 not implemented")
 }
-func (UnimplementedScanResultServiceServer) GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetDevice not implemented")
+func (UnimplementedBluetoothLeAdvertiserServiceServer) StopAdvertising(context.Context, *StopAdvertisingRequest) (*StopAdvertisingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopAdvertising not implemented")
 }
-func (UnimplementedScanResultServiceServer) GetPeriodicAdvertisingInterval(context.Context, *GetPeriodicAdvertisingIntervalRequest) (*GetPeriodicAdvertisingIntervalResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPeriodicAdvertisingInterval not implemented")
+func (UnimplementedBluetoothLeAdvertiserServiceServer) StopAdvertisingSet(context.Context, *StopAdvertisingSetRequest) (*StopAdvertisingSetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopAdvertisingSet not implemented")
 }
-func (UnimplementedScanResultServiceServer) GetPrimaryPhy(context.Context, *GetPrimaryPhyRequest) (*GetPrimaryPhyResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPrimaryPhy not implemented")
+func (UnimplementedBluetoothLeAdvertiserServiceServer) mustEmbedUnimplementedBluetoothLeAdvertiserServiceServer() {
 }
-func (UnimplementedScanResultServiceServer) GetRssi(context.Context, *GetRssiRequest) (*GetRssiResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRssi not implemented")
-}
-func (UnimplementedScanResultServiceServer) GetScanRecord(context.Context, *GetScanRecordRequest) (*GetScanRecordResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetScanRecord not implemented")
-}
-func (UnimplementedScanResultServiceServer) GetSecondaryPhy(context.Context, *GetSecondaryPhyRequest) (*GetSecondaryPhyResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSecondaryPhy not implemented")
-}
-func (UnimplementedScanResultServiceServer) GetTimestampNanos(context.Context, *GetTimestampNanosRequest) (*GetTimestampNanosResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTimestampNanos not implemented")
-}
-func (UnimplementedScanResultServiceServer) GetTxPower(context.Context, *GetTxPowerRequest) (*GetTxPowerResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTxPower not implemented")
-}
-func (UnimplementedScanResultServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
-}
-func (UnimplementedScanResultServiceServer) IsConnectable(context.Context, *IsConnectableRequest) (*IsConnectableResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsConnectable not implemented")
-}
-func (UnimplementedScanResultServiceServer) IsLegacy(context.Context, *IsLegacyRequest) (*IsLegacyResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsLegacy not implemented")
-}
-func (UnimplementedScanResultServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
-}
-func (UnimplementedScanResultServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
-}
-func (UnimplementedScanResultServiceServer) mustEmbedUnimplementedScanResultServiceServer() {}
-func (UnimplementedScanResultServiceServer) testEmbeddedByValue()                           {}
+func (UnimplementedBluetoothLeAdvertiserServiceServer) testEmbeddedByValue() {}
 
-// UnsafeScanResultServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ScanResultServiceServer will
+// UnsafeBluetoothLeAdvertiserServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothLeAdvertiserServiceServer will
 // result in compilation errors.
-type UnsafeScanResultServiceServer interface {
-	mustEmbedUnimplementedScanResultServiceServer()
+type UnsafeBluetoothLeAdvertiserServiceServer interface {
+	mustEmbedUnimplementedBluetoothLeAdvertiserServiceServer()
 }
 
-func RegisterScanResultServiceServer(s grpc.ServiceRegistrar, srv ScanResultServiceServer) {
-	// If the following call panics, it indicates UnimplementedScanResultServiceServer was
+func RegisterBluetoothLeAdvertiserServiceServer(s grpc.ServiceRegistrar, srv BluetoothLeAdvertiserServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothLeAdvertiserServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ScanResultService_ServiceDesc, srv)
+	s.RegisterService(&BluetoothLeAdvertiserService_ServiceDesc, srv)
 }
 
-func _ScanResultService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DescribeContentsRequest)
+func _BluetoothLeAdvertiserService_StartAdvertising3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartAdvertising3Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ScanResultServiceServer).DescribeContents(ctx, in)
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising3(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ScanResultService_DescribeContents_FullMethodName,
+		FullMethod: BluetoothLeAdvertiserService_StartAdvertising3_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising3(ctx, req.(*StartAdvertising3Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ScanResultService_Equals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EqualsRequest)
+func _BluetoothLeAdvertiserService_StartAdvertising4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartAdvertising4_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ScanResultServiceServer).Equals(ctx, in)
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising4_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ScanResultService_Equals_FullMethodName,
+		FullMethod: BluetoothLeAdvertiserService_StartAdvertising4_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).Equals(ctx, req.(*EqualsRequest))
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertising4_1(ctx, req.(*StartAdvertising4_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ScanResultService_GetAdvertisingSid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAdvertisingSidRequest)
+func _BluetoothLeAdvertiserService_StartAdvertisingSet6_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartAdvertisingSet6Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetAdvertisingSid(ctx, in)
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet6(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ScanResultService_GetAdvertisingSid_FullMethodName,
+		FullMethod: BluetoothLeAdvertiserService_StartAdvertisingSet6_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetAdvertisingSid(ctx, req.(*GetAdvertisingSidRequest))
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet6(ctx, req.(*StartAdvertisingSet6Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ScanResultService_GetDataStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDataStatusRequest)
+func _BluetoothLeAdvertiserService_StartAdvertisingSet8_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartAdvertisingSet8_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetDataStatus(ctx, in)
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet8_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ScanResultService_GetDataStatus_FullMethodName,
+		FullMethod: BluetoothLeAdvertiserService_StartAdvertisingSet8_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetDataStatus(ctx, req.(*GetDataStatusRequest))
+		return srv.(BluetoothLeAdvertiserServiceServer).StartAdvertisingSet8_1(ctx, req.(*StartAdvertisingSet8_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ScanResultService_GetDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDeviceRequest)
+func _BluetoothLeAdvertiserService_StopAdvertising_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopAdvertisingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetDevice(ctx, in)
+		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertising(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ScanResultService_GetDevice_FullMethodName,
+		FullMethod: BluetoothLeAdvertiserService_StopAdvertising_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetDevice(ctx, req.(*GetDeviceRequest))
+		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertising(ctx, req.(*StopAdvertisingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ScanResultService_GetPeriodicAdvertisingInterval_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPeriodicAdvertisingIntervalRequest)
+func _BluetoothLeAdvertiserService_StopAdvertisingSet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopAdvertisingSetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetPeriodicAdvertisingInterval(ctx, in)
+		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertisingSet(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ScanResultService_GetPeriodicAdvertisingInterval_FullMethodName,
+		FullMethod: BluetoothLeAdvertiserService_StopAdvertisingSet_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetPeriodicAdvertisingInterval(ctx, req.(*GetPeriodicAdvertisingIntervalRequest))
+		return srv.(BluetoothLeAdvertiserServiceServer).StopAdvertisingSet(ctx, req.(*StopAdvertisingSetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ScanResultService_GetPrimaryPhy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPrimaryPhyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetPrimaryPhy(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_GetPrimaryPhy_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetPrimaryPhy(ctx, req.(*GetPrimaryPhyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_GetRssi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRssiRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetRssi(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_GetRssi_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetRssi(ctx, req.(*GetRssiRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_GetScanRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetScanRecordRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetScanRecord(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_GetScanRecord_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetScanRecord(ctx, req.(*GetScanRecordRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_GetSecondaryPhy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSecondaryPhyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetSecondaryPhy(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_GetSecondaryPhy_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetSecondaryPhy(ctx, req.(*GetSecondaryPhyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_GetTimestampNanos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTimestampNanosRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetTimestampNanos(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_GetTimestampNanos_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetTimestampNanos(ctx, req.(*GetTimestampNanosRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_GetTxPower_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTxPowerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).GetTxPower(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_GetTxPower_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).GetTxPower(ctx, req.(*GetTxPowerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HashCodeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).HashCode(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_HashCode_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).HashCode(ctx, req.(*HashCodeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_IsConnectable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsConnectableRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).IsConnectable(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_IsConnectable_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).IsConnectable(ctx, req.(*IsConnectableRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_IsLegacy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsLegacyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).IsLegacy(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_IsLegacy_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).IsLegacy(ctx, req.(*IsLegacyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ToStringRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).ToString(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_ToString_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).ToString(ctx, req.(*ToStringRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanResultService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WriteToParcelRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanResultServiceServer).WriteToParcel(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanResultService_WriteToParcel_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanResultServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ScanResultService_ServiceDesc is the grpc.ServiceDesc for ScanResultService service.
+// BluetoothLeAdvertiserService_ServiceDesc is the grpc.ServiceDesc for BluetoothLeAdvertiserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ScanResultService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth_le.ScanResultService",
-	HandlerType: (*ScanResultServiceServer)(nil),
+var BluetoothLeAdvertiserService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth_le.BluetoothLeAdvertiserService",
+	HandlerType: (*BluetoothLeAdvertiserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "DescribeContents",
-			Handler:    _ScanResultService_DescribeContents_Handler,
+			MethodName: "StartAdvertising3",
+			Handler:    _BluetoothLeAdvertiserService_StartAdvertising3_Handler,
 		},
 		{
-			MethodName: "Equals",
-			Handler:    _ScanResultService_Equals_Handler,
+			MethodName: "StartAdvertising4_1",
+			Handler:    _BluetoothLeAdvertiserService_StartAdvertising4_1_Handler,
 		},
 		{
-			MethodName: "GetAdvertisingSid",
-			Handler:    _ScanResultService_GetAdvertisingSid_Handler,
+			MethodName: "StartAdvertisingSet6",
+			Handler:    _BluetoothLeAdvertiserService_StartAdvertisingSet6_Handler,
 		},
 		{
-			MethodName: "GetDataStatus",
-			Handler:    _ScanResultService_GetDataStatus_Handler,
+			MethodName: "StartAdvertisingSet8_1",
+			Handler:    _BluetoothLeAdvertiserService_StartAdvertisingSet8_1_Handler,
 		},
 		{
-			MethodName: "GetDevice",
-			Handler:    _ScanResultService_GetDevice_Handler,
+			MethodName: "StopAdvertising",
+			Handler:    _BluetoothLeAdvertiserService_StopAdvertising_Handler,
 		},
 		{
-			MethodName: "GetPeriodicAdvertisingInterval",
-			Handler:    _ScanResultService_GetPeriodicAdvertisingInterval_Handler,
-		},
-		{
-			MethodName: "GetPrimaryPhy",
-			Handler:    _ScanResultService_GetPrimaryPhy_Handler,
-		},
-		{
-			MethodName: "GetRssi",
-			Handler:    _ScanResultService_GetRssi_Handler,
-		},
-		{
-			MethodName: "GetScanRecord",
-			Handler:    _ScanResultService_GetScanRecord_Handler,
-		},
-		{
-			MethodName: "GetSecondaryPhy",
-			Handler:    _ScanResultService_GetSecondaryPhy_Handler,
-		},
-		{
-			MethodName: "GetTimestampNanos",
-			Handler:    _ScanResultService_GetTimestampNanos_Handler,
-		},
-		{
-			MethodName: "GetTxPower",
-			Handler:    _ScanResultService_GetTxPower_Handler,
-		},
-		{
-			MethodName: "HashCode",
-			Handler:    _ScanResultService_HashCode_Handler,
-		},
-		{
-			MethodName: "IsConnectable",
-			Handler:    _ScanResultService_IsConnectable_Handler,
-		},
-		{
-			MethodName: "IsLegacy",
-			Handler:    _ScanResultService_IsLegacy_Handler,
-		},
-		{
-			MethodName: "ToString",
-			Handler:    _ScanResultService_ToString_Handler,
-		},
-		{
-			MethodName: "WriteToParcel",
-			Handler:    _ScanResultService_WriteToParcel_Handler,
+			MethodName: "StopAdvertisingSet",
+			Handler:    _BluetoothLeAdvertiserService_StopAdvertisingSet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

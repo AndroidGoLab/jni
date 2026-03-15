@@ -21,291 +21,1583 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DisplayMetricsService_Equals1_FullMethodName       = "/display.DisplayMetricsService/Equals1"
-	DisplayMetricsService_Equals1_1_FullMethodName     = "/display.DisplayMetricsService/Equals1_1"
-	DisplayMetricsService_HashCode_FullMethodName      = "/display.DisplayMetricsService/HashCode"
-	DisplayMetricsService_SetTo_FullMethodName         = "/display.DisplayMetricsService/SetTo"
-	DisplayMetricsService_SetToDefaults_FullMethodName = "/display.DisplayMetricsService/SetToDefaults"
-	DisplayMetricsService_ToString_FullMethodName      = "/display.DisplayMetricsService/ToString"
+	DisplayService_GetAppVsyncOffsetNanos_FullMethodName               = "/display.DisplayService/GetAppVsyncOffsetNanos"
+	DisplayService_GetCurrentSizeRange_FullMethodName                  = "/display.DisplayService/GetCurrentSizeRange"
+	DisplayService_GetCutout_FullMethodName                            = "/display.DisplayService/GetCutout"
+	DisplayService_GetDeviceProductInfo_FullMethodName                 = "/display.DisplayService/GetDeviceProductInfo"
+	DisplayService_GetDisplayId_FullMethodName                         = "/display.DisplayService/GetDisplayId"
+	DisplayService_GetFlags_FullMethodName                             = "/display.DisplayService/GetFlags"
+	DisplayService_GetHdrCapabilities_FullMethodName                   = "/display.DisplayService/GetHdrCapabilities"
+	DisplayService_GetHdrSdrRatio_FullMethodName                       = "/display.DisplayService/GetHdrSdrRatio"
+	DisplayService_GetHeight_FullMethodName                            = "/display.DisplayService/GetHeight"
+	DisplayService_GetHighestHdrSdrRatio_FullMethodName                = "/display.DisplayService/GetHighestHdrSdrRatio"
+	DisplayService_GetMetrics_FullMethodName                           = "/display.DisplayService/GetMetrics"
+	DisplayService_GetMode_FullMethodName                              = "/display.DisplayService/GetMode"
+	DisplayService_GetName_FullMethodName                              = "/display.DisplayService/GetName"
+	DisplayService_GetOrientation_FullMethodName                       = "/display.DisplayService/GetOrientation"
+	DisplayService_GetOverlaySupport_FullMethodName                    = "/display.DisplayService/GetOverlaySupport"
+	DisplayService_GetPixelFormat_FullMethodName                       = "/display.DisplayService/GetPixelFormat"
+	DisplayService_GetPreferredWideGamutColorSpace_FullMethodName      = "/display.DisplayService/GetPreferredWideGamutColorSpace"
+	DisplayService_GetPresentationDeadlineNanos_FullMethodName         = "/display.DisplayService/GetPresentationDeadlineNanos"
+	DisplayService_GetRealMetrics_FullMethodName                       = "/display.DisplayService/GetRealMetrics"
+	DisplayService_GetRealSize_FullMethodName                          = "/display.DisplayService/GetRealSize"
+	DisplayService_GetRectSize_FullMethodName                          = "/display.DisplayService/GetRectSize"
+	DisplayService_GetRefreshRate_FullMethodName                       = "/display.DisplayService/GetRefreshRate"
+	DisplayService_GetRotation_FullMethodName                          = "/display.DisplayService/GetRotation"
+	DisplayService_GetRoundedCorner_FullMethodName                     = "/display.DisplayService/GetRoundedCorner"
+	DisplayService_GetShape_FullMethodName                             = "/display.DisplayService/GetShape"
+	DisplayService_GetSize_FullMethodName                              = "/display.DisplayService/GetSize"
+	DisplayService_GetState_FullMethodName                             = "/display.DisplayService/GetState"
+	DisplayService_GetSuggestedFrameRate_FullMethodName                = "/display.DisplayService/GetSuggestedFrameRate"
+	DisplayService_GetSupportedModes_FullMethodName                    = "/display.DisplayService/GetSupportedModes"
+	DisplayService_GetSupportedRefreshRates_FullMethodName             = "/display.DisplayService/GetSupportedRefreshRates"
+	DisplayService_GetWidth_FullMethodName                             = "/display.DisplayService/GetWidth"
+	DisplayService_HasArrSupport_FullMethodName                        = "/display.DisplayService/HasArrSupport"
+	DisplayService_IsHdr_FullMethodName                                = "/display.DisplayService/IsHdr"
+	DisplayService_IsHdrSdrRatioAvailable_FullMethodName               = "/display.DisplayService/IsHdrSdrRatioAvailable"
+	DisplayService_IsMinimalPostProcessingSupported_FullMethodName     = "/display.DisplayService/IsMinimalPostProcessingSupported"
+	DisplayService_IsValid_FullMethodName                              = "/display.DisplayService/IsValid"
+	DisplayService_IsWideColorGamut_FullMethodName                     = "/display.DisplayService/IsWideColorGamut"
+	DisplayService_RegisterHdrSdrRatioChangedListener_FullMethodName   = "/display.DisplayService/RegisterHdrSdrRatioChangedListener"
+	DisplayService_ToString_FullMethodName                             = "/display.DisplayService/ToString"
+	DisplayService_UnregisterHdrSdrRatioChangedListener_FullMethodName = "/display.DisplayService/UnregisterHdrSdrRatioChangedListener"
 )
 
-// DisplayMetricsServiceClient is the client API for DisplayMetricsService service.
+// DisplayServiceClient is the client API for DisplayService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DisplayMetricsServiceClient interface {
-	Equals1(ctx context.Context, in *Equals1Request, opts ...grpc.CallOption) (*Equals1Response, error)
-	Equals1_1(ctx context.Context, in *Equals1_1Request, opts ...grpc.CallOption) (*Equals1_1Response, error)
-	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
-	SetTo(ctx context.Context, in *SetToRequest, opts ...grpc.CallOption) (*SetToResponse, error)
-	SetToDefaults(ctx context.Context, in *SetToDefaultsRequest, opts ...grpc.CallOption) (*SetToDefaultsResponse, error)
+type DisplayServiceClient interface {
+	GetAppVsyncOffsetNanos(ctx context.Context, in *GetAppVsyncOffsetNanosRequest, opts ...grpc.CallOption) (*GetAppVsyncOffsetNanosResponse, error)
+	GetCurrentSizeRange(ctx context.Context, in *GetCurrentSizeRangeRequest, opts ...grpc.CallOption) (*GetCurrentSizeRangeResponse, error)
+	GetCutout(ctx context.Context, in *GetCutoutRequest, opts ...grpc.CallOption) (*GetCutoutResponse, error)
+	GetDeviceProductInfo(ctx context.Context, in *GetDeviceProductInfoRequest, opts ...grpc.CallOption) (*GetDeviceProductInfoResponse, error)
+	GetDisplayId(ctx context.Context, in *GetDisplayIdRequest, opts ...grpc.CallOption) (*GetDisplayIdResponse, error)
+	GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error)
+	GetHdrCapabilities(ctx context.Context, in *GetHdrCapabilitiesRequest, opts ...grpc.CallOption) (*GetHdrCapabilitiesResponse, error)
+	GetHdrSdrRatio(ctx context.Context, in *GetHdrSdrRatioRequest, opts ...grpc.CallOption) (*GetHdrSdrRatioResponse, error)
+	GetHeight(ctx context.Context, in *GetHeightRequest, opts ...grpc.CallOption) (*GetHeightResponse, error)
+	GetHighestHdrSdrRatio(ctx context.Context, in *GetHighestHdrSdrRatioRequest, opts ...grpc.CallOption) (*GetHighestHdrSdrRatioResponse, error)
+	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*GetMetricsResponse, error)
+	GetMode(ctx context.Context, in *GetModeRequest, opts ...grpc.CallOption) (*GetModeResponse, error)
+	GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error)
+	GetOrientation(ctx context.Context, in *GetOrientationRequest, opts ...grpc.CallOption) (*GetOrientationResponse, error)
+	GetOverlaySupport(ctx context.Context, in *GetOverlaySupportRequest, opts ...grpc.CallOption) (*GetOverlaySupportResponse, error)
+	GetPixelFormat(ctx context.Context, in *GetPixelFormatRequest, opts ...grpc.CallOption) (*GetPixelFormatResponse, error)
+	GetPreferredWideGamutColorSpace(ctx context.Context, in *GetPreferredWideGamutColorSpaceRequest, opts ...grpc.CallOption) (*GetPreferredWideGamutColorSpaceResponse, error)
+	GetPresentationDeadlineNanos(ctx context.Context, in *GetPresentationDeadlineNanosRequest, opts ...grpc.CallOption) (*GetPresentationDeadlineNanosResponse, error)
+	GetRealMetrics(ctx context.Context, in *GetRealMetricsRequest, opts ...grpc.CallOption) (*GetRealMetricsResponse, error)
+	GetRealSize(ctx context.Context, in *GetRealSizeRequest, opts ...grpc.CallOption) (*GetRealSizeResponse, error)
+	GetRectSize(ctx context.Context, in *GetRectSizeRequest, opts ...grpc.CallOption) (*GetRectSizeResponse, error)
+	GetRefreshRate(ctx context.Context, in *GetRefreshRateRequest, opts ...grpc.CallOption) (*GetRefreshRateResponse, error)
+	GetRotation(ctx context.Context, in *GetRotationRequest, opts ...grpc.CallOption) (*GetRotationResponse, error)
+	GetRoundedCorner(ctx context.Context, in *GetRoundedCornerRequest, opts ...grpc.CallOption) (*GetRoundedCornerResponse, error)
+	GetShape(ctx context.Context, in *GetShapeRequest, opts ...grpc.CallOption) (*GetShapeResponse, error)
+	GetSize(ctx context.Context, in *GetSizeRequest, opts ...grpc.CallOption) (*GetSizeResponse, error)
+	GetState(ctx context.Context, in *GetStateRequest, opts ...grpc.CallOption) (*GetStateResponse, error)
+	GetSuggestedFrameRate(ctx context.Context, in *GetSuggestedFrameRateRequest, opts ...grpc.CallOption) (*GetSuggestedFrameRateResponse, error)
+	GetSupportedModes(ctx context.Context, in *GetSupportedModesRequest, opts ...grpc.CallOption) (*GetSupportedModesResponse, error)
+	GetSupportedRefreshRates(ctx context.Context, in *GetSupportedRefreshRatesRequest, opts ...grpc.CallOption) (*GetSupportedRefreshRatesResponse, error)
+	GetWidth(ctx context.Context, in *GetWidthRequest, opts ...grpc.CallOption) (*GetWidthResponse, error)
+	HasArrSupport(ctx context.Context, in *HasArrSupportRequest, opts ...grpc.CallOption) (*HasArrSupportResponse, error)
+	IsHdr(ctx context.Context, in *IsHdrRequest, opts ...grpc.CallOption) (*IsHdrResponse, error)
+	IsHdrSdrRatioAvailable(ctx context.Context, in *IsHdrSdrRatioAvailableRequest, opts ...grpc.CallOption) (*IsHdrSdrRatioAvailableResponse, error)
+	IsMinimalPostProcessingSupported(ctx context.Context, in *IsMinimalPostProcessingSupportedRequest, opts ...grpc.CallOption) (*IsMinimalPostProcessingSupportedResponse, error)
+	IsValid(ctx context.Context, in *IsValidRequest, opts ...grpc.CallOption) (*IsValidResponse, error)
+	IsWideColorGamut(ctx context.Context, in *IsWideColorGamutRequest, opts ...grpc.CallOption) (*IsWideColorGamutResponse, error)
+	RegisterHdrSdrRatioChangedListener(ctx context.Context, in *RegisterHdrSdrRatioChangedListenerRequest, opts ...grpc.CallOption) (*RegisterHdrSdrRatioChangedListenerResponse, error)
 	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	UnregisterHdrSdrRatioChangedListener(ctx context.Context, in *UnregisterHdrSdrRatioChangedListenerRequest, opts ...grpc.CallOption) (*UnregisterHdrSdrRatioChangedListenerResponse, error)
 }
 
-type displayMetricsServiceClient struct {
+type displayServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewDisplayMetricsServiceClient(cc grpc.ClientConnInterface) DisplayMetricsServiceClient {
-	return &displayMetricsServiceClient{cc}
+func NewDisplayServiceClient(cc grpc.ClientConnInterface) DisplayServiceClient {
+	return &displayServiceClient{cc}
 }
 
-func (c *displayMetricsServiceClient) Equals1(ctx context.Context, in *Equals1Request, opts ...grpc.CallOption) (*Equals1Response, error) {
+func (c *displayServiceClient) GetAppVsyncOffsetNanos(ctx context.Context, in *GetAppVsyncOffsetNanosRequest, opts ...grpc.CallOption) (*GetAppVsyncOffsetNanosResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Equals1Response)
-	err := c.cc.Invoke(ctx, DisplayMetricsService_Equals1_FullMethodName, in, out, cOpts...)
+	out := new(GetAppVsyncOffsetNanosResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetAppVsyncOffsetNanos_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *displayMetricsServiceClient) Equals1_1(ctx context.Context, in *Equals1_1Request, opts ...grpc.CallOption) (*Equals1_1Response, error) {
+func (c *displayServiceClient) GetCurrentSizeRange(ctx context.Context, in *GetCurrentSizeRangeRequest, opts ...grpc.CallOption) (*GetCurrentSizeRangeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Equals1_1Response)
-	err := c.cc.Invoke(ctx, DisplayMetricsService_Equals1_1_FullMethodName, in, out, cOpts...)
+	out := new(GetCurrentSizeRangeResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetCurrentSizeRange_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *displayMetricsServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
+func (c *displayServiceClient) GetCutout(ctx context.Context, in *GetCutoutRequest, opts ...grpc.CallOption) (*GetCutoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HashCodeResponse)
-	err := c.cc.Invoke(ctx, DisplayMetricsService_HashCode_FullMethodName, in, out, cOpts...)
+	out := new(GetCutoutResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetCutout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *displayMetricsServiceClient) SetTo(ctx context.Context, in *SetToRequest, opts ...grpc.CallOption) (*SetToResponse, error) {
+func (c *displayServiceClient) GetDeviceProductInfo(ctx context.Context, in *GetDeviceProductInfoRequest, opts ...grpc.CallOption) (*GetDeviceProductInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetToResponse)
-	err := c.cc.Invoke(ctx, DisplayMetricsService_SetTo_FullMethodName, in, out, cOpts...)
+	out := new(GetDeviceProductInfoResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetDeviceProductInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *displayMetricsServiceClient) SetToDefaults(ctx context.Context, in *SetToDefaultsRequest, opts ...grpc.CallOption) (*SetToDefaultsResponse, error) {
+func (c *displayServiceClient) GetDisplayId(ctx context.Context, in *GetDisplayIdRequest, opts ...grpc.CallOption) (*GetDisplayIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetToDefaultsResponse)
-	err := c.cc.Invoke(ctx, DisplayMetricsService_SetToDefaults_FullMethodName, in, out, cOpts...)
+	out := new(GetDisplayIdResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetDisplayId_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *displayMetricsServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+func (c *displayServiceClient) GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFlagsResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetFlags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetHdrCapabilities(ctx context.Context, in *GetHdrCapabilitiesRequest, opts ...grpc.CallOption) (*GetHdrCapabilitiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetHdrCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetHdrCapabilities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetHdrSdrRatio(ctx context.Context, in *GetHdrSdrRatioRequest, opts ...grpc.CallOption) (*GetHdrSdrRatioResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetHdrSdrRatioResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetHdrSdrRatio_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetHeight(ctx context.Context, in *GetHeightRequest, opts ...grpc.CallOption) (*GetHeightResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetHeightResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetHeight_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetHighestHdrSdrRatio(ctx context.Context, in *GetHighestHdrSdrRatioRequest, opts ...grpc.CallOption) (*GetHighestHdrSdrRatioResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetHighestHdrSdrRatioResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetHighestHdrSdrRatio_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*GetMetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMetricsResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetMode(ctx context.Context, in *GetModeRequest, opts ...grpc.CallOption) (*GetModeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetModeResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetMode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNameResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetOrientation(ctx context.Context, in *GetOrientationRequest, opts ...grpc.CallOption) (*GetOrientationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOrientationResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetOrientation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetOverlaySupport(ctx context.Context, in *GetOverlaySupportRequest, opts ...grpc.CallOption) (*GetOverlaySupportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOverlaySupportResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetOverlaySupport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetPixelFormat(ctx context.Context, in *GetPixelFormatRequest, opts ...grpc.CallOption) (*GetPixelFormatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPixelFormatResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetPixelFormat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetPreferredWideGamutColorSpace(ctx context.Context, in *GetPreferredWideGamutColorSpaceRequest, opts ...grpc.CallOption) (*GetPreferredWideGamutColorSpaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPreferredWideGamutColorSpaceResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetPreferredWideGamutColorSpace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetPresentationDeadlineNanos(ctx context.Context, in *GetPresentationDeadlineNanosRequest, opts ...grpc.CallOption) (*GetPresentationDeadlineNanosResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPresentationDeadlineNanosResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetPresentationDeadlineNanos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetRealMetrics(ctx context.Context, in *GetRealMetricsRequest, opts ...grpc.CallOption) (*GetRealMetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRealMetricsResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetRealMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetRealSize(ctx context.Context, in *GetRealSizeRequest, opts ...grpc.CallOption) (*GetRealSizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRealSizeResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetRealSize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetRectSize(ctx context.Context, in *GetRectSizeRequest, opts ...grpc.CallOption) (*GetRectSizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRectSizeResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetRectSize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetRefreshRate(ctx context.Context, in *GetRefreshRateRequest, opts ...grpc.CallOption) (*GetRefreshRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRefreshRateResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetRefreshRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetRotation(ctx context.Context, in *GetRotationRequest, opts ...grpc.CallOption) (*GetRotationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRotationResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetRotation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetRoundedCorner(ctx context.Context, in *GetRoundedCornerRequest, opts ...grpc.CallOption) (*GetRoundedCornerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRoundedCornerResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetRoundedCorner_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetShape(ctx context.Context, in *GetShapeRequest, opts ...grpc.CallOption) (*GetShapeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetShapeResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetShape_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetSize(ctx context.Context, in *GetSizeRequest, opts ...grpc.CallOption) (*GetSizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSizeResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetSize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetState(ctx context.Context, in *GetStateRequest, opts ...grpc.CallOption) (*GetStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStateResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetSuggestedFrameRate(ctx context.Context, in *GetSuggestedFrameRateRequest, opts ...grpc.CallOption) (*GetSuggestedFrameRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSuggestedFrameRateResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetSuggestedFrameRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetSupportedModes(ctx context.Context, in *GetSupportedModesRequest, opts ...grpc.CallOption) (*GetSupportedModesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSupportedModesResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetSupportedModes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetSupportedRefreshRates(ctx context.Context, in *GetSupportedRefreshRatesRequest, opts ...grpc.CallOption) (*GetSupportedRefreshRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSupportedRefreshRatesResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetSupportedRefreshRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) GetWidth(ctx context.Context, in *GetWidthRequest, opts ...grpc.CallOption) (*GetWidthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWidthResponse)
+	err := c.cc.Invoke(ctx, DisplayService_GetWidth_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) HasArrSupport(ctx context.Context, in *HasArrSupportRequest, opts ...grpc.CallOption) (*HasArrSupportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasArrSupportResponse)
+	err := c.cc.Invoke(ctx, DisplayService_HasArrSupport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) IsHdr(ctx context.Context, in *IsHdrRequest, opts ...grpc.CallOption) (*IsHdrResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsHdrResponse)
+	err := c.cc.Invoke(ctx, DisplayService_IsHdr_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) IsHdrSdrRatioAvailable(ctx context.Context, in *IsHdrSdrRatioAvailableRequest, opts ...grpc.CallOption) (*IsHdrSdrRatioAvailableResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsHdrSdrRatioAvailableResponse)
+	err := c.cc.Invoke(ctx, DisplayService_IsHdrSdrRatioAvailable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) IsMinimalPostProcessingSupported(ctx context.Context, in *IsMinimalPostProcessingSupportedRequest, opts ...grpc.CallOption) (*IsMinimalPostProcessingSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsMinimalPostProcessingSupportedResponse)
+	err := c.cc.Invoke(ctx, DisplayService_IsMinimalPostProcessingSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) IsValid(ctx context.Context, in *IsValidRequest, opts ...grpc.CallOption) (*IsValidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsValidResponse)
+	err := c.cc.Invoke(ctx, DisplayService_IsValid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) IsWideColorGamut(ctx context.Context, in *IsWideColorGamutRequest, opts ...grpc.CallOption) (*IsWideColorGamutResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsWideColorGamutResponse)
+	err := c.cc.Invoke(ctx, DisplayService_IsWideColorGamut_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) RegisterHdrSdrRatioChangedListener(ctx context.Context, in *RegisterHdrSdrRatioChangedListenerRequest, opts ...grpc.CallOption) (*RegisterHdrSdrRatioChangedListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterHdrSdrRatioChangedListenerResponse)
+	err := c.cc.Invoke(ctx, DisplayService_RegisterHdrSdrRatioChangedListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ToStringResponse)
-	err := c.cc.Invoke(ctx, DisplayMetricsService_ToString_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, DisplayService_ToString_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// DisplayMetricsServiceServer is the server API for DisplayMetricsService service.
-// All implementations must embed UnimplementedDisplayMetricsServiceServer
-// for forward compatibility.
-type DisplayMetricsServiceServer interface {
-	Equals1(context.Context, *Equals1Request) (*Equals1Response, error)
-	Equals1_1(context.Context, *Equals1_1Request) (*Equals1_1Response, error)
-	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
-	SetTo(context.Context, *SetToRequest) (*SetToResponse, error)
-	SetToDefaults(context.Context, *SetToDefaultsRequest) (*SetToDefaultsResponse, error)
-	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
-	mustEmbedUnimplementedDisplayMetricsServiceServer()
+func (c *displayServiceClient) UnregisterHdrSdrRatioChangedListener(ctx context.Context, in *UnregisterHdrSdrRatioChangedListenerRequest, opts ...grpc.CallOption) (*UnregisterHdrSdrRatioChangedListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterHdrSdrRatioChangedListenerResponse)
+	err := c.cc.Invoke(ctx, DisplayService_UnregisterHdrSdrRatioChangedListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedDisplayMetricsServiceServer must be embedded to have
+// DisplayServiceServer is the server API for DisplayService service.
+// All implementations must embed UnimplementedDisplayServiceServer
+// for forward compatibility.
+type DisplayServiceServer interface {
+	GetAppVsyncOffsetNanos(context.Context, *GetAppVsyncOffsetNanosRequest) (*GetAppVsyncOffsetNanosResponse, error)
+	GetCurrentSizeRange(context.Context, *GetCurrentSizeRangeRequest) (*GetCurrentSizeRangeResponse, error)
+	GetCutout(context.Context, *GetCutoutRequest) (*GetCutoutResponse, error)
+	GetDeviceProductInfo(context.Context, *GetDeviceProductInfoRequest) (*GetDeviceProductInfoResponse, error)
+	GetDisplayId(context.Context, *GetDisplayIdRequest) (*GetDisplayIdResponse, error)
+	GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error)
+	GetHdrCapabilities(context.Context, *GetHdrCapabilitiesRequest) (*GetHdrCapabilitiesResponse, error)
+	GetHdrSdrRatio(context.Context, *GetHdrSdrRatioRequest) (*GetHdrSdrRatioResponse, error)
+	GetHeight(context.Context, *GetHeightRequest) (*GetHeightResponse, error)
+	GetHighestHdrSdrRatio(context.Context, *GetHighestHdrSdrRatioRequest) (*GetHighestHdrSdrRatioResponse, error)
+	GetMetrics(context.Context, *GetMetricsRequest) (*GetMetricsResponse, error)
+	GetMode(context.Context, *GetModeRequest) (*GetModeResponse, error)
+	GetName(context.Context, *GetNameRequest) (*GetNameResponse, error)
+	GetOrientation(context.Context, *GetOrientationRequest) (*GetOrientationResponse, error)
+	GetOverlaySupport(context.Context, *GetOverlaySupportRequest) (*GetOverlaySupportResponse, error)
+	GetPixelFormat(context.Context, *GetPixelFormatRequest) (*GetPixelFormatResponse, error)
+	GetPreferredWideGamutColorSpace(context.Context, *GetPreferredWideGamutColorSpaceRequest) (*GetPreferredWideGamutColorSpaceResponse, error)
+	GetPresentationDeadlineNanos(context.Context, *GetPresentationDeadlineNanosRequest) (*GetPresentationDeadlineNanosResponse, error)
+	GetRealMetrics(context.Context, *GetRealMetricsRequest) (*GetRealMetricsResponse, error)
+	GetRealSize(context.Context, *GetRealSizeRequest) (*GetRealSizeResponse, error)
+	GetRectSize(context.Context, *GetRectSizeRequest) (*GetRectSizeResponse, error)
+	GetRefreshRate(context.Context, *GetRefreshRateRequest) (*GetRefreshRateResponse, error)
+	GetRotation(context.Context, *GetRotationRequest) (*GetRotationResponse, error)
+	GetRoundedCorner(context.Context, *GetRoundedCornerRequest) (*GetRoundedCornerResponse, error)
+	GetShape(context.Context, *GetShapeRequest) (*GetShapeResponse, error)
+	GetSize(context.Context, *GetSizeRequest) (*GetSizeResponse, error)
+	GetState(context.Context, *GetStateRequest) (*GetStateResponse, error)
+	GetSuggestedFrameRate(context.Context, *GetSuggestedFrameRateRequest) (*GetSuggestedFrameRateResponse, error)
+	GetSupportedModes(context.Context, *GetSupportedModesRequest) (*GetSupportedModesResponse, error)
+	GetSupportedRefreshRates(context.Context, *GetSupportedRefreshRatesRequest) (*GetSupportedRefreshRatesResponse, error)
+	GetWidth(context.Context, *GetWidthRequest) (*GetWidthResponse, error)
+	HasArrSupport(context.Context, *HasArrSupportRequest) (*HasArrSupportResponse, error)
+	IsHdr(context.Context, *IsHdrRequest) (*IsHdrResponse, error)
+	IsHdrSdrRatioAvailable(context.Context, *IsHdrSdrRatioAvailableRequest) (*IsHdrSdrRatioAvailableResponse, error)
+	IsMinimalPostProcessingSupported(context.Context, *IsMinimalPostProcessingSupportedRequest) (*IsMinimalPostProcessingSupportedResponse, error)
+	IsValid(context.Context, *IsValidRequest) (*IsValidResponse, error)
+	IsWideColorGamut(context.Context, *IsWideColorGamutRequest) (*IsWideColorGamutResponse, error)
+	RegisterHdrSdrRatioChangedListener(context.Context, *RegisterHdrSdrRatioChangedListenerRequest) (*RegisterHdrSdrRatioChangedListenerResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	UnregisterHdrSdrRatioChangedListener(context.Context, *UnregisterHdrSdrRatioChangedListenerRequest) (*UnregisterHdrSdrRatioChangedListenerResponse, error)
+	mustEmbedUnimplementedDisplayServiceServer()
+}
+
+// UnimplementedDisplayServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedDisplayMetricsServiceServer struct{}
+type UnimplementedDisplayServiceServer struct{}
 
-func (UnimplementedDisplayMetricsServiceServer) Equals1(context.Context, *Equals1Request) (*Equals1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method Equals1 not implemented")
+func (UnimplementedDisplayServiceServer) GetAppVsyncOffsetNanos(context.Context, *GetAppVsyncOffsetNanosRequest) (*GetAppVsyncOffsetNanosResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppVsyncOffsetNanos not implemented")
 }
-func (UnimplementedDisplayMetricsServiceServer) Equals1_1(context.Context, *Equals1_1Request) (*Equals1_1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method Equals1_1 not implemented")
+func (UnimplementedDisplayServiceServer) GetCurrentSizeRange(context.Context, *GetCurrentSizeRangeRequest) (*GetCurrentSizeRangeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCurrentSizeRange not implemented")
 }
-func (UnimplementedDisplayMetricsServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
+func (UnimplementedDisplayServiceServer) GetCutout(context.Context, *GetCutoutRequest) (*GetCutoutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCutout not implemented")
 }
-func (UnimplementedDisplayMetricsServiceServer) SetTo(context.Context, *SetToRequest) (*SetToResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetTo not implemented")
+func (UnimplementedDisplayServiceServer) GetDeviceProductInfo(context.Context, *GetDeviceProductInfoRequest) (*GetDeviceProductInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDeviceProductInfo not implemented")
 }
-func (UnimplementedDisplayMetricsServiceServer) SetToDefaults(context.Context, *SetToDefaultsRequest) (*SetToDefaultsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetToDefaults not implemented")
+func (UnimplementedDisplayServiceServer) GetDisplayId(context.Context, *GetDisplayIdRequest) (*GetDisplayIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDisplayId not implemented")
 }
-func (UnimplementedDisplayMetricsServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+func (UnimplementedDisplayServiceServer) GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFlags not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetHdrCapabilities(context.Context, *GetHdrCapabilitiesRequest) (*GetHdrCapabilitiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHdrCapabilities not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetHdrSdrRatio(context.Context, *GetHdrSdrRatioRequest) (*GetHdrSdrRatioResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHdrSdrRatio not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetHeight(context.Context, *GetHeightRequest) (*GetHeightResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHeight not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetHighestHdrSdrRatio(context.Context, *GetHighestHdrSdrRatioRequest) (*GetHighestHdrSdrRatioResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHighestHdrSdrRatio not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetMetrics(context.Context, *GetMetricsRequest) (*GetMetricsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMetrics not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetMode(context.Context, *GetModeRequest) (*GetModeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMode not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetName(context.Context, *GetNameRequest) (*GetNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetName not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetOrientation(context.Context, *GetOrientationRequest) (*GetOrientationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOrientation not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetOverlaySupport(context.Context, *GetOverlaySupportRequest) (*GetOverlaySupportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOverlaySupport not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetPixelFormat(context.Context, *GetPixelFormatRequest) (*GetPixelFormatResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPixelFormat not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetPreferredWideGamutColorSpace(context.Context, *GetPreferredWideGamutColorSpaceRequest) (*GetPreferredWideGamutColorSpaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPreferredWideGamutColorSpace not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetPresentationDeadlineNanos(context.Context, *GetPresentationDeadlineNanosRequest) (*GetPresentationDeadlineNanosResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPresentationDeadlineNanos not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetRealMetrics(context.Context, *GetRealMetricsRequest) (*GetRealMetricsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRealMetrics not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetRealSize(context.Context, *GetRealSizeRequest) (*GetRealSizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRealSize not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetRectSize(context.Context, *GetRectSizeRequest) (*GetRectSizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRectSize not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetRefreshRate(context.Context, *GetRefreshRateRequest) (*GetRefreshRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRefreshRate not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetRotation(context.Context, *GetRotationRequest) (*GetRotationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRotation not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetRoundedCorner(context.Context, *GetRoundedCornerRequest) (*GetRoundedCornerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRoundedCorner not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetShape(context.Context, *GetShapeRequest) (*GetShapeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetShape not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetSize(context.Context, *GetSizeRequest) (*GetSizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSize not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetState(context.Context, *GetStateRequest) (*GetStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetState not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetSuggestedFrameRate(context.Context, *GetSuggestedFrameRateRequest) (*GetSuggestedFrameRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSuggestedFrameRate not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetSupportedModes(context.Context, *GetSupportedModesRequest) (*GetSupportedModesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSupportedModes not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetSupportedRefreshRates(context.Context, *GetSupportedRefreshRatesRequest) (*GetSupportedRefreshRatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSupportedRefreshRates not implemented")
+}
+func (UnimplementedDisplayServiceServer) GetWidth(context.Context, *GetWidthRequest) (*GetWidthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWidth not implemented")
+}
+func (UnimplementedDisplayServiceServer) HasArrSupport(context.Context, *HasArrSupportRequest) (*HasArrSupportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasArrSupport not implemented")
+}
+func (UnimplementedDisplayServiceServer) IsHdr(context.Context, *IsHdrRequest) (*IsHdrResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsHdr not implemented")
+}
+func (UnimplementedDisplayServiceServer) IsHdrSdrRatioAvailable(context.Context, *IsHdrSdrRatioAvailableRequest) (*IsHdrSdrRatioAvailableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsHdrSdrRatioAvailable not implemented")
+}
+func (UnimplementedDisplayServiceServer) IsMinimalPostProcessingSupported(context.Context, *IsMinimalPostProcessingSupportedRequest) (*IsMinimalPostProcessingSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsMinimalPostProcessingSupported not implemented")
+}
+func (UnimplementedDisplayServiceServer) IsValid(context.Context, *IsValidRequest) (*IsValidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsValid not implemented")
+}
+func (UnimplementedDisplayServiceServer) IsWideColorGamut(context.Context, *IsWideColorGamutRequest) (*IsWideColorGamutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsWideColorGamut not implemented")
+}
+func (UnimplementedDisplayServiceServer) RegisterHdrSdrRatioChangedListener(context.Context, *RegisterHdrSdrRatioChangedListenerRequest) (*RegisterHdrSdrRatioChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterHdrSdrRatioChangedListener not implemented")
+}
+func (UnimplementedDisplayServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
 }
-func (UnimplementedDisplayMetricsServiceServer) mustEmbedUnimplementedDisplayMetricsServiceServer() {}
-func (UnimplementedDisplayMetricsServiceServer) testEmbeddedByValue()                               {}
+func (UnimplementedDisplayServiceServer) UnregisterHdrSdrRatioChangedListener(context.Context, *UnregisterHdrSdrRatioChangedListenerRequest) (*UnregisterHdrSdrRatioChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterHdrSdrRatioChangedListener not implemented")
+}
+func (UnimplementedDisplayServiceServer) mustEmbedUnimplementedDisplayServiceServer() {}
+func (UnimplementedDisplayServiceServer) testEmbeddedByValue()                        {}
 
-// UnsafeDisplayMetricsServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DisplayMetricsServiceServer will
+// UnsafeDisplayServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DisplayServiceServer will
 // result in compilation errors.
-type UnsafeDisplayMetricsServiceServer interface {
-	mustEmbedUnimplementedDisplayMetricsServiceServer()
+type UnsafeDisplayServiceServer interface {
+	mustEmbedUnimplementedDisplayServiceServer()
 }
 
-func RegisterDisplayMetricsServiceServer(s grpc.ServiceRegistrar, srv DisplayMetricsServiceServer) {
-	// If the following call panics, it indicates UnimplementedDisplayMetricsServiceServer was
+func RegisterDisplayServiceServer(s grpc.ServiceRegistrar, srv DisplayServiceServer) {
+	// If the following call panics, it indicates UnimplementedDisplayServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&DisplayMetricsService_ServiceDesc, srv)
+	s.RegisterService(&DisplayService_ServiceDesc, srv)
 }
 
-func _DisplayMetricsService_Equals1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Equals1Request)
+func _DisplayService_GetAppVsyncOffsetNanos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppVsyncOffsetNanosRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DisplayMetricsServiceServer).Equals1(ctx, in)
+		return srv.(DisplayServiceServer).GetAppVsyncOffsetNanos(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DisplayMetricsService_Equals1_FullMethodName,
+		FullMethod: DisplayService_GetAppVsyncOffsetNanos_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayMetricsServiceServer).Equals1(ctx, req.(*Equals1Request))
+		return srv.(DisplayServiceServer).GetAppVsyncOffsetNanos(ctx, req.(*GetAppVsyncOffsetNanosRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DisplayMetricsService_Equals1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Equals1_1Request)
+func _DisplayService_GetCurrentSizeRange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentSizeRangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DisplayMetricsServiceServer).Equals1_1(ctx, in)
+		return srv.(DisplayServiceServer).GetCurrentSizeRange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DisplayMetricsService_Equals1_1_FullMethodName,
+		FullMethod: DisplayService_GetCurrentSizeRange_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayMetricsServiceServer).Equals1_1(ctx, req.(*Equals1_1Request))
+		return srv.(DisplayServiceServer).GetCurrentSizeRange(ctx, req.(*GetCurrentSizeRangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DisplayMetricsService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HashCodeRequest)
+func _DisplayService_GetCutout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCutoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DisplayMetricsServiceServer).HashCode(ctx, in)
+		return srv.(DisplayServiceServer).GetCutout(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DisplayMetricsService_HashCode_FullMethodName,
+		FullMethod: DisplayService_GetCutout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayMetricsServiceServer).HashCode(ctx, req.(*HashCodeRequest))
+		return srv.(DisplayServiceServer).GetCutout(ctx, req.(*GetCutoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DisplayMetricsService_SetTo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetToRequest)
+func _DisplayService_GetDeviceProductInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDeviceProductInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DisplayMetricsServiceServer).SetTo(ctx, in)
+		return srv.(DisplayServiceServer).GetDeviceProductInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DisplayMetricsService_SetTo_FullMethodName,
+		FullMethod: DisplayService_GetDeviceProductInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayMetricsServiceServer).SetTo(ctx, req.(*SetToRequest))
+		return srv.(DisplayServiceServer).GetDeviceProductInfo(ctx, req.(*GetDeviceProductInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DisplayMetricsService_SetToDefaults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetToDefaultsRequest)
+func _DisplayService_GetDisplayId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDisplayIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DisplayMetricsServiceServer).SetToDefaults(ctx, in)
+		return srv.(DisplayServiceServer).GetDisplayId(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DisplayMetricsService_SetToDefaults_FullMethodName,
+		FullMethod: DisplayService_GetDisplayId_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayMetricsServiceServer).SetToDefaults(ctx, req.(*SetToDefaultsRequest))
+		return srv.(DisplayServiceServer).GetDisplayId(ctx, req.(*GetDisplayIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DisplayMetricsService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DisplayService_GetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetFlags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetFlags(ctx, req.(*GetFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetHdrCapabilities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHdrCapabilitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetHdrCapabilities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetHdrCapabilities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetHdrCapabilities(ctx, req.(*GetHdrCapabilitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetHdrSdrRatio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHdrSdrRatioRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetHdrSdrRatio(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetHdrSdrRatio_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetHdrSdrRatio(ctx, req.(*GetHdrSdrRatioRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetHeight_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHeightRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetHeight(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetHeight_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetHeight(ctx, req.(*GetHeightRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetHighestHdrSdrRatio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHighestHdrSdrRatioRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetHighestHdrSdrRatio(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetHighestHdrSdrRatio_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetHighestHdrSdrRatio(ctx, req.(*GetHighestHdrSdrRatioRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetMetrics(ctx, req.(*GetMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetModeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetMode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetMode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetMode(ctx, req.(*GetModeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetName(ctx, req.(*GetNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetOrientation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrientationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetOrientation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetOrientation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetOrientation(ctx, req.(*GetOrientationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetOverlaySupport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOverlaySupportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetOverlaySupport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetOverlaySupport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetOverlaySupport(ctx, req.(*GetOverlaySupportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetPixelFormat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPixelFormatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetPixelFormat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetPixelFormat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetPixelFormat(ctx, req.(*GetPixelFormatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetPreferredWideGamutColorSpace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPreferredWideGamutColorSpaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetPreferredWideGamutColorSpace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetPreferredWideGamutColorSpace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetPreferredWideGamutColorSpace(ctx, req.(*GetPreferredWideGamutColorSpaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetPresentationDeadlineNanos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPresentationDeadlineNanosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetPresentationDeadlineNanos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetPresentationDeadlineNanos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetPresentationDeadlineNanos(ctx, req.(*GetPresentationDeadlineNanosRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetRealMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRealMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetRealMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetRealMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetRealMetrics(ctx, req.(*GetRealMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetRealSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRealSizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetRealSize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetRealSize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetRealSize(ctx, req.(*GetRealSizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetRectSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRectSizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetRectSize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetRectSize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetRectSize(ctx, req.(*GetRectSizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetRefreshRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRefreshRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetRefreshRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetRefreshRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetRefreshRate(ctx, req.(*GetRefreshRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetRotation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRotationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetRotation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetRotation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetRotation(ctx, req.(*GetRotationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetRoundedCorner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRoundedCornerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetRoundedCorner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetRoundedCorner_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetRoundedCorner(ctx, req.(*GetRoundedCornerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetShape_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetShapeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetShape(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetShape_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetShape(ctx, req.(*GetShapeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetSize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetSize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetSize(ctx, req.(*GetSizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetState(ctx, req.(*GetStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetSuggestedFrameRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSuggestedFrameRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetSuggestedFrameRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetSuggestedFrameRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetSuggestedFrameRate(ctx, req.(*GetSuggestedFrameRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetSupportedModes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSupportedModesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetSupportedModes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetSupportedModes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetSupportedModes(ctx, req.(*GetSupportedModesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetSupportedRefreshRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSupportedRefreshRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetSupportedRefreshRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetSupportedRefreshRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetSupportedRefreshRates(ctx, req.(*GetSupportedRefreshRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_GetWidth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWidthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).GetWidth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_GetWidth_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).GetWidth(ctx, req.(*GetWidthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_HasArrSupport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasArrSupportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).HasArrSupport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_HasArrSupport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).HasArrSupport(ctx, req.(*HasArrSupportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_IsHdr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsHdrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).IsHdr(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_IsHdr_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).IsHdr(ctx, req.(*IsHdrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_IsHdrSdrRatioAvailable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsHdrSdrRatioAvailableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).IsHdrSdrRatioAvailable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_IsHdrSdrRatioAvailable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).IsHdrSdrRatioAvailable(ctx, req.(*IsHdrSdrRatioAvailableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_IsMinimalPostProcessingSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsMinimalPostProcessingSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).IsMinimalPostProcessingSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_IsMinimalPostProcessingSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).IsMinimalPostProcessingSupported(ctx, req.(*IsMinimalPostProcessingSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_IsValid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsValidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).IsValid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_IsValid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).IsValid(ctx, req.(*IsValidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_IsWideColorGamut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsWideColorGamutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).IsWideColorGamut(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_IsWideColorGamut_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).IsWideColorGamut(ctx, req.(*IsWideColorGamutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_RegisterHdrSdrRatioChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterHdrSdrRatioChangedListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).RegisterHdrSdrRatioChangedListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_RegisterHdrSdrRatioChangedListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).RegisterHdrSdrRatioChangedListener(ctx, req.(*RegisterHdrSdrRatioChangedListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ToStringRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DisplayMetricsServiceServer).ToString(ctx, in)
+		return srv.(DisplayServiceServer).ToString(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DisplayMetricsService_ToString_FullMethodName,
+		FullMethod: DisplayService_ToString_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayMetricsServiceServer).ToString(ctx, req.(*ToStringRequest))
+		return srv.(DisplayServiceServer).ToString(ctx, req.(*ToStringRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// DisplayMetricsService_ServiceDesc is the grpc.ServiceDesc for DisplayMetricsService service.
+func _DisplayService_UnregisterHdrSdrRatioChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterHdrSdrRatioChangedListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayServiceServer).UnregisterHdrSdrRatioChangedListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayService_UnregisterHdrSdrRatioChangedListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayServiceServer).UnregisterHdrSdrRatioChangedListener(ctx, req.(*UnregisterHdrSdrRatioChangedListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DisplayService_ServiceDesc is the grpc.ServiceDesc for DisplayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var DisplayMetricsService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "display.DisplayMetricsService",
-	HandlerType: (*DisplayMetricsServiceServer)(nil),
+var DisplayService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "display.DisplayService",
+	HandlerType: (*DisplayServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Equals1",
-			Handler:    _DisplayMetricsService_Equals1_Handler,
+			MethodName: "GetAppVsyncOffsetNanos",
+			Handler:    _DisplayService_GetAppVsyncOffsetNanos_Handler,
 		},
 		{
-			MethodName: "Equals1_1",
-			Handler:    _DisplayMetricsService_Equals1_1_Handler,
+			MethodName: "GetCurrentSizeRange",
+			Handler:    _DisplayService_GetCurrentSizeRange_Handler,
 		},
 		{
-			MethodName: "HashCode",
-			Handler:    _DisplayMetricsService_HashCode_Handler,
+			MethodName: "GetCutout",
+			Handler:    _DisplayService_GetCutout_Handler,
 		},
 		{
-			MethodName: "SetTo",
-			Handler:    _DisplayMetricsService_SetTo_Handler,
+			MethodName: "GetDeviceProductInfo",
+			Handler:    _DisplayService_GetDeviceProductInfo_Handler,
 		},
 		{
-			MethodName: "SetToDefaults",
-			Handler:    _DisplayMetricsService_SetToDefaults_Handler,
+			MethodName: "GetDisplayId",
+			Handler:    _DisplayService_GetDisplayId_Handler,
+		},
+		{
+			MethodName: "GetFlags",
+			Handler:    _DisplayService_GetFlags_Handler,
+		},
+		{
+			MethodName: "GetHdrCapabilities",
+			Handler:    _DisplayService_GetHdrCapabilities_Handler,
+		},
+		{
+			MethodName: "GetHdrSdrRatio",
+			Handler:    _DisplayService_GetHdrSdrRatio_Handler,
+		},
+		{
+			MethodName: "GetHeight",
+			Handler:    _DisplayService_GetHeight_Handler,
+		},
+		{
+			MethodName: "GetHighestHdrSdrRatio",
+			Handler:    _DisplayService_GetHighestHdrSdrRatio_Handler,
+		},
+		{
+			MethodName: "GetMetrics",
+			Handler:    _DisplayService_GetMetrics_Handler,
+		},
+		{
+			MethodName: "GetMode",
+			Handler:    _DisplayService_GetMode_Handler,
+		},
+		{
+			MethodName: "GetName",
+			Handler:    _DisplayService_GetName_Handler,
+		},
+		{
+			MethodName: "GetOrientation",
+			Handler:    _DisplayService_GetOrientation_Handler,
+		},
+		{
+			MethodName: "GetOverlaySupport",
+			Handler:    _DisplayService_GetOverlaySupport_Handler,
+		},
+		{
+			MethodName: "GetPixelFormat",
+			Handler:    _DisplayService_GetPixelFormat_Handler,
+		},
+		{
+			MethodName: "GetPreferredWideGamutColorSpace",
+			Handler:    _DisplayService_GetPreferredWideGamutColorSpace_Handler,
+		},
+		{
+			MethodName: "GetPresentationDeadlineNanos",
+			Handler:    _DisplayService_GetPresentationDeadlineNanos_Handler,
+		},
+		{
+			MethodName: "GetRealMetrics",
+			Handler:    _DisplayService_GetRealMetrics_Handler,
+		},
+		{
+			MethodName: "GetRealSize",
+			Handler:    _DisplayService_GetRealSize_Handler,
+		},
+		{
+			MethodName: "GetRectSize",
+			Handler:    _DisplayService_GetRectSize_Handler,
+		},
+		{
+			MethodName: "GetRefreshRate",
+			Handler:    _DisplayService_GetRefreshRate_Handler,
+		},
+		{
+			MethodName: "GetRotation",
+			Handler:    _DisplayService_GetRotation_Handler,
+		},
+		{
+			MethodName: "GetRoundedCorner",
+			Handler:    _DisplayService_GetRoundedCorner_Handler,
+		},
+		{
+			MethodName: "GetShape",
+			Handler:    _DisplayService_GetShape_Handler,
+		},
+		{
+			MethodName: "GetSize",
+			Handler:    _DisplayService_GetSize_Handler,
+		},
+		{
+			MethodName: "GetState",
+			Handler:    _DisplayService_GetState_Handler,
+		},
+		{
+			MethodName: "GetSuggestedFrameRate",
+			Handler:    _DisplayService_GetSuggestedFrameRate_Handler,
+		},
+		{
+			MethodName: "GetSupportedModes",
+			Handler:    _DisplayService_GetSupportedModes_Handler,
+		},
+		{
+			MethodName: "GetSupportedRefreshRates",
+			Handler:    _DisplayService_GetSupportedRefreshRates_Handler,
+		},
+		{
+			MethodName: "GetWidth",
+			Handler:    _DisplayService_GetWidth_Handler,
+		},
+		{
+			MethodName: "HasArrSupport",
+			Handler:    _DisplayService_HasArrSupport_Handler,
+		},
+		{
+			MethodName: "IsHdr",
+			Handler:    _DisplayService_IsHdr_Handler,
+		},
+		{
+			MethodName: "IsHdrSdrRatioAvailable",
+			Handler:    _DisplayService_IsHdrSdrRatioAvailable_Handler,
+		},
+		{
+			MethodName: "IsMinimalPostProcessingSupported",
+			Handler:    _DisplayService_IsMinimalPostProcessingSupported_Handler,
+		},
+		{
+			MethodName: "IsValid",
+			Handler:    _DisplayService_IsValid_Handler,
+		},
+		{
+			MethodName: "IsWideColorGamut",
+			Handler:    _DisplayService_IsWideColorGamut_Handler,
+		},
+		{
+			MethodName: "RegisterHdrSdrRatioChangedListener",
+			Handler:    _DisplayService_RegisterHdrSdrRatioChangedListener_Handler,
 		},
 		{
 			MethodName: "ToString",
-			Handler:    _DisplayMetricsService_ToString_Handler,
+			Handler:    _DisplayService_ToString_Handler,
+		},
+		{
+			MethodName: "UnregisterHdrSdrRatioChangedListener",
+			Handler:    _DisplayService_UnregisterHdrSdrRatioChangedListener_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

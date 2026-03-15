@@ -23,27 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AddPrimaryClipChangedListenerRequest struct {
+type AddItem1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddPrimaryClipChangedListenerRequest) Reset() {
-	*x = AddPrimaryClipChangedListenerRequest{}
+func (x *AddItem1Request) Reset() {
+	*x = AddItem1Request{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddPrimaryClipChangedListenerRequest) String() string {
+func (x *AddItem1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddPrimaryClipChangedListenerRequest) ProtoMessage() {}
+func (*AddItem1Request) ProtoMessage() {}
 
-func (x *AddPrimaryClipChangedListenerRequest) ProtoReflect() protoreflect.Message {
+func (x *AddItem1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,38 +55,38 @@ func (x *AddPrimaryClipChangedListenerRequest) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddPrimaryClipChangedListenerRequest.ProtoReflect.Descriptor instead.
-func (*AddPrimaryClipChangedListenerRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddItem1Request.ProtoReflect.Descriptor instead.
+func (*AddItem1Request) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AddPrimaryClipChangedListenerRequest) GetArg0() int64 {
+func (x *AddItem1Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type AddPrimaryClipChangedListenerResponse struct {
+type AddItem1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddPrimaryClipChangedListenerResponse) Reset() {
-	*x = AddPrimaryClipChangedListenerResponse{}
+func (x *AddItem1Response) Reset() {
+	*x = AddItem1Response{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddPrimaryClipChangedListenerResponse) String() string {
+func (x *AddItem1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddPrimaryClipChangedListenerResponse) ProtoMessage() {}
+func (*AddItem1Response) ProtoMessage() {}
 
-func (x *AddPrimaryClipChangedListenerResponse) ProtoReflect() protoreflect.Message {
+func (x *AddItem1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -98,31 +98,33 @@ func (x *AddPrimaryClipChangedListenerResponse) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddPrimaryClipChangedListenerResponse.ProtoReflect.Descriptor instead.
-func (*AddPrimaryClipChangedListenerResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddItem1Response.ProtoReflect.Descriptor instead.
+func (*AddItem1Response) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{1}
 }
 
-type ClearPrimaryClipRequest struct {
+type AddItem2_1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ClearPrimaryClipRequest) Reset() {
-	*x = ClearPrimaryClipRequest{}
+func (x *AddItem2_1Request) Reset() {
+	*x = AddItem2_1Request{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClearPrimaryClipRequest) String() string {
+func (x *AddItem2_1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClearPrimaryClipRequest) ProtoMessage() {}
+func (*AddItem2_1Request) ProtoMessage() {}
 
-func (x *ClearPrimaryClipRequest) ProtoReflect() protoreflect.Message {
+func (x *AddItem2_1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -134,31 +136,45 @@ func (x *ClearPrimaryClipRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClearPrimaryClipRequest.ProtoReflect.Descriptor instead.
-func (*ClearPrimaryClipRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddItem2_1Request.ProtoReflect.Descriptor instead.
+func (*AddItem2_1Request) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{2}
 }
 
-type ClearPrimaryClipResponse struct {
+func (x *AddItem2_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *AddItem2_1Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type AddItem2_1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ClearPrimaryClipResponse) Reset() {
-	*x = ClearPrimaryClipResponse{}
+func (x *AddItem2_1Response) Reset() {
+	*x = AddItem2_1Response{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClearPrimaryClipResponse) String() string {
+func (x *AddItem2_1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClearPrimaryClipResponse) ProtoMessage() {}
+func (*AddItem2_1Response) ProtoMessage() {}
 
-func (x *ClearPrimaryClipResponse) ProtoReflect() protoreflect.Message {
+func (x *AddItem2_1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -170,31 +186,31 @@ func (x *ClearPrimaryClipResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClearPrimaryClipResponse.ProtoReflect.Descriptor instead.
-func (*ClearPrimaryClipResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddItem2_1Response.ProtoReflect.Descriptor instead.
+func (*AddItem2_1Response) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{3}
 }
 
-type GetPrimaryClipRequest struct {
+type DescribeContentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPrimaryClipRequest) Reset() {
-	*x = GetPrimaryClipRequest{}
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPrimaryClipRequest) String() string {
+func (x *DescribeContentsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPrimaryClipRequest) ProtoMessage() {}
+func (*DescribeContentsRequest) ProtoMessage() {}
 
-func (x *GetPrimaryClipRequest) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -206,32 +222,32 @@ func (x *GetPrimaryClipRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPrimaryClipRequest.ProtoReflect.Descriptor instead.
-func (*GetPrimaryClipRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{4}
 }
 
-type GetPrimaryClipResponse struct {
+type DescribeContentsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPrimaryClipResponse) Reset() {
-	*x = GetPrimaryClipResponse{}
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPrimaryClipResponse) String() string {
+func (x *DescribeContentsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPrimaryClipResponse) ProtoMessage() {}
+func (*DescribeContentsResponse) ProtoMessage() {}
 
-func (x *GetPrimaryClipResponse) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -243,38 +259,38 @@ func (x *GetPrimaryClipResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPrimaryClipResponse.ProtoReflect.Descriptor instead.
-func (*GetPrimaryClipResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetPrimaryClipResponse) GetResult() int64 {
+func (x *DescribeContentsResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type GetPrimaryClipDescriptionRequest struct {
+type GetDescriptionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPrimaryClipDescriptionRequest) Reset() {
-	*x = GetPrimaryClipDescriptionRequest{}
+func (x *GetDescriptionRequest) Reset() {
+	*x = GetDescriptionRequest{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPrimaryClipDescriptionRequest) String() string {
+func (x *GetDescriptionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPrimaryClipDescriptionRequest) ProtoMessage() {}
+func (*GetDescriptionRequest) ProtoMessage() {}
 
-func (x *GetPrimaryClipDescriptionRequest) ProtoReflect() protoreflect.Message {
+func (x *GetDescriptionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -286,32 +302,32 @@ func (x *GetPrimaryClipDescriptionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPrimaryClipDescriptionRequest.ProtoReflect.Descriptor instead.
-func (*GetPrimaryClipDescriptionRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDescriptionRequest.ProtoReflect.Descriptor instead.
+func (*GetDescriptionRequest) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{6}
 }
 
-type GetPrimaryClipDescriptionResponse struct {
+type GetDescriptionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPrimaryClipDescriptionResponse) Reset() {
-	*x = GetPrimaryClipDescriptionResponse{}
+func (x *GetDescriptionResponse) Reset() {
+	*x = GetDescriptionResponse{}
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPrimaryClipDescriptionResponse) String() string {
+func (x *GetDescriptionResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPrimaryClipDescriptionResponse) ProtoMessage() {}
+func (*GetDescriptionResponse) ProtoMessage() {}
 
-func (x *GetPrimaryClipDescriptionResponse) ProtoReflect() protoreflect.Message {
+func (x *GetDescriptionResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_clipboard_clipboard_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -323,12 +339,1348 @@ func (x *GetPrimaryClipDescriptionResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPrimaryClipDescriptionResponse.ProtoReflect.Descriptor instead.
-func (*GetPrimaryClipDescriptionResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDescriptionResponse.ProtoReflect.Descriptor instead.
+func (*GetDescriptionResponse) Descriptor() ([]byte, []int) {
 	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *GetPrimaryClipDescriptionResponse) GetResult() int64 {
+func (x *GetDescriptionResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetItemAtRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetItemAtRequest) Reset() {
+	*x = GetItemAtRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetItemAtRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetItemAtRequest) ProtoMessage() {}
+
+func (x *GetItemAtRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetItemAtRequest.ProtoReflect.Descriptor instead.
+func (*GetItemAtRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetItemAtRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetItemAtResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetItemAtResponse) Reset() {
+	*x = GetItemAtResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetItemAtResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetItemAtResponse) ProtoMessage() {}
+
+func (x *GetItemAtResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetItemAtResponse.ProtoReflect.Descriptor instead.
+func (*GetItemAtResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetItemAtResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetItemCountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetItemCountRequest) Reset() {
+	*x = GetItemCountRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetItemCountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetItemCountRequest) ProtoMessage() {}
+
+func (x *GetItemCountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetItemCountRequest.ProtoReflect.Descriptor instead.
+func (*GetItemCountRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{10}
+}
+
+type GetItemCountResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetItemCountResponse) Reset() {
+	*x = GetItemCountResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetItemCountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetItemCountResponse) ProtoMessage() {}
+
+func (x *GetItemCountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetItemCountResponse.ProtoReflect.Descriptor instead.
+func (*GetItemCountResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetItemCountResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ToStringRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringRequest) ProtoMessage() {}
+
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{12}
+}
+
+type ToStringResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringResponse) ProtoMessage() {}
+
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ToStringResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type WriteToParcelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelRequest) ProtoMessage() {}
+
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *WriteToParcelRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *WriteToParcelRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type WriteToParcelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelResponse) ProtoMessage() {}
+
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{15}
+}
+
+type NewHtmlTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          string                 `protobuf:"bytes,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewHtmlTextRequest) Reset() {
+	*x = NewHtmlTextRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewHtmlTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewHtmlTextRequest) ProtoMessage() {}
+
+func (x *NewHtmlTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewHtmlTextRequest.ProtoReflect.Descriptor instead.
+func (*NewHtmlTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *NewHtmlTextRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *NewHtmlTextRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+func (x *NewHtmlTextRequest) GetArg2() string {
+	if x != nil {
+		return x.Arg2
+	}
+	return ""
+}
+
+type NewHtmlTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewHtmlTextResponse) Reset() {
+	*x = NewHtmlTextResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewHtmlTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewHtmlTextResponse) ProtoMessage() {}
+
+func (x *NewHtmlTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewHtmlTextResponse.ProtoReflect.Descriptor instead.
+func (*NewHtmlTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *NewHtmlTextResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type NewIntentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewIntentRequest) Reset() {
+	*x = NewIntentRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewIntentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewIntentRequest) ProtoMessage() {}
+
+func (x *NewIntentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewIntentRequest.ProtoReflect.Descriptor instead.
+func (*NewIntentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *NewIntentRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *NewIntentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type NewIntentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewIntentResponse) Reset() {
+	*x = NewIntentResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewIntentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewIntentResponse) ProtoMessage() {}
+
+func (x *NewIntentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewIntentResponse.ProtoReflect.Descriptor instead.
+func (*NewIntentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *NewIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type NewPlainTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewPlainTextRequest) Reset() {
+	*x = NewPlainTextRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewPlainTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewPlainTextRequest) ProtoMessage() {}
+
+func (x *NewPlainTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewPlainTextRequest.ProtoReflect.Descriptor instead.
+func (*NewPlainTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *NewPlainTextRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *NewPlainTextRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+type NewPlainTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewPlainTextResponse) Reset() {
+	*x = NewPlainTextResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewPlainTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewPlainTextResponse) ProtoMessage() {}
+
+func (x *NewPlainTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewPlainTextResponse.ProtoReflect.Descriptor instead.
+func (*NewPlainTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *NewPlainTextResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type NewRawUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewRawUriRequest) Reset() {
+	*x = NewRawUriRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewRawUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewRawUriRequest) ProtoMessage() {}
+
+func (x *NewRawUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewRawUriRequest.ProtoReflect.Descriptor instead.
+func (*NewRawUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *NewRawUriRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *NewRawUriRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type NewRawUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewRawUriResponse) Reset() {
+	*x = NewRawUriResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewRawUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewRawUriResponse) ProtoMessage() {}
+
+func (x *NewRawUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewRawUriResponse.ProtoReflect.Descriptor instead.
+func (*NewRawUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *NewRawUriResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type NewUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewUriRequest) Reset() {
+	*x = NewUriRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewUriRequest) ProtoMessage() {}
+
+func (x *NewUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewUriRequest.ProtoReflect.Descriptor instead.
+func (*NewUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *NewUriRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *NewUriRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+func (x *NewUriRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type NewUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewUriResponse) Reset() {
+	*x = NewUriResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewUriResponse) ProtoMessage() {}
+
+func (x *NewUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewUriResponse.ProtoReflect.Descriptor instead.
+func (*NewUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *NewUriResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CoerceToHtmlTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CoerceToHtmlTextRequest) Reset() {
+	*x = CoerceToHtmlTextRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoerceToHtmlTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoerceToHtmlTextRequest) ProtoMessage() {}
+
+func (x *CoerceToHtmlTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoerceToHtmlTextRequest.ProtoReflect.Descriptor instead.
+func (*CoerceToHtmlTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *CoerceToHtmlTextRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type CoerceToHtmlTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CoerceToHtmlTextResponse) Reset() {
+	*x = CoerceToHtmlTextResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoerceToHtmlTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoerceToHtmlTextResponse) ProtoMessage() {}
+
+func (x *CoerceToHtmlTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoerceToHtmlTextResponse.ProtoReflect.Descriptor instead.
+func (*CoerceToHtmlTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *CoerceToHtmlTextResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type CoerceToStyledTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CoerceToStyledTextRequest) Reset() {
+	*x = CoerceToStyledTextRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoerceToStyledTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoerceToStyledTextRequest) ProtoMessage() {}
+
+func (x *CoerceToStyledTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoerceToStyledTextRequest.ProtoReflect.Descriptor instead.
+func (*CoerceToStyledTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *CoerceToStyledTextRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type CoerceToStyledTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CoerceToStyledTextResponse) Reset() {
+	*x = CoerceToStyledTextResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoerceToStyledTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoerceToStyledTextResponse) ProtoMessage() {}
+
+func (x *CoerceToStyledTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoerceToStyledTextResponse.ProtoReflect.Descriptor instead.
+func (*CoerceToStyledTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *CoerceToStyledTextResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type CoerceToTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CoerceToTextRequest) Reset() {
+	*x = CoerceToTextRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoerceToTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoerceToTextRequest) ProtoMessage() {}
+
+func (x *CoerceToTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoerceToTextRequest.ProtoReflect.Descriptor instead.
+func (*CoerceToTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *CoerceToTextRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type CoerceToTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CoerceToTextResponse) Reset() {
+	*x = CoerceToTextResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CoerceToTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoerceToTextResponse) ProtoMessage() {}
+
+func (x *CoerceToTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoerceToTextResponse.ProtoReflect.Descriptor instead.
+func (*CoerceToTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *CoerceToTextResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetHtmlTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetHtmlTextRequest) Reset() {
+	*x = GetHtmlTextRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetHtmlTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetHtmlTextRequest) ProtoMessage() {}
+
+func (x *GetHtmlTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetHtmlTextRequest.ProtoReflect.Descriptor instead.
+func (*GetHtmlTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{32}
+}
+
+type GetHtmlTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetHtmlTextResponse) Reset() {
+	*x = GetHtmlTextResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetHtmlTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetHtmlTextResponse) ProtoMessage() {}
+
+func (x *GetHtmlTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetHtmlTextResponse.ProtoReflect.Descriptor instead.
+func (*GetHtmlTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetHtmlTextResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetIntentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIntentRequest) Reset() {
+	*x = GetIntentRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIntentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIntentRequest) ProtoMessage() {}
+
+func (x *GetIntentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIntentRequest.ProtoReflect.Descriptor instead.
+func (*GetIntentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{34}
+}
+
+type GetIntentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIntentResponse) Reset() {
+	*x = GetIntentResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIntentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIntentResponse) ProtoMessage() {}
+
+func (x *GetIntentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIntentResponse.ProtoReflect.Descriptor instead.
+func (*GetIntentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetIntentSenderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIntentSenderRequest) Reset() {
+	*x = GetIntentSenderRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIntentSenderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIntentSenderRequest) ProtoMessage() {}
+
+func (x *GetIntentSenderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIntentSenderRequest.ProtoReflect.Descriptor instead.
+func (*GetIntentSenderRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{36}
+}
+
+type GetIntentSenderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIntentSenderResponse) Reset() {
+	*x = GetIntentSenderResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIntentSenderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIntentSenderResponse) ProtoMessage() {}
+
+func (x *GetIntentSenderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIntentSenderResponse.ProtoReflect.Descriptor instead.
+func (*GetIntentSenderResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetIntentSenderResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
@@ -343,7 +1695,7 @@ type GetTextRequest struct {
 
 func (x *GetTextRequest) Reset() {
 	*x = GetTextRequest{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[8]
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -355,7 +1707,7 @@ func (x *GetTextRequest) String() string {
 func (*GetTextRequest) ProtoMessage() {}
 
 func (x *GetTextRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[8]
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +1720,7 @@ func (x *GetTextRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTextRequest.ProtoReflect.Descriptor instead.
 func (*GetTextRequest) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{8}
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{38}
 }
 
 type GetTextResponse struct {
@@ -380,7 +1732,7 @@ type GetTextResponse struct {
 
 func (x *GetTextResponse) Reset() {
 	*x = GetTextResponse{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[9]
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -392,7 +1744,7 @@ func (x *GetTextResponse) String() string {
 func (*GetTextResponse) ProtoMessage() {}
 
 func (x *GetTextResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[9]
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -405,7 +1757,7 @@ func (x *GetTextResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTextResponse.ProtoReflect.Descriptor instead.
 func (*GetTextResponse) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{9}
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GetTextResponse) GetResult() string {
@@ -415,27 +1767,27 @@ func (x *GetTextResponse) GetResult() string {
 	return ""
 }
 
-type HasPrimaryClipRequest struct {
+type GetTextLinksRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HasPrimaryClipRequest) Reset() {
-	*x = HasPrimaryClipRequest{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[10]
+func (x *GetTextLinksRequest) Reset() {
+	*x = GetTextLinksRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HasPrimaryClipRequest) String() string {
+func (x *GetTextLinksRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HasPrimaryClipRequest) ProtoMessage() {}
+func (*GetTextLinksRequest) ProtoMessage() {}
 
-func (x *HasPrimaryClipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[10]
+func (x *GetTextLinksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -446,33 +1798,33 @@ func (x *HasPrimaryClipRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HasPrimaryClipRequest.ProtoReflect.Descriptor instead.
-func (*HasPrimaryClipRequest) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use GetTextLinksRequest.ProtoReflect.Descriptor instead.
+func (*GetTextLinksRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{40}
 }
 
-type HasPrimaryClipResponse struct {
+type GetTextLinksResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HasPrimaryClipResponse) Reset() {
-	*x = HasPrimaryClipResponse{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[11]
+func (x *GetTextLinksResponse) Reset() {
+	*x = GetTextLinksResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HasPrimaryClipResponse) String() string {
+func (x *GetTextLinksResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HasPrimaryClipResponse) ProtoMessage() {}
+func (*GetTextLinksResponse) ProtoMessage() {}
 
-func (x *HasPrimaryClipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[11]
+func (x *GetTextLinksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -483,163 +1835,39 @@ func (x *HasPrimaryClipResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HasPrimaryClipResponse.ProtoReflect.Descriptor instead.
-func (*HasPrimaryClipResponse) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{11}
+// Deprecated: Use GetTextLinksResponse.ProtoReflect.Descriptor instead.
+func (*GetTextLinksResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{41}
 }
 
-func (x *HasPrimaryClipResponse) GetResult() bool {
+func (x *GetTextLinksResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
-	}
-	return false
-}
-
-type HasTextRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HasTextRequest) Reset() {
-	*x = HasTextRequest{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HasTextRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HasTextRequest) ProtoMessage() {}
-
-func (x *HasTextRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HasTextRequest.ProtoReflect.Descriptor instead.
-func (*HasTextRequest) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{12}
-}
-
-type HasTextResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HasTextResponse) Reset() {
-	*x = HasTextResponse{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HasTextResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HasTextResponse) ProtoMessage() {}
-
-func (x *HasTextResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HasTextResponse.ProtoReflect.Descriptor instead.
-func (*HasTextResponse) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *HasTextResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type RemovePrimaryClipChangedListenerRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RemovePrimaryClipChangedListenerRequest) Reset() {
-	*x = RemovePrimaryClipChangedListenerRequest{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RemovePrimaryClipChangedListenerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RemovePrimaryClipChangedListenerRequest) ProtoMessage() {}
-
-func (x *RemovePrimaryClipChangedListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RemovePrimaryClipChangedListenerRequest.ProtoReflect.Descriptor instead.
-func (*RemovePrimaryClipChangedListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *RemovePrimaryClipChangedListenerRequest) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
 	}
 	return 0
 }
 
-type RemovePrimaryClipChangedListenerResponse struct {
+type GetUriRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RemovePrimaryClipChangedListenerResponse) Reset() {
-	*x = RemovePrimaryClipChangedListenerResponse{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[15]
+func (x *GetUriRequest) Reset() {
+	*x = GetUriRequest{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RemovePrimaryClipChangedListenerResponse) String() string {
+func (x *GetUriRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RemovePrimaryClipChangedListenerResponse) ProtoMessage() {}
+func (*GetUriRequest) ProtoMessage() {}
 
-func (x *RemovePrimaryClipChangedListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[15]
+func (x *GetUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -650,33 +1878,33 @@ func (x *RemovePrimaryClipChangedListenerResponse) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemovePrimaryClipChangedListenerResponse.ProtoReflect.Descriptor instead.
-func (*RemovePrimaryClipChangedListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{15}
+// Deprecated: Use GetUriRequest.ProtoReflect.Descriptor instead.
+func (*GetUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{42}
 }
 
-type SetPrimaryClipRequest struct {
+type GetUriResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetPrimaryClipRequest) Reset() {
-	*x = SetPrimaryClipRequest{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[16]
+func (x *GetUriResponse) Reset() {
+	*x = GetUriResponse{}
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetPrimaryClipRequest) String() string {
+func (x *GetUriResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetPrimaryClipRequest) ProtoMessage() {}
+func (*GetUriResponse) ProtoMessage() {}
 
-func (x *SetPrimaryClipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[16]
+func (x *GetUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_clipboard_clipboard_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -687,179 +1915,133 @@ func (x *SetPrimaryClipRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetPrimaryClipRequest.ProtoReflect.Descriptor instead.
-func (*SetPrimaryClipRequest) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{16}
+// Deprecated: Use GetUriResponse.ProtoReflect.Descriptor instead.
+func (*GetUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{43}
 }
 
-func (x *SetPrimaryClipRequest) GetArg0() int64 {
+func (x *GetUriResponse) GetResult() int64 {
 	if x != nil {
-		return x.Arg0
+		return x.Result
 	}
 	return 0
-}
-
-type SetPrimaryClipResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetPrimaryClipResponse) Reset() {
-	*x = SetPrimaryClipResponse{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetPrimaryClipResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetPrimaryClipResponse) ProtoMessage() {}
-
-func (x *SetPrimaryClipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetPrimaryClipResponse.ProtoReflect.Descriptor instead.
-func (*SetPrimaryClipResponse) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{17}
-}
-
-type SetTextRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetTextRequest) Reset() {
-	*x = SetTextRequest{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetTextRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetTextRequest) ProtoMessage() {}
-
-func (x *SetTextRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetTextRequest.ProtoReflect.Descriptor instead.
-func (*SetTextRequest) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *SetTextRequest) GetArg0() string {
-	if x != nil {
-		return x.Arg0
-	}
-	return ""
-}
-
-type SetTextResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetTextResponse) Reset() {
-	*x = SetTextResponse{}
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetTextResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetTextResponse) ProtoMessage() {}
-
-func (x *SetTextResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_clipboard_clipboard_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetTextResponse.ProtoReflect.Descriptor instead.
-func (*SetTextResponse) Descriptor() ([]byte, []int) {
-	return file_proto_clipboard_clipboard_proto_rawDescGZIP(), []int{19}
 }
 
 var File_proto_clipboard_clipboard_proto protoreflect.FileDescriptor
 
 const file_proto_clipboard_clipboard_proto_rawDesc = "" +
 	"\n" +
-	"\x1fproto/clipboard/clipboard.proto\x12\tclipboard\":\n" +
-	"$AddPrimaryClipChangedListenerRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"'\n" +
-	"%AddPrimaryClipChangedListenerResponse\"\x19\n" +
-	"\x17ClearPrimaryClipRequest\"\x1a\n" +
-	"\x18ClearPrimaryClipResponse\"\x17\n" +
-	"\x15GetPrimaryClipRequest\"0\n" +
-	"\x16GetPrimaryClipResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\"\n" +
-	" GetPrimaryClipDescriptionRequest\";\n" +
-	"!GetPrimaryClipDescriptionResponse\x12\x16\n" +
+	"\x1fproto/clipboard/clipboard.proto\x12\tclipboard\"%\n" +
+	"\x0fAddItem1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x12\n" +
+	"\x10AddItem1Response\";\n" +
+	"\x11AddItem2_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x14\n" +
+	"\x12AddItem2_1Response\"\x19\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x17\n" +
+	"\x15GetDescriptionRequest\"0\n" +
+	"\x16GetDescriptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"&\n" +
+	"\x10GetItemAtRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"+\n" +
+	"\x11GetItemAtResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x15\n" +
+	"\x13GetItemCountRequest\".\n" +
+	"\x14GetItemCountResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse\"P\n" +
+	"\x12NewHtmlTextRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\tR\x04arg2\"-\n" +
+	"\x13NewHtmlTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\":\n" +
+	"\x10NewIntentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"+\n" +
+	"\x11NewIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"=\n" +
+	"\x13NewPlainTextRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\".\n" +
+	"\x14NewPlainTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\":\n" +
+	"\x10NewRawUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"+\n" +
+	"\x11NewRawUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"K\n" +
+	"\rNewUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"(\n" +
+	"\x0eNewUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"-\n" +
+	"\x17CoerceToHtmlTextRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"2\n" +
+	"\x18CoerceToHtmlTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"/\n" +
+	"\x19CoerceToStyledTextRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"4\n" +
+	"\x1aCoerceToStyledTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\")\n" +
+	"\x13CoerceToTextRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\".\n" +
+	"\x14CoerceToTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x14\n" +
+	"\x12GetHtmlTextRequest\"-\n" +
+	"\x13GetHtmlTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x12\n" +
+	"\x10GetIntentRequest\"+\n" +
+	"\x11GetIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x18\n" +
+	"\x16GetIntentSenderRequest\"1\n" +
+	"\x17GetIntentSenderResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
 	"\x0eGetTextRequest\")\n" +
 	"\x0fGetTextResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\"\x17\n" +
-	"\x15HasPrimaryClipRequest\"0\n" +
-	"\x16HasPrimaryClipResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"\x10\n" +
-	"\x0eHasTextRequest\")\n" +
-	"\x0fHasTextResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"=\n" +
-	"'RemovePrimaryClipChangedListenerRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"*\n" +
-	"(RemovePrimaryClipChangedListenerResponse\"+\n" +
-	"\x15SetPrimaryClipRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x18\n" +
-	"\x16SetPrimaryClipResponse\"$\n" +
-	"\x0eSetTextRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x11\n" +
-	"\x0fSetTextResponse2\xcc\a\n" +
-	"\x17ClipboardManagerService\x12\x82\x01\n" +
-	"\x1dAddPrimaryClipChangedListener\x12/.clipboard.AddPrimaryClipChangedListenerRequest\x1a0.clipboard.AddPrimaryClipChangedListenerResponse\x12[\n" +
-	"\x10ClearPrimaryClip\x12\".clipboard.ClearPrimaryClipRequest\x1a#.clipboard.ClearPrimaryClipResponse\x12U\n" +
-	"\x0eGetPrimaryClip\x12 .clipboard.GetPrimaryClipRequest\x1a!.clipboard.GetPrimaryClipResponse\x12v\n" +
-	"\x19GetPrimaryClipDescription\x12+.clipboard.GetPrimaryClipDescriptionRequest\x1a,.clipboard.GetPrimaryClipDescriptionResponse\x12@\n" +
-	"\aGetText\x12\x19.clipboard.GetTextRequest\x1a\x1a.clipboard.GetTextResponse\x12U\n" +
-	"\x0eHasPrimaryClip\x12 .clipboard.HasPrimaryClipRequest\x1a!.clipboard.HasPrimaryClipResponse\x12@\n" +
-	"\aHasText\x12\x19.clipboard.HasTextRequest\x1a\x1a.clipboard.HasTextResponse\x12\x8b\x01\n" +
-	" RemovePrimaryClipChangedListener\x122.clipboard.RemovePrimaryClipChangedListenerRequest\x1a3.clipboard.RemovePrimaryClipChangedListenerResponse\x12U\n" +
-	"\x0eSetPrimaryClip\x12 .clipboard.SetPrimaryClipRequest\x1a!.clipboard.SetPrimaryClipResponse\x12@\n" +
-	"\aSetText\x12\x19.clipboard.SetTextRequest\x1a\x1a.clipboard.SetTextResponseB,Z*github.com/xaionaro-go/jni/proto/clipboardb\x06proto3"
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x15\n" +
+	"\x13GetTextLinksRequest\".\n" +
+	"\x14GetTextLinksResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0f\n" +
+	"\rGetUriRequest\"(\n" +
+	"\x0eGetUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result2\xf5\a\n" +
+	"\x0fClipDataService\x12C\n" +
+	"\bAddItem1\x12\x1a.clipboard.AddItem1Request\x1a\x1b.clipboard.AddItem1Response\x12I\n" +
+	"\n" +
+	"AddItem2_1\x12\x1c.clipboard.AddItem2_1Request\x1a\x1d.clipboard.AddItem2_1Response\x12[\n" +
+	"\x10DescribeContents\x12\".clipboard.DescribeContentsRequest\x1a#.clipboard.DescribeContentsResponse\x12U\n" +
+	"\x0eGetDescription\x12 .clipboard.GetDescriptionRequest\x1a!.clipboard.GetDescriptionResponse\x12F\n" +
+	"\tGetItemAt\x12\x1b.clipboard.GetItemAtRequest\x1a\x1c.clipboard.GetItemAtResponse\x12O\n" +
+	"\fGetItemCount\x12\x1e.clipboard.GetItemCountRequest\x1a\x1f.clipboard.GetItemCountResponse\x12C\n" +
+	"\bToString\x12\x1a.clipboard.ToStringRequest\x1a\x1b.clipboard.ToStringResponse\x12R\n" +
+	"\rWriteToParcel\x12\x1f.clipboard.WriteToParcelRequest\x1a .clipboard.WriteToParcelResponse\x12L\n" +
+	"\vNewHtmlText\x12\x1d.clipboard.NewHtmlTextRequest\x1a\x1e.clipboard.NewHtmlTextResponse\x12F\n" +
+	"\tNewIntent\x12\x1b.clipboard.NewIntentRequest\x1a\x1c.clipboard.NewIntentResponse\x12O\n" +
+	"\fNewPlainText\x12\x1e.clipboard.NewPlainTextRequest\x1a\x1f.clipboard.NewPlainTextResponse\x12F\n" +
+	"\tNewRawUri\x12\x1b.clipboard.NewRawUriRequest\x1a\x1c.clipboard.NewRawUriResponse\x12=\n" +
+	"\x06NewUri\x12\x18.clipboard.NewUriRequest\x1a\x19.clipboard.NewUriResponse2\xad\x06\n" +
+	"\x13ClipDataItemService\x12[\n" +
+	"\x10CoerceToHtmlText\x12\".clipboard.CoerceToHtmlTextRequest\x1a#.clipboard.CoerceToHtmlTextResponse\x12a\n" +
+	"\x12CoerceToStyledText\x12$.clipboard.CoerceToStyledTextRequest\x1a%.clipboard.CoerceToStyledTextResponse\x12O\n" +
+	"\fCoerceToText\x12\x1e.clipboard.CoerceToTextRequest\x1a\x1f.clipboard.CoerceToTextResponse\x12L\n" +
+	"\vGetHtmlText\x12\x1d.clipboard.GetHtmlTextRequest\x1a\x1e.clipboard.GetHtmlTextResponse\x12F\n" +
+	"\tGetIntent\x12\x1b.clipboard.GetIntentRequest\x1a\x1c.clipboard.GetIntentResponse\x12X\n" +
+	"\x0fGetIntentSender\x12!.clipboard.GetIntentSenderRequest\x1a\".clipboard.GetIntentSenderResponse\x12@\n" +
+	"\aGetText\x12\x19.clipboard.GetTextRequest\x1a\x1a.clipboard.GetTextResponse\x12O\n" +
+	"\fGetTextLinks\x12\x1e.clipboard.GetTextLinksRequest\x1a\x1f.clipboard.GetTextLinksResponse\x12=\n" +
+	"\x06GetUri\x12\x18.clipboard.GetUriRequest\x1a\x19.clipboard.GetUriResponse\x12C\n" +
+	"\bToString\x12\x1a.clipboard.ToStringRequest\x1a\x1b.clipboard.ToStringResponseB,Z*github.com/xaionaro-go/jni/proto/clipboardb\x06proto3"
 
 var (
 	file_proto_clipboard_clipboard_proto_rawDescOnce sync.Once
@@ -873,52 +2055,102 @@ func file_proto_clipboard_clipboard_proto_rawDescGZIP() []byte {
 	return file_proto_clipboard_clipboard_proto_rawDescData
 }
 
-var file_proto_clipboard_clipboard_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_proto_clipboard_clipboard_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
 var file_proto_clipboard_clipboard_proto_goTypes = []any{
-	(*AddPrimaryClipChangedListenerRequest)(nil),     // 0: clipboard.AddPrimaryClipChangedListenerRequest
-	(*AddPrimaryClipChangedListenerResponse)(nil),    // 1: clipboard.AddPrimaryClipChangedListenerResponse
-	(*ClearPrimaryClipRequest)(nil),                  // 2: clipboard.ClearPrimaryClipRequest
-	(*ClearPrimaryClipResponse)(nil),                 // 3: clipboard.ClearPrimaryClipResponse
-	(*GetPrimaryClipRequest)(nil),                    // 4: clipboard.GetPrimaryClipRequest
-	(*GetPrimaryClipResponse)(nil),                   // 5: clipboard.GetPrimaryClipResponse
-	(*GetPrimaryClipDescriptionRequest)(nil),         // 6: clipboard.GetPrimaryClipDescriptionRequest
-	(*GetPrimaryClipDescriptionResponse)(nil),        // 7: clipboard.GetPrimaryClipDescriptionResponse
-	(*GetTextRequest)(nil),                           // 8: clipboard.GetTextRequest
-	(*GetTextResponse)(nil),                          // 9: clipboard.GetTextResponse
-	(*HasPrimaryClipRequest)(nil),                    // 10: clipboard.HasPrimaryClipRequest
-	(*HasPrimaryClipResponse)(nil),                   // 11: clipboard.HasPrimaryClipResponse
-	(*HasTextRequest)(nil),                           // 12: clipboard.HasTextRequest
-	(*HasTextResponse)(nil),                          // 13: clipboard.HasTextResponse
-	(*RemovePrimaryClipChangedListenerRequest)(nil),  // 14: clipboard.RemovePrimaryClipChangedListenerRequest
-	(*RemovePrimaryClipChangedListenerResponse)(nil), // 15: clipboard.RemovePrimaryClipChangedListenerResponse
-	(*SetPrimaryClipRequest)(nil),                    // 16: clipboard.SetPrimaryClipRequest
-	(*SetPrimaryClipResponse)(nil),                   // 17: clipboard.SetPrimaryClipResponse
-	(*SetTextRequest)(nil),                           // 18: clipboard.SetTextRequest
-	(*SetTextResponse)(nil),                          // 19: clipboard.SetTextResponse
+	(*AddItem1Request)(nil),            // 0: clipboard.AddItem1Request
+	(*AddItem1Response)(nil),           // 1: clipboard.AddItem1Response
+	(*AddItem2_1Request)(nil),          // 2: clipboard.AddItem2_1Request
+	(*AddItem2_1Response)(nil),         // 3: clipboard.AddItem2_1Response
+	(*DescribeContentsRequest)(nil),    // 4: clipboard.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil),   // 5: clipboard.DescribeContentsResponse
+	(*GetDescriptionRequest)(nil),      // 6: clipboard.GetDescriptionRequest
+	(*GetDescriptionResponse)(nil),     // 7: clipboard.GetDescriptionResponse
+	(*GetItemAtRequest)(nil),           // 8: clipboard.GetItemAtRequest
+	(*GetItemAtResponse)(nil),          // 9: clipboard.GetItemAtResponse
+	(*GetItemCountRequest)(nil),        // 10: clipboard.GetItemCountRequest
+	(*GetItemCountResponse)(nil),       // 11: clipboard.GetItemCountResponse
+	(*ToStringRequest)(nil),            // 12: clipboard.ToStringRequest
+	(*ToStringResponse)(nil),           // 13: clipboard.ToStringResponse
+	(*WriteToParcelRequest)(nil),       // 14: clipboard.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),      // 15: clipboard.WriteToParcelResponse
+	(*NewHtmlTextRequest)(nil),         // 16: clipboard.NewHtmlTextRequest
+	(*NewHtmlTextResponse)(nil),        // 17: clipboard.NewHtmlTextResponse
+	(*NewIntentRequest)(nil),           // 18: clipboard.NewIntentRequest
+	(*NewIntentResponse)(nil),          // 19: clipboard.NewIntentResponse
+	(*NewPlainTextRequest)(nil),        // 20: clipboard.NewPlainTextRequest
+	(*NewPlainTextResponse)(nil),       // 21: clipboard.NewPlainTextResponse
+	(*NewRawUriRequest)(nil),           // 22: clipboard.NewRawUriRequest
+	(*NewRawUriResponse)(nil),          // 23: clipboard.NewRawUriResponse
+	(*NewUriRequest)(nil),              // 24: clipboard.NewUriRequest
+	(*NewUriResponse)(nil),             // 25: clipboard.NewUriResponse
+	(*CoerceToHtmlTextRequest)(nil),    // 26: clipboard.CoerceToHtmlTextRequest
+	(*CoerceToHtmlTextResponse)(nil),   // 27: clipboard.CoerceToHtmlTextResponse
+	(*CoerceToStyledTextRequest)(nil),  // 28: clipboard.CoerceToStyledTextRequest
+	(*CoerceToStyledTextResponse)(nil), // 29: clipboard.CoerceToStyledTextResponse
+	(*CoerceToTextRequest)(nil),        // 30: clipboard.CoerceToTextRequest
+	(*CoerceToTextResponse)(nil),       // 31: clipboard.CoerceToTextResponse
+	(*GetHtmlTextRequest)(nil),         // 32: clipboard.GetHtmlTextRequest
+	(*GetHtmlTextResponse)(nil),        // 33: clipboard.GetHtmlTextResponse
+	(*GetIntentRequest)(nil),           // 34: clipboard.GetIntentRequest
+	(*GetIntentResponse)(nil),          // 35: clipboard.GetIntentResponse
+	(*GetIntentSenderRequest)(nil),     // 36: clipboard.GetIntentSenderRequest
+	(*GetIntentSenderResponse)(nil),    // 37: clipboard.GetIntentSenderResponse
+	(*GetTextRequest)(nil),             // 38: clipboard.GetTextRequest
+	(*GetTextResponse)(nil),            // 39: clipboard.GetTextResponse
+	(*GetTextLinksRequest)(nil),        // 40: clipboard.GetTextLinksRequest
+	(*GetTextLinksResponse)(nil),       // 41: clipboard.GetTextLinksResponse
+	(*GetUriRequest)(nil),              // 42: clipboard.GetUriRequest
+	(*GetUriResponse)(nil),             // 43: clipboard.GetUriResponse
 }
 var file_proto_clipboard_clipboard_proto_depIdxs = []int32{
-	0,  // 0: clipboard.ClipboardManagerService.AddPrimaryClipChangedListener:input_type -> clipboard.AddPrimaryClipChangedListenerRequest
-	2,  // 1: clipboard.ClipboardManagerService.ClearPrimaryClip:input_type -> clipboard.ClearPrimaryClipRequest
-	4,  // 2: clipboard.ClipboardManagerService.GetPrimaryClip:input_type -> clipboard.GetPrimaryClipRequest
-	6,  // 3: clipboard.ClipboardManagerService.GetPrimaryClipDescription:input_type -> clipboard.GetPrimaryClipDescriptionRequest
-	8,  // 4: clipboard.ClipboardManagerService.GetText:input_type -> clipboard.GetTextRequest
-	10, // 5: clipboard.ClipboardManagerService.HasPrimaryClip:input_type -> clipboard.HasPrimaryClipRequest
-	12, // 6: clipboard.ClipboardManagerService.HasText:input_type -> clipboard.HasTextRequest
-	14, // 7: clipboard.ClipboardManagerService.RemovePrimaryClipChangedListener:input_type -> clipboard.RemovePrimaryClipChangedListenerRequest
-	16, // 8: clipboard.ClipboardManagerService.SetPrimaryClip:input_type -> clipboard.SetPrimaryClipRequest
-	18, // 9: clipboard.ClipboardManagerService.SetText:input_type -> clipboard.SetTextRequest
-	1,  // 10: clipboard.ClipboardManagerService.AddPrimaryClipChangedListener:output_type -> clipboard.AddPrimaryClipChangedListenerResponse
-	3,  // 11: clipboard.ClipboardManagerService.ClearPrimaryClip:output_type -> clipboard.ClearPrimaryClipResponse
-	5,  // 12: clipboard.ClipboardManagerService.GetPrimaryClip:output_type -> clipboard.GetPrimaryClipResponse
-	7,  // 13: clipboard.ClipboardManagerService.GetPrimaryClipDescription:output_type -> clipboard.GetPrimaryClipDescriptionResponse
-	9,  // 14: clipboard.ClipboardManagerService.GetText:output_type -> clipboard.GetTextResponse
-	11, // 15: clipboard.ClipboardManagerService.HasPrimaryClip:output_type -> clipboard.HasPrimaryClipResponse
-	13, // 16: clipboard.ClipboardManagerService.HasText:output_type -> clipboard.HasTextResponse
-	15, // 17: clipboard.ClipboardManagerService.RemovePrimaryClipChangedListener:output_type -> clipboard.RemovePrimaryClipChangedListenerResponse
-	17, // 18: clipboard.ClipboardManagerService.SetPrimaryClip:output_type -> clipboard.SetPrimaryClipResponse
-	19, // 19: clipboard.ClipboardManagerService.SetText:output_type -> clipboard.SetTextResponse
-	10, // [10:20] is the sub-list for method output_type
-	0,  // [0:10] is the sub-list for method input_type
+	0,  // 0: clipboard.ClipDataService.AddItem1:input_type -> clipboard.AddItem1Request
+	2,  // 1: clipboard.ClipDataService.AddItem2_1:input_type -> clipboard.AddItem2_1Request
+	4,  // 2: clipboard.ClipDataService.DescribeContents:input_type -> clipboard.DescribeContentsRequest
+	6,  // 3: clipboard.ClipDataService.GetDescription:input_type -> clipboard.GetDescriptionRequest
+	8,  // 4: clipboard.ClipDataService.GetItemAt:input_type -> clipboard.GetItemAtRequest
+	10, // 5: clipboard.ClipDataService.GetItemCount:input_type -> clipboard.GetItemCountRequest
+	12, // 6: clipboard.ClipDataService.ToString:input_type -> clipboard.ToStringRequest
+	14, // 7: clipboard.ClipDataService.WriteToParcel:input_type -> clipboard.WriteToParcelRequest
+	16, // 8: clipboard.ClipDataService.NewHtmlText:input_type -> clipboard.NewHtmlTextRequest
+	18, // 9: clipboard.ClipDataService.NewIntent:input_type -> clipboard.NewIntentRequest
+	20, // 10: clipboard.ClipDataService.NewPlainText:input_type -> clipboard.NewPlainTextRequest
+	22, // 11: clipboard.ClipDataService.NewRawUri:input_type -> clipboard.NewRawUriRequest
+	24, // 12: clipboard.ClipDataService.NewUri:input_type -> clipboard.NewUriRequest
+	26, // 13: clipboard.ClipDataItemService.CoerceToHtmlText:input_type -> clipboard.CoerceToHtmlTextRequest
+	28, // 14: clipboard.ClipDataItemService.CoerceToStyledText:input_type -> clipboard.CoerceToStyledTextRequest
+	30, // 15: clipboard.ClipDataItemService.CoerceToText:input_type -> clipboard.CoerceToTextRequest
+	32, // 16: clipboard.ClipDataItemService.GetHtmlText:input_type -> clipboard.GetHtmlTextRequest
+	34, // 17: clipboard.ClipDataItemService.GetIntent:input_type -> clipboard.GetIntentRequest
+	36, // 18: clipboard.ClipDataItemService.GetIntentSender:input_type -> clipboard.GetIntentSenderRequest
+	38, // 19: clipboard.ClipDataItemService.GetText:input_type -> clipboard.GetTextRequest
+	40, // 20: clipboard.ClipDataItemService.GetTextLinks:input_type -> clipboard.GetTextLinksRequest
+	42, // 21: clipboard.ClipDataItemService.GetUri:input_type -> clipboard.GetUriRequest
+	12, // 22: clipboard.ClipDataItemService.ToString:input_type -> clipboard.ToStringRequest
+	1,  // 23: clipboard.ClipDataService.AddItem1:output_type -> clipboard.AddItem1Response
+	3,  // 24: clipboard.ClipDataService.AddItem2_1:output_type -> clipboard.AddItem2_1Response
+	5,  // 25: clipboard.ClipDataService.DescribeContents:output_type -> clipboard.DescribeContentsResponse
+	7,  // 26: clipboard.ClipDataService.GetDescription:output_type -> clipboard.GetDescriptionResponse
+	9,  // 27: clipboard.ClipDataService.GetItemAt:output_type -> clipboard.GetItemAtResponse
+	11, // 28: clipboard.ClipDataService.GetItemCount:output_type -> clipboard.GetItemCountResponse
+	13, // 29: clipboard.ClipDataService.ToString:output_type -> clipboard.ToStringResponse
+	15, // 30: clipboard.ClipDataService.WriteToParcel:output_type -> clipboard.WriteToParcelResponse
+	17, // 31: clipboard.ClipDataService.NewHtmlText:output_type -> clipboard.NewHtmlTextResponse
+	19, // 32: clipboard.ClipDataService.NewIntent:output_type -> clipboard.NewIntentResponse
+	21, // 33: clipboard.ClipDataService.NewPlainText:output_type -> clipboard.NewPlainTextResponse
+	23, // 34: clipboard.ClipDataService.NewRawUri:output_type -> clipboard.NewRawUriResponse
+	25, // 35: clipboard.ClipDataService.NewUri:output_type -> clipboard.NewUriResponse
+	27, // 36: clipboard.ClipDataItemService.CoerceToHtmlText:output_type -> clipboard.CoerceToHtmlTextResponse
+	29, // 37: clipboard.ClipDataItemService.CoerceToStyledText:output_type -> clipboard.CoerceToStyledTextResponse
+	31, // 38: clipboard.ClipDataItemService.CoerceToText:output_type -> clipboard.CoerceToTextResponse
+	33, // 39: clipboard.ClipDataItemService.GetHtmlText:output_type -> clipboard.GetHtmlTextResponse
+	35, // 40: clipboard.ClipDataItemService.GetIntent:output_type -> clipboard.GetIntentResponse
+	37, // 41: clipboard.ClipDataItemService.GetIntentSender:output_type -> clipboard.GetIntentSenderResponse
+	39, // 42: clipboard.ClipDataItemService.GetText:output_type -> clipboard.GetTextResponse
+	41, // 43: clipboard.ClipDataItemService.GetTextLinks:output_type -> clipboard.GetTextLinksResponse
+	43, // 44: clipboard.ClipDataItemService.GetUri:output_type -> clipboard.GetUriResponse
+	13, // 45: clipboard.ClipDataItemService.ToString:output_type -> clipboard.ToStringResponse
+	23, // [23:46] is the sub-list for method output_type
+	0,  // [0:23] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -935,9 +2167,9 @@ func file_proto_clipboard_clipboard_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_clipboard_clipboard_proto_rawDesc), len(file_proto_clipboard_clipboard_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   44,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_proto_clipboard_clipboard_proto_goTypes,
 		DependencyIndexes: file_proto_clipboard_clipboard_proto_depIdxs,
