@@ -1,5 +1,6 @@
 .PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator \
-	build build-server list-commands dist dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex
+	build build-server list-commands dist dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex \
+	deploy push start-server stop-server forward
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -96,6 +97,75 @@ build-server:
 	CC=$(shell echo $$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang) \
 	go build -buildmode=c-shared -o build/libjniservice.so ./cmd/jniservice/
 
+# Android SDK (used by deploy + dist targets).
+# Prefer ANDROID_HOME / ANDROID_SDK_ROOT (standard env vars) over ANDROID_SDK.
+ifeq ($(ANDROID_SDK),)
+  ifneq ($(ANDROID_HOME),)
+    ANDROID_SDK := $(ANDROID_HOME)
+  else ifneq ($(ANDROID_SDK_ROOT),)
+    ANDROID_SDK := $(ANDROID_SDK_ROOT)
+  else
+    ANDROID_SDK := $(HOME)/Android/Sdk
+  endif
+endif
+
+# ---- Device deployment ----
+# Usage: make deploy                    # build, push, start server, forward port
+#        make deploy HOST_PORT=50052    # use different host port
+#        make stop-server               # stop the server on the device
+
+ADB ?= $(ANDROID_SDK)/platform-tools/adb
+PORT ?= 50051
+HOST_PORT ?= $(PORT)
+REMOTE_DIR := /data/local/tmp
+
+# Build, push, start server, and set up port forwarding.
+# Auto-detects device architecture. Override with: make deploy DEVICE_ARCH=arm64-v8a
+deploy: push start-server forward
+
+# Push jniservice artifacts to the device.
+# Detects device arch at execution time (not parse time) to handle
+# multiple/no devices gracefully.
+push:
+	@ARCH=$${DEVICE_ARCH:-$$($(ADB) shell getprop ro.product.cpu.abi)}; \
+	case "$$ARCH" in \
+		arm64-v8a) GOARCH=arm64; ABI=arm64-v8a ;; \
+		*)         GOARCH=amd64; ABI=x86_64 ;; \
+	esac; \
+	echo "Device arch: $$ARCH -> GOARCH=$$GOARCH ABI=$$ABI"; \
+	$(MAKE) dist-jniservice dist-dex DIST_GOARCH=$$GOARCH && \
+	$(ADB) push build/libjniservice-$$ABI.so $(REMOTE_DIR)/libjniservice.so && \
+	$(ADB) push build/classes.dex $(REMOTE_DIR)/jniservice.dex
+
+# Start the gRPC server on the device (kills any old instance first).
+start-server: stop-server
+	$(ADB) shell "JNISERVICE_PORT=$(PORT) app_process \
+		-Djava.class.path=$(REMOTE_DIR)/jniservice.dex \
+		$(REMOTE_DIR) JNIService" &
+	@echo "Waiting for jniservice to start..."
+	@for i in 1 2 3 4 5 6 7 8 9 10; do \
+		sleep 1; \
+		if $(ADB) shell "netstat -tlnp 2>/dev/null | grep -q ':$(PORT)'" 2>/dev/null; then \
+			echo "jniservice is listening on port $(PORT)"; \
+			exit 0; \
+		fi; \
+		echo "  attempt $$i/10..."; \
+	done; \
+	echo "WARNING: could not confirm server is listening; proceeding anyway"; \
+	sleep 2
+
+# Stop the server on the device.
+stop-server:
+	-@$(ADB) shell "pkill -f JNIService" 2>/dev/null || true
+	@sleep 1
+
+# Set up adb port forwarding so the host can reach the server.
+forward:
+	$(ADB) forward tcp:$(HOST_PORT) tcp:$(PORT)
+	@echo "Port forwarding: localhost:$(HOST_PORT) -> device:$(PORT)"
+
+# ---- Tests ----
+
 # Run E2E scenario tests (host-side, no emulator needed)
 test-e2e:
 	go test ./tests/e2e-grpc/ -v
@@ -110,7 +180,6 @@ test-emulator:
 # Builds all release artifacts into build/.
 
 DIST_GOARCH ?= arm64
-ANDROID_SDK ?= $(HOME)/Android/Sdk
 DIST_NDK ?= $(shell ls -d $(ANDROID_SDK)/ndk/* 2>/dev/null | sort -V | tail -1)
 DIST_API_LEVEL ?= 30
 
