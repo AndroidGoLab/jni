@@ -102,7 +102,7 @@ import (
     mgr, _ := location.NewManager(ctx)
     defer mgr.Close()
 
-    loc, _ := mgr.GetLastKnownLocation("gps")
+    loc, _ := mgr.GetLastKnownLocation(location.GpsProvider)
     if loc != nil {
         fmt.Printf("lat=%.6f lon=%.6f\n", loc.Latitude, loc.Longitude)
     }
