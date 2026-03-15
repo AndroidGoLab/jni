@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/xaionaro-go/jni/android"
 	pb "github.com/xaionaro-go/jni/proto/jni_raw"
 )
 
@@ -34,7 +35,7 @@ var locationGetCmd = &cobra.Command{
 			return fmt.Errorf("getting getSystemService: %w", err)
 		}
 
-		locStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: "location"})
+		locStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: android.AppLocationService})
 		if err != nil {
 			return err
 		}
@@ -83,7 +84,12 @@ var locationGetCmd = &cobra.Command{
 			ClassHandle: locCls.GetClassHandle(), Name: "getAltitude", Sig: "()D",
 		})
 
-		providers := []string{"gps", "network", "fused", "passive"}
+		providers := []string{
+			android.LocationGpsProvider,
+			android.LocationNetworkProvider,
+			android.LocationFusedProvider,
+			android.LocationPassiveProvider,
+		}
 		for _, provider := range providers {
 			provStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: provider})
 			if err != nil {
