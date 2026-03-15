@@ -14,13 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
-          - goarch: arm64
-            android_abi: arm64-v8a
-            ndk_triple: aarch64-linux-android
-          - goarch: amd64
-            android_abi: x86_64
-            ndk_triple: x86_64-linux-android
+        goarch: [arm64, amd64]
 
     steps:
       - uses: actions/checkout@v4
@@ -42,46 +36,12 @@ jobs:
       - name: Install Android NDK and build-tools
         run: sdkmanager --install "ndk;27.0.12077973" "build-tools;35.0.0" "platforms;android-35"
 
-      - name: Build jnictl (linux)
+      - name: Build all artifacts
+        run: make dist
         env:
-          CGO_ENABLED: '0'
-          GOOS: linux
-          GOARCH: ${{ matrix.goarch }}
-        run: go build -o dist/jnictl-linux-${{ matrix.goarch }} ./cmd/jnictl/
-
-      - name: Build jnictl (android)
-        env:
-          CGO_ENABLED: '1'
-          GOOS: android
-          GOARCH: ${{ matrix.goarch }}
-          NDK_HOME: /usr/local/lib/android/sdk/ndk/27.0.12077973
-          CC_TRIPLE: ${{ matrix.ndk_triple }}
-        run: |
-          CC=$NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/${CC_TRIPLE}30-clang \
-          go build -o dist/jnictl-android-${{ matrix.goarch }} ./cmd/jnictl/
-
-      - name: Build jniservice shared library
-        env:
-          CGO_ENABLED: '1'
-          GOOS: android
-          GOARCH: ${{ matrix.goarch }}
-          NDK_HOME: /usr/local/lib/android/sdk/ndk/27.0.12077973
-          CC_TRIPLE: ${{ matrix.ndk_triple }}
-        run: |
-          CC=$NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/${CC_TRIPLE}30-clang \
-          go build -buildmode=c-shared \
-            -o dist/libjniservice-${{ matrix.android_abi }}.so \
-            ./cmd/jniservice/
-
-      - name: Compile Java wrapper and create classes.dex
-        env:
-          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-        run: |
-          javac --release 17 -d dist cmd/jniservice/JNIService.java
-          $ANDROID_SDK_ROOT/build-tools/35.0.0/d8 \
-            --lib $ANDROID_SDK_ROOT/platforms/android-35/android.jar \
-            --output dist dist/JNIService.class
-          rm -f dist/JNIService.class
+          DIST_GOARCH: ${{ matrix.goarch }}
+          ANDROID_SDK: /usr/local/lib/android/sdk
+          DIST_NDK: /usr/local/lib/android/sdk/ndk/27.0.12077973
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

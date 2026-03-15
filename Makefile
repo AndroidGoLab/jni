@@ -1,4 +1,5 @@
-.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator build build-server list-commands
+.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator \
+	build build-server list-commands dist dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -102,3 +103,50 @@ test-e2e:
 # Full pipeline: build, push, start server, forward port, run tests, stop server.
 test-emulator:
 	$(MAKE) -C tests/e2e-grpc test
+
+# ---- Release artifacts ----
+# Usage: make dist GOARCH=arm64   (or GOARCH=amd64)
+# Builds all release artifacts into dist/.
+
+DIST_GOARCH ?= arm64
+ANDROID_SDK ?= $(HOME)/Android/Sdk
+DIST_NDK ?= $(shell ls -d $(ANDROID_SDK)/ndk/* 2>/dev/null | sort -V | tail -1)
+DIST_API_LEVEL ?= 30
+
+# Derive platform-specific values from GOARCH.
+ifeq ($(DIST_GOARCH),arm64)
+  DIST_NDK_TRIPLE := aarch64-linux-android
+  DIST_ANDROID_ABI := arm64-v8a
+else
+  DIST_NDK_TRIPLE := x86_64-linux-android
+  DIST_ANDROID_ABI := x86_64
+endif
+
+DIST_CC := $(DIST_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/$(DIST_NDK_TRIPLE)$(DIST_API_LEVEL)-clang
+
+# Build all release artifacts for a single GOARCH.
+dist: dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex
+
+dist-jnictl-linux:
+	@mkdir -p dist
+	CGO_ENABLED=0 GOOS=linux GOARCH=$(DIST_GOARCH) \
+		go build -o dist/jnictl-linux-$(DIST_GOARCH) ./cmd/jnictl/
+
+dist-jnictl-android:
+	@mkdir -p dist
+	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
+		go build -o dist/jnictl-android-$(DIST_GOARCH) ./cmd/jnictl/
+
+dist-jniservice:
+	@mkdir -p dist
+	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
+		go build -buildmode=c-shared \
+			-o dist/libjniservice-$(DIST_ANDROID_ABI).so ./cmd/jniservice/
+
+dist-dex:
+	@mkdir -p dist
+	javac --release 17 -d dist cmd/jniservice/JNIService.java
+	$(ANDROID_SDK)/build-tools/$$(ls $(ANDROID_SDK)/build-tools | sort -V | tail -1)/d8 \
+		--lib $$(ls -d $(ANDROID_SDK)/platforms/android-* | sort -V | tail -1)/android.jar \
+		--output dist dist/JNIService.class
+	rm -f dist/JNIService.class
