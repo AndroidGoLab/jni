@@ -81,22 +81,22 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.provider.MediaStore.canManageMedia: %w", err)
 	}
 
-	midmediaStoreCreateDeleteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createDeleteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection<android$net$Uri>;)Landroid/app/PendingIntent;")
+	midmediaStoreCreateDeleteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createDeleteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.createDeleteRequest: %w", err)
 	}
 
-	midmediaStoreCreateFavoriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createFavoriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection<android$net$Uri>;Z)Landroid/app/PendingIntent;")
+	midmediaStoreCreateFavoriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createFavoriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.createFavoriteRequest: %w", err)
 	}
 
-	midmediaStoreCreateTrashRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createTrashRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection<android$net$Uri>;Z)Landroid/app/PendingIntent;")
+	midmediaStoreCreateTrashRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createTrashRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.createTrashRequest: %w", err)
 	}
 
-	midmediaStoreCreateWriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createWriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection<android$net$Uri>;)Landroid/app/PendingIntent;")
+	midmediaStoreCreateWriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createWriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.createWriteRequest: %w", err)
 	}
@@ -106,7 +106,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.provider.MediaStore.getDocumentUri: %w", err)
 	}
 
-	midmediaStoreGetExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set<java$lang$String>;")
+	midmediaStoreGetExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.getExternalVolumeNames: %w", err)
 	}
@@ -136,7 +136,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.provider.MediaStore.getPickImagesMaxLimit: %w", err)
 	}
 
-	midmediaStoreGetRecentExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRecentExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set<java$lang$String>;")
+	midmediaStoreGetRecentExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRecentExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.getRecentExternalVolumeNames: %w", err)
 	}
@@ -146,7 +146,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.provider.MediaStore.getRedactedUri: %w", err)
 	}
 
-	midmediaStoreGetRedactedUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Ljava/util/List<android$net$Uri>;)Ljava/util/List<android$net$Uri>;")
+	midmediaStoreGetRedactedUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Ljava/util/List;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.getRedactedUri: %w", err)
 	}
@@ -186,7 +186,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.provider.MediaStore.isSupportedCloudMediaProviderAuthority: %w", err)
 	}
 
-	midmediaStoreMarkIsFavoriteStatus, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "markIsFavoriteStatus", "(Landroid/content/ContentResolver;Ljava/util/Collection<android$net$Uri>;Z)V")
+	midmediaStoreMarkIsFavoriteStatus, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "markIsFavoriteStatus", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)V")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.MediaStore.markIsFavoriteStatus: %w", err)
 	}

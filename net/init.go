@@ -109,7 +109,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.NetworkCapabilities.getSignalStrength: %w", err)
 	}
 
-	midnetworkCapabilitiesGetSubscriptionIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getSubscriptionIds", "()Ljava/util/Set<java$lang$Integer>;")
+	midnetworkCapabilitiesGetSubscriptionIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getSubscriptionIds", "()Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.NetworkCapabilities.getSubscriptionIds: %w", err)
 	}

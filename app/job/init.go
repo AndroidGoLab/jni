@@ -141,7 +141,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.job.JobInfo.getClipGrantFlags: %w", err)
 	}
 
-	midjobInfoGetDebugTags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getDebugTags", "()Ljava/util/Set<java$lang$String>;")
+	midjobInfoGetDebugTags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getDebugTags", "()Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.job.JobInfo.getDebugTags: %w", err)
 	}

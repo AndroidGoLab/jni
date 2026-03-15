@@ -86,12 +86,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.Uri.getQueryParameter: %w", err)
 	}
 
-	miduriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameterNames", "()Ljava/util/Set<java$lang$String>;")
+	miduriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameterNames", "()Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.Uri.getQueryParameterNames: %w", err)
 	}
 
-	miduriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List<java$lang$String>;")
+	miduriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.Uri.getQueryParameters: %w", err)
 	}

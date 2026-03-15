@@ -113,12 +113,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.enableSystemDataSyncForTypes: %w", err)
 	}
 
-	midcompanionDeviceManagerGetAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getAssociations", "()Ljava/util/List<java$lang$String>;")
+	midcompanionDeviceManagerGetAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getAssociations", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.getAssociations: %w", err)
 	}
 
-	midcompanionDeviceManagerGetMyAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getMyAssociations", "()Ljava/util/List<android$companion$AssociationInfo>;")
+	midcompanionDeviceManagerGetMyAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getMyAssociations", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.getMyAssociations: %w", err)
 	}
@@ -158,7 +158,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startObservingDevicePresence: %w", err)
 	}
 
-	midcompanionDeviceManagerStartSystemDataTransfer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startSystemDataTransfer", "(ILjava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<java$lang$Void;Landroid/companion/CompanionException>;)V")
+	midcompanionDeviceManagerStartSystemDataTransfer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startSystemDataTransfer", "(ILjava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Landroid/companion/CompanionException>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startSystemDataTransfer: %w", err)
 	}

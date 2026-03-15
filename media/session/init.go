@@ -107,7 +107,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.session.MediaController.getPlaybackState: %w", err)
 	}
 
-	midmediaControllerGetQueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getQueue", "()Ljava/util/List<android/media/session/MediaSession$QueueItem>;")
+	midmediaControllerGetQueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getQueue", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.session.MediaController.getQueue: %w", err)
 	}

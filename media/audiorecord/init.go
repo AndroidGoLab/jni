@@ -89,7 +89,7 @@ func doInit(env *jni.Env) error {
 	}
 	clsaudioRecord = env.NewGlobalRef(&c.Object)
 
-	midaudioRecordGetActiveMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getActiveMicrophones", "()Ljava/util/List<android$media$MicrophoneInfo>;")
+	midaudioRecordGetActiveMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getActiveMicrophones", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioRecord.getActiveMicrophones: %w", err)
 	}
@@ -169,7 +169,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.AudioRecord.getRoutedDevice: %w", err)
 	}
 
-	midaudioRecordGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getRoutedDevices", "()Ljava/util/List<android$media$AudioDeviceInfo>;")
+	midaudioRecordGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioRecord)), "getRoutedDevices", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioRecord.getRoutedDevices: %w", err)
 	}

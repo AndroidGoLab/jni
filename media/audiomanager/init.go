@@ -209,12 +209,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.AudioManager.generateAudioSessionId: %w", err)
 	}
 
-	midaudioManagerGetActivePlaybackConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActivePlaybackConfigurations", "()Ljava/util/List<android$media$AudioPlaybackConfiguration>;")
+	midaudioManagerGetActivePlaybackConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActivePlaybackConfigurations", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getActivePlaybackConfigurations: %w", err)
 	}
 
-	midaudioManagerGetActiveRecordingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActiveRecordingConfigurations", "()Ljava/util/List<android$media$AudioRecordingConfiguration>;")
+	midaudioManagerGetActiveRecordingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActiveRecordingConfigurations", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getActiveRecordingConfigurations: %w", err)
 	}
@@ -224,7 +224,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.AudioManager.getAllowedCapturePolicy: %w", err)
 	}
 
-	midaudioManagerGetAudioDevicesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAudioDevicesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List<android$media$AudioDeviceInfo>;")
+	midaudioManagerGetAudioDevicesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAudioDevicesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getAudioDevicesForAttributes: %w", err)
 	}
@@ -234,7 +234,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.AudioManager.getAudioHwSyncForSession: %w", err)
 	}
 
-	midaudioManagerGetAvailableCommunicationDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAvailableCommunicationDevices", "()Ljava/util/List<android$media$AudioDeviceInfo>;")
+	midaudioManagerGetAvailableCommunicationDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAvailableCommunicationDevices", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getAvailableCommunicationDevices: %w", err)
 	}
@@ -249,7 +249,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.AudioManager.getDevices: %w", err)
 	}
 
-	midaudioManagerGetDirectProfilesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDirectProfilesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List<android$media$AudioProfile>;")
+	midaudioManagerGetDirectProfilesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDirectProfilesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getDirectProfilesForAttributes: %w", err)
 	}
@@ -259,7 +259,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.AudioManager.getEncodedSurroundMode: %w", err)
 	}
 
-	midaudioManagerGetMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getMicrophones", "()Ljava/util/List<android$media$MicrophoneInfo>;")
+	midaudioManagerGetMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getMicrophones", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getMicrophones: %w", err)
 	}
@@ -319,12 +319,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.AudioManager.getStreamVolumeDb: %w", err)
 	}
 
-	midaudioManagerGetSupportedDeviceTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedDeviceTypes", "(I)Ljava/util/Set<java$lang$Integer>;")
+	midaudioManagerGetSupportedDeviceTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedDeviceTypes", "(I)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getSupportedDeviceTypes: %w", err)
 	}
 
-	midaudioManagerGetSupportedMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedMixerAttributes", "(Landroid/media/AudioDeviceInfo;)Ljava/util/List<android$media$AudioMixerAttributes>;")
+	midaudioManagerGetSupportedMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedMixerAttributes", "(Landroid/media/AudioDeviceInfo;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getSupportedMixerAttributes: %w", err)
 	}

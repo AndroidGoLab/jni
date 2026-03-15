@@ -40,6 +40,7 @@ var javaLangShortNames = map[string]string{
 }
 
 // ResolveType maps a Java type string to its TypeConv.
+// Generic type parameters are stripped because JNI uses erased types.
 func ResolveType(javaType string) TypeConv {
 	// Handle pre-formatted JNI array syntax like "[Landroid.foo.Bar;"
 	if strings.HasPrefix(javaType, "[") && !strings.HasSuffix(javaType, "[]") {
@@ -64,6 +65,9 @@ func ResolveType(javaType string) TypeConv {
 			IsObject:   true,
 		}
 	}
+
+	// Strip generic type parameters (JNI uses erased types).
+	javaType = stripGenerics(javaType)
 
 	// Check primitives.
 	if tc, ok := primitiveTypeMap[javaType]; ok {
@@ -156,6 +160,7 @@ func JavaClassToSlash(className string) string {
 }
 
 // JNITypeSignature converts a single Java type to its JNI type signature.
+// Generic type parameters are stripped because JNI uses erased types.
 func JNITypeSignature(javaType string) string {
 	// Handle pre-formatted JNI array syntax like "[Landroid.foo.Bar;"
 	if strings.HasPrefix(javaType, "[") && !strings.HasSuffix(javaType, "[]") {
@@ -166,6 +171,9 @@ func JNITypeSignature(javaType string) string {
 	if strings.HasSuffix(javaType, "[]") {
 		return "[" + JNITypeSignature(strings.TrimSuffix(javaType, "[]"))
 	}
+
+	// Strip generic type parameters (JNI uses erased types).
+	javaType = stripGenerics(javaType)
 
 	// Primitives.
 	if tc, ok := primitiveTypeMap[javaType]; ok {
@@ -227,6 +235,21 @@ func ReturnConversionCode(javaType, goType string) string {
 // instead of slashes. For example, "[Landroid.foo.Bar;" becomes "[Landroid/foo/Bar;".
 func normalizeJNISig(sig string) string {
 	return strings.ReplaceAll(sig, ".", "/")
+}
+
+// stripGenerics removes Java generic type parameters from a type name.
+// JNI uses erased types, so generics must be stripped before building
+// JNI signatures. Handles nested generics:
+//
+//	"java.util.Set<java.lang.String>"                → "java.util.Set"
+//	"java.util.Map<java.lang.String, java.util.List<java.lang.Integer>>" → "java.util.Map"
+func stripGenerics(javaType string) string {
+	idx := strings.IndexByte(javaType, '<')
+	if idx < 0 {
+		return javaType
+	}
+	// Everything before the first '<' is the raw type.
+	return javaType[:idx]
 }
 
 // jniValueFunc returns the jni.XxxValue() function name for a given JNI call suffix.

@@ -88,7 +88,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.blob.BlobStoreManager.createSession: %w", err)
 	}
 
-	midblobStoreManagerGetLeasedBlobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "getLeasedBlobs", "()Ljava/util/List<android$app$blob$BlobHandle>;")
+	midblobStoreManagerGetLeasedBlobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "getLeasedBlobs", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.blob.BlobStoreManager.getLeasedBlobs: %w", err)
 	}

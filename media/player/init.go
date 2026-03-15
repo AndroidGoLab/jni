@@ -169,7 +169,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.MediaPlayer.getDrmPropertyString: %w", err)
 	}
 
-	midmediaPlayerGetKeyRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getKeyRequest", "([B[BLjava/lang/String;ILjava/util/Map<java$lang$String;Ljava/lang/String>;)Landroid/media/MediaDrm$KeyRequest;")
+	midmediaPlayerGetKeyRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getKeyRequest", "([B[BLjava/lang/String;ILjava/util/Map;Ljava/lang/String>;)Landroid/media/MediaDrm$KeyRequest;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaPlayer.getKeyRequest: %w", err)
 	}
@@ -189,7 +189,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.MediaPlayer.getRoutedDevice: %w", err)
 	}
 
-	midmediaPlayerGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getRoutedDevices", "()Ljava/util/List<android$media$AudioDeviceInfo>;")
+	midmediaPlayerGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getRoutedDevices", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaPlayer.getRoutedDevices: %w", err)
 	}
@@ -299,12 +299,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
 	}
 
-	midmediaPlayerSetDataSource4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map<java$lang$String;Ljava/lang/String>;)V")
+	midmediaPlayerSetDataSource4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map;Ljava/lang/String>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
 	}
 
-	midmediaPlayerSetDataSource5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map<java$lang$String;Ljava/lang/String>;Ljava/util/List<java$net$HttpCookie>;)V")
+	midmediaPlayerSetDataSource5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map;Ljava/lang/String>;Ljava/util/List;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
 	}

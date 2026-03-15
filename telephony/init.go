@@ -217,7 +217,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getActiveModemCount: %w", err)
 	}
 
-	midtelephonyManagerGetAllCellInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getAllCellInfo", "()Ljava/util/List<android$telephony$CellInfo>;")
+	midtelephonyManagerGetAllCellInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getAllCellInfo", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getAllCellInfo: %w", err)
 	}
@@ -257,7 +257,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getCarrierIdFromSimMccMnc: %w", err)
 	}
 
-	midtelephonyManagerGetCarrierRestrictionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierRestrictionStatus", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	midtelephonyManagerGetCarrierRestrictionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierRestrictionStatus", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getCarrierRestrictionStatus: %w", err)
 	}
@@ -297,7 +297,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getDeviceSoftwareVersion: %w", err)
 	}
 
-	midtelephonyManagerGetEquivalentHomePlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getEquivalentHomePlmns", "()Ljava/util/List<java$lang$String>;")
+	midtelephonyManagerGetEquivalentHomePlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getEquivalentHomePlmns", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getEquivalentHomePlmns: %w", err)
 	}
@@ -397,7 +397,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkSelectionMode: %w", err)
 	}
 
-	midtelephonyManagerGetNetworkSlicingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSlicingConfiguration", "(Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$telephony$data$NetworkSlicingConfig;Landroid/telephony/TelephonyManager$NetworkSlicingException>;)V")
+	midtelephonyManagerGetNetworkSlicingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSlicingConfiguration", "(Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Landroid/telephony/TelephonyManager$NetworkSlicingException>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkSlicingConfiguration: %w", err)
 	}
@@ -537,7 +537,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getTypeAllocationCode: %w", err)
 	}
 
-	midtelephonyManagerGetUiccCardsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getUiccCardsInfo", "()Ljava/util/List<android$telephony$UiccCardInfo>;")
+	midtelephonyManagerGetUiccCardsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getUiccCardsInfo", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getUiccCardsInfo: %w", err)
 	}
@@ -722,7 +722,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.listen: %w", err)
 	}
 
-	midtelephonyManagerPurchasePremiumCapability, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "purchasePremiumCapability", "(ILjava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	midtelephonyManagerPurchasePremiumCapability, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "purchasePremiumCapability", "(ILjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.purchasePremiumCapability: %w", err)
 	}
@@ -792,7 +792,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.setDataEnabledForReason: %w", err)
 	}
 
-	midtelephonyManagerSetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setForbiddenPlmns", "(Ljava/util/List<java$lang$String>;)I")
+	midtelephonyManagerSetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setForbiddenPlmns", "(Ljava/util/List;)I")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.setForbiddenPlmns: %w", err)
 	}
@@ -827,7 +827,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.setPreferredNetworkTypeToGlobal: %w", err)
 	}
 
-	midtelephonyManagerSetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setPreferredOpportunisticDataSubscription", "(IZLjava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	midtelephonyManagerSetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setPreferredOpportunisticDataSubscription", "(IZLjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.setPreferredOpportunisticDataSubscription: %w", err)
 	}
@@ -867,17 +867,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.unregisterTelephonyCallback: %w", err)
 	}
 
-	midtelephonyManagerUpdateAvailableNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "updateAvailableNetworks", "(Ljava/util/List<android$telephony$AvailableNetworkInfo>;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	midtelephonyManagerUpdateAvailableNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "updateAvailableNetworks", "(Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.updateAvailableNetworks: %w", err)
 	}
 
-	midtelephonyManagerUploadCallComposerPicture5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/io/InputStream;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$os$ParcelUuid;Landroid/telephony/TelephonyManager$CallComposerException>;)V")
+	midtelephonyManagerUploadCallComposerPicture5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/io/InputStream;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Landroid/telephony/TelephonyManager$CallComposerException>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.uploadCallComposerPicture: %w", err)
 	}
 
-	midtelephonyManagerUploadCallComposerPicture5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$os$ParcelUuid;Landroid/telephony/TelephonyManager$CallComposerException>;)V")
+	midtelephonyManagerUploadCallComposerPicture5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Landroid/telephony/TelephonyManager$CallComposerException>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.uploadCallComposerPicture: %w", err)
 	}

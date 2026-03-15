@@ -168,7 +168,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.discoverUsdBasedServices: %w", err)
 	}
 
-	midwifiP2pManagerGetListenState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "getListenState", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	midwifiP2pManagerGetListenState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "getListenState", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.getListenState: %w", err)
 	}
@@ -248,7 +248,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.requestDeviceInfo: %w", err)
 	}
 
-	midwifiP2pManagerRequestDirInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "requestDirInfo", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$net$wifi$p2p$WifiP2pDirInfo;Ljava/lang/Exception>;)V")
+	midwifiP2pManagerRequestDirInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "requestDirInfo", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Ljava/lang/Exception>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.requestDirInfo: %w", err)
 	}
@@ -303,7 +303,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.setUpnpServiceResponseListener: %w", err)
 	}
 
-	midwifiP2pManagerSetVendorElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "setVendorElements", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/List<android/net/wifi/ScanResult$InformationElement>;Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V")
+	midwifiP2pManagerSetVendorElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "setVendorElements", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/List;Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.setVendorElements: %w", err)
 	}
@@ -343,7 +343,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.unregisterWifiP2pListener: %w", err)
 	}
 
-	midwifiP2pManagerValidateDirInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "validateDirInfo", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Landroid/net/wifi/p2p/WifiP2pDirInfo;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<java$lang$Boolean;Ljava/lang/Exception>;)V")
+	midwifiP2pManagerValidateDirInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiP2pManager)), "validateDirInfo", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Landroid/net/wifi/p2p/WifiP2pDirInfo;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Ljava/lang/Exception>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.p2p.WifiP2pManager.validateDirInfo: %w", err)
 	}

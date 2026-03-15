@@ -98,6 +98,26 @@ func TestResolveType_UnknownShortName(t *testing.T) {
 	}
 }
 
+func TestResolveType_Generics(t *testing.T) {
+	// Generic types must be erased: List<String> → Ljava/util/List;
+	tc := ResolveType("java.util.List<java.lang.String>")
+	if tc.JNISig != "Ljava/util/List;" {
+		t.Errorf("JNISig = %q, want Ljava/util/List;", tc.JNISig)
+	}
+	if tc.GoType != "*jni.Object" {
+		t.Errorf("GoType = %q, want *jni.Object", tc.GoType)
+	}
+	if !tc.IsObject {
+		t.Error("expected IsObject")
+	}
+
+	// Nested generics.
+	tc2 := ResolveType("java.util.Map<java.lang.String, java.util.List<java.lang.Integer>>")
+	if tc2.JNISig != "Ljava/util/Map;" {
+		t.Errorf("nested JNISig = %q, want Ljava/util/Map;", tc2.JNISig)
+	}
+}
+
 func TestResolveType_Array(t *testing.T) {
 	tc := ResolveType("int[]")
 	if tc.GoType != "*jni.Object" {
@@ -134,12 +154,40 @@ func TestJNITypeSignature(t *testing.T) {
 		{"int[]", "[I"},
 		{"Integer", "Ljava/lang/Integer;"},
 		{"Object", "Ljava/lang/Object;"},
+		// Generic types must be erased for JNI signatures.
+		{"java.util.Set<java.lang.String>", "Ljava/util/Set;"},
+		{"java.util.List<android.telephony.CellInfo>", "Ljava/util/List;"},
+		{"java.util.Map<java.lang.String, java.util.List<java.lang.Integer>>", "Ljava/util/Map;"},
+		{"java.util.function.Consumer<android.location.Location>", "Ljava/util/function/Consumer;"},
+		{"java.util.Set<java.util.Set<java.lang.String>>", "Ljava/util/Set;"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.javaType, func(t *testing.T) {
 			got := JNITypeSignature(tt.javaType)
 			if got != tt.want {
 				t.Errorf("JNITypeSignature(%q) = %q, want %q", tt.javaType, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestStripGenerics(t *testing.T) {
+	tests := []struct {
+		input string
+		want  string
+	}{
+		{"java.util.Set<java.lang.String>", "java.util.Set"},
+		{"java.util.Map<java.lang.String, java.lang.Integer>", "java.util.Map"},
+		{"java.util.Set<java.util.Set<java.lang.String>>", "java.util.Set"},
+		{"java.lang.String", "java.lang.String"},
+		{"int", "int"},
+		{"", ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.input, func(t *testing.T) {
+			got := stripGenerics(tt.input)
+			if got != tt.want {
+				t.Errorf("stripGenerics(%q) = %q, want %q", tt.input, got, tt.want)
 			}
 		})
 	}

@@ -462,17 +462,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAccountTypesWithManagementDisabled: %w", err)
 	}
 
-	middevicePolicyManagerGetActiveAdmins, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getActiveAdmins", "()Ljava/util/List<android$content$ComponentName>;")
+	middevicePolicyManagerGetActiveAdmins, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getActiveAdmins", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getActiveAdmins: %w", err)
 	}
 
-	middevicePolicyManagerGetAffiliationIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAffiliationIds", "(Landroid/content/ComponentName;)Ljava/util/Set<java$lang$String>;")
+	middevicePolicyManagerGetAffiliationIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAffiliationIds", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAffiliationIds: %w", err)
 	}
 
-	middevicePolicyManagerGetAlwaysOnVpnLockdownWhitelist, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAlwaysOnVpnLockdownWhitelist", "(Landroid/content/ComponentName;)Ljava/util/Set<java$lang$String>;")
+	middevicePolicyManagerGetAlwaysOnVpnLockdownWhitelist, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getAlwaysOnVpnLockdownWhitelist", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAlwaysOnVpnLockdownWhitelist: %w", err)
 	}
@@ -522,7 +522,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getAutoTimeZonePolicy: %w", err)
 	}
 
-	middevicePolicyManagerGetBindDeviceAdminTargetUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getBindDeviceAdminTargetUsers", "(Landroid/content/ComponentName;)Ljava/util/List<android$os$UserHandle>;")
+	middevicePolicyManagerGetBindDeviceAdminTargetUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getBindDeviceAdminTargetUsers", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getBindDeviceAdminTargetUsers: %w", err)
 	}
@@ -552,7 +552,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCredentialManagerPolicy: %w", err)
 	}
 
-	middevicePolicyManagerGetCrossProfileCalendarPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileCalendarPackages", "(Landroid/content/ComponentName;)Ljava/util/Set<java$lang$String>;")
+	middevicePolicyManagerGetCrossProfileCalendarPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileCalendarPackages", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfileCalendarPackages: %w", err)
 	}
@@ -567,12 +567,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfileContactsSearchDisabled: %w", err)
 	}
 
-	middevicePolicyManagerGetCrossProfilePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfilePackages", "(Landroid/content/ComponentName;)Ljava/util/Set<java$lang$String>;")
+	middevicePolicyManagerGetCrossProfilePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfilePackages", "(Landroid/content/ComponentName;)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfilePackages: %w", err)
 	}
 
-	middevicePolicyManagerGetCrossProfileWidgetProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileWidgetProviders", "(Landroid/content/ComponentName;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetCrossProfileWidgetProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getCrossProfileWidgetProviders", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCrossProfileWidgetProviders: %w", err)
 	}
@@ -582,12 +582,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getCurrentFailedPasswordAttempts: %w", err)
 	}
 
-	middevicePolicyManagerGetDelegatePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDelegatePackages", "(Landroid/content/ComponentName;Ljava/lang/String;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetDelegatePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDelegatePackages", "(Landroid/content/ComponentName;Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getDelegatePackages: %w", err)
 	}
 
-	middevicePolicyManagerGetDelegatedScopes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDelegatedScopes", "(Landroid/content/ComponentName;Ljava/lang/String;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetDelegatedScopes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getDelegatedScopes", "(Landroid/content/ComponentName;Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getDelegatedScopes: %w", err)
 	}
@@ -627,12 +627,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getGlobalPrivateDnsMode: %w", err)
 	}
 
-	middevicePolicyManagerGetInstalledCaCerts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getInstalledCaCerts", "(Landroid/content/ComponentName;)Ljava/util/List<byte[]>;")
+	middevicePolicyManagerGetInstalledCaCerts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getInstalledCaCerts", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getInstalledCaCerts: %w", err)
 	}
 
-	middevicePolicyManagerGetKeepUninstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getKeepUninstalledPackages", "(Landroid/content/ComponentName;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetKeepUninstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getKeepUninstalledPackages", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getKeepUninstalledPackages: %w", err)
 	}
@@ -687,7 +687,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getMaximumTimeToLock: %w", err)
 	}
 
-	middevicePolicyManagerGetMeteredDataDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getMeteredDataDisabledPackages", "(Landroid/content/ComponentName;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetMeteredDataDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getMeteredDataDisabledPackages", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getMeteredDataDisabledPackages: %w", err)
 	}
@@ -722,7 +722,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getOrganizationName: %w", err)
 	}
 
-	middevicePolicyManagerGetOverrideApns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getOverrideApns", "(Landroid/content/ComponentName;)Ljava/util/List<android$telephony$data$ApnSetting>;")
+	middevicePolicyManagerGetOverrideApns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getOverrideApns", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getOverrideApns: %w", err)
 	}
@@ -812,17 +812,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermissionPolicy: %w", err)
 	}
 
-	middevicePolicyManagerGetPermittedAccessibilityServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedAccessibilityServices", "(Landroid/content/ComponentName;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetPermittedAccessibilityServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedAccessibilityServices", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermittedAccessibilityServices: %w", err)
 	}
 
-	middevicePolicyManagerGetPermittedCrossProfileNotificationListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedCrossProfileNotificationListeners", "(Landroid/content/ComponentName;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetPermittedCrossProfileNotificationListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedCrossProfileNotificationListeners", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermittedCrossProfileNotificationListeners: %w", err)
 	}
 
-	middevicePolicyManagerGetPermittedInputMethods, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedInputMethods", "(Landroid/content/ComponentName;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetPermittedInputMethods, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPermittedInputMethods", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPermittedInputMethods: %w", err)
 	}
@@ -832,7 +832,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPersonalAppsSuspendedReasons: %w", err)
 	}
 
-	middevicePolicyManagerGetPreferentialNetworkServiceConfigs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPreferentialNetworkServiceConfigs", "()Ljava/util/List<android$app$admin$PreferentialNetworkServiceConfig>;")
+	middevicePolicyManagerGetPreferentialNetworkServiceConfigs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getPreferentialNetworkServiceConfigs", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getPreferentialNetworkServiceConfigs: %w", err)
 	}
@@ -857,7 +857,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getScreenCaptureDisabled: %w", err)
 	}
 
-	middevicePolicyManagerGetSecondaryUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getSecondaryUsers", "(Landroid/content/ComponentName;)Ljava/util/List<android$os$UserHandle>;")
+	middevicePolicyManagerGetSecondaryUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getSecondaryUsers", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getSecondaryUsers: %w", err)
 	}
@@ -882,7 +882,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getStorageEncryptionStatus: %w", err)
 	}
 
-	middevicePolicyManagerGetSubscriptionIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getSubscriptionIds", "()Ljava/util/Set<java$lang$Integer>;")
+	middevicePolicyManagerGetSubscriptionIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getSubscriptionIds", "()Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getSubscriptionIds: %w", err)
 	}
@@ -897,12 +897,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getTransferOwnershipBundle: %w", err)
 	}
 
-	middevicePolicyManagerGetTrustAgentConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getTrustAgentConfiguration", "(Landroid/content/ComponentName;Landroid/content/ComponentName;)Ljava/util/List<android$os$PersistableBundle>;")
+	middevicePolicyManagerGetTrustAgentConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getTrustAgentConfiguration", "(Landroid/content/ComponentName;Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getTrustAgentConfiguration: %w", err)
 	}
 
-	middevicePolicyManagerGetUserControlDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getUserControlDisabledPackages", "(Landroid/content/ComponentName;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerGetUserControlDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "getUserControlDisabledPackages", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.getUserControlDisabledPackages: %w", err)
 	}
@@ -1157,7 +1157,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.isUsingUnifiedPassword: %w", err)
 	}
 
-	middevicePolicyManagerListForegroundAffiliatedUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "listForegroundAffiliatedUsers", "()Ljava/util/List<android$os$UserHandle>;")
+	middevicePolicyManagerListForegroundAffiliatedUsers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "listForegroundAffiliatedUsers", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.listForegroundAffiliatedUsers: %w", err)
 	}
@@ -1222,17 +1222,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.resetPasswordWithToken: %w", err)
 	}
 
-	middevicePolicyManagerRetrieveNetworkLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrieveNetworkLogs", "(Landroid/content/ComponentName;J)Ljava/util/List<android$app$admin$NetworkEvent>;")
+	middevicePolicyManagerRetrieveNetworkLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrieveNetworkLogs", "(Landroid/content/ComponentName;J)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.retrieveNetworkLogs: %w", err)
 	}
 
-	middevicePolicyManagerRetrievePreRebootSecurityLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrievePreRebootSecurityLogs", "(Landroid/content/ComponentName;)Ljava/util/List<android/app/admin/SecurityLog$SecurityEvent>;")
+	middevicePolicyManagerRetrievePreRebootSecurityLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrievePreRebootSecurityLogs", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.retrievePreRebootSecurityLogs: %w", err)
 	}
 
-	middevicePolicyManagerRetrieveSecurityLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrieveSecurityLogs", "(Landroid/content/ComponentName;)Ljava/util/List<android/app/admin/SecurityLog$SecurityEvent>;")
+	middevicePolicyManagerRetrieveSecurityLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "retrieveSecurityLogs", "(Landroid/content/ComponentName;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.retrieveSecurityLogs: %w", err)
 	}
@@ -1252,7 +1252,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAccountManagementDisabled: %w", err)
 	}
 
-	middevicePolicyManagerSetAffiliationIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAffiliationIds", "(Landroid/content/ComponentName;Ljava/util/Set<java$lang$String>;)V")
+	middevicePolicyManagerSetAffiliationIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAffiliationIds", "(Landroid/content/ComponentName;Ljava/util/Set;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAffiliationIds: %w", err)
 	}
@@ -1262,7 +1262,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage: %w", err)
 	}
 
-	middevicePolicyManagerSetAlwaysOnVpnPackage4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAlwaysOnVpnPackage", "(Landroid/content/ComponentName;Ljava/lang/String;ZLjava/util/Set<java$lang$String>;)V")
+	middevicePolicyManagerSetAlwaysOnVpnPackage4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setAlwaysOnVpnPackage", "(Landroid/content/ComponentName;Ljava/lang/String;ZLjava/util/Set;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage: %w", err)
 	}
@@ -1352,7 +1352,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCredentialManagerPolicy: %w", err)
 	}
 
-	middevicePolicyManagerSetCrossProfileCalendarPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfileCalendarPackages", "(Landroid/content/ComponentName;Ljava/util/Set<java$lang$String>;)V")
+	middevicePolicyManagerSetCrossProfileCalendarPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfileCalendarPackages", "(Landroid/content/ComponentName;Ljava/util/Set;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCrossProfileCalendarPackages: %w", err)
 	}
@@ -1367,7 +1367,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCrossProfileContactsSearchDisabled: %w", err)
 	}
 
-	middevicePolicyManagerSetCrossProfilePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfilePackages", "(Landroid/content/ComponentName;Ljava/util/Set<java$lang$String>;)V")
+	middevicePolicyManagerSetCrossProfilePackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setCrossProfilePackages", "(Landroid/content/ComponentName;Ljava/util/Set;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setCrossProfilePackages: %w", err)
 	}
@@ -1382,7 +1382,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setDefaultSmsApplication: %w", err)
 	}
 
-	middevicePolicyManagerSetDelegatedScopes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setDelegatedScopes", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/util/List<java$lang$String>;)V")
+	middevicePolicyManagerSetDelegatedScopes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setDelegatedScopes", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/util/List;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setDelegatedScopes: %w", err)
 	}
@@ -1417,12 +1417,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setGlobalSetting: %w", err)
 	}
 
-	middevicePolicyManagerSetKeepUninstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeepUninstalledPackages", "(Landroid/content/ComponentName;Ljava/util/List<java$lang$String>;)V")
+	middevicePolicyManagerSetKeepUninstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeepUninstalledPackages", "(Landroid/content/ComponentName;Ljava/util/List;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setKeepUninstalledPackages: %w", err)
 	}
 
-	middevicePolicyManagerSetKeyPairCertificate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeyPairCertificate", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/util/List<java$security$cert$Certificate>;Z)Z")
+	middevicePolicyManagerSetKeyPairCertificate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setKeyPairCertificate", "(Landroid/content/ComponentName;Ljava/lang/String;Ljava/util/List;Z)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setKeyPairCertificate: %w", err)
 	}
@@ -1497,7 +1497,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMaximumTimeToLock: %w", err)
 	}
 
-	middevicePolicyManagerSetMeteredDataDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMeteredDataDisabledPackages", "(Landroid/content/ComponentName;Ljava/util/List<java$lang$String>;)Ljava/util/List<java$lang$String>;")
+	middevicePolicyManagerSetMeteredDataDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setMeteredDataDisabledPackages", "(Landroid/content/ComponentName;Ljava/util/List;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setMeteredDataDisabledPackages: %w", err)
 	}
@@ -1612,17 +1612,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermissionPolicy: %w", err)
 	}
 
-	middevicePolicyManagerSetPermittedAccessibilityServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedAccessibilityServices", "(Landroid/content/ComponentName;Ljava/util/List<java$lang$String>;)Z")
+	middevicePolicyManagerSetPermittedAccessibilityServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedAccessibilityServices", "(Landroid/content/ComponentName;Ljava/util/List;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermittedAccessibilityServices: %w", err)
 	}
 
-	middevicePolicyManagerSetPermittedCrossProfileNotificationListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedCrossProfileNotificationListeners", "(Landroid/content/ComponentName;Ljava/util/List<java$lang$String>;)Z")
+	middevicePolicyManagerSetPermittedCrossProfileNotificationListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedCrossProfileNotificationListeners", "(Landroid/content/ComponentName;Ljava/util/List;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermittedCrossProfileNotificationListeners: %w", err)
 	}
 
-	middevicePolicyManagerSetPermittedInputMethods, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedInputMethods", "(Landroid/content/ComponentName;Ljava/util/List<java$lang$String>;)Z")
+	middevicePolicyManagerSetPermittedInputMethods, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPermittedInputMethods", "(Landroid/content/ComponentName;Ljava/util/List;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPermittedInputMethods: %w", err)
 	}
@@ -1632,7 +1632,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPersonalAppsSuspended: %w", err)
 	}
 
-	middevicePolicyManagerSetPreferentialNetworkServiceConfigs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPreferentialNetworkServiceConfigs", "(Ljava/util/List<android$app$admin$PreferentialNetworkServiceConfig>;)V")
+	middevicePolicyManagerSetPreferentialNetworkServiceConfigs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setPreferentialNetworkServiceConfigs", "(Ljava/util/List;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceConfigs: %w", err)
 	}
@@ -1747,7 +1747,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setUsbDataSignalingEnabled: %w", err)
 	}
 
-	middevicePolicyManagerSetUserControlDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setUserControlDisabledPackages", "(Landroid/content/ComponentName;Ljava/util/List<java$lang$String>;)V")
+	middevicePolicyManagerSetUserControlDisabledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdevicePolicyManager)), "setUserControlDisabledPackages", "(Landroid/content/ComponentName;Ljava/util/List;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.app.admin.DevicePolicyManager.setUserControlDisabledPackages: %w", err)
 	}

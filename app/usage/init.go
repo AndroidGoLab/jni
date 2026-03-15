@@ -65,12 +65,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.usage.UsageStatsManager.isAppInactive: %w", err)
 	}
 
-	midusageStatsManagerQueryConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryConfigurations", "(IJJ)Ljava/util/List<android$app$usage$ConfigurationStats>;")
+	midusageStatsManagerQueryConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryConfigurations", "(IJJ)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryConfigurations: %w", err)
 	}
 
-	midusageStatsManagerQueryEventStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEventStats", "(IJJ)Ljava/util/List<android$app$usage$EventStats>;")
+	midusageStatsManagerQueryEventStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEventStats", "(IJJ)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEventStats: %w", err)
 	}
@@ -90,7 +90,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEventsForSelf: %w", err)
 	}
 
-	midusageStatsManagerQueryUsageStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryUsageStats", "(IJJ)Ljava/util/List<android$app$usage$UsageStats>;")
+	midusageStatsManagerQueryUsageStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryUsageStats", "(IJJ)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryUsageStats: %w", err)
 	}

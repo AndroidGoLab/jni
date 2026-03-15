@@ -54,7 +54,7 @@ func doInit(env *jni.Env) error {
 	}
 	clsbuild = env.NewGlobalRef(&c.Object)
 
-	midbuildGetFingerprintedPartitions, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getFingerprintedPartitions", "()Ljava/util/List<android/os/Build$Partition>;")
+	midbuildGetFingerprintedPartitions, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getFingerprintedPartitions", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.os.Build.getFingerprintedPartitions: %w", err)
 	}

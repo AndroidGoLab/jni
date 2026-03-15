@@ -243,7 +243,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.Intent.getByteExtra: %w", err)
 	}
 
-	midintentGetCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCategories", "()Ljava/util/Set<java$lang$String>;")
+	midintentGetCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCategories", "()Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.getCategories: %w", err)
 	}
@@ -263,7 +263,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.Intent.getCharSequenceArrayExtra: %w", err)
 	}
 
-	midintentGetCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList<java$lang$CharSequence>;")
+	midintentGetCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.getCharSequenceArrayListExtra: %w", err)
 	}
@@ -338,7 +338,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.Intent.getIntExtra: %w", err)
 	}
 
-	midintentGetIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntegerArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList<java$lang$Integer>;")
+	midintentGetIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntegerArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.getIntegerArrayListExtra: %w", err)
 	}
@@ -398,7 +398,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.Intent.getStringArrayExtra: %w", err)
 	}
 
-	midintentGetStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList<java$lang$String>;")
+	midintentGetStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.getStringArrayListExtra: %w", err)
 	}
@@ -433,7 +433,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.Intent.isMismatchingFilter: %w", err)
 	}
 
-	midintentPutCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putCharSequenceArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<java$lang$CharSequence>;)Landroid/content/Intent;")
+	midintentPutCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putCharSequenceArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putCharSequenceArrayListExtra: %w", err)
 	}
@@ -568,17 +568,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.Intent.putExtras: %w", err)
 	}
 
-	midintentPutIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putIntegerArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<java$lang$Integer>;)Landroid/content/Intent;")
+	midintentPutIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putIntegerArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putIntegerArrayListExtra: %w", err)
 	}
 
-	midintentPutParcelableArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putParcelableArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<? extends android$os$Parcelable>;)Landroid/content/Intent;")
+	midintentPutParcelableArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putParcelableArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putParcelableArrayListExtra: %w", err)
 	}
 
-	midintentPutStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putStringArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<java$lang$String>;)Landroid/content/Intent;")
+	midintentPutStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putStringArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putStringArrayListExtra: %w", err)
 	}
@@ -648,7 +648,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.Intent.setAction: %w", err)
 	}
 
-	midintentSetClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClass", "(Landroid/content/Context;Ljava/lang/Class<?>;)Landroid/content/Intent;")
+	midintentSetClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClass", "(Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.setClass: %w", err)
 	}

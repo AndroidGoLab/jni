@@ -82,7 +82,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getCameraIdList: %w", err)
 	}
 
-	midcameraManagerGetConcurrentCameraIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getConcurrentCameraIds", "()Ljava/util/Set<java$util$Set<java$lang$String>>;")
+	midcameraManagerGetConcurrentCameraIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getConcurrentCameraIds", "()Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getConcurrentCameraIds: %w", err)
 	}
@@ -97,7 +97,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.hardware.camera2.CameraManager.isCameraDeviceSetupSupported: %w", err)
 	}
 
-	midcameraManagerIsConcurrentSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "isConcurrentSessionConfigurationSupported", "(Ljava/util/Map<java$lang$String;Landroid/hardware/camera2/params/SessionConfiguration>;)Z")
+	midcameraManagerIsConcurrentSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "isConcurrentSessionConfigurationSupported", "(Ljava/util/Map;Landroid/hardware/camera2/params/SessionConfiguration>;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.camera2.CameraManager.isConcurrentSessionConfigurationSupported: %w", err)
 	}

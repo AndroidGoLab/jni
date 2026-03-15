@@ -77,12 +77,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getCharacteristic: %w", err)
 	}
 
-	midbluetoothGattServiceGetCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getCharacteristics", "()Ljava/util/List<android$bluetooth$BluetoothGattCharacteristic>;")
+	midbluetoothGattServiceGetCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getCharacteristics", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getCharacteristics: %w", err)
 	}
 
-	midbluetoothGattServiceGetIncludedServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getIncludedServices", "()Ljava/util/List<android$bluetooth$BluetoothGattService>;")
+	midbluetoothGattServiceGetIncludedServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getIncludedServices", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getIncludedServices: %w", err)
 	}

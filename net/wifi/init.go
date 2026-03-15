@@ -70,7 +70,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.wifi.ScanResult.describeContents: %w", err)
 	}
 
-	midscanResultGetAffiliatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getAffiliatedMloLinks", "()Ljava/util/List<android$net$wifi$MloLink>;")
+	midscanResultGetAffiliatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getAffiliatedMloLinks", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.ScanResult.getAffiliatedMloLinks: %w", err)
 	}
@@ -85,7 +85,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.wifi.ScanResult.getApMloLinkId: %w", err)
 	}
 
-	midscanResultGetInformationElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getInformationElements", "()Ljava/util/List<android/net/wifi/ScanResult$InformationElement>;")
+	midscanResultGetInformationElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getInformationElements", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.ScanResult.getInformationElements: %w", err)
 	}

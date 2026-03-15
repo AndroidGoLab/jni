@@ -143,7 +143,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
 	}
 
-	midlocationManagerAddTestProvider3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;Ljava/util/Set<java$lang$String>;)V")
+	midlocationManagerAddTestProvider3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;Ljava/util/Set;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
 	}
@@ -168,7 +168,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.location.LocationManager.clearTestProviderStatus: %w", err)
 	}
 
-	midlocationManagerGetAllProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getAllProviders", "()Ljava/util/List<java$lang$String>;")
+	midlocationManagerGetAllProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getAllProviders", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.getAllProviders: %w", err)
 	}
@@ -178,17 +178,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.location.LocationManager.getBestProvider: %w", err)
 	}
 
-	midlocationManagerGetCurrentLocation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<android$location$Location>;)V")
+	midlocationManagerGetCurrentLocation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.getCurrentLocation: %w", err)
 	}
 
-	midlocationManagerGetCurrentLocation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<android$location$Location>;)V")
+	midlocationManagerGetCurrentLocation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.getCurrentLocation: %w", err)
 	}
 
-	midlocationManagerGetGnssAntennaInfos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssAntennaInfos", "()Ljava/util/List<android$location$GnssAntennaInfo>;")
+	midlocationManagerGetGnssAntennaInfos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssAntennaInfos", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.getGnssAntennaInfos: %w", err)
 	}
@@ -228,12 +228,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.location.LocationManager.getProviderProperties: %w", err)
 	}
 
-	midlocationManagerGetProviders2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Landroid/location/Criteria;Z)Ljava/util/List<java$lang$String>;")
+	midlocationManagerGetProviders2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Landroid/location/Criteria;Z)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.getProviders: %w", err)
 	}
 
-	midlocationManagerGetProviders1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Z)Ljava/util/List<java$lang$String>;")
+	midlocationManagerGetProviders1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Z)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.getProviders: %w", err)
 	}

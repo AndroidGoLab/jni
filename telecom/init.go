@@ -100,7 +100,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telecom.TelecomManager.acceptRingingCall: %w", err)
 	}
 
-	midtelecomManagerAddCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "addCall", "(Landroid/telecom/CallAttributes;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$telecom$CallControl;Landroid/telecom/CallException>;Landroid/telecom/CallControlCallback;Landroid/telecom/CallEventCallback;)V")
+	midtelecomManagerAddCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "addCall", "(Landroid/telecom/CallAttributes;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;Landroid/telecom/CallException>;Landroid/telecom/CallControlCallback;Landroid/telecom/CallEventCallback;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.addCall: %w", err)
 	}
@@ -135,7 +135,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telecom.TelecomManager.getAdnUriForPhoneAccount: %w", err)
 	}
 
-	midtelecomManagerGetCallCapablePhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getCallCapablePhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccountHandle>;")
+	midtelecomManagerGetCallCapablePhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getCallCapablePhoneAccounts", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.getCallCapablePhoneAccounts: %w", err)
 	}
@@ -155,7 +155,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telecom.TelecomManager.getLine1Number: %w", err)
 	}
 
-	midtelecomManagerGetOwnSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getOwnSelfManagedPhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccountHandle>;")
+	midtelecomManagerGetOwnSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getOwnSelfManagedPhoneAccounts", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.getOwnSelfManagedPhoneAccounts: %w", err)
 	}
@@ -165,12 +165,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telecom.TelecomManager.getPhoneAccount: %w", err)
 	}
 
-	midtelecomManagerGetRegisteredPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getRegisteredPhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccount>;")
+	midtelecomManagerGetRegisteredPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getRegisteredPhoneAccounts", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.getRegisteredPhoneAccounts: %w", err)
 	}
 
-	midtelecomManagerGetSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getSelfManagedPhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccountHandle>;")
+	midtelecomManagerGetSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getSelfManagedPhoneAccounts", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.getSelfManagedPhoneAccounts: %w", err)
 	}
@@ -265,7 +265,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.telecom.TelecomManager.silenceRinger: %w", err)
 	}
 
-	midtelecomManagerStartConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "startConference", "(Ljava/util/List<android$net$Uri>;Landroid/os/Bundle;)V")
+	midtelecomManagerStartConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "startConference", "(Ljava/util/List;Landroid/os/Bundle;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.startConference: %w", err)
 	}

@@ -77,7 +77,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHost: %w", err)
 	}
 
-	midnsdServiceInfoGetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHostAddresses", "()Ljava/util/List<java$net$InetAddress>;")
+	midnsdServiceInfoGetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHostAddresses", "()Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHostAddresses: %w", err)
 	}
@@ -107,7 +107,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getServiceType: %w", err)
 	}
 
-	midnsdServiceInfoGetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getSubtypes", "()Ljava/util/Set<java$lang$String>;")
+	midnsdServiceInfoGetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getSubtypes", "()Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getSubtypes: %w", err)
 	}
@@ -127,7 +127,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setHost: %w", err)
 	}
 
-	midnsdServiceInfoSetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setHostAddresses", "(Ljava/util/List<java$net$InetAddress>;)V")
+	midnsdServiceInfoSetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setHostAddresses", "(Ljava/util/List;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setHostAddresses: %w", err)
 	}
@@ -152,7 +152,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setServiceType: %w", err)
 	}
 
-	midnsdServiceInfoSetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setSubtypes", "(Ljava/util/Set<java$lang$String>;)V")
+	midnsdServiceInfoSetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setSubtypes", "(Ljava/util/Set;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setSubtypes: %w", err)
 	}

@@ -147,7 +147,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getBackgroundPermissionOptionLabel: %w", err)
 	}
 
-	midpackageManagerGetGroupOfPlatformPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getGroupOfPlatformPermission", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$String>;)V")
+	midpackageManagerGetGroupOfPlatformPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getGroupOfPlatformPermission", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getGroupOfPlatformPermission: %w", err)
 	}
@@ -157,17 +157,17 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getInstallSourceInfo: %w", err)
 	}
 
-	midpackageManagerGetInstalledApplications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledApplications", "(Landroid/content/pm/PackageManager$ApplicationInfoFlags;)Ljava/util/List<android$content$pm$ApplicationInfo>;")
+	midpackageManagerGetInstalledApplications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledApplications", "(Landroid/content/pm/PackageManager$ApplicationInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getInstalledApplications: %w", err)
 	}
 
-	midpackageManagerGetInstalledModules, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledModules", "(I)Ljava/util/List<android$content$pm$ModuleInfo>;")
+	midpackageManagerGetInstalledModules, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledModules", "(I)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getInstalledModules: %w", err)
 	}
 
-	midpackageManagerGetInstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledPackages", "(Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List<android$content$pm$PackageInfo>;")
+	midpackageManagerGetInstalledPackages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getInstalledPackages", "(Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getInstalledPackages: %w", err)
 	}
@@ -177,7 +177,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getLaunchIntentSenderForPackage: %w", err)
 	}
 
-	midpackageManagerGetMimeGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getMimeGroup", "(Ljava/lang/String;)Ljava/util/Set<java$lang$String>;")
+	midpackageManagerGetMimeGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getMimeGroup", "(Ljava/lang/String;)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getMimeGroup: %w", err)
 	}
@@ -217,12 +217,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getPackageUid: %w", err)
 	}
 
-	midpackageManagerGetPackagesHoldingPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackagesHoldingPermissions", "([Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List<android$content$pm$PackageInfo>;")
+	midpackageManagerGetPackagesHoldingPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPackagesHoldingPermissions", "([Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getPackagesHoldingPermissions: %w", err)
 	}
 
-	midpackageManagerGetPlatformPermissionsForGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPlatformPermissionsForGroup", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$util$List<java$lang$String>>;)V")
+	midpackageManagerGetPlatformPermissionsForGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getPlatformPermissionsForGroup", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getPlatformPermissionsForGroup: %w", err)
 	}
@@ -257,7 +257,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getServiceInfo: %w", err)
 	}
 
-	midpackageManagerGetSharedLibraries, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getSharedLibraries", "(Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List<android$content$pm$SharedLibraryInfo>;")
+	midpackageManagerGetSharedLibraries, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getSharedLibraries", "(Landroid/content/pm/PackageManager$PackageInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getSharedLibraries: %w", err)
 	}
@@ -277,7 +277,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getTargetSdkVersion: %w", err)
 	}
 
-	midpackageManagerGetWhitelistedRestrictedPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getWhitelistedRestrictedPermissions", "(Ljava/lang/String;I)Ljava/util/Set<java$lang$String>;")
+	midpackageManagerGetWhitelistedRestrictedPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "getWhitelistedRestrictedPermissions", "(Ljava/lang/String;I)Ljava/util/Set;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.getWhitelistedRestrictedPermissions: %w", err)
 	}
@@ -332,57 +332,57 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.isPackageSuspended: %w", err)
 	}
 
-	midpackageManagerQueryActivityProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryActivityProperty", "(Ljava/lang/String;)Ljava/util/List<android/content/pm/PackageManager$Property>;")
+	midpackageManagerQueryActivityProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryActivityProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryActivityProperty: %w", err)
 	}
 
-	midpackageManagerQueryApplicationProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryApplicationProperty", "(Ljava/lang/String;)Ljava/util/List<android/content/pm/PackageManager$Property>;")
+	midpackageManagerQueryApplicationProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryApplicationProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryApplicationProperty: %w", err)
 	}
 
-	midpackageManagerQueryBroadcastReceivers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryBroadcastReceivers", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List<android$content$pm$ResolveInfo>;")
+	midpackageManagerQueryBroadcastReceivers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryBroadcastReceivers", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryBroadcastReceivers: %w", err)
 	}
 
-	midpackageManagerQueryContentProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryContentProviders", "(Ljava/lang/String;ILandroid/content/pm/PackageManager$ComponentInfoFlags;)Ljava/util/List<android$content$pm$ProviderInfo>;")
+	midpackageManagerQueryContentProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryContentProviders", "(Ljava/lang/String;ILandroid/content/pm/PackageManager$ComponentInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryContentProviders: %w", err)
 	}
 
-	midpackageManagerQueryIntentActivities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentActivities", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List<android$content$pm$ResolveInfo>;")
+	midpackageManagerQueryIntentActivities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentActivities", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentActivities: %w", err)
 	}
 
-	midpackageManagerQueryIntentActivityOptions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentActivityOptions", "(Landroid/content/ComponentName;Ljava/util/List<android$content$Intent>;Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List<android$content$pm$ResolveInfo>;")
+	midpackageManagerQueryIntentActivityOptions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentActivityOptions", "(Landroid/content/ComponentName;Ljava/util/List;Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentActivityOptions: %w", err)
 	}
 
-	midpackageManagerQueryIntentContentProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentContentProviders", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List<android$content$pm$ResolveInfo>;")
+	midpackageManagerQueryIntentContentProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentContentProviders", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentContentProviders: %w", err)
 	}
 
-	midpackageManagerQueryIntentServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentServices", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List<android$content$pm$ResolveInfo>;")
+	midpackageManagerQueryIntentServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryIntentServices", "(Landroid/content/Intent;Landroid/content/pm/PackageManager$ResolveInfoFlags;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryIntentServices: %w", err)
 	}
 
-	midpackageManagerQueryProviderProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryProviderProperty", "(Ljava/lang/String;)Ljava/util/List<android/content/pm/PackageManager$Property>;")
+	midpackageManagerQueryProviderProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryProviderProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryProviderProperty: %w", err)
 	}
 
-	midpackageManagerQueryReceiverProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryReceiverProperty", "(Ljava/lang/String;)Ljava/util/List<android/content/pm/PackageManager$Property>;")
+	midpackageManagerQueryReceiverProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryReceiverProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryReceiverProperty: %w", err)
 	}
 
-	midpackageManagerQueryServiceProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryServiceProperty", "(Ljava/lang/String;)Ljava/util/List<android/content/pm/PackageManager$Property>;")
+	midpackageManagerQueryServiceProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "queryServiceProperty", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.queryServiceProperty: %w", err)
 	}
@@ -397,7 +397,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.removeWhitelistedRestrictedPermission: %w", err)
 	}
 
-	midpackageManagerRequestChecksums, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "requestChecksums", "(Ljava/lang/String;ZILjava/util/List<java$security$cert$Certificate>;Landroid/content/pm/PackageManager$OnChecksumsReadyListener;)V")
+	midpackageManagerRequestChecksums, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "requestChecksums", "(Ljava/lang/String;ZILjava/util/List;Landroid/content/pm/PackageManager$OnChecksumsReadyListener;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.requestChecksums: %w", err)
 	}
@@ -422,12 +422,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.content.pm.PackageManager.setAutoRevokeWhitelisted: %w", err)
 	}
 
-	midpackageManagerSetComponentEnabledSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "setComponentEnabledSettings", "(Ljava/util/List<android/content/pm/PackageManager$ComponentEnabledSetting>;)V")
+	midpackageManagerSetComponentEnabledSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "setComponentEnabledSettings", "(Ljava/util/List;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.setComponentEnabledSettings: %w", err)
 	}
 
-	midpackageManagerSetMimeGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "setMimeGroup", "(Ljava/lang/String;Ljava/util/Set<java$lang$String>;)V")
+	midpackageManagerSetMimeGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspackageManager)), "setMimeGroup", "(Ljava/lang/String;Ljava/util/Set;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.content.pm.PackageManager.setMimeGroup: %w", err)
 	}

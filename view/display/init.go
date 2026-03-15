@@ -272,7 +272,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.view.Display.isWideColorGamut: %w", err)
 	}
 
-	middisplayRegisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "registerHdrSdrRatioChangedListener", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<android$view$Display>;)V")
+	middisplayRegisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "registerHdrSdrRatioChangedListener", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.view.Display.registerHdrSdrRatioChangedListener: %w", err)
 	}
@@ -282,7 +282,7 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("get method android.view.Display.toString: %w", err)
 	}
 
-	middisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer<android$view$Display>;)V")
+	middisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.view.Display.unregisterHdrSdrRatioChangedListener: %w", err)
 	}
