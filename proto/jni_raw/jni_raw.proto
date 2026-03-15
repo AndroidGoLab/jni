@@ -116,6 +116,9 @@ service JNIService {
   rpc ToReflectedMethod   (ToReflectedMethodRequest)   returns (ToReflectedMethodResponse);
   rpc ToReflectedField    (ToReflectedFieldRequest)    returns (ToReflectedFieldResponse);
 
+  // Bidirectional stream for creating Java interface proxies with remote callbacks.
+  rpc Proxy(stream ProxyClientMessage) returns (stream ProxyServerMessage);
+
 }
 
 // ---- Version ----
@@ -336,3 +339,39 @@ message ToReflectedMethodResponse { int64 method_object = 1; }
 
 message ToReflectedFieldRequest { int64 class_handle = 1; int64 field_id = 2; bool is_static = 3; }
 message ToReflectedFieldResponse { int64 field_object = 1; }
+
+// ---- Proxy (remote callbacks) ----
+message ProxyClientMessage {
+  oneof msg {
+    CreateProxyRequest create = 1;
+    CallbackResponse callback_response = 2;
+  }
+}
+
+message ProxyServerMessage {
+  oneof msg {
+    CreateProxyResponse created = 1;
+    CallbackEvent callback = 2;
+  }
+}
+
+message CreateProxyRequest {
+  repeated int64 interface_class_handles = 1;
+}
+
+message CreateProxyResponse {
+  int64 proxy_handle = 1;
+}
+
+message CallbackEvent {
+  int64 callback_id = 1;
+  string method_name = 2;
+  repeated int64 arg_handles = 3;
+  bool expects_response = 4;
+}
+
+message CallbackResponse {
+  int64 callback_id = 1;
+  int64 result_handle = 2;
+  string error = 3;
+}

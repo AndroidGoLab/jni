@@ -72,6 +72,7 @@ const (
 	JNIService_FromReflectedField_FullMethodName    = "/jni_raw.JNIService/FromReflectedField"
 	JNIService_ToReflectedMethod_FullMethodName     = "/jni_raw.JNIService/ToReflectedMethod"
 	JNIService_ToReflectedField_FullMethodName      = "/jni_raw.JNIService/ToReflectedField"
+	JNIService_Proxy_FullMethodName                 = "/jni_raw.JNIService/Proxy"
 )
 
 // JNIServiceClient is the client API for JNIService service.
@@ -149,6 +150,8 @@ type JNIServiceClient interface {
 	FromReflectedField(ctx context.Context, in *FromReflectedFieldRequest, opts ...grpc.CallOption) (*FromReflectedFieldResponse, error)
 	ToReflectedMethod(ctx context.Context, in *ToReflectedMethodRequest, opts ...grpc.CallOption) (*ToReflectedMethodResponse, error)
 	ToReflectedField(ctx context.Context, in *ToReflectedFieldRequest, opts ...grpc.CallOption) (*ToReflectedFieldResponse, error)
+	// Bidirectional stream for creating Java interface proxies with remote callbacks.
+	Proxy(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ProxyClientMessage, ProxyServerMessage], error)
 }
 
 type jNIServiceClient struct {
@@ -689,6 +692,19 @@ func (c *jNIServiceClient) ToReflectedField(ctx context.Context, in *ToReflected
 	return out, nil
 }
 
+func (c *jNIServiceClient) Proxy(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ProxyClientMessage, ProxyServerMessage], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &JNIService_ServiceDesc.Streams[0], JNIService_Proxy_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[ProxyClientMessage, ProxyServerMessage]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type JNIService_ProxyClient = grpc.BidiStreamingClient[ProxyClientMessage, ProxyServerMessage]
+
 // JNIServiceServer is the server API for JNIService service.
 // All implementations must embed UnimplementedJNIServiceServer
 // for forward compatibility.
@@ -764,6 +780,8 @@ type JNIServiceServer interface {
 	FromReflectedField(context.Context, *FromReflectedFieldRequest) (*FromReflectedFieldResponse, error)
 	ToReflectedMethod(context.Context, *ToReflectedMethodRequest) (*ToReflectedMethodResponse, error)
 	ToReflectedField(context.Context, *ToReflectedFieldRequest) (*ToReflectedFieldResponse, error)
+	// Bidirectional stream for creating Java interface proxies with remote callbacks.
+	Proxy(grpc.BidiStreamingServer[ProxyClientMessage, ProxyServerMessage]) error
 	mustEmbedUnimplementedJNIServiceServer()
 }
 
@@ -932,6 +950,9 @@ func (UnimplementedJNIServiceServer) ToReflectedMethod(context.Context, *ToRefle
 }
 func (UnimplementedJNIServiceServer) ToReflectedField(context.Context, *ToReflectedFieldRequest) (*ToReflectedFieldResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ToReflectedField not implemented")
+}
+func (UnimplementedJNIServiceServer) Proxy(grpc.BidiStreamingServer[ProxyClientMessage, ProxyServerMessage]) error {
+	return status.Error(codes.Unimplemented, "method Proxy not implemented")
 }
 func (UnimplementedJNIServiceServer) mustEmbedUnimplementedJNIServiceServer() {}
 func (UnimplementedJNIServiceServer) testEmbeddedByValue()                    {}
@@ -1908,6 +1929,13 @@ func _JNIService_ToReflectedField_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _JNIService_Proxy_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(JNIServiceServer).Proxy(&grpc.GenericServerStream[ProxyClientMessage, ProxyServerMessage]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type JNIService_ProxyServer = grpc.BidiStreamingServer[ProxyClientMessage, ProxyServerMessage]
+
 // JNIService_ServiceDesc is the grpc.ServiceDesc for JNIService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2128,6 +2156,13 @@ var JNIService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _JNIService_ToReflectedField_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Proxy",
+			Handler:       _JNIService_Proxy_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "proto/jni_raw/jni_raw.proto",
 }

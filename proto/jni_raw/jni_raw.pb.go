@@ -5189,6 +5189,387 @@ func (x *ToReflectedFieldResponse) GetFieldObject() int64 {
 	return 0
 }
 
+// ---- Proxy (remote callbacks) ----
+type ProxyClientMessage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Msg:
+	//
+	//	*ProxyClientMessage_Create
+	//	*ProxyClientMessage_CallbackResponse
+	Msg           isProxyClientMessage_Msg `protobuf_oneof:"msg"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProxyClientMessage) Reset() {
+	*x = ProxyClientMessage{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[107]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProxyClientMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProxyClientMessage) ProtoMessage() {}
+
+func (x *ProxyClientMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[107]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProxyClientMessage.ProtoReflect.Descriptor instead.
+func (*ProxyClientMessage) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{107}
+}
+
+func (x *ProxyClientMessage) GetMsg() isProxyClientMessage_Msg {
+	if x != nil {
+		return x.Msg
+	}
+	return nil
+}
+
+func (x *ProxyClientMessage) GetCreate() *CreateProxyRequest {
+	if x != nil {
+		if x, ok := x.Msg.(*ProxyClientMessage_Create); ok {
+			return x.Create
+		}
+	}
+	return nil
+}
+
+func (x *ProxyClientMessage) GetCallbackResponse() *CallbackResponse {
+	if x != nil {
+		if x, ok := x.Msg.(*ProxyClientMessage_CallbackResponse); ok {
+			return x.CallbackResponse
+		}
+	}
+	return nil
+}
+
+type isProxyClientMessage_Msg interface {
+	isProxyClientMessage_Msg()
+}
+
+type ProxyClientMessage_Create struct {
+	Create *CreateProxyRequest `protobuf:"bytes,1,opt,name=create,proto3,oneof"`
+}
+
+type ProxyClientMessage_CallbackResponse struct {
+	CallbackResponse *CallbackResponse `protobuf:"bytes,2,opt,name=callback_response,json=callbackResponse,proto3,oneof"`
+}
+
+func (*ProxyClientMessage_Create) isProxyClientMessage_Msg() {}
+
+func (*ProxyClientMessage_CallbackResponse) isProxyClientMessage_Msg() {}
+
+type ProxyServerMessage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Msg:
+	//
+	//	*ProxyServerMessage_Created
+	//	*ProxyServerMessage_Callback
+	Msg           isProxyServerMessage_Msg `protobuf_oneof:"msg"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProxyServerMessage) Reset() {
+	*x = ProxyServerMessage{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[108]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProxyServerMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProxyServerMessage) ProtoMessage() {}
+
+func (x *ProxyServerMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[108]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProxyServerMessage.ProtoReflect.Descriptor instead.
+func (*ProxyServerMessage) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{108}
+}
+
+func (x *ProxyServerMessage) GetMsg() isProxyServerMessage_Msg {
+	if x != nil {
+		return x.Msg
+	}
+	return nil
+}
+
+func (x *ProxyServerMessage) GetCreated() *CreateProxyResponse {
+	if x != nil {
+		if x, ok := x.Msg.(*ProxyServerMessage_Created); ok {
+			return x.Created
+		}
+	}
+	return nil
+}
+
+func (x *ProxyServerMessage) GetCallback() *CallbackEvent {
+	if x != nil {
+		if x, ok := x.Msg.(*ProxyServerMessage_Callback); ok {
+			return x.Callback
+		}
+	}
+	return nil
+}
+
+type isProxyServerMessage_Msg interface {
+	isProxyServerMessage_Msg()
+}
+
+type ProxyServerMessage_Created struct {
+	Created *CreateProxyResponse `protobuf:"bytes,1,opt,name=created,proto3,oneof"`
+}
+
+type ProxyServerMessage_Callback struct {
+	Callback *CallbackEvent `protobuf:"bytes,2,opt,name=callback,proto3,oneof"`
+}
+
+func (*ProxyServerMessage_Created) isProxyServerMessage_Msg() {}
+
+func (*ProxyServerMessage_Callback) isProxyServerMessage_Msg() {}
+
+type CreateProxyRequest struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	InterfaceClassHandles []int64                `protobuf:"varint,1,rep,packed,name=interface_class_handles,json=interfaceClassHandles,proto3" json:"interface_class_handles,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *CreateProxyRequest) Reset() {
+	*x = CreateProxyRequest{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[109]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateProxyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateProxyRequest) ProtoMessage() {}
+
+func (x *CreateProxyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[109]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateProxyRequest.ProtoReflect.Descriptor instead.
+func (*CreateProxyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{109}
+}
+
+func (x *CreateProxyRequest) GetInterfaceClassHandles() []int64 {
+	if x != nil {
+		return x.InterfaceClassHandles
+	}
+	return nil
+}
+
+type CreateProxyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProxyHandle   int64                  `protobuf:"varint,1,opt,name=proxy_handle,json=proxyHandle,proto3" json:"proxy_handle,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateProxyResponse) Reset() {
+	*x = CreateProxyResponse{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[110]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateProxyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateProxyResponse) ProtoMessage() {}
+
+func (x *CreateProxyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[110]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateProxyResponse.ProtoReflect.Descriptor instead.
+func (*CreateProxyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{110}
+}
+
+func (x *CreateProxyResponse) GetProxyHandle() int64 {
+	if x != nil {
+		return x.ProxyHandle
+	}
+	return 0
+}
+
+type CallbackEvent struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	CallbackId      int64                  `protobuf:"varint,1,opt,name=callback_id,json=callbackId,proto3" json:"callback_id,omitempty"`
+	MethodName      string                 `protobuf:"bytes,2,opt,name=method_name,json=methodName,proto3" json:"method_name,omitempty"`
+	ArgHandles      []int64                `protobuf:"varint,3,rep,packed,name=arg_handles,json=argHandles,proto3" json:"arg_handles,omitempty"`
+	ExpectsResponse bool                   `protobuf:"varint,4,opt,name=expects_response,json=expectsResponse,proto3" json:"expects_response,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CallbackEvent) Reset() {
+	*x = CallbackEvent{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[111]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CallbackEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallbackEvent) ProtoMessage() {}
+
+func (x *CallbackEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[111]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallbackEvent.ProtoReflect.Descriptor instead.
+func (*CallbackEvent) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{111}
+}
+
+func (x *CallbackEvent) GetCallbackId() int64 {
+	if x != nil {
+		return x.CallbackId
+	}
+	return 0
+}
+
+func (x *CallbackEvent) GetMethodName() string {
+	if x != nil {
+		return x.MethodName
+	}
+	return ""
+}
+
+func (x *CallbackEvent) GetArgHandles() []int64 {
+	if x != nil {
+		return x.ArgHandles
+	}
+	return nil
+}
+
+func (x *CallbackEvent) GetExpectsResponse() bool {
+	if x != nil {
+		return x.ExpectsResponse
+	}
+	return false
+}
+
+type CallbackResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CallbackId    int64                  `protobuf:"varint,1,opt,name=callback_id,json=callbackId,proto3" json:"callback_id,omitempty"`
+	ResultHandle  int64                  `protobuf:"varint,2,opt,name=result_handle,json=resultHandle,proto3" json:"result_handle,omitempty"`
+	Error         string                 `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CallbackResponse) Reset() {
+	*x = CallbackResponse{}
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[112]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CallbackResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallbackResponse) ProtoMessage() {}
+
+func (x *CallbackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_jni_raw_jni_raw_proto_msgTypes[112]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallbackResponse.ProtoReflect.Descriptor instead.
+func (*CallbackResponse) Descriptor() ([]byte, []int) {
+	return file_proto_jni_raw_jni_raw_proto_rawDescGZIP(), []int{112}
+}
+
+func (x *CallbackResponse) GetCallbackId() int64 {
+	if x != nil {
+		return x.CallbackId
+	}
+	return 0
+}
+
+func (x *CallbackResponse) GetResultHandle() int64 {
+	if x != nil {
+		return x.ResultHandle
+	}
+	return 0
+}
+
+func (x *CallbackResponse) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
 var File_proto_jni_raw_jni_raw_proto protoreflect.FileDescriptor
 
 const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
@@ -5455,7 +5836,32 @@ const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
 	"\bfield_id\x18\x02 \x01(\x03R\afieldId\x12\x1b\n" +
 	"\tis_static\x18\x03 \x01(\bR\bisStatic\"=\n" +
 	"\x18ToReflectedFieldResponse\x12!\n" +
-	"\ffield_object\x18\x01 \x01(\x03R\vfieldObject*s\n" +
+	"\ffield_object\x18\x01 \x01(\x03R\vfieldObject\"\x9c\x01\n" +
+	"\x12ProxyClientMessage\x125\n" +
+	"\x06create\x18\x01 \x01(\v2\x1b.jni_raw.CreateProxyRequestH\x00R\x06create\x12H\n" +
+	"\x11callback_response\x18\x02 \x01(\v2\x19.jni_raw.CallbackResponseH\x00R\x10callbackResponseB\x05\n" +
+	"\x03msg\"\x8b\x01\n" +
+	"\x12ProxyServerMessage\x128\n" +
+	"\acreated\x18\x01 \x01(\v2\x1c.jni_raw.CreateProxyResponseH\x00R\acreated\x124\n" +
+	"\bcallback\x18\x02 \x01(\v2\x16.jni_raw.CallbackEventH\x00R\bcallbackB\x05\n" +
+	"\x03msg\"L\n" +
+	"\x12CreateProxyRequest\x126\n" +
+	"\x17interface_class_handles\x18\x01 \x03(\x03R\x15interfaceClassHandles\"8\n" +
+	"\x13CreateProxyResponse\x12!\n" +
+	"\fproxy_handle\x18\x01 \x01(\x03R\vproxyHandle\"\x9d\x01\n" +
+	"\rCallbackEvent\x12\x1f\n" +
+	"\vcallback_id\x18\x01 \x01(\x03R\n" +
+	"callbackId\x12\x1f\n" +
+	"\vmethod_name\x18\x02 \x01(\tR\n" +
+	"methodName\x12\x1f\n" +
+	"\varg_handles\x18\x03 \x03(\x03R\n" +
+	"argHandles\x12)\n" +
+	"\x10expects_response\x18\x04 \x01(\bR\x0fexpectsResponse\"n\n" +
+	"\x10CallbackResponse\x12\x1f\n" +
+	"\vcallback_id\x18\x01 \x01(\x03R\n" +
+	"callbackId\x12#\n" +
+	"\rresult_handle\x18\x02 \x01(\x03R\fresultHandle\x12\x14\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error*s\n" +
 	"\x05JType\x12\b\n" +
 	"\x04VOID\x10\x00\x12\v\n" +
 	"\aBOOLEAN\x10\x01\x12\b\n" +
@@ -5468,7 +5874,7 @@ const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
 	"\n" +
 	"\x06DOUBLE\x10\b\x12\n" +
 	"\n" +
-	"\x06OBJECT\x10\t2\xe3\"\n" +
+	"\x06OBJECT\x10\t2\xaa#\n" +
 	"\n" +
 	"JNIService\x12E\n" +
 	"\n" +
@@ -5526,7 +5932,8 @@ const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
 	"\x13FromReflectedMethod\x12#.jni_raw.FromReflectedMethodRequest\x1a$.jni_raw.FromReflectedMethodResponse\x12]\n" +
 	"\x12FromReflectedField\x12\".jni_raw.FromReflectedFieldRequest\x1a#.jni_raw.FromReflectedFieldResponse\x12Z\n" +
 	"\x11ToReflectedMethod\x12!.jni_raw.ToReflectedMethodRequest\x1a\".jni_raw.ToReflectedMethodResponse\x12W\n" +
-	"\x10ToReflectedField\x12 .jni_raw.ToReflectedFieldRequest\x1a!.jni_raw.ToReflectedFieldResponseB*Z(github.com/xaionaro-go/jni/proto/jni_rawb\x06proto3"
+	"\x10ToReflectedField\x12 .jni_raw.ToReflectedFieldRequest\x1a!.jni_raw.ToReflectedFieldResponse\x12E\n" +
+	"\x05Proxy\x12\x1b.jni_raw.ProxyClientMessage\x1a\x1b.jni_raw.ProxyServerMessage(\x010\x01B*Z(github.com/xaionaro-go/jni/proto/jni_rawb\x06proto3"
 
 var (
 	file_proto_jni_raw_jni_raw_proto_rawDescOnce sync.Once
@@ -5541,7 +5948,7 @@ func file_proto_jni_raw_jni_raw_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_jni_raw_jni_raw_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_jni_raw_jni_raw_proto_msgTypes = make([]protoimpl.MessageInfo, 107)
+var file_proto_jni_raw_jni_raw_proto_msgTypes = make([]protoimpl.MessageInfo, 113)
 var file_proto_jni_raw_jni_raw_proto_goTypes = []any{
 	(JType)(0),                            // 0: jni_raw.JType
 	(*JValue)(nil),                        // 1: jni_raw.JValue
@@ -5651,6 +6058,12 @@ var file_proto_jni_raw_jni_raw_proto_goTypes = []any{
 	(*ToReflectedMethodResponse)(nil),     // 105: jni_raw.ToReflectedMethodResponse
 	(*ToReflectedFieldRequest)(nil),       // 106: jni_raw.ToReflectedFieldRequest
 	(*ToReflectedFieldResponse)(nil),      // 107: jni_raw.ToReflectedFieldResponse
+	(*ProxyClientMessage)(nil),            // 108: jni_raw.ProxyClientMessage
+	(*ProxyServerMessage)(nil),            // 109: jni_raw.ProxyServerMessage
+	(*CreateProxyRequest)(nil),            // 110: jni_raw.CreateProxyRequest
+	(*CreateProxyResponse)(nil),           // 111: jni_raw.CreateProxyResponse
+	(*CallbackEvent)(nil),                 // 112: jni_raw.CallbackEvent
+	(*CallbackResponse)(nil),              // 113: jni_raw.CallbackResponse
 }
 var file_proto_jni_raw_jni_raw_proto_depIdxs = []int32{
 	1,   // 0: jni_raw.NewObjectRequest.args:type_name -> jni_raw.JValue
@@ -5674,117 +6087,123 @@ var file_proto_jni_raw_jni_raw_proto_depIdxs = []int32{
 	1,   // 18: jni_raw.GetArrayRegionResponse.elements:type_name -> jni_raw.JValue
 	0,   // 19: jni_raw.SetArrayRegionRequest.element_type:type_name -> jni_raw.JType
 	1,   // 20: jni_raw.SetArrayRegionRequest.elements:type_name -> jni_raw.JValue
-	2,   // 21: jni_raw.JNIService.GetVersion:input_type -> jni_raw.GetVersionRequest
-	4,   // 22: jni_raw.JNIService.FindClass:input_type -> jni_raw.FindClassRequest
-	6,   // 23: jni_raw.JNIService.GetSuperclass:input_type -> jni_raw.GetSuperclassRequest
-	8,   // 24: jni_raw.JNIService.IsAssignableFrom:input_type -> jni_raw.IsAssignableFromRequest
-	10,  // 25: jni_raw.JNIService.AllocObject:input_type -> jni_raw.AllocObjectRequest
-	12,  // 26: jni_raw.JNIService.NewObject:input_type -> jni_raw.NewObjectRequest
-	14,  // 27: jni_raw.JNIService.GetObjectClass:input_type -> jni_raw.GetObjectClassRequest
-	16,  // 28: jni_raw.JNIService.IsInstanceOf:input_type -> jni_raw.IsInstanceOfRequest
-	18,  // 29: jni_raw.JNIService.IsSameObject:input_type -> jni_raw.IsSameObjectRequest
-	20,  // 30: jni_raw.JNIService.GetObjectRefType:input_type -> jni_raw.GetObjectRefTypeRequest
-	22,  // 31: jni_raw.JNIService.GetMethodID:input_type -> jni_raw.GetMethodIDRequest
-	24,  // 32: jni_raw.JNIService.GetStaticMethodID:input_type -> jni_raw.GetStaticMethodIDRequest
-	26,  // 33: jni_raw.JNIService.GetFieldID:input_type -> jni_raw.GetFieldIDRequest
-	28,  // 34: jni_raw.JNIService.GetStaticFieldID:input_type -> jni_raw.GetStaticFieldIDRequest
-	30,  // 35: jni_raw.JNIService.CallMethod:input_type -> jni_raw.CallMethodRequest
-	32,  // 36: jni_raw.JNIService.CallStaticMethod:input_type -> jni_raw.CallStaticMethodRequest
-	34,  // 37: jni_raw.JNIService.CallNonvirtualMethod:input_type -> jni_raw.CallNonvirtualMethodRequest
-	36,  // 38: jni_raw.JNIService.GetField:input_type -> jni_raw.GetFieldValueRequest
-	38,  // 39: jni_raw.JNIService.SetField:input_type -> jni_raw.SetFieldValueRequest
-	40,  // 40: jni_raw.JNIService.GetStaticField:input_type -> jni_raw.GetStaticFieldValueRequest
-	42,  // 41: jni_raw.JNIService.SetStaticField:input_type -> jni_raw.SetStaticFieldValueRequest
-	44,  // 42: jni_raw.JNIService.NewStringUTF:input_type -> jni_raw.NewStringUTFRequest
-	46,  // 43: jni_raw.JNIService.GetStringUTFChars:input_type -> jni_raw.GetStringUTFCharsRequest
-	48,  // 44: jni_raw.JNIService.GetStringLength:input_type -> jni_raw.GetStringLengthRequest
-	50,  // 45: jni_raw.JNIService.NewPrimitiveArray:input_type -> jni_raw.NewPrimitiveArrayRequest
-	52,  // 46: jni_raw.JNIService.NewObjectArray:input_type -> jni_raw.NewObjectArrayRequest
-	54,  // 47: jni_raw.JNIService.GetArrayLength:input_type -> jni_raw.GetArrayLengthRequest
-	56,  // 48: jni_raw.JNIService.GetObjectArrayElement:input_type -> jni_raw.GetObjectArrayElementRequest
-	58,  // 49: jni_raw.JNIService.SetObjectArrayElement:input_type -> jni_raw.SetObjectArrayElementRequest
-	60,  // 50: jni_raw.JNIService.GetArrayRegion:input_type -> jni_raw.GetArrayRegionRequest
-	62,  // 51: jni_raw.JNIService.SetArrayRegion:input_type -> jni_raw.SetArrayRegionRequest
-	64,  // 52: jni_raw.JNIService.GetByteArrayData:input_type -> jni_raw.GetByteArrayDataRequest
-	66,  // 53: jni_raw.JNIService.NewGlobalRef:input_type -> jni_raw.NewGlobalRefRequest
-	68,  // 54: jni_raw.JNIService.DeleteGlobalRef:input_type -> jni_raw.DeleteGlobalRefRequest
-	70,  // 55: jni_raw.JNIService.NewLocalRef:input_type -> jni_raw.NewLocalRefRequest
-	72,  // 56: jni_raw.JNIService.DeleteLocalRef:input_type -> jni_raw.DeleteLocalRefRequest
-	74,  // 57: jni_raw.JNIService.NewWeakGlobalRef:input_type -> jni_raw.NewWeakGlobalRefRequest
-	76,  // 58: jni_raw.JNIService.DeleteWeakGlobalRef:input_type -> jni_raw.DeleteWeakGlobalRefRequest
-	78,  // 59: jni_raw.JNIService.ExceptionCheck:input_type -> jni_raw.ExceptionCheckRequest
-	80,  // 60: jni_raw.JNIService.ExceptionClear:input_type -> jni_raw.ExceptionClearRequest
-	82,  // 61: jni_raw.JNIService.ExceptionDescribe:input_type -> jni_raw.ExceptionDescribeRequest
-	84,  // 62: jni_raw.JNIService.ExceptionOccurred:input_type -> jni_raw.ExceptionOccurredRequest
-	86,  // 63: jni_raw.JNIService.Throw:input_type -> jni_raw.ThrowRequest
-	88,  // 64: jni_raw.JNIService.ThrowNew:input_type -> jni_raw.ThrowNewRequest
-	90,  // 65: jni_raw.JNIService.MonitorEnter:input_type -> jni_raw.MonitorEnterRequest
-	92,  // 66: jni_raw.JNIService.MonitorExit:input_type -> jni_raw.MonitorExitRequest
-	94,  // 67: jni_raw.JNIService.PushLocalFrame:input_type -> jni_raw.PushLocalFrameRequest
-	96,  // 68: jni_raw.JNIService.PopLocalFrame:input_type -> jni_raw.PopLocalFrameRequest
-	98,  // 69: jni_raw.JNIService.EnsureLocalCapacity:input_type -> jni_raw.EnsureLocalCapacityRequest
-	100, // 70: jni_raw.JNIService.FromReflectedMethod:input_type -> jni_raw.FromReflectedMethodRequest
-	102, // 71: jni_raw.JNIService.FromReflectedField:input_type -> jni_raw.FromReflectedFieldRequest
-	104, // 72: jni_raw.JNIService.ToReflectedMethod:input_type -> jni_raw.ToReflectedMethodRequest
-	106, // 73: jni_raw.JNIService.ToReflectedField:input_type -> jni_raw.ToReflectedFieldRequest
-	3,   // 74: jni_raw.JNIService.GetVersion:output_type -> jni_raw.GetVersionResponse
-	5,   // 75: jni_raw.JNIService.FindClass:output_type -> jni_raw.FindClassResponse
-	7,   // 76: jni_raw.JNIService.GetSuperclass:output_type -> jni_raw.GetSuperclassResponse
-	9,   // 77: jni_raw.JNIService.IsAssignableFrom:output_type -> jni_raw.IsAssignableFromResponse
-	11,  // 78: jni_raw.JNIService.AllocObject:output_type -> jni_raw.AllocObjectResponse
-	13,  // 79: jni_raw.JNIService.NewObject:output_type -> jni_raw.NewObjectResponse
-	15,  // 80: jni_raw.JNIService.GetObjectClass:output_type -> jni_raw.GetObjectClassResponse
-	17,  // 81: jni_raw.JNIService.IsInstanceOf:output_type -> jni_raw.IsInstanceOfResponse
-	19,  // 82: jni_raw.JNIService.IsSameObject:output_type -> jni_raw.IsSameObjectResponse
-	21,  // 83: jni_raw.JNIService.GetObjectRefType:output_type -> jni_raw.GetObjectRefTypeResponse
-	23,  // 84: jni_raw.JNIService.GetMethodID:output_type -> jni_raw.GetMethodIDResponse
-	25,  // 85: jni_raw.JNIService.GetStaticMethodID:output_type -> jni_raw.GetStaticMethodIDResponse
-	27,  // 86: jni_raw.JNIService.GetFieldID:output_type -> jni_raw.GetFieldIDResponse
-	29,  // 87: jni_raw.JNIService.GetStaticFieldID:output_type -> jni_raw.GetStaticFieldIDResponse
-	31,  // 88: jni_raw.JNIService.CallMethod:output_type -> jni_raw.CallMethodResponse
-	33,  // 89: jni_raw.JNIService.CallStaticMethod:output_type -> jni_raw.CallStaticMethodResponse
-	35,  // 90: jni_raw.JNIService.CallNonvirtualMethod:output_type -> jni_raw.CallNonvirtualMethodResponse
-	37,  // 91: jni_raw.JNIService.GetField:output_type -> jni_raw.GetFieldValueResponse
-	39,  // 92: jni_raw.JNIService.SetField:output_type -> jni_raw.SetFieldValueResponse
-	41,  // 93: jni_raw.JNIService.GetStaticField:output_type -> jni_raw.GetStaticFieldValueResponse
-	43,  // 94: jni_raw.JNIService.SetStaticField:output_type -> jni_raw.SetStaticFieldValueResponse
-	45,  // 95: jni_raw.JNIService.NewStringUTF:output_type -> jni_raw.NewStringUTFResponse
-	47,  // 96: jni_raw.JNIService.GetStringUTFChars:output_type -> jni_raw.GetStringUTFCharsResponse
-	49,  // 97: jni_raw.JNIService.GetStringLength:output_type -> jni_raw.GetStringLengthResponse
-	51,  // 98: jni_raw.JNIService.NewPrimitiveArray:output_type -> jni_raw.NewPrimitiveArrayResponse
-	53,  // 99: jni_raw.JNIService.NewObjectArray:output_type -> jni_raw.NewObjectArrayResponse
-	55,  // 100: jni_raw.JNIService.GetArrayLength:output_type -> jni_raw.GetArrayLengthResponse
-	57,  // 101: jni_raw.JNIService.GetObjectArrayElement:output_type -> jni_raw.GetObjectArrayElementResponse
-	59,  // 102: jni_raw.JNIService.SetObjectArrayElement:output_type -> jni_raw.SetObjectArrayElementResponse
-	61,  // 103: jni_raw.JNIService.GetArrayRegion:output_type -> jni_raw.GetArrayRegionResponse
-	63,  // 104: jni_raw.JNIService.SetArrayRegion:output_type -> jni_raw.SetArrayRegionResponse
-	65,  // 105: jni_raw.JNIService.GetByteArrayData:output_type -> jni_raw.GetByteArrayDataResponse
-	67,  // 106: jni_raw.JNIService.NewGlobalRef:output_type -> jni_raw.NewGlobalRefResponse
-	69,  // 107: jni_raw.JNIService.DeleteGlobalRef:output_type -> jni_raw.DeleteGlobalRefResponse
-	71,  // 108: jni_raw.JNIService.NewLocalRef:output_type -> jni_raw.NewLocalRefResponse
-	73,  // 109: jni_raw.JNIService.DeleteLocalRef:output_type -> jni_raw.DeleteLocalRefResponse
-	75,  // 110: jni_raw.JNIService.NewWeakGlobalRef:output_type -> jni_raw.NewWeakGlobalRefResponse
-	77,  // 111: jni_raw.JNIService.DeleteWeakGlobalRef:output_type -> jni_raw.DeleteWeakGlobalRefResponse
-	79,  // 112: jni_raw.JNIService.ExceptionCheck:output_type -> jni_raw.ExceptionCheckResponse
-	81,  // 113: jni_raw.JNIService.ExceptionClear:output_type -> jni_raw.ExceptionClearResponse
-	83,  // 114: jni_raw.JNIService.ExceptionDescribe:output_type -> jni_raw.ExceptionDescribeResponse
-	85,  // 115: jni_raw.JNIService.ExceptionOccurred:output_type -> jni_raw.ExceptionOccurredResponse
-	87,  // 116: jni_raw.JNIService.Throw:output_type -> jni_raw.ThrowResponse
-	89,  // 117: jni_raw.JNIService.ThrowNew:output_type -> jni_raw.ThrowNewResponse
-	91,  // 118: jni_raw.JNIService.MonitorEnter:output_type -> jni_raw.MonitorEnterResponse
-	93,  // 119: jni_raw.JNIService.MonitorExit:output_type -> jni_raw.MonitorExitResponse
-	95,  // 120: jni_raw.JNIService.PushLocalFrame:output_type -> jni_raw.PushLocalFrameResponse
-	97,  // 121: jni_raw.JNIService.PopLocalFrame:output_type -> jni_raw.PopLocalFrameResponse
-	99,  // 122: jni_raw.JNIService.EnsureLocalCapacity:output_type -> jni_raw.EnsureLocalCapacityResponse
-	101, // 123: jni_raw.JNIService.FromReflectedMethod:output_type -> jni_raw.FromReflectedMethodResponse
-	103, // 124: jni_raw.JNIService.FromReflectedField:output_type -> jni_raw.FromReflectedFieldResponse
-	105, // 125: jni_raw.JNIService.ToReflectedMethod:output_type -> jni_raw.ToReflectedMethodResponse
-	107, // 126: jni_raw.JNIService.ToReflectedField:output_type -> jni_raw.ToReflectedFieldResponse
-	74,  // [74:127] is the sub-list for method output_type
-	21,  // [21:74] is the sub-list for method input_type
-	21,  // [21:21] is the sub-list for extension type_name
-	21,  // [21:21] is the sub-list for extension extendee
-	0,   // [0:21] is the sub-list for field type_name
+	110, // 21: jni_raw.ProxyClientMessage.create:type_name -> jni_raw.CreateProxyRequest
+	113, // 22: jni_raw.ProxyClientMessage.callback_response:type_name -> jni_raw.CallbackResponse
+	111, // 23: jni_raw.ProxyServerMessage.created:type_name -> jni_raw.CreateProxyResponse
+	112, // 24: jni_raw.ProxyServerMessage.callback:type_name -> jni_raw.CallbackEvent
+	2,   // 25: jni_raw.JNIService.GetVersion:input_type -> jni_raw.GetVersionRequest
+	4,   // 26: jni_raw.JNIService.FindClass:input_type -> jni_raw.FindClassRequest
+	6,   // 27: jni_raw.JNIService.GetSuperclass:input_type -> jni_raw.GetSuperclassRequest
+	8,   // 28: jni_raw.JNIService.IsAssignableFrom:input_type -> jni_raw.IsAssignableFromRequest
+	10,  // 29: jni_raw.JNIService.AllocObject:input_type -> jni_raw.AllocObjectRequest
+	12,  // 30: jni_raw.JNIService.NewObject:input_type -> jni_raw.NewObjectRequest
+	14,  // 31: jni_raw.JNIService.GetObjectClass:input_type -> jni_raw.GetObjectClassRequest
+	16,  // 32: jni_raw.JNIService.IsInstanceOf:input_type -> jni_raw.IsInstanceOfRequest
+	18,  // 33: jni_raw.JNIService.IsSameObject:input_type -> jni_raw.IsSameObjectRequest
+	20,  // 34: jni_raw.JNIService.GetObjectRefType:input_type -> jni_raw.GetObjectRefTypeRequest
+	22,  // 35: jni_raw.JNIService.GetMethodID:input_type -> jni_raw.GetMethodIDRequest
+	24,  // 36: jni_raw.JNIService.GetStaticMethodID:input_type -> jni_raw.GetStaticMethodIDRequest
+	26,  // 37: jni_raw.JNIService.GetFieldID:input_type -> jni_raw.GetFieldIDRequest
+	28,  // 38: jni_raw.JNIService.GetStaticFieldID:input_type -> jni_raw.GetStaticFieldIDRequest
+	30,  // 39: jni_raw.JNIService.CallMethod:input_type -> jni_raw.CallMethodRequest
+	32,  // 40: jni_raw.JNIService.CallStaticMethod:input_type -> jni_raw.CallStaticMethodRequest
+	34,  // 41: jni_raw.JNIService.CallNonvirtualMethod:input_type -> jni_raw.CallNonvirtualMethodRequest
+	36,  // 42: jni_raw.JNIService.GetField:input_type -> jni_raw.GetFieldValueRequest
+	38,  // 43: jni_raw.JNIService.SetField:input_type -> jni_raw.SetFieldValueRequest
+	40,  // 44: jni_raw.JNIService.GetStaticField:input_type -> jni_raw.GetStaticFieldValueRequest
+	42,  // 45: jni_raw.JNIService.SetStaticField:input_type -> jni_raw.SetStaticFieldValueRequest
+	44,  // 46: jni_raw.JNIService.NewStringUTF:input_type -> jni_raw.NewStringUTFRequest
+	46,  // 47: jni_raw.JNIService.GetStringUTFChars:input_type -> jni_raw.GetStringUTFCharsRequest
+	48,  // 48: jni_raw.JNIService.GetStringLength:input_type -> jni_raw.GetStringLengthRequest
+	50,  // 49: jni_raw.JNIService.NewPrimitiveArray:input_type -> jni_raw.NewPrimitiveArrayRequest
+	52,  // 50: jni_raw.JNIService.NewObjectArray:input_type -> jni_raw.NewObjectArrayRequest
+	54,  // 51: jni_raw.JNIService.GetArrayLength:input_type -> jni_raw.GetArrayLengthRequest
+	56,  // 52: jni_raw.JNIService.GetObjectArrayElement:input_type -> jni_raw.GetObjectArrayElementRequest
+	58,  // 53: jni_raw.JNIService.SetObjectArrayElement:input_type -> jni_raw.SetObjectArrayElementRequest
+	60,  // 54: jni_raw.JNIService.GetArrayRegion:input_type -> jni_raw.GetArrayRegionRequest
+	62,  // 55: jni_raw.JNIService.SetArrayRegion:input_type -> jni_raw.SetArrayRegionRequest
+	64,  // 56: jni_raw.JNIService.GetByteArrayData:input_type -> jni_raw.GetByteArrayDataRequest
+	66,  // 57: jni_raw.JNIService.NewGlobalRef:input_type -> jni_raw.NewGlobalRefRequest
+	68,  // 58: jni_raw.JNIService.DeleteGlobalRef:input_type -> jni_raw.DeleteGlobalRefRequest
+	70,  // 59: jni_raw.JNIService.NewLocalRef:input_type -> jni_raw.NewLocalRefRequest
+	72,  // 60: jni_raw.JNIService.DeleteLocalRef:input_type -> jni_raw.DeleteLocalRefRequest
+	74,  // 61: jni_raw.JNIService.NewWeakGlobalRef:input_type -> jni_raw.NewWeakGlobalRefRequest
+	76,  // 62: jni_raw.JNIService.DeleteWeakGlobalRef:input_type -> jni_raw.DeleteWeakGlobalRefRequest
+	78,  // 63: jni_raw.JNIService.ExceptionCheck:input_type -> jni_raw.ExceptionCheckRequest
+	80,  // 64: jni_raw.JNIService.ExceptionClear:input_type -> jni_raw.ExceptionClearRequest
+	82,  // 65: jni_raw.JNIService.ExceptionDescribe:input_type -> jni_raw.ExceptionDescribeRequest
+	84,  // 66: jni_raw.JNIService.ExceptionOccurred:input_type -> jni_raw.ExceptionOccurredRequest
+	86,  // 67: jni_raw.JNIService.Throw:input_type -> jni_raw.ThrowRequest
+	88,  // 68: jni_raw.JNIService.ThrowNew:input_type -> jni_raw.ThrowNewRequest
+	90,  // 69: jni_raw.JNIService.MonitorEnter:input_type -> jni_raw.MonitorEnterRequest
+	92,  // 70: jni_raw.JNIService.MonitorExit:input_type -> jni_raw.MonitorExitRequest
+	94,  // 71: jni_raw.JNIService.PushLocalFrame:input_type -> jni_raw.PushLocalFrameRequest
+	96,  // 72: jni_raw.JNIService.PopLocalFrame:input_type -> jni_raw.PopLocalFrameRequest
+	98,  // 73: jni_raw.JNIService.EnsureLocalCapacity:input_type -> jni_raw.EnsureLocalCapacityRequest
+	100, // 74: jni_raw.JNIService.FromReflectedMethod:input_type -> jni_raw.FromReflectedMethodRequest
+	102, // 75: jni_raw.JNIService.FromReflectedField:input_type -> jni_raw.FromReflectedFieldRequest
+	104, // 76: jni_raw.JNIService.ToReflectedMethod:input_type -> jni_raw.ToReflectedMethodRequest
+	106, // 77: jni_raw.JNIService.ToReflectedField:input_type -> jni_raw.ToReflectedFieldRequest
+	108, // 78: jni_raw.JNIService.Proxy:input_type -> jni_raw.ProxyClientMessage
+	3,   // 79: jni_raw.JNIService.GetVersion:output_type -> jni_raw.GetVersionResponse
+	5,   // 80: jni_raw.JNIService.FindClass:output_type -> jni_raw.FindClassResponse
+	7,   // 81: jni_raw.JNIService.GetSuperclass:output_type -> jni_raw.GetSuperclassResponse
+	9,   // 82: jni_raw.JNIService.IsAssignableFrom:output_type -> jni_raw.IsAssignableFromResponse
+	11,  // 83: jni_raw.JNIService.AllocObject:output_type -> jni_raw.AllocObjectResponse
+	13,  // 84: jni_raw.JNIService.NewObject:output_type -> jni_raw.NewObjectResponse
+	15,  // 85: jni_raw.JNIService.GetObjectClass:output_type -> jni_raw.GetObjectClassResponse
+	17,  // 86: jni_raw.JNIService.IsInstanceOf:output_type -> jni_raw.IsInstanceOfResponse
+	19,  // 87: jni_raw.JNIService.IsSameObject:output_type -> jni_raw.IsSameObjectResponse
+	21,  // 88: jni_raw.JNIService.GetObjectRefType:output_type -> jni_raw.GetObjectRefTypeResponse
+	23,  // 89: jni_raw.JNIService.GetMethodID:output_type -> jni_raw.GetMethodIDResponse
+	25,  // 90: jni_raw.JNIService.GetStaticMethodID:output_type -> jni_raw.GetStaticMethodIDResponse
+	27,  // 91: jni_raw.JNIService.GetFieldID:output_type -> jni_raw.GetFieldIDResponse
+	29,  // 92: jni_raw.JNIService.GetStaticFieldID:output_type -> jni_raw.GetStaticFieldIDResponse
+	31,  // 93: jni_raw.JNIService.CallMethod:output_type -> jni_raw.CallMethodResponse
+	33,  // 94: jni_raw.JNIService.CallStaticMethod:output_type -> jni_raw.CallStaticMethodResponse
+	35,  // 95: jni_raw.JNIService.CallNonvirtualMethod:output_type -> jni_raw.CallNonvirtualMethodResponse
+	37,  // 96: jni_raw.JNIService.GetField:output_type -> jni_raw.GetFieldValueResponse
+	39,  // 97: jni_raw.JNIService.SetField:output_type -> jni_raw.SetFieldValueResponse
+	41,  // 98: jni_raw.JNIService.GetStaticField:output_type -> jni_raw.GetStaticFieldValueResponse
+	43,  // 99: jni_raw.JNIService.SetStaticField:output_type -> jni_raw.SetStaticFieldValueResponse
+	45,  // 100: jni_raw.JNIService.NewStringUTF:output_type -> jni_raw.NewStringUTFResponse
+	47,  // 101: jni_raw.JNIService.GetStringUTFChars:output_type -> jni_raw.GetStringUTFCharsResponse
+	49,  // 102: jni_raw.JNIService.GetStringLength:output_type -> jni_raw.GetStringLengthResponse
+	51,  // 103: jni_raw.JNIService.NewPrimitiveArray:output_type -> jni_raw.NewPrimitiveArrayResponse
+	53,  // 104: jni_raw.JNIService.NewObjectArray:output_type -> jni_raw.NewObjectArrayResponse
+	55,  // 105: jni_raw.JNIService.GetArrayLength:output_type -> jni_raw.GetArrayLengthResponse
+	57,  // 106: jni_raw.JNIService.GetObjectArrayElement:output_type -> jni_raw.GetObjectArrayElementResponse
+	59,  // 107: jni_raw.JNIService.SetObjectArrayElement:output_type -> jni_raw.SetObjectArrayElementResponse
+	61,  // 108: jni_raw.JNIService.GetArrayRegion:output_type -> jni_raw.GetArrayRegionResponse
+	63,  // 109: jni_raw.JNIService.SetArrayRegion:output_type -> jni_raw.SetArrayRegionResponse
+	65,  // 110: jni_raw.JNIService.GetByteArrayData:output_type -> jni_raw.GetByteArrayDataResponse
+	67,  // 111: jni_raw.JNIService.NewGlobalRef:output_type -> jni_raw.NewGlobalRefResponse
+	69,  // 112: jni_raw.JNIService.DeleteGlobalRef:output_type -> jni_raw.DeleteGlobalRefResponse
+	71,  // 113: jni_raw.JNIService.NewLocalRef:output_type -> jni_raw.NewLocalRefResponse
+	73,  // 114: jni_raw.JNIService.DeleteLocalRef:output_type -> jni_raw.DeleteLocalRefResponse
+	75,  // 115: jni_raw.JNIService.NewWeakGlobalRef:output_type -> jni_raw.NewWeakGlobalRefResponse
+	77,  // 116: jni_raw.JNIService.DeleteWeakGlobalRef:output_type -> jni_raw.DeleteWeakGlobalRefResponse
+	79,  // 117: jni_raw.JNIService.ExceptionCheck:output_type -> jni_raw.ExceptionCheckResponse
+	81,  // 118: jni_raw.JNIService.ExceptionClear:output_type -> jni_raw.ExceptionClearResponse
+	83,  // 119: jni_raw.JNIService.ExceptionDescribe:output_type -> jni_raw.ExceptionDescribeResponse
+	85,  // 120: jni_raw.JNIService.ExceptionOccurred:output_type -> jni_raw.ExceptionOccurredResponse
+	87,  // 121: jni_raw.JNIService.Throw:output_type -> jni_raw.ThrowResponse
+	89,  // 122: jni_raw.JNIService.ThrowNew:output_type -> jni_raw.ThrowNewResponse
+	91,  // 123: jni_raw.JNIService.MonitorEnter:output_type -> jni_raw.MonitorEnterResponse
+	93,  // 124: jni_raw.JNIService.MonitorExit:output_type -> jni_raw.MonitorExitResponse
+	95,  // 125: jni_raw.JNIService.PushLocalFrame:output_type -> jni_raw.PushLocalFrameResponse
+	97,  // 126: jni_raw.JNIService.PopLocalFrame:output_type -> jni_raw.PopLocalFrameResponse
+	99,  // 127: jni_raw.JNIService.EnsureLocalCapacity:output_type -> jni_raw.EnsureLocalCapacityResponse
+	101, // 128: jni_raw.JNIService.FromReflectedMethod:output_type -> jni_raw.FromReflectedMethodResponse
+	103, // 129: jni_raw.JNIService.FromReflectedField:output_type -> jni_raw.FromReflectedFieldResponse
+	105, // 130: jni_raw.JNIService.ToReflectedMethod:output_type -> jni_raw.ToReflectedMethodResponse
+	107, // 131: jni_raw.JNIService.ToReflectedField:output_type -> jni_raw.ToReflectedFieldResponse
+	109, // 132: jni_raw.JNIService.Proxy:output_type -> jni_raw.ProxyServerMessage
+	79,  // [79:133] is the sub-list for method output_type
+	25,  // [25:79] is the sub-list for method input_type
+	25,  // [25:25] is the sub-list for extension type_name
+	25,  // [25:25] is the sub-list for extension extendee
+	0,   // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_proto_jni_raw_jni_raw_proto_init() }
@@ -5803,13 +6222,21 @@ func file_proto_jni_raw_jni_raw_proto_init() {
 		(*JValue_D)(nil),
 		(*JValue_L)(nil),
 	}
+	file_proto_jni_raw_jni_raw_proto_msgTypes[107].OneofWrappers = []any{
+		(*ProxyClientMessage_Create)(nil),
+		(*ProxyClientMessage_CallbackResponse)(nil),
+	}
+	file_proto_jni_raw_jni_raw_proto_msgTypes[108].OneofWrappers = []any{
+		(*ProxyServerMessage_Created)(nil),
+		(*ProxyServerMessage_Callback)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_jni_raw_jni_raw_proto_rawDesc), len(file_proto_jni_raw_jni_raw_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   107,
+			NumMessages:   113,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
