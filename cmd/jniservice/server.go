@@ -115,7 +115,7 @@ func runServer(cvm *C.JavaVM) {
 
 	listenAddr := os.Getenv("JNISERVICE_LISTEN")
 	if listenAddr == "" {
-		listenAddr = "0.0.0.0"
+		listenAddr = "127.0.0.1"
 	}
 
 	port := os.Getenv("JNISERVICE_PORT")
