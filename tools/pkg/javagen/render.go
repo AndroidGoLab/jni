@@ -117,6 +117,12 @@ func Generate(specPath, overlayPath, templatesDir, outputDir, goModule string) e
 		if err := renderConstsSubpackage(templates, merged, pkgDir); err != nil {
 			return fmt.Errorf("render consts sub-package: %w", err)
 		}
+
+		// Also generate alias re-exports in the parent package for convenience.
+		constsImport := spec.GoImport + "/consts"
+		if err := renderConstAliases(merged, pkgDir, constsImport); err != nil {
+			return fmt.Errorf("render const aliases: %w", err)
+		}
 	}
 
 	return nil
@@ -252,6 +258,48 @@ func renderConstsSubpackage(templates *template.Template, merged *MergedSpec, pk
 	}
 
 	return renderTemplate(tmpl, "constants.go.tmpl", constsData, filepath.Join(constsDir, "consts.go"))
+}
+
+// renderConstAliases generates {pkgDir}/constants.go with alias re-exports
+// of every constant from the consts sub-package. This lets users of the
+// CGO-dependent parent package access constants directly (e.g. location.GpsProvider)
+// without importing the consts sub-package.
+func renderConstAliases(merged *MergedSpec, pkgDir, constsImport string) error {
+	outputPath := filepath.Join(pkgDir, "constants.go")
+
+	// Preserve hand-maintained files.
+	if isHandMaintainedFile(outputPath) {
+		return nil
+	}
+
+	var buf bytes.Buffer
+	fmt.Fprintf(&buf, "package %s\n\n", merged.Package)
+	fmt.Fprintf(&buf, "import %q\n\n", constsImport)
+
+	for _, grp := range merged.ConstantGroups {
+		if grp.GoType != "" {
+			fmt.Fprintf(&buf, "// %s is a typed constant defined in the consts sub-package.\n", grp.GoType)
+			fmt.Fprintf(&buf, "type %s = consts.%s\n\n", grp.GoType, grp.GoType)
+		}
+
+		buf.WriteString("const (\n")
+		for _, c := range grp.Values {
+			fmt.Fprintf(&buf, "\t%s = consts.%s\n", c.GoName, c.GoName)
+		}
+		buf.WriteString(")\n\n")
+	}
+
+	src := generatedHeader + buf.String()
+
+	formatted, err := format.Source([]byte(src))
+	if err != nil {
+		if writeErr := os.WriteFile(outputPath, []byte(src), 0o644); writeErr != nil {
+			return fmt.Errorf("write unformatted: %w (format error: %w)", writeErr, err)
+		}
+		return fmt.Errorf("gofmt constants.go: %w", err)
+	}
+
+	return os.WriteFile(outputPath, formatted, 0o644)
 }
 
 func shouldRender(tmplName string, merged *MergedSpec) bool {
