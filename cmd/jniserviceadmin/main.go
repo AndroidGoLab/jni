@@ -199,7 +199,7 @@ var requestsDenyCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVar(&flagDB, "db", "/data/local/tmp/jniservice.db", "path to SQLite database")
+	rootCmd.PersistentFlags().StringVar(&flagDB, "db", "/data/local/tmp/jniservice/acl.db", "path to SQLite database")
 
 	grantsListCmd.Flags().StringVar(&flagGrantsClient, "client", "", "filter grants by client ID")
 
