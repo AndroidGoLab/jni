@@ -112,19 +112,34 @@ func grantViaADB(adbAdminPath, cn string) error {
 		dbPath = "/data/local/tmp/jniservice/acl.db"
 	}
 
-	adb := os.Getenv("ADB")
-	if adb == "" {
-		adb = "adb"
+	adbEnv := os.Getenv("ADB")
+	if adbEnv == "" {
+		adbEnv = "adb"
+	}
+	// ADB env may contain flags (e.g., "adb -s 192.168.0.159:5555").
+	adbParts := strings.Fields(adbEnv)
+
+	// Write a grant script to the device to avoid shell glob expansion of /*.
+	scriptContent := fmt.Sprintf(`%s --db %s grants approve %s "/*"`,
+		adbAdminPath, dbPath, cn)
+	scriptFile, err := os.CreateTemp("", "grant-*.sh")
+	if err != nil {
+		return fmt.Errorf("creating grant script: %w", err)
+	}
+	defer os.Remove(scriptFile.Name())
+	scriptFile.WriteString(scriptContent)
+	scriptFile.Close()
+
+	// Push script to device.
+	pushArgs := append(adbParts[1:], "push", scriptFile.Name(), "/data/local/tmp/e2e-grant.sh")
+	pushCmd := exec.Command(adbParts[0], pushArgs...)
+	if out, err := pushCmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("pushing grant script: %v\n%s", err, out)
 	}
 
-	// Build the shell command with proper quoting.
-	shellCmd := strings.Join([]string{
-		adbAdminPath,
-		"--db", dbPath,
-		"grants", "approve", cn, "/*",
-	}, " ")
-
-	cmd := exec.Command(adb, "shell", shellCmd)
+	// Run script via su.
+	runArgs := append(adbParts[1:], "shell", "su", "-c", "sh /data/local/tmp/e2e-grant.sh")
+	cmd := exec.Command(adbParts[0], runArgs...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("adb shell jniserviceadmin: %v\n%s", err, out)
