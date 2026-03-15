@@ -217,55 +217,89 @@ func generateServerTLS(ca *certauth.CA) (tls.Certificate, error) {
 	}, nil
 }
 
-// initAndroidContext initializes the Android system context by calling
-// Looper.prepare() and ActivityThread.systemMain() on a pinned OS thread.
-// The resulting Context handle is stored in the HandleStore and printed
-// to stderr for CLI tools to reference.
+// initAndroidContext obtains an Android Context and stores it in the HandleStore.
+//
+// Two modes:
+//   - APK mode: an ActivityThread already exists (the app framework created it).
+//     Use currentActivityThread().getApplication() to get the app's Context.
+//   - app_process mode: no ActivityThread exists. Create one via Looper.prepare()
+//     + ActivityThread.systemMain(), then use getSystemContext().
 func initAndroidContext(vm *jni.VM, handles *handlestore.HandleStore) {
-	// Pin to OS thread so Looper.prepare() and systemMain() run on the same thread.
+	// Pin to OS thread so Looper/ActivityThread calls run on the same thread.
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
 	var contextHandle int64
 	err := vm.Do(func(env *jni.Env) error {
-		// Looper.prepare() — required before creating an ActivityThread.
-		looperCls, err := env.FindClass("android/os/Looper")
-		if err != nil {
-			return fmt.Errorf("find Looper class: %w", err)
-		}
-		prepareMID, err := env.GetStaticMethodID(looperCls, "prepare", "()V")
-		if err != nil {
-			return fmt.Errorf("get Looper.prepare: %w", err)
-		}
-		if err := env.CallStaticVoidMethod(looperCls, prepareMID); err != nil {
-			return fmt.Errorf("Looper.prepare: %w", err)
-		}
-
-		// ActivityThread.systemMain() — creates a full ActivityThread with system context.
 		atCls, err := env.FindClass("android/app/ActivityThread")
 		if err != nil {
 			return fmt.Errorf("find ActivityThread class: %w", err)
 		}
-		systemMainMID, err := env.GetStaticMethodID(atCls, "systemMain", "()Landroid/app/ActivityThread;")
+
+		// Check if an ActivityThread already exists (APK mode).
+		currentATMID, err := env.GetStaticMethodID(atCls, "currentActivityThread", "()Landroid/app/ActivityThread;")
 		if err != nil {
-			return fmt.Errorf("get systemMain: %w", err)
+			return fmt.Errorf("get currentActivityThread: %w", err)
 		}
-		atObj, err := env.CallStaticObjectMethod(atCls, systemMainMID)
+		atObj, err := env.CallStaticObjectMethod(atCls, currentATMID)
 		if err != nil {
-			return fmt.Errorf("systemMain: %w", err)
+			return fmt.Errorf("currentActivityThread: %w", err)
 		}
 
-		// ActivityThread.getSystemContext() → ContextImpl (which IS a Context).
-		getCtxMID, err := env.GetMethodID(atCls, "getSystemContext", "()Landroid/app/ContextImpl;")
-		if err != nil {
-			return fmt.Errorf("get getSystemContext: %w", err)
-		}
-		ctxObj, err := env.CallObjectMethod(atObj, getCtxMID)
-		if err != nil {
-			return fmt.Errorf("getSystemContext: %w", err)
+		switch {
+		case atObj != nil && atObj.Ref() != 0:
+			// APK mode: ActivityThread exists. Get the Application context.
+			fmt.Fprintf(os.Stderr, "jniservice: APK mode — using existing ActivityThread\n")
+
+			getAppMID, err := env.GetStaticMethodID(atCls, "currentApplication", "()Landroid/app/Application;")
+			if err != nil {
+				return fmt.Errorf("get currentApplication: %w", err)
+			}
+			appObj, err := env.CallStaticObjectMethod(atCls, getAppMID)
+			if err != nil {
+				return fmt.Errorf("currentApplication: %w", err)
+			}
+			if appObj == nil || appObj.Ref() == 0 {
+				return fmt.Errorf("currentApplication returned null")
+			}
+			contextHandle = handles.Put(env, appObj)
+
+		default:
+			// app_process mode: no ActivityThread. Create one.
+			fmt.Fprintf(os.Stderr, "jniservice: app_process mode — creating ActivityThread\n")
+
+			looperCls, err := env.FindClass("android/os/Looper")
+			if err != nil {
+				return fmt.Errorf("find Looper class: %w", err)
+			}
+			prepareMID, err := env.GetStaticMethodID(looperCls, "prepare", "()V")
+			if err != nil {
+				return fmt.Errorf("get Looper.prepare: %w", err)
+			}
+			if err := env.CallStaticVoidMethod(looperCls, prepareMID); err != nil {
+				return fmt.Errorf("Looper.prepare: %w", err)
+			}
+
+			systemMainMID, err := env.GetStaticMethodID(atCls, "systemMain", "()Landroid/app/ActivityThread;")
+			if err != nil {
+				return fmt.Errorf("get systemMain: %w", err)
+			}
+			atObj, err := env.CallStaticObjectMethod(atCls, systemMainMID)
+			if err != nil {
+				return fmt.Errorf("systemMain: %w", err)
+			}
+
+			getCtxMID, err := env.GetMethodID(atCls, "getSystemContext", "()Landroid/app/ContextImpl;")
+			if err != nil {
+				return fmt.Errorf("get getSystemContext: %w", err)
+			}
+			ctxObj, err := env.CallObjectMethod(atObj, getCtxMID)
+			if err != nil {
+				return fmt.Errorf("getSystemContext: %w", err)
+			}
+			contextHandle = handles.Put(env, ctxObj)
 		}
 
-		contextHandle = handles.Put(env, ctxObj)
 		return nil
 	})
 	if err != nil {
