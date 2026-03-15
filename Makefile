@@ -1,4 +1,4 @@
-.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator \
+.PHONY: generate specs jni java proto protoc grpc cli callbacks clean lint test test-tools test-e2e test-emulator \
 	build build-server list-commands dist dist-jnicli-linux dist-jnicli-android dist-jniserviceadmin dist-jniservice dist-dex \
 	magisk apk deploy push start-server stop-server forward
 
@@ -11,7 +11,7 @@ LIBJVM_DIR ?= $(shell find $(JDK_HOME) -name libjvm.so -printf '%h' -quit 2>/dev
 ANDROID_JAR ?= $(ANDROID_HOME)/platforms/android-36/android.jar
 
 # Run all generators
-generate: specs jni java proto protoc grpc cli
+generate: specs jni java proto protoc grpc cli callbacks
 
 # Run specgen — generates YAML specs from ref/ .class files
 specs:
@@ -48,6 +48,10 @@ grpc: protoc
 # Run cligen — generates jnicli cobra commands from Java API specs
 cli: grpc
 	go run ./tools/cmd/cligen/ -specs spec/java/ -overlays spec/overlays/java/ -output cmd/jnicli/ -go-module github.com/xaionaro-go/jni
+
+# Run callbackgen — generates Java callback adapter classes
+callbacks:
+	go run ./tools/cmd/callbackgen/
 
 # List all jnicli leaf commands as full paths
 list-commands:
@@ -273,6 +277,8 @@ apk: dist-jniservice
 		-cp $(APK_PLATFORM)/android.jar \
 		-d $(APK_STAGING)/classes \
 		$(APK_SRC)/src/center/dx/jni/jniservice/*.java \
+		$(APK_SRC)/src/center/dx/jni/internal/GoAbstractDispatch.java \
+		$(APK_SRC)/src/center/dx/jni/generated/*.java \
 		internal/testjvm/testdata/center/dx/jni/internal/GoInvocationHandler.java
 	$(APK_BUILD_TOOLS)/d8 \
 		--lib $(APK_PLATFORM)/android.jar \
