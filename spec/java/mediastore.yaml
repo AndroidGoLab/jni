@@ -1,5 +1,5 @@
 package: mediastore
-go_import: github.com/xaionaro-go/jni/provider/media
+go_import: github.com/AndroidGoLab/jni/provider/media
 classes:
     - java_class: android.provider.MediaStore
       go_type: mediaStore

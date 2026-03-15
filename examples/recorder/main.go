@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/media/recorder"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/media/recorder"
 )
 
 func main() {}

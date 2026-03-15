@@ -17,7 +17,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/provider/media"
+	"github.com/AndroidGoLab/jni/provider/media"
 )
 
 func main() {}

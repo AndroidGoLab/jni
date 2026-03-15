@@ -1,5 +1,5 @@
 package: environment
-go_import: github.com/xaionaro-go/jni/os/environment
+go_import: github.com/AndroidGoLab/jni/os/environment
 classes:
     - java_class: android.os.Environment
       go_type: environment

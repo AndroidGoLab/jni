@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/app"
-	_ "github.com/xaionaro-go/jni/view/display"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/app"
+	_ "github.com/AndroidGoLab/jni/view/display"
 )
 
 func main() {}

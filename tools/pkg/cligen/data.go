@@ -4,7 +4,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/xaionaro-go/jni/tools/pkg/protogen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protogen"
 )
 
 // CLIPackage describes a single proto package's CLI commands.

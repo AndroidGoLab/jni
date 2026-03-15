@@ -1,5 +1,5 @@
 package: clipboard
-go_import: github.com/xaionaro-go/jni/content/clipboard
+go_import: github.com/AndroidGoLab/jni/content/clipboard
 classes:
     - java_class: android.content.ClipData
       go_type: clipData

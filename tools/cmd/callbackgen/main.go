@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/xaionaro-go/jni/tools/pkg/callbackgen"
+	"github.com/AndroidGoLab/jni/tools/pkg/callbackgen"
 )
 
 func main() {

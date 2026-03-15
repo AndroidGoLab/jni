@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package blob;
 
-option go_package = "github.com/xaionaro-go/jni/proto/blob";
+option go_package = "github.com/AndroidGoLab/jni/proto/blob";
 
 message AbandonSessionRequest {
   int64 arg0 = 1;

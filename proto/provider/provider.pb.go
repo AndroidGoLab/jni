@@ -8193,7 +8193,7 @@ const file_proto_provider_provider_proto_rawDesc = "" +
 	"\x06PutInt\x12\x17.provider.PutIntRequest\x1a\x18.provider.PutIntResponse\x12>\n" +
 	"\aPutLong\x12\x18.provider.PutLongRequest\x1a\x19.provider.PutLongResponse\x12D\n" +
 	"\tPutString\x12\x1a.provider.PutStringRequest\x1a\x1b.provider.PutStringResponse\x12t\n" +
-	"\x19SetShowGTalkServiceStatus\x12*.provider.SetShowGTalkServiceStatusRequest\x1a+.provider.SetShowGTalkServiceStatusResponseB+Z)github.com/xaionaro-go/jni/proto/providerb\x06proto3"
+	"\x19SetShowGTalkServiceStatus\x12*.provider.SetShowGTalkServiceStatusRequest\x1a+.provider.SetShowGTalkServiceStatusResponseB+Z)github.com/AndroidGoLab/jni/proto/providerb\x06proto3"
 
 var (
 	file_proto_provider_provider_proto_rawDescOnce sync.Once

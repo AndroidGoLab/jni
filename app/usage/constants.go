@@ -2,7 +2,7 @@
 
 package usage
 
-import "github.com/xaionaro-go/jni/app/usage/consts"
+import "github.com/AndroidGoLab/jni/app/usage/consts"
 
 const (
 	ExtraEventAction   = consts.ExtraEventAction

@@ -5,7 +5,7 @@ package companion
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/companion"
+	pb "github.com/AndroidGoLab/jni/proto/companion"
 	"google.golang.org/grpc"
 )
 

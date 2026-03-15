@@ -2,7 +2,7 @@
 
 package environment
 
-import "github.com/xaionaro-go/jni/os/environment/consts"
+import "github.com/AndroidGoLab/jni/os/environment/consts"
 
 const (
 	MediaBadRemoval      = consts.MediaBadRemoval

@@ -8,8 +8,8 @@ import (
 	"sync/atomic"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	pb "github.com/xaionaro-go/jni/proto/jni_raw"
+	"github.com/AndroidGoLab/jni"
+	pb "github.com/AndroidGoLab/jni/proto/jni_raw"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

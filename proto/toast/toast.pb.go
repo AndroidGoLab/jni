@@ -1693,7 +1693,7 @@ const file_proto_toast_toast_proto_rawDesc = "" +
 	"\aSetView\x12\x15.toast.SetViewRequest\x1a\x16.toast.SetViewResponse\x12/\n" +
 	"\x04Show\x12\x12.toast.ShowRequest\x1a\x13.toast.ShowResponse\x12>\n" +
 	"\tMakeText3\x12\x17.toast.MakeText3Request\x1a\x18.toast.MakeText3Response\x12D\n" +
-	"\vMakeText3_1\x12\x19.toast.MakeText3_1Request\x1a\x1a.toast.MakeText3_1ResponseB(Z&github.com/xaionaro-go/jni/proto/toastb\x06proto3"
+	"\vMakeText3_1\x12\x19.toast.MakeText3_1Request\x1a\x1a.toast.MakeText3_1ResponseB(Z&github.com/AndroidGoLab/jni/proto/toastb\x06proto3"
 
 var (
 	file_proto_toast_toast_proto_rawDescOnce sync.Once

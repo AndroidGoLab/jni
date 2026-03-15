@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package le;
 
-option go_package = "github.com/xaionaro-go/jni/proto/le";
+option go_package = "github.com/AndroidGoLab/jni/proto/le";
 
 message AddManufacturerDataRequest {
   int32 arg0 = 1;

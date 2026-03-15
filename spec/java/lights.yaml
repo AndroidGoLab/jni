@@ -1,5 +1,5 @@
 package: lights
-go_import: github.com/xaionaro-go/jni/hardware/lights
+go_import: github.com/AndroidGoLab/jni/hardware/lights
 classes:
     - java_class: android.hardware.lights.LightState
       go_type: lightState

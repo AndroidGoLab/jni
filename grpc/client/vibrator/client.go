@@ -5,7 +5,7 @@ package vibrator
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/vibrator"
+	pb "github.com/AndroidGoLab/jni/proto/vibrator"
 	"google.golang.org/grpc"
 )
 

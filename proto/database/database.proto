@@ -4,4 +4,4 @@ syntax = "proto3";
 
 package database;
 
-option go_package = "github.com/xaionaro-go/jni/proto/database";
+option go_package = "github.com/AndroidGoLab/jni/proto/database";

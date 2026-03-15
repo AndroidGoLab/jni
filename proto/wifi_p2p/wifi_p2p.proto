@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package wifi_p2p;
 
-option go_package = "github.com/xaionaro-go/jni/proto/wifi_p2p";
+option go_package = "github.com/AndroidGoLab/jni/proto/wifi_p2p";
 
 message AddExternalApproverRequest {
   int64 arg0 = 1;

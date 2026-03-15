@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package session;
 
-option go_package = "github.com/xaionaro-go/jni/proto/session";
+option go_package = "github.com/AndroidGoLab/jni/proto/session";
 
 message AddOnActiveSessionsChangedListenerRequest {
   int64 arg0 = 1;

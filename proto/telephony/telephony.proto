@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package telephony;
 
-option go_package = "github.com/xaionaro-go/jni/proto/telephony";
+option go_package = "github.com/AndroidGoLab/jni/proto/telephony";
 
 message CanChangeDtmfToneLengthRequest {
 }

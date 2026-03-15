@@ -495,7 +495,7 @@ const file_proto_health_health_proto_rawDesc = "" +
 	"\x10InsertRecordsRaw\x12\x1f.health.InsertRecordsRawRequest\x1a .health.InsertRecordsRawResponse\x12O\n" +
 	"\x0eReadRecordsRaw\x12\x1d.health.ReadRecordsRawRequest\x1a\x1e.health.ReadRecordsRawResponse\x12I\n" +
 	"\fAggregateRaw\x12\x1b.health.AggregateRawRequest\x1a\x1c.health.AggregateRawResponse\x12U\n" +
-	"\x10DeleteRecordsRaw\x12\x1f.health.DeleteRecordsRawRequest\x1a .health.DeleteRecordsRawResponseB)Z'github.com/xaionaro-go/jni/proto/healthb\x06proto3"
+	"\x10DeleteRecordsRaw\x12\x1f.health.DeleteRecordsRawRequest\x1a .health.DeleteRecordsRawResponseB)Z'github.com/AndroidGoLab/jni/proto/healthb\x06proto3"
 
 var (
 	file_proto_health_health_proto_rawDescOnce sync.Once

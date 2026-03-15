@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/xaionaro-go/jni/grpc/server/certauth"
-	authpb "github.com/xaionaro-go/jni/proto/auth"
+	"github.com/AndroidGoLab/jni/grpc/server/certauth"
+	authpb "github.com/AndroidGoLab/jni/proto/auth"
 )
 
 var authCmd = &cobra.Command{

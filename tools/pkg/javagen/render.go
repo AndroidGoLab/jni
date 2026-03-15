@@ -26,7 +26,7 @@ var templateOrder = []string{
 // Generate is the main entry point. It loads spec + overlay, merges them,
 // renders templates, and writes output files.
 //
-// The goModule parameter is the Go module path (e.g. "github.com/xaionaro-go/jni").
+// The goModule parameter is the Go module path (e.g. "github.com/AndroidGoLab/jni").
 // Output directories and Go package names are derived from the spec's go_import
 // field by stripping the module prefix.
 func Generate(specPath, overlayPath, templatesDir, outputDir, goModule string) error {
@@ -46,11 +46,11 @@ func Generate(specPath, overlayPath, templatesDir, outputDir, goModule string) e
 	}
 
 	// Derive output directory from go_import by stripping the module prefix.
-	// e.g. "github.com/xaionaro-go/jni/hardware/camera" → "hardware/camera"
+	// e.g. "github.com/AndroidGoLab/jni/hardware/camera" → "hardware/camera"
 	relDir := strings.TrimPrefix(spec.GoImport, goModule+"/")
 
 	// Derive Go package name from the last segment of go_import.
-	// e.g. "github.com/xaionaro-go/jni/net/wifi/p2p" → "p2p"
+	// e.g. "github.com/AndroidGoLab/jni/net/wifi/p2p" → "p2p"
 	goPackageName := filepath.Base(spec.GoImport)
 	merged.Package = goPackageName
 

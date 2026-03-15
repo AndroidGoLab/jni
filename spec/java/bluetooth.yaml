@@ -1,5 +1,5 @@
 package: bluetooth
-go_import: github.com/xaionaro-go/jni/bluetooth
+go_import: github.com/AndroidGoLab/jni/bluetooth
 classes:
     - java_class: android.bluetooth.BluetoothGattService
       go_type: bluetoothGattService

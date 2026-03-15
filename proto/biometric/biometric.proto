@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package biometric;
 
-option go_package = "github.com/xaionaro-go/jni/proto/biometric";
+option go_package = "github.com/AndroidGoLab/jni/proto/biometric";
 
 message CanAuthenticate0Request {
 }

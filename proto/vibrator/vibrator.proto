@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package vibrator;
 
-option go_package = "github.com/xaionaro-go/jni/proto/vibrator";
+option go_package = "github.com/AndroidGoLab/jni/proto/vibrator";
 
 message AreEffectsSupportedRequest {
   int64 arg0 = 1;

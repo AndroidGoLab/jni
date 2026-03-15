@@ -13762,7 +13762,7 @@ const file_proto_location_location_proto_rawDesc = "" +
 	"\x1dUnregisterAntennaInfoListener\x12..location.UnregisterAntennaInfoListenerRequest\x1a/.location.UnregisterAntennaInfoListenerResponse\x12\x8f\x01\n" +
 	"\"UnregisterGnssMeasurementsCallback\x123.location.UnregisterGnssMeasurementsCallbackRequest\x1a4.location.UnregisterGnssMeasurementsCallbackResponse\x12\x9e\x01\n" +
 	"'UnregisterGnssNavigationMessageCallback\x128.location.UnregisterGnssNavigationMessageCallbackRequest\x1a9.location.UnregisterGnssNavigationMessageCallbackResponse\x12}\n" +
-	"\x1cUnregisterGnssStatusCallback\x12-.location.UnregisterGnssStatusCallbackRequest\x1a..location.UnregisterGnssStatusCallbackResponseB+Z)github.com/xaionaro-go/jni/proto/locationb\x06proto3"
+	"\x1cUnregisterGnssStatusCallback\x12-.location.UnregisterGnssStatusCallbackRequest\x1a..location.UnregisterGnssStatusCallbackResponseB+Z)github.com/AndroidGoLab/jni/proto/locationb\x06proto3"
 
 var (
 	file_proto_location_location_proto_rawDescOnce sync.Once

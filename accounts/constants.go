@@ -2,7 +2,7 @@
 
 package accounts
 
-import "github.com/xaionaro-go/jni/accounts/consts"
+import "github.com/AndroidGoLab/jni/accounts/consts"
 
 const (
 	ActionAccountRemoved            = consts.ActionAccountRemoved

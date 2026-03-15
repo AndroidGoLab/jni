@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
-	"github.com/xaionaro-go/jni/tools/pkg/protogen"
-	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protogen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protoscan"
 )
 
 // GenerateServer loads a Java API spec and overlay, merges them, builds server

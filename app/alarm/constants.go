@@ -2,7 +2,7 @@
 
 package alarm
 
-import "github.com/xaionaro-go/jni/app/alarm/consts"
+import "github.com/AndroidGoLab/jni/app/alarm/consts"
 
 const (
 	ActionNextAlarmClockChanged                    = consts.ActionNextAlarmClockChanged

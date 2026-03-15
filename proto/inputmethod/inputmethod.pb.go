@@ -5158,7 +5158,7 @@ const file_proto_inputmethod_inputmethod_proto_rawDesc = "" +
 	"\x16UpdateCursorAnchorInfo\x12*.inputmethod.UpdateCursorAnchorInfoRequest\x1a+.inputmethod.UpdateCursorAnchorInfoResponse\x12h\n" +
 	"\x13UpdateExtractedText\x12'.inputmethod.UpdateExtractedTextRequest\x1a(.inputmethod.UpdateExtractedTextResponse\x12\\\n" +
 	"\x0fUpdateSelection\x12#.inputmethod.UpdateSelectionRequest\x1a$.inputmethod.UpdateSelectionResponse\x12P\n" +
-	"\vViewClicked\x12\x1f.inputmethod.ViewClickedRequest\x1a .inputmethod.ViewClickedResponseB.Z,github.com/xaionaro-go/jni/proto/inputmethodb\x06proto3"
+	"\vViewClicked\x12\x1f.inputmethod.ViewClickedRequest\x1a .inputmethod.ViewClickedResponseB.Z,github.com/AndroidGoLab/jni/proto/inputmethodb\x06proto3"
 
 var (
 	file_proto_inputmethod_inputmethod_proto_rawDescOnce sync.Once

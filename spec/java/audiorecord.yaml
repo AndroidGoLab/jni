@@ -1,5 +1,5 @@
 package: audiorecord
-go_import: github.com/xaionaro-go/jni/media/audiorecord
+go_import: github.com/AndroidGoLab/jni/media/audiorecord
 classes:
     - java_class: android.media.AudioRecord
       go_type: audioRecord

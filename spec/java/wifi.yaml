@@ -1,5 +1,5 @@
 package: wifi
-go_import: github.com/xaionaro-go/jni/net/wifi
+go_import: github.com/AndroidGoLab/jni/net/wifi
 classes:
     - java_class: android.net.wifi.WifiManager
       go_type: wifiManager

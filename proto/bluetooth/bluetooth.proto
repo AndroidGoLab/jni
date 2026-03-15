@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package bluetooth;
 
-option go_package = "github.com/xaionaro-go/jni/proto/bluetooth";
+option go_package = "github.com/AndroidGoLab/jni/proto/bluetooth";
 
 message CloseRequest {
 }

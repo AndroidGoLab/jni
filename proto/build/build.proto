@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package build;
 
-option go_package = "github.com/xaionaro-go/jni/proto/build";
+option go_package = "github.com/AndroidGoLab/jni/proto/build";
 
 message GetFingerprintedPartitionsRequest {
 }

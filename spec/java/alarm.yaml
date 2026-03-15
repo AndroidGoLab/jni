@@ -1,5 +1,5 @@
 package: alarm
-go_import: github.com/xaionaro-go/jni/app/alarm
+go_import: github.com/AndroidGoLab/jni/app/alarm
 classes:
     - java_class: android.app.AlarmManager
       go_type: alarmManager

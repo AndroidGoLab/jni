@@ -3791,7 +3791,7 @@ const file_proto_audiorecord_audiorecord_proto_rawDesc = "" +
 	"\x11StartRecording1_1\x12%.audiorecord.StartRecording1_1Request\x1a&.audiorecord.StartRecording1_1Response\x12;\n" +
 	"\x04Stop\x12\x18.audiorecord.StopRequest\x1a\x19.audiorecord.StopResponse\x12\x8f\x01\n" +
 	" UnregisterAudioRecordingCallback\x124.audiorecord.UnregisterAudioRecordingCallbackRequest\x1a5.audiorecord.UnregisterAudioRecordingCallbackResponse\x12_\n" +
-	"\x10GetMinBufferSize\x12$.audiorecord.GetMinBufferSizeRequest\x1a%.audiorecord.GetMinBufferSizeResponseB.Z,github.com/xaionaro-go/jni/proto/audiorecordb\x06proto3"
+	"\x10GetMinBufferSize\x12$.audiorecord.GetMinBufferSizeRequest\x1a%.audiorecord.GetMinBufferSizeResponseB.Z,github.com/AndroidGoLab/jni/proto/audiorecordb\x06proto3"
 
 var (
 	file_proto_audiorecord_audiorecord_proto_rawDescOnce sync.Once

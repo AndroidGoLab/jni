@@ -2,7 +2,7 @@
 
 package companion
 
-import "github.com/xaionaro-go/jni/companion/consts"
+import "github.com/AndroidGoLab/jni/companion/consts"
 
 const (
 	ExtraAssociation = consts.ExtraAssociation

@@ -2446,7 +2446,7 @@ const file_proto_print_print_proto_rawDesc = "" +
 	"\bGetState\x12\x16.print.GetStateRequest\x1a\x17.print.GetStateResponse\x12V\n" +
 	"\x11HasAdvancedOption\x12\x1f.print.HasAdvancedOptionRequest\x1a .print.HasAdvancedOptionResponse\x12;\n" +
 	"\bToString\x12\x16.print.ToStringRequest\x1a\x17.print.ToStringResponse\x12J\n" +
-	"\rWriteToParcel\x12\x1b.print.WriteToParcelRequest\x1a\x1c.print.WriteToParcelResponseB(Z&github.com/xaionaro-go/jni/proto/printb\x06proto3"
+	"\rWriteToParcel\x12\x1b.print.WriteToParcelRequest\x1a\x1c.print.WriteToParcelResponseB(Z&github.com/AndroidGoLab/jni/proto/printb\x06proto3"
 
 var (
 	file_proto_print_print_proto_rawDescOnce sync.Once

@@ -9220,7 +9220,7 @@ const file_proto_notification_notification_proto_rawDesc = "" +
 	"\x17SetNotificationDelegate\x12,.notification.SetNotificationDelegateRequest\x1a-.notification.SetNotificationDelegateResponse\x12p\n" +
 	"\x15SetNotificationPolicy\x12*.notification.SetNotificationPolicyRequest\x1a+.notification.SetNotificationPolicyResponse\x12\x8b\x01\n" +
 	"\x1eShouldHideSilentStatusBarIcons\x123.notification.ShouldHideSilentStatusBarIconsRequest\x1a4.notification.ShouldHideSilentStatusBarIconsResponse\x12s\n" +
-	"\x16UpdateAutomaticZenRule\x12+.notification.UpdateAutomaticZenRuleRequest\x1a,.notification.UpdateAutomaticZenRuleResponseB/Z-github.com/xaionaro-go/jni/proto/notificationb\x06proto3"
+	"\x16UpdateAutomaticZenRule\x12+.notification.UpdateAutomaticZenRuleRequest\x1a,.notification.UpdateAutomaticZenRuleResponseB/Z-github.com/AndroidGoLab/jni/proto/notificationb\x06proto3"
 
 var (
 	file_proto_notification_notification_proto_rawDescOnce sync.Once

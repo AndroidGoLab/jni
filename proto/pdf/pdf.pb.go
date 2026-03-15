@@ -10523,7 +10523,7 @@ const file_proto_pdf_pdf_proto_rawDesc = "" +
 	"\n" +
 	"FromSocket\x12\x16.pdf.FromSocketRequest\x1a\x17.pdf.FromSocketResponse\x12+\n" +
 	"\x04Open\x12\x10.pdf.OpenRequest\x1a\x11.pdf.OpenResponse\x12:\n" +
-	"\tParseMode\x12\x15.pdf.ParseModeRequest\x1a\x16.pdf.ParseModeResponseB&Z$github.com/xaionaro-go/jni/proto/pdfb\x06proto3"
+	"\tParseMode\x12\x15.pdf.ParseModeRequest\x1a\x16.pdf.ParseModeResponseB&Z$github.com/AndroidGoLab/jni/proto/pdfb\x06proto3"
 
 var (
 	file_proto_pdf_pdf_proto_rawDescOnce sync.Once

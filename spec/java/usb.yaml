@@ -1,5 +1,5 @@
 package: usb
-go_import: github.com/xaionaro-go/jni/hardware/usb
+go_import: github.com/AndroidGoLab/jni/hardware/usb
 classes:
     - java_class: android.hardware.usb.UsbDeviceConnection
       go_type: usbDeviceConnection

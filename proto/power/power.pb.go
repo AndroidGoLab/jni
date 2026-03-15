@@ -3044,7 +3044,7 @@ const file_proto_power_power_proto_rawDesc = "" +
 	"\x13SetReferenceCounted\x12!.power.SetReferenceCountedRequest\x1a\".power.SetReferenceCountedResponse\x12S\n" +
 	"\x10SetStateListener\x12\x1e.power.SetStateListenerRequest\x1a\x1f.power.SetStateListenerResponse\x12J\n" +
 	"\rSetWorkSource\x12\x1b.power.SetWorkSourceRequest\x1a\x1c.power.SetWorkSourceResponse\x12;\n" +
-	"\bToString\x12\x16.power.ToStringRequest\x1a\x17.power.ToStringResponseB(Z&github.com/xaionaro-go/jni/proto/powerb\x06proto3"
+	"\bToString\x12\x16.power.ToStringRequest\x1a\x17.power.ToStringResponseB(Z&github.com/AndroidGoLab/jni/proto/powerb\x06proto3"
 
 var (
 	file_proto_power_power_proto_rawDescOnce sync.Once

@@ -2,7 +2,7 @@
 
 package calendar
 
-import "github.com/xaionaro-go/jni/provider/calendar/consts"
+import "github.com/AndroidGoLab/jni/provider/calendar/consts"
 
 const (
 	AccountTypeLocal                      = consts.AccountTypeLocal

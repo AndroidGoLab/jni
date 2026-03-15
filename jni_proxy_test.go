@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/xaionaro-go/jni/capi"
+	"github.com/AndroidGoLab/jni/capi"
 )
 
 // --- proxy registry (pure Go) ---

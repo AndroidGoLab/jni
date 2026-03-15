@@ -1,5 +1,5 @@
 package: net
-go_import: github.com/xaionaro-go/jni/net
+go_import: github.com/AndroidGoLab/jni/net
 classes:
     - java_class: android.net.NetworkCapabilities
       go_type: networkCapabilities

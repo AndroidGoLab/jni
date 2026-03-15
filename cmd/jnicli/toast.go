@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/toast"
+	pb "github.com/AndroidGoLab/jni/proto/toast"
 )
 
 var toastCmd = &cobra.Command{

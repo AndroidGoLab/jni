@@ -1,5 +1,5 @@
 package: recorder
-go_import: github.com/xaionaro-go/jni/media/recorder
+go_import: github.com/AndroidGoLab/jni/media/recorder
 classes:
     - java_class: android.media.MediaRecorder
       go_type: mediaRecorder

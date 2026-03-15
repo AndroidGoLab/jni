@@ -1,5 +1,5 @@
 package: admin
-go_import: github.com/xaionaro-go/jni/app/admin
+go_import: github.com/AndroidGoLab/jni/app/admin
 classes:
     - java_class: android.app.admin.DevicePolicyManager
       go_type: devicePolicyManager

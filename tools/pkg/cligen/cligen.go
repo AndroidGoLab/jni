@@ -8,9 +8,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
-	"github.com/xaionaro-go/jni/tools/pkg/protogen"
-	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protogen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protoscan"
 )
 
 // Generate loads a Java API spec and overlay, builds proto data, converts

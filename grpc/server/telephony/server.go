@@ -5,12 +5,12 @@ package telephony
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	pb "github.com/xaionaro-go/jni/proto/telephony"
-	jnipkg "github.com/xaionaro-go/jni/telephony"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/telephony"
+	jnipkg "github.com/AndroidGoLab/jni/telephony"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

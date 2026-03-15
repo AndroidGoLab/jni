@@ -1,5 +1,5 @@
 package: preferences
-go_import: github.com/xaionaro-go/jni/content/preferences
+go_import: github.com/AndroidGoLab/jni/content/preferences
 classes:
     - java_class: android.content.SharedPreferences
       go_type: sharedPreferences

@@ -2798,7 +2798,7 @@ const file_proto_session_session_proto_rawDesc = "" +
 	"\x10RegisterCallback\x12 .session.RegisterCallbackRequest\x1a!.session.RegisterCallbackResponse\x12H\n" +
 	"\vSendCommand\x12\x1b.session.SendCommandRequest\x1a\x1c.session.SendCommandResponse\x12H\n" +
 	"\vSetVolumeTo\x12\x1b.session.SetVolumeToRequest\x1a\x1c.session.SetVolumeToResponse\x12]\n" +
-	"\x12UnregisterCallback\x12\".session.UnregisterCallbackRequest\x1a#.session.UnregisterCallbackResponseB*Z(github.com/xaionaro-go/jni/proto/sessionb\x06proto3"
+	"\x12UnregisterCallback\x12\".session.UnregisterCallbackRequest\x1a#.session.UnregisterCallbackResponseB*Z(github.com/AndroidGoLab/jni/proto/sessionb\x06proto3"
 
 var (
 	file_proto_session_session_proto_rawDescOnce sync.Once

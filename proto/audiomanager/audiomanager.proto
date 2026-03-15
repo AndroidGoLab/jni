@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package audiomanager;
 
-option go_package = "github.com/xaionaro-go/jni/proto/audiomanager";
+option go_package = "github.com/AndroidGoLab/jni/proto/audiomanager";
 
 message EqualsRequest {
   int64 arg0 = 1;

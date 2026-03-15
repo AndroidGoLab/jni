@@ -184,8 +184,8 @@ package jni
 
 import (
 	"unsafe"
-	"github.com/xaionaro-go/jni/capi"
-	"github.com/xaionaro-go/jni/internal/jnierr"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/internal/jnierr"
 )
 
 var _ = unsafe.Pointer(nil)
@@ -201,7 +201,7 @@ func (e *Env) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} { panic("stub") }
 
 package jni
 
-import "github.com/xaionaro-go/jni/capi"
+import "github.com/AndroidGoLab/jni/capi"
 
 type VM struct { ptr *capi.JavaVM }
 {{range .Methods}}
@@ -212,7 +212,7 @@ func (vm *VM) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} { panic("stub") }
 
 package jni
 
-import "github.com/xaionaro-go/jni/capi"
+import "github.com/AndroidGoLab/jni/capi"
 
 var _ = capi.JNI_OK
 {{range .Types}}
@@ -229,7 +229,7 @@ type {{.GoName}} struct {
 
 package jni
 
-import "github.com/xaionaro-go/jni/capi"
+import "github.com/AndroidGoLab/jni/capi"
 
 type Value struct { val capi.Jvalue }
 {{range .Primitives}}
@@ -252,7 +252,7 @@ const {{.GoName}} = Error({{.Value}})
 
 package jni
 
-import "github.com/xaionaro-go/jni/capi"
+import "github.com/AndroidGoLab/jni/capi"
 
 type MethodID = capi.JmethodID
 type FieldID = capi.JfieldID

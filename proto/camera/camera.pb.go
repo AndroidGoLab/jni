@@ -1397,7 +1397,7 @@ const file_proto_camera_camera_proto_rawDesc = "" +
 	"\fSetTorchMode\x12\x1b.camera.SetTorchModeRequest\x1a\x1c.camera.SetTorchModeResponse\x12y\n" +
 	"\x1cTurnOnTorchWithStrengthLevel\x12+.camera.TurnOnTorchWithStrengthLevelRequest\x1a,.camera.TurnOnTorchWithStrengthLevelResponse\x12\x7f\n" +
 	"\x1eUnregisterAvailabilityCallback\x12-.camera.UnregisterAvailabilityCallbackRequest\x1a..camera.UnregisterAvailabilityCallbackResponse\x12j\n" +
-	"\x17UnregisterTorchCallback\x12&.camera.UnregisterTorchCallbackRequest\x1a'.camera.UnregisterTorchCallbackResponseB)Z'github.com/xaionaro-go/jni/proto/camerab\x06proto3"
+	"\x17UnregisterTorchCallback\x12&.camera.UnregisterTorchCallbackRequest\x1a'.camera.UnregisterTorchCallbackResponseB)Z'github.com/AndroidGoLab/jni/proto/camerab\x06proto3"
 
 var (
 	file_proto_camera_camera_proto_rawDescOnce sync.Once

@@ -4,7 +4,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 )
 
 // HandleStore maps opaque int64 handles to JNI global references, allowing

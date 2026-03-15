@@ -1,5 +1,5 @@
 package: print
-go_import: github.com/xaionaro-go/jni/print
+go_import: github.com/AndroidGoLab/jni/print
 classes:
     - java_class: android.print.PrintManager
       go_type: printManager

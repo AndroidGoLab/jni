@@ -2,7 +2,7 @@
 
 package build
 
-import "github.com/xaionaro-go/jni/os/build/consts"
+import "github.com/AndroidGoLab/jni/os/build/consts"
 
 const (
 	Board                   = consts.Board

@@ -5,7 +5,7 @@ package wifi
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/wifi"
+	pb "github.com/AndroidGoLab/jni/proto/wifi"
 	"google.golang.org/grpc"
 )
 

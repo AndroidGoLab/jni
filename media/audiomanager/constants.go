@@ -2,7 +2,7 @@
 
 package audiomanager
 
-import "github.com/xaionaro-go/jni/media/audiomanager/consts"
+import "github.com/AndroidGoLab/jni/media/audiomanager/consts"
 
 const (
 	ActionAudioBecomingNoisy              = consts.ActionAudioBecomingNoisy

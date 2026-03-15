@@ -6406,7 +6406,7 @@ const file_proto_player_player_proto_rawDesc = "" +
 	"\tCreate3_1\x12\x18.player.Create3_1Request\x1a\x19.player.Create3_1Response\x12@\n" +
 	"\tCreate5_2\x12\x18.player.Create5_2Request\x1a\x19.player.Create5_2Response\x12@\n" +
 	"\tCreate2_3\x12\x18.player.Create2_3Request\x1a\x19.player.Create2_3Response\x12@\n" +
-	"\tCreate4_4\x12\x18.player.Create4_4Request\x1a\x19.player.Create4_4ResponseB)Z'github.com/xaionaro-go/jni/proto/playerb\x06proto3"
+	"\tCreate4_4\x12\x18.player.Create4_4Request\x1a\x19.player.Create4_4ResponseB)Z'github.com/AndroidGoLab/jni/proto/playerb\x06proto3"
 
 var (
 	file_proto_player_player_proto_rawDescOnce sync.Once

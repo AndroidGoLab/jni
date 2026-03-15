@@ -1,5 +1,5 @@
 package: role
-go_import: github.com/xaionaro-go/jni/app/role
+go_import: github.com/AndroidGoLab/jni/app/role
 classes:
     - java_class: android.app.role.RoleManager
       go_type: roleManager

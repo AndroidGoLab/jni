@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/altitude"
+	pb "github.com/AndroidGoLab/jni/proto/altitude"
 )
 
 var altitudeCmd = &cobra.Command{

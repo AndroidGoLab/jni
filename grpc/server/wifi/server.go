@@ -5,12 +5,12 @@ package wifi
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/net/wifi"
-	pb "github.com/xaionaro-go/jni/proto/wifi"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/net/wifi"
+	pb "github.com/AndroidGoLab/jni/proto/wifi"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

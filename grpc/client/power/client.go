@@ -5,7 +5,7 @@ package power
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/power"
+	pb "github.com/AndroidGoLab/jni/proto/power"
 	"google.golang.org/grpc"
 )
 

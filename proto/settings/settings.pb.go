@@ -780,7 +780,7 @@ const file_proto_settings_settings_proto_rawDesc = "" +
 	"\x0fGetStringSecure\x12 .settings.GetStringSecureRequest\x1a!.settings.GetStringSecureResponse2\xbe\x01\n" +
 	"\x15SettingsGlobalService\x12M\n" +
 	"\fGetIntGlobal\x12\x1d.settings.GetIntGlobalRequest\x1a\x1e.settings.GetIntGlobalResponse\x12V\n" +
-	"\x0fGetStringGlobal\x12 .settings.GetStringGlobalRequest\x1a!.settings.GetStringGlobalResponseB+Z)github.com/xaionaro-go/jni/proto/settingsb\x06proto3"
+	"\x0fGetStringGlobal\x12 .settings.GetStringGlobalRequest\x1a!.settings.GetStringGlobalResponseB+Z)github.com/AndroidGoLab/jni/proto/settingsb\x06proto3"
 
 var (
 	file_proto_settings_settings_proto_rawDescOnce sync.Once

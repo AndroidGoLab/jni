@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package bluetooth_le;
 
-option go_package = "github.com/xaionaro-go/jni/proto/bluetooth_le";
+option go_package = "github.com/AndroidGoLab/jni/proto/bluetooth_le";
 
 message DescribeContentsRequest {
 }

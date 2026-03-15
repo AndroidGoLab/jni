@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	appconsts "github.com/xaionaro-go/jni/app/consts"
-	locationconsts "github.com/xaionaro-go/jni/location/consts"
-	pb "github.com/xaionaro-go/jni/proto/jni_raw"
+	appconsts "github.com/AndroidGoLab/jni/app/consts"
+	locationconsts "github.com/AndroidGoLab/jni/location/consts"
+	pb "github.com/AndroidGoLab/jni/proto/jni_raw"
 )
 
 var locationGetCmd = &cobra.Command{

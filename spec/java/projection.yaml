@@ -1,5 +1,5 @@
 package: projection
-go_import: github.com/xaionaro-go/jni/media/projection
+go_import: github.com/AndroidGoLab/jni/media/projection
 classes:
     - java_class: android.media.projection.MediaProjection
       go_type: mediaProjection

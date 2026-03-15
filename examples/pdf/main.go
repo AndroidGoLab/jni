@@ -16,7 +16,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/graphics/pdf"
+	"github.com/AndroidGoLab/jni/graphics/pdf"
 )
 
 func main() {}

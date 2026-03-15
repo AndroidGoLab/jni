@@ -5,12 +5,12 @@ package telecom
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	pb "github.com/xaionaro-go/jni/proto/telecom"
-	jnipkg "github.com/xaionaro-go/jni/telecom"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/telecom"
+	jnipkg "github.com/AndroidGoLab/jni/telecom"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

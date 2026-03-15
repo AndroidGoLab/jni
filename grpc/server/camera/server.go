@@ -5,12 +5,12 @@ package camera
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/hardware/camera"
-	pb "github.com/xaionaro-go/jni/proto/camera"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/hardware/camera"
+	pb "github.com/AndroidGoLab/jni/proto/camera"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

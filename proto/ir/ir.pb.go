@@ -458,7 +458,7 @@ const file_proto_ir_ir_proto_rawDesc = "" +
 	"\bTransmit\x12\x13.ir.TransmitRequest\x1a\x14.ir.TransmitResponse2\xc7\x01\n" +
 	"-ConsumerIrManagerCarrierFrequencyRangeService\x12J\n" +
 	"\x0fGetMaxFrequency\x12\x1a.ir.GetMaxFrequencyRequest\x1a\x1b.ir.GetMaxFrequencyResponse\x12J\n" +
-	"\x0fGetMinFrequency\x12\x1a.ir.GetMinFrequencyRequest\x1a\x1b.ir.GetMinFrequencyResponseB%Z#github.com/xaionaro-go/jni/proto/irb\x06proto3"
+	"\x0fGetMinFrequency\x12\x1a.ir.GetMinFrequencyRequest\x1a\x1b.ir.GetMinFrequencyResponseB%Z#github.com/AndroidGoLab/jni/proto/irb\x06proto3"
 
 var (
 	file_proto_ir_ir_proto_rawDescOnce sync.Once

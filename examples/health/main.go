@@ -17,7 +17,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/health/connect"
+	"github.com/AndroidGoLab/jni/health/connect"
 )
 
 func main() {}

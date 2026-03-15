@@ -541,7 +541,7 @@ const file_proto_util_util_proto_rawDesc = "" +
 	"\bHashCode\x12\x15.util.HashCodeRequest\x1a\x16.util.HashCodeResponse\x120\n" +
 	"\x05SetTo\x12\x12.util.SetToRequest\x1a\x13.util.SetToResponse\x12H\n" +
 	"\rSetToDefaults\x12\x1a.util.SetToDefaultsRequest\x1a\x1b.util.SetToDefaultsResponse\x129\n" +
-	"\bToString\x12\x15.util.ToStringRequest\x1a\x16.util.ToStringResponseB'Z%github.com/xaionaro-go/jni/proto/utilb\x06proto3"
+	"\bToString\x12\x15.util.ToStringRequest\x1a\x16.util.ToStringResponseB'Z%github.com/AndroidGoLab/jni/proto/utilb\x06proto3"
 
 var (
 	file_proto_util_util_proto_rawDescOnce sync.Once

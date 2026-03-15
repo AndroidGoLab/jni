@@ -2,7 +2,7 @@
 
 package role
 
-import "github.com/xaionaro-go/jni/app/role/consts"
+import "github.com/AndroidGoLab/jni/app/role/consts"
 
 const (
 	RoleAssistant       = consts.RoleAssistant

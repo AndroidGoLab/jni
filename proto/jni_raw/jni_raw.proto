@@ -1,6 +1,6 @@
 syntax = "proto3";
 package jni_raw;
-option go_package = "github.com/xaionaro-go/jni/proto/jni_raw";
+option go_package = "github.com/AndroidGoLab/jni/proto/jni_raw";
 
 // JType identifies a JNI primitive type for typed dispatch.
 enum JType {

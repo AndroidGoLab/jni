@@ -2172,7 +2172,7 @@ const file_proto_omapi_omapi_proto_rawDesc = "" +
 	"\x11OpenBasicChannel1\x12\x1f.omapi.OpenBasicChannel1Request\x1a .omapi.OpenBasicChannel1Response\x12\\\n" +
 	"\x13OpenBasicChannel2_1\x12!.omapi.OpenBasicChannel2_1Request\x1a\".omapi.OpenBasicChannel2_1Response\x12\\\n" +
 	"\x13OpenLogicalChannel1\x12!.omapi.OpenLogicalChannel1Request\x1a\".omapi.OpenLogicalChannel1Response\x12b\n" +
-	"\x15OpenLogicalChannel2_1\x12#.omapi.OpenLogicalChannel2_1Request\x1a$.omapi.OpenLogicalChannel2_1ResponseB(Z&github.com/xaionaro-go/jni/proto/omapib\x06proto3"
+	"\x15OpenLogicalChannel2_1\x12#.omapi.OpenLogicalChannel2_1Request\x1a$.omapi.OpenLogicalChannel2_1ResponseB(Z&github.com/AndroidGoLab/jni/proto/omapib\x06proto3"
 
 var (
 	file_proto_omapi_omapi_proto_rawDescOnce sync.Once

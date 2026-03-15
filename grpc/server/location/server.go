@@ -5,12 +5,12 @@ package location
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/location"
-	pb "github.com/xaionaro-go/jni/proto/location"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/location"
+	pb "github.com/AndroidGoLab/jni/proto/location"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

@@ -3032,7 +3032,7 @@ const file_proto_documents_documents_proto_rawDesc = "" +
 	"\tIsTreeUri\x12\x1b.documents.IsTreeUriRequest\x1a\x1c.documents.IsTreeUriResponse\x12O\n" +
 	"\fMoveDocument\x12\x1e.documents.MoveDocumentRequest\x1a\x1f.documents.MoveDocumentResponse\x12U\n" +
 	"\x0eRemoveDocument\x12 .documents.RemoveDocumentRequest\x1a!.documents.RemoveDocumentResponse\x12U\n" +
-	"\x0eRenameDocument\x12 .documents.RenameDocumentRequest\x1a!.documents.RenameDocumentResponseB,Z*github.com/xaionaro-go/jni/proto/documentsb\x06proto3"
+	"\x0eRenameDocument\x12 .documents.RenameDocumentRequest\x1a!.documents.RenameDocumentResponseB,Z*github.com/AndroidGoLab/jni/proto/documentsb\x06proto3"
 
 var (
 	file_proto_documents_documents_proto_rawDescOnce sync.Once

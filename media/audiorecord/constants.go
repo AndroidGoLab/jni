@@ -2,7 +2,7 @@
 
 package audiorecord
 
-import "github.com/xaionaro-go/jni/media/audiorecord/consts"
+import "github.com/AndroidGoLab/jni/media/audiorecord/consts"
 
 const (
 	Error                 = consts.Error

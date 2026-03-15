@@ -1910,7 +1910,7 @@ const file_proto_companion_companion_proto_rawDesc = "" +
 	"\x1fStartObservingDevicePresence1_1\x121.companion.StartObservingDevicePresence1_1Request\x1a2.companion.StartObservingDevicePresence1_1Response\x12p\n" +
 	"\x17StartSystemDataTransfer\x12).companion.StartSystemDataTransferRequest\x1a*.companion.StartSystemDataTransferResponse\x12\x7f\n" +
 	"\x1cStopObservingDevicePresence1\x12..companion.StopObservingDevicePresence1Request\x1a/.companion.StopObservingDevicePresence1Response\x12\x85\x01\n" +
-	"\x1eStopObservingDevicePresence1_1\x120.companion.StopObservingDevicePresence1_1Request\x1a1.companion.StopObservingDevicePresence1_1ResponseB,Z*github.com/xaionaro-go/jni/proto/companionb\x06proto3"
+	"\x1eStopObservingDevicePresence1_1\x120.companion.StopObservingDevicePresence1_1Request\x1a1.companion.StopObservingDevicePresence1_1ResponseB,Z*github.com/AndroidGoLab/jni/proto/companionb\x06proto3"
 
 var (
 	file_proto_companion_companion_proto_rawDescOnce sync.Once

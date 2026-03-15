@@ -5,7 +5,7 @@ package camera
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/camera"
+	pb "github.com/AndroidGoLab/jni/proto/camera"
 	"google.golang.org/grpc"
 )
 

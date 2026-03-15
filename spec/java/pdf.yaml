@@ -1,5 +1,5 @@
 package: pdf
-go_import: github.com/xaionaro-go/jni/graphics/pdf
+go_import: github.com/AndroidGoLab/jni/graphics/pdf
 classes:
     - java_class: android.graphics.Bitmap
       go_type: bitmap

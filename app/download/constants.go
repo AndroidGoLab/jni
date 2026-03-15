@@ -2,7 +2,7 @@
 
 package download
 
-import "github.com/xaionaro-go/jni/app/download/consts"
+import "github.com/AndroidGoLab/jni/app/download/consts"
 
 const (
 	ActionDownloadComplete            = consts.ActionDownloadComplete

@@ -5,7 +5,7 @@ package projection
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/projection"
+	pb "github.com/AndroidGoLab/jni/proto/projection"
 	"google.golang.org/grpc"
 )
 

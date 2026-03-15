@@ -1,5 +1,5 @@
 package: contacts
-go_import: github.com/xaionaro-go/jni/provider/contacts
+go_import: github.com/AndroidGoLab/jni/provider/contacts
 classes:
     - java_class: android.provider.ContactsContract
       go_type: contactsContract

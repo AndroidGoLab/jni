@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package battery;
 
-option go_package = "github.com/xaionaro-go/jni/proto/battery";
+option go_package = "github.com/AndroidGoLab/jni/proto/battery";
 
 message ComputeChargeTimeRemainingRequest {
 }

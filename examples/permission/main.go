@@ -16,7 +16,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/content/permission"
+	"github.com/AndroidGoLab/jni/content/permission"
 )
 
 func main() {}

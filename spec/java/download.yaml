@@ -1,5 +1,5 @@
 package: download
-go_import: github.com/xaionaro-go/jni/app/download
+go_import: github.com/AndroidGoLab/jni/app/download
 classes:
     - java_class: android.app.DownloadManager
       go_type: downloadManager

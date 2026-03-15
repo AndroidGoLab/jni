@@ -2,7 +2,7 @@
 
 package app
 
-import "github.com/xaionaro-go/jni/app/consts"
+import "github.com/AndroidGoLab/jni/app/consts"
 
 const (
 	AccessibilityService                      = consts.AccessibilityService

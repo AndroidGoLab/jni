@@ -15,7 +15,7 @@ generate: specs jni java proto protoc grpc cli callbacks
 
 # Run specgen — generates YAML specs from ref/ .class files
 specs:
-	go run ./tools/cmd/specgen/ -ref ref -classpath $(ANDROID_JAR) -output spec/java/ -go-module github.com/xaionaro-go/jni
+	go run ./tools/cmd/specgen/ -ref ref -classpath $(ANDROID_JAR) -output spec/java/ -go-module github.com/AndroidGoLab/jni
 
 # Run jnigen only — generates capi/ and root package idiomatic files
 jni:
@@ -23,11 +23,11 @@ jni:
 
 # Run javagen only — generates high-level Android API packages
 java:
-	go run ./tools/cmd/javagen/ -specs spec/java/ -overlays spec/overlays/java/ -templates templates/java/ -output . -go-module github.com/xaionaro-go/jni
+	go run ./tools/cmd/javagen/ -specs spec/java/ -overlays spec/overlays/java/ -templates templates/java/ -output . -go-module github.com/AndroidGoLab/jni
 
 # Run protogen — generates .proto files from Java API specs
 proto:
-	go run ./tools/cmd/protogen/ -specs spec/java/ -overlays spec/overlays/java/ -output proto/ -go-module github.com/xaionaro-go/jni
+	go run ./tools/cmd/protogen/ -specs spec/java/ -overlays spec/overlays/java/ -output proto/ -go-module github.com/AndroidGoLab/jni
 	@mkdir -p proto/handlestore
 	@cp spec/handlestore.proto proto/handlestore/handlestore.proto
 
@@ -43,11 +43,11 @@ protoc: proto
 
 # Run grpcgen — generates gRPC server and client wrappers
 grpc: protoc
-	go run ./tools/cmd/grpcgen/ -specs spec/java/ -overlays spec/overlays/java/ -output . -go-module github.com/xaionaro-go/jni
+	go run ./tools/cmd/grpcgen/ -specs spec/java/ -overlays spec/overlays/java/ -output . -go-module github.com/AndroidGoLab/jni
 
 # Run cligen — generates jnicli cobra commands from Java API specs
 cli: grpc
-	go run ./tools/cmd/cligen/ -specs spec/java/ -overlays spec/overlays/java/ -output cmd/jnicli/ -go-module github.com/xaionaro-go/jni
+	go run ./tools/cmd/cligen/ -specs spec/java/ -overlays spec/overlays/java/ -output cmd/jnicli/ -go-module github.com/AndroidGoLab/jni
 
 # Run callbackgen — generates Java callback adapter classes
 callbacks:

@@ -7022,7 +7022,7 @@ const file_proto_pm_pm_proto_rawDesc = "" +
 	"\x12GetLongVersionCode\x12\x1d.pm.GetLongVersionCodeRequest\x1a\x1e.pm.GetLongVersionCodeResponse\x12S\n" +
 	"\x12SetLongVersionCode\x12\x1d.pm.SetLongVersionCodeRequest\x1a\x1e.pm.SetLongVersionCodeResponse\x125\n" +
 	"\bToString\x12\x13.pm.ToStringRequest\x1a\x14.pm.ToStringResponse\x12D\n" +
-	"\rWriteToParcel\x12\x18.pm.WriteToParcelRequest\x1a\x19.pm.WriteToParcelResponseB%Z#github.com/xaionaro-go/jni/proto/pmb\x06proto3"
+	"\rWriteToParcel\x12\x18.pm.WriteToParcelRequest\x1a\x19.pm.WriteToParcelResponseB%Z#github.com/AndroidGoLab/jni/proto/pmb\x06proto3"
 
 var (
 	file_proto_pm_pm_proto_rawDescOnce sync.Once

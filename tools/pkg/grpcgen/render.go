@@ -23,7 +23,7 @@ import (
 	"context"
 {{- if .NeedsJNI}}
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 {{- end}}
 
 	"{{.GoModule}}/app"

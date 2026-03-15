@@ -5,7 +5,7 @@ package net
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/net"
+	pb "github.com/AndroidGoLab/jni/proto/net"
 	"google.golang.org/grpc"
 )
 

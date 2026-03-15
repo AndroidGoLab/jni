@@ -5,7 +5,7 @@ package battery
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/battery"
+	pb "github.com/AndroidGoLab/jni/proto/battery"
 	"google.golang.org/grpc"
 )
 

@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package alarm;
 
-option go_package = "github.com/xaionaro-go/jni/proto/alarm";
+option go_package = "github.com/AndroidGoLab/jni/proto/alarm";
 
 message CanScheduleExactAlarmsRequest {
 }

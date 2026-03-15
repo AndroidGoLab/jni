@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/recorder"
+	pb "github.com/AndroidGoLab/jni/proto/recorder"
 )
 
 var recorderCmd = &cobra.Command{

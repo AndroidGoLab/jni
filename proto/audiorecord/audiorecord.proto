@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package audiorecord;
 
-option go_package = "github.com/xaionaro-go/jni/proto/audiorecord";
+option go_package = "github.com/AndroidGoLab/jni/proto/audiorecord";
 
 message GetActiveMicrophonesRequest {
 }

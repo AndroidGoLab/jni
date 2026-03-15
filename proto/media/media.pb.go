@@ -24227,7 +24227,7 @@ const file_proto_media_media_proto_rawDesc = "" +
 	"\x1dMediaProjectionManagerService\x12q\n" +
 	"\x1aCreateScreenCaptureIntent0\x12(.media.CreateScreenCaptureIntent0Request\x1a).media.CreateScreenCaptureIntent0Response\x12w\n" +
 	"\x1cCreateScreenCaptureIntent1_1\x12*.media.CreateScreenCaptureIntent1_1Request\x1a+.media.CreateScreenCaptureIntent1_1Response\x12Y\n" +
-	"\x12GetMediaProjection\x12 .media.GetMediaProjectionRequest\x1a!.media.GetMediaProjectionResponseB(Z&github.com/xaionaro-go/jni/proto/mediab\x06proto3"
+	"\x12GetMediaProjection\x12 .media.GetMediaProjectionRequest\x1a!.media.GetMediaProjectionResponseB(Z&github.com/AndroidGoLab/jni/proto/mediab\x06proto3"
 
 var (
 	file_proto_media_media_proto_rawDescOnce sync.Once

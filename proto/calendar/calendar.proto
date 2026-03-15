@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package calendar;
 
-option go_package = "github.com/xaionaro-go/jni/proto/calendar";
+option go_package = "github.com/AndroidGoLab/jni/proto/calendar";
 
 message StartViewCalendarEventInManagedProfileRequest {
   int64 arg0 = 1;

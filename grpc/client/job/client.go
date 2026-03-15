@@ -5,7 +5,7 @@ package job
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/job"
+	pb "github.com/AndroidGoLab/jni/proto/job"
 	"google.golang.org/grpc"
 )
 

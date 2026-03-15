@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/handlestore"
 )
 
 var handleCmd = &cobra.Command{

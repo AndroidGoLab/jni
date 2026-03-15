@@ -5,7 +5,7 @@ package notification
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/notification"
+	pb "github.com/AndroidGoLab/jni/proto/notification"
 	"google.golang.org/grpc"
 )
 

@@ -43436,7 +43436,7 @@ const file_proto_app_app_proto_rawDesc = "" +
 	"\n" +
 	"IsCanceled\x12\x16.app.IsCanceledRequest\x1a\x17.app.IsCanceledResponse\x12X\n" +
 	"\x13SetOnCancelListener\x12\x1f.app.SetOnCancelListenerRequest\x1a .app.SetOnCancelListenerResponse\x12L\n" +
-	"\x0fThrowIfCanceled\x12\x1b.app.ThrowIfCanceledRequest\x1a\x1c.app.ThrowIfCanceledResponseB&Z$github.com/xaionaro-go/jni/proto/appb\x06proto3"
+	"\x0fThrowIfCanceled\x12\x1b.app.ThrowIfCanceledRequest\x1a\x1c.app.ThrowIfCanceledResponseB&Z$github.com/AndroidGoLab/jni/proto/appb\x06proto3"
 
 var (
 	file_proto_app_app_proto_rawDescOnce sync.Once

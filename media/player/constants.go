@@ -2,7 +2,7 @@
 
 package player
 
-import "github.com/xaionaro-go/jni/media/player/consts"
+import "github.com/AndroidGoLab/jni/media/player/consts"
 
 const (
 	MediaErrorIo                             = consts.MediaErrorIo

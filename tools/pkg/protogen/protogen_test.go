@@ -31,7 +31,7 @@ func TestGenerate_ProducesProtoFile(t *testing.T) {
 	specPath := filepath.Join(root, "spec", "java", "location.yaml")
 	overlayPath := filepath.Join(root, "spec", "overlays", "java", "location.yaml")
 	outputDir := t.TempDir()
-	goModule := "github.com/xaionaro-go/jni"
+	goModule := "github.com/AndroidGoLab/jni"
 
 	if err := Generate(specPath, overlayPath, outputDir, goModule); err != nil {
 		t.Fatalf("Generate: %v", err)
@@ -56,7 +56,7 @@ func TestGenerate_ProducesProtoFile(t *testing.T) {
 	}
 
 	// Verify go_package option.
-	if !strings.Contains(content, `option go_package = "github.com/xaionaro-go/jni/proto/location";`) {
+	if !strings.Contains(content, `option go_package = "github.com/AndroidGoLab/jni/proto/location";`) {
 		t.Error("missing or incorrect go_package option")
 	}
 
@@ -69,7 +69,7 @@ func TestGenerate_ProducesProtoFile(t *testing.T) {
 func TestGenerate_MultipleSpecs(t *testing.T) {
 	root := findRepoRoot(t)
 	outputDir := t.TempDir()
-	goModule := "github.com/xaionaro-go/jni"
+	goModule := "github.com/AndroidGoLab/jni"
 
 	specs := []string{"location", "bluetooth", "toast"}
 	for _, name := range specs {
@@ -91,7 +91,7 @@ func TestGenerate_Idempotency(t *testing.T) {
 	root := findRepoRoot(t)
 	specPath := filepath.Join(root, "spec", "java", "location.yaml")
 	overlayPath := filepath.Join(root, "spec", "overlays", "java", "location.yaml")
-	goModule := "github.com/xaionaro-go/jni"
+	goModule := "github.com/AndroidGoLab/jni"
 
 	outputDir1 := t.TempDir()
 	outputDir2 := t.TempDir()

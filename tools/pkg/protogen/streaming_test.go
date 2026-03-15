@@ -3,7 +3,7 @@ package protogen
 import (
 	"testing"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
 )
 
 func TestDetectStreamingPattern_LocationListener(t *testing.T) {

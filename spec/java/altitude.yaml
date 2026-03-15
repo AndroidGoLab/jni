@@ -1,5 +1,5 @@
 package: altitude
-go_import: github.com/xaionaro-go/jni/location/altitude
+go_import: github.com/AndroidGoLab/jni/location/altitude
 classes:
     - java_class: android.location.altitude.AltitudeConverter
       go_type: altitudeConverter

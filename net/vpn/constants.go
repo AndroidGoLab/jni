@@ -2,7 +2,7 @@
 
 package vpn
 
-import "github.com/xaionaro-go/jni/net/vpn/consts"
+import "github.com/AndroidGoLab/jni/net/vpn/consts"
 
 const (
 	ServiceInterface                = consts.ServiceInterface

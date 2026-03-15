@@ -10,9 +10,9 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/handlestore"
-	pb "github.com/xaionaro-go/jni/proto/jni_raw"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/jni_raw"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

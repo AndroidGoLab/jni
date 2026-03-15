@@ -2,7 +2,7 @@
 
 package resolver
 
-import "github.com/xaionaro-go/jni/content/resolver/consts"
+import "github.com/AndroidGoLab/jni/content/resolver/consts"
 
 const (
 	FieldTypeBlob                  = consts.FieldTypeBlob

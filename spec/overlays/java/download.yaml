@@ -1,5 +1,5 @@
 package: download
-go_import: "github.com/xaionaro-go/jni/app/download"
+go_import: "github.com/AndroidGoLab/jni/app/download"
 
 go_types:
   - go_name: Request
@@ -56,4 +56,4 @@ overrides:
           7. Return Status(status)
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

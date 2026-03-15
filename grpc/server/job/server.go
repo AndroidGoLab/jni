@@ -5,12 +5,12 @@ package job
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	jnipkg "github.com/xaionaro-go/jni/app/job"
-	"github.com/xaionaro-go/jni/handlestore"
-	pb "github.com/xaionaro-go/jni/proto/job"
+	"github.com/AndroidGoLab/jni/app"
+	jnipkg "github.com/AndroidGoLab/jni/app/job"
+	"github.com/AndroidGoLab/jni/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/job"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

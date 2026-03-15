@@ -1,5 +1,5 @@
 package: inputmethod
-go_import: github.com/xaionaro-go/jni/view/inputmethod
+go_import: github.com/AndroidGoLab/jni/view/inputmethod
 classes:
     - java_class: android.view.inputmethod.InputMethodManager
       go_type: inputMethodManager

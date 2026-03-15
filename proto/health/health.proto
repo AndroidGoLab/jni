@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package health;
 
-option go_package = "github.com/xaionaro-go/jni/proto/health";
+option go_package = "github.com/AndroidGoLab/jni/proto/health";
 
 message GetOrCreateRawRequest {
   int64 ctx = 1;

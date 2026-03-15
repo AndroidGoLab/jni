@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package usage;
 
-option go_package = "github.com/xaionaro-go/jni/proto/usage";
+option go_package = "github.com/AndroidGoLab/jni/proto/usage";
 
 message GetAppStandbyBucketRequest {
 }

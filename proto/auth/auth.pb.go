@@ -315,7 +315,7 @@ const file_proto_auth_auth_proto_rawDesc = "" +
 	"\vAuthService\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x12T\n" +
 	"\x11RequestPermission\x12\x1e.auth.RequestPermissionRequest\x1a\x1f.auth.RequestPermissionResponse\x12T\n" +
-	"\x11ListMyPermissions\x12\x1e.auth.ListMyPermissionsRequest\x1a\x1f.auth.ListMyPermissionsResponseB'Z%github.com/xaionaro-go/jni/proto/authb\x06proto3"
+	"\x11ListMyPermissions\x12\x1e.auth.ListMyPermissionsRequest\x1a\x1f.auth.ListMyPermissionsResponseB'Z%github.com/AndroidGoLab/jni/proto/authb\x06proto3"
 
 var (
 	file_proto_auth_auth_proto_rawDescOnce sync.Once

@@ -5,7 +5,7 @@ package location
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/location"
+	pb "github.com/AndroidGoLab/jni/proto/location"
 	"google.golang.org/grpc"
 )
 

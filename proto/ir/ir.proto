@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package ir;
 
-option go_package = "github.com/xaionaro-go/jni/proto/ir";
+option go_package = "github.com/AndroidGoLab/jni/proto/ir";
 
 message GetCarrierFrequenciesRequest {
 }

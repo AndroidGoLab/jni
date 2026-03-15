@@ -2,7 +2,7 @@
 
 package biometric
 
-import "github.com/xaionaro-go/jni/hardware/biometric/consts"
+import "github.com/AndroidGoLab/jni/hardware/biometric/consts"
 
 const (
 	AuthenticationResultTypeBiometric        = consts.AuthenticationResultTypeBiometric

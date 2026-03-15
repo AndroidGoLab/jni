@@ -5,12 +5,12 @@ package projection
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/media/projection"
-	pb "github.com/xaionaro-go/jni/proto/projection"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/media/projection"
+	pb "github.com/AndroidGoLab/jni/proto/projection"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

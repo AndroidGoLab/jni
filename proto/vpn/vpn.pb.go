@@ -663,7 +663,7 @@ const file_proto_vpn_vpn_proto_rawDesc = "" +
 	"\n" +
 	"Protect1_2\x12\x16.vpn.Protect1_2Request\x1a\x17.vpn.Protect1_2Response\x12^\n" +
 	"\x15SetUnderlyingNetworks\x12!.vpn.SetUnderlyingNetworksRequest\x1a\".vpn.SetUnderlyingNetworksResponse\x124\n" +
-	"\aPrepare\x12\x13.vpn.PrepareRequest\x1a\x14.vpn.PrepareResponseB&Z$github.com/xaionaro-go/jni/proto/vpnb\x06proto3"
+	"\aPrepare\x12\x13.vpn.PrepareRequest\x1a\x14.vpn.PrepareResponseB&Z$github.com/AndroidGoLab/jni/proto/vpnb\x06proto3"
 
 var (
 	file_proto_vpn_vpn_proto_rawDescOnce sync.Once

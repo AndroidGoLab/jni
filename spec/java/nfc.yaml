@@ -1,5 +1,5 @@
 package: nfc
-go_import: github.com/xaionaro-go/jni/nfc
+go_import: github.com/AndroidGoLab/jni/nfc
 classes:
     - java_class: android.nfc.NdefRecord
       go_type: ndefRecord

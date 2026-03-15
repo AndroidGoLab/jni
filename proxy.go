@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni/capi"
+	"github.com/AndroidGoLab/jni/capi"
 )
 
 // ProxyHandler is a Go function that handles method invocations on a

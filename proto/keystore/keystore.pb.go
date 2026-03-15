@@ -2820,7 +2820,7 @@ const file_proto_keystore_keystore_proto_rawDesc = "" +
 	"%SetUserAuthenticationValidWhileOnBody\x126.keystore.SetUserAuthenticationValidWhileOnBodyRequest\x1a7.keystore.SetUserAuthenticationValidWhileOnBodyResponse\x12\xad\x01\n" +
 	",SetUserAuthenticationValidityDurationSeconds\x12=.keystore.SetUserAuthenticationValidityDurationSecondsRequest\x1a>.keystore.SetUserAuthenticationValidityDurationSecondsResponse\x12z\n" +
 	"\x1bSetUserConfirmationRequired\x12,.keystore.SetUserConfirmationRequiredRequest\x1a-.keystore.SetUserConfirmationRequiredResponse\x12n\n" +
-	"\x17SetUserPresenceRequired\x12(.keystore.SetUserPresenceRequiredRequest\x1a).keystore.SetUserPresenceRequiredResponseB+Z)github.com/xaionaro-go/jni/proto/keystoreb\x06proto3"
+	"\x17SetUserPresenceRequired\x12(.keystore.SetUserPresenceRequiredRequest\x1a).keystore.SetUserPresenceRequiredResponseB+Z)github.com/AndroidGoLab/jni/proto/keystoreb\x06proto3"
 
 var (
 	file_proto_keystore_keystore_proto_rawDescOnce sync.Once

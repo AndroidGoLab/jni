@@ -3856,7 +3856,7 @@ const file_proto_display_display_proto_rawDesc = "" +
 	"\x10IsWideColorGamut\x12 .display.IsWideColorGamutRequest\x1a!.display.IsWideColorGamutResponse\x12\x8d\x01\n" +
 	"\"RegisterHdrSdrRatioChangedListener\x122.display.RegisterHdrSdrRatioChangedListenerRequest\x1a3.display.RegisterHdrSdrRatioChangedListenerResponse\x12?\n" +
 	"\bToString\x12\x18.display.ToStringRequest\x1a\x19.display.ToStringResponse\x12\x93\x01\n" +
-	"$UnregisterHdrSdrRatioChangedListener\x124.display.UnregisterHdrSdrRatioChangedListenerRequest\x1a5.display.UnregisterHdrSdrRatioChangedListenerResponseB*Z(github.com/xaionaro-go/jni/proto/displayb\x06proto3"
+	"$UnregisterHdrSdrRatioChangedListener\x124.display.UnregisterHdrSdrRatioChangedListenerRequest\x1a5.display.UnregisterHdrSdrRatioChangedListenerResponseB*Z(github.com/AndroidGoLab/jni/proto/displayb\x06proto3"
 
 var (
 	file_proto_display_display_proto_rawDescOnce sync.Once

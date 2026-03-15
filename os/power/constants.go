@@ -2,7 +2,7 @@
 
 package power
 
-import "github.com/xaionaro-go/jni/os/power/consts"
+import "github.com/AndroidGoLab/jni/os/power/consts"
 
 const (
 	AcquireCausesWakeup                                = consts.AcquireCausesWakeup

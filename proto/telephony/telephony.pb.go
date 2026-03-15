@@ -12592,7 +12592,7 @@ const file_proto_telephony_telephony_proto_rawDesc = "" +
 	"\x17UpdateAvailableNetworks\x12).telephony.UpdateAvailableNetworksRequest\x1a*.telephony.UpdateAvailableNetworksResponse\x12y\n" +
 	"\x1aUploadCallComposerPicture4\x12,.telephony.UploadCallComposerPicture4Request\x1a-.telephony.UploadCallComposerPicture4Response\x12\x7f\n" +
 	"\x1cUploadCallComposerPicture4_1\x12..telephony.UploadCallComposerPicture4_1Request\x1a/.telephony.UploadCallComposerPicture4_1Response\x12\x8e\x01\n" +
-	"!GetMaximumCallComposerPictureSize\x123.telephony.GetMaximumCallComposerPictureSizeRequest\x1a4.telephony.GetMaximumCallComposerPictureSizeResponseB,Z*github.com/xaionaro-go/jni/proto/telephonyb\x06proto3"
+	"!GetMaximumCallComposerPictureSize\x123.telephony.GetMaximumCallComposerPictureSizeRequest\x1a4.telephony.GetMaximumCallComposerPictureSizeResponseB,Z*github.com/AndroidGoLab/jni/proto/telephonyb\x06proto3"
 
 var (
 	file_proto_telephony_telephony_proto_rawDescOnce sync.Once

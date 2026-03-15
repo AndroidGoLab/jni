@@ -5,9 +5,9 @@ import (
 	"crypto/sha256"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/grpc/server/acl"
-	"github.com/xaionaro-go/jni/grpc/server/certauth"
-	pb "github.com/xaionaro-go/jni/proto/auth"
+	"github.com/AndroidGoLab/jni/grpc/server/acl"
+	"github.com/AndroidGoLab/jni/grpc/server/certauth"
+	pb "github.com/AndroidGoLab/jni/proto/auth"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"

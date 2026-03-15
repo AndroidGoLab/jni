@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/wifi_rtt"
+	pb "github.com/AndroidGoLab/jni/proto/wifi_rtt"
 )
 
 var wifirttCmd = &cobra.Command{

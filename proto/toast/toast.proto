@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package toast;
 
-option go_package = "github.com/xaionaro-go/jni/proto/toast";
+option go_package = "github.com/AndroidGoLab/jni/proto/toast";
 
 message AddCallbackRequest {
   int64 arg0 = 1;

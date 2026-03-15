@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package altitude;
 
-option go_package = "github.com/xaionaro-go/jni/proto/altitude";
+option go_package = "github.com/AndroidGoLab/jni/proto/altitude";
 
 message AddMslAltitudeToLocationRequest {
   int64 arg0 = 1;

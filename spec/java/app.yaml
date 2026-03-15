@@ -1,5 +1,5 @@
 package: app
-go_import: github.com/xaionaro-go/jni/app
+go_import: github.com/AndroidGoLab/jni/app
 classes:
     - java_class: android.os.CancellationSignal
       go_type: cancellationSignal

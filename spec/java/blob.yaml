@@ -1,5 +1,5 @@
 package: blob
-go_import: github.com/xaionaro-go/jni/app/blob
+go_import: github.com/AndroidGoLab/jni/app/blob
 classes:
     - java_class: android.app.blob.BlobStoreManager
       go_type: blobStoreManager

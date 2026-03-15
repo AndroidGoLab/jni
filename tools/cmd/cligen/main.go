@@ -6,14 +6,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/xaionaro-go/jni/tools/pkg/cligen"
+	"github.com/AndroidGoLab/jni/tools/pkg/cligen"
 )
 
 func main() {
 	specsDir := flag.String("specs", "spec/java", "directory containing per-package YAML specs")
 	overlaysDir := flag.String("overlays", "spec/overlays/java", "directory containing overlays")
 	outputDir := flag.String("output", "cmd/jnicli", "output directory for generated CLI files")
-	goModule := flag.String("go-module", "github.com/xaionaro-go/jni", "Go module path")
+	goModule := flag.String("go-module", "github.com/AndroidGoLab/jni", "Go module path")
 	protoDir := flag.String("proto-dir", "proto", "directory containing compiled proto Go stubs")
 	flag.Parse()
 

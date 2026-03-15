@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package nfc;
 
-option go_package = "github.com/xaionaro-go/jni/proto/nfc";
+option go_package = "github.com/AndroidGoLab/jni/proto/nfc";
 
 message DescribeContentsRequest {
 }

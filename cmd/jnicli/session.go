@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/session"
+	pb "github.com/AndroidGoLab/jni/proto/session"
 )
 
 var sessionCmd = &cobra.Command{

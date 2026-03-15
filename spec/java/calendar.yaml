@@ -1,5 +1,5 @@
 package: calendar
-go_import: github.com/xaionaro-go/jni/provider/calendar
+go_import: github.com/AndroidGoLab/jni/provider/calendar
 classes:
     - java_class: android.provider.CalendarContract
       go_type: calendarContract

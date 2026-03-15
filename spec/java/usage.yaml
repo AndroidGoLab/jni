@@ -1,5 +1,5 @@
 package: usage
-go_import: github.com/xaionaro-go/jni/app/usage
+go_import: github.com/AndroidGoLab/jni/app/usage
 classes:
     - java_class: android.app.usage.UsageStatsManager
       go_type: usageStatsManager

@@ -6,14 +6,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/xaionaro-go/jni/tools/pkg/protogen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protogen"
 )
 
 func main() {
 	specsDir := flag.String("specs", "spec/java", "directory containing per-package YAML specs")
 	overlaysDir := flag.String("overlays", "spec/overlays/java", "directory containing per-package overlay YAMLs")
 	outputDir := flag.String("output", "proto", "base output directory for .proto files")
-	goModule := flag.String("go-module", "github.com/xaionaro-go/jni", "Go module path for go_package option")
+	goModule := flag.String("go-module", "github.com/AndroidGoLab/jni", "Go module path for go_package option")
 	flag.Parse()
 
 	specs, err := filepath.Glob(filepath.Join(*specsDir, "*.yaml"))

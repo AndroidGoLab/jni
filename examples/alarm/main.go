@@ -15,9 +15,9 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/app/alarm"
-	"github.com/xaionaro-go/jni/app"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/app/alarm"
+	"github.com/AndroidGoLab/jni/app"
 )
 
 func main() {}

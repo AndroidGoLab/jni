@@ -103,10 +103,10 @@ func TestGoImportToRelDir(t *testing.T) {
 		goModule string
 		want     string
 	}{
-		{"github.com/xaionaro-go/jni/bluetooth", "github.com/xaionaro-go/jni", "bluetooth"},
-		{"github.com/xaionaro-go/jni/hardware/camera", "github.com/xaionaro-go/jni", "hardware/camera"},
-		{"github.com/xaionaro-go/jni/net/wifi/p2p", "github.com/xaionaro-go/jni", "net/wifi/p2p"},
-		{"github.com/xaionaro-go/jni/widget/toast", "github.com/xaionaro-go/jni", "widget/toast"},
+		{"github.com/AndroidGoLab/jni/bluetooth", "github.com/AndroidGoLab/jni", "bluetooth"},
+		{"github.com/AndroidGoLab/jni/hardware/camera", "github.com/AndroidGoLab/jni", "hardware/camera"},
+		{"github.com/AndroidGoLab/jni/net/wifi/p2p", "github.com/AndroidGoLab/jni", "net/wifi/p2p"},
+		{"github.com/AndroidGoLab/jni/widget/toast", "github.com/AndroidGoLab/jni", "widget/toast"},
 	}
 	for _, tt := range tests {
 		got := GoImportToRelDir(tt.goImport, tt.goModule)

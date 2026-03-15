@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	pb "github.com/xaionaro-go/jni/proto/jni_raw"
+	pb "github.com/AndroidGoLab/jni/proto/jni_raw"
 )
 
 // jniCaller wraps the raw JNI gRPC client and provides concise methods

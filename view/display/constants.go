@@ -2,7 +2,7 @@
 
 package display
 
-import "github.com/xaionaro-go/jni/view/display/consts"
+import "github.com/AndroidGoLab/jni/view/display/consts"
 
 const (
 	Density140                     = consts.Density140

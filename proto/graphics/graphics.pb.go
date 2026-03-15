@@ -6868,7 +6868,7 @@ const file_proto_graphics_graphics_proto_rawDesc = "" +
 	"\x10CreateBitmap4_13\x12!.graphics.CreateBitmap4_13Request\x1a\".graphics.CreateBitmap4_13Response\x12Y\n" +
 	"\x10CreateBitmap6_14\x12!.graphics.CreateBitmap6_14Request\x1a\".graphics.CreateBitmap6_14Response\x12_\n" +
 	"\x12CreateScaledBitmap\x12#.graphics.CreateScaledBitmapRequest\x1a$.graphics.CreateScaledBitmapResponse\x12_\n" +
-	"\x12WrapHardwareBuffer\x12#.graphics.WrapHardwareBufferRequest\x1a$.graphics.WrapHardwareBufferResponseB+Z)github.com/xaionaro-go/jni/proto/graphicsb\x06proto3"
+	"\x12WrapHardwareBuffer\x12#.graphics.WrapHardwareBufferRequest\x1a$.graphics.WrapHardwareBufferResponseB+Z)github.com/AndroidGoLab/jni/proto/graphicsb\x06proto3"
 
 var (
 	file_proto_graphics_graphics_proto_rawDescOnce sync.Once

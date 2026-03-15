@@ -2778,7 +2778,7 @@ const file_proto_download_download_proto_rawDesc = "" +
 	"\x15SetRequiresDeviceIdle\x12&.download.SetRequiresDeviceIdleRequest\x1a'.download.SetRequiresDeviceIdleResponse\x12w\n" +
 	"\x1aSetShowRunningNotification\x12+.download.SetShowRunningNotificationRequest\x1a,.download.SetShowRunningNotificationResponse\x12A\n" +
 	"\bSetTitle\x12\x19.download.SetTitleRequest\x1a\x1a.download.SetTitleResponse\x12n\n" +
-	"\x17SetVisibleInDownloadsUi\x12(.download.SetVisibleInDownloadsUiRequest\x1a).download.SetVisibleInDownloadsUiResponseB+Z)github.com/xaionaro-go/jni/proto/downloadb\x06proto3"
+	"\x17SetVisibleInDownloadsUi\x12(.download.SetVisibleInDownloadsUiRequest\x1a).download.SetVisibleInDownloadsUiResponseB+Z)github.com/AndroidGoLab/jni/proto/downloadb\x06proto3"
 
 var (
 	file_proto_download_download_proto_rawDescOnce sync.Once

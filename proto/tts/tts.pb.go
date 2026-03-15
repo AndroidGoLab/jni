@@ -4061,7 +4061,7 @@ const file_proto_tts_tts_proto_rawDesc = "" +
 	"\x11SynthesizeToFile4\x12\x1d.tts.SynthesizeToFile4Request\x1a\x1e.tts.SynthesizeToFile4Response\x12X\n" +
 	"\x13SynthesizeToFile4_1\x12\x1f.tts.SynthesizeToFile4_1Request\x1a .tts.SynthesizeToFile4_1Response\x12X\n" +
 	"\x13SynthesizeToFile4_2\x12\x1f.tts.SynthesizeToFile4_2Request\x1a .tts.SynthesizeToFile4_2Response\x12d\n" +
-	"\x17GetMaxSpeechInputLength\x12#.tts.GetMaxSpeechInputLengthRequest\x1a$.tts.GetMaxSpeechInputLengthResponseB&Z$github.com/xaionaro-go/jni/proto/ttsb\x06proto3"
+	"\x17GetMaxSpeechInputLength\x12#.tts.GetMaxSpeechInputLengthRequest\x1a$.tts.GetMaxSpeechInputLengthResponseB&Z$github.com/AndroidGoLab/jni/proto/ttsb\x06proto3"
 
 var (
 	file_proto_tts_tts_proto_rawDescOnce sync.Once

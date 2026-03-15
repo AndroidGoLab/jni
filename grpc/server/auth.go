@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/xaionaro-go/jni/grpc/server/acl"
+	"github.com/AndroidGoLab/jni/grpc/server/acl"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"

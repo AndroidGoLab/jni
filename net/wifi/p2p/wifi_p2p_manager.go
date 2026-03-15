@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/app"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/app"
 )
 
 // Ensure imports are used.

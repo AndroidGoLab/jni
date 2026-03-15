@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package content;
 
-option go_package = "github.com/xaionaro-go/jni/proto/content";
+option go_package = "github.com/AndroidGoLab/jni/proto/content";
 
 message GetSentFromPackageRequest {
 }

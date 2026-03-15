@@ -1519,7 +1519,7 @@ const file_proto_environment_environment_proto_rawDesc = "" +
 	"\x19IsExternalStorageManager0\x12-.environment.IsExternalStorageManager0Request\x1a..environment.IsExternalStorageManager0Response\x12\x80\x01\n" +
 	"\x1bIsExternalStorageManager1_1\x12/.environment.IsExternalStorageManager1_1Request\x1a0.environment.IsExternalStorageManager1_1Response\x12\x80\x01\n" +
 	"\x1bIsExternalStorageRemovable0\x12/.environment.IsExternalStorageRemovable0Request\x1a0.environment.IsExternalStorageRemovable0Response\x12\x86\x01\n" +
-	"\x1dIsExternalStorageRemovable1_1\x121.environment.IsExternalStorageRemovable1_1Request\x1a2.environment.IsExternalStorageRemovable1_1ResponseB.Z,github.com/xaionaro-go/jni/proto/environmentb\x06proto3"
+	"\x1dIsExternalStorageRemovable1_1\x121.environment.IsExternalStorageRemovable1_1Request\x1a2.environment.IsExternalStorageRemovable1_1ResponseB.Z,github.com/AndroidGoLab/jni/proto/environmentb\x06proto3"
 
 var (
 	file_proto_environment_environment_proto_rawDescOnce sync.Once

@@ -13,7 +13,7 @@ import (
 type PackageMapping struct {
 	JavaPrefix string // e.g. "android.app.admin"
 	Package    string // e.g. "admin"
-	GoImport   string // e.g. "github.com/xaionaro-go/jni/app/admin"
+	GoImport   string // e.g. "github.com/AndroidGoLab/jni/app/admin"
 }
 
 // AndroidServiceName maps known manager class names to their Android

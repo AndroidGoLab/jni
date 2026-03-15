@@ -5,7 +5,7 @@ package admin
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/admin"
+	pb "github.com/AndroidGoLab/jni/proto/admin"
 	"google.golang.org/grpc"
 )
 

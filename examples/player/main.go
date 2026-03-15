@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/media/player"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/media/player"
 )
 
 func main() {}

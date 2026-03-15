@@ -2,7 +2,7 @@
 
 package recorder
 
-import "github.com/xaionaro-go/jni/media/recorder/consts"
+import "github.com/AndroidGoLab/jni/media/recorder/consts"
 
 const (
 	MediaErrorServerDied                    = consts.MediaErrorServerDied

@@ -3905,7 +3905,7 @@ const file_proto_storage_storage_proto_rawDesc = "" +
 	"\x19SetCacheBehaviorTombstone\x12).storage.SetCacheBehaviorTombstoneRequest\x1a*.storage.SetCacheBehaviorTombstoneResponse\x12E\n" +
 	"\n" +
 	"UnmountObb\x12\x1a.storage.UnmountObbRequest\x1a\x1b.storage.UnmountObbResponse\x12\x84\x01\n" +
-	"\x1fUnregisterStorageVolumeCallback\x12/.storage.UnregisterStorageVolumeCallbackRequest\x1a0.storage.UnregisterStorageVolumeCallbackResponseB*Z(github.com/xaionaro-go/jni/proto/storageb\x06proto3"
+	"\x1fUnregisterStorageVolumeCallback\x12/.storage.UnregisterStorageVolumeCallbackRequest\x1a0.storage.UnregisterStorageVolumeCallbackResponseB*Z(github.com/AndroidGoLab/jni/proto/storageb\x06proto3"
 
 var (
 	file_proto_storage_storage_proto_rawDescOnce sync.Once

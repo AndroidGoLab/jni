@@ -3,7 +3,7 @@ package protogen
 import (
 	"strings"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
 )
 
 // StreamingPattern classifies how a callback should be exposed as gRPC streaming.

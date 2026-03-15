@@ -2,7 +2,7 @@
 
 package storage
 
-import "github.com/xaionaro-go/jni/os/storage/consts"
+import "github.com/AndroidGoLab/jni/os/storage/consts"
 
 const (
 	ActionClearAppCache = consts.ActionClearAppCache

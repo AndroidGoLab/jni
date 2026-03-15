@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package permission;
 
-option go_package = "github.com/xaionaro-go/jni/proto/permission";
+option go_package = "github.com/AndroidGoLab/jni/proto/permission";
 
 message CheckSelfPermissionRequest {
   int64 ctx = 1;

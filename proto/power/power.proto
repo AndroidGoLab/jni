@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package power;
 
-option go_package = "github.com/xaionaro-go/jni/proto/power";
+option go_package = "github.com/AndroidGoLab/jni/proto/power";
 
 message AddThermalHeadroomListener1Request {
   int64 arg0 = 1;

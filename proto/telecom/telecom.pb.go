@@ -3401,7 +3401,7 @@ const file_proto_telecom_telecom_proto_rawDesc = "" +
 	"\x10ShowInCallScreen\x12 .telecom.ShowInCallScreenRequest\x1a!.telecom.ShowInCallScreenResponse\x12N\n" +
 	"\rSilenceRinger\x12\x1d.telecom.SilenceRingerRequest\x1a\x1e.telecom.SilenceRingerResponse\x12T\n" +
 	"\x0fStartConference\x12\x1f.telecom.StartConferenceRequest\x1a .telecom.StartConferenceResponse\x12i\n" +
-	"\x16UnregisterPhoneAccount\x12&.telecom.UnregisterPhoneAccountRequest\x1a'.telecom.UnregisterPhoneAccountResponseB*Z(github.com/xaionaro-go/jni/proto/telecomb\x06proto3"
+	"\x16UnregisterPhoneAccount\x12&.telecom.UnregisterPhoneAccountRequest\x1a'.telecom.UnregisterPhoneAccountResponseB*Z(github.com/AndroidGoLab/jni/proto/telecomb\x06proto3"
 
 var (
 	file_proto_telecom_telecom_proto_rawDescOnce sync.Once

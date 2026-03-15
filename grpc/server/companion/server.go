@@ -5,12 +5,12 @@ package companion
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	jnipkg "github.com/xaionaro-go/jni/companion"
-	"github.com/xaionaro-go/jni/handlestore"
-	pb "github.com/xaionaro-go/jni/proto/companion"
+	"github.com/AndroidGoLab/jni/app"
+	jnipkg "github.com/AndroidGoLab/jni/companion"
+	"github.com/AndroidGoLab/jni/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/companion"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

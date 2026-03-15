@@ -725,7 +725,7 @@ const file_proto_credentials_credentials_proto_rawDesc = "" +
 	"\x17ClearCredentialStateRaw\x12+.credentials.ClearCredentialStateRawRequest\x1a,.credentials.ClearCredentialStateRawResponse2\xce\x01\n" +
 	"\"GetCredentialRequestBuilderService\x12h\n" +
 	"\x13AddCredentialOption\x12'.credentials.AddCredentialOptionRequest\x1a(.credentials.AddCredentialOptionResponse\x12>\n" +
-	"\x05Build\x12\x19.credentials.BuildRequest\x1a\x1a.credentials.BuildResponseB.Z,github.com/xaionaro-go/jni/proto/credentialsb\x06proto3"
+	"\x05Build\x12\x19.credentials.BuildRequest\x1a\x1a.credentials.BuildResponseB.Z,github.com/AndroidGoLab/jni/proto/credentialsb\x06proto3"
 
 var (
 	file_proto_credentials_credentials_proto_rawDescOnce sync.Once

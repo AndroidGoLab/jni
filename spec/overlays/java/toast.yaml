@@ -1,5 +1,5 @@
 package: toast
-go_import: "github.com/xaionaro-go/jni/widget/toast"
+go_import: "github.com/AndroidGoLab/jni/widget/toast"
 
 # Combine makeText + show into single package-level Show function
 composite_methods:

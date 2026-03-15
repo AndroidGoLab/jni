@@ -17,7 +17,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/provider/settings"
+	"github.com/AndroidGoLab/jni/provider/settings"
 )
 
 func main() {}

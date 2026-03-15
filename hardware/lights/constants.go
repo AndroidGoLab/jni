@@ -2,7 +2,7 @@
 
 package lights
 
-import "github.com/xaionaro-go/jni/hardware/lights/consts"
+import "github.com/AndroidGoLab/jni/hardware/lights/consts"
 
 const (
 	Creator                    = consts.Creator

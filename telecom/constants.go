@@ -2,7 +2,7 @@
 
 package telecom
 
-import "github.com/xaionaro-go/jni/telecom/consts"
+import "github.com/AndroidGoLab/jni/telecom/consts"
 
 const (
 	ActionChangeDefaultDialer                 = consts.ActionChangeDefaultDialer

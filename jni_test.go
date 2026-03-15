@@ -6,8 +6,8 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni/capi"
-	"github.com/xaionaro-go/jni/internal/testjvm"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/internal/testjvm"
 )
 
 var testVM *VM

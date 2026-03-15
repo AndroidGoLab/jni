@@ -2,7 +2,7 @@
 
 package job
 
-import "github.com/xaionaro-go/jni/app/job/consts"
+import "github.com/AndroidGoLab/jni/app/job/consts"
 
 const (
 	PendingJobReasonApp                      = consts.PendingJobReasonApp

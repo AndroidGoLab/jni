@@ -3,7 +3,7 @@ package jni
 import (
 	"unsafe"
 
-	"github.com/xaionaro-go/jni/capi"
+	"github.com/AndroidGoLab/jni/capi"
 )
 
 // GoString converts a JNI String to a Go string using modified UTF-8 encoding.

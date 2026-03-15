@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package download;
 
-option go_package = "github.com/xaionaro-go/jni/proto/download";
+option go_package = "github.com/AndroidGoLab/jni/proto/download";
 
 message AddCompletedDownload7Request {
   string arg0 = 1;

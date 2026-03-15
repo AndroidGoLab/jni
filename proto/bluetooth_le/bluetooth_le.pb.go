@@ -2684,7 +2684,7 @@ const file_proto_bluetooth_le_bluetooth_le_proto_rawDesc = "" +
 	"\x14StartAdvertisingSet6\x12).bluetooth_le.StartAdvertisingSet6Request\x1a*.bluetooth_le.StartAdvertisingSet6Response\x12s\n" +
 	"\x16StartAdvertisingSet8_1\x12+.bluetooth_le.StartAdvertisingSet8_1Request\x1a,.bluetooth_le.StartAdvertisingSet8_1Response\x12^\n" +
 	"\x0fStopAdvertising\x12$.bluetooth_le.StopAdvertisingRequest\x1a%.bluetooth_le.StopAdvertisingResponse\x12g\n" +
-	"\x12StopAdvertisingSet\x12'.bluetooth_le.StopAdvertisingSetRequest\x1a(.bluetooth_le.StopAdvertisingSetResponseB/Z-github.com/xaionaro-go/jni/proto/bluetooth_leb\x06proto3"
+	"\x12StopAdvertisingSet\x12'.bluetooth_le.StopAdvertisingSetRequest\x1a(.bluetooth_le.StopAdvertisingSetResponseB/Z-github.com/AndroidGoLab/jni/proto/bluetooth_leb\x06proto3"
 
 var (
 	file_proto_bluetooth_le_bluetooth_le_proto_rawDescOnce sync.Once

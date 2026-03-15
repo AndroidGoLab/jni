@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package handlestore;
 
-option go_package = "github.com/xaionaro-go/jni/proto/handlestore";
+option go_package = "github.com/AndroidGoLab/jni/proto/handlestore";
 
 service HandleStoreService {
   rpc ReleaseHandle(ReleaseHandleRequest) returns (ReleaseHandleResponse);

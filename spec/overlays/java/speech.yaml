@@ -1,5 +1,5 @@
 package: speech
-go_import: "github.com/xaionaro-go/jni/speech"
+go_import: "github.com/AndroidGoLab/jni/speech"
 
 overrides:
   android.speech.SpeechRecognizer:

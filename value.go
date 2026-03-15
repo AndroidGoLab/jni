@@ -5,7 +5,7 @@ package jni
 import (
 	"unsafe"
 
-	"github.com/xaionaro-go/jni/capi"
+	"github.com/AndroidGoLab/jni/capi"
 )
 
 // Value wraps a JNI jvalue union. Use the typed constructors (IntValue,

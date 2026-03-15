@@ -236,7 +236,7 @@ const file_proto_permission_permission_proto_rawDesc = "" +
 	"\x14ContextCompatService\x12f\n" +
 	"\x13CheckSelfPermission\x12&.permission.CheckSelfPermissionRequest\x1a'.permission.CheckSelfPermissionResponse2|\n" +
 	"\x15ActivityCompatService\x12c\n" +
-	"\x12RequestPermissions\x12%.permission.RequestPermissionsRequest\x1a&.permission.RequestPermissionsResponseB-Z+github.com/xaionaro-go/jni/proto/permissionb\x06proto3"
+	"\x12RequestPermissions\x12%.permission.RequestPermissionsRequest\x1a&.permission.RequestPermissionsResponseB-Z+github.com/AndroidGoLab/jni/proto/permissionb\x06proto3"
 
 var (
 	file_proto_permission_permission_proto_rawDescOnce sync.Once

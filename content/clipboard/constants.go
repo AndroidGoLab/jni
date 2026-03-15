@@ -2,7 +2,7 @@
 
 package clipboard
 
-import "github.com/xaionaro-go/jni/content/clipboard/consts"
+import "github.com/AndroidGoLab/jni/content/clipboard/consts"
 
 const (
 	Creator = consts.Creator

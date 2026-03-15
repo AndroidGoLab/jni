@@ -2,7 +2,7 @@
 
 package pm
 
-import "github.com/xaionaro-go/jni/content/pm/consts"
+import "github.com/AndroidGoLab/jni/content/pm/consts"
 
 const (
 	CertInputRawX509                       = consts.CertInputRawX509

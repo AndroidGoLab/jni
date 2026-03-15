@@ -8973,7 +8973,7 @@ const file_proto_hardware_hardware_proto_rawDesc = "" +
 	"\n" +
 	"OpenDevice\x12\x1b.hardware.OpenDeviceRequest\x1a\x1c.hardware.OpenDeviceResponse\x12_\n" +
 	"\x12RequestPermission2\x12#.hardware.RequestPermission2Request\x1a$.hardware.RequestPermission2Response\x12e\n" +
-	"\x14RequestPermission2_1\x12%.hardware.RequestPermission2_1Request\x1a&.hardware.RequestPermission2_1ResponseB+Z)github.com/xaionaro-go/jni/proto/hardwareb\x06proto3"
+	"\x14RequestPermission2_1\x12%.hardware.RequestPermission2_1Request\x1a&.hardware.RequestPermission2_1ResponseB+Z)github.com/AndroidGoLab/jni/proto/hardwareb\x06proto3"
 
 var (
 	file_proto_hardware_hardware_proto_rawDescOnce sync.Once

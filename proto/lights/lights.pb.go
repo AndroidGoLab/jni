@@ -1414,7 +1414,7 @@ const file_proto_lights_lights_proto_rawDesc = "" +
 	"\x18LightStateBuilderService\x124\n" +
 	"\x05Build\x12\x14.lights.BuildRequest\x1a\x15.lights.BuildResponse\x12=\n" +
 	"\bSetColor\x12\x17.lights.SetColorRequest\x1a\x18.lights.SetColorResponse\x12F\n" +
-	"\vSetPlayerId\x12\x1a.lights.SetPlayerIdRequest\x1a\x1b.lights.SetPlayerIdResponseB)Z'github.com/xaionaro-go/jni/proto/lightsb\x06proto3"
+	"\vSetPlayerId\x12\x1a.lights.SetPlayerIdRequest\x1a\x1b.lights.SetPlayerIdResponseB)Z'github.com/AndroidGoLab/jni/proto/lightsb\x06proto3"
 
 var (
 	file_proto_lights_lights_proto_rawDescOnce sync.Once

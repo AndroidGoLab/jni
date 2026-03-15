@@ -2,7 +2,7 @@
 
 package p2p
 
-import "github.com/xaionaro-go/jni/net/wifi/p2p/consts"
+import "github.com/AndroidGoLab/jni/net/wifi/p2p/consts"
 
 const (
 	Creator                                            = consts.Creator

@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package hardware;
 
-option go_package = "github.com/xaionaro-go/jni/proto/hardware";
+option go_package = "github.com/AndroidGoLab/jni/proto/hardware";
 
 message GetMaxFrequencyRequest {
 }

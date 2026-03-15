@@ -2,7 +2,7 @@
 
 package omapi
 
-import "github.com/xaionaro-go/jni/se/omapi/consts"
+import "github.com/AndroidGoLab/jni/se/omapi/consts"
 
 const (
 	ActionSecureElementStateChanged = consts.ActionSecureElementStateChanged

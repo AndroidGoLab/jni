@@ -16,7 +16,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/os/environment"
+	"github.com/AndroidGoLab/jni/os/environment"
 )
 
 func main() {}

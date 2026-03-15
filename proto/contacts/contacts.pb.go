@@ -121,7 +121,7 @@ const file_proto_contacts_contacts_proto_rawDesc = "" +
 	"\x13IsProfileIdResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result2e\n" +
 	"\x17ContactsContractService\x12J\n" +
-	"\vIsProfileId\x12\x1c.contacts.IsProfileIdRequest\x1a\x1d.contacts.IsProfileIdResponseB+Z)github.com/xaionaro-go/jni/proto/contactsb\x06proto3"
+	"\vIsProfileId\x12\x1c.contacts.IsProfileIdRequest\x1a\x1d.contacts.IsProfileIdResponseB+Z)github.com/AndroidGoLab/jni/proto/contactsb\x06proto3"
 
 var (
 	file_proto_contacts_contacts_proto_rawDescOnce sync.Once

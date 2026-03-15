@@ -5211,7 +5211,7 @@ const file_proto_resolver_resolver_proto_rawDesc = "" +
 	"\x14SetSyncAutomatically\x12%.resolver.SetSyncAutomaticallyRequest\x1a&.resolver.SetSyncAutomaticallyResponse\x12q\n" +
 	"\x18ValidateSyncExtrasBundle\x12).resolver.ValidateSyncExtrasBundleRequest\x1a*.resolver.ValidateSyncExtrasBundleResponse\x128\n" +
 	"\x05Wrap1\x12\x16.resolver.Wrap1Request\x1a\x17.resolver.Wrap1Response\x12>\n" +
-	"\aWrap1_1\x12\x18.resolver.Wrap1_1Request\x1a\x19.resolver.Wrap1_1ResponseB+Z)github.com/xaionaro-go/jni/proto/resolverb\x06proto3"
+	"\aWrap1_1\x12\x18.resolver.Wrap1_1Request\x1a\x19.resolver.Wrap1_1ResponseB+Z)github.com/AndroidGoLab/jni/proto/resolverb\x06proto3"
 
 var (
 	file_proto_resolver_resolver_proto_rawDescOnce sync.Once

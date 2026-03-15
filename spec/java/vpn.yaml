@@ -1,5 +1,5 @@
 package: vpn
-go_import: github.com/xaionaro-go/jni/net/vpn
+go_import: github.com/AndroidGoLab/jni/net/vpn
 classes:
     - java_class: android.net.VpnService
       go_type: vpnService

@@ -1,5 +1,5 @@
 package: recorder
-go_import: "github.com/xaionaro-go/jni/media/recorder"
+go_import: "github.com/AndroidGoLab/jni/media/recorder"
 
 go_types:
   - go_name: AudioSource
@@ -123,5 +123,5 @@ overrides:
           Create OnInfoListener, call setOnInfoListener
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"
   - "time"

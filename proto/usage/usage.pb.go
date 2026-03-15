@@ -1854,7 +1854,7 @@ const file_proto_usage_usage_proto_rawDesc = "" +
 	"!GetTotalTimeForegroundServiceUsed\x12/.usage.GetTotalTimeForegroundServiceUsedRequest\x1a0.usage.GetTotalTimeForegroundServiceUsedResponse\x12k\n" +
 	"\x18GetTotalTimeInForeground\x12&.usage.GetTotalTimeInForegroundRequest\x1a'.usage.GetTotalTimeInForegroundResponse\x12\\\n" +
 	"\x13GetTotalTimeVisible\x12!.usage.GetTotalTimeVisibleRequest\x1a\".usage.GetTotalTimeVisibleResponse\x12J\n" +
-	"\rWriteToParcel\x12\x1b.usage.WriteToParcelRequest\x1a\x1c.usage.WriteToParcelResponseB(Z&github.com/xaionaro-go/jni/proto/usageb\x06proto3"
+	"\rWriteToParcel\x12\x1b.usage.WriteToParcelRequest\x1a\x1c.usage.WriteToParcelResponseB(Z&github.com/AndroidGoLab/jni/proto/usageb\x06proto3"
 
 var (
 	file_proto_usage_usage_proto_rawDescOnce sync.Once

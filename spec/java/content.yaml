@@ -1,5 +1,5 @@
 package: content
-go_import: github.com/xaionaro-go/jni/content
+go_import: github.com/AndroidGoLab/jni/content
 classes:
     - java_class: android.content.BroadcastReceiver
       go_type: broadcastReceiver

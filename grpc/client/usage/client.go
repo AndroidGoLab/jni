@@ -5,7 +5,7 @@ package usage
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/usage"
+	pb "github.com/AndroidGoLab/jni/proto/usage"
 	"google.golang.org/grpc"
 )
 

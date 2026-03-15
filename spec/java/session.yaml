@@ -1,5 +1,5 @@
 package: session
-go_import: github.com/xaionaro-go/jni/media/session
+go_import: github.com/AndroidGoLab/jni/media/session
 classes:
     - java_class: android.media.session.MediaSessionManager
       go_type: mediaSessionManager

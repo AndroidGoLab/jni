@@ -19,7 +19,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/nfc"
+	"github.com/AndroidGoLab/jni/nfc"
 )
 
 func main() {}

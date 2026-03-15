@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package media;
 
-option go_package = "github.com/xaionaro-go/jni/proto/media";
+option go_package = "github.com/AndroidGoLab/jni/proto/media";
 
 message EqualsRequest {
   int64 arg0 = 1;

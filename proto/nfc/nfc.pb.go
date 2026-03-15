@@ -5345,7 +5345,7 @@ const file_proto_nfc_nfc_proto_rawDesc = "" +
 	"IsWritable\x12\x16.nfc.IsWritableRequest\x1a\x17.nfc.IsWritableResponse\x12C\n" +
 	"\fMakeReadOnly\x12\x18.nfc.MakeReadOnlyRequest\x1a\x19.nfc.MakeReadOnlyResponse\x12O\n" +
 	"\x10WriteNdefMessage\x12\x1c.nfc.WriteNdefMessageRequest\x1a\x1d.nfc.WriteNdefMessageResponse\x12(\n" +
-	"\x03Get\x12\x0f.nfc.GetRequest\x1a\x10.nfc.GetResponseB&Z$github.com/xaionaro-go/jni/proto/nfcb\x06proto3"
+	"\x03Get\x12\x0f.nfc.GetRequest\x1a\x10.nfc.GetResponseB&Z$github.com/AndroidGoLab/jni/proto/nfcb\x06proto3"
 
 var (
 	file_proto_nfc_nfc_proto_rawDescOnce sync.Once

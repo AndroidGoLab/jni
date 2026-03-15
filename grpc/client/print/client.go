@@ -5,7 +5,7 @@ package print
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/print"
+	pb "github.com/AndroidGoLab/jni/proto/print"
 	"google.golang.org/grpc"
 )
 

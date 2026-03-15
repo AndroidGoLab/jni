@@ -1,5 +1,5 @@
 package: omapi
-go_import: github.com/xaionaro-go/jni/se/omapi
+go_import: github.com/AndroidGoLab/jni/se/omapi
 classes:
     - java_class: android.se.omapi.SEService
       go_type: sEService

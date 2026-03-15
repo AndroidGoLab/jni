@@ -2,7 +2,7 @@
 
 package admin
 
-import "github.com/xaionaro-go/jni/app/admin/consts"
+import "github.com/AndroidGoLab/jni/app/admin/consts"
 
 const (
 	ActionAddDeviceAdmin                                    = consts.ActionAddDeviceAdmin

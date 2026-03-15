@@ -8,7 +8,7 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 )
 
 // Ensure imports are used.

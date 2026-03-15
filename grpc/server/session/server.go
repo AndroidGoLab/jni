@@ -5,12 +5,12 @@ package session
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/media/session"
-	pb "github.com/xaionaro-go/jni/proto/session"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/media/session"
+	pb "github.com/AndroidGoLab/jni/proto/session"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

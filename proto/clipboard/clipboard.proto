@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package clipboard;
 
-option go_package = "github.com/xaionaro-go/jni/proto/clipboard";
+option go_package = "github.com/AndroidGoLab/jni/proto/clipboard";
 
 message AddPrimaryClipChangedListenerRequest {
   int64 arg0 = 1;

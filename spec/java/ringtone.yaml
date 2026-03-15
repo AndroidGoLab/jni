@@ -1,5 +1,5 @@
 package: ringtone
-go_import: github.com/xaionaro-go/jni/media/ringtone
+go_import: github.com/AndroidGoLab/jni/media/ringtone
 classes:
     - java_class: android.media.RingtoneManager
       go_type: ringtoneManager

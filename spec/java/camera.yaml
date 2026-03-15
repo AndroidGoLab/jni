@@ -1,5 +1,5 @@
 package: camera
-go_import: github.com/xaionaro-go/jni/hardware/camera
+go_import: github.com/AndroidGoLab/jni/hardware/camera
 classes:
     - java_class: android.hardware.camera2.CameraManager
       go_type: cameraManager

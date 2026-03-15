@@ -298,7 +298,7 @@ const file_proto_content_content_proto_rawDesc = "" +
 	"\x18BroadcastReceiverService\x12]\n" +
 	"\x12GetSentFromPackage\x12\".content.GetSentFromPackageRequest\x1a#.content.GetSentFromPackageResponse\x12Q\n" +
 	"\x0eGetSentFromUid\x12\x1e.content.GetSentFromUidRequest\x1a\x1f.content.GetSentFromUidResponse\x12H\n" +
-	"\vPeekService\x12\x1b.content.PeekServiceRequest\x1a\x1c.content.PeekServiceResponseB*Z(github.com/xaionaro-go/jni/proto/contentb\x06proto3"
+	"\vPeekService\x12\x1b.content.PeekServiceRequest\x1a\x1c.content.PeekServiceResponseB*Z(github.com/AndroidGoLab/jni/proto/contentb\x06proto3"
 
 var (
 	file_proto_content_content_proto_rawDescOnce sync.Once

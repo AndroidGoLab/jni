@@ -1,5 +1,5 @@
 package: telephony
-go_import: github.com/xaionaro-go/jni/telephony
+go_import: github.com/AndroidGoLab/jni/telephony
 classes:
     - java_class: android.telephony.TelephonyManager
       go_type: telephonyManager

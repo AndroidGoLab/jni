@@ -5,9 +5,9 @@ package battery
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni/app"
-	jnipkg "github.com/xaionaro-go/jni/os/battery"
-	pb "github.com/xaionaro-go/jni/proto/battery"
+	"github.com/AndroidGoLab/jni/app"
+	jnipkg "github.com/AndroidGoLab/jni/os/battery"
+	pb "github.com/AndroidGoLab/jni/proto/battery"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

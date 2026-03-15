@@ -1,5 +1,5 @@
 package: audiomanager
-go_import: "github.com/xaionaro-go/jni/media/audiomanager"
+go_import: "github.com/AndroidGoLab/jni/media/audiomanager"
 
 go_types:
   - go_name: DeviceType
@@ -108,4 +108,4 @@ overrides:
         returns: { error: true }
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

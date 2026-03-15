@@ -5,7 +5,7 @@ package storage
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/storage"
+	pb "github.com/AndroidGoLab/jni/proto/storage"
 	"google.golang.org/grpc"
 )
 

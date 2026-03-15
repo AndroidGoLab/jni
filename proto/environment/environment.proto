@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package environment;
 
-option go_package = "github.com/xaionaro-go/jni/proto/environment";
+option go_package = "github.com/AndroidGoLab/jni/proto/environment";
 
 message GetDataDirectoryRequest {
 }

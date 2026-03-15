@@ -1,5 +1,5 @@
 package: audiomanager
-go_import: github.com/xaionaro-go/jni/media/audiomanager
+go_import: github.com/AndroidGoLab/jni/media/audiomanager
 classes:
     - java_class: android.media.AudioManager
       go_type: audioManager

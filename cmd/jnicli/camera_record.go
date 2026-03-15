@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	appconsts "github.com/xaionaro-go/jni/app/consts"
-	pb "github.com/xaionaro-go/jni/proto/jni_raw"
+	appconsts "github.com/AndroidGoLab/jni/app/consts"
+	pb "github.com/AndroidGoLab/jni/proto/jni_raw"
 	"google.golang.org/grpc"
 )
 

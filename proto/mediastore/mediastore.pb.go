@@ -2969,7 +2969,7 @@ const file_proto_mediastore_mediastore_proto_rawDesc = "" +
 	"\x12OpenFileDescriptor\x12%.mediastore.OpenFileDescriptorRequest\x1a&.mediastore.OpenFileDescriptorResponse\x12\x81\x01\n" +
 	"\x1cOpenTypedAssetFileDescriptor\x12/.mediastore.OpenTypedAssetFileDescriptorRequest\x1a0.mediastore.OpenTypedAssetFileDescriptorResponse\x12`\n" +
 	"\x11SetIncludePending\x12$.mediastore.SetIncludePendingRequest\x1a%.mediastore.SetIncludePendingResponse\x12c\n" +
-	"\x12SetRequireOriginal\x12%.mediastore.SetRequireOriginalRequest\x1a&.mediastore.SetRequireOriginalResponseB-Z+github.com/xaionaro-go/jni/proto/mediastoreb\x06proto3"
+	"\x12SetRequireOriginal\x12%.mediastore.SetRequireOriginalRequest\x1a&.mediastore.SetRequireOriginalResponseB-Z+github.com/AndroidGoLab/jni/proto/mediastoreb\x06proto3"
 
 var (
 	file_proto_mediastore_mediastore_proto_rawDescOnce sync.Once

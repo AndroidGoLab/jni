@@ -1,5 +1,5 @@
 package: ir
-go_import: github.com/xaionaro-go/jni/hardware/ir
+go_import: github.com/AndroidGoLab/jni/hardware/ir
 classes:
     - java_class: android.hardware.ConsumerIrManager
       go_type: consumerIrManager

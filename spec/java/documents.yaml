@@ -1,5 +1,5 @@
 package: documents
-go_import: github.com/xaionaro-go/jni/provider/documents
+go_import: github.com/AndroidGoLab/jni/provider/documents
 classes:
     - java_class: android.provider.DocumentsContract
       go_type: documentsContract

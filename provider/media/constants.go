@@ -2,7 +2,7 @@
 
 package media
 
-import "github.com/xaionaro-go/jni/provider/media/consts"
+import "github.com/AndroidGoLab/jni/provider/media/consts"
 
 const (
 	AccessMediaOwnerPackageNamePermission   = consts.AccessMediaOwnerPackageNamePermission

@@ -2,7 +2,7 @@
 
 package location
 
-import "github.com/xaionaro-go/jni/location/consts"
+import "github.com/AndroidGoLab/jni/location/consts"
 
 const (
 	ActionGnssCapabilitiesChanged = consts.ActionGnssCapabilitiesChanged

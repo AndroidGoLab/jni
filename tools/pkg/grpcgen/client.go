@@ -6,15 +6,15 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
-	"github.com/xaionaro-go/jni/tools/pkg/protogen"
-	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protogen"
+	"github.com/AndroidGoLab/jni/tools/pkg/protoscan"
 )
 
 // ClientData holds all information needed to render a gRPC client file.
 type ClientData struct {
 	Package     string          // Go package name, e.g. "location"
-	GoModule    string          // Go module path, e.g. "github.com/xaionaro-go/jni"
+	GoModule    string          // Go module path, e.g. "github.com/AndroidGoLab/jni"
 	Services    []ClientService // One per gRPC service in the package
 	DataClasses []ClientDataClass
 }

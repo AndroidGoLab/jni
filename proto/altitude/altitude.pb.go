@@ -214,7 +214,7 @@ const file_proto_altitude_altitude_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\bR\x06result2\x89\x02\n" +
 	"\x18AltitudeConverterService\x12q\n" +
 	"\x18AddMslAltitudeToLocation\x12).altitude.AddMslAltitudeToLocationRequest\x1a*.altitude.AddMslAltitudeToLocationResponse\x12z\n" +
-	"\x1bTryAddMslAltitudeToLocation\x12,.altitude.TryAddMslAltitudeToLocationRequest\x1a-.altitude.TryAddMslAltitudeToLocationResponseB+Z)github.com/xaionaro-go/jni/proto/altitudeb\x06proto3"
+	"\x1bTryAddMslAltitudeToLocation\x12,.altitude.TryAddMslAltitudeToLocationRequest\x1a-.altitude.TryAddMslAltitudeToLocationResponseB+Z)github.com/AndroidGoLab/jni/proto/altitudeb\x06proto3"
 
 var (
 	file_proto_altitude_altitude_proto_rawDescOnce sync.Once

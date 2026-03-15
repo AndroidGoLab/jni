@@ -110,7 +110,7 @@ const file_proto_handlestore_handlestore_proto_rawDesc = "" +
 	"\x06handle\x18\x01 \x01(\x03R\x06handle\"\x17\n" +
 	"\x15ReleaseHandleResponse2l\n" +
 	"\x12HandleStoreService\x12V\n" +
-	"\rReleaseHandle\x12!.handlestore.ReleaseHandleRequest\x1a\".handlestore.ReleaseHandleResponseB.Z,github.com/xaionaro-go/jni/proto/handlestoreb\x06proto3"
+	"\rReleaseHandle\x12!.handlestore.ReleaseHandleRequest\x1a\".handlestore.ReleaseHandleResponseB.Z,github.com/AndroidGoLab/jni/proto/handlestoreb\x06proto3"
 
 var (
 	file_proto_handlestore_handlestore_proto_rawDescOnce sync.Once

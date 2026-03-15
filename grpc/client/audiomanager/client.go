@@ -5,7 +5,7 @@ package audiomanager
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/audiomanager"
+	pb "github.com/AndroidGoLab/jni/proto/audiomanager"
 	"google.golang.org/grpc"
 )
 

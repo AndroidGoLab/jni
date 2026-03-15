@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/security/keystore"
+	"github.com/AndroidGoLab/jni/security/keystore"
 )
 
 func main() {}

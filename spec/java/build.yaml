@@ -1,5 +1,5 @@
 package: build
-go_import: github.com/xaionaro-go/jni/os/build
+go_import: github.com/AndroidGoLab/jni/os/build
 classes:
     - java_class: android.os.Build
       go_type: build

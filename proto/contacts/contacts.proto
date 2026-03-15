@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package contacts;
 
-option go_package = "github.com/xaionaro-go/jni/proto/contacts";
+option go_package = "github.com/AndroidGoLab/jni/proto/contacts";
 
 message IsProfileIdRequest {
   int64 arg0 = 1;

@@ -23,9 +23,9 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/view/inputmethod"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/view/inputmethod"
 )
 
 func main() {}

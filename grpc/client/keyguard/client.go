@@ -5,7 +5,7 @@ package keyguard
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/keyguard"
+	pb "github.com/AndroidGoLab/jni/proto/keyguard"
 	"google.golang.org/grpc"
 )
 

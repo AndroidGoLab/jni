@@ -14168,7 +14168,7 @@ const file_proto_os_os_proto_rawDesc = "" +
 	"\n" +
 	"Vibrate2_5\x12\x15.os.Vibrate2_5Request\x1a\x16.os.Vibrate2_5Response\x12;\n" +
 	"\n" +
-	"Vibrate3_6\x12\x15.os.Vibrate3_6Request\x1a\x16.os.Vibrate3_6ResponseB%Z#github.com/xaionaro-go/jni/proto/osb\x06proto3"
+	"Vibrate3_6\x12\x15.os.Vibrate3_6Request\x1a\x16.os.Vibrate3_6ResponseB%Z#github.com/AndroidGoLab/jni/proto/osb\x06proto3"
 
 var (
 	file_proto_os_os_proto_rawDescOnce sync.Once

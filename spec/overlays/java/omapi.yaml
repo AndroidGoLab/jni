@@ -48,4 +48,4 @@ overlays:
           Call openLogicalChannelRaw(aid) and wrap as *Channel
 
 imports:
-  - '"github.com/xaionaro-go/jni/app"'
+  - '"github.com/AndroidGoLab/jni/app"'

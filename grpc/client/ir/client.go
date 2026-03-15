@@ -5,7 +5,7 @@ package ir
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/ir"
+	pb "github.com/AndroidGoLab/jni/proto/ir"
 	"google.golang.org/grpc"
 )
 

@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package telecom;
 
-option go_package = "github.com/xaionaro-go/jni/proto/telecom";
+option go_package = "github.com/AndroidGoLab/jni/proto/telecom";
 
 message AcceptHandoverRequest {
   int64 arg0 = 1;

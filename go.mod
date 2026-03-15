@@ -1,4 +1,4 @@
-module github.com/xaionaro-go/jni
+module github.com/AndroidGoLab/jni
 
 go 1.24.0
 

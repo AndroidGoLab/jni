@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package role;
 
-option go_package = "github.com/xaionaro-go/jni/proto/role";
+option go_package = "github.com/AndroidGoLab/jni/proto/role";
 
 message CreateRequestRoleIntentRequest {
   string arg0 = 1;

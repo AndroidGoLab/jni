@@ -2,7 +2,7 @@
 
 package ringtone
 
-import "github.com/xaionaro-go/jni/media/ringtone/consts"
+import "github.com/AndroidGoLab/jni/media/ringtone/consts"
 
 const (
 	ActionRingtonePicker     = consts.ActionRingtonePicker

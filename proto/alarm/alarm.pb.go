@@ -1918,7 +1918,7 @@ const file_proto_alarm_alarm_proto_rawDesc = "" +
 	"\x10DescribeContents\x12\x1e.alarm.DescribeContentsRequest\x1a\x1f.alarm.DescribeContentsResponse\x12J\n" +
 	"\rGetShowIntent\x12\x1b.alarm.GetShowIntentRequest\x1a\x1c.alarm.GetShowIntentResponse\x12M\n" +
 	"\x0eGetTriggerTime\x12\x1c.alarm.GetTriggerTimeRequest\x1a\x1d.alarm.GetTriggerTimeResponse\x12J\n" +
-	"\rWriteToParcel\x12\x1b.alarm.WriteToParcelRequest\x1a\x1c.alarm.WriteToParcelResponseB(Z&github.com/xaionaro-go/jni/proto/alarmb\x06proto3"
+	"\rWriteToParcel\x12\x1b.alarm.WriteToParcelRequest\x1a\x1c.alarm.WriteToParcelResponseB(Z&github.com/AndroidGoLab/jni/proto/alarmb\x06proto3"
 
 var (
 	file_proto_alarm_alarm_proto_rawDescOnce sync.Once

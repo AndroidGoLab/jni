@@ -12289,7 +12289,7 @@ const file_proto_bluetooth_bluetooth_proto_rawDesc = "" +
 	"\aReadPhy\x12,.bluetooth.BluetoothGattServerReadPhyRequest\x1a\x1a.bluetooth.ReadPhyResponse\x12R\n" +
 	"\rRemoveService\x12\x1f.bluetooth.RemoveServiceRequest\x1a .bluetooth.RemoveServiceResponse\x12O\n" +
 	"\fSendResponse\x12\x1e.bluetooth.SendResponseRequest\x1a\x1f.bluetooth.SendResponseResponse\x12k\n" +
-	"\x0fSetPreferredPhy\x124.bluetooth.BluetoothGattServerSetPreferredPhyRequest\x1a\".bluetooth.SetPreferredPhyResponseB,Z*github.com/xaionaro-go/jni/proto/bluetoothb\x06proto3"
+	"\x0fSetPreferredPhy\x124.bluetooth.BluetoothGattServerSetPreferredPhyRequest\x1a\".bluetooth.SetPreferredPhyResponseB,Z*github.com/AndroidGoLab/jni/proto/bluetoothb\x06proto3"
 
 var (
 	file_proto_bluetooth_bluetooth_proto_rawDescOnce sync.Once

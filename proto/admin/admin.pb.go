@@ -27658,7 +27658,7 @@ const file_proto_admin_admin_proto_rawDesc = "" +
 	"\vWipeData2_1\x12\x19.admin.WipeData2_1Request\x1a\x1a.admin.WipeData2_1Response\x12A\n" +
 	"\n" +
 	"WipeDevice\x12\x18.admin.WipeDeviceRequest\x1a\x19.admin.WipeDeviceResponse\x12\\\n" +
-	"\x13IsMtePolicyEnforced\x12!.admin.IsMtePolicyEnforcedRequest\x1a\".admin.IsMtePolicyEnforcedResponseB(Z&github.com/xaionaro-go/jni/proto/adminb\x06proto3"
+	"\x13IsMtePolicyEnforced\x12!.admin.IsMtePolicyEnforcedRequest\x1a\".admin.IsMtePolicyEnforcedResponseB(Z&github.com/AndroidGoLab/jni/proto/adminb\x06proto3"
 
 var (
 	file_proto_admin_admin_proto_rawDescOnce sync.Once

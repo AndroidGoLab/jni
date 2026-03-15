@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/xaionaro-go/jni/capi"
+	"github.com/AndroidGoLab/jni/capi"
 )
 
 // --- Remaining Nonvirtual typed method calls ---

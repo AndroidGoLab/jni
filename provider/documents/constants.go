@@ -2,7 +2,7 @@
 
 package documents
 
-import "github.com/xaionaro-go/jni/provider/documents/consts"
+import "github.com/AndroidGoLab/jni/provider/documents/consts"
 
 const (
 	ActionDocumentSettings    = consts.ActionDocumentSettings

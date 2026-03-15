@@ -1,5 +1,5 @@
 package: bluetooth_le
-go_import: github.com/xaionaro-go/jni/bluetooth/le
+go_import: github.com/AndroidGoLab/jni/bluetooth/le
 classes:
     - java_class: android.bluetooth.le.BluetoothLeScanner
       go_type: bluetoothLeScanner

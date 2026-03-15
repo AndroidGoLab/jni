@@ -2,7 +2,7 @@
 
 package le
 
-import "github.com/xaionaro-go/jni/bluetooth/le/consts"
+import "github.com/AndroidGoLab/jni/bluetooth/le/consts"
 
 const (
 	ExtraCallbackType   = consts.ExtraCallbackType

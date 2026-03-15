@@ -1,5 +1,5 @@
 package: companion
-go_import: github.com/xaionaro-go/jni/companion
+go_import: github.com/AndroidGoLab/jni/companion
 classes:
     - java_class: android.companion.CompanionDeviceManager
       go_type: companionDeviceManager

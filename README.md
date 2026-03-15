@@ -1,9 +1,9 @@
 # jni
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/xaionaro-go/jni.svg)](https://pkg.go.dev/github.com/xaionaro-go/jni)
-[![Go Report Card](https://goreportcard.com/badge/github.com/xaionaro-go/jni)](https://goreportcard.com/report/github.com/xaionaro-go/jni)
+[![Go Reference](https://pkg.go.dev/badge/github.com/AndroidGoLab/jni.svg)](https://pkg.go.dev/github.com/AndroidGoLab/jni)
+[![Go Report Card](https://goreportcard.com/badge/github.com/AndroidGoLab/jni)](https://goreportcard.com/report/github.com/AndroidGoLab/jni)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](LICENSE)
-[![Go Version](https://img.shields.io/github/go-mod/go-version/xaionaro-go/jni)](go.mod)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/AndroidGoLab/jni)](go.mod)
 
 Idiomatic Go bindings for the Java Native Interface and 53 Android Java API packages, auto-generated from YAML specs to ensure full coverage and easy maintenance. Includes a gRPC layer for remote Android API access.
 
@@ -44,9 +44,9 @@ graph TD
 
 | Library | Interface | Requires | Best for |
 |---|---|---|---|
-| **[ndk](https://github.com/xaionaro-go/ndk)** | Android NDK C APIs | cgo + NDK toolchain | High-performance hardware access: camera, audio, sensors, OpenGL/Vulkan, media codecs |
-| **[jni](https://github.com/xaionaro-go/jni)** (this project) | Java Android SDK via JNI | cgo + JNI + JVM/ART | Java-only APIs with no NDK equivalent: Bluetooth, WiFi, NFC, location, telephony, content providers |
-| **[binder](https://github.com/xaionaro-go/binder)** | Binder IPC (system services) | pure Go (no cgo) | Direct system service calls without Java: works on non-Android Linux with binder, minimal footprint |
+| **[ndk](https://github.com/AndroidGoLab/ndk)** | Android NDK C APIs | cgo + NDK toolchain | High-performance hardware access: camera, audio, sensors, OpenGL/Vulkan, media codecs |
+| **[jni](https://github.com/AndroidGoLab/jni)** (this project) | Java Android SDK via JNI | cgo + JNI + JVM/ART | Java-only APIs with no NDK equivalent: Bluetooth, WiFi, NFC, location, telephony, content providers |
+| **[binder](https://github.com/AndroidGoLab/binder)** | Binder IPC (system services) | pure Go (no cgo) | Direct system service calls without Java: works on non-Android Linux with binder, minimal footprint |
 
 ### When to use which
 
@@ -72,9 +72,9 @@ All three libraries talk to the same Android system services, but through differ
 
 ```go
 import (
-    "github.com/xaionaro-go/jni"
-    "github.com/xaionaro-go/jni/app"
-    "github.com/xaionaro-go/jni/bluetooth"
+    "github.com/AndroidGoLab/jni"
+    "github.com/AndroidGoLab/jni/app"
+    "github.com/AndroidGoLab/jni/bluetooth"
 )
 
     ctx, _ := app.NewContext(vm)
@@ -94,8 +94,8 @@ import (
 
 ```go
 import (
-    "github.com/xaionaro-go/jni/app"
-    "github.com/xaionaro-go/jni/location"
+    "github.com/AndroidGoLab/jni/app"
+    "github.com/AndroidGoLab/jni/location"
 )
 
     ctx, _ := app.NewContext(vm)
@@ -111,7 +111,7 @@ import (
 ### WiFi
 
 ```go
-import "github.com/xaionaro-go/jni/net/wifi"
+import "github.com/AndroidGoLab/jni/net/wifi"
 
     mgr, _ := wifi.NewManager(ctx)
     defer mgr.Close()
@@ -124,7 +124,7 @@ import "github.com/xaionaro-go/jni/net/wifi"
 ### Toast
 
 ```go
-import "github.com/xaionaro-go/jni/widget/toast"
+import "github.com/AndroidGoLab/jni/widget/toast"
 
     toast.Show(ctx, "Hello from Go!", toast.LengthShort)
 ```
@@ -138,74 +138,74 @@ More examples: [`examples/`](examples/)
 | Android API                                                                                                                                                                    | Go Package       | Import Path                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ------------------------------------------------------ |
 | **Application Framework**                                                                                                                                                      |                  |                                                        |
-| [![app](https://img.shields.io/badge/app-Context,_Activity,_Intent-2962FF)](https://pkg.go.dev/github.com/xaionaro-go/jni/app)                                                 | `app`            | `github.com/xaionaro-go/jni/app`                       |
-| [![alarm](https://img.shields.io/badge/alarm-AlarmManager-2962FF)](https://pkg.go.dev/github.com/xaionaro-go/jni/app/alarm)                                                    | `alarm`          | `github.com/xaionaro-go/jni/app/alarm`                 |
-| [![download](https://img.shields.io/badge/download-DownloadManager-2962FF)](https://pkg.go.dev/github.com/xaionaro-go/jni/app/download)                                        | `download`       | `github.com/xaionaro-go/jni/app/download`              |
-| [![job](https://img.shields.io/badge/job-JobScheduler-2962FF)](https://pkg.go.dev/github.com/xaionaro-go/jni/app/job)                                                          | `job`            | `github.com/xaionaro-go/jni/app/job`                   |
-| [![notification](https://img.shields.io/badge/notification-NotificationManager-2962FF)](https://pkg.go.dev/github.com/xaionaro-go/jni/app/notification)                         | `notification`   | `github.com/xaionaro-go/jni/app/notification`          |
-| [![usage](https://img.shields.io/badge/usage-UsageStatsManager-2962FF)](https://pkg.go.dev/github.com/xaionaro-go/jni/app/usage)                                               | `usage`          | `github.com/xaionaro-go/jni/app/usage`                 |
-| [![accounts](https://img.shields.io/badge/accounts-AccountManager-2962FF)](https://pkg.go.dev/github.com/xaionaro-go/jni/accounts)                                             | `accounts`       | `github.com/xaionaro-go/jni/accounts`                  |
+| [![app](https://img.shields.io/badge/app-Context,_Activity,_Intent-2962FF)](https://pkg.go.dev/github.com/AndroidGoLab/jni/app)                                                 | `app`            | `github.com/AndroidGoLab/jni/app`                       |
+| [![alarm](https://img.shields.io/badge/alarm-AlarmManager-2962FF)](https://pkg.go.dev/github.com/AndroidGoLab/jni/app/alarm)                                                    | `alarm`          | `github.com/AndroidGoLab/jni/app/alarm`                 |
+| [![download](https://img.shields.io/badge/download-DownloadManager-2962FF)](https://pkg.go.dev/github.com/AndroidGoLab/jni/app/download)                                        | `download`       | `github.com/AndroidGoLab/jni/app/download`              |
+| [![job](https://img.shields.io/badge/job-JobScheduler-2962FF)](https://pkg.go.dev/github.com/AndroidGoLab/jni/app/job)                                                          | `job`            | `github.com/AndroidGoLab/jni/app/job`                   |
+| [![notification](https://img.shields.io/badge/notification-NotificationManager-2962FF)](https://pkg.go.dev/github.com/AndroidGoLab/jni/app/notification)                         | `notification`   | `github.com/AndroidGoLab/jni/app/notification`          |
+| [![usage](https://img.shields.io/badge/usage-UsageStatsManager-2962FF)](https://pkg.go.dev/github.com/AndroidGoLab/jni/app/usage)                                               | `usage`          | `github.com/AndroidGoLab/jni/app/usage`                 |
+| [![accounts](https://img.shields.io/badge/accounts-AccountManager-2962FF)](https://pkg.go.dev/github.com/AndroidGoLab/jni/accounts)                                             | `accounts`       | `github.com/AndroidGoLab/jni/accounts`                  |
 | **Bluetooth**                                                                                                                                                                  |                  |                                                        |
-| [![bluetooth](https://img.shields.io/badge/bluetooth-BluetoothAdapter,_GATT,_BLE-2E7D32)](https://pkg.go.dev/github.com/xaionaro-go/jni/bluetooth)                             | `bluetooth`      | `github.com/xaionaro-go/jni/bluetooth`                 |
+| [![bluetooth](https://img.shields.io/badge/bluetooth-BluetoothAdapter,_GATT,_BLE-2E7D32)](https://pkg.go.dev/github.com/AndroidGoLab/jni/bluetooth)                             | `bluetooth`      | `github.com/AndroidGoLab/jni/bluetooth`                 |
 | **Content & Storage**                                                                                                                                                          |                  |                                                        |
-| [![clipboard](https://img.shields.io/badge/clipboard-ClipboardManager-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/content/clipboard)                                | `clipboard`      | `github.com/xaionaro-go/jni/content/clipboard`         |
-| [![pm](https://img.shields.io/badge/pm-PackageManager-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/content/pm)                                                       | `pm`             | `github.com/xaionaro-go/jni/content/pm`                |
-| [![preferences](https://img.shields.io/badge/preferences-SharedPreferences-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/content/preferences)                         | `preferences`    | `github.com/xaionaro-go/jni/content/preferences`       |
-| [![resolver](https://img.shields.io/badge/resolver-ContentResolver-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/content/resolver)                                    | `resolver`       | `github.com/xaionaro-go/jni/content/resolver`          |
-| [![permission](https://img.shields.io/badge/permission-Runtime_Permissions-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/content/permission)                           | `permission`     | `github.com/xaionaro-go/jni/content/permission`        |
+| [![clipboard](https://img.shields.io/badge/clipboard-ClipboardManager-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/content/clipboard)                                | `clipboard`      | `github.com/AndroidGoLab/jni/content/clipboard`         |
+| [![pm](https://img.shields.io/badge/pm-PackageManager-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/content/pm)                                                       | `pm`             | `github.com/AndroidGoLab/jni/content/pm`                |
+| [![preferences](https://img.shields.io/badge/preferences-SharedPreferences-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/content/preferences)                         | `preferences`    | `github.com/AndroidGoLab/jni/content/preferences`       |
+| [![resolver](https://img.shields.io/badge/resolver-ContentResolver-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/content/resolver)                                    | `resolver`       | `github.com/AndroidGoLab/jni/content/resolver`          |
+| [![permission](https://img.shields.io/badge/permission-Runtime_Permissions-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/content/permission)                           | `permission`     | `github.com/AndroidGoLab/jni/content/permission`        |
 | **Graphics**                                                                                                                                                                   |                  |                                                        |
-| [![pdf](https://img.shields.io/badge/pdf-PdfRenderer-9C27B0)](https://pkg.go.dev/github.com/xaionaro-go/jni/graphics/pdf)                                                      | `pdf`            | `github.com/xaionaro-go/jni/graphics/pdf`              |
+| [![pdf](https://img.shields.io/badge/pdf-PdfRenderer-9C27B0)](https://pkg.go.dev/github.com/AndroidGoLab/jni/graphics/pdf)                                                      | `pdf`            | `github.com/AndroidGoLab/jni/graphics/pdf`              |
 | **Hardware**                                                                                                                                                                   |                  |                                                        |
-| [![biometric](https://img.shields.io/badge/biometric-BiometricPrompt-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/hardware/biometric)                                | `biometric`      | `github.com/xaionaro-go/jni/hardware/biometric`        |
-| [![camera](https://img.shields.io/badge/camera-CameraManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/hardware/camera)                                           | `camera`         | `github.com/xaionaro-go/jni/hardware/camera`           |
-| [![ir](https://img.shields.io/badge/ir-ConsumerIrManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/hardware/ir)                                                   | `ir`             | `github.com/xaionaro-go/jni/hardware/ir`               |
-| [![lights](https://img.shields.io/badge/lights-LightsManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/hardware/lights)                                           | `lights`         | `github.com/xaionaro-go/jni/hardware/lights`           |
-| [![usb](https://img.shields.io/badge/usb-UsbManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/hardware/usb)                                                       | `usb`            | `github.com/xaionaro-go/jni/hardware/usb`              |
+| [![biometric](https://img.shields.io/badge/biometric-BiometricPrompt-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/hardware/biometric)                                | `biometric`      | `github.com/AndroidGoLab/jni/hardware/biometric`        |
+| [![camera](https://img.shields.io/badge/camera-CameraManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/hardware/camera)                                           | `camera`         | `github.com/AndroidGoLab/jni/hardware/camera`           |
+| [![ir](https://img.shields.io/badge/ir-ConsumerIrManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/hardware/ir)                                                   | `ir`             | `github.com/AndroidGoLab/jni/hardware/ir`               |
+| [![lights](https://img.shields.io/badge/lights-LightsManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/hardware/lights)                                           | `lights`         | `github.com/AndroidGoLab/jni/hardware/lights`           |
+| [![usb](https://img.shields.io/badge/usb-UsbManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/hardware/usb)                                                       | `usb`            | `github.com/AndroidGoLab/jni/hardware/usb`              |
 | **Health**                                                                                                                                                                     |                  |                                                        |
-| [![health](https://img.shields.io/badge/connect-Health_Connect-4CAF50)](https://pkg.go.dev/github.com/xaionaro-go/jni/health/connect)                                          | `connect`        | `github.com/xaionaro-go/jni/health/connect`            |
+| [![health](https://img.shields.io/badge/connect-Health_Connect-4CAF50)](https://pkg.go.dev/github.com/AndroidGoLab/jni/health/connect)                                          | `connect`        | `github.com/AndroidGoLab/jni/health/connect`            |
 | **Location**                                                                                                                                                                   |                  |                                                        |
-| [![location](https://img.shields.io/badge/location-LocationManager-00838F)](https://pkg.go.dev/github.com/xaionaro-go/jni/location)                                            | `location`       | `github.com/xaionaro-go/jni/location`                  |
+| [![location](https://img.shields.io/badge/location-LocationManager-00838F)](https://pkg.go.dev/github.com/AndroidGoLab/jni/location)                                            | `location`       | `github.com/AndroidGoLab/jni/location`                  |
 | **Media**                                                                                                                                                                      |                  |                                                        |
-| [![audiomanager](https://img.shields.io/badge/audiomanager-AudioManager-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/media/audiomanager)                              | `audiomanager`   | `github.com/xaionaro-go/jni/media/audiomanager`        |
-| [![player](https://img.shields.io/badge/player-MediaPlayer-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/media/player)                                                | `player`         | `github.com/xaionaro-go/jni/media/player`              |
-| [![projection](https://img.shields.io/badge/projection-MediaProjection-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/media/projection)                                | `projection`     | `github.com/xaionaro-go/jni/media/projection`          |
-| [![recorder](https://img.shields.io/badge/recorder-MediaRecorder-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/media/recorder)                                        | `recorder`       | `github.com/xaionaro-go/jni/media/recorder`            |
-| [![session](https://img.shields.io/badge/session-MediaSession-7B1FA2)](https://pkg.go.dev/github.com/xaionaro-go/jni/media/session)                                            | `session`        | `github.com/xaionaro-go/jni/media/session`             |
+| [![audiomanager](https://img.shields.io/badge/audiomanager-AudioManager-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/media/audiomanager)                              | `audiomanager`   | `github.com/AndroidGoLab/jni/media/audiomanager`        |
+| [![player](https://img.shields.io/badge/player-MediaPlayer-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/media/player)                                                | `player`         | `github.com/AndroidGoLab/jni/media/player`              |
+| [![projection](https://img.shields.io/badge/projection-MediaProjection-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/media/projection)                                | `projection`     | `github.com/AndroidGoLab/jni/media/projection`          |
+| [![recorder](https://img.shields.io/badge/recorder-MediaRecorder-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/media/recorder)                                        | `recorder`       | `github.com/AndroidGoLab/jni/media/recorder`            |
+| [![session](https://img.shields.io/badge/session-MediaSession-7B1FA2)](https://pkg.go.dev/github.com/AndroidGoLab/jni/media/session)                                            | `session`        | `github.com/AndroidGoLab/jni/media/session`             |
 | **Networking**                                                                                                                                                                 |                  |                                                        |
-| [![net](https://img.shields.io/badge/net-ConnectivityManager-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/net)                                                       | `net`            | `github.com/xaionaro-go/jni/net`                       |
-| [![nsd](https://img.shields.io/badge/nsd-NsdManager-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/net/nsd)                                                            | `nsd`            | `github.com/xaionaro-go/jni/net/nsd`                   |
-| [![wifi](https://img.shields.io/badge/wifi-WifiManager-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/net/wifi)                                                        | `wifi`           | `github.com/xaionaro-go/jni/net/wifi`                  |
-| [![p2p](https://img.shields.io/badge/p2p-WiFi_Direct-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/net/wifi/p2p)                                                      | `p2p`            | `github.com/xaionaro-go/jni/net/wifi/p2p`              |
-| [![rtt](https://img.shields.io/badge/rtt-WiFi_RTT-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/net/wifi/rtt)                                                         | `rtt`            | `github.com/xaionaro-go/jni/net/wifi/rtt`              |
+| [![net](https://img.shields.io/badge/net-ConnectivityManager-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/net)                                                       | `net`            | `github.com/AndroidGoLab/jni/net`                       |
+| [![nsd](https://img.shields.io/badge/nsd-NsdManager-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/net/nsd)                                                            | `nsd`            | `github.com/AndroidGoLab/jni/net/nsd`                   |
+| [![wifi](https://img.shields.io/badge/wifi-WifiManager-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/net/wifi)                                                        | `wifi`           | `github.com/AndroidGoLab/jni/net/wifi`                  |
+| [![p2p](https://img.shields.io/badge/p2p-WiFi_Direct-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/net/wifi/p2p)                                                      | `p2p`            | `github.com/AndroidGoLab/jni/net/wifi/p2p`              |
+| [![rtt](https://img.shields.io/badge/rtt-WiFi_RTT-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/net/wifi/rtt)                                                         | `rtt`            | `github.com/AndroidGoLab/jni/net/wifi/rtt`              |
 | **NFC**                                                                                                                                                                        |                  |                                                        |
-| [![nfc](https://img.shields.io/badge/nfc-NfcAdapter,_NDEF,_Tag-2E7D32)](https://pkg.go.dev/github.com/xaionaro-go/jni/nfc)                                                     | `nfc`            | `github.com/xaionaro-go/jni/nfc`                       |
+| [![nfc](https://img.shields.io/badge/nfc-NfcAdapter,_NDEF,_Tag-2E7D32)](https://pkg.go.dev/github.com/AndroidGoLab/jni/nfc)                                                     | `nfc`            | `github.com/AndroidGoLab/jni/nfc`                       |
 | **OS Services**                                                                                                                                                                |                  |                                                        |
-| [![battery](https://img.shields.io/badge/battery-BatteryManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/os/battery)                                             | `battery`        | `github.com/xaionaro-go/jni/os/battery`                |
-| [![build](https://img.shields.io/badge/build-Build_Info-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/os/build)                                                       | `build`          | `github.com/xaionaro-go/jni/os/build`                  |
-| [![environment](https://img.shields.io/badge/environment-Environment-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/os/environment)                                    | `environment`    | `github.com/xaionaro-go/jni/os/environment`            |
-| [![keyguard](https://img.shields.io/badge/keyguard-KeyguardManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/os/keyguard)                                         | `keyguard`       | `github.com/xaionaro-go/jni/os/keyguard`               |
-| [![power](https://img.shields.io/badge/power-PowerManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/os/power)                                                     | `power`          | `github.com/xaionaro-go/jni/os/power`                  |
-| [![storage](https://img.shields.io/badge/storage-StorageManager-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/os/storage)                                             | `storage`        | `github.com/xaionaro-go/jni/os/storage`                |
-| [![vibrator](https://img.shields.io/badge/vibrator-Vibrator-E65100)](https://pkg.go.dev/github.com/xaionaro-go/jni/os/vibrator)                                                | `vibrator`       | `github.com/xaionaro-go/jni/os/vibrator`               |
+| [![battery](https://img.shields.io/badge/battery-BatteryManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/os/battery)                                             | `battery`        | `github.com/AndroidGoLab/jni/os/battery`                |
+| [![build](https://img.shields.io/badge/build-Build_Info-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/os/build)                                                       | `build`          | `github.com/AndroidGoLab/jni/os/build`                  |
+| [![environment](https://img.shields.io/badge/environment-Environment-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/os/environment)                                    | `environment`    | `github.com/AndroidGoLab/jni/os/environment`            |
+| [![keyguard](https://img.shields.io/badge/keyguard-KeyguardManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/os/keyguard)                                         | `keyguard`       | `github.com/AndroidGoLab/jni/os/keyguard`               |
+| [![power](https://img.shields.io/badge/power-PowerManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/os/power)                                                     | `power`          | `github.com/AndroidGoLab/jni/os/power`                  |
+| [![storage](https://img.shields.io/badge/storage-StorageManager-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/os/storage)                                             | `storage`        | `github.com/AndroidGoLab/jni/os/storage`                |
+| [![vibrator](https://img.shields.io/badge/vibrator-Vibrator-E65100)](https://pkg.go.dev/github.com/AndroidGoLab/jni/os/vibrator)                                                | `vibrator`       | `github.com/AndroidGoLab/jni/os/vibrator`               |
 | **Providers**                                                                                                                                                                  |                  |                                                        |
-| [![documents](https://img.shields.io/badge/documents-DocumentsContract-6D4C41)](https://pkg.go.dev/github.com/xaionaro-go/jni/provider/documents)                              | `documents`      | `github.com/xaionaro-go/jni/provider/documents`        |
-| [![mediastore](https://img.shields.io/badge/media-MediaStore-6D4C41)](https://pkg.go.dev/github.com/xaionaro-go/jni/provider/media)                                            | `media`          | `github.com/xaionaro-go/jni/provider/media`            |
-| [![settings](https://img.shields.io/badge/settings-Settings-6D4C41)](https://pkg.go.dev/github.com/xaionaro-go/jni/provider/settings)                                          | `settings`       | `github.com/xaionaro-go/jni/provider/settings`         |
+| [![documents](https://img.shields.io/badge/documents-DocumentsContract-6D4C41)](https://pkg.go.dev/github.com/AndroidGoLab/jni/provider/documents)                              | `documents`      | `github.com/AndroidGoLab/jni/provider/documents`        |
+| [![mediastore](https://img.shields.io/badge/media-MediaStore-6D4C41)](https://pkg.go.dev/github.com/AndroidGoLab/jni/provider/media)                                            | `media`          | `github.com/AndroidGoLab/jni/provider/media`            |
+| [![settings](https://img.shields.io/badge/settings-Settings-6D4C41)](https://pkg.go.dev/github.com/AndroidGoLab/jni/provider/settings)                                          | `settings`       | `github.com/AndroidGoLab/jni/provider/settings`         |
 | **Security**                                                                                                                                                                   |                  |                                                        |
-| [![keystore](https://img.shields.io/badge/keystore-KeyStore-C62828)](https://pkg.go.dev/github.com/xaionaro-go/jni/security/keystore)                                          | `keystore`       | `github.com/xaionaro-go/jni/security/keystore`         |
-| [![credentials](https://img.shields.io/badge/credentials-CredentialManager-C62828)](https://pkg.go.dev/github.com/xaionaro-go/jni/credentials)                                 | `credentials`    | `github.com/xaionaro-go/jni/credentials`               |
-| [![omapi](https://img.shields.io/badge/omapi-Secure_Element-C62828)](https://pkg.go.dev/github.com/xaionaro-go/jni/se/omapi)                                                   | `omapi`          | `github.com/xaionaro-go/jni/se/omapi`                  |
+| [![keystore](https://img.shields.io/badge/keystore-KeyStore-C62828)](https://pkg.go.dev/github.com/AndroidGoLab/jni/security/keystore)                                          | `keystore`       | `github.com/AndroidGoLab/jni/security/keystore`         |
+| [![credentials](https://img.shields.io/badge/credentials-CredentialManager-C62828)](https://pkg.go.dev/github.com/AndroidGoLab/jni/credentials)                                 | `credentials`    | `github.com/AndroidGoLab/jni/credentials`               |
+| [![omapi](https://img.shields.io/badge/omapi-Secure_Element-C62828)](https://pkg.go.dev/github.com/AndroidGoLab/jni/se/omapi)                                                   | `omapi`          | `github.com/AndroidGoLab/jni/se/omapi`                  |
 | **Telecom**                                                                                                                                                                    |                  |                                                        |
-| [![telecom](https://img.shields.io/badge/telecom-TelecomManager-455A64)](https://pkg.go.dev/github.com/xaionaro-go/jni/telecom)                                                | `telecom`        | `github.com/xaionaro-go/jni/telecom`                   |
-| [![telephony](https://img.shields.io/badge/telephony-TelephonyManager-455A64)](https://pkg.go.dev/github.com/xaionaro-go/jni/telephony)                                        | `telephony`      | `github.com/xaionaro-go/jni/telephony`                 |
+| [![telecom](https://img.shields.io/badge/telecom-TelecomManager-455A64)](https://pkg.go.dev/github.com/AndroidGoLab/jni/telecom)                                                | `telecom`        | `github.com/AndroidGoLab/jni/telecom`                   |
+| [![telephony](https://img.shields.io/badge/telephony-TelephonyManager-455A64)](https://pkg.go.dev/github.com/AndroidGoLab/jni/telephony)                                        | `telephony`      | `github.com/AndroidGoLab/jni/telephony`                 |
 | **UI**                                                                                                                                                                         |                  |                                                        |
-| [![display](https://img.shields.io/badge/display-Display,_WindowManager-00838F)](https://pkg.go.dev/github.com/xaionaro-go/jni/view/display)                                   | `display`        | `github.com/xaionaro-go/jni/view/display`              |
-| [![inputmethod](https://img.shields.io/badge/inputmethod-InputMethodManager-00838F)](https://pkg.go.dev/github.com/xaionaro-go/jni/view/inputmethod)                           | `inputmethod`    | `github.com/xaionaro-go/jni/view/inputmethod`          |
-| [![toast](https://img.shields.io/badge/toast-Toast-00838F)](https://pkg.go.dev/github.com/xaionaro-go/jni/widget/toast)                                                        | `toast`          | `github.com/xaionaro-go/jni/widget/toast`              |
+| [![display](https://img.shields.io/badge/display-Display,_WindowManager-00838F)](https://pkg.go.dev/github.com/AndroidGoLab/jni/view/display)                                   | `display`        | `github.com/AndroidGoLab/jni/view/display`              |
+| [![inputmethod](https://img.shields.io/badge/inputmethod-InputMethodManager-00838F)](https://pkg.go.dev/github.com/AndroidGoLab/jni/view/inputmethod)                           | `inputmethod`    | `github.com/AndroidGoLab/jni/view/inputmethod`          |
+| [![toast](https://img.shields.io/badge/toast-Toast-00838F)](https://pkg.go.dev/github.com/AndroidGoLab/jni/widget/toast)                                                        | `toast`          | `github.com/AndroidGoLab/jni/widget/toast`              |
 | **Other**                                                                                                                                                                      |                  |                                                        |
-| [![companion](https://img.shields.io/badge/companion-CompanionDevice-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/companion)                                         | `companion`      | `github.com/xaionaro-go/jni/companion`                 |
-| [![print](https://img.shields.io/badge/print-PrintManager-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/print)                                                        | `print`          | `github.com/xaionaro-go/jni/print`                     |
-| [![speech](https://img.shields.io/badge/speech-TextToSpeech,_SpeechRecognizer-546E7A)](https://pkg.go.dev/github.com/xaionaro-go/jni/speech)                                   | `speech`         | `github.com/xaionaro-go/jni/speech`                    |
+| [![companion](https://img.shields.io/badge/companion-CompanionDevice-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/companion)                                         | `companion`      | `github.com/AndroidGoLab/jni/companion`                 |
+| [![print](https://img.shields.io/badge/print-PrintManager-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/print)                                                        | `print`          | `github.com/AndroidGoLab/jni/print`                     |
+| [![speech](https://img.shields.io/badge/speech-TextToSpeech,_SpeechRecognizer-546E7A)](https://pkg.go.dev/github.com/AndroidGoLab/jni/speech)                                   | `speech`         | `github.com/AndroidGoLab/jni/speech`                    |
 
 ## Architecture
 

@@ -997,7 +997,7 @@ const file_proto_keyguard_keyguard_proto_rawDesc = "" +
 	"\x10IsKeyguardSecure\x12!.keyguard.IsKeyguardSecureRequest\x1a\".keyguard.IsKeyguardSecureResponse\x12V\n" +
 	"\x0fNewKeyguardLock\x12 .keyguard.NewKeyguardLockRequest\x1a!.keyguard.NewKeyguardLockResponse\x12\x8c\x01\n" +
 	"!RemoveKeyguardLockedStateListener\x122.keyguard.RemoveKeyguardLockedStateListenerRequest\x1a3.keyguard.RemoveKeyguardLockedStateListenerResponse\x12k\n" +
-	"\x16RequestDismissKeyguard\x12'.keyguard.RequestDismissKeyguardRequest\x1a(.keyguard.RequestDismissKeyguardResponseB+Z)github.com/xaionaro-go/jni/proto/keyguardb\x06proto3"
+	"\x16RequestDismissKeyguard\x12'.keyguard.RequestDismissKeyguardRequest\x1a(.keyguard.RequestDismissKeyguardResponseB+Z)github.com/AndroidGoLab/jni/proto/keyguardb\x06proto3"
 
 var (
 	file_proto_keyguard_keyguard_proto_rawDescOnce sync.Once

@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/location"
+	pb "github.com/AndroidGoLab/jni/proto/location"
 )
 
 var locationCmd = &cobra.Command{

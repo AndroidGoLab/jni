@@ -1,5 +1,5 @@
 package: projection
-go_import: "github.com/xaionaro-go/jni/media/projection"
+go_import: "github.com/AndroidGoLab/jni/media/projection"
 
 overrides:
   android.media.projection.MediaProjectionManager:
@@ -56,4 +56,4 @@ overrides:
         params: []
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

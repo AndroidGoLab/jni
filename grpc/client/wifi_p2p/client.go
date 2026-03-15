@@ -5,7 +5,7 @@ package wifi_p2p
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/wifi_p2p"
+	pb "github.com/AndroidGoLab/jni/proto/wifi_p2p"
 	"google.golang.org/grpc"
 )
 

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/jni_raw"
+	pb "github.com/AndroidGoLab/jni/proto/jni_raw"
 )
 
 // Android MediaRecorder constants for audio-only recording.

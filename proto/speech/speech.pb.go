@@ -5182,7 +5182,7 @@ const file_proto_speech_speech_proto_rawDesc = "" +
 	"\x17CreateSpeechRecognizer1\x12&.speech.CreateSpeechRecognizer1Request\x1a'.speech.CreateSpeechRecognizer1Response\x12p\n" +
 	"\x19CreateSpeechRecognizer2_1\x12(.speech.CreateSpeechRecognizer2_1Request\x1a).speech.CreateSpeechRecognizer2_1Response\x12\x7f\n" +
 	"\x1eIsOnDeviceRecognitionAvailable\x12-.speech.IsOnDeviceRecognitionAvailableRequest\x1a..speech.IsOnDeviceRecognitionAvailableResponse\x12g\n" +
-	"\x16IsRecognitionAvailable\x12%.speech.IsRecognitionAvailableRequest\x1a&.speech.IsRecognitionAvailableResponseB)Z'github.com/xaionaro-go/jni/proto/speechb\x06proto3"
+	"\x16IsRecognitionAvailable\x12%.speech.IsRecognitionAvailableRequest\x1a&.speech.IsRecognitionAvailableResponseB)Z'github.com/AndroidGoLab/jni/proto/speechb\x06proto3"
 
 var (
 	file_proto_speech_speech_proto_rawDescOnce sync.Once

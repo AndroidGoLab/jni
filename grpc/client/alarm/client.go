@@ -5,7 +5,7 @@ package alarm
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/alarm"
+	pb "github.com/AndroidGoLab/jni/proto/alarm"
 	"google.golang.org/grpc"
 )
 

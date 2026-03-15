@@ -5,7 +5,7 @@ package role
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/role"
+	pb "github.com/AndroidGoLab/jni/proto/role"
 	"google.golang.org/grpc"
 )
 

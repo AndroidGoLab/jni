@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package documents;
 
-option go_package = "github.com/xaionaro-go/jni/proto/documents";
+option go_package = "github.com/AndroidGoLab/jni/proto/documents";
 
 message BuildChildDocumentsUriRequest {
   string arg0 = 1;

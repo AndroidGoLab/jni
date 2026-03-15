@@ -1,5 +1,5 @@
 package: pm
-go_import: github.com/xaionaro-go/jni/content/pm
+go_import: github.com/AndroidGoLab/jni/content/pm
 classes:
     - java_class: android.content.pm.PackageManager
       go_type: packageManager

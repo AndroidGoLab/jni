@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/se/omapi"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/se/omapi"
 )
 
 func main() {}

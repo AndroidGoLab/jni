@@ -1,5 +1,5 @@
 package: alarm
-go_import: "github.com/xaionaro-go/jni/app/alarm"
+go_import: "github.com/AndroidGoLab/jni/app/alarm"
 
 go_types:
   AlarmType:
@@ -117,4 +117,4 @@ transforms:
 
 imports:
   - "time"
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

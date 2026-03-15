@@ -5767,7 +5767,7 @@ const file_proto_le_le_proto_rawDesc = "" +
 	"\x0fSetNumOfMatches\x12\x1a.le.SetNumOfMatchesRequest\x1a\x1b.le.SetNumOfMatchesResponse\x12/\n" +
 	"\x06SetPhy\x12\x11.le.SetPhyRequest\x1a\x12.le.SetPhyResponse\x12G\n" +
 	"\x0eSetReportDelay\x12\x19.le.SetReportDelayRequest\x1a\x1a.le.SetReportDelayResponse\x12>\n" +
-	"\vSetScanMode\x12\x16.le.SetScanModeRequest\x1a\x17.le.SetScanModeResponseB%Z#github.com/xaionaro-go/jni/proto/leb\x06proto3"
+	"\vSetScanMode\x12\x16.le.SetScanModeRequest\x1a\x17.le.SetScanModeResponseB%Z#github.com/AndroidGoLab/jni/proto/leb\x06proto3"
 
 var (
 	file_proto_le_le_proto_rawDescOnce sync.Once

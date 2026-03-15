@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/xaionaro-go/jni/credentials"
+	"github.com/AndroidGoLab/jni/credentials"
 )
 
 func main() {}

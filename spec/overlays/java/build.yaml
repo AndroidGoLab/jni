@@ -1,5 +1,5 @@
 package: build
-go_import: "github.com/xaionaro-go/jni/os/build"
+go_import: "github.com/AndroidGoLab/jni/os/build"
 
 # Combine Build + Build.VERSION fields into single Info struct
 composite_type:

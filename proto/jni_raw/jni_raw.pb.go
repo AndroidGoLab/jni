@@ -6018,7 +6018,7 @@ const file_proto_jni_raw_jni_raw_proto_rawDesc = "" +
 	"\x11ToReflectedMethod\x12!.jni_raw.ToReflectedMethodRequest\x1a\".jni_raw.ToReflectedMethodResponse\x12W\n" +
 	"\x10ToReflectedField\x12 .jni_raw.ToReflectedFieldRequest\x1a!.jni_raw.ToReflectedFieldResponse\x12N\n" +
 	"\rGetAppContext\x12\x1d.jni_raw.GetAppContextRequest\x1a\x1e.jni_raw.GetAppContextResponse\x12E\n" +
-	"\x05Proxy\x12\x1b.jni_raw.ProxyClientMessage\x1a\x1b.jni_raw.ProxyServerMessage(\x010\x01B*Z(github.com/xaionaro-go/jni/proto/jni_rawb\x06proto3"
+	"\x05Proxy\x12\x1b.jni_raw.ProxyClientMessage\x1a\x1b.jni_raw.ProxyServerMessage(\x010\x01B*Z(github.com/AndroidGoLab/jni/proto/jni_rawb\x06proto3"
 
 var (
 	file_proto_jni_raw_jni_raw_proto_rawDescOnce sync.Once

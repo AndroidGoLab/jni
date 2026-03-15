@@ -2,7 +2,7 @@
 
 package jni
 
-import "github.com/xaionaro-go/jni/capi"
+import "github.com/AndroidGoLab/jni/capi"
 
 // MethodID is a JNI method identifier.
 type MethodID = capi.JmethodID

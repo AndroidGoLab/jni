@@ -1,5 +1,5 @@
 package: player
-go_import: "github.com/xaionaro-go/jni/media/player"
+go_import: "github.com/AndroidGoLab/jni/media/player"
 
 overrides:
   android.media.MediaPlayer:
@@ -108,4 +108,4 @@ overrides:
           Direct delegation to release()
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

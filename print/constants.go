@@ -2,7 +2,7 @@
 
 package print
 
-import "github.com/xaionaro-go/jni/print/consts"
+import "github.com/AndroidGoLab/jni/print/consts"
 
 const (
 	Creator        = consts.Creator

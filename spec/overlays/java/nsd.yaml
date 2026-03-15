@@ -1,5 +1,5 @@
 package: nsd
-go_import: "github.com/xaionaro-go/jni/net/nsd"
+go_import: "github.com/AndroidGoLab/jni/net/nsd"
 
 overrides:
   android.net.nsd.NsdManager:

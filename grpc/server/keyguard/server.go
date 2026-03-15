@@ -5,12 +5,12 @@ package keyguard
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/os/keyguard"
-	pb "github.com/xaionaro-go/jni/proto/keyguard"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/os/keyguard"
+	pb "github.com/AndroidGoLab/jni/proto/keyguard"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

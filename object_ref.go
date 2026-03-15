@@ -1,6 +1,6 @@
 package jni
 
-import "github.com/xaionaro-go/jni/capi"
+import "github.com/AndroidGoLab/jni/capi"
 
 // CAPIObject is an alias for capi.Object (C.jobject), exported so that
 // packages outside capi can reference the type for unsafe conversions

@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package omapi;
 
-option go_package = "github.com/xaionaro-go/jni/proto/omapi";
+option go_package = "github.com/AndroidGoLab/jni/proto/omapi";
 
 message CloseRequest {
 }

@@ -2574,7 +2574,7 @@ const file_proto_biometric_biometric_proto_rawDesc = "" +
 	"SetLogoRes\x12\x1c.biometric.SetLogoResRequest\x1a\x1d.biometric.SetLogoResResponse\x12^\n" +
 	"\x11SetNegativeButton\x12#.biometric.SetNegativeButtonRequest\x1a$.biometric.SetNegativeButtonResponse\x12L\n" +
 	"\vSetSubtitle\x12\x1d.biometric.SetSubtitleRequest\x1a\x1e.biometric.SetSubtitleResponse\x12C\n" +
-	"\bSetTitle\x12\x1a.biometric.SetTitleRequest\x1a\x1b.biometric.SetTitleResponseB,Z*github.com/xaionaro-go/jni/proto/biometricb\x06proto3"
+	"\bSetTitle\x12\x1a.biometric.SetTitleRequest\x1a\x1b.biometric.SetTitleResponseB,Z*github.com/AndroidGoLab/jni/proto/biometricb\x06proto3"
 
 var (
 	file_proto_biometric_biometric_proto_rawDescOnce sync.Once

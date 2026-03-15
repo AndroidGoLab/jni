@@ -1,6 +1,6 @@
 package app
 
-import "github.com/xaionaro-go/jni"
+import "github.com/AndroidGoLab/jni"
 
 // ContextFromObject wraps an existing Android Context JNI global reference
 // into an app.Context. The caller is responsible for ensuring the object

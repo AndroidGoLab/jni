@@ -5,7 +5,7 @@ package telecom
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/telecom"
+	pb "github.com/AndroidGoLab/jni/proto/telecom"
 	"google.golang.org/grpc"
 )
 

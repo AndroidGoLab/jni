@@ -26,7 +26,7 @@ var File_proto_preferences_preferences_proto protoreflect.FileDescriptor
 
 const file_proto_preferences_preferences_proto_rawDesc = "" +
 	"\n" +
-	"#proto/preferences/preferences.proto\x12\vpreferencesB.Z,github.com/xaionaro-go/jni/proto/preferencesb\x06proto3"
+	"#proto/preferences/preferences.proto\x12\vpreferencesB.Z,github.com/AndroidGoLab/jni/proto/preferencesb\x06proto3"
 
 var file_proto_preferences_preferences_proto_goTypes = []any{}
 var file_proto_preferences_preferences_proto_depIdxs = []int32{

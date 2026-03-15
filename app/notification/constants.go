@@ -2,7 +2,7 @@
 
 package notification
 
-import "github.com/xaionaro-go/jni/app/notification/consts"
+import "github.com/AndroidGoLab/jni/app/notification/consts"
 
 const (
 	Creator                        = consts.Creator

@@ -5,7 +5,7 @@ package clipboard
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/clipboard"
+	pb "github.com/AndroidGoLab/jni/proto/clipboard"
 	"google.golang.org/grpc"
 )
 

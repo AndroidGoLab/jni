@@ -1,5 +1,5 @@
 package: permission
-go_import: "github.com/xaionaro-go/jni/content/permission"
+go_import: "github.com/AndroidGoLab/jni/content/permission"
 
 overrides:
   # Expose as package-level functions, not struct methods

@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/bluetooth_le"
+	pb "github.com/AndroidGoLab/jni/proto/bluetooth_le"
 )
 
 var bluetoothleCmd = &cobra.Command{

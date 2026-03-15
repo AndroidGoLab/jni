@@ -5,12 +5,12 @@ package clipboard
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	jnipkg "github.com/xaionaro-go/jni/content/clipboard"
-	"github.com/xaionaro-go/jni/handlestore"
-	pb "github.com/xaionaro-go/jni/proto/clipboard"
+	"github.com/AndroidGoLab/jni/app"
+	jnipkg "github.com/AndroidGoLab/jni/content/clipboard"
+	"github.com/AndroidGoLab/jni/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/clipboard"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

@@ -2790,7 +2790,7 @@ const file_proto_clipboard_clipboard_proto_rawDesc = "" +
 	"\aGetText\x12\x19.clipboard.GetTextRequest\x1a\x1a.clipboard.GetTextResponse\x12O\n" +
 	"\fGetTextLinks\x12\x1e.clipboard.GetTextLinksRequest\x1a\x1f.clipboard.GetTextLinksResponse\x12=\n" +
 	"\x06GetUri\x12\x18.clipboard.GetUriRequest\x1a\x19.clipboard.GetUriResponse\x12C\n" +
-	"\bToString\x12\x1a.clipboard.ToStringRequest\x1a\x1b.clipboard.ToStringResponseB,Z*github.com/xaionaro-go/jni/proto/clipboardb\x06proto3"
+	"\bToString\x12\x1a.clipboard.ToStringRequest\x1a\x1b.clipboard.ToStringResponseB,Z*github.com/AndroidGoLab/jni/proto/clipboardb\x06proto3"
 
 var (
 	file_proto_clipboard_clipboard_proto_rawDescOnce sync.Once

@@ -5,8 +5,8 @@ package jni
 import (
 	"unsafe"
 
-	"github.com/xaionaro-go/jni/capi"
-	"github.com/xaionaro-go/jni/internal/jnierr"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/internal/jnierr"
 )
 
 // Env wraps a JNIEnv pointer. It is only valid on the OS thread where it

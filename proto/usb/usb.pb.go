@@ -5477,7 +5477,7 @@ const file_proto_usb_usb_proto_rawDesc = "" +
 	"\bToString\x12\x14.usb.ToStringRequest\x1a\x15.usb.ToStringResponse\x12F\n" +
 	"\rWriteToParcel\x12\x19.usb.WriteToParcelRequest\x1a\x1a.usb.WriteToParcelResponse\x12I\n" +
 	"\x0eGetDeviceId1_1\x12\x1a.usb.GetDeviceId1_1Request\x1a\x1b.usb.GetDeviceId1_1Response\x12O\n" +
-	"\x10GetDeviceName1_1\x12\x1c.usb.GetDeviceName1_1Request\x1a\x1d.usb.GetDeviceName1_1ResponseB&Z$github.com/xaionaro-go/jni/proto/usbb\x06proto3"
+	"\x10GetDeviceName1_1\x12\x1c.usb.GetDeviceName1_1Request\x1a\x1d.usb.GetDeviceName1_1ResponseB&Z$github.com/AndroidGoLab/jni/proto/usbb\x06proto3"
 
 var (
 	file_proto_usb_usb_proto_rawDescOnce sync.Once

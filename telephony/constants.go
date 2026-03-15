@@ -2,7 +2,7 @@
 
 package telephony
 
-import "github.com/xaionaro-go/jni/telephony/consts"
+import "github.com/AndroidGoLab/jni/telephony/consts"
 
 const (
 	ActionCarrierMessagingClientService              = consts.ActionCarrierMessagingClientService

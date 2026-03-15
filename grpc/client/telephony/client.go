@@ -5,7 +5,7 @@ package telephony
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/telephony"
+	pb "github.com/AndroidGoLab/jni/proto/telephony"
 	"google.golang.org/grpc"
 )
 

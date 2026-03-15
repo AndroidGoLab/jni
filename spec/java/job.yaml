@@ -1,5 +1,5 @@
 package: job
-go_import: github.com/xaionaro-go/jni/app/job
+go_import: github.com/AndroidGoLab/jni/app/job
 classes:
     - java_class: android.app.job.JobScheduler
       go_type: jobScheduler

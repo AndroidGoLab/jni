@@ -14047,7 +14047,7 @@ const file_proto_wifi_wifi_proto_rawDesc = "" +
 	"\bToString\x12\x15.wifi.ToStringRequest\x1a\x16.wifi.ToStringResponse\x12H\n" +
 	"\rWriteToParcel\x12\x1a.wifi.WriteToParcelRequest\x1a\x1b.wifi.WriteToParcelResponse\x12\x96\x01\n" +
 	"'ConvertChannelToFrequencyMhzIfSupported\x124.wifi.ConvertChannelToFrequencyMhzIfSupportedRequest\x1a5.wifi.ConvertChannelToFrequencyMhzIfSupportedResponse\x12\x96\x01\n" +
-	"'ConvertFrequencyMhzToChannelIfSupported\x124.wifi.ConvertFrequencyMhzToChannelIfSupportedRequest\x1a5.wifi.ConvertFrequencyMhzToChannelIfSupportedResponseB'Z%github.com/xaionaro-go/jni/proto/wifib\x06proto3"
+	"'ConvertFrequencyMhzToChannelIfSupported\x124.wifi.ConvertFrequencyMhzToChannelIfSupportedRequest\x1a5.wifi.ConvertFrequencyMhzToChannelIfSupportedResponseB'Z%github.com/AndroidGoLab/jni/proto/wifib\x06proto3"
 
 var (
 	file_proto_wifi_wifi_proto_rawDescOnce sync.Once

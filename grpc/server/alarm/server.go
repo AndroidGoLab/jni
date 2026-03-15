@@ -5,12 +5,12 @@ package alarm
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	jnipkg "github.com/xaionaro-go/jni/app/alarm"
-	"github.com/xaionaro-go/jni/handlestore"
-	pb "github.com/xaionaro-go/jni/proto/alarm"
+	"github.com/AndroidGoLab/jni/app"
+	jnipkg "github.com/AndroidGoLab/jni/app/alarm"
+	"github.com/AndroidGoLab/jni/handlestore"
+	pb "github.com/AndroidGoLab/jni/proto/alarm"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

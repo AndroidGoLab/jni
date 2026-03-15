@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package usb;
 
-option go_package = "github.com/xaionaro-go/jni/proto/usb";
+option go_package = "github.com/AndroidGoLab/jni/proto/usb";
 
 message DescribeContentsRequest {
 }

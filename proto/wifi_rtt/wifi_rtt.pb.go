@@ -3089,7 +3089,7 @@ const file_proto_wifi_rtt_wifi_rtt_proto_rawDesc = "" +
 	"\x15WifiRttManagerService\x12h\n" +
 	"\x15GetRttCharacteristics\x12&.wifi_rtt.GetRttCharacteristicsRequest\x1a'.wifi_rtt.GetRttCharacteristicsResponse\x12J\n" +
 	"\vIsAvailable\x12\x1c.wifi_rtt.IsAvailableRequest\x1a\x1d.wifi_rtt.IsAvailableResponse\x12M\n" +
-	"\fStartRanging\x12\x1d.wifi_rtt.StartRangingRequest\x1a\x1e.wifi_rtt.StartRangingResponseB+Z)github.com/xaionaro-go/jni/proto/wifi_rttb\x06proto3"
+	"\fStartRanging\x12\x1d.wifi_rtt.StartRangingRequest\x1a\x1e.wifi_rtt.StartRangingResponseB+Z)github.com/AndroidGoLab/jni/proto/wifi_rttb\x06proto3"
 
 var (
 	file_proto_wifi_rtt_wifi_rtt_proto_rawDescOnce sync.Once

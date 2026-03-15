@@ -1,5 +1,5 @@
 package: location
-go_import: github.com/xaionaro-go/jni/location
+go_import: github.com/AndroidGoLab/jni/location
 classes:
     - java_class: android.location.LocationManager
       go_type: locationManager

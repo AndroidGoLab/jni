@@ -3020,7 +3020,7 @@ const file_proto_nsd_nsd_proto_rawDesc = "" +
 	"\x0eSetServiceType\x12\x1a.nsd.SetServiceTypeRequest\x1a\x1b.nsd.SetServiceTypeResponse\x12@\n" +
 	"\vSetSubtypes\x12\x17.nsd.SetSubtypesRequest\x1a\x18.nsd.SetSubtypesResponse\x127\n" +
 	"\bToString\x12\x14.nsd.ToStringRequest\x1a\x15.nsd.ToStringResponse\x12F\n" +
-	"\rWriteToParcel\x12\x19.nsd.WriteToParcelRequest\x1a\x1a.nsd.WriteToParcelResponseB&Z$github.com/xaionaro-go/jni/proto/nsdb\x06proto3"
+	"\rWriteToParcel\x12\x19.nsd.WriteToParcelRequest\x1a\x1a.nsd.WriteToParcelResponseB&Z$github.com/AndroidGoLab/jni/proto/nsdb\x06proto3"
 
 var (
 	file_proto_nsd_nsd_proto_rawDescOnce sync.Once

@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/spf13/cobra"
-	pb "github.com/xaionaro-go/jni/proto/audiomanager"
+	pb "github.com/AndroidGoLab/jni/proto/audiomanager"
 )
 
 var audiomanagerCmd = &cobra.Command{

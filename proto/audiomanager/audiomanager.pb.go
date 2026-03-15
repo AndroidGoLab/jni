@@ -10316,7 +10316,7 @@ const file_proto_audiomanager_audiomanager_proto_rawDesc = "" +
 	"\x18GetDirectPlaybackSupport\x12-.audiomanager.GetDirectPlaybackSupportRequest\x1a..audiomanager.GetDirectPlaybackSupportResponse\x12|\n" +
 	"\x19GetPlaybackOffloadSupport\x12..audiomanager.GetPlaybackOffloadSupportRequest\x1a/.audiomanager.GetPlaybackOffloadSupportResponse\x12|\n" +
 	"\x19IsHapticPlaybackSupported\x12..audiomanager.IsHapticPlaybackSupportedRequest\x1a/.audiomanager.IsHapticPlaybackSupportedResponse\x12\x85\x01\n" +
-	"\x1cIsOffloadedPlaybackSupported\x121.audiomanager.IsOffloadedPlaybackSupportedRequest\x1a2.audiomanager.IsOffloadedPlaybackSupportedResponseB/Z-github.com/xaionaro-go/jni/proto/audiomanagerb\x06proto3"
+	"\x1cIsOffloadedPlaybackSupported\x121.audiomanager.IsOffloadedPlaybackSupportedRequest\x1a2.audiomanager.IsOffloadedPlaybackSupportedResponseB/Z-github.com/AndroidGoLab/jni/proto/audiomanagerb\x06proto3"
 
 var (
 	file_proto_audiomanager_audiomanager_proto_rawDescOnce sync.Once

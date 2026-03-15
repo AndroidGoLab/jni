@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/media/session"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/media/session"
 )
 
 func main() {}

@@ -2,7 +2,7 @@
 
 package rtt
 
-import "github.com/xaionaro-go/jni/net/wifi/rtt/consts"
+import "github.com/AndroidGoLab/jni/net/wifi/rtt/consts"
 
 const (
 	ActionWifiRttStateChanged                                = consts.ActionWifiRttStateChanged

@@ -1,5 +1,5 @@
 package: keyguard
-go_import: "github.com/xaionaro-go/jni/os/keyguard"
+go_import: "github.com/AndroidGoLab/jni/os/keyguard"
 
 overrides:
   android.app.KeyguardManager:
@@ -46,4 +46,4 @@ overrides:
         min_api: 31
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

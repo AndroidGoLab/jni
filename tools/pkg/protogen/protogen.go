@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
 )
 
 // Generate loads a Java API spec and overlay, merges them, builds proto

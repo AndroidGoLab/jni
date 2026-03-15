@@ -2,7 +2,7 @@
 
 package wifi
 
-import "github.com/xaionaro-go/jni/net/wifi/consts"
+import "github.com/AndroidGoLab/jni/net/wifi/consts"
 
 const (
 	ActionPickWifiNetwork                     = consts.ActionPickWifiNetwork

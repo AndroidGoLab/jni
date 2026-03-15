@@ -2,7 +2,7 @@
 
 package net
 
-import "github.com/xaionaro-go/jni/net/consts"
+import "github.com/AndroidGoLab/jni/net/consts"
 
 const (
 	Creator                              = consts.Creator

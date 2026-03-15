@@ -1033,7 +1033,7 @@ const file_proto_blob_blob_proto_rawDesc = "" +
 	"\x1bGetRemainingLeaseQuotaBytes\x12(.blob.GetRemainingLeaseQuotaBytesRequest\x1a).blob.GetRemainingLeaseQuotaBytesResponse\x129\n" +
 	"\bOpenBlob\x12\x15.blob.OpenBlobRequest\x1a\x16.blob.OpenBlobResponse\x12B\n" +
 	"\vOpenSession\x12\x18.blob.OpenSessionRequest\x1a\x19.blob.OpenSessionResponse\x12E\n" +
-	"\fReleaseLease\x12\x19.blob.ReleaseLeaseRequest\x1a\x1a.blob.ReleaseLeaseResponseB'Z%github.com/xaionaro-go/jni/proto/blobb\x06proto3"
+	"\fReleaseLease\x12\x19.blob.ReleaseLeaseRequest\x1a\x1a.blob.ReleaseLeaseResponseB'Z%github.com/AndroidGoLab/jni/proto/blobb\x06proto3"
 
 var (
 	file_proto_blob_blob_proto_rawDescOnce sync.Once

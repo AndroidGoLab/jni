@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package widget;
 
-option go_package = "github.com/xaionaro-go/jni/proto/widget";
+option go_package = "github.com/AndroidGoLab/jni/proto/widget";
 
 message AddCallbackRequest {
   int64 arg0 = 1;

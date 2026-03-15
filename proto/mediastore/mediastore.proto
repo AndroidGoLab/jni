@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package mediastore;
 
-option go_package = "github.com/xaionaro-go/jni/proto/mediastore";
+option go_package = "github.com/AndroidGoLab/jni/proto/mediastore";
 
 message CanManageMediaRequest {
   int64 arg0 = 1;

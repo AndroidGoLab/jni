@@ -5,7 +5,7 @@ package jni
 import (
 	"unsafe"
 
-	"github.com/xaionaro-go/jni/capi"
+	"github.com/AndroidGoLab/jni/capi"
 )
 
 // VM wraps a JNI JavaVM pointer. It is process-global and thread-safe.

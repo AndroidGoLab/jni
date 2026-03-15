@@ -1,5 +1,5 @@
 package: camera
-go_import: "github.com/xaionaro-go/jni/hardware/camera"
+go_import: "github.com/AndroidGoLab/jni/hardware/camera"
 
 overrides:
   android.hardware.camera2.CameraManager:
@@ -27,4 +27,4 @@ overrides:
           3. Return cancel func that calls unregisterTorchCallback(callback)
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

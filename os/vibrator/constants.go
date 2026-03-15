@@ -2,7 +2,7 @@
 
 package vibrator
 
-import "github.com/xaionaro-go/jni/os/vibrator/consts"
+import "github.com/AndroidGoLab/jni/os/vibrator/consts"
 
 const (
 	VibrationEffectSupportNo      = consts.VibrationEffectSupportNo

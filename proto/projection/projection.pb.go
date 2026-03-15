@@ -1069,7 +1069,7 @@ const file_proto_projection_projection_proto_rawDesc = "" +
 	"\vSetRotation\x12\x1e.projection.SetRotationRequest\x1a\x1f.projection.SetRotationResponse\x12K\n" +
 	"\n" +
 	"SetSurface\x12\x1d.projection.SetSurfaceRequest\x1a\x1e.projection.SetSurfaceResponse\x12E\n" +
-	"\bToString\x12\x1b.projection.ToStringRequest\x1a\x1c.projection.ToStringResponseB-Z+github.com/xaionaro-go/jni/proto/projectionb\x06proto3"
+	"\bToString\x12\x1b.projection.ToStringRequest\x1a\x1c.projection.ToStringResponseB-Z+github.com/AndroidGoLab/jni/proto/projectionb\x06proto3"
 
 var (
 	file_proto_projection_projection_proto_rawDescOnce sync.Once

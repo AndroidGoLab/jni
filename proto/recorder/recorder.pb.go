@@ -3090,7 +3090,7 @@ const file_proto_recorder_recorder_proto_rawDesc = "" +
 	"\x17SetVideoEncodingBitRate\x12(.recorder.SetVideoEncodingBitRateRequest\x1a).recorder.SetVideoEncodingBitRateResponse\x12}\n" +
 	"\x1cSetVideoEncodingProfileLevel\x12-.recorder.SetVideoEncodingProfileLevelRequest\x1a..recorder.SetVideoEncodingProfileLevelResponse\x12V\n" +
 	"\x0fSetVideoProfile\x12 .recorder.SetVideoProfileRequest\x1a!.recorder.SetVideoProfileResponse\x12\x89\x01\n" +
-	" UnregisterAudioRecordingCallback\x121.recorder.UnregisterAudioRecordingCallbackRequest\x1a2.recorder.UnregisterAudioRecordingCallbackResponseB+Z)github.com/xaionaro-go/jni/proto/recorderb\x06proto3"
+	" UnregisterAudioRecordingCallback\x121.recorder.UnregisterAudioRecordingCallbackRequest\x1a2.recorder.UnregisterAudioRecordingCallbackResponseB+Z)github.com/AndroidGoLab/jni/proto/recorderb\x06proto3"
 
 var (
 	file_proto_recorder_recorder_proto_rawDescOnce sync.Once

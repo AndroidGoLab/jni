@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package net;
 
-option go_package = "github.com/xaionaro-go/jni/proto/net";
+option go_package = "github.com/AndroidGoLab/jni/proto/net";
 
 message AddDefaultNetworkActiveListenerRequest {
   int64 arg0 = 1;

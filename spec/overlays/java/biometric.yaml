@@ -1,5 +1,5 @@
 package: biometric
-go_import: "github.com/xaionaro-go/jni/hardware/biometric"
+go_import: "github.com/AndroidGoLab/jni/hardware/biometric"
 
 go_types:
   - go_name: Strength
@@ -80,4 +80,4 @@ overrides:
           5. Return cancel func that calls cancelSignal.cancel()
 
 imports:
-  - "github.com/xaionaro-go/jni/app"
+  - "github.com/AndroidGoLab/jni/app"

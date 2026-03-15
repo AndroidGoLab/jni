@@ -1693,7 +1693,7 @@ const file_proto_widget_widget_proto_rawDesc = "" +
 	"\aSetView\x12\x16.widget.SetViewRequest\x1a\x17.widget.SetViewResponse\x121\n" +
 	"\x04Show\x12\x13.widget.ShowRequest\x1a\x14.widget.ShowResponse\x12@\n" +
 	"\tMakeText3\x12\x18.widget.MakeText3Request\x1a\x19.widget.MakeText3Response\x12F\n" +
-	"\vMakeText3_1\x12\x1a.widget.MakeText3_1Request\x1a\x1b.widget.MakeText3_1ResponseB)Z'github.com/xaionaro-go/jni/proto/widgetb\x06proto3"
+	"\vMakeText3_1\x12\x1a.widget.MakeText3_1Request\x1a\x1b.widget.MakeText3_1ResponseB)Z'github.com/AndroidGoLab/jni/proto/widgetb\x06proto3"
 
 var (
 	file_proto_widget_widget_proto_rawDescOnce sync.Once

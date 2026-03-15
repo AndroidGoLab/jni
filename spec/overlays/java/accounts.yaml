@@ -56,4 +56,4 @@ custom_types:
       - { go_name: Type, go_type: string, doc: "Account type (e.g. com.google)" }
 
 imports:
-  - '"github.com/xaionaro-go/jni/app"'
+  - '"github.com/AndroidGoLab/jni/app"'

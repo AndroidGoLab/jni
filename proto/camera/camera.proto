@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package camera;
 
-option go_package = "github.com/xaionaro-go/jni/proto/camera";
+option go_package = "github.com/AndroidGoLab/jni/proto/camera";
 
 message GetCameraCharacteristicsRequest {
   string arg0 = 1;

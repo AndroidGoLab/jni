@@ -308,7 +308,7 @@ const file_proto_role_role_proto_rawDesc = "" +
 	"\x17CreateRequestRoleIntent\x12$.role.CreateRequestRoleIntentRequest\x1a%.role.CreateRequestRoleIntentResponse\x12N\n" +
 	"\x0fIsRoleAvailable\x12\x1c.role.IsRoleAvailableRequest\x1a\x1d.role.IsRoleAvailableResponse\x12?\n" +
 	"\n" +
-	"IsRoleHeld\x12\x17.role.IsRoleHeldRequest\x1a\x18.role.IsRoleHeldResponseB'Z%github.com/xaionaro-go/jni/proto/roleb\x06proto3"
+	"IsRoleHeld\x12\x17.role.IsRoleHeldRequest\x1a\x18.role.IsRoleHeldResponseB'Z%github.com/AndroidGoLab/jni/proto/roleb\x06proto3"
 
 var (
 	file_proto_role_role_proto_rawDescOnce sync.Once

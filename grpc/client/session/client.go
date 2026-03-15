@@ -5,7 +5,7 @@ package session
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/session"
+	pb "github.com/AndroidGoLab/jni/proto/session"
 	"google.golang.org/grpc"
 )
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
 )
 
 // TestGenerate_AllRealSpecs is an E2E integration test that loads all spec/java/*.yaml
@@ -16,7 +16,7 @@ func TestGenerate_AllRealSpecs(t *testing.T) {
 	specsDir := filepath.Join(root, "spec", "java")
 	overlaysDir := filepath.Join(root, "spec", "overlays", "java")
 	outputDir := t.TempDir()
-	goModule := "github.com/xaionaro-go/jni"
+	goModule := "github.com/AndroidGoLab/jni"
 
 	specFiles, err := filepath.Glob(filepath.Join(specsDir, "*.yaml"))
 	if err != nil {

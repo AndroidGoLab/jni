@@ -5,12 +5,12 @@ package wifi_p2p
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/net/wifi/p2p"
-	pb "github.com/xaionaro-go/jni/proto/wifi_p2p"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/net/wifi/p2p"
+	pb "github.com/AndroidGoLab/jni/proto/wifi_p2p"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

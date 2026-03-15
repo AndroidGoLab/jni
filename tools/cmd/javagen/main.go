@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	overlaysDir := flag.String("overlays", "spec/overlays/java", "directory containing per-package overlay YAMLs")
 	templatesDir := flag.String("templates", "templates/java", "directory containing Go templates")
 	outputDir := flag.String("output", ".", "base output directory")
-	goModule := flag.String("go-module", "github.com/xaionaro-go/jni", "Go module path (used to derive output directories from go_import)")
+	goModule := flag.String("go-module", "github.com/AndroidGoLab/jni", "Go module path (used to derive output directories from go_import)")
 	flag.Parse()
 
 	specs, err := filepath.Glob(filepath.Join(*specsDir, "*.yaml"))

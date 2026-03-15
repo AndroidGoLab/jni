@@ -2,7 +2,7 @@
 
 package inputmethod
 
-import "github.com/xaionaro-go/jni/view/inputmethod/consts"
+import "github.com/AndroidGoLab/jni/view/inputmethod/consts"
 
 const (
 	HandwritingDelegateFlagHomeDelegatorAllowed = consts.HandwritingDelegateFlagHomeDelegatorAllowed

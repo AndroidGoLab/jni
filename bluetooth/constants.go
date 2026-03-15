@@ -2,7 +2,7 @@
 
 package bluetooth
 
-import "github.com/xaionaro-go/jni/bluetooth/consts"
+import "github.com/AndroidGoLab/jni/bluetooth/consts"
 
 const (
 	Creator                           = consts.Creator

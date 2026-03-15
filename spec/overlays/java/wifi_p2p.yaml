@@ -1,5 +1,5 @@
 package: wifi_p2p
-go_import: "github.com/xaionaro-go/jni/net/wifi/p2p"
+go_import: "github.com/AndroidGoLab/jni/net/wifi/p2p"
 
 overrides:
   android.net.wifi.p2p.WifiP2pManager:

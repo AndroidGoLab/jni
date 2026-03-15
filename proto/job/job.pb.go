@@ -6582,7 +6582,7 @@ const file_proto_job_job_proto_rawDesc = "" +
 	"\fGetNamespace\x12\x18.job.GetNamespaceRequest\x1a\x19.job.GetNamespaceResponse\x12X\n" +
 	"\x13GetPendingJobReason\x12\x1f.job.GetPendingJobReasonRequest\x1a .job.GetPendingJobReasonResponse\x12[\n" +
 	"\x14GetPendingJobReasons\x12 .job.GetPendingJobReasonsRequest\x1a!.job.GetPendingJobReasonsResponse\x12p\n" +
-	"\x1bGetPendingJobReasonsHistory\x12'.job.GetPendingJobReasonsHistoryRequest\x1a(.job.GetPendingJobReasonsHistoryResponseB&Z$github.com/xaionaro-go/jni/proto/jobb\x06proto3"
+	"\x1bGetPendingJobReasonsHistory\x12'.job.GetPendingJobReasonsHistoryRequest\x1a(.job.GetPendingJobReasonsHistoryResponseB&Z$github.com/AndroidGoLab/jni/proto/jobb\x06proto3"
 
 var (
 	file_proto_job_job_proto_rawDescOnce sync.Once

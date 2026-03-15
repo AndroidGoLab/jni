@@ -466,7 +466,7 @@ const file_proto_build_build_proto_rawDesc = "" +
 	"\x12GetMajorSdkVersion\x12 .build.GetMajorSdkVersionRequest\x1a!.build.GetMajorSdkVersionResponse\x12Y\n" +
 	"\x12GetMinorSdkVersion\x12 .build.GetMinorSdkVersionRequest\x1a!.build.GetMinorSdkVersionResponse\x12P\n" +
 	"\x0fGetRadioVersion\x12\x1d.build.GetRadioVersionRequest\x1a\x1e.build.GetRadioVersionResponse\x12>\n" +
-	"\tGetSerial\x12\x17.build.GetSerialRequest\x1a\x18.build.GetSerialResponseB(Z&github.com/xaionaro-go/jni/proto/buildb\x06proto3"
+	"\tGetSerial\x12\x17.build.GetSerialRequest\x1a\x18.build.GetSerialResponseB(Z&github.com/AndroidGoLab/jni/proto/buildb\x06proto3"
 
 var (
 	file_proto_build_build_proto_rawDescOnce sync.Once

@@ -5,7 +5,7 @@ package blob
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/blob"
+	pb "github.com/AndroidGoLab/jni/proto/blob"
 	"google.golang.org/grpc"
 )
 

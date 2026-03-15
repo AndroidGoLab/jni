@@ -2,7 +2,7 @@
 
 package battery
 
-import "github.com/xaionaro-go/jni/os/battery/consts"
+import "github.com/AndroidGoLab/jni/os/battery/consts"
 
 const (
 	ActionCharging      = consts.ActionCharging

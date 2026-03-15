@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/xaionaro-go/jni/tools/pkg/jnigen"
+	"github.com/AndroidGoLab/jni/tools/pkg/jnigen"
 )
 
 func main() {

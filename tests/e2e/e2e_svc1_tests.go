@@ -5,17 +5,17 @@ package main
 import (
 	"fmt"
 
-	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/bluetooth"
-	"github.com/xaionaro-go/jni/content/clipboard"
-	"github.com/xaionaro-go/jni/content/pm"
-	"github.com/xaionaro-go/jni/net/wifi"
-	"github.com/xaionaro-go/jni/os/keyguard"
-	"github.com/xaionaro-go/jni/os/power"
-	"github.com/xaionaro-go/jni/os/storage"
-	"github.com/xaionaro-go/jni/os/vibrator"
-	"github.com/xaionaro-go/jni/telephony"
-	"github.com/xaionaro-go/jni/view/display"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/bluetooth"
+	"github.com/AndroidGoLab/jni/content/clipboard"
+	"github.com/AndroidGoLab/jni/content/pm"
+	"github.com/AndroidGoLab/jni/net/wifi"
+	"github.com/AndroidGoLab/jni/os/keyguard"
+	"github.com/AndroidGoLab/jni/os/power"
+	"github.com/AndroidGoLab/jni/os/storage"
+	"github.com/AndroidGoLab/jni/os/vibrator"
+	"github.com/AndroidGoLab/jni/telephony"
+	"github.com/AndroidGoLab/jni/view/display"
 )
 
 func testBluetoothWrapper(vm *jni.VM) error {

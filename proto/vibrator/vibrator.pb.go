@@ -1461,7 +1461,7 @@ const file_proto_vibrator_vibrator_proto_rawDesc = "" +
 	"\n" +
 	"Vibrate2_5\x12\x1b.vibrator.Vibrate2_5Request\x1a\x1c.vibrator.Vibrate2_5Response\x12G\n" +
 	"\n" +
-	"Vibrate3_6\x12\x1b.vibrator.Vibrate3_6Request\x1a\x1c.vibrator.Vibrate3_6ResponseB+Z)github.com/xaionaro-go/jni/proto/vibratorb\x06proto3"
+	"Vibrate3_6\x12\x1b.vibrator.Vibrate3_6Request\x1a\x1c.vibrator.Vibrate3_6ResponseB+Z)github.com/AndroidGoLab/jni/proto/vibratorb\x06proto3"
 
 var (
 	file_proto_vibrator_vibrator_proto_rawDescOnce sync.Once

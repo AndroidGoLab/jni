@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package nsd;
 
-option go_package = "github.com/xaionaro-go/jni/proto/nsd";
+option go_package = "github.com/AndroidGoLab/jni/proto/nsd";
 
 message DiscoverServices3Request {
   int64 arg0 = 1;

@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package wifi_rtt;
 
-option go_package = "github.com/xaionaro-go/jni/proto/wifi_rtt";
+option go_package = "github.com/AndroidGoLab/jni/proto/wifi_rtt";
 
 message DescribeContentsRequest {
 }

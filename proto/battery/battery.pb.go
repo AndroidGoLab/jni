@@ -476,7 +476,7 @@ const file_proto_battery_battery_proto_rawDesc = "" +
 	"\x0fGetLongProperty\x12\x1f.battery.GetLongPropertyRequest\x1a .battery.GetLongPropertyResponse\x12Z\n" +
 	"\x11GetStringProperty\x12!.battery.GetStringPropertyRequest\x1a\".battery.GetStringPropertyResponse\x12E\n" +
 	"\n" +
-	"IsCharging\x12\x1a.battery.IsChargingRequest\x1a\x1b.battery.IsChargingResponseB*Z(github.com/xaionaro-go/jni/proto/batteryb\x06proto3"
+	"IsCharging\x12\x1a.battery.IsChargingRequest\x1a\x1b.battery.IsChargingResponseB*Z(github.com/AndroidGoLab/jni/proto/batteryb\x06proto3"
 
 var (
 	file_proto_battery_battery_proto_rawDescOnce sync.Once

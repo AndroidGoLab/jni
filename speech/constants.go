@@ -2,7 +2,7 @@
 
 package speech
 
-import "github.com/xaionaro-go/jni/speech/consts"
+import "github.com/AndroidGoLab/jni/speech/consts"
 
 const (
 	ConfidenceScores                  = consts.ConfidenceScores

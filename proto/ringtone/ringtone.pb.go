@@ -2038,7 +2038,7 @@ const file_proto_ringtone_ringtone_proto_rawDesc = "" +
 	"\x14HasHapticChannels1_1\x12%.ringtone.HasHapticChannels1_1Request\x1a&.ringtone.HasHapticChannels1_1Response\x12D\n" +
 	"\tIsDefault\x12\x1a.ringtone.IsDefaultRequest\x1a\x1b.ringtone.IsDefaultResponse\x12k\n" +
 	"\x16OpenDefaultRingtoneUri\x12'.ringtone.OpenDefaultRingtoneUriRequest\x1a(.ringtone.OpenDefaultRingtoneUriResponse\x12z\n" +
-	"\x1bSetActualDefaultRingtoneUri\x12,.ringtone.SetActualDefaultRingtoneUriRequest\x1a-.ringtone.SetActualDefaultRingtoneUriResponseB+Z)github.com/xaionaro-go/jni/proto/ringtoneb\x06proto3"
+	"\x1bSetActualDefaultRingtoneUri\x12,.ringtone.SetActualDefaultRingtoneUriRequest\x1a-.ringtone.SetActualDefaultRingtoneUriResponseB+Z)github.com/AndroidGoLab/jni/proto/ringtoneb\x06proto3"
 
 var (
 	file_proto_ringtone_ringtone_proto_rawDescOnce sync.Once

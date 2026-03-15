@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package settings;
 
-option go_package = "github.com/xaionaro-go/jni/proto/settings";
+option go_package = "github.com/AndroidGoLab/jni/proto/settings";
 
 message GetIntSystemRequest {
   int64 resolver = 1;

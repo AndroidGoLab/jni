@@ -2,7 +2,7 @@
 
 package nfc
 
-import "github.com/xaionaro-go/jni/nfc/consts"
+import "github.com/AndroidGoLab/jni/nfc/consts"
 
 const (
 	Creator                    = consts.Creator

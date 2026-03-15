@@ -8,7 +8,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
-	"github.com/xaionaro-go/jni/grpc/server/acl"
+	"github.com/AndroidGoLab/jni/grpc/server/acl"
 )
 
 var (

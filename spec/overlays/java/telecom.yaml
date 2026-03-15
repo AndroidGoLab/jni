@@ -1,5 +1,5 @@
 package: telecom
-go_import: "github.com/xaionaro-go/jni/telecom"
+go_import: "github.com/AndroidGoLab/jni/telecom"
 
 overrides:
   android.telecom.TelecomManager:

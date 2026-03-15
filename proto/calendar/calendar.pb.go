@@ -166,7 +166,7 @@ const file_proto_calendar_calendar_proto_rawDesc = "" +
 	".StartViewCalendarEventInManagedProfileResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result2\xb7\x01\n" +
 	"\x17CalendarContractService\x12\x9b\x01\n" +
-	"&StartViewCalendarEventInManagedProfile\x127.calendar.StartViewCalendarEventInManagedProfileRequest\x1a8.calendar.StartViewCalendarEventInManagedProfileResponseB+Z)github.com/xaionaro-go/jni/proto/calendarb\x06proto3"
+	"&StartViewCalendarEventInManagedProfile\x127.calendar.StartViewCalendarEventInManagedProfileRequest\x1a8.calendar.StartViewCalendarEventInManagedProfileResponseB+Z)github.com/AndroidGoLab/jni/proto/calendarb\x06proto3"
 
 var (
 	file_proto_calendar_calendar_proto_rawDescOnce sync.Once

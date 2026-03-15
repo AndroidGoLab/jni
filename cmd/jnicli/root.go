@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/xaionaro-go/jni/grpc/client"
+	"github.com/AndroidGoLab/jni/grpc/client"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

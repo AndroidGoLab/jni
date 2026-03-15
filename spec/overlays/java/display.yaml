@@ -1,5 +1,5 @@
 package: display
-go_import: "github.com/xaionaro-go/jni/view/display"
+go_import: "github.com/AndroidGoLab/jni/view/display"
 
 # Combine WindowManager + Display + DisplayMetrics into single Info struct
 composite_type:

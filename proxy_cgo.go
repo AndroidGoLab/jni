@@ -103,7 +103,7 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/xaionaro-go/jni/capi"
+	"github.com/AndroidGoLab/jni/capi"
 )
 
 func init() {

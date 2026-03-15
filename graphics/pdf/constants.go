@@ -2,7 +2,7 @@
 
 package pdf
 
-import "github.com/xaionaro-go/jni/graphics/pdf/consts"
+import "github.com/AndroidGoLab/jni/graphics/pdf/consts"
 
 const (
 	Creator                             = consts.Creator

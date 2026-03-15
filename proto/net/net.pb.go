@@ -4920,7 +4920,7 @@ const file_proto_net_net_proto_rawDesc = "" +
 	"\fHasTransport\x12\x18.net.HasTransportRequest\x1a\x19.net.HasTransportResponse\x127\n" +
 	"\bHashCode\x12\x14.net.HashCodeRequest\x1a\x15.net.HashCodeResponse\x127\n" +
 	"\bToString\x12\x14.net.ToStringRequest\x1a\x15.net.ToStringResponse\x12F\n" +
-	"\rWriteToParcel\x12\x19.net.WriteToParcelRequest\x1a\x1a.net.WriteToParcelResponseB&Z$github.com/xaionaro-go/jni/proto/netb\x06proto3"
+	"\rWriteToParcel\x12\x19.net.WriteToParcelRequest\x1a\x1a.net.WriteToParcelResponseB&Z$github.com/AndroidGoLab/jni/proto/netb\x06proto3"
 
 var (
 	file_proto_net_net_proto_rawDescOnce sync.Once

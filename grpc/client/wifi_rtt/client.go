@@ -5,7 +5,7 @@ package wifi_rtt
 import (
 	"context"
 
-	pb "github.com/xaionaro-go/jni/proto/wifi_rtt"
+	pb "github.com/AndroidGoLab/jni/proto/wifi_rtt"
 	"google.golang.org/grpc"
 )
 

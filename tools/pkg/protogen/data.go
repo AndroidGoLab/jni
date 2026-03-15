@@ -3,7 +3,7 @@ package protogen
 import (
 	"strings"
 
-	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/AndroidGoLab/jni/tools/pkg/javagen"
 )
 
 // ProtoData holds all information needed to render a .proto file.

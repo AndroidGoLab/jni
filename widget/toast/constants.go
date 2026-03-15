@@ -2,7 +2,7 @@
 
 package toast
 
-import "github.com/xaionaro-go/jni/widget/toast/consts"
+import "github.com/AndroidGoLab/jni/widget/toast/consts"
 
 const (
 	LengthLong  = consts.LengthLong

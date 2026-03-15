@@ -2916,7 +2916,7 @@ const file_proto_accounts_accounts_proto_rawDesc = "" +
 	"\vSetUserData\x12\x1c.accounts.SetUserDataRequest\x1a\x1d.accounts.SetUserDataResponse\x122\n" +
 	"\x03Get\x12\x14.accounts.GetRequest\x1a\x15.accounts.GetResponse\x12n\n" +
 	"\x17NewChooseAccountIntent8\x12(.accounts.NewChooseAccountIntent8Request\x1a).accounts.NewChooseAccountIntent8Response\x12t\n" +
-	"\x19NewChooseAccountIntent7_1\x12*.accounts.NewChooseAccountIntent7_1Request\x1a+.accounts.NewChooseAccountIntent7_1ResponseB+Z)github.com/xaionaro-go/jni/proto/accountsb\x06proto3"
+	"\x19NewChooseAccountIntent7_1\x12*.accounts.NewChooseAccountIntent7_1Request\x1a+.accounts.NewChooseAccountIntent7_1ResponseB+Z)github.com/AndroidGoLab/jni/proto/accountsb\x06proto3"
 
 var (
 	file_proto_accounts_accounts_proto_rawDescOnce sync.Once

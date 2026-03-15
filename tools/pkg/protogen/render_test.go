@@ -238,7 +238,7 @@ func TestRenderProto_Integration(t *testing.T) {
 	specPath := filepath.Join(root, "spec", "java", "location.yaml")
 	overlayPath := filepath.Join(root, "spec", "overlays", "java", "location.yaml")
 	outputDir := t.TempDir()
-	goModule := "github.com/xaionaro-go/jni"
+	goModule := "github.com/AndroidGoLab/jni"
 
 	if err := Generate(specPath, overlayPath, outputDir, goModule); err != nil {
 		t.Fatalf("Generate: %v", err)
@@ -269,7 +269,7 @@ func TestRenderProto_BluetoothIntegration(t *testing.T) {
 	specPath := filepath.Join(root, "spec", "java", "bluetooth.yaml")
 	overlayPath := filepath.Join(root, "spec", "overlays", "java", "bluetooth.yaml")
 	outputDir := t.TempDir()
-	goModule := "github.com/xaionaro-go/jni"
+	goModule := "github.com/AndroidGoLab/jni"
 
 	if err := Generate(specPath, overlayPath, outputDir, goModule); err != nil {
 		t.Fatalf("Generate: %v", err)

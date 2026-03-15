@@ -5,12 +5,12 @@ package net
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
+	"github.com/AndroidGoLab/jni"
 
-	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/net"
-	pb "github.com/xaionaro-go/jni/proto/net"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/handlestore"
+	jnipkg "github.com/AndroidGoLab/jni/net"
+	pb "github.com/AndroidGoLab/jni/proto/net"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

@@ -2,7 +2,7 @@
 
 package nsd
 
-import "github.com/xaionaro-go/jni/net/nsd/consts"
+import "github.com/AndroidGoLab/jni/net/nsd/consts"
 
 const (
 	ActionNsdStateChanged = consts.ActionNsdStateChanged

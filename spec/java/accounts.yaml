@@ -1,5 +1,5 @@
 package: accounts
-go_import: github.com/xaionaro-go/jni/accounts
+go_import: github.com/AndroidGoLab/jni/accounts
 classes:
     - java_class: android.accounts.AccountManager
       go_type: accountManager

@@ -7926,7 +7926,7 @@ const file_proto_wifi_p2p_wifi_p2p_proto_rawDesc = "" +
 	"\x0fGetSecurityType\x12 .wifi_p2p.GetSecurityTypeRequest\x1a!.wifi_p2p.GetSecurityTypeResponse\x12M\n" +
 	"\fIsGroupOwner\x12\x1d.wifi_p2p.IsGroupOwnerRequest\x1a\x1e.wifi_p2p.IsGroupOwnerResponse\x12A\n" +
 	"\bToString\x12\x19.wifi_p2p.ToStringRequest\x1a\x1a.wifi_p2p.ToStringResponse\x12P\n" +
-	"\rWriteToParcel\x12\x1e.wifi_p2p.WriteToParcelRequest\x1a\x1f.wifi_p2p.WriteToParcelResponseB+Z)github.com/xaionaro-go/jni/proto/wifi_p2pb\x06proto3"
+	"\rWriteToParcel\x12\x1e.wifi_p2p.WriteToParcelRequest\x1a\x1f.wifi_p2p.WriteToParcelResponseB+Z)github.com/AndroidGoLab/jni/proto/wifi_p2pb\x06proto3"
 
 var (
 	file_proto_wifi_p2p_wifi_p2p_proto_rawDescOnce sync.Once

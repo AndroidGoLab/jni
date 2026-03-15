@@ -2,7 +2,7 @@
 
 package contacts
 
-import "github.com/xaionaro-go/jni/provider/contacts/consts"
+import "github.com/AndroidGoLab/jni/provider/contacts/consts"
 
 const (
 	Authority               = consts.Authority

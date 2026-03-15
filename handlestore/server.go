@@ -3,8 +3,8 @@ package handlestore
 import (
 	"context"
 
-	"github.com/xaionaro-go/jni"
-	pb "github.com/xaionaro-go/jni/proto/handlestore"
+	"github.com/AndroidGoLab/jni"
+	pb "github.com/AndroidGoLab/jni/proto/handlestore"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
