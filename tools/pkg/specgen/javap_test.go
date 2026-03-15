@@ -1,9 +1,8 @@
 package specgen
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestSplitRespectingGenerics(t *testing.T) {
@@ -55,7 +54,9 @@ func TestSplitRespectingGenerics(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			result := splitRespectingGenerics(tc.input)
-			assert.Equal(t, tc.expected, result)
+			if !reflect.DeepEqual(result, tc.expected) {
+				t.Errorf("got %v, want %v", result, tc.expected)
+			}
 		})
 	}
 }
@@ -104,7 +105,9 @@ func TestParseParams(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			result := parseParams(tc.input)
-			assert.Equal(t, tc.expected, result)
+			if !reflect.DeepEqual(result, tc.expected) {
+				t.Errorf("got %v, want %v", result, tc.expected)
+			}
 		})
 	}
 }
