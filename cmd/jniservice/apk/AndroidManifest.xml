@@ -78,6 +78,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".PermissionDialogActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog" />
+
         <service
             android:name=".JNIServiceForeground"
             android:exported="false"
