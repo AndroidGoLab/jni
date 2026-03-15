@@ -12,6 +12,11 @@ public class JNIServiceForeground extends Service {
     private static final int NOTIFICATION_ID = 1;
     private static boolean loaded = false;
 
+    // Native method to pass the APK's Application context to Go.
+    // Called after System.loadLibrary so the Go side can store a handle
+    // to the real app context (with the correct ClassLoader and permissions).
+    private static native void setAppContext(Object context);
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,6 +39,11 @@ public class JNIServiceForeground extends Service {
             try {
                 System.loadLibrary("jniservice");
                 android.util.Log.i("jniservice", "native library loaded, gRPC server started");
+
+                // Pass the real app context to the Go side. getApplicationContext()
+                // returns the Application with the APK's PathClassLoader and permissions.
+                setAppContext(getApplicationContext());
+                android.util.Log.i("jniservice", "app context passed to native side");
             } catch (Throwable t) {
                 android.util.Log.e("jniservice", "failed to load native library", t);
             }

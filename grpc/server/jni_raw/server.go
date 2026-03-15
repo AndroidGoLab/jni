@@ -7,6 +7,7 @@ package jni_raw
 import (
 	"context"
 	"fmt"
+	"strings"
 	"unsafe"
 
 	"github.com/xaionaro-go/jni"
@@ -21,6 +22,11 @@ type Server struct {
 	pb.UnimplementedJNIServiceServer
 	VM      *jni.VM
 	Handles *handlestore.HandleStore
+	// AppClassLoader is an optional handle to the APK's ClassLoader.
+	// When set, FindClass falls back to ClassLoader.loadClass() if the
+	// JNI FindClass fails (native threads use BootClassLoader which
+	// can't find APK classes).
+	AppClassLoader int64
 }
 
 func (s *Server) withEnv(fn func(env *jni.Env) error) error {
@@ -126,10 +132,50 @@ func (s *Server) FindClass(_ context.Context, req *pb.FindClassRequest) (*pb.Fin
 	var handle int64
 	if err := s.withEnv(func(env *jni.Env) error {
 		cls, err := env.FindClass(req.GetName())
-		if err != nil {
+		if err == nil {
+			handle = s.putObject(env, &cls.Object)
+			return nil
+		}
+
+		// Fallback: native threads use BootClassLoader which can't find APK
+		// classes. Use the stored AppClassLoader (if available) to retry via
+		// ClassLoader.loadClass(). The class name uses dots, not slashes.
+		if s.AppClassLoader == 0 {
 			return err
 		}
-		handle = s.putObject(env, &cls.Object)
+		env.ExceptionClear()
+
+		clObj := s.getObject(s.AppClassLoader)
+		if clObj == nil {
+			return err
+		}
+
+		clCls, findErr := env.FindClass("java/lang/ClassLoader")
+		if findErr != nil {
+			return err
+		}
+		loadMID, findErr := env.GetMethodID(clCls, "loadClass", "(Ljava/lang/String;)Ljava/lang/Class;")
+		if findErr != nil {
+			return err
+		}
+
+		// Convert JNI name (e.g. "center/dx/jni/jniservice/CameraCapture")
+		// to Java name (e.g. "center.dx.jni.jniservice.CameraCapture").
+		javaName := strings.ReplaceAll(req.GetName(), "/", ".")
+		nameStr, findErr := env.NewStringUTF(javaName)
+		if findErr != nil {
+			return err
+		}
+
+		classObj, findErr := env.CallObjectMethod(clObj, loadMID, jni.ObjectValue(&nameStr.Object))
+		if findErr != nil {
+			return findErr
+		}
+		if classObj == nil || classObj.Ref() == 0 {
+			return err
+		}
+
+		handle = s.putObject(env, classObj)
 		return nil
 	}); err != nil {
 		return nil, status.Errorf(codes.Internal, "FindClass: %v", err)

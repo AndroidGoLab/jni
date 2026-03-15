@@ -47,6 +47,63 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
+// globalVM, globalHandles, and globalJNIServer are set during runServer so that
+// setAppContext (called later from Java) can store the APK's Application context
+// and ClassLoader.
+var (
+	globalVM        *jni.VM
+	globalHandles   *handlestore.HandleStore
+	globalJNIServer *jnirawserver.Server
+)
+
+// Java_center_dx_jni_jniservice_JNIServiceForeground_setAppContext is the JNI-mangled name
+// for center.dx.jni.jniservice.JNIServiceForeground.setAppContext(Object).
+//
+//export Java_center_dx_jni_jniservice_JNIServiceForeground_setAppContext
+func Java_center_dx_jni_jniservice_JNIServiceForeground_setAppContext(cenv *C.JNIEnv, cls C.jclass, ctx C.jobject) {
+	// Called from Java after System.loadLibrary in APK mode.
+	// Stores the APK's Application context (with the correct ClassLoader
+	// and permissions) in the HandleStore.
+	if globalVM == nil || globalHandles == nil {
+		fmt.Fprintf(os.Stderr, "jniservice: setAppContext called before runServer\n")
+		return
+	}
+	globalVM.Do(func(goEnv *jni.Env) error {
+		// ctx is C.jobject from this package's CGO. jni.ObjectFromRef takes
+		// capi.Object (= C.jobject from capi's CGO). Both are C pointer types
+		// so unsafe conversion is safe.
+		obj := jni.ObjectFromRef(*(*jni.CAPIObject)(unsafe.Pointer(&ctx)))
+		handle := globalHandles.Put(goEnv, obj)
+		fmt.Fprintf(os.Stderr, "jniservice: APK app context stored (handle=%d)\n", handle)
+
+		// Also store the APK's ClassLoader so FindClass can fall back to it
+		// for APK-specific classes (JNI FindClass from native threads uses
+		// BootClassLoader which can't see APK classes).
+		ctxCls, err := goEnv.FindClass("android/content/Context")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "jniservice: WARNING: can't find Context class: %v\n", err)
+			return nil
+		}
+		getClMID, err := goEnv.GetMethodID(ctxCls, "getClassLoader", "()Ljava/lang/ClassLoader;")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "jniservice: WARNING: can't find getClassLoader: %v\n", err)
+			return nil
+		}
+		clObj, err := goEnv.CallObjectMethod(obj, getClMID)
+		if err != nil || clObj == nil || clObj.Ref() == 0 {
+			fmt.Fprintf(os.Stderr, "jniservice: WARNING: getClassLoader failed: %v\n", err)
+			return nil
+		}
+		clHandle := globalHandles.Put(goEnv, clObj)
+		if globalJNIServer != nil {
+			globalJNIServer.AppClassLoader = clHandle
+		}
+		fmt.Fprintf(os.Stderr, "jniservice: APK ClassLoader stored (handle=%d)\n", clHandle)
+
+		return nil
+	})
+}
+
 //export runServer
 func runServer(cvm *C.JavaVM) {
 	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
@@ -65,6 +122,9 @@ func runServer(cvm *C.JavaVM) {
 	mtlsEnabled := os.Getenv("JNISERVICE_MTLS") == "1"
 
 	handles := handlestore.New()
+
+	globalVM = vm
+	globalHandles = handles
 
 	// Initialize Android system context (Looper + ActivityThread).
 	// This makes the Context handle available for Android API calls.
@@ -144,10 +204,11 @@ func runServer(cvm *C.JavaVM) {
 	}
 
 	// Register the raw JNI service for low-level JNI access.
-	jnirawpb.RegisterJNIServiceServer(grpcServer, &jnirawserver.Server{
+	globalJNIServer = &jnirawserver.Server{
 		VM:      vm,
 		Handles: handles,
-	})
+	}
+	jnirawpb.RegisterJNIServiceServer(grpcServer, globalJNIServer)
 	fmt.Fprintf(os.Stderr, "jniservice: registered jni_raw service\n")
 
 	svcInfo := grpcServer.GetServiceInfo()
