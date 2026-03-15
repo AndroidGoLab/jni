@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/xaionaro-go/jni/android"
+	appconsts "github.com/xaionaro-go/jni/app/consts"
 	pb "github.com/xaionaro-go/jni/proto/jni_raw"
 	"google.golang.org/grpc"
 )
@@ -469,16 +469,16 @@ func getCameraID(j *jniCaller, appContextHandle int64, index int) (string, int64
 		return "", 0, fmt.Errorf("getting getSystemService method: %w", err)
 	}
 
-	cameraServiceStr, err := j.newString(android.AppCameraService)
+	cameraServiceStr, err := j.newString(appconsts.CameraService)
 	if err != nil {
 		return "", 0, fmt.Errorf("creating camera service string: %w", err)
 	}
 	cameraManager, err := j.callObjectMethod(appContextHandle, getSystemServiceMid, objVal(cameraServiceStr))
 	if err != nil {
-		return "", 0, fmt.Errorf("calling getSystemService(%q): %w", android.AppCameraService, err)
+		return "", 0, fmt.Errorf("calling getSystemService(%q): %w", appconsts.CameraService, err)
 	}
 	if cameraManager == 0 {
-		return "", 0, fmt.Errorf("getSystemService(%q) returned null", android.AppCameraService)
+		return "", 0, fmt.Errorf("getSystemService(%q) returned null", appconsts.CameraService)
 	}
 
 	cameraMgrCls, err := j.findClass("android/hardware/camera2/CameraManager")

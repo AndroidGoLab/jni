@@ -4,7 +4,8 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/xaionaro-go/jni/android"
+	appconsts "github.com/xaionaro-go/jni/app/consts"
+	locationconsts "github.com/xaionaro-go/jni/location/consts"
 	pb "github.com/xaionaro-go/jni/proto/jni_raw"
 )
 
@@ -35,7 +36,7 @@ var locationGetCmd = &cobra.Command{
 			return fmt.Errorf("getting getSystemService: %w", err)
 		}
 
-		locStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: android.AppLocationService})
+		locStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: appconsts.LocationService})
 		if err != nil {
 			return err
 		}
@@ -85,10 +86,10 @@ var locationGetCmd = &cobra.Command{
 		})
 
 		providers := []string{
-			android.LocationGpsProvider,
-			android.LocationNetworkProvider,
-			android.LocationFusedProvider,
-			android.LocationPassiveProvider,
+			locationconsts.GpsProvider,
+			locationconsts.NetworkProvider,
+			locationconsts.FusedProvider,
+			locationconsts.PassiveProvider,
 		}
 		for _, provider := range providers {
 			provStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: provider})

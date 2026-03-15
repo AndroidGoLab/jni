@@ -45,9 +45,6 @@ func TestShouldRender(t *testing.T) {
 	if shouldRender("callbacks.go.tmpl", empty) {
 		t.Error("shouldRender(callbacks.go.tmpl, empty) should be false")
 	}
-	if shouldRender("constants.go.tmpl", empty) {
-		t.Error("shouldRender(constants.go.tmpl, empty) should be false")
-	}
 
 	// package.go.tmpl and init.go.tmpl always render.
 	if !shouldRender("package.go.tmpl", empty) {
@@ -66,7 +63,6 @@ func TestTemplateOutputFile(t *testing.T) {
 		{"package.go.tmpl", "doc.go"},
 		{"manager.go.tmpl", "manager.go"},
 		{"callbacks.go.tmpl", "callbacks.go"},
-		{"constants.go.tmpl", "constants.go"},
 		{"init.go.tmpl", "init.go"},
 	}
 	for _, tt := range tests {

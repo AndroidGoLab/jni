@@ -15,8 +15,7 @@ func TestJavaTemplatesParse(t *testing.T) {
 	}
 	for _, name := range []string{
 		"package.go.tmpl", "init.go.tmpl", "class.go.tmpl",
-		"callbacks.go.tmpl", "type.go.tmpl",
-		"constants.go.tmpl",
+		"callbacks.go.tmpl", "type.go.tmpl", "constants.go.tmpl",
 	} {
 		if templates.Lookup(name) == nil {
 			t.Errorf("template %s not found", name)
@@ -51,7 +50,7 @@ func TestJavaTemplatesRender(t *testing.T) {
 		},
 		{
 			tmpl:     "constants.go.tmpl",
-			contains: []string{"GPS", "Network"},
+			contains: []string{"package location", "GPS", "Network"},
 		},
 	}
 

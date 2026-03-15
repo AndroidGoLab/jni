@@ -33,11 +33,4 @@ func main() {
 			log.Fatalf("generate %s: %v", baseName, err)
 		}
 	}
-
-	// Generate consolidated android/constants.go with all constants
-	// from every spec, prefixed by package name. This file is CGO-free
-	// so non-CGO code (e.g., jnicli) can import it.
-	if err := javagen.GenerateConsolidatedConstants(specs, *overlaysDir, *outputDir); err != nil {
-		log.Fatalf("generate consolidated constants: %v", err)
-	}
 }
