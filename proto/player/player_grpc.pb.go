@@ -57,8 +57,8 @@ const (
 	MediaPlayerService_SetAudioStreamType_FullMethodName                    = "/player.MediaPlayerService/SetAudioStreamType"
 	MediaPlayerService_SetAuxEffectSendLevel_FullMethodName                 = "/player.MediaPlayerService/SetAuxEffectSendLevel"
 	MediaPlayerService_SetDataSource2_FullMethodName                        = "/player.MediaPlayerService/SetDataSource2"
-	MediaPlayerService_SetDataSource4_1_FullMethodName                      = "/player.MediaPlayerService/SetDataSource4_1"
-	MediaPlayerService_SetDataSource5_2_FullMethodName                      = "/player.MediaPlayerService/SetDataSource5_2"
+	MediaPlayerService_SetDataSource3_1_FullMethodName                      = "/player.MediaPlayerService/SetDataSource3_1"
+	MediaPlayerService_SetDataSource4_2_FullMethodName                      = "/player.MediaPlayerService/SetDataSource4_2"
 	MediaPlayerService_SetDataSource1_3_FullMethodName                      = "/player.MediaPlayerService/SetDataSource1_3"
 	MediaPlayerService_SetDataSource1_4_FullMethodName                      = "/player.MediaPlayerService/SetDataSource1_4"
 	MediaPlayerService_SetDataSource1_5_FullMethodName                      = "/player.MediaPlayerService/SetDataSource1_5"
@@ -135,8 +135,8 @@ type MediaPlayerServiceClient interface {
 	SetAudioStreamType(ctx context.Context, in *SetAudioStreamTypeRequest, opts ...grpc.CallOption) (*SetAudioStreamTypeResponse, error)
 	SetAuxEffectSendLevel(ctx context.Context, in *SetAuxEffectSendLevelRequest, opts ...grpc.CallOption) (*SetAuxEffectSendLevelResponse, error)
 	SetDataSource2(ctx context.Context, in *SetDataSource2Request, opts ...grpc.CallOption) (*SetDataSource2Response, error)
-	SetDataSource4_1(ctx context.Context, in *SetDataSource4_1Request, opts ...grpc.CallOption) (*SetDataSource4_1Response, error)
-	SetDataSource5_2(ctx context.Context, in *SetDataSource5_2Request, opts ...grpc.CallOption) (*SetDataSource5_2Response, error)
+	SetDataSource3_1(ctx context.Context, in *SetDataSource3_1Request, opts ...grpc.CallOption) (*SetDataSource3_1Response, error)
+	SetDataSource4_2(ctx context.Context, in *SetDataSource4_2Request, opts ...grpc.CallOption) (*SetDataSource4_2Response, error)
 	SetDataSource1_3(ctx context.Context, in *SetDataSource1_3Request, opts ...grpc.CallOption) (*SetDataSource1_3Response, error)
 	SetDataSource1_4(ctx context.Context, in *SetDataSource1_4Request, opts ...grpc.CallOption) (*SetDataSource1_4Response, error)
 	SetDataSource1_5(ctx context.Context, in *SetDataSource1_5Request, opts ...grpc.CallOption) (*SetDataSource1_5Response, error)
@@ -541,20 +541,20 @@ func (c *mediaPlayerServiceClient) SetDataSource2(ctx context.Context, in *SetDa
 	return out, nil
 }
 
-func (c *mediaPlayerServiceClient) SetDataSource4_1(ctx context.Context, in *SetDataSource4_1Request, opts ...grpc.CallOption) (*SetDataSource4_1Response, error) {
+func (c *mediaPlayerServiceClient) SetDataSource3_1(ctx context.Context, in *SetDataSource3_1Request, opts ...grpc.CallOption) (*SetDataSource3_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDataSource4_1Response)
-	err := c.cc.Invoke(ctx, MediaPlayerService_SetDataSource4_1_FullMethodName, in, out, cOpts...)
+	out := new(SetDataSource3_1Response)
+	err := c.cc.Invoke(ctx, MediaPlayerService_SetDataSource3_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *mediaPlayerServiceClient) SetDataSource5_2(ctx context.Context, in *SetDataSource5_2Request, opts ...grpc.CallOption) (*SetDataSource5_2Response, error) {
+func (c *mediaPlayerServiceClient) SetDataSource4_2(ctx context.Context, in *SetDataSource4_2Request, opts ...grpc.CallOption) (*SetDataSource4_2Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDataSource5_2Response)
-	err := c.cc.Invoke(ctx, MediaPlayerService_SetDataSource5_2_FullMethodName, in, out, cOpts...)
+	out := new(SetDataSource4_2Response)
+	err := c.cc.Invoke(ctx, MediaPlayerService_SetDataSource4_2_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -941,8 +941,8 @@ type MediaPlayerServiceServer interface {
 	SetAudioStreamType(context.Context, *SetAudioStreamTypeRequest) (*SetAudioStreamTypeResponse, error)
 	SetAuxEffectSendLevel(context.Context, *SetAuxEffectSendLevelRequest) (*SetAuxEffectSendLevelResponse, error)
 	SetDataSource2(context.Context, *SetDataSource2Request) (*SetDataSource2Response, error)
-	SetDataSource4_1(context.Context, *SetDataSource4_1Request) (*SetDataSource4_1Response, error)
-	SetDataSource5_2(context.Context, *SetDataSource5_2Request) (*SetDataSource5_2Response, error)
+	SetDataSource3_1(context.Context, *SetDataSource3_1Request) (*SetDataSource3_1Response, error)
+	SetDataSource4_2(context.Context, *SetDataSource4_2Request) (*SetDataSource4_2Response, error)
 	SetDataSource1_3(context.Context, *SetDataSource1_3Request) (*SetDataSource1_3Response, error)
 	SetDataSource1_4(context.Context, *SetDataSource1_4Request) (*SetDataSource1_4Response, error)
 	SetDataSource1_5(context.Context, *SetDataSource1_5Request) (*SetDataSource1_5Response, error)
@@ -1095,11 +1095,11 @@ func (UnimplementedMediaPlayerServiceServer) SetAuxEffectSendLevel(context.Conte
 func (UnimplementedMediaPlayerServiceServer) SetDataSource2(context.Context, *SetDataSource2Request) (*SetDataSource2Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetDataSource2 not implemented")
 }
-func (UnimplementedMediaPlayerServiceServer) SetDataSource4_1(context.Context, *SetDataSource4_1Request) (*SetDataSource4_1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDataSource4_1 not implemented")
+func (UnimplementedMediaPlayerServiceServer) SetDataSource3_1(context.Context, *SetDataSource3_1Request) (*SetDataSource3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDataSource3_1 not implemented")
 }
-func (UnimplementedMediaPlayerServiceServer) SetDataSource5_2(context.Context, *SetDataSource5_2Request) (*SetDataSource5_2Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDataSource5_2 not implemented")
+func (UnimplementedMediaPlayerServiceServer) SetDataSource4_2(context.Context, *SetDataSource4_2Request) (*SetDataSource4_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDataSource4_2 not implemented")
 }
 func (UnimplementedMediaPlayerServiceServer) SetDataSource1_3(context.Context, *SetDataSource1_3Request) (*SetDataSource1_3Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetDataSource1_3 not implemented")
@@ -1872,38 +1872,38 @@ func _MediaPlayerService_SetDataSource2_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaPlayerService_SetDataSource4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDataSource4_1Request)
+func _MediaPlayerService_SetDataSource3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDataSource3_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaPlayerServiceServer).SetDataSource4_1(ctx, in)
+		return srv.(MediaPlayerServiceServer).SetDataSource3_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaPlayerService_SetDataSource4_1_FullMethodName,
+		FullMethod: MediaPlayerService_SetDataSource3_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaPlayerServiceServer).SetDataSource4_1(ctx, req.(*SetDataSource4_1Request))
+		return srv.(MediaPlayerServiceServer).SetDataSource3_1(ctx, req.(*SetDataSource3_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MediaPlayerService_SetDataSource5_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDataSource5_2Request)
+func _MediaPlayerService_SetDataSource4_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDataSource4_2Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MediaPlayerServiceServer).SetDataSource5_2(ctx, in)
+		return srv.(MediaPlayerServiceServer).SetDataSource4_2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MediaPlayerService_SetDataSource5_2_FullMethodName,
+		FullMethod: MediaPlayerService_SetDataSource4_2_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaPlayerServiceServer).SetDataSource5_2(ctx, req.(*SetDataSource5_2Request))
+		return srv.(MediaPlayerServiceServer).SetDataSource4_2(ctx, req.(*SetDataSource4_2Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2672,12 +2672,12 @@ var MediaPlayerService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MediaPlayerService_SetDataSource2_Handler,
 		},
 		{
-			MethodName: "SetDataSource4_1",
-			Handler:    _MediaPlayerService_SetDataSource4_1_Handler,
+			MethodName: "SetDataSource3_1",
+			Handler:    _MediaPlayerService_SetDataSource3_1_Handler,
 		},
 		{
-			MethodName: "SetDataSource5_2",
-			Handler:    _MediaPlayerService_SetDataSource5_2_Handler,
+			MethodName: "SetDataSource4_2",
+			Handler:    _MediaPlayerService_SetDataSource4_2_Handler,
 		},
 		{
 			MethodName: "SetDataSource1_3",

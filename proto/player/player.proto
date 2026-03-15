@@ -269,23 +269,23 @@ message SetDataSource2Request {
 message SetDataSource2Response {
 }
 
-message SetDataSource4_1Request {
+message SetDataSource3_1Request {
   int64 arg0 = 1;
   int64 arg1 = 2;
   int64 arg2 = 3;
 }
 
-message SetDataSource4_1Response {
+message SetDataSource3_1Response {
 }
 
-message SetDataSource5_2Request {
+message SetDataSource4_2Request {
   int64 arg0 = 1;
   int64 arg1 = 2;
   int64 arg2 = 3;
   int64 arg3 = 4;
 }
 
-message SetDataSource5_2Response {
+message SetDataSource4_2Response {
 }
 
 message SetDataSource1_3Request {
@@ -583,8 +583,8 @@ service MediaPlayerService {
   rpc SetAudioStreamType (SetAudioStreamTypeRequest) returns (SetAudioStreamTypeResponse);
   rpc SetAuxEffectSendLevel (SetAuxEffectSendLevelRequest) returns (SetAuxEffectSendLevelResponse);
   rpc SetDataSource2 (SetDataSource2Request) returns (SetDataSource2Response);
-  rpc SetDataSource4_1 (SetDataSource4_1Request) returns (SetDataSource4_1Response);
-  rpc SetDataSource5_2 (SetDataSource5_2Request) returns (SetDataSource5_2Response);
+  rpc SetDataSource3_1 (SetDataSource3_1Request) returns (SetDataSource3_1Response);
+  rpc SetDataSource4_2 (SetDataSource4_2Request) returns (SetDataSource4_2Response);
   rpc SetDataSource1_3 (SetDataSource1_3Request) returns (SetDataSource1_3Response);
   rpc SetDataSource1_4 (SetDataSource1_4Request) returns (SetDataSource1_4Response);
   rpc SetDataSource1_5 (SetDataSource1_5Request) returns (SetDataSource1_5Response);

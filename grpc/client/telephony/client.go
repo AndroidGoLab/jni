@@ -1428,9 +1428,9 @@ func (c *Client) UpdateAvailableNetworks(ctx context.Context, arg0 int64, arg1 i
 	return err
 }
 
-// UploadCallComposerPicture5 calls the UploadCallComposerPicture5 RPC.
-func (c *Client) UploadCallComposerPicture5(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64) error {
-	_, err := c.svc.UploadCallComposerPicture5(ctx, &pb.UploadCallComposerPicture5Request{
+// UploadCallComposerPicture4 calls the UploadCallComposerPicture4 RPC.
+func (c *Client) UploadCallComposerPicture4(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64) error {
+	_, err := c.svc.UploadCallComposerPicture4(ctx, &pb.UploadCallComposerPicture4Request{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,
@@ -1439,9 +1439,9 @@ func (c *Client) UploadCallComposerPicture5(ctx context.Context, arg0 int64, arg
 	return err
 }
 
-// UploadCallComposerPicture5_1 calls the UploadCallComposerPicture5_1 RPC.
-func (c *Client) UploadCallComposerPicture5_1(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64) error {
-	_, err := c.svc.UploadCallComposerPicture5_1(ctx, &pb.UploadCallComposerPicture5_1Request{
+// UploadCallComposerPicture4_1 calls the UploadCallComposerPicture4_1 RPC.
+func (c *Client) UploadCallComposerPicture4_1(ctx context.Context, arg0 int64, arg1 string, arg2 int64, arg3 int64) error {
+	_, err := c.svc.UploadCallComposerPicture4_1(ctx, &pb.UploadCallComposerPicture4_1Request{
 		Arg0: arg0,
 		Arg1: arg1,
 		Arg2: arg2,

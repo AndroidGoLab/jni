@@ -2078,30 +2078,30 @@ func (s *TelephonyManagerServer) UpdateAvailableNetworks(_ context.Context, req 
 	return &pb.UpdateAvailableNetworksResponse{}, nil
 }
 
-func (s *TelephonyManagerServer) UploadCallComposerPicture5(_ context.Context, req *pb.UploadCallComposerPicture5Request) (*pb.UploadCallComposerPicture5Response, error) {
+func (s *TelephonyManagerServer) UploadCallComposerPicture4(_ context.Context, req *pb.UploadCallComposerPicture4Request) (*pb.UploadCallComposerPicture4Response, error) {
 	mgr, err := jnipkg.NewtelephonyManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
 	}
 	defer mgr.Close()
 
-	if err := mgr.UploadCallComposerPicture5(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
+	if err := mgr.UploadCallComposerPicture4(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
-	return &pb.UploadCallComposerPicture5Response{}, nil
+	return &pb.UploadCallComposerPicture4Response{}, nil
 }
 
-func (s *TelephonyManagerServer) UploadCallComposerPicture5_1(_ context.Context, req *pb.UploadCallComposerPicture5_1Request) (*pb.UploadCallComposerPicture5_1Response, error) {
+func (s *TelephonyManagerServer) UploadCallComposerPicture4_1(_ context.Context, req *pb.UploadCallComposerPicture4_1Request) (*pb.UploadCallComposerPicture4_1Response, error) {
 	mgr, err := jnipkg.NewtelephonyManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
 	}
 	defer mgr.Close()
 
-	if err := mgr.UploadCallComposerPicture5_1(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
+	if err := mgr.UploadCallComposerPicture4_1(s.Handles.Get(req.GetArg0()), req.GetArg1(), s.Handles.Get(req.GetArg2()), s.Handles.Get(req.GetArg3())); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
-	return &pb.UploadCallComposerPicture5_1Response{}, nil
+	return &pb.UploadCallComposerPicture4_1Response{}, nil
 }
 
 func (s *TelephonyManagerServer) GetMaximumCallComposerPictureSize(_ context.Context, req *pb.GetMaximumCallComposerPictureSizeRequest) (*pb.GetMaximumCallComposerPictureSizeResponse, error) {

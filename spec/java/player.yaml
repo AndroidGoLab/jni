@@ -90,7 +90,7 @@ classes:
               go_name: arg2
             - java_type: int
               go_name: arg3
-            - java_type: "java.util.Map<java.lang.String, java.lang.String>"
+            - java_type: java.util.Map<java.lang.String, java.lang.String>
               go_name: arg4
           returns: android.media.MediaDrm$KeyRequest
           error: true
@@ -240,24 +240,24 @@ classes:
           returns: void
           error: true
         - java_method: setDataSource
-          go_name: SetDataSource4_1
+          go_name: SetDataSource3_1
           params:
             - java_type: android.content.Context
               go_name: arg0
             - java_type: android.net.Uri
               go_name: arg1
-            - java_type: "java.util.Map<java.lang.String, java.lang.String>"
+            - java_type: java.util.Map<java.lang.String, java.lang.String>
               go_name: arg2
           returns: void
           error: true
         - java_method: setDataSource
-          go_name: SetDataSource5_2
+          go_name: SetDataSource4_2
           params:
             - java_type: android.content.Context
               go_name: arg0
             - java_type: android.net.Uri
               go_name: arg1
-            - java_type: "java.util.Map<java.lang.String, java.lang.String>"
+            - java_type: java.util.Map<java.lang.String, java.lang.String>
               go_name: arg2
             - java_type: java.util.List<java.net.HttpCookie>
               go_name: arg3

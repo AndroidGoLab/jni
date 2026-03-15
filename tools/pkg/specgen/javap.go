@@ -129,7 +129,10 @@ func parseParams(s string) []JavapParam {
 	if s == "" {
 		return nil
 	}
-	parts := strings.Split(s, ",")
+	// Split on commas that are not inside angle brackets (generic type
+	// parameters). A naive strings.Split(",") would break types like
+	// Map<String, SessionConfiguration> into two separate params.
+	parts := splitRespectingGenerics(s)
 	params := make([]JavapParam, 0, len(parts))
 	for _, p := range parts {
 		p = strings.TrimSpace(p)
@@ -139,4 +142,28 @@ func parseParams(s string) []JavapParam {
 		params = append(params, JavapParam{JavaType: p})
 	}
 	return params
+}
+
+// splitRespectingGenerics splits a parameter string on commas, but only
+// those at the top level (depth == 0 relative to angle brackets). Commas
+// inside generic types like Map<K, V> are preserved as part of the type.
+func splitRespectingGenerics(s string) []string {
+	var parts []string
+	depth := 0
+	start := 0
+	for i := 0; i < len(s); i++ {
+		switch s[i] {
+		case '<':
+			depth++
+		case '>':
+			depth--
+		case ',':
+			if depth == 0 {
+				parts = append(parts, s[start:i])
+				start = i + 1
+			}
+		}
+	}
+	parts = append(parts, s[start:])
+	return parts
 }

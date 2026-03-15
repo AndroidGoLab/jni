@@ -158,8 +158,8 @@ const (
 	TelephonyManagerService_SwitchMultiSimConfig_FullMethodName                      = "/telephony.TelephonyManagerService/SwitchMultiSimConfig"
 	TelephonyManagerService_UnregisterTelephonyCallback_FullMethodName               = "/telephony.TelephonyManagerService/UnregisterTelephonyCallback"
 	TelephonyManagerService_UpdateAvailableNetworks_FullMethodName                   = "/telephony.TelephonyManagerService/UpdateAvailableNetworks"
-	TelephonyManagerService_UploadCallComposerPicture5_FullMethodName                = "/telephony.TelephonyManagerService/UploadCallComposerPicture5"
-	TelephonyManagerService_UploadCallComposerPicture5_1_FullMethodName              = "/telephony.TelephonyManagerService/UploadCallComposerPicture5_1"
+	TelephonyManagerService_UploadCallComposerPicture4_FullMethodName                = "/telephony.TelephonyManagerService/UploadCallComposerPicture4"
+	TelephonyManagerService_UploadCallComposerPicture4_1_FullMethodName              = "/telephony.TelephonyManagerService/UploadCallComposerPicture4_1"
 	TelephonyManagerService_GetMaximumCallComposerPictureSize_FullMethodName         = "/telephony.TelephonyManagerService/GetMaximumCallComposerPictureSize"
 )
 
@@ -304,8 +304,8 @@ type TelephonyManagerServiceClient interface {
 	SwitchMultiSimConfig(ctx context.Context, in *SwitchMultiSimConfigRequest, opts ...grpc.CallOption) (*SwitchMultiSimConfigResponse, error)
 	UnregisterTelephonyCallback(ctx context.Context, in *UnregisterTelephonyCallbackRequest, opts ...grpc.CallOption) (*UnregisterTelephonyCallbackResponse, error)
 	UpdateAvailableNetworks(ctx context.Context, in *UpdateAvailableNetworksRequest, opts ...grpc.CallOption) (*UpdateAvailableNetworksResponse, error)
-	UploadCallComposerPicture5(ctx context.Context, in *UploadCallComposerPicture5Request, opts ...grpc.CallOption) (*UploadCallComposerPicture5Response, error)
-	UploadCallComposerPicture5_1(ctx context.Context, in *UploadCallComposerPicture5_1Request, opts ...grpc.CallOption) (*UploadCallComposerPicture5_1Response, error)
+	UploadCallComposerPicture4(ctx context.Context, in *UploadCallComposerPicture4Request, opts ...grpc.CallOption) (*UploadCallComposerPicture4Response, error)
+	UploadCallComposerPicture4_1(ctx context.Context, in *UploadCallComposerPicture4_1Request, opts ...grpc.CallOption) (*UploadCallComposerPicture4_1Response, error)
 	GetMaximumCallComposerPictureSize(ctx context.Context, in *GetMaximumCallComposerPictureSizeRequest, opts ...grpc.CallOption) (*GetMaximumCallComposerPictureSizeResponse, error)
 }
 
@@ -1687,20 +1687,20 @@ func (c *telephonyManagerServiceClient) UpdateAvailableNetworks(ctx context.Cont
 	return out, nil
 }
 
-func (c *telephonyManagerServiceClient) UploadCallComposerPicture5(ctx context.Context, in *UploadCallComposerPicture5Request, opts ...grpc.CallOption) (*UploadCallComposerPicture5Response, error) {
+func (c *telephonyManagerServiceClient) UploadCallComposerPicture4(ctx context.Context, in *UploadCallComposerPicture4Request, opts ...grpc.CallOption) (*UploadCallComposerPicture4Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UploadCallComposerPicture5Response)
-	err := c.cc.Invoke(ctx, TelephonyManagerService_UploadCallComposerPicture5_FullMethodName, in, out, cOpts...)
+	out := new(UploadCallComposerPicture4Response)
+	err := c.cc.Invoke(ctx, TelephonyManagerService_UploadCallComposerPicture4_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *telephonyManagerServiceClient) UploadCallComposerPicture5_1(ctx context.Context, in *UploadCallComposerPicture5_1Request, opts ...grpc.CallOption) (*UploadCallComposerPicture5_1Response, error) {
+func (c *telephonyManagerServiceClient) UploadCallComposerPicture4_1(ctx context.Context, in *UploadCallComposerPicture4_1Request, opts ...grpc.CallOption) (*UploadCallComposerPicture4_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UploadCallComposerPicture5_1Response)
-	err := c.cc.Invoke(ctx, TelephonyManagerService_UploadCallComposerPicture5_1_FullMethodName, in, out, cOpts...)
+	out := new(UploadCallComposerPicture4_1Response)
+	err := c.cc.Invoke(ctx, TelephonyManagerService_UploadCallComposerPicture4_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1858,8 +1858,8 @@ type TelephonyManagerServiceServer interface {
 	SwitchMultiSimConfig(context.Context, *SwitchMultiSimConfigRequest) (*SwitchMultiSimConfigResponse, error)
 	UnregisterTelephonyCallback(context.Context, *UnregisterTelephonyCallbackRequest) (*UnregisterTelephonyCallbackResponse, error)
 	UpdateAvailableNetworks(context.Context, *UpdateAvailableNetworksRequest) (*UpdateAvailableNetworksResponse, error)
-	UploadCallComposerPicture5(context.Context, *UploadCallComposerPicture5Request) (*UploadCallComposerPicture5Response, error)
-	UploadCallComposerPicture5_1(context.Context, *UploadCallComposerPicture5_1Request) (*UploadCallComposerPicture5_1Response, error)
+	UploadCallComposerPicture4(context.Context, *UploadCallComposerPicture4Request) (*UploadCallComposerPicture4Response, error)
+	UploadCallComposerPicture4_1(context.Context, *UploadCallComposerPicture4_1Request) (*UploadCallComposerPicture4_1Response, error)
 	GetMaximumCallComposerPictureSize(context.Context, *GetMaximumCallComposerPictureSizeRequest) (*GetMaximumCallComposerPictureSizeResponse, error)
 	mustEmbedUnimplementedTelephonyManagerServiceServer()
 }
@@ -2282,11 +2282,11 @@ func (UnimplementedTelephonyManagerServiceServer) UnregisterTelephonyCallback(co
 func (UnimplementedTelephonyManagerServiceServer) UpdateAvailableNetworks(context.Context, *UpdateAvailableNetworksRequest) (*UpdateAvailableNetworksResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAvailableNetworks not implemented")
 }
-func (UnimplementedTelephonyManagerServiceServer) UploadCallComposerPicture5(context.Context, *UploadCallComposerPicture5Request) (*UploadCallComposerPicture5Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method UploadCallComposerPicture5 not implemented")
+func (UnimplementedTelephonyManagerServiceServer) UploadCallComposerPicture4(context.Context, *UploadCallComposerPicture4Request) (*UploadCallComposerPicture4Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UploadCallComposerPicture4 not implemented")
 }
-func (UnimplementedTelephonyManagerServiceServer) UploadCallComposerPicture5_1(context.Context, *UploadCallComposerPicture5_1Request) (*UploadCallComposerPicture5_1Response, error) {
-	return nil, status.Error(codes.Unimplemented, "method UploadCallComposerPicture5_1 not implemented")
+func (UnimplementedTelephonyManagerServiceServer) UploadCallComposerPicture4_1(context.Context, *UploadCallComposerPicture4_1Request) (*UploadCallComposerPicture4_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UploadCallComposerPicture4_1 not implemented")
 }
 func (UnimplementedTelephonyManagerServiceServer) GetMaximumCallComposerPictureSize(context.Context, *GetMaximumCallComposerPictureSizeRequest) (*GetMaximumCallComposerPictureSizeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetMaximumCallComposerPictureSize not implemented")
@@ -4779,38 +4779,38 @@ func _TelephonyManagerService_UpdateAvailableNetworks_Handler(srv interface{}, c
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TelephonyManagerService_UploadCallComposerPicture5_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadCallComposerPicture5Request)
+func _TelephonyManagerService_UploadCallComposerPicture4_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadCallComposerPicture4Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture5(ctx, in)
+		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture4(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TelephonyManagerService_UploadCallComposerPicture5_FullMethodName,
+		FullMethod: TelephonyManagerService_UploadCallComposerPicture4_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture5(ctx, req.(*UploadCallComposerPicture5Request))
+		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture4(ctx, req.(*UploadCallComposerPicture4Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TelephonyManagerService_UploadCallComposerPicture5_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadCallComposerPicture5_1Request)
+func _TelephonyManagerService_UploadCallComposerPicture4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadCallComposerPicture4_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture5_1(ctx, in)
+		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture4_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TelephonyManagerService_UploadCallComposerPicture5_1_FullMethodName,
+		FullMethod: TelephonyManagerService_UploadCallComposerPicture4_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture5_1(ctx, req.(*UploadCallComposerPicture5_1Request))
+		return srv.(TelephonyManagerServiceServer).UploadCallComposerPicture4_1(ctx, req.(*UploadCallComposerPicture4_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5389,12 +5389,12 @@ var TelephonyManagerService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TelephonyManagerService_UpdateAvailableNetworks_Handler,
 		},
 		{
-			MethodName: "UploadCallComposerPicture5",
-			Handler:    _TelephonyManagerService_UploadCallComposerPicture5_Handler,
+			MethodName: "UploadCallComposerPicture4",
+			Handler:    _TelephonyManagerService_UploadCallComposerPicture4_Handler,
 		},
 		{
-			MethodName: "UploadCallComposerPicture5_1",
-			Handler:    _TelephonyManagerService_UploadCallComposerPicture5_1_Handler,
+			MethodName: "UploadCallComposerPicture4_1",
+			Handler:    _TelephonyManagerService_UploadCallComposerPicture4_1_Handler,
 		},
 		{
 			MethodName: "GetMaximumCallComposerPictureSize",

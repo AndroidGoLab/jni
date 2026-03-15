@@ -3656,8 +3656,8 @@ func (m *telephonyManager) UpdateAvailableNetworks(arg0 *jni.Object, arg1 *jni.O
 	return callErr
 }
 
-// UploadCallComposerPicture5 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *telephonyManager) UploadCallComposerPicture5(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
+// UploadCallComposerPicture4 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
+func (m *telephonyManager) UploadCallComposerPicture4(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3665,7 +3665,7 @@ func (m *telephonyManager) UploadCallComposerPicture5(arg0 *jni.Object, arg1 str
 			callErr = err
 			return err
 		}
-		if midtelephonyManagerUploadCallComposerPicture5 == nil {
+		if midtelephonyManagerUploadCallComposerPicture4 == nil {
 			callErr = fmt.Errorf("android.telephony.TelephonyManager.uploadCallComposerPicture is not available on this device")
 			return callErr
 		}
@@ -3677,15 +3677,15 @@ func (m *telephonyManager) UploadCallComposerPicture5(arg0 *jni.Object, arg1 str
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtelephonyManagerUploadCallComposerPicture5, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midtelephonyManagerUploadCallComposerPicture4, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// UploadCallComposerPicture5_1 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *telephonyManager) UploadCallComposerPicture5_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
+// UploadCallComposerPicture4_1 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
+func (m *telephonyManager) UploadCallComposerPicture4_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3693,7 +3693,7 @@ func (m *telephonyManager) UploadCallComposerPicture5_1(arg0 *jni.Object, arg1 s
 			callErr = err
 			return err
 		}
-		if midtelephonyManagerUploadCallComposerPicture5_1 == nil {
+		if midtelephonyManagerUploadCallComposerPicture4_1 == nil {
 			callErr = fmt.Errorf("android.telephony.TelephonyManager.uploadCallComposerPicture is not available on this device")
 			return callErr
 		}
@@ -3705,7 +3705,7 @@ func (m *telephonyManager) UploadCallComposerPicture5_1(arg0 *jni.Object, arg1 s
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtelephonyManagerUploadCallComposerPicture5_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midtelephonyManagerUploadCallComposerPicture4_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})

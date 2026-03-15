@@ -2991,7 +2991,7 @@ func (*SetDataSource2Response) Descriptor() ([]byte, []int) {
 	return file_proto_player_player_proto_rawDescGZIP(), []int{71}
 }
 
-type SetDataSource4_1Request struct {
+type SetDataSource3_1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
@@ -3000,20 +3000,20 @@ type SetDataSource4_1Request struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetDataSource4_1Request) Reset() {
-	*x = SetDataSource4_1Request{}
+func (x *SetDataSource3_1Request) Reset() {
+	*x = SetDataSource3_1Request{}
 	mi := &file_proto_player_player_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetDataSource4_1Request) String() string {
+func (x *SetDataSource3_1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetDataSource4_1Request) ProtoMessage() {}
+func (*SetDataSource3_1Request) ProtoMessage() {}
 
-func (x *SetDataSource4_1Request) ProtoReflect() protoreflect.Message {
+func (x *SetDataSource3_1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_player_player_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3025,52 +3025,52 @@ func (x *SetDataSource4_1Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetDataSource4_1Request.ProtoReflect.Descriptor instead.
-func (*SetDataSource4_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetDataSource3_1Request.ProtoReflect.Descriptor instead.
+func (*SetDataSource3_1Request) Descriptor() ([]byte, []int) {
 	return file_proto_player_player_proto_rawDescGZIP(), []int{72}
 }
 
-func (x *SetDataSource4_1Request) GetArg0() int64 {
+func (x *SetDataSource3_1Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *SetDataSource4_1Request) GetArg1() int64 {
+func (x *SetDataSource3_1Request) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
 	}
 	return 0
 }
 
-func (x *SetDataSource4_1Request) GetArg2() int64 {
+func (x *SetDataSource3_1Request) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
 	}
 	return 0
 }
 
-type SetDataSource4_1Response struct {
+type SetDataSource3_1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetDataSource4_1Response) Reset() {
-	*x = SetDataSource4_1Response{}
+func (x *SetDataSource3_1Response) Reset() {
+	*x = SetDataSource3_1Response{}
 	mi := &file_proto_player_player_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetDataSource4_1Response) String() string {
+func (x *SetDataSource3_1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetDataSource4_1Response) ProtoMessage() {}
+func (*SetDataSource3_1Response) ProtoMessage() {}
 
-func (x *SetDataSource4_1Response) ProtoReflect() protoreflect.Message {
+func (x *SetDataSource3_1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_player_player_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3082,12 +3082,12 @@ func (x *SetDataSource4_1Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetDataSource4_1Response.ProtoReflect.Descriptor instead.
-func (*SetDataSource4_1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetDataSource3_1Response.ProtoReflect.Descriptor instead.
+func (*SetDataSource3_1Response) Descriptor() ([]byte, []int) {
 	return file_proto_player_player_proto_rawDescGZIP(), []int{73}
 }
 
-type SetDataSource5_2Request struct {
+type SetDataSource4_2Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
@@ -3097,20 +3097,20 @@ type SetDataSource5_2Request struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetDataSource5_2Request) Reset() {
-	*x = SetDataSource5_2Request{}
+func (x *SetDataSource4_2Request) Reset() {
+	*x = SetDataSource4_2Request{}
 	mi := &file_proto_player_player_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetDataSource5_2Request) String() string {
+func (x *SetDataSource4_2Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetDataSource5_2Request) ProtoMessage() {}
+func (*SetDataSource4_2Request) ProtoMessage() {}
 
-func (x *SetDataSource5_2Request) ProtoReflect() protoreflect.Message {
+func (x *SetDataSource4_2Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_player_player_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3122,59 +3122,59 @@ func (x *SetDataSource5_2Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetDataSource5_2Request.ProtoReflect.Descriptor instead.
-func (*SetDataSource5_2Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetDataSource4_2Request.ProtoReflect.Descriptor instead.
+func (*SetDataSource4_2Request) Descriptor() ([]byte, []int) {
 	return file_proto_player_player_proto_rawDescGZIP(), []int{74}
 }
 
-func (x *SetDataSource5_2Request) GetArg0() int64 {
+func (x *SetDataSource4_2Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *SetDataSource5_2Request) GetArg1() int64 {
+func (x *SetDataSource4_2Request) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
 	}
 	return 0
 }
 
-func (x *SetDataSource5_2Request) GetArg2() int64 {
+func (x *SetDataSource4_2Request) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
 	}
 	return 0
 }
 
-func (x *SetDataSource5_2Request) GetArg3() int64 {
+func (x *SetDataSource4_2Request) GetArg3() int64 {
 	if x != nil {
 		return x.Arg3
 	}
 	return 0
 }
 
-type SetDataSource5_2Response struct {
+type SetDataSource4_2Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetDataSource5_2Response) Reset() {
-	*x = SetDataSource5_2Response{}
+func (x *SetDataSource4_2Response) Reset() {
+	*x = SetDataSource4_2Response{}
 	mi := &file_proto_player_player_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetDataSource5_2Response) String() string {
+func (x *SetDataSource4_2Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetDataSource5_2Response) ProtoMessage() {}
+func (*SetDataSource4_2Response) ProtoMessage() {}
 
-func (x *SetDataSource5_2Response) ProtoReflect() protoreflect.Message {
+func (x *SetDataSource4_2Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_player_player_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3186,8 +3186,8 @@ func (x *SetDataSource5_2Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetDataSource5_2Response.ProtoReflect.Descriptor instead.
-func (*SetDataSource5_2Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetDataSource4_2Response.ProtoReflect.Descriptor instead.
+func (*SetDataSource4_2Response) Descriptor() ([]byte, []int) {
 	return file_proto_player_player_proto_rawDescGZIP(), []int{75}
 }
 
@@ -6195,17 +6195,17 @@ const file_proto_player_player_proto_rawDesc = "" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x18\n" +
 	"\x16SetDataSource2Response\"U\n" +
-	"\x17SetDataSource4_1Request\x12\x12\n" +
+	"\x17SetDataSource3_1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x1a\n" +
-	"\x18SetDataSource4_1Response\"i\n" +
-	"\x17SetDataSource5_2Request\x12\x12\n" +
+	"\x18SetDataSource3_1Response\"i\n" +
+	"\x17SetDataSource4_2Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
 	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x1a\n" +
-	"\x18SetDataSource5_2Response\"-\n" +
+	"\x18SetDataSource4_2Response\"-\n" +
 	"\x17SetDataSource1_3Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1a\n" +
 	"\x18SetDataSource1_3Response\"-\n" +
@@ -6369,8 +6369,8 @@ const file_proto_player_player_proto_rawDesc = "" +
 	"\x12SetAudioStreamType\x12!.player.SetAudioStreamTypeRequest\x1a\".player.SetAudioStreamTypeResponse\x12d\n" +
 	"\x15SetAuxEffectSendLevel\x12$.player.SetAuxEffectSendLevelRequest\x1a%.player.SetAuxEffectSendLevelResponse\x12O\n" +
 	"\x0eSetDataSource2\x12\x1d.player.SetDataSource2Request\x1a\x1e.player.SetDataSource2Response\x12U\n" +
-	"\x10SetDataSource4_1\x12\x1f.player.SetDataSource4_1Request\x1a .player.SetDataSource4_1Response\x12U\n" +
-	"\x10SetDataSource5_2\x12\x1f.player.SetDataSource5_2Request\x1a .player.SetDataSource5_2Response\x12U\n" +
+	"\x10SetDataSource3_1\x12\x1f.player.SetDataSource3_1Request\x1a .player.SetDataSource3_1Response\x12U\n" +
+	"\x10SetDataSource4_2\x12\x1f.player.SetDataSource4_2Request\x1a .player.SetDataSource4_2Response\x12U\n" +
 	"\x10SetDataSource1_3\x12\x1f.player.SetDataSource1_3Request\x1a .player.SetDataSource1_3Response\x12U\n" +
 	"\x10SetDataSource1_4\x12\x1f.player.SetDataSource1_4Request\x1a .player.SetDataSource1_4Response\x12U\n" +
 	"\x10SetDataSource1_5\x12\x1f.player.SetDataSource1_5Request\x1a .player.SetDataSource1_5Response\x12U\n" +
@@ -6494,10 +6494,10 @@ var file_proto_player_player_proto_goTypes = []any{
 	(*SetAuxEffectSendLevelResponse)(nil),                 // 69: player.SetAuxEffectSendLevelResponse
 	(*SetDataSource2Request)(nil),                         // 70: player.SetDataSource2Request
 	(*SetDataSource2Response)(nil),                        // 71: player.SetDataSource2Response
-	(*SetDataSource4_1Request)(nil),                       // 72: player.SetDataSource4_1Request
-	(*SetDataSource4_1Response)(nil),                      // 73: player.SetDataSource4_1Response
-	(*SetDataSource5_2Request)(nil),                       // 74: player.SetDataSource5_2Request
-	(*SetDataSource5_2Response)(nil),                      // 75: player.SetDataSource5_2Response
+	(*SetDataSource3_1Request)(nil),                       // 72: player.SetDataSource3_1Request
+	(*SetDataSource3_1Response)(nil),                      // 73: player.SetDataSource3_1Response
+	(*SetDataSource4_2Request)(nil),                       // 74: player.SetDataSource4_2Request
+	(*SetDataSource4_2Response)(nil),                      // 75: player.SetDataSource4_2Response
 	(*SetDataSource1_3Request)(nil),                       // 76: player.SetDataSource1_3Request
 	(*SetDataSource1_3Response)(nil),                      // 77: player.SetDataSource1_3Response
 	(*SetDataSource1_4Request)(nil),                       // 78: player.SetDataSource1_4Request
@@ -6604,8 +6604,8 @@ var file_proto_player_player_proto_depIdxs = []int32{
 	66,  // 33: player.MediaPlayerService.SetAudioStreamType:input_type -> player.SetAudioStreamTypeRequest
 	68,  // 34: player.MediaPlayerService.SetAuxEffectSendLevel:input_type -> player.SetAuxEffectSendLevelRequest
 	70,  // 35: player.MediaPlayerService.SetDataSource2:input_type -> player.SetDataSource2Request
-	72,  // 36: player.MediaPlayerService.SetDataSource4_1:input_type -> player.SetDataSource4_1Request
-	74,  // 37: player.MediaPlayerService.SetDataSource5_2:input_type -> player.SetDataSource5_2Request
+	72,  // 36: player.MediaPlayerService.SetDataSource3_1:input_type -> player.SetDataSource3_1Request
+	74,  // 37: player.MediaPlayerService.SetDataSource4_2:input_type -> player.SetDataSource4_2Request
 	76,  // 38: player.MediaPlayerService.SetDataSource1_3:input_type -> player.SetDataSource1_3Request
 	78,  // 39: player.MediaPlayerService.SetDataSource1_4:input_type -> player.SetDataSource1_4Request
 	80,  // 40: player.MediaPlayerService.SetDataSource1_5:input_type -> player.SetDataSource1_5Request
@@ -6676,8 +6676,8 @@ var file_proto_player_player_proto_depIdxs = []int32{
 	67,  // 105: player.MediaPlayerService.SetAudioStreamType:output_type -> player.SetAudioStreamTypeResponse
 	69,  // 106: player.MediaPlayerService.SetAuxEffectSendLevel:output_type -> player.SetAuxEffectSendLevelResponse
 	71,  // 107: player.MediaPlayerService.SetDataSource2:output_type -> player.SetDataSource2Response
-	73,  // 108: player.MediaPlayerService.SetDataSource4_1:output_type -> player.SetDataSource4_1Response
-	75,  // 109: player.MediaPlayerService.SetDataSource5_2:output_type -> player.SetDataSource5_2Response
+	73,  // 108: player.MediaPlayerService.SetDataSource3_1:output_type -> player.SetDataSource3_1Response
+	75,  // 109: player.MediaPlayerService.SetDataSource4_2:output_type -> player.SetDataSource4_2Response
 	77,  // 110: player.MediaPlayerService.SetDataSource1_3:output_type -> player.SetDataSource1_3Response
 	79,  // 111: player.MediaPlayerService.SetDataSource1_4:output_type -> player.SetDataSource1_4Response
 	81,  // 112: player.MediaPlayerService.SetDataSource1_5:output_type -> player.SetDataSource1_5Response

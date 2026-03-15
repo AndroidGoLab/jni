@@ -1048,24 +1048,24 @@ message UpdateAvailableNetworksRequest {
 message UpdateAvailableNetworksResponse {
 }
 
-message UploadCallComposerPicture5Request {
+message UploadCallComposerPicture4Request {
   int64 arg0 = 1;
   string arg1 = 2;
   int64 arg2 = 3;
   int64 arg3 = 4;
 }
 
-message UploadCallComposerPicture5Response {
+message UploadCallComposerPicture4Response {
 }
 
-message UploadCallComposerPicture5_1Request {
+message UploadCallComposerPicture4_1Request {
   int64 arg0 = 1;
   string arg1 = 2;
   int64 arg2 = 3;
   int64 arg3 = 4;
 }
 
-message UploadCallComposerPicture5_1Response {
+message UploadCallComposerPicture4_1Response {
 }
 
 message GetMaximumCallComposerPictureSizeRequest {
@@ -1213,7 +1213,7 @@ service TelephonyManagerService {
   rpc SwitchMultiSimConfig (SwitchMultiSimConfigRequest) returns (SwitchMultiSimConfigResponse);
   rpc UnregisterTelephonyCallback (UnregisterTelephonyCallbackRequest) returns (UnregisterTelephonyCallbackResponse);
   rpc UpdateAvailableNetworks (UpdateAvailableNetworksRequest) returns (UpdateAvailableNetworksResponse);
-  rpc UploadCallComposerPicture5 (UploadCallComposerPicture5Request) returns (UploadCallComposerPicture5Response);
-  rpc UploadCallComposerPicture5_1 (UploadCallComposerPicture5_1Request) returns (UploadCallComposerPicture5_1Response);
+  rpc UploadCallComposerPicture4 (UploadCallComposerPicture4Request) returns (UploadCallComposerPicture4Response);
+  rpc UploadCallComposerPicture4_1 (UploadCallComposerPicture4_1Request) returns (UploadCallComposerPicture4_1Response);
   rpc GetMaximumCallComposerPictureSize (GetMaximumCallComposerPictureSizeRequest) returns (GetMaximumCallComposerPictureSizeResponse);
 }

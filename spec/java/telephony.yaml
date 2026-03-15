@@ -219,7 +219,7 @@ classes:
           params:
             - java_type: java.util.concurrent.Executor
               go_name: arg0
-            - java_type: "android.os.OutcomeReceiver<android.telephony.data.NetworkSlicingConfig, android.telephony.TelephonyManager$NetworkSlicingException>"
+            - java_type: android.os.OutcomeReceiver<android.telephony.data.NetworkSlicingConfig, android.telephony.TelephonyManager$NetworkSlicingException>
               go_name: arg1
           returns: void
           error: true
@@ -827,7 +827,7 @@ classes:
           returns: void
           error: true
         - java_method: uploadCallComposerPicture
-          go_name: UploadCallComposerPicture5
+          go_name: UploadCallComposerPicture4
           params:
             - java_type: java.io.InputStream
               go_name: arg0
@@ -835,12 +835,12 @@ classes:
               go_name: arg1
             - java_type: java.util.concurrent.Executor
               go_name: arg2
-            - java_type: "android.os.OutcomeReceiver<android.os.ParcelUuid, android.telephony.TelephonyManager$CallComposerException>"
+            - java_type: android.os.OutcomeReceiver<android.os.ParcelUuid, android.telephony.TelephonyManager$CallComposerException>
               go_name: arg3
           returns: void
           error: true
         - java_method: uploadCallComposerPicture
-          go_name: UploadCallComposerPicture5_1
+          go_name: UploadCallComposerPicture4_1
           params:
             - java_type: java.nio.file.Path
               go_name: arg0
@@ -848,7 +848,7 @@ classes:
               go_name: arg1
             - java_type: java.util.concurrent.Executor
               go_name: arg2
-            - java_type: "android.os.OutcomeReceiver<android.os.ParcelUuid, android.telephony.TelephonyManager$CallComposerException>"
+            - java_type: android.os.OutcomeReceiver<android.os.ParcelUuid, android.telephony.TelephonyManager$CallComposerException>
               go_name: arg3
           returns: void
           error: true

@@ -11647,7 +11647,7 @@ func (*UpdateAvailableNetworksResponse) Descriptor() ([]byte, []int) {
 	return file_proto_telephony_telephony_proto_rawDescGZIP(), []int{273}
 }
 
-type UploadCallComposerPicture5Request struct {
+type UploadCallComposerPicture4Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
@@ -11657,20 +11657,20 @@ type UploadCallComposerPicture5Request struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UploadCallComposerPicture5Request) Reset() {
-	*x = UploadCallComposerPicture5Request{}
+func (x *UploadCallComposerPicture4Request) Reset() {
+	*x = UploadCallComposerPicture4Request{}
 	mi := &file_proto_telephony_telephony_proto_msgTypes[274]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UploadCallComposerPicture5Request) String() string {
+func (x *UploadCallComposerPicture4Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UploadCallComposerPicture5Request) ProtoMessage() {}
+func (*UploadCallComposerPicture4Request) ProtoMessage() {}
 
-func (x *UploadCallComposerPicture5Request) ProtoReflect() protoreflect.Message {
+func (x *UploadCallComposerPicture4Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_telephony_telephony_proto_msgTypes[274]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11682,59 +11682,59 @@ func (x *UploadCallComposerPicture5Request) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UploadCallComposerPicture5Request.ProtoReflect.Descriptor instead.
-func (*UploadCallComposerPicture5Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadCallComposerPicture4Request.ProtoReflect.Descriptor instead.
+func (*UploadCallComposerPicture4Request) Descriptor() ([]byte, []int) {
 	return file_proto_telephony_telephony_proto_rawDescGZIP(), []int{274}
 }
 
-func (x *UploadCallComposerPicture5Request) GetArg0() int64 {
+func (x *UploadCallComposerPicture4Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *UploadCallComposerPicture5Request) GetArg1() string {
+func (x *UploadCallComposerPicture4Request) GetArg1() string {
 	if x != nil {
 		return x.Arg1
 	}
 	return ""
 }
 
-func (x *UploadCallComposerPicture5Request) GetArg2() int64 {
+func (x *UploadCallComposerPicture4Request) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
 	}
 	return 0
 }
 
-func (x *UploadCallComposerPicture5Request) GetArg3() int64 {
+func (x *UploadCallComposerPicture4Request) GetArg3() int64 {
 	if x != nil {
 		return x.Arg3
 	}
 	return 0
 }
 
-type UploadCallComposerPicture5Response struct {
+type UploadCallComposerPicture4Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UploadCallComposerPicture5Response) Reset() {
-	*x = UploadCallComposerPicture5Response{}
+func (x *UploadCallComposerPicture4Response) Reset() {
+	*x = UploadCallComposerPicture4Response{}
 	mi := &file_proto_telephony_telephony_proto_msgTypes[275]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UploadCallComposerPicture5Response) String() string {
+func (x *UploadCallComposerPicture4Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UploadCallComposerPicture5Response) ProtoMessage() {}
+func (*UploadCallComposerPicture4Response) ProtoMessage() {}
 
-func (x *UploadCallComposerPicture5Response) ProtoReflect() protoreflect.Message {
+func (x *UploadCallComposerPicture4Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_telephony_telephony_proto_msgTypes[275]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11746,12 +11746,12 @@ func (x *UploadCallComposerPicture5Response) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UploadCallComposerPicture5Response.ProtoReflect.Descriptor instead.
-func (*UploadCallComposerPicture5Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadCallComposerPicture4Response.ProtoReflect.Descriptor instead.
+func (*UploadCallComposerPicture4Response) Descriptor() ([]byte, []int) {
 	return file_proto_telephony_telephony_proto_rawDescGZIP(), []int{275}
 }
 
-type UploadCallComposerPicture5_1Request struct {
+type UploadCallComposerPicture4_1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
@@ -11761,20 +11761,20 @@ type UploadCallComposerPicture5_1Request struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UploadCallComposerPicture5_1Request) Reset() {
-	*x = UploadCallComposerPicture5_1Request{}
+func (x *UploadCallComposerPicture4_1Request) Reset() {
+	*x = UploadCallComposerPicture4_1Request{}
 	mi := &file_proto_telephony_telephony_proto_msgTypes[276]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UploadCallComposerPicture5_1Request) String() string {
+func (x *UploadCallComposerPicture4_1Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UploadCallComposerPicture5_1Request) ProtoMessage() {}
+func (*UploadCallComposerPicture4_1Request) ProtoMessage() {}
 
-func (x *UploadCallComposerPicture5_1Request) ProtoReflect() protoreflect.Message {
+func (x *UploadCallComposerPicture4_1Request) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_telephony_telephony_proto_msgTypes[276]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11786,59 +11786,59 @@ func (x *UploadCallComposerPicture5_1Request) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UploadCallComposerPicture5_1Request.ProtoReflect.Descriptor instead.
-func (*UploadCallComposerPicture5_1Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadCallComposerPicture4_1Request.ProtoReflect.Descriptor instead.
+func (*UploadCallComposerPicture4_1Request) Descriptor() ([]byte, []int) {
 	return file_proto_telephony_telephony_proto_rawDescGZIP(), []int{276}
 }
 
-func (x *UploadCallComposerPicture5_1Request) GetArg0() int64 {
+func (x *UploadCallComposerPicture4_1Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *UploadCallComposerPicture5_1Request) GetArg1() string {
+func (x *UploadCallComposerPicture4_1Request) GetArg1() string {
 	if x != nil {
 		return x.Arg1
 	}
 	return ""
 }
 
-func (x *UploadCallComposerPicture5_1Request) GetArg2() int64 {
+func (x *UploadCallComposerPicture4_1Request) GetArg2() int64 {
 	if x != nil {
 		return x.Arg2
 	}
 	return 0
 }
 
-func (x *UploadCallComposerPicture5_1Request) GetArg3() int64 {
+func (x *UploadCallComposerPicture4_1Request) GetArg3() int64 {
 	if x != nil {
 		return x.Arg3
 	}
 	return 0
 }
 
-type UploadCallComposerPicture5_1Response struct {
+type UploadCallComposerPicture4_1Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UploadCallComposerPicture5_1Response) Reset() {
-	*x = UploadCallComposerPicture5_1Response{}
+func (x *UploadCallComposerPicture4_1Response) Reset() {
+	*x = UploadCallComposerPicture4_1Response{}
 	mi := &file_proto_telephony_telephony_proto_msgTypes[277]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UploadCallComposerPicture5_1Response) String() string {
+func (x *UploadCallComposerPicture4_1Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UploadCallComposerPicture5_1Response) ProtoMessage() {}
+func (*UploadCallComposerPicture4_1Response) ProtoMessage() {}
 
-func (x *UploadCallComposerPicture5_1Response) ProtoReflect() protoreflect.Message {
+func (x *UploadCallComposerPicture4_1Response) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_telephony_telephony_proto_msgTypes[277]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11850,8 +11850,8 @@ func (x *UploadCallComposerPicture5_1Response) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UploadCallComposerPicture5_1Response.ProtoReflect.Descriptor instead.
-func (*UploadCallComposerPicture5_1Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadCallComposerPicture4_1Response.ProtoReflect.Descriptor instead.
+func (*UploadCallComposerPicture4_1Response) Descriptor() ([]byte, []int) {
 	return file_proto_telephony_telephony_proto_rawDescGZIP(), []int{277}
 }
 
@@ -12434,18 +12434,18 @@ const file_proto_telephony_telephony_proto_rawDesc = "" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"!\n" +
 	"\x1fUpdateAvailableNetworksResponse\"s\n" +
-	"!UploadCallComposerPicture5Request\x12\x12\n" +
+	"!UploadCallComposerPicture4Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
 	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"$\n" +
-	"\"UploadCallComposerPicture5Response\"u\n" +
-	"#UploadCallComposerPicture5_1Request\x12\x12\n" +
+	"\"UploadCallComposerPicture4Response\"u\n" +
+	"#UploadCallComposerPicture4_1Request\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
 	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
 	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"&\n" +
-	"$UploadCallComposerPicture5_1Response\"*\n" +
+	"$UploadCallComposerPicture4_1Response\"*\n" +
 	"(GetMaximumCallComposerPictureSizeRequest\"C\n" +
 	")GetMaximumCallComposerPictureSizeResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result2\xd5v\n" +
@@ -12590,8 +12590,8 @@ const file_proto_telephony_telephony_proto_rawDesc = "" +
 	"\x14SwitchMultiSimConfig\x12&.telephony.SwitchMultiSimConfigRequest\x1a'.telephony.SwitchMultiSimConfigResponse\x12|\n" +
 	"\x1bUnregisterTelephonyCallback\x12-.telephony.UnregisterTelephonyCallbackRequest\x1a..telephony.UnregisterTelephonyCallbackResponse\x12p\n" +
 	"\x17UpdateAvailableNetworks\x12).telephony.UpdateAvailableNetworksRequest\x1a*.telephony.UpdateAvailableNetworksResponse\x12y\n" +
-	"\x1aUploadCallComposerPicture5\x12,.telephony.UploadCallComposerPicture5Request\x1a-.telephony.UploadCallComposerPicture5Response\x12\x7f\n" +
-	"\x1cUploadCallComposerPicture5_1\x12..telephony.UploadCallComposerPicture5_1Request\x1a/.telephony.UploadCallComposerPicture5_1Response\x12\x8e\x01\n" +
+	"\x1aUploadCallComposerPicture4\x12,.telephony.UploadCallComposerPicture4Request\x1a-.telephony.UploadCallComposerPicture4Response\x12\x7f\n" +
+	"\x1cUploadCallComposerPicture4_1\x12..telephony.UploadCallComposerPicture4_1Request\x1a/.telephony.UploadCallComposerPicture4_1Response\x12\x8e\x01\n" +
 	"!GetMaximumCallComposerPictureSize\x123.telephony.GetMaximumCallComposerPictureSizeRequest\x1a4.telephony.GetMaximumCallComposerPictureSizeResponseB,Z*github.com/xaionaro-go/jni/proto/telephonyb\x06proto3"
 
 var (
@@ -12882,10 +12882,10 @@ var file_proto_telephony_telephony_proto_goTypes = []any{
 	(*UnregisterTelephonyCallbackResponse)(nil),               // 271: telephony.UnregisterTelephonyCallbackResponse
 	(*UpdateAvailableNetworksRequest)(nil),                    // 272: telephony.UpdateAvailableNetworksRequest
 	(*UpdateAvailableNetworksResponse)(nil),                   // 273: telephony.UpdateAvailableNetworksResponse
-	(*UploadCallComposerPicture5Request)(nil),                 // 274: telephony.UploadCallComposerPicture5Request
-	(*UploadCallComposerPicture5Response)(nil),                // 275: telephony.UploadCallComposerPicture5Response
-	(*UploadCallComposerPicture5_1Request)(nil),               // 276: telephony.UploadCallComposerPicture5_1Request
-	(*UploadCallComposerPicture5_1Response)(nil),              // 277: telephony.UploadCallComposerPicture5_1Response
+	(*UploadCallComposerPicture4Request)(nil),                 // 274: telephony.UploadCallComposerPicture4Request
+	(*UploadCallComposerPicture4Response)(nil),                // 275: telephony.UploadCallComposerPicture4Response
+	(*UploadCallComposerPicture4_1Request)(nil),               // 276: telephony.UploadCallComposerPicture4_1Request
+	(*UploadCallComposerPicture4_1Response)(nil),              // 277: telephony.UploadCallComposerPicture4_1Response
 	(*GetMaximumCallComposerPictureSizeRequest)(nil),          // 278: telephony.GetMaximumCallComposerPictureSizeRequest
 	(*GetMaximumCallComposerPictureSizeResponse)(nil),         // 279: telephony.GetMaximumCallComposerPictureSizeResponse
 }
@@ -13027,8 +13027,8 @@ var file_proto_telephony_telephony_proto_depIdxs = []int32{
 	268, // 134: telephony.TelephonyManagerService.SwitchMultiSimConfig:input_type -> telephony.SwitchMultiSimConfigRequest
 	270, // 135: telephony.TelephonyManagerService.UnregisterTelephonyCallback:input_type -> telephony.UnregisterTelephonyCallbackRequest
 	272, // 136: telephony.TelephonyManagerService.UpdateAvailableNetworks:input_type -> telephony.UpdateAvailableNetworksRequest
-	274, // 137: telephony.TelephonyManagerService.UploadCallComposerPicture5:input_type -> telephony.UploadCallComposerPicture5Request
-	276, // 138: telephony.TelephonyManagerService.UploadCallComposerPicture5_1:input_type -> telephony.UploadCallComposerPicture5_1Request
+	274, // 137: telephony.TelephonyManagerService.UploadCallComposerPicture4:input_type -> telephony.UploadCallComposerPicture4Request
+	276, // 138: telephony.TelephonyManagerService.UploadCallComposerPicture4_1:input_type -> telephony.UploadCallComposerPicture4_1Request
 	278, // 139: telephony.TelephonyManagerService.GetMaximumCallComposerPictureSize:input_type -> telephony.GetMaximumCallComposerPictureSizeRequest
 	1,   // 140: telephony.TelephonyManagerService.CanChangeDtmfToneLength:output_type -> telephony.CanChangeDtmfToneLengthResponse
 	3,   // 141: telephony.TelephonyManagerService.ClearSignalStrengthUpdateRequest:output_type -> telephony.ClearSignalStrengthUpdateRequestResponse
@@ -13167,8 +13167,8 @@ var file_proto_telephony_telephony_proto_depIdxs = []int32{
 	269, // 274: telephony.TelephonyManagerService.SwitchMultiSimConfig:output_type -> telephony.SwitchMultiSimConfigResponse
 	271, // 275: telephony.TelephonyManagerService.UnregisterTelephonyCallback:output_type -> telephony.UnregisterTelephonyCallbackResponse
 	273, // 276: telephony.TelephonyManagerService.UpdateAvailableNetworks:output_type -> telephony.UpdateAvailableNetworksResponse
-	275, // 277: telephony.TelephonyManagerService.UploadCallComposerPicture5:output_type -> telephony.UploadCallComposerPicture5Response
-	277, // 278: telephony.TelephonyManagerService.UploadCallComposerPicture5_1:output_type -> telephony.UploadCallComposerPicture5_1Response
+	275, // 277: telephony.TelephonyManagerService.UploadCallComposerPicture4:output_type -> telephony.UploadCallComposerPicture4Response
+	277, // 278: telephony.TelephonyManagerService.UploadCallComposerPicture4_1:output_type -> telephony.UploadCallComposerPicture4_1Response
 	279, // 279: telephony.TelephonyManagerService.GetMaximumCallComposerPictureSize:output_type -> telephony.GetMaximumCallComposerPictureSizeResponse
 	140, // [140:280] is the sub-list for method output_type
 	0,   // [0:140] is the sub-list for method input_type

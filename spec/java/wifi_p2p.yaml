@@ -280,7 +280,7 @@ classes:
               go_name: arg0
             - java_type: java.util.concurrent.Executor
               go_name: arg1
-            - java_type: "android.os.OutcomeReceiver<android.net.wifi.p2p.WifiP2pDirInfo, java.lang.Exception>"
+            - java_type: android.os.OutcomeReceiver<android.net.wifi.p2p.WifiP2pDirInfo, java.lang.Exception>
               go_name: arg2
           returns: void
           error: true
@@ -475,7 +475,7 @@ classes:
               go_name: arg1
             - java_type: java.util.concurrent.Executor
               go_name: arg2
-            - java_type: "android.os.OutcomeReceiver<java.lang.Boolean, java.lang.Exception>"
+            - java_type: android.os.OutcomeReceiver<java.lang.Boolean, java.lang.Exception>
               go_name: arg3
           returns: void
           error: true

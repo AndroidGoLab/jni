@@ -36,7 +36,7 @@ classes:
               go_name: arg0
             - java_type: java.util.concurrent.Executor
               go_name: arg1
-            - java_type: "android.os.OutcomeReceiver<android.telecom.CallControl, android.telecom.CallException>"
+            - java_type: android.os.OutcomeReceiver<android.telecom.CallControl, android.telecom.CallException>
               go_name: arg2
             - java_type: android.telecom.CallControlCallback
               go_name: arg3

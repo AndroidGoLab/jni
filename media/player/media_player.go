@@ -906,8 +906,8 @@ func (m *mediaPlayer) SetDataSource2(arg0 *jni.Object, arg1 *jni.Object) error {
 	return callErr
 }
 
-// SetDataSource4_1 calls android.media.MediaPlayer.setDataSource.
-func (m *mediaPlayer) SetDataSource4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+// SetDataSource3_1 calls android.media.MediaPlayer.setDataSource.
+func (m *mediaPlayer) SetDataSource3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -915,22 +915,22 @@ func (m *mediaPlayer) SetDataSource4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 
 			callErr = err
 			return err
 		}
-		if midmediaPlayerSetDataSource4_1 == nil {
+		if midmediaPlayerSetDataSource3_1 == nil {
 			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaPlayerSetDataSource4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midmediaPlayerSetDataSource3_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// SetDataSource5_2 calls android.media.MediaPlayer.setDataSource.
-func (m *mediaPlayer) SetDataSource5_2(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+// SetDataSource4_2 calls android.media.MediaPlayer.setDataSource.
+func (m *mediaPlayer) SetDataSource4_2(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -938,14 +938,14 @@ func (m *mediaPlayer) SetDataSource5_2(arg0 *jni.Object, arg1 *jni.Object, arg2 
 			callErr = err
 			return err
 		}
-		if midmediaPlayerSetDataSource5_2 == nil {
+		if midmediaPlayerSetDataSource4_2 == nil {
 			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaPlayerSetDataSource5_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midmediaPlayerSetDataSource4_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})

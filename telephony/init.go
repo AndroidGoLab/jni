@@ -158,8 +158,8 @@ var (
 	midtelephonyManagerSwitchMultiSimConfig                      jni.MethodID
 	midtelephonyManagerUnregisterTelephonyCallback               jni.MethodID
 	midtelephonyManagerUpdateAvailableNetworks                   jni.MethodID
-	midtelephonyManagerUploadCallComposerPicture5                jni.MethodID
-	midtelephonyManagerUploadCallComposerPicture5_1              jni.MethodID
+	midtelephonyManagerUploadCallComposerPicture4                jni.MethodID
+	midtelephonyManagerUploadCallComposerPicture4_1              jni.MethodID
 	midtelephonyManagerGetMaximumCallComposerPictureSize         jni.MethodID
 )
 
@@ -1289,7 +1289,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.updateAvailableNetworks")
 	}
 
-	midtelephonyManagerUploadCallComposerPicture5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/io/InputStream;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+	midtelephonyManagerUploadCallComposerPicture4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/io/InputStream;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1297,7 +1297,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.uploadCallComposerPicture")
 	}
 
-	midtelephonyManagerUploadCallComposerPicture5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+	midtelephonyManagerUploadCallComposerPicture4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
