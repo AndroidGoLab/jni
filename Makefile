@@ -1,4 +1,4 @@
-.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools build
+.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools build prove
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -76,6 +76,11 @@ test:
 # Run only tool tests (no JDK needed)
 test-tools:
 	go test ./tools/...
+
+# Verify Lean proofs (requires elan/lake)
+prove:
+	@command -v lake >/dev/null 2>&1 || { echo "lake not found. Install elan: https://github.com/leanprover/elan"; exit 1; }
+	cd proofs && lake build
 
 # Cross-compile libraries for android/arm64 (requires NDK toolchain)
 build:

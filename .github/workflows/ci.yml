@@ -79,3 +79,24 @@ jobs:
 
       - name: Lint (tools)
         run: golangci-lint run --build-tags="" ./tools/...
+
+  proofs:
+    name: Verify proofs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - uses: actions/cache@v4
+        with:
+          path: proofs/.lake
+          key: ${{ runner.os }}-lean-${{ hashFiles('proofs/lean-toolchain', 'proofs/lakefile.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-lean-
+
+      - name: Build proofs
+        run: cd proofs && lake build

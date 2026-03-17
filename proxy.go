@@ -378,7 +378,11 @@ func (e *Env) NewProxy(
 	}
 
 	// Get the class loader from the first interface.
-	classLoader := capi.CallObjectMethodA(e.ptr, capi.Object(ifaces[0].ref), midGetClassLoader, nil)
+	// Pass &dummyJvalue instead of nil: the JNI spec does not guarantee
+	// NULL is valid for the const jvalue* parameter of Call*MethodA;
+	// OpenJ9 segfaults on NULL (eclipse-openj9/openj9#10480).
+	var dummyJvalue capi.Jvalue
+	classLoader := capi.CallObjectMethodA(e.ptr, capi.Object(ifaces[0].ref), midGetClassLoader, &dummyJvalue)
 	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
 		capi.ExceptionClear(e.ptr)
 		unregisterProxy(handlerID)
@@ -459,7 +463,11 @@ func (e *Env) NewProxyFull(
 	}
 
 	// Get the class loader from the first interface.
-	classLoader := capi.CallObjectMethodA(e.ptr, capi.Object(ifaces[0].ref), midGetClassLoader, nil)
+	// Pass &dummyJvalue instead of nil: the JNI spec does not guarantee
+	// NULL is valid for the const jvalue* parameter of Call*MethodA;
+	// OpenJ9 segfaults on NULL (eclipse-openj9/openj9#10480).
+	var dummyJvalue capi.Jvalue
+	classLoader := capi.CallObjectMethodA(e.ptr, capi.Object(ifaces[0].ref), midGetClassLoader, &dummyJvalue)
 	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
 		capi.ExceptionClear(e.ptr)
 		unregisterProxy(handlerID)

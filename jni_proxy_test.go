@@ -157,7 +157,7 @@ func TestDispatchProxyInvocationNilArgs(t *testing.T) {
 		}
 		defer env.DeleteLocalRef(&methodStr.Object)
 
-		result := dispatchProxyInvocation(env.ptr, id, capi.String(methodStr.ref), 0)
+		result := dispatchProxyInvocation(env.ptr, id, capi.String(methodStr.ref), 0, 0)
 		if result != 0 {
 			t.Errorf("expected null result, got %v", result)
 		}
@@ -212,6 +212,7 @@ func TestDispatchProxyInvocationWithArgs(t *testing.T) {
 			env.ptr, id,
 			capi.String(methodStr.ref),
 			capi.ObjectArray(argsArray.ref),
+			0,
 		)
 		if result != 0 {
 			t.Errorf("expected null result, got %v", result)
@@ -247,7 +248,7 @@ func TestDispatchProxyInvocationReturnsObject(t *testing.T) {
 		}
 		defer env.DeleteLocalRef(&methodStr.Object)
 
-		result := dispatchProxyInvocation(env.ptr, id, capi.String(methodStr.ref), 0)
+		result := dispatchProxyInvocation(env.ptr, id, capi.String(methodStr.ref), 0, 0)
 		if result == 0 {
 			t.Fatal("expected non-null result")
 		}
@@ -273,7 +274,7 @@ func TestDispatchProxyInvocationHandlerError(t *testing.T) {
 		}
 		defer env.DeleteLocalRef(&methodStr.Object)
 
-		result := dispatchProxyInvocation(env.ptr, id, capi.String(methodStr.ref), 0)
+		result := dispatchProxyInvocation(env.ptr, id, capi.String(methodStr.ref), 0, 0)
 		if result != 0 {
 			t.Error("expected null result on error")
 		}
@@ -296,7 +297,7 @@ func TestDispatchProxyInvocationUnregisteredHandler(t *testing.T) {
 		}
 		defer env.DeleteLocalRef(&methodStr.Object)
 
-		result := dispatchProxyInvocation(env.ptr, -777, capi.String(methodStr.ref), 0)
+		result := dispatchProxyInvocation(env.ptr, -777, capi.String(methodStr.ref), 0, 0)
 		if result != 0 {
 			t.Error("expected null result for unregistered handler")
 		}

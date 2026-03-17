@@ -13,6 +13,13 @@ import (
 	"github.com/AndroidGoLab/jni/capi"
 )
 
+// dummyJvalue is a zero-valued jvalue passed to Call*MethodA for
+// zero-argument methods. The JNI spec does not guarantee NULL is valid
+// for the const jvalue* parameter; OpenJ9 segfaults on NULL
+// (eclipse-openj9/openj9#10480). The dummy is never read by the JVM
+// when the method takes no arguments.
+var dummyJvalue capi.Jvalue
+
 // JavaException represents a Java exception caught by JNI.
 type JavaException struct {
 	ClassName string
@@ -81,7 +88,7 @@ func extractClassName(env *capi.Env, throwable capi.Throwable) string {
 		return "unknown"
 	}
 
-	nameObj := capi.CallObjectMethodA(env, capi.Object(cls), getNameMID, nil)
+	nameObj := capi.CallObjectMethodA(env, capi.Object(cls), getNameMID, &dummyJvalue)
 	if capi.ExceptionCheck(env) == capi.JNI_TRUE {
 		capi.ExceptionClear(env)
 		return "unknown"
@@ -107,7 +114,7 @@ func extractMessage(env *capi.Env, throwable capi.Throwable) string {
 		return ""
 	}
 
-	msgObj := capi.CallObjectMethodA(env, capi.Object(throwable), getMsgMID, nil)
+	msgObj := capi.CallObjectMethodA(env, capi.Object(throwable), getMsgMID, &dummyJvalue)
 	if capi.ExceptionCheck(env) == capi.JNI_TRUE {
 		capi.ExceptionClear(env)
 		return ""

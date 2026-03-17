@@ -1,0 +1,10 @@
+name = "JNIProofs"
+version = "0.1.0"
+defaultTargets = ["jniproofs"]
+
+[[lean_lib]]
+name = "JNIProofs"
+
+[[lean_exe]]
+name = "jniproofs"
+root = "Main"
