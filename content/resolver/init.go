@@ -22,64 +22,64 @@ var (
 
 	clscursor *jni.GlobalRef
 
-	clscontentResolver                                   *jni.GlobalRef
-	midcontentResolverApplyBatch                         jni.MethodID
-	midcontentResolverCancelSync1_2                      jni.MethodID
-	midcontentResolverGetOutgoingPersistedUriPermissions jni.MethodID
-	midcontentResolverGetPersistedUriPermissions         jni.MethodID
-	midcontentResolverGetStreamTypes                     jni.MethodID
-	midcontentResolverLoadThumbnail                      jni.MethodID
-	midcontentResolverNotifyChange2                      jni.MethodID
-	midcontentResolverNotifyChange3_1                    jni.MethodID
-	midcontentResolverNotifyChange3_2                    jni.MethodID
-	midcontentResolverNotifyChange3_3                    jni.MethodID
-	midcontentResolverReleasePersistableUriPermission    jni.MethodID
-	midcontentResolverStartSync                          jni.MethodID
-	midcontentResolverTakePersistableUriPermission       jni.MethodID
-	midcontentResolverAddPeriodicSync                    jni.MethodID
-	midcontentResolverAddStatusChangeListener            jni.MethodID
-	midcontentResolverCancelSync2                        jni.MethodID
-	midcontentResolverCancelSync1_1                      jni.MethodID
-	midcontentResolverGetCurrentSync                     jni.MethodID
-	midcontentResolverGetCurrentSyncs                    jni.MethodID
-	midcontentResolverGetIsSyncable                      jni.MethodID
-	midcontentResolverGetMasterSyncAutomatically         jni.MethodID
-	midcontentResolverGetPeriodicSyncs                   jni.MethodID
-	midcontentResolverGetSyncAdapterTypes                jni.MethodID
-	midcontentResolverGetSyncAutomatically               jni.MethodID
-	midcontentResolverIsSyncActive                       jni.MethodID
-	midcontentResolverIsSyncPending                      jni.MethodID
-	midcontentResolverRemovePeriodicSync                 jni.MethodID
-	midcontentResolverRemoveStatusChangeListener         jni.MethodID
-	midcontentResolverRequestSync3                       jni.MethodID
-	midcontentResolverRequestSync1_1                     jni.MethodID
-	midcontentResolverSetIsSyncable                      jni.MethodID
-	midcontentResolverSetMasterSyncAutomatically         jni.MethodID
-	midcontentResolverSetSyncAutomatically               jni.MethodID
-	midcontentResolverValidateSyncExtrasBundle           jni.MethodID
-	midcontentResolverWrap1                              jni.MethodID
-	midcontentResolverWrap1_1                            jni.MethodID
+	clsResolver                                   *jni.GlobalRef
+	midResolverApplyBatch                         jni.MethodID
+	midResolverCancelSync1_2                      jni.MethodID
+	midResolverGetOutgoingPersistedUriPermissions jni.MethodID
+	midResolverGetPersistedUriPermissions         jni.MethodID
+	midResolverGetStreamTypes                     jni.MethodID
+	midResolverLoadThumbnail                      jni.MethodID
+	midResolverNotifyChange2                      jni.MethodID
+	midResolverNotifyChange3_1                    jni.MethodID
+	midResolverNotifyChange3_2                    jni.MethodID
+	midResolverNotifyChange3_3                    jni.MethodID
+	midResolverReleasePersistableUriPermission    jni.MethodID
+	midResolverStartSync                          jni.MethodID
+	midResolverTakePersistableUriPermission       jni.MethodID
+	midResolverAddPeriodicSync                    jni.MethodID
+	midResolverAddStatusChangeListener            jni.MethodID
+	midResolverCancelSync2                        jni.MethodID
+	midResolverCancelSync1_1                      jni.MethodID
+	midResolverGetCurrentSync                     jni.MethodID
+	midResolverGetCurrentSyncs                    jni.MethodID
+	midResolverGetIsSyncable                      jni.MethodID
+	midResolverGetMasterSyncAutomatically         jni.MethodID
+	midResolverGetPeriodicSyncs                   jni.MethodID
+	midResolverGetSyncAdapterTypes                jni.MethodID
+	midResolverGetSyncAutomatically               jni.MethodID
+	midResolverIsSyncActive                       jni.MethodID
+	midResolverIsSyncPending                      jni.MethodID
+	midResolverRemovePeriodicSync                 jni.MethodID
+	midResolverRemoveStatusChangeListener         jni.MethodID
+	midResolverRequestSync3                       jni.MethodID
+	midResolverRequestSync1_1                     jni.MethodID
+	midResolverSetIsSyncable                      jni.MethodID
+	midResolverSetMasterSyncAutomatically         jni.MethodID
+	midResolverSetSyncAutomatically               jni.MethodID
+	midResolverValidateSyncExtrasBundle           jni.MethodID
+	midResolverWrap1                              jni.MethodID
+	midResolverWrap1_1                            jni.MethodID
 
-	clsuri                         *jni.GlobalRef
-	miduriCompareTo1               jni.MethodID
-	miduriEquals                   jni.MethodID
-	miduriGetBooleanQueryParameter jni.MethodID
-	miduriGetQueryParameter        jni.MethodID
-	miduriGetQueryParameterNames   jni.MethodID
-	miduriGetQueryParameters       jni.MethodID
-	miduriHashCode                 jni.MethodID
-	miduriIsAbsolute               jni.MethodID
-	miduriIsOpaque                 jni.MethodID
-	miduriNormalizeScheme          jni.MethodID
-	miduriCompareTo1_1             jni.MethodID
-	miduriDecode                   jni.MethodID
-	miduriEncode1                  jni.MethodID
-	miduriEncode2_1                jni.MethodID
-	miduriFromFile                 jni.MethodID
-	miduriFromParts                jni.MethodID
-	miduriParse                    jni.MethodID
-	miduriWithAppendedPath         jni.MethodID
-	miduriWriteToParcel            jni.MethodID
+	clsUri                         *jni.GlobalRef
+	midUriCompareTo1               jni.MethodID
+	midUriEquals                   jni.MethodID
+	midUriGetBooleanQueryParameter jni.MethodID
+	midUriGetQueryParameter        jni.MethodID
+	midUriGetQueryParameterNames   jni.MethodID
+	midUriGetQueryParameters       jni.MethodID
+	midUriHashCode                 jni.MethodID
+	midUriIsAbsolute               jni.MethodID
+	midUriIsOpaque                 jni.MethodID
+	midUriNormalizeScheme          jni.MethodID
+	midUriCompareTo1_1             jni.MethodID
+	midUriDecode                   jni.MethodID
+	midUriEncode1                  jni.MethodID
+	midUriEncode2_1                jni.MethodID
+	midUriFromFile                 jni.MethodID
+	midUriFromParts                jni.MethodID
+	midUriParse                    jni.MethodID
+	midUriWithAppendedPath         jni.MethodID
+	midUriWriteToParcel            jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -116,9 +116,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.content.ContentResolver: %w", err)
 	}
-	clscontentResolver = env.NewGlobalRef(&c.Object)
+	clsResolver = env.NewGlobalRef(&c.Object)
 
-	midcontentResolverApplyBatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "applyBatch", "(Ljava/lang/String;Ljava/util/ArrayList;)[Landroid/content/ContentProviderResult;")
+	midResolverApplyBatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "applyBatch", "(Ljava/lang/String;Ljava/util/ArrayList;)[Landroid/content/ContentProviderResult;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -126,7 +126,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.applyBatch")
 	}
 
-	midcontentResolverCancelSync1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "cancelSync", "(Landroid/net/Uri;)V")
+	midResolverCancelSync1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "cancelSync", "(Landroid/net/Uri;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -134,7 +134,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.cancelSync")
 	}
 
-	midcontentResolverGetOutgoingPersistedUriPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getOutgoingPersistedUriPermissions", "()Ljava/util/List;")
+	midResolverGetOutgoingPersistedUriPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getOutgoingPersistedUriPermissions", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -142,7 +142,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getOutgoingPersistedUriPermissions")
 	}
 
-	midcontentResolverGetPersistedUriPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getPersistedUriPermissions", "()Ljava/util/List;")
+	midResolverGetPersistedUriPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getPersistedUriPermissions", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -150,7 +150,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getPersistedUriPermissions")
 	}
 
-	midcontentResolverGetStreamTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getStreamTypes", "(Landroid/net/Uri;Ljava/lang/String;)[Ljava/lang/String;")
+	midResolverGetStreamTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getStreamTypes", "(Landroid/net/Uri;Ljava/lang/String;)[Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -158,7 +158,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getStreamTypes")
 	}
 
-	midcontentResolverLoadThumbnail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "loadThumbnail", "(Landroid/net/Uri;Landroid/util/Size;Landroid/os/CancellationSignal;)Landroid/graphics/Bitmap;")
+	midResolverLoadThumbnail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "loadThumbnail", "(Landroid/net/Uri;Landroid/util/Size;Landroid/os/CancellationSignal;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -166,7 +166,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.loadThumbnail")
 	}
 
-	midcontentResolverNotifyChange2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "notifyChange", "(Landroid/net/Uri;Landroid/database/ContentObserver;)V")
+	midResolverNotifyChange2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "notifyChange", "(Landroid/net/Uri;Landroid/database/ContentObserver;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -174,7 +174,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.notifyChange")
 	}
 
-	midcontentResolverNotifyChange3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "notifyChange", "(Landroid/net/Uri;Landroid/database/ContentObserver;Z)V")
+	midResolverNotifyChange3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "notifyChange", "(Landroid/net/Uri;Landroid/database/ContentObserver;Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -182,7 +182,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.notifyChange")
 	}
 
-	midcontentResolverNotifyChange3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "notifyChange", "(Landroid/net/Uri;Landroid/database/ContentObserver;I)V")
+	midResolverNotifyChange3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "notifyChange", "(Landroid/net/Uri;Landroid/database/ContentObserver;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -190,7 +190,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.notifyChange")
 	}
 
-	midcontentResolverNotifyChange3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "notifyChange", "(Ljava/util/Collection;Landroid/database/ContentObserver;I)V")
+	midResolverNotifyChange3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "notifyChange", "(Ljava/util/Collection;Landroid/database/ContentObserver;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -198,7 +198,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.notifyChange")
 	}
 
-	midcontentResolverReleasePersistableUriPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "releasePersistableUriPermission", "(Landroid/net/Uri;I)V")
+	midResolverReleasePersistableUriPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "releasePersistableUriPermission", "(Landroid/net/Uri;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -206,7 +206,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.releasePersistableUriPermission")
 	}
 
-	midcontentResolverStartSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "startSync", "(Landroid/net/Uri;Landroid/os/Bundle;)V")
+	midResolverStartSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "startSync", "(Landroid/net/Uri;Landroid/os/Bundle;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -214,7 +214,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.startSync")
 	}
 
-	midcontentResolverTakePersistableUriPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "takePersistableUriPermission", "(Landroid/net/Uri;I)V")
+	midResolverTakePersistableUriPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "takePersistableUriPermission", "(Landroid/net/Uri;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -222,7 +222,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.takePersistableUriPermission")
 	}
 
-	midcontentResolverAddPeriodicSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "addPeriodicSync", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;J)V")
+	midResolverAddPeriodicSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "addPeriodicSync", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;J)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -230,7 +230,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.addPeriodicSync")
 	}
 
-	midcontentResolverAddStatusChangeListener, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "addStatusChangeListener", "(ILandroid/content/SyncStatusObserver;)Ljava/lang/Object;")
+	midResolverAddStatusChangeListener, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "addStatusChangeListener", "(ILandroid/content/SyncStatusObserver;)Ljava/lang/Object;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -238,7 +238,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.addStatusChangeListener")
 	}
 
-	midcontentResolverCancelSync2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "cancelSync", "(Landroid/accounts/Account;Ljava/lang/String;)V")
+	midResolverCancelSync2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "cancelSync", "(Landroid/accounts/Account;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -246,7 +246,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.cancelSync")
 	}
 
-	midcontentResolverCancelSync1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "cancelSync", "(Landroid/content/SyncRequest;)V")
+	midResolverCancelSync1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "cancelSync", "(Landroid/content/SyncRequest;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -254,7 +254,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.cancelSync")
 	}
 
-	midcontentResolverGetCurrentSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getCurrentSync", "()Landroid/content/SyncInfo;")
+	midResolverGetCurrentSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getCurrentSync", "()Landroid/content/SyncInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -262,7 +262,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getCurrentSync")
 	}
 
-	midcontentResolverGetCurrentSyncs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getCurrentSyncs", "()Ljava/util/List;")
+	midResolverGetCurrentSyncs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getCurrentSyncs", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -270,7 +270,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getCurrentSyncs")
 	}
 
-	midcontentResolverGetIsSyncable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getIsSyncable", "(Landroid/accounts/Account;Ljava/lang/String;)I")
+	midResolverGetIsSyncable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getIsSyncable", "(Landroid/accounts/Account;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -278,7 +278,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getIsSyncable")
 	}
 
-	midcontentResolverGetMasterSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getMasterSyncAutomatically", "()Z")
+	midResolverGetMasterSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getMasterSyncAutomatically", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -286,7 +286,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getMasterSyncAutomatically")
 	}
 
-	midcontentResolverGetPeriodicSyncs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getPeriodicSyncs", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/util/List;")
+	midResolverGetPeriodicSyncs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getPeriodicSyncs", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -294,7 +294,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getPeriodicSyncs")
 	}
 
-	midcontentResolverGetSyncAdapterTypes, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getSyncAdapterTypes", "()[Landroid/content/SyncAdapterType;")
+	midResolverGetSyncAdapterTypes, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getSyncAdapterTypes", "()[Landroid/content/SyncAdapterType;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -302,7 +302,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getSyncAdapterTypes")
 	}
 
-	midcontentResolverGetSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "getSyncAutomatically", "(Landroid/accounts/Account;Ljava/lang/String;)Z")
+	midResolverGetSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "getSyncAutomatically", "(Landroid/accounts/Account;Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -310,7 +310,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.getSyncAutomatically")
 	}
 
-	midcontentResolverIsSyncActive, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "isSyncActive", "(Landroid/accounts/Account;Ljava/lang/String;)Z")
+	midResolverIsSyncActive, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "isSyncActive", "(Landroid/accounts/Account;Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -318,7 +318,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.isSyncActive")
 	}
 
-	midcontentResolverIsSyncPending, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "isSyncPending", "(Landroid/accounts/Account;Ljava/lang/String;)Z")
+	midResolverIsSyncPending, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "isSyncPending", "(Landroid/accounts/Account;Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -326,7 +326,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.isSyncPending")
 	}
 
-	midcontentResolverRemovePeriodicSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "removePeriodicSync", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)V")
+	midResolverRemovePeriodicSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "removePeriodicSync", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -334,7 +334,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.removePeriodicSync")
 	}
 
-	midcontentResolverRemoveStatusChangeListener, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "removeStatusChangeListener", "(Ljava/lang/Object;)V")
+	midResolverRemoveStatusChangeListener, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "removeStatusChangeListener", "(Ljava/lang/Object;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -342,7 +342,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.removeStatusChangeListener")
 	}
 
-	midcontentResolverRequestSync3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "requestSync", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)V")
+	midResolverRequestSync3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "requestSync", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -350,7 +350,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.requestSync")
 	}
 
-	midcontentResolverRequestSync1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "requestSync", "(Landroid/content/SyncRequest;)V")
+	midResolverRequestSync1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "requestSync", "(Landroid/content/SyncRequest;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -358,7 +358,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.requestSync")
 	}
 
-	midcontentResolverSetIsSyncable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "setIsSyncable", "(Landroid/accounts/Account;Ljava/lang/String;I)V")
+	midResolverSetIsSyncable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "setIsSyncable", "(Landroid/accounts/Account;Ljava/lang/String;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -366,7 +366,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.setIsSyncable")
 	}
 
-	midcontentResolverSetMasterSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "setMasterSyncAutomatically", "(Z)V")
+	midResolverSetMasterSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "setMasterSyncAutomatically", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -374,7 +374,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.setMasterSyncAutomatically")
 	}
 
-	midcontentResolverSetSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "setSyncAutomatically", "(Landroid/accounts/Account;Ljava/lang/String;Z)V")
+	midResolverSetSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "setSyncAutomatically", "(Landroid/accounts/Account;Ljava/lang/String;Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -382,7 +382,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.setSyncAutomatically")
 	}
 
-	midcontentResolverValidateSyncExtrasBundle, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "validateSyncExtrasBundle", "(Landroid/os/Bundle;)V")
+	midResolverValidateSyncExtrasBundle, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "validateSyncExtrasBundle", "(Landroid/os/Bundle;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -390,7 +390,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.validateSyncExtrasBundle")
 	}
 
-	midcontentResolverWrap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "wrap", "(Landroid/content/ContentProvider;)Landroid/content/ContentResolver;")
+	midResolverWrap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "wrap", "(Landroid/content/ContentProvider;)Landroid/content/ContentResolver;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -398,7 +398,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ContentResolver.wrap")
 	}
 
-	midcontentResolverWrap1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontentResolver)), "wrap", "(Landroid/content/ContentProviderClient;)Landroid/content/ContentResolver;")
+	midResolverWrap1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "wrap", "(Landroid/content/ContentProviderClient;)Landroid/content/ContentResolver;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -410,9 +410,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.net.Uri: %w", err)
 	}
-	clsuri = env.NewGlobalRef(&c.Object)
+	clsUri = env.NewGlobalRef(&c.Object)
 
-	miduriCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Landroid/net/Uri;)I")
+	midUriCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "compareTo", "(Landroid/net/Uri;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -420,7 +420,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.compareTo")
 	}
 
-	miduriEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "equals", "(Ljava/lang/Object;)Z")
+	midUriEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -428,7 +428,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.equals")
 	}
 
-	miduriGetBooleanQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getBooleanQueryParameter", "(Ljava/lang/String;Z)Z")
+	midUriGetBooleanQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getBooleanQueryParameter", "(Ljava/lang/String;Z)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -436,7 +436,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.getBooleanQueryParameter")
 	}
 
-	miduriGetQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameter", "(Ljava/lang/String;)Ljava/lang/String;")
+	midUriGetQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getQueryParameter", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -444,7 +444,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameter")
 	}
 
-	miduriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameterNames", "()Ljava/util/Set;")
+	midUriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getQueryParameterNames", "()Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -452,7 +452,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameterNames")
 	}
 
-	miduriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List;")
+	midUriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -460,7 +460,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameters")
 	}
 
-	miduriHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "hashCode", "()I")
+	midUriHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "hashCode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -468,7 +468,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.hashCode")
 	}
 
-	miduriIsAbsolute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isAbsolute", "()Z")
+	midUriIsAbsolute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "isAbsolute", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -476,7 +476,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.isAbsolute")
 	}
 
-	miduriIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isOpaque", "()Z")
+	midUriIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "isOpaque", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -484,7 +484,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.isOpaque")
 	}
 
-	miduriNormalizeScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "normalizeScheme", "()Landroid/net/Uri;")
+	midUriNormalizeScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "normalizeScheme", "()Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -492,7 +492,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.normalizeScheme")
 	}
 
-	miduriCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Ljava/lang/Object;)I")
+	midUriCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "compareTo", "(Ljava/lang/Object;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -500,7 +500,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.compareTo")
 	}
 
-	miduriDecode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "decode", "(Ljava/lang/String;)Ljava/lang/String;")
+	midUriDecode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "decode", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -508,7 +508,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.decode")
 	}
 
-	miduriEncode1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;)Ljava/lang/String;")
+	midUriEncode1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "encode", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -516,7 +516,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.encode")
 	}
 
-	miduriEncode2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
+	midUriEncode2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "encode", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -524,7 +524,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.encode")
 	}
 
-	miduriFromFile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromFile", "(Ljava/io/File;)Landroid/net/Uri;")
+	midUriFromFile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "fromFile", "(Ljava/io/File;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -532,7 +532,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.fromFile")
 	}
 
-	miduriFromParts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromParts", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midUriFromParts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "fromParts", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -540,7 +540,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.fromParts")
 	}
 
-	miduriParse, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "parse", "(Ljava/lang/String;)Landroid/net/Uri;")
+	midUriParse, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "parse", "(Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -548,7 +548,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.parse")
 	}
 
-	miduriWithAppendedPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "withAppendedPath", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	midUriWithAppendedPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "withAppendedPath", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -556,7 +556,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.Uri.withAppendedPath")
 	}
 
-	miduriWriteToParcel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "writeToParcel", "(Landroid/os/Parcel;Landroid/net/Uri;)V")
+	midUriWriteToParcel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "writeToParcel", "(Landroid/os/Parcel;Landroid/net/Uri;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

@@ -2,7 +2,7 @@ package: usage
 go_import: github.com/AndroidGoLab/jni/app/usage
 classes:
     - java_class: android.app.usage.UsageStatsManager
-      go_type: usageStatsManager
+      go_type: Manager
       obtain: system_service
       service_name: usagestats
       close: true

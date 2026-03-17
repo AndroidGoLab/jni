@@ -2,7 +2,7 @@ package: biometric
 go_import: github.com/AndroidGoLab/jni/hardware/biometric
 classes:
     - java_class: android.hardware.biometrics.BiometricPrompt
-      go_type: biometricPrompt
+      go_type: Prompt
       methods:
         - java_method: authenticate
           go_name: Authenticate4
@@ -69,7 +69,7 @@ classes:
           returns: boolean
           error: true
     - java_class: android.hardware.biometrics.BiometricPrompt$Builder
-      go_type: biometricPromptBuilder
+      go_type: PromptBuilder
       methods:
         - java_method: build
           go_name: Build
@@ -157,7 +157,10 @@ classes:
           returns: android.hardware.biometrics.BiometricPrompt$Builder
           error: true
     - java_class: android.hardware.biometrics.BiometricManager
-      go_type: biometricManager
+      go_type: Manager
+      obtain: system_service
+      service_name: biometric
+      close: true
       methods:
         - java_method: canAuthenticate
           go_name: CanAuthenticate0

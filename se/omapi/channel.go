@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// channel wraps android.se.omapi.Channel.
-type channel struct {
+// Channel wraps android.se.omapi.Channel.
+type Channel struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Close calls android.se.omapi.Channel.close.
-func (m *channel) Close() error {
+func (m *Channel) Close() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *channel) Close() error {
 			callErr = err
 			return err
 		}
-		if midchannelClose == nil {
+		if midChannelClose == nil {
 			callErr = fmt.Errorf("android.se.omapi.Channel.close is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midchannelClose,
+			midChannelClose,
 		)
 		return callErr
 	})
@@ -46,7 +46,7 @@ func (m *channel) Close() error {
 }
 
 // GetSelectResponse calls android.se.omapi.Channel.getSelectResponse.
-func (m *channel) GetSelectResponse() (*jni.Object, error) {
+func (m *Channel) GetSelectResponse() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -54,13 +54,13 @@ func (m *channel) GetSelectResponse() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midchannelGetSelectResponse == nil {
+		if midChannelGetSelectResponse == nil {
 			callErr = fmt.Errorf("android.se.omapi.Channel.getSelectResponse is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midchannelGetSelectResponse,
+			midChannelGetSelectResponse,
 		)
 		if callErr != nil {
 			return callErr
@@ -71,7 +71,7 @@ func (m *channel) GetSelectResponse() (*jni.Object, error) {
 }
 
 // GetSession calls android.se.omapi.Channel.getSession.
-func (m *channel) GetSession() (*jni.Object, error) {
+func (m *Channel) GetSession() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -79,13 +79,13 @@ func (m *channel) GetSession() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midchannelGetSession == nil {
+		if midChannelGetSession == nil {
 			callErr = fmt.Errorf("android.se.omapi.Channel.getSession is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midchannelGetSession,
+			midChannelGetSession,
 		)
 		if callErr != nil {
 			return callErr
@@ -96,7 +96,7 @@ func (m *channel) GetSession() (*jni.Object, error) {
 }
 
 // IsBasicChannel calls android.se.omapi.Channel.isBasicChannel.
-func (m *channel) IsBasicChannel() (bool, error) {
+func (m *Channel) IsBasicChannel() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -104,13 +104,13 @@ func (m *channel) IsBasicChannel() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midchannelIsBasicChannel == nil {
+		if midChannelIsBasicChannel == nil {
 			callErr = fmt.Errorf("android.se.omapi.Channel.isBasicChannel is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midchannelIsBasicChannel,
+			midChannelIsBasicChannel,
 		)
 		if callErr != nil {
 			return callErr
@@ -122,7 +122,7 @@ func (m *channel) IsBasicChannel() (bool, error) {
 }
 
 // IsOpen calls android.se.omapi.Channel.isOpen.
-func (m *channel) IsOpen() (bool, error) {
+func (m *Channel) IsOpen() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -130,13 +130,13 @@ func (m *channel) IsOpen() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midchannelIsOpen == nil {
+		if midChannelIsOpen == nil {
 			callErr = fmt.Errorf("android.se.omapi.Channel.isOpen is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midchannelIsOpen,
+			midChannelIsOpen,
 		)
 		if callErr != nil {
 			return callErr
@@ -148,7 +148,7 @@ func (m *channel) IsOpen() (bool, error) {
 }
 
 // SelectNext calls android.se.omapi.Channel.selectNext.
-func (m *channel) SelectNext() (bool, error) {
+func (m *Channel) SelectNext() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -156,13 +156,13 @@ func (m *channel) SelectNext() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midchannelSelectNext == nil {
+		if midChannelSelectNext == nil {
 			callErr = fmt.Errorf("android.se.omapi.Channel.selectNext is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midchannelSelectNext,
+			midChannelSelectNext,
 		)
 		if callErr != nil {
 			return callErr
@@ -174,7 +174,7 @@ func (m *channel) SelectNext() (bool, error) {
 }
 
 // Transmit calls android.se.omapi.Channel.transmit.
-func (m *channel) Transmit(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Channel) Transmit(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -182,14 +182,14 @@ func (m *channel) Transmit(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midchannelTransmit == nil {
+		if midChannelTransmit == nil {
 			callErr = fmt.Errorf("android.se.omapi.Channel.transmit is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midchannelTransmit, jni.ObjectValue(arg0),
+			midChannelTransmit, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

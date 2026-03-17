@@ -47,17 +47,17 @@ var (
 	midclipDataItemGetUri             jni.MethodID
 	midclipDataItemToString           jni.MethodID
 
-	clsclipboardManager                                 *jni.GlobalRef
-	midclipboardManagerAddPrimaryClipChangedListener    jni.MethodID
-	midclipboardManagerClearPrimaryClip                 jni.MethodID
-	midclipboardManagerGetPrimaryClip                   jni.MethodID
-	midclipboardManagerGetPrimaryClipDescription        jni.MethodID
-	midclipboardManagerGetText                          jni.MethodID
-	midclipboardManagerHasPrimaryClip                   jni.MethodID
-	midclipboardManagerHasText                          jni.MethodID
-	midclipboardManagerRemovePrimaryClipChangedListener jni.MethodID
-	midclipboardManagerSetPrimaryClip                   jni.MethodID
-	midclipboardManagerSetText                          jni.MethodID
+	clsManager                                 *jni.GlobalRef
+	midManagerAddPrimaryClipChangedListener    jni.MethodID
+	midManagerClearPrimaryClip                 jni.MethodID
+	midManagerGetPrimaryClip                   jni.MethodID
+	midManagerGetPrimaryClipDescription        jni.MethodID
+	midManagerGetText                          jni.MethodID
+	midManagerHasPrimaryClip                   jni.MethodID
+	midManagerHasText                          jni.MethodID
+	midManagerRemovePrimaryClipChangedListener jni.MethodID
+	midManagerSetPrimaryClip                   jni.MethodID
+	midManagerSetText                          jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -284,9 +284,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.content.ClipboardManager: %w", err)
 	}
-	clsclipboardManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midclipboardManagerAddPrimaryClipChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "addPrimaryClipChangedListener", "(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V")
+	midManagerAddPrimaryClipChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addPrimaryClipChangedListener", "(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -294,7 +294,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.addPrimaryClipChangedListener")
 	}
 
-	midclipboardManagerClearPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "clearPrimaryClip", "()V")
+	midManagerClearPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearPrimaryClip", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -302,7 +302,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.clearPrimaryClip")
 	}
 
-	midclipboardManagerGetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "getPrimaryClip", "()Landroid/content/ClipData;")
+	midManagerGetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrimaryClip", "()Landroid/content/ClipData;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -310,7 +310,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.getPrimaryClip")
 	}
 
-	midclipboardManagerGetPrimaryClipDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "getPrimaryClipDescription", "()Landroid/content/ClipDescription;")
+	midManagerGetPrimaryClipDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrimaryClipDescription", "()Landroid/content/ClipDescription;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -318,7 +318,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.getPrimaryClipDescription")
 	}
 
-	midclipboardManagerGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "getText", "()Ljava/lang/String;")
+	midManagerGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getText", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -326,7 +326,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.getText")
 	}
 
-	midclipboardManagerHasPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "hasPrimaryClip", "()Z")
+	midManagerHasPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasPrimaryClip", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -334,7 +334,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.hasPrimaryClip")
 	}
 
-	midclipboardManagerHasText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "hasText", "()Z")
+	midManagerHasText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasText", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -342,7 +342,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.hasText")
 	}
 
-	midclipboardManagerRemovePrimaryClipChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "removePrimaryClipChangedListener", "(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V")
+	midManagerRemovePrimaryClipChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removePrimaryClipChangedListener", "(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -350,7 +350,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.removePrimaryClipChangedListener")
 	}
 
-	midclipboardManagerSetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "setPrimaryClip", "(Landroid/content/ClipData;)V")
+	midManagerSetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setPrimaryClip", "(Landroid/content/ClipData;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -358,7 +358,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipboardManager.setPrimaryClip")
 	}
 
-	midclipboardManagerSetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipboardManager)), "setText", "(Ljava/lang/String;)V")
+	midManagerSetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setText", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

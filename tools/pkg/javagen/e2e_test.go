@@ -293,7 +293,7 @@ func TestGenerate_OutputFilePatterns(t *testing.T) {
 	}{
 		{
 			specName:      "location",
-			expectFiles:   []string{"doc.go", "init.go", "location_manager.go", "constants.go"},
+			expectFiles:   []string{"doc.go", "init.go", "manager.go", "constants.go"},
 			unexpectFiles: []string{"callbacks.go"},
 		},
 		{
@@ -363,25 +363,25 @@ func TestGenerate_ContentPatterns(t *testing.T) {
 		t.Error("doc.go missing generated header")
 	}
 
-	// Check location_manager.go has constructor and methods.
-	mgrGo := readFile(t, filepath.Join(pkgDir, "location_manager.go"))
-	if !strings.Contains(mgrGo, "type locationManager struct") {
-		t.Error("location_manager.go missing locationManager struct")
+	// Check manager.go has constructor and methods.
+	mgrGo := readFile(t, filepath.Join(pkgDir, "manager.go"))
+	if !strings.Contains(mgrGo, "type Manager struct") {
+		t.Error("manager.go missing Manager struct")
 	}
-	if !strings.Contains(mgrGo, "NewlocationManager") {
-		t.Error("location_manager.go missing NewlocationManager constructor")
+	if !strings.Contains(mgrGo, "NewManager") {
+		t.Error("manager.go missing NewManager constructor")
 	}
 	if !strings.Contains(mgrGo, "GetSystemService") {
-		t.Error("location_manager.go missing GetSystemService call")
+		t.Error("manager.go missing GetSystemService call")
 	}
-	if !strings.Contains(mgrGo, "func (m *locationManager)") {
-		t.Error("location_manager.go missing locationManager methods")
+	if !strings.Contains(mgrGo, "func (m *Manager)") {
+		t.Error("manager.go missing Manager methods")
 	}
 	if !strings.Contains(mgrGo, "m.VM.Do") {
-		t.Error("location_manager.go missing VM.Do pattern")
+		t.Error("manager.go missing VM.Do pattern")
 	}
 	if !strings.Contains(mgrGo, "ensureInit") {
-		t.Error("location_manager.go missing ensureInit call")
+		t.Error("manager.go missing ensureInit call")
 	}
 
 	// Check init.go has sync.Once initialization.

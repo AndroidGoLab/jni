@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// gnssStatus wraps android.location.GnssStatus.
-type gnssStatus struct {
+// GnssStatus wraps android.location.GnssStatus.
+type GnssStatus struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.location.GnssStatus.describeContents.
-func (m *gnssStatus) DescribeContents() (int32, error) {
+func (m *GnssStatus) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *gnssStatus) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusDescribeContents == nil {
+		if midGnssStatusDescribeContents == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midgnssStatusDescribeContents,
+			midGnssStatusDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *gnssStatus) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.location.GnssStatus.equals.
-func (m *gnssStatus) Equals(arg0 *jni.Object) (bool, error) {
+func (m *GnssStatus) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *gnssStatus) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusEquals == nil {
+		if midGnssStatusEquals == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midgnssStatusEquals, jni.ObjectValue(arg0),
+			midGnssStatusEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *gnssStatus) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetAzimuthDegrees calls android.location.GnssStatus.getAzimuthDegrees.
-func (m *gnssStatus) GetAzimuthDegrees(arg0 int32) (float32, error) {
+func (m *GnssStatus) GetAzimuthDegrees(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,14 +84,14 @@ func (m *gnssStatus) GetAzimuthDegrees(arg0 int32) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetAzimuthDegrees == nil {
+		if midGnssStatusGetAzimuthDegrees == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getAzimuthDegrees is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midgnssStatusGetAzimuthDegrees, jni.IntValue(arg0),
+			midGnssStatusGetAzimuthDegrees, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -102,7 +102,7 @@ func (m *gnssStatus) GetAzimuthDegrees(arg0 int32) (float32, error) {
 }
 
 // GetBasebandCn0DbHz calls android.location.GnssStatus.getBasebandCn0DbHz.
-func (m *gnssStatus) GetBasebandCn0DbHz(arg0 int32) (float32, error) {
+func (m *GnssStatus) GetBasebandCn0DbHz(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -110,14 +110,14 @@ func (m *gnssStatus) GetBasebandCn0DbHz(arg0 int32) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetBasebandCn0DbHz == nil {
+		if midGnssStatusGetBasebandCn0DbHz == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getBasebandCn0DbHz is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midgnssStatusGetBasebandCn0DbHz, jni.IntValue(arg0),
+			midGnssStatusGetBasebandCn0DbHz, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -128,7 +128,7 @@ func (m *gnssStatus) GetBasebandCn0DbHz(arg0 int32) (float32, error) {
 }
 
 // GetCarrierFrequencyHz calls android.location.GnssStatus.getCarrierFrequencyHz.
-func (m *gnssStatus) GetCarrierFrequencyHz(arg0 int32) (float32, error) {
+func (m *GnssStatus) GetCarrierFrequencyHz(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -136,14 +136,14 @@ func (m *gnssStatus) GetCarrierFrequencyHz(arg0 int32) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetCarrierFrequencyHz == nil {
+		if midGnssStatusGetCarrierFrequencyHz == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getCarrierFrequencyHz is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midgnssStatusGetCarrierFrequencyHz, jni.IntValue(arg0),
+			midGnssStatusGetCarrierFrequencyHz, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -154,7 +154,7 @@ func (m *gnssStatus) GetCarrierFrequencyHz(arg0 int32) (float32, error) {
 }
 
 // GetCn0DbHz calls android.location.GnssStatus.getCn0DbHz.
-func (m *gnssStatus) GetCn0DbHz(arg0 int32) (float32, error) {
+func (m *GnssStatus) GetCn0DbHz(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -162,14 +162,14 @@ func (m *gnssStatus) GetCn0DbHz(arg0 int32) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetCn0DbHz == nil {
+		if midGnssStatusGetCn0DbHz == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getCn0DbHz is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midgnssStatusGetCn0DbHz, jni.IntValue(arg0),
+			midGnssStatusGetCn0DbHz, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -180,7 +180,7 @@ func (m *gnssStatus) GetCn0DbHz(arg0 int32) (float32, error) {
 }
 
 // GetConstellationType calls android.location.GnssStatus.getConstellationType.
-func (m *gnssStatus) GetConstellationType(arg0 int32) (int32, error) {
+func (m *GnssStatus) GetConstellationType(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -188,14 +188,14 @@ func (m *gnssStatus) GetConstellationType(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetConstellationType == nil {
+		if midGnssStatusGetConstellationType == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getConstellationType is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midgnssStatusGetConstellationType, jni.IntValue(arg0),
+			midGnssStatusGetConstellationType, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -206,7 +206,7 @@ func (m *gnssStatus) GetConstellationType(arg0 int32) (int32, error) {
 }
 
 // GetElevationDegrees calls android.location.GnssStatus.getElevationDegrees.
-func (m *gnssStatus) GetElevationDegrees(arg0 int32) (float32, error) {
+func (m *GnssStatus) GetElevationDegrees(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -214,14 +214,14 @@ func (m *gnssStatus) GetElevationDegrees(arg0 int32) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetElevationDegrees == nil {
+		if midGnssStatusGetElevationDegrees == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getElevationDegrees is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midgnssStatusGetElevationDegrees, jni.IntValue(arg0),
+			midGnssStatusGetElevationDegrees, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -232,7 +232,7 @@ func (m *gnssStatus) GetElevationDegrees(arg0 int32) (float32, error) {
 }
 
 // GetSatelliteCount calls android.location.GnssStatus.getSatelliteCount.
-func (m *gnssStatus) GetSatelliteCount() (int32, error) {
+func (m *GnssStatus) GetSatelliteCount() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -240,13 +240,13 @@ func (m *gnssStatus) GetSatelliteCount() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetSatelliteCount == nil {
+		if midGnssStatusGetSatelliteCount == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getSatelliteCount is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midgnssStatusGetSatelliteCount,
+			midGnssStatusGetSatelliteCount,
 		)
 		if callErr != nil {
 			return callErr
@@ -257,7 +257,7 @@ func (m *gnssStatus) GetSatelliteCount() (int32, error) {
 }
 
 // GetSvid calls android.location.GnssStatus.getSvid.
-func (m *gnssStatus) GetSvid(arg0 int32) (int32, error) {
+func (m *GnssStatus) GetSvid(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -265,14 +265,14 @@ func (m *gnssStatus) GetSvid(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusGetSvid == nil {
+		if midGnssStatusGetSvid == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.getSvid is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midgnssStatusGetSvid, jni.IntValue(arg0),
+			midGnssStatusGetSvid, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -283,7 +283,7 @@ func (m *gnssStatus) GetSvid(arg0 int32) (int32, error) {
 }
 
 // HasAlmanacData calls android.location.GnssStatus.hasAlmanacData.
-func (m *gnssStatus) HasAlmanacData(arg0 int32) (bool, error) {
+func (m *GnssStatus) HasAlmanacData(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -291,14 +291,14 @@ func (m *gnssStatus) HasAlmanacData(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusHasAlmanacData == nil {
+		if midGnssStatusHasAlmanacData == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.hasAlmanacData is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midgnssStatusHasAlmanacData, jni.IntValue(arg0),
+			midGnssStatusHasAlmanacData, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -310,7 +310,7 @@ func (m *gnssStatus) HasAlmanacData(arg0 int32) (bool, error) {
 }
 
 // HasBasebandCn0DbHz calls android.location.GnssStatus.hasBasebandCn0DbHz.
-func (m *gnssStatus) HasBasebandCn0DbHz(arg0 int32) (bool, error) {
+func (m *GnssStatus) HasBasebandCn0DbHz(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -318,14 +318,14 @@ func (m *gnssStatus) HasBasebandCn0DbHz(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusHasBasebandCn0DbHz == nil {
+		if midGnssStatusHasBasebandCn0DbHz == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.hasBasebandCn0DbHz is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midgnssStatusHasBasebandCn0DbHz, jni.IntValue(arg0),
+			midGnssStatusHasBasebandCn0DbHz, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -337,7 +337,7 @@ func (m *gnssStatus) HasBasebandCn0DbHz(arg0 int32) (bool, error) {
 }
 
 // HasCarrierFrequencyHz calls android.location.GnssStatus.hasCarrierFrequencyHz.
-func (m *gnssStatus) HasCarrierFrequencyHz(arg0 int32) (bool, error) {
+func (m *GnssStatus) HasCarrierFrequencyHz(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -345,14 +345,14 @@ func (m *gnssStatus) HasCarrierFrequencyHz(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusHasCarrierFrequencyHz == nil {
+		if midGnssStatusHasCarrierFrequencyHz == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.hasCarrierFrequencyHz is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midgnssStatusHasCarrierFrequencyHz, jni.IntValue(arg0),
+			midGnssStatusHasCarrierFrequencyHz, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -364,7 +364,7 @@ func (m *gnssStatus) HasCarrierFrequencyHz(arg0 int32) (bool, error) {
 }
 
 // HasEphemerisData calls android.location.GnssStatus.hasEphemerisData.
-func (m *gnssStatus) HasEphemerisData(arg0 int32) (bool, error) {
+func (m *GnssStatus) HasEphemerisData(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -372,14 +372,14 @@ func (m *gnssStatus) HasEphemerisData(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusHasEphemerisData == nil {
+		if midGnssStatusHasEphemerisData == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.hasEphemerisData is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midgnssStatusHasEphemerisData, jni.IntValue(arg0),
+			midGnssStatusHasEphemerisData, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -391,7 +391,7 @@ func (m *gnssStatus) HasEphemerisData(arg0 int32) (bool, error) {
 }
 
 // HashCode calls android.location.GnssStatus.hashCode.
-func (m *gnssStatus) HashCode() (int32, error) {
+func (m *GnssStatus) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -399,13 +399,13 @@ func (m *gnssStatus) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusHashCode == nil {
+		if midGnssStatusHashCode == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midgnssStatusHashCode,
+			midGnssStatusHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -416,7 +416,7 @@ func (m *gnssStatus) HashCode() (int32, error) {
 }
 
 // UsedInFix calls android.location.GnssStatus.usedInFix.
-func (m *gnssStatus) UsedInFix(arg0 int32) (bool, error) {
+func (m *GnssStatus) UsedInFix(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -424,14 +424,14 @@ func (m *gnssStatus) UsedInFix(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midgnssStatusUsedInFix == nil {
+		if midGnssStatusUsedInFix == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.usedInFix is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midgnssStatusUsedInFix, jni.IntValue(arg0),
+			midGnssStatusUsedInFix, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -443,7 +443,7 @@ func (m *gnssStatus) UsedInFix(arg0 int32) (bool, error) {
 }
 
 // WriteToParcel calls android.location.GnssStatus.writeToParcel.
-func (m *gnssStatus) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *GnssStatus) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -451,14 +451,14 @@ func (m *gnssStatus) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midgnssStatusWriteToParcel == nil {
+		if midGnssStatusWriteToParcel == nil {
 			callErr = fmt.Errorf("android.location.GnssStatus.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midgnssStatusWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midGnssStatusWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

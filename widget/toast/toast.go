@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// toast wraps android.widget.Toast.
-type toast struct {
+// Toast wraps android.widget.Toast.
+type Toast struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // AddCallback calls android.widget.Toast.addCallback.
-func (m *toast) AddCallback(arg0 *jni.Object) error {
+func (m *Toast) AddCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *toast) AddCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midtoastAddCallback == nil {
+		if midToastAddCallback == nil {
 			callErr = fmt.Errorf("android.widget.Toast.addCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastAddCallback, jni.ObjectValue(arg0),
+			midToastAddCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -47,7 +47,7 @@ func (m *toast) AddCallback(arg0 *jni.Object) error {
 }
 
 // Cancel calls android.widget.Toast.cancel.
-func (m *toast) Cancel() error {
+func (m *Toast) Cancel() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -55,13 +55,13 @@ func (m *toast) Cancel() error {
 			callErr = err
 			return err
 		}
-		if midtoastCancel == nil {
+		if midToastCancel == nil {
 			callErr = fmt.Errorf("android.widget.Toast.cancel is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastCancel,
+			midToastCancel,
 		)
 		return callErr
 	})
@@ -69,7 +69,7 @@ func (m *toast) Cancel() error {
 }
 
 // GetDuration calls android.widget.Toast.getDuration.
-func (m *toast) GetDuration() (int32, error) {
+func (m *Toast) GetDuration() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -77,13 +77,13 @@ func (m *toast) GetDuration() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midtoastGetDuration == nil {
+		if midToastGetDuration == nil {
 			callErr = fmt.Errorf("android.widget.Toast.getDuration is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midtoastGetDuration,
+			midToastGetDuration,
 		)
 		if callErr != nil {
 			return callErr
@@ -94,7 +94,7 @@ func (m *toast) GetDuration() (int32, error) {
 }
 
 // GetGravity calls android.widget.Toast.getGravity.
-func (m *toast) GetGravity() (int32, error) {
+func (m *Toast) GetGravity() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -102,13 +102,13 @@ func (m *toast) GetGravity() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midtoastGetGravity == nil {
+		if midToastGetGravity == nil {
 			callErr = fmt.Errorf("android.widget.Toast.getGravity is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midtoastGetGravity,
+			midToastGetGravity,
 		)
 		if callErr != nil {
 			return callErr
@@ -119,7 +119,7 @@ func (m *toast) GetGravity() (int32, error) {
 }
 
 // GetHorizontalMargin calls android.widget.Toast.getHorizontalMargin.
-func (m *toast) GetHorizontalMargin() (float32, error) {
+func (m *Toast) GetHorizontalMargin() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -127,13 +127,13 @@ func (m *toast) GetHorizontalMargin() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midtoastGetHorizontalMargin == nil {
+		if midToastGetHorizontalMargin == nil {
 			callErr = fmt.Errorf("android.widget.Toast.getHorizontalMargin is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midtoastGetHorizontalMargin,
+			midToastGetHorizontalMargin,
 		)
 		if callErr != nil {
 			return callErr
@@ -144,7 +144,7 @@ func (m *toast) GetHorizontalMargin() (float32, error) {
 }
 
 // GetVerticalMargin calls android.widget.Toast.getVerticalMargin.
-func (m *toast) GetVerticalMargin() (float32, error) {
+func (m *Toast) GetVerticalMargin() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -152,13 +152,13 @@ func (m *toast) GetVerticalMargin() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midtoastGetVerticalMargin == nil {
+		if midToastGetVerticalMargin == nil {
 			callErr = fmt.Errorf("android.widget.Toast.getVerticalMargin is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midtoastGetVerticalMargin,
+			midToastGetVerticalMargin,
 		)
 		if callErr != nil {
 			return callErr
@@ -169,7 +169,7 @@ func (m *toast) GetVerticalMargin() (float32, error) {
 }
 
 // GetView calls android.widget.Toast.getView.
-func (m *toast) GetView() (*jni.Object, error) {
+func (m *Toast) GetView() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -177,13 +177,13 @@ func (m *toast) GetView() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midtoastGetView == nil {
+		if midToastGetView == nil {
 			callErr = fmt.Errorf("android.widget.Toast.getView is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midtoastGetView,
+			midToastGetView,
 		)
 		if callErr != nil {
 			return callErr
@@ -194,7 +194,7 @@ func (m *toast) GetView() (*jni.Object, error) {
 }
 
 // GetXOffset calls android.widget.Toast.getXOffset.
-func (m *toast) GetXOffset() (int32, error) {
+func (m *Toast) GetXOffset() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -202,13 +202,13 @@ func (m *toast) GetXOffset() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midtoastGetXOffset == nil {
+		if midToastGetXOffset == nil {
 			callErr = fmt.Errorf("android.widget.Toast.getXOffset is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midtoastGetXOffset,
+			midToastGetXOffset,
 		)
 		if callErr != nil {
 			return callErr
@@ -219,7 +219,7 @@ func (m *toast) GetXOffset() (int32, error) {
 }
 
 // GetYOffset calls android.widget.Toast.getYOffset.
-func (m *toast) GetYOffset() (int32, error) {
+func (m *Toast) GetYOffset() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -227,13 +227,13 @@ func (m *toast) GetYOffset() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midtoastGetYOffset == nil {
+		if midToastGetYOffset == nil {
 			callErr = fmt.Errorf("android.widget.Toast.getYOffset is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midtoastGetYOffset,
+			midToastGetYOffset,
 		)
 		if callErr != nil {
 			return callErr
@@ -244,7 +244,7 @@ func (m *toast) GetYOffset() (int32, error) {
 }
 
 // RemoveCallback calls android.widget.Toast.removeCallback.
-func (m *toast) RemoveCallback(arg0 *jni.Object) error {
+func (m *Toast) RemoveCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -252,14 +252,14 @@ func (m *toast) RemoveCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midtoastRemoveCallback == nil {
+		if midToastRemoveCallback == nil {
 			callErr = fmt.Errorf("android.widget.Toast.removeCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastRemoveCallback, jni.ObjectValue(arg0),
+			midToastRemoveCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -267,7 +267,7 @@ func (m *toast) RemoveCallback(arg0 *jni.Object) error {
 }
 
 // SetDuration calls android.widget.Toast.setDuration.
-func (m *toast) SetDuration(arg0 int32) error {
+func (m *Toast) SetDuration(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -275,14 +275,14 @@ func (m *toast) SetDuration(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midtoastSetDuration == nil {
+		if midToastSetDuration == nil {
 			callErr = fmt.Errorf("android.widget.Toast.setDuration is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastSetDuration, jni.IntValue(arg0),
+			midToastSetDuration, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -290,7 +290,7 @@ func (m *toast) SetDuration(arg0 int32) error {
 }
 
 // SetGravity calls android.widget.Toast.setGravity.
-func (m *toast) SetGravity(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *Toast) SetGravity(arg0 int32, arg1 int32, arg2 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -298,14 +298,14 @@ func (m *toast) SetGravity(arg0 int32, arg1 int32, arg2 int32) error {
 			callErr = err
 			return err
 		}
-		if midtoastSetGravity == nil {
+		if midToastSetGravity == nil {
 			callErr = fmt.Errorf("android.widget.Toast.setGravity is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastSetGravity, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			midToastSetGravity, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -313,7 +313,7 @@ func (m *toast) SetGravity(arg0 int32, arg1 int32, arg2 int32) error {
 }
 
 // SetMargin calls android.widget.Toast.setMargin.
-func (m *toast) SetMargin(arg0 float32, arg1 float32) error {
+func (m *Toast) SetMargin(arg0 float32, arg1 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -321,14 +321,14 @@ func (m *toast) SetMargin(arg0 float32, arg1 float32) error {
 			callErr = err
 			return err
 		}
-		if midtoastSetMargin == nil {
+		if midToastSetMargin == nil {
 			callErr = fmt.Errorf("android.widget.Toast.setMargin is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastSetMargin, jni.FloatValue(arg0), jni.FloatValue(arg1),
+			midToastSetMargin, jni.FloatValue(arg0), jni.FloatValue(arg1),
 		)
 		return callErr
 	})
@@ -336,7 +336,7 @@ func (m *toast) SetMargin(arg0 float32, arg1 float32) error {
 }
 
 // SetText1 calls android.widget.Toast.setText.
-func (m *toast) SetText1(arg0 int32) error {
+func (m *Toast) SetText1(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -344,14 +344,14 @@ func (m *toast) SetText1(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midtoastSetText1 == nil {
+		if midToastSetText1 == nil {
 			callErr = fmt.Errorf("android.widget.Toast.setText is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastSetText1, jni.IntValue(arg0),
+			midToastSetText1, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -359,7 +359,7 @@ func (m *toast) SetText1(arg0 int32) error {
 }
 
 // SetText1_1 calls android.widget.Toast.setText.
-func (m *toast) SetText1_1(arg0 string) error {
+func (m *Toast) SetText1_1(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -367,7 +367,7 @@ func (m *toast) SetText1_1(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midtoastSetText1_1 == nil {
+		if midToastSetText1_1 == nil {
 			callErr = fmt.Errorf("android.widget.Toast.setText is not available on this device")
 			return callErr
 		}
@@ -378,7 +378,7 @@ func (m *toast) SetText1_1(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastSetText1_1, jni.ObjectValue(&jArg0.Object),
+			midToastSetText1_1, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -386,7 +386,7 @@ func (m *toast) SetText1_1(arg0 string) error {
 }
 
 // SetView calls android.widget.Toast.setView.
-func (m *toast) SetView(arg0 *jni.Object) error {
+func (m *Toast) SetView(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -394,14 +394,14 @@ func (m *toast) SetView(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midtoastSetView == nil {
+		if midToastSetView == nil {
 			callErr = fmt.Errorf("android.widget.Toast.setView is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastSetView, jni.ObjectValue(arg0),
+			midToastSetView, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -409,7 +409,7 @@ func (m *toast) SetView(arg0 *jni.Object) error {
 }
 
 // Show calls android.widget.Toast.show.
-func (m *toast) Show() error {
+func (m *Toast) Show() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -417,13 +417,13 @@ func (m *toast) Show() error {
 			callErr = err
 			return err
 		}
-		if midtoastShow == nil {
+		if midToastShow == nil {
 			callErr = fmt.Errorf("android.widget.Toast.show is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastShow,
+			midToastShow,
 		)
 		return callErr
 	})
@@ -431,7 +431,7 @@ func (m *toast) Show() error {
 }
 
 // MakeText3 calls android.widget.Toast.makeText.
-func (m *toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object, error) {
+func (m *Toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -439,14 +439,14 @@ func (m *toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object
 			callErr = err
 			return err
 		}
-		if midtoastMakeText3 == nil {
+		if midToastMakeText3 == nil {
 			callErr = fmt.Errorf("android.widget.Toast.makeText is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clstoast)),
-			midtoastMakeText3, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			(*jni.Class)(unsafe.Pointer(clsToast)),
+			midToastMakeText3, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -457,7 +457,7 @@ func (m *toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object
 }
 
 // MakeText3_1 calls android.widget.Toast.makeText.
-func (m *toast) MakeText3_1(arg0 *jni.Object, arg1 string, arg2 int32) (*jni.Object, error) {
+func (m *Toast) MakeText3_1(arg0 *jni.Object, arg1 string, arg2 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -465,7 +465,7 @@ func (m *toast) MakeText3_1(arg0 *jni.Object, arg1 string, arg2 int32) (*jni.Obj
 			callErr = err
 			return err
 		}
-		if midtoastMakeText3_1 == nil {
+		if midToastMakeText3_1 == nil {
 			callErr = fmt.Errorf("android.widget.Toast.makeText is not available on this device")
 			return callErr
 		}
@@ -476,8 +476,8 @@ func (m *toast) MakeText3_1(arg0 *jni.Object, arg1 string, arg2 int32) (*jni.Obj
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clstoast)),
-			midtoastMakeText3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
+			(*jni.Class)(unsafe.Pointer(clsToast)),
+			midToastMakeText3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
 		)
 		if callErr != nil {
 			return callErr

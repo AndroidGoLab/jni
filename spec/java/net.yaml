@@ -90,7 +90,7 @@ classes:
           returns: void
           error: true
     - java_class: android.net.ConnectivityManager
-      go_type: connectivityManager
+      go_type: Manager
       obtain: system_service
       service_name: connectivity
       close: true

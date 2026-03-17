@@ -2,7 +2,7 @@ package: speech
 go_import: github.com/AndroidGoLab/jni/speech
 classes:
     - java_class: android.speech.SpeechRecognizer
-      go_type: speechRecognizer
+      go_type: Recognizer
       methods:
         - java_method: cancel
           go_name: Cancel
@@ -98,7 +98,7 @@ classes:
           returns: boolean
           error: true
     - java_class: android.speech.tts.TextToSpeech
-      go_type: textToSpeech
+      go_type: TTS
       methods:
         - java_method: addEarcon
           go_name: AddEarcon2

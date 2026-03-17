@@ -15,14 +15,14 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
-// bundle wraps android.os.Bundle.
-type bundle struct {
+// Bundle wraps android.os.Bundle.
+type Bundle struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Clear calls android.os.Bundle.clear.
-func (m *bundle) Clear() error {
+func (m *Bundle) Clear() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -30,13 +30,13 @@ func (m *bundle) Clear() error {
 			callErr = err
 			return err
 		}
-		if midbundleClear == nil {
+		if midBundleClear == nil {
 			callErr = fmt.Errorf("android.os.Bundle.clear is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundleClear,
+			midBundleClear,
 		)
 		return callErr
 	})
@@ -44,7 +44,7 @@ func (m *bundle) Clear() error {
 }
 
 // Clone calls android.os.Bundle.clone.
-func (m *bundle) Clone() (*jni.Object, error) {
+func (m *Bundle) Clone() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -52,13 +52,13 @@ func (m *bundle) Clone() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleClone == nil {
+		if midBundleClone == nil {
 			callErr = fmt.Errorf("android.os.Bundle.clone is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleClone,
+			midBundleClone,
 		)
 		if callErr != nil {
 			return callErr
@@ -69,7 +69,7 @@ func (m *bundle) Clone() (*jni.Object, error) {
 }
 
 // DeepCopy calls android.os.Bundle.deepCopy.
-func (m *bundle) DeepCopy() (*jni.Object, error) {
+func (m *Bundle) DeepCopy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -77,13 +77,13 @@ func (m *bundle) DeepCopy() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleDeepCopy == nil {
+		if midBundleDeepCopy == nil {
 			callErr = fmt.Errorf("android.os.Bundle.deepCopy is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleDeepCopy,
+			midBundleDeepCopy,
 		)
 		if callErr != nil {
 			return callErr
@@ -94,7 +94,7 @@ func (m *bundle) DeepCopy() (*jni.Object, error) {
 }
 
 // DescribeContents calls android.os.Bundle.describeContents.
-func (m *bundle) DescribeContents() (int32, error) {
+func (m *Bundle) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -102,13 +102,13 @@ func (m *bundle) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbundleDescribeContents == nil {
+		if midBundleDescribeContents == nil {
 			callErr = fmt.Errorf("android.os.Bundle.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbundleDescribeContents,
+			midBundleDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -119,7 +119,7 @@ func (m *bundle) DescribeContents() (int32, error) {
 }
 
 // GetBinder calls android.os.Bundle.getBinder.
-func (m *bundle) GetBinder(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetBinder(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -127,7 +127,7 @@ func (m *bundle) GetBinder(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetBinder == nil {
+		if midBundleGetBinder == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getBinder is not available on this device")
 			return callErr
 		}
@@ -138,7 +138,7 @@ func (m *bundle) GetBinder(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetBinder, jni.ObjectValue(&jArg0.Object),
+			midBundleGetBinder, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -149,7 +149,7 @@ func (m *bundle) GetBinder(arg0 string) (*jni.Object, error) {
 }
 
 // GetBundle calls android.os.Bundle.getBundle.
-func (m *bundle) GetBundle(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetBundle(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -157,7 +157,7 @@ func (m *bundle) GetBundle(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetBundle == nil {
+		if midBundleGetBundle == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getBundle is not available on this device")
 			return callErr
 		}
@@ -168,7 +168,7 @@ func (m *bundle) GetBundle(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetBundle, jni.ObjectValue(&jArg0.Object),
+			midBundleGetBundle, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -179,7 +179,7 @@ func (m *bundle) GetBundle(arg0 string) (*jni.Object, error) {
 }
 
 // GetByte1 calls android.os.Bundle.getByte.
-func (m *bundle) GetByte1(arg0 string) (int8, error) {
+func (m *Bundle) GetByte1(arg0 string) (int8, error) {
 	var result int8
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -187,7 +187,7 @@ func (m *bundle) GetByte1(arg0 string) (int8, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetByte1 == nil {
+		if midBundleGetByte1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getByte is not available on this device")
 			return callErr
 		}
@@ -198,7 +198,7 @@ func (m *bundle) GetByte1(arg0 string) (int8, error) {
 
 		result, callErr = env.CallByteMethod(
 			m.Obj,
-			midbundleGetByte1, jni.ObjectValue(&jArg0.Object),
+			midBundleGetByte1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -209,7 +209,7 @@ func (m *bundle) GetByte1(arg0 string) (int8, error) {
 }
 
 // GetByte2_1 calls android.os.Bundle.getByte.
-func (m *bundle) GetByte2_1(arg0 string, arg1 int8) (*jni.Object, error) {
+func (m *Bundle) GetByte2_1(arg0 string, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -217,7 +217,7 @@ func (m *bundle) GetByte2_1(arg0 string, arg1 int8) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetByte2_1 == nil {
+		if midBundleGetByte2_1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getByte is not available on this device")
 			return callErr
 		}
@@ -228,7 +228,7 @@ func (m *bundle) GetByte2_1(arg0 string, arg1 int8) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetByte2_1, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
+			midBundleGetByte2_1, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -239,7 +239,7 @@ func (m *bundle) GetByte2_1(arg0 string, arg1 int8) (*jni.Object, error) {
 }
 
 // GetByteArray calls android.os.Bundle.getByteArray.
-func (m *bundle) GetByteArray(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetByteArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -247,7 +247,7 @@ func (m *bundle) GetByteArray(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetByteArray == nil {
+		if midBundleGetByteArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getByteArray is not available on this device")
 			return callErr
 		}
@@ -258,7 +258,7 @@ func (m *bundle) GetByteArray(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetByteArray, jni.ObjectValue(&jArg0.Object),
+			midBundleGetByteArray, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -269,7 +269,7 @@ func (m *bundle) GetByteArray(arg0 string) (*jni.Object, error) {
 }
 
 // GetChar1 calls android.os.Bundle.getChar.
-func (m *bundle) GetChar1(arg0 string) (uint16, error) {
+func (m *Bundle) GetChar1(arg0 string) (uint16, error) {
 	var result uint16
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -277,7 +277,7 @@ func (m *bundle) GetChar1(arg0 string) (uint16, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetChar1 == nil {
+		if midBundleGetChar1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getChar is not available on this device")
 			return callErr
 		}
@@ -288,7 +288,7 @@ func (m *bundle) GetChar1(arg0 string) (uint16, error) {
 
 		result, callErr = env.CallCharMethod(
 			m.Obj,
-			midbundleGetChar1, jni.ObjectValue(&jArg0.Object),
+			midBundleGetChar1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -299,7 +299,7 @@ func (m *bundle) GetChar1(arg0 string) (uint16, error) {
 }
 
 // GetChar2_1 calls android.os.Bundle.getChar.
-func (m *bundle) GetChar2_1(arg0 string, arg1 uint16) (uint16, error) {
+func (m *Bundle) GetChar2_1(arg0 string, arg1 uint16) (uint16, error) {
 	var result uint16
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -307,7 +307,7 @@ func (m *bundle) GetChar2_1(arg0 string, arg1 uint16) (uint16, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetChar2_1 == nil {
+		if midBundleGetChar2_1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getChar is not available on this device")
 			return callErr
 		}
@@ -318,7 +318,7 @@ func (m *bundle) GetChar2_1(arg0 string, arg1 uint16) (uint16, error) {
 
 		result, callErr = env.CallCharMethod(
 			m.Obj,
-			midbundleGetChar2_1, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
+			midBundleGetChar2_1, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -329,7 +329,7 @@ func (m *bundle) GetChar2_1(arg0 string, arg1 uint16) (uint16, error) {
 }
 
 // GetCharArray calls android.os.Bundle.getCharArray.
-func (m *bundle) GetCharArray(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetCharArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -337,7 +337,7 @@ func (m *bundle) GetCharArray(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetCharArray == nil {
+		if midBundleGetCharArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getCharArray is not available on this device")
 			return callErr
 		}
@@ -348,7 +348,7 @@ func (m *bundle) GetCharArray(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetCharArray, jni.ObjectValue(&jArg0.Object),
+			midBundleGetCharArray, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -359,7 +359,7 @@ func (m *bundle) GetCharArray(arg0 string) (*jni.Object, error) {
 }
 
 // GetCharSequence1 calls android.os.Bundle.getCharSequence.
-func (m *bundle) GetCharSequence1(arg0 string) (string, error) {
+func (m *Bundle) GetCharSequence1(arg0 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -367,7 +367,7 @@ func (m *bundle) GetCharSequence1(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetCharSequence1 == nil {
+		if midBundleGetCharSequence1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getCharSequence is not available on this device")
 			return callErr
 		}
@@ -378,7 +378,7 @@ func (m *bundle) GetCharSequence1(arg0 string) (string, error) {
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midbundleGetCharSequence1, jni.ObjectValue(&jArg0.Object),
+			midBundleGetCharSequence1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -390,7 +390,7 @@ func (m *bundle) GetCharSequence1(arg0 string) (string, error) {
 }
 
 // GetCharSequence2_1 calls android.os.Bundle.getCharSequence.
-func (m *bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
+func (m *Bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -398,7 +398,7 @@ func (m *bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetCharSequence2_1 == nil {
+		if midBundleGetCharSequence2_1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getCharSequence is not available on this device")
 			return callErr
 		}
@@ -414,7 +414,7 @@ func (m *bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midbundleGetCharSequence2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			midBundleGetCharSequence2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -426,7 +426,7 @@ func (m *bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
 }
 
 // GetCharSequenceArray calls android.os.Bundle.getCharSequenceArray.
-func (m *bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -434,7 +434,7 @@ func (m *bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetCharSequenceArray == nil {
+		if midBundleGetCharSequenceArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getCharSequenceArray is not available on this device")
 			return callErr
 		}
@@ -445,7 +445,7 @@ func (m *bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetCharSequenceArray, jni.ObjectValue(&jArg0.Object),
+			midBundleGetCharSequenceArray, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -456,7 +456,7 @@ func (m *bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
 }
 
 // GetCharSequenceArrayList calls android.os.Bundle.getCharSequenceArrayList.
-func (m *bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -464,7 +464,7 @@ func (m *bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetCharSequenceArrayList == nil {
+		if midBundleGetCharSequenceArrayList == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getCharSequenceArrayList is not available on this device")
 			return callErr
 		}
@@ -475,7 +475,7 @@ func (m *bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetCharSequenceArrayList, jni.ObjectValue(&jArg0.Object),
+			midBundleGetCharSequenceArrayList, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -486,7 +486,7 @@ func (m *bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
 }
 
 // GetClassLoader calls android.os.Bundle.getClassLoader.
-func (m *bundle) GetClassLoader() (*jni.Object, error) {
+func (m *Bundle) GetClassLoader() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -494,13 +494,13 @@ func (m *bundle) GetClassLoader() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetClassLoader == nil {
+		if midBundleGetClassLoader == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getClassLoader is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetClassLoader,
+			midBundleGetClassLoader,
 		)
 		if callErr != nil {
 			return callErr
@@ -511,7 +511,7 @@ func (m *bundle) GetClassLoader() (*jni.Object, error) {
 }
 
 // GetFloat1 calls android.os.Bundle.getFloat.
-func (m *bundle) GetFloat1(arg0 string) (float32, error) {
+func (m *Bundle) GetFloat1(arg0 string) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -519,7 +519,7 @@ func (m *bundle) GetFloat1(arg0 string) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetFloat1 == nil {
+		if midBundleGetFloat1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getFloat is not available on this device")
 			return callErr
 		}
@@ -530,7 +530,7 @@ func (m *bundle) GetFloat1(arg0 string) (float32, error) {
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midbundleGetFloat1, jni.ObjectValue(&jArg0.Object),
+			midBundleGetFloat1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -541,7 +541,7 @@ func (m *bundle) GetFloat1(arg0 string) (float32, error) {
 }
 
 // GetFloat2_1 calls android.os.Bundle.getFloat.
-func (m *bundle) GetFloat2_1(arg0 string, arg1 float32) (float32, error) {
+func (m *Bundle) GetFloat2_1(arg0 string, arg1 float32) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -549,7 +549,7 @@ func (m *bundle) GetFloat2_1(arg0 string, arg1 float32) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetFloat2_1 == nil {
+		if midBundleGetFloat2_1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getFloat is not available on this device")
 			return callErr
 		}
@@ -560,7 +560,7 @@ func (m *bundle) GetFloat2_1(arg0 string, arg1 float32) (float32, error) {
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midbundleGetFloat2_1, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
+			midBundleGetFloat2_1, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -571,7 +571,7 @@ func (m *bundle) GetFloat2_1(arg0 string, arg1 float32) (float32, error) {
 }
 
 // GetFloatArray calls android.os.Bundle.getFloatArray.
-func (m *bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -579,7 +579,7 @@ func (m *bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetFloatArray == nil {
+		if midBundleGetFloatArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getFloatArray is not available on this device")
 			return callErr
 		}
@@ -590,7 +590,7 @@ func (m *bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetFloatArray, jni.ObjectValue(&jArg0.Object),
+			midBundleGetFloatArray, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -601,7 +601,7 @@ func (m *bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
 }
 
 // GetIntegerArrayList calls android.os.Bundle.getIntegerArrayList.
-func (m *bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -609,7 +609,7 @@ func (m *bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetIntegerArrayList == nil {
+		if midBundleGetIntegerArrayList == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getIntegerArrayList is not available on this device")
 			return callErr
 		}
@@ -620,7 +620,7 @@ func (m *bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetIntegerArrayList, jni.ObjectValue(&jArg0.Object),
+			midBundleGetIntegerArrayList, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -631,7 +631,7 @@ func (m *bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
 }
 
 // GetParcelableArray calls android.os.Bundle.getParcelableArray.
-func (m *bundle) GetParcelableArray(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetParcelableArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -639,7 +639,7 @@ func (m *bundle) GetParcelableArray(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetParcelableArray == nil {
+		if midBundleGetParcelableArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getParcelableArray is not available on this device")
 			return callErr
 		}
@@ -650,7 +650,7 @@ func (m *bundle) GetParcelableArray(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetParcelableArray, jni.ObjectValue(&jArg0.Object),
+			midBundleGetParcelableArray, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -661,7 +661,7 @@ func (m *bundle) GetParcelableArray(arg0 string) (*jni.Object, error) {
 }
 
 // GetSerializable calls android.os.Bundle.getSerializable.
-func (m *bundle) GetSerializable(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetSerializable(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -669,7 +669,7 @@ func (m *bundle) GetSerializable(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetSerializable == nil {
+		if midBundleGetSerializable == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getSerializable is not available on this device")
 			return callErr
 		}
@@ -680,7 +680,7 @@ func (m *bundle) GetSerializable(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetSerializable, jni.ObjectValue(&jArg0.Object),
+			midBundleGetSerializable, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -691,7 +691,7 @@ func (m *bundle) GetSerializable(arg0 string) (*jni.Object, error) {
 }
 
 // GetShort1 calls android.os.Bundle.getShort.
-func (m *bundle) GetShort1(arg0 string) (int16, error) {
+func (m *Bundle) GetShort1(arg0 string) (int16, error) {
 	var result int16
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -699,7 +699,7 @@ func (m *bundle) GetShort1(arg0 string) (int16, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetShort1 == nil {
+		if midBundleGetShort1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getShort is not available on this device")
 			return callErr
 		}
@@ -710,7 +710,7 @@ func (m *bundle) GetShort1(arg0 string) (int16, error) {
 
 		result, callErr = env.CallShortMethod(
 			m.Obj,
-			midbundleGetShort1, jni.ObjectValue(&jArg0.Object),
+			midBundleGetShort1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -721,7 +721,7 @@ func (m *bundle) GetShort1(arg0 string) (int16, error) {
 }
 
 // GetShort2_1 calls android.os.Bundle.getShort.
-func (m *bundle) GetShort2_1(arg0 string, arg1 int16) (int16, error) {
+func (m *Bundle) GetShort2_1(arg0 string, arg1 int16) (int16, error) {
 	var result int16
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -729,7 +729,7 @@ func (m *bundle) GetShort2_1(arg0 string, arg1 int16) (int16, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetShort2_1 == nil {
+		if midBundleGetShort2_1 == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getShort is not available on this device")
 			return callErr
 		}
@@ -740,7 +740,7 @@ func (m *bundle) GetShort2_1(arg0 string, arg1 int16) (int16, error) {
 
 		result, callErr = env.CallShortMethod(
 			m.Obj,
-			midbundleGetShort2_1, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
+			midBundleGetShort2_1, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -751,7 +751,7 @@ func (m *bundle) GetShort2_1(arg0 string, arg1 int16) (int16, error) {
 }
 
 // GetShortArray calls android.os.Bundle.getShortArray.
-func (m *bundle) GetShortArray(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetShortArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -759,7 +759,7 @@ func (m *bundle) GetShortArray(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetShortArray == nil {
+		if midBundleGetShortArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getShortArray is not available on this device")
 			return callErr
 		}
@@ -770,7 +770,7 @@ func (m *bundle) GetShortArray(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetShortArray, jni.ObjectValue(&jArg0.Object),
+			midBundleGetShortArray, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -781,7 +781,7 @@ func (m *bundle) GetShortArray(arg0 string) (*jni.Object, error) {
 }
 
 // GetSize calls android.os.Bundle.getSize.
-func (m *bundle) GetSize(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetSize(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -789,7 +789,7 @@ func (m *bundle) GetSize(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetSize == nil {
+		if midBundleGetSize == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getSize is not available on this device")
 			return callErr
 		}
@@ -800,7 +800,7 @@ func (m *bundle) GetSize(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetSize, jni.ObjectValue(&jArg0.Object),
+			midBundleGetSize, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -811,7 +811,7 @@ func (m *bundle) GetSize(arg0 string) (*jni.Object, error) {
 }
 
 // GetSizeF calls android.os.Bundle.getSizeF.
-func (m *bundle) GetSizeF(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetSizeF(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -819,7 +819,7 @@ func (m *bundle) GetSizeF(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetSizeF == nil {
+		if midBundleGetSizeF == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getSizeF is not available on this device")
 			return callErr
 		}
@@ -830,7 +830,7 @@ func (m *bundle) GetSizeF(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetSizeF, jni.ObjectValue(&jArg0.Object),
+			midBundleGetSizeF, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -841,7 +841,7 @@ func (m *bundle) GetSizeF(arg0 string) (*jni.Object, error) {
 }
 
 // GetStringArrayList calls android.os.Bundle.getStringArrayList.
-func (m *bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
+func (m *Bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -849,7 +849,7 @@ func (m *bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbundleGetStringArrayList == nil {
+		if midBundleGetStringArrayList == nil {
 			callErr = fmt.Errorf("android.os.Bundle.getStringArrayList is not available on this device")
 			return callErr
 		}
@@ -860,7 +860,7 @@ func (m *bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbundleGetStringArrayList, jni.ObjectValue(&jArg0.Object),
+			midBundleGetStringArrayList, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -871,7 +871,7 @@ func (m *bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
 }
 
 // HasFileDescriptors calls android.os.Bundle.hasFileDescriptors.
-func (m *bundle) HasFileDescriptors() (bool, error) {
+func (m *Bundle) HasFileDescriptors() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -879,13 +879,13 @@ func (m *bundle) HasFileDescriptors() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbundleHasFileDescriptors == nil {
+		if midBundleHasFileDescriptors == nil {
 			callErr = fmt.Errorf("android.os.Bundle.hasFileDescriptors is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbundleHasFileDescriptors,
+			midBundleHasFileDescriptors,
 		)
 		if callErr != nil {
 			return callErr
@@ -897,7 +897,7 @@ func (m *bundle) HasFileDescriptors() (bool, error) {
 }
 
 // PutAll calls android.os.Bundle.putAll.
-func (m *bundle) PutAll(arg0 *jni.Object) error {
+func (m *Bundle) PutAll(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -905,14 +905,14 @@ func (m *bundle) PutAll(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutAll == nil {
+		if midBundlePutAll == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putAll is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutAll, jni.ObjectValue(arg0),
+			midBundlePutAll, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -920,7 +920,7 @@ func (m *bundle) PutAll(arg0 *jni.Object) error {
 }
 
 // PutBinder calls android.os.Bundle.putBinder.
-func (m *bundle) PutBinder(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutBinder(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -928,7 +928,7 @@ func (m *bundle) PutBinder(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutBinder == nil {
+		if midBundlePutBinder == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putBinder is not available on this device")
 			return callErr
 		}
@@ -939,7 +939,7 @@ func (m *bundle) PutBinder(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutBinder, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutBinder, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -947,7 +947,7 @@ func (m *bundle) PutBinder(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutBundle calls android.os.Bundle.putBundle.
-func (m *bundle) PutBundle(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutBundle(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -955,7 +955,7 @@ func (m *bundle) PutBundle(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutBundle == nil {
+		if midBundlePutBundle == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putBundle is not available on this device")
 			return callErr
 		}
@@ -966,7 +966,7 @@ func (m *bundle) PutBundle(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutBundle, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutBundle, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -974,7 +974,7 @@ func (m *bundle) PutBundle(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutByte calls android.os.Bundle.putByte.
-func (m *bundle) PutByte(arg0 string, arg1 int8) error {
+func (m *Bundle) PutByte(arg0 string, arg1 int8) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -982,7 +982,7 @@ func (m *bundle) PutByte(arg0 string, arg1 int8) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutByte == nil {
+		if midBundlePutByte == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putByte is not available on this device")
 			return callErr
 		}
@@ -993,7 +993,7 @@ func (m *bundle) PutByte(arg0 string, arg1 int8) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutByte, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
+			midBundlePutByte, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
 		)
 		return callErr
 	})
@@ -1001,7 +1001,7 @@ func (m *bundle) PutByte(arg0 string, arg1 int8) error {
 }
 
 // PutByteArray calls android.os.Bundle.putByteArray.
-func (m *bundle) PutByteArray(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutByteArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1009,7 +1009,7 @@ func (m *bundle) PutByteArray(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutByteArray == nil {
+		if midBundlePutByteArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putByteArray is not available on this device")
 			return callErr
 		}
@@ -1020,7 +1020,7 @@ func (m *bundle) PutByteArray(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutByteArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutByteArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1028,7 +1028,7 @@ func (m *bundle) PutByteArray(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutChar calls android.os.Bundle.putChar.
-func (m *bundle) PutChar(arg0 string, arg1 uint16) error {
+func (m *Bundle) PutChar(arg0 string, arg1 uint16) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1036,7 +1036,7 @@ func (m *bundle) PutChar(arg0 string, arg1 uint16) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutChar == nil {
+		if midBundlePutChar == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putChar is not available on this device")
 			return callErr
 		}
@@ -1047,7 +1047,7 @@ func (m *bundle) PutChar(arg0 string, arg1 uint16) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutChar, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
+			midBundlePutChar, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
 		)
 		return callErr
 	})
@@ -1055,7 +1055,7 @@ func (m *bundle) PutChar(arg0 string, arg1 uint16) error {
 }
 
 // PutCharArray calls android.os.Bundle.putCharArray.
-func (m *bundle) PutCharArray(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutCharArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1063,7 +1063,7 @@ func (m *bundle) PutCharArray(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutCharArray == nil {
+		if midBundlePutCharArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putCharArray is not available on this device")
 			return callErr
 		}
@@ -1074,7 +1074,7 @@ func (m *bundle) PutCharArray(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutCharArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutCharArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1082,7 +1082,7 @@ func (m *bundle) PutCharArray(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutCharSequence calls android.os.Bundle.putCharSequence.
-func (m *bundle) PutCharSequence(arg0 string, arg1 string) error {
+func (m *Bundle) PutCharSequence(arg0 string, arg1 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1090,7 +1090,7 @@ func (m *bundle) PutCharSequence(arg0 string, arg1 string) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutCharSequence == nil {
+		if midBundlePutCharSequence == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putCharSequence is not available on this device")
 			return callErr
 		}
@@ -1106,7 +1106,7 @@ func (m *bundle) PutCharSequence(arg0 string, arg1 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutCharSequence, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			midBundlePutCharSequence, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		return callErr
 	})
@@ -1114,7 +1114,7 @@ func (m *bundle) PutCharSequence(arg0 string, arg1 string) error {
 }
 
 // PutCharSequenceArray calls android.os.Bundle.putCharSequenceArray.
-func (m *bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1122,7 +1122,7 @@ func (m *bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutCharSequenceArray == nil {
+		if midBundlePutCharSequenceArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putCharSequenceArray is not available on this device")
 			return callErr
 		}
@@ -1133,7 +1133,7 @@ func (m *bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutCharSequenceArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutCharSequenceArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1141,7 +1141,7 @@ func (m *bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutCharSequenceArrayList calls android.os.Bundle.putCharSequenceArrayList.
-func (m *bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1149,7 +1149,7 @@ func (m *bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutCharSequenceArrayList == nil {
+		if midBundlePutCharSequenceArrayList == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putCharSequenceArrayList is not available on this device")
 			return callErr
 		}
@@ -1160,7 +1160,7 @@ func (m *bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutCharSequenceArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutCharSequenceArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1168,7 +1168,7 @@ func (m *bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutFloat calls android.os.Bundle.putFloat.
-func (m *bundle) PutFloat(arg0 string, arg1 float32) error {
+func (m *Bundle) PutFloat(arg0 string, arg1 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1176,7 +1176,7 @@ func (m *bundle) PutFloat(arg0 string, arg1 float32) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutFloat == nil {
+		if midBundlePutFloat == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putFloat is not available on this device")
 			return callErr
 		}
@@ -1187,7 +1187,7 @@ func (m *bundle) PutFloat(arg0 string, arg1 float32) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutFloat, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
+			midBundlePutFloat, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
 		)
 		return callErr
 	})
@@ -1195,7 +1195,7 @@ func (m *bundle) PutFloat(arg0 string, arg1 float32) error {
 }
 
 // PutFloatArray calls android.os.Bundle.putFloatArray.
-func (m *bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1203,7 +1203,7 @@ func (m *bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutFloatArray == nil {
+		if midBundlePutFloatArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putFloatArray is not available on this device")
 			return callErr
 		}
@@ -1214,7 +1214,7 @@ func (m *bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutFloatArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutFloatArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1222,7 +1222,7 @@ func (m *bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutIntegerArrayList calls android.os.Bundle.putIntegerArrayList.
-func (m *bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1230,7 +1230,7 @@ func (m *bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutIntegerArrayList == nil {
+		if midBundlePutIntegerArrayList == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putIntegerArrayList is not available on this device")
 			return callErr
 		}
@@ -1241,7 +1241,7 @@ func (m *bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutIntegerArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutIntegerArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1249,7 +1249,7 @@ func (m *bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutParcelable calls android.os.Bundle.putParcelable.
-func (m *bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1257,7 +1257,7 @@ func (m *bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutParcelable == nil {
+		if midBundlePutParcelable == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putParcelable is not available on this device")
 			return callErr
 		}
@@ -1268,7 +1268,7 @@ func (m *bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutParcelable, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutParcelable, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1276,7 +1276,7 @@ func (m *bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutParcelableArray calls android.os.Bundle.putParcelableArray.
-func (m *bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1284,7 +1284,7 @@ func (m *bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutParcelableArray == nil {
+		if midBundlePutParcelableArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putParcelableArray is not available on this device")
 			return callErr
 		}
@@ -1295,7 +1295,7 @@ func (m *bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutParcelableArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutParcelableArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1303,7 +1303,7 @@ func (m *bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutParcelableArrayList calls android.os.Bundle.putParcelableArrayList.
-func (m *bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1311,7 +1311,7 @@ func (m *bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutParcelableArrayList == nil {
+		if midBundlePutParcelableArrayList == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putParcelableArrayList is not available on this device")
 			return callErr
 		}
@@ -1322,7 +1322,7 @@ func (m *bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutParcelableArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutParcelableArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1330,7 +1330,7 @@ func (m *bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutSerializable calls android.os.Bundle.putSerializable.
-func (m *bundle) PutSerializable(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutSerializable(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1338,7 +1338,7 @@ func (m *bundle) PutSerializable(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutSerializable == nil {
+		if midBundlePutSerializable == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putSerializable is not available on this device")
 			return callErr
 		}
@@ -1349,7 +1349,7 @@ func (m *bundle) PutSerializable(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutSerializable, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutSerializable, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1357,7 +1357,7 @@ func (m *bundle) PutSerializable(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutShort calls android.os.Bundle.putShort.
-func (m *bundle) PutShort(arg0 string, arg1 int16) error {
+func (m *Bundle) PutShort(arg0 string, arg1 int16) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1365,7 +1365,7 @@ func (m *bundle) PutShort(arg0 string, arg1 int16) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutShort == nil {
+		if midBundlePutShort == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putShort is not available on this device")
 			return callErr
 		}
@@ -1376,7 +1376,7 @@ func (m *bundle) PutShort(arg0 string, arg1 int16) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutShort, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
+			midBundlePutShort, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
 		)
 		return callErr
 	})
@@ -1384,7 +1384,7 @@ func (m *bundle) PutShort(arg0 string, arg1 int16) error {
 }
 
 // PutShortArray calls android.os.Bundle.putShortArray.
-func (m *bundle) PutShortArray(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutShortArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1392,7 +1392,7 @@ func (m *bundle) PutShortArray(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutShortArray == nil {
+		if midBundlePutShortArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putShortArray is not available on this device")
 			return callErr
 		}
@@ -1403,7 +1403,7 @@ func (m *bundle) PutShortArray(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutShortArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutShortArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1411,7 +1411,7 @@ func (m *bundle) PutShortArray(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutSize calls android.os.Bundle.putSize.
-func (m *bundle) PutSize(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutSize(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1419,7 +1419,7 @@ func (m *bundle) PutSize(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutSize == nil {
+		if midBundlePutSize == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putSize is not available on this device")
 			return callErr
 		}
@@ -1430,7 +1430,7 @@ func (m *bundle) PutSize(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutSize, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutSize, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1438,7 +1438,7 @@ func (m *bundle) PutSize(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutSizeF calls android.os.Bundle.putSizeF.
-func (m *bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1446,7 +1446,7 @@ func (m *bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutSizeF == nil {
+		if midBundlePutSizeF == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putSizeF is not available on this device")
 			return callErr
 		}
@@ -1457,7 +1457,7 @@ func (m *bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutSizeF, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutSizeF, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1465,7 +1465,7 @@ func (m *bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutSparseParcelableArray calls android.os.Bundle.putSparseParcelableArray.
-func (m *bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1473,7 +1473,7 @@ func (m *bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutSparseParcelableArray == nil {
+		if midBundlePutSparseParcelableArray == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putSparseParcelableArray is not available on this device")
 			return callErr
 		}
@@ -1484,7 +1484,7 @@ func (m *bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutSparseParcelableArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutSparseParcelableArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1492,7 +1492,7 @@ func (m *bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
 }
 
 // PutStringArrayList calls android.os.Bundle.putStringArrayList.
-func (m *bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
+func (m *Bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1500,7 +1500,7 @@ func (m *bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundlePutStringArrayList == nil {
+		if midBundlePutStringArrayList == nil {
 			callErr = fmt.Errorf("android.os.Bundle.putStringArrayList is not available on this device")
 			return callErr
 		}
@@ -1511,7 +1511,7 @@ func (m *bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundlePutStringArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midBundlePutStringArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1519,7 +1519,7 @@ func (m *bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
 }
 
 // ReadFromParcel calls android.os.Bundle.readFromParcel.
-func (m *bundle) ReadFromParcel(arg0 *jni.Object) error {
+func (m *Bundle) ReadFromParcel(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1527,14 +1527,14 @@ func (m *bundle) ReadFromParcel(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundleReadFromParcel == nil {
+		if midBundleReadFromParcel == nil {
 			callErr = fmt.Errorf("android.os.Bundle.readFromParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundleReadFromParcel, jni.ObjectValue(arg0),
+			midBundleReadFromParcel, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1542,7 +1542,7 @@ func (m *bundle) ReadFromParcel(arg0 *jni.Object) error {
 }
 
 // Remove calls android.os.Bundle.remove.
-func (m *bundle) Remove(arg0 string) error {
+func (m *Bundle) Remove(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1550,7 +1550,7 @@ func (m *bundle) Remove(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midbundleRemove == nil {
+		if midBundleRemove == nil {
 			callErr = fmt.Errorf("android.os.Bundle.remove is not available on this device")
 			return callErr
 		}
@@ -1561,7 +1561,7 @@ func (m *bundle) Remove(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundleRemove, jni.ObjectValue(&jArg0.Object),
+			midBundleRemove, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -1569,7 +1569,7 @@ func (m *bundle) Remove(arg0 string) error {
 }
 
 // SetClassLoader calls android.os.Bundle.setClassLoader.
-func (m *bundle) SetClassLoader(arg0 *jni.Object) error {
+func (m *Bundle) SetClassLoader(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1577,14 +1577,14 @@ func (m *bundle) SetClassLoader(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbundleSetClassLoader == nil {
+		if midBundleSetClassLoader == nil {
 			callErr = fmt.Errorf("android.os.Bundle.setClassLoader is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundleSetClassLoader, jni.ObjectValue(arg0),
+			midBundleSetClassLoader, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1592,7 +1592,7 @@ func (m *bundle) SetClassLoader(arg0 *jni.Object) error {
 }
 
 // WriteToParcel calls android.os.Bundle.writeToParcel.
-func (m *bundle) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *Bundle) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1600,14 +1600,14 @@ func (m *bundle) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midbundleWriteToParcel == nil {
+		if midBundleWriteToParcel == nil {
 			callErr = fmt.Errorf("android.os.Bundle.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbundleWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midBundleWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

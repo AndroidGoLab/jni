@@ -2,7 +2,7 @@ package: usb
 go_import: github.com/AndroidGoLab/jni/hardware/usb
 classes:
     - java_class: android.hardware.usb.UsbDeviceConnection
-      go_type: usbDeviceConnection
+      go_type: DeviceConnection
       methods:
         - java_method: bulkTransfer
           go_name: BulkTransfer4
@@ -130,7 +130,7 @@ classes:
           returns: boolean
           error: true
     - java_class: android.hardware.usb.UsbEndpoint
-      go_type: usbEndpoint
+      go_type: Endpoint
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -178,7 +178,7 @@ classes:
           returns: void
           error: true
     - java_class: android.hardware.usb.UsbDevice
-      go_type: usbDevice
+      go_type: Device
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -290,7 +290,7 @@ classes:
           returns: String
           error: true
     - java_class: android.hardware.usb.UsbInterface
-      go_type: usbInterface
+      go_type: Interface
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -345,7 +345,10 @@ classes:
           returns: void
           error: true
     - java_class: android.hardware.usb.UsbManager
-      go_type: usbManager
+      go_type: Manager
+      obtain: system_service
+      service_name: usb
+      close: true
       methods:
         - java_method: getAccessoryList
           go_name: GetAccessoryList

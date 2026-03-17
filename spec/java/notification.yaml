@@ -2,7 +2,7 @@ package: notification
 go_import: github.com/AndroidGoLab/jni/app/notification
 classes:
     - java_class: android.app.NotificationChannel
-      go_type: notificationChannel
+      go_type: NotificationChannel
       methods:
         - java_method: canBubble
           go_name: CanBubble
@@ -245,7 +245,7 @@ classes:
           returns: void
           error: true
     - java_class: android.service.notification.StatusBarNotification
-      go_type: statusBarNotification
+      go_type: StatusBarNotification
       methods:
         - java_method: clone
           go_name: Clone0
@@ -344,7 +344,7 @@ classes:
           returns: java.lang.Object
           error: true
     - java_class: android.app.NotificationManager
-      go_type: notificationManager
+      go_type: Manager
       obtain: system_service
       service_name: notification
       close: true

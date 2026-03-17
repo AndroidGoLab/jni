@@ -20,186 +20,186 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsbluetoothGattService                    *jni.GlobalRef
-	midbluetoothGattServiceAddCharacteristic   jni.MethodID
-	midbluetoothGattServiceAddService          jni.MethodID
-	midbluetoothGattServiceDescribeContents    jni.MethodID
-	midbluetoothGattServiceGetCharacteristic   jni.MethodID
-	midbluetoothGattServiceGetCharacteristics  jni.MethodID
-	midbluetoothGattServiceGetIncludedServices jni.MethodID
-	midbluetoothGattServiceGetInstanceId       jni.MethodID
-	midbluetoothGattServiceGetType             jni.MethodID
-	midbluetoothGattServiceGetUuid             jni.MethodID
-	midbluetoothGattServiceWriteToParcel       jni.MethodID
+	clsGattService                    *jni.GlobalRef
+	midGattServiceAddCharacteristic   jni.MethodID
+	midGattServiceAddService          jni.MethodID
+	midGattServiceDescribeContents    jni.MethodID
+	midGattServiceGetCharacteristic   jni.MethodID
+	midGattServiceGetCharacteristics  jni.MethodID
+	midGattServiceGetIncludedServices jni.MethodID
+	midGattServiceGetInstanceId       jni.MethodID
+	midGattServiceGetType             jni.MethodID
+	midGattServiceGetUuid             jni.MethodID
+	midGattServiceWriteToParcel       jni.MethodID
 
-	clsbluetoothDevice                                          *jni.GlobalRef
-	midbluetoothDeviceConnectGatt3                              jni.MethodID
-	midbluetoothDeviceConnectGatt4_1                            jni.MethodID
-	midbluetoothDeviceConnectGatt5_2                            jni.MethodID
-	midbluetoothDeviceCreateBond                                jni.MethodID
-	midbluetoothDeviceCreateInsecureL2capChannel                jni.MethodID
-	midbluetoothDeviceCreateInsecureRfcommSocketToServiceRecord jni.MethodID
-	midbluetoothDeviceCreateL2capChannel                        jni.MethodID
-	midbluetoothDeviceCreateRfcommSocketToServiceRecord         jni.MethodID
-	midbluetoothDeviceCreateUsingSocketSettings                 jni.MethodID
-	midbluetoothDeviceDescribeContents                          jni.MethodID
-	midbluetoothDeviceEquals                                    jni.MethodID
-	midbluetoothDeviceFetchUuidsWithSdp                         jni.MethodID
-	midbluetoothDeviceGetAddress                                jni.MethodID
-	midbluetoothDeviceGetAddressType                            jni.MethodID
-	midbluetoothDeviceGetAlias                                  jni.MethodID
-	midbluetoothDeviceGetBluetoothClass                         jni.MethodID
-	midbluetoothDeviceGetBondState                              jni.MethodID
-	midbluetoothDeviceGetIdentityAddressWithType                jni.MethodID
-	midbluetoothDeviceGetName                                   jni.MethodID
-	midbluetoothDeviceGetType                                   jni.MethodID
-	midbluetoothDeviceGetUuids                                  jni.MethodID
-	midbluetoothDeviceHashCode                                  jni.MethodID
-	midbluetoothDeviceSetAlias                                  jni.MethodID
-	midbluetoothDeviceSetPairingConfirmation                    jni.MethodID
-	midbluetoothDeviceSetPin                                    jni.MethodID
-	midbluetoothDeviceToString                                  jni.MethodID
-	midbluetoothDeviceWriteToParcel                             jni.MethodID
+	clsDevice                                          *jni.GlobalRef
+	midDeviceConnectGatt3                              jni.MethodID
+	midDeviceConnectGatt4_1                            jni.MethodID
+	midDeviceConnectGatt5_2                            jni.MethodID
+	midDeviceCreateBond                                jni.MethodID
+	midDeviceCreateInsecureL2capChannel                jni.MethodID
+	midDeviceCreateInsecureRfcommSocketToServiceRecord jni.MethodID
+	midDeviceCreateL2capChannel                        jni.MethodID
+	midDeviceCreateRfcommSocketToServiceRecord         jni.MethodID
+	midDeviceCreateUsingSocketSettings                 jni.MethodID
+	midDeviceDescribeContents                          jni.MethodID
+	midDeviceEquals                                    jni.MethodID
+	midDeviceFetchUuidsWithSdp                         jni.MethodID
+	midDeviceGetAddress                                jni.MethodID
+	midDeviceGetAddressType                            jni.MethodID
+	midDeviceGetAlias                                  jni.MethodID
+	midDeviceGetBluetoothClass                         jni.MethodID
+	midDeviceGetBondState                              jni.MethodID
+	midDeviceGetIdentityAddressWithType                jni.MethodID
+	midDeviceGetName                                   jni.MethodID
+	midDeviceGetType                                   jni.MethodID
+	midDeviceGetUuids                                  jni.MethodID
+	midDeviceHashCode                                  jni.MethodID
+	midDeviceSetAlias                                  jni.MethodID
+	midDeviceSetPairingConfirmation                    jni.MethodID
+	midDeviceSetPin                                    jni.MethodID
+	midDeviceToString                                  jni.MethodID
+	midDeviceWriteToParcel                             jni.MethodID
 
-	clsbluetoothAdapter                                           *jni.GlobalRef
-	midbluetoothAdapterCancelDiscovery                            jni.MethodID
-	midbluetoothAdapterCloseProfileProxy                          jni.MethodID
-	midbluetoothAdapterDisable                                    jni.MethodID
-	midbluetoothAdapterEnable                                     jni.MethodID
-	midbluetoothAdapterGetAddress                                 jni.MethodID
-	midbluetoothAdapterGetBluetoothLeAdvertiser                   jni.MethodID
-	midbluetoothAdapterGetBluetoothLeScanner                      jni.MethodID
-	midbluetoothAdapterGetBondedDevices                           jni.MethodID
-	midbluetoothAdapterGetDiscoverableTimeout                     jni.MethodID
-	midbluetoothAdapterGetLeMaximumAdvertisingDataLength          jni.MethodID
-	midbluetoothAdapterGetMaxConnectedAudioDevices                jni.MethodID
-	midbluetoothAdapterGetName                                    jni.MethodID
-	midbluetoothAdapterGetProfileConnectionState                  jni.MethodID
-	midbluetoothAdapterGetProfileProxy                            jni.MethodID
-	midbluetoothAdapterGetRemoteDevice1                           jni.MethodID
-	midbluetoothAdapterGetRemoteDevice1_1                         jni.MethodID
-	midbluetoothAdapterGetRemoteLeDevice                          jni.MethodID
-	midbluetoothAdapterGetScanMode                                jni.MethodID
-	midbluetoothAdapterGetState                                   jni.MethodID
-	midbluetoothAdapterIsDiscovering                              jni.MethodID
-	midbluetoothAdapterIsEnabled                                  jni.MethodID
-	midbluetoothAdapterIsLe2MPhySupported                         jni.MethodID
-	midbluetoothAdapterIsLeAudioBroadcastAssistantSupported       jni.MethodID
-	midbluetoothAdapterIsLeAudioBroadcastSourceSupported          jni.MethodID
-	midbluetoothAdapterIsLeAudioSupported                         jni.MethodID
-	midbluetoothAdapterIsLeCodedPhySupported                      jni.MethodID
-	midbluetoothAdapterIsLeExtendedAdvertisingSupported           jni.MethodID
-	midbluetoothAdapterIsLePeriodicAdvertisingSupported           jni.MethodID
-	midbluetoothAdapterIsMultipleAdvertisementSupported           jni.MethodID
-	midbluetoothAdapterIsOffloadedFilteringSupported              jni.MethodID
-	midbluetoothAdapterIsOffloadedScanBatchingSupported           jni.MethodID
-	midbluetoothAdapterListenUsingInsecureL2capChannel            jni.MethodID
-	midbluetoothAdapterListenUsingInsecureRfcommWithServiceRecord jni.MethodID
-	midbluetoothAdapterListenUsingL2capChannel                    jni.MethodID
-	midbluetoothAdapterListenUsingRfcommWithServiceRecord         jni.MethodID
-	midbluetoothAdapterListenUsingSocketSettings                  jni.MethodID
-	midbluetoothAdapterSetName                                    jni.MethodID
-	midbluetoothAdapterStartDiscovery                             jni.MethodID
-	midbluetoothAdapterStartLeScan1                               jni.MethodID
-	midbluetoothAdapterStartLeScan2_1                             jni.MethodID
-	midbluetoothAdapterStopLeScan                                 jni.MethodID
-	midbluetoothAdapterCheckBluetoothAddress                      jni.MethodID
+	clsAdapter                                           *jni.GlobalRef
+	midAdapterCancelDiscovery                            jni.MethodID
+	midAdapterCloseProfileProxy                          jni.MethodID
+	midAdapterDisable                                    jni.MethodID
+	midAdapterEnable                                     jni.MethodID
+	midAdapterGetAddress                                 jni.MethodID
+	midAdapterGetBluetoothLeAdvertiser                   jni.MethodID
+	midAdapterGetBluetoothLeScanner                      jni.MethodID
+	midAdapterGetBondedDevices                           jni.MethodID
+	midAdapterGetDiscoverableTimeout                     jni.MethodID
+	midAdapterGetLeMaximumAdvertisingDataLength          jni.MethodID
+	midAdapterGetMaxConnectedAudioDevices                jni.MethodID
+	midAdapterGetName                                    jni.MethodID
+	midAdapterGetProfileConnectionState                  jni.MethodID
+	midAdapterGetProfileProxy                            jni.MethodID
+	midAdapterGetRemoteDevice1                           jni.MethodID
+	midAdapterGetRemoteDevice1_1                         jni.MethodID
+	midAdapterGetRemoteLeDevice                          jni.MethodID
+	midAdapterGetScanMode                                jni.MethodID
+	midAdapterGetState                                   jni.MethodID
+	midAdapterIsDiscovering                              jni.MethodID
+	midAdapterIsEnabled                                  jni.MethodID
+	midAdapterIsLe2MPhySupported                         jni.MethodID
+	midAdapterIsLeAudioBroadcastAssistantSupported       jni.MethodID
+	midAdapterIsLeAudioBroadcastSourceSupported          jni.MethodID
+	midAdapterIsLeAudioSupported                         jni.MethodID
+	midAdapterIsLeCodedPhySupported                      jni.MethodID
+	midAdapterIsLeExtendedAdvertisingSupported           jni.MethodID
+	midAdapterIsLePeriodicAdvertisingSupported           jni.MethodID
+	midAdapterIsMultipleAdvertisementSupported           jni.MethodID
+	midAdapterIsOffloadedFilteringSupported              jni.MethodID
+	midAdapterIsOffloadedScanBatchingSupported           jni.MethodID
+	midAdapterListenUsingInsecureL2capChannel            jni.MethodID
+	midAdapterListenUsingInsecureRfcommWithServiceRecord jni.MethodID
+	midAdapterListenUsingL2capChannel                    jni.MethodID
+	midAdapterListenUsingRfcommWithServiceRecord         jni.MethodID
+	midAdapterListenUsingSocketSettings                  jni.MethodID
+	midAdapterSetName                                    jni.MethodID
+	midAdapterStartDiscovery                             jni.MethodID
+	midAdapterStartLeScan1                               jni.MethodID
+	midAdapterStartLeScan2_1                             jni.MethodID
+	midAdapterStopLeScan                                 jni.MethodID
+	midAdapterCheckBluetoothAddress                      jni.MethodID
 
-	clsbluetoothGattCharacteristic                 *jni.GlobalRef
-	midbluetoothGattCharacteristicAddDescriptor    jni.MethodID
-	midbluetoothGattCharacteristicDescribeContents jni.MethodID
-	midbluetoothGattCharacteristicGetDescriptor    jni.MethodID
-	midbluetoothGattCharacteristicGetDescriptors   jni.MethodID
-	midbluetoothGattCharacteristicGetFloatValue    jni.MethodID
-	midbluetoothGattCharacteristicGetInstanceId    jni.MethodID
-	midbluetoothGattCharacteristicGetIntValue      jni.MethodID
-	midbluetoothGattCharacteristicGetPermissions   jni.MethodID
-	midbluetoothGattCharacteristicGetProperties    jni.MethodID
-	midbluetoothGattCharacteristicGetService       jni.MethodID
-	midbluetoothGattCharacteristicGetStringValue   jni.MethodID
-	midbluetoothGattCharacteristicGetUuid          jni.MethodID
-	midbluetoothGattCharacteristicGetValue         jni.MethodID
-	midbluetoothGattCharacteristicGetWriteType     jni.MethodID
-	midbluetoothGattCharacteristicSetValue1        jni.MethodID
-	midbluetoothGattCharacteristicSetValue3_1      jni.MethodID
-	midbluetoothGattCharacteristicSetValue4_2      jni.MethodID
-	midbluetoothGattCharacteristicSetValue1_3      jni.MethodID
-	midbluetoothGattCharacteristicSetWriteType     jni.MethodID
-	midbluetoothGattCharacteristicWriteToParcel    jni.MethodID
+	clsGattCharacteristic                 *jni.GlobalRef
+	midGattCharacteristicAddDescriptor    jni.MethodID
+	midGattCharacteristicDescribeContents jni.MethodID
+	midGattCharacteristicGetDescriptor    jni.MethodID
+	midGattCharacteristicGetDescriptors   jni.MethodID
+	midGattCharacteristicGetFloatValue    jni.MethodID
+	midGattCharacteristicGetInstanceId    jni.MethodID
+	midGattCharacteristicGetIntValue      jni.MethodID
+	midGattCharacteristicGetPermissions   jni.MethodID
+	midGattCharacteristicGetProperties    jni.MethodID
+	midGattCharacteristicGetService       jni.MethodID
+	midGattCharacteristicGetStringValue   jni.MethodID
+	midGattCharacteristicGetUuid          jni.MethodID
+	midGattCharacteristicGetValue         jni.MethodID
+	midGattCharacteristicGetWriteType     jni.MethodID
+	midGattCharacteristicSetValue1        jni.MethodID
+	midGattCharacteristicSetValue3_1      jni.MethodID
+	midGattCharacteristicSetValue4_2      jni.MethodID
+	midGattCharacteristicSetValue1_3      jni.MethodID
+	midGattCharacteristicSetWriteType     jni.MethodID
+	midGattCharacteristicWriteToParcel    jni.MethodID
 
-	clsbluetoothSocket                         *jni.GlobalRef
-	midbluetoothSocketClose                    jni.MethodID
-	midbluetoothSocketConnect                  jni.MethodID
-	midbluetoothSocketGetConnectionType        jni.MethodID
-	midbluetoothSocketGetInputStream           jni.MethodID
-	midbluetoothSocketGetMaxReceivePacketSize  jni.MethodID
-	midbluetoothSocketGetMaxTransmitPacketSize jni.MethodID
-	midbluetoothSocketGetOutputStream          jni.MethodID
-	midbluetoothSocketGetRemoteDevice          jni.MethodID
-	midbluetoothSocketIsConnected              jni.MethodID
-	midbluetoothSocketToString                 jni.MethodID
+	clsSocket                         *jni.GlobalRef
+	midSocketClose                    jni.MethodID
+	midSocketConnect                  jni.MethodID
+	midSocketGetConnectionType        jni.MethodID
+	midSocketGetInputStream           jni.MethodID
+	midSocketGetMaxReceivePacketSize  jni.MethodID
+	midSocketGetMaxTransmitPacketSize jni.MethodID
+	midSocketGetOutputStream          jni.MethodID
+	midSocketGetRemoteDevice          jni.MethodID
+	midSocketIsConnected              jni.MethodID
+	midSocketToString                 jni.MethodID
 
-	clsbluetoothGattServer                                   *jni.GlobalRef
-	midbluetoothGattServerAddService                         jni.MethodID
-	midbluetoothGattServerCancelConnection                   jni.MethodID
-	midbluetoothGattServerClearServices                      jni.MethodID
-	midbluetoothGattServerClose                              jni.MethodID
-	midbluetoothGattServerConnect                            jni.MethodID
-	midbluetoothGattServerGetConnectedDevices                jni.MethodID
-	midbluetoothGattServerGetConnectionState                 jni.MethodID
-	midbluetoothGattServerGetDevicesMatchingConnectionStates jni.MethodID
-	midbluetoothGattServerGetService                         jni.MethodID
-	midbluetoothGattServerGetServices                        jni.MethodID
-	midbluetoothGattServerNotifyCharacteristicChanged3       jni.MethodID
-	midbluetoothGattServerNotifyCharacteristicChanged4_1     jni.MethodID
-	midbluetoothGattServerReadPhy                            jni.MethodID
-	midbluetoothGattServerRemoveService                      jni.MethodID
-	midbluetoothGattServerSendResponse                       jni.MethodID
-	midbluetoothGattServerSetPreferredPhy                    jni.MethodID
+	clsGattServer                                   *jni.GlobalRef
+	midGattServerAddService                         jni.MethodID
+	midGattServerCancelConnection                   jni.MethodID
+	midGattServerClearServices                      jni.MethodID
+	midGattServerClose                              jni.MethodID
+	midGattServerConnect                            jni.MethodID
+	midGattServerGetConnectedDevices                jni.MethodID
+	midGattServerGetConnectionState                 jni.MethodID
+	midGattServerGetDevicesMatchingConnectionStates jni.MethodID
+	midGattServerGetService                         jni.MethodID
+	midGattServerGetServices                        jni.MethodID
+	midGattServerNotifyCharacteristicChanged3       jni.MethodID
+	midGattServerNotifyCharacteristicChanged4_1     jni.MethodID
+	midGattServerReadPhy                            jni.MethodID
+	midGattServerRemoveService                      jni.MethodID
+	midGattServerSendResponse                       jni.MethodID
+	midGattServerSetPreferredPhy                    jni.MethodID
 
-	clsbluetoothGatt                                   *jni.GlobalRef
-	midbluetoothGattAbortReliableWrite0                jni.MethodID
-	midbluetoothGattAbortReliableWrite1_1              jni.MethodID
-	midbluetoothGattBeginReliableWrite                 jni.MethodID
-	midbluetoothGattClose                              jni.MethodID
-	midbluetoothGattConnect                            jni.MethodID
-	midbluetoothGattDisconnect                         jni.MethodID
-	midbluetoothGattDiscoverServices                   jni.MethodID
-	midbluetoothGattExecuteReliableWrite               jni.MethodID
-	midbluetoothGattGetConnectedDevices                jni.MethodID
-	midbluetoothGattGetConnectionState                 jni.MethodID
-	midbluetoothGattGetDevice                          jni.MethodID
-	midbluetoothGattGetDevicesMatchingConnectionStates jni.MethodID
-	midbluetoothGattGetService                         jni.MethodID
-	midbluetoothGattGetServices                        jni.MethodID
-	midbluetoothGattReadCharacteristic                 jni.MethodID
-	midbluetoothGattReadDescriptor                     jni.MethodID
-	midbluetoothGattReadPhy                            jni.MethodID
-	midbluetoothGattReadRemoteRssi                     jni.MethodID
-	midbluetoothGattRequestConnectionPriority          jni.MethodID
-	midbluetoothGattRequestMtu                         jni.MethodID
-	midbluetoothGattSetCharacteristicNotification      jni.MethodID
-	midbluetoothGattSetPreferredPhy                    jni.MethodID
-	midbluetoothGattWriteCharacteristic1               jni.MethodID
-	midbluetoothGattWriteCharacteristic3_1             jni.MethodID
-	midbluetoothGattWriteDescriptor1                   jni.MethodID
-	midbluetoothGattWriteDescriptor2_1                 jni.MethodID
+	clsGatt                                   *jni.GlobalRef
+	midGattAbortReliableWrite0                jni.MethodID
+	midGattAbortReliableWrite1_1              jni.MethodID
+	midGattBeginReliableWrite                 jni.MethodID
+	midGattClose                              jni.MethodID
+	midGattConnect                            jni.MethodID
+	midGattDisconnect                         jni.MethodID
+	midGattDiscoverServices                   jni.MethodID
+	midGattExecuteReliableWrite               jni.MethodID
+	midGattGetConnectedDevices                jni.MethodID
+	midGattGetConnectionState                 jni.MethodID
+	midGattGetDevice                          jni.MethodID
+	midGattGetDevicesMatchingConnectionStates jni.MethodID
+	midGattGetService                         jni.MethodID
+	midGattGetServices                        jni.MethodID
+	midGattReadCharacteristic                 jni.MethodID
+	midGattReadDescriptor                     jni.MethodID
+	midGattReadPhy                            jni.MethodID
+	midGattReadRemoteRssi                     jni.MethodID
+	midGattRequestConnectionPriority          jni.MethodID
+	midGattRequestMtu                         jni.MethodID
+	midGattSetCharacteristicNotification      jni.MethodID
+	midGattSetPreferredPhy                    jni.MethodID
+	midGattWriteCharacteristic1               jni.MethodID
+	midGattWriteCharacteristic3_1             jni.MethodID
+	midGattWriteDescriptor1                   jni.MethodID
+	midGattWriteDescriptor2_1                 jni.MethodID
 
-	clsbluetoothServerSocket          *jni.GlobalRef
-	midbluetoothServerSocketAccept0   jni.MethodID
-	midbluetoothServerSocketAccept1_1 jni.MethodID
-	midbluetoothServerSocketClose     jni.MethodID
-	midbluetoothServerSocketGetPsm    jni.MethodID
-	midbluetoothServerSocketToString  jni.MethodID
+	clsServerSocket          *jni.GlobalRef
+	midServerSocketAccept0   jni.MethodID
+	midServerSocketAccept1_1 jni.MethodID
+	midServerSocketClose     jni.MethodID
+	midServerSocketGetPsm    jni.MethodID
+	midServerSocketToString  jni.MethodID
 
-	clsbluetoothGattDescriptor                  *jni.GlobalRef
-	midbluetoothGattDescriptorDescribeContents  jni.MethodID
-	midbluetoothGattDescriptorGetCharacteristic jni.MethodID
-	midbluetoothGattDescriptorGetPermissions    jni.MethodID
-	midbluetoothGattDescriptorGetUuid           jni.MethodID
-	midbluetoothGattDescriptorGetValue          jni.MethodID
-	midbluetoothGattDescriptorSetValue          jni.MethodID
-	midbluetoothGattDescriptorWriteToParcel     jni.MethodID
+	clsGattDescriptor                  *jni.GlobalRef
+	midGattDescriptorDescribeContents  jni.MethodID
+	midGattDescriptorGetCharacteristic jni.MethodID
+	midGattDescriptorGetPermissions    jni.MethodID
+	midGattDescriptorGetUuid           jni.MethodID
+	midGattDescriptorGetValue          jni.MethodID
+	midGattDescriptorSetValue          jni.MethodID
+	midGattDescriptorWriteToParcel     jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -230,9 +230,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothGattService: %w", err)
 	}
-	clsbluetoothGattService = env.NewGlobalRef(&c.Object)
+	clsGattService = env.NewGlobalRef(&c.Object)
 
-	midbluetoothGattServiceAddCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "addCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
+	midGattServiceAddCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "addCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -240,7 +240,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.addCharacteristic")
 	}
 
-	midbluetoothGattServiceAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
+	midGattServiceAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -248,7 +248,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.addService")
 	}
 
-	midbluetoothGattServiceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "describeContents", "()I")
+	midGattServiceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -256,7 +256,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.describeContents")
 	}
 
-	midbluetoothGattServiceGetCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getCharacteristic", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattCharacteristic;")
+	midGattServiceGetCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getCharacteristic", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattCharacteristic;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -264,7 +264,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.getCharacteristic")
 	}
 
-	midbluetoothGattServiceGetCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getCharacteristics", "()Ljava/util/List;")
+	midGattServiceGetCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getCharacteristics", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -272,7 +272,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.getCharacteristics")
 	}
 
-	midbluetoothGattServiceGetIncludedServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getIncludedServices", "()Ljava/util/List;")
+	midGattServiceGetIncludedServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getIncludedServices", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -280,7 +280,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.getIncludedServices")
 	}
 
-	midbluetoothGattServiceGetInstanceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getInstanceId", "()I")
+	midGattServiceGetInstanceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getInstanceId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -288,7 +288,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.getInstanceId")
 	}
 
-	midbluetoothGattServiceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getType", "()I")
+	midGattServiceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -296,7 +296,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.getType")
 	}
 
-	midbluetoothGattServiceGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getUuid", "()Ljava/util/UUID;")
+	midGattServiceGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getUuid", "()Ljava/util/UUID;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -304,7 +304,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattService.getUuid")
 	}
 
-	midbluetoothGattServiceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midGattServiceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -316,9 +316,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothDevice: %w", err)
 	}
-	clsbluetoothDevice = env.NewGlobalRef(&c.Object)
+	clsDevice = env.NewGlobalRef(&c.Object)
 
-	midbluetoothDeviceConnectGatt3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Landroid/bluetooth/BluetoothGatt;")
+	midDeviceConnectGatt3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Landroid/bluetooth/BluetoothGatt;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -326,7 +326,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.connectGatt")
 	}
 
-	midbluetoothDeviceConnectGatt4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;I)Landroid/bluetooth/BluetoothGatt;")
+	midDeviceConnectGatt4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;I)Landroid/bluetooth/BluetoothGatt;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -334,7 +334,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.connectGatt")
 	}
 
-	midbluetoothDeviceConnectGatt5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;II)Landroid/bluetooth/BluetoothGatt;")
+	midDeviceConnectGatt5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;II)Landroid/bluetooth/BluetoothGatt;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -342,7 +342,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.connectGatt")
 	}
 
-	midbluetoothDeviceCreateBond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "createBond", "()Z")
+	midDeviceCreateBond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createBond", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -350,7 +350,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.createBond")
 	}
 
-	midbluetoothDeviceCreateInsecureL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "createInsecureL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
+	midDeviceCreateInsecureL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createInsecureL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -358,7 +358,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.createInsecureL2capChannel")
 	}
 
-	midbluetoothDeviceCreateInsecureRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "createInsecureRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
+	midDeviceCreateInsecureRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createInsecureRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -366,7 +366,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.createInsecureRfcommSocketToServiceRecord")
 	}
 
-	midbluetoothDeviceCreateL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "createL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
+	midDeviceCreateL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -374,7 +374,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.createL2capChannel")
 	}
 
-	midbluetoothDeviceCreateRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "createRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
+	midDeviceCreateRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -382,7 +382,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.createRfcommSocketToServiceRecord")
 	}
 
-	midbluetoothDeviceCreateUsingSocketSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "createUsingSocketSettings", "(Landroid/bluetooth/BluetoothSocketSettings;)Landroid/bluetooth/BluetoothSocket;")
+	midDeviceCreateUsingSocketSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createUsingSocketSettings", "(Landroid/bluetooth/BluetoothSocketSettings;)Landroid/bluetooth/BluetoothSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -390,7 +390,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.createUsingSocketSettings")
 	}
 
-	midbluetoothDeviceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "describeContents", "()I")
+	midDeviceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -398,7 +398,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.describeContents")
 	}
 
-	midbluetoothDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "equals", "(Ljava/lang/Object;)Z")
+	midDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -406,7 +406,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.equals")
 	}
 
-	midbluetoothDeviceFetchUuidsWithSdp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "fetchUuidsWithSdp", "()Z")
+	midDeviceFetchUuidsWithSdp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "fetchUuidsWithSdp", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -414,7 +414,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.fetchUuidsWithSdp")
 	}
 
-	midbluetoothDeviceGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getAddress", "()Ljava/lang/String;")
+	midDeviceGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAddress", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -422,7 +422,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getAddress")
 	}
 
-	midbluetoothDeviceGetAddressType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getAddressType", "()I")
+	midDeviceGetAddressType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAddressType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -430,7 +430,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getAddressType")
 	}
 
-	midbluetoothDeviceGetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getAlias", "()Ljava/lang/String;")
+	midDeviceGetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAlias", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -438,7 +438,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getAlias")
 	}
 
-	midbluetoothDeviceGetBluetoothClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getBluetoothClass", "()Landroid/bluetooth/BluetoothClass;")
+	midDeviceGetBluetoothClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getBluetoothClass", "()Landroid/bluetooth/BluetoothClass;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -446,7 +446,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getBluetoothClass")
 	}
 
-	midbluetoothDeviceGetBondState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getBondState", "()I")
+	midDeviceGetBondState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getBondState", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -454,7 +454,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getBondState")
 	}
 
-	midbluetoothDeviceGetIdentityAddressWithType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getIdentityAddressWithType", "()Landroid/bluetooth/BluetoothDevice$BluetoothAddress;")
+	midDeviceGetIdentityAddressWithType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getIdentityAddressWithType", "()Landroid/bluetooth/BluetoothDevice$BluetoothAddress;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -462,7 +462,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getIdentityAddressWithType")
 	}
 
-	midbluetoothDeviceGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getName", "()Ljava/lang/String;")
+	midDeviceGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -470,7 +470,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getName")
 	}
 
-	midbluetoothDeviceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getType", "()I")
+	midDeviceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -478,7 +478,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getType")
 	}
 
-	midbluetoothDeviceGetUuids, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "getUuids", "()[Landroid/os/ParcelUuid;")
+	midDeviceGetUuids, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getUuids", "()[Landroid/os/ParcelUuid;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -486,7 +486,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.getUuids")
 	}
 
-	midbluetoothDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "hashCode", "()I")
+	midDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "hashCode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -494,7 +494,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.hashCode")
 	}
 
-	midbluetoothDeviceSetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "setAlias", "(Ljava/lang/String;)I")
+	midDeviceSetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setAlias", "(Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -502,7 +502,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.setAlias")
 	}
 
-	midbluetoothDeviceSetPairingConfirmation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "setPairingConfirmation", "(Z)Z")
+	midDeviceSetPairingConfirmation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setPairingConfirmation", "(Z)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -510,7 +510,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.setPairingConfirmation")
 	}
 
-	midbluetoothDeviceSetPin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "setPin", "([B)Z")
+	midDeviceSetPin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setPin", "([B)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -518,7 +518,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.setPin")
 	}
 
-	midbluetoothDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "toString", "()Ljava/lang/String;")
+	midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -526,7 +526,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothDevice.toString")
 	}
 
-	midbluetoothDeviceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothDevice)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midDeviceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -538,9 +538,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothAdapter: %w", err)
 	}
-	clsbluetoothAdapter = env.NewGlobalRef(&c.Object)
+	clsAdapter = env.NewGlobalRef(&c.Object)
 
-	midbluetoothAdapterCancelDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "cancelDiscovery", "()Z")
+	midAdapterCancelDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "cancelDiscovery", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -548,7 +548,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.cancelDiscovery")
 	}
 
-	midbluetoothAdapterCloseProfileProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "closeProfileProxy", "(ILandroid/bluetooth/BluetoothProfile;)V")
+	midAdapterCloseProfileProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "closeProfileProxy", "(ILandroid/bluetooth/BluetoothProfile;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -556,7 +556,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.closeProfileProxy")
 	}
 
-	midbluetoothAdapterDisable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "disable", "()Z")
+	midAdapterDisable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "disable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -564,7 +564,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.disable")
 	}
 
-	midbluetoothAdapterEnable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "enable", "()Z")
+	midAdapterEnable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "enable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -572,7 +572,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.enable")
 	}
 
-	midbluetoothAdapterGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getAddress", "()Ljava/lang/String;")
+	midAdapterGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getAddress", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -580,7 +580,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getAddress")
 	}
 
-	midbluetoothAdapterGetBluetoothLeAdvertiser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getBluetoothLeAdvertiser", "()Landroid/bluetooth/le/BluetoothLeAdvertiser;")
+	midAdapterGetBluetoothLeAdvertiser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getBluetoothLeAdvertiser", "()Landroid/bluetooth/le/BluetoothLeAdvertiser;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -588,7 +588,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getBluetoothLeAdvertiser")
 	}
 
-	midbluetoothAdapterGetBluetoothLeScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getBluetoothLeScanner", "()Landroid/bluetooth/le/BluetoothLeScanner;")
+	midAdapterGetBluetoothLeScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getBluetoothLeScanner", "()Landroid/bluetooth/le/BluetoothLeScanner;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -596,7 +596,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getBluetoothLeScanner")
 	}
 
-	midbluetoothAdapterGetBondedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getBondedDevices", "()Ljava/util/Set;")
+	midAdapterGetBondedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getBondedDevices", "()Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -604,7 +604,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getBondedDevices")
 	}
 
-	midbluetoothAdapterGetDiscoverableTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getDiscoverableTimeout", "()Ljava/time/Duration;")
+	midAdapterGetDiscoverableTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getDiscoverableTimeout", "()Ljava/time/Duration;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -612,7 +612,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getDiscoverableTimeout")
 	}
 
-	midbluetoothAdapterGetLeMaximumAdvertisingDataLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getLeMaximumAdvertisingDataLength", "()I")
+	midAdapterGetLeMaximumAdvertisingDataLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getLeMaximumAdvertisingDataLength", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -620,7 +620,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getLeMaximumAdvertisingDataLength")
 	}
 
-	midbluetoothAdapterGetMaxConnectedAudioDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getMaxConnectedAudioDevices", "()I")
+	midAdapterGetMaxConnectedAudioDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getMaxConnectedAudioDevices", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -628,7 +628,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getMaxConnectedAudioDevices")
 	}
 
-	midbluetoothAdapterGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getName", "()Ljava/lang/String;")
+	midAdapterGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -636,7 +636,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getName")
 	}
 
-	midbluetoothAdapterGetProfileConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getProfileConnectionState", "(I)I")
+	midAdapterGetProfileConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getProfileConnectionState", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -644,7 +644,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getProfileConnectionState")
 	}
 
-	midbluetoothAdapterGetProfileProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getProfileProxy", "(Landroid/content/Context;Landroid/bluetooth/BluetoothProfile$ServiceListener;I)Z")
+	midAdapterGetProfileProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getProfileProxy", "(Landroid/content/Context;Landroid/bluetooth/BluetoothProfile$ServiceListener;I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -652,7 +652,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getProfileProxy")
 	}
 
-	midbluetoothAdapterGetRemoteDevice1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getRemoteDevice", "([B)Landroid/bluetooth/BluetoothDevice;")
+	midAdapterGetRemoteDevice1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getRemoteDevice", "([B)Landroid/bluetooth/BluetoothDevice;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -660,7 +660,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getRemoteDevice")
 	}
 
-	midbluetoothAdapterGetRemoteDevice1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getRemoteDevice", "(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;")
+	midAdapterGetRemoteDevice1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getRemoteDevice", "(Ljava/lang/String;)Landroid/bluetooth/BluetoothDevice;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -668,7 +668,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getRemoteDevice")
 	}
 
-	midbluetoothAdapterGetRemoteLeDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getRemoteLeDevice", "(Ljava/lang/String;I)Landroid/bluetooth/BluetoothDevice;")
+	midAdapterGetRemoteLeDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getRemoteLeDevice", "(Ljava/lang/String;I)Landroid/bluetooth/BluetoothDevice;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -676,7 +676,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getRemoteLeDevice")
 	}
 
-	midbluetoothAdapterGetScanMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getScanMode", "()I")
+	midAdapterGetScanMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getScanMode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -684,7 +684,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getScanMode")
 	}
 
-	midbluetoothAdapterGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "getState", "()I")
+	midAdapterGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getState", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -692,7 +692,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.getState")
 	}
 
-	midbluetoothAdapterIsDiscovering, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isDiscovering", "()Z")
+	midAdapterIsDiscovering, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isDiscovering", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -700,7 +700,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isDiscovering")
 	}
 
-	midbluetoothAdapterIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isEnabled", "()Z")
+	midAdapterIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isEnabled", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -708,7 +708,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isEnabled")
 	}
 
-	midbluetoothAdapterIsLe2MPhySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isLe2MPhySupported", "()Z")
+	midAdapterIsLe2MPhySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isLe2MPhySupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -716,7 +716,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isLe2MPhySupported")
 	}
 
-	midbluetoothAdapterIsLeAudioBroadcastAssistantSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isLeAudioBroadcastAssistantSupported", "()I")
+	midAdapterIsLeAudioBroadcastAssistantSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isLeAudioBroadcastAssistantSupported", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -724,7 +724,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isLeAudioBroadcastAssistantSupported")
 	}
 
-	midbluetoothAdapterIsLeAudioBroadcastSourceSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isLeAudioBroadcastSourceSupported", "()I")
+	midAdapterIsLeAudioBroadcastSourceSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isLeAudioBroadcastSourceSupported", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -732,7 +732,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isLeAudioBroadcastSourceSupported")
 	}
 
-	midbluetoothAdapterIsLeAudioSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isLeAudioSupported", "()I")
+	midAdapterIsLeAudioSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isLeAudioSupported", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -740,7 +740,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isLeAudioSupported")
 	}
 
-	midbluetoothAdapterIsLeCodedPhySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isLeCodedPhySupported", "()Z")
+	midAdapterIsLeCodedPhySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isLeCodedPhySupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -748,7 +748,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isLeCodedPhySupported")
 	}
 
-	midbluetoothAdapterIsLeExtendedAdvertisingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isLeExtendedAdvertisingSupported", "()Z")
+	midAdapterIsLeExtendedAdvertisingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isLeExtendedAdvertisingSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -756,7 +756,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isLeExtendedAdvertisingSupported")
 	}
 
-	midbluetoothAdapterIsLePeriodicAdvertisingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isLePeriodicAdvertisingSupported", "()Z")
+	midAdapterIsLePeriodicAdvertisingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isLePeriodicAdvertisingSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -764,7 +764,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isLePeriodicAdvertisingSupported")
 	}
 
-	midbluetoothAdapterIsMultipleAdvertisementSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isMultipleAdvertisementSupported", "()Z")
+	midAdapterIsMultipleAdvertisementSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isMultipleAdvertisementSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -772,7 +772,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isMultipleAdvertisementSupported")
 	}
 
-	midbluetoothAdapterIsOffloadedFilteringSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isOffloadedFilteringSupported", "()Z")
+	midAdapterIsOffloadedFilteringSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isOffloadedFilteringSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -780,7 +780,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isOffloadedFilteringSupported")
 	}
 
-	midbluetoothAdapterIsOffloadedScanBatchingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "isOffloadedScanBatchingSupported", "()Z")
+	midAdapterIsOffloadedScanBatchingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isOffloadedScanBatchingSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -788,7 +788,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.isOffloadedScanBatchingSupported")
 	}
 
-	midbluetoothAdapterListenUsingInsecureL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "listenUsingInsecureL2capChannel", "()Landroid/bluetooth/BluetoothServerSocket;")
+	midAdapterListenUsingInsecureL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "listenUsingInsecureL2capChannel", "()Landroid/bluetooth/BluetoothServerSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -796,7 +796,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.listenUsingInsecureL2capChannel")
 	}
 
-	midbluetoothAdapterListenUsingInsecureRfcommWithServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "listenUsingInsecureRfcommWithServiceRecord", "(Ljava/lang/String;Ljava/util/UUID;)Landroid/bluetooth/BluetoothServerSocket;")
+	midAdapterListenUsingInsecureRfcommWithServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "listenUsingInsecureRfcommWithServiceRecord", "(Ljava/lang/String;Ljava/util/UUID;)Landroid/bluetooth/BluetoothServerSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -804,7 +804,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord")
 	}
 
-	midbluetoothAdapterListenUsingL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "listenUsingL2capChannel", "()Landroid/bluetooth/BluetoothServerSocket;")
+	midAdapterListenUsingL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "listenUsingL2capChannel", "()Landroid/bluetooth/BluetoothServerSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -812,7 +812,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.listenUsingL2capChannel")
 	}
 
-	midbluetoothAdapterListenUsingRfcommWithServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "listenUsingRfcommWithServiceRecord", "(Ljava/lang/String;Ljava/util/UUID;)Landroid/bluetooth/BluetoothServerSocket;")
+	midAdapterListenUsingRfcommWithServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "listenUsingRfcommWithServiceRecord", "(Ljava/lang/String;Ljava/util/UUID;)Landroid/bluetooth/BluetoothServerSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -820,7 +820,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.listenUsingRfcommWithServiceRecord")
 	}
 
-	midbluetoothAdapterListenUsingSocketSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "listenUsingSocketSettings", "(Landroid/bluetooth/BluetoothSocketSettings;)Landroid/bluetooth/BluetoothServerSocket;")
+	midAdapterListenUsingSocketSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "listenUsingSocketSettings", "(Landroid/bluetooth/BluetoothSocketSettings;)Landroid/bluetooth/BluetoothServerSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -828,7 +828,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.listenUsingSocketSettings")
 	}
 
-	midbluetoothAdapterSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "setName", "(Ljava/lang/String;)Z")
+	midAdapterSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "setName", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -836,7 +836,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.setName")
 	}
 
-	midbluetoothAdapterStartDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "startDiscovery", "()Z")
+	midAdapterStartDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "startDiscovery", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -844,7 +844,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.startDiscovery")
 	}
 
-	midbluetoothAdapterStartLeScan1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "startLeScan", "(Landroid/bluetooth/BluetoothAdapter$LeScanCallback;)Z")
+	midAdapterStartLeScan1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "startLeScan", "(Landroid/bluetooth/BluetoothAdapter$LeScanCallback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -852,7 +852,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.startLeScan")
 	}
 
-	midbluetoothAdapterStartLeScan2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "startLeScan", "([Ljava/util/UUID;Landroid/bluetooth/BluetoothAdapter$LeScanCallback;)Z")
+	midAdapterStartLeScan2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "startLeScan", "([Ljava/util/UUID;Landroid/bluetooth/BluetoothAdapter$LeScanCallback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -860,7 +860,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.startLeScan")
 	}
 
-	midbluetoothAdapterStopLeScan, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "stopLeScan", "(Landroid/bluetooth/BluetoothAdapter$LeScanCallback;)V")
+	midAdapterStopLeScan, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "stopLeScan", "(Landroid/bluetooth/BluetoothAdapter$LeScanCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -868,7 +868,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothAdapter.stopLeScan")
 	}
 
-	midbluetoothAdapterCheckBluetoothAddress, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothAdapter)), "checkBluetoothAddress", "(Ljava/lang/String;)Z")
+	midAdapterCheckBluetoothAddress, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "checkBluetoothAddress", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -880,9 +880,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothGattCharacteristic: %w", err)
 	}
-	clsbluetoothGattCharacteristic = env.NewGlobalRef(&c.Object)
+	clsGattCharacteristic = env.NewGlobalRef(&c.Object)
 
-	midbluetoothGattCharacteristicAddDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "addDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;)Z")
+	midGattCharacteristicAddDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "addDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -890,7 +890,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.addDescriptor")
 	}
 
-	midbluetoothGattCharacteristicDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "describeContents", "()I")
+	midGattCharacteristicDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -898,7 +898,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.describeContents")
 	}
 
-	midbluetoothGattCharacteristicGetDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getDescriptor", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattDescriptor;")
+	midGattCharacteristicGetDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getDescriptor", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -906,7 +906,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getDescriptor")
 	}
 
-	midbluetoothGattCharacteristicGetDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getDescriptors", "()Ljava/util/List;")
+	midGattCharacteristicGetDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getDescriptors", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -914,7 +914,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getDescriptors")
 	}
 
-	midbluetoothGattCharacteristicGetFloatValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getFloatValue", "(II)Ljava/lang/Float;")
+	midGattCharacteristicGetFloatValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getFloatValue", "(II)Ljava/lang/Float;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -922,7 +922,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getFloatValue")
 	}
 
-	midbluetoothGattCharacteristicGetInstanceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getInstanceId", "()I")
+	midGattCharacteristicGetInstanceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getInstanceId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -930,7 +930,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getInstanceId")
 	}
 
-	midbluetoothGattCharacteristicGetIntValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getIntValue", "(II)Ljava/lang/Integer;")
+	midGattCharacteristicGetIntValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getIntValue", "(II)Ljava/lang/Integer;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -938,7 +938,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getIntValue")
 	}
 
-	midbluetoothGattCharacteristicGetPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getPermissions", "()I")
+	midGattCharacteristicGetPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getPermissions", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -946,7 +946,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getPermissions")
 	}
 
-	midbluetoothGattCharacteristicGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getProperties", "()I")
+	midGattCharacteristicGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getProperties", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -954,7 +954,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getProperties")
 	}
 
-	midbluetoothGattCharacteristicGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getService", "()Landroid/bluetooth/BluetoothGattService;")
+	midGattCharacteristicGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getService", "()Landroid/bluetooth/BluetoothGattService;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -962,7 +962,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getService")
 	}
 
-	midbluetoothGattCharacteristicGetStringValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getStringValue", "(I)Ljava/lang/String;")
+	midGattCharacteristicGetStringValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getStringValue", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -970,7 +970,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getStringValue")
 	}
 
-	midbluetoothGattCharacteristicGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getUuid", "()Ljava/util/UUID;")
+	midGattCharacteristicGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getUuid", "()Ljava/util/UUID;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -978,7 +978,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getUuid")
 	}
 
-	midbluetoothGattCharacteristicGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getValue", "()[B")
+	midGattCharacteristicGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getValue", "()[B")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -986,7 +986,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getValue")
 	}
 
-	midbluetoothGattCharacteristicGetWriteType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "getWriteType", "()I")
+	midGattCharacteristicGetWriteType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "getWriteType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -994,7 +994,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.getWriteType")
 	}
 
-	midbluetoothGattCharacteristicSetValue1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "setValue", "([B)Z")
+	midGattCharacteristicSetValue1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "setValue", "([B)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1002,7 +1002,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.setValue")
 	}
 
-	midbluetoothGattCharacteristicSetValue3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "setValue", "(III)Z")
+	midGattCharacteristicSetValue3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "setValue", "(III)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1010,7 +1010,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.setValue")
 	}
 
-	midbluetoothGattCharacteristicSetValue4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "setValue", "(IIII)Z")
+	midGattCharacteristicSetValue4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "setValue", "(IIII)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1018,7 +1018,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.setValue")
 	}
 
-	midbluetoothGattCharacteristicSetValue1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "setValue", "(Ljava/lang/String;)Z")
+	midGattCharacteristicSetValue1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "setValue", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1026,7 +1026,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.setValue")
 	}
 
-	midbluetoothGattCharacteristicSetWriteType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "setWriteType", "(I)V")
+	midGattCharacteristicSetWriteType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "setWriteType", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1034,7 +1034,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattCharacteristic.setWriteType")
 	}
 
-	midbluetoothGattCharacteristicWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattCharacteristic)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midGattCharacteristicWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1046,9 +1046,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothSocket: %w", err)
 	}
-	clsbluetoothSocket = env.NewGlobalRef(&c.Object)
+	clsSocket = env.NewGlobalRef(&c.Object)
 
-	midbluetoothSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "close", "()V")
+	midSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1056,7 +1056,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.close")
 	}
 
-	midbluetoothSocketConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "connect", "()V")
+	midSocketConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "connect", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1064,7 +1064,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.connect")
 	}
 
-	midbluetoothSocketGetConnectionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "getConnectionType", "()I")
+	midSocketGetConnectionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getConnectionType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1072,7 +1072,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.getConnectionType")
 	}
 
-	midbluetoothSocketGetInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "getInputStream", "()Ljava/io/InputStream;")
+	midSocketGetInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getInputStream", "()Ljava/io/InputStream;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1080,7 +1080,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.getInputStream")
 	}
 
-	midbluetoothSocketGetMaxReceivePacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "getMaxReceivePacketSize", "()I")
+	midSocketGetMaxReceivePacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getMaxReceivePacketSize", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1088,7 +1088,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.getMaxReceivePacketSize")
 	}
 
-	midbluetoothSocketGetMaxTransmitPacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "getMaxTransmitPacketSize", "()I")
+	midSocketGetMaxTransmitPacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getMaxTransmitPacketSize", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1096,7 +1096,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.getMaxTransmitPacketSize")
 	}
 
-	midbluetoothSocketGetOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "getOutputStream", "()Ljava/io/OutputStream;")
+	midSocketGetOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getOutputStream", "()Ljava/io/OutputStream;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1104,7 +1104,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.getOutputStream")
 	}
 
-	midbluetoothSocketGetRemoteDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "getRemoteDevice", "()Landroid/bluetooth/BluetoothDevice;")
+	midSocketGetRemoteDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getRemoteDevice", "()Landroid/bluetooth/BluetoothDevice;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1112,7 +1112,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.getRemoteDevice")
 	}
 
-	midbluetoothSocketIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "isConnected", "()Z")
+	midSocketIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "isConnected", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1120,7 +1120,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothSocket.isConnected")
 	}
 
-	midbluetoothSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothSocket)), "toString", "()Ljava/lang/String;")
+	midSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1132,9 +1132,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothGattServer: %w", err)
 	}
-	clsbluetoothGattServer = env.NewGlobalRef(&c.Object)
+	clsGattServer = env.NewGlobalRef(&c.Object)
 
-	midbluetoothGattServerAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
+	midGattServerAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1142,7 +1142,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.addService")
 	}
 
-	midbluetoothGattServerCancelConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "cancelConnection", "(Landroid/bluetooth/BluetoothDevice;)V")
+	midGattServerCancelConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "cancelConnection", "(Landroid/bluetooth/BluetoothDevice;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1150,7 +1150,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.cancelConnection")
 	}
 
-	midbluetoothGattServerClearServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "clearServices", "()V")
+	midGattServerClearServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "clearServices", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1158,7 +1158,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.clearServices")
 	}
 
-	midbluetoothGattServerClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "close", "()V")
+	midGattServerClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1166,7 +1166,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.close")
 	}
 
-	midbluetoothGattServerConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "connect", "(Landroid/bluetooth/BluetoothDevice;Z)Z")
+	midGattServerConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "connect", "(Landroid/bluetooth/BluetoothDevice;Z)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1174,7 +1174,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.connect")
 	}
 
-	midbluetoothGattServerGetConnectedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "getConnectedDevices", "()Ljava/util/List;")
+	midGattServerGetConnectedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getConnectedDevices", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1182,7 +1182,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.getConnectedDevices")
 	}
 
-	midbluetoothGattServerGetConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "getConnectionState", "(Landroid/bluetooth/BluetoothDevice;)I")
+	midGattServerGetConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getConnectionState", "(Landroid/bluetooth/BluetoothDevice;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1190,7 +1190,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.getConnectionState")
 	}
 
-	midbluetoothGattServerGetDevicesMatchingConnectionStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "getDevicesMatchingConnectionStates", "([I)Ljava/util/List;")
+	midGattServerGetDevicesMatchingConnectionStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getDevicesMatchingConnectionStates", "([I)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1198,7 +1198,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.getDevicesMatchingConnectionStates")
 	}
 
-	midbluetoothGattServerGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "getService", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattService;")
+	midGattServerGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getService", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattService;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1206,7 +1206,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.getService")
 	}
 
-	midbluetoothGattServerGetServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "getServices", "()Ljava/util/List;")
+	midGattServerGetServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getServices", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1214,7 +1214,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.getServices")
 	}
 
-	midbluetoothGattServerNotifyCharacteristicChanged3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
+	midGattServerNotifyCharacteristicChanged3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1222,7 +1222,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged")
 	}
 
-	midbluetoothGattServerNotifyCharacteristicChanged4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z[B)I")
+	midGattServerNotifyCharacteristicChanged4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z[B)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1230,7 +1230,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged")
 	}
 
-	midbluetoothGattServerReadPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "readPhy", "(Landroid/bluetooth/BluetoothDevice;)V")
+	midGattServerReadPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "readPhy", "(Landroid/bluetooth/BluetoothDevice;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1238,7 +1238,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.readPhy")
 	}
 
-	midbluetoothGattServerRemoveService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "removeService", "(Landroid/bluetooth/BluetoothGattService;)Z")
+	midGattServerRemoveService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "removeService", "(Landroid/bluetooth/BluetoothGattService;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1246,7 +1246,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.removeService")
 	}
 
-	midbluetoothGattServerSendResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "sendResponse", "(Landroid/bluetooth/BluetoothDevice;III[B)Z")
+	midGattServerSendResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "sendResponse", "(Landroid/bluetooth/BluetoothDevice;III[B)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1254,7 +1254,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattServer.sendResponse")
 	}
 
-	midbluetoothGattServerSetPreferredPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattServer)), "setPreferredPhy", "(Landroid/bluetooth/BluetoothDevice;III)V")
+	midGattServerSetPreferredPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "setPreferredPhy", "(Landroid/bluetooth/BluetoothDevice;III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1266,9 +1266,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothGatt: %w", err)
 	}
-	clsbluetoothGatt = env.NewGlobalRef(&c.Object)
+	clsGatt = env.NewGlobalRef(&c.Object)
 
-	midbluetoothGattAbortReliableWrite0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "abortReliableWrite", "()V")
+	midGattAbortReliableWrite0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "abortReliableWrite", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1276,7 +1276,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.abortReliableWrite")
 	}
 
-	midbluetoothGattAbortReliableWrite1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "abortReliableWrite", "(Landroid/bluetooth/BluetoothDevice;)V")
+	midGattAbortReliableWrite1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "abortReliableWrite", "(Landroid/bluetooth/BluetoothDevice;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1284,7 +1284,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.abortReliableWrite")
 	}
 
-	midbluetoothGattBeginReliableWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "beginReliableWrite", "()Z")
+	midGattBeginReliableWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "beginReliableWrite", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1292,7 +1292,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.beginReliableWrite")
 	}
 
-	midbluetoothGattClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "close", "()V")
+	midGattClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1300,7 +1300,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.close")
 	}
 
-	midbluetoothGattConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "connect", "()Z")
+	midGattConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "connect", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1308,7 +1308,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.connect")
 	}
 
-	midbluetoothGattDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "disconnect", "()V")
+	midGattDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "disconnect", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1316,7 +1316,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.disconnect")
 	}
 
-	midbluetoothGattDiscoverServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "discoverServices", "()Z")
+	midGattDiscoverServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "discoverServices", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1324,7 +1324,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.discoverServices")
 	}
 
-	midbluetoothGattExecuteReliableWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "executeReliableWrite", "()Z")
+	midGattExecuteReliableWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "executeReliableWrite", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1332,7 +1332,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.executeReliableWrite")
 	}
 
-	midbluetoothGattGetConnectedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "getConnectedDevices", "()Ljava/util/List;")
+	midGattGetConnectedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "getConnectedDevices", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1340,7 +1340,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.getConnectedDevices")
 	}
 
-	midbluetoothGattGetConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "getConnectionState", "(Landroid/bluetooth/BluetoothDevice;)I")
+	midGattGetConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "getConnectionState", "(Landroid/bluetooth/BluetoothDevice;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1348,7 +1348,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.getConnectionState")
 	}
 
-	midbluetoothGattGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "getDevice", "()Landroid/bluetooth/BluetoothDevice;")
+	midGattGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "getDevice", "()Landroid/bluetooth/BluetoothDevice;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1356,7 +1356,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.getDevice")
 	}
 
-	midbluetoothGattGetDevicesMatchingConnectionStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "getDevicesMatchingConnectionStates", "([I)Ljava/util/List;")
+	midGattGetDevicesMatchingConnectionStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "getDevicesMatchingConnectionStates", "([I)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1364,7 +1364,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.getDevicesMatchingConnectionStates")
 	}
 
-	midbluetoothGattGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "getService", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattService;")
+	midGattGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "getService", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattService;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1372,7 +1372,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.getService")
 	}
 
-	midbluetoothGattGetServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "getServices", "()Ljava/util/List;")
+	midGattGetServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "getServices", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1380,7 +1380,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.getServices")
 	}
 
-	midbluetoothGattReadCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "readCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
+	midGattReadCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "readCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1388,7 +1388,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.readCharacteristic")
 	}
 
-	midbluetoothGattReadDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "readDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;)Z")
+	midGattReadDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "readDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1396,7 +1396,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.readDescriptor")
 	}
 
-	midbluetoothGattReadPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "readPhy", "()V")
+	midGattReadPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "readPhy", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1404,7 +1404,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.readPhy")
 	}
 
-	midbluetoothGattReadRemoteRssi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "readRemoteRssi", "()Z")
+	midGattReadRemoteRssi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "readRemoteRssi", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1412,7 +1412,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.readRemoteRssi")
 	}
 
-	midbluetoothGattRequestConnectionPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "requestConnectionPriority", "(I)Z")
+	midGattRequestConnectionPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "requestConnectionPriority", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1420,7 +1420,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.requestConnectionPriority")
 	}
 
-	midbluetoothGattRequestMtu, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "requestMtu", "(I)Z")
+	midGattRequestMtu, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "requestMtu", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1428,7 +1428,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.requestMtu")
 	}
 
-	midbluetoothGattSetCharacteristicNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "setCharacteristicNotification", "(Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
+	midGattSetCharacteristicNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "setCharacteristicNotification", "(Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1436,7 +1436,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.setCharacteristicNotification")
 	}
 
-	midbluetoothGattSetPreferredPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "setPreferredPhy", "(III)V")
+	midGattSetPreferredPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "setPreferredPhy", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1444,7 +1444,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.setPreferredPhy")
 	}
 
-	midbluetoothGattWriteCharacteristic1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "writeCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
+	midGattWriteCharacteristic1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "writeCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1452,7 +1452,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.writeCharacteristic")
 	}
 
-	midbluetoothGattWriteCharacteristic3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "writeCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;[BI)I")
+	midGattWriteCharacteristic3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "writeCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;[BI)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1460,7 +1460,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.writeCharacteristic")
 	}
 
-	midbluetoothGattWriteDescriptor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "writeDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;)Z")
+	midGattWriteDescriptor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "writeDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1468,7 +1468,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGatt.writeDescriptor")
 	}
 
-	midbluetoothGattWriteDescriptor2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGatt)), "writeDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;[B)I")
+	midGattWriteDescriptor2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "writeDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;[B)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1480,9 +1480,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothServerSocket: %w", err)
 	}
-	clsbluetoothServerSocket = env.NewGlobalRef(&c.Object)
+	clsServerSocket = env.NewGlobalRef(&c.Object)
 
-	midbluetoothServerSocketAccept0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothServerSocket)), "accept", "()Landroid/bluetooth/BluetoothSocket;")
+	midServerSocketAccept0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "accept", "()Landroid/bluetooth/BluetoothSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1490,7 +1490,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothServerSocket.accept")
 	}
 
-	midbluetoothServerSocketAccept1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothServerSocket)), "accept", "(I)Landroid/bluetooth/BluetoothSocket;")
+	midServerSocketAccept1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "accept", "(I)Landroid/bluetooth/BluetoothSocket;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1498,7 +1498,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothServerSocket.accept")
 	}
 
-	midbluetoothServerSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothServerSocket)), "close", "()V")
+	midServerSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1506,7 +1506,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothServerSocket.close")
 	}
 
-	midbluetoothServerSocketGetPsm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothServerSocket)), "getPsm", "()I")
+	midServerSocketGetPsm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "getPsm", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1514,7 +1514,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothServerSocket.getPsm")
 	}
 
-	midbluetoothServerSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothServerSocket)), "toString", "()Ljava/lang/String;")
+	midServerSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1526,9 +1526,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothGattDescriptor: %w", err)
 	}
-	clsbluetoothGattDescriptor = env.NewGlobalRef(&c.Object)
+	clsGattDescriptor = env.NewGlobalRef(&c.Object)
 
-	midbluetoothGattDescriptorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattDescriptor)), "describeContents", "()I")
+	midGattDescriptorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1536,7 +1536,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattDescriptor.describeContents")
 	}
 
-	midbluetoothGattDescriptorGetCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattDescriptor)), "getCharacteristic", "()Landroid/bluetooth/BluetoothGattCharacteristic;")
+	midGattDescriptorGetCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), "getCharacteristic", "()Landroid/bluetooth/BluetoothGattCharacteristic;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1544,7 +1544,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattDescriptor.getCharacteristic")
 	}
 
-	midbluetoothGattDescriptorGetPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattDescriptor)), "getPermissions", "()I")
+	midGattDescriptorGetPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), "getPermissions", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1552,7 +1552,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattDescriptor.getPermissions")
 	}
 
-	midbluetoothGattDescriptorGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattDescriptor)), "getUuid", "()Ljava/util/UUID;")
+	midGattDescriptorGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), "getUuid", "()Ljava/util/UUID;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1560,7 +1560,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattDescriptor.getUuid")
 	}
 
-	midbluetoothGattDescriptorGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattDescriptor)), "getValue", "()[B")
+	midGattDescriptorGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), "getValue", "()[B")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1568,7 +1568,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattDescriptor.getValue")
 	}
 
-	midbluetoothGattDescriptorSetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattDescriptor)), "setValue", "([B)Z")
+	midGattDescriptorSetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), "setValue", "([B)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1576,7 +1576,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.bluetooth.BluetoothGattDescriptor.setValue")
 	}
 
-	midbluetoothGattDescriptorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattDescriptor)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midGattDescriptorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

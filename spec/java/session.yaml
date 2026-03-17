@@ -2,7 +2,7 @@ package: session
 go_import: github.com/AndroidGoLab/jni/media/session
 classes:
     - java_class: android.media.session.MediaSessionManager
-      go_type: mediaSessionManager
+      go_type: Manager
       obtain: system_service
       service_name: media_session
       close: true

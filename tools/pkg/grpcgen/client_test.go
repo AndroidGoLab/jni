@@ -49,11 +49,11 @@ func TestBuildClientData_Location(t *testing.T) {
 	}
 
 	svc := data.Services[0]
-	if svc.GoType != "locationManager" {
-		t.Errorf("Service GoType = %q, want %q", svc.GoType, "locationManager")
+	if svc.GoType != "Manager" {
+		t.Errorf("Service GoType = %q, want %q", svc.GoType, "Manager")
 	}
-	if svc.ServiceName != "LocationManagerService" {
-		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "LocationManagerService")
+	if svc.ServiceName != "ManagerService" {
+		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "ManagerService")
 	}
 
 	// Check that methods include GetLastKnownLocation and IsProviderEnabled.
@@ -156,7 +156,7 @@ func TestRenderClientToString_Location(t *testing.T) {
 		{"grpc import", `"google.golang.org/grpc"`},
 		{"client struct", "type Client struct"},
 		{"new client func", "func NewClient(cc grpc.ClientConnInterface)"},
-		{"new service client", "pb.NewLocationManagerServiceClient(cc)"},
+		{"new service client", "pb.NewManagerServiceClient(cc)"},
 		{"get location method", "func (c *Client) GetLastKnownLocation"},
 		{"is provider enabled", "func (c *Client) IsProviderEnabled"},
 		{"request builder", "&pb.GetLastKnownLocationRequest{"},

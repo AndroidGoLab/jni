@@ -2,11 +2,15 @@ package: vibrator
 go_import: github.com/AndroidGoLab/jni/os/vibrator
 classes:
     - java_class: android.os.Vibrator
-      go_type: vibrator
+      go_type: Vibrator
       obtain: system_service
       service_name: vibrator
       close: true
       methods:
+        - java_method: hasVibrator
+          go_name: HasVibrator
+          returns: boolean
+          error: true
         - java_method: areEffectsSupported
           go_name: AreEffectsSupported
           params:

@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// scanResult wraps android.net.wifi.ScanResult.
-type scanResult struct {
+// ScanResult wraps android.net.wifi.ScanResult.
+type ScanResult struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.net.wifi.ScanResult.describeContents.
-func (m *scanResult) DescribeContents() (int32, error) {
+func (m *ScanResult) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *scanResult) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultDescribeContents == nil {
+		if midScanResultDescribeContents == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultDescribeContents,
+			midScanResultDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *scanResult) DescribeContents() (int32, error) {
 }
 
 // GetAffiliatedMloLinks calls android.net.wifi.ScanResult.getAffiliatedMloLinks.
-func (m *scanResult) GetAffiliatedMloLinks() (*jni.Object, error) {
+func (m *ScanResult) GetAffiliatedMloLinks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *scanResult) GetAffiliatedMloLinks() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetAffiliatedMloLinks == nil {
+		if midScanResultGetAffiliatedMloLinks == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.getAffiliatedMloLinks is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midscanResultGetAffiliatedMloLinks,
+			midScanResultGetAffiliatedMloLinks,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *scanResult) GetAffiliatedMloLinks() (*jni.Object, error) {
 }
 
 // GetApMldMacAddress calls android.net.wifi.ScanResult.getApMldMacAddress.
-func (m *scanResult) GetApMldMacAddress() (*jni.Object, error) {
+func (m *ScanResult) GetApMldMacAddress() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *scanResult) GetApMldMacAddress() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetApMldMacAddress == nil {
+		if midScanResultGetApMldMacAddress == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.getApMldMacAddress is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midscanResultGetApMldMacAddress,
+			midScanResultGetApMldMacAddress,
 		)
 		if callErr != nil {
 			return callErr
@@ -99,7 +99,7 @@ func (m *scanResult) GetApMldMacAddress() (*jni.Object, error) {
 }
 
 // GetApMloLinkId calls android.net.wifi.ScanResult.getApMloLinkId.
-func (m *scanResult) GetApMloLinkId() (int32, error) {
+func (m *ScanResult) GetApMloLinkId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -107,13 +107,13 @@ func (m *scanResult) GetApMloLinkId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetApMloLinkId == nil {
+		if midScanResultGetApMloLinkId == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.getApMloLinkId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetApMloLinkId,
+			midScanResultGetApMloLinkId,
 		)
 		if callErr != nil {
 			return callErr
@@ -124,7 +124,7 @@ func (m *scanResult) GetApMloLinkId() (int32, error) {
 }
 
 // GetInformationElements calls android.net.wifi.ScanResult.getInformationElements.
-func (m *scanResult) GetInformationElements() (*jni.Object, error) {
+func (m *ScanResult) GetInformationElements() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -132,13 +132,13 @@ func (m *scanResult) GetInformationElements() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetInformationElements == nil {
+		if midScanResultGetInformationElements == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.getInformationElements is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midscanResultGetInformationElements,
+			midScanResultGetInformationElements,
 		)
 		if callErr != nil {
 			return callErr
@@ -149,7 +149,7 @@ func (m *scanResult) GetInformationElements() (*jni.Object, error) {
 }
 
 // GetSecurityTypes calls android.net.wifi.ScanResult.getSecurityTypes.
-func (m *scanResult) GetSecurityTypes() (*jni.Object, error) {
+func (m *ScanResult) GetSecurityTypes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -157,13 +157,13 @@ func (m *scanResult) GetSecurityTypes() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetSecurityTypes == nil {
+		if midScanResultGetSecurityTypes == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.getSecurityTypes is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midscanResultGetSecurityTypes,
+			midScanResultGetSecurityTypes,
 		)
 		if callErr != nil {
 			return callErr
@@ -174,7 +174,7 @@ func (m *scanResult) GetSecurityTypes() (*jni.Object, error) {
 }
 
 // GetWifiSsid calls android.net.wifi.ScanResult.getWifiSsid.
-func (m *scanResult) GetWifiSsid() (*jni.Object, error) {
+func (m *ScanResult) GetWifiSsid() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -182,13 +182,13 @@ func (m *scanResult) GetWifiSsid() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetWifiSsid == nil {
+		if midScanResultGetWifiSsid == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.getWifiSsid is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midscanResultGetWifiSsid,
+			midScanResultGetWifiSsid,
 		)
 		if callErr != nil {
 			return callErr
@@ -199,7 +199,7 @@ func (m *scanResult) GetWifiSsid() (*jni.Object, error) {
 }
 
 // GetWifiStandard calls android.net.wifi.ScanResult.getWifiStandard.
-func (m *scanResult) GetWifiStandard() (int32, error) {
+func (m *ScanResult) GetWifiStandard() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -207,13 +207,13 @@ func (m *scanResult) GetWifiStandard() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetWifiStandard == nil {
+		if midScanResultGetWifiStandard == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.getWifiStandard is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetWifiStandard,
+			midScanResultGetWifiStandard,
 		)
 		if callErr != nil {
 			return callErr
@@ -224,7 +224,7 @@ func (m *scanResult) GetWifiStandard() (int32, error) {
 }
 
 // Is80211azNtbResponder calls android.net.wifi.ScanResult.is80211azNtbResponder.
-func (m *scanResult) Is80211azNtbResponder() (bool, error) {
+func (m *ScanResult) Is80211azNtbResponder() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -232,13 +232,13 @@ func (m *scanResult) Is80211azNtbResponder() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIs80211azNtbResponder == nil {
+		if midScanResultIs80211azNtbResponder == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.is80211azNtbResponder is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIs80211azNtbResponder,
+			midScanResultIs80211azNtbResponder,
 		)
 		if callErr != nil {
 			return callErr
@@ -250,7 +250,7 @@ func (m *scanResult) Is80211azNtbResponder() (bool, error) {
 }
 
 // Is80211mcResponder calls android.net.wifi.ScanResult.is80211mcResponder.
-func (m *scanResult) Is80211mcResponder() (bool, error) {
+func (m *ScanResult) Is80211mcResponder() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -258,13 +258,13 @@ func (m *scanResult) Is80211mcResponder() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIs80211mcResponder == nil {
+		if midScanResultIs80211mcResponder == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.is80211mcResponder is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIs80211mcResponder,
+			midScanResultIs80211mcResponder,
 		)
 		if callErr != nil {
 			return callErr
@@ -276,7 +276,7 @@ func (m *scanResult) Is80211mcResponder() (bool, error) {
 }
 
 // IsPasspointNetwork calls android.net.wifi.ScanResult.isPasspointNetwork.
-func (m *scanResult) IsPasspointNetwork() (bool, error) {
+func (m *ScanResult) IsPasspointNetwork() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -284,13 +284,13 @@ func (m *scanResult) IsPasspointNetwork() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIsPasspointNetwork == nil {
+		if midScanResultIsPasspointNetwork == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isPasspointNetwork is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIsPasspointNetwork,
+			midScanResultIsPasspointNetwork,
 		)
 		if callErr != nil {
 			return callErr
@@ -302,7 +302,7 @@ func (m *scanResult) IsPasspointNetwork() (bool, error) {
 }
 
 // IsRangingFrameProtectionRequired calls android.net.wifi.ScanResult.isRangingFrameProtectionRequired.
-func (m *scanResult) IsRangingFrameProtectionRequired() (bool, error) {
+func (m *ScanResult) IsRangingFrameProtectionRequired() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -310,13 +310,13 @@ func (m *scanResult) IsRangingFrameProtectionRequired() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIsRangingFrameProtectionRequired == nil {
+		if midScanResultIsRangingFrameProtectionRequired == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isRangingFrameProtectionRequired is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIsRangingFrameProtectionRequired,
+			midScanResultIsRangingFrameProtectionRequired,
 		)
 		if callErr != nil {
 			return callErr
@@ -328,7 +328,7 @@ func (m *scanResult) IsRangingFrameProtectionRequired() (bool, error) {
 }
 
 // IsSecureHeLtfSupported calls android.net.wifi.ScanResult.isSecureHeLtfSupported.
-func (m *scanResult) IsSecureHeLtfSupported() (bool, error) {
+func (m *ScanResult) IsSecureHeLtfSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -336,13 +336,13 @@ func (m *scanResult) IsSecureHeLtfSupported() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIsSecureHeLtfSupported == nil {
+		if midScanResultIsSecureHeLtfSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isSecureHeLtfSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIsSecureHeLtfSupported,
+			midScanResultIsSecureHeLtfSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -354,7 +354,7 @@ func (m *scanResult) IsSecureHeLtfSupported() (bool, error) {
 }
 
 // IsTwtResponder calls android.net.wifi.ScanResult.isTwtResponder.
-func (m *scanResult) IsTwtResponder() (bool, error) {
+func (m *ScanResult) IsTwtResponder() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -362,13 +362,13 @@ func (m *scanResult) IsTwtResponder() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIsTwtResponder == nil {
+		if midScanResultIsTwtResponder == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isTwtResponder is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIsTwtResponder,
+			midScanResultIsTwtResponder,
 		)
 		if callErr != nil {
 			return callErr
@@ -380,7 +380,7 @@ func (m *scanResult) IsTwtResponder() (bool, error) {
 }
 
 // ToString calls android.net.wifi.ScanResult.toString.
-func (m *scanResult) ToString() (string, error) {
+func (m *ScanResult) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -388,13 +388,13 @@ func (m *scanResult) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultToString == nil {
+		if midScanResultToString == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midscanResultToString,
+			midScanResultToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -406,7 +406,7 @@ func (m *scanResult) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.net.wifi.ScanResult.writeToParcel.
-func (m *scanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *ScanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -414,14 +414,14 @@ func (m *scanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midscanResultWriteToParcel == nil {
+		if midScanResultWriteToParcel == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midscanResultWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midScanResultWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -429,7 +429,7 @@ func (m *scanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 }
 
 // ConvertChannelToFrequencyMhzIfSupported calls android.net.wifi.ScanResult.convertChannelToFrequencyMhzIfSupported.
-func (m *scanResult) ConvertChannelToFrequencyMhzIfSupported(arg0 int32, arg1 int32) (int32, error) {
+func (m *ScanResult) ConvertChannelToFrequencyMhzIfSupported(arg0 int32, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -437,14 +437,14 @@ func (m *scanResult) ConvertChannelToFrequencyMhzIfSupported(arg0 int32, arg1 in
 			callErr = err
 			return err
 		}
-		if midscanResultConvertChannelToFrequencyMhzIfSupported == nil {
+		if midScanResultConvertChannelToFrequencyMhzIfSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.convertChannelToFrequencyMhzIfSupported is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticIntMethod(
-			(*jni.Class)(unsafe.Pointer(clsscanResult)),
-			midscanResultConvertChannelToFrequencyMhzIfSupported, jni.IntValue(arg0), jni.IntValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsScanResult)),
+			midScanResultConvertChannelToFrequencyMhzIfSupported, jni.IntValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -455,7 +455,7 @@ func (m *scanResult) ConvertChannelToFrequencyMhzIfSupported(arg0 int32, arg1 in
 }
 
 // ConvertFrequencyMhzToChannelIfSupported calls android.net.wifi.ScanResult.convertFrequencyMhzToChannelIfSupported.
-func (m *scanResult) ConvertFrequencyMhzToChannelIfSupported(arg0 int32) (int32, error) {
+func (m *ScanResult) ConvertFrequencyMhzToChannelIfSupported(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -463,14 +463,14 @@ func (m *scanResult) ConvertFrequencyMhzToChannelIfSupported(arg0 int32) (int32,
 			callErr = err
 			return err
 		}
-		if midscanResultConvertFrequencyMhzToChannelIfSupported == nil {
+		if midScanResultConvertFrequencyMhzToChannelIfSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.convertFrequencyMhzToChannelIfSupported is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticIntMethod(
-			(*jni.Class)(unsafe.Pointer(clsscanResult)),
-			midscanResultConvertFrequencyMhzToChannelIfSupported, jni.IntValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsScanResult)),
+			midScanResultConvertFrequencyMhzToChannelIfSupported, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

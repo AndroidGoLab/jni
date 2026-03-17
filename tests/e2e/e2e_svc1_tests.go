@@ -51,9 +51,9 @@ func testWifiWrapper(vm *jni.VM) error {
 	}
 	defer mgr.Close()
 
-	_, err = mgr.IsEnabled()
+	_, err = mgr.IsWifiEnabled()
 	if err != nil {
-		return fmt.Errorf("isEnabled: %w", err)
+		return fmt.Errorf("isWifiEnabled: %w", err)
 	}
 	return nil
 }

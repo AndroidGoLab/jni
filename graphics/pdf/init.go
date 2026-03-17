@@ -20,130 +20,130 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsbitmap                       *jni.GlobalRef
-	midbitmapAsShared               jni.MethodID
-	midbitmapCompress               jni.MethodID
-	midbitmapCopy                   jni.MethodID
-	midbitmapCopyPixelsFromBuffer   jni.MethodID
-	midbitmapCopyPixelsToBuffer     jni.MethodID
-	midbitmapDescribeContents       jni.MethodID
-	midbitmapEraseColor1            jni.MethodID
-	midbitmapEraseColor1_1          jni.MethodID
-	midbitmapExtractAlpha0          jni.MethodID
-	midbitmapExtractAlpha2_1        jni.MethodID
-	midbitmapGetAllocationByteCount jni.MethodID
-	midbitmapGetByteCount           jni.MethodID
-	midbitmapGetColor               jni.MethodID
-	midbitmapGetColorSpace          jni.MethodID
-	midbitmapGetConfig              jni.MethodID
-	midbitmapGetDensity             jni.MethodID
-	midbitmapGetGainmap             jni.MethodID
-	midbitmapGetGenerationId        jni.MethodID
-	midbitmapGetHardwareBuffer      jni.MethodID
-	midbitmapGetHeight              jni.MethodID
-	midbitmapGetNinePatchChunk      jni.MethodID
-	midbitmapGetPixel               jni.MethodID
-	midbitmapGetPixels              jni.MethodID
-	midbitmapGetRowBytes            jni.MethodID
-	midbitmapGetScaledHeight1       jni.MethodID
-	midbitmapGetScaledHeight1_1     jni.MethodID
-	midbitmapGetScaledHeight1_2     jni.MethodID
-	midbitmapGetScaledWidth1        jni.MethodID
-	midbitmapGetScaledWidth1_1      jni.MethodID
-	midbitmapGetScaledWidth1_2      jni.MethodID
-	midbitmapGetWidth               jni.MethodID
-	midbitmapHasAlpha               jni.MethodID
-	midbitmapHasGainmap             jni.MethodID
-	midbitmapHasMipMap              jni.MethodID
-	midbitmapIsMutable              jni.MethodID
-	midbitmapIsPremultiplied        jni.MethodID
-	midbitmapIsRecycled             jni.MethodID
-	midbitmapPrepareToDraw          jni.MethodID
-	midbitmapReconfigure            jni.MethodID
-	midbitmapRecycle                jni.MethodID
-	midbitmapSameAs                 jni.MethodID
-	midbitmapSetColorSpace          jni.MethodID
-	midbitmapSetConfig              jni.MethodID
-	midbitmapSetDensity             jni.MethodID
-	midbitmapSetGainmap             jni.MethodID
-	midbitmapSetHasAlpha            jni.MethodID
-	midbitmapSetHasMipMap           jni.MethodID
-	midbitmapSetHeight              jni.MethodID
-	midbitmapSetPixel               jni.MethodID
-	midbitmapSetPixels              jni.MethodID
-	midbitmapSetPremultiplied       jni.MethodID
-	midbitmapSetWidth               jni.MethodID
-	midbitmapWriteToParcel          jni.MethodID
-	midbitmapCreateBitmap1          jni.MethodID
-	midbitmapCreateBitmap5_1        jni.MethodID
-	midbitmapCreateBitmap7_2        jni.MethodID
-	midbitmapCreateBitmap1_3        jni.MethodID
-	midbitmapCreateBitmap4_4        jni.MethodID
-	midbitmapCreateBitmap4_5        jni.MethodID
-	midbitmapCreateBitmap5_6        jni.MethodID
-	midbitmapCreateBitmap6_7        jni.MethodID
-	midbitmapCreateBitmap5_8        jni.MethodID
-	midbitmapCreateBitmap7_9        jni.MethodID
-	midbitmapCreateBitmap3_10       jni.MethodID
-	midbitmapCreateBitmap4_11       jni.MethodID
-	midbitmapCreateBitmap5_12       jni.MethodID
-	midbitmapCreateBitmap4_13       jni.MethodID
-	midbitmapCreateBitmap6_14       jni.MethodID
-	midbitmapCreateScaledBitmap     jni.MethodID
-	midbitmapWrapHardwareBuffer     jni.MethodID
+	clsBitmap                       *jni.GlobalRef
+	midBitmapAsShared               jni.MethodID
+	midBitmapCompress               jni.MethodID
+	midBitmapCopy                   jni.MethodID
+	midBitmapCopyPixelsFromBuffer   jni.MethodID
+	midBitmapCopyPixelsToBuffer     jni.MethodID
+	midBitmapDescribeContents       jni.MethodID
+	midBitmapEraseColor1            jni.MethodID
+	midBitmapEraseColor1_1          jni.MethodID
+	midBitmapExtractAlpha0          jni.MethodID
+	midBitmapExtractAlpha2_1        jni.MethodID
+	midBitmapGetAllocationByteCount jni.MethodID
+	midBitmapGetByteCount           jni.MethodID
+	midBitmapGetColor               jni.MethodID
+	midBitmapGetColorSpace          jni.MethodID
+	midBitmapGetConfig              jni.MethodID
+	midBitmapGetDensity             jni.MethodID
+	midBitmapGetGainmap             jni.MethodID
+	midBitmapGetGenerationId        jni.MethodID
+	midBitmapGetHardwareBuffer      jni.MethodID
+	midBitmapGetHeight              jni.MethodID
+	midBitmapGetNinePatchChunk      jni.MethodID
+	midBitmapGetPixel               jni.MethodID
+	midBitmapGetPixels              jni.MethodID
+	midBitmapGetRowBytes            jni.MethodID
+	midBitmapGetScaledHeight1       jni.MethodID
+	midBitmapGetScaledHeight1_1     jni.MethodID
+	midBitmapGetScaledHeight1_2     jni.MethodID
+	midBitmapGetScaledWidth1        jni.MethodID
+	midBitmapGetScaledWidth1_1      jni.MethodID
+	midBitmapGetScaledWidth1_2      jni.MethodID
+	midBitmapGetWidth               jni.MethodID
+	midBitmapHasAlpha               jni.MethodID
+	midBitmapHasGainmap             jni.MethodID
+	midBitmapHasMipMap              jni.MethodID
+	midBitmapIsMutable              jni.MethodID
+	midBitmapIsPremultiplied        jni.MethodID
+	midBitmapIsRecycled             jni.MethodID
+	midBitmapPrepareToDraw          jni.MethodID
+	midBitmapReconfigure            jni.MethodID
+	midBitmapRecycle                jni.MethodID
+	midBitmapSameAs                 jni.MethodID
+	midBitmapSetColorSpace          jni.MethodID
+	midBitmapSetConfig              jni.MethodID
+	midBitmapSetDensity             jni.MethodID
+	midBitmapSetGainmap             jni.MethodID
+	midBitmapSetHasAlpha            jni.MethodID
+	midBitmapSetHasMipMap           jni.MethodID
+	midBitmapSetHeight              jni.MethodID
+	midBitmapSetPixel               jni.MethodID
+	midBitmapSetPixels              jni.MethodID
+	midBitmapSetPremultiplied       jni.MethodID
+	midBitmapSetWidth               jni.MethodID
+	midBitmapWriteToParcel          jni.MethodID
+	midBitmapCreateBitmap1          jni.MethodID
+	midBitmapCreateBitmap5_1        jni.MethodID
+	midBitmapCreateBitmap7_2        jni.MethodID
+	midBitmapCreateBitmap1_3        jni.MethodID
+	midBitmapCreateBitmap4_4        jni.MethodID
+	midBitmapCreateBitmap4_5        jni.MethodID
+	midBitmapCreateBitmap5_6        jni.MethodID
+	midBitmapCreateBitmap6_7        jni.MethodID
+	midBitmapCreateBitmap5_8        jni.MethodID
+	midBitmapCreateBitmap7_9        jni.MethodID
+	midBitmapCreateBitmap3_10       jni.MethodID
+	midBitmapCreateBitmap4_11       jni.MethodID
+	midBitmapCreateBitmap5_12       jni.MethodID
+	midBitmapCreateBitmap4_13       jni.MethodID
+	midBitmapCreateBitmap6_14       jni.MethodID
+	midBitmapCreateScaledBitmap     jni.MethodID
+	midBitmapWrapHardwareBuffer     jni.MethodID
 
-	clspdfRenderer                             *jni.GlobalRef
-	midpdfRendererClose                        jni.MethodID
-	midpdfRendererGetDocumentLinearizationType jni.MethodID
-	midpdfRendererGetPageCount                 jni.MethodID
-	midpdfRendererGetPdfFormType               jni.MethodID
-	midpdfRendererOpenPage                     jni.MethodID
-	midpdfRendererShouldScaleForPrinting       jni.MethodID
-	midpdfRendererWrite                        jni.MethodID
+	clsRenderer                             *jni.GlobalRef
+	midRendererClose                        jni.MethodID
+	midRendererGetDocumentLinearizationType jni.MethodID
+	midRendererGetPageCount                 jni.MethodID
+	midRendererGetPdfFormType               jni.MethodID
+	midRendererOpenPage                     jni.MethodID
+	midRendererShouldScaleForPrinting       jni.MethodID
+	midRendererWrite                        jni.MethodID
 
-	clspdfRendererPage                            *jni.GlobalRef
-	midpdfRendererPageApplyEdit                   jni.MethodID
-	midpdfRendererPageClose                       jni.MethodID
-	midpdfRendererPageGetFormWidgetInfoAtIndex    jni.MethodID
-	midpdfRendererPageGetFormWidgetInfoAtPosition jni.MethodID
-	midpdfRendererPageGetFormWidgetInfos0         jni.MethodID
-	midpdfRendererPageGetFormWidgetInfos1_1       jni.MethodID
-	midpdfRendererPageGetGotoLinks                jni.MethodID
-	midpdfRendererPageGetHeight                   jni.MethodID
-	midpdfRendererPageGetImageContents            jni.MethodID
-	midpdfRendererPageGetIndex                    jni.MethodID
-	midpdfRendererPageGetLinkContents             jni.MethodID
-	midpdfRendererPageGetTextContents             jni.MethodID
-	midpdfRendererPageGetWidth                    jni.MethodID
-	midpdfRendererPageRender4                     jni.MethodID
-	midpdfRendererPageRender4_1                   jni.MethodID
-	midpdfRendererPageSearchText                  jni.MethodID
-	midpdfRendererPageSelectContent               jni.MethodID
+	clsRendererPage                            *jni.GlobalRef
+	midRendererPageApplyEdit                   jni.MethodID
+	midRendererPageClose                       jni.MethodID
+	midRendererPageGetFormWidgetInfoAtIndex    jni.MethodID
+	midRendererPageGetFormWidgetInfoAtPosition jni.MethodID
+	midRendererPageGetFormWidgetInfos0         jni.MethodID
+	midRendererPageGetFormWidgetInfos1_1       jni.MethodID
+	midRendererPageGetGotoLinks                jni.MethodID
+	midRendererPageGetHeight                   jni.MethodID
+	midRendererPageGetImageContents            jni.MethodID
+	midRendererPageGetIndex                    jni.MethodID
+	midRendererPageGetLinkContents             jni.MethodID
+	midRendererPageGetTextContents             jni.MethodID
+	midRendererPageGetWidth                    jni.MethodID
+	midRendererPageRender4                     jni.MethodID
+	midRendererPageRender4_1                   jni.MethodID
+	midRendererPageSearchText                  jni.MethodID
+	midRendererPageSelectContent               jni.MethodID
 
-	clsparcelFileDescriptor                         *jni.GlobalRef
-	midparcelFileDescriptorCanDetectErrors          jni.MethodID
-	midparcelFileDescriptorCheckError               jni.MethodID
-	midparcelFileDescriptorClose                    jni.MethodID
-	midparcelFileDescriptorCloseWithError           jni.MethodID
-	midparcelFileDescriptorDescribeContents         jni.MethodID
-	midparcelFileDescriptorDetachFd                 jni.MethodID
-	midparcelFileDescriptorDup0                     jni.MethodID
-	midparcelFileDescriptorGetFd                    jni.MethodID
-	midparcelFileDescriptorGetFileDescriptor        jni.MethodID
-	midparcelFileDescriptorGetStatSize              jni.MethodID
-	midparcelFileDescriptorToString                 jni.MethodID
-	midparcelFileDescriptorWriteToParcel            jni.MethodID
-	midparcelFileDescriptorAdoptFd                  jni.MethodID
-	midparcelFileDescriptorCreatePipe               jni.MethodID
-	midparcelFileDescriptorCreateReliablePipe       jni.MethodID
-	midparcelFileDescriptorCreateReliableSocketPair jni.MethodID
-	midparcelFileDescriptorCreateSocketPair         jni.MethodID
-	midparcelFileDescriptorDup1_1                   jni.MethodID
-	midparcelFileDescriptorFromDatagramSocket       jni.MethodID
-	midparcelFileDescriptorFromFd                   jni.MethodID
-	midparcelFileDescriptorFromSocket               jni.MethodID
-	midparcelFileDescriptorOpen                     jni.MethodID
-	midparcelFileDescriptorParseMode                jni.MethodID
+	clsParcelFileDescriptor                         *jni.GlobalRef
+	midParcelFileDescriptorCanDetectErrors          jni.MethodID
+	midParcelFileDescriptorCheckError               jni.MethodID
+	midParcelFileDescriptorClose                    jni.MethodID
+	midParcelFileDescriptorCloseWithError           jni.MethodID
+	midParcelFileDescriptorDescribeContents         jni.MethodID
+	midParcelFileDescriptorDetachFd                 jni.MethodID
+	midParcelFileDescriptorDup0                     jni.MethodID
+	midParcelFileDescriptorGetFd                    jni.MethodID
+	midParcelFileDescriptorGetFileDescriptor        jni.MethodID
+	midParcelFileDescriptorGetStatSize              jni.MethodID
+	midParcelFileDescriptorToString                 jni.MethodID
+	midParcelFileDescriptorWriteToParcel            jni.MethodID
+	midParcelFileDescriptorAdoptFd                  jni.MethodID
+	midParcelFileDescriptorCreatePipe               jni.MethodID
+	midParcelFileDescriptorCreateReliablePipe       jni.MethodID
+	midParcelFileDescriptorCreateReliableSocketPair jni.MethodID
+	midParcelFileDescriptorCreateSocketPair         jni.MethodID
+	midParcelFileDescriptorDup1_1                   jni.MethodID
+	midParcelFileDescriptorFromDatagramSocket       jni.MethodID
+	midParcelFileDescriptorFromFd                   jni.MethodID
+	midParcelFileDescriptorFromSocket               jni.MethodID
+	midParcelFileDescriptorOpen                     jni.MethodID
+	midParcelFileDescriptorParseMode                jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -174,9 +174,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.graphics.Bitmap: %w", err)
 	}
-	clsbitmap = env.NewGlobalRef(&c.Object)
+	clsBitmap = env.NewGlobalRef(&c.Object)
 
-	midbitmapAsShared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "asShared", "()Landroid/graphics/Bitmap;")
+	midBitmapAsShared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "asShared", "()Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -184,7 +184,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.asShared")
 	}
 
-	midbitmapCompress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "compress", "(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z")
+	midBitmapCompress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "compress", "(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -192,7 +192,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.compress")
 	}
 
-	midbitmapCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copy", "(Landroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	midBitmapCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "copy", "(Landroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -200,7 +200,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.copy")
 	}
 
-	midbitmapCopyPixelsFromBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsFromBuffer", "(Ljava/nio/Buffer;)V")
+	midBitmapCopyPixelsFromBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "copyPixelsFromBuffer", "(Ljava/nio/Buffer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -208,7 +208,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.copyPixelsFromBuffer")
 	}
 
-	midbitmapCopyPixelsToBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsToBuffer", "(Ljava/nio/Buffer;)V")
+	midBitmapCopyPixelsToBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "copyPixelsToBuffer", "(Ljava/nio/Buffer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -216,7 +216,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.copyPixelsToBuffer")
 	}
 
-	midbitmapDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "describeContents", "()I")
+	midBitmapDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -224,7 +224,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.describeContents")
 	}
 
-	midbitmapEraseColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(I)V")
+	midBitmapEraseColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "eraseColor", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -232,7 +232,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.eraseColor")
 	}
 
-	midbitmapEraseColor1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(J)V")
+	midBitmapEraseColor1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "eraseColor", "(J)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -240,7 +240,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.eraseColor")
 	}
 
-	midbitmapExtractAlpha0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "()Landroid/graphics/Bitmap;")
+	midBitmapExtractAlpha0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "extractAlpha", "()Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -248,7 +248,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.extractAlpha")
 	}
 
-	midbitmapExtractAlpha2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "(Landroid/graphics/Paint;[I)Landroid/graphics/Bitmap;")
+	midBitmapExtractAlpha2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "extractAlpha", "(Landroid/graphics/Paint;[I)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -256,7 +256,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.extractAlpha")
 	}
 
-	midbitmapGetAllocationByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getAllocationByteCount", "()I")
+	midBitmapGetAllocationByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getAllocationByteCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -264,7 +264,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getAllocationByteCount")
 	}
 
-	midbitmapGetByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getByteCount", "()I")
+	midBitmapGetByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getByteCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -272,7 +272,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getByteCount")
 	}
 
-	midbitmapGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColor", "(II)Landroid/graphics/Color;")
+	midBitmapGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getColor", "(II)Landroid/graphics/Color;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -280,7 +280,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getColor")
 	}
 
-	midbitmapGetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColorSpace", "()Landroid/graphics/ColorSpace;")
+	midBitmapGetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getColorSpace", "()Landroid/graphics/ColorSpace;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -288,7 +288,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getColorSpace")
 	}
 
-	midbitmapGetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getConfig", "()Landroid/graphics/Bitmap$Config;")
+	midBitmapGetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getConfig", "()Landroid/graphics/Bitmap$Config;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -296,7 +296,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getConfig")
 	}
 
-	midbitmapGetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getDensity", "()I")
+	midBitmapGetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getDensity", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -304,7 +304,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getDensity")
 	}
 
-	midbitmapGetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGainmap", "()Landroid/graphics/Gainmap;")
+	midBitmapGetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getGainmap", "()Landroid/graphics/Gainmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -312,7 +312,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getGainmap")
 	}
 
-	midbitmapGetGenerationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGenerationId", "()I")
+	midBitmapGetGenerationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getGenerationId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -320,7 +320,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getGenerationId")
 	}
 
-	midbitmapGetHardwareBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHardwareBuffer", "()Landroid/hardware/HardwareBuffer;")
+	midBitmapGetHardwareBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getHardwareBuffer", "()Landroid/hardware/HardwareBuffer;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -328,7 +328,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getHardwareBuffer")
 	}
 
-	midbitmapGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHeight", "()I")
+	midBitmapGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getHeight", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -336,7 +336,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getHeight")
 	}
 
-	midbitmapGetNinePatchChunk, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getNinePatchChunk", "()[B")
+	midBitmapGetNinePatchChunk, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getNinePatchChunk", "()[B")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -344,7 +344,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getNinePatchChunk")
 	}
 
-	midbitmapGetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixel", "(II)I")
+	midBitmapGetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getPixel", "(II)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -352,7 +352,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getPixel")
 	}
 
-	midbitmapGetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixels", "([IIIIIII)V")
+	midBitmapGetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getPixels", "([IIIIIII)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -360,7 +360,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getPixels")
 	}
 
-	midbitmapGetRowBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getRowBytes", "()I")
+	midBitmapGetRowBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getRowBytes", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -368,7 +368,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getRowBytes")
 	}
 
-	midbitmapGetScaledHeight1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/graphics/Canvas;)I")
+	midBitmapGetScaledHeight1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getScaledHeight", "(Landroid/graphics/Canvas;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -376,7 +376,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
 	}
 
-	midbitmapGetScaledHeight1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/util/DisplayMetrics;)I")
+	midBitmapGetScaledHeight1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getScaledHeight", "(Landroid/util/DisplayMetrics;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -384,7 +384,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
 	}
 
-	midbitmapGetScaledHeight1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(I)I")
+	midBitmapGetScaledHeight1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getScaledHeight", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -392,7 +392,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledHeight")
 	}
 
-	midbitmapGetScaledWidth1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/graphics/Canvas;)I")
+	midBitmapGetScaledWidth1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getScaledWidth", "(Landroid/graphics/Canvas;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -400,7 +400,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
 	}
 
-	midbitmapGetScaledWidth1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/util/DisplayMetrics;)I")
+	midBitmapGetScaledWidth1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getScaledWidth", "(Landroid/util/DisplayMetrics;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -408,7 +408,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
 	}
 
-	midbitmapGetScaledWidth1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(I)I")
+	midBitmapGetScaledWidth1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getScaledWidth", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -416,7 +416,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getScaledWidth")
 	}
 
-	midbitmapGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getWidth", "()I")
+	midBitmapGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "getWidth", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -424,7 +424,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.getWidth")
 	}
 
-	midbitmapHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasAlpha", "()Z")
+	midBitmapHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "hasAlpha", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -432,7 +432,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasAlpha")
 	}
 
-	midbitmapHasGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasGainmap", "()Z")
+	midBitmapHasGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "hasGainmap", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -440,7 +440,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasGainmap")
 	}
 
-	midbitmapHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasMipMap", "()Z")
+	midBitmapHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "hasMipMap", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -448,7 +448,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.hasMipMap")
 	}
 
-	midbitmapIsMutable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isMutable", "()Z")
+	midBitmapIsMutable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "isMutable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -456,7 +456,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.isMutable")
 	}
 
-	midbitmapIsPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isPremultiplied", "()Z")
+	midBitmapIsPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "isPremultiplied", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -464,7 +464,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.isPremultiplied")
 	}
 
-	midbitmapIsRecycled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isRecycled", "()Z")
+	midBitmapIsRecycled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "isRecycled", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -472,7 +472,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.isRecycled")
 	}
 
-	midbitmapPrepareToDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "prepareToDraw", "()V")
+	midBitmapPrepareToDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "prepareToDraw", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -480,7 +480,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.prepareToDraw")
 	}
 
-	midbitmapReconfigure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "reconfigure", "(IILandroid/graphics/Bitmap$Config;)V")
+	midBitmapReconfigure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "reconfigure", "(IILandroid/graphics/Bitmap$Config;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -488,7 +488,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.reconfigure")
 	}
 
-	midbitmapRecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "recycle", "()V")
+	midBitmapRecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "recycle", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -496,7 +496,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.recycle")
 	}
 
-	midbitmapSameAs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "sameAs", "(Landroid/graphics/Bitmap;)Z")
+	midBitmapSameAs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "sameAs", "(Landroid/graphics/Bitmap;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -504,7 +504,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.sameAs")
 	}
 
-	midbitmapSetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setColorSpace", "(Landroid/graphics/ColorSpace;)V")
+	midBitmapSetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setColorSpace", "(Landroid/graphics/ColorSpace;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -512,7 +512,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setColorSpace")
 	}
 
-	midbitmapSetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setConfig", "(Landroid/graphics/Bitmap$Config;)V")
+	midBitmapSetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setConfig", "(Landroid/graphics/Bitmap$Config;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -520,7 +520,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setConfig")
 	}
 
-	midbitmapSetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setDensity", "(I)V")
+	midBitmapSetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setDensity", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -528,7 +528,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setDensity")
 	}
 
-	midbitmapSetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setGainmap", "(Landroid/graphics/Gainmap;)V")
+	midBitmapSetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setGainmap", "(Landroid/graphics/Gainmap;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -536,7 +536,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setGainmap")
 	}
 
-	midbitmapSetHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasAlpha", "(Z)V")
+	midBitmapSetHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setHasAlpha", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -544,7 +544,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHasAlpha")
 	}
 
-	midbitmapSetHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasMipMap", "(Z)V")
+	midBitmapSetHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setHasMipMap", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -552,7 +552,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHasMipMap")
 	}
 
-	midbitmapSetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHeight", "(I)V")
+	midBitmapSetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setHeight", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -560,7 +560,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setHeight")
 	}
 
-	midbitmapSetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixel", "(III)V")
+	midBitmapSetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setPixel", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -568,7 +568,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPixel")
 	}
 
-	midbitmapSetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixels", "([IIIIIII)V")
+	midBitmapSetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setPixels", "([IIIIIII)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -576,7 +576,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPixels")
 	}
 
-	midbitmapSetPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPremultiplied", "(Z)V")
+	midBitmapSetPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setPremultiplied", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -584,7 +584,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setPremultiplied")
 	}
 
-	midbitmapSetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setWidth", "(I)V")
+	midBitmapSetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "setWidth", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -592,7 +592,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.setWidth")
 	}
 
-	midbitmapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midBitmapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -600,7 +600,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.writeToParcel")
 	}
 
-	midbitmapCreateBitmap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -608,7 +608,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIII)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIII)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -616,7 +616,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap7_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap7_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -624,7 +624,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap1_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap1_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/graphics/Picture;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -632,7 +632,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap4_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap4_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/graphics/Picture;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -640,7 +640,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap4_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap4_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -648,7 +648,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap5_6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap5_6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -656,7 +656,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap6_7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap6_7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -664,7 +664,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap5_8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap5_8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -672,7 +672,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap7_9, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap7_9, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -680,7 +680,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap3_10, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap3_10, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -688,7 +688,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap4_11, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap4_11, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -696,7 +696,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap5_12, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap5_12, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -704,7 +704,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap4_13, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap4_13, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -712,7 +712,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateBitmap6_14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midBitmapCreateBitmap6_14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -720,7 +720,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createBitmap")
 	}
 
-	midbitmapCreateScaledBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createScaledBitmap", "(Landroid/graphics/Bitmap;IIZ)Landroid/graphics/Bitmap;")
+	midBitmapCreateScaledBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createScaledBitmap", "(Landroid/graphics/Bitmap;IIZ)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -728,7 +728,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.createScaledBitmap")
 	}
 
-	midbitmapWrapHardwareBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "wrapHardwareBuffer", "(Landroid/hardware/HardwareBuffer;Landroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	midBitmapWrapHardwareBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "wrapHardwareBuffer", "(Landroid/hardware/HardwareBuffer;Landroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -740,9 +740,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer: %w", err)
 	}
-	clspdfRenderer = env.NewGlobalRef(&c.Object)
+	clsRenderer = env.NewGlobalRef(&c.Object)
 
-	midpdfRendererClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "close", "()V")
+	midRendererClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -750,7 +750,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.close")
 	}
 
-	midpdfRendererGetDocumentLinearizationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getDocumentLinearizationType", "()I")
+	midRendererGetDocumentLinearizationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getDocumentLinearizationType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -758,7 +758,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getDocumentLinearizationType")
 	}
 
-	midpdfRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPageCount", "()I")
+	midRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getPageCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -766,7 +766,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPageCount")
 	}
 
-	midpdfRendererGetPdfFormType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPdfFormType", "()I")
+	midRendererGetPdfFormType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getPdfFormType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -774,7 +774,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPdfFormType")
 	}
 
-	midpdfRendererOpenPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
+	midRendererOpenPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -782,7 +782,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.openPage")
 	}
 
-	midpdfRendererShouldScaleForPrinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "shouldScaleForPrinting", "()Z")
+	midRendererShouldScaleForPrinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "shouldScaleForPrinting", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -790,7 +790,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.shouldScaleForPrinting")
 	}
 
-	midpdfRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
+	midRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -802,9 +802,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer$Page: %w", err)
 	}
-	clspdfRendererPage = env.NewGlobalRef(&c.Object)
+	clsRendererPage = env.NewGlobalRef(&c.Object)
 
-	midpdfRendererPageApplyEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "applyEdit", "(Landroid/graphics/pdf/models/FormEditRecord;)Ljava/util/List;")
+	midRendererPageApplyEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "applyEdit", "(Landroid/graphics/pdf/models/FormEditRecord;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -812,7 +812,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.applyEdit")
 	}
 
-	midpdfRendererPageClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "close", "()V")
+	midRendererPageClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -820,7 +820,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.close")
 	}
 
-	midpdfRendererPageGetFormWidgetInfoAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtIndex", "(I)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	midRendererPageGetFormWidgetInfoAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfoAtIndex", "(I)Landroid/graphics/pdf/models/FormWidgetInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -828,7 +828,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtIndex")
 	}
 
-	midpdfRendererPageGetFormWidgetInfoAtPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtPosition", "(II)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	midRendererPageGetFormWidgetInfoAtPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfoAtPosition", "(II)Landroid/graphics/pdf/models/FormWidgetInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -836,7 +836,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtPosition")
 	}
 
-	midpdfRendererPageGetFormWidgetInfos0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "()Ljava/util/List;")
+	midRendererPageGetFormWidgetInfos0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfos", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -844,7 +844,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
 	}
 
-	midpdfRendererPageGetFormWidgetInfos1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "([I)Ljava/util/List;")
+	midRendererPageGetFormWidgetInfos1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfos", "([I)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -852,7 +852,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
 	}
 
-	midpdfRendererPageGetGotoLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getGotoLinks", "()Ljava/util/List;")
+	midRendererPageGetGotoLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getGotoLinks", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -860,7 +860,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getGotoLinks")
 	}
 
-	midpdfRendererPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getHeight", "()I")
+	midRendererPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getHeight", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -868,7 +868,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getHeight")
 	}
 
-	midpdfRendererPageGetImageContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getImageContents", "()Ljava/util/List;")
+	midRendererPageGetImageContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getImageContents", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -876,7 +876,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getImageContents")
 	}
 
-	midpdfRendererPageGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getIndex", "()I")
+	midRendererPageGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getIndex", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -884,7 +884,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getIndex")
 	}
 
-	midpdfRendererPageGetLinkContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getLinkContents", "()Ljava/util/List;")
+	midRendererPageGetLinkContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getLinkContents", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -892,7 +892,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getLinkContents")
 	}
 
-	midpdfRendererPageGetTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getTextContents", "()Ljava/util/List;")
+	midRendererPageGetTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getTextContents", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -900,7 +900,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getTextContents")
 	}
 
-	midpdfRendererPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getWidth", "()I")
+	midRendererPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getWidth", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -908,7 +908,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getWidth")
 	}
 
-	midpdfRendererPageRender4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;Landroid/graphics/pdf/RenderParams;)V")
+	midRendererPageRender4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;Landroid/graphics/pdf/RenderParams;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -916,7 +916,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
 	}
 
-	midpdfRendererPageRender4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
+	midRendererPageRender4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -924,7 +924,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
 	}
 
-	midpdfRendererPageSearchText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "searchText", "(Ljava/lang/String;)Ljava/util/List;")
+	midRendererPageSearchText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "searchText", "(Ljava/lang/String;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -932,7 +932,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.searchText")
 	}
 
-	midpdfRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
+	midRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -944,9 +944,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.os.ParcelFileDescriptor: %w", err)
 	}
-	clsparcelFileDescriptor = env.NewGlobalRef(&c.Object)
+	clsParcelFileDescriptor = env.NewGlobalRef(&c.Object)
 
-	midparcelFileDescriptorCanDetectErrors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "canDetectErrors", "()Z")
+	midParcelFileDescriptorCanDetectErrors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "canDetectErrors", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -954,7 +954,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.canDetectErrors")
 	}
 
-	midparcelFileDescriptorCheckError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "checkError", "()V")
+	midParcelFileDescriptorCheckError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "checkError", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -962,7 +962,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.checkError")
 	}
 
-	midparcelFileDescriptorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "close", "()V")
+	midParcelFileDescriptorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "close", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -970,7 +970,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.close")
 	}
 
-	midparcelFileDescriptorCloseWithError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "closeWithError", "(Ljava/lang/String;)V")
+	midParcelFileDescriptorCloseWithError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "closeWithError", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -978,7 +978,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.closeWithError")
 	}
 
-	midparcelFileDescriptorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "describeContents", "()I")
+	midParcelFileDescriptorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -986,7 +986,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.describeContents")
 	}
 
-	midparcelFileDescriptorDetachFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "detachFd", "()I")
+	midParcelFileDescriptorDetachFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "detachFd", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -994,7 +994,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.detachFd")
 	}
 
-	midparcelFileDescriptorDup0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "dup", "()Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorDup0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "dup", "()Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1002,7 +1002,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.dup")
 	}
 
-	midparcelFileDescriptorGetFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "getFd", "()I")
+	midParcelFileDescriptorGetFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getFd", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1010,7 +1010,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getFd")
 	}
 
-	midparcelFileDescriptorGetFileDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "getFileDescriptor", "()Ljava/io/FileDescriptor;")
+	midParcelFileDescriptorGetFileDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getFileDescriptor", "()Ljava/io/FileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1018,7 +1018,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getFileDescriptor")
 	}
 
-	midparcelFileDescriptorGetStatSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "getStatSize", "()J")
+	midParcelFileDescriptorGetStatSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getStatSize", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1026,7 +1026,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getStatSize")
 	}
 
-	midparcelFileDescriptorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "toString", "()Ljava/lang/String;")
+	midParcelFileDescriptorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1034,7 +1034,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.toString")
 	}
 
-	midparcelFileDescriptorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midParcelFileDescriptorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1042,7 +1042,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.writeToParcel")
 	}
 
-	midparcelFileDescriptorAdoptFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "adoptFd", "(I)Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorAdoptFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "adoptFd", "(I)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1050,7 +1050,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.adoptFd")
 	}
 
-	midparcelFileDescriptorCreatePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "createPipe", "()[Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorCreatePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createPipe", "()[Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1058,7 +1058,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createPipe")
 	}
 
-	midparcelFileDescriptorCreateReliablePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "createReliablePipe", "()[Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorCreateReliablePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createReliablePipe", "()[Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1066,7 +1066,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createReliablePipe")
 	}
 
-	midparcelFileDescriptorCreateReliableSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "createReliableSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorCreateReliableSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createReliableSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1074,7 +1074,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createReliableSocketPair")
 	}
 
-	midparcelFileDescriptorCreateSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "createSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorCreateSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1082,7 +1082,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createSocketPair")
 	}
 
-	midparcelFileDescriptorDup1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "dup", "(Ljava/io/FileDescriptor;)Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorDup1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "dup", "(Ljava/io/FileDescriptor;)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1090,7 +1090,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.dup")
 	}
 
-	midparcelFileDescriptorFromDatagramSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "fromDatagramSocket", "(Ljava/net/DatagramSocket;)Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorFromDatagramSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromDatagramSocket", "(Ljava/net/DatagramSocket;)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1098,7 +1098,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromDatagramSocket")
 	}
 
-	midparcelFileDescriptorFromFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "fromFd", "(I)Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorFromFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromFd", "(I)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1106,7 +1106,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromFd")
 	}
 
-	midparcelFileDescriptorFromSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "fromSocket", "(Ljava/net/Socket;)Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorFromSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromSocket", "(Ljava/net/Socket;)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1114,7 +1114,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromSocket")
 	}
 
-	midparcelFileDescriptorOpen, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "open", "(Ljava/io/File;I)Landroid/os/ParcelFileDescriptor;")
+	midParcelFileDescriptorOpen, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "open", "(Ljava/io/File;I)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1122,7 +1122,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.open")
 	}
 
-	midparcelFileDescriptorParseMode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "parseMode", "(Ljava/lang/String;)I")
+	midParcelFileDescriptorParseMode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "parseMode", "(Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

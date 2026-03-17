@@ -15,14 +15,14 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
-// intent wraps android.content.Intent.
-type intent struct {
+// Intent wraps android.content.Intent.
+type Intent struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // AddCategory calls android.content.Intent.addCategory.
-func (m *intent) AddCategory(arg0 string) (*jni.Object, error) {
+func (m *Intent) AddCategory(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -30,7 +30,7 @@ func (m *intent) AddCategory(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentAddCategory == nil {
+		if midIntentAddCategory == nil {
 			callErr = fmt.Errorf("android.content.Intent.addCategory is not available on this device")
 			return callErr
 		}
@@ -41,7 +41,7 @@ func (m *intent) AddCategory(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentAddCategory, jni.ObjectValue(&jArg0.Object),
+			midIntentAddCategory, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -52,7 +52,7 @@ func (m *intent) AddCategory(arg0 string) (*jni.Object, error) {
 }
 
 // AddFlags calls android.content.Intent.addFlags.
-func (m *intent) AddFlags(arg0 int32) (*jni.Object, error) {
+func (m *Intent) AddFlags(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -60,14 +60,14 @@ func (m *intent) AddFlags(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentAddFlags == nil {
+		if midIntentAddFlags == nil {
 			callErr = fmt.Errorf("android.content.Intent.addFlags is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentAddFlags, jni.IntValue(arg0),
+			midIntentAddFlags, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -78,7 +78,7 @@ func (m *intent) AddFlags(arg0 int32) (*jni.Object, error) {
 }
 
 // Clone calls android.content.Intent.clone.
-func (m *intent) Clone() (*jni.Object, error) {
+func (m *Intent) Clone() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -86,13 +86,13 @@ func (m *intent) Clone() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentClone == nil {
+		if midIntentClone == nil {
 			callErr = fmt.Errorf("android.content.Intent.clone is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentClone,
+			midIntentClone,
 		)
 		if callErr != nil {
 			return callErr
@@ -103,7 +103,7 @@ func (m *intent) Clone() (*jni.Object, error) {
 }
 
 // CloneFilter calls android.content.Intent.cloneFilter.
-func (m *intent) CloneFilter() (*jni.Object, error) {
+func (m *Intent) CloneFilter() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -111,13 +111,13 @@ func (m *intent) CloneFilter() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentCloneFilter == nil {
+		if midIntentCloneFilter == nil {
 			callErr = fmt.Errorf("android.content.Intent.cloneFilter is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentCloneFilter,
+			midIntentCloneFilter,
 		)
 		if callErr != nil {
 			return callErr
@@ -128,7 +128,7 @@ func (m *intent) CloneFilter() (*jni.Object, error) {
 }
 
 // DescribeContents calls android.content.Intent.describeContents.
-func (m *intent) DescribeContents() (int32, error) {
+func (m *Intent) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -136,13 +136,13 @@ func (m *intent) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midintentDescribeContents == nil {
+		if midIntentDescribeContents == nil {
 			callErr = fmt.Errorf("android.content.Intent.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midintentDescribeContents,
+			midIntentDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -153,7 +153,7 @@ func (m *intent) DescribeContents() (int32, error) {
 }
 
 // FillIn calls android.content.Intent.fillIn.
-func (m *intent) FillIn(arg0 *jni.Object, arg1 int32) (int32, error) {
+func (m *Intent) FillIn(arg0 *jni.Object, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -161,14 +161,14 @@ func (m *intent) FillIn(arg0 *jni.Object, arg1 int32) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midintentFillIn == nil {
+		if midIntentFillIn == nil {
 			callErr = fmt.Errorf("android.content.Intent.fillIn is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midintentFillIn, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midIntentFillIn, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -179,7 +179,7 @@ func (m *intent) FillIn(arg0 *jni.Object, arg1 int32) (int32, error) {
 }
 
 // FilterEquals calls android.content.Intent.filterEquals.
-func (m *intent) FilterEquals(arg0 *jni.Object) (bool, error) {
+func (m *Intent) FilterEquals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -187,14 +187,14 @@ func (m *intent) FilterEquals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midintentFilterEquals == nil {
+		if midIntentFilterEquals == nil {
 			callErr = fmt.Errorf("android.content.Intent.filterEquals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midintentFilterEquals, jni.ObjectValue(arg0),
+			midIntentFilterEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -206,7 +206,7 @@ func (m *intent) FilterEquals(arg0 *jni.Object) (bool, error) {
 }
 
 // FilterHashCode calls android.content.Intent.filterHashCode.
-func (m *intent) FilterHashCode() (int32, error) {
+func (m *Intent) FilterHashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -214,13 +214,13 @@ func (m *intent) FilterHashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midintentFilterHashCode == nil {
+		if midIntentFilterHashCode == nil {
 			callErr = fmt.Errorf("android.content.Intent.filterHashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midintentFilterHashCode,
+			midIntentFilterHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -231,7 +231,7 @@ func (m *intent) FilterHashCode() (int32, error) {
 }
 
 // GetAction calls android.content.Intent.getAction.
-func (m *intent) GetAction() (string, error) {
+func (m *Intent) GetAction() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -239,13 +239,13 @@ func (m *intent) GetAction() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetAction == nil {
+		if midIntentGetAction == nil {
 			callErr = fmt.Errorf("android.content.Intent.getAction is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetAction,
+			midIntentGetAction,
 		)
 		if callErr != nil {
 			return callErr
@@ -257,7 +257,7 @@ func (m *intent) GetAction() (string, error) {
 }
 
 // GetBooleanArrayExtra calls android.content.Intent.getBooleanArrayExtra.
-func (m *intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -265,7 +265,7 @@ func (m *intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetBooleanArrayExtra == nil {
+		if midIntentGetBooleanArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getBooleanArrayExtra is not available on this device")
 			return callErr
 		}
@@ -276,7 +276,7 @@ func (m *intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetBooleanArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetBooleanArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -287,7 +287,7 @@ func (m *intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetBooleanExtra calls android.content.Intent.getBooleanExtra.
-func (m *intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
+func (m *Intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -295,7 +295,7 @@ func (m *intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetBooleanExtra == nil {
+		if midIntentGetBooleanExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getBooleanExtra is not available on this device")
 			return callErr
 		}
@@ -311,7 +311,7 @@ func (m *intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midintentGetBooleanExtra, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
+			midIntentGetBooleanExtra, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -323,7 +323,7 @@ func (m *intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 }
 
 // GetBundleExtra calls android.content.Intent.getBundleExtra.
-func (m *intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -331,7 +331,7 @@ func (m *intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetBundleExtra == nil {
+		if midIntentGetBundleExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getBundleExtra is not available on this device")
 			return callErr
 		}
@@ -342,7 +342,7 @@ func (m *intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetBundleExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetBundleExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -353,7 +353,7 @@ func (m *intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetByteArrayExtra calls android.content.Intent.getByteArrayExtra.
-func (m *intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -361,7 +361,7 @@ func (m *intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetByteArrayExtra == nil {
+		if midIntentGetByteArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getByteArrayExtra is not available on this device")
 			return callErr
 		}
@@ -372,7 +372,7 @@ func (m *intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetByteArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetByteArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -383,7 +383,7 @@ func (m *intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetByteExtra calls android.content.Intent.getByteExtra.
-func (m *intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
+func (m *Intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
 	var result int8
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -391,7 +391,7 @@ func (m *intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetByteExtra == nil {
+		if midIntentGetByteExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getByteExtra is not available on this device")
 			return callErr
 		}
@@ -402,7 +402,7 @@ func (m *intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
 
 		result, callErr = env.CallByteMethod(
 			m.Obj,
-			midintentGetByteExtra, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
+			midIntentGetByteExtra, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -413,7 +413,7 @@ func (m *intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
 }
 
 // GetCategories calls android.content.Intent.getCategories.
-func (m *intent) GetCategories() (*jni.Object, error) {
+func (m *Intent) GetCategories() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -421,13 +421,13 @@ func (m *intent) GetCategories() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetCategories == nil {
+		if midIntentGetCategories == nil {
 			callErr = fmt.Errorf("android.content.Intent.getCategories is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetCategories,
+			midIntentGetCategories,
 		)
 		if callErr != nil {
 			return callErr
@@ -438,7 +438,7 @@ func (m *intent) GetCategories() (*jni.Object, error) {
 }
 
 // GetCharArrayExtra calls android.content.Intent.getCharArrayExtra.
-func (m *intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -446,7 +446,7 @@ func (m *intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetCharArrayExtra == nil {
+		if midIntentGetCharArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getCharArrayExtra is not available on this device")
 			return callErr
 		}
@@ -457,7 +457,7 @@ func (m *intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetCharArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetCharArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -468,7 +468,7 @@ func (m *intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetCharExtra calls android.content.Intent.getCharExtra.
-func (m *intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
+func (m *Intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
 	var result uint16
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -476,7 +476,7 @@ func (m *intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetCharExtra == nil {
+		if midIntentGetCharExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getCharExtra is not available on this device")
 			return callErr
 		}
@@ -487,7 +487,7 @@ func (m *intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
 
 		result, callErr = env.CallCharMethod(
 			m.Obj,
-			midintentGetCharExtra, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
+			midIntentGetCharExtra, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -498,7 +498,7 @@ func (m *intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
 }
 
 // GetCharSequenceArrayExtra calls android.content.Intent.getCharSequenceArrayExtra.
-func (m *intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -506,7 +506,7 @@ func (m *intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetCharSequenceArrayExtra == nil {
+		if midIntentGetCharSequenceArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getCharSequenceArrayExtra is not available on this device")
 			return callErr
 		}
@@ -517,7 +517,7 @@ func (m *intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetCharSequenceArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetCharSequenceArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -528,7 +528,7 @@ func (m *intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetCharSequenceArrayListExtra calls android.content.Intent.getCharSequenceArrayListExtra.
-func (m *intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -536,7 +536,7 @@ func (m *intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midintentGetCharSequenceArrayListExtra == nil {
+		if midIntentGetCharSequenceArrayListExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getCharSequenceArrayListExtra is not available on this device")
 			return callErr
 		}
@@ -547,7 +547,7 @@ func (m *intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -558,7 +558,7 @@ func (m *intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error)
 }
 
 // GetCharSequenceExtra calls android.content.Intent.getCharSequenceExtra.
-func (m *intent) GetCharSequenceExtra(arg0 string) (string, error) {
+func (m *Intent) GetCharSequenceExtra(arg0 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -566,7 +566,7 @@ func (m *intent) GetCharSequenceExtra(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetCharSequenceExtra == nil {
+		if midIntentGetCharSequenceExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getCharSequenceExtra is not available on this device")
 			return callErr
 		}
@@ -577,7 +577,7 @@ func (m *intent) GetCharSequenceExtra(arg0 string) (string, error) {
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetCharSequenceExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetCharSequenceExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -589,7 +589,7 @@ func (m *intent) GetCharSequenceExtra(arg0 string) (string, error) {
 }
 
 // GetClipData calls android.content.Intent.getClipData.
-func (m *intent) GetClipData() (*jni.Object, error) {
+func (m *Intent) GetClipData() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -597,13 +597,13 @@ func (m *intent) GetClipData() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetClipData == nil {
+		if midIntentGetClipData == nil {
 			callErr = fmt.Errorf("android.content.Intent.getClipData is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetClipData,
+			midIntentGetClipData,
 		)
 		if callErr != nil {
 			return callErr
@@ -614,7 +614,7 @@ func (m *intent) GetClipData() (*jni.Object, error) {
 }
 
 // GetComponent calls android.content.Intent.getComponent.
-func (m *intent) GetComponent() (*jni.Object, error) {
+func (m *Intent) GetComponent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -622,13 +622,13 @@ func (m *intent) GetComponent() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetComponent == nil {
+		if midIntentGetComponent == nil {
 			callErr = fmt.Errorf("android.content.Intent.getComponent is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetComponent,
+			midIntentGetComponent,
 		)
 		if callErr != nil {
 			return callErr
@@ -639,7 +639,7 @@ func (m *intent) GetComponent() (*jni.Object, error) {
 }
 
 // GetData calls android.content.Intent.getData.
-func (m *intent) GetData() (*jni.Object, error) {
+func (m *Intent) GetData() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -647,13 +647,13 @@ func (m *intent) GetData() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetData == nil {
+		if midIntentGetData == nil {
 			callErr = fmt.Errorf("android.content.Intent.getData is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetData,
+			midIntentGetData,
 		)
 		if callErr != nil {
 			return callErr
@@ -664,7 +664,7 @@ func (m *intent) GetData() (*jni.Object, error) {
 }
 
 // GetDataString calls android.content.Intent.getDataString.
-func (m *intent) GetDataString() (string, error) {
+func (m *Intent) GetDataString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -672,13 +672,13 @@ func (m *intent) GetDataString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetDataString == nil {
+		if midIntentGetDataString == nil {
 			callErr = fmt.Errorf("android.content.Intent.getDataString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetDataString,
+			midIntentGetDataString,
 		)
 		if callErr != nil {
 			return callErr
@@ -690,7 +690,7 @@ func (m *intent) GetDataString() (string, error) {
 }
 
 // GetDoubleArrayExtra calls android.content.Intent.getDoubleArrayExtra.
-func (m *intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -698,7 +698,7 @@ func (m *intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetDoubleArrayExtra == nil {
+		if midIntentGetDoubleArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getDoubleArrayExtra is not available on this device")
 			return callErr
 		}
@@ -709,7 +709,7 @@ func (m *intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetDoubleArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetDoubleArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -720,7 +720,7 @@ func (m *intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetDoubleExtra calls android.content.Intent.getDoubleExtra.
-func (m *intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
+func (m *Intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
 	var result float64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -728,7 +728,7 @@ func (m *intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetDoubleExtra == nil {
+		if midIntentGetDoubleExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getDoubleExtra is not available on this device")
 			return callErr
 		}
@@ -739,7 +739,7 @@ func (m *intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
 
 		result, callErr = env.CallDoubleMethod(
 			m.Obj,
-			midintentGetDoubleExtra, jni.ObjectValue(&jArg0.Object), jni.DoubleValue(arg1),
+			midIntentGetDoubleExtra, jni.ObjectValue(&jArg0.Object), jni.DoubleValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -750,7 +750,7 @@ func (m *intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
 }
 
 // GetExtras calls android.content.Intent.getExtras.
-func (m *intent) GetExtras() (*jni.Object, error) {
+func (m *Intent) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -758,13 +758,13 @@ func (m *intent) GetExtras() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetExtras == nil {
+		if midIntentGetExtras == nil {
 			callErr = fmt.Errorf("android.content.Intent.getExtras is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetExtras,
+			midIntentGetExtras,
 		)
 		if callErr != nil {
 			return callErr
@@ -775,7 +775,7 @@ func (m *intent) GetExtras() (*jni.Object, error) {
 }
 
 // GetFlags calls android.content.Intent.getFlags.
-func (m *intent) GetFlags() (int32, error) {
+func (m *Intent) GetFlags() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -783,13 +783,13 @@ func (m *intent) GetFlags() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetFlags == nil {
+		if midIntentGetFlags == nil {
 			callErr = fmt.Errorf("android.content.Intent.getFlags is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midintentGetFlags,
+			midIntentGetFlags,
 		)
 		if callErr != nil {
 			return callErr
@@ -800,7 +800,7 @@ func (m *intent) GetFlags() (int32, error) {
 }
 
 // GetFloatArrayExtra calls android.content.Intent.getFloatArrayExtra.
-func (m *intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -808,7 +808,7 @@ func (m *intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetFloatArrayExtra == nil {
+		if midIntentGetFloatArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getFloatArrayExtra is not available on this device")
 			return callErr
 		}
@@ -819,7 +819,7 @@ func (m *intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetFloatArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetFloatArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -830,7 +830,7 @@ func (m *intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetFloatExtra calls android.content.Intent.getFloatExtra.
-func (m *intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
+func (m *Intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -838,7 +838,7 @@ func (m *intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetFloatExtra == nil {
+		if midIntentGetFloatExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getFloatExtra is not available on this device")
 			return callErr
 		}
@@ -849,7 +849,7 @@ func (m *intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midintentGetFloatExtra, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
+			midIntentGetFloatExtra, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -860,7 +860,7 @@ func (m *intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
 }
 
 // GetIdentifier calls android.content.Intent.getIdentifier.
-func (m *intent) GetIdentifier() (string, error) {
+func (m *Intent) GetIdentifier() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -868,13 +868,13 @@ func (m *intent) GetIdentifier() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetIdentifier == nil {
+		if midIntentGetIdentifier == nil {
 			callErr = fmt.Errorf("android.content.Intent.getIdentifier is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetIdentifier,
+			midIntentGetIdentifier,
 		)
 		if callErr != nil {
 			return callErr
@@ -886,7 +886,7 @@ func (m *intent) GetIdentifier() (string, error) {
 }
 
 // GetIntArrayExtra calls android.content.Intent.getIntArrayExtra.
-func (m *intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -894,7 +894,7 @@ func (m *intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetIntArrayExtra == nil {
+		if midIntentGetIntArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getIntArrayExtra is not available on this device")
 			return callErr
 		}
@@ -905,7 +905,7 @@ func (m *intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetIntArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetIntArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -916,7 +916,7 @@ func (m *intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetIntExtra calls android.content.Intent.getIntExtra.
-func (m *intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
+func (m *Intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -924,7 +924,7 @@ func (m *intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetIntExtra == nil {
+		if midIntentGetIntExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getIntExtra is not available on this device")
 			return callErr
 		}
@@ -935,7 +935,7 @@ func (m *intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midintentGetIntExtra, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+			midIntentGetIntExtra, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -946,7 +946,7 @@ func (m *intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 }
 
 // GetIntegerArrayListExtra calls android.content.Intent.getIntegerArrayListExtra.
-func (m *intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -954,7 +954,7 @@ func (m *intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetIntegerArrayListExtra == nil {
+		if midIntentGetIntegerArrayListExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getIntegerArrayListExtra is not available on this device")
 			return callErr
 		}
@@ -965,7 +965,7 @@ func (m *intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -976,7 +976,7 @@ func (m *intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetLongArrayExtra calls android.content.Intent.getLongArrayExtra.
-func (m *intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -984,7 +984,7 @@ func (m *intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetLongArrayExtra == nil {
+		if midIntentGetLongArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getLongArrayExtra is not available on this device")
 			return callErr
 		}
@@ -995,7 +995,7 @@ func (m *intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetLongArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetLongArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1006,7 +1006,7 @@ func (m *intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetLongExtra calls android.content.Intent.getLongExtra.
-func (m *intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
+func (m *Intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1014,7 +1014,7 @@ func (m *intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetLongExtra == nil {
+		if midIntentGetLongExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getLongExtra is not available on this device")
 			return callErr
 		}
@@ -1025,7 +1025,7 @@ func (m *intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midintentGetLongExtra, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1),
+			midIntentGetLongExtra, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1036,7 +1036,7 @@ func (m *intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
 }
 
 // GetPackage calls android.content.Intent.getPackage.
-func (m *intent) GetPackage() (string, error) {
+func (m *Intent) GetPackage() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1044,13 +1044,13 @@ func (m *intent) GetPackage() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetPackage == nil {
+		if midIntentGetPackage == nil {
 			callErr = fmt.Errorf("android.content.Intent.getPackage is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetPackage,
+			midIntentGetPackage,
 		)
 		if callErr != nil {
 			return callErr
@@ -1062,7 +1062,7 @@ func (m *intent) GetPackage() (string, error) {
 }
 
 // GetParcelableArrayExtra calls android.content.Intent.getParcelableArrayExtra.
-func (m *intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1070,7 +1070,7 @@ func (m *intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetParcelableArrayExtra == nil {
+		if midIntentGetParcelableArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getParcelableArrayExtra is not available on this device")
 			return callErr
 		}
@@ -1081,7 +1081,7 @@ func (m *intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetParcelableArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetParcelableArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1092,7 +1092,7 @@ func (m *intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetScheme calls android.content.Intent.getScheme.
-func (m *intent) GetScheme() (string, error) {
+func (m *Intent) GetScheme() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1100,13 +1100,13 @@ func (m *intent) GetScheme() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetScheme == nil {
+		if midIntentGetScheme == nil {
 			callErr = fmt.Errorf("android.content.Intent.getScheme is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetScheme,
+			midIntentGetScheme,
 		)
 		if callErr != nil {
 			return callErr
@@ -1118,7 +1118,7 @@ func (m *intent) GetScheme() (string, error) {
 }
 
 // GetSelector calls android.content.Intent.getSelector.
-func (m *intent) GetSelector() (*jni.Object, error) {
+func (m *Intent) GetSelector() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1126,13 +1126,13 @@ func (m *intent) GetSelector() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetSelector == nil {
+		if midIntentGetSelector == nil {
 			callErr = fmt.Errorf("android.content.Intent.getSelector is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetSelector,
+			midIntentGetSelector,
 		)
 		if callErr != nil {
 			return callErr
@@ -1143,7 +1143,7 @@ func (m *intent) GetSelector() (*jni.Object, error) {
 }
 
 // GetSerializableExtra calls android.content.Intent.getSerializableExtra.
-func (m *intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1151,7 +1151,7 @@ func (m *intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetSerializableExtra == nil {
+		if midIntentGetSerializableExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getSerializableExtra is not available on this device")
 			return callErr
 		}
@@ -1162,7 +1162,7 @@ func (m *intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetSerializableExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetSerializableExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1173,7 +1173,7 @@ func (m *intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetShortArrayExtra calls android.content.Intent.getShortArrayExtra.
-func (m *intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1181,7 +1181,7 @@ func (m *intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetShortArrayExtra == nil {
+		if midIntentGetShortArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getShortArrayExtra is not available on this device")
 			return callErr
 		}
@@ -1192,7 +1192,7 @@ func (m *intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetShortArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetShortArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1203,7 +1203,7 @@ func (m *intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetShortExtra calls android.content.Intent.getShortExtra.
-func (m *intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
+func (m *Intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
 	var result int16
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1211,7 +1211,7 @@ func (m *intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetShortExtra == nil {
+		if midIntentGetShortExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getShortExtra is not available on this device")
 			return callErr
 		}
@@ -1222,7 +1222,7 @@ func (m *intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
 
 		result, callErr = env.CallShortMethod(
 			m.Obj,
-			midintentGetShortExtra, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
+			midIntentGetShortExtra, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1233,7 +1233,7 @@ func (m *intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
 }
 
 // GetSourceBounds calls android.content.Intent.getSourceBounds.
-func (m *intent) GetSourceBounds() (*jni.Object, error) {
+func (m *Intent) GetSourceBounds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1241,13 +1241,13 @@ func (m *intent) GetSourceBounds() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetSourceBounds == nil {
+		if midIntentGetSourceBounds == nil {
 			callErr = fmt.Errorf("android.content.Intent.getSourceBounds is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetSourceBounds,
+			midIntentGetSourceBounds,
 		)
 		if callErr != nil {
 			return callErr
@@ -1258,7 +1258,7 @@ func (m *intent) GetSourceBounds() (*jni.Object, error) {
 }
 
 // GetStringArrayExtra calls android.content.Intent.getStringArrayExtra.
-func (m *intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1266,7 +1266,7 @@ func (m *intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetStringArrayExtra == nil {
+		if midIntentGetStringArrayExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getStringArrayExtra is not available on this device")
 			return callErr
 		}
@@ -1277,7 +1277,7 @@ func (m *intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetStringArrayExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetStringArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1288,7 +1288,7 @@ func (m *intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetStringArrayListExtra calls android.content.Intent.getStringArrayListExtra.
-func (m *intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1296,7 +1296,7 @@ func (m *intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetStringArrayListExtra == nil {
+		if midIntentGetStringArrayListExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getStringArrayListExtra is not available on this device")
 			return callErr
 		}
@@ -1307,7 +1307,7 @@ func (m *intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentGetStringArrayListExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetStringArrayListExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1318,7 +1318,7 @@ func (m *intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetStringExtra calls android.content.Intent.getStringExtra.
-func (m *intent) GetStringExtra(arg0 string) (string, error) {
+func (m *Intent) GetStringExtra(arg0 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1326,7 +1326,7 @@ func (m *intent) GetStringExtra(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetStringExtra == nil {
+		if midIntentGetStringExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.getStringExtra is not available on this device")
 			return callErr
 		}
@@ -1337,7 +1337,7 @@ func (m *intent) GetStringExtra(arg0 string) (string, error) {
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetStringExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentGetStringExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1349,7 +1349,7 @@ func (m *intent) GetStringExtra(arg0 string) (string, error) {
 }
 
 // GetType calls android.content.Intent.getType.
-func (m *intent) GetType() (string, error) {
+func (m *Intent) GetType() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1357,13 +1357,13 @@ func (m *intent) GetType() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetType == nil {
+		if midIntentGetType == nil {
 			callErr = fmt.Errorf("android.content.Intent.getType is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentGetType,
+			midIntentGetType,
 		)
 		if callErr != nil {
 			return callErr
@@ -1375,7 +1375,7 @@ func (m *intent) GetType() (string, error) {
 }
 
 // HasCategory calls android.content.Intent.hasCategory.
-func (m *intent) HasCategory(arg0 string) (bool, error) {
+func (m *Intent) HasCategory(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1383,7 +1383,7 @@ func (m *intent) HasCategory(arg0 string) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midintentHasCategory == nil {
+		if midIntentHasCategory == nil {
 			callErr = fmt.Errorf("android.content.Intent.hasCategory is not available on this device")
 			return callErr
 		}
@@ -1394,7 +1394,7 @@ func (m *intent) HasCategory(arg0 string) (bool, error) {
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midintentHasCategory, jni.ObjectValue(&jArg0.Object),
+			midIntentHasCategory, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1406,7 +1406,7 @@ func (m *intent) HasCategory(arg0 string) (bool, error) {
 }
 
 // HasExtra calls android.content.Intent.hasExtra.
-func (m *intent) HasExtra(arg0 string) (bool, error) {
+func (m *Intent) HasExtra(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1414,7 +1414,7 @@ func (m *intent) HasExtra(arg0 string) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midintentHasExtra == nil {
+		if midIntentHasExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.hasExtra is not available on this device")
 			return callErr
 		}
@@ -1425,7 +1425,7 @@ func (m *intent) HasExtra(arg0 string) (bool, error) {
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midintentHasExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentHasExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1437,7 +1437,7 @@ func (m *intent) HasExtra(arg0 string) (bool, error) {
 }
 
 // HasFileDescriptors calls android.content.Intent.hasFileDescriptors.
-func (m *intent) HasFileDescriptors() (bool, error) {
+func (m *Intent) HasFileDescriptors() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1445,13 +1445,13 @@ func (m *intent) HasFileDescriptors() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midintentHasFileDescriptors == nil {
+		if midIntentHasFileDescriptors == nil {
 			callErr = fmt.Errorf("android.content.Intent.hasFileDescriptors is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midintentHasFileDescriptors,
+			midIntentHasFileDescriptors,
 		)
 		if callErr != nil {
 			return callErr
@@ -1463,7 +1463,7 @@ func (m *intent) HasFileDescriptors() (bool, error) {
 }
 
 // IsMismatchingFilter calls android.content.Intent.isMismatchingFilter.
-func (m *intent) IsMismatchingFilter() (bool, error) {
+func (m *Intent) IsMismatchingFilter() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1471,13 +1471,13 @@ func (m *intent) IsMismatchingFilter() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midintentIsMismatchingFilter == nil {
+		if midIntentIsMismatchingFilter == nil {
 			callErr = fmt.Errorf("android.content.Intent.isMismatchingFilter is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midintentIsMismatchingFilter,
+			midIntentIsMismatchingFilter,
 		)
 		if callErr != nil {
 			return callErr
@@ -1489,7 +1489,7 @@ func (m *intent) IsMismatchingFilter() (bool, error) {
 }
 
 // PutCharSequenceArrayListExtra calls android.content.Intent.putCharSequenceArrayListExtra.
-func (m *intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1497,7 +1497,7 @@ func (m *intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*
 			callErr = err
 			return err
 		}
-		if midintentPutCharSequenceArrayListExtra == nil {
+		if midIntentPutCharSequenceArrayListExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.putCharSequenceArrayListExtra is not available on this device")
 			return callErr
 		}
@@ -1508,7 +1508,7 @@ func (m *intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1519,7 +1519,7 @@ func (m *intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*
 }
 
 // PutExtra2 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1527,7 +1527,7 @@ func (m *intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2 == nil {
+		if midIntentPutExtra2 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1538,7 +1538,7 @@ func (m *intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1549,7 +1549,7 @@ func (m *intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 }
 
 // PutExtra2_1 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1557,7 +1557,7 @@ func (m *intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_1 == nil {
+		if midIntentPutExtra2_1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1568,7 +1568,7 @@ func (m *intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1579,7 +1579,7 @@ func (m *intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 }
 
 // PutExtra2_2 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1587,7 +1587,7 @@ func (m *intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_2 == nil {
+		if midIntentPutExtra2_2 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1598,7 +1598,7 @@ func (m *intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1609,7 +1609,7 @@ func (m *intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 }
 
 // PutExtra2_3 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
+func (m *Intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1617,7 +1617,7 @@ func (m *intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_3 == nil {
+		if midIntentPutExtra2_3 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1633,7 +1633,7 @@ func (m *intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_3, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
+			midIntentPutExtra2_3, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1644,7 +1644,7 @@ func (m *intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
 }
 
 // PutExtra2_4 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1652,7 +1652,7 @@ func (m *intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_4 == nil {
+		if midIntentPutExtra2_4 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1663,7 +1663,7 @@ func (m *intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_4, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_4, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1674,7 +1674,7 @@ func (m *intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 }
 
 // PutExtra2_5 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
+func (m *Intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1682,7 +1682,7 @@ func (m *intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_5 == nil {
+		if midIntentPutExtra2_5 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1693,7 +1693,7 @@ func (m *intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_5, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
+			midIntentPutExtra2_5, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1704,7 +1704,7 @@ func (m *intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
 }
 
 // PutExtra2_6 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1712,7 +1712,7 @@ func (m *intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_6 == nil {
+		if midIntentPutExtra2_6 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1723,7 +1723,7 @@ func (m *intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_6, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_6, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1734,7 +1734,7 @@ func (m *intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 }
 
 // PutExtra2_7 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
+func (m *Intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1742,7 +1742,7 @@ func (m *intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_7 == nil {
+		if midIntentPutExtra2_7 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1753,7 +1753,7 @@ func (m *intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_7, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
+			midIntentPutExtra2_7, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1764,7 +1764,7 @@ func (m *intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
 }
 
 // PutExtra2_8 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1772,7 +1772,7 @@ func (m *intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_8 == nil {
+		if midIntentPutExtra2_8 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1783,7 +1783,7 @@ func (m *intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_8, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_8, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1794,7 +1794,7 @@ func (m *intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 }
 
 // PutExtra2_9 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
+func (m *Intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1802,7 +1802,7 @@ func (m *intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_9 == nil {
+		if midIntentPutExtra2_9 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1813,7 +1813,7 @@ func (m *intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_9, jni.ObjectValue(&jArg0.Object), jni.DoubleValue(arg1),
+			midIntentPutExtra2_9, jni.ObjectValue(&jArg0.Object), jni.DoubleValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1824,7 +1824,7 @@ func (m *intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
 }
 
 // PutExtra2_10 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1832,7 +1832,7 @@ func (m *intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_10 == nil {
+		if midIntentPutExtra2_10 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1843,7 +1843,7 @@ func (m *intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_10, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_10, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1854,7 +1854,7 @@ func (m *intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtra2_11 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
+func (m *Intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1862,7 +1862,7 @@ func (m *intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_11 == nil {
+		if midIntentPutExtra2_11 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1873,7 +1873,7 @@ func (m *intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_11, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
+			midIntentPutExtra2_11, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1884,7 +1884,7 @@ func (m *intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
 }
 
 // PutExtra2_12 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1892,7 +1892,7 @@ func (m *intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_12 == nil {
+		if midIntentPutExtra2_12 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1903,7 +1903,7 @@ func (m *intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_12, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_12, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1914,7 +1914,7 @@ func (m *intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtra2_13 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
+func (m *Intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1922,7 +1922,7 @@ func (m *intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_13 == nil {
+		if midIntentPutExtra2_13 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1933,7 +1933,7 @@ func (m *intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_13, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+			midIntentPutExtra2_13, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1944,7 +1944,7 @@ func (m *intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
 }
 
 // PutExtra2_14 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1952,7 +1952,7 @@ func (m *intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_14 == nil {
+		if midIntentPutExtra2_14 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1963,7 +1963,7 @@ func (m *intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_14, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_14, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1974,7 +1974,7 @@ func (m *intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtra2_15 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1982,7 +1982,7 @@ func (m *intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_15 == nil {
+		if midIntentPutExtra2_15 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -1993,7 +1993,7 @@ func (m *intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_15, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_15, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2004,7 +2004,7 @@ func (m *intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtra2_16 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
+func (m *Intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2012,7 +2012,7 @@ func (m *intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_16 == nil {
+		if midIntentPutExtra2_16 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2028,7 +2028,7 @@ func (m *intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_16, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			midIntentPutExtra2_16, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2039,7 +2039,7 @@ func (m *intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
 }
 
 // PutExtra2_17 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2047,7 +2047,7 @@ func (m *intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_17 == nil {
+		if midIntentPutExtra2_17 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2058,7 +2058,7 @@ func (m *intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_17, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_17, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2069,7 +2069,7 @@ func (m *intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtra2_18 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
+func (m *Intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2077,7 +2077,7 @@ func (m *intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_18 == nil {
+		if midIntentPutExtra2_18 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2093,7 +2093,7 @@ func (m *intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_18, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			midIntentPutExtra2_18, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2104,7 +2104,7 @@ func (m *intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
 }
 
 // PutExtra2_19 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2112,7 +2112,7 @@ func (m *intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_19 == nil {
+		if midIntentPutExtra2_19 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2123,7 +2123,7 @@ func (m *intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_19, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_19, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2134,7 +2134,7 @@ func (m *intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtra2_20 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
+func (m *Intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2142,7 +2142,7 @@ func (m *intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_20 == nil {
+		if midIntentPutExtra2_20 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2153,7 +2153,7 @@ func (m *intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_20, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1),
+			midIntentPutExtra2_20, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2164,7 +2164,7 @@ func (m *intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
 }
 
 // PutExtra2_21 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2172,7 +2172,7 @@ func (m *intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_21 == nil {
+		if midIntentPutExtra2_21 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2183,7 +2183,7 @@ func (m *intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_21, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_21, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2194,7 +2194,7 @@ func (m *intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtra2_22 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
+func (m *Intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2202,7 +2202,7 @@ func (m *intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_22 == nil {
+		if midIntentPutExtra2_22 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2213,7 +2213,7 @@ func (m *intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_22, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
+			midIntentPutExtra2_22, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2224,7 +2224,7 @@ func (m *intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
 }
 
 // PutExtra2_23 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2232,7 +2232,7 @@ func (m *intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midintentPutExtra2_23 == nil {
+		if midIntentPutExtra2_23 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtra is not available on this device")
 			return callErr
 		}
@@ -2243,7 +2243,7 @@ func (m *intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtra2_23, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutExtra2_23, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2254,7 +2254,7 @@ func (m *intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error
 }
 
 // PutExtras1 calls android.content.Intent.putExtras.
-func (m *intent) PutExtras1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtras1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2262,14 +2262,14 @@ func (m *intent) PutExtras1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtras1 == nil {
+		if midIntentPutExtras1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtras is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtras1, jni.ObjectValue(arg0),
+			midIntentPutExtras1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2280,7 +2280,7 @@ func (m *intent) PutExtras1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // PutExtras1_1 calls android.content.Intent.putExtras.
-func (m *intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2288,14 +2288,14 @@ func (m *intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentPutExtras1_1 == nil {
+		if midIntentPutExtras1_1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.putExtras is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutExtras1_1, jni.ObjectValue(arg0),
+			midIntentPutExtras1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2306,7 +2306,7 @@ func (m *intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // PutIntegerArrayListExtra calls android.content.Intent.putIntegerArrayListExtra.
-func (m *intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2314,7 +2314,7 @@ func (m *intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.O
 			callErr = err
 			return err
 		}
-		if midintentPutIntegerArrayListExtra == nil {
+		if midIntentPutIntegerArrayListExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.putIntegerArrayListExtra is not available on this device")
 			return callErr
 		}
@@ -2325,7 +2325,7 @@ func (m *intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.O
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2336,7 +2336,7 @@ func (m *intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.O
 }
 
 // PutParcelableArrayListExtra calls android.content.Intent.putParcelableArrayListExtra.
-func (m *intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2344,7 +2344,7 @@ func (m *intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jn
 			callErr = err
 			return err
 		}
-		if midintentPutParcelableArrayListExtra == nil {
+		if midIntentPutParcelableArrayListExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.putParcelableArrayListExtra is not available on this device")
 			return callErr
 		}
@@ -2355,7 +2355,7 @@ func (m *intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jn
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutParcelableArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutParcelableArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2366,7 +2366,7 @@ func (m *intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jn
 }
 
 // PutStringArrayListExtra calls android.content.Intent.putStringArrayListExtra.
-func (m *intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2374,7 +2374,7 @@ func (m *intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Ob
 			callErr = err
 			return err
 		}
-		if midintentPutStringArrayListExtra == nil {
+		if midIntentPutStringArrayListExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.putStringArrayListExtra is not available on this device")
 			return callErr
 		}
@@ -2385,7 +2385,7 @@ func (m *intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Ob
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentPutStringArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midIntentPutStringArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2396,7 +2396,7 @@ func (m *intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Ob
 }
 
 // ReadFromParcel calls android.content.Intent.readFromParcel.
-func (m *intent) ReadFromParcel(arg0 *jni.Object) error {
+func (m *Intent) ReadFromParcel(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2404,14 +2404,14 @@ func (m *intent) ReadFromParcel(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midintentReadFromParcel == nil {
+		if midIntentReadFromParcel == nil {
 			callErr = fmt.Errorf("android.content.Intent.readFromParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentReadFromParcel, jni.ObjectValue(arg0),
+			midIntentReadFromParcel, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -2419,7 +2419,7 @@ func (m *intent) ReadFromParcel(arg0 *jni.Object) error {
 }
 
 // RemoveCategory calls android.content.Intent.removeCategory.
-func (m *intent) RemoveCategory(arg0 string) error {
+func (m *Intent) RemoveCategory(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2427,7 +2427,7 @@ func (m *intent) RemoveCategory(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midintentRemoveCategory == nil {
+		if midIntentRemoveCategory == nil {
 			callErr = fmt.Errorf("android.content.Intent.removeCategory is not available on this device")
 			return callErr
 		}
@@ -2438,7 +2438,7 @@ func (m *intent) RemoveCategory(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentRemoveCategory, jni.ObjectValue(&jArg0.Object),
+			midIntentRemoveCategory, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -2446,7 +2446,7 @@ func (m *intent) RemoveCategory(arg0 string) error {
 }
 
 // RemoveExtra calls android.content.Intent.removeExtra.
-func (m *intent) RemoveExtra(arg0 string) error {
+func (m *Intent) RemoveExtra(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2454,7 +2454,7 @@ func (m *intent) RemoveExtra(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midintentRemoveExtra == nil {
+		if midIntentRemoveExtra == nil {
 			callErr = fmt.Errorf("android.content.Intent.removeExtra is not available on this device")
 			return callErr
 		}
@@ -2465,7 +2465,7 @@ func (m *intent) RemoveExtra(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentRemoveExtra, jni.ObjectValue(&jArg0.Object),
+			midIntentRemoveExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -2473,7 +2473,7 @@ func (m *intent) RemoveExtra(arg0 string) error {
 }
 
 // RemoveFlags calls android.content.Intent.removeFlags.
-func (m *intent) RemoveFlags(arg0 int32) error {
+func (m *Intent) RemoveFlags(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2481,14 +2481,14 @@ func (m *intent) RemoveFlags(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midintentRemoveFlags == nil {
+		if midIntentRemoveFlags == nil {
 			callErr = fmt.Errorf("android.content.Intent.removeFlags is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentRemoveFlags, jni.IntValue(arg0),
+			midIntentRemoveFlags, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -2496,7 +2496,7 @@ func (m *intent) RemoveFlags(arg0 int32) error {
 }
 
 // RemoveLaunchSecurityProtection calls android.content.Intent.removeLaunchSecurityProtection.
-func (m *intent) RemoveLaunchSecurityProtection() error {
+func (m *Intent) RemoveLaunchSecurityProtection() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2504,13 +2504,13 @@ func (m *intent) RemoveLaunchSecurityProtection() error {
 			callErr = err
 			return err
 		}
-		if midintentRemoveLaunchSecurityProtection == nil {
+		if midIntentRemoveLaunchSecurityProtection == nil {
 			callErr = fmt.Errorf("android.content.Intent.removeLaunchSecurityProtection is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentRemoveLaunchSecurityProtection,
+			midIntentRemoveLaunchSecurityProtection,
 		)
 		return callErr
 	})
@@ -2518,7 +2518,7 @@ func (m *intent) RemoveLaunchSecurityProtection() error {
 }
 
 // ReplaceExtras1 calls android.content.Intent.replaceExtras.
-func (m *intent) ReplaceExtras1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) ReplaceExtras1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2526,14 +2526,14 @@ func (m *intent) ReplaceExtras1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentReplaceExtras1 == nil {
+		if midIntentReplaceExtras1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.replaceExtras is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentReplaceExtras1, jni.ObjectValue(arg0),
+			midIntentReplaceExtras1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2544,7 +2544,7 @@ func (m *intent) ReplaceExtras1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // ReplaceExtras1_1 calls android.content.Intent.replaceExtras.
-func (m *intent) ReplaceExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) ReplaceExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2552,14 +2552,14 @@ func (m *intent) ReplaceExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentReplaceExtras1_1 == nil {
+		if midIntentReplaceExtras1_1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.replaceExtras is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentReplaceExtras1_1, jni.ObjectValue(arg0),
+			midIntentReplaceExtras1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2570,7 +2570,7 @@ func (m *intent) ReplaceExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // ResolveActivity calls android.content.Intent.resolveActivity.
-func (m *intent) ResolveActivity(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) ResolveActivity(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2578,14 +2578,14 @@ func (m *intent) ResolveActivity(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentResolveActivity == nil {
+		if midIntentResolveActivity == nil {
 			callErr = fmt.Errorf("android.content.Intent.resolveActivity is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentResolveActivity, jni.ObjectValue(arg0),
+			midIntentResolveActivity, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2596,7 +2596,7 @@ func (m *intent) ResolveActivity(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // ResolveActivityInfo calls android.content.Intent.resolveActivityInfo.
-func (m *intent) ResolveActivityInfo(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+func (m *Intent) ResolveActivityInfo(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2604,14 +2604,14 @@ func (m *intent) ResolveActivityInfo(arg0 *jni.Object, arg1 int32) (*jni.Object,
 			callErr = err
 			return err
 		}
-		if midintentResolveActivityInfo == nil {
+		if midIntentResolveActivityInfo == nil {
 			callErr = fmt.Errorf("android.content.Intent.resolveActivityInfo is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentResolveActivityInfo, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midIntentResolveActivityInfo, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2622,7 +2622,7 @@ func (m *intent) ResolveActivityInfo(arg0 *jni.Object, arg1 int32) (*jni.Object,
 }
 
 // ResolveType1 calls android.content.Intent.resolveType.
-func (m *intent) ResolveType1(arg0 *jni.Object) (string, error) {
+func (m *Intent) ResolveType1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2630,14 +2630,14 @@ func (m *intent) ResolveType1(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentResolveType1 == nil {
+		if midIntentResolveType1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.resolveType is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentResolveType1, jni.ObjectValue(arg0),
+			midIntentResolveType1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2649,7 +2649,7 @@ func (m *intent) ResolveType1(arg0 *jni.Object) (string, error) {
 }
 
 // ResolveType1_1 calls android.content.Intent.resolveType.
-func (m *intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
+func (m *Intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2657,14 +2657,14 @@ func (m *intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentResolveType1_1 == nil {
+		if midIntentResolveType1_1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.resolveType is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentResolveType1_1, jni.ObjectValue(arg0),
+			midIntentResolveType1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2676,7 +2676,7 @@ func (m *intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
 }
 
 // ResolveTypeIfNeeded calls android.content.Intent.resolveTypeIfNeeded.
-func (m *intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
+func (m *Intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2684,14 +2684,14 @@ func (m *intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentResolveTypeIfNeeded == nil {
+		if midIntentResolveTypeIfNeeded == nil {
 			callErr = fmt.Errorf("android.content.Intent.resolveTypeIfNeeded is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentResolveTypeIfNeeded, jni.ObjectValue(arg0),
+			midIntentResolveTypeIfNeeded, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2703,7 +2703,7 @@ func (m *intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
 }
 
 // SetAction calls android.content.Intent.setAction.
-func (m *intent) SetAction(arg0 string) (*jni.Object, error) {
+func (m *Intent) SetAction(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2711,7 +2711,7 @@ func (m *intent) SetAction(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetAction == nil {
+		if midIntentSetAction == nil {
 			callErr = fmt.Errorf("android.content.Intent.setAction is not available on this device")
 			return callErr
 		}
@@ -2722,7 +2722,7 @@ func (m *intent) SetAction(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetAction, jni.ObjectValue(&jArg0.Object),
+			midIntentSetAction, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2733,7 +2733,7 @@ func (m *intent) SetAction(arg0 string) (*jni.Object, error) {
 }
 
 // SetClass calls android.content.Intent.setClass.
-func (m *intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2741,14 +2741,14 @@ func (m *intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, erro
 			callErr = err
 			return err
 		}
-		if midintentSetClass == nil {
+		if midIntentSetClass == nil {
 			callErr = fmt.Errorf("android.content.Intent.setClass is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetClass, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midIntentSetClass, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2759,7 +2759,7 @@ func (m *intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, erro
 }
 
 // SetClassName2 calls android.content.Intent.setClassName.
-func (m *intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+func (m *Intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2767,7 +2767,7 @@ func (m *intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 			callErr = err
 			return err
 		}
-		if midintentSetClassName2 == nil {
+		if midIntentSetClassName2 == nil {
 			callErr = fmt.Errorf("android.content.Intent.setClassName is not available on this device")
 			return callErr
 		}
@@ -2779,7 +2779,7 @@ func (m *intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetClassName2, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			midIntentSetClassName2, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2790,7 +2790,7 @@ func (m *intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 }
 
 // SetClassName2_1 calls android.content.Intent.setClassName.
-func (m *intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) {
+func (m *Intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2798,7 +2798,7 @@ func (m *intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) 
 			callErr = err
 			return err
 		}
-		if midintentSetClassName2_1 == nil {
+		if midIntentSetClassName2_1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.setClassName is not available on this device")
 			return callErr
 		}
@@ -2814,7 +2814,7 @@ func (m *intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) 
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetClassName2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			midIntentSetClassName2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2825,7 +2825,7 @@ func (m *intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) 
 }
 
 // SetClipData calls android.content.Intent.setClipData.
-func (m *intent) SetClipData(arg0 *jni.Object) error {
+func (m *Intent) SetClipData(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2833,14 +2833,14 @@ func (m *intent) SetClipData(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midintentSetClipData == nil {
+		if midIntentSetClipData == nil {
 			callErr = fmt.Errorf("android.content.Intent.setClipData is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentSetClipData, jni.ObjectValue(arg0),
+			midIntentSetClipData, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -2848,7 +2848,7 @@ func (m *intent) SetClipData(arg0 *jni.Object) error {
 }
 
 // SetComponent calls android.content.Intent.setComponent.
-func (m *intent) SetComponent(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) SetComponent(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2856,14 +2856,14 @@ func (m *intent) SetComponent(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetComponent == nil {
+		if midIntentSetComponent == nil {
 			callErr = fmt.Errorf("android.content.Intent.setComponent is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetComponent, jni.ObjectValue(arg0),
+			midIntentSetComponent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2874,7 +2874,7 @@ func (m *intent) SetComponent(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // SetData calls android.content.Intent.setData.
-func (m *intent) SetData(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) SetData(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2882,14 +2882,14 @@ func (m *intent) SetData(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetData == nil {
+		if midIntentSetData == nil {
 			callErr = fmt.Errorf("android.content.Intent.setData is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetData, jni.ObjectValue(arg0),
+			midIntentSetData, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2900,7 +2900,7 @@ func (m *intent) SetData(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // SetDataAndNormalize calls android.content.Intent.setDataAndNormalize.
-func (m *intent) SetDataAndNormalize(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) SetDataAndNormalize(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2908,14 +2908,14 @@ func (m *intent) SetDataAndNormalize(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetDataAndNormalize == nil {
+		if midIntentSetDataAndNormalize == nil {
 			callErr = fmt.Errorf("android.content.Intent.setDataAndNormalize is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetDataAndNormalize, jni.ObjectValue(arg0),
+			midIntentSetDataAndNormalize, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2926,7 +2926,7 @@ func (m *intent) SetDataAndNormalize(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // SetDataAndType calls android.content.Intent.setDataAndType.
-func (m *intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+func (m *Intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2934,7 +2934,7 @@ func (m *intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, err
 			callErr = err
 			return err
 		}
-		if midintentSetDataAndType == nil {
+		if midIntentSetDataAndType == nil {
 			callErr = fmt.Errorf("android.content.Intent.setDataAndType is not available on this device")
 			return callErr
 		}
@@ -2946,7 +2946,7 @@ func (m *intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, err
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetDataAndType, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			midIntentSetDataAndType, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2957,7 +2957,7 @@ func (m *intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, err
 }
 
 // SetDataAndTypeAndNormalize calls android.content.Intent.setDataAndTypeAndNormalize.
-func (m *intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+func (m *Intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2965,7 +2965,7 @@ func (m *intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni
 			callErr = err
 			return err
 		}
-		if midintentSetDataAndTypeAndNormalize == nil {
+		if midIntentSetDataAndTypeAndNormalize == nil {
 			callErr = fmt.Errorf("android.content.Intent.setDataAndTypeAndNormalize is not available on this device")
 			return callErr
 		}
@@ -2977,7 +2977,7 @@ func (m *intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetDataAndTypeAndNormalize, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			midIntentSetDataAndTypeAndNormalize, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2988,7 +2988,7 @@ func (m *intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni
 }
 
 // SetExtrasClassLoader calls android.content.Intent.setExtrasClassLoader.
-func (m *intent) SetExtrasClassLoader(arg0 *jni.Object) error {
+func (m *Intent) SetExtrasClassLoader(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2996,14 +2996,14 @@ func (m *intent) SetExtrasClassLoader(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midintentSetExtrasClassLoader == nil {
+		if midIntentSetExtrasClassLoader == nil {
 			callErr = fmt.Errorf("android.content.Intent.setExtrasClassLoader is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentSetExtrasClassLoader, jni.ObjectValue(arg0),
+			midIntentSetExtrasClassLoader, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3011,7 +3011,7 @@ func (m *intent) SetExtrasClassLoader(arg0 *jni.Object) error {
 }
 
 // SetFlags calls android.content.Intent.setFlags.
-func (m *intent) SetFlags(arg0 int32) (*jni.Object, error) {
+func (m *Intent) SetFlags(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3019,14 +3019,14 @@ func (m *intent) SetFlags(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetFlags == nil {
+		if midIntentSetFlags == nil {
 			callErr = fmt.Errorf("android.content.Intent.setFlags is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetFlags, jni.IntValue(arg0),
+			midIntentSetFlags, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3037,7 +3037,7 @@ func (m *intent) SetFlags(arg0 int32) (*jni.Object, error) {
 }
 
 // SetIdentifier calls android.content.Intent.setIdentifier.
-func (m *intent) SetIdentifier(arg0 string) (*jni.Object, error) {
+func (m *Intent) SetIdentifier(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3045,7 +3045,7 @@ func (m *intent) SetIdentifier(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetIdentifier == nil {
+		if midIntentSetIdentifier == nil {
 			callErr = fmt.Errorf("android.content.Intent.setIdentifier is not available on this device")
 			return callErr
 		}
@@ -3056,7 +3056,7 @@ func (m *intent) SetIdentifier(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetIdentifier, jni.ObjectValue(&jArg0.Object),
+			midIntentSetIdentifier, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3067,7 +3067,7 @@ func (m *intent) SetIdentifier(arg0 string) (*jni.Object, error) {
 }
 
 // SetPackage calls android.content.Intent.setPackage.
-func (m *intent) SetPackage(arg0 string) (*jni.Object, error) {
+func (m *Intent) SetPackage(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3075,7 +3075,7 @@ func (m *intent) SetPackage(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetPackage == nil {
+		if midIntentSetPackage == nil {
 			callErr = fmt.Errorf("android.content.Intent.setPackage is not available on this device")
 			return callErr
 		}
@@ -3086,7 +3086,7 @@ func (m *intent) SetPackage(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetPackage, jni.ObjectValue(&jArg0.Object),
+			midIntentSetPackage, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3097,7 +3097,7 @@ func (m *intent) SetPackage(arg0 string) (*jni.Object, error) {
 }
 
 // SetSelector calls android.content.Intent.setSelector.
-func (m *intent) SetSelector(arg0 *jni.Object) error {
+func (m *Intent) SetSelector(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3105,14 +3105,14 @@ func (m *intent) SetSelector(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midintentSetSelector == nil {
+		if midIntentSetSelector == nil {
 			callErr = fmt.Errorf("android.content.Intent.setSelector is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentSetSelector, jni.ObjectValue(arg0),
+			midIntentSetSelector, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3120,7 +3120,7 @@ func (m *intent) SetSelector(arg0 *jni.Object) error {
 }
 
 // SetSourceBounds calls android.content.Intent.setSourceBounds.
-func (m *intent) SetSourceBounds(arg0 *jni.Object) error {
+func (m *Intent) SetSourceBounds(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3128,14 +3128,14 @@ func (m *intent) SetSourceBounds(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midintentSetSourceBounds == nil {
+		if midIntentSetSourceBounds == nil {
 			callErr = fmt.Errorf("android.content.Intent.setSourceBounds is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentSetSourceBounds, jni.ObjectValue(arg0),
+			midIntentSetSourceBounds, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3143,7 +3143,7 @@ func (m *intent) SetSourceBounds(arg0 *jni.Object) error {
 }
 
 // SetType calls android.content.Intent.setType.
-func (m *intent) SetType(arg0 string) (*jni.Object, error) {
+func (m *Intent) SetType(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3151,7 +3151,7 @@ func (m *intent) SetType(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetType == nil {
+		if midIntentSetType == nil {
 			callErr = fmt.Errorf("android.content.Intent.setType is not available on this device")
 			return callErr
 		}
@@ -3162,7 +3162,7 @@ func (m *intent) SetType(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetType, jni.ObjectValue(&jArg0.Object),
+			midIntentSetType, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3173,7 +3173,7 @@ func (m *intent) SetType(arg0 string) (*jni.Object, error) {
 }
 
 // SetTypeAndNormalize calls android.content.Intent.setTypeAndNormalize.
-func (m *intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
+func (m *Intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3181,7 +3181,7 @@ func (m *intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentSetTypeAndNormalize == nil {
+		if midIntentSetTypeAndNormalize == nil {
 			callErr = fmt.Errorf("android.content.Intent.setTypeAndNormalize is not available on this device")
 			return callErr
 		}
@@ -3192,7 +3192,7 @@ func (m *intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midintentSetTypeAndNormalize, jni.ObjectValue(&jArg0.Object),
+			midIntentSetTypeAndNormalize, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3203,7 +3203,7 @@ func (m *intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
 }
 
 // ToString calls android.content.Intent.toString.
-func (m *intent) ToString() (string, error) {
+func (m *Intent) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3211,13 +3211,13 @@ func (m *intent) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentToString == nil {
+		if midIntentToString == nil {
 			callErr = fmt.Errorf("android.content.Intent.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentToString,
+			midIntentToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -3229,7 +3229,7 @@ func (m *intent) ToString() (string, error) {
 }
 
 // ToURI calls android.content.Intent.toURI.
-func (m *intent) ToURI() (string, error) {
+func (m *Intent) ToURI() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3237,13 +3237,13 @@ func (m *intent) ToURI() (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentToURI == nil {
+		if midIntentToURI == nil {
 			callErr = fmt.Errorf("android.content.Intent.toURI is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentToURI,
+			midIntentToURI,
 		)
 		if callErr != nil {
 			return callErr
@@ -3255,7 +3255,7 @@ func (m *intent) ToURI() (string, error) {
 }
 
 // ToUri calls android.content.Intent.toUri.
-func (m *intent) ToUri(arg0 int32) (string, error) {
+func (m *Intent) ToUri(arg0 int32) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3263,14 +3263,14 @@ func (m *intent) ToUri(arg0 int32) (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentToUri == nil {
+		if midIntentToUri == nil {
 			callErr = fmt.Errorf("android.content.Intent.toUri is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midintentToUri, jni.IntValue(arg0),
+			midIntentToUri, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3282,7 +3282,7 @@ func (m *intent) ToUri(arg0 int32) (string, error) {
 }
 
 // WriteToParcel calls android.content.Intent.writeToParcel.
-func (m *intent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *Intent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3290,14 +3290,14 @@ func (m *intent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midintentWriteToParcel == nil {
+		if midIntentWriteToParcel == nil {
 			callErr = fmt.Errorf("android.content.Intent.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midintentWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midIntentWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -3305,7 +3305,7 @@ func (m *intent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 }
 
 // CreateChooser2 calls android.content.Intent.createChooser.
-func (m *intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+func (m *Intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3313,7 +3313,7 @@ func (m *intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, err
 			callErr = err
 			return err
 		}
-		if midintentCreateChooser2 == nil {
+		if midIntentCreateChooser2 == nil {
 			callErr = fmt.Errorf("android.content.Intent.createChooser is not available on this device")
 			return callErr
 		}
@@ -3324,8 +3324,8 @@ func (m *intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, err
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentCreateChooser2, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentCreateChooser2, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3336,7 +3336,7 @@ func (m *intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, err
 }
 
 // CreateChooser3_1 calls android.content.Intent.createChooser.
-func (m *intent) CreateChooser3_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Intent) CreateChooser3_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3344,7 +3344,7 @@ func (m *intent) CreateChooser3_1(arg0 *jni.Object, arg1 string, arg2 *jni.Objec
 			callErr = err
 			return err
 		}
-		if midintentCreateChooser3_1 == nil {
+		if midIntentCreateChooser3_1 == nil {
 			callErr = fmt.Errorf("android.content.Intent.createChooser is not available on this device")
 			return callErr
 		}
@@ -3355,8 +3355,8 @@ func (m *intent) CreateChooser3_1(arg0 *jni.Object, arg1 string, arg2 *jni.Objec
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentCreateChooser3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentCreateChooser3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -3367,7 +3367,7 @@ func (m *intent) CreateChooser3_1(arg0 *jni.Object, arg1 string, arg2 *jni.Objec
 }
 
 // GetIntent calls android.content.Intent.getIntent.
-func (m *intent) GetIntent(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetIntent(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3375,7 +3375,7 @@ func (m *intent) GetIntent(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetIntent == nil {
+		if midIntentGetIntent == nil {
 			callErr = fmt.Errorf("android.content.Intent.getIntent is not available on this device")
 			return callErr
 		}
@@ -3385,8 +3385,8 @@ func (m *intent) GetIntent(arg0 string) (*jni.Object, error) {
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentGetIntent, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentGetIntent, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3397,7 +3397,7 @@ func (m *intent) GetIntent(arg0 string) (*jni.Object, error) {
 }
 
 // GetIntentOld calls android.content.Intent.getIntentOld.
-func (m *intent) GetIntentOld(arg0 string) (*jni.Object, error) {
+func (m *Intent) GetIntentOld(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3405,7 +3405,7 @@ func (m *intent) GetIntentOld(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentGetIntentOld == nil {
+		if midIntentGetIntentOld == nil {
 			callErr = fmt.Errorf("android.content.Intent.getIntentOld is not available on this device")
 			return callErr
 		}
@@ -3415,8 +3415,8 @@ func (m *intent) GetIntentOld(arg0 string) (*jni.Object, error) {
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentGetIntentOld, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentGetIntentOld, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3427,7 +3427,7 @@ func (m *intent) GetIntentOld(arg0 string) (*jni.Object, error) {
 }
 
 // MakeMainActivity calls android.content.Intent.makeMainActivity.
-func (m *intent) MakeMainActivity(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) MakeMainActivity(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3435,14 +3435,14 @@ func (m *intent) MakeMainActivity(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentMakeMainActivity == nil {
+		if midIntentMakeMainActivity == nil {
 			callErr = fmt.Errorf("android.content.Intent.makeMainActivity is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentMakeMainActivity, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentMakeMainActivity, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3453,7 +3453,7 @@ func (m *intent) MakeMainActivity(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // MakeMainSelectorActivity calls android.content.Intent.makeMainSelectorActivity.
-func (m *intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object, error) {
+func (m *Intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3461,7 +3461,7 @@ func (m *intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object
 			callErr = err
 			return err
 		}
-		if midintentMakeMainSelectorActivity == nil {
+		if midIntentMakeMainSelectorActivity == nil {
 			callErr = fmt.Errorf("android.content.Intent.makeMainSelectorActivity is not available on this device")
 			return callErr
 		}
@@ -3476,8 +3476,8 @@ func (m *intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentMakeMainSelectorActivity, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentMakeMainSelectorActivity, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3488,7 +3488,7 @@ func (m *intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object
 }
 
 // MakeRestartActivityTask calls android.content.Intent.makeRestartActivityTask.
-func (m *intent) MakeRestartActivityTask(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Intent) MakeRestartActivityTask(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3496,14 +3496,14 @@ func (m *intent) MakeRestartActivityTask(arg0 *jni.Object) (*jni.Object, error) 
 			callErr = err
 			return err
 		}
-		if midintentMakeRestartActivityTask == nil {
+		if midIntentMakeRestartActivityTask == nil {
 			callErr = fmt.Errorf("android.content.Intent.makeRestartActivityTask is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentMakeRestartActivityTask, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentMakeRestartActivityTask, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3514,7 +3514,7 @@ func (m *intent) MakeRestartActivityTask(arg0 *jni.Object) (*jni.Object, error) 
 }
 
 // NormalizeMimeType calls android.content.Intent.normalizeMimeType.
-func (m *intent) NormalizeMimeType(arg0 string) (string, error) {
+func (m *Intent) NormalizeMimeType(arg0 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3522,7 +3522,7 @@ func (m *intent) NormalizeMimeType(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if midintentNormalizeMimeType == nil {
+		if midIntentNormalizeMimeType == nil {
 			callErr = fmt.Errorf("android.content.Intent.normalizeMimeType is not available on this device")
 			return callErr
 		}
@@ -3532,8 +3532,8 @@ func (m *intent) NormalizeMimeType(arg0 string) (string, error) {
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentNormalizeMimeType, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentNormalizeMimeType, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -3545,7 +3545,7 @@ func (m *intent) NormalizeMimeType(arg0 string) (string, error) {
 }
 
 // ParseIntent calls android.content.Intent.parseIntent.
-func (m *intent) ParseIntent(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Intent) ParseIntent(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3553,14 +3553,14 @@ func (m *intent) ParseIntent(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Objec
 			callErr = err
 			return err
 		}
-		if midintentParseIntent == nil {
+		if midIntentParseIntent == nil {
 			callErr = fmt.Errorf("android.content.Intent.parseIntent is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentParseIntent, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentParseIntent, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -3571,7 +3571,7 @@ func (m *intent) ParseIntent(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Objec
 }
 
 // ParseUri calls android.content.Intent.parseUri.
-func (m *intent) ParseUri(arg0 string, arg1 int32) (*jni.Object, error) {
+func (m *Intent) ParseUri(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3579,7 +3579,7 @@ func (m *intent) ParseUri(arg0 string, arg1 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midintentParseUri == nil {
+		if midIntentParseUri == nil {
 			callErr = fmt.Errorf("android.content.Intent.parseUri is not available on this device")
 			return callErr
 		}
@@ -3589,8 +3589,8 @@ func (m *intent) ParseUri(arg0 string, arg1 int32) (*jni.Object, error) {
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsintent)),
-			midintentParseUri, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsIntent)),
+			midIntentParseUri, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr

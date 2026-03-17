@@ -20,18 +20,18 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsblobStoreManager                            *jni.GlobalRef
-	midblobStoreManagerAbandonSession              jni.MethodID
-	midblobStoreManagerAcquireLease2               jni.MethodID
-	midblobStoreManagerAcquireLease3_1             jni.MethodID
-	midblobStoreManagerAcquireLease2_2             jni.MethodID
-	midblobStoreManagerAcquireLease3_3             jni.MethodID
-	midblobStoreManagerCreateSession               jni.MethodID
-	midblobStoreManagerGetLeasedBlobs              jni.MethodID
-	midblobStoreManagerGetRemainingLeaseQuotaBytes jni.MethodID
-	midblobStoreManagerOpenBlob                    jni.MethodID
-	midblobStoreManagerOpenSession                 jni.MethodID
-	midblobStoreManagerReleaseLease                jni.MethodID
+	clsManager                            *jni.GlobalRef
+	midManagerAbandonSession              jni.MethodID
+	midManagerAcquireLease2               jni.MethodID
+	midManagerAcquireLease3_1             jni.MethodID
+	midManagerAcquireLease2_2             jni.MethodID
+	midManagerAcquireLease3_3             jni.MethodID
+	midManagerCreateSession               jni.MethodID
+	midManagerGetLeasedBlobs              jni.MethodID
+	midManagerGetRemainingLeaseQuotaBytes jni.MethodID
+	midManagerOpenBlob                    jni.MethodID
+	midManagerOpenSession                 jni.MethodID
+	midManagerReleaseLease                jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -62,9 +62,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.blob.BlobStoreManager: %w", err)
 	}
-	clsblobStoreManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midblobStoreManagerAbandonSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "abandonSession", "(J)V")
+	midManagerAbandonSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "abandonSession", "(J)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -72,7 +72,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.abandonSession")
 	}
 
-	midblobStoreManagerAcquireLease2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;I)V")
+	midManagerAcquireLease2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -80,7 +80,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
-	midblobStoreManagerAcquireLease3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;IJ)V")
+	midManagerAcquireLease3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;IJ)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -88,7 +88,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
-	midblobStoreManagerAcquireLease2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;Ljava/lang/String;)V")
+	midManagerAcquireLease2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -96,7 +96,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
-	midblobStoreManagerAcquireLease3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;Ljava/lang/String;J)V")
+	midManagerAcquireLease3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acquireLease", "(Landroid/app/blob/BlobHandle;Ljava/lang/String;J)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -104,7 +104,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.acquireLease")
 	}
 
-	midblobStoreManagerCreateSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "createSession", "(Landroid/app/blob/BlobHandle;)J")
+	midManagerCreateSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createSession", "(Landroid/app/blob/BlobHandle;)J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -112,7 +112,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.createSession")
 	}
 
-	midblobStoreManagerGetLeasedBlobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "getLeasedBlobs", "()Ljava/util/List;")
+	midManagerGetLeasedBlobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLeasedBlobs", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -120,7 +120,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.getLeasedBlobs")
 	}
 
-	midblobStoreManagerGetRemainingLeaseQuotaBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "getRemainingLeaseQuotaBytes", "()J")
+	midManagerGetRemainingLeaseQuotaBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRemainingLeaseQuotaBytes", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -128,7 +128,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.getRemainingLeaseQuotaBytes")
 	}
 
-	midblobStoreManagerOpenBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "openBlob", "(Landroid/app/blob/BlobHandle;)Landroid/os/ParcelFileDescriptor;")
+	midManagerOpenBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openBlob", "(Landroid/app/blob/BlobHandle;)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -136,7 +136,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.openBlob")
 	}
 
-	midblobStoreManagerOpenSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "openSession", "(J)Landroid/app/blob/BlobStoreManager$Session;")
+	midManagerOpenSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openSession", "(J)Landroid/app/blob/BlobStoreManager$Session;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -144,7 +144,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.blob.BlobStoreManager.openSession")
 	}
 
-	midblobStoreManagerReleaseLease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsblobStoreManager)), "releaseLease", "(Landroid/app/blob/BlobHandle;)V")
+	midManagerReleaseLease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "releaseLease", "(Landroid/app/blob/BlobHandle;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

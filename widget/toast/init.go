@@ -20,26 +20,26 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clstoast                    *jni.GlobalRef
-	midtoastAddCallback         jni.MethodID
-	midtoastCancel              jni.MethodID
-	midtoastGetDuration         jni.MethodID
-	midtoastGetGravity          jni.MethodID
-	midtoastGetHorizontalMargin jni.MethodID
-	midtoastGetVerticalMargin   jni.MethodID
-	midtoastGetView             jni.MethodID
-	midtoastGetXOffset          jni.MethodID
-	midtoastGetYOffset          jni.MethodID
-	midtoastRemoveCallback      jni.MethodID
-	midtoastSetDuration         jni.MethodID
-	midtoastSetGravity          jni.MethodID
-	midtoastSetMargin           jni.MethodID
-	midtoastSetText1            jni.MethodID
-	midtoastSetText1_1          jni.MethodID
-	midtoastSetView             jni.MethodID
-	midtoastShow                jni.MethodID
-	midtoastMakeText3           jni.MethodID
-	midtoastMakeText3_1         jni.MethodID
+	clsToast                    *jni.GlobalRef
+	midToastAddCallback         jni.MethodID
+	midToastCancel              jni.MethodID
+	midToastGetDuration         jni.MethodID
+	midToastGetGravity          jni.MethodID
+	midToastGetHorizontalMargin jni.MethodID
+	midToastGetVerticalMargin   jni.MethodID
+	midToastGetView             jni.MethodID
+	midToastGetXOffset          jni.MethodID
+	midToastGetYOffset          jni.MethodID
+	midToastRemoveCallback      jni.MethodID
+	midToastSetDuration         jni.MethodID
+	midToastSetGravity          jni.MethodID
+	midToastSetMargin           jni.MethodID
+	midToastSetText1            jni.MethodID
+	midToastSetText1_1          jni.MethodID
+	midToastSetView             jni.MethodID
+	midToastShow                jni.MethodID
+	midToastMakeText3           jni.MethodID
+	midToastMakeText3_1         jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -70,9 +70,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.widget.Toast: %w", err)
 	}
-	clstoast = env.NewGlobalRef(&c.Object)
+	clsToast = env.NewGlobalRef(&c.Object)
 
-	midtoastAddCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "addCallback", "(Landroid/widget/Toast$Callback;)V")
+	midToastAddCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "addCallback", "(Landroid/widget/Toast$Callback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -80,7 +80,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.addCallback")
 	}
 
-	midtoastCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "cancel", "()V")
+	midToastCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "cancel", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -88,7 +88,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.cancel")
 	}
 
-	midtoastGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getDuration", "()I")
+	midToastGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "getDuration", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -96,7 +96,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.getDuration")
 	}
 
-	midtoastGetGravity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getGravity", "()I")
+	midToastGetGravity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "getGravity", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -104,7 +104,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.getGravity")
 	}
 
-	midtoastGetHorizontalMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getHorizontalMargin", "()F")
+	midToastGetHorizontalMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "getHorizontalMargin", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -112,7 +112,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.getHorizontalMargin")
 	}
 
-	midtoastGetVerticalMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getVerticalMargin", "()F")
+	midToastGetVerticalMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "getVerticalMargin", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -120,7 +120,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.getVerticalMargin")
 	}
 
-	midtoastGetView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getView", "()Landroid/view/View;")
+	midToastGetView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "getView", "()Landroid/view/View;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -128,7 +128,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.getView")
 	}
 
-	midtoastGetXOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getXOffset", "()I")
+	midToastGetXOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "getXOffset", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -136,7 +136,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.getXOffset")
 	}
 
-	midtoastGetYOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getYOffset", "()I")
+	midToastGetYOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "getYOffset", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -144,7 +144,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.getYOffset")
 	}
 
-	midtoastRemoveCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "removeCallback", "(Landroid/widget/Toast$Callback;)V")
+	midToastRemoveCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "removeCallback", "(Landroid/widget/Toast$Callback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -152,7 +152,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.removeCallback")
 	}
 
-	midtoastSetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setDuration", "(I)V")
+	midToastSetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setDuration", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -160,7 +160,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.setDuration")
 	}
 
-	midtoastSetGravity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setGravity", "(III)V")
+	midToastSetGravity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setGravity", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -168,7 +168,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.setGravity")
 	}
 
-	midtoastSetMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setMargin", "(FF)V")
+	midToastSetMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setMargin", "(FF)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -176,7 +176,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.setMargin")
 	}
 
-	midtoastSetText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setText", "(I)V")
+	midToastSetText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setText", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -184,7 +184,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.setText")
 	}
 
-	midtoastSetText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setText", "(Ljava/lang/String;)V")
+	midToastSetText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setText", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -192,7 +192,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.setText")
 	}
 
-	midtoastSetView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setView", "(Landroid/view/View;)V")
+	midToastSetView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setView", "(Landroid/view/View;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -200,7 +200,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.setView")
 	}
 
-	midtoastShow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "show", "()V")
+	midToastShow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "show", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -208,7 +208,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.show")
 	}
 
-	midtoastMakeText3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "makeText", "(Landroid/content/Context;II)Landroid/widget/Toast;")
+	midToastMakeText3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "makeText", "(Landroid/content/Context;II)Landroid/widget/Toast;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -216,7 +216,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.makeText")
 	}
 
-	midtoastMakeText3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "makeText", "(Landroid/content/Context;Ljava/lang/String;I)Landroid/widget/Toast;")
+	midToastMakeText3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "makeText", "(Landroid/content/Context;Ljava/lang/String;I)Landroid/widget/Toast;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

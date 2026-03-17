@@ -2,7 +2,10 @@ package: nsd
 go_import: github.com/AndroidGoLab/jni/net/nsd
 classes:
     - java_class: android.net.nsd.NsdManager
-      go_type: nsdManager
+      go_type: Manager
+      obtain: system_service
+      service_name: servicediscovery
+      close: true
       methods:
         - java_method: discoverServices
           go_name: DiscoverServices3
@@ -140,7 +143,7 @@ classes:
           returns: void
           error: true
     - java_class: android.net.nsd.NsdServiceInfo
-      go_type: nsdServiceInfo
+      go_type: ServiceInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents

@@ -60,6 +60,51 @@ func (m *Context) Close() {
 	}
 }
 
+// PackageManager calls android.content.Context.getPackageManager().
+func (m *Context) PackageManager() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureContextInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		mid, err := env.GetMethodID(
+			(*jni.Class)(unsafe.Pointer(clsContext)),
+			"getPackageManager",
+			"()Landroid/content/pm/PackageManager;",
+		)
+		if err != nil {
+			callErr = fmt.Errorf("get getPackageManager: %w", err)
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(m.Obj, mid)
+		return callErr
+	})
+	return result, callErr
+}
+
+// ContentResolver calls android.content.Context.getContentResolver().
+func (m *Context) ContentResolver() *jni.Object {
+	var result *jni.Object
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureContextInit(env); err != nil {
+			return err
+		}
+		mid, err := env.GetMethodID(
+			(*jni.Class)(unsafe.Pointer(clsContext)),
+			"getContentResolver",
+			"()Landroid/content/ContentResolver;",
+		)
+		if err != nil {
+			return err
+		}
+		result, _ = env.CallObjectMethod(m.Obj, mid)
+		return nil
+	})
+	return result
+}
+
 // GetSystemService calls android.content.Context.getSystemService.
 func (m *Context) GetSystemService(name string) (*jni.Object, error) {
 	var result *jni.Object

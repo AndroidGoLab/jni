@@ -17,19 +17,19 @@ var (
 	_ *app.Context
 )
 
-// vibrator wraps android.os.Vibrator.
-type vibrator struct {
+// Vibrator wraps android.os.Vibrator.
+type Vibrator struct {
 	VM  *jni.VM
 	Ctx *app.Context
 	Obj *jni.GlobalRef
 }
 
-// Newvibrator obtains android.os.Vibrator from the Android system service manager.
-func Newvibrator(ctx *app.Context) (*vibrator, error) {
+// NewVibrator obtains android.os.Vibrator from the Android system service manager.
+func NewVibrator(ctx *app.Context) (*Vibrator, error) {
 	if ctx == nil {
-		return nil, fmt.Errorf("vibrator: nil Context")
+		return nil, fmt.Errorf("Vibrator: nil Context")
 	}
-	var mgr vibrator
+	var mgr Vibrator
 	mgr.VM = ctx.VM
 	mgr.Ctx = ctx
 
@@ -54,8 +54,8 @@ func Newvibrator(ctx *app.Context) (*vibrator, error) {
 }
 
 // Close releases the global reference to the underlying Java object.
-// After Close, the vibrator must not be used.
-func (m *vibrator) Close() {
+// After Close, the Vibrator must not be used.
+func (m *Vibrator) Close() {
 	if m.Obj != nil {
 		m.VM.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(m.Obj)
@@ -65,8 +65,34 @@ func (m *vibrator) Close() {
 	}
 }
 
+// HasVibrator calls android.os.Vibrator.hasVibrator.
+func (m *Vibrator) HasVibrator() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVibratorHasVibrator == nil {
+			callErr = fmt.Errorf("android.os.Vibrator.hasVibrator is not available on this device")
+			return callErr
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midVibratorHasVibrator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
 // AreEffectsSupported calls android.os.Vibrator.areEffectsSupported.
-func (m *vibrator) AreEffectsSupported(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Vibrator) AreEffectsSupported(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -74,14 +100,14 @@ func (m *vibrator) AreEffectsSupported(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midvibratorAreEffectsSupported == nil {
+		if midVibratorAreEffectsSupported == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.areEffectsSupported is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midvibratorAreEffectsSupported, jni.ObjectValue(arg0),
+			midVibratorAreEffectsSupported, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -92,7 +118,7 @@ func (m *vibrator) AreEffectsSupported(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // AreEnvelopeEffectsSupported calls android.os.Vibrator.areEnvelopeEffectsSupported.
-func (m *vibrator) AreEnvelopeEffectsSupported() (bool, error) {
+func (m *Vibrator) AreEnvelopeEffectsSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -100,13 +126,13 @@ func (m *vibrator) AreEnvelopeEffectsSupported() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midvibratorAreEnvelopeEffectsSupported == nil {
+		if midVibratorAreEnvelopeEffectsSupported == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.areEnvelopeEffectsSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midvibratorAreEnvelopeEffectsSupported,
+			midVibratorAreEnvelopeEffectsSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -118,7 +144,7 @@ func (m *vibrator) AreEnvelopeEffectsSupported() (bool, error) {
 }
 
 // ArePrimitivesSupported calls android.os.Vibrator.arePrimitivesSupported.
-func (m *vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -126,14 +152,14 @@ func (m *vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midvibratorArePrimitivesSupported == nil {
+		if midVibratorArePrimitivesSupported == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.arePrimitivesSupported is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midvibratorArePrimitivesSupported, jni.ObjectValue(arg0),
+			midVibratorArePrimitivesSupported, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -144,7 +170,7 @@ func (m *vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error)
 }
 
 // GetEnvelopeEffectInfo calls android.os.Vibrator.getEnvelopeEffectInfo.
-func (m *vibrator) GetEnvelopeEffectInfo() (*jni.Object, error) {
+func (m *Vibrator) GetEnvelopeEffectInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -152,13 +178,13 @@ func (m *vibrator) GetEnvelopeEffectInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midvibratorGetEnvelopeEffectInfo == nil {
+		if midVibratorGetEnvelopeEffectInfo == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.getEnvelopeEffectInfo is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midvibratorGetEnvelopeEffectInfo,
+			midVibratorGetEnvelopeEffectInfo,
 		)
 		if callErr != nil {
 			return callErr
@@ -169,7 +195,7 @@ func (m *vibrator) GetEnvelopeEffectInfo() (*jni.Object, error) {
 }
 
 // GetFrequencyProfile calls android.os.Vibrator.getFrequencyProfile.
-func (m *vibrator) GetFrequencyProfile() (*jni.Object, error) {
+func (m *Vibrator) GetFrequencyProfile() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -177,13 +203,13 @@ func (m *vibrator) GetFrequencyProfile() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midvibratorGetFrequencyProfile == nil {
+		if midVibratorGetFrequencyProfile == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.getFrequencyProfile is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midvibratorGetFrequencyProfile,
+			midVibratorGetFrequencyProfile,
 		)
 		if callErr != nil {
 			return callErr
@@ -194,7 +220,7 @@ func (m *vibrator) GetFrequencyProfile() (*jni.Object, error) {
 }
 
 // GetId calls android.os.Vibrator.getId.
-func (m *vibrator) GetId() (int32, error) {
+func (m *Vibrator) GetId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -202,13 +228,13 @@ func (m *vibrator) GetId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midvibratorGetId == nil {
+		if midVibratorGetId == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.getId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midvibratorGetId,
+			midVibratorGetId,
 		)
 		if callErr != nil {
 			return callErr
@@ -219,7 +245,7 @@ func (m *vibrator) GetId() (int32, error) {
 }
 
 // GetPrimitiveDurations calls android.os.Vibrator.getPrimitiveDurations.
-func (m *vibrator) GetPrimitiveDurations(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Vibrator) GetPrimitiveDurations(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -227,14 +253,14 @@ func (m *vibrator) GetPrimitiveDurations(arg0 *jni.Object) (*jni.Object, error) 
 			callErr = err
 			return err
 		}
-		if midvibratorGetPrimitiveDurations == nil {
+		if midVibratorGetPrimitiveDurations == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.getPrimitiveDurations is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midvibratorGetPrimitiveDurations, jni.ObjectValue(arg0),
+			midVibratorGetPrimitiveDurations, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -245,7 +271,7 @@ func (m *vibrator) GetPrimitiveDurations(arg0 *jni.Object) (*jni.Object, error) 
 }
 
 // GetQFactor calls android.os.Vibrator.getQFactor.
-func (m *vibrator) GetQFactor() (float32, error) {
+func (m *Vibrator) GetQFactor() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -253,13 +279,13 @@ func (m *vibrator) GetQFactor() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midvibratorGetQFactor == nil {
+		if midVibratorGetQFactor == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.getQFactor is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midvibratorGetQFactor,
+			midVibratorGetQFactor,
 		)
 		if callErr != nil {
 			return callErr
@@ -270,7 +296,7 @@ func (m *vibrator) GetQFactor() (float32, error) {
 }
 
 // GetResonantFrequency calls android.os.Vibrator.getResonantFrequency.
-func (m *vibrator) GetResonantFrequency() (float32, error) {
+func (m *Vibrator) GetResonantFrequency() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -278,13 +304,13 @@ func (m *vibrator) GetResonantFrequency() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midvibratorGetResonantFrequency == nil {
+		if midVibratorGetResonantFrequency == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.getResonantFrequency is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midvibratorGetResonantFrequency,
+			midVibratorGetResonantFrequency,
 		)
 		if callErr != nil {
 			return callErr
@@ -295,7 +321,7 @@ func (m *vibrator) GetResonantFrequency() (float32, error) {
 }
 
 // Vibrate1 calls android.os.Vibrator.vibrate.
-func (m *vibrator) Vibrate1(arg0 *jni.Object) error {
+func (m *Vibrator) Vibrate1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -303,14 +329,14 @@ func (m *vibrator) Vibrate1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midvibratorVibrate1 == nil {
+		if midVibratorVibrate1 == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.vibrate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvibratorVibrate1, jni.ObjectValue(arg0),
+			midVibratorVibrate1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -318,7 +344,7 @@ func (m *vibrator) Vibrate1(arg0 *jni.Object) error {
 }
 
 // Vibrate2_1 calls android.os.Vibrator.vibrate.
-func (m *vibrator) Vibrate2_1(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Vibrator) Vibrate2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -326,14 +352,14 @@ func (m *vibrator) Vibrate2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midvibratorVibrate2_1 == nil {
+		if midVibratorVibrate2_1 == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.vibrate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvibratorVibrate2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midVibratorVibrate2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -341,7 +367,7 @@ func (m *vibrator) Vibrate2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // Vibrate2_2 calls android.os.Vibrator.vibrate.
-func (m *vibrator) Vibrate2_2(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Vibrator) Vibrate2_2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -349,14 +375,14 @@ func (m *vibrator) Vibrate2_2(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midvibratorVibrate2_2 == nil {
+		if midVibratorVibrate2_2 == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.vibrate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvibratorVibrate2_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midVibratorVibrate2_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -364,7 +390,7 @@ func (m *vibrator) Vibrate2_2(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // Vibrate1_3 calls android.os.Vibrator.vibrate.
-func (m *vibrator) Vibrate1_3(arg0 int64) error {
+func (m *Vibrator) Vibrate1_3(arg0 int64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -372,14 +398,14 @@ func (m *vibrator) Vibrate1_3(arg0 int64) error {
 			callErr = err
 			return err
 		}
-		if midvibratorVibrate1_3 == nil {
+		if midVibratorVibrate1_3 == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.vibrate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvibratorVibrate1_3, jni.LongValue(arg0),
+			midVibratorVibrate1_3, jni.LongValue(arg0),
 		)
 		return callErr
 	})
@@ -387,7 +413,7 @@ func (m *vibrator) Vibrate1_3(arg0 int64) error {
 }
 
 // Vibrate2_4 calls android.os.Vibrator.vibrate.
-func (m *vibrator) Vibrate2_4(arg0 int64, arg1 *jni.Object) error {
+func (m *Vibrator) Vibrate2_4(arg0 int64, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -395,14 +421,14 @@ func (m *vibrator) Vibrate2_4(arg0 int64, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midvibratorVibrate2_4 == nil {
+		if midVibratorVibrate2_4 == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.vibrate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvibratorVibrate2_4, jni.LongValue(arg0), jni.ObjectValue(arg1),
+			midVibratorVibrate2_4, jni.LongValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -410,7 +436,7 @@ func (m *vibrator) Vibrate2_4(arg0 int64, arg1 *jni.Object) error {
 }
 
 // Vibrate2_5 calls android.os.Vibrator.vibrate.
-func (m *vibrator) Vibrate2_5(arg0 *jni.Object, arg1 int32) error {
+func (m *Vibrator) Vibrate2_5(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -418,14 +444,14 @@ func (m *vibrator) Vibrate2_5(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midvibratorVibrate2_5 == nil {
+		if midVibratorVibrate2_5 == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.vibrate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvibratorVibrate2_5, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midVibratorVibrate2_5, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -433,7 +459,7 @@ func (m *vibrator) Vibrate2_5(arg0 *jni.Object, arg1 int32) error {
 }
 
 // Vibrate3_6 calls android.os.Vibrator.vibrate.
-func (m *vibrator) Vibrate3_6(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+func (m *Vibrator) Vibrate3_6(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -441,14 +467,14 @@ func (m *vibrator) Vibrate3_6(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) er
 			callErr = err
 			return err
 		}
-		if midvibratorVibrate3_6 == nil {
+		if midVibratorVibrate3_6 == nil {
 			callErr = fmt.Errorf("android.os.Vibrator.vibrate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvibratorVibrate3_6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midVibratorVibrate3_6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})

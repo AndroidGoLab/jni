@@ -252,8 +252,8 @@ func TestRenderProto_Integration(t *testing.T) {
 	content := string(data)
 
 	// Verify basic structure: service and RPC presence.
-	if !strings.Contains(content, "service LocationManagerService {") {
-		t.Error("missing LocationManagerService")
+	if !strings.Contains(content, "service ManagerService {") {
+		t.Error("missing ManagerService")
 	}
 	if !strings.Contains(content, "rpc ") {
 		t.Error("no RPCs generated")
@@ -283,8 +283,8 @@ func TestRenderProto_BluetoothIntegration(t *testing.T) {
 	content := string(data)
 
 	// Verify basic bluetooth structure.
-	if !strings.Contains(content, "service BluetoothGattCharacteristicService {") {
-		t.Error("missing BluetoothGattCharacteristicService")
+	if !strings.Contains(content, "service GattCharacteristicService {") {
+		t.Error("missing GattCharacteristicService")
 	}
 	if !strings.Contains(content, "rpc ") {
 		t.Error("no RPCs generated for bluetooth")

@@ -2,7 +2,7 @@ package: app
 go_import: github.com/AndroidGoLab/jni/app
 classes:
     - java_class: android.os.CancellationSignal
-      go_type: cancellationSignal
+      go_type: CancellationSignal
       methods:
         - java_method: cancel
           go_name: Cancel
@@ -336,7 +336,7 @@ classes:
           returns: void
           error: true
     - java_class: android.content.Intent
-      go_type: intent
+      go_type: Intent
       methods:
         - java_method: addCategory
           go_name: AddCategory
@@ -1255,7 +1255,7 @@ classes:
           returns: android.content.Intent
           error: true
     - java_class: android.os.Bundle
-      go_type: bundle
+      go_type: Bundle
       methods:
         - java_method: clear
           go_name: Clear
@@ -1695,7 +1695,7 @@ classes:
           returns: void
           error: true
     - java_class: android.app.Activity
-      go_type: activity
+      go_type: Activity
       methods:
         - java_method: addContentView
           go_name: AddContentView
@@ -3320,7 +3320,7 @@ classes:
           returns: void
           error: true
     - java_class: android.app.PendingIntent
-      go_type: pendingIntent
+      go_type: PendingIntent
       methods:
         - java_method: cancel
           go_name: Cancel

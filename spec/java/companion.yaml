@@ -2,7 +2,7 @@ package: companion
 go_import: github.com/AndroidGoLab/jni/companion
 classes:
     - java_class: android.companion.CompanionDeviceManager
-      go_type: companionDeviceManager
+      go_type: Manager
       obtain: system_service
       service_name: companiondevice
       close: true

@@ -2,7 +2,7 @@ package: nfc
 go_import: github.com/AndroidGoLab/jni/nfc
 classes:
     - java_class: android.nfc.NdefRecord
-      go_type: ndefRecord
+      go_type: NdefRecord
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -112,7 +112,7 @@ classes:
           returns: android.nfc.NdefRecord
           error: true
     - java_class: android.nfc.NdefMessage
-      go_type: ndefMessage
+      go_type: NdefMessage
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -155,7 +155,7 @@ classes:
           returns: void
           error: true
     - java_class: android.nfc.tech.Ndef
-      go_type: ndef
+      go_type: Ndef
       methods:
         - java_method: canMakeReadOnly
           go_name: CanMakeReadOnly
@@ -217,7 +217,7 @@ classes:
           returns: android.nfc.tech.Ndef
           error: true
     - java_class: android.nfc.tech.IsoDep
-      go_type: isoDep
+      go_type: IsoDep
       methods:
         - java_method: close
           go_name: Close
@@ -278,7 +278,7 @@ classes:
           returns: android.nfc.tech.IsoDep
           error: true
     - java_class: android.nfc.Tag
-      go_type: tag
+      go_type: Tag
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -306,7 +306,8 @@ classes:
           returns: void
           error: true
     - java_class: android.nfc.NfcAdapter
-      go_type: nfcAdapter
+      go_type: Adapter
+      close: true
       methods:
         - java_method: disable
           go_name: Disable

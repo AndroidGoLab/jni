@@ -20,14 +20,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsconsumerIrManager                      *jni.GlobalRef
-	midconsumerIrManagerGetCarrierFrequencies jni.MethodID
-	midconsumerIrManagerHasIrEmitter          jni.MethodID
-	midconsumerIrManagerTransmit              jni.MethodID
+	clsManager                      *jni.GlobalRef
+	midManagerGetCarrierFrequencies jni.MethodID
+	midManagerHasIrEmitter          jni.MethodID
+	midManagerTransmit              jni.MethodID
 
-	clsconsumerIrManagerCarrierFrequencyRange                *jni.GlobalRef
-	midconsumerIrManagerCarrierFrequencyRangeGetMaxFrequency jni.MethodID
-	midconsumerIrManagerCarrierFrequencyRangeGetMinFrequency jni.MethodID
+	clsManagerCarrierFrequencyRange                *jni.GlobalRef
+	midManagerCarrierFrequencyRangeGetMaxFrequency jni.MethodID
+	midManagerCarrierFrequencyRangeGetMinFrequency jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -58,9 +58,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.ConsumerIrManager: %w", err)
 	}
-	clsconsumerIrManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midconsumerIrManagerGetCarrierFrequencies, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManager)), "getCarrierFrequencies", "()[Landroid/hardware/ConsumerIrManager$CarrierFrequencyRange;")
+	midManagerGetCarrierFrequencies, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCarrierFrequencies", "()[Landroid/hardware/ConsumerIrManager$CarrierFrequencyRange;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -68,7 +68,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.hardware.ConsumerIrManager.getCarrierFrequencies")
 	}
 
-	midconsumerIrManagerHasIrEmitter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManager)), "hasIrEmitter", "()Z")
+	midManagerHasIrEmitter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasIrEmitter", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -76,7 +76,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.hardware.ConsumerIrManager.hasIrEmitter")
 	}
 
-	midconsumerIrManagerTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManager)), "transmit", "(I[I)V")
+	midManagerTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "transmit", "(I[I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -88,9 +88,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.ConsumerIrManager$CarrierFrequencyRange: %w", err)
 	}
-	clsconsumerIrManagerCarrierFrequencyRange = env.NewGlobalRef(&c.Object)
+	clsManagerCarrierFrequencyRange = env.NewGlobalRef(&c.Object)
 
-	midconsumerIrManagerCarrierFrequencyRangeGetMaxFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManagerCarrierFrequencyRange)), "getMaxFrequency", "()I")
+	midManagerCarrierFrequencyRangeGetMaxFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerCarrierFrequencyRange)), "getMaxFrequency", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -98,7 +98,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.hardware.ConsumerIrManager$CarrierFrequencyRange.getMaxFrequency")
 	}
 
-	midconsumerIrManagerCarrierFrequencyRangeGetMinFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManagerCarrierFrequencyRange)), "getMinFrequency", "()I")
+	midManagerCarrierFrequencyRangeGetMinFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerCarrierFrequencyRange)), "getMinFrequency", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

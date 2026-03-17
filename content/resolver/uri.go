@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// uri wraps android.net.Uri.
-type uri struct {
+// Uri wraps android.net.Uri.
+type Uri struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // CompareTo1 calls android.net.Uri.compareTo.
-func (m *uri) CompareTo1(arg0 *jni.Object) (int32, error) {
+func (m *Uri) CompareTo1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *uri) CompareTo1(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
-		if miduriCompareTo1 == nil {
+		if midUriCompareTo1 == nil {
 			callErr = fmt.Errorf("android.net.Uri.compareTo is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			miduriCompareTo1, jni.ObjectValue(arg0),
+			midUriCompareTo1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -50,7 +50,7 @@ func (m *uri) CompareTo1(arg0 *jni.Object) (int32, error) {
 }
 
 // Equals calls android.net.Uri.equals.
-func (m *uri) Equals(arg0 *jni.Object) (bool, error) {
+func (m *Uri) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -58,14 +58,14 @@ func (m *uri) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if miduriEquals == nil {
+		if midUriEquals == nil {
 			callErr = fmt.Errorf("android.net.Uri.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			miduriEquals, jni.ObjectValue(arg0),
+			midUriEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -77,7 +77,7 @@ func (m *uri) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetBooleanQueryParameter calls android.net.Uri.getBooleanQueryParameter.
-func (m *uri) GetBooleanQueryParameter(arg0 string, arg1 bool) (bool, error) {
+func (m *Uri) GetBooleanQueryParameter(arg0 string, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -85,7 +85,7 @@ func (m *uri) GetBooleanQueryParameter(arg0 string, arg1 bool) (bool, error) {
 			callErr = err
 			return err
 		}
-		if miduriGetBooleanQueryParameter == nil {
+		if midUriGetBooleanQueryParameter == nil {
 			callErr = fmt.Errorf("android.net.Uri.getBooleanQueryParameter is not available on this device")
 			return callErr
 		}
@@ -101,7 +101,7 @@ func (m *uri) GetBooleanQueryParameter(arg0 string, arg1 bool) (bool, error) {
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			miduriGetBooleanQueryParameter, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
+			midUriGetBooleanQueryParameter, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -113,7 +113,7 @@ func (m *uri) GetBooleanQueryParameter(arg0 string, arg1 bool) (bool, error) {
 }
 
 // GetQueryParameter calls android.net.Uri.getQueryParameter.
-func (m *uri) GetQueryParameter(arg0 string) (string, error) {
+func (m *Uri) GetQueryParameter(arg0 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -121,7 +121,7 @@ func (m *uri) GetQueryParameter(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if miduriGetQueryParameter == nil {
+		if midUriGetQueryParameter == nil {
 			callErr = fmt.Errorf("android.net.Uri.getQueryParameter is not available on this device")
 			return callErr
 		}
@@ -132,7 +132,7 @@ func (m *uri) GetQueryParameter(arg0 string) (string, error) {
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			miduriGetQueryParameter, jni.ObjectValue(&jArg0.Object),
+			midUriGetQueryParameter, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -144,7 +144,7 @@ func (m *uri) GetQueryParameter(arg0 string) (string, error) {
 }
 
 // GetQueryParameterNames calls android.net.Uri.getQueryParameterNames.
-func (m *uri) GetQueryParameterNames() (*jni.Object, error) {
+func (m *Uri) GetQueryParameterNames() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -152,13 +152,13 @@ func (m *uri) GetQueryParameterNames() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if miduriGetQueryParameterNames == nil {
+		if midUriGetQueryParameterNames == nil {
 			callErr = fmt.Errorf("android.net.Uri.getQueryParameterNames is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			miduriGetQueryParameterNames,
+			midUriGetQueryParameterNames,
 		)
 		if callErr != nil {
 			return callErr
@@ -169,7 +169,7 @@ func (m *uri) GetQueryParameterNames() (*jni.Object, error) {
 }
 
 // GetQueryParameters calls android.net.Uri.getQueryParameters.
-func (m *uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
+func (m *Uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -177,7 +177,7 @@ func (m *uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if miduriGetQueryParameters == nil {
+		if midUriGetQueryParameters == nil {
 			callErr = fmt.Errorf("android.net.Uri.getQueryParameters is not available on this device")
 			return callErr
 		}
@@ -188,7 +188,7 @@ func (m *uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			miduriGetQueryParameters, jni.ObjectValue(&jArg0.Object),
+			midUriGetQueryParameters, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -199,7 +199,7 @@ func (m *uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
 }
 
 // HashCode calls android.net.Uri.hashCode.
-func (m *uri) HashCode() (int32, error) {
+func (m *Uri) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -207,13 +207,13 @@ func (m *uri) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if miduriHashCode == nil {
+		if midUriHashCode == nil {
 			callErr = fmt.Errorf("android.net.Uri.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			miduriHashCode,
+			midUriHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -224,7 +224,7 @@ func (m *uri) HashCode() (int32, error) {
 }
 
 // IsAbsolute calls android.net.Uri.isAbsolute.
-func (m *uri) IsAbsolute() (bool, error) {
+func (m *Uri) IsAbsolute() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -232,13 +232,13 @@ func (m *uri) IsAbsolute() (bool, error) {
 			callErr = err
 			return err
 		}
-		if miduriIsAbsolute == nil {
+		if midUriIsAbsolute == nil {
 			callErr = fmt.Errorf("android.net.Uri.isAbsolute is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			miduriIsAbsolute,
+			midUriIsAbsolute,
 		)
 		if callErr != nil {
 			return callErr
@@ -250,7 +250,7 @@ func (m *uri) IsAbsolute() (bool, error) {
 }
 
 // IsOpaque calls android.net.Uri.isOpaque.
-func (m *uri) IsOpaque() (bool, error) {
+func (m *Uri) IsOpaque() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -258,13 +258,13 @@ func (m *uri) IsOpaque() (bool, error) {
 			callErr = err
 			return err
 		}
-		if miduriIsOpaque == nil {
+		if midUriIsOpaque == nil {
 			callErr = fmt.Errorf("android.net.Uri.isOpaque is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			miduriIsOpaque,
+			midUriIsOpaque,
 		)
 		if callErr != nil {
 			return callErr
@@ -276,7 +276,7 @@ func (m *uri) IsOpaque() (bool, error) {
 }
 
 // NormalizeScheme calls android.net.Uri.normalizeScheme.
-func (m *uri) NormalizeScheme() (*jni.Object, error) {
+func (m *Uri) NormalizeScheme() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -284,13 +284,13 @@ func (m *uri) NormalizeScheme() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if miduriNormalizeScheme == nil {
+		if midUriNormalizeScheme == nil {
 			callErr = fmt.Errorf("android.net.Uri.normalizeScheme is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			miduriNormalizeScheme,
+			midUriNormalizeScheme,
 		)
 		if callErr != nil {
 			return callErr
@@ -301,7 +301,7 @@ func (m *uri) NormalizeScheme() (*jni.Object, error) {
 }
 
 // CompareTo1_1 calls android.net.Uri.compareTo.
-func (m *uri) CompareTo1_1(arg0 *jni.Object) (int32, error) {
+func (m *Uri) CompareTo1_1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -309,14 +309,14 @@ func (m *uri) CompareTo1_1(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
-		if miduriCompareTo1_1 == nil {
+		if midUriCompareTo1_1 == nil {
 			callErr = fmt.Errorf("android.net.Uri.compareTo is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			miduriCompareTo1_1, jni.ObjectValue(arg0),
+			midUriCompareTo1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -327,7 +327,7 @@ func (m *uri) CompareTo1_1(arg0 *jni.Object) (int32, error) {
 }
 
 // Decode calls android.net.Uri.decode.
-func (m *uri) Decode(arg0 string) (string, error) {
+func (m *Uri) Decode(arg0 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -335,7 +335,7 @@ func (m *uri) Decode(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if miduriDecode == nil {
+		if midUriDecode == nil {
 			callErr = fmt.Errorf("android.net.Uri.decode is not available on this device")
 			return callErr
 		}
@@ -345,8 +345,8 @@ func (m *uri) Decode(arg0 string) (string, error) {
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriDecode, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriDecode, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -358,7 +358,7 @@ func (m *uri) Decode(arg0 string) (string, error) {
 }
 
 // Encode1 calls android.net.Uri.encode.
-func (m *uri) Encode1(arg0 string) (string, error) {
+func (m *Uri) Encode1(arg0 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -366,7 +366,7 @@ func (m *uri) Encode1(arg0 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if miduriEncode1 == nil {
+		if midUriEncode1 == nil {
 			callErr = fmt.Errorf("android.net.Uri.encode is not available on this device")
 			return callErr
 		}
@@ -376,8 +376,8 @@ func (m *uri) Encode1(arg0 string) (string, error) {
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriEncode1, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriEncode1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -389,7 +389,7 @@ func (m *uri) Encode1(arg0 string) (string, error) {
 }
 
 // Encode2_1 calls android.net.Uri.encode.
-func (m *uri) Encode2_1(arg0 string, arg1 string) (string, error) {
+func (m *Uri) Encode2_1(arg0 string, arg1 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -397,7 +397,7 @@ func (m *uri) Encode2_1(arg0 string, arg1 string) (string, error) {
 			callErr = err
 			return err
 		}
-		if miduriEncode2_1 == nil {
+		if midUriEncode2_1 == nil {
 			callErr = fmt.Errorf("android.net.Uri.encode is not available on this device")
 			return callErr
 		}
@@ -412,8 +412,8 @@ func (m *uri) Encode2_1(arg0 string, arg1 string) (string, error) {
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriEncode2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriEncode2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -425,7 +425,7 @@ func (m *uri) Encode2_1(arg0 string, arg1 string) (string, error) {
 }
 
 // FromFile calls android.net.Uri.fromFile.
-func (m *uri) FromFile(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Uri) FromFile(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -433,14 +433,14 @@ func (m *uri) FromFile(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if miduriFromFile == nil {
+		if midUriFromFile == nil {
 			callErr = fmt.Errorf("android.net.Uri.fromFile is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriFromFile, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriFromFile, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -451,7 +451,7 @@ func (m *uri) FromFile(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // FromParts calls android.net.Uri.fromParts.
-func (m *uri) FromParts(arg0 string, arg1 string, arg2 string) (*jni.Object, error) {
+func (m *Uri) FromParts(arg0 string, arg1 string, arg2 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -459,7 +459,7 @@ func (m *uri) FromParts(arg0 string, arg1 string, arg2 string) (*jni.Object, err
 			callErr = err
 			return err
 		}
-		if miduriFromParts == nil {
+		if midUriFromParts == nil {
 			callErr = fmt.Errorf("android.net.Uri.fromParts is not available on this device")
 			return callErr
 		}
@@ -479,8 +479,8 @@ func (m *uri) FromParts(arg0 string, arg1 string, arg2 string) (*jni.Object, err
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriFromParts, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriFromParts, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -491,7 +491,7 @@ func (m *uri) FromParts(arg0 string, arg1 string, arg2 string) (*jni.Object, err
 }
 
 // Parse calls android.net.Uri.parse.
-func (m *uri) Parse(arg0 string) (*jni.Object, error) {
+func (m *Uri) Parse(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -499,7 +499,7 @@ func (m *uri) Parse(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if miduriParse == nil {
+		if midUriParse == nil {
 			callErr = fmt.Errorf("android.net.Uri.parse is not available on this device")
 			return callErr
 		}
@@ -509,8 +509,8 @@ func (m *uri) Parse(arg0 string) (*jni.Object, error) {
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriParse, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriParse, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -521,7 +521,7 @@ func (m *uri) Parse(arg0 string) (*jni.Object, error) {
 }
 
 // WithAppendedPath calls android.net.Uri.withAppendedPath.
-func (m *uri) WithAppendedPath(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+func (m *Uri) WithAppendedPath(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -529,7 +529,7 @@ func (m *uri) WithAppendedPath(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 			callErr = err
 			return err
 		}
-		if miduriWithAppendedPath == nil {
+		if midUriWithAppendedPath == nil {
 			callErr = fmt.Errorf("android.net.Uri.withAppendedPath is not available on this device")
 			return callErr
 		}
@@ -540,8 +540,8 @@ func (m *uri) WithAppendedPath(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriWithAppendedPath, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriWithAppendedPath, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -552,7 +552,7 @@ func (m *uri) WithAppendedPath(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 }
 
 // WriteToParcel calls android.net.Uri.writeToParcel.
-func (m *uri) WriteToParcel(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Uri) WriteToParcel(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -560,14 +560,14 @@ func (m *uri) WriteToParcel(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if miduriWriteToParcel == nil {
+		if midUriWriteToParcel == nil {
 			callErr = fmt.Errorf("android.net.Uri.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallStaticVoidMethod(
-			(*jni.Class)(unsafe.Pointer(clsuri)),
-			miduriWriteToParcel, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsUri)),
+			midUriWriteToParcel, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})

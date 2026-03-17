@@ -20,166 +20,166 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clslocationManager                                         *jni.GlobalRef
-	midlocationManagerAddGpsStatusListener                     jni.MethodID
-	midlocationManagerAddNmeaListener1                         jni.MethodID
-	midlocationManagerAddNmeaListener1_1                       jni.MethodID
-	midlocationManagerAddNmeaListener2_2                       jni.MethodID
-	midlocationManagerAddProximityAlert                        jni.MethodID
-	midlocationManagerAddTestProvider2                         jni.MethodID
-	midlocationManagerAddTestProvider3_1                       jni.MethodID
-	midlocationManagerAddTestProvider10_2                      jni.MethodID
-	midlocationManagerClearTestProviderEnabled                 jni.MethodID
-	midlocationManagerClearTestProviderLocation                jni.MethodID
-	midlocationManagerClearTestProviderStatus                  jni.MethodID
-	midlocationManagerGetAllProviders                          jni.MethodID
-	midlocationManagerGetBestProvider                          jni.MethodID
-	midlocationManagerGetCurrentLocation5                      jni.MethodID
-	midlocationManagerGetCurrentLocation4_1                    jni.MethodID
-	midlocationManagerGetGnssAntennaInfos                      jni.MethodID
-	midlocationManagerGetGnssCapabilities                      jni.MethodID
-	midlocationManagerGetGnssHardwareModelName                 jni.MethodID
-	midlocationManagerGetGnssYearOfHardware                    jni.MethodID
-	midlocationManagerGetGpsStatus                             jni.MethodID
-	midlocationManagerGetLastKnownLocation                     jni.MethodID
-	midlocationManagerGetProvider                              jni.MethodID
-	midlocationManagerGetProviderProperties                    jni.MethodID
-	midlocationManagerGetProviders2                            jni.MethodID
-	midlocationManagerGetProviders1_1                          jni.MethodID
-	midlocationManagerHasProvider                              jni.MethodID
-	midlocationManagerIsLocationEnabled                        jni.MethodID
-	midlocationManagerIsProviderEnabled                        jni.MethodID
-	midlocationManagerRegisterAntennaInfoListener              jni.MethodID
-	midlocationManagerRegisterGnssMeasurementsCallback3        jni.MethodID
-	midlocationManagerRegisterGnssMeasurementsCallback1_1      jni.MethodID
-	midlocationManagerRegisterGnssMeasurementsCallback2_2      jni.MethodID
-	midlocationManagerRegisterGnssNavigationMessageCallback1   jni.MethodID
-	midlocationManagerRegisterGnssNavigationMessageCallback2_1 jni.MethodID
-	midlocationManagerRegisterGnssStatusCallback1              jni.MethodID
-	midlocationManagerRegisterGnssStatusCallback2_1            jni.MethodID
-	midlocationManagerRemoveGpsStatusListener                  jni.MethodID
-	midlocationManagerRemoveNmeaListener1                      jni.MethodID
-	midlocationManagerRemoveNmeaListener1_1                    jni.MethodID
-	midlocationManagerRemoveProximityAlert                     jni.MethodID
-	midlocationManagerRemoveTestProvider                       jni.MethodID
-	midlocationManagerRemoveUpdates1                           jni.MethodID
-	midlocationManagerRemoveUpdates1_1                         jni.MethodID
-	midlocationManagerRequestFlush3                            jni.MethodID
-	midlocationManagerRequestFlush3_1                          jni.MethodID
-	midlocationManagerRequestLocationUpdates3                  jni.MethodID
-	midlocationManagerRequestLocationUpdates4_1                jni.MethodID
-	midlocationManagerRequestLocationUpdates4_2                jni.MethodID
-	midlocationManagerRequestLocationUpdates4_3                jni.MethodID
-	midlocationManagerRequestLocationUpdates5_4                jni.MethodID
-	midlocationManagerRequestLocationUpdates5_5                jni.MethodID
-	midlocationManagerRequestLocationUpdates4_6                jni.MethodID
-	midlocationManagerRequestLocationUpdates5_7                jni.MethodID
-	midlocationManagerRequestLocationUpdates5_8                jni.MethodID
-	midlocationManagerRequestSingleUpdate2                     jni.MethodID
-	midlocationManagerRequestSingleUpdate3_1                   jni.MethodID
-	midlocationManagerRequestSingleUpdate2_2                   jni.MethodID
-	midlocationManagerRequestSingleUpdate3_3                   jni.MethodID
-	midlocationManagerSendExtraCommand                         jni.MethodID
-	midlocationManagerSetTestProviderEnabled                   jni.MethodID
-	midlocationManagerSetTestProviderLocation                  jni.MethodID
-	midlocationManagerSetTestProviderStatus                    jni.MethodID
-	midlocationManagerUnregisterAntennaInfoListener            jni.MethodID
-	midlocationManagerUnregisterGnssMeasurementsCallback       jni.MethodID
-	midlocationManagerUnregisterGnssNavigationMessageCallback  jni.MethodID
-	midlocationManagerUnregisterGnssStatusCallback             jni.MethodID
+	clsManager                                         *jni.GlobalRef
+	midManagerAddGpsStatusListener                     jni.MethodID
+	midManagerAddNmeaListener1                         jni.MethodID
+	midManagerAddNmeaListener1_1                       jni.MethodID
+	midManagerAddNmeaListener2_2                       jni.MethodID
+	midManagerAddProximityAlert                        jni.MethodID
+	midManagerAddTestProvider2                         jni.MethodID
+	midManagerAddTestProvider3_1                       jni.MethodID
+	midManagerAddTestProvider10_2                      jni.MethodID
+	midManagerClearTestProviderEnabled                 jni.MethodID
+	midManagerClearTestProviderLocation                jni.MethodID
+	midManagerClearTestProviderStatus                  jni.MethodID
+	midManagerGetAllProviders                          jni.MethodID
+	midManagerGetBestProvider                          jni.MethodID
+	midManagerGetCurrentLocation5                      jni.MethodID
+	midManagerGetCurrentLocation4_1                    jni.MethodID
+	midManagerGetGnssAntennaInfos                      jni.MethodID
+	midManagerGetGnssCapabilities                      jni.MethodID
+	midManagerGetGnssHardwareModelName                 jni.MethodID
+	midManagerGetGnssYearOfHardware                    jni.MethodID
+	midManagerGetGpsStatus                             jni.MethodID
+	midManagerGetLastKnownLocation                     jni.MethodID
+	midManagerGetProvider                              jni.MethodID
+	midManagerGetProviderProperties                    jni.MethodID
+	midManagerGetProviders2                            jni.MethodID
+	midManagerGetProviders1_1                          jni.MethodID
+	midManagerHasProvider                              jni.MethodID
+	midManagerIsLocationEnabled                        jni.MethodID
+	midManagerIsProviderEnabled                        jni.MethodID
+	midManagerRegisterAntennaInfoListener              jni.MethodID
+	midManagerRegisterGnssMeasurementsCallback3        jni.MethodID
+	midManagerRegisterGnssMeasurementsCallback1_1      jni.MethodID
+	midManagerRegisterGnssMeasurementsCallback2_2      jni.MethodID
+	midManagerRegisterGnssNavigationMessageCallback1   jni.MethodID
+	midManagerRegisterGnssNavigationMessageCallback2_1 jni.MethodID
+	midManagerRegisterGnssStatusCallback1              jni.MethodID
+	midManagerRegisterGnssStatusCallback2_1            jni.MethodID
+	midManagerRemoveGpsStatusListener                  jni.MethodID
+	midManagerRemoveNmeaListener1                      jni.MethodID
+	midManagerRemoveNmeaListener1_1                    jni.MethodID
+	midManagerRemoveProximityAlert                     jni.MethodID
+	midManagerRemoveTestProvider                       jni.MethodID
+	midManagerRemoveUpdates1                           jni.MethodID
+	midManagerRemoveUpdates1_1                         jni.MethodID
+	midManagerRequestFlush3                            jni.MethodID
+	midManagerRequestFlush3_1                          jni.MethodID
+	midManagerRequestLocationUpdates3                  jni.MethodID
+	midManagerRequestLocationUpdates4_1                jni.MethodID
+	midManagerRequestLocationUpdates4_2                jni.MethodID
+	midManagerRequestLocationUpdates4_3                jni.MethodID
+	midManagerRequestLocationUpdates5_4                jni.MethodID
+	midManagerRequestLocationUpdates5_5                jni.MethodID
+	midManagerRequestLocationUpdates4_6                jni.MethodID
+	midManagerRequestLocationUpdates5_7                jni.MethodID
+	midManagerRequestLocationUpdates5_8                jni.MethodID
+	midManagerRequestSingleUpdate2                     jni.MethodID
+	midManagerRequestSingleUpdate3_1                   jni.MethodID
+	midManagerRequestSingleUpdate2_2                   jni.MethodID
+	midManagerRequestSingleUpdate3_3                   jni.MethodID
+	midManagerSendExtraCommand                         jni.MethodID
+	midManagerSetTestProviderEnabled                   jni.MethodID
+	midManagerSetTestProviderLocation                  jni.MethodID
+	midManagerSetTestProviderStatus                    jni.MethodID
+	midManagerUnregisterAntennaInfoListener            jni.MethodID
+	midManagerUnregisterGnssMeasurementsCallback       jni.MethodID
+	midManagerUnregisterGnssNavigationMessageCallback  jni.MethodID
+	midManagerUnregisterGnssStatusCallback             jni.MethodID
 
-	clslocation                                      *jni.GlobalRef
-	midlocationBearingTo                             jni.MethodID
-	midlocationDescribeContents                      jni.MethodID
-	midlocationDistanceTo                            jni.MethodID
-	midlocationDump                                  jni.MethodID
-	midlocationEquals                                jni.MethodID
-	midlocationGetAccuracy                           jni.MethodID
-	midlocationGetAltitude                           jni.MethodID
-	midlocationGetBearing                            jni.MethodID
-	midlocationGetBearingAccuracyDegrees             jni.MethodID
-	midlocationGetElapsedRealtimeAgeMillis0          jni.MethodID
-	midlocationGetElapsedRealtimeAgeMillis1_1        jni.MethodID
-	midlocationGetElapsedRealtimeMillis              jni.MethodID
-	midlocationGetElapsedRealtimeNanos               jni.MethodID
-	midlocationGetElapsedRealtimeUncertaintyNanos    jni.MethodID
-	midlocationGetExtras                             jni.MethodID
-	midlocationGetLatitude                           jni.MethodID
-	midlocationGetLongitude                          jni.MethodID
-	midlocationGetMslAltitudeAccuracyMeters          jni.MethodID
-	midlocationGetMslAltitudeMeters                  jni.MethodID
-	midlocationGetProvider                           jni.MethodID
-	midlocationGetSpeed                              jni.MethodID
-	midlocationGetSpeedAccuracyMetersPerSecond       jni.MethodID
-	midlocationGetTime                               jni.MethodID
-	midlocationGetVerticalAccuracyMeters             jni.MethodID
-	midlocationHasAccuracy                           jni.MethodID
-	midlocationHasAltitude                           jni.MethodID
-	midlocationHasBearing                            jni.MethodID
-	midlocationHasBearingAccuracy                    jni.MethodID
-	midlocationHasElapsedRealtimeUncertaintyNanos    jni.MethodID
-	midlocationHasMslAltitude                        jni.MethodID
-	midlocationHasMslAltitudeAccuracy                jni.MethodID
-	midlocationHasSpeed                              jni.MethodID
-	midlocationHasSpeedAccuracy                      jni.MethodID
-	midlocationHasVerticalAccuracy                   jni.MethodID
-	midlocationHashCode                              jni.MethodID
-	midlocationIsComplete                            jni.MethodID
-	midlocationIsFromMockProvider                    jni.MethodID
-	midlocationIsMock                                jni.MethodID
-	midlocationRemoveAccuracy                        jni.MethodID
-	midlocationRemoveAltitude                        jni.MethodID
-	midlocationRemoveBearing                         jni.MethodID
-	midlocationRemoveBearingAccuracy                 jni.MethodID
-	midlocationRemoveElapsedRealtimeUncertaintyNanos jni.MethodID
-	midlocationRemoveMslAltitude                     jni.MethodID
-	midlocationRemoveMslAltitudeAccuracy             jni.MethodID
-	midlocationRemoveSpeed                           jni.MethodID
-	midlocationRemoveSpeedAccuracy                   jni.MethodID
-	midlocationRemoveVerticalAccuracy                jni.MethodID
-	midlocationReset                                 jni.MethodID
-	midlocationSet                                   jni.MethodID
-	midlocationSetAccuracy                           jni.MethodID
-	midlocationSetAltitude                           jni.MethodID
-	midlocationSetBearing                            jni.MethodID
-	midlocationSetBearingAccuracyDegrees             jni.MethodID
-	midlocationSetElapsedRealtimeNanos               jni.MethodID
-	midlocationSetElapsedRealtimeUncertaintyNanos    jni.MethodID
-	midlocationSetExtras                             jni.MethodID
-	midlocationSetLatitude                           jni.MethodID
-	midlocationSetLongitude                          jni.MethodID
-	midlocationSetMock                               jni.MethodID
-	midlocationSetMslAltitudeAccuracyMeters          jni.MethodID
-	midlocationSetMslAltitudeMeters                  jni.MethodID
-	midlocationSetProvider                           jni.MethodID
-	midlocationSetSpeed                              jni.MethodID
-	midlocationSetSpeedAccuracyMetersPerSecond       jni.MethodID
-	midlocationSetTime                               jni.MethodID
-	midlocationSetVerticalAccuracyMeters             jni.MethodID
-	midlocationToString                              jni.MethodID
-	midlocationWriteToParcel                         jni.MethodID
-	midlocationConvert2                              jni.MethodID
-	midlocationConvert1_1                            jni.MethodID
-	midlocationDistanceBetween                       jni.MethodID
+	clsLocation                                      *jni.GlobalRef
+	midLocationBearingTo                             jni.MethodID
+	midLocationDescribeContents                      jni.MethodID
+	midLocationDistanceTo                            jni.MethodID
+	midLocationDump                                  jni.MethodID
+	midLocationEquals                                jni.MethodID
+	midLocationGetAccuracy                           jni.MethodID
+	midLocationGetAltitude                           jni.MethodID
+	midLocationGetBearing                            jni.MethodID
+	midLocationGetBearingAccuracyDegrees             jni.MethodID
+	midLocationGetElapsedRealtimeAgeMillis0          jni.MethodID
+	midLocationGetElapsedRealtimeAgeMillis1_1        jni.MethodID
+	midLocationGetElapsedRealtimeMillis              jni.MethodID
+	midLocationGetElapsedRealtimeNanos               jni.MethodID
+	midLocationGetElapsedRealtimeUncertaintyNanos    jni.MethodID
+	midLocationGetExtras                             jni.MethodID
+	midLocationGetLatitude                           jni.MethodID
+	midLocationGetLongitude                          jni.MethodID
+	midLocationGetMslAltitudeAccuracyMeters          jni.MethodID
+	midLocationGetMslAltitudeMeters                  jni.MethodID
+	midLocationGetProvider                           jni.MethodID
+	midLocationGetSpeed                              jni.MethodID
+	midLocationGetSpeedAccuracyMetersPerSecond       jni.MethodID
+	midLocationGetTime                               jni.MethodID
+	midLocationGetVerticalAccuracyMeters             jni.MethodID
+	midLocationHasAccuracy                           jni.MethodID
+	midLocationHasAltitude                           jni.MethodID
+	midLocationHasBearing                            jni.MethodID
+	midLocationHasBearingAccuracy                    jni.MethodID
+	midLocationHasElapsedRealtimeUncertaintyNanos    jni.MethodID
+	midLocationHasMslAltitude                        jni.MethodID
+	midLocationHasMslAltitudeAccuracy                jni.MethodID
+	midLocationHasSpeed                              jni.MethodID
+	midLocationHasSpeedAccuracy                      jni.MethodID
+	midLocationHasVerticalAccuracy                   jni.MethodID
+	midLocationHashCode                              jni.MethodID
+	midLocationIsComplete                            jni.MethodID
+	midLocationIsFromMockProvider                    jni.MethodID
+	midLocationIsMock                                jni.MethodID
+	midLocationRemoveAccuracy                        jni.MethodID
+	midLocationRemoveAltitude                        jni.MethodID
+	midLocationRemoveBearing                         jni.MethodID
+	midLocationRemoveBearingAccuracy                 jni.MethodID
+	midLocationRemoveElapsedRealtimeUncertaintyNanos jni.MethodID
+	midLocationRemoveMslAltitude                     jni.MethodID
+	midLocationRemoveMslAltitudeAccuracy             jni.MethodID
+	midLocationRemoveSpeed                           jni.MethodID
+	midLocationRemoveSpeedAccuracy                   jni.MethodID
+	midLocationRemoveVerticalAccuracy                jni.MethodID
+	midLocationReset                                 jni.MethodID
+	midLocationSet                                   jni.MethodID
+	midLocationSetAccuracy                           jni.MethodID
+	midLocationSetAltitude                           jni.MethodID
+	midLocationSetBearing                            jni.MethodID
+	midLocationSetBearingAccuracyDegrees             jni.MethodID
+	midLocationSetElapsedRealtimeNanos               jni.MethodID
+	midLocationSetElapsedRealtimeUncertaintyNanos    jni.MethodID
+	midLocationSetExtras                             jni.MethodID
+	midLocationSetLatitude                           jni.MethodID
+	midLocationSetLongitude                          jni.MethodID
+	midLocationSetMock                               jni.MethodID
+	midLocationSetMslAltitudeAccuracyMeters          jni.MethodID
+	midLocationSetMslAltitudeMeters                  jni.MethodID
+	midLocationSetProvider                           jni.MethodID
+	midLocationSetSpeed                              jni.MethodID
+	midLocationSetSpeedAccuracyMetersPerSecond       jni.MethodID
+	midLocationSetTime                               jni.MethodID
+	midLocationSetVerticalAccuracyMeters             jni.MethodID
+	midLocationToString                              jni.MethodID
+	midLocationWriteToParcel                         jni.MethodID
+	midLocationConvert2                              jni.MethodID
+	midLocationConvert1_1                            jni.MethodID
+	midLocationDistanceBetween                       jni.MethodID
 
-	clsgnssStatus                      *jni.GlobalRef
-	midgnssStatusDescribeContents      jni.MethodID
-	midgnssStatusEquals                jni.MethodID
-	midgnssStatusGetAzimuthDegrees     jni.MethodID
-	midgnssStatusGetBasebandCn0DbHz    jni.MethodID
-	midgnssStatusGetCarrierFrequencyHz jni.MethodID
-	midgnssStatusGetCn0DbHz            jni.MethodID
-	midgnssStatusGetConstellationType  jni.MethodID
-	midgnssStatusGetElevationDegrees   jni.MethodID
-	midgnssStatusGetSatelliteCount     jni.MethodID
-	midgnssStatusGetSvid               jni.MethodID
-	midgnssStatusHasAlmanacData        jni.MethodID
-	midgnssStatusHasBasebandCn0DbHz    jni.MethodID
-	midgnssStatusHasCarrierFrequencyHz jni.MethodID
-	midgnssStatusHasEphemerisData      jni.MethodID
-	midgnssStatusHashCode              jni.MethodID
-	midgnssStatusUsedInFix             jni.MethodID
-	midgnssStatusWriteToParcel         jni.MethodID
+	clsGnssStatus                      *jni.GlobalRef
+	midGnssStatusDescribeContents      jni.MethodID
+	midGnssStatusEquals                jni.MethodID
+	midGnssStatusGetAzimuthDegrees     jni.MethodID
+	midGnssStatusGetBasebandCn0DbHz    jni.MethodID
+	midGnssStatusGetCarrierFrequencyHz jni.MethodID
+	midGnssStatusGetCn0DbHz            jni.MethodID
+	midGnssStatusGetConstellationType  jni.MethodID
+	midGnssStatusGetElevationDegrees   jni.MethodID
+	midGnssStatusGetSatelliteCount     jni.MethodID
+	midGnssStatusGetSvid               jni.MethodID
+	midGnssStatusHasAlmanacData        jni.MethodID
+	midGnssStatusHasBasebandCn0DbHz    jni.MethodID
+	midGnssStatusHasCarrierFrequencyHz jni.MethodID
+	midGnssStatusHasEphemerisData      jni.MethodID
+	midGnssStatusHashCode              jni.MethodID
+	midGnssStatusUsedInFix             jni.MethodID
+	midGnssStatusWriteToParcel         jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -210,9 +210,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.location.LocationManager: %w", err)
 	}
-	clslocationManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midlocationManagerAddGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)Z")
+	midManagerAddGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -220,7 +220,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addGpsStatusListener")
 	}
 
-	midlocationManagerAddNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)Z")
+	midManagerAddNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -228,7 +228,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addNmeaListener")
 	}
 
-	midlocationManagerAddNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Landroid/location/OnNmeaMessageListener;)Z")
+	midManagerAddNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addNmeaListener", "(Landroid/location/OnNmeaMessageListener;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -236,7 +236,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addNmeaListener")
 	}
 
-	midlocationManagerAddNmeaListener2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Ljava/util/concurrent/Executor;Landroid/location/OnNmeaMessageListener;)Z")
+	midManagerAddNmeaListener2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addNmeaListener", "(Ljava/util/concurrent/Executor;Landroid/location/OnNmeaMessageListener;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -244,7 +244,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addNmeaListener")
 	}
 
-	midlocationManagerAddProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addProximityAlert", "(DDFJLandroid/app/PendingIntent;)V")
+	midManagerAddProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addProximityAlert", "(DDFJLandroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -252,7 +252,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addProximityAlert")
 	}
 
-	midlocationManagerAddTestProvider2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;)V")
+	midManagerAddTestProvider2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -260,7 +260,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addTestProvider")
 	}
 
-	midlocationManagerAddTestProvider3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;Ljava/util/Set;)V")
+	midManagerAddTestProvider3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;Ljava/util/Set;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -268,7 +268,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addTestProvider")
 	}
 
-	midlocationManagerAddTestProvider10_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;ZZZZZZZII)V")
+	midManagerAddTestProvider10_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addTestProvider", "(Ljava/lang/String;ZZZZZZZII)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -276,7 +276,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.addTestProvider")
 	}
 
-	midlocationManagerClearTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderEnabled", "(Ljava/lang/String;)V")
+	midManagerClearTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearTestProviderEnabled", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -284,7 +284,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.clearTestProviderEnabled")
 	}
 
-	midlocationManagerClearTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderLocation", "(Ljava/lang/String;)V")
+	midManagerClearTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearTestProviderLocation", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -292,7 +292,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.clearTestProviderLocation")
 	}
 
-	midlocationManagerClearTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderStatus", "(Ljava/lang/String;)V")
+	midManagerClearTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearTestProviderStatus", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -300,7 +300,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.clearTestProviderStatus")
 	}
 
-	midlocationManagerGetAllProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getAllProviders", "()Ljava/util/List;")
+	midManagerGetAllProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAllProviders", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -308,7 +308,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getAllProviders")
 	}
 
-	midlocationManagerGetBestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getBestProvider", "(Landroid/location/Criteria;Z)Ljava/lang/String;")
+	midManagerGetBestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getBestProvider", "(Landroid/location/Criteria;Z)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -316,7 +316,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getBestProvider")
 	}
 
-	midlocationManagerGetCurrentLocation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midManagerGetCurrentLocation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -324,7 +324,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getCurrentLocation")
 	}
 
-	midlocationManagerGetCurrentLocation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midManagerGetCurrentLocation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -332,7 +332,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getCurrentLocation")
 	}
 
-	midlocationManagerGetGnssAntennaInfos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssAntennaInfos", "()Ljava/util/List;")
+	midManagerGetGnssAntennaInfos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getGnssAntennaInfos", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -340,7 +340,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssAntennaInfos")
 	}
 
-	midlocationManagerGetGnssCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssCapabilities", "()Landroid/location/GnssCapabilities;")
+	midManagerGetGnssCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getGnssCapabilities", "()Landroid/location/GnssCapabilities;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -348,7 +348,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssCapabilities")
 	}
 
-	midlocationManagerGetGnssHardwareModelName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssHardwareModelName", "()Ljava/lang/String;")
+	midManagerGetGnssHardwareModelName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getGnssHardwareModelName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -356,7 +356,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssHardwareModelName")
 	}
 
-	midlocationManagerGetGnssYearOfHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssYearOfHardware", "()I")
+	midManagerGetGnssYearOfHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getGnssYearOfHardware", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -364,7 +364,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getGnssYearOfHardware")
 	}
 
-	midlocationManagerGetGpsStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGpsStatus", "(Landroid/location/GpsStatus;)Landroid/location/GpsStatus;")
+	midManagerGetGpsStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getGpsStatus", "(Landroid/location/GpsStatus;)Landroid/location/GpsStatus;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -372,7 +372,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getGpsStatus")
 	}
 
-	midlocationManagerGetLastKnownLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getLastKnownLocation", "(Ljava/lang/String;)Landroid/location/Location;")
+	midManagerGetLastKnownLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLastKnownLocation", "(Ljava/lang/String;)Landroid/location/Location;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -380,7 +380,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getLastKnownLocation")
 	}
 
-	midlocationManagerGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProvider", "(Ljava/lang/String;)Landroid/location/LocationProvider;")
+	midManagerGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getProvider", "(Ljava/lang/String;)Landroid/location/LocationProvider;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -388,7 +388,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getProvider")
 	}
 
-	midlocationManagerGetProviderProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviderProperties", "(Ljava/lang/String;)Landroid/location/provider/ProviderProperties;")
+	midManagerGetProviderProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getProviderProperties", "(Ljava/lang/String;)Landroid/location/provider/ProviderProperties;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -396,7 +396,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getProviderProperties")
 	}
 
-	midlocationManagerGetProviders2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Landroid/location/Criteria;Z)Ljava/util/List;")
+	midManagerGetProviders2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getProviders", "(Landroid/location/Criteria;Z)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -404,7 +404,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getProviders")
 	}
 
-	midlocationManagerGetProviders1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Z)Ljava/util/List;")
+	midManagerGetProviders1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getProviders", "(Z)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -412,7 +412,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.getProviders")
 	}
 
-	midlocationManagerHasProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "hasProvider", "(Ljava/lang/String;)Z")
+	midManagerHasProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasProvider", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -420,7 +420,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.hasProvider")
 	}
 
-	midlocationManagerIsLocationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "isLocationEnabled", "()Z")
+	midManagerIsLocationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isLocationEnabled", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -428,7 +428,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.isLocationEnabled")
 	}
 
-	midlocationManagerIsProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "isProviderEnabled", "(Ljava/lang/String;)Z")
+	midManagerIsProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isProviderEnabled", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -436,7 +436,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.isProviderEnabled")
 	}
 
-	midlocationManagerRegisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerAntennaInfoListener", "(Ljava/util/concurrent/Executor;Landroid/location/GnssAntennaInfo$Listener;)Z")
+	midManagerRegisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerAntennaInfoListener", "(Ljava/util/concurrent/Executor;Landroid/location/GnssAntennaInfo$Listener;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -444,7 +444,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerAntennaInfoListener")
 	}
 
-	midlocationManagerRegisterGnssMeasurementsCallback3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementRequest;Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
+	midManagerRegisterGnssMeasurementsCallback3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementRequest;Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -452,7 +452,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssMeasurementsCallback")
 	}
 
-	midlocationManagerRegisterGnssMeasurementsCallback1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)Z")
+	midManagerRegisterGnssMeasurementsCallback1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -460,7 +460,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssMeasurementsCallback")
 	}
 
-	midlocationManagerRegisterGnssMeasurementsCallback2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
+	midManagerRegisterGnssMeasurementsCallback2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssMeasurementsCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -468,7 +468,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssMeasurementsCallback")
 	}
 
-	midlocationManagerRegisterGnssNavigationMessageCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)Z")
+	midManagerRegisterGnssNavigationMessageCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -476,7 +476,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssNavigationMessageCallback")
 	}
 
-	midlocationManagerRegisterGnssNavigationMessageCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssNavigationMessageCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssNavigationMessage$Callback;)Z")
+	midManagerRegisterGnssNavigationMessageCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssNavigationMessageCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssNavigationMessage$Callback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -484,7 +484,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssNavigationMessageCallback")
 	}
 
-	midlocationManagerRegisterGnssStatusCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)Z")
+	midManagerRegisterGnssStatusCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -492,7 +492,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssStatusCallback")
 	}
 
-	midlocationManagerRegisterGnssStatusCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssStatusCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssStatus$Callback;)Z")
+	midManagerRegisterGnssStatusCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssStatusCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssStatus$Callback;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -500,7 +500,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.registerGnssStatusCallback")
 	}
 
-	midlocationManagerRemoveGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)V")
+	midManagerRemoveGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -508,7 +508,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.removeGpsStatusListener")
 	}
 
-	midlocationManagerRemoveNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)V")
+	midManagerRemoveNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -516,7 +516,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.removeNmeaListener")
 	}
 
-	midlocationManagerRemoveNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeNmeaListener", "(Landroid/location/OnNmeaMessageListener;)V")
+	midManagerRemoveNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeNmeaListener", "(Landroid/location/OnNmeaMessageListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -524,7 +524,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.removeNmeaListener")
 	}
 
-	midlocationManagerRemoveProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeProximityAlert", "(Landroid/app/PendingIntent;)V")
+	midManagerRemoveProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeProximityAlert", "(Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -532,7 +532,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.removeProximityAlert")
 	}
 
-	midlocationManagerRemoveTestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeTestProvider", "(Ljava/lang/String;)V")
+	midManagerRemoveTestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeTestProvider", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -540,7 +540,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.removeTestProvider")
 	}
 
-	midlocationManagerRemoveUpdates1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeUpdates", "(Landroid/app/PendingIntent;)V")
+	midManagerRemoveUpdates1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeUpdates", "(Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -548,7 +548,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.removeUpdates")
 	}
 
-	midlocationManagerRemoveUpdates1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeUpdates", "(Landroid/location/LocationListener;)V")
+	midManagerRemoveUpdates1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeUpdates", "(Landroid/location/LocationListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -556,7 +556,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.removeUpdates")
 	}
 
-	midlocationManagerRequestFlush3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestFlush", "(Ljava/lang/String;Landroid/app/PendingIntent;I)V")
+	midManagerRequestFlush3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestFlush", "(Ljava/lang/String;Landroid/app/PendingIntent;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -564,7 +564,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestFlush")
 	}
 
-	midlocationManagerRequestFlush3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestFlush", "(Ljava/lang/String;Landroid/location/LocationListener;I)V")
+	midManagerRequestFlush3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestFlush", "(Ljava/lang/String;Landroid/location/LocationListener;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -572,7 +572,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestFlush")
 	}
 
-	midlocationManagerRequestLocationUpdates3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/app/PendingIntent;)V")
+	midManagerRequestLocationUpdates3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -580,7 +580,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
+	midManagerRequestLocationUpdates4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -588,7 +588,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/app/PendingIntent;)V")
+	midManagerRequestLocationUpdates4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -596,7 +596,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;)V")
+	midManagerRequestLocationUpdates4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -604,7 +604,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;Landroid/os/Looper;)V")
+	midManagerRequestLocationUpdates5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -612,7 +612,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLjava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
+	midManagerRequestLocationUpdates5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLjava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -620,7 +620,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates4_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/app/PendingIntent;)V")
+	midManagerRequestLocationUpdates4_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -628,7 +628,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates5_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
+	midManagerRequestLocationUpdates5_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -636,7 +636,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestLocationUpdates5_8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
+	midManagerRequestLocationUpdates5_8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -644,7 +644,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestLocationUpdates")
 	}
 
-	midlocationManagerRequestSingleUpdate2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/app/PendingIntent;)V")
+	midManagerRequestSingleUpdate2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -652,7 +652,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
-	midlocationManagerRequestSingleUpdate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
+	midManagerRequestSingleUpdate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -660,7 +660,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
-	midlocationManagerRequestSingleUpdate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/app/PendingIntent;)V")
+	midManagerRequestSingleUpdate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -668,7 +668,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
-	midlocationManagerRequestSingleUpdate3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/location/LocationListener;Landroid/os/Looper;)V")
+	midManagerRequestSingleUpdate3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/location/LocationListener;Landroid/os/Looper;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -676,7 +676,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.requestSingleUpdate")
 	}
 
-	midlocationManagerSendExtraCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "sendExtraCommand", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Z")
+	midManagerSendExtraCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "sendExtraCommand", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -684,7 +684,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.sendExtraCommand")
 	}
 
-	midlocationManagerSetTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderEnabled", "(Ljava/lang/String;Z)V")
+	midManagerSetTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setTestProviderEnabled", "(Ljava/lang/String;Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -692,7 +692,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.setTestProviderEnabled")
 	}
 
-	midlocationManagerSetTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderLocation", "(Ljava/lang/String;Landroid/location/Location;)V")
+	midManagerSetTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setTestProviderLocation", "(Ljava/lang/String;Landroid/location/Location;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -700,7 +700,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.setTestProviderLocation")
 	}
 
-	midlocationManagerSetTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderStatus", "(Ljava/lang/String;ILandroid/os/Bundle;J)V")
+	midManagerSetTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setTestProviderStatus", "(Ljava/lang/String;ILandroid/os/Bundle;J)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -708,7 +708,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.setTestProviderStatus")
 	}
 
-	midlocationManagerUnregisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterAntennaInfoListener", "(Landroid/location/GnssAntennaInfo$Listener;)V")
+	midManagerUnregisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterAntennaInfoListener", "(Landroid/location/GnssAntennaInfo$Listener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -716,7 +716,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterAntennaInfoListener")
 	}
 
-	midlocationManagerUnregisterGnssMeasurementsCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)V")
+	midManagerUnregisterGnssMeasurementsCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -724,7 +724,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterGnssMeasurementsCallback")
 	}
 
-	midlocationManagerUnregisterGnssNavigationMessageCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)V")
+	midManagerUnregisterGnssNavigationMessageCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -732,7 +732,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterGnssNavigationMessageCallback")
 	}
 
-	midlocationManagerUnregisterGnssStatusCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)V")
+	midManagerUnregisterGnssStatusCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -744,9 +744,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.location.Location: %w", err)
 	}
-	clslocation = env.NewGlobalRef(&c.Object)
+	clsLocation = env.NewGlobalRef(&c.Object)
 
-	midlocationBearingTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "bearingTo", "(Landroid/location/Location;)F")
+	midLocationBearingTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "bearingTo", "(Landroid/location/Location;)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -754,7 +754,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.bearingTo")
 	}
 
-	midlocationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "describeContents", "()I")
+	midLocationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -762,7 +762,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.describeContents")
 	}
 
-	midlocationDistanceTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "distanceTo", "(Landroid/location/Location;)F")
+	midLocationDistanceTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "distanceTo", "(Landroid/location/Location;)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -770,7 +770,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.distanceTo")
 	}
 
-	midlocationDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "dump", "(Landroid/util/Printer;Ljava/lang/String;)V")
+	midLocationDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "dump", "(Landroid/util/Printer;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -778,7 +778,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.dump")
 	}
 
-	midlocationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "equals", "(Ljava/lang/Object;)Z")
+	midLocationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -786,7 +786,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.equals")
 	}
 
-	midlocationGetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getAccuracy", "()F")
+	midLocationGetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAccuracy", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -794,7 +794,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getAccuracy")
 	}
 
-	midlocationGetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getAltitude", "()D")
+	midLocationGetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAltitude", "()D")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -802,7 +802,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getAltitude")
 	}
 
-	midlocationGetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getBearing", "()F")
+	midLocationGetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getBearing", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -810,7 +810,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getBearing")
 	}
 
-	midlocationGetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getBearingAccuracyDegrees", "()F")
+	midLocationGetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getBearingAccuracyDegrees", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -818,7 +818,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getBearingAccuracyDegrees")
 	}
 
-	midlocationGetElapsedRealtimeAgeMillis0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getElapsedRealtimeAgeMillis", "()J")
+	midLocationGetElapsedRealtimeAgeMillis0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeAgeMillis", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -826,7 +826,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getElapsedRealtimeAgeMillis")
 	}
 
-	midlocationGetElapsedRealtimeAgeMillis1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getElapsedRealtimeAgeMillis", "(J)J")
+	midLocationGetElapsedRealtimeAgeMillis1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeAgeMillis", "(J)J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -834,7 +834,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getElapsedRealtimeAgeMillis")
 	}
 
-	midlocationGetElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getElapsedRealtimeMillis", "()J")
+	midLocationGetElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeMillis", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -842,7 +842,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getElapsedRealtimeMillis")
 	}
 
-	midlocationGetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getElapsedRealtimeNanos", "()J")
+	midLocationGetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeNanos", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -850,7 +850,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getElapsedRealtimeNanos")
 	}
 
-	midlocationGetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getElapsedRealtimeUncertaintyNanos", "()D")
+	midLocationGetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeUncertaintyNanos", "()D")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -858,7 +858,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getElapsedRealtimeUncertaintyNanos")
 	}
 
-	midlocationGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getExtras", "()Landroid/os/Bundle;")
+	midLocationGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getExtras", "()Landroid/os/Bundle;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -866,7 +866,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getExtras")
 	}
 
-	midlocationGetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getLatitude", "()D")
+	midLocationGetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLatitude", "()D")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -874,7 +874,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getLatitude")
 	}
 
-	midlocationGetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getLongitude", "()D")
+	midLocationGetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLongitude", "()D")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -882,7 +882,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getLongitude")
 	}
 
-	midlocationGetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getMslAltitudeAccuracyMeters", "()F")
+	midLocationGetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getMslAltitudeAccuracyMeters", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -890,7 +890,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getMslAltitudeAccuracyMeters")
 	}
 
-	midlocationGetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getMslAltitudeMeters", "()D")
+	midLocationGetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getMslAltitudeMeters", "()D")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -898,7 +898,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getMslAltitudeMeters")
 	}
 
-	midlocationGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getProvider", "()Ljava/lang/String;")
+	midLocationGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getProvider", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -906,7 +906,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getProvider")
 	}
 
-	midlocationGetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getSpeed", "()F")
+	midLocationGetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getSpeed", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -914,7 +914,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getSpeed")
 	}
 
-	midlocationGetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getSpeedAccuracyMetersPerSecond", "()F")
+	midLocationGetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getSpeedAccuracyMetersPerSecond", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -922,7 +922,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getSpeedAccuracyMetersPerSecond")
 	}
 
-	midlocationGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getTime", "()J")
+	midLocationGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getTime", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -930,7 +930,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getTime")
 	}
 
-	midlocationGetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "getVerticalAccuracyMeters", "()F")
+	midLocationGetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getVerticalAccuracyMeters", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -938,7 +938,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.getVerticalAccuracyMeters")
 	}
 
-	midlocationHasAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasAccuracy", "()Z")
+	midLocationHasAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasAccuracy", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -946,7 +946,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasAccuracy")
 	}
 
-	midlocationHasAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasAltitude", "()Z")
+	midLocationHasAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasAltitude", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -954,7 +954,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasAltitude")
 	}
 
-	midlocationHasBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasBearing", "()Z")
+	midLocationHasBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasBearing", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -962,7 +962,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasBearing")
 	}
 
-	midlocationHasBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasBearingAccuracy", "()Z")
+	midLocationHasBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasBearingAccuracy", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -970,7 +970,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasBearingAccuracy")
 	}
 
-	midlocationHasElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasElapsedRealtimeUncertaintyNanos", "()Z")
+	midLocationHasElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasElapsedRealtimeUncertaintyNanos", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -978,7 +978,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasElapsedRealtimeUncertaintyNanos")
 	}
 
-	midlocationHasMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasMslAltitude", "()Z")
+	midLocationHasMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasMslAltitude", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -986,7 +986,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasMslAltitude")
 	}
 
-	midlocationHasMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasMslAltitudeAccuracy", "()Z")
+	midLocationHasMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasMslAltitudeAccuracy", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -994,7 +994,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasMslAltitudeAccuracy")
 	}
 
-	midlocationHasSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasSpeed", "()Z")
+	midLocationHasSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasSpeed", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1002,7 +1002,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasSpeed")
 	}
 
-	midlocationHasSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasSpeedAccuracy", "()Z")
+	midLocationHasSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasSpeedAccuracy", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1010,7 +1010,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasSpeedAccuracy")
 	}
 
-	midlocationHasVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hasVerticalAccuracy", "()Z")
+	midLocationHasVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasVerticalAccuracy", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1018,7 +1018,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hasVerticalAccuracy")
 	}
 
-	midlocationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "hashCode", "()I")
+	midLocationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hashCode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1026,7 +1026,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.hashCode")
 	}
 
-	midlocationIsComplete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "isComplete", "()Z")
+	midLocationIsComplete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isComplete", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1034,7 +1034,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.isComplete")
 	}
 
-	midlocationIsFromMockProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "isFromMockProvider", "()Z")
+	midLocationIsFromMockProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isFromMockProvider", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1042,7 +1042,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.isFromMockProvider")
 	}
 
-	midlocationIsMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "isMock", "()Z")
+	midLocationIsMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isMock", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1050,7 +1050,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.isMock")
 	}
 
-	midlocationRemoveAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeAccuracy", "()V")
+	midLocationRemoveAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeAccuracy", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1058,7 +1058,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeAccuracy")
 	}
 
-	midlocationRemoveAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeAltitude", "()V")
+	midLocationRemoveAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeAltitude", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1066,7 +1066,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeAltitude")
 	}
 
-	midlocationRemoveBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeBearing", "()V")
+	midLocationRemoveBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeBearing", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1074,7 +1074,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeBearing")
 	}
 
-	midlocationRemoveBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeBearingAccuracy", "()V")
+	midLocationRemoveBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeBearingAccuracy", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1082,7 +1082,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeBearingAccuracy")
 	}
 
-	midlocationRemoveElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeElapsedRealtimeUncertaintyNanos", "()V")
+	midLocationRemoveElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeElapsedRealtimeUncertaintyNanos", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1090,7 +1090,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeElapsedRealtimeUncertaintyNanos")
 	}
 
-	midlocationRemoveMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeMslAltitude", "()V")
+	midLocationRemoveMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeMslAltitude", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1098,7 +1098,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeMslAltitude")
 	}
 
-	midlocationRemoveMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeMslAltitudeAccuracy", "()V")
+	midLocationRemoveMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeMslAltitudeAccuracy", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1106,7 +1106,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeMslAltitudeAccuracy")
 	}
 
-	midlocationRemoveSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeSpeed", "()V")
+	midLocationRemoveSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeSpeed", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1114,7 +1114,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeSpeed")
 	}
 
-	midlocationRemoveSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeSpeedAccuracy", "()V")
+	midLocationRemoveSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeSpeedAccuracy", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1122,7 +1122,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeSpeedAccuracy")
 	}
 
-	midlocationRemoveVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "removeVerticalAccuracy", "()V")
+	midLocationRemoveVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeVerticalAccuracy", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1130,7 +1130,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.removeVerticalAccuracy")
 	}
 
-	midlocationReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "reset", "()V")
+	midLocationReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "reset", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1138,7 +1138,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.reset")
 	}
 
-	midlocationSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "set", "(Landroid/location/Location;)V")
+	midLocationSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "set", "(Landroid/location/Location;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1146,7 +1146,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.set")
 	}
 
-	midlocationSetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setAccuracy", "(F)V")
+	midLocationSetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setAccuracy", "(F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1154,7 +1154,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setAccuracy")
 	}
 
-	midlocationSetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setAltitude", "(D)V")
+	midLocationSetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setAltitude", "(D)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1162,7 +1162,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setAltitude")
 	}
 
-	midlocationSetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setBearing", "(F)V")
+	midLocationSetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setBearing", "(F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1170,7 +1170,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setBearing")
 	}
 
-	midlocationSetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setBearingAccuracyDegrees", "(F)V")
+	midLocationSetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setBearingAccuracyDegrees", "(F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1178,7 +1178,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setBearingAccuracyDegrees")
 	}
 
-	midlocationSetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setElapsedRealtimeNanos", "(J)V")
+	midLocationSetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setElapsedRealtimeNanos", "(J)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1186,7 +1186,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setElapsedRealtimeNanos")
 	}
 
-	midlocationSetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setElapsedRealtimeUncertaintyNanos", "(D)V")
+	midLocationSetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setElapsedRealtimeUncertaintyNanos", "(D)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1194,7 +1194,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setElapsedRealtimeUncertaintyNanos")
 	}
 
-	midlocationSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setExtras", "(Landroid/os/Bundle;)V")
+	midLocationSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setExtras", "(Landroid/os/Bundle;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1202,7 +1202,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setExtras")
 	}
 
-	midlocationSetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setLatitude", "(D)V")
+	midLocationSetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setLatitude", "(D)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1210,7 +1210,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setLatitude")
 	}
 
-	midlocationSetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setLongitude", "(D)V")
+	midLocationSetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setLongitude", "(D)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1218,7 +1218,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setLongitude")
 	}
 
-	midlocationSetMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setMock", "(Z)V")
+	midLocationSetMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMock", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1226,7 +1226,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setMock")
 	}
 
-	midlocationSetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setMslAltitudeAccuracyMeters", "(F)V")
+	midLocationSetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMslAltitudeAccuracyMeters", "(F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1234,7 +1234,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setMslAltitudeAccuracyMeters")
 	}
 
-	midlocationSetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setMslAltitudeMeters", "(D)V")
+	midLocationSetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMslAltitudeMeters", "(D)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1242,7 +1242,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setMslAltitudeMeters")
 	}
 
-	midlocationSetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setProvider", "(Ljava/lang/String;)V")
+	midLocationSetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setProvider", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1250,7 +1250,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setProvider")
 	}
 
-	midlocationSetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setSpeed", "(F)V")
+	midLocationSetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setSpeed", "(F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1258,7 +1258,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setSpeed")
 	}
 
-	midlocationSetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setSpeedAccuracyMetersPerSecond", "(F)V")
+	midLocationSetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setSpeedAccuracyMetersPerSecond", "(F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1266,7 +1266,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setSpeedAccuracyMetersPerSecond")
 	}
 
-	midlocationSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setTime", "(J)V")
+	midLocationSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setTime", "(J)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1274,7 +1274,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setTime")
 	}
 
-	midlocationSetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "setVerticalAccuracyMeters", "(F)V")
+	midLocationSetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setVerticalAccuracyMeters", "(F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1282,7 +1282,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.setVerticalAccuracyMeters")
 	}
 
-	midlocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "toString", "()Ljava/lang/String;")
+	midLocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1290,7 +1290,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.toString")
 	}
 
-	midlocationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midLocationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1298,7 +1298,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.writeToParcel")
 	}
 
-	midlocationConvert2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "convert", "(DI)Ljava/lang/String;")
+	midLocationConvert2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "convert", "(DI)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1306,7 +1306,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.convert")
 	}
 
-	midlocationConvert1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "convert", "(Ljava/lang/String;)D")
+	midLocationConvert1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "convert", "(Ljava/lang/String;)D")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1314,7 +1314,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.Location.convert")
 	}
 
-	midlocationDistanceBetween, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clslocation)), "distanceBetween", "(DDDD[F)V")
+	midLocationDistanceBetween, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "distanceBetween", "(DDDD[F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1326,9 +1326,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.location.GnssStatus: %w", err)
 	}
-	clsgnssStatus = env.NewGlobalRef(&c.Object)
+	clsGnssStatus = env.NewGlobalRef(&c.Object)
 
-	midgnssStatusDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "describeContents", "()I")
+	midGnssStatusDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1336,7 +1336,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.describeContents")
 	}
 
-	midgnssStatusEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "equals", "(Ljava/lang/Object;)Z")
+	midGnssStatusEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1344,7 +1344,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.equals")
 	}
 
-	midgnssStatusGetAzimuthDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getAzimuthDegrees", "(I)F")
+	midGnssStatusGetAzimuthDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getAzimuthDegrees", "(I)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1352,7 +1352,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getAzimuthDegrees")
 	}
 
-	midgnssStatusGetBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getBasebandCn0DbHz", "(I)F")
+	midGnssStatusGetBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getBasebandCn0DbHz", "(I)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1360,7 +1360,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getBasebandCn0DbHz")
 	}
 
-	midgnssStatusGetCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getCarrierFrequencyHz", "(I)F")
+	midGnssStatusGetCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getCarrierFrequencyHz", "(I)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1368,7 +1368,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getCarrierFrequencyHz")
 	}
 
-	midgnssStatusGetCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getCn0DbHz", "(I)F")
+	midGnssStatusGetCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getCn0DbHz", "(I)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1376,7 +1376,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getCn0DbHz")
 	}
 
-	midgnssStatusGetConstellationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getConstellationType", "(I)I")
+	midGnssStatusGetConstellationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getConstellationType", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1384,7 +1384,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getConstellationType")
 	}
 
-	midgnssStatusGetElevationDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getElevationDegrees", "(I)F")
+	midGnssStatusGetElevationDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getElevationDegrees", "(I)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1392,7 +1392,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getElevationDegrees")
 	}
 
-	midgnssStatusGetSatelliteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getSatelliteCount", "()I")
+	midGnssStatusGetSatelliteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getSatelliteCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1400,7 +1400,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getSatelliteCount")
 	}
 
-	midgnssStatusGetSvid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "getSvid", "(I)I")
+	midGnssStatusGetSvid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getSvid", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1408,7 +1408,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.getSvid")
 	}
 
-	midgnssStatusHasAlmanacData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "hasAlmanacData", "(I)Z")
+	midGnssStatusHasAlmanacData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasAlmanacData", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1416,7 +1416,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.hasAlmanacData")
 	}
 
-	midgnssStatusHasBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "hasBasebandCn0DbHz", "(I)Z")
+	midGnssStatusHasBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasBasebandCn0DbHz", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1424,7 +1424,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.hasBasebandCn0DbHz")
 	}
 
-	midgnssStatusHasCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "hasCarrierFrequencyHz", "(I)Z")
+	midGnssStatusHasCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasCarrierFrequencyHz", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1432,7 +1432,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.hasCarrierFrequencyHz")
 	}
 
-	midgnssStatusHasEphemerisData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "hasEphemerisData", "(I)Z")
+	midGnssStatusHasEphemerisData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasEphemerisData", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1440,7 +1440,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.hasEphemerisData")
 	}
 
-	midgnssStatusHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "hashCode", "()I")
+	midGnssStatusHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hashCode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1448,7 +1448,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.hashCode")
 	}
 
-	midgnssStatusUsedInFix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "usedInFix", "(I)Z")
+	midGnssStatusUsedInFix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "usedInFix", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1456,7 +1456,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.GnssStatus.usedInFix")
 	}
 
-	midgnssStatusWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgnssStatus)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midGnssStatusWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

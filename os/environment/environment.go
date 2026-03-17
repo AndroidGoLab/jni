@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// environment wraps android.os.Environment.
-type environment struct {
+// Environment wraps android.os.Environment.
+type Environment struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // GetDataDirectory calls android.os.Environment.getDataDirectory.
-func (m *environment) GetDataDirectory() (*jni.Object, error) {
+func (m *Environment) GetDataDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *environment) GetDataDirectory() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentGetDataDirectory == nil {
+		if midEnvironmentGetDataDirectory == nil {
 			callErr = fmt.Errorf("android.os.Environment.getDataDirectory is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetDataDirectory,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetDataDirectory,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *environment) GetDataDirectory() (*jni.Object, error) {
 }
 
 // GetDownloadCacheDirectory calls android.os.Environment.getDownloadCacheDirectory.
-func (m *environment) GetDownloadCacheDirectory() (*jni.Object, error) {
+func (m *Environment) GetDownloadCacheDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *environment) GetDownloadCacheDirectory() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentGetDownloadCacheDirectory == nil {
+		if midEnvironmentGetDownloadCacheDirectory == nil {
 			callErr = fmt.Errorf("android.os.Environment.getDownloadCacheDirectory is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetDownloadCacheDirectory,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetDownloadCacheDirectory,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *environment) GetDownloadCacheDirectory() (*jni.Object, error) {
 }
 
 // GetExternalStorageDirectory calls android.os.Environment.getExternalStorageDirectory.
-func (m *environment) GetExternalStorageDirectory() (*jni.Object, error) {
+func (m *Environment) GetExternalStorageDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *environment) GetExternalStorageDirectory() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentGetExternalStorageDirectory == nil {
+		if midEnvironmentGetExternalStorageDirectory == nil {
 			callErr = fmt.Errorf("android.os.Environment.getExternalStorageDirectory is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetExternalStorageDirectory,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetExternalStorageDirectory,
 		)
 		if callErr != nil {
 			return callErr
@@ -99,7 +99,7 @@ func (m *environment) GetExternalStorageDirectory() (*jni.Object, error) {
 }
 
 // GetExternalStoragePublicDirectory calls android.os.Environment.getExternalStoragePublicDirectory.
-func (m *environment) GetExternalStoragePublicDirectory(arg0 string) (*jni.Object, error) {
+func (m *Environment) GetExternalStoragePublicDirectory(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -107,7 +107,7 @@ func (m *environment) GetExternalStoragePublicDirectory(arg0 string) (*jni.Objec
 			callErr = err
 			return err
 		}
-		if midenvironmentGetExternalStoragePublicDirectory == nil {
+		if midEnvironmentGetExternalStoragePublicDirectory == nil {
 			callErr = fmt.Errorf("android.os.Environment.getExternalStoragePublicDirectory is not available on this device")
 			return callErr
 		}
@@ -117,8 +117,8 @@ func (m *environment) GetExternalStoragePublicDirectory(arg0 string) (*jni.Objec
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetExternalStoragePublicDirectory, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetExternalStoragePublicDirectory, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -129,7 +129,7 @@ func (m *environment) GetExternalStoragePublicDirectory(arg0 string) (*jni.Objec
 }
 
 // GetExternalStorageState0 calls android.os.Environment.getExternalStorageState.
-func (m *environment) GetExternalStorageState0() (string, error) {
+func (m *Environment) GetExternalStorageState0() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -137,13 +137,13 @@ func (m *environment) GetExternalStorageState0() (string, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentGetExternalStorageState0 == nil {
+		if midEnvironmentGetExternalStorageState0 == nil {
 			callErr = fmt.Errorf("android.os.Environment.getExternalStorageState is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetExternalStorageState0,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetExternalStorageState0,
 		)
 		if callErr != nil {
 			return callErr
@@ -155,7 +155,7 @@ func (m *environment) GetExternalStorageState0() (string, error) {
 }
 
 // GetExternalStorageState1_1 calls android.os.Environment.getExternalStorageState.
-func (m *environment) GetExternalStorageState1_1(arg0 *jni.Object) (string, error) {
+func (m *Environment) GetExternalStorageState1_1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -163,14 +163,14 @@ func (m *environment) GetExternalStorageState1_1(arg0 *jni.Object) (string, erro
 			callErr = err
 			return err
 		}
-		if midenvironmentGetExternalStorageState1_1 == nil {
+		if midEnvironmentGetExternalStorageState1_1 == nil {
 			callErr = fmt.Errorf("android.os.Environment.getExternalStorageState is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetExternalStorageState1_1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetExternalStorageState1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -182,7 +182,7 @@ func (m *environment) GetExternalStorageState1_1(arg0 *jni.Object) (string, erro
 }
 
 // GetRootDirectory calls android.os.Environment.getRootDirectory.
-func (m *environment) GetRootDirectory() (*jni.Object, error) {
+func (m *Environment) GetRootDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -190,13 +190,13 @@ func (m *environment) GetRootDirectory() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentGetRootDirectory == nil {
+		if midEnvironmentGetRootDirectory == nil {
 			callErr = fmt.Errorf("android.os.Environment.getRootDirectory is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetRootDirectory,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetRootDirectory,
 		)
 		if callErr != nil {
 			return callErr
@@ -207,7 +207,7 @@ func (m *environment) GetRootDirectory() (*jni.Object, error) {
 }
 
 // GetStorageDirectory calls android.os.Environment.getStorageDirectory.
-func (m *environment) GetStorageDirectory() (*jni.Object, error) {
+func (m *Environment) GetStorageDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -215,13 +215,13 @@ func (m *environment) GetStorageDirectory() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentGetStorageDirectory == nil {
+		if midEnvironmentGetStorageDirectory == nil {
 			callErr = fmt.Errorf("android.os.Environment.getStorageDirectory is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetStorageDirectory,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetStorageDirectory,
 		)
 		if callErr != nil {
 			return callErr
@@ -232,7 +232,7 @@ func (m *environment) GetStorageDirectory() (*jni.Object, error) {
 }
 
 // GetStorageState calls android.os.Environment.getStorageState.
-func (m *environment) GetStorageState(arg0 *jni.Object) (string, error) {
+func (m *Environment) GetStorageState(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -240,14 +240,14 @@ func (m *environment) GetStorageState(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentGetStorageState == nil {
+		if midEnvironmentGetStorageState == nil {
 			callErr = fmt.Errorf("android.os.Environment.getStorageState is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentGetStorageState, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentGetStorageState, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -259,7 +259,7 @@ func (m *environment) GetStorageState(arg0 *jni.Object) (string, error) {
 }
 
 // IsExternalStorageEmulated0 calls android.os.Environment.isExternalStorageEmulated.
-func (m *environment) IsExternalStorageEmulated0() (bool, error) {
+func (m *Environment) IsExternalStorageEmulated0() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -267,13 +267,13 @@ func (m *environment) IsExternalStorageEmulated0() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageEmulated0 == nil {
+		if midEnvironmentIsExternalStorageEmulated0 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageEmulated is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageEmulated0,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageEmulated0,
 		)
 		if callErr != nil {
 			return callErr
@@ -285,7 +285,7 @@ func (m *environment) IsExternalStorageEmulated0() (bool, error) {
 }
 
 // IsExternalStorageEmulated1_1 calls android.os.Environment.isExternalStorageEmulated.
-func (m *environment) IsExternalStorageEmulated1_1(arg0 *jni.Object) (bool, error) {
+func (m *Environment) IsExternalStorageEmulated1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -293,14 +293,14 @@ func (m *environment) IsExternalStorageEmulated1_1(arg0 *jni.Object) (bool, erro
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageEmulated1_1 == nil {
+		if midEnvironmentIsExternalStorageEmulated1_1 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageEmulated is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageEmulated1_1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageEmulated1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -312,7 +312,7 @@ func (m *environment) IsExternalStorageEmulated1_1(arg0 *jni.Object) (bool, erro
 }
 
 // IsExternalStorageLegacy0 calls android.os.Environment.isExternalStorageLegacy.
-func (m *environment) IsExternalStorageLegacy0() (bool, error) {
+func (m *Environment) IsExternalStorageLegacy0() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -320,13 +320,13 @@ func (m *environment) IsExternalStorageLegacy0() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageLegacy0 == nil {
+		if midEnvironmentIsExternalStorageLegacy0 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageLegacy is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageLegacy0,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageLegacy0,
 		)
 		if callErr != nil {
 			return callErr
@@ -338,7 +338,7 @@ func (m *environment) IsExternalStorageLegacy0() (bool, error) {
 }
 
 // IsExternalStorageLegacy1_1 calls android.os.Environment.isExternalStorageLegacy.
-func (m *environment) IsExternalStorageLegacy1_1(arg0 *jni.Object) (bool, error) {
+func (m *Environment) IsExternalStorageLegacy1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -346,14 +346,14 @@ func (m *environment) IsExternalStorageLegacy1_1(arg0 *jni.Object) (bool, error)
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageLegacy1_1 == nil {
+		if midEnvironmentIsExternalStorageLegacy1_1 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageLegacy is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageLegacy1_1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageLegacy1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -365,7 +365,7 @@ func (m *environment) IsExternalStorageLegacy1_1(arg0 *jni.Object) (bool, error)
 }
 
 // IsExternalStorageManager0 calls android.os.Environment.isExternalStorageManager.
-func (m *environment) IsExternalStorageManager0() (bool, error) {
+func (m *Environment) IsExternalStorageManager0() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -373,13 +373,13 @@ func (m *environment) IsExternalStorageManager0() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageManager0 == nil {
+		if midEnvironmentIsExternalStorageManager0 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageManager is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageManager0,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageManager0,
 		)
 		if callErr != nil {
 			return callErr
@@ -391,7 +391,7 @@ func (m *environment) IsExternalStorageManager0() (bool, error) {
 }
 
 // IsExternalStorageManager1_1 calls android.os.Environment.isExternalStorageManager.
-func (m *environment) IsExternalStorageManager1_1(arg0 *jni.Object) (bool, error) {
+func (m *Environment) IsExternalStorageManager1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -399,14 +399,14 @@ func (m *environment) IsExternalStorageManager1_1(arg0 *jni.Object) (bool, error
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageManager1_1 == nil {
+		if midEnvironmentIsExternalStorageManager1_1 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageManager is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageManager1_1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageManager1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -418,7 +418,7 @@ func (m *environment) IsExternalStorageManager1_1(arg0 *jni.Object) (bool, error
 }
 
 // IsExternalStorageRemovable0 calls android.os.Environment.isExternalStorageRemovable.
-func (m *environment) IsExternalStorageRemovable0() (bool, error) {
+func (m *Environment) IsExternalStorageRemovable0() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -426,13 +426,13 @@ func (m *environment) IsExternalStorageRemovable0() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageRemovable0 == nil {
+		if midEnvironmentIsExternalStorageRemovable0 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageRemovable is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageRemovable0,
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageRemovable0,
 		)
 		if callErr != nil {
 			return callErr
@@ -444,7 +444,7 @@ func (m *environment) IsExternalStorageRemovable0() (bool, error) {
 }
 
 // IsExternalStorageRemovable1_1 calls android.os.Environment.isExternalStorageRemovable.
-func (m *environment) IsExternalStorageRemovable1_1(arg0 *jni.Object) (bool, error) {
+func (m *Environment) IsExternalStorageRemovable1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -452,14 +452,14 @@ func (m *environment) IsExternalStorageRemovable1_1(arg0 *jni.Object) (bool, err
 			callErr = err
 			return err
 		}
-		if midenvironmentIsExternalStorageRemovable1_1 == nil {
+		if midEnvironmentIsExternalStorageRemovable1_1 == nil {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageRemovable is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsenvironment)),
-			midenvironmentIsExternalStorageRemovable1_1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
+			midEnvironmentIsExternalStorageRemovable1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

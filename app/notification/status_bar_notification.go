@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// statusBarNotification wraps android.service.notification.StatusBarNotification.
-type statusBarNotification struct {
+// StatusBarNotification wraps android.service.notification.StatusBarNotification.
+type StatusBarNotification struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Clone0 calls android.service.notification.StatusBarNotification.clone.
-func (m *statusBarNotification) Clone0() (*jni.Object, error) {
+func (m *StatusBarNotification) Clone0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *statusBarNotification) Clone0() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationClone0 == nil {
+		if midStatusBarNotificationClone0 == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.clone is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationClone0,
+			midStatusBarNotificationClone0,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *statusBarNotification) Clone0() (*jni.Object, error) {
 }
 
 // DescribeContents calls android.service.notification.StatusBarNotification.describeContents.
-func (m *statusBarNotification) DescribeContents() (int32, error) {
+func (m *StatusBarNotification) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *statusBarNotification) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationDescribeContents == nil {
+		if midStatusBarNotificationDescribeContents == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midstatusBarNotificationDescribeContents,
+			midStatusBarNotificationDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *statusBarNotification) DescribeContents() (int32, error) {
 }
 
 // GetGroupKey calls android.service.notification.StatusBarNotification.getGroupKey.
-func (m *statusBarNotification) GetGroupKey() (string, error) {
+func (m *StatusBarNotification) GetGroupKey() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *statusBarNotification) GetGroupKey() (string, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetGroupKey == nil {
+		if midStatusBarNotificationGetGroupKey == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getGroupKey is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetGroupKey,
+			midStatusBarNotificationGetGroupKey,
 		)
 		if callErr != nil {
 			return callErr
@@ -100,7 +100,7 @@ func (m *statusBarNotification) GetGroupKey() (string, error) {
 }
 
 // GetId calls android.service.notification.StatusBarNotification.getId.
-func (m *statusBarNotification) GetId() (int32, error) {
+func (m *StatusBarNotification) GetId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -108,13 +108,13 @@ func (m *statusBarNotification) GetId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetId == nil {
+		if midStatusBarNotificationGetId == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midstatusBarNotificationGetId,
+			midStatusBarNotificationGetId,
 		)
 		if callErr != nil {
 			return callErr
@@ -125,7 +125,7 @@ func (m *statusBarNotification) GetId() (int32, error) {
 }
 
 // GetKey calls android.service.notification.StatusBarNotification.getKey.
-func (m *statusBarNotification) GetKey() (string, error) {
+func (m *StatusBarNotification) GetKey() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -133,13 +133,13 @@ func (m *statusBarNotification) GetKey() (string, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetKey == nil {
+		if midStatusBarNotificationGetKey == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getKey is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetKey,
+			midStatusBarNotificationGetKey,
 		)
 		if callErr != nil {
 			return callErr
@@ -151,7 +151,7 @@ func (m *statusBarNotification) GetKey() (string, error) {
 }
 
 // GetNotification calls android.service.notification.StatusBarNotification.getNotification.
-func (m *statusBarNotification) GetNotification() (*jni.Object, error) {
+func (m *StatusBarNotification) GetNotification() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -159,13 +159,13 @@ func (m *statusBarNotification) GetNotification() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetNotification == nil {
+		if midStatusBarNotificationGetNotification == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getNotification is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetNotification,
+			midStatusBarNotificationGetNotification,
 		)
 		if callErr != nil {
 			return callErr
@@ -176,7 +176,7 @@ func (m *statusBarNotification) GetNotification() (*jni.Object, error) {
 }
 
 // GetOpPkg calls android.service.notification.StatusBarNotification.getOpPkg.
-func (m *statusBarNotification) GetOpPkg() (string, error) {
+func (m *StatusBarNotification) GetOpPkg() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -184,13 +184,13 @@ func (m *statusBarNotification) GetOpPkg() (string, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetOpPkg == nil {
+		if midStatusBarNotificationGetOpPkg == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getOpPkg is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetOpPkg,
+			midStatusBarNotificationGetOpPkg,
 		)
 		if callErr != nil {
 			return callErr
@@ -202,7 +202,7 @@ func (m *statusBarNotification) GetOpPkg() (string, error) {
 }
 
 // GetOverrideGroupKey calls android.service.notification.StatusBarNotification.getOverrideGroupKey.
-func (m *statusBarNotification) GetOverrideGroupKey() (string, error) {
+func (m *StatusBarNotification) GetOverrideGroupKey() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -210,13 +210,13 @@ func (m *statusBarNotification) GetOverrideGroupKey() (string, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetOverrideGroupKey == nil {
+		if midStatusBarNotificationGetOverrideGroupKey == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getOverrideGroupKey is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetOverrideGroupKey,
+			midStatusBarNotificationGetOverrideGroupKey,
 		)
 		if callErr != nil {
 			return callErr
@@ -228,7 +228,7 @@ func (m *statusBarNotification) GetOverrideGroupKey() (string, error) {
 }
 
 // GetPackageName calls android.service.notification.StatusBarNotification.getPackageName.
-func (m *statusBarNotification) GetPackageName() (string, error) {
+func (m *StatusBarNotification) GetPackageName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -236,13 +236,13 @@ func (m *statusBarNotification) GetPackageName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetPackageName == nil {
+		if midStatusBarNotificationGetPackageName == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getPackageName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetPackageName,
+			midStatusBarNotificationGetPackageName,
 		)
 		if callErr != nil {
 			return callErr
@@ -254,7 +254,7 @@ func (m *statusBarNotification) GetPackageName() (string, error) {
 }
 
 // GetPostTime calls android.service.notification.StatusBarNotification.getPostTime.
-func (m *statusBarNotification) GetPostTime() (int64, error) {
+func (m *StatusBarNotification) GetPostTime() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -262,13 +262,13 @@ func (m *statusBarNotification) GetPostTime() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetPostTime == nil {
+		if midStatusBarNotificationGetPostTime == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getPostTime is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midstatusBarNotificationGetPostTime,
+			midStatusBarNotificationGetPostTime,
 		)
 		if callErr != nil {
 			return callErr
@@ -279,7 +279,7 @@ func (m *statusBarNotification) GetPostTime() (int64, error) {
 }
 
 // GetTag calls android.service.notification.StatusBarNotification.getTag.
-func (m *statusBarNotification) GetTag() (string, error) {
+func (m *StatusBarNotification) GetTag() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -287,13 +287,13 @@ func (m *statusBarNotification) GetTag() (string, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetTag == nil {
+		if midStatusBarNotificationGetTag == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getTag is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetTag,
+			midStatusBarNotificationGetTag,
 		)
 		if callErr != nil {
 			return callErr
@@ -305,7 +305,7 @@ func (m *statusBarNotification) GetTag() (string, error) {
 }
 
 // GetUid calls android.service.notification.StatusBarNotification.getUid.
-func (m *statusBarNotification) GetUid() (int32, error) {
+func (m *StatusBarNotification) GetUid() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -313,13 +313,13 @@ func (m *statusBarNotification) GetUid() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetUid == nil {
+		if midStatusBarNotificationGetUid == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getUid is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midstatusBarNotificationGetUid,
+			midStatusBarNotificationGetUid,
 		)
 		if callErr != nil {
 			return callErr
@@ -330,7 +330,7 @@ func (m *statusBarNotification) GetUid() (int32, error) {
 }
 
 // GetUser calls android.service.notification.StatusBarNotification.getUser.
-func (m *statusBarNotification) GetUser() (*jni.Object, error) {
+func (m *StatusBarNotification) GetUser() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -338,13 +338,13 @@ func (m *statusBarNotification) GetUser() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetUser == nil {
+		if midStatusBarNotificationGetUser == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getUser is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationGetUser,
+			midStatusBarNotificationGetUser,
 		)
 		if callErr != nil {
 			return callErr
@@ -355,7 +355,7 @@ func (m *statusBarNotification) GetUser() (*jni.Object, error) {
 }
 
 // GetUserId calls android.service.notification.StatusBarNotification.getUserId.
-func (m *statusBarNotification) GetUserId() (int32, error) {
+func (m *StatusBarNotification) GetUserId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -363,13 +363,13 @@ func (m *statusBarNotification) GetUserId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationGetUserId == nil {
+		if midStatusBarNotificationGetUserId == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.getUserId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midstatusBarNotificationGetUserId,
+			midStatusBarNotificationGetUserId,
 		)
 		if callErr != nil {
 			return callErr
@@ -380,7 +380,7 @@ func (m *statusBarNotification) GetUserId() (int32, error) {
 }
 
 // IsAppGroup calls android.service.notification.StatusBarNotification.isAppGroup.
-func (m *statusBarNotification) IsAppGroup() (bool, error) {
+func (m *StatusBarNotification) IsAppGroup() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -388,13 +388,13 @@ func (m *statusBarNotification) IsAppGroup() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationIsAppGroup == nil {
+		if midStatusBarNotificationIsAppGroup == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.isAppGroup is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midstatusBarNotificationIsAppGroup,
+			midStatusBarNotificationIsAppGroup,
 		)
 		if callErr != nil {
 			return callErr
@@ -406,7 +406,7 @@ func (m *statusBarNotification) IsAppGroup() (bool, error) {
 }
 
 // IsClearable calls android.service.notification.StatusBarNotification.isClearable.
-func (m *statusBarNotification) IsClearable() (bool, error) {
+func (m *StatusBarNotification) IsClearable() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -414,13 +414,13 @@ func (m *statusBarNotification) IsClearable() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationIsClearable == nil {
+		if midStatusBarNotificationIsClearable == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.isClearable is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midstatusBarNotificationIsClearable,
+			midStatusBarNotificationIsClearable,
 		)
 		if callErr != nil {
 			return callErr
@@ -432,7 +432,7 @@ func (m *statusBarNotification) IsClearable() (bool, error) {
 }
 
 // IsGroup calls android.service.notification.StatusBarNotification.isGroup.
-func (m *statusBarNotification) IsGroup() (bool, error) {
+func (m *StatusBarNotification) IsGroup() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -440,13 +440,13 @@ func (m *statusBarNotification) IsGroup() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationIsGroup == nil {
+		if midStatusBarNotificationIsGroup == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.isGroup is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midstatusBarNotificationIsGroup,
+			midStatusBarNotificationIsGroup,
 		)
 		if callErr != nil {
 			return callErr
@@ -458,7 +458,7 @@ func (m *statusBarNotification) IsGroup() (bool, error) {
 }
 
 // IsOngoing calls android.service.notification.StatusBarNotification.isOngoing.
-func (m *statusBarNotification) IsOngoing() (bool, error) {
+func (m *StatusBarNotification) IsOngoing() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -466,13 +466,13 @@ func (m *statusBarNotification) IsOngoing() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationIsOngoing == nil {
+		if midStatusBarNotificationIsOngoing == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.isOngoing is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midstatusBarNotificationIsOngoing,
+			midStatusBarNotificationIsOngoing,
 		)
 		if callErr != nil {
 			return callErr
@@ -484,7 +484,7 @@ func (m *statusBarNotification) IsOngoing() (bool, error) {
 }
 
 // SetOverrideGroupKey calls android.service.notification.StatusBarNotification.setOverrideGroupKey.
-func (m *statusBarNotification) SetOverrideGroupKey(arg0 string) error {
+func (m *StatusBarNotification) SetOverrideGroupKey(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -492,7 +492,7 @@ func (m *statusBarNotification) SetOverrideGroupKey(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationSetOverrideGroupKey == nil {
+		if midStatusBarNotificationSetOverrideGroupKey == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.setOverrideGroupKey is not available on this device")
 			return callErr
 		}
@@ -503,7 +503,7 @@ func (m *statusBarNotification) SetOverrideGroupKey(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midstatusBarNotificationSetOverrideGroupKey, jni.ObjectValue(&jArg0.Object),
+			midStatusBarNotificationSetOverrideGroupKey, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -511,7 +511,7 @@ func (m *statusBarNotification) SetOverrideGroupKey(arg0 string) error {
 }
 
 // ToString calls android.service.notification.StatusBarNotification.toString.
-func (m *statusBarNotification) ToString() (string, error) {
+func (m *StatusBarNotification) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -519,13 +519,13 @@ func (m *statusBarNotification) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationToString == nil {
+		if midStatusBarNotificationToString == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationToString,
+			midStatusBarNotificationToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -537,7 +537,7 @@ func (m *statusBarNotification) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.service.notification.StatusBarNotification.writeToParcel.
-func (m *statusBarNotification) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *StatusBarNotification) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -545,14 +545,14 @@ func (m *statusBarNotification) WriteToParcel(arg0 *jni.Object, arg1 int32) erro
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationWriteToParcel == nil {
+		if midStatusBarNotificationWriteToParcel == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midstatusBarNotificationWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midStatusBarNotificationWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -560,7 +560,7 @@ func (m *statusBarNotification) WriteToParcel(arg0 *jni.Object, arg1 int32) erro
 }
 
 // Clone0_1 calls android.service.notification.StatusBarNotification.clone.
-func (m *statusBarNotification) Clone0_1() (*jni.Object, error) {
+func (m *StatusBarNotification) Clone0_1() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -568,13 +568,13 @@ func (m *statusBarNotification) Clone0_1() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midstatusBarNotificationClone0_1 == nil {
+		if midStatusBarNotificationClone0_1 == nil {
 			callErr = fmt.Errorf("android.service.notification.StatusBarNotification.clone is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midstatusBarNotificationClone0_1,
+			midStatusBarNotificationClone0_1,
 		)
 		if callErr != nil {
 			return callErr

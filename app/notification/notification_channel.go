@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// notificationChannel wraps android.app.NotificationChannel.
-type notificationChannel struct {
+// NotificationChannel wraps android.app.NotificationChannel.
+type NotificationChannel struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // CanBubble calls android.app.NotificationChannel.canBubble.
-func (m *notificationChannel) CanBubble() (bool, error) {
+func (m *NotificationChannel) CanBubble() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *notificationChannel) CanBubble() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelCanBubble == nil {
+		if midNotificationChannelCanBubble == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.canBubble is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelCanBubble,
+			midNotificationChannelCanBubble,
 		)
 		if callErr != nil {
 			return callErr
@@ -50,7 +50,7 @@ func (m *notificationChannel) CanBubble() (bool, error) {
 }
 
 // CanBypassDnd calls android.app.NotificationChannel.canBypassDnd.
-func (m *notificationChannel) CanBypassDnd() (bool, error) {
+func (m *NotificationChannel) CanBypassDnd() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -58,13 +58,13 @@ func (m *notificationChannel) CanBypassDnd() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelCanBypassDnd == nil {
+		if midNotificationChannelCanBypassDnd == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.canBypassDnd is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelCanBypassDnd,
+			midNotificationChannelCanBypassDnd,
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *notificationChannel) CanBypassDnd() (bool, error) {
 }
 
 // CanShowBadge calls android.app.NotificationChannel.canShowBadge.
-func (m *notificationChannel) CanShowBadge() (bool, error) {
+func (m *NotificationChannel) CanShowBadge() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *notificationChannel) CanShowBadge() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelCanShowBadge == nil {
+		if midNotificationChannelCanShowBadge == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.canShowBadge is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelCanShowBadge,
+			midNotificationChannelCanShowBadge,
 		)
 		if callErr != nil {
 			return callErr
@@ -102,7 +102,7 @@ func (m *notificationChannel) CanShowBadge() (bool, error) {
 }
 
 // DescribeContents calls android.app.NotificationChannel.describeContents.
-func (m *notificationChannel) DescribeContents() (int32, error) {
+func (m *NotificationChannel) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -110,13 +110,13 @@ func (m *notificationChannel) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelDescribeContents == nil {
+		if midNotificationChannelDescribeContents == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midnotificationChannelDescribeContents,
+			midNotificationChannelDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -127,7 +127,7 @@ func (m *notificationChannel) DescribeContents() (int32, error) {
 }
 
 // EnableLights calls android.app.NotificationChannel.enableLights.
-func (m *notificationChannel) EnableLights(arg0 bool) error {
+func (m *NotificationChannel) EnableLights(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -135,7 +135,7 @@ func (m *notificationChannel) EnableLights(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelEnableLights == nil {
+		if midNotificationChannelEnableLights == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.enableLights is not available on this device")
 			return callErr
 		}
@@ -146,7 +146,7 @@ func (m *notificationChannel) EnableLights(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelEnableLights, jni.BooleanValue(jArg0),
+			midNotificationChannelEnableLights, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -154,7 +154,7 @@ func (m *notificationChannel) EnableLights(arg0 bool) error {
 }
 
 // EnableVibration calls android.app.NotificationChannel.enableVibration.
-func (m *notificationChannel) EnableVibration(arg0 bool) error {
+func (m *NotificationChannel) EnableVibration(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -162,7 +162,7 @@ func (m *notificationChannel) EnableVibration(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelEnableVibration == nil {
+		if midNotificationChannelEnableVibration == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.enableVibration is not available on this device")
 			return callErr
 		}
@@ -173,7 +173,7 @@ func (m *notificationChannel) EnableVibration(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelEnableVibration, jni.BooleanValue(jArg0),
+			midNotificationChannelEnableVibration, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -181,7 +181,7 @@ func (m *notificationChannel) EnableVibration(arg0 bool) error {
 }
 
 // Equals calls android.app.NotificationChannel.equals.
-func (m *notificationChannel) Equals(arg0 *jni.Object) (bool, error) {
+func (m *NotificationChannel) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -189,14 +189,14 @@ func (m *notificationChannel) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelEquals == nil {
+		if midNotificationChannelEquals == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelEquals, jni.ObjectValue(arg0),
+			midNotificationChannelEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -208,7 +208,7 @@ func (m *notificationChannel) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetAudioAttributes calls android.app.NotificationChannel.getAudioAttributes.
-func (m *notificationChannel) GetAudioAttributes() (*jni.Object, error) {
+func (m *NotificationChannel) GetAudioAttributes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -216,13 +216,13 @@ func (m *notificationChannel) GetAudioAttributes() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetAudioAttributes == nil {
+		if midNotificationChannelGetAudioAttributes == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getAudioAttributes is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetAudioAttributes,
+			midNotificationChannelGetAudioAttributes,
 		)
 		if callErr != nil {
 			return callErr
@@ -233,7 +233,7 @@ func (m *notificationChannel) GetAudioAttributes() (*jni.Object, error) {
 }
 
 // GetConversationId calls android.app.NotificationChannel.getConversationId.
-func (m *notificationChannel) GetConversationId() (string, error) {
+func (m *NotificationChannel) GetConversationId() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -241,13 +241,13 @@ func (m *notificationChannel) GetConversationId() (string, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetConversationId == nil {
+		if midNotificationChannelGetConversationId == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getConversationId is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetConversationId,
+			midNotificationChannelGetConversationId,
 		)
 		if callErr != nil {
 			return callErr
@@ -259,7 +259,7 @@ func (m *notificationChannel) GetConversationId() (string, error) {
 }
 
 // GetDescription calls android.app.NotificationChannel.getDescription.
-func (m *notificationChannel) GetDescription() (string, error) {
+func (m *NotificationChannel) GetDescription() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -267,13 +267,13 @@ func (m *notificationChannel) GetDescription() (string, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetDescription == nil {
+		if midNotificationChannelGetDescription == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getDescription is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetDescription,
+			midNotificationChannelGetDescription,
 		)
 		if callErr != nil {
 			return callErr
@@ -285,7 +285,7 @@ func (m *notificationChannel) GetDescription() (string, error) {
 }
 
 // GetGroup calls android.app.NotificationChannel.getGroup.
-func (m *notificationChannel) GetGroup() (string, error) {
+func (m *NotificationChannel) GetGroup() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -293,13 +293,13 @@ func (m *notificationChannel) GetGroup() (string, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetGroup == nil {
+		if midNotificationChannelGetGroup == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getGroup is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetGroup,
+			midNotificationChannelGetGroup,
 		)
 		if callErr != nil {
 			return callErr
@@ -311,7 +311,7 @@ func (m *notificationChannel) GetGroup() (string, error) {
 }
 
 // GetId calls android.app.NotificationChannel.getId.
-func (m *notificationChannel) GetId() (string, error) {
+func (m *NotificationChannel) GetId() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -319,13 +319,13 @@ func (m *notificationChannel) GetId() (string, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetId == nil {
+		if midNotificationChannelGetId == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getId is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetId,
+			midNotificationChannelGetId,
 		)
 		if callErr != nil {
 			return callErr
@@ -337,7 +337,7 @@ func (m *notificationChannel) GetId() (string, error) {
 }
 
 // GetImportance calls android.app.NotificationChannel.getImportance.
-func (m *notificationChannel) GetImportance() (int32, error) {
+func (m *NotificationChannel) GetImportance() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -345,13 +345,13 @@ func (m *notificationChannel) GetImportance() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetImportance == nil {
+		if midNotificationChannelGetImportance == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getImportance is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midnotificationChannelGetImportance,
+			midNotificationChannelGetImportance,
 		)
 		if callErr != nil {
 			return callErr
@@ -362,7 +362,7 @@ func (m *notificationChannel) GetImportance() (int32, error) {
 }
 
 // GetLightColor calls android.app.NotificationChannel.getLightColor.
-func (m *notificationChannel) GetLightColor() (int32, error) {
+func (m *NotificationChannel) GetLightColor() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -370,13 +370,13 @@ func (m *notificationChannel) GetLightColor() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetLightColor == nil {
+		if midNotificationChannelGetLightColor == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getLightColor is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midnotificationChannelGetLightColor,
+			midNotificationChannelGetLightColor,
 		)
 		if callErr != nil {
 			return callErr
@@ -387,7 +387,7 @@ func (m *notificationChannel) GetLightColor() (int32, error) {
 }
 
 // GetLockscreenVisibility calls android.app.NotificationChannel.getLockscreenVisibility.
-func (m *notificationChannel) GetLockscreenVisibility() (int32, error) {
+func (m *NotificationChannel) GetLockscreenVisibility() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -395,13 +395,13 @@ func (m *notificationChannel) GetLockscreenVisibility() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetLockscreenVisibility == nil {
+		if midNotificationChannelGetLockscreenVisibility == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getLockscreenVisibility is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midnotificationChannelGetLockscreenVisibility,
+			midNotificationChannelGetLockscreenVisibility,
 		)
 		if callErr != nil {
 			return callErr
@@ -412,7 +412,7 @@ func (m *notificationChannel) GetLockscreenVisibility() (int32, error) {
 }
 
 // GetName calls android.app.NotificationChannel.getName.
-func (m *notificationChannel) GetName() (string, error) {
+func (m *NotificationChannel) GetName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -420,13 +420,13 @@ func (m *notificationChannel) GetName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetName == nil {
+		if midNotificationChannelGetName == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetName,
+			midNotificationChannelGetName,
 		)
 		if callErr != nil {
 			return callErr
@@ -438,7 +438,7 @@ func (m *notificationChannel) GetName() (string, error) {
 }
 
 // GetParentChannelId calls android.app.NotificationChannel.getParentChannelId.
-func (m *notificationChannel) GetParentChannelId() (string, error) {
+func (m *NotificationChannel) GetParentChannelId() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -446,13 +446,13 @@ func (m *notificationChannel) GetParentChannelId() (string, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetParentChannelId == nil {
+		if midNotificationChannelGetParentChannelId == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getParentChannelId is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetParentChannelId,
+			midNotificationChannelGetParentChannelId,
 		)
 		if callErr != nil {
 			return callErr
@@ -464,7 +464,7 @@ func (m *notificationChannel) GetParentChannelId() (string, error) {
 }
 
 // GetSound calls android.app.NotificationChannel.getSound.
-func (m *notificationChannel) GetSound() (*jni.Object, error) {
+func (m *NotificationChannel) GetSound() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -472,13 +472,13 @@ func (m *notificationChannel) GetSound() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetSound == nil {
+		if midNotificationChannelGetSound == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getSound is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetSound,
+			midNotificationChannelGetSound,
 		)
 		if callErr != nil {
 			return callErr
@@ -489,7 +489,7 @@ func (m *notificationChannel) GetSound() (*jni.Object, error) {
 }
 
 // GetVibrationEffect calls android.app.NotificationChannel.getVibrationEffect.
-func (m *notificationChannel) GetVibrationEffect() (*jni.Object, error) {
+func (m *NotificationChannel) GetVibrationEffect() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -497,13 +497,13 @@ func (m *notificationChannel) GetVibrationEffect() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetVibrationEffect == nil {
+		if midNotificationChannelGetVibrationEffect == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getVibrationEffect is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetVibrationEffect,
+			midNotificationChannelGetVibrationEffect,
 		)
 		if callErr != nil {
 			return callErr
@@ -514,7 +514,7 @@ func (m *notificationChannel) GetVibrationEffect() (*jni.Object, error) {
 }
 
 // GetVibrationPattern calls android.app.NotificationChannel.getVibrationPattern.
-func (m *notificationChannel) GetVibrationPattern() (*jni.Object, error) {
+func (m *NotificationChannel) GetVibrationPattern() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -522,13 +522,13 @@ func (m *notificationChannel) GetVibrationPattern() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelGetVibrationPattern == nil {
+		if midNotificationChannelGetVibrationPattern == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getVibrationPattern is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelGetVibrationPattern,
+			midNotificationChannelGetVibrationPattern,
 		)
 		if callErr != nil {
 			return callErr
@@ -539,7 +539,7 @@ func (m *notificationChannel) GetVibrationPattern() (*jni.Object, error) {
 }
 
 // HasUserSetImportance calls android.app.NotificationChannel.hasUserSetImportance.
-func (m *notificationChannel) HasUserSetImportance() (bool, error) {
+func (m *NotificationChannel) HasUserSetImportance() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -547,13 +547,13 @@ func (m *notificationChannel) HasUserSetImportance() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelHasUserSetImportance == nil {
+		if midNotificationChannelHasUserSetImportance == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.hasUserSetImportance is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelHasUserSetImportance,
+			midNotificationChannelHasUserSetImportance,
 		)
 		if callErr != nil {
 			return callErr
@@ -565,7 +565,7 @@ func (m *notificationChannel) HasUserSetImportance() (bool, error) {
 }
 
 // HasUserSetSound calls android.app.NotificationChannel.hasUserSetSound.
-func (m *notificationChannel) HasUserSetSound() (bool, error) {
+func (m *NotificationChannel) HasUserSetSound() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -573,13 +573,13 @@ func (m *notificationChannel) HasUserSetSound() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelHasUserSetSound == nil {
+		if midNotificationChannelHasUserSetSound == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.hasUserSetSound is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelHasUserSetSound,
+			midNotificationChannelHasUserSetSound,
 		)
 		if callErr != nil {
 			return callErr
@@ -591,7 +591,7 @@ func (m *notificationChannel) HasUserSetSound() (bool, error) {
 }
 
 // HashCode calls android.app.NotificationChannel.hashCode.
-func (m *notificationChannel) HashCode() (int32, error) {
+func (m *NotificationChannel) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -599,13 +599,13 @@ func (m *notificationChannel) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelHashCode == nil {
+		if midNotificationChannelHashCode == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midnotificationChannelHashCode,
+			midNotificationChannelHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -616,7 +616,7 @@ func (m *notificationChannel) HashCode() (int32, error) {
 }
 
 // IsBlockable calls android.app.NotificationChannel.isBlockable.
-func (m *notificationChannel) IsBlockable() (bool, error) {
+func (m *NotificationChannel) IsBlockable() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -624,13 +624,13 @@ func (m *notificationChannel) IsBlockable() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelIsBlockable == nil {
+		if midNotificationChannelIsBlockable == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isBlockable is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelIsBlockable,
+			midNotificationChannelIsBlockable,
 		)
 		if callErr != nil {
 			return callErr
@@ -642,7 +642,7 @@ func (m *notificationChannel) IsBlockable() (bool, error) {
 }
 
 // IsConversation calls android.app.NotificationChannel.isConversation.
-func (m *notificationChannel) IsConversation() (bool, error) {
+func (m *NotificationChannel) IsConversation() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -650,13 +650,13 @@ func (m *notificationChannel) IsConversation() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelIsConversation == nil {
+		if midNotificationChannelIsConversation == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isConversation is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelIsConversation,
+			midNotificationChannelIsConversation,
 		)
 		if callErr != nil {
 			return callErr
@@ -668,7 +668,7 @@ func (m *notificationChannel) IsConversation() (bool, error) {
 }
 
 // IsDemoted calls android.app.NotificationChannel.isDemoted.
-func (m *notificationChannel) IsDemoted() (bool, error) {
+func (m *NotificationChannel) IsDemoted() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -676,13 +676,13 @@ func (m *notificationChannel) IsDemoted() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelIsDemoted == nil {
+		if midNotificationChannelIsDemoted == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isDemoted is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelIsDemoted,
+			midNotificationChannelIsDemoted,
 		)
 		if callErr != nil {
 			return callErr
@@ -694,7 +694,7 @@ func (m *notificationChannel) IsDemoted() (bool, error) {
 }
 
 // IsImportantConversation calls android.app.NotificationChannel.isImportantConversation.
-func (m *notificationChannel) IsImportantConversation() (bool, error) {
+func (m *NotificationChannel) IsImportantConversation() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -702,13 +702,13 @@ func (m *notificationChannel) IsImportantConversation() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelIsImportantConversation == nil {
+		if midNotificationChannelIsImportantConversation == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isImportantConversation is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelIsImportantConversation,
+			midNotificationChannelIsImportantConversation,
 		)
 		if callErr != nil {
 			return callErr
@@ -720,7 +720,7 @@ func (m *notificationChannel) IsImportantConversation() (bool, error) {
 }
 
 // SetAllowBubbles calls android.app.NotificationChannel.setAllowBubbles.
-func (m *notificationChannel) SetAllowBubbles(arg0 bool) error {
+func (m *NotificationChannel) SetAllowBubbles(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -728,7 +728,7 @@ func (m *notificationChannel) SetAllowBubbles(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetAllowBubbles == nil {
+		if midNotificationChannelSetAllowBubbles == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setAllowBubbles is not available on this device")
 			return callErr
 		}
@@ -739,7 +739,7 @@ func (m *notificationChannel) SetAllowBubbles(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetAllowBubbles, jni.BooleanValue(jArg0),
+			midNotificationChannelSetAllowBubbles, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -747,7 +747,7 @@ func (m *notificationChannel) SetAllowBubbles(arg0 bool) error {
 }
 
 // SetBlockable calls android.app.NotificationChannel.setBlockable.
-func (m *notificationChannel) SetBlockable(arg0 bool) error {
+func (m *NotificationChannel) SetBlockable(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -755,7 +755,7 @@ func (m *notificationChannel) SetBlockable(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetBlockable == nil {
+		if midNotificationChannelSetBlockable == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setBlockable is not available on this device")
 			return callErr
 		}
@@ -766,7 +766,7 @@ func (m *notificationChannel) SetBlockable(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetBlockable, jni.BooleanValue(jArg0),
+			midNotificationChannelSetBlockable, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -774,7 +774,7 @@ func (m *notificationChannel) SetBlockable(arg0 bool) error {
 }
 
 // SetBypassDnd calls android.app.NotificationChannel.setBypassDnd.
-func (m *notificationChannel) SetBypassDnd(arg0 bool) error {
+func (m *NotificationChannel) SetBypassDnd(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -782,7 +782,7 @@ func (m *notificationChannel) SetBypassDnd(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetBypassDnd == nil {
+		if midNotificationChannelSetBypassDnd == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setBypassDnd is not available on this device")
 			return callErr
 		}
@@ -793,7 +793,7 @@ func (m *notificationChannel) SetBypassDnd(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetBypassDnd, jni.BooleanValue(jArg0),
+			midNotificationChannelSetBypassDnd, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -801,7 +801,7 @@ func (m *notificationChannel) SetBypassDnd(arg0 bool) error {
 }
 
 // SetConversationId calls android.app.NotificationChannel.setConversationId.
-func (m *notificationChannel) SetConversationId(arg0 string, arg1 string) error {
+func (m *NotificationChannel) SetConversationId(arg0 string, arg1 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -809,7 +809,7 @@ func (m *notificationChannel) SetConversationId(arg0 string, arg1 string) error 
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetConversationId == nil {
+		if midNotificationChannelSetConversationId == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setConversationId is not available on this device")
 			return callErr
 		}
@@ -825,7 +825,7 @@ func (m *notificationChannel) SetConversationId(arg0 string, arg1 string) error 
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetConversationId, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			midNotificationChannelSetConversationId, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		return callErr
 	})
@@ -833,7 +833,7 @@ func (m *notificationChannel) SetConversationId(arg0 string, arg1 string) error 
 }
 
 // SetDescription calls android.app.NotificationChannel.setDescription.
-func (m *notificationChannel) SetDescription(arg0 string) error {
+func (m *NotificationChannel) SetDescription(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -841,7 +841,7 @@ func (m *notificationChannel) SetDescription(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetDescription == nil {
+		if midNotificationChannelSetDescription == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setDescription is not available on this device")
 			return callErr
 		}
@@ -852,7 +852,7 @@ func (m *notificationChannel) SetDescription(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetDescription, jni.ObjectValue(&jArg0.Object),
+			midNotificationChannelSetDescription, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -860,7 +860,7 @@ func (m *notificationChannel) SetDescription(arg0 string) error {
 }
 
 // SetGroup calls android.app.NotificationChannel.setGroup.
-func (m *notificationChannel) SetGroup(arg0 string) error {
+func (m *NotificationChannel) SetGroup(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -868,7 +868,7 @@ func (m *notificationChannel) SetGroup(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetGroup == nil {
+		if midNotificationChannelSetGroup == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setGroup is not available on this device")
 			return callErr
 		}
@@ -879,7 +879,7 @@ func (m *notificationChannel) SetGroup(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetGroup, jni.ObjectValue(&jArg0.Object),
+			midNotificationChannelSetGroup, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -887,7 +887,7 @@ func (m *notificationChannel) SetGroup(arg0 string) error {
 }
 
 // SetImportance calls android.app.NotificationChannel.setImportance.
-func (m *notificationChannel) SetImportance(arg0 int32) error {
+func (m *NotificationChannel) SetImportance(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -895,14 +895,14 @@ func (m *notificationChannel) SetImportance(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetImportance == nil {
+		if midNotificationChannelSetImportance == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setImportance is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetImportance, jni.IntValue(arg0),
+			midNotificationChannelSetImportance, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -910,7 +910,7 @@ func (m *notificationChannel) SetImportance(arg0 int32) error {
 }
 
 // SetLightColor calls android.app.NotificationChannel.setLightColor.
-func (m *notificationChannel) SetLightColor(arg0 int32) error {
+func (m *NotificationChannel) SetLightColor(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -918,14 +918,14 @@ func (m *notificationChannel) SetLightColor(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetLightColor == nil {
+		if midNotificationChannelSetLightColor == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setLightColor is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetLightColor, jni.IntValue(arg0),
+			midNotificationChannelSetLightColor, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -933,7 +933,7 @@ func (m *notificationChannel) SetLightColor(arg0 int32) error {
 }
 
 // SetLockscreenVisibility calls android.app.NotificationChannel.setLockscreenVisibility.
-func (m *notificationChannel) SetLockscreenVisibility(arg0 int32) error {
+func (m *NotificationChannel) SetLockscreenVisibility(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -941,14 +941,14 @@ func (m *notificationChannel) SetLockscreenVisibility(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetLockscreenVisibility == nil {
+		if midNotificationChannelSetLockscreenVisibility == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setLockscreenVisibility is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetLockscreenVisibility, jni.IntValue(arg0),
+			midNotificationChannelSetLockscreenVisibility, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -956,7 +956,7 @@ func (m *notificationChannel) SetLockscreenVisibility(arg0 int32) error {
 }
 
 // SetName calls android.app.NotificationChannel.setName.
-func (m *notificationChannel) SetName(arg0 string) error {
+func (m *NotificationChannel) SetName(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -964,7 +964,7 @@ func (m *notificationChannel) SetName(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetName == nil {
+		if midNotificationChannelSetName == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setName is not available on this device")
 			return callErr
 		}
@@ -975,7 +975,7 @@ func (m *notificationChannel) SetName(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetName, jni.ObjectValue(&jArg0.Object),
+			midNotificationChannelSetName, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -983,7 +983,7 @@ func (m *notificationChannel) SetName(arg0 string) error {
 }
 
 // SetShowBadge calls android.app.NotificationChannel.setShowBadge.
-func (m *notificationChannel) SetShowBadge(arg0 bool) error {
+func (m *NotificationChannel) SetShowBadge(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -991,7 +991,7 @@ func (m *notificationChannel) SetShowBadge(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetShowBadge == nil {
+		if midNotificationChannelSetShowBadge == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setShowBadge is not available on this device")
 			return callErr
 		}
@@ -1002,7 +1002,7 @@ func (m *notificationChannel) SetShowBadge(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetShowBadge, jni.BooleanValue(jArg0),
+			midNotificationChannelSetShowBadge, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -1010,7 +1010,7 @@ func (m *notificationChannel) SetShowBadge(arg0 bool) error {
 }
 
 // SetSound calls android.app.NotificationChannel.setSound.
-func (m *notificationChannel) SetSound(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *NotificationChannel) SetSound(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1018,14 +1018,14 @@ func (m *notificationChannel) SetSound(arg0 *jni.Object, arg1 *jni.Object) error
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetSound == nil {
+		if midNotificationChannelSetSound == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setSound is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetSound, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midNotificationChannelSetSound, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1033,7 +1033,7 @@ func (m *notificationChannel) SetSound(arg0 *jni.Object, arg1 *jni.Object) error
 }
 
 // SetVibrationEffect calls android.app.NotificationChannel.setVibrationEffect.
-func (m *notificationChannel) SetVibrationEffect(arg0 *jni.Object) error {
+func (m *NotificationChannel) SetVibrationEffect(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1041,14 +1041,14 @@ func (m *notificationChannel) SetVibrationEffect(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetVibrationEffect == nil {
+		if midNotificationChannelSetVibrationEffect == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setVibrationEffect is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetVibrationEffect, jni.ObjectValue(arg0),
+			midNotificationChannelSetVibrationEffect, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1056,7 +1056,7 @@ func (m *notificationChannel) SetVibrationEffect(arg0 *jni.Object) error {
 }
 
 // SetVibrationPattern calls android.app.NotificationChannel.setVibrationPattern.
-func (m *notificationChannel) SetVibrationPattern(arg0 *jni.Object) error {
+func (m *NotificationChannel) SetVibrationPattern(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1064,14 +1064,14 @@ func (m *notificationChannel) SetVibrationPattern(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelSetVibrationPattern == nil {
+		if midNotificationChannelSetVibrationPattern == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.setVibrationPattern is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelSetVibrationPattern, jni.ObjectValue(arg0),
+			midNotificationChannelSetVibrationPattern, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1079,7 +1079,7 @@ func (m *notificationChannel) SetVibrationPattern(arg0 *jni.Object) error {
 }
 
 // ShouldShowLights calls android.app.NotificationChannel.shouldShowLights.
-func (m *notificationChannel) ShouldShowLights() (bool, error) {
+func (m *NotificationChannel) ShouldShowLights() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1087,13 +1087,13 @@ func (m *notificationChannel) ShouldShowLights() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelShouldShowLights == nil {
+		if midNotificationChannelShouldShowLights == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.shouldShowLights is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelShouldShowLights,
+			midNotificationChannelShouldShowLights,
 		)
 		if callErr != nil {
 			return callErr
@@ -1105,7 +1105,7 @@ func (m *notificationChannel) ShouldShowLights() (bool, error) {
 }
 
 // ShouldVibrate calls android.app.NotificationChannel.shouldVibrate.
-func (m *notificationChannel) ShouldVibrate() (bool, error) {
+func (m *NotificationChannel) ShouldVibrate() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1113,13 +1113,13 @@ func (m *notificationChannel) ShouldVibrate() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelShouldVibrate == nil {
+		if midNotificationChannelShouldVibrate == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.shouldVibrate is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelShouldVibrate,
+			midNotificationChannelShouldVibrate,
 		)
 		if callErr != nil {
 			return callErr
@@ -1131,7 +1131,7 @@ func (m *notificationChannel) ShouldVibrate() (bool, error) {
 }
 
 // ToString calls android.app.NotificationChannel.toString.
-func (m *notificationChannel) ToString() (string, error) {
+func (m *NotificationChannel) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1139,13 +1139,13 @@ func (m *notificationChannel) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midnotificationChannelToString == nil {
+		if midNotificationChannelToString == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midnotificationChannelToString,
+			midNotificationChannelToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -1157,7 +1157,7 @@ func (m *notificationChannel) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.app.NotificationChannel.writeToParcel.
-func (m *notificationChannel) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *NotificationChannel) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1165,14 +1165,14 @@ func (m *notificationChannel) WriteToParcel(arg0 *jni.Object, arg1 int32) error 
 			callErr = err
 			return err
 		}
-		if midnotificationChannelWriteToParcel == nil {
+		if midNotificationChannelWriteToParcel == nil {
 			callErr = fmt.Errorf("android.app.NotificationChannel.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midnotificationChannelWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midNotificationChannelWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

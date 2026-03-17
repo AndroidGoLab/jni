@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// account wraps android.accounts.Account.
-type account struct {
+// Account wraps android.accounts.Account.
+type Account struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.accounts.Account.describeContents.
-func (m *account) DescribeContents() (int32, error) {
+func (m *Account) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *account) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midaccountDescribeContents == nil {
+		if midAccountDescribeContents == nil {
 			callErr = fmt.Errorf("android.accounts.Account.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midaccountDescribeContents,
+			midAccountDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *account) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.accounts.Account.equals.
-func (m *account) Equals(arg0 *jni.Object) (bool, error) {
+func (m *Account) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *account) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midaccountEquals == nil {
+		if midAccountEquals == nil {
 			callErr = fmt.Errorf("android.accounts.Account.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midaccountEquals, jni.ObjectValue(arg0),
+			midAccountEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *account) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // HashCode calls android.accounts.Account.hashCode.
-func (m *account) HashCode() (int32, error) {
+func (m *Account) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *account) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midaccountHashCode == nil {
+		if midAccountHashCode == nil {
 			callErr = fmt.Errorf("android.accounts.Account.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midaccountHashCode,
+			midAccountHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *account) HashCode() (int32, error) {
 }
 
 // ToString calls android.accounts.Account.toString.
-func (m *account) ToString() (string, error) {
+func (m *Account) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,13 +109,13 @@ func (m *account) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midaccountToString == nil {
+		if midAccountToString == nil {
 			callErr = fmt.Errorf("android.accounts.Account.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midaccountToString,
+			midAccountToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -127,7 +127,7 @@ func (m *account) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.accounts.Account.writeToParcel.
-func (m *account) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *Account) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -135,14 +135,14 @@ func (m *account) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midaccountWriteToParcel == nil {
+		if midAccountWriteToParcel == nil {
 			callErr = fmt.Errorf("android.accounts.Account.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midaccountWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midAccountWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

@@ -2,6 +2,28 @@ package: preferences
 go_import: github.com/AndroidGoLab/jni/content/preferences
 classes:
     - java_class: android.content.SharedPreferences
-      go_type: sharedPreferences
+      go_type: Preferences
+      close: true
+      methods:
+        - java_method: getString
+          go_name: GetString
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: String
+          error: true
+        - java_method: contains
+          go_name: Contains
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAll
+          go_name: GetAll
+          returns: java.util.Map
+          error: true
     - java_class: android.content.SharedPreferences$Editor
-      go_type: sharedPreferencesEditor
+      go_type: Editor

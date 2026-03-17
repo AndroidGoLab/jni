@@ -2,7 +2,7 @@ package: accounts
 go_import: github.com/AndroidGoLab/jni/accounts
 classes:
     - java_class: android.accounts.AccountManager
-      go_type: accountManager
+      go_type: Manager
       methods:
         - java_method: addAccountExplicitly
           go_name: AddAccountExplicitly3
@@ -232,7 +232,7 @@ classes:
           returns: android.content.Intent
           error: true
     - java_class: android.accounts.Account
-      go_type: account
+      go_type: Account
       methods:
         - java_method: describeContents
           go_name: DescribeContents

@@ -2,7 +2,7 @@ package: battery
 go_import: github.com/AndroidGoLab/jni/os/battery
 classes:
     - java_class: android.os.BatteryManager
-      go_type: batteryManager
+      go_type: Manager
       obtain: system_service
       service_name: batterymanager
       close: true

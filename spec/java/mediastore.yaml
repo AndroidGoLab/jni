@@ -2,7 +2,7 @@ package: mediastore
 go_import: github.com/AndroidGoLab/jni/provider/media
 classes:
     - java_class: android.provider.MediaStore
-      go_type: mediaStore
+      go_type: MediaStore
       static_methods:
         - java_method: canManageMedia
           go_name: CanManageMedia

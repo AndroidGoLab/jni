@@ -20,10 +20,10 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clswifiRttManager                      *jni.GlobalRef
-	midwifiRttManagerGetRttCharacteristics jni.MethodID
-	midwifiRttManagerIsAvailable           jni.MethodID
-	midwifiRttManagerStartRanging          jni.MethodID
+	clsManager                      *jni.GlobalRef
+	midManagerGetRttCharacteristics jni.MethodID
+	midManagerIsAvailable           jni.MethodID
+	midManagerStartRanging          jni.MethodID
 
 	clsrangingResult                                         *jni.GlobalRef
 	midrangingResultDescribeContents                         jni.MethodID
@@ -89,9 +89,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.net.wifi.rtt.WifiRttManager: %w", err)
 	}
-	clswifiRttManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midwifiRttManagerGetRttCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiRttManager)), "getRttCharacteristics", "()Landroid/os/Bundle;")
+	midManagerGetRttCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRttCharacteristics", "()Landroid/os/Bundle;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -99,7 +99,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.wifi.rtt.WifiRttManager.getRttCharacteristics")
 	}
 
-	midwifiRttManagerIsAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiRttManager)), "isAvailable", "()Z")
+	midManagerIsAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAvailable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -107,7 +107,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.wifi.rtt.WifiRttManager.isAvailable")
 	}
 
-	midwifiRttManagerStartRanging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiRttManager)), "startRanging", "(Landroid/net/wifi/rtt/RangingRequest;Ljava/util/concurrent/Executor;Landroid/net/wifi/rtt/RangingResultCallback;)V")
+	midManagerStartRanging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "startRanging", "(Landroid/net/wifi/rtt/RangingRequest;Ljava/util/concurrent/Executor;Landroid/net/wifi/rtt/RangingResultCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

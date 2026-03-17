@@ -15,14 +15,14 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
-// cancellationSignal wraps android.os.CancellationSignal.
-type cancellationSignal struct {
+// CancellationSignal wraps android.os.CancellationSignal.
+type CancellationSignal struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Cancel calls android.os.CancellationSignal.cancel.
-func (m *cancellationSignal) Cancel() error {
+func (m *CancellationSignal) Cancel() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -30,13 +30,13 @@ func (m *cancellationSignal) Cancel() error {
 			callErr = err
 			return err
 		}
-		if midcancellationSignalCancel == nil {
+		if midCancellationSignalCancel == nil {
 			callErr = fmt.Errorf("android.os.CancellationSignal.cancel is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midcancellationSignalCancel,
+			midCancellationSignalCancel,
 		)
 		return callErr
 	})
@@ -44,7 +44,7 @@ func (m *cancellationSignal) Cancel() error {
 }
 
 // IsCanceled calls android.os.CancellationSignal.isCanceled.
-func (m *cancellationSignal) IsCanceled() (bool, error) {
+func (m *CancellationSignal) IsCanceled() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -52,13 +52,13 @@ func (m *cancellationSignal) IsCanceled() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midcancellationSignalIsCanceled == nil {
+		if midCancellationSignalIsCanceled == nil {
 			callErr = fmt.Errorf("android.os.CancellationSignal.isCanceled is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midcancellationSignalIsCanceled,
+			midCancellationSignalIsCanceled,
 		)
 		if callErr != nil {
 			return callErr
@@ -70,7 +70,7 @@ func (m *cancellationSignal) IsCanceled() (bool, error) {
 }
 
 // SetOnCancelListener calls android.os.CancellationSignal.setOnCancelListener.
-func (m *cancellationSignal) SetOnCancelListener(arg0 *jni.Object) error {
+func (m *CancellationSignal) SetOnCancelListener(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -78,14 +78,14 @@ func (m *cancellationSignal) SetOnCancelListener(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midcancellationSignalSetOnCancelListener == nil {
+		if midCancellationSignalSetOnCancelListener == nil {
 			callErr = fmt.Errorf("android.os.CancellationSignal.setOnCancelListener is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midcancellationSignalSetOnCancelListener, jni.ObjectValue(arg0),
+			midCancellationSignalSetOnCancelListener, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -93,7 +93,7 @@ func (m *cancellationSignal) SetOnCancelListener(arg0 *jni.Object) error {
 }
 
 // ThrowIfCanceled calls android.os.CancellationSignal.throwIfCanceled.
-func (m *cancellationSignal) ThrowIfCanceled() error {
+func (m *CancellationSignal) ThrowIfCanceled() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -101,13 +101,13 @@ func (m *cancellationSignal) ThrowIfCanceled() error {
 			callErr = err
 			return err
 		}
-		if midcancellationSignalThrowIfCanceled == nil {
+		if midCancellationSignalThrowIfCanceled == nil {
 			callErr = fmt.Errorf("android.os.CancellationSignal.throwIfCanceled is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midcancellationSignalThrowIfCanceled,
+			midCancellationSignalThrowIfCanceled,
 		)
 		return callErr
 	})

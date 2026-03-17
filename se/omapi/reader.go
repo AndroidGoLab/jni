@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// reader wraps android.se.omapi.Reader.
-type reader struct {
+// Reader wraps android.se.omapi.Reader.
+type Reader struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // CloseSessions calls android.se.omapi.Reader.closeSessions.
-func (m *reader) CloseSessions() error {
+func (m *Reader) CloseSessions() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *reader) CloseSessions() error {
 			callErr = err
 			return err
 		}
-		if midreaderCloseSessions == nil {
+		if midReaderCloseSessions == nil {
 			callErr = fmt.Errorf("android.se.omapi.Reader.closeSessions is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midreaderCloseSessions,
+			midReaderCloseSessions,
 		)
 		return callErr
 	})
@@ -46,7 +46,7 @@ func (m *reader) CloseSessions() error {
 }
 
 // GetName calls android.se.omapi.Reader.getName.
-func (m *reader) GetName() (string, error) {
+func (m *Reader) GetName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -54,13 +54,13 @@ func (m *reader) GetName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midreaderGetName == nil {
+		if midReaderGetName == nil {
 			callErr = fmt.Errorf("android.se.omapi.Reader.getName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midreaderGetName,
+			midReaderGetName,
 		)
 		if callErr != nil {
 			return callErr
@@ -72,7 +72,7 @@ func (m *reader) GetName() (string, error) {
 }
 
 // GetSEService calls android.se.omapi.Reader.getSEService.
-func (m *reader) GetSEService() (*jni.Object, error) {
+func (m *Reader) GetSEService() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -80,13 +80,13 @@ func (m *reader) GetSEService() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midreaderGetSEService == nil {
+		if midReaderGetSEService == nil {
 			callErr = fmt.Errorf("android.se.omapi.Reader.getSEService is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midreaderGetSEService,
+			midReaderGetSEService,
 		)
 		if callErr != nil {
 			return callErr
@@ -97,7 +97,7 @@ func (m *reader) GetSEService() (*jni.Object, error) {
 }
 
 // IsSecureElementPresent calls android.se.omapi.Reader.isSecureElementPresent.
-func (m *reader) IsSecureElementPresent() (bool, error) {
+func (m *Reader) IsSecureElementPresent() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -105,13 +105,13 @@ func (m *reader) IsSecureElementPresent() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midreaderIsSecureElementPresent == nil {
+		if midReaderIsSecureElementPresent == nil {
 			callErr = fmt.Errorf("android.se.omapi.Reader.isSecureElementPresent is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midreaderIsSecureElementPresent,
+			midReaderIsSecureElementPresent,
 		)
 		if callErr != nil {
 			return callErr
@@ -123,7 +123,7 @@ func (m *reader) IsSecureElementPresent() (bool, error) {
 }
 
 // OpenSession calls android.se.omapi.Reader.openSession.
-func (m *reader) OpenSession() (*jni.Object, error) {
+func (m *Reader) OpenSession() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -131,13 +131,13 @@ func (m *reader) OpenSession() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midreaderOpenSession == nil {
+		if midReaderOpenSession == nil {
 			callErr = fmt.Errorf("android.se.omapi.Reader.openSession is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midreaderOpenSession,
+			midReaderOpenSession,
 		)
 		if callErr != nil {
 			return callErr

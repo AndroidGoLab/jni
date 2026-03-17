@@ -2,7 +2,7 @@ package: recorder
 go_import: github.com/AndroidGoLab/jni/media/recorder
 classes:
     - java_class: android.media.MediaRecorder
-      go_type: mediaRecorder
+      go_type: Recorder
       methods:
         - java_method: getActiveMicrophones
           go_name: GetActiveMicrophones

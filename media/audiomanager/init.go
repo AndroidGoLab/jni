@@ -20,104 +20,104 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsaudioManager                                                *jni.GlobalRef
-	midaudioManagerAbandonAudioFocus                               jni.MethodID
-	midaudioManagerAbandonAudioFocusRequest                        jni.MethodID
-	midaudioManagerAddOnCommunicationDeviceChangedListener         jni.MethodID
-	midaudioManagerAddOnModeChangedListener                        jni.MethodID
-	midaudioManagerAddOnPreferredMixerAttributesChangedListener    jni.MethodID
-	midaudioManagerAdjustStreamVolume                              jni.MethodID
-	midaudioManagerAdjustSuggestedStreamVolume                     jni.MethodID
-	midaudioManagerAdjustVolume                                    jni.MethodID
-	midaudioManagerAdjustVolumeGroupVolume                         jni.MethodID
-	midaudioManagerClearCommunicationDevice                        jni.MethodID
-	midaudioManagerClearPreferredMixerAttributes                   jni.MethodID
-	midaudioManagerDispatchMediaKeyEvent                           jni.MethodID
-	midaudioManagerGenerateAudioSessionId                          jni.MethodID
-	midaudioManagerGetActivePlaybackConfigurations                 jni.MethodID
-	midaudioManagerGetActiveRecordingConfigurations                jni.MethodID
-	midaudioManagerGetAllowedCapturePolicy                         jni.MethodID
-	midaudioManagerGetAudioDevicesForAttributes                    jni.MethodID
-	midaudioManagerGetAudioHwSyncForSession                        jni.MethodID
-	midaudioManagerGetAvailableCommunicationDevices                jni.MethodID
-	midaudioManagerGetCommunicationDevice                          jni.MethodID
-	midaudioManagerGetDevices                                      jni.MethodID
-	midaudioManagerGetDirectProfilesForAttributes                  jni.MethodID
-	midaudioManagerGetEncodedSurroundMode                          jni.MethodID
-	midaudioManagerGetMicrophones                                  jni.MethodID
-	midaudioManagerGetMode                                         jni.MethodID
-	midaudioManagerGetParameters                                   jni.MethodID
-	midaudioManagerGetPreferredMixerAttributes                     jni.MethodID
-	midaudioManagerGetProperty                                     jni.MethodID
-	midaudioManagerGetRingerMode                                   jni.MethodID
-	midaudioManagerGetRouting                                      jni.MethodID
-	midaudioManagerGetSpatializer                                  jni.MethodID
-	midaudioManagerGetStreamMaxVolume                              jni.MethodID
-	midaudioManagerGetStreamMinVolume                              jni.MethodID
-	midaudioManagerGetStreamVolume                                 jni.MethodID
-	midaudioManagerGetStreamVolumeDb                               jni.MethodID
-	midaudioManagerGetSupportedDeviceTypes                         jni.MethodID
-	midaudioManagerGetSupportedMixerAttributes                     jni.MethodID
-	midaudioManagerGetVibrateSetting                               jni.MethodID
-	midaudioManagerGetVolumeGroupIdForAttributes                   jni.MethodID
-	midaudioManagerIsBluetoothA2dpOn                               jni.MethodID
-	midaudioManagerIsBluetoothScoAvailableOffCall                  jni.MethodID
-	midaudioManagerIsBluetoothScoOn                                jni.MethodID
-	midaudioManagerIsCallScreeningModeSupported                    jni.MethodID
-	midaudioManagerIsMicrophoneMute                                jni.MethodID
-	midaudioManagerIsMusicActive                                   jni.MethodID
-	midaudioManagerIsRampingRingerEnabled                          jni.MethodID
-	midaudioManagerIsSpeakerphoneOn                                jni.MethodID
-	midaudioManagerIsStreamMute                                    jni.MethodID
-	midaudioManagerIsSurroundFormatEnabled                         jni.MethodID
-	midaudioManagerIsVolumeFixed                                   jni.MethodID
-	midaudioManagerIsVolumeGroupMuted                              jni.MethodID
-	midaudioManagerIsWiredHeadsetOn                                jni.MethodID
-	midaudioManagerLoadSoundEffects                                jni.MethodID
-	midaudioManagerPlaySoundEffect1                                jni.MethodID
-	midaudioManagerPlaySoundEffect2_1                              jni.MethodID
-	midaudioManagerRegisterMediaButtonEventReceiver1               jni.MethodID
-	midaudioManagerRegisterMediaButtonEventReceiver1_1             jni.MethodID
-	midaudioManagerRegisterRemoteControlClient                     jni.MethodID
-	midaudioManagerRegisterRemoteController                        jni.MethodID
-	midaudioManagerRemoveOnCommunicationDeviceChangedListener      jni.MethodID
-	midaudioManagerRemoveOnModeChangedListener                     jni.MethodID
-	midaudioManagerRemoveOnPreferredMixerAttributesChangedListener jni.MethodID
-	midaudioManagerRequestAudioFocus1                              jni.MethodID
-	midaudioManagerRequestAudioFocus3_1                            jni.MethodID
-	midaudioManagerSetAllowedCapturePolicy                         jni.MethodID
-	midaudioManagerSetBluetoothA2dpOn                              jni.MethodID
-	midaudioManagerSetBluetoothScoOn                               jni.MethodID
-	midaudioManagerSetCommunicationDevice                          jni.MethodID
-	midaudioManagerSetEncodedSurroundMode                          jni.MethodID
-	midaudioManagerSetMicrophoneMute                               jni.MethodID
-	midaudioManagerSetMode                                         jni.MethodID
-	midaudioManagerSetParameters                                   jni.MethodID
-	midaudioManagerSetPreferredMixerAttributes                     jni.MethodID
-	midaudioManagerSetRingerMode                                   jni.MethodID
-	midaudioManagerSetRouting                                      jni.MethodID
-	midaudioManagerSetSpeakerphoneOn                               jni.MethodID
-	midaudioManagerSetStreamMute                                   jni.MethodID
-	midaudioManagerSetStreamSolo                                   jni.MethodID
-	midaudioManagerSetStreamVolume                                 jni.MethodID
-	midaudioManagerSetSurroundFormatEnabled                        jni.MethodID
-	midaudioManagerSetVibrateSetting                               jni.MethodID
-	midaudioManagerSetWiredHeadsetOn                               jni.MethodID
-	midaudioManagerShouldVibrate                                   jni.MethodID
-	midaudioManagerStartBluetoothSco                               jni.MethodID
-	midaudioManagerStopBluetoothSco                                jni.MethodID
-	midaudioManagerUnloadSoundEffects                              jni.MethodID
-	midaudioManagerUnregisterAudioDeviceCallback                   jni.MethodID
-	midaudioManagerUnregisterAudioPlaybackCallback                 jni.MethodID
-	midaudioManagerUnregisterAudioRecordingCallback                jni.MethodID
-	midaudioManagerUnregisterMediaButtonEventReceiver1             jni.MethodID
-	midaudioManagerUnregisterMediaButtonEventReceiver1_1           jni.MethodID
-	midaudioManagerUnregisterRemoteControlClient                   jni.MethodID
-	midaudioManagerUnregisterRemoteController                      jni.MethodID
-	midaudioManagerGetDirectPlaybackSupport                        jni.MethodID
-	midaudioManagerGetPlaybackOffloadSupport                       jni.MethodID
-	midaudioManagerIsHapticPlaybackSupported                       jni.MethodID
-	midaudioManagerIsOffloadedPlaybackSupported                    jni.MethodID
+	clsManager                                                *jni.GlobalRef
+	midManagerAbandonAudioFocus                               jni.MethodID
+	midManagerAbandonAudioFocusRequest                        jni.MethodID
+	midManagerAddOnCommunicationDeviceChangedListener         jni.MethodID
+	midManagerAddOnModeChangedListener                        jni.MethodID
+	midManagerAddOnPreferredMixerAttributesChangedListener    jni.MethodID
+	midManagerAdjustStreamVolume                              jni.MethodID
+	midManagerAdjustSuggestedStreamVolume                     jni.MethodID
+	midManagerAdjustVolume                                    jni.MethodID
+	midManagerAdjustVolumeGroupVolume                         jni.MethodID
+	midManagerClearCommunicationDevice                        jni.MethodID
+	midManagerClearPreferredMixerAttributes                   jni.MethodID
+	midManagerDispatchMediaKeyEvent                           jni.MethodID
+	midManagerGenerateAudioSessionId                          jni.MethodID
+	midManagerGetActivePlaybackConfigurations                 jni.MethodID
+	midManagerGetActiveRecordingConfigurations                jni.MethodID
+	midManagerGetAllowedCapturePolicy                         jni.MethodID
+	midManagerGetAudioDevicesForAttributes                    jni.MethodID
+	midManagerGetAudioHwSyncForSession                        jni.MethodID
+	midManagerGetAvailableCommunicationDevices                jni.MethodID
+	midManagerGetCommunicationDevice                          jni.MethodID
+	midManagerGetDevices                                      jni.MethodID
+	midManagerGetDirectProfilesForAttributes                  jni.MethodID
+	midManagerGetEncodedSurroundMode                          jni.MethodID
+	midManagerGetMicrophones                                  jni.MethodID
+	midManagerGetMode                                         jni.MethodID
+	midManagerGetParameters                                   jni.MethodID
+	midManagerGetPreferredMixerAttributes                     jni.MethodID
+	midManagerGetProperty                                     jni.MethodID
+	midManagerGetRingerMode                                   jni.MethodID
+	midManagerGetRouting                                      jni.MethodID
+	midManagerGetSpatializer                                  jni.MethodID
+	midManagerGetStreamMaxVolume                              jni.MethodID
+	midManagerGetStreamMinVolume                              jni.MethodID
+	midManagerGetStreamVolume                                 jni.MethodID
+	midManagerGetStreamVolumeDb                               jni.MethodID
+	midManagerGetSupportedDeviceTypes                         jni.MethodID
+	midManagerGetSupportedMixerAttributes                     jni.MethodID
+	midManagerGetVibrateSetting                               jni.MethodID
+	midManagerGetVolumeGroupIdForAttributes                   jni.MethodID
+	midManagerIsBluetoothA2dpOn                               jni.MethodID
+	midManagerIsBluetoothScoAvailableOffCall                  jni.MethodID
+	midManagerIsBluetoothScoOn                                jni.MethodID
+	midManagerIsCallScreeningModeSupported                    jni.MethodID
+	midManagerIsMicrophoneMute                                jni.MethodID
+	midManagerIsMusicActive                                   jni.MethodID
+	midManagerIsRampingRingerEnabled                          jni.MethodID
+	midManagerIsSpeakerphoneOn                                jni.MethodID
+	midManagerIsStreamMute                                    jni.MethodID
+	midManagerIsSurroundFormatEnabled                         jni.MethodID
+	midManagerIsVolumeFixed                                   jni.MethodID
+	midManagerIsVolumeGroupMuted                              jni.MethodID
+	midManagerIsWiredHeadsetOn                                jni.MethodID
+	midManagerLoadSoundEffects                                jni.MethodID
+	midManagerPlaySoundEffect1                                jni.MethodID
+	midManagerPlaySoundEffect2_1                              jni.MethodID
+	midManagerRegisterMediaButtonEventReceiver1               jni.MethodID
+	midManagerRegisterMediaButtonEventReceiver1_1             jni.MethodID
+	midManagerRegisterRemoteControlClient                     jni.MethodID
+	midManagerRegisterRemoteController                        jni.MethodID
+	midManagerRemoveOnCommunicationDeviceChangedListener      jni.MethodID
+	midManagerRemoveOnModeChangedListener                     jni.MethodID
+	midManagerRemoveOnPreferredMixerAttributesChangedListener jni.MethodID
+	midManagerRequestAudioFocus1                              jni.MethodID
+	midManagerRequestAudioFocus3_1                            jni.MethodID
+	midManagerSetAllowedCapturePolicy                         jni.MethodID
+	midManagerSetBluetoothA2dpOn                              jni.MethodID
+	midManagerSetBluetoothScoOn                               jni.MethodID
+	midManagerSetCommunicationDevice                          jni.MethodID
+	midManagerSetEncodedSurroundMode                          jni.MethodID
+	midManagerSetMicrophoneMute                               jni.MethodID
+	midManagerSetMode                                         jni.MethodID
+	midManagerSetParameters                                   jni.MethodID
+	midManagerSetPreferredMixerAttributes                     jni.MethodID
+	midManagerSetRingerMode                                   jni.MethodID
+	midManagerSetRouting                                      jni.MethodID
+	midManagerSetSpeakerphoneOn                               jni.MethodID
+	midManagerSetStreamMute                                   jni.MethodID
+	midManagerSetStreamSolo                                   jni.MethodID
+	midManagerSetStreamVolume                                 jni.MethodID
+	midManagerSetSurroundFormatEnabled                        jni.MethodID
+	midManagerSetVibrateSetting                               jni.MethodID
+	midManagerSetWiredHeadsetOn                               jni.MethodID
+	midManagerShouldVibrate                                   jni.MethodID
+	midManagerStartBluetoothSco                               jni.MethodID
+	midManagerStopBluetoothSco                                jni.MethodID
+	midManagerUnloadSoundEffects                              jni.MethodID
+	midManagerUnregisterAudioDeviceCallback                   jni.MethodID
+	midManagerUnregisterAudioPlaybackCallback                 jni.MethodID
+	midManagerUnregisterAudioRecordingCallback                jni.MethodID
+	midManagerUnregisterMediaButtonEventReceiver1             jni.MethodID
+	midManagerUnregisterMediaButtonEventReceiver1_1           jni.MethodID
+	midManagerUnregisterRemoteControlClient                   jni.MethodID
+	midManagerUnregisterRemoteController                      jni.MethodID
+	midManagerGetDirectPlaybackSupport                        jni.MethodID
+	midManagerGetPlaybackOffloadSupport                       jni.MethodID
+	midManagerIsHapticPlaybackSupported                       jni.MethodID
+	midManagerIsOffloadedPlaybackSupported                    jni.MethodID
 
 	clsaudioDeviceInfo                              *jni.GlobalRef
 	midaudioDeviceInfoEquals                        jni.MethodID
@@ -168,9 +168,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.media.AudioManager: %w", err)
 	}
-	clsaudioManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midaudioManagerAbandonAudioFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "abandonAudioFocus", "(Landroid/media/AudioManager$OnAudioFocusChangeListener;)I")
+	midManagerAbandonAudioFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "abandonAudioFocus", "(Landroid/media/AudioManager$OnAudioFocusChangeListener;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -178,7 +178,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.abandonAudioFocus")
 	}
 
-	midaudioManagerAbandonAudioFocusRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "abandonAudioFocusRequest", "(Landroid/media/AudioFocusRequest;)I")
+	midManagerAbandonAudioFocusRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "abandonAudioFocusRequest", "(Landroid/media/AudioFocusRequest;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -186,7 +186,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.abandonAudioFocusRequest")
 	}
 
-	midaudioManagerAddOnCommunicationDeviceChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "addOnCommunicationDeviceChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnCommunicationDeviceChangedListener;)V")
+	midManagerAddOnCommunicationDeviceChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addOnCommunicationDeviceChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnCommunicationDeviceChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -194,7 +194,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.addOnCommunicationDeviceChangedListener")
 	}
 
-	midaudioManagerAddOnModeChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "addOnModeChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnModeChangedListener;)V")
+	midManagerAddOnModeChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addOnModeChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnModeChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -202,7 +202,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.addOnModeChangedListener")
 	}
 
-	midaudioManagerAddOnPreferredMixerAttributesChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "addOnPreferredMixerAttributesChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnPreferredMixerAttributesChangedListener;)V")
+	midManagerAddOnPreferredMixerAttributesChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addOnPreferredMixerAttributesChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnPreferredMixerAttributesChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -210,7 +210,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.addOnPreferredMixerAttributesChangedListener")
 	}
 
-	midaudioManagerAdjustStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustStreamVolume", "(III)V")
+	midManagerAdjustStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "adjustStreamVolume", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -218,7 +218,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.adjustStreamVolume")
 	}
 
-	midaudioManagerAdjustSuggestedStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustSuggestedStreamVolume", "(III)V")
+	midManagerAdjustSuggestedStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "adjustSuggestedStreamVolume", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -226,7 +226,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.adjustSuggestedStreamVolume")
 	}
 
-	midaudioManagerAdjustVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustVolume", "(II)V")
+	midManagerAdjustVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "adjustVolume", "(II)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -234,7 +234,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.adjustVolume")
 	}
 
-	midaudioManagerAdjustVolumeGroupVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustVolumeGroupVolume", "(III)V")
+	midManagerAdjustVolumeGroupVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "adjustVolumeGroupVolume", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -242,7 +242,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.adjustVolumeGroupVolume")
 	}
 
-	midaudioManagerClearCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "clearCommunicationDevice", "()V")
+	midManagerClearCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearCommunicationDevice", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -250,7 +250,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.clearCommunicationDevice")
 	}
 
-	midaudioManagerClearPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "clearPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;)Z")
+	midManagerClearPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -258,7 +258,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.clearPreferredMixerAttributes")
 	}
 
-	midaudioManagerDispatchMediaKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "dispatchMediaKeyEvent", "(Landroid/view/KeyEvent;)V")
+	midManagerDispatchMediaKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "dispatchMediaKeyEvent", "(Landroid/view/KeyEvent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -266,7 +266,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.dispatchMediaKeyEvent")
 	}
 
-	midaudioManagerGenerateAudioSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "generateAudioSessionId", "()I")
+	midManagerGenerateAudioSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "generateAudioSessionId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -274,7 +274,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.generateAudioSessionId")
 	}
 
-	midaudioManagerGetActivePlaybackConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActivePlaybackConfigurations", "()Ljava/util/List;")
+	midManagerGetActivePlaybackConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActivePlaybackConfigurations", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -282,7 +282,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getActivePlaybackConfigurations")
 	}
 
-	midaudioManagerGetActiveRecordingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActiveRecordingConfigurations", "()Ljava/util/List;")
+	midManagerGetActiveRecordingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActiveRecordingConfigurations", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -290,7 +290,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getActiveRecordingConfigurations")
 	}
 
-	midaudioManagerGetAllowedCapturePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAllowedCapturePolicy", "()I")
+	midManagerGetAllowedCapturePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAllowedCapturePolicy", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -298,7 +298,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getAllowedCapturePolicy")
 	}
 
-	midaudioManagerGetAudioDevicesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAudioDevicesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List;")
+	midManagerGetAudioDevicesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAudioDevicesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -306,7 +306,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getAudioDevicesForAttributes")
 	}
 
-	midaudioManagerGetAudioHwSyncForSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAudioHwSyncForSession", "(I)I")
+	midManagerGetAudioHwSyncForSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAudioHwSyncForSession", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -314,7 +314,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getAudioHwSyncForSession")
 	}
 
-	midaudioManagerGetAvailableCommunicationDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAvailableCommunicationDevices", "()Ljava/util/List;")
+	midManagerGetAvailableCommunicationDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAvailableCommunicationDevices", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -322,7 +322,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getAvailableCommunicationDevices")
 	}
 
-	midaudioManagerGetCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getCommunicationDevice", "()Landroid/media/AudioDeviceInfo;")
+	midManagerGetCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCommunicationDevice", "()Landroid/media/AudioDeviceInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -330,7 +330,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getCommunicationDevice")
 	}
 
-	midaudioManagerGetDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDevices", "(I)[Landroid/media/AudioDeviceInfo;")
+	midManagerGetDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDevices", "(I)[Landroid/media/AudioDeviceInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -338,7 +338,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getDevices")
 	}
 
-	midaudioManagerGetDirectProfilesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDirectProfilesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List;")
+	midManagerGetDirectProfilesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDirectProfilesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -346,7 +346,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getDirectProfilesForAttributes")
 	}
 
-	midaudioManagerGetEncodedSurroundMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getEncodedSurroundMode", "()I")
+	midManagerGetEncodedSurroundMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getEncodedSurroundMode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -354,7 +354,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getEncodedSurroundMode")
 	}
 
-	midaudioManagerGetMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getMicrophones", "()Ljava/util/List;")
+	midManagerGetMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMicrophones", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -362,7 +362,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getMicrophones")
 	}
 
-	midaudioManagerGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getMode", "()I")
+	midManagerGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -370,7 +370,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getMode")
 	}
 
-	midaudioManagerGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getParameters", "(Ljava/lang/String;)Ljava/lang/String;")
+	midManagerGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getParameters", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -378,7 +378,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getParameters")
 	}
 
-	midaudioManagerGetPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;)Landroid/media/AudioMixerAttributes;")
+	midManagerGetPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;)Landroid/media/AudioMixerAttributes;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -386,7 +386,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getPreferredMixerAttributes")
 	}
 
-	midaudioManagerGetProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getProperty", "(Ljava/lang/String;)Ljava/lang/String;")
+	midManagerGetProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getProperty", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -394,7 +394,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getProperty")
 	}
 
-	midaudioManagerGetRingerMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getRingerMode", "()I")
+	midManagerGetRingerMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingerMode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -402,7 +402,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getRingerMode")
 	}
 
-	midaudioManagerGetRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getRouting", "(I)I")
+	midManagerGetRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRouting", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -410,7 +410,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getRouting")
 	}
 
-	midaudioManagerGetSpatializer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSpatializer", "()Landroid/media/Spatializer;")
+	midManagerGetSpatializer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSpatializer", "()Landroid/media/Spatializer;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -418,7 +418,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getSpatializer")
 	}
 
-	midaudioManagerGetStreamMaxVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamMaxVolume", "(I)I")
+	midManagerGetStreamMaxVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStreamMaxVolume", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -426,7 +426,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getStreamMaxVolume")
 	}
 
-	midaudioManagerGetStreamMinVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamMinVolume", "(I)I")
+	midManagerGetStreamMinVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStreamMinVolume", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -434,7 +434,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getStreamMinVolume")
 	}
 
-	midaudioManagerGetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamVolume", "(I)I")
+	midManagerGetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStreamVolume", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -442,7 +442,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getStreamVolume")
 	}
 
-	midaudioManagerGetStreamVolumeDb, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamVolumeDb", "(III)F")
+	midManagerGetStreamVolumeDb, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStreamVolumeDb", "(III)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -450,7 +450,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getStreamVolumeDb")
 	}
 
-	midaudioManagerGetSupportedDeviceTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedDeviceTypes", "(I)Ljava/util/Set;")
+	midManagerGetSupportedDeviceTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSupportedDeviceTypes", "(I)Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -458,7 +458,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getSupportedDeviceTypes")
 	}
 
-	midaudioManagerGetSupportedMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedMixerAttributes", "(Landroid/media/AudioDeviceInfo;)Ljava/util/List;")
+	midManagerGetSupportedMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSupportedMixerAttributes", "(Landroid/media/AudioDeviceInfo;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -466,7 +466,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getSupportedMixerAttributes")
 	}
 
-	midaudioManagerGetVibrateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getVibrateSetting", "(I)I")
+	midManagerGetVibrateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVibrateSetting", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -474,7 +474,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getVibrateSetting")
 	}
 
-	midaudioManagerGetVolumeGroupIdForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getVolumeGroupIdForAttributes", "(Landroid/media/AudioAttributes;)I")
+	midManagerGetVolumeGroupIdForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVolumeGroupIdForAttributes", "(Landroid/media/AudioAttributes;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -482,7 +482,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getVolumeGroupIdForAttributes")
 	}
 
-	midaudioManagerIsBluetoothA2dpOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isBluetoothA2dpOn", "()Z")
+	midManagerIsBluetoothA2dpOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isBluetoothA2dpOn", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -490,7 +490,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isBluetoothA2dpOn")
 	}
 
-	midaudioManagerIsBluetoothScoAvailableOffCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isBluetoothScoAvailableOffCall", "()Z")
+	midManagerIsBluetoothScoAvailableOffCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isBluetoothScoAvailableOffCall", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -498,7 +498,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isBluetoothScoAvailableOffCall")
 	}
 
-	midaudioManagerIsBluetoothScoOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isBluetoothScoOn", "()Z")
+	midManagerIsBluetoothScoOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isBluetoothScoOn", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -506,7 +506,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isBluetoothScoOn")
 	}
 
-	midaudioManagerIsCallScreeningModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isCallScreeningModeSupported", "()Z")
+	midManagerIsCallScreeningModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isCallScreeningModeSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -514,7 +514,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isCallScreeningModeSupported")
 	}
 
-	midaudioManagerIsMicrophoneMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isMicrophoneMute", "()Z")
+	midManagerIsMicrophoneMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isMicrophoneMute", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -522,7 +522,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isMicrophoneMute")
 	}
 
-	midaudioManagerIsMusicActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isMusicActive", "()Z")
+	midManagerIsMusicActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isMusicActive", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -530,7 +530,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isMusicActive")
 	}
 
-	midaudioManagerIsRampingRingerEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isRampingRingerEnabled", "()Z")
+	midManagerIsRampingRingerEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRampingRingerEnabled", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -538,7 +538,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isRampingRingerEnabled")
 	}
 
-	midaudioManagerIsSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isSpeakerphoneOn", "()Z")
+	midManagerIsSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSpeakerphoneOn", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -546,7 +546,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isSpeakerphoneOn")
 	}
 
-	midaudioManagerIsStreamMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isStreamMute", "(I)Z")
+	midManagerIsStreamMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isStreamMute", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -554,7 +554,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isStreamMute")
 	}
 
-	midaudioManagerIsSurroundFormatEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isSurroundFormatEnabled", "(I)Z")
+	midManagerIsSurroundFormatEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSurroundFormatEnabled", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -562,7 +562,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isSurroundFormatEnabled")
 	}
 
-	midaudioManagerIsVolumeFixed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isVolumeFixed", "()Z")
+	midManagerIsVolumeFixed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isVolumeFixed", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -570,7 +570,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isVolumeFixed")
 	}
 
-	midaudioManagerIsVolumeGroupMuted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isVolumeGroupMuted", "(I)Z")
+	midManagerIsVolumeGroupMuted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isVolumeGroupMuted", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -578,7 +578,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isVolumeGroupMuted")
 	}
 
-	midaudioManagerIsWiredHeadsetOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isWiredHeadsetOn", "()Z")
+	midManagerIsWiredHeadsetOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isWiredHeadsetOn", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -586,7 +586,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isWiredHeadsetOn")
 	}
 
-	midaudioManagerLoadSoundEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "loadSoundEffects", "()V")
+	midManagerLoadSoundEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "loadSoundEffects", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -594,7 +594,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.loadSoundEffects")
 	}
 
-	midaudioManagerPlaySoundEffect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "playSoundEffect", "(I)V")
+	midManagerPlaySoundEffect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "playSoundEffect", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -602,7 +602,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.playSoundEffect")
 	}
 
-	midaudioManagerPlaySoundEffect2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "playSoundEffect", "(IF)V")
+	midManagerPlaySoundEffect2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "playSoundEffect", "(IF)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -610,7 +610,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.playSoundEffect")
 	}
 
-	midaudioManagerRegisterMediaButtonEventReceiver1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerMediaButtonEventReceiver", "(Landroid/app/PendingIntent;)V")
+	midManagerRegisterMediaButtonEventReceiver1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerMediaButtonEventReceiver", "(Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -618,7 +618,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.registerMediaButtonEventReceiver")
 	}
 
-	midaudioManagerRegisterMediaButtonEventReceiver1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerMediaButtonEventReceiver", "(Landroid/content/ComponentName;)V")
+	midManagerRegisterMediaButtonEventReceiver1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerMediaButtonEventReceiver", "(Landroid/content/ComponentName;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -626,7 +626,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.registerMediaButtonEventReceiver")
 	}
 
-	midaudioManagerRegisterRemoteControlClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerRemoteControlClient", "(Landroid/media/RemoteControlClient;)V")
+	midManagerRegisterRemoteControlClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerRemoteControlClient", "(Landroid/media/RemoteControlClient;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -634,7 +634,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.registerRemoteControlClient")
 	}
 
-	midaudioManagerRegisterRemoteController, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerRemoteController", "(Landroid/media/RemoteController;)Z")
+	midManagerRegisterRemoteController, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerRemoteController", "(Landroid/media/RemoteController;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -642,7 +642,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.registerRemoteController")
 	}
 
-	midaudioManagerRemoveOnCommunicationDeviceChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "removeOnCommunicationDeviceChangedListener", "(Landroid/media/AudioManager$OnCommunicationDeviceChangedListener;)V")
+	midManagerRemoveOnCommunicationDeviceChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeOnCommunicationDeviceChangedListener", "(Landroid/media/AudioManager$OnCommunicationDeviceChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -650,7 +650,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.removeOnCommunicationDeviceChangedListener")
 	}
 
-	midaudioManagerRemoveOnModeChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "removeOnModeChangedListener", "(Landroid/media/AudioManager$OnModeChangedListener;)V")
+	midManagerRemoveOnModeChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeOnModeChangedListener", "(Landroid/media/AudioManager$OnModeChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -658,7 +658,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.removeOnModeChangedListener")
 	}
 
-	midaudioManagerRemoveOnPreferredMixerAttributesChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "removeOnPreferredMixerAttributesChangedListener", "(Landroid/media/AudioManager$OnPreferredMixerAttributesChangedListener;)V")
+	midManagerRemoveOnPreferredMixerAttributesChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeOnPreferredMixerAttributesChangedListener", "(Landroid/media/AudioManager$OnPreferredMixerAttributesChangedListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -666,7 +666,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.removeOnPreferredMixerAttributesChangedListener")
 	}
 
-	midaudioManagerRequestAudioFocus1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "requestAudioFocus", "(Landroid/media/AudioFocusRequest;)I")
+	midManagerRequestAudioFocus1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestAudioFocus", "(Landroid/media/AudioFocusRequest;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -674,7 +674,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.requestAudioFocus")
 	}
 
-	midaudioManagerRequestAudioFocus3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "requestAudioFocus", "(Landroid/media/AudioManager$OnAudioFocusChangeListener;II)I")
+	midManagerRequestAudioFocus3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestAudioFocus", "(Landroid/media/AudioManager$OnAudioFocusChangeListener;II)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -682,7 +682,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.requestAudioFocus")
 	}
 
-	midaudioManagerSetAllowedCapturePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setAllowedCapturePolicy", "(I)V")
+	midManagerSetAllowedCapturePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setAllowedCapturePolicy", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -690,7 +690,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setAllowedCapturePolicy")
 	}
 
-	midaudioManagerSetBluetoothA2dpOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setBluetoothA2dpOn", "(Z)V")
+	midManagerSetBluetoothA2dpOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setBluetoothA2dpOn", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -698,7 +698,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setBluetoothA2dpOn")
 	}
 
-	midaudioManagerSetBluetoothScoOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setBluetoothScoOn", "(Z)V")
+	midManagerSetBluetoothScoOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setBluetoothScoOn", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -706,7 +706,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setBluetoothScoOn")
 	}
 
-	midaudioManagerSetCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setCommunicationDevice", "(Landroid/media/AudioDeviceInfo;)Z")
+	midManagerSetCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setCommunicationDevice", "(Landroid/media/AudioDeviceInfo;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -714,7 +714,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setCommunicationDevice")
 	}
 
-	midaudioManagerSetEncodedSurroundMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setEncodedSurroundMode", "(I)Z")
+	midManagerSetEncodedSurroundMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setEncodedSurroundMode", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -722,7 +722,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setEncodedSurroundMode")
 	}
 
-	midaudioManagerSetMicrophoneMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setMicrophoneMute", "(Z)V")
+	midManagerSetMicrophoneMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setMicrophoneMute", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -730,7 +730,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setMicrophoneMute")
 	}
 
-	midaudioManagerSetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setMode", "(I)V")
+	midManagerSetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setMode", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -738,7 +738,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setMode")
 	}
 
-	midaudioManagerSetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setParameters", "(Ljava/lang/String;)V")
+	midManagerSetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setParameters", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -746,7 +746,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setParameters")
 	}
 
-	midaudioManagerSetPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;Landroid/media/AudioMixerAttributes;)Z")
+	midManagerSetPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;Landroid/media/AudioMixerAttributes;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -754,7 +754,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setPreferredMixerAttributes")
 	}
 
-	midaudioManagerSetRingerMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setRingerMode", "(I)V")
+	midManagerSetRingerMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setRingerMode", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -762,7 +762,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setRingerMode")
 	}
 
-	midaudioManagerSetRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setRouting", "(III)V")
+	midManagerSetRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setRouting", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -770,7 +770,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setRouting")
 	}
 
-	midaudioManagerSetSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setSpeakerphoneOn", "(Z)V")
+	midManagerSetSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setSpeakerphoneOn", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -778,7 +778,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setSpeakerphoneOn")
 	}
 
-	midaudioManagerSetStreamMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setStreamMute", "(IZ)V")
+	midManagerSetStreamMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setStreamMute", "(IZ)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -786,7 +786,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setStreamMute")
 	}
 
-	midaudioManagerSetStreamSolo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setStreamSolo", "(IZ)V")
+	midManagerSetStreamSolo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setStreamSolo", "(IZ)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -794,7 +794,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setStreamSolo")
 	}
 
-	midaudioManagerSetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setStreamVolume", "(III)V")
+	midManagerSetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setStreamVolume", "(III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -802,7 +802,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setStreamVolume")
 	}
 
-	midaudioManagerSetSurroundFormatEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setSurroundFormatEnabled", "(IZ)Z")
+	midManagerSetSurroundFormatEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setSurroundFormatEnabled", "(IZ)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -810,7 +810,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setSurroundFormatEnabled")
 	}
 
-	midaudioManagerSetVibrateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setVibrateSetting", "(II)V")
+	midManagerSetVibrateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setVibrateSetting", "(II)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -818,7 +818,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setVibrateSetting")
 	}
 
-	midaudioManagerSetWiredHeadsetOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setWiredHeadsetOn", "(Z)V")
+	midManagerSetWiredHeadsetOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setWiredHeadsetOn", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -826,7 +826,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.setWiredHeadsetOn")
 	}
 
-	midaudioManagerShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "shouldVibrate", "(I)Z")
+	midManagerShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "shouldVibrate", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -834,7 +834,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.shouldVibrate")
 	}
 
-	midaudioManagerStartBluetoothSco, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "startBluetoothSco", "()V")
+	midManagerStartBluetoothSco, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "startBluetoothSco", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -842,7 +842,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.startBluetoothSco")
 	}
 
-	midaudioManagerStopBluetoothSco, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "stopBluetoothSco", "()V")
+	midManagerStopBluetoothSco, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "stopBluetoothSco", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -850,7 +850,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.stopBluetoothSco")
 	}
 
-	midaudioManagerUnloadSoundEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unloadSoundEffects", "()V")
+	midManagerUnloadSoundEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unloadSoundEffects", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -858,7 +858,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unloadSoundEffects")
 	}
 
-	midaudioManagerUnregisterAudioDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterAudioDeviceCallback", "(Landroid/media/AudioDeviceCallback;)V")
+	midManagerUnregisterAudioDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterAudioDeviceCallback", "(Landroid/media/AudioDeviceCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -866,7 +866,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unregisterAudioDeviceCallback")
 	}
 
-	midaudioManagerUnregisterAudioPlaybackCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterAudioPlaybackCallback", "(Landroid/media/AudioManager$AudioPlaybackCallback;)V")
+	midManagerUnregisterAudioPlaybackCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterAudioPlaybackCallback", "(Landroid/media/AudioManager$AudioPlaybackCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -874,7 +874,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unregisterAudioPlaybackCallback")
 	}
 
-	midaudioManagerUnregisterAudioRecordingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterAudioRecordingCallback", "(Landroid/media/AudioManager$AudioRecordingCallback;)V")
+	midManagerUnregisterAudioRecordingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterAudioRecordingCallback", "(Landroid/media/AudioManager$AudioRecordingCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -882,7 +882,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unregisterAudioRecordingCallback")
 	}
 
-	midaudioManagerUnregisterMediaButtonEventReceiver1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterMediaButtonEventReceiver", "(Landroid/app/PendingIntent;)V")
+	midManagerUnregisterMediaButtonEventReceiver1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterMediaButtonEventReceiver", "(Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -890,7 +890,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unregisterMediaButtonEventReceiver")
 	}
 
-	midaudioManagerUnregisterMediaButtonEventReceiver1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterMediaButtonEventReceiver", "(Landroid/content/ComponentName;)V")
+	midManagerUnregisterMediaButtonEventReceiver1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterMediaButtonEventReceiver", "(Landroid/content/ComponentName;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -898,7 +898,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unregisterMediaButtonEventReceiver")
 	}
 
-	midaudioManagerUnregisterRemoteControlClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterRemoteControlClient", "(Landroid/media/RemoteControlClient;)V")
+	midManagerUnregisterRemoteControlClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterRemoteControlClient", "(Landroid/media/RemoteControlClient;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -906,7 +906,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unregisterRemoteControlClient")
 	}
 
-	midaudioManagerUnregisterRemoteController, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterRemoteController", "(Landroid/media/RemoteController;)V")
+	midManagerUnregisterRemoteController, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterRemoteController", "(Landroid/media/RemoteController;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -914,7 +914,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.unregisterRemoteController")
 	}
 
-	midaudioManagerGetDirectPlaybackSupport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDirectPlaybackSupport", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)I")
+	midManagerGetDirectPlaybackSupport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDirectPlaybackSupport", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -922,7 +922,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getDirectPlaybackSupport")
 	}
 
-	midaudioManagerGetPlaybackOffloadSupport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getPlaybackOffloadSupport", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)I")
+	midManagerGetPlaybackOffloadSupport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPlaybackOffloadSupport", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -930,7 +930,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.getPlaybackOffloadSupport")
 	}
 
-	midaudioManagerIsHapticPlaybackSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isHapticPlaybackSupported", "()Z")
+	midManagerIsHapticPlaybackSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isHapticPlaybackSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -938,7 +938,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.media.AudioManager.isHapticPlaybackSupported")
 	}
 
-	midaudioManagerIsOffloadedPlaybackSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isOffloadedPlaybackSupported", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)Z")
+	midManagerIsOffloadedPlaybackSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isOffloadedPlaybackSupported", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

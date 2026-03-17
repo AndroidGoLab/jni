@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// displayMetrics wraps android.util.DisplayMetrics.
-type displayMetrics struct {
+// DisplayMetrics wraps android.util.DisplayMetrics.
+type DisplayMetrics struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Equals1 calls android.util.DisplayMetrics.equals.
-func (m *displayMetrics) Equals1(arg0 *jni.Object) (bool, error) {
+func (m *DisplayMetrics) Equals1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *displayMetrics) Equals1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if middisplayMetricsEquals1 == nil {
+		if midDisplayMetricsEquals1 == nil {
 			callErr = fmt.Errorf("android.util.DisplayMetrics.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			middisplayMetricsEquals1, jni.ObjectValue(arg0),
+			midDisplayMetricsEquals1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -51,7 +51,7 @@ func (m *displayMetrics) Equals1(arg0 *jni.Object) (bool, error) {
 }
 
 // Equals1_1 calls android.util.DisplayMetrics.equals.
-func (m *displayMetrics) Equals1_1(arg0 *jni.Object) (bool, error) {
+func (m *DisplayMetrics) Equals1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -59,14 +59,14 @@ func (m *displayMetrics) Equals1_1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if middisplayMetricsEquals1_1 == nil {
+		if midDisplayMetricsEquals1_1 == nil {
 			callErr = fmt.Errorf("android.util.DisplayMetrics.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			middisplayMetricsEquals1_1, jni.ObjectValue(arg0),
+			midDisplayMetricsEquals1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -78,7 +78,7 @@ func (m *displayMetrics) Equals1_1(arg0 *jni.Object) (bool, error) {
 }
 
 // HashCode calls android.util.DisplayMetrics.hashCode.
-func (m *displayMetrics) HashCode() (int32, error) {
+func (m *DisplayMetrics) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -86,13 +86,13 @@ func (m *displayMetrics) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if middisplayMetricsHashCode == nil {
+		if midDisplayMetricsHashCode == nil {
 			callErr = fmt.Errorf("android.util.DisplayMetrics.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			middisplayMetricsHashCode,
+			midDisplayMetricsHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -103,7 +103,7 @@ func (m *displayMetrics) HashCode() (int32, error) {
 }
 
 // SetTo calls android.util.DisplayMetrics.setTo.
-func (m *displayMetrics) SetTo(arg0 *jni.Object) error {
+func (m *DisplayMetrics) SetTo(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -111,14 +111,14 @@ func (m *displayMetrics) SetTo(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if middisplayMetricsSetTo == nil {
+		if midDisplayMetricsSetTo == nil {
 			callErr = fmt.Errorf("android.util.DisplayMetrics.setTo is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			middisplayMetricsSetTo, jni.ObjectValue(arg0),
+			midDisplayMetricsSetTo, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -126,7 +126,7 @@ func (m *displayMetrics) SetTo(arg0 *jni.Object) error {
 }
 
 // SetToDefaults calls android.util.DisplayMetrics.setToDefaults.
-func (m *displayMetrics) SetToDefaults() error {
+func (m *DisplayMetrics) SetToDefaults() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -134,13 +134,13 @@ func (m *displayMetrics) SetToDefaults() error {
 			callErr = err
 			return err
 		}
-		if middisplayMetricsSetToDefaults == nil {
+		if midDisplayMetricsSetToDefaults == nil {
 			callErr = fmt.Errorf("android.util.DisplayMetrics.setToDefaults is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			middisplayMetricsSetToDefaults,
+			midDisplayMetricsSetToDefaults,
 		)
 		return callErr
 	})
@@ -148,7 +148,7 @@ func (m *displayMetrics) SetToDefaults() error {
 }
 
 // ToString calls android.util.DisplayMetrics.toString.
-func (m *displayMetrics) ToString() (string, error) {
+func (m *DisplayMetrics) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -156,13 +156,13 @@ func (m *displayMetrics) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if middisplayMetricsToString == nil {
+		if midDisplayMetricsToString == nil {
 			callErr = fmt.Errorf("android.util.DisplayMetrics.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			middisplayMetricsToString,
+			midDisplayMetricsToString,
 		)
 		if callErr != nil {
 			return callErr

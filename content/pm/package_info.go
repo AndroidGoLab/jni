@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// packageInfo wraps android.content.pm.PackageInfo.
-type packageInfo struct {
+// PackageInfo wraps android.content.pm.PackageInfo.
+type PackageInfo struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.content.pm.PackageInfo.describeContents.
-func (m *packageInfo) DescribeContents() (int32, error) {
+func (m *PackageInfo) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *packageInfo) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midpackageInfoDescribeContents == nil {
+		if midPackageInfoDescribeContents == nil {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midpackageInfoDescribeContents,
+			midPackageInfoDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *packageInfo) DescribeContents() (int32, error) {
 }
 
 // GetApexPackageName calls android.content.pm.PackageInfo.getApexPackageName.
-func (m *packageInfo) GetApexPackageName() (string, error) {
+func (m *PackageInfo) GetApexPackageName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *packageInfo) GetApexPackageName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midpackageInfoGetApexPackageName == nil {
+		if midPackageInfoGetApexPackageName == nil {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.getApexPackageName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midpackageInfoGetApexPackageName,
+			midPackageInfoGetApexPackageName,
 		)
 		if callErr != nil {
 			return callErr
@@ -75,7 +75,7 @@ func (m *packageInfo) GetApexPackageName() (string, error) {
 }
 
 // GetArchiveTimeMillis calls android.content.pm.PackageInfo.getArchiveTimeMillis.
-func (m *packageInfo) GetArchiveTimeMillis() (int64, error) {
+func (m *PackageInfo) GetArchiveTimeMillis() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -83,13 +83,13 @@ func (m *packageInfo) GetArchiveTimeMillis() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midpackageInfoGetArchiveTimeMillis == nil {
+		if midPackageInfoGetArchiveTimeMillis == nil {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.getArchiveTimeMillis is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midpackageInfoGetArchiveTimeMillis,
+			midPackageInfoGetArchiveTimeMillis,
 		)
 		if callErr != nil {
 			return callErr
@@ -100,7 +100,7 @@ func (m *packageInfo) GetArchiveTimeMillis() (int64, error) {
 }
 
 // GetLongVersionCode calls android.content.pm.PackageInfo.getLongVersionCode.
-func (m *packageInfo) GetLongVersionCode() (int64, error) {
+func (m *PackageInfo) GetLongVersionCode() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -108,13 +108,13 @@ func (m *packageInfo) GetLongVersionCode() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midpackageInfoGetLongVersionCode == nil {
+		if midPackageInfoGetLongVersionCode == nil {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.getLongVersionCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midpackageInfoGetLongVersionCode,
+			midPackageInfoGetLongVersionCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -125,7 +125,7 @@ func (m *packageInfo) GetLongVersionCode() (int64, error) {
 }
 
 // SetLongVersionCode calls android.content.pm.PackageInfo.setLongVersionCode.
-func (m *packageInfo) SetLongVersionCode(arg0 int64) error {
+func (m *PackageInfo) SetLongVersionCode(arg0 int64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -133,14 +133,14 @@ func (m *packageInfo) SetLongVersionCode(arg0 int64) error {
 			callErr = err
 			return err
 		}
-		if midpackageInfoSetLongVersionCode == nil {
+		if midPackageInfoSetLongVersionCode == nil {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.setLongVersionCode is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpackageInfoSetLongVersionCode, jni.LongValue(arg0),
+			midPackageInfoSetLongVersionCode, jni.LongValue(arg0),
 		)
 		return callErr
 	})
@@ -148,7 +148,7 @@ func (m *packageInfo) SetLongVersionCode(arg0 int64) error {
 }
 
 // ToString calls android.content.pm.PackageInfo.toString.
-func (m *packageInfo) ToString() (string, error) {
+func (m *PackageInfo) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -156,13 +156,13 @@ func (m *packageInfo) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midpackageInfoToString == nil {
+		if midPackageInfoToString == nil {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midpackageInfoToString,
+			midPackageInfoToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -174,7 +174,7 @@ func (m *packageInfo) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.content.pm.PackageInfo.writeToParcel.
-func (m *packageInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *PackageInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -182,14 +182,14 @@ func (m *packageInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midpackageInfoWriteToParcel == nil {
+		if midPackageInfoWriteToParcel == nil {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpackageInfoWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midPackageInfoWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

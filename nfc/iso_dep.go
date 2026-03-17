@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// isoDep wraps android.nfc.tech.IsoDep.
-type isoDep struct {
+// IsoDep wraps android.nfc.tech.IsoDep.
+type IsoDep struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Close calls android.nfc.tech.IsoDep.close.
-func (m *isoDep) Close() error {
+func (m *IsoDep) Close() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *isoDep) Close() error {
 			callErr = err
 			return err
 		}
-		if midisoDepClose == nil {
+		if midIsoDepClose == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.close is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midisoDepClose,
+			midIsoDepClose,
 		)
 		return callErr
 	})
@@ -46,7 +46,7 @@ func (m *isoDep) Close() error {
 }
 
 // Connect calls android.nfc.tech.IsoDep.connect.
-func (m *isoDep) Connect() error {
+func (m *IsoDep) Connect() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -54,13 +54,13 @@ func (m *isoDep) Connect() error {
 			callErr = err
 			return err
 		}
-		if midisoDepConnect == nil {
+		if midIsoDepConnect == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.connect is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midisoDepConnect,
+			midIsoDepConnect,
 		)
 		return callErr
 	})
@@ -68,7 +68,7 @@ func (m *isoDep) Connect() error {
 }
 
 // GetHiLayerResponse calls android.nfc.tech.IsoDep.getHiLayerResponse.
-func (m *isoDep) GetHiLayerResponse() (*jni.Object, error) {
+func (m *IsoDep) GetHiLayerResponse() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -76,13 +76,13 @@ func (m *isoDep) GetHiLayerResponse() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepGetHiLayerResponse == nil {
+		if midIsoDepGetHiLayerResponse == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.getHiLayerResponse is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midisoDepGetHiLayerResponse,
+			midIsoDepGetHiLayerResponse,
 		)
 		if callErr != nil {
 			return callErr
@@ -93,7 +93,7 @@ func (m *isoDep) GetHiLayerResponse() (*jni.Object, error) {
 }
 
 // GetHistoricalBytes calls android.nfc.tech.IsoDep.getHistoricalBytes.
-func (m *isoDep) GetHistoricalBytes() (*jni.Object, error) {
+func (m *IsoDep) GetHistoricalBytes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -101,13 +101,13 @@ func (m *isoDep) GetHistoricalBytes() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepGetHistoricalBytes == nil {
+		if midIsoDepGetHistoricalBytes == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.getHistoricalBytes is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midisoDepGetHistoricalBytes,
+			midIsoDepGetHistoricalBytes,
 		)
 		if callErr != nil {
 			return callErr
@@ -118,7 +118,7 @@ func (m *isoDep) GetHistoricalBytes() (*jni.Object, error) {
 }
 
 // GetMaxTransceiveLength calls android.nfc.tech.IsoDep.getMaxTransceiveLength.
-func (m *isoDep) GetMaxTransceiveLength() (int32, error) {
+func (m *IsoDep) GetMaxTransceiveLength() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -126,13 +126,13 @@ func (m *isoDep) GetMaxTransceiveLength() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepGetMaxTransceiveLength == nil {
+		if midIsoDepGetMaxTransceiveLength == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.getMaxTransceiveLength is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midisoDepGetMaxTransceiveLength,
+			midIsoDepGetMaxTransceiveLength,
 		)
 		if callErr != nil {
 			return callErr
@@ -143,7 +143,7 @@ func (m *isoDep) GetMaxTransceiveLength() (int32, error) {
 }
 
 // GetTag calls android.nfc.tech.IsoDep.getTag.
-func (m *isoDep) GetTag() (*jni.Object, error) {
+func (m *IsoDep) GetTag() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -151,13 +151,13 @@ func (m *isoDep) GetTag() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepGetTag == nil {
+		if midIsoDepGetTag == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.getTag is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midisoDepGetTag,
+			midIsoDepGetTag,
 		)
 		if callErr != nil {
 			return callErr
@@ -168,7 +168,7 @@ func (m *isoDep) GetTag() (*jni.Object, error) {
 }
 
 // GetTimeout calls android.nfc.tech.IsoDep.getTimeout.
-func (m *isoDep) GetTimeout() (int32, error) {
+func (m *IsoDep) GetTimeout() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -176,13 +176,13 @@ func (m *isoDep) GetTimeout() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepGetTimeout == nil {
+		if midIsoDepGetTimeout == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.getTimeout is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midisoDepGetTimeout,
+			midIsoDepGetTimeout,
 		)
 		if callErr != nil {
 			return callErr
@@ -193,7 +193,7 @@ func (m *isoDep) GetTimeout() (int32, error) {
 }
 
 // IsConnected calls android.nfc.tech.IsoDep.isConnected.
-func (m *isoDep) IsConnected() (bool, error) {
+func (m *IsoDep) IsConnected() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -201,13 +201,13 @@ func (m *isoDep) IsConnected() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepIsConnected == nil {
+		if midIsoDepIsConnected == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.isConnected is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midisoDepIsConnected,
+			midIsoDepIsConnected,
 		)
 		if callErr != nil {
 			return callErr
@@ -219,7 +219,7 @@ func (m *isoDep) IsConnected() (bool, error) {
 }
 
 // IsExtendedLengthApduSupported calls android.nfc.tech.IsoDep.isExtendedLengthApduSupported.
-func (m *isoDep) IsExtendedLengthApduSupported() (bool, error) {
+func (m *IsoDep) IsExtendedLengthApduSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -227,13 +227,13 @@ func (m *isoDep) IsExtendedLengthApduSupported() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepIsExtendedLengthApduSupported == nil {
+		if midIsoDepIsExtendedLengthApduSupported == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.isExtendedLengthApduSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midisoDepIsExtendedLengthApduSupported,
+			midIsoDepIsExtendedLengthApduSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -245,7 +245,7 @@ func (m *isoDep) IsExtendedLengthApduSupported() (bool, error) {
 }
 
 // SetTimeout calls android.nfc.tech.IsoDep.setTimeout.
-func (m *isoDep) SetTimeout(arg0 int32) error {
+func (m *IsoDep) SetTimeout(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -253,14 +253,14 @@ func (m *isoDep) SetTimeout(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midisoDepSetTimeout == nil {
+		if midIsoDepSetTimeout == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.setTimeout is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midisoDepSetTimeout, jni.IntValue(arg0),
+			midIsoDepSetTimeout, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -268,7 +268,7 @@ func (m *isoDep) SetTimeout(arg0 int32) error {
 }
 
 // Transceive calls android.nfc.tech.IsoDep.transceive.
-func (m *isoDep) Transceive(arg0 *jni.Object) (*jni.Object, error) {
+func (m *IsoDep) Transceive(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -276,14 +276,14 @@ func (m *isoDep) Transceive(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepTransceive == nil {
+		if midIsoDepTransceive == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.transceive is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midisoDepTransceive, jni.ObjectValue(arg0),
+			midIsoDepTransceive, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -294,7 +294,7 @@ func (m *isoDep) Transceive(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // Get calls android.nfc.tech.IsoDep.get.
-func (m *isoDep) Get(arg0 *jni.Object) (*jni.Object, error) {
+func (m *IsoDep) Get(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -302,14 +302,14 @@ func (m *isoDep) Get(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midisoDepGet == nil {
+		if midIsoDepGet == nil {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.get is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsisoDep)),
-			midisoDepGet, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsIsoDep)),
+			midIsoDepGet, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

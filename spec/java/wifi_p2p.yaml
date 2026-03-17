@@ -215,7 +215,7 @@ classes:
           returns: void
           error: true
     - java_class: android.net.wifi.p2p.WifiP2pManager
-      go_type: wifiP2pManager
+      go_type: Manager
       obtain: system_service
       service_name: wifip2p
       close: true

@@ -61,11 +61,11 @@ func TestBuildServerData_Location(t *testing.T) {
 	}
 
 	svc := data.Services[0]
-	if svc.GoType != "locationManager" {
-		t.Errorf("Service GoType = %q, want %q", svc.GoType, "locationManager")
+	if svc.GoType != "Manager" {
+		t.Errorf("Service GoType = %q, want %q", svc.GoType, "Manager")
 	}
-	if svc.ServiceName != "LocationManagerService" {
-		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "LocationManagerService")
+	if svc.ServiceName != "ManagerService" {
+		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "ManagerService")
 	}
 	if !svc.Close {
 		t.Error("Service Close should be true")
@@ -176,13 +176,13 @@ func TestRenderServerToString_Location(t *testing.T) {
 		{"jni import", `"github.com/AndroidGoLab/jni"`},
 		{"jnipkg import", `jnipkg "github.com/AndroidGoLab/jni/location"`},
 		{"pb import", `pb "github.com/AndroidGoLab/jni/proto/location"`},
-		{"struct type", "type LocationManagerServer struct"},
-		{"unimplemented embed", "pb.UnimplementedLocationManagerServiceServer"},
-		{"method sig", "func (s *LocationManagerServer) GetLastKnownLocation"},
-		{"new manager", "jnipkg.NewlocationManager(s.Ctx)"},
+		{"struct type", "type ManagerServer struct"},
+		{"unimplemented embed", "pb.UnimplementedManagerServiceServer"},
+		{"method sig", "func (s *ManagerServer) GetLastKnownLocation"},
+		{"new manager", "jnipkg.NewManager(s.Ctx)"},
 		{"defer close", "defer mgr.Close()"},
 		{"proto response", "&pb.GetLastKnownLocationResponse{"},
-		{"bool method", "func (s *LocationManagerServer) IsProviderEnabled"},
+		{"bool method", "func (s *ManagerServer) IsProviderEnabled"},
 		{"bool result", "Result: result"},
 		{"error return", "status.Errorf(codes.Internal,"},
 	}

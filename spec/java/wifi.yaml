@@ -2,7 +2,7 @@ package: wifi
 go_import: github.com/AndroidGoLab/jni/net/wifi
 classes:
     - java_class: android.net.wifi.WifiManager
-      go_type: wifiManager
+      go_type: Manager
       obtain: system_service
       service_name: wifi
       close: true
@@ -710,7 +710,7 @@ classes:
           returns: int
           error: true
     - java_class: android.net.wifi.WifiInfo
-      go_type: wifiInfo
+      go_type: Info
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -864,7 +864,7 @@ classes:
           returns: android.net.NetworkInfo$DetailedState
           error: true
     - java_class: android.net.wifi.ScanResult
-      go_type: scanResult
+      go_type: ScanResult
       methods:
         - java_method: describeContents
           go_name: DescribeContents

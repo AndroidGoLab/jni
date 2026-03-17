@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// mediaStore wraps android.provider.MediaStore.
-type mediaStore struct {
+// MediaStore wraps android.provider.MediaStore.
+type MediaStore struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // CanManageMedia calls android.provider.MediaStore.canManageMedia.
-func (m *mediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
+func (m *MediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *mediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreCanManageMedia == nil {
+		if midMediaStoreCanManageMedia == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.canManageMedia is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreCanManageMedia, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreCanManageMedia, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -51,7 +51,7 @@ func (m *mediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
 }
 
 // CreateDeleteRequest calls android.provider.MediaStore.createDeleteRequest.
-func (m *mediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -59,14 +59,14 @@ func (m *mediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*j
 			callErr = err
 			return err
 		}
-		if midmediaStoreCreateDeleteRequest == nil {
+		if midMediaStoreCreateDeleteRequest == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.createDeleteRequest is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreCreateDeleteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreCreateDeleteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -77,7 +77,7 @@ func (m *mediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*j
 }
 
 // CreateFavoriteRequest calls android.provider.MediaStore.createFavoriteRequest.
-func (m *mediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (*jni.Object, error) {
+func (m *MediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -85,7 +85,7 @@ func (m *mediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, a
 			callErr = err
 			return err
 		}
-		if midmediaStoreCreateFavoriteRequest == nil {
+		if midMediaStoreCreateFavoriteRequest == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.createFavoriteRequest is not available on this device")
 			return callErr
 		}
@@ -96,8 +96,8 @@ func (m *mediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, a
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreCreateFavoriteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreCreateFavoriteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -108,7 +108,7 @@ func (m *mediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, a
 }
 
 // CreateTrashRequest calls android.provider.MediaStore.createTrashRequest.
-func (m *mediaStore) CreateTrashRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (*jni.Object, error) {
+func (m *MediaStore) CreateTrashRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -116,7 +116,7 @@ func (m *mediaStore) CreateTrashRequest(arg0 *jni.Object, arg1 *jni.Object, arg2
 			callErr = err
 			return err
 		}
-		if midmediaStoreCreateTrashRequest == nil {
+		if midMediaStoreCreateTrashRequest == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.createTrashRequest is not available on this device")
 			return callErr
 		}
@@ -127,8 +127,8 @@ func (m *mediaStore) CreateTrashRequest(arg0 *jni.Object, arg1 *jni.Object, arg2
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreCreateTrashRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreCreateTrashRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -139,7 +139,7 @@ func (m *mediaStore) CreateTrashRequest(arg0 *jni.Object, arg1 *jni.Object, arg2
 }
 
 // CreateWriteRequest calls android.provider.MediaStore.createWriteRequest.
-func (m *mediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -147,14 +147,14 @@ func (m *mediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jn
 			callErr = err
 			return err
 		}
-		if midmediaStoreCreateWriteRequest == nil {
+		if midMediaStoreCreateWriteRequest == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.createWriteRequest is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreCreateWriteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreCreateWriteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -165,7 +165,7 @@ func (m *mediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jn
 }
 
 // GetDocumentUri calls android.provider.MediaStore.getDocumentUri.
-func (m *mediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -173,14 +173,14 @@ func (m *mediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetDocumentUri == nil {
+		if midMediaStoreGetDocumentUri == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getDocumentUri is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetDocumentUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetDocumentUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -191,7 +191,7 @@ func (m *mediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 }
 
 // GetExternalVolumeNames calls android.provider.MediaStore.getExternalVolumeNames.
-func (m *mediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -199,14 +199,14 @@ func (m *mediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, erro
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetExternalVolumeNames == nil {
+		if midMediaStoreGetExternalVolumeNames == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getExternalVolumeNames is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetExternalVolumeNames, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetExternalVolumeNames, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -217,7 +217,7 @@ func (m *mediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, erro
 }
 
 // GetGeneration calls android.provider.MediaStore.getGeneration.
-func (m *mediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error) {
+func (m *MediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -225,7 +225,7 @@ func (m *mediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error)
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetGeneration == nil {
+		if midMediaStoreGetGeneration == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getGeneration is not available on this device")
 			return callErr
 		}
@@ -236,8 +236,8 @@ func (m *mediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error)
 		}
 
 		result, callErr = env.CallStaticLongMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetGeneration, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetGeneration, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -248,7 +248,7 @@ func (m *mediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error)
 }
 
 // GetMediaScannerUri calls android.provider.MediaStore.getMediaScannerUri.
-func (m *mediaStore) GetMediaScannerUri() (*jni.Object, error) {
+func (m *MediaStore) GetMediaScannerUri() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -256,13 +256,13 @@ func (m *mediaStore) GetMediaScannerUri() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetMediaScannerUri == nil {
+		if midMediaStoreGetMediaScannerUri == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getMediaScannerUri is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetMediaScannerUri,
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetMediaScannerUri,
 		)
 		if callErr != nil {
 			return callErr
@@ -273,7 +273,7 @@ func (m *mediaStore) GetMediaScannerUri() (*jni.Object, error) {
 }
 
 // GetMediaUri calls android.provider.MediaStore.getMediaUri.
-func (m *mediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -281,14 +281,14 @@ func (m *mediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetMediaUri == nil {
+		if midMediaStoreGetMediaUri == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getMediaUri is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetMediaUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetMediaUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -299,7 +299,7 @@ func (m *mediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 }
 
 // GetOriginalMediaFormatFileDescriptor calls android.provider.MediaStore.getOriginalMediaFormatFileDescriptor.
-func (m *mediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -307,14 +307,14 @@ func (m *mediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetOriginalMediaFormatFileDescriptor == nil {
+		if midMediaStoreGetOriginalMediaFormatFileDescriptor == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getOriginalMediaFormatFileDescriptor is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetOriginalMediaFormatFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetOriginalMediaFormatFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -325,7 +325,7 @@ func (m *mediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1
 }
 
 // GetPickImagesMaxLimit calls android.provider.MediaStore.getPickImagesMaxLimit.
-func (m *mediaStore) GetPickImagesMaxLimit() (int32, error) {
+func (m *MediaStore) GetPickImagesMaxLimit() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -333,13 +333,13 @@ func (m *mediaStore) GetPickImagesMaxLimit() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetPickImagesMaxLimit == nil {
+		if midMediaStoreGetPickImagesMaxLimit == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getPickImagesMaxLimit is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticIntMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetPickImagesMaxLimit,
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetPickImagesMaxLimit,
 		)
 		if callErr != nil {
 			return callErr
@@ -350,7 +350,7 @@ func (m *mediaStore) GetPickImagesMaxLimit() (int32, error) {
 }
 
 // GetRecentExternalVolumeNames calls android.provider.MediaStore.getRecentExternalVolumeNames.
-func (m *mediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -358,14 +358,14 @@ func (m *mediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetRecentExternalVolumeNames == nil {
+		if midMediaStoreGetRecentExternalVolumeNames == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getRecentExternalVolumeNames is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetRecentExternalVolumeNames, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetRecentExternalVolumeNames, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -376,7 +376,7 @@ func (m *mediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object
 }
 
 // GetRedactedUri2 calls android.provider.MediaStore.getRedactedUri.
-func (m *mediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -384,14 +384,14 @@ func (m *mediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.O
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetRedactedUri2 == nil {
+		if midMediaStoreGetRedactedUri2 == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getRedactedUri is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetRedactedUri2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetRedactedUri2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -402,7 +402,7 @@ func (m *mediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.O
 }
 
 // GetRedactedUri2_1 calls android.provider.MediaStore.getRedactedUri.
-func (m *mediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -410,14 +410,14 @@ func (m *mediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetRedactedUri2_1 == nil {
+		if midMediaStoreGetRedactedUri2_1 == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getRedactedUri is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetRedactedUri2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetRedactedUri2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -428,7 +428,7 @@ func (m *mediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni
 }
 
 // GetRequireOriginal calls android.provider.MediaStore.getRequireOriginal.
-func (m *mediaStore) GetRequireOriginal(arg0 *jni.Object) (bool, error) {
+func (m *MediaStore) GetRequireOriginal(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -436,14 +436,14 @@ func (m *mediaStore) GetRequireOriginal(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetRequireOriginal == nil {
+		if midMediaStoreGetRequireOriginal == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getRequireOriginal is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetRequireOriginal, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetRequireOriginal, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -455,7 +455,7 @@ func (m *mediaStore) GetRequireOriginal(arg0 *jni.Object) (bool, error) {
 }
 
 // GetVersion1 calls android.provider.MediaStore.getVersion.
-func (m *mediaStore) GetVersion1(arg0 *jni.Object) (string, error) {
+func (m *MediaStore) GetVersion1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -463,14 +463,14 @@ func (m *mediaStore) GetVersion1(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetVersion1 == nil {
+		if midMediaStoreGetVersion1 == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getVersion is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetVersion1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetVersion1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -482,7 +482,7 @@ func (m *mediaStore) GetVersion1(arg0 *jni.Object) (string, error) {
 }
 
 // GetVersion2_1 calls android.provider.MediaStore.getVersion.
-func (m *mediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error) {
+func (m *MediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -490,7 +490,7 @@ func (m *mediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetVersion2_1 == nil {
+		if midMediaStoreGetVersion2_1 == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getVersion is not available on this device")
 			return callErr
 		}
@@ -501,8 +501,8 @@ func (m *mediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetVersion2_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetVersion2_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -514,7 +514,7 @@ func (m *mediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error
 }
 
 // GetVolumeName calls android.provider.MediaStore.getVolumeName.
-func (m *mediaStore) GetVolumeName(arg0 *jni.Object) (string, error) {
+func (m *MediaStore) GetVolumeName(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -522,14 +522,14 @@ func (m *mediaStore) GetVolumeName(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreGetVolumeName == nil {
+		if midMediaStoreGetVolumeName == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getVolumeName is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreGetVolumeName, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetVolumeName, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -541,7 +541,7 @@ func (m *mediaStore) GetVolumeName(arg0 *jni.Object) (string, error) {
 }
 
 // IsCurrentCloudMediaProviderAuthority calls android.provider.MediaStore.isCurrentCloudMediaProviderAuthority.
-func (m *mediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1 string) (bool, error) {
+func (m *MediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -549,7 +549,7 @@ func (m *mediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1
 			callErr = err
 			return err
 		}
-		if midmediaStoreIsCurrentCloudMediaProviderAuthority == nil {
+		if midMediaStoreIsCurrentCloudMediaProviderAuthority == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.isCurrentCloudMediaProviderAuthority is not available on this device")
 			return callErr
 		}
@@ -560,8 +560,8 @@ func (m *mediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreIsCurrentCloudMediaProviderAuthority, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreIsCurrentCloudMediaProviderAuthority, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -573,7 +573,7 @@ func (m *mediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1
 }
 
 // IsCurrentSystemGallery calls android.provider.MediaStore.isCurrentSystemGallery.
-func (m *mediaStore) IsCurrentSystemGallery(arg0 *jni.Object, arg1 int32, arg2 string) (bool, error) {
+func (m *MediaStore) IsCurrentSystemGallery(arg0 *jni.Object, arg1 int32, arg2 string) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -581,7 +581,7 @@ func (m *mediaStore) IsCurrentSystemGallery(arg0 *jni.Object, arg1 int32, arg2 s
 			callErr = err
 			return err
 		}
-		if midmediaStoreIsCurrentSystemGallery == nil {
+		if midMediaStoreIsCurrentSystemGallery == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.isCurrentSystemGallery is not available on this device")
 			return callErr
 		}
@@ -592,8 +592,8 @@ func (m *mediaStore) IsCurrentSystemGallery(arg0 *jni.Object, arg1 int32, arg2 s
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreIsCurrentSystemGallery, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreIsCurrentSystemGallery, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -605,7 +605,7 @@ func (m *mediaStore) IsCurrentSystemGallery(arg0 *jni.Object, arg1 int32, arg2 s
 }
 
 // IsSupportedCloudMediaProviderAuthority calls android.provider.MediaStore.isSupportedCloudMediaProviderAuthority.
-func (m *mediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, arg1 string) (bool, error) {
+func (m *MediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -613,7 +613,7 @@ func (m *mediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, ar
 			callErr = err
 			return err
 		}
-		if midmediaStoreIsSupportedCloudMediaProviderAuthority == nil {
+		if midMediaStoreIsSupportedCloudMediaProviderAuthority == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.isSupportedCloudMediaProviderAuthority is not available on this device")
 			return callErr
 		}
@@ -624,8 +624,8 @@ func (m *mediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, ar
 		}
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreIsSupportedCloudMediaProviderAuthority, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreIsSupportedCloudMediaProviderAuthority, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -637,7 +637,7 @@ func (m *mediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, ar
 }
 
 // MarkIsFavoriteStatus calls android.provider.MediaStore.markIsFavoriteStatus.
-func (m *mediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) error {
+func (m *MediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -645,7 +645,7 @@ func (m *mediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, ar
 			callErr = err
 			return err
 		}
-		if midmediaStoreMarkIsFavoriteStatus == nil {
+		if midMediaStoreMarkIsFavoriteStatus == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.markIsFavoriteStatus is not available on this device")
 			return callErr
 		}
@@ -656,8 +656,8 @@ func (m *mediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, ar
 		}
 
 		callErr = env.CallStaticVoidMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreMarkIsFavoriteStatus, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreMarkIsFavoriteStatus, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
 		)
 		return callErr
 	})
@@ -665,7 +665,7 @@ func (m *mediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, ar
 }
 
 // NotifyCloudMediaChangedEvent calls android.provider.MediaStore.notifyCloudMediaChangedEvent.
-func (m *mediaStore) NotifyCloudMediaChangedEvent(arg0 *jni.Object, arg1 string, arg2 string) error {
+func (m *MediaStore) NotifyCloudMediaChangedEvent(arg0 *jni.Object, arg1 string, arg2 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -673,7 +673,7 @@ func (m *mediaStore) NotifyCloudMediaChangedEvent(arg0 *jni.Object, arg1 string,
 			callErr = err
 			return err
 		}
-		if midmediaStoreNotifyCloudMediaChangedEvent == nil {
+		if midMediaStoreNotifyCloudMediaChangedEvent == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.notifyCloudMediaChangedEvent is not available on this device")
 			return callErr
 		}
@@ -689,8 +689,8 @@ func (m *mediaStore) NotifyCloudMediaChangedEvent(arg0 *jni.Object, arg1 string,
 		}
 
 		callErr = env.CallStaticVoidMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreNotifyCloudMediaChangedEvent, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreNotifyCloudMediaChangedEvent, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
 		)
 		return callErr
 	})
@@ -698,7 +698,7 @@ func (m *mediaStore) NotifyCloudMediaChangedEvent(arg0 *jni.Object, arg1 string,
 }
 
 // OpenAssetFileDescriptor calls android.provider.MediaStore.openAssetFileDescriptor.
-func (m *mediaStore) OpenAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) OpenAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -706,7 +706,7 @@ func (m *mediaStore) OpenAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object,
 			callErr = err
 			return err
 		}
-		if midmediaStoreOpenAssetFileDescriptor == nil {
+		if midMediaStoreOpenAssetFileDescriptor == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.openAssetFileDescriptor is not available on this device")
 			return callErr
 		}
@@ -717,8 +717,8 @@ func (m *mediaStore) OpenAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object,
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreOpenAssetFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreOpenAssetFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -729,7 +729,7 @@ func (m *mediaStore) OpenAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object,
 }
 
 // OpenFileDescriptor calls android.provider.MediaStore.openFileDescriptor.
-func (m *mediaStore) OpenFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) OpenFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -737,7 +737,7 @@ func (m *mediaStore) OpenFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2
 			callErr = err
 			return err
 		}
-		if midmediaStoreOpenFileDescriptor == nil {
+		if midMediaStoreOpenFileDescriptor == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.openFileDescriptor is not available on this device")
 			return callErr
 		}
@@ -748,8 +748,8 @@ func (m *mediaStore) OpenFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreOpenFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreOpenFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -760,7 +760,7 @@ func (m *mediaStore) OpenFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2
 }
 
 // OpenTypedAssetFileDescriptor calls android.provider.MediaStore.openTypedAssetFileDescriptor.
-func (m *mediaStore) OpenTypedAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object, arg4 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) OpenTypedAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object, arg4 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -768,7 +768,7 @@ func (m *mediaStore) OpenTypedAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Ob
 			callErr = err
 			return err
 		}
-		if midmediaStoreOpenTypedAssetFileDescriptor == nil {
+		if midMediaStoreOpenTypedAssetFileDescriptor == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.openTypedAssetFileDescriptor is not available on this device")
 			return callErr
 		}
@@ -779,8 +779,8 @@ func (m *mediaStore) OpenTypedAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Ob
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreOpenTypedAssetFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreOpenTypedAssetFileDescriptor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -791,7 +791,7 @@ func (m *mediaStore) OpenTypedAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Ob
 }
 
 // SetIncludePending calls android.provider.MediaStore.setIncludePending.
-func (m *mediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -799,14 +799,14 @@ func (m *mediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreSetIncludePending == nil {
+		if midMediaStoreSetIncludePending == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.setIncludePending is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreSetIncludePending, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreSetIncludePending, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -817,7 +817,7 @@ func (m *mediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // SetRequireOriginal calls android.provider.MediaStore.setRequireOriginal.
-func (m *mediaStore) SetRequireOriginal(arg0 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) SetRequireOriginal(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -825,14 +825,14 @@ func (m *mediaStore) SetRequireOriginal(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaStoreSetRequireOriginal == nil {
+		if midMediaStoreSetRequireOriginal == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.setRequireOriginal is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsmediaStore)),
-			midmediaStoreSetRequireOriginal, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreSetRequireOriginal, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

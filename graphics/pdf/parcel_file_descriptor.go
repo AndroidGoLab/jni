@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// parcelFileDescriptor wraps android.os.ParcelFileDescriptor.
-type parcelFileDescriptor struct {
+// ParcelFileDescriptor wraps android.os.ParcelFileDescriptor.
+type ParcelFileDescriptor struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // CanDetectErrors calls android.os.ParcelFileDescriptor.canDetectErrors.
-func (m *parcelFileDescriptor) CanDetectErrors() (bool, error) {
+func (m *ParcelFileDescriptor) CanDetectErrors() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *parcelFileDescriptor) CanDetectErrors() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorCanDetectErrors == nil {
+		if midParcelFileDescriptorCanDetectErrors == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.canDetectErrors is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midparcelFileDescriptorCanDetectErrors,
+			midParcelFileDescriptorCanDetectErrors,
 		)
 		if callErr != nil {
 			return callErr
@@ -50,7 +50,7 @@ func (m *parcelFileDescriptor) CanDetectErrors() (bool, error) {
 }
 
 // CheckError calls android.os.ParcelFileDescriptor.checkError.
-func (m *parcelFileDescriptor) CheckError() error {
+func (m *ParcelFileDescriptor) CheckError() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -58,13 +58,13 @@ func (m *parcelFileDescriptor) CheckError() error {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorCheckError == nil {
+		if midParcelFileDescriptorCheckError == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.checkError is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midparcelFileDescriptorCheckError,
+			midParcelFileDescriptorCheckError,
 		)
 		return callErr
 	})
@@ -72,7 +72,7 @@ func (m *parcelFileDescriptor) CheckError() error {
 }
 
 // Close calls android.os.ParcelFileDescriptor.close.
-func (m *parcelFileDescriptor) Close() error {
+func (m *ParcelFileDescriptor) Close() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -80,13 +80,13 @@ func (m *parcelFileDescriptor) Close() error {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorClose == nil {
+		if midParcelFileDescriptorClose == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.close is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midparcelFileDescriptorClose,
+			midParcelFileDescriptorClose,
 		)
 		return callErr
 	})
@@ -94,7 +94,7 @@ func (m *parcelFileDescriptor) Close() error {
 }
 
 // CloseWithError calls android.os.ParcelFileDescriptor.closeWithError.
-func (m *parcelFileDescriptor) CloseWithError(arg0 string) error {
+func (m *ParcelFileDescriptor) CloseWithError(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -102,7 +102,7 @@ func (m *parcelFileDescriptor) CloseWithError(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorCloseWithError == nil {
+		if midParcelFileDescriptorCloseWithError == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.closeWithError is not available on this device")
 			return callErr
 		}
@@ -113,7 +113,7 @@ func (m *parcelFileDescriptor) CloseWithError(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midparcelFileDescriptorCloseWithError, jni.ObjectValue(&jArg0.Object),
+			midParcelFileDescriptorCloseWithError, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -121,7 +121,7 @@ func (m *parcelFileDescriptor) CloseWithError(arg0 string) error {
 }
 
 // DescribeContents calls android.os.ParcelFileDescriptor.describeContents.
-func (m *parcelFileDescriptor) DescribeContents() (int32, error) {
+func (m *ParcelFileDescriptor) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -129,13 +129,13 @@ func (m *parcelFileDescriptor) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorDescribeContents == nil {
+		if midParcelFileDescriptorDescribeContents == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midparcelFileDescriptorDescribeContents,
+			midParcelFileDescriptorDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -146,7 +146,7 @@ func (m *parcelFileDescriptor) DescribeContents() (int32, error) {
 }
 
 // DetachFd calls android.os.ParcelFileDescriptor.detachFd.
-func (m *parcelFileDescriptor) DetachFd() (int32, error) {
+func (m *ParcelFileDescriptor) DetachFd() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -154,13 +154,13 @@ func (m *parcelFileDescriptor) DetachFd() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorDetachFd == nil {
+		if midParcelFileDescriptorDetachFd == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.detachFd is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midparcelFileDescriptorDetachFd,
+			midParcelFileDescriptorDetachFd,
 		)
 		if callErr != nil {
 			return callErr
@@ -171,7 +171,7 @@ func (m *parcelFileDescriptor) DetachFd() (int32, error) {
 }
 
 // Dup0 calls android.os.ParcelFileDescriptor.dup.
-func (m *parcelFileDescriptor) Dup0() (*jni.Object, error) {
+func (m *ParcelFileDescriptor) Dup0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -179,13 +179,13 @@ func (m *parcelFileDescriptor) Dup0() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorDup0 == nil {
+		if midParcelFileDescriptorDup0 == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.dup is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midparcelFileDescriptorDup0,
+			midParcelFileDescriptorDup0,
 		)
 		if callErr != nil {
 			return callErr
@@ -196,7 +196,7 @@ func (m *parcelFileDescriptor) Dup0() (*jni.Object, error) {
 }
 
 // GetFd calls android.os.ParcelFileDescriptor.getFd.
-func (m *parcelFileDescriptor) GetFd() (int32, error) {
+func (m *ParcelFileDescriptor) GetFd() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -204,13 +204,13 @@ func (m *parcelFileDescriptor) GetFd() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorGetFd == nil {
+		if midParcelFileDescriptorGetFd == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.getFd is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midparcelFileDescriptorGetFd,
+			midParcelFileDescriptorGetFd,
 		)
 		if callErr != nil {
 			return callErr
@@ -221,7 +221,7 @@ func (m *parcelFileDescriptor) GetFd() (int32, error) {
 }
 
 // GetFileDescriptor calls android.os.ParcelFileDescriptor.getFileDescriptor.
-func (m *parcelFileDescriptor) GetFileDescriptor() (*jni.Object, error) {
+func (m *ParcelFileDescriptor) GetFileDescriptor() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -229,13 +229,13 @@ func (m *parcelFileDescriptor) GetFileDescriptor() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorGetFileDescriptor == nil {
+		if midParcelFileDescriptorGetFileDescriptor == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.getFileDescriptor is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midparcelFileDescriptorGetFileDescriptor,
+			midParcelFileDescriptorGetFileDescriptor,
 		)
 		if callErr != nil {
 			return callErr
@@ -246,7 +246,7 @@ func (m *parcelFileDescriptor) GetFileDescriptor() (*jni.Object, error) {
 }
 
 // GetStatSize calls android.os.ParcelFileDescriptor.getStatSize.
-func (m *parcelFileDescriptor) GetStatSize() (int64, error) {
+func (m *ParcelFileDescriptor) GetStatSize() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -254,13 +254,13 @@ func (m *parcelFileDescriptor) GetStatSize() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorGetStatSize == nil {
+		if midParcelFileDescriptorGetStatSize == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.getStatSize is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midparcelFileDescriptorGetStatSize,
+			midParcelFileDescriptorGetStatSize,
 		)
 		if callErr != nil {
 			return callErr
@@ -271,7 +271,7 @@ func (m *parcelFileDescriptor) GetStatSize() (int64, error) {
 }
 
 // ToString calls android.os.ParcelFileDescriptor.toString.
-func (m *parcelFileDescriptor) ToString() (string, error) {
+func (m *ParcelFileDescriptor) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -279,13 +279,13 @@ func (m *parcelFileDescriptor) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorToString == nil {
+		if midParcelFileDescriptorToString == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midparcelFileDescriptorToString,
+			midParcelFileDescriptorToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -297,7 +297,7 @@ func (m *parcelFileDescriptor) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.os.ParcelFileDescriptor.writeToParcel.
-func (m *parcelFileDescriptor) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *ParcelFileDescriptor) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -305,14 +305,14 @@ func (m *parcelFileDescriptor) WriteToParcel(arg0 *jni.Object, arg1 int32) error
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorWriteToParcel == nil {
+		if midParcelFileDescriptorWriteToParcel == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midparcelFileDescriptorWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midParcelFileDescriptorWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -320,7 +320,7 @@ func (m *parcelFileDescriptor) WriteToParcel(arg0 *jni.Object, arg1 int32) error
 }
 
 // AdoptFd calls android.os.ParcelFileDescriptor.adoptFd.
-func (m *parcelFileDescriptor) AdoptFd(arg0 int32) (*jni.Object, error) {
+func (m *ParcelFileDescriptor) AdoptFd(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -328,14 +328,14 @@ func (m *parcelFileDescriptor) AdoptFd(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorAdoptFd == nil {
+		if midParcelFileDescriptorAdoptFd == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.adoptFd is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorAdoptFd, jni.IntValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorAdoptFd, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -346,7 +346,7 @@ func (m *parcelFileDescriptor) AdoptFd(arg0 int32) (*jni.Object, error) {
 }
 
 // CreatePipe calls android.os.ParcelFileDescriptor.createPipe.
-func (m *parcelFileDescriptor) CreatePipe() (*jni.Object, error) {
+func (m *ParcelFileDescriptor) CreatePipe() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -354,13 +354,13 @@ func (m *parcelFileDescriptor) CreatePipe() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorCreatePipe == nil {
+		if midParcelFileDescriptorCreatePipe == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.createPipe is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorCreatePipe,
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorCreatePipe,
 		)
 		if callErr != nil {
 			return callErr
@@ -371,7 +371,7 @@ func (m *parcelFileDescriptor) CreatePipe() (*jni.Object, error) {
 }
 
 // CreateReliablePipe calls android.os.ParcelFileDescriptor.createReliablePipe.
-func (m *parcelFileDescriptor) CreateReliablePipe() (*jni.Object, error) {
+func (m *ParcelFileDescriptor) CreateReliablePipe() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -379,13 +379,13 @@ func (m *parcelFileDescriptor) CreateReliablePipe() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorCreateReliablePipe == nil {
+		if midParcelFileDescriptorCreateReliablePipe == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.createReliablePipe is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorCreateReliablePipe,
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorCreateReliablePipe,
 		)
 		if callErr != nil {
 			return callErr
@@ -396,7 +396,7 @@ func (m *parcelFileDescriptor) CreateReliablePipe() (*jni.Object, error) {
 }
 
 // CreateReliableSocketPair calls android.os.ParcelFileDescriptor.createReliableSocketPair.
-func (m *parcelFileDescriptor) CreateReliableSocketPair() (*jni.Object, error) {
+func (m *ParcelFileDescriptor) CreateReliableSocketPair() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -404,13 +404,13 @@ func (m *parcelFileDescriptor) CreateReliableSocketPair() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorCreateReliableSocketPair == nil {
+		if midParcelFileDescriptorCreateReliableSocketPair == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.createReliableSocketPair is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorCreateReliableSocketPair,
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorCreateReliableSocketPair,
 		)
 		if callErr != nil {
 			return callErr
@@ -421,7 +421,7 @@ func (m *parcelFileDescriptor) CreateReliableSocketPair() (*jni.Object, error) {
 }
 
 // CreateSocketPair calls android.os.ParcelFileDescriptor.createSocketPair.
-func (m *parcelFileDescriptor) CreateSocketPair() (*jni.Object, error) {
+func (m *ParcelFileDescriptor) CreateSocketPair() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -429,13 +429,13 @@ func (m *parcelFileDescriptor) CreateSocketPair() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorCreateSocketPair == nil {
+		if midParcelFileDescriptorCreateSocketPair == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.createSocketPair is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorCreateSocketPair,
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorCreateSocketPair,
 		)
 		if callErr != nil {
 			return callErr
@@ -446,7 +446,7 @@ func (m *parcelFileDescriptor) CreateSocketPair() (*jni.Object, error) {
 }
 
 // Dup1_1 calls android.os.ParcelFileDescriptor.dup.
-func (m *parcelFileDescriptor) Dup1_1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *ParcelFileDescriptor) Dup1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -454,14 +454,14 @@ func (m *parcelFileDescriptor) Dup1_1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorDup1_1 == nil {
+		if midParcelFileDescriptorDup1_1 == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.dup is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorDup1_1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorDup1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -472,7 +472,7 @@ func (m *parcelFileDescriptor) Dup1_1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // FromDatagramSocket calls android.os.ParcelFileDescriptor.fromDatagramSocket.
-func (m *parcelFileDescriptor) FromDatagramSocket(arg0 *jni.Object) (*jni.Object, error) {
+func (m *ParcelFileDescriptor) FromDatagramSocket(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -480,14 +480,14 @@ func (m *parcelFileDescriptor) FromDatagramSocket(arg0 *jni.Object) (*jni.Object
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorFromDatagramSocket == nil {
+		if midParcelFileDescriptorFromDatagramSocket == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.fromDatagramSocket is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorFromDatagramSocket, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorFromDatagramSocket, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -498,7 +498,7 @@ func (m *parcelFileDescriptor) FromDatagramSocket(arg0 *jni.Object) (*jni.Object
 }
 
 // FromFd calls android.os.ParcelFileDescriptor.fromFd.
-func (m *parcelFileDescriptor) FromFd(arg0 int32) (*jni.Object, error) {
+func (m *ParcelFileDescriptor) FromFd(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -506,14 +506,14 @@ func (m *parcelFileDescriptor) FromFd(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorFromFd == nil {
+		if midParcelFileDescriptorFromFd == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.fromFd is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorFromFd, jni.IntValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorFromFd, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -524,7 +524,7 @@ func (m *parcelFileDescriptor) FromFd(arg0 int32) (*jni.Object, error) {
 }
 
 // FromSocket calls android.os.ParcelFileDescriptor.fromSocket.
-func (m *parcelFileDescriptor) FromSocket(arg0 *jni.Object) (*jni.Object, error) {
+func (m *ParcelFileDescriptor) FromSocket(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -532,14 +532,14 @@ func (m *parcelFileDescriptor) FromSocket(arg0 *jni.Object) (*jni.Object, error)
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorFromSocket == nil {
+		if midParcelFileDescriptorFromSocket == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.fromSocket is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorFromSocket, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorFromSocket, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -550,7 +550,7 @@ func (m *parcelFileDescriptor) FromSocket(arg0 *jni.Object) (*jni.Object, error)
 }
 
 // Open calls android.os.ParcelFileDescriptor.open.
-func (m *parcelFileDescriptor) Open(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+func (m *ParcelFileDescriptor) Open(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -558,14 +558,14 @@ func (m *parcelFileDescriptor) Open(arg0 *jni.Object, arg1 int32) (*jni.Object, 
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorOpen == nil {
+		if midParcelFileDescriptorOpen == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.open is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorOpen, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorOpen, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -576,7 +576,7 @@ func (m *parcelFileDescriptor) Open(arg0 *jni.Object, arg1 int32) (*jni.Object, 
 }
 
 // ParseMode calls android.os.ParcelFileDescriptor.parseMode.
-func (m *parcelFileDescriptor) ParseMode(arg0 string) (int32, error) {
+func (m *ParcelFileDescriptor) ParseMode(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -584,7 +584,7 @@ func (m *parcelFileDescriptor) ParseMode(arg0 string) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midparcelFileDescriptorParseMode == nil {
+		if midParcelFileDescriptorParseMode == nil {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.parseMode is not available on this device")
 			return callErr
 		}
@@ -594,8 +594,8 @@ func (m *parcelFileDescriptor) ParseMode(arg0 string) (int32, error) {
 		}
 
 		result, callErr = env.CallStaticIntMethod(
-			(*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)),
-			midparcelFileDescriptorParseMode, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)),
+			midParcelFileDescriptorParseMode, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr

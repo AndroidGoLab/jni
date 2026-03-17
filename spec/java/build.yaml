@@ -2,7 +2,7 @@ package: build
 go_import: github.com/AndroidGoLab/jni/os/build
 classes:
     - java_class: android.os.Build
-      go_type: build
+      go_type: Build
       static_methods:
         - java_method: getFingerprintedPartitions
           go_name: GetFingerprintedPartitions
@@ -31,7 +31,7 @@ classes:
           returns: String
           error: true
     - java_class: android.os.Build$VERSION
-      go_type: buildVERSION
+      go_type: BuildVERSION
 constants:
     - go_name: Board
       value: '""'

@@ -2,7 +2,7 @@ package: print
 go_import: github.com/AndroidGoLab/jni/print
 classes:
     - java_class: android.print.PrintManager
-      go_type: printManager
+      go_type: Manager
       obtain: system_service
       service_name: print
       close: true

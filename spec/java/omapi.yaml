@@ -2,7 +2,7 @@ package: omapi
 go_import: github.com/AndroidGoLab/jni/se/omapi
 classes:
     - java_class: android.se.omapi.SEService
-      go_type: sEService
+      go_type: Service
       methods:
         - java_method: getReaders
           go_name: GetReaders
@@ -28,7 +28,7 @@ classes:
           returns: void
           error: true
     - java_class: android.se.omapi.Channel
-      go_type: channel
+      go_type: Channel
       methods:
         - java_method: close
           go_name: Close
@@ -62,7 +62,7 @@ classes:
           returns: '[B'
           error: true
     - java_class: android.se.omapi.Reader
-      go_type: reader
+      go_type: Reader
       methods:
         - java_method: closeSessions
           go_name: CloseSessions

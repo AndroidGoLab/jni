@@ -60,7 +60,7 @@ classes:
           returns: String
           error: true
     - java_class: android.media.projection.MediaProjectionManager
-      go_type: mediaProjectionManager
+      go_type: Manager
       obtain: system_service
       service_name: media_projection
       close: true

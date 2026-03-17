@@ -2,7 +2,7 @@ package: storage
 go_import: github.com/AndroidGoLab/jni/os/storage
 classes:
     - java_class: android.os.storage.StorageManager
-      go_type: storageManager
+      go_type: Manager
       obtain: system_service
       service_name: storage
       close: true

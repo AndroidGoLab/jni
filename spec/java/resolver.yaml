@@ -4,7 +4,7 @@ classes:
     - java_class: android.database.Cursor
       go_type: cursor
     - java_class: android.content.ContentResolver
-      go_type: contentResolver
+      go_type: Resolver
       methods:
         - java_method: applyBatch
           go_name: ApplyBatch
@@ -306,7 +306,7 @@ classes:
           returns: android.content.ContentResolver
           error: true
     - java_class: android.net.Uri
-      go_type: uri
+      go_type: Uri
       methods:
         - java_method: compareTo
           go_name: CompareTo1

@@ -15,14 +15,14 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
-// pendingIntent wraps android.app.PendingIntent.
-type pendingIntent struct {
+// PendingIntent wraps android.app.PendingIntent.
+type PendingIntent struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Cancel calls android.app.PendingIntent.cancel.
-func (m *pendingIntent) Cancel() error {
+func (m *PendingIntent) Cancel() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -30,13 +30,13 @@ func (m *pendingIntent) Cancel() error {
 			callErr = err
 			return err
 		}
-		if midpendingIntentCancel == nil {
+		if midPendingIntentCancel == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.cancel is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpendingIntentCancel,
+			midPendingIntentCancel,
 		)
 		return callErr
 	})
@@ -44,7 +44,7 @@ func (m *pendingIntent) Cancel() error {
 }
 
 // DescribeContents calls android.app.PendingIntent.describeContents.
-func (m *pendingIntent) DescribeContents() (int32, error) {
+func (m *PendingIntent) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -52,13 +52,13 @@ func (m *pendingIntent) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentDescribeContents == nil {
+		if midPendingIntentDescribeContents == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midpendingIntentDescribeContents,
+			midPendingIntentDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -69,7 +69,7 @@ func (m *pendingIntent) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.app.PendingIntent.equals.
-func (m *pendingIntent) Equals(arg0 *jni.Object) (bool, error) {
+func (m *PendingIntent) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -77,14 +77,14 @@ func (m *pendingIntent) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentEquals == nil {
+		if midPendingIntentEquals == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midpendingIntentEquals, jni.ObjectValue(arg0),
+			midPendingIntentEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -96,7 +96,7 @@ func (m *pendingIntent) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetCreatorPackage calls android.app.PendingIntent.getCreatorPackage.
-func (m *pendingIntent) GetCreatorPackage() (string, error) {
+func (m *PendingIntent) GetCreatorPackage() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -104,13 +104,13 @@ func (m *pendingIntent) GetCreatorPackage() (string, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetCreatorPackage == nil {
+		if midPendingIntentGetCreatorPackage == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getCreatorPackage is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midpendingIntentGetCreatorPackage,
+			midPendingIntentGetCreatorPackage,
 		)
 		if callErr != nil {
 			return callErr
@@ -122,7 +122,7 @@ func (m *pendingIntent) GetCreatorPackage() (string, error) {
 }
 
 // GetCreatorUid calls android.app.PendingIntent.getCreatorUid.
-func (m *pendingIntent) GetCreatorUid() (int32, error) {
+func (m *PendingIntent) GetCreatorUid() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -130,13 +130,13 @@ func (m *pendingIntent) GetCreatorUid() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetCreatorUid == nil {
+		if midPendingIntentGetCreatorUid == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getCreatorUid is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midpendingIntentGetCreatorUid,
+			midPendingIntentGetCreatorUid,
 		)
 		if callErr != nil {
 			return callErr
@@ -147,7 +147,7 @@ func (m *pendingIntent) GetCreatorUid() (int32, error) {
 }
 
 // GetCreatorUserHandle calls android.app.PendingIntent.getCreatorUserHandle.
-func (m *pendingIntent) GetCreatorUserHandle() (*jni.Object, error) {
+func (m *PendingIntent) GetCreatorUserHandle() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -155,13 +155,13 @@ func (m *pendingIntent) GetCreatorUserHandle() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetCreatorUserHandle == nil {
+		if midPendingIntentGetCreatorUserHandle == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getCreatorUserHandle is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midpendingIntentGetCreatorUserHandle,
+			midPendingIntentGetCreatorUserHandle,
 		)
 		if callErr != nil {
 			return callErr
@@ -172,7 +172,7 @@ func (m *pendingIntent) GetCreatorUserHandle() (*jni.Object, error) {
 }
 
 // GetIntentSender calls android.app.PendingIntent.getIntentSender.
-func (m *pendingIntent) GetIntentSender() (*jni.Object, error) {
+func (m *PendingIntent) GetIntentSender() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -180,13 +180,13 @@ func (m *pendingIntent) GetIntentSender() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetIntentSender == nil {
+		if midPendingIntentGetIntentSender == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getIntentSender is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midpendingIntentGetIntentSender,
+			midPendingIntentGetIntentSender,
 		)
 		if callErr != nil {
 			return callErr
@@ -197,7 +197,7 @@ func (m *pendingIntent) GetIntentSender() (*jni.Object, error) {
 }
 
 // GetTargetPackage calls android.app.PendingIntent.getTargetPackage.
-func (m *pendingIntent) GetTargetPackage() (string, error) {
+func (m *PendingIntent) GetTargetPackage() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -205,13 +205,13 @@ func (m *pendingIntent) GetTargetPackage() (string, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetTargetPackage == nil {
+		if midPendingIntentGetTargetPackage == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getTargetPackage is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midpendingIntentGetTargetPackage,
+			midPendingIntentGetTargetPackage,
 		)
 		if callErr != nil {
 			return callErr
@@ -223,7 +223,7 @@ func (m *pendingIntent) GetTargetPackage() (string, error) {
 }
 
 // HashCode calls android.app.PendingIntent.hashCode.
-func (m *pendingIntent) HashCode() (int32, error) {
+func (m *PendingIntent) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -231,13 +231,13 @@ func (m *pendingIntent) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentHashCode == nil {
+		if midPendingIntentHashCode == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midpendingIntentHashCode,
+			midPendingIntentHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -248,7 +248,7 @@ func (m *pendingIntent) HashCode() (int32, error) {
 }
 
 // IsActivity calls android.app.PendingIntent.isActivity.
-func (m *pendingIntent) IsActivity() (bool, error) {
+func (m *PendingIntent) IsActivity() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -256,13 +256,13 @@ func (m *pendingIntent) IsActivity() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentIsActivity == nil {
+		if midPendingIntentIsActivity == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.isActivity is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midpendingIntentIsActivity,
+			midPendingIntentIsActivity,
 		)
 		if callErr != nil {
 			return callErr
@@ -274,7 +274,7 @@ func (m *pendingIntent) IsActivity() (bool, error) {
 }
 
 // IsBroadcast calls android.app.PendingIntent.isBroadcast.
-func (m *pendingIntent) IsBroadcast() (bool, error) {
+func (m *PendingIntent) IsBroadcast() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -282,13 +282,13 @@ func (m *pendingIntent) IsBroadcast() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentIsBroadcast == nil {
+		if midPendingIntentIsBroadcast == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.isBroadcast is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midpendingIntentIsBroadcast,
+			midPendingIntentIsBroadcast,
 		)
 		if callErr != nil {
 			return callErr
@@ -300,7 +300,7 @@ func (m *pendingIntent) IsBroadcast() (bool, error) {
 }
 
 // IsForegroundService calls android.app.PendingIntent.isForegroundService.
-func (m *pendingIntent) IsForegroundService() (bool, error) {
+func (m *PendingIntent) IsForegroundService() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -308,13 +308,13 @@ func (m *pendingIntent) IsForegroundService() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentIsForegroundService == nil {
+		if midPendingIntentIsForegroundService == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.isForegroundService is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midpendingIntentIsForegroundService,
+			midPendingIntentIsForegroundService,
 		)
 		if callErr != nil {
 			return callErr
@@ -326,7 +326,7 @@ func (m *pendingIntent) IsForegroundService() (bool, error) {
 }
 
 // IsImmutable calls android.app.PendingIntent.isImmutable.
-func (m *pendingIntent) IsImmutable() (bool, error) {
+func (m *PendingIntent) IsImmutable() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -334,13 +334,13 @@ func (m *pendingIntent) IsImmutable() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentIsImmutable == nil {
+		if midPendingIntentIsImmutable == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.isImmutable is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midpendingIntentIsImmutable,
+			midPendingIntentIsImmutable,
 		)
 		if callErr != nil {
 			return callErr
@@ -352,7 +352,7 @@ func (m *pendingIntent) IsImmutable() (bool, error) {
 }
 
 // IsService calls android.app.PendingIntent.isService.
-func (m *pendingIntent) IsService() (bool, error) {
+func (m *PendingIntent) IsService() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -360,13 +360,13 @@ func (m *pendingIntent) IsService() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentIsService == nil {
+		if midPendingIntentIsService == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.isService is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midpendingIntentIsService,
+			midPendingIntentIsService,
 		)
 		if callErr != nil {
 			return callErr
@@ -378,7 +378,7 @@ func (m *pendingIntent) IsService() (bool, error) {
 }
 
 // Send0 calls android.app.PendingIntent.send.
-func (m *pendingIntent) Send0() error {
+func (m *PendingIntent) Send0() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -386,13 +386,13 @@ func (m *pendingIntent) Send0() error {
 			callErr = err
 			return err
 		}
-		if midpendingIntentSend0 == nil {
+		if midPendingIntentSend0 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.send is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpendingIntentSend0,
+			midPendingIntentSend0,
 		)
 		return callErr
 	})
@@ -400,7 +400,7 @@ func (m *pendingIntent) Send0() error {
 }
 
 // Send3_1 calls android.app.PendingIntent.send.
-func (m *pendingIntent) Send3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+func (m *PendingIntent) Send3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -408,14 +408,14 @@ func (m *pendingIntent) Send3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) 
 			callErr = err
 			return err
 		}
-		if midpendingIntentSend3_1 == nil {
+		if midPendingIntentSend3_1 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.send is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpendingIntentSend3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midPendingIntentSend3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -423,7 +423,7 @@ func (m *pendingIntent) Send3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) 
 }
 
 // Send1_2 calls android.app.PendingIntent.send.
-func (m *pendingIntent) Send1_2(arg0 *jni.Object) error {
+func (m *PendingIntent) Send1_2(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -431,14 +431,14 @@ func (m *pendingIntent) Send1_2(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midpendingIntentSend1_2 == nil {
+		if midPendingIntentSend1_2 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.send is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpendingIntentSend1_2, jni.ObjectValue(arg0),
+			midPendingIntentSend1_2, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -446,7 +446,7 @@ func (m *pendingIntent) Send1_2(arg0 *jni.Object) error {
 }
 
 // Send1_3 calls android.app.PendingIntent.send.
-func (m *pendingIntent) Send1_3(arg0 int32) error {
+func (m *PendingIntent) Send1_3(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -454,14 +454,14 @@ func (m *pendingIntent) Send1_3(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midpendingIntentSend1_3 == nil {
+		if midPendingIntentSend1_3 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.send is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpendingIntentSend1_3, jni.IntValue(arg0),
+			midPendingIntentSend1_3, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -469,7 +469,7 @@ func (m *pendingIntent) Send1_3(arg0 int32) error {
 }
 
 // ToString calls android.app.PendingIntent.toString.
-func (m *pendingIntent) ToString() (string, error) {
+func (m *PendingIntent) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -477,13 +477,13 @@ func (m *pendingIntent) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midpendingIntentToString == nil {
+		if midPendingIntentToString == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midpendingIntentToString,
+			midPendingIntentToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -495,7 +495,7 @@ func (m *pendingIntent) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.app.PendingIntent.writeToParcel.
-func (m *pendingIntent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *PendingIntent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -503,14 +503,14 @@ func (m *pendingIntent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midpendingIntentWriteToParcel == nil {
+		if midPendingIntentWriteToParcel == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midpendingIntentWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midPendingIntentWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -518,7 +518,7 @@ func (m *pendingIntent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 }
 
 // GetActivities4 calls android.app.PendingIntent.getActivities.
-func (m *pendingIntent) GetActivities4(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetActivities4(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -526,14 +526,14 @@ func (m *pendingIntent) GetActivities4(arg0 *jni.Object, arg1 int32, arg2 *jni.O
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetActivities4 == nil {
+		if midPendingIntentGetActivities4 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getActivities is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentGetActivities4, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentGetActivities4, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -544,7 +544,7 @@ func (m *pendingIntent) GetActivities4(arg0 *jni.Object, arg1 int32, arg2 *jni.O
 }
 
 // GetActivities5_1 calls android.app.PendingIntent.getActivities.
-func (m *pendingIntent) GetActivities5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
+func (m *PendingIntent) GetActivities5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -552,14 +552,14 @@ func (m *pendingIntent) GetActivities5_1(arg0 *jni.Object, arg1 int32, arg2 *jni
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetActivities5_1 == nil {
+		if midPendingIntentGetActivities5_1 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getActivities is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentGetActivities5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentGetActivities5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -570,7 +570,7 @@ func (m *pendingIntent) GetActivities5_1(arg0 *jni.Object, arg1 int32, arg2 *jni
 }
 
 // GetActivity4 calls android.app.PendingIntent.getActivity.
-func (m *pendingIntent) GetActivity4(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetActivity4(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -578,14 +578,14 @@ func (m *pendingIntent) GetActivity4(arg0 *jni.Object, arg1 int32, arg2 *jni.Obj
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetActivity4 == nil {
+		if midPendingIntentGetActivity4 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getActivity is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentGetActivity4, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentGetActivity4, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -596,7 +596,7 @@ func (m *pendingIntent) GetActivity4(arg0 *jni.Object, arg1 int32, arg2 *jni.Obj
 }
 
 // GetActivity5_1 calls android.app.PendingIntent.getActivity.
-func (m *pendingIntent) GetActivity5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
+func (m *PendingIntent) GetActivity5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -604,14 +604,14 @@ func (m *pendingIntent) GetActivity5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.O
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetActivity5_1 == nil {
+		if midPendingIntentGetActivity5_1 == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getActivity is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentGetActivity5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentGetActivity5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -622,7 +622,7 @@ func (m *pendingIntent) GetActivity5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.O
 }
 
 // GetBroadcast calls android.app.PendingIntent.getBroadcast.
-func (m *pendingIntent) GetBroadcast(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetBroadcast(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -630,14 +630,14 @@ func (m *pendingIntent) GetBroadcast(arg0 *jni.Object, arg1 int32, arg2 *jni.Obj
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetBroadcast == nil {
+		if midPendingIntentGetBroadcast == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getBroadcast is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentGetBroadcast, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentGetBroadcast, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -648,7 +648,7 @@ func (m *pendingIntent) GetBroadcast(arg0 *jni.Object, arg1 int32, arg2 *jni.Obj
 }
 
 // GetForegroundService calls android.app.PendingIntent.getForegroundService.
-func (m *pendingIntent) GetForegroundService(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetForegroundService(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -656,14 +656,14 @@ func (m *pendingIntent) GetForegroundService(arg0 *jni.Object, arg1 int32, arg2 
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetForegroundService == nil {
+		if midPendingIntentGetForegroundService == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getForegroundService is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentGetForegroundService, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentGetForegroundService, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -674,7 +674,7 @@ func (m *pendingIntent) GetForegroundService(arg0 *jni.Object, arg1 int32, arg2 
 }
 
 // GetService calls android.app.PendingIntent.getService.
-func (m *pendingIntent) GetService(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetService(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -682,14 +682,14 @@ func (m *pendingIntent) GetService(arg0 *jni.Object, arg1 int32, arg2 *jni.Objec
 			callErr = err
 			return err
 		}
-		if midpendingIntentGetService == nil {
+		if midPendingIntentGetService == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.getService is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentGetService, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentGetService, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -700,7 +700,7 @@ func (m *pendingIntent) GetService(arg0 *jni.Object, arg1 int32, arg2 *jni.Objec
 }
 
 // ReadPendingIntentOrNullFromParcel calls android.app.PendingIntent.readPendingIntentOrNullFromParcel.
-func (m *pendingIntent) ReadPendingIntentOrNullFromParcel(arg0 *jni.Object) (*jni.Object, error) {
+func (m *PendingIntent) ReadPendingIntentOrNullFromParcel(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -708,14 +708,14 @@ func (m *pendingIntent) ReadPendingIntentOrNullFromParcel(arg0 *jni.Object) (*jn
 			callErr = err
 			return err
 		}
-		if midpendingIntentReadPendingIntentOrNullFromParcel == nil {
+		if midPendingIntentReadPendingIntentOrNullFromParcel == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.readPendingIntentOrNullFromParcel is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentReadPendingIntentOrNullFromParcel, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentReadPendingIntentOrNullFromParcel, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -726,7 +726,7 @@ func (m *pendingIntent) ReadPendingIntentOrNullFromParcel(arg0 *jni.Object) (*jn
 }
 
 // WritePendingIntentOrNullToParcel calls android.app.PendingIntent.writePendingIntentOrNullToParcel.
-func (m *pendingIntent) WritePendingIntentOrNullToParcel(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *PendingIntent) WritePendingIntentOrNullToParcel(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -734,14 +734,14 @@ func (m *pendingIntent) WritePendingIntentOrNullToParcel(arg0 *jni.Object, arg1 
 			callErr = err
 			return err
 		}
-		if midpendingIntentWritePendingIntentOrNullToParcel == nil {
+		if midPendingIntentWritePendingIntentOrNullToParcel == nil {
 			callErr = fmt.Errorf("android.app.PendingIntent.writePendingIntentOrNullToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallStaticVoidMethod(
-			(*jni.Class)(unsafe.Pointer(clspendingIntent)),
-			midpendingIntentWritePendingIntentOrNullToParcel, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsPendingIntent)),
+			midPendingIntentWritePendingIntentOrNullToParcel, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})

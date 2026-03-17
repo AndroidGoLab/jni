@@ -45,9 +45,9 @@ var (
 	midlightToString             jni.MethodID
 	midlightWriteToParcel        jni.MethodID
 
-	clslightsManager *jni.GlobalRef
+	clsManager *jni.GlobalRef
 
-	clslightsManagerLightsSession *jni.GlobalRef
+	clsManagerLightsSession *jni.GlobalRef
 )
 
 // initSkipped records methods that were not found during init.
@@ -248,13 +248,13 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.lights.LightsManager: %w", err)
 	}
-	clslightsManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/hardware/lights/LightsManager$LightsSession")
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.lights.LightsManager$LightsSession: %w", err)
 	}
-	clslightsManagerLightsSession = env.NewGlobalRef(&c.Object)
+	clsManagerLightsSession = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

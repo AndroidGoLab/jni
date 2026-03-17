@@ -27,7 +27,7 @@ else
   CC     := $(CC_AMD64)
 endif
 
-HANDLER_JAVA := $(shell find ../../internal/testjvm/testdata -name 'GoInvocationHandler.java' 2>/dev/null | head -1)
+HANDLER_DIR  := $(shell find ../../internal/testjvm/testdata -type d -name 'internal' -path '*/center/dx/jni/*' 2>/dev/null | head -1)
 BUILD_DIR    := build
 
 .PHONY: all build push run clean
@@ -36,12 +36,15 @@ all: run
 
 build: $(BUILD_DIR)/libe2etest.so $(BUILD_DIR)/classes.dex
 
-$(BUILD_DIR)/classes.dex: TestRunner.java $(HANDLER_JAVA)
+$(BUILD_DIR)/classes.dex: TestRunner.java
 	@mkdir -p $(BUILD_DIR)/center/dx/jni/internal
-	@cp $(HANDLER_JAVA) $(BUILD_DIR)/center/dx/jni/internal/
-	javac --release 17 -d $(BUILD_DIR) TestRunner.java $(BUILD_DIR)/center/dx/jni/internal/GoInvocationHandler.java
+	@cp $(HANDLER_DIR)/GoInvocationHandler.java $(BUILD_DIR)/center/dx/jni/internal/
+	@cp $(HANDLER_DIR)/GoAbstractDispatch.java $(BUILD_DIR)/center/dx/jni/internal/
+	javac --release 17 -d $(BUILD_DIR) TestRunner.java \
+		$(BUILD_DIR)/center/dx/jni/internal/GoInvocationHandler.java \
+		$(BUILD_DIR)/center/dx/jni/internal/GoAbstractDispatch.java
 	$(D8) --lib $(PLATFORM)/android.jar --output $(BUILD_DIR) \
-		$(BUILD_DIR)/TestRunner.class $(BUILD_DIR)/center/dx/jni/internal/GoInvocationHandler.class
+		$$(find $(BUILD_DIR) -name '*.class')
 
 $(BUILD_DIR)/libe2etest.so: e2e.go jni_onload.c
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=$(GOARCH) CC=$(CC) \

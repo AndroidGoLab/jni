@@ -20,55 +20,55 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsdisplayMetrics              *jni.GlobalRef
-	middisplayMetricsEquals1       jni.MethodID
-	middisplayMetricsEquals1_1     jni.MethodID
-	middisplayMetricsHashCode      jni.MethodID
-	middisplayMetricsSetTo         jni.MethodID
-	middisplayMetricsSetToDefaults jni.MethodID
-	middisplayMetricsToString      jni.MethodID
+	clsDisplayMetrics              *jni.GlobalRef
+	midDisplayMetricsEquals1       jni.MethodID
+	midDisplayMetricsEquals1_1     jni.MethodID
+	midDisplayMetricsHashCode      jni.MethodID
+	midDisplayMetricsSetTo         jni.MethodID
+	midDisplayMetricsSetToDefaults jni.MethodID
+	midDisplayMetricsToString      jni.MethodID
 
-	clsdisplay                                     *jni.GlobalRef
-	middisplayGetAppVsyncOffsetNanos               jni.MethodID
-	middisplayGetCurrentSizeRange                  jni.MethodID
-	middisplayGetCutout                            jni.MethodID
-	middisplayGetDeviceProductInfo                 jni.MethodID
-	middisplayGetDisplayId                         jni.MethodID
-	middisplayGetFlags                             jni.MethodID
-	middisplayGetHdrCapabilities                   jni.MethodID
-	middisplayGetHdrSdrRatio                       jni.MethodID
-	middisplayGetHeight                            jni.MethodID
-	middisplayGetHighestHdrSdrRatio                jni.MethodID
-	middisplayGetMetrics                           jni.MethodID
-	middisplayGetMode                              jni.MethodID
-	middisplayGetName                              jni.MethodID
-	middisplayGetOrientation                       jni.MethodID
-	middisplayGetOverlaySupport                    jni.MethodID
-	middisplayGetPixelFormat                       jni.MethodID
-	middisplayGetPreferredWideGamutColorSpace      jni.MethodID
-	middisplayGetPresentationDeadlineNanos         jni.MethodID
-	middisplayGetRealMetrics                       jni.MethodID
-	middisplayGetRealSize                          jni.MethodID
-	middisplayGetRectSize                          jni.MethodID
-	middisplayGetRefreshRate                       jni.MethodID
-	middisplayGetRotation                          jni.MethodID
-	middisplayGetRoundedCorner                     jni.MethodID
-	middisplayGetShape                             jni.MethodID
-	middisplayGetSize                              jni.MethodID
-	middisplayGetState                             jni.MethodID
-	middisplayGetSuggestedFrameRate                jni.MethodID
-	middisplayGetSupportedModes                    jni.MethodID
-	middisplayGetSupportedRefreshRates             jni.MethodID
-	middisplayGetWidth                             jni.MethodID
-	middisplayHasArrSupport                        jni.MethodID
-	middisplayIsHdr                                jni.MethodID
-	middisplayIsHdrSdrRatioAvailable               jni.MethodID
-	middisplayIsMinimalPostProcessingSupported     jni.MethodID
-	middisplayIsValid                              jni.MethodID
-	middisplayIsWideColorGamut                     jni.MethodID
-	middisplayRegisterHdrSdrRatioChangedListener   jni.MethodID
-	middisplayToString                             jni.MethodID
-	middisplayUnregisterHdrSdrRatioChangedListener jni.MethodID
+	clsDisplay                                     *jni.GlobalRef
+	midDisplayGetAppVsyncOffsetNanos               jni.MethodID
+	midDisplayGetCurrentSizeRange                  jni.MethodID
+	midDisplayGetCutout                            jni.MethodID
+	midDisplayGetDeviceProductInfo                 jni.MethodID
+	midDisplayGetDisplayId                         jni.MethodID
+	midDisplayGetFlags                             jni.MethodID
+	midDisplayGetHdrCapabilities                   jni.MethodID
+	midDisplayGetHdrSdrRatio                       jni.MethodID
+	midDisplayGetHeight                            jni.MethodID
+	midDisplayGetHighestHdrSdrRatio                jni.MethodID
+	midDisplayGetMetrics                           jni.MethodID
+	midDisplayGetMode                              jni.MethodID
+	midDisplayGetName                              jni.MethodID
+	midDisplayGetOrientation                       jni.MethodID
+	midDisplayGetOverlaySupport                    jni.MethodID
+	midDisplayGetPixelFormat                       jni.MethodID
+	midDisplayGetPreferredWideGamutColorSpace      jni.MethodID
+	midDisplayGetPresentationDeadlineNanos         jni.MethodID
+	midDisplayGetRealMetrics                       jni.MethodID
+	midDisplayGetRealSize                          jni.MethodID
+	midDisplayGetRectSize                          jni.MethodID
+	midDisplayGetRefreshRate                       jni.MethodID
+	midDisplayGetRotation                          jni.MethodID
+	midDisplayGetRoundedCorner                     jni.MethodID
+	midDisplayGetShape                             jni.MethodID
+	midDisplayGetSize                              jni.MethodID
+	midDisplayGetState                             jni.MethodID
+	midDisplayGetSuggestedFrameRate                jni.MethodID
+	midDisplayGetSupportedModes                    jni.MethodID
+	midDisplayGetSupportedRefreshRates             jni.MethodID
+	midDisplayGetWidth                             jni.MethodID
+	midDisplayHasArrSupport                        jni.MethodID
+	midDisplayIsHdr                                jni.MethodID
+	midDisplayIsHdrSdrRatioAvailable               jni.MethodID
+	midDisplayIsMinimalPostProcessingSupported     jni.MethodID
+	midDisplayIsValid                              jni.MethodID
+	midDisplayIsWideColorGamut                     jni.MethodID
+	midDisplayRegisterHdrSdrRatioChangedListener   jni.MethodID
+	midDisplayToString                             jni.MethodID
+	midDisplayUnregisterHdrSdrRatioChangedListener jni.MethodID
 
 	clswindowManager *jni.GlobalRef
 )
@@ -101,9 +101,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.util.DisplayMetrics: %w", err)
 	}
-	clsdisplayMetrics = env.NewGlobalRef(&c.Object)
+	clsDisplayMetrics = env.NewGlobalRef(&c.Object)
 
-	middisplayMetricsEquals1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "equals", "(Landroid/util/DisplayMetrics;)Z")
+	midDisplayMetricsEquals1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayMetrics)), "equals", "(Landroid/util/DisplayMetrics;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -111,7 +111,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.util.DisplayMetrics.equals")
 	}
 
-	middisplayMetricsEquals1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "equals", "(Ljava/lang/Object;)Z")
+	midDisplayMetricsEquals1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayMetrics)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -119,7 +119,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.util.DisplayMetrics.equals")
 	}
 
-	middisplayMetricsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "hashCode", "()I")
+	midDisplayMetricsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayMetrics)), "hashCode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -127,7 +127,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.util.DisplayMetrics.hashCode")
 	}
 
-	middisplayMetricsSetTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "setTo", "(Landroid/util/DisplayMetrics;)V")
+	midDisplayMetricsSetTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayMetrics)), "setTo", "(Landroid/util/DisplayMetrics;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -135,7 +135,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.util.DisplayMetrics.setTo")
 	}
 
-	middisplayMetricsSetToDefaults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "setToDefaults", "()V")
+	midDisplayMetricsSetToDefaults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayMetrics)), "setToDefaults", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -143,7 +143,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.util.DisplayMetrics.setToDefaults")
 	}
 
-	middisplayMetricsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "toString", "()Ljava/lang/String;")
+	midDisplayMetricsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayMetrics)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -155,9 +155,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.view.Display: %w", err)
 	}
-	clsdisplay = env.NewGlobalRef(&c.Object)
+	clsDisplay = env.NewGlobalRef(&c.Object)
 
-	middisplayGetAppVsyncOffsetNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getAppVsyncOffsetNanos", "()J")
+	midDisplayGetAppVsyncOffsetNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getAppVsyncOffsetNanos", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -165,7 +165,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getAppVsyncOffsetNanos")
 	}
 
-	middisplayGetCurrentSizeRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getCurrentSizeRange", "(Landroid/graphics/Point;Landroid/graphics/Point;)V")
+	midDisplayGetCurrentSizeRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getCurrentSizeRange", "(Landroid/graphics/Point;Landroid/graphics/Point;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -173,7 +173,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getCurrentSizeRange")
 	}
 
-	middisplayGetCutout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getCutout", "()Landroid/view/DisplayCutout;")
+	midDisplayGetCutout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getCutout", "()Landroid/view/DisplayCutout;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -181,7 +181,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getCutout")
 	}
 
-	middisplayGetDeviceProductInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getDeviceProductInfo", "()Landroid/hardware/display/DeviceProductInfo;")
+	midDisplayGetDeviceProductInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getDeviceProductInfo", "()Landroid/hardware/display/DeviceProductInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -189,7 +189,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getDeviceProductInfo")
 	}
 
-	middisplayGetDisplayId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getDisplayId", "()I")
+	midDisplayGetDisplayId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getDisplayId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -197,7 +197,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getDisplayId")
 	}
 
-	middisplayGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getFlags", "()I")
+	midDisplayGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getFlags", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -205,7 +205,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getFlags")
 	}
 
-	middisplayGetHdrCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHdrCapabilities", "()Landroid/view/Display$HdrCapabilities;")
+	midDisplayGetHdrCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHdrCapabilities", "()Landroid/view/Display$HdrCapabilities;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -213,7 +213,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getHdrCapabilities")
 	}
 
-	middisplayGetHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHdrSdrRatio", "()F")
+	midDisplayGetHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHdrSdrRatio", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -221,7 +221,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getHdrSdrRatio")
 	}
 
-	middisplayGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHeight", "()I")
+	midDisplayGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHeight", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -229,7 +229,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getHeight")
 	}
 
-	middisplayGetHighestHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHighestHdrSdrRatio", "()F")
+	midDisplayGetHighestHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHighestHdrSdrRatio", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -237,7 +237,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getHighestHdrSdrRatio")
 	}
 
-	middisplayGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getMetrics", "(Landroid/util/DisplayMetrics;)V")
+	midDisplayGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getMetrics", "(Landroid/util/DisplayMetrics;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -245,7 +245,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getMetrics")
 	}
 
-	middisplayGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getMode", "()Landroid/view/Display$Mode;")
+	midDisplayGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getMode", "()Landroid/view/Display$Mode;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -253,7 +253,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getMode")
 	}
 
-	middisplayGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getName", "()Ljava/lang/String;")
+	midDisplayGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -261,7 +261,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getName")
 	}
 
-	middisplayGetOrientation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getOrientation", "()I")
+	midDisplayGetOrientation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getOrientation", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -269,7 +269,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getOrientation")
 	}
 
-	middisplayGetOverlaySupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getOverlaySupport", "()Landroid/hardware/OverlayProperties;")
+	midDisplayGetOverlaySupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getOverlaySupport", "()Landroid/hardware/OverlayProperties;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -277,7 +277,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getOverlaySupport")
 	}
 
-	middisplayGetPixelFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getPixelFormat", "()I")
+	midDisplayGetPixelFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPixelFormat", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -285,7 +285,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getPixelFormat")
 	}
 
-	middisplayGetPreferredWideGamutColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getPreferredWideGamutColorSpace", "()Landroid/graphics/ColorSpace;")
+	midDisplayGetPreferredWideGamutColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPreferredWideGamutColorSpace", "()Landroid/graphics/ColorSpace;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -293,7 +293,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getPreferredWideGamutColorSpace")
 	}
 
-	middisplayGetPresentationDeadlineNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getPresentationDeadlineNanos", "()J")
+	midDisplayGetPresentationDeadlineNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPresentationDeadlineNanos", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -301,7 +301,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getPresentationDeadlineNanos")
 	}
 
-	middisplayGetRealMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRealMetrics", "(Landroid/util/DisplayMetrics;)V")
+	midDisplayGetRealMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRealMetrics", "(Landroid/util/DisplayMetrics;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -309,7 +309,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getRealMetrics")
 	}
 
-	middisplayGetRealSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRealSize", "(Landroid/graphics/Point;)V")
+	midDisplayGetRealSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRealSize", "(Landroid/graphics/Point;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -317,7 +317,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getRealSize")
 	}
 
-	middisplayGetRectSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRectSize", "(Landroid/graphics/Rect;)V")
+	midDisplayGetRectSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRectSize", "(Landroid/graphics/Rect;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -325,7 +325,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getRectSize")
 	}
 
-	middisplayGetRefreshRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRefreshRate", "()F")
+	midDisplayGetRefreshRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRefreshRate", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -333,7 +333,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getRefreshRate")
 	}
 
-	middisplayGetRotation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRotation", "()I")
+	midDisplayGetRotation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRotation", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -341,7 +341,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getRotation")
 	}
 
-	middisplayGetRoundedCorner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRoundedCorner", "(I)Landroid/view/RoundedCorner;")
+	midDisplayGetRoundedCorner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRoundedCorner", "(I)Landroid/view/RoundedCorner;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -349,7 +349,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getRoundedCorner")
 	}
 
-	middisplayGetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getShape", "()Landroid/view/DisplayShape;")
+	midDisplayGetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getShape", "()Landroid/view/DisplayShape;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -357,7 +357,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getShape")
 	}
 
-	middisplayGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSize", "(Landroid/graphics/Point;)V")
+	midDisplayGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSize", "(Landroid/graphics/Point;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -365,7 +365,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getSize")
 	}
 
-	middisplayGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getState", "()I")
+	midDisplayGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getState", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -373,7 +373,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getState")
 	}
 
-	middisplayGetSuggestedFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSuggestedFrameRate", "(I)F")
+	midDisplayGetSuggestedFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSuggestedFrameRate", "(I)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -381,7 +381,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getSuggestedFrameRate")
 	}
 
-	middisplayGetSupportedModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSupportedModes", "()[Landroid/view/Display$Mode;")
+	midDisplayGetSupportedModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSupportedModes", "()[Landroid/view/Display$Mode;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -389,7 +389,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getSupportedModes")
 	}
 
-	middisplayGetSupportedRefreshRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSupportedRefreshRates", "()[F")
+	midDisplayGetSupportedRefreshRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSupportedRefreshRates", "()[F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -397,7 +397,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getSupportedRefreshRates")
 	}
 
-	middisplayGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getWidth", "()I")
+	midDisplayGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getWidth", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -405,7 +405,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.getWidth")
 	}
 
-	middisplayHasArrSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "hasArrSupport", "()Z")
+	midDisplayHasArrSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "hasArrSupport", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -413,7 +413,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.hasArrSupport")
 	}
 
-	middisplayIsHdr, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isHdr", "()Z")
+	midDisplayIsHdr, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isHdr", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -421,7 +421,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.isHdr")
 	}
 
-	middisplayIsHdrSdrRatioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isHdrSdrRatioAvailable", "()Z")
+	midDisplayIsHdrSdrRatioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isHdrSdrRatioAvailable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -429,7 +429,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.isHdrSdrRatioAvailable")
 	}
 
-	middisplayIsMinimalPostProcessingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isMinimalPostProcessingSupported", "()Z")
+	midDisplayIsMinimalPostProcessingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isMinimalPostProcessingSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -437,7 +437,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.isMinimalPostProcessingSupported")
 	}
 
-	middisplayIsValid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isValid", "()Z")
+	midDisplayIsValid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isValid", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -445,7 +445,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.isValid")
 	}
 
-	middisplayIsWideColorGamut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isWideColorGamut", "()Z")
+	midDisplayIsWideColorGamut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isWideColorGamut", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -453,7 +453,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.isWideColorGamut")
 	}
 
-	middisplayRegisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "registerHdrSdrRatioChangedListener", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midDisplayRegisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "registerHdrSdrRatioChangedListener", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -461,7 +461,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.registerHdrSdrRatioChangedListener")
 	}
 
-	middisplayToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "toString", "()Ljava/lang/String;")
+	midDisplayToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -469,7 +469,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.view.Display.toString")
 	}
 
-	middisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer;)V")
+	midDisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

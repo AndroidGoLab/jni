@@ -2,7 +2,7 @@ package: role
 go_import: github.com/AndroidGoLab/jni/app/role
 classes:
     - java_class: android.app.role.RoleManager
-      go_type: roleManager
+      go_type: Manager
       obtain: system_service
       service_name: role
       close: true

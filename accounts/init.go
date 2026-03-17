@@ -20,38 +20,38 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsaccountManager                                *jni.GlobalRef
-	midaccountManagerAddAccountExplicitly3           jni.MethodID
-	midaccountManagerAddAccountExplicitly4_1         jni.MethodID
-	midaccountManagerBlockingGetAuthToken            jni.MethodID
-	midaccountManagerClearPassword                   jni.MethodID
-	midaccountManagerGetAccountVisibility            jni.MethodID
-	midaccountManagerGetAccounts                     jni.MethodID
-	midaccountManagerGetAccountsByType               jni.MethodID
-	midaccountManagerGetAccountsByTypeForPackage     jni.MethodID
-	midaccountManagerGetAuthenticatorTypes           jni.MethodID
-	midaccountManagerGetPassword                     jni.MethodID
-	midaccountManagerGetPreviousName                 jni.MethodID
-	midaccountManagerGetUserData                     jni.MethodID
-	midaccountManagerInvalidateAuthToken             jni.MethodID
-	midaccountManagerNotifyAccountAuthenticated      jni.MethodID
-	midaccountManagerPeekAuthToken                   jni.MethodID
-	midaccountManagerRemoveAccountExplicitly         jni.MethodID
-	midaccountManagerRemoveOnAccountsUpdatedListener jni.MethodID
-	midaccountManagerSetAccountVisibility            jni.MethodID
-	midaccountManagerSetAuthToken                    jni.MethodID
-	midaccountManagerSetPassword                     jni.MethodID
-	midaccountManagerSetUserData                     jni.MethodID
-	midaccountManagerGet                             jni.MethodID
-	midaccountManagerNewChooseAccountIntent8         jni.MethodID
-	midaccountManagerNewChooseAccountIntent7_1       jni.MethodID
+	clsManager                                *jni.GlobalRef
+	midManagerAddAccountExplicitly3           jni.MethodID
+	midManagerAddAccountExplicitly4_1         jni.MethodID
+	midManagerBlockingGetAuthToken            jni.MethodID
+	midManagerClearPassword                   jni.MethodID
+	midManagerGetAccountVisibility            jni.MethodID
+	midManagerGetAccounts                     jni.MethodID
+	midManagerGetAccountsByType               jni.MethodID
+	midManagerGetAccountsByTypeForPackage     jni.MethodID
+	midManagerGetAuthenticatorTypes           jni.MethodID
+	midManagerGetPassword                     jni.MethodID
+	midManagerGetPreviousName                 jni.MethodID
+	midManagerGetUserData                     jni.MethodID
+	midManagerInvalidateAuthToken             jni.MethodID
+	midManagerNotifyAccountAuthenticated      jni.MethodID
+	midManagerPeekAuthToken                   jni.MethodID
+	midManagerRemoveAccountExplicitly         jni.MethodID
+	midManagerRemoveOnAccountsUpdatedListener jni.MethodID
+	midManagerSetAccountVisibility            jni.MethodID
+	midManagerSetAuthToken                    jni.MethodID
+	midManagerSetPassword                     jni.MethodID
+	midManagerSetUserData                     jni.MethodID
+	midManagerGet                             jni.MethodID
+	midManagerNewChooseAccountIntent8         jni.MethodID
+	midManagerNewChooseAccountIntent7_1       jni.MethodID
 
-	clsaccount                 *jni.GlobalRef
-	midaccountDescribeContents jni.MethodID
-	midaccountEquals           jni.MethodID
-	midaccountHashCode         jni.MethodID
-	midaccountToString         jni.MethodID
-	midaccountWriteToParcel    jni.MethodID
+	clsAccount                 *jni.GlobalRef
+	midAccountDescribeContents jni.MethodID
+	midAccountEquals           jni.MethodID
+	midAccountHashCode         jni.MethodID
+	midAccountToString         jni.MethodID
+	midAccountWriteToParcel    jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -82,9 +82,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.accounts.AccountManager: %w", err)
 	}
-	clsaccountManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midaccountManagerAddAccountExplicitly3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "addAccountExplicitly", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Z")
+	midManagerAddAccountExplicitly3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addAccountExplicitly", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -92,7 +92,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.addAccountExplicitly")
 	}
 
-	midaccountManagerAddAccountExplicitly4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "addAccountExplicitly", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;Ljava/util/Map;)Z")
+	midManagerAddAccountExplicitly4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addAccountExplicitly", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;Ljava/util/Map;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -100,7 +100,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.addAccountExplicitly")
 	}
 
-	midaccountManagerBlockingGetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "blockingGetAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Z)Ljava/lang/String;")
+	midManagerBlockingGetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "blockingGetAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Z)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -108,7 +108,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.blockingGetAuthToken")
 	}
 
-	midaccountManagerClearPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "clearPassword", "(Landroid/accounts/Account;)V")
+	midManagerClearPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearPassword", "(Landroid/accounts/Account;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -116,7 +116,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.clearPassword")
 	}
 
-	midaccountManagerGetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;)I")
+	midManagerGetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -124,7 +124,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccountVisibility")
 	}
 
-	midaccountManagerGetAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getAccounts", "()[Landroid/accounts/Account;")
+	midManagerGetAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAccounts", "()[Landroid/accounts/Account;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -132,7 +132,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccounts")
 	}
 
-	midaccountManagerGetAccountsByType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getAccountsByType", "(Ljava/lang/String;)[Landroid/accounts/Account;")
+	midManagerGetAccountsByType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAccountsByType", "(Ljava/lang/String;)[Landroid/accounts/Account;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -140,7 +140,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccountsByType")
 	}
 
-	midaccountManagerGetAccountsByTypeForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getAccountsByTypeForPackage", "(Ljava/lang/String;Ljava/lang/String;)[Landroid/accounts/Account;")
+	midManagerGetAccountsByTypeForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAccountsByTypeForPackage", "(Ljava/lang/String;Ljava/lang/String;)[Landroid/accounts/Account;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -148,7 +148,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccountsByTypeForPackage")
 	}
 
-	midaccountManagerGetAuthenticatorTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getAuthenticatorTypes", "()[Landroid/accounts/AuthenticatorDescription;")
+	midManagerGetAuthenticatorTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAuthenticatorTypes", "()[Landroid/accounts/AuthenticatorDescription;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -156,7 +156,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAuthenticatorTypes")
 	}
 
-	midaccountManagerGetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getPassword", "(Landroid/accounts/Account;)Ljava/lang/String;")
+	midManagerGetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPassword", "(Landroid/accounts/Account;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -164,7 +164,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getPassword")
 	}
 
-	midaccountManagerGetPreviousName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getPreviousName", "(Landroid/accounts/Account;)Ljava/lang/String;")
+	midManagerGetPreviousName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPreviousName", "(Landroid/accounts/Account;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -172,7 +172,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getPreviousName")
 	}
 
-	midaccountManagerGetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "getUserData", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
+	midManagerGetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getUserData", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -180,7 +180,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.getUserData")
 	}
 
-	midaccountManagerInvalidateAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "invalidateAuthToken", "(Ljava/lang/String;Ljava/lang/String;)V")
+	midManagerInvalidateAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "invalidateAuthToken", "(Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -188,7 +188,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.invalidateAuthToken")
 	}
 
-	midaccountManagerNotifyAccountAuthenticated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "notifyAccountAuthenticated", "(Landroid/accounts/Account;)Z")
+	midManagerNotifyAccountAuthenticated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "notifyAccountAuthenticated", "(Landroid/accounts/Account;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -196,7 +196,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.notifyAccountAuthenticated")
 	}
 
-	midaccountManagerPeekAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "peekAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
+	midManagerPeekAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "peekAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -204,7 +204,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.peekAuthToken")
 	}
 
-	midaccountManagerRemoveAccountExplicitly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "removeAccountExplicitly", "(Landroid/accounts/Account;)Z")
+	midManagerRemoveAccountExplicitly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeAccountExplicitly", "(Landroid/accounts/Account;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -212,7 +212,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.removeAccountExplicitly")
 	}
 
-	midaccountManagerRemoveOnAccountsUpdatedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "removeOnAccountsUpdatedListener", "(Landroid/accounts/OnAccountsUpdateListener;)V")
+	midManagerRemoveOnAccountsUpdatedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeOnAccountsUpdatedListener", "(Landroid/accounts/OnAccountsUpdateListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -220,7 +220,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.removeOnAccountsUpdatedListener")
 	}
 
-	midaccountManagerSetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "setAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;I)Z")
+	midManagerSetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -228,7 +228,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.setAccountVisibility")
 	}
 
-	midaccountManagerSetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "setAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
+	midManagerSetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -236,7 +236,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.setAuthToken")
 	}
 
-	midaccountManagerSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "setPassword", "(Landroid/accounts/Account;Ljava/lang/String;)V")
+	midManagerSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setPassword", "(Landroid/accounts/Account;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -244,7 +244,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.setPassword")
 	}
 
-	midaccountManagerSetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "setUserData", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
+	midManagerSetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setUserData", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -252,7 +252,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.setUserData")
 	}
 
-	midaccountManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "get", "(Landroid/content/Context;)Landroid/accounts/AccountManager;")
+	midManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "get", "(Landroid/content/Context;)Landroid/accounts/AccountManager;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -260,7 +260,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.get")
 	}
 
-	midaccountManagerNewChooseAccountIntent8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "newChooseAccountIntent", "(Landroid/accounts/Account;Ljava/util/ArrayList;[Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
+	midManagerNewChooseAccountIntent8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "newChooseAccountIntent", "(Landroid/accounts/Account;Ljava/util/ArrayList;[Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -268,7 +268,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.AccountManager.newChooseAccountIntent")
 	}
 
-	midaccountManagerNewChooseAccountIntent7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaccountManager)), "newChooseAccountIntent", "(Landroid/accounts/Account;Ljava/util/List;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
+	midManagerNewChooseAccountIntent7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "newChooseAccountIntent", "(Landroid/accounts/Account;Ljava/util/List;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -280,9 +280,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.accounts.Account: %w", err)
 	}
-	clsaccount = env.NewGlobalRef(&c.Object)
+	clsAccount = env.NewGlobalRef(&c.Object)
 
-	midaccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "describeContents", "()I")
+	midAccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -290,7 +290,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.Account.describeContents")
 	}
 
-	midaccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "equals", "(Ljava/lang/Object;)Z")
+	midAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -298,7 +298,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.Account.equals")
 	}
 
-	midaccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "hashCode", "()I")
+	midAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "hashCode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -306,7 +306,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.Account.hashCode")
 	}
 
-	midaccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "toString", "()Ljava/lang/String;")
+	midAccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -314,7 +314,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.accounts.Account.toString")
 	}
 
-	midaccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

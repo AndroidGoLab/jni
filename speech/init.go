@@ -20,63 +20,63 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsspeechRecognizer                               *jni.GlobalRef
-	midspeechRecognizerCancel                         jni.MethodID
-	midspeechRecognizerCheckRecognitionSupport        jni.MethodID
-	midspeechRecognizerDestroy                        jni.MethodID
-	midspeechRecognizerSetRecognitionListener         jni.MethodID
-	midspeechRecognizerStartListening                 jni.MethodID
-	midspeechRecognizerStopListening                  jni.MethodID
-	midspeechRecognizerTriggerModelDownload1          jni.MethodID
-	midspeechRecognizerTriggerModelDownload3_1        jni.MethodID
-	midspeechRecognizerCreateOnDeviceSpeechRecognizer jni.MethodID
-	midspeechRecognizerCreateSpeechRecognizer1        jni.MethodID
-	midspeechRecognizerCreateSpeechRecognizer2_1      jni.MethodID
-	midspeechRecognizerIsOnDeviceRecognitionAvailable jni.MethodID
-	midspeechRecognizerIsRecognitionAvailable         jni.MethodID
+	clsRecognizer                               *jni.GlobalRef
+	midRecognizerCancel                         jni.MethodID
+	midRecognizerCheckRecognitionSupport        jni.MethodID
+	midRecognizerDestroy                        jni.MethodID
+	midRecognizerSetRecognitionListener         jni.MethodID
+	midRecognizerStartListening                 jni.MethodID
+	midRecognizerStopListening                  jni.MethodID
+	midRecognizerTriggerModelDownload1          jni.MethodID
+	midRecognizerTriggerModelDownload3_1        jni.MethodID
+	midRecognizerCreateOnDeviceSpeechRecognizer jni.MethodID
+	midRecognizerCreateSpeechRecognizer1        jni.MethodID
+	midRecognizerCreateSpeechRecognizer2_1      jni.MethodID
+	midRecognizerIsOnDeviceRecognitionAvailable jni.MethodID
+	midRecognizerIsRecognitionAvailable         jni.MethodID
 
-	clstextToSpeech                                *jni.GlobalRef
-	midtextToSpeechAddEarcon2                      jni.MethodID
-	midtextToSpeechAddEarcon2_1                    jni.MethodID
-	midtextToSpeechAddEarcon2_2                    jni.MethodID
-	midtextToSpeechAddEarcon3_3                    jni.MethodID
-	midtextToSpeechAddSpeech2                      jni.MethodID
-	midtextToSpeechAddSpeech2_1                    jni.MethodID
-	midtextToSpeechAddSpeech3_2                    jni.MethodID
-	midtextToSpeechAddSpeech2_3                    jni.MethodID
-	midtextToSpeechAddSpeech3_4                    jni.MethodID
-	midtextToSpeechAreDefaultsEnforced             jni.MethodID
-	midtextToSpeechGetAvailableLanguages           jni.MethodID
-	midtextToSpeechGetDefaultEngine                jni.MethodID
-	midtextToSpeechGetDefaultLanguage              jni.MethodID
-	midtextToSpeechGetDefaultVoice                 jni.MethodID
-	midtextToSpeechGetEngines                      jni.MethodID
-	midtextToSpeechGetFeatures                     jni.MethodID
-	midtextToSpeechGetLanguage                     jni.MethodID
-	midtextToSpeechGetVoice                        jni.MethodID
-	midtextToSpeechGetVoices                       jni.MethodID
-	midtextToSpeechIsLanguageAvailable             jni.MethodID
-	midtextToSpeechIsSpeaking                      jni.MethodID
-	midtextToSpeechPlayEarcon4                     jni.MethodID
-	midtextToSpeechPlayEarcon3_1                   jni.MethodID
-	midtextToSpeechPlaySilence                     jni.MethodID
-	midtextToSpeechPlaySilentUtterance             jni.MethodID
-	midtextToSpeechSetAudioAttributes              jni.MethodID
-	midtextToSpeechSetEngineByPackageName          jni.MethodID
-	midtextToSpeechSetLanguage                     jni.MethodID
-	midtextToSpeechSetOnUtteranceCompletedListener jni.MethodID
-	midtextToSpeechSetOnUtteranceProgressListener  jni.MethodID
-	midtextToSpeechSetPitch                        jni.MethodID
-	midtextToSpeechSetSpeechRate                   jni.MethodID
-	midtextToSpeechSetVoice                        jni.MethodID
-	midtextToSpeechShutdown                        jni.MethodID
-	midtextToSpeechSpeak4                          jni.MethodID
-	midtextToSpeechSpeak3_1                        jni.MethodID
-	midtextToSpeechStop                            jni.MethodID
-	midtextToSpeechSynthesizeToFile4               jni.MethodID
-	midtextToSpeechSynthesizeToFile4_1             jni.MethodID
-	midtextToSpeechSynthesizeToFile3_2             jni.MethodID
-	midtextToSpeechGetMaxSpeechInputLength         jni.MethodID
+	clsTTS                                *jni.GlobalRef
+	midTTSAddEarcon2                      jni.MethodID
+	midTTSAddEarcon2_1                    jni.MethodID
+	midTTSAddEarcon2_2                    jni.MethodID
+	midTTSAddEarcon3_3                    jni.MethodID
+	midTTSAddSpeech2                      jni.MethodID
+	midTTSAddSpeech2_1                    jni.MethodID
+	midTTSAddSpeech3_2                    jni.MethodID
+	midTTSAddSpeech2_3                    jni.MethodID
+	midTTSAddSpeech3_4                    jni.MethodID
+	midTTSAreDefaultsEnforced             jni.MethodID
+	midTTSGetAvailableLanguages           jni.MethodID
+	midTTSGetDefaultEngine                jni.MethodID
+	midTTSGetDefaultLanguage              jni.MethodID
+	midTTSGetDefaultVoice                 jni.MethodID
+	midTTSGetEngines                      jni.MethodID
+	midTTSGetFeatures                     jni.MethodID
+	midTTSGetLanguage                     jni.MethodID
+	midTTSGetVoice                        jni.MethodID
+	midTTSGetVoices                       jni.MethodID
+	midTTSIsLanguageAvailable             jni.MethodID
+	midTTSIsSpeaking                      jni.MethodID
+	midTTSPlayEarcon4                     jni.MethodID
+	midTTSPlayEarcon3_1                   jni.MethodID
+	midTTSPlaySilence                     jni.MethodID
+	midTTSPlaySilentUtterance             jni.MethodID
+	midTTSSetAudioAttributes              jni.MethodID
+	midTTSSetEngineByPackageName          jni.MethodID
+	midTTSSetLanguage                     jni.MethodID
+	midTTSSetOnUtteranceCompletedListener jni.MethodID
+	midTTSSetOnUtteranceProgressListener  jni.MethodID
+	midTTSSetPitch                        jni.MethodID
+	midTTSSetSpeechRate                   jni.MethodID
+	midTTSSetVoice                        jni.MethodID
+	midTTSShutdown                        jni.MethodID
+	midTTSSpeak4                          jni.MethodID
+	midTTSSpeak3_1                        jni.MethodID
+	midTTSStop                            jni.MethodID
+	midTTSSynthesizeToFile4               jni.MethodID
+	midTTSSynthesizeToFile4_1             jni.MethodID
+	midTTSSynthesizeToFile3_2             jni.MethodID
+	midTTSGetMaxSpeechInputLength         jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -107,9 +107,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.speech.SpeechRecognizer: %w", err)
 	}
-	clsspeechRecognizer = env.NewGlobalRef(&c.Object)
+	clsRecognizer = env.NewGlobalRef(&c.Object)
 
-	midspeechRecognizerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "cancel", "()V")
+	midRecognizerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "cancel", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -117,7 +117,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.cancel")
 	}
 
-	midspeechRecognizerCheckRecognitionSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "checkRecognitionSupport", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/RecognitionSupportCallback;)V")
+	midRecognizerCheckRecognitionSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "checkRecognitionSupport", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/RecognitionSupportCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -125,7 +125,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.checkRecognitionSupport")
 	}
 
-	midspeechRecognizerDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "destroy", "()V")
+	midRecognizerDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "destroy", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -133,7 +133,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.destroy")
 	}
 
-	midspeechRecognizerSetRecognitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "setRecognitionListener", "(Landroid/speech/RecognitionListener;)V")
+	midRecognizerSetRecognitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "setRecognitionListener", "(Landroid/speech/RecognitionListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -141,7 +141,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.setRecognitionListener")
 	}
 
-	midspeechRecognizerStartListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "startListening", "(Landroid/content/Intent;)V")
+	midRecognizerStartListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "startListening", "(Landroid/content/Intent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -149,7 +149,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.startListening")
 	}
 
-	midspeechRecognizerStopListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "stopListening", "()V")
+	midRecognizerStopListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "stopListening", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -157,7 +157,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.stopListening")
 	}
 
-	midspeechRecognizerTriggerModelDownload1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;)V")
+	midRecognizerTriggerModelDownload1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -165,7 +165,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.triggerModelDownload")
 	}
 
-	midspeechRecognizerTriggerModelDownload3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/ModelDownloadListener;)V")
+	midRecognizerTriggerModelDownload3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/ModelDownloadListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -173,7 +173,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.triggerModelDownload")
 	}
 
-	midspeechRecognizerCreateOnDeviceSpeechRecognizer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createOnDeviceSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
+	midRecognizerCreateOnDeviceSpeechRecognizer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "createOnDeviceSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -181,7 +181,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.createOnDeviceSpeechRecognizer")
 	}
 
-	midspeechRecognizerCreateSpeechRecognizer1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
+	midRecognizerCreateSpeechRecognizer1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -189,7 +189,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.createSpeechRecognizer")
 	}
 
-	midspeechRecognizerCreateSpeechRecognizer2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;Landroid/content/ComponentName;)Landroid/speech/SpeechRecognizer;")
+	midRecognizerCreateSpeechRecognizer2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;Landroid/content/ComponentName;)Landroid/speech/SpeechRecognizer;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -197,7 +197,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.createSpeechRecognizer")
 	}
 
-	midspeechRecognizerIsOnDeviceRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "isOnDeviceRecognitionAvailable", "(Landroid/content/Context;)Z")
+	midRecognizerIsOnDeviceRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "isOnDeviceRecognitionAvailable", "(Landroid/content/Context;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -205,7 +205,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.isOnDeviceRecognitionAvailable")
 	}
 
-	midspeechRecognizerIsRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "isRecognitionAvailable", "(Landroid/content/Context;)Z")
+	midRecognizerIsRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "isRecognitionAvailable", "(Landroid/content/Context;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -217,9 +217,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.speech.tts.TextToSpeech: %w", err)
 	}
-	clstextToSpeech = env.NewGlobalRef(&c.Object)
+	clsTTS = env.NewGlobalRef(&c.Object)
 
-	midtextToSpeechAddEarcon2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addEarcon", "(Ljava/lang/String;Landroid/net/Uri;)I")
+	midTTSAddEarcon2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addEarcon", "(Ljava/lang/String;Landroid/net/Uri;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -227,7 +227,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addEarcon")
 	}
 
-	midtextToSpeechAddEarcon2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addEarcon", "(Ljava/lang/String;Ljava/io/File;)I")
+	midTTSAddEarcon2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addEarcon", "(Ljava/lang/String;Ljava/io/File;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -235,7 +235,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addEarcon")
 	}
 
-	midtextToSpeechAddEarcon2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addEarcon", "(Ljava/lang/String;Ljava/lang/String;)I")
+	midTTSAddEarcon2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addEarcon", "(Ljava/lang/String;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -243,7 +243,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addEarcon")
 	}
 
-	midtextToSpeechAddEarcon3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addEarcon", "(Ljava/lang/String;Ljava/lang/String;I)I")
+	midTTSAddEarcon3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addEarcon", "(Ljava/lang/String;Ljava/lang/String;I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -251,7 +251,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addEarcon")
 	}
 
-	midtextToSpeechAddSpeech2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addSpeech", "(Ljava/lang/String;Landroid/net/Uri;)I")
+	midTTSAddSpeech2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addSpeech", "(Ljava/lang/String;Landroid/net/Uri;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -259,7 +259,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addSpeech")
 	}
 
-	midtextToSpeechAddSpeech2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addSpeech", "(Ljava/lang/String;Ljava/io/File;)I")
+	midTTSAddSpeech2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addSpeech", "(Ljava/lang/String;Ljava/io/File;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -267,7 +267,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addSpeech")
 	}
 
-	midtextToSpeechAddSpeech3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addSpeech", "(Ljava/lang/String;Ljava/lang/String;I)I")
+	midTTSAddSpeech3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addSpeech", "(Ljava/lang/String;Ljava/lang/String;I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -275,7 +275,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addSpeech")
 	}
 
-	midtextToSpeechAddSpeech2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addSpeech", "(Ljava/lang/String;Ljava/lang/String;)I")
+	midTTSAddSpeech2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addSpeech", "(Ljava/lang/String;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -283,7 +283,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addSpeech")
 	}
 
-	midtextToSpeechAddSpeech3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "addSpeech", "(Ljava/lang/String;Ljava/lang/String;I)I")
+	midTTSAddSpeech3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "addSpeech", "(Ljava/lang/String;Ljava/lang/String;I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -291,7 +291,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.addSpeech")
 	}
 
-	midtextToSpeechAreDefaultsEnforced, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "areDefaultsEnforced", "()Z")
+	midTTSAreDefaultsEnforced, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "areDefaultsEnforced", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -299,7 +299,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.areDefaultsEnforced")
 	}
 
-	midtextToSpeechGetAvailableLanguages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getAvailableLanguages", "()Ljava/util/Set;")
+	midTTSGetAvailableLanguages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getAvailableLanguages", "()Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -307,7 +307,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getAvailableLanguages")
 	}
 
-	midtextToSpeechGetDefaultEngine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getDefaultEngine", "()Ljava/lang/String;")
+	midTTSGetDefaultEngine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getDefaultEngine", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -315,7 +315,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getDefaultEngine")
 	}
 
-	midtextToSpeechGetDefaultLanguage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getDefaultLanguage", "()Ljava/util/Locale;")
+	midTTSGetDefaultLanguage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getDefaultLanguage", "()Ljava/util/Locale;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -323,7 +323,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getDefaultLanguage")
 	}
 
-	midtextToSpeechGetDefaultVoice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getDefaultVoice", "()Landroid/speech/tts/Voice;")
+	midTTSGetDefaultVoice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getDefaultVoice", "()Landroid/speech/tts/Voice;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -331,7 +331,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getDefaultVoice")
 	}
 
-	midtextToSpeechGetEngines, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getEngines", "()Ljava/util/List;")
+	midTTSGetEngines, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getEngines", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -339,7 +339,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getEngines")
 	}
 
-	midtextToSpeechGetFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getFeatures", "(Ljava/util/Locale;)Ljava/util/Set;")
+	midTTSGetFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getFeatures", "(Ljava/util/Locale;)Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -347,7 +347,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getFeatures")
 	}
 
-	midtextToSpeechGetLanguage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getLanguage", "()Ljava/util/Locale;")
+	midTTSGetLanguage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getLanguage", "()Ljava/util/Locale;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -355,7 +355,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getLanguage")
 	}
 
-	midtextToSpeechGetVoice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getVoice", "()Landroid/speech/tts/Voice;")
+	midTTSGetVoice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getVoice", "()Landroid/speech/tts/Voice;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -363,7 +363,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getVoice")
 	}
 
-	midtextToSpeechGetVoices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getVoices", "()Ljava/util/Set;")
+	midTTSGetVoices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getVoices", "()Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -371,7 +371,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getVoices")
 	}
 
-	midtextToSpeechIsLanguageAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "isLanguageAvailable", "(Ljava/util/Locale;)I")
+	midTTSIsLanguageAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "isLanguageAvailable", "(Ljava/util/Locale;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -379,7 +379,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.isLanguageAvailable")
 	}
 
-	midtextToSpeechIsSpeaking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "isSpeaking", "()Z")
+	midTTSIsSpeaking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "isSpeaking", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -387,7 +387,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.isSpeaking")
 	}
 
-	midtextToSpeechPlayEarcon4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "playEarcon", "(Ljava/lang/String;ILandroid/os/Bundle;Ljava/lang/String;)I")
+	midTTSPlayEarcon4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "playEarcon", "(Ljava/lang/String;ILandroid/os/Bundle;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -395,7 +395,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.playEarcon")
 	}
 
-	midtextToSpeechPlayEarcon3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "playEarcon", "(Ljava/lang/String;ILjava/util/HashMap;)I")
+	midTTSPlayEarcon3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "playEarcon", "(Ljava/lang/String;ILjava/util/HashMap;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -403,7 +403,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.playEarcon")
 	}
 
-	midtextToSpeechPlaySilence, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "playSilence", "(JILjava/util/HashMap;)I")
+	midTTSPlaySilence, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "playSilence", "(JILjava/util/HashMap;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -411,7 +411,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.playSilence")
 	}
 
-	midtextToSpeechPlaySilentUtterance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "playSilentUtterance", "(JILjava/lang/String;)I")
+	midTTSPlaySilentUtterance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "playSilentUtterance", "(JILjava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -419,7 +419,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.playSilentUtterance")
 	}
 
-	midtextToSpeechSetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setAudioAttributes", "(Landroid/media/AudioAttributes;)I")
+	midTTSSetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setAudioAttributes", "(Landroid/media/AudioAttributes;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -427,7 +427,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setAudioAttributes")
 	}
 
-	midtextToSpeechSetEngineByPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setEngineByPackageName", "(Ljava/lang/String;)I")
+	midTTSSetEngineByPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setEngineByPackageName", "(Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -435,7 +435,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setEngineByPackageName")
 	}
 
-	midtextToSpeechSetLanguage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setLanguage", "(Ljava/util/Locale;)I")
+	midTTSSetLanguage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setLanguage", "(Ljava/util/Locale;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -443,7 +443,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setLanguage")
 	}
 
-	midtextToSpeechSetOnUtteranceCompletedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setOnUtteranceCompletedListener", "(Landroid/speech/tts/TextToSpeech$OnUtteranceCompletedListener;)I")
+	midTTSSetOnUtteranceCompletedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setOnUtteranceCompletedListener", "(Landroid/speech/tts/TextToSpeech$OnUtteranceCompletedListener;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -451,7 +451,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setOnUtteranceCompletedListener")
 	}
 
-	midtextToSpeechSetOnUtteranceProgressListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setOnUtteranceProgressListener", "(Landroid/speech/tts/UtteranceProgressListener;)I")
+	midTTSSetOnUtteranceProgressListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setOnUtteranceProgressListener", "(Landroid/speech/tts/UtteranceProgressListener;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -459,7 +459,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setOnUtteranceProgressListener")
 	}
 
-	midtextToSpeechSetPitch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setPitch", "(F)I")
+	midTTSSetPitch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setPitch", "(F)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -467,7 +467,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setPitch")
 	}
 
-	midtextToSpeechSetSpeechRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setSpeechRate", "(F)I")
+	midTTSSetSpeechRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setSpeechRate", "(F)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -475,7 +475,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setSpeechRate")
 	}
 
-	midtextToSpeechSetVoice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "setVoice", "(Landroid/speech/tts/Voice;)I")
+	midTTSSetVoice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setVoice", "(Landroid/speech/tts/Voice;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -483,7 +483,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.setVoice")
 	}
 
-	midtextToSpeechShutdown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "shutdown", "()V")
+	midTTSShutdown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "shutdown", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -491,7 +491,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.shutdown")
 	}
 
-	midtextToSpeechSpeak4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "speak", "(Ljava/lang/String;ILandroid/os/Bundle;Ljava/lang/String;)I")
+	midTTSSpeak4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "speak", "(Ljava/lang/String;ILandroid/os/Bundle;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -499,7 +499,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.speak")
 	}
 
-	midtextToSpeechSpeak3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "speak", "(Ljava/lang/String;ILjava/util/HashMap;)I")
+	midTTSSpeak3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "speak", "(Ljava/lang/String;ILjava/util/HashMap;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -507,7 +507,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.speak")
 	}
 
-	midtextToSpeechStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "stop", "()I")
+	midTTSStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "stop", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -515,7 +515,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.stop")
 	}
 
-	midtextToSpeechSynthesizeToFile4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "synthesizeToFile", "(Ljava/lang/String;Landroid/os/Bundle;Landroid/os/ParcelFileDescriptor;Ljava/lang/String;)I")
+	midTTSSynthesizeToFile4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "synthesizeToFile", "(Ljava/lang/String;Landroid/os/Bundle;Landroid/os/ParcelFileDescriptor;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -523,7 +523,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.synthesizeToFile")
 	}
 
-	midtextToSpeechSynthesizeToFile4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "synthesizeToFile", "(Ljava/lang/String;Landroid/os/Bundle;Ljava/io/File;Ljava/lang/String;)I")
+	midTTSSynthesizeToFile4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "synthesizeToFile", "(Ljava/lang/String;Landroid/os/Bundle;Ljava/io/File;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -531,7 +531,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.synthesizeToFile")
 	}
 
-	midtextToSpeechSynthesizeToFile3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "synthesizeToFile", "(Ljava/lang/String;Ljava/util/HashMap;Ljava/lang/String;)I")
+	midTTSSynthesizeToFile3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "synthesizeToFile", "(Ljava/lang/String;Ljava/util/HashMap;Ljava/lang/String;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -539,7 +539,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.synthesizeToFile")
 	}
 
-	midtextToSpeechGetMaxSpeechInputLength, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clstextToSpeech)), "getMaxSpeechInputLength", "()I")
+	midTTSGetMaxSpeechInputLength, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getMaxSpeechInputLength", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

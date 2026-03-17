@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// bitmap wraps android.graphics.Bitmap.
-type bitmap struct {
+// Bitmap wraps android.graphics.Bitmap.
+type Bitmap struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // AsShared calls android.graphics.Bitmap.asShared.
-func (m *bitmap) AsShared() (*jni.Object, error) {
+func (m *Bitmap) AsShared() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *bitmap) AsShared() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapAsShared == nil {
+		if midBitmapAsShared == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.asShared is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapAsShared,
+			midBitmapAsShared,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *bitmap) AsShared() (*jni.Object, error) {
 }
 
 // Compress calls android.graphics.Bitmap.compress.
-func (m *bitmap) Compress(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool, error) {
+func (m *Bitmap) Compress(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *bitmap) Compress(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool,
 			callErr = err
 			return err
 		}
-		if midbitmapCompress == nil {
+		if midBitmapCompress == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.compress is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapCompress, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midBitmapCompress, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *bitmap) Compress(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool,
 }
 
 // Copy calls android.graphics.Bitmap.copy.
-func (m *bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
+func (m *Bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,7 +84,7 @@ func (m *bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapCopy == nil {
+		if midBitmapCopy == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.copy is not available on this device")
 			return callErr
 		}
@@ -96,7 +96,7 @@ func (m *bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapCopy, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
+			midBitmapCopy, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -107,7 +107,7 @@ func (m *bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 }
 
 // CopyPixelsFromBuffer calls android.graphics.Bitmap.copyPixelsFromBuffer.
-func (m *bitmap) CopyPixelsFromBuffer(arg0 *jni.Object) error {
+func (m *Bitmap) CopyPixelsFromBuffer(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -115,14 +115,14 @@ func (m *bitmap) CopyPixelsFromBuffer(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbitmapCopyPixelsFromBuffer == nil {
+		if midBitmapCopyPixelsFromBuffer == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.copyPixelsFromBuffer is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapCopyPixelsFromBuffer, jni.ObjectValue(arg0),
+			midBitmapCopyPixelsFromBuffer, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -130,7 +130,7 @@ func (m *bitmap) CopyPixelsFromBuffer(arg0 *jni.Object) error {
 }
 
 // CopyPixelsToBuffer calls android.graphics.Bitmap.copyPixelsToBuffer.
-func (m *bitmap) CopyPixelsToBuffer(arg0 *jni.Object) error {
+func (m *Bitmap) CopyPixelsToBuffer(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -138,14 +138,14 @@ func (m *bitmap) CopyPixelsToBuffer(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbitmapCopyPixelsToBuffer == nil {
+		if midBitmapCopyPixelsToBuffer == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.copyPixelsToBuffer is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapCopyPixelsToBuffer, jni.ObjectValue(arg0),
+			midBitmapCopyPixelsToBuffer, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -153,7 +153,7 @@ func (m *bitmap) CopyPixelsToBuffer(arg0 *jni.Object) error {
 }
 
 // DescribeContents calls android.graphics.Bitmap.describeContents.
-func (m *bitmap) DescribeContents() (int32, error) {
+func (m *Bitmap) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -161,13 +161,13 @@ func (m *bitmap) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapDescribeContents == nil {
+		if midBitmapDescribeContents == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapDescribeContents,
+			midBitmapDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -178,7 +178,7 @@ func (m *bitmap) DescribeContents() (int32, error) {
 }
 
 // EraseColor1 calls android.graphics.Bitmap.eraseColor.
-func (m *bitmap) EraseColor1(arg0 int32) error {
+func (m *Bitmap) EraseColor1(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -186,14 +186,14 @@ func (m *bitmap) EraseColor1(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midbitmapEraseColor1 == nil {
+		if midBitmapEraseColor1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.eraseColor is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapEraseColor1, jni.IntValue(arg0),
+			midBitmapEraseColor1, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -201,7 +201,7 @@ func (m *bitmap) EraseColor1(arg0 int32) error {
 }
 
 // EraseColor1_1 calls android.graphics.Bitmap.eraseColor.
-func (m *bitmap) EraseColor1_1(arg0 int64) error {
+func (m *Bitmap) EraseColor1_1(arg0 int64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -209,14 +209,14 @@ func (m *bitmap) EraseColor1_1(arg0 int64) error {
 			callErr = err
 			return err
 		}
-		if midbitmapEraseColor1_1 == nil {
+		if midBitmapEraseColor1_1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.eraseColor is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapEraseColor1_1, jni.LongValue(arg0),
+			midBitmapEraseColor1_1, jni.LongValue(arg0),
 		)
 		return callErr
 	})
@@ -224,7 +224,7 @@ func (m *bitmap) EraseColor1_1(arg0 int64) error {
 }
 
 // ExtractAlpha0 calls android.graphics.Bitmap.extractAlpha.
-func (m *bitmap) ExtractAlpha0() (*jni.Object, error) {
+func (m *Bitmap) ExtractAlpha0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -232,13 +232,13 @@ func (m *bitmap) ExtractAlpha0() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapExtractAlpha0 == nil {
+		if midBitmapExtractAlpha0 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.extractAlpha is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapExtractAlpha0,
+			midBitmapExtractAlpha0,
 		)
 		if callErr != nil {
 			return callErr
@@ -249,7 +249,7 @@ func (m *bitmap) ExtractAlpha0() (*jni.Object, error) {
 }
 
 // ExtractAlpha2_1 calls android.graphics.Bitmap.extractAlpha.
-func (m *bitmap) ExtractAlpha2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) ExtractAlpha2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -257,14 +257,14 @@ func (m *bitmap) ExtractAlpha2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 			callErr = err
 			return err
 		}
-		if midbitmapExtractAlpha2_1 == nil {
+		if midBitmapExtractAlpha2_1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.extractAlpha is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapExtractAlpha2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midBitmapExtractAlpha2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -275,7 +275,7 @@ func (m *bitmap) ExtractAlpha2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 }
 
 // GetAllocationByteCount calls android.graphics.Bitmap.getAllocationByteCount.
-func (m *bitmap) GetAllocationByteCount() (int32, error) {
+func (m *Bitmap) GetAllocationByteCount() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -283,13 +283,13 @@ func (m *bitmap) GetAllocationByteCount() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetAllocationByteCount == nil {
+		if midBitmapGetAllocationByteCount == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getAllocationByteCount is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetAllocationByteCount,
+			midBitmapGetAllocationByteCount,
 		)
 		if callErr != nil {
 			return callErr
@@ -300,7 +300,7 @@ func (m *bitmap) GetAllocationByteCount() (int32, error) {
 }
 
 // GetByteCount calls android.graphics.Bitmap.getByteCount.
-func (m *bitmap) GetByteCount() (int32, error) {
+func (m *Bitmap) GetByteCount() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -308,13 +308,13 @@ func (m *bitmap) GetByteCount() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetByteCount == nil {
+		if midBitmapGetByteCount == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getByteCount is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetByteCount,
+			midBitmapGetByteCount,
 		)
 		if callErr != nil {
 			return callErr
@@ -325,7 +325,7 @@ func (m *bitmap) GetByteCount() (int32, error) {
 }
 
 // GetColor calls android.graphics.Bitmap.getColor.
-func (m *bitmap) GetColor(arg0 int32, arg1 int32) (*jni.Object, error) {
+func (m *Bitmap) GetColor(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -333,14 +333,14 @@ func (m *bitmap) GetColor(arg0 int32, arg1 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetColor == nil {
+		if midBitmapGetColor == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getColor is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapGetColor, jni.IntValue(arg0), jni.IntValue(arg1),
+			midBitmapGetColor, jni.IntValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -351,7 +351,7 @@ func (m *bitmap) GetColor(arg0 int32, arg1 int32) (*jni.Object, error) {
 }
 
 // GetColorSpace calls android.graphics.Bitmap.getColorSpace.
-func (m *bitmap) GetColorSpace() (*jni.Object, error) {
+func (m *Bitmap) GetColorSpace() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -359,13 +359,13 @@ func (m *bitmap) GetColorSpace() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetColorSpace == nil {
+		if midBitmapGetColorSpace == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getColorSpace is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapGetColorSpace,
+			midBitmapGetColorSpace,
 		)
 		if callErr != nil {
 			return callErr
@@ -376,7 +376,7 @@ func (m *bitmap) GetColorSpace() (*jni.Object, error) {
 }
 
 // GetConfig calls android.graphics.Bitmap.getConfig.
-func (m *bitmap) GetConfig() (*jni.Object, error) {
+func (m *Bitmap) GetConfig() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -384,13 +384,13 @@ func (m *bitmap) GetConfig() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetConfig == nil {
+		if midBitmapGetConfig == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getConfig is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapGetConfig,
+			midBitmapGetConfig,
 		)
 		if callErr != nil {
 			return callErr
@@ -401,7 +401,7 @@ func (m *bitmap) GetConfig() (*jni.Object, error) {
 }
 
 // GetDensity calls android.graphics.Bitmap.getDensity.
-func (m *bitmap) GetDensity() (int32, error) {
+func (m *Bitmap) GetDensity() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -409,13 +409,13 @@ func (m *bitmap) GetDensity() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetDensity == nil {
+		if midBitmapGetDensity == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getDensity is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetDensity,
+			midBitmapGetDensity,
 		)
 		if callErr != nil {
 			return callErr
@@ -426,7 +426,7 @@ func (m *bitmap) GetDensity() (int32, error) {
 }
 
 // GetGainmap calls android.graphics.Bitmap.getGainmap.
-func (m *bitmap) GetGainmap() (*jni.Object, error) {
+func (m *Bitmap) GetGainmap() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -434,13 +434,13 @@ func (m *bitmap) GetGainmap() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetGainmap == nil {
+		if midBitmapGetGainmap == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getGainmap is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapGetGainmap,
+			midBitmapGetGainmap,
 		)
 		if callErr != nil {
 			return callErr
@@ -451,7 +451,7 @@ func (m *bitmap) GetGainmap() (*jni.Object, error) {
 }
 
 // GetGenerationId calls android.graphics.Bitmap.getGenerationId.
-func (m *bitmap) GetGenerationId() (int32, error) {
+func (m *Bitmap) GetGenerationId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -459,13 +459,13 @@ func (m *bitmap) GetGenerationId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetGenerationId == nil {
+		if midBitmapGetGenerationId == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getGenerationId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetGenerationId,
+			midBitmapGetGenerationId,
 		)
 		if callErr != nil {
 			return callErr
@@ -476,7 +476,7 @@ func (m *bitmap) GetGenerationId() (int32, error) {
 }
 
 // GetHardwareBuffer calls android.graphics.Bitmap.getHardwareBuffer.
-func (m *bitmap) GetHardwareBuffer() (*jni.Object, error) {
+func (m *Bitmap) GetHardwareBuffer() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -484,13 +484,13 @@ func (m *bitmap) GetHardwareBuffer() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetHardwareBuffer == nil {
+		if midBitmapGetHardwareBuffer == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getHardwareBuffer is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapGetHardwareBuffer,
+			midBitmapGetHardwareBuffer,
 		)
 		if callErr != nil {
 			return callErr
@@ -501,7 +501,7 @@ func (m *bitmap) GetHardwareBuffer() (*jni.Object, error) {
 }
 
 // GetHeight calls android.graphics.Bitmap.getHeight.
-func (m *bitmap) GetHeight() (int32, error) {
+func (m *Bitmap) GetHeight() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -509,13 +509,13 @@ func (m *bitmap) GetHeight() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetHeight == nil {
+		if midBitmapGetHeight == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getHeight is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetHeight,
+			midBitmapGetHeight,
 		)
 		if callErr != nil {
 			return callErr
@@ -526,7 +526,7 @@ func (m *bitmap) GetHeight() (int32, error) {
 }
 
 // GetNinePatchChunk calls android.graphics.Bitmap.getNinePatchChunk.
-func (m *bitmap) GetNinePatchChunk() (*jni.Object, error) {
+func (m *Bitmap) GetNinePatchChunk() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -534,13 +534,13 @@ func (m *bitmap) GetNinePatchChunk() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetNinePatchChunk == nil {
+		if midBitmapGetNinePatchChunk == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getNinePatchChunk is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbitmapGetNinePatchChunk,
+			midBitmapGetNinePatchChunk,
 		)
 		if callErr != nil {
 			return callErr
@@ -551,7 +551,7 @@ func (m *bitmap) GetNinePatchChunk() (*jni.Object, error) {
 }
 
 // GetPixel calls android.graphics.Bitmap.getPixel.
-func (m *bitmap) GetPixel(arg0 int32, arg1 int32) (int32, error) {
+func (m *Bitmap) GetPixel(arg0 int32, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -559,14 +559,14 @@ func (m *bitmap) GetPixel(arg0 int32, arg1 int32) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetPixel == nil {
+		if midBitmapGetPixel == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getPixel is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetPixel, jni.IntValue(arg0), jni.IntValue(arg1),
+			midBitmapGetPixel, jni.IntValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -577,7 +577,7 @@ func (m *bitmap) GetPixel(arg0 int32, arg1 int32) (int32, error) {
 }
 
 // GetPixels calls android.graphics.Bitmap.getPixels.
-func (m *bitmap) GetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
+func (m *Bitmap) GetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -585,14 +585,14 @@ func (m *bitmap) GetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32,
 			callErr = err
 			return err
 		}
-		if midbitmapGetPixels == nil {
+		if midBitmapGetPixels == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getPixels is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapGetPixels, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
+			midBitmapGetPixels, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
 		)
 		return callErr
 	})
@@ -600,7 +600,7 @@ func (m *bitmap) GetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32,
 }
 
 // GetRowBytes calls android.graphics.Bitmap.getRowBytes.
-func (m *bitmap) GetRowBytes() (int32, error) {
+func (m *Bitmap) GetRowBytes() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -608,13 +608,13 @@ func (m *bitmap) GetRowBytes() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetRowBytes == nil {
+		if midBitmapGetRowBytes == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getRowBytes is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetRowBytes,
+			midBitmapGetRowBytes,
 		)
 		if callErr != nil {
 			return callErr
@@ -625,7 +625,7 @@ func (m *bitmap) GetRowBytes() (int32, error) {
 }
 
 // GetScaledHeight1 calls android.graphics.Bitmap.getScaledHeight.
-func (m *bitmap) GetScaledHeight1(arg0 *jni.Object) (int32, error) {
+func (m *Bitmap) GetScaledHeight1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -633,14 +633,14 @@ func (m *bitmap) GetScaledHeight1(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetScaledHeight1 == nil {
+		if midBitmapGetScaledHeight1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getScaledHeight is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetScaledHeight1, jni.ObjectValue(arg0),
+			midBitmapGetScaledHeight1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -651,7 +651,7 @@ func (m *bitmap) GetScaledHeight1(arg0 *jni.Object) (int32, error) {
 }
 
 // GetScaledHeight1_1 calls android.graphics.Bitmap.getScaledHeight.
-func (m *bitmap) GetScaledHeight1_1(arg0 *jni.Object) (int32, error) {
+func (m *Bitmap) GetScaledHeight1_1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -659,14 +659,14 @@ func (m *bitmap) GetScaledHeight1_1(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetScaledHeight1_1 == nil {
+		if midBitmapGetScaledHeight1_1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getScaledHeight is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetScaledHeight1_1, jni.ObjectValue(arg0),
+			midBitmapGetScaledHeight1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -677,7 +677,7 @@ func (m *bitmap) GetScaledHeight1_1(arg0 *jni.Object) (int32, error) {
 }
 
 // GetScaledHeight1_2 calls android.graphics.Bitmap.getScaledHeight.
-func (m *bitmap) GetScaledHeight1_2(arg0 int32) (int32, error) {
+func (m *Bitmap) GetScaledHeight1_2(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -685,14 +685,14 @@ func (m *bitmap) GetScaledHeight1_2(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetScaledHeight1_2 == nil {
+		if midBitmapGetScaledHeight1_2 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getScaledHeight is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetScaledHeight1_2, jni.IntValue(arg0),
+			midBitmapGetScaledHeight1_2, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -703,7 +703,7 @@ func (m *bitmap) GetScaledHeight1_2(arg0 int32) (int32, error) {
 }
 
 // GetScaledWidth1 calls android.graphics.Bitmap.getScaledWidth.
-func (m *bitmap) GetScaledWidth1(arg0 *jni.Object) (int32, error) {
+func (m *Bitmap) GetScaledWidth1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -711,14 +711,14 @@ func (m *bitmap) GetScaledWidth1(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetScaledWidth1 == nil {
+		if midBitmapGetScaledWidth1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getScaledWidth is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetScaledWidth1, jni.ObjectValue(arg0),
+			midBitmapGetScaledWidth1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -729,7 +729,7 @@ func (m *bitmap) GetScaledWidth1(arg0 *jni.Object) (int32, error) {
 }
 
 // GetScaledWidth1_1 calls android.graphics.Bitmap.getScaledWidth.
-func (m *bitmap) GetScaledWidth1_1(arg0 *jni.Object) (int32, error) {
+func (m *Bitmap) GetScaledWidth1_1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -737,14 +737,14 @@ func (m *bitmap) GetScaledWidth1_1(arg0 *jni.Object) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetScaledWidth1_1 == nil {
+		if midBitmapGetScaledWidth1_1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getScaledWidth is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetScaledWidth1_1, jni.ObjectValue(arg0),
+			midBitmapGetScaledWidth1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -755,7 +755,7 @@ func (m *bitmap) GetScaledWidth1_1(arg0 *jni.Object) (int32, error) {
 }
 
 // GetScaledWidth1_2 calls android.graphics.Bitmap.getScaledWidth.
-func (m *bitmap) GetScaledWidth1_2(arg0 int32) (int32, error) {
+func (m *Bitmap) GetScaledWidth1_2(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -763,14 +763,14 @@ func (m *bitmap) GetScaledWidth1_2(arg0 int32) (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetScaledWidth1_2 == nil {
+		if midBitmapGetScaledWidth1_2 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getScaledWidth is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetScaledWidth1_2, jni.IntValue(arg0),
+			midBitmapGetScaledWidth1_2, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -781,7 +781,7 @@ func (m *bitmap) GetScaledWidth1_2(arg0 int32) (int32, error) {
 }
 
 // GetWidth calls android.graphics.Bitmap.getWidth.
-func (m *bitmap) GetWidth() (int32, error) {
+func (m *Bitmap) GetWidth() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -789,13 +789,13 @@ func (m *bitmap) GetWidth() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapGetWidth == nil {
+		if midBitmapGetWidth == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.getWidth is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbitmapGetWidth,
+			midBitmapGetWidth,
 		)
 		if callErr != nil {
 			return callErr
@@ -806,7 +806,7 @@ func (m *bitmap) GetWidth() (int32, error) {
 }
 
 // HasAlpha calls android.graphics.Bitmap.hasAlpha.
-func (m *bitmap) HasAlpha() (bool, error) {
+func (m *Bitmap) HasAlpha() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -814,13 +814,13 @@ func (m *bitmap) HasAlpha() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapHasAlpha == nil {
+		if midBitmapHasAlpha == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.hasAlpha is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapHasAlpha,
+			midBitmapHasAlpha,
 		)
 		if callErr != nil {
 			return callErr
@@ -832,7 +832,7 @@ func (m *bitmap) HasAlpha() (bool, error) {
 }
 
 // HasGainmap calls android.graphics.Bitmap.hasGainmap.
-func (m *bitmap) HasGainmap() (bool, error) {
+func (m *Bitmap) HasGainmap() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -840,13 +840,13 @@ func (m *bitmap) HasGainmap() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapHasGainmap == nil {
+		if midBitmapHasGainmap == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.hasGainmap is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapHasGainmap,
+			midBitmapHasGainmap,
 		)
 		if callErr != nil {
 			return callErr
@@ -858,7 +858,7 @@ func (m *bitmap) HasGainmap() (bool, error) {
 }
 
 // HasMipMap calls android.graphics.Bitmap.hasMipMap.
-func (m *bitmap) HasMipMap() (bool, error) {
+func (m *Bitmap) HasMipMap() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -866,13 +866,13 @@ func (m *bitmap) HasMipMap() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapHasMipMap == nil {
+		if midBitmapHasMipMap == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.hasMipMap is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapHasMipMap,
+			midBitmapHasMipMap,
 		)
 		if callErr != nil {
 			return callErr
@@ -884,7 +884,7 @@ func (m *bitmap) HasMipMap() (bool, error) {
 }
 
 // IsMutable calls android.graphics.Bitmap.isMutable.
-func (m *bitmap) IsMutable() (bool, error) {
+func (m *Bitmap) IsMutable() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -892,13 +892,13 @@ func (m *bitmap) IsMutable() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapIsMutable == nil {
+		if midBitmapIsMutable == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.isMutable is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapIsMutable,
+			midBitmapIsMutable,
 		)
 		if callErr != nil {
 			return callErr
@@ -910,7 +910,7 @@ func (m *bitmap) IsMutable() (bool, error) {
 }
 
 // IsPremultiplied calls android.graphics.Bitmap.isPremultiplied.
-func (m *bitmap) IsPremultiplied() (bool, error) {
+func (m *Bitmap) IsPremultiplied() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -918,13 +918,13 @@ func (m *bitmap) IsPremultiplied() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapIsPremultiplied == nil {
+		if midBitmapIsPremultiplied == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.isPremultiplied is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapIsPremultiplied,
+			midBitmapIsPremultiplied,
 		)
 		if callErr != nil {
 			return callErr
@@ -936,7 +936,7 @@ func (m *bitmap) IsPremultiplied() (bool, error) {
 }
 
 // IsRecycled calls android.graphics.Bitmap.isRecycled.
-func (m *bitmap) IsRecycled() (bool, error) {
+func (m *Bitmap) IsRecycled() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -944,13 +944,13 @@ func (m *bitmap) IsRecycled() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapIsRecycled == nil {
+		if midBitmapIsRecycled == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.isRecycled is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapIsRecycled,
+			midBitmapIsRecycled,
 		)
 		if callErr != nil {
 			return callErr
@@ -962,7 +962,7 @@ func (m *bitmap) IsRecycled() (bool, error) {
 }
 
 // PrepareToDraw calls android.graphics.Bitmap.prepareToDraw.
-func (m *bitmap) PrepareToDraw() error {
+func (m *Bitmap) PrepareToDraw() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -970,13 +970,13 @@ func (m *bitmap) PrepareToDraw() error {
 			callErr = err
 			return err
 		}
-		if midbitmapPrepareToDraw == nil {
+		if midBitmapPrepareToDraw == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.prepareToDraw is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapPrepareToDraw,
+			midBitmapPrepareToDraw,
 		)
 		return callErr
 	})
@@ -984,7 +984,7 @@ func (m *bitmap) PrepareToDraw() error {
 }
 
 // Reconfigure calls android.graphics.Bitmap.reconfigure.
-func (m *bitmap) Reconfigure(arg0 int32, arg1 int32, arg2 *jni.Object) error {
+func (m *Bitmap) Reconfigure(arg0 int32, arg1 int32, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -992,14 +992,14 @@ func (m *bitmap) Reconfigure(arg0 int32, arg1 int32, arg2 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbitmapReconfigure == nil {
+		if midBitmapReconfigure == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.reconfigure is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapReconfigure, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midBitmapReconfigure, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -1007,7 +1007,7 @@ func (m *bitmap) Reconfigure(arg0 int32, arg1 int32, arg2 *jni.Object) error {
 }
 
 // Recycle calls android.graphics.Bitmap.recycle.
-func (m *bitmap) Recycle() error {
+func (m *Bitmap) Recycle() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1015,13 +1015,13 @@ func (m *bitmap) Recycle() error {
 			callErr = err
 			return err
 		}
-		if midbitmapRecycle == nil {
+		if midBitmapRecycle == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.recycle is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapRecycle,
+			midBitmapRecycle,
 		)
 		return callErr
 	})
@@ -1029,7 +1029,7 @@ func (m *bitmap) Recycle() error {
 }
 
 // SameAs calls android.graphics.Bitmap.sameAs.
-func (m *bitmap) SameAs(arg0 *jni.Object) (bool, error) {
+func (m *Bitmap) SameAs(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1037,14 +1037,14 @@ func (m *bitmap) SameAs(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapSameAs == nil {
+		if midBitmapSameAs == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.sameAs is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midbitmapSameAs, jni.ObjectValue(arg0),
+			midBitmapSameAs, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -1056,7 +1056,7 @@ func (m *bitmap) SameAs(arg0 *jni.Object) (bool, error) {
 }
 
 // SetColorSpace calls android.graphics.Bitmap.setColorSpace.
-func (m *bitmap) SetColorSpace(arg0 *jni.Object) error {
+func (m *Bitmap) SetColorSpace(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1064,14 +1064,14 @@ func (m *bitmap) SetColorSpace(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetColorSpace == nil {
+		if midBitmapSetColorSpace == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setColorSpace is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetColorSpace, jni.ObjectValue(arg0),
+			midBitmapSetColorSpace, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1079,7 +1079,7 @@ func (m *bitmap) SetColorSpace(arg0 *jni.Object) error {
 }
 
 // SetConfig calls android.graphics.Bitmap.setConfig.
-func (m *bitmap) SetConfig(arg0 *jni.Object) error {
+func (m *Bitmap) SetConfig(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1087,14 +1087,14 @@ func (m *bitmap) SetConfig(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetConfig == nil {
+		if midBitmapSetConfig == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setConfig is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetConfig, jni.ObjectValue(arg0),
+			midBitmapSetConfig, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1102,7 +1102,7 @@ func (m *bitmap) SetConfig(arg0 *jni.Object) error {
 }
 
 // SetDensity calls android.graphics.Bitmap.setDensity.
-func (m *bitmap) SetDensity(arg0 int32) error {
+func (m *Bitmap) SetDensity(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1110,14 +1110,14 @@ func (m *bitmap) SetDensity(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetDensity == nil {
+		if midBitmapSetDensity == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setDensity is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetDensity, jni.IntValue(arg0),
+			midBitmapSetDensity, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -1125,7 +1125,7 @@ func (m *bitmap) SetDensity(arg0 int32) error {
 }
 
 // SetGainmap calls android.graphics.Bitmap.setGainmap.
-func (m *bitmap) SetGainmap(arg0 *jni.Object) error {
+func (m *Bitmap) SetGainmap(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1133,14 +1133,14 @@ func (m *bitmap) SetGainmap(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetGainmap == nil {
+		if midBitmapSetGainmap == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setGainmap is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetGainmap, jni.ObjectValue(arg0),
+			midBitmapSetGainmap, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1148,7 +1148,7 @@ func (m *bitmap) SetGainmap(arg0 *jni.Object) error {
 }
 
 // SetHasAlpha calls android.graphics.Bitmap.setHasAlpha.
-func (m *bitmap) SetHasAlpha(arg0 bool) error {
+func (m *Bitmap) SetHasAlpha(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1156,7 +1156,7 @@ func (m *bitmap) SetHasAlpha(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetHasAlpha == nil {
+		if midBitmapSetHasAlpha == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setHasAlpha is not available on this device")
 			return callErr
 		}
@@ -1167,7 +1167,7 @@ func (m *bitmap) SetHasAlpha(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetHasAlpha, jni.BooleanValue(jArg0),
+			midBitmapSetHasAlpha, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -1175,7 +1175,7 @@ func (m *bitmap) SetHasAlpha(arg0 bool) error {
 }
 
 // SetHasMipMap calls android.graphics.Bitmap.setHasMipMap.
-func (m *bitmap) SetHasMipMap(arg0 bool) error {
+func (m *Bitmap) SetHasMipMap(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1183,7 +1183,7 @@ func (m *bitmap) SetHasMipMap(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetHasMipMap == nil {
+		if midBitmapSetHasMipMap == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setHasMipMap is not available on this device")
 			return callErr
 		}
@@ -1194,7 +1194,7 @@ func (m *bitmap) SetHasMipMap(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetHasMipMap, jni.BooleanValue(jArg0),
+			midBitmapSetHasMipMap, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -1202,7 +1202,7 @@ func (m *bitmap) SetHasMipMap(arg0 bool) error {
 }
 
 // SetHeight calls android.graphics.Bitmap.setHeight.
-func (m *bitmap) SetHeight(arg0 int32) error {
+func (m *Bitmap) SetHeight(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1210,14 +1210,14 @@ func (m *bitmap) SetHeight(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetHeight == nil {
+		if midBitmapSetHeight == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setHeight is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetHeight, jni.IntValue(arg0),
+			midBitmapSetHeight, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -1225,7 +1225,7 @@ func (m *bitmap) SetHeight(arg0 int32) error {
 }
 
 // SetPixel calls android.graphics.Bitmap.setPixel.
-func (m *bitmap) SetPixel(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *Bitmap) SetPixel(arg0 int32, arg1 int32, arg2 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1233,14 +1233,14 @@ func (m *bitmap) SetPixel(arg0 int32, arg1 int32, arg2 int32) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetPixel == nil {
+		if midBitmapSetPixel == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setPixel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetPixel, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			midBitmapSetPixel, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -1248,7 +1248,7 @@ func (m *bitmap) SetPixel(arg0 int32, arg1 int32, arg2 int32) error {
 }
 
 // SetPixels calls android.graphics.Bitmap.setPixels.
-func (m *bitmap) SetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
+func (m *Bitmap) SetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1256,14 +1256,14 @@ func (m *bitmap) SetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32,
 			callErr = err
 			return err
 		}
-		if midbitmapSetPixels == nil {
+		if midBitmapSetPixels == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setPixels is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetPixels, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
+			midBitmapSetPixels, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
 		)
 		return callErr
 	})
@@ -1271,7 +1271,7 @@ func (m *bitmap) SetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32,
 }
 
 // SetPremultiplied calls android.graphics.Bitmap.setPremultiplied.
-func (m *bitmap) SetPremultiplied(arg0 bool) error {
+func (m *Bitmap) SetPremultiplied(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1279,7 +1279,7 @@ func (m *bitmap) SetPremultiplied(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetPremultiplied == nil {
+		if midBitmapSetPremultiplied == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setPremultiplied is not available on this device")
 			return callErr
 		}
@@ -1290,7 +1290,7 @@ func (m *bitmap) SetPremultiplied(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetPremultiplied, jni.BooleanValue(jArg0),
+			midBitmapSetPremultiplied, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -1298,7 +1298,7 @@ func (m *bitmap) SetPremultiplied(arg0 bool) error {
 }
 
 // SetWidth calls android.graphics.Bitmap.setWidth.
-func (m *bitmap) SetWidth(arg0 int32) error {
+func (m *Bitmap) SetWidth(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1306,14 +1306,14 @@ func (m *bitmap) SetWidth(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midbitmapSetWidth == nil {
+		if midBitmapSetWidth == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.setWidth is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapSetWidth, jni.IntValue(arg0),
+			midBitmapSetWidth, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -1321,7 +1321,7 @@ func (m *bitmap) SetWidth(arg0 int32) error {
 }
 
 // WriteToParcel calls android.graphics.Bitmap.writeToParcel.
-func (m *bitmap) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *Bitmap) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1329,14 +1329,14 @@ func (m *bitmap) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midbitmapWriteToParcel == nil {
+		if midBitmapWriteToParcel == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midBitmapWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -1344,7 +1344,7 @@ func (m *bitmap) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 }
 
 // CreateBitmap1 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1352,14 +1352,14 @@ func (m *bitmap) CreateBitmap1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap1 == nil {
+		if midBitmapCreateBitmap1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -1370,7 +1370,7 @@ func (m *bitmap) CreateBitmap1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // CreateBitmap5_1 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap5_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1378,14 +1378,14 @@ func (m *bitmap) CreateBitmap5_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap5_1 == nil {
+		if midBitmapCreateBitmap5_1 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -1396,7 +1396,7 @@ func (m *bitmap) CreateBitmap5_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap7_2 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object, arg6 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object, arg6 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1404,7 +1404,7 @@ func (m *bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap7_2 == nil {
+		if midBitmapCreateBitmap7_2 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
@@ -1415,8 +1415,8 @@ func (m *bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap7_2, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5), jni.BooleanValue(jArg6),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap7_2, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5), jni.BooleanValue(jArg6),
 		)
 		if callErr != nil {
 			return callErr
@@ -1427,7 +1427,7 @@ func (m *bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap1_3 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap1_3(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap1_3(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1435,14 +1435,14 @@ func (m *bitmap) CreateBitmap1_3(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap1_3 == nil {
+		if midBitmapCreateBitmap1_3 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap1_3, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap1_3, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -1453,7 +1453,7 @@ func (m *bitmap) CreateBitmap1_3(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // CreateBitmap4_4 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1461,14 +1461,14 @@ func (m *bitmap) CreateBitmap4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap4_4 == nil {
+		if midBitmapCreateBitmap4_4 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap4_4, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap4_4, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -1479,7 +1479,7 @@ func (m *bitmap) CreateBitmap4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap4_5 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap4_5(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_5(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1487,14 +1487,14 @@ func (m *bitmap) CreateBitmap4_5(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap4_5 == nil {
+		if midBitmapCreateBitmap4_5 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap4_5, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap4_5, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -1505,7 +1505,7 @@ func (m *bitmap) CreateBitmap4_5(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap5_6 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1513,7 +1513,7 @@ func (m *bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap5_6 == nil {
+		if midBitmapCreateBitmap5_6 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
@@ -1524,8 +1524,8 @@ func (m *bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap5_6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.BooleanValue(jArg4),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap5_6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.BooleanValue(jArg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -1536,7 +1536,7 @@ func (m *bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap6_7 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool, arg5 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool, arg5 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1544,7 +1544,7 @@ func (m *bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap6_7 == nil {
+		if midBitmapCreateBitmap6_7 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
@@ -1555,8 +1555,8 @@ func (m *bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap6_7, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.BooleanValue(jArg4), jni.ObjectValue(arg5),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap6_7, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.BooleanValue(jArg4), jni.ObjectValue(arg5),
 		)
 		if callErr != nil {
 			return callErr
@@ -1567,7 +1567,7 @@ func (m *bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap5_8 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap5_8(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_8(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1575,14 +1575,14 @@ func (m *bitmap) CreateBitmap5_8(arg0 *jni.Object, arg1 *jni.Object, arg2 int32,
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap5_8 == nil {
+		if midBitmapCreateBitmap5_8 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap5_8, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap5_8, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -1593,7 +1593,7 @@ func (m *bitmap) CreateBitmap5_8(arg0 *jni.Object, arg1 *jni.Object, arg2 int32,
 }
 
 // CreateBitmap7_9 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap7_9(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap7_9(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1601,14 +1601,14 @@ func (m *bitmap) CreateBitmap7_9(arg0 *jni.Object, arg1 *jni.Object, arg2 int32,
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap7_9 == nil {
+		if midBitmapCreateBitmap7_9 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap7_9, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap7_9, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6),
 		)
 		if callErr != nil {
 			return callErr
@@ -1619,7 +1619,7 @@ func (m *bitmap) CreateBitmap7_9(arg0 *jni.Object, arg1 *jni.Object, arg2 int32,
 }
 
 // CreateBitmap3_10 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap3_10(arg0 int32, arg1 int32, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap3_10(arg0 int32, arg1 int32, arg2 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1627,14 +1627,14 @@ func (m *bitmap) CreateBitmap3_10(arg0 int32, arg1 int32, arg2 *jni.Object) (*jn
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap3_10 == nil {
+		if midBitmapCreateBitmap3_10 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap3_10, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap3_10, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -1645,7 +1645,7 @@ func (m *bitmap) CreateBitmap3_10(arg0 int32, arg1 int32, arg2 *jni.Object) (*jn
 }
 
 // CreateBitmap4_11 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1653,7 +1653,7 @@ func (m *bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap4_11 == nil {
+		if midBitmapCreateBitmap4_11 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
@@ -1664,8 +1664,8 @@ func (m *bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap4_11, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap4_11, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -1676,7 +1676,7 @@ func (m *bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 }
 
 // CreateBitmap5_12 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool, arg4 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool, arg4 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1684,7 +1684,7 @@ func (m *bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap5_12 == nil {
+		if midBitmapCreateBitmap5_12 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
@@ -1695,8 +1695,8 @@ func (m *bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap5_12, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3), jni.ObjectValue(arg4),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap5_12, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3), jni.ObjectValue(arg4),
 		)
 		if callErr != nil {
 			return callErr
@@ -1707,7 +1707,7 @@ func (m *bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 }
 
 // CreateBitmap4_13 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap4_13(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_13(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1715,14 +1715,14 @@ func (m *bitmap) CreateBitmap4_13(arg0 *jni.Object, arg1 int32, arg2 int32, arg3
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap4_13 == nil {
+		if midBitmapCreateBitmap4_13 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap4_13, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap4_13, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -1733,7 +1733,7 @@ func (m *bitmap) CreateBitmap4_13(arg0 *jni.Object, arg1 int32, arg2 int32, arg3
 }
 
 // CreateBitmap6_14 calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) CreateBitmap6_14(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap6_14(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1741,14 +1741,14 @@ func (m *bitmap) CreateBitmap6_14(arg0 *jni.Object, arg1 int32, arg2 int32, arg3
 			callErr = err
 			return err
 		}
-		if midbitmapCreateBitmap6_14 == nil {
+		if midBitmapCreateBitmap6_14 == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createBitmap is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateBitmap6_14, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateBitmap6_14, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5),
 		)
 		if callErr != nil {
 			return callErr
@@ -1759,7 +1759,7 @@ func (m *bitmap) CreateBitmap6_14(arg0 *jni.Object, arg1 int32, arg2 int32, arg3
 }
 
 // CreateScaledBitmap calls android.graphics.Bitmap.createScaledBitmap.
-func (m *bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1767,7 +1767,7 @@ func (m *bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, ar
 			callErr = err
 			return err
 		}
-		if midbitmapCreateScaledBitmap == nil {
+		if midBitmapCreateScaledBitmap == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.createScaledBitmap is not available on this device")
 			return callErr
 		}
@@ -1778,8 +1778,8 @@ func (m *bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, ar
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapCreateScaledBitmap, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.BooleanValue(jArg3),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapCreateScaledBitmap, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.BooleanValue(jArg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -1790,7 +1790,7 @@ func (m *bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, ar
 }
 
 // WrapHardwareBuffer calls android.graphics.Bitmap.wrapHardwareBuffer.
-func (m *bitmap) WrapHardwareBuffer(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) WrapHardwareBuffer(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1798,14 +1798,14 @@ func (m *bitmap) WrapHardwareBuffer(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 			callErr = err
 			return err
 		}
-		if midbitmapWrapHardwareBuffer == nil {
+		if midBitmapWrapHardwareBuffer == nil {
 			callErr = fmt.Errorf("android.graphics.Bitmap.wrapHardwareBuffer is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapWrapHardwareBuffer, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsBitmap)),
+			midBitmapWrapHardwareBuffer, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr

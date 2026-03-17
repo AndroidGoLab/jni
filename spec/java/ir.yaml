@@ -2,7 +2,7 @@ package: ir
 go_import: github.com/AndroidGoLab/jni/hardware/ir
 classes:
     - java_class: android.hardware.ConsumerIrManager
-      go_type: consumerIrManager
+      go_type: Manager
       obtain: system_service
       service_name: consumer_ir
       close: true
@@ -25,7 +25,7 @@ classes:
           returns: void
           error: true
     - java_class: android.hardware.ConsumerIrManager$CarrierFrequencyRange
-      go_type: consumerIrManagerCarrierFrequencyRange
+      go_type: ManagerCarrierFrequencyRange
       methods:
         - java_method: getMaxFrequency
           go_name: GetMaxFrequency

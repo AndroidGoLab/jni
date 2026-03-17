@@ -2,7 +2,7 @@ package: keyguard
 go_import: github.com/AndroidGoLab/jni/os/keyguard
 classes:
     - java_class: android.app.KeyguardManager
-      go_type: keyguardManager
+      go_type: Manager
       obtain: system_service
       service_name: keyguard
       close: true

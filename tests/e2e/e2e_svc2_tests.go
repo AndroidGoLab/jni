@@ -271,7 +271,7 @@ func testOmapiWrapper(vm *jni.VM) error {
 	}
 	defer svc.Close()
 
-	connected := svc.IsConnected()
+	connected, _ := svc.IsConnected()
 	fmt.Fprintf(os.Stderr, "  omapi isConnected = %v\n", connected)
 	return nil
 }

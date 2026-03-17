@@ -2,7 +2,7 @@ package: toast
 go_import: github.com/AndroidGoLab/jni/widget/toast
 classes:
     - java_class: android.widget.Toast
-      go_type: toast
+      go_type: Toast
       methods:
         - java_method: addCallback
           go_name: AddCallback

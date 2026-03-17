@@ -20,9 +20,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clssharedPreferences *jni.GlobalRef
+	clsPreferences          *jni.GlobalRef
+	midPreferencesGetString jni.MethodID
+	midPreferencesContains  jni.MethodID
+	midPreferencesGetAll    jni.MethodID
 
-	clssharedPreferencesEditor *jni.GlobalRef
+	clsEditor *jni.GlobalRef
 )
 
 // initSkipped records methods that were not found during init.
@@ -53,13 +56,37 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.content.SharedPreferences: %w", err)
 	}
-	clssharedPreferences = env.NewGlobalRef(&c.Object)
+	clsPreferences = env.NewGlobalRef(&c.Object)
+
+	midPreferencesGetString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getString", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getString")
+	}
+
+	midPreferencesContains, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "contains", "(Ljava/lang/String;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.contains")
+	}
+
+	midPreferencesGetAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getAll", "()Ljava/util/Map;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getAll")
+	}
 
 	c, err = env.FindClass("android/content/SharedPreferences$Editor")
 	if err != nil {
 		return fmt.Errorf("find class android.content.SharedPreferences$Editor: %w", err)
 	}
-	clssharedPreferencesEditor = env.NewGlobalRef(&c.Object)
+	clsEditor = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

@@ -2,7 +2,9 @@ package: player
 go_import: github.com/AndroidGoLab/jni/media/player
 classes:
     - java_class: android.media.MediaPlayer
-      go_type: mediaPlayer
+      go_type: Player
+      obtain: constructor
+      close: true
       methods:
         - java_method: addTimedTextSource
           go_name: AddTimedTextSource3

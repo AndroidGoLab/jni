@@ -2,7 +2,7 @@ package: display
 go_import: github.com/AndroidGoLab/jni/view/display
 classes:
     - java_class: android.util.DisplayMetrics
-      go_type: displayMetrics
+      go_type: DisplayMetrics
       methods:
         - java_method: equals
           go_name: Equals1
@@ -38,7 +38,7 @@ classes:
           returns: String
           error: true
     - java_class: android.view.Display
-      go_type: display
+      go_type: Display
       methods:
         - java_method: getAppVsyncOffsetNanos
           go_name: GetAppVsyncOffsetNanos

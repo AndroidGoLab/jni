@@ -2,7 +2,7 @@ package: location
 go_import: github.com/AndroidGoLab/jni/location
 classes:
     - java_class: android.location.LocationManager
-      go_type: locationManager
+      go_type: Manager
       obtain: system_service
       service_name: location
       close: true
@@ -610,7 +610,7 @@ classes:
           returns: void
           error: true
     - java_class: android.location.Location
-      go_type: location
+      go_type: Location
       methods:
         - java_method: bearingTo
           go_name: BearingTo
@@ -997,7 +997,7 @@ classes:
           returns: void
           error: true
     - java_class: android.location.GnssStatus
-      go_type: gnssStatus
+      go_type: GnssStatus
       methods:
         - java_method: describeContents
           go_name: DescribeContents

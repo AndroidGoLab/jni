@@ -106,12 +106,12 @@ classes:
           returns: void
           error: true
     - java_class: android.hardware.lights.LightsManager
-      go_type: lightsManager
+      go_type: Manager
       obtain: system_service
       service_name: lights
       close: true
     - java_class: android.hardware.lights.LightsManager$LightsSession
-      go_type: lightsManagerLightsSession
+      go_type: ManagerLightsSession
 constants:
     - go_name: Creator
       value: "0"

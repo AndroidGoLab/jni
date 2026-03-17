@@ -2,7 +2,7 @@ package: telecom
 go_import: github.com/AndroidGoLab/jni/telecom
 classes:
     - java_class: android.telecom.TelecomManager
-      go_type: telecomManager
+      go_type: Manager
       obtain: system_service
       service_name: telecom
       close: true

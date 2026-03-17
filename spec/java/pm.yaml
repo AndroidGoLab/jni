@@ -2,8 +2,15 @@ package: pm
 go_import: github.com/AndroidGoLab/jni/content/pm
 classes:
     - java_class: android.content.pm.PackageManager
-      go_type: packageManager
+      go_type: Manager
       methods:
+        - java_method: hasSystemFeature
+          go_name: HasSystemFeature
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
         - java_method: addWhitelistedRestrictedPermission
           go_name: AddWhitelistedRestrictedPermission
           params:
@@ -546,7 +553,7 @@ classes:
           returns: android.content.pm.SigningInfo
           error: true
     - java_class: android.content.pm.PackageInfo
-      go_type: packageInfo
+      go_type: PackageInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents

@@ -15,14 +15,14 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
-// activity wraps android.app.Activity.
-type activity struct {
+// Activity wraps android.app.Activity.
+type Activity struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // AddContentView calls android.app.Activity.addContentView.
-func (m *activity) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -30,14 +30,14 @@ func (m *activity) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityAddContentView == nil {
+		if midActivityAddContentView == nil {
 			callErr = fmt.Errorf("android.app.Activity.addContentView is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityAddContentView, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityAddContentView, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -45,7 +45,7 @@ func (m *activity) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // ClearOverrideActivityTransition calls android.app.Activity.clearOverrideActivityTransition.
-func (m *activity) ClearOverrideActivityTransition(arg0 int32) error {
+func (m *Activity) ClearOverrideActivityTransition(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -53,14 +53,14 @@ func (m *activity) ClearOverrideActivityTransition(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivityClearOverrideActivityTransition == nil {
+		if midActivityClearOverrideActivityTransition == nil {
 			callErr = fmt.Errorf("android.app.Activity.clearOverrideActivityTransition is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityClearOverrideActivityTransition, jni.IntValue(arg0),
+			midActivityClearOverrideActivityTransition, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -68,7 +68,7 @@ func (m *activity) ClearOverrideActivityTransition(arg0 int32) error {
 }
 
 // CloseContextMenu calls android.app.Activity.closeContextMenu.
-func (m *activity) CloseContextMenu() error {
+func (m *Activity) CloseContextMenu() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -76,13 +76,13 @@ func (m *activity) CloseContextMenu() error {
 			callErr = err
 			return err
 		}
-		if midactivityCloseContextMenu == nil {
+		if midActivityCloseContextMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.closeContextMenu is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityCloseContextMenu,
+			midActivityCloseContextMenu,
 		)
 		return callErr
 	})
@@ -90,7 +90,7 @@ func (m *activity) CloseContextMenu() error {
 }
 
 // CloseOptionsMenu calls android.app.Activity.closeOptionsMenu.
-func (m *activity) CloseOptionsMenu() error {
+func (m *Activity) CloseOptionsMenu() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -98,13 +98,13 @@ func (m *activity) CloseOptionsMenu() error {
 			callErr = err
 			return err
 		}
-		if midactivityCloseOptionsMenu == nil {
+		if midActivityCloseOptionsMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.closeOptionsMenu is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityCloseOptionsMenu,
+			midActivityCloseOptionsMenu,
 		)
 		return callErr
 	})
@@ -112,7 +112,7 @@ func (m *activity) CloseOptionsMenu() error {
 }
 
 // CreatePendingResult calls android.app.Activity.createPendingResult.
-func (m *activity) CreatePendingResult(arg0 int32, arg1 *jni.Object, arg2 int32) (*jni.Object, error) {
+func (m *Activity) CreatePendingResult(arg0 int32, arg1 *jni.Object, arg2 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -120,14 +120,14 @@ func (m *activity) CreatePendingResult(arg0 int32, arg1 *jni.Object, arg2 int32)
 			callErr = err
 			return err
 		}
-		if midactivityCreatePendingResult == nil {
+		if midActivityCreatePendingResult == nil {
 			callErr = fmt.Errorf("android.app.Activity.createPendingResult is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityCreatePendingResult, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
+			midActivityCreatePendingResult, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -138,7 +138,7 @@ func (m *activity) CreatePendingResult(arg0 int32, arg1 *jni.Object, arg2 int32)
 }
 
 // DispatchGenericMotionEvent calls android.app.Activity.dispatchGenericMotionEvent.
-func (m *activity) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -146,14 +146,14 @@ func (m *activity) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityDispatchGenericMotionEvent == nil {
+		if midActivityDispatchGenericMotionEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.dispatchGenericMotionEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityDispatchGenericMotionEvent, jni.ObjectValue(arg0),
+			midActivityDispatchGenericMotionEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -165,7 +165,7 @@ func (m *activity) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // DispatchKeyEvent calls android.app.Activity.dispatchKeyEvent.
-func (m *activity) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -173,14 +173,14 @@ func (m *activity) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityDispatchKeyEvent == nil {
+		if midActivityDispatchKeyEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.dispatchKeyEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityDispatchKeyEvent, jni.ObjectValue(arg0),
+			midActivityDispatchKeyEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -192,7 +192,7 @@ func (m *activity) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // DispatchKeyShortcutEvent calls android.app.Activity.dispatchKeyShortcutEvent.
-func (m *activity) DispatchKeyShortcutEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) DispatchKeyShortcutEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -200,14 +200,14 @@ func (m *activity) DispatchKeyShortcutEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityDispatchKeyShortcutEvent == nil {
+		if midActivityDispatchKeyShortcutEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.dispatchKeyShortcutEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityDispatchKeyShortcutEvent, jni.ObjectValue(arg0),
+			midActivityDispatchKeyShortcutEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -219,7 +219,7 @@ func (m *activity) DispatchKeyShortcutEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // DispatchPopulateAccessibilityEvent calls android.app.Activity.dispatchPopulateAccessibilityEvent.
-func (m *activity) DispatchPopulateAccessibilityEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) DispatchPopulateAccessibilityEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -227,14 +227,14 @@ func (m *activity) DispatchPopulateAccessibilityEvent(arg0 *jni.Object) (bool, e
 			callErr = err
 			return err
 		}
-		if midactivityDispatchPopulateAccessibilityEvent == nil {
+		if midActivityDispatchPopulateAccessibilityEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.dispatchPopulateAccessibilityEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityDispatchPopulateAccessibilityEvent, jni.ObjectValue(arg0),
+			midActivityDispatchPopulateAccessibilityEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -246,7 +246,7 @@ func (m *activity) DispatchPopulateAccessibilityEvent(arg0 *jni.Object) (bool, e
 }
 
 // DispatchTouchEvent calls android.app.Activity.dispatchTouchEvent.
-func (m *activity) DispatchTouchEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) DispatchTouchEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -254,14 +254,14 @@ func (m *activity) DispatchTouchEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityDispatchTouchEvent == nil {
+		if midActivityDispatchTouchEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.dispatchTouchEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityDispatchTouchEvent, jni.ObjectValue(arg0),
+			midActivityDispatchTouchEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -273,7 +273,7 @@ func (m *activity) DispatchTouchEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // DispatchTrackballEvent calls android.app.Activity.dispatchTrackballEvent.
-func (m *activity) DispatchTrackballEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) DispatchTrackballEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -281,14 +281,14 @@ func (m *activity) DispatchTrackballEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityDispatchTrackballEvent == nil {
+		if midActivityDispatchTrackballEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.dispatchTrackballEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityDispatchTrackballEvent, jni.ObjectValue(arg0),
+			midActivityDispatchTrackballEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -300,7 +300,7 @@ func (m *activity) DispatchTrackballEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // Dump calls android.app.Activity.dump.
-func (m *activity) Dump(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Activity) Dump(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -308,7 +308,7 @@ func (m *activity) Dump(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *j
 			callErr = err
 			return err
 		}
-		if midactivityDump == nil {
+		if midActivityDump == nil {
 			callErr = fmt.Errorf("android.app.Activity.dump is not available on this device")
 			return callErr
 		}
@@ -319,7 +319,7 @@ func (m *activity) Dump(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *j
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityDump, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midActivityDump, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -327,7 +327,7 @@ func (m *activity) Dump(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *j
 }
 
 // EnterPictureInPictureMode0 calls android.app.Activity.enterPictureInPictureMode.
-func (m *activity) EnterPictureInPictureMode0() error {
+func (m *Activity) EnterPictureInPictureMode0() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -335,13 +335,13 @@ func (m *activity) EnterPictureInPictureMode0() error {
 			callErr = err
 			return err
 		}
-		if midactivityEnterPictureInPictureMode0 == nil {
+		if midActivityEnterPictureInPictureMode0 == nil {
 			callErr = fmt.Errorf("android.app.Activity.enterPictureInPictureMode is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityEnterPictureInPictureMode0,
+			midActivityEnterPictureInPictureMode0,
 		)
 		return callErr
 	})
@@ -349,7 +349,7 @@ func (m *activity) EnterPictureInPictureMode0() error {
 }
 
 // EnterPictureInPictureMode1_1 calls android.app.Activity.enterPictureInPictureMode.
-func (m *activity) EnterPictureInPictureMode1_1(arg0 *jni.Object) (bool, error) {
+func (m *Activity) EnterPictureInPictureMode1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -357,14 +357,14 @@ func (m *activity) EnterPictureInPictureMode1_1(arg0 *jni.Object) (bool, error) 
 			callErr = err
 			return err
 		}
-		if midactivityEnterPictureInPictureMode1_1 == nil {
+		if midActivityEnterPictureInPictureMode1_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.enterPictureInPictureMode is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityEnterPictureInPictureMode1_1, jni.ObjectValue(arg0),
+			midActivityEnterPictureInPictureMode1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -376,7 +376,7 @@ func (m *activity) EnterPictureInPictureMode1_1(arg0 *jni.Object) (bool, error) 
 }
 
 // Finish calls android.app.Activity.finish.
-func (m *activity) Finish() error {
+func (m *Activity) Finish() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -384,13 +384,13 @@ func (m *activity) Finish() error {
 			callErr = err
 			return err
 		}
-		if midactivityFinish == nil {
+		if midActivityFinish == nil {
 			callErr = fmt.Errorf("android.app.Activity.finish is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityFinish,
+			midActivityFinish,
 		)
 		return callErr
 	})
@@ -398,7 +398,7 @@ func (m *activity) Finish() error {
 }
 
 // FinishActivity calls android.app.Activity.finishActivity.
-func (m *activity) FinishActivity(arg0 int32) error {
+func (m *Activity) FinishActivity(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -406,14 +406,14 @@ func (m *activity) FinishActivity(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivityFinishActivity == nil {
+		if midActivityFinishActivity == nil {
 			callErr = fmt.Errorf("android.app.Activity.finishActivity is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityFinishActivity, jni.IntValue(arg0),
+			midActivityFinishActivity, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -421,7 +421,7 @@ func (m *activity) FinishActivity(arg0 int32) error {
 }
 
 // FinishActivityFromChild calls android.app.Activity.finishActivityFromChild.
-func (m *activity) FinishActivityFromChild(arg0 *jni.Object, arg1 int32) error {
+func (m *Activity) FinishActivityFromChild(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -429,14 +429,14 @@ func (m *activity) FinishActivityFromChild(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivityFinishActivityFromChild == nil {
+		if midActivityFinishActivityFromChild == nil {
 			callErr = fmt.Errorf("android.app.Activity.finishActivityFromChild is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityFinishActivityFromChild, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midActivityFinishActivityFromChild, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -444,7 +444,7 @@ func (m *activity) FinishActivityFromChild(arg0 *jni.Object, arg1 int32) error {
 }
 
 // FinishAffinity calls android.app.Activity.finishAffinity.
-func (m *activity) FinishAffinity() error {
+func (m *Activity) FinishAffinity() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -452,13 +452,13 @@ func (m *activity) FinishAffinity() error {
 			callErr = err
 			return err
 		}
-		if midactivityFinishAffinity == nil {
+		if midActivityFinishAffinity == nil {
 			callErr = fmt.Errorf("android.app.Activity.finishAffinity is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityFinishAffinity,
+			midActivityFinishAffinity,
 		)
 		return callErr
 	})
@@ -466,7 +466,7 @@ func (m *activity) FinishAffinity() error {
 }
 
 // FinishAfterTransition calls android.app.Activity.finishAfterTransition.
-func (m *activity) FinishAfterTransition() error {
+func (m *Activity) FinishAfterTransition() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -474,13 +474,13 @@ func (m *activity) FinishAfterTransition() error {
 			callErr = err
 			return err
 		}
-		if midactivityFinishAfterTransition == nil {
+		if midActivityFinishAfterTransition == nil {
 			callErr = fmt.Errorf("android.app.Activity.finishAfterTransition is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityFinishAfterTransition,
+			midActivityFinishAfterTransition,
 		)
 		return callErr
 	})
@@ -488,7 +488,7 @@ func (m *activity) FinishAfterTransition() error {
 }
 
 // FinishAndRemoveTask calls android.app.Activity.finishAndRemoveTask.
-func (m *activity) FinishAndRemoveTask() error {
+func (m *Activity) FinishAndRemoveTask() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -496,13 +496,13 @@ func (m *activity) FinishAndRemoveTask() error {
 			callErr = err
 			return err
 		}
-		if midactivityFinishAndRemoveTask == nil {
+		if midActivityFinishAndRemoveTask == nil {
 			callErr = fmt.Errorf("android.app.Activity.finishAndRemoveTask is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityFinishAndRemoveTask,
+			midActivityFinishAndRemoveTask,
 		)
 		return callErr
 	})
@@ -510,7 +510,7 @@ func (m *activity) FinishAndRemoveTask() error {
 }
 
 // FinishFromChild calls android.app.Activity.finishFromChild.
-func (m *activity) FinishFromChild(arg0 *jni.Object) error {
+func (m *Activity) FinishFromChild(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -518,14 +518,14 @@ func (m *activity) FinishFromChild(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityFinishFromChild == nil {
+		if midActivityFinishFromChild == nil {
 			callErr = fmt.Errorf("android.app.Activity.finishFromChild is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityFinishFromChild, jni.ObjectValue(arg0),
+			midActivityFinishFromChild, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -533,7 +533,7 @@ func (m *activity) FinishFromChild(arg0 *jni.Object) error {
 }
 
 // GetActionBar calls android.app.Activity.getActionBar.
-func (m *activity) GetActionBar() (*jni.Object, error) {
+func (m *Activity) GetActionBar() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -541,13 +541,13 @@ func (m *activity) GetActionBar() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetActionBar == nil {
+		if midActivityGetActionBar == nil {
 			callErr = fmt.Errorf("android.app.Activity.getActionBar is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetActionBar,
+			midActivityGetActionBar,
 		)
 		if callErr != nil {
 			return callErr
@@ -558,7 +558,7 @@ func (m *activity) GetActionBar() (*jni.Object, error) {
 }
 
 // GetCaller calls android.app.Activity.getCaller.
-func (m *activity) GetCaller() (*jni.Object, error) {
+func (m *Activity) GetCaller() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -566,13 +566,13 @@ func (m *activity) GetCaller() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetCaller == nil {
+		if midActivityGetCaller == nil {
 			callErr = fmt.Errorf("android.app.Activity.getCaller is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetCaller,
+			midActivityGetCaller,
 		)
 		if callErr != nil {
 			return callErr
@@ -583,7 +583,7 @@ func (m *activity) GetCaller() (*jni.Object, error) {
 }
 
 // GetCallingActivity calls android.app.Activity.getCallingActivity.
-func (m *activity) GetCallingActivity() (*jni.Object, error) {
+func (m *Activity) GetCallingActivity() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -591,13 +591,13 @@ func (m *activity) GetCallingActivity() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetCallingActivity == nil {
+		if midActivityGetCallingActivity == nil {
 			callErr = fmt.Errorf("android.app.Activity.getCallingActivity is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetCallingActivity,
+			midActivityGetCallingActivity,
 		)
 		if callErr != nil {
 			return callErr
@@ -608,7 +608,7 @@ func (m *activity) GetCallingActivity() (*jni.Object, error) {
 }
 
 // GetCallingPackage calls android.app.Activity.getCallingPackage.
-func (m *activity) GetCallingPackage() (string, error) {
+func (m *Activity) GetCallingPackage() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -616,13 +616,13 @@ func (m *activity) GetCallingPackage() (string, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetCallingPackage == nil {
+		if midActivityGetCallingPackage == nil {
 			callErr = fmt.Errorf("android.app.Activity.getCallingPackage is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midactivityGetCallingPackage,
+			midActivityGetCallingPackage,
 		)
 		if callErr != nil {
 			return callErr
@@ -634,7 +634,7 @@ func (m *activity) GetCallingPackage() (string, error) {
 }
 
 // GetChangingConfigurations calls android.app.Activity.getChangingConfigurations.
-func (m *activity) GetChangingConfigurations() (int32, error) {
+func (m *Activity) GetChangingConfigurations() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -642,13 +642,13 @@ func (m *activity) GetChangingConfigurations() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetChangingConfigurations == nil {
+		if midActivityGetChangingConfigurations == nil {
 			callErr = fmt.Errorf("android.app.Activity.getChangingConfigurations is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midactivityGetChangingConfigurations,
+			midActivityGetChangingConfigurations,
 		)
 		if callErr != nil {
 			return callErr
@@ -659,7 +659,7 @@ func (m *activity) GetChangingConfigurations() (int32, error) {
 }
 
 // GetComponentName calls android.app.Activity.getComponentName.
-func (m *activity) GetComponentName() (*jni.Object, error) {
+func (m *Activity) GetComponentName() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -667,13 +667,13 @@ func (m *activity) GetComponentName() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetComponentName == nil {
+		if midActivityGetComponentName == nil {
 			callErr = fmt.Errorf("android.app.Activity.getComponentName is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetComponentName,
+			midActivityGetComponentName,
 		)
 		if callErr != nil {
 			return callErr
@@ -684,7 +684,7 @@ func (m *activity) GetComponentName() (*jni.Object, error) {
 }
 
 // GetContentScene calls android.app.Activity.getContentScene.
-func (m *activity) GetContentScene() (*jni.Object, error) {
+func (m *Activity) GetContentScene() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -692,13 +692,13 @@ func (m *activity) GetContentScene() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetContentScene == nil {
+		if midActivityGetContentScene == nil {
 			callErr = fmt.Errorf("android.app.Activity.getContentScene is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetContentScene,
+			midActivityGetContentScene,
 		)
 		if callErr != nil {
 			return callErr
@@ -709,7 +709,7 @@ func (m *activity) GetContentScene() (*jni.Object, error) {
 }
 
 // GetContentTransitionManager calls android.app.Activity.getContentTransitionManager.
-func (m *activity) GetContentTransitionManager() (*jni.Object, error) {
+func (m *Activity) GetContentTransitionManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -717,13 +717,13 @@ func (m *activity) GetContentTransitionManager() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetContentTransitionManager == nil {
+		if midActivityGetContentTransitionManager == nil {
 			callErr = fmt.Errorf("android.app.Activity.getContentTransitionManager is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetContentTransitionManager,
+			midActivityGetContentTransitionManager,
 		)
 		if callErr != nil {
 			return callErr
@@ -734,7 +734,7 @@ func (m *activity) GetContentTransitionManager() (*jni.Object, error) {
 }
 
 // GetCurrentCaller calls android.app.Activity.getCurrentCaller.
-func (m *activity) GetCurrentCaller() (*jni.Object, error) {
+func (m *Activity) GetCurrentCaller() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -742,13 +742,13 @@ func (m *activity) GetCurrentCaller() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetCurrentCaller == nil {
+		if midActivityGetCurrentCaller == nil {
 			callErr = fmt.Errorf("android.app.Activity.getCurrentCaller is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetCurrentCaller,
+			midActivityGetCurrentCaller,
 		)
 		if callErr != nil {
 			return callErr
@@ -759,7 +759,7 @@ func (m *activity) GetCurrentCaller() (*jni.Object, error) {
 }
 
 // GetCurrentFocus calls android.app.Activity.getCurrentFocus.
-func (m *activity) GetCurrentFocus() (*jni.Object, error) {
+func (m *Activity) GetCurrentFocus() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -767,13 +767,13 @@ func (m *activity) GetCurrentFocus() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetCurrentFocus == nil {
+		if midActivityGetCurrentFocus == nil {
 			callErr = fmt.Errorf("android.app.Activity.getCurrentFocus is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetCurrentFocus,
+			midActivityGetCurrentFocus,
 		)
 		if callErr != nil {
 			return callErr
@@ -784,7 +784,7 @@ func (m *activity) GetCurrentFocus() (*jni.Object, error) {
 }
 
 // GetFragmentManager calls android.app.Activity.getFragmentManager.
-func (m *activity) GetFragmentManager() (*jni.Object, error) {
+func (m *Activity) GetFragmentManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -792,13 +792,13 @@ func (m *activity) GetFragmentManager() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetFragmentManager == nil {
+		if midActivityGetFragmentManager == nil {
 			callErr = fmt.Errorf("android.app.Activity.getFragmentManager is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetFragmentManager,
+			midActivityGetFragmentManager,
 		)
 		if callErr != nil {
 			return callErr
@@ -809,7 +809,7 @@ func (m *activity) GetFragmentManager() (*jni.Object, error) {
 }
 
 // GetInitialCaller calls android.app.Activity.getInitialCaller.
-func (m *activity) GetInitialCaller() (*jni.Object, error) {
+func (m *Activity) GetInitialCaller() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -817,13 +817,13 @@ func (m *activity) GetInitialCaller() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetInitialCaller == nil {
+		if midActivityGetInitialCaller == nil {
 			callErr = fmt.Errorf("android.app.Activity.getInitialCaller is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetInitialCaller,
+			midActivityGetInitialCaller,
 		)
 		if callErr != nil {
 			return callErr
@@ -834,7 +834,7 @@ func (m *activity) GetInitialCaller() (*jni.Object, error) {
 }
 
 // GetIntent calls android.app.Activity.getIntent.
-func (m *activity) GetIntent() (*jni.Object, error) {
+func (m *Activity) GetIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -842,13 +842,13 @@ func (m *activity) GetIntent() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetIntent == nil {
+		if midActivityGetIntent == nil {
 			callErr = fmt.Errorf("android.app.Activity.getIntent is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetIntent,
+			midActivityGetIntent,
 		)
 		if callErr != nil {
 			return callErr
@@ -859,7 +859,7 @@ func (m *activity) GetIntent() (*jni.Object, error) {
 }
 
 // GetLastNonConfigurationInstance calls android.app.Activity.getLastNonConfigurationInstance.
-func (m *activity) GetLastNonConfigurationInstance() (*jni.Object, error) {
+func (m *Activity) GetLastNonConfigurationInstance() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -867,13 +867,13 @@ func (m *activity) GetLastNonConfigurationInstance() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetLastNonConfigurationInstance == nil {
+		if midActivityGetLastNonConfigurationInstance == nil {
 			callErr = fmt.Errorf("android.app.Activity.getLastNonConfigurationInstance is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetLastNonConfigurationInstance,
+			midActivityGetLastNonConfigurationInstance,
 		)
 		if callErr != nil {
 			return callErr
@@ -884,7 +884,7 @@ func (m *activity) GetLastNonConfigurationInstance() (*jni.Object, error) {
 }
 
 // GetLaunchedFromPackage calls android.app.Activity.getLaunchedFromPackage.
-func (m *activity) GetLaunchedFromPackage() (string, error) {
+func (m *Activity) GetLaunchedFromPackage() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -892,13 +892,13 @@ func (m *activity) GetLaunchedFromPackage() (string, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetLaunchedFromPackage == nil {
+		if midActivityGetLaunchedFromPackage == nil {
 			callErr = fmt.Errorf("android.app.Activity.getLaunchedFromPackage is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midactivityGetLaunchedFromPackage,
+			midActivityGetLaunchedFromPackage,
 		)
 		if callErr != nil {
 			return callErr
@@ -910,7 +910,7 @@ func (m *activity) GetLaunchedFromPackage() (string, error) {
 }
 
 // GetLaunchedFromUid calls android.app.Activity.getLaunchedFromUid.
-func (m *activity) GetLaunchedFromUid() (int32, error) {
+func (m *Activity) GetLaunchedFromUid() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -918,13 +918,13 @@ func (m *activity) GetLaunchedFromUid() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetLaunchedFromUid == nil {
+		if midActivityGetLaunchedFromUid == nil {
 			callErr = fmt.Errorf("android.app.Activity.getLaunchedFromUid is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midactivityGetLaunchedFromUid,
+			midActivityGetLaunchedFromUid,
 		)
 		if callErr != nil {
 			return callErr
@@ -935,7 +935,7 @@ func (m *activity) GetLaunchedFromUid() (int32, error) {
 }
 
 // GetLayoutInflater calls android.app.Activity.getLayoutInflater.
-func (m *activity) GetLayoutInflater() (*jni.Object, error) {
+func (m *Activity) GetLayoutInflater() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -943,13 +943,13 @@ func (m *activity) GetLayoutInflater() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetLayoutInflater == nil {
+		if midActivityGetLayoutInflater == nil {
 			callErr = fmt.Errorf("android.app.Activity.getLayoutInflater is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetLayoutInflater,
+			midActivityGetLayoutInflater,
 		)
 		if callErr != nil {
 			return callErr
@@ -960,7 +960,7 @@ func (m *activity) GetLayoutInflater() (*jni.Object, error) {
 }
 
 // GetLoaderManager calls android.app.Activity.getLoaderManager.
-func (m *activity) GetLoaderManager() (*jni.Object, error) {
+func (m *Activity) GetLoaderManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -968,13 +968,13 @@ func (m *activity) GetLoaderManager() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetLoaderManager == nil {
+		if midActivityGetLoaderManager == nil {
 			callErr = fmt.Errorf("android.app.Activity.getLoaderManager is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetLoaderManager,
+			midActivityGetLoaderManager,
 		)
 		if callErr != nil {
 			return callErr
@@ -985,7 +985,7 @@ func (m *activity) GetLoaderManager() (*jni.Object, error) {
 }
 
 // GetLocalClassName calls android.app.Activity.getLocalClassName.
-func (m *activity) GetLocalClassName() (string, error) {
+func (m *Activity) GetLocalClassName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -993,13 +993,13 @@ func (m *activity) GetLocalClassName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetLocalClassName == nil {
+		if midActivityGetLocalClassName == nil {
 			callErr = fmt.Errorf("android.app.Activity.getLocalClassName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midactivityGetLocalClassName,
+			midActivityGetLocalClassName,
 		)
 		if callErr != nil {
 			return callErr
@@ -1011,7 +1011,7 @@ func (m *activity) GetLocalClassName() (string, error) {
 }
 
 // GetMaxNumPictureInPictureActions calls android.app.Activity.getMaxNumPictureInPictureActions.
-func (m *activity) GetMaxNumPictureInPictureActions() (int32, error) {
+func (m *Activity) GetMaxNumPictureInPictureActions() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1019,13 +1019,13 @@ func (m *activity) GetMaxNumPictureInPictureActions() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetMaxNumPictureInPictureActions == nil {
+		if midActivityGetMaxNumPictureInPictureActions == nil {
 			callErr = fmt.Errorf("android.app.Activity.getMaxNumPictureInPictureActions is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midactivityGetMaxNumPictureInPictureActions,
+			midActivityGetMaxNumPictureInPictureActions,
 		)
 		if callErr != nil {
 			return callErr
@@ -1036,7 +1036,7 @@ func (m *activity) GetMaxNumPictureInPictureActions() (int32, error) {
 }
 
 // GetMenuInflater calls android.app.Activity.getMenuInflater.
-func (m *activity) GetMenuInflater() (*jni.Object, error) {
+func (m *Activity) GetMenuInflater() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1044,13 +1044,13 @@ func (m *activity) GetMenuInflater() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetMenuInflater == nil {
+		if midActivityGetMenuInflater == nil {
 			callErr = fmt.Errorf("android.app.Activity.getMenuInflater is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetMenuInflater,
+			midActivityGetMenuInflater,
 		)
 		if callErr != nil {
 			return callErr
@@ -1061,7 +1061,7 @@ func (m *activity) GetMenuInflater() (*jni.Object, error) {
 }
 
 // GetOnBackInvokedDispatcher calls android.app.Activity.getOnBackInvokedDispatcher.
-func (m *activity) GetOnBackInvokedDispatcher() (*jni.Object, error) {
+func (m *Activity) GetOnBackInvokedDispatcher() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1069,13 +1069,13 @@ func (m *activity) GetOnBackInvokedDispatcher() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetOnBackInvokedDispatcher == nil {
+		if midActivityGetOnBackInvokedDispatcher == nil {
 			callErr = fmt.Errorf("android.app.Activity.getOnBackInvokedDispatcher is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetOnBackInvokedDispatcher,
+			midActivityGetOnBackInvokedDispatcher,
 		)
 		if callErr != nil {
 			return callErr
@@ -1086,7 +1086,7 @@ func (m *activity) GetOnBackInvokedDispatcher() (*jni.Object, error) {
 }
 
 // GetParentActivityIntent calls android.app.Activity.getParentActivityIntent.
-func (m *activity) GetParentActivityIntent() (*jni.Object, error) {
+func (m *Activity) GetParentActivityIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1094,13 +1094,13 @@ func (m *activity) GetParentActivityIntent() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetParentActivityIntent == nil {
+		if midActivityGetParentActivityIntent == nil {
 			callErr = fmt.Errorf("android.app.Activity.getParentActivityIntent is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetParentActivityIntent,
+			midActivityGetParentActivityIntent,
 		)
 		if callErr != nil {
 			return callErr
@@ -1111,7 +1111,7 @@ func (m *activity) GetParentActivityIntent() (*jni.Object, error) {
 }
 
 // GetPreferences calls android.app.Activity.getPreferences.
-func (m *activity) GetPreferences(arg0 int32) (*jni.Object, error) {
+func (m *Activity) GetPreferences(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1119,14 +1119,14 @@ func (m *activity) GetPreferences(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetPreferences == nil {
+		if midActivityGetPreferences == nil {
 			callErr = fmt.Errorf("android.app.Activity.getPreferences is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetPreferences, jni.IntValue(arg0),
+			midActivityGetPreferences, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -1137,7 +1137,7 @@ func (m *activity) GetPreferences(arg0 int32) (*jni.Object, error) {
 }
 
 // GetReferrer calls android.app.Activity.getReferrer.
-func (m *activity) GetReferrer() (*jni.Object, error) {
+func (m *Activity) GetReferrer() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1145,13 +1145,13 @@ func (m *activity) GetReferrer() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetReferrer == nil {
+		if midActivityGetReferrer == nil {
 			callErr = fmt.Errorf("android.app.Activity.getReferrer is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetReferrer,
+			midActivityGetReferrer,
 		)
 		if callErr != nil {
 			return callErr
@@ -1162,7 +1162,7 @@ func (m *activity) GetReferrer() (*jni.Object, error) {
 }
 
 // GetRequestedOrientation calls android.app.Activity.getRequestedOrientation.
-func (m *activity) GetRequestedOrientation() (int32, error) {
+func (m *Activity) GetRequestedOrientation() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1170,13 +1170,13 @@ func (m *activity) GetRequestedOrientation() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetRequestedOrientation == nil {
+		if midActivityGetRequestedOrientation == nil {
 			callErr = fmt.Errorf("android.app.Activity.getRequestedOrientation is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midactivityGetRequestedOrientation,
+			midActivityGetRequestedOrientation,
 		)
 		if callErr != nil {
 			return callErr
@@ -1187,7 +1187,7 @@ func (m *activity) GetRequestedOrientation() (int32, error) {
 }
 
 // GetSystemService calls android.app.Activity.getSystemService.
-func (m *activity) GetSystemService(arg0 string) (*jni.Object, error) {
+func (m *Activity) GetSystemService(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1195,7 +1195,7 @@ func (m *activity) GetSystemService(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetSystemService == nil {
+		if midActivityGetSystemService == nil {
 			callErr = fmt.Errorf("android.app.Activity.getSystemService is not available on this device")
 			return callErr
 		}
@@ -1206,7 +1206,7 @@ func (m *activity) GetSystemService(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetSystemService, jni.ObjectValue(&jArg0.Object),
+			midActivityGetSystemService, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1217,7 +1217,7 @@ func (m *activity) GetSystemService(arg0 string) (*jni.Object, error) {
 }
 
 // GetTaskId calls android.app.Activity.getTaskId.
-func (m *activity) GetTaskId() (int32, error) {
+func (m *Activity) GetTaskId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1225,13 +1225,13 @@ func (m *activity) GetTaskId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetTaskId == nil {
+		if midActivityGetTaskId == nil {
 			callErr = fmt.Errorf("android.app.Activity.getTaskId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midactivityGetTaskId,
+			midActivityGetTaskId,
 		)
 		if callErr != nil {
 			return callErr
@@ -1242,7 +1242,7 @@ func (m *activity) GetTaskId() (int32, error) {
 }
 
 // GetVoiceInteractor calls android.app.Activity.getVoiceInteractor.
-func (m *activity) GetVoiceInteractor() (*jni.Object, error) {
+func (m *Activity) GetVoiceInteractor() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1250,13 +1250,13 @@ func (m *activity) GetVoiceInteractor() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetVoiceInteractor == nil {
+		if midActivityGetVoiceInteractor == nil {
 			callErr = fmt.Errorf("android.app.Activity.getVoiceInteractor is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetVoiceInteractor,
+			midActivityGetVoiceInteractor,
 		)
 		if callErr != nil {
 			return callErr
@@ -1267,7 +1267,7 @@ func (m *activity) GetVoiceInteractor() (*jni.Object, error) {
 }
 
 // GetWindow calls android.app.Activity.getWindow.
-func (m *activity) GetWindow() (*jni.Object, error) {
+func (m *Activity) GetWindow() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1275,13 +1275,13 @@ func (m *activity) GetWindow() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetWindow == nil {
+		if midActivityGetWindow == nil {
 			callErr = fmt.Errorf("android.app.Activity.getWindow is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetWindow,
+			midActivityGetWindow,
 		)
 		if callErr != nil {
 			return callErr
@@ -1292,7 +1292,7 @@ func (m *activity) GetWindow() (*jni.Object, error) {
 }
 
 // GetWindowManager calls android.app.Activity.getWindowManager.
-func (m *activity) GetWindowManager() (*jni.Object, error) {
+func (m *Activity) GetWindowManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1300,13 +1300,13 @@ func (m *activity) GetWindowManager() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityGetWindowManager == nil {
+		if midActivityGetWindowManager == nil {
 			callErr = fmt.Errorf("android.app.Activity.getWindowManager is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityGetWindowManager,
+			midActivityGetWindowManager,
 		)
 		if callErr != nil {
 			return callErr
@@ -1317,7 +1317,7 @@ func (m *activity) GetWindowManager() (*jni.Object, error) {
 }
 
 // HasWindowFocus calls android.app.Activity.hasWindowFocus.
-func (m *activity) HasWindowFocus() (bool, error) {
+func (m *Activity) HasWindowFocus() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1325,13 +1325,13 @@ func (m *activity) HasWindowFocus() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityHasWindowFocus == nil {
+		if midActivityHasWindowFocus == nil {
 			callErr = fmt.Errorf("android.app.Activity.hasWindowFocus is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityHasWindowFocus,
+			midActivityHasWindowFocus,
 		)
 		if callErr != nil {
 			return callErr
@@ -1343,7 +1343,7 @@ func (m *activity) HasWindowFocus() (bool, error) {
 }
 
 // InvalidateOptionsMenu calls android.app.Activity.invalidateOptionsMenu.
-func (m *activity) InvalidateOptionsMenu() error {
+func (m *Activity) InvalidateOptionsMenu() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1351,13 +1351,13 @@ func (m *activity) InvalidateOptionsMenu() error {
 			callErr = err
 			return err
 		}
-		if midactivityInvalidateOptionsMenu == nil {
+		if midActivityInvalidateOptionsMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.invalidateOptionsMenu is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityInvalidateOptionsMenu,
+			midActivityInvalidateOptionsMenu,
 		)
 		return callErr
 	})
@@ -1365,7 +1365,7 @@ func (m *activity) InvalidateOptionsMenu() error {
 }
 
 // IsActivityTransitionRunning calls android.app.Activity.isActivityTransitionRunning.
-func (m *activity) IsActivityTransitionRunning() (bool, error) {
+func (m *Activity) IsActivityTransitionRunning() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1373,13 +1373,13 @@ func (m *activity) IsActivityTransitionRunning() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsActivityTransitionRunning == nil {
+		if midActivityIsActivityTransitionRunning == nil {
 			callErr = fmt.Errorf("android.app.Activity.isActivityTransitionRunning is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsActivityTransitionRunning,
+			midActivityIsActivityTransitionRunning,
 		)
 		if callErr != nil {
 			return callErr
@@ -1391,7 +1391,7 @@ func (m *activity) IsActivityTransitionRunning() (bool, error) {
 }
 
 // IsChangingConfigurations calls android.app.Activity.isChangingConfigurations.
-func (m *activity) IsChangingConfigurations() (bool, error) {
+func (m *Activity) IsChangingConfigurations() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1399,13 +1399,13 @@ func (m *activity) IsChangingConfigurations() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsChangingConfigurations == nil {
+		if midActivityIsChangingConfigurations == nil {
 			callErr = fmt.Errorf("android.app.Activity.isChangingConfigurations is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsChangingConfigurations,
+			midActivityIsChangingConfigurations,
 		)
 		if callErr != nil {
 			return callErr
@@ -1417,7 +1417,7 @@ func (m *activity) IsChangingConfigurations() (bool, error) {
 }
 
 // IsDestroyed calls android.app.Activity.isDestroyed.
-func (m *activity) IsDestroyed() (bool, error) {
+func (m *Activity) IsDestroyed() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1425,13 +1425,13 @@ func (m *activity) IsDestroyed() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsDestroyed == nil {
+		if midActivityIsDestroyed == nil {
 			callErr = fmt.Errorf("android.app.Activity.isDestroyed is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsDestroyed,
+			midActivityIsDestroyed,
 		)
 		if callErr != nil {
 			return callErr
@@ -1443,7 +1443,7 @@ func (m *activity) IsDestroyed() (bool, error) {
 }
 
 // IsFinishing calls android.app.Activity.isFinishing.
-func (m *activity) IsFinishing() (bool, error) {
+func (m *Activity) IsFinishing() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1451,13 +1451,13 @@ func (m *activity) IsFinishing() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsFinishing == nil {
+		if midActivityIsFinishing == nil {
 			callErr = fmt.Errorf("android.app.Activity.isFinishing is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsFinishing,
+			midActivityIsFinishing,
 		)
 		if callErr != nil {
 			return callErr
@@ -1469,7 +1469,7 @@ func (m *activity) IsFinishing() (bool, error) {
 }
 
 // IsImmersive calls android.app.Activity.isImmersive.
-func (m *activity) IsImmersive() (bool, error) {
+func (m *Activity) IsImmersive() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1477,13 +1477,13 @@ func (m *activity) IsImmersive() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsImmersive == nil {
+		if midActivityIsImmersive == nil {
 			callErr = fmt.Errorf("android.app.Activity.isImmersive is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsImmersive,
+			midActivityIsImmersive,
 		)
 		if callErr != nil {
 			return callErr
@@ -1495,7 +1495,7 @@ func (m *activity) IsImmersive() (bool, error) {
 }
 
 // IsInMultiWindowMode calls android.app.Activity.isInMultiWindowMode.
-func (m *activity) IsInMultiWindowMode() (bool, error) {
+func (m *Activity) IsInMultiWindowMode() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1503,13 +1503,13 @@ func (m *activity) IsInMultiWindowMode() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsInMultiWindowMode == nil {
+		if midActivityIsInMultiWindowMode == nil {
 			callErr = fmt.Errorf("android.app.Activity.isInMultiWindowMode is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsInMultiWindowMode,
+			midActivityIsInMultiWindowMode,
 		)
 		if callErr != nil {
 			return callErr
@@ -1521,7 +1521,7 @@ func (m *activity) IsInMultiWindowMode() (bool, error) {
 }
 
 // IsInPictureInPictureMode calls android.app.Activity.isInPictureInPictureMode.
-func (m *activity) IsInPictureInPictureMode() (bool, error) {
+func (m *Activity) IsInPictureInPictureMode() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1529,13 +1529,13 @@ func (m *activity) IsInPictureInPictureMode() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsInPictureInPictureMode == nil {
+		if midActivityIsInPictureInPictureMode == nil {
 			callErr = fmt.Errorf("android.app.Activity.isInPictureInPictureMode is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsInPictureInPictureMode,
+			midActivityIsInPictureInPictureMode,
 		)
 		if callErr != nil {
 			return callErr
@@ -1547,7 +1547,7 @@ func (m *activity) IsInPictureInPictureMode() (bool, error) {
 }
 
 // IsLaunchedFromBubble calls android.app.Activity.isLaunchedFromBubble.
-func (m *activity) IsLaunchedFromBubble() (bool, error) {
+func (m *Activity) IsLaunchedFromBubble() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1555,13 +1555,13 @@ func (m *activity) IsLaunchedFromBubble() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsLaunchedFromBubble == nil {
+		if midActivityIsLaunchedFromBubble == nil {
 			callErr = fmt.Errorf("android.app.Activity.isLaunchedFromBubble is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsLaunchedFromBubble,
+			midActivityIsLaunchedFromBubble,
 		)
 		if callErr != nil {
 			return callErr
@@ -1573,7 +1573,7 @@ func (m *activity) IsLaunchedFromBubble() (bool, error) {
 }
 
 // IsLocalVoiceInteractionSupported calls android.app.Activity.isLocalVoiceInteractionSupported.
-func (m *activity) IsLocalVoiceInteractionSupported() (bool, error) {
+func (m *Activity) IsLocalVoiceInteractionSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1581,13 +1581,13 @@ func (m *activity) IsLocalVoiceInteractionSupported() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsLocalVoiceInteractionSupported == nil {
+		if midActivityIsLocalVoiceInteractionSupported == nil {
 			callErr = fmt.Errorf("android.app.Activity.isLocalVoiceInteractionSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsLocalVoiceInteractionSupported,
+			midActivityIsLocalVoiceInteractionSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -1599,7 +1599,7 @@ func (m *activity) IsLocalVoiceInteractionSupported() (bool, error) {
 }
 
 // IsTaskRoot calls android.app.Activity.isTaskRoot.
-func (m *activity) IsTaskRoot() (bool, error) {
+func (m *Activity) IsTaskRoot() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1607,13 +1607,13 @@ func (m *activity) IsTaskRoot() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsTaskRoot == nil {
+		if midActivityIsTaskRoot == nil {
 			callErr = fmt.Errorf("android.app.Activity.isTaskRoot is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsTaskRoot,
+			midActivityIsTaskRoot,
 		)
 		if callErr != nil {
 			return callErr
@@ -1625,7 +1625,7 @@ func (m *activity) IsTaskRoot() (bool, error) {
 }
 
 // IsVoiceInteraction calls android.app.Activity.isVoiceInteraction.
-func (m *activity) IsVoiceInteraction() (bool, error) {
+func (m *Activity) IsVoiceInteraction() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1633,13 +1633,13 @@ func (m *activity) IsVoiceInteraction() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsVoiceInteraction == nil {
+		if midActivityIsVoiceInteraction == nil {
 			callErr = fmt.Errorf("android.app.Activity.isVoiceInteraction is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsVoiceInteraction,
+			midActivityIsVoiceInteraction,
 		)
 		if callErr != nil {
 			return callErr
@@ -1651,7 +1651,7 @@ func (m *activity) IsVoiceInteraction() (bool, error) {
 }
 
 // IsVoiceInteractionRoot calls android.app.Activity.isVoiceInteractionRoot.
-func (m *activity) IsVoiceInteractionRoot() (bool, error) {
+func (m *Activity) IsVoiceInteractionRoot() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1659,13 +1659,13 @@ func (m *activity) IsVoiceInteractionRoot() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityIsVoiceInteractionRoot == nil {
+		if midActivityIsVoiceInteractionRoot == nil {
 			callErr = fmt.Errorf("android.app.Activity.isVoiceInteractionRoot is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityIsVoiceInteractionRoot,
+			midActivityIsVoiceInteractionRoot,
 		)
 		if callErr != nil {
 			return callErr
@@ -1677,7 +1677,7 @@ func (m *activity) IsVoiceInteractionRoot() (bool, error) {
 }
 
 // MoveTaskToBack calls android.app.Activity.moveTaskToBack.
-func (m *activity) MoveTaskToBack(arg0 bool) (bool, error) {
+func (m *Activity) MoveTaskToBack(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1685,7 +1685,7 @@ func (m *activity) MoveTaskToBack(arg0 bool) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityMoveTaskToBack == nil {
+		if midActivityMoveTaskToBack == nil {
 			callErr = fmt.Errorf("android.app.Activity.moveTaskToBack is not available on this device")
 			return callErr
 		}
@@ -1696,7 +1696,7 @@ func (m *activity) MoveTaskToBack(arg0 bool) (bool, error) {
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityMoveTaskToBack, jni.BooleanValue(jArg0),
+			midActivityMoveTaskToBack, jni.BooleanValue(jArg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -1708,7 +1708,7 @@ func (m *activity) MoveTaskToBack(arg0 bool) (bool, error) {
 }
 
 // NavigateUpTo calls android.app.Activity.navigateUpTo.
-func (m *activity) NavigateUpTo(arg0 *jni.Object) (bool, error) {
+func (m *Activity) NavigateUpTo(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1716,14 +1716,14 @@ func (m *activity) NavigateUpTo(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityNavigateUpTo == nil {
+		if midActivityNavigateUpTo == nil {
 			callErr = fmt.Errorf("android.app.Activity.navigateUpTo is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityNavigateUpTo, jni.ObjectValue(arg0),
+			midActivityNavigateUpTo, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -1735,7 +1735,7 @@ func (m *activity) NavigateUpTo(arg0 *jni.Object) (bool, error) {
 }
 
 // NavigateUpToFromChild calls android.app.Activity.navigateUpToFromChild.
-func (m *activity) NavigateUpToFromChild(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
+func (m *Activity) NavigateUpToFromChild(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1743,14 +1743,14 @@ func (m *activity) NavigateUpToFromChild(arg0 *jni.Object, arg1 *jni.Object) (bo
 			callErr = err
 			return err
 		}
-		if midactivityNavigateUpToFromChild == nil {
+		if midActivityNavigateUpToFromChild == nil {
 			callErr = fmt.Errorf("android.app.Activity.navigateUpToFromChild is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityNavigateUpToFromChild, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityNavigateUpToFromChild, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1762,7 +1762,7 @@ func (m *activity) NavigateUpToFromChild(arg0 *jni.Object, arg1 *jni.Object) (bo
 }
 
 // OnActionModeFinished calls android.app.Activity.onActionModeFinished.
-func (m *activity) OnActionModeFinished(arg0 *jni.Object) error {
+func (m *Activity) OnActionModeFinished(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1770,14 +1770,14 @@ func (m *activity) OnActionModeFinished(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnActionModeFinished == nil {
+		if midActivityOnActionModeFinished == nil {
 			callErr = fmt.Errorf("android.app.Activity.onActionModeFinished is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnActionModeFinished, jni.ObjectValue(arg0),
+			midActivityOnActionModeFinished, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1785,7 +1785,7 @@ func (m *activity) OnActionModeFinished(arg0 *jni.Object) error {
 }
 
 // OnActionModeStarted calls android.app.Activity.onActionModeStarted.
-func (m *activity) OnActionModeStarted(arg0 *jni.Object) error {
+func (m *Activity) OnActionModeStarted(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1793,14 +1793,14 @@ func (m *activity) OnActionModeStarted(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnActionModeStarted == nil {
+		if midActivityOnActionModeStarted == nil {
 			callErr = fmt.Errorf("android.app.Activity.onActionModeStarted is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnActionModeStarted, jni.ObjectValue(arg0),
+			midActivityOnActionModeStarted, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1808,7 +1808,7 @@ func (m *activity) OnActionModeStarted(arg0 *jni.Object) error {
 }
 
 // OnActivityReenter calls android.app.Activity.onActivityReenter.
-func (m *activity) OnActivityReenter(arg0 int32, arg1 *jni.Object) error {
+func (m *Activity) OnActivityReenter(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1816,14 +1816,14 @@ func (m *activity) OnActivityReenter(arg0 int32, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnActivityReenter == nil {
+		if midActivityOnActivityReenter == nil {
 			callErr = fmt.Errorf("android.app.Activity.onActivityReenter is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnActivityReenter, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnActivityReenter, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1831,7 +1831,7 @@ func (m *activity) OnActivityReenter(arg0 int32, arg1 *jni.Object) error {
 }
 
 // OnActivityResult calls android.app.Activity.onActivityResult.
-func (m *activity) OnActivityResult(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Activity) OnActivityResult(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1839,14 +1839,14 @@ func (m *activity) OnActivityResult(arg0 int32, arg1 int32, arg2 *jni.Object, ar
 			callErr = err
 			return err
 		}
-		if midactivityOnActivityResult == nil {
+		if midActivityOnActivityResult == nil {
 			callErr = fmt.Errorf("android.app.Activity.onActivityResult is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnActivityResult, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midActivityOnActivityResult, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -1854,7 +1854,7 @@ func (m *activity) OnActivityResult(arg0 int32, arg1 int32, arg2 *jni.Object, ar
 }
 
 // OnAttachFragment calls android.app.Activity.onAttachFragment.
-func (m *activity) OnAttachFragment(arg0 *jni.Object) error {
+func (m *Activity) OnAttachFragment(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1862,14 +1862,14 @@ func (m *activity) OnAttachFragment(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnAttachFragment == nil {
+		if midActivityOnAttachFragment == nil {
 			callErr = fmt.Errorf("android.app.Activity.onAttachFragment is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnAttachFragment, jni.ObjectValue(arg0),
+			midActivityOnAttachFragment, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1877,7 +1877,7 @@ func (m *activity) OnAttachFragment(arg0 *jni.Object) error {
 }
 
 // OnAttachedToWindow calls android.app.Activity.onAttachedToWindow.
-func (m *activity) OnAttachedToWindow() error {
+func (m *Activity) OnAttachedToWindow() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1885,13 +1885,13 @@ func (m *activity) OnAttachedToWindow() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnAttachedToWindow == nil {
+		if midActivityOnAttachedToWindow == nil {
 			callErr = fmt.Errorf("android.app.Activity.onAttachedToWindow is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnAttachedToWindow,
+			midActivityOnAttachedToWindow,
 		)
 		return callErr
 	})
@@ -1899,7 +1899,7 @@ func (m *activity) OnAttachedToWindow() error {
 }
 
 // OnBackPressed calls android.app.Activity.onBackPressed.
-func (m *activity) OnBackPressed() error {
+func (m *Activity) OnBackPressed() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1907,13 +1907,13 @@ func (m *activity) OnBackPressed() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnBackPressed == nil {
+		if midActivityOnBackPressed == nil {
 			callErr = fmt.Errorf("android.app.Activity.onBackPressed is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnBackPressed,
+			midActivityOnBackPressed,
 		)
 		return callErr
 	})
@@ -1921,7 +1921,7 @@ func (m *activity) OnBackPressed() error {
 }
 
 // OnConfigurationChanged calls android.app.Activity.onConfigurationChanged.
-func (m *activity) OnConfigurationChanged(arg0 *jni.Object) error {
+func (m *Activity) OnConfigurationChanged(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1929,14 +1929,14 @@ func (m *activity) OnConfigurationChanged(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnConfigurationChanged == nil {
+		if midActivityOnConfigurationChanged == nil {
 			callErr = fmt.Errorf("android.app.Activity.onConfigurationChanged is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnConfigurationChanged, jni.ObjectValue(arg0),
+			midActivityOnConfigurationChanged, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1944,7 +1944,7 @@ func (m *activity) OnConfigurationChanged(arg0 *jni.Object) error {
 }
 
 // OnContentChanged calls android.app.Activity.onContentChanged.
-func (m *activity) OnContentChanged() error {
+func (m *Activity) OnContentChanged() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1952,13 +1952,13 @@ func (m *activity) OnContentChanged() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnContentChanged == nil {
+		if midActivityOnContentChanged == nil {
 			callErr = fmt.Errorf("android.app.Activity.onContentChanged is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnContentChanged,
+			midActivityOnContentChanged,
 		)
 		return callErr
 	})
@@ -1966,7 +1966,7 @@ func (m *activity) OnContentChanged() error {
 }
 
 // OnContextItemSelected calls android.app.Activity.onContextItemSelected.
-func (m *activity) OnContextItemSelected(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnContextItemSelected(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1974,14 +1974,14 @@ func (m *activity) OnContextItemSelected(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnContextItemSelected == nil {
+		if midActivityOnContextItemSelected == nil {
 			callErr = fmt.Errorf("android.app.Activity.onContextItemSelected is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnContextItemSelected, jni.ObjectValue(arg0),
+			midActivityOnContextItemSelected, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -1993,7 +1993,7 @@ func (m *activity) OnContextItemSelected(arg0 *jni.Object) (bool, error) {
 }
 
 // OnContextMenuClosed calls android.app.Activity.onContextMenuClosed.
-func (m *activity) OnContextMenuClosed(arg0 *jni.Object) error {
+func (m *Activity) OnContextMenuClosed(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2001,14 +2001,14 @@ func (m *activity) OnContextMenuClosed(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnContextMenuClosed == nil {
+		if midActivityOnContextMenuClosed == nil {
 			callErr = fmt.Errorf("android.app.Activity.onContextMenuClosed is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnContextMenuClosed, jni.ObjectValue(arg0),
+			midActivityOnContextMenuClosed, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -2016,7 +2016,7 @@ func (m *activity) OnContextMenuClosed(arg0 *jni.Object) error {
 }
 
 // OnCreate calls android.app.Activity.onCreate.
-func (m *activity) OnCreate(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) OnCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2024,14 +2024,14 @@ func (m *activity) OnCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnCreate == nil {
+		if midActivityOnCreate == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnCreate, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnCreate, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -2039,7 +2039,7 @@ func (m *activity) OnCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // OnCreateContextMenu calls android.app.Activity.onCreateContextMenu.
-func (m *activity) OnCreateContextMenu(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Activity) OnCreateContextMenu(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2047,14 +2047,14 @@ func (m *activity) OnCreateContextMenu(arg0 *jni.Object, arg1 *jni.Object, arg2 
 			callErr = err
 			return err
 		}
-		if midactivityOnCreateContextMenu == nil {
+		if midActivityOnCreateContextMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreateContextMenu is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnCreateContextMenu, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midActivityOnCreateContextMenu, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -2062,7 +2062,7 @@ func (m *activity) OnCreateContextMenu(arg0 *jni.Object, arg1 *jni.Object, arg2 
 }
 
 // OnCreateDescription calls android.app.Activity.onCreateDescription.
-func (m *activity) OnCreateDescription() (string, error) {
+func (m *Activity) OnCreateDescription() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2070,13 +2070,13 @@ func (m *activity) OnCreateDescription() (string, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnCreateDescription == nil {
+		if midActivityOnCreateDescription == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreateDescription is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midactivityOnCreateDescription,
+			midActivityOnCreateDescription,
 		)
 		if callErr != nil {
 			return callErr
@@ -2088,7 +2088,7 @@ func (m *activity) OnCreateDescription() (string, error) {
 }
 
 // OnCreateNavigateUpTaskStack calls android.app.Activity.onCreateNavigateUpTaskStack.
-func (m *activity) OnCreateNavigateUpTaskStack(arg0 *jni.Object) error {
+func (m *Activity) OnCreateNavigateUpTaskStack(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2096,14 +2096,14 @@ func (m *activity) OnCreateNavigateUpTaskStack(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnCreateNavigateUpTaskStack == nil {
+		if midActivityOnCreateNavigateUpTaskStack == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreateNavigateUpTaskStack is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnCreateNavigateUpTaskStack, jni.ObjectValue(arg0),
+			midActivityOnCreateNavigateUpTaskStack, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -2111,7 +2111,7 @@ func (m *activity) OnCreateNavigateUpTaskStack(arg0 *jni.Object) error {
 }
 
 // OnCreateOptionsMenu calls android.app.Activity.onCreateOptionsMenu.
-func (m *activity) OnCreateOptionsMenu(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnCreateOptionsMenu(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2119,14 +2119,14 @@ func (m *activity) OnCreateOptionsMenu(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnCreateOptionsMenu == nil {
+		if midActivityOnCreateOptionsMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreateOptionsMenu is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnCreateOptionsMenu, jni.ObjectValue(arg0),
+			midActivityOnCreateOptionsMenu, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2138,7 +2138,7 @@ func (m *activity) OnCreateOptionsMenu(arg0 *jni.Object) (bool, error) {
 }
 
 // OnCreatePanelMenu calls android.app.Activity.onCreatePanelMenu.
-func (m *activity) OnCreatePanelMenu(arg0 int32, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnCreatePanelMenu(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2146,14 +2146,14 @@ func (m *activity) OnCreatePanelMenu(arg0 int32, arg1 *jni.Object) (bool, error)
 			callErr = err
 			return err
 		}
-		if midactivityOnCreatePanelMenu == nil {
+		if midActivityOnCreatePanelMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreatePanelMenu is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnCreatePanelMenu, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnCreatePanelMenu, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2165,7 +2165,7 @@ func (m *activity) OnCreatePanelMenu(arg0 int32, arg1 *jni.Object) (bool, error)
 }
 
 // OnCreatePanelView calls android.app.Activity.onCreatePanelView.
-func (m *activity) OnCreatePanelView(arg0 int32) (*jni.Object, error) {
+func (m *Activity) OnCreatePanelView(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2173,14 +2173,14 @@ func (m *activity) OnCreatePanelView(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnCreatePanelView == nil {
+		if midActivityOnCreatePanelView == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreatePanelView is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityOnCreatePanelView, jni.IntValue(arg0),
+			midActivityOnCreatePanelView, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2191,7 +2191,7 @@ func (m *activity) OnCreatePanelView(arg0 int32) (*jni.Object, error) {
 }
 
 // OnCreateThumbnail calls android.app.Activity.onCreateThumbnail.
-func (m *activity) OnCreateThumbnail(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnCreateThumbnail(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2199,14 +2199,14 @@ func (m *activity) OnCreateThumbnail(arg0 *jni.Object, arg1 *jni.Object) (bool, 
 			callErr = err
 			return err
 		}
-		if midactivityOnCreateThumbnail == nil {
+		if midActivityOnCreateThumbnail == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreateThumbnail is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnCreateThumbnail, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnCreateThumbnail, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2218,7 +2218,7 @@ func (m *activity) OnCreateThumbnail(arg0 *jni.Object, arg1 *jni.Object) (bool, 
 }
 
 // OnCreateView4 calls android.app.Activity.onCreateView.
-func (m *activity) OnCreateView4(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Activity) OnCreateView4(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2226,7 +2226,7 @@ func (m *activity) OnCreateView4(arg0 *jni.Object, arg1 string, arg2 *jni.Object
 			callErr = err
 			return err
 		}
-		if midactivityOnCreateView4 == nil {
+		if midActivityOnCreateView4 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreateView is not available on this device")
 			return callErr
 		}
@@ -2238,7 +2238,7 @@ func (m *activity) OnCreateView4(arg0 *jni.Object, arg1 string, arg2 *jni.Object
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityOnCreateView4, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midActivityOnCreateView4, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		if callErr != nil {
 			return callErr
@@ -2249,7 +2249,7 @@ func (m *activity) OnCreateView4(arg0 *jni.Object, arg1 string, arg2 *jni.Object
 }
 
 // OnCreateView3_1 calls android.app.Activity.onCreateView.
-func (m *activity) OnCreateView3_1(arg0 string, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Activity) OnCreateView3_1(arg0 string, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2257,7 +2257,7 @@ func (m *activity) OnCreateView3_1(arg0 string, arg1 *jni.Object, arg2 *jni.Obje
 			callErr = err
 			return err
 		}
-		if midactivityOnCreateView3_1 == nil {
+		if midActivityOnCreateView3_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onCreateView is not available on this device")
 			return callErr
 		}
@@ -2268,7 +2268,7 @@ func (m *activity) OnCreateView3_1(arg0 string, arg1 *jni.Object, arg2 *jni.Obje
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityOnCreateView3_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midActivityOnCreateView3_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -2279,7 +2279,7 @@ func (m *activity) OnCreateView3_1(arg0 string, arg1 *jni.Object, arg2 *jni.Obje
 }
 
 // OnDetachedFromWindow calls android.app.Activity.onDetachedFromWindow.
-func (m *activity) OnDetachedFromWindow() error {
+func (m *Activity) OnDetachedFromWindow() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2287,13 +2287,13 @@ func (m *activity) OnDetachedFromWindow() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnDetachedFromWindow == nil {
+		if midActivityOnDetachedFromWindow == nil {
 			callErr = fmt.Errorf("android.app.Activity.onDetachedFromWindow is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnDetachedFromWindow,
+			midActivityOnDetachedFromWindow,
 		)
 		return callErr
 	})
@@ -2301,7 +2301,7 @@ func (m *activity) OnDetachedFromWindow() error {
 }
 
 // OnEnterAnimationComplete calls android.app.Activity.onEnterAnimationComplete.
-func (m *activity) OnEnterAnimationComplete() error {
+func (m *Activity) OnEnterAnimationComplete() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2309,13 +2309,13 @@ func (m *activity) OnEnterAnimationComplete() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnEnterAnimationComplete == nil {
+		if midActivityOnEnterAnimationComplete == nil {
 			callErr = fmt.Errorf("android.app.Activity.onEnterAnimationComplete is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnEnterAnimationComplete,
+			midActivityOnEnterAnimationComplete,
 		)
 		return callErr
 	})
@@ -2323,7 +2323,7 @@ func (m *activity) OnEnterAnimationComplete() error {
 }
 
 // OnGenericMotionEvent calls android.app.Activity.onGenericMotionEvent.
-func (m *activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2331,14 +2331,14 @@ func (m *activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnGenericMotionEvent == nil {
+		if midActivityOnGenericMotionEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.onGenericMotionEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnGenericMotionEvent, jni.ObjectValue(arg0),
+			midActivityOnGenericMotionEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2350,7 +2350,7 @@ func (m *activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // OnGetDirectActions calls android.app.Activity.onGetDirectActions.
-func (m *activity) OnGetDirectActions(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) OnGetDirectActions(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2358,14 +2358,14 @@ func (m *activity) OnGetDirectActions(arg0 *jni.Object, arg1 *jni.Object) error 
 			callErr = err
 			return err
 		}
-		if midactivityOnGetDirectActions == nil {
+		if midActivityOnGetDirectActions == nil {
 			callErr = fmt.Errorf("android.app.Activity.onGetDirectActions is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnGetDirectActions, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnGetDirectActions, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -2373,7 +2373,7 @@ func (m *activity) OnGetDirectActions(arg0 *jni.Object, arg1 *jni.Object) error 
 }
 
 // OnKeyDown calls android.app.Activity.onKeyDown.
-func (m *activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2381,14 +2381,14 @@ func (m *activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnKeyDown == nil {
+		if midActivityOnKeyDown == nil {
 			callErr = fmt.Errorf("android.app.Activity.onKeyDown is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnKeyDown, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnKeyDown, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2400,7 +2400,7 @@ func (m *activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
 }
 
 // OnKeyLongPress calls android.app.Activity.onKeyLongPress.
-func (m *activity) OnKeyLongPress(arg0 int32, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnKeyLongPress(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2408,14 +2408,14 @@ func (m *activity) OnKeyLongPress(arg0 int32, arg1 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnKeyLongPress == nil {
+		if midActivityOnKeyLongPress == nil {
 			callErr = fmt.Errorf("android.app.Activity.onKeyLongPress is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnKeyLongPress, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnKeyLongPress, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2427,7 +2427,7 @@ func (m *activity) OnKeyLongPress(arg0 int32, arg1 *jni.Object) (bool, error) {
 }
 
 // OnKeyMultiple calls android.app.Activity.onKeyMultiple.
-func (m *activity) OnKeyMultiple(arg0 int32, arg1 int32, arg2 *jni.Object) (bool, error) {
+func (m *Activity) OnKeyMultiple(arg0 int32, arg1 int32, arg2 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2435,14 +2435,14 @@ func (m *activity) OnKeyMultiple(arg0 int32, arg1 int32, arg2 *jni.Object) (bool
 			callErr = err
 			return err
 		}
-		if midactivityOnKeyMultiple == nil {
+		if midActivityOnKeyMultiple == nil {
 			callErr = fmt.Errorf("android.app.Activity.onKeyMultiple is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnKeyMultiple, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midActivityOnKeyMultiple, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -2454,7 +2454,7 @@ func (m *activity) OnKeyMultiple(arg0 int32, arg1 int32, arg2 *jni.Object) (bool
 }
 
 // OnKeyShortcut calls android.app.Activity.onKeyShortcut.
-func (m *activity) OnKeyShortcut(arg0 int32, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnKeyShortcut(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2462,14 +2462,14 @@ func (m *activity) OnKeyShortcut(arg0 int32, arg1 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnKeyShortcut == nil {
+		if midActivityOnKeyShortcut == nil {
 			callErr = fmt.Errorf("android.app.Activity.onKeyShortcut is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnKeyShortcut, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnKeyShortcut, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2481,7 +2481,7 @@ func (m *activity) OnKeyShortcut(arg0 int32, arg1 *jni.Object) (bool, error) {
 }
 
 // OnKeyUp calls android.app.Activity.onKeyUp.
-func (m *activity) OnKeyUp(arg0 int32, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnKeyUp(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2489,14 +2489,14 @@ func (m *activity) OnKeyUp(arg0 int32, arg1 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnKeyUp == nil {
+		if midActivityOnKeyUp == nil {
 			callErr = fmt.Errorf("android.app.Activity.onKeyUp is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnKeyUp, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnKeyUp, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2508,7 +2508,7 @@ func (m *activity) OnKeyUp(arg0 int32, arg1 *jni.Object) (bool, error) {
 }
 
 // OnLocalVoiceInteractionStarted calls android.app.Activity.onLocalVoiceInteractionStarted.
-func (m *activity) OnLocalVoiceInteractionStarted() error {
+func (m *Activity) OnLocalVoiceInteractionStarted() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2516,13 +2516,13 @@ func (m *activity) OnLocalVoiceInteractionStarted() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnLocalVoiceInteractionStarted == nil {
+		if midActivityOnLocalVoiceInteractionStarted == nil {
 			callErr = fmt.Errorf("android.app.Activity.onLocalVoiceInteractionStarted is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnLocalVoiceInteractionStarted,
+			midActivityOnLocalVoiceInteractionStarted,
 		)
 		return callErr
 	})
@@ -2530,7 +2530,7 @@ func (m *activity) OnLocalVoiceInteractionStarted() error {
 }
 
 // OnLocalVoiceInteractionStopped calls android.app.Activity.onLocalVoiceInteractionStopped.
-func (m *activity) OnLocalVoiceInteractionStopped() error {
+func (m *Activity) OnLocalVoiceInteractionStopped() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2538,13 +2538,13 @@ func (m *activity) OnLocalVoiceInteractionStopped() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnLocalVoiceInteractionStopped == nil {
+		if midActivityOnLocalVoiceInteractionStopped == nil {
 			callErr = fmt.Errorf("android.app.Activity.onLocalVoiceInteractionStopped is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnLocalVoiceInteractionStopped,
+			midActivityOnLocalVoiceInteractionStopped,
 		)
 		return callErr
 	})
@@ -2552,7 +2552,7 @@ func (m *activity) OnLocalVoiceInteractionStopped() error {
 }
 
 // OnLowMemory calls android.app.Activity.onLowMemory.
-func (m *activity) OnLowMemory() error {
+func (m *Activity) OnLowMemory() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2560,13 +2560,13 @@ func (m *activity) OnLowMemory() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnLowMemory == nil {
+		if midActivityOnLowMemory == nil {
 			callErr = fmt.Errorf("android.app.Activity.onLowMemory is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnLowMemory,
+			midActivityOnLowMemory,
 		)
 		return callErr
 	})
@@ -2574,7 +2574,7 @@ func (m *activity) OnLowMemory() error {
 }
 
 // OnMenuItemSelected calls android.app.Activity.onMenuItemSelected.
-func (m *activity) OnMenuItemSelected(arg0 int32, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnMenuItemSelected(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2582,14 +2582,14 @@ func (m *activity) OnMenuItemSelected(arg0 int32, arg1 *jni.Object) (bool, error
 			callErr = err
 			return err
 		}
-		if midactivityOnMenuItemSelected == nil {
+		if midActivityOnMenuItemSelected == nil {
 			callErr = fmt.Errorf("android.app.Activity.onMenuItemSelected is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnMenuItemSelected, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnMenuItemSelected, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2601,7 +2601,7 @@ func (m *activity) OnMenuItemSelected(arg0 int32, arg1 *jni.Object) (bool, error
 }
 
 // OnMenuOpened calls android.app.Activity.onMenuOpened.
-func (m *activity) OnMenuOpened(arg0 int32, arg1 *jni.Object) (bool, error) {
+func (m *Activity) OnMenuOpened(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2609,14 +2609,14 @@ func (m *activity) OnMenuOpened(arg0 int32, arg1 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnMenuOpened == nil {
+		if midActivityOnMenuOpened == nil {
 			callErr = fmt.Errorf("android.app.Activity.onMenuOpened is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnMenuOpened, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnMenuOpened, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -2628,7 +2628,7 @@ func (m *activity) OnMenuOpened(arg0 int32, arg1 *jni.Object) (bool, error) {
 }
 
 // OnMultiWindowModeChanged1 calls android.app.Activity.onMultiWindowModeChanged.
-func (m *activity) OnMultiWindowModeChanged1(arg0 bool) error {
+func (m *Activity) OnMultiWindowModeChanged1(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2636,7 +2636,7 @@ func (m *activity) OnMultiWindowModeChanged1(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnMultiWindowModeChanged1 == nil {
+		if midActivityOnMultiWindowModeChanged1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onMultiWindowModeChanged is not available on this device")
 			return callErr
 		}
@@ -2647,7 +2647,7 @@ func (m *activity) OnMultiWindowModeChanged1(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnMultiWindowModeChanged1, jni.BooleanValue(jArg0),
+			midActivityOnMultiWindowModeChanged1, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -2655,7 +2655,7 @@ func (m *activity) OnMultiWindowModeChanged1(arg0 bool) error {
 }
 
 // OnMultiWindowModeChanged2_1 calls android.app.Activity.onMultiWindowModeChanged.
-func (m *activity) OnMultiWindowModeChanged2_1(arg0 bool, arg1 *jni.Object) error {
+func (m *Activity) OnMultiWindowModeChanged2_1(arg0 bool, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2663,7 +2663,7 @@ func (m *activity) OnMultiWindowModeChanged2_1(arg0 bool, arg1 *jni.Object) erro
 			callErr = err
 			return err
 		}
-		if midactivityOnMultiWindowModeChanged2_1 == nil {
+		if midActivityOnMultiWindowModeChanged2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onMultiWindowModeChanged is not available on this device")
 			return callErr
 		}
@@ -2674,7 +2674,7 @@ func (m *activity) OnMultiWindowModeChanged2_1(arg0 bool, arg1 *jni.Object) erro
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnMultiWindowModeChanged2_1, jni.BooleanValue(jArg0), jni.ObjectValue(arg1),
+			midActivityOnMultiWindowModeChanged2_1, jni.BooleanValue(jArg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -2682,7 +2682,7 @@ func (m *activity) OnMultiWindowModeChanged2_1(arg0 bool, arg1 *jni.Object) erro
 }
 
 // OnNavigateUp calls android.app.Activity.onNavigateUp.
-func (m *activity) OnNavigateUp() (bool, error) {
+func (m *Activity) OnNavigateUp() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2690,13 +2690,13 @@ func (m *activity) OnNavigateUp() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnNavigateUp == nil {
+		if midActivityOnNavigateUp == nil {
 			callErr = fmt.Errorf("android.app.Activity.onNavigateUp is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnNavigateUp,
+			midActivityOnNavigateUp,
 		)
 		if callErr != nil {
 			return callErr
@@ -2708,7 +2708,7 @@ func (m *activity) OnNavigateUp() (bool, error) {
 }
 
 // OnNavigateUpFromChild calls android.app.Activity.onNavigateUpFromChild.
-func (m *activity) OnNavigateUpFromChild(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnNavigateUpFromChild(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2716,14 +2716,14 @@ func (m *activity) OnNavigateUpFromChild(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnNavigateUpFromChild == nil {
+		if midActivityOnNavigateUpFromChild == nil {
 			callErr = fmt.Errorf("android.app.Activity.onNavigateUpFromChild is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnNavigateUpFromChild, jni.ObjectValue(arg0),
+			midActivityOnNavigateUpFromChild, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2735,7 +2735,7 @@ func (m *activity) OnNavigateUpFromChild(arg0 *jni.Object) (bool, error) {
 }
 
 // OnNewIntent calls android.app.Activity.onNewIntent.
-func (m *activity) OnNewIntent(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) OnNewIntent(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2743,14 +2743,14 @@ func (m *activity) OnNewIntent(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnNewIntent == nil {
+		if midActivityOnNewIntent == nil {
 			callErr = fmt.Errorf("android.app.Activity.onNewIntent is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnNewIntent, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnNewIntent, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -2758,7 +2758,7 @@ func (m *activity) OnNewIntent(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // OnOptionsItemSelected calls android.app.Activity.onOptionsItemSelected.
-func (m *activity) OnOptionsItemSelected(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnOptionsItemSelected(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2766,14 +2766,14 @@ func (m *activity) OnOptionsItemSelected(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnOptionsItemSelected == nil {
+		if midActivityOnOptionsItemSelected == nil {
 			callErr = fmt.Errorf("android.app.Activity.onOptionsItemSelected is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnOptionsItemSelected, jni.ObjectValue(arg0),
+			midActivityOnOptionsItemSelected, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2785,7 +2785,7 @@ func (m *activity) OnOptionsItemSelected(arg0 *jni.Object) (bool, error) {
 }
 
 // OnOptionsMenuClosed calls android.app.Activity.onOptionsMenuClosed.
-func (m *activity) OnOptionsMenuClosed(arg0 *jni.Object) error {
+func (m *Activity) OnOptionsMenuClosed(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2793,14 +2793,14 @@ func (m *activity) OnOptionsMenuClosed(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnOptionsMenuClosed == nil {
+		if midActivityOnOptionsMenuClosed == nil {
 			callErr = fmt.Errorf("android.app.Activity.onOptionsMenuClosed is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnOptionsMenuClosed, jni.ObjectValue(arg0),
+			midActivityOnOptionsMenuClosed, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -2808,7 +2808,7 @@ func (m *activity) OnOptionsMenuClosed(arg0 *jni.Object) error {
 }
 
 // OnPanelClosed calls android.app.Activity.onPanelClosed.
-func (m *activity) OnPanelClosed(arg0 int32, arg1 *jni.Object) error {
+func (m *Activity) OnPanelClosed(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2816,14 +2816,14 @@ func (m *activity) OnPanelClosed(arg0 int32, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnPanelClosed == nil {
+		if midActivityOnPanelClosed == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPanelClosed is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnPanelClosed, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnPanelClosed, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -2831,7 +2831,7 @@ func (m *activity) OnPanelClosed(arg0 int32, arg1 *jni.Object) error {
 }
 
 // OnPerformDirectAction calls android.app.Activity.onPerformDirectAction.
-func (m *activity) OnPerformDirectAction(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Activity) OnPerformDirectAction(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2839,7 +2839,7 @@ func (m *activity) OnPerformDirectAction(arg0 string, arg1 *jni.Object, arg2 *jn
 			callErr = err
 			return err
 		}
-		if midactivityOnPerformDirectAction == nil {
+		if midActivityOnPerformDirectAction == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPerformDirectAction is not available on this device")
 			return callErr
 		}
@@ -2850,7 +2850,7 @@ func (m *activity) OnPerformDirectAction(arg0 string, arg1 *jni.Object, arg2 *jn
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnPerformDirectAction, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midActivityOnPerformDirectAction, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -2858,7 +2858,7 @@ func (m *activity) OnPerformDirectAction(arg0 string, arg1 *jni.Object, arg2 *jn
 }
 
 // OnPictureInPictureModeChanged1 calls android.app.Activity.onPictureInPictureModeChanged.
-func (m *activity) OnPictureInPictureModeChanged1(arg0 bool) error {
+func (m *Activity) OnPictureInPictureModeChanged1(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2866,7 +2866,7 @@ func (m *activity) OnPictureInPictureModeChanged1(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnPictureInPictureModeChanged1 == nil {
+		if midActivityOnPictureInPictureModeChanged1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPictureInPictureModeChanged is not available on this device")
 			return callErr
 		}
@@ -2877,7 +2877,7 @@ func (m *activity) OnPictureInPictureModeChanged1(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnPictureInPictureModeChanged1, jni.BooleanValue(jArg0),
+			midActivityOnPictureInPictureModeChanged1, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -2885,7 +2885,7 @@ func (m *activity) OnPictureInPictureModeChanged1(arg0 bool) error {
 }
 
 // OnPictureInPictureModeChanged2_1 calls android.app.Activity.onPictureInPictureModeChanged.
-func (m *activity) OnPictureInPictureModeChanged2_1(arg0 bool, arg1 *jni.Object) error {
+func (m *Activity) OnPictureInPictureModeChanged2_1(arg0 bool, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2893,7 +2893,7 @@ func (m *activity) OnPictureInPictureModeChanged2_1(arg0 bool, arg1 *jni.Object)
 			callErr = err
 			return err
 		}
-		if midactivityOnPictureInPictureModeChanged2_1 == nil {
+		if midActivityOnPictureInPictureModeChanged2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPictureInPictureModeChanged is not available on this device")
 			return callErr
 		}
@@ -2904,7 +2904,7 @@ func (m *activity) OnPictureInPictureModeChanged2_1(arg0 bool, arg1 *jni.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnPictureInPictureModeChanged2_1, jni.BooleanValue(jArg0), jni.ObjectValue(arg1),
+			midActivityOnPictureInPictureModeChanged2_1, jni.BooleanValue(jArg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -2912,7 +2912,7 @@ func (m *activity) OnPictureInPictureModeChanged2_1(arg0 bool, arg1 *jni.Object)
 }
 
 // OnPictureInPictureRequested calls android.app.Activity.onPictureInPictureRequested.
-func (m *activity) OnPictureInPictureRequested() (bool, error) {
+func (m *Activity) OnPictureInPictureRequested() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2920,13 +2920,13 @@ func (m *activity) OnPictureInPictureRequested() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnPictureInPictureRequested == nil {
+		if midActivityOnPictureInPictureRequested == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPictureInPictureRequested is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnPictureInPictureRequested,
+			midActivityOnPictureInPictureRequested,
 		)
 		if callErr != nil {
 			return callErr
@@ -2938,7 +2938,7 @@ func (m *activity) OnPictureInPictureRequested() (bool, error) {
 }
 
 // OnPictureInPictureUiStateChanged calls android.app.Activity.onPictureInPictureUiStateChanged.
-func (m *activity) OnPictureInPictureUiStateChanged(arg0 *jni.Object) error {
+func (m *Activity) OnPictureInPictureUiStateChanged(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2946,14 +2946,14 @@ func (m *activity) OnPictureInPictureUiStateChanged(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnPictureInPictureUiStateChanged == nil {
+		if midActivityOnPictureInPictureUiStateChanged == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPictureInPictureUiStateChanged is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnPictureInPictureUiStateChanged, jni.ObjectValue(arg0),
+			midActivityOnPictureInPictureUiStateChanged, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -2961,7 +2961,7 @@ func (m *activity) OnPictureInPictureUiStateChanged(arg0 *jni.Object) error {
 }
 
 // OnPostCreate calls android.app.Activity.onPostCreate.
-func (m *activity) OnPostCreate(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) OnPostCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2969,14 +2969,14 @@ func (m *activity) OnPostCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnPostCreate == nil {
+		if midActivityOnPostCreate == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPostCreate is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnPostCreate, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnPostCreate, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -2984,7 +2984,7 @@ func (m *activity) OnPostCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // OnPrepareNavigateUpTaskStack calls android.app.Activity.onPrepareNavigateUpTaskStack.
-func (m *activity) OnPrepareNavigateUpTaskStack(arg0 *jni.Object) error {
+func (m *Activity) OnPrepareNavigateUpTaskStack(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2992,14 +2992,14 @@ func (m *activity) OnPrepareNavigateUpTaskStack(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnPrepareNavigateUpTaskStack == nil {
+		if midActivityOnPrepareNavigateUpTaskStack == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPrepareNavigateUpTaskStack is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnPrepareNavigateUpTaskStack, jni.ObjectValue(arg0),
+			midActivityOnPrepareNavigateUpTaskStack, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3007,7 +3007,7 @@ func (m *activity) OnPrepareNavigateUpTaskStack(arg0 *jni.Object) error {
 }
 
 // OnPrepareOptionsMenu calls android.app.Activity.onPrepareOptionsMenu.
-func (m *activity) OnPrepareOptionsMenu(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnPrepareOptionsMenu(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3015,14 +3015,14 @@ func (m *activity) OnPrepareOptionsMenu(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnPrepareOptionsMenu == nil {
+		if midActivityOnPrepareOptionsMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPrepareOptionsMenu is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnPrepareOptionsMenu, jni.ObjectValue(arg0),
+			midActivityOnPrepareOptionsMenu, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3034,7 +3034,7 @@ func (m *activity) OnPrepareOptionsMenu(arg0 *jni.Object) (bool, error) {
 }
 
 // OnPreparePanel calls android.app.Activity.onPreparePanel.
-func (m *activity) OnPreparePanel(arg0 int32, arg1 *jni.Object, arg2 *jni.Object) (bool, error) {
+func (m *Activity) OnPreparePanel(arg0 int32, arg1 *jni.Object, arg2 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3042,14 +3042,14 @@ func (m *activity) OnPreparePanel(arg0 int32, arg1 *jni.Object, arg2 *jni.Object
 			callErr = err
 			return err
 		}
-		if midactivityOnPreparePanel == nil {
+		if midActivityOnPreparePanel == nil {
 			callErr = fmt.Errorf("android.app.Activity.onPreparePanel is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnPreparePanel, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midActivityOnPreparePanel, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -3061,7 +3061,7 @@ func (m *activity) OnPreparePanel(arg0 int32, arg1 *jni.Object, arg2 *jni.Object
 }
 
 // OnProvideAssistContent calls android.app.Activity.onProvideAssistContent.
-func (m *activity) OnProvideAssistContent(arg0 *jni.Object) error {
+func (m *Activity) OnProvideAssistContent(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3069,14 +3069,14 @@ func (m *activity) OnProvideAssistContent(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnProvideAssistContent == nil {
+		if midActivityOnProvideAssistContent == nil {
 			callErr = fmt.Errorf("android.app.Activity.onProvideAssistContent is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnProvideAssistContent, jni.ObjectValue(arg0),
+			midActivityOnProvideAssistContent, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3084,7 +3084,7 @@ func (m *activity) OnProvideAssistContent(arg0 *jni.Object) error {
 }
 
 // OnProvideAssistData calls android.app.Activity.onProvideAssistData.
-func (m *activity) OnProvideAssistData(arg0 *jni.Object) error {
+func (m *Activity) OnProvideAssistData(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3092,14 +3092,14 @@ func (m *activity) OnProvideAssistData(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnProvideAssistData == nil {
+		if midActivityOnProvideAssistData == nil {
 			callErr = fmt.Errorf("android.app.Activity.onProvideAssistData is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnProvideAssistData, jni.ObjectValue(arg0),
+			midActivityOnProvideAssistData, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3107,7 +3107,7 @@ func (m *activity) OnProvideAssistData(arg0 *jni.Object) error {
 }
 
 // OnProvideKeyboardShortcuts calls android.app.Activity.onProvideKeyboardShortcuts.
-func (m *activity) OnProvideKeyboardShortcuts(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) error {
+func (m *Activity) OnProvideKeyboardShortcuts(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3115,14 +3115,14 @@ func (m *activity) OnProvideKeyboardShortcuts(arg0 *jni.Object, arg1 *jni.Object
 			callErr = err
 			return err
 		}
-		if midactivityOnProvideKeyboardShortcuts == nil {
+		if midActivityOnProvideKeyboardShortcuts == nil {
 			callErr = fmt.Errorf("android.app.Activity.onProvideKeyboardShortcuts is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnProvideKeyboardShortcuts, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
+			midActivityOnProvideKeyboardShortcuts, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -3130,7 +3130,7 @@ func (m *activity) OnProvideKeyboardShortcuts(arg0 *jni.Object, arg1 *jni.Object
 }
 
 // OnProvideReferrer calls android.app.Activity.onProvideReferrer.
-func (m *activity) OnProvideReferrer() (*jni.Object, error) {
+func (m *Activity) OnProvideReferrer() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3138,13 +3138,13 @@ func (m *activity) OnProvideReferrer() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnProvideReferrer == nil {
+		if midActivityOnProvideReferrer == nil {
 			callErr = fmt.Errorf("android.app.Activity.onProvideReferrer is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityOnProvideReferrer,
+			midActivityOnProvideReferrer,
 		)
 		if callErr != nil {
 			return callErr
@@ -3155,7 +3155,7 @@ func (m *activity) OnProvideReferrer() (*jni.Object, error) {
 }
 
 // OnRequestPermissionsResult3 calls android.app.Activity.onRequestPermissionsResult.
-func (m *activity) OnRequestPermissionsResult3(arg0 int32, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Activity) OnRequestPermissionsResult3(arg0 int32, arg1 *jni.Object, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3163,14 +3163,14 @@ func (m *activity) OnRequestPermissionsResult3(arg0 int32, arg1 *jni.Object, arg
 			callErr = err
 			return err
 		}
-		if midactivityOnRequestPermissionsResult3 == nil {
+		if midActivityOnRequestPermissionsResult3 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onRequestPermissionsResult is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnRequestPermissionsResult3, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midActivityOnRequestPermissionsResult3, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -3178,7 +3178,7 @@ func (m *activity) OnRequestPermissionsResult3(arg0 int32, arg1 *jni.Object, arg
 }
 
 // OnRequestPermissionsResult4_1 calls android.app.Activity.onRequestPermissionsResult.
-func (m *activity) OnRequestPermissionsResult4_1(arg0 int32, arg1 *jni.Object, arg2 *jni.Object, arg3 int32) error {
+func (m *Activity) OnRequestPermissionsResult4_1(arg0 int32, arg1 *jni.Object, arg2 *jni.Object, arg3 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3186,14 +3186,14 @@ func (m *activity) OnRequestPermissionsResult4_1(arg0 int32, arg1 *jni.Object, a
 			callErr = err
 			return err
 		}
-		if midactivityOnRequestPermissionsResult4_1 == nil {
+		if midActivityOnRequestPermissionsResult4_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onRequestPermissionsResult is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnRequestPermissionsResult4_1, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
+			midActivityOnRequestPermissionsResult4_1, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
 		)
 		return callErr
 	})
@@ -3201,7 +3201,7 @@ func (m *activity) OnRequestPermissionsResult4_1(arg0 int32, arg1 *jni.Object, a
 }
 
 // OnRestoreInstanceState calls android.app.Activity.onRestoreInstanceState.
-func (m *activity) OnRestoreInstanceState(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) OnRestoreInstanceState(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3209,14 +3209,14 @@ func (m *activity) OnRestoreInstanceState(arg0 *jni.Object, arg1 *jni.Object) er
 			callErr = err
 			return err
 		}
-		if midactivityOnRestoreInstanceState == nil {
+		if midActivityOnRestoreInstanceState == nil {
 			callErr = fmt.Errorf("android.app.Activity.onRestoreInstanceState is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnRestoreInstanceState, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnRestoreInstanceState, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -3224,7 +3224,7 @@ func (m *activity) OnRestoreInstanceState(arg0 *jni.Object, arg1 *jni.Object) er
 }
 
 // OnRetainNonConfigurationInstance calls android.app.Activity.onRetainNonConfigurationInstance.
-func (m *activity) OnRetainNonConfigurationInstance() (*jni.Object, error) {
+func (m *Activity) OnRetainNonConfigurationInstance() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3232,13 +3232,13 @@ func (m *activity) OnRetainNonConfigurationInstance() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnRetainNonConfigurationInstance == nil {
+		if midActivityOnRetainNonConfigurationInstance == nil {
 			callErr = fmt.Errorf("android.app.Activity.onRetainNonConfigurationInstance is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityOnRetainNonConfigurationInstance,
+			midActivityOnRetainNonConfigurationInstance,
 		)
 		if callErr != nil {
 			return callErr
@@ -3249,7 +3249,7 @@ func (m *activity) OnRetainNonConfigurationInstance() (*jni.Object, error) {
 }
 
 // OnSaveInstanceState calls android.app.Activity.onSaveInstanceState.
-func (m *activity) OnSaveInstanceState(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) OnSaveInstanceState(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3257,14 +3257,14 @@ func (m *activity) OnSaveInstanceState(arg0 *jni.Object, arg1 *jni.Object) error
 			callErr = err
 			return err
 		}
-		if midactivityOnSaveInstanceState == nil {
+		if midActivityOnSaveInstanceState == nil {
 			callErr = fmt.Errorf("android.app.Activity.onSaveInstanceState is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnSaveInstanceState, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityOnSaveInstanceState, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -3272,7 +3272,7 @@ func (m *activity) OnSaveInstanceState(arg0 *jni.Object, arg1 *jni.Object) error
 }
 
 // OnSearchRequested0 calls android.app.Activity.onSearchRequested.
-func (m *activity) OnSearchRequested0() (bool, error) {
+func (m *Activity) OnSearchRequested0() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3280,13 +3280,13 @@ func (m *activity) OnSearchRequested0() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnSearchRequested0 == nil {
+		if midActivityOnSearchRequested0 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onSearchRequested is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnSearchRequested0,
+			midActivityOnSearchRequested0,
 		)
 		if callErr != nil {
 			return callErr
@@ -3298,7 +3298,7 @@ func (m *activity) OnSearchRequested0() (bool, error) {
 }
 
 // OnSearchRequested1_1 calls android.app.Activity.onSearchRequested.
-func (m *activity) OnSearchRequested1_1(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnSearchRequested1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3306,14 +3306,14 @@ func (m *activity) OnSearchRequested1_1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnSearchRequested1_1 == nil {
+		if midActivityOnSearchRequested1_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onSearchRequested is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnSearchRequested1_1, jni.ObjectValue(arg0),
+			midActivityOnSearchRequested1_1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3325,7 +3325,7 @@ func (m *activity) OnSearchRequested1_1(arg0 *jni.Object) (bool, error) {
 }
 
 // OnStateNotSaved calls android.app.Activity.onStateNotSaved.
-func (m *activity) OnStateNotSaved() error {
+func (m *Activity) OnStateNotSaved() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3333,13 +3333,13 @@ func (m *activity) OnStateNotSaved() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnStateNotSaved == nil {
+		if midActivityOnStateNotSaved == nil {
 			callErr = fmt.Errorf("android.app.Activity.onStateNotSaved is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnStateNotSaved,
+			midActivityOnStateNotSaved,
 		)
 		return callErr
 	})
@@ -3347,7 +3347,7 @@ func (m *activity) OnStateNotSaved() error {
 }
 
 // OnTopResumedActivityChanged calls android.app.Activity.onTopResumedActivityChanged.
-func (m *activity) OnTopResumedActivityChanged(arg0 bool) error {
+func (m *Activity) OnTopResumedActivityChanged(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3355,7 +3355,7 @@ func (m *activity) OnTopResumedActivityChanged(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnTopResumedActivityChanged == nil {
+		if midActivityOnTopResumedActivityChanged == nil {
 			callErr = fmt.Errorf("android.app.Activity.onTopResumedActivityChanged is not available on this device")
 			return callErr
 		}
@@ -3366,7 +3366,7 @@ func (m *activity) OnTopResumedActivityChanged(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnTopResumedActivityChanged, jni.BooleanValue(jArg0),
+			midActivityOnTopResumedActivityChanged, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -3374,7 +3374,7 @@ func (m *activity) OnTopResumedActivityChanged(arg0 bool) error {
 }
 
 // OnTouchEvent calls android.app.Activity.onTouchEvent.
-func (m *activity) OnTouchEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnTouchEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3382,14 +3382,14 @@ func (m *activity) OnTouchEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnTouchEvent == nil {
+		if midActivityOnTouchEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.onTouchEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnTouchEvent, jni.ObjectValue(arg0),
+			midActivityOnTouchEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3401,7 +3401,7 @@ func (m *activity) OnTouchEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // OnTrackballEvent calls android.app.Activity.onTrackballEvent.
-func (m *activity) OnTrackballEvent(arg0 *jni.Object) (bool, error) {
+func (m *Activity) OnTrackballEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3409,14 +3409,14 @@ func (m *activity) OnTrackballEvent(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityOnTrackballEvent == nil {
+		if midActivityOnTrackballEvent == nil {
 			callErr = fmt.Errorf("android.app.Activity.onTrackballEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityOnTrackballEvent, jni.ObjectValue(arg0),
+			midActivityOnTrackballEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3428,7 +3428,7 @@ func (m *activity) OnTrackballEvent(arg0 *jni.Object) (bool, error) {
 }
 
 // OnTrimMemory calls android.app.Activity.onTrimMemory.
-func (m *activity) OnTrimMemory(arg0 int32) error {
+func (m *Activity) OnTrimMemory(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3436,14 +3436,14 @@ func (m *activity) OnTrimMemory(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnTrimMemory == nil {
+		if midActivityOnTrimMemory == nil {
 			callErr = fmt.Errorf("android.app.Activity.onTrimMemory is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnTrimMemory, jni.IntValue(arg0),
+			midActivityOnTrimMemory, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -3451,7 +3451,7 @@ func (m *activity) OnTrimMemory(arg0 int32) error {
 }
 
 // OnUserInteraction calls android.app.Activity.onUserInteraction.
-func (m *activity) OnUserInteraction() error {
+func (m *Activity) OnUserInteraction() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3459,13 +3459,13 @@ func (m *activity) OnUserInteraction() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnUserInteraction == nil {
+		if midActivityOnUserInteraction == nil {
 			callErr = fmt.Errorf("android.app.Activity.onUserInteraction is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnUserInteraction,
+			midActivityOnUserInteraction,
 		)
 		return callErr
 	})
@@ -3473,7 +3473,7 @@ func (m *activity) OnUserInteraction() error {
 }
 
 // OnVisibleBehindCanceled calls android.app.Activity.onVisibleBehindCanceled.
-func (m *activity) OnVisibleBehindCanceled() error {
+func (m *Activity) OnVisibleBehindCanceled() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3481,13 +3481,13 @@ func (m *activity) OnVisibleBehindCanceled() error {
 			callErr = err
 			return err
 		}
-		if midactivityOnVisibleBehindCanceled == nil {
+		if midActivityOnVisibleBehindCanceled == nil {
 			callErr = fmt.Errorf("android.app.Activity.onVisibleBehindCanceled is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnVisibleBehindCanceled,
+			midActivityOnVisibleBehindCanceled,
 		)
 		return callErr
 	})
@@ -3495,7 +3495,7 @@ func (m *activity) OnVisibleBehindCanceled() error {
 }
 
 // OnWindowAttributesChanged calls android.app.Activity.onWindowAttributesChanged.
-func (m *activity) OnWindowAttributesChanged(arg0 *jni.Object) error {
+func (m *Activity) OnWindowAttributesChanged(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3503,14 +3503,14 @@ func (m *activity) OnWindowAttributesChanged(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnWindowAttributesChanged == nil {
+		if midActivityOnWindowAttributesChanged == nil {
 			callErr = fmt.Errorf("android.app.Activity.onWindowAttributesChanged is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnWindowAttributesChanged, jni.ObjectValue(arg0),
+			midActivityOnWindowAttributesChanged, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3518,7 +3518,7 @@ func (m *activity) OnWindowAttributesChanged(arg0 *jni.Object) error {
 }
 
 // OnWindowFocusChanged calls android.app.Activity.onWindowFocusChanged.
-func (m *activity) OnWindowFocusChanged(arg0 bool) error {
+func (m *Activity) OnWindowFocusChanged(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3526,7 +3526,7 @@ func (m *activity) OnWindowFocusChanged(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivityOnWindowFocusChanged == nil {
+		if midActivityOnWindowFocusChanged == nil {
 			callErr = fmt.Errorf("android.app.Activity.onWindowFocusChanged is not available on this device")
 			return callErr
 		}
@@ -3537,7 +3537,7 @@ func (m *activity) OnWindowFocusChanged(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOnWindowFocusChanged, jni.BooleanValue(jArg0),
+			midActivityOnWindowFocusChanged, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -3545,7 +3545,7 @@ func (m *activity) OnWindowFocusChanged(arg0 bool) error {
 }
 
 // OnWindowStartingActionMode1 calls android.app.Activity.onWindowStartingActionMode.
-func (m *activity) OnWindowStartingActionMode1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Activity) OnWindowStartingActionMode1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3553,14 +3553,14 @@ func (m *activity) OnWindowStartingActionMode1(arg0 *jni.Object) (*jni.Object, e
 			callErr = err
 			return err
 		}
-		if midactivityOnWindowStartingActionMode1 == nil {
+		if midActivityOnWindowStartingActionMode1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onWindowStartingActionMode is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityOnWindowStartingActionMode1, jni.ObjectValue(arg0),
+			midActivityOnWindowStartingActionMode1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3571,7 +3571,7 @@ func (m *activity) OnWindowStartingActionMode1(arg0 *jni.Object) (*jni.Object, e
 }
 
 // OnWindowStartingActionMode2_1 calls android.app.Activity.onWindowStartingActionMode.
-func (m *activity) OnWindowStartingActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+func (m *Activity) OnWindowStartingActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3579,14 +3579,14 @@ func (m *activity) OnWindowStartingActionMode2_1(arg0 *jni.Object, arg1 int32) (
 			callErr = err
 			return err
 		}
-		if midactivityOnWindowStartingActionMode2_1 == nil {
+		if midActivityOnWindowStartingActionMode2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.onWindowStartingActionMode is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityOnWindowStartingActionMode2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midActivityOnWindowStartingActionMode2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -3597,7 +3597,7 @@ func (m *activity) OnWindowStartingActionMode2_1(arg0 *jni.Object, arg1 int32) (
 }
 
 // OpenContextMenu calls android.app.Activity.openContextMenu.
-func (m *activity) OpenContextMenu(arg0 *jni.Object) error {
+func (m *Activity) OpenContextMenu(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3605,14 +3605,14 @@ func (m *activity) OpenContextMenu(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityOpenContextMenu == nil {
+		if midActivityOpenContextMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.openContextMenu is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOpenContextMenu, jni.ObjectValue(arg0),
+			midActivityOpenContextMenu, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3620,7 +3620,7 @@ func (m *activity) OpenContextMenu(arg0 *jni.Object) error {
 }
 
 // OpenOptionsMenu calls android.app.Activity.openOptionsMenu.
-func (m *activity) OpenOptionsMenu() error {
+func (m *Activity) OpenOptionsMenu() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3628,13 +3628,13 @@ func (m *activity) OpenOptionsMenu() error {
 			callErr = err
 			return err
 		}
-		if midactivityOpenOptionsMenu == nil {
+		if midActivityOpenOptionsMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.openOptionsMenu is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOpenOptionsMenu,
+			midActivityOpenOptionsMenu,
 		)
 		return callErr
 	})
@@ -3642,7 +3642,7 @@ func (m *activity) OpenOptionsMenu() error {
 }
 
 // OverrideActivityTransition3 calls android.app.Activity.overrideActivityTransition.
-func (m *activity) OverrideActivityTransition3(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *Activity) OverrideActivityTransition3(arg0 int32, arg1 int32, arg2 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3650,14 +3650,14 @@ func (m *activity) OverrideActivityTransition3(arg0 int32, arg1 int32, arg2 int3
 			callErr = err
 			return err
 		}
-		if midactivityOverrideActivityTransition3 == nil {
+		if midActivityOverrideActivityTransition3 == nil {
 			callErr = fmt.Errorf("android.app.Activity.overrideActivityTransition is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOverrideActivityTransition3, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			midActivityOverrideActivityTransition3, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -3665,7 +3665,7 @@ func (m *activity) OverrideActivityTransition3(arg0 int32, arg1 int32, arg2 int3
 }
 
 // OverrideActivityTransition4_1 calls android.app.Activity.overrideActivityTransition.
-func (m *activity) OverrideActivityTransition4_1(arg0 int32, arg1 int32, arg2 int32, arg3 int32) error {
+func (m *Activity) OverrideActivityTransition4_1(arg0 int32, arg1 int32, arg2 int32, arg3 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3673,14 +3673,14 @@ func (m *activity) OverrideActivityTransition4_1(arg0 int32, arg1 int32, arg2 in
 			callErr = err
 			return err
 		}
-		if midactivityOverrideActivityTransition4_1 == nil {
+		if midActivityOverrideActivityTransition4_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.overrideActivityTransition is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOverrideActivityTransition4_1, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3),
+			midActivityOverrideActivityTransition4_1, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3),
 		)
 		return callErr
 	})
@@ -3688,7 +3688,7 @@ func (m *activity) OverrideActivityTransition4_1(arg0 int32, arg1 int32, arg2 in
 }
 
 // OverridePendingTransition2 calls android.app.Activity.overridePendingTransition.
-func (m *activity) OverridePendingTransition2(arg0 int32, arg1 int32) error {
+func (m *Activity) OverridePendingTransition2(arg0 int32, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3696,14 +3696,14 @@ func (m *activity) OverridePendingTransition2(arg0 int32, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivityOverridePendingTransition2 == nil {
+		if midActivityOverridePendingTransition2 == nil {
 			callErr = fmt.Errorf("android.app.Activity.overridePendingTransition is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOverridePendingTransition2, jni.IntValue(arg0), jni.IntValue(arg1),
+			midActivityOverridePendingTransition2, jni.IntValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -3711,7 +3711,7 @@ func (m *activity) OverridePendingTransition2(arg0 int32, arg1 int32) error {
 }
 
 // OverridePendingTransition3_1 calls android.app.Activity.overridePendingTransition.
-func (m *activity) OverridePendingTransition3_1(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *Activity) OverridePendingTransition3_1(arg0 int32, arg1 int32, arg2 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3719,14 +3719,14 @@ func (m *activity) OverridePendingTransition3_1(arg0 int32, arg1 int32, arg2 int
 			callErr = err
 			return err
 		}
-		if midactivityOverridePendingTransition3_1 == nil {
+		if midActivityOverridePendingTransition3_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.overridePendingTransition is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityOverridePendingTransition3_1, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			midActivityOverridePendingTransition3_1, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -3734,7 +3734,7 @@ func (m *activity) OverridePendingTransition3_1(arg0 int32, arg1 int32, arg2 int
 }
 
 // PostponeEnterTransition calls android.app.Activity.postponeEnterTransition.
-func (m *activity) PostponeEnterTransition() error {
+func (m *Activity) PostponeEnterTransition() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3742,13 +3742,13 @@ func (m *activity) PostponeEnterTransition() error {
 			callErr = err
 			return err
 		}
-		if midactivityPostponeEnterTransition == nil {
+		if midActivityPostponeEnterTransition == nil {
 			callErr = fmt.Errorf("android.app.Activity.postponeEnterTransition is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityPostponeEnterTransition,
+			midActivityPostponeEnterTransition,
 		)
 		return callErr
 	})
@@ -3756,7 +3756,7 @@ func (m *activity) PostponeEnterTransition() error {
 }
 
 // Recreate calls android.app.Activity.recreate.
-func (m *activity) Recreate() error {
+func (m *Activity) Recreate() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3764,13 +3764,13 @@ func (m *activity) Recreate() error {
 			callErr = err
 			return err
 		}
-		if midactivityRecreate == nil {
+		if midActivityRecreate == nil {
 			callErr = fmt.Errorf("android.app.Activity.recreate is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityRecreate,
+			midActivityRecreate,
 		)
 		return callErr
 	})
@@ -3778,7 +3778,7 @@ func (m *activity) Recreate() error {
 }
 
 // RegisterActivityLifecycleCallbacks calls android.app.Activity.registerActivityLifecycleCallbacks.
-func (m *activity) RegisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
+func (m *Activity) RegisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3786,14 +3786,14 @@ func (m *activity) RegisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityRegisterActivityLifecycleCallbacks == nil {
+		if midActivityRegisterActivityLifecycleCallbacks == nil {
 			callErr = fmt.Errorf("android.app.Activity.registerActivityLifecycleCallbacks is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityRegisterActivityLifecycleCallbacks, jni.ObjectValue(arg0),
+			midActivityRegisterActivityLifecycleCallbacks, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3801,7 +3801,7 @@ func (m *activity) RegisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
 }
 
 // RegisterComponentCallbacks calls android.app.Activity.registerComponentCallbacks.
-func (m *activity) RegisterComponentCallbacks(arg0 *jni.Object) error {
+func (m *Activity) RegisterComponentCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3809,14 +3809,14 @@ func (m *activity) RegisterComponentCallbacks(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityRegisterComponentCallbacks == nil {
+		if midActivityRegisterComponentCallbacks == nil {
 			callErr = fmt.Errorf("android.app.Activity.registerComponentCallbacks is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityRegisterComponentCallbacks, jni.ObjectValue(arg0),
+			midActivityRegisterComponentCallbacks, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3824,7 +3824,7 @@ func (m *activity) RegisterComponentCallbacks(arg0 *jni.Object) error {
 }
 
 // RegisterForContextMenu calls android.app.Activity.registerForContextMenu.
-func (m *activity) RegisterForContextMenu(arg0 *jni.Object) error {
+func (m *Activity) RegisterForContextMenu(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3832,14 +3832,14 @@ func (m *activity) RegisterForContextMenu(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityRegisterForContextMenu == nil {
+		if midActivityRegisterForContextMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.registerForContextMenu is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityRegisterForContextMenu, jni.ObjectValue(arg0),
+			midActivityRegisterForContextMenu, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -3847,7 +3847,7 @@ func (m *activity) RegisterForContextMenu(arg0 *jni.Object) error {
 }
 
 // RegisterScreenCaptureCallback calls android.app.Activity.registerScreenCaptureCallback.
-func (m *activity) RegisterScreenCaptureCallback(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) RegisterScreenCaptureCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3855,14 +3855,14 @@ func (m *activity) RegisterScreenCaptureCallback(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
-		if midactivityRegisterScreenCaptureCallback == nil {
+		if midActivityRegisterScreenCaptureCallback == nil {
 			callErr = fmt.Errorf("android.app.Activity.registerScreenCaptureCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityRegisterScreenCaptureCallback, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityRegisterScreenCaptureCallback, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -3870,7 +3870,7 @@ func (m *activity) RegisterScreenCaptureCallback(arg0 *jni.Object, arg1 *jni.Obj
 }
 
 // ReleaseInstance calls android.app.Activity.releaseInstance.
-func (m *activity) ReleaseInstance() (bool, error) {
+func (m *Activity) ReleaseInstance() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3878,13 +3878,13 @@ func (m *activity) ReleaseInstance() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityReleaseInstance == nil {
+		if midActivityReleaseInstance == nil {
 			callErr = fmt.Errorf("android.app.Activity.releaseInstance is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityReleaseInstance,
+			midActivityReleaseInstance,
 		)
 		if callErr != nil {
 			return callErr
@@ -3896,7 +3896,7 @@ func (m *activity) ReleaseInstance() (bool, error) {
 }
 
 // ReportFullyDrawn calls android.app.Activity.reportFullyDrawn.
-func (m *activity) ReportFullyDrawn() error {
+func (m *Activity) ReportFullyDrawn() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3904,13 +3904,13 @@ func (m *activity) ReportFullyDrawn() error {
 			callErr = err
 			return err
 		}
-		if midactivityReportFullyDrawn == nil {
+		if midActivityReportFullyDrawn == nil {
 			callErr = fmt.Errorf("android.app.Activity.reportFullyDrawn is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityReportFullyDrawn,
+			midActivityReportFullyDrawn,
 		)
 		return callErr
 	})
@@ -3918,7 +3918,7 @@ func (m *activity) ReportFullyDrawn() error {
 }
 
 // RequestDragAndDropPermissions calls android.app.Activity.requestDragAndDropPermissions.
-func (m *activity) RequestDragAndDropPermissions(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Activity) RequestDragAndDropPermissions(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3926,14 +3926,14 @@ func (m *activity) RequestDragAndDropPermissions(arg0 *jni.Object) (*jni.Object,
 			callErr = err
 			return err
 		}
-		if midactivityRequestDragAndDropPermissions == nil {
+		if midActivityRequestDragAndDropPermissions == nil {
 			callErr = fmt.Errorf("android.app.Activity.requestDragAndDropPermissions is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityRequestDragAndDropPermissions, jni.ObjectValue(arg0),
+			midActivityRequestDragAndDropPermissions, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3944,7 +3944,7 @@ func (m *activity) RequestDragAndDropPermissions(arg0 *jni.Object) (*jni.Object,
 }
 
 // RequestFullscreenMode calls android.app.Activity.requestFullscreenMode.
-func (m *activity) RequestFullscreenMode(arg0 int32, arg1 *jni.Object) error {
+func (m *Activity) RequestFullscreenMode(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3952,14 +3952,14 @@ func (m *activity) RequestFullscreenMode(arg0 int32, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityRequestFullscreenMode == nil {
+		if midActivityRequestFullscreenMode == nil {
 			callErr = fmt.Errorf("android.app.Activity.requestFullscreenMode is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityRequestFullscreenMode, jni.IntValue(arg0), jni.ObjectValue(arg1),
+			midActivityRequestFullscreenMode, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -3967,7 +3967,7 @@ func (m *activity) RequestFullscreenMode(arg0 int32, arg1 *jni.Object) error {
 }
 
 // RequestVisibleBehind calls android.app.Activity.requestVisibleBehind.
-func (m *activity) RequestVisibleBehind(arg0 bool) (bool, error) {
+func (m *Activity) RequestVisibleBehind(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3975,7 +3975,7 @@ func (m *activity) RequestVisibleBehind(arg0 bool) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityRequestVisibleBehind == nil {
+		if midActivityRequestVisibleBehind == nil {
 			callErr = fmt.Errorf("android.app.Activity.requestVisibleBehind is not available on this device")
 			return callErr
 		}
@@ -3986,7 +3986,7 @@ func (m *activity) RequestVisibleBehind(arg0 bool) (bool, error) {
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityRequestVisibleBehind, jni.BooleanValue(jArg0),
+			midActivityRequestVisibleBehind, jni.BooleanValue(jArg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -3998,7 +3998,7 @@ func (m *activity) RequestVisibleBehind(arg0 bool) (bool, error) {
 }
 
 // SetActionBar calls android.app.Activity.setActionBar.
-func (m *activity) SetActionBar(arg0 *jni.Object) error {
+func (m *Activity) SetActionBar(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4006,14 +4006,14 @@ func (m *activity) SetActionBar(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetActionBar == nil {
+		if midActivitySetActionBar == nil {
 			callErr = fmt.Errorf("android.app.Activity.setActionBar is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetActionBar, jni.ObjectValue(arg0),
+			midActivitySetActionBar, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4021,7 +4021,7 @@ func (m *activity) SetActionBar(arg0 *jni.Object) error {
 }
 
 // SetAllowCrossUidActivitySwitchFromBelow calls android.app.Activity.setAllowCrossUidActivitySwitchFromBelow.
-func (m *activity) SetAllowCrossUidActivitySwitchFromBelow(arg0 bool) error {
+func (m *Activity) SetAllowCrossUidActivitySwitchFromBelow(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4029,7 +4029,7 @@ func (m *activity) SetAllowCrossUidActivitySwitchFromBelow(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetAllowCrossUidActivitySwitchFromBelow == nil {
+		if midActivitySetAllowCrossUidActivitySwitchFromBelow == nil {
 			callErr = fmt.Errorf("android.app.Activity.setAllowCrossUidActivitySwitchFromBelow is not available on this device")
 			return callErr
 		}
@@ -4040,7 +4040,7 @@ func (m *activity) SetAllowCrossUidActivitySwitchFromBelow(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetAllowCrossUidActivitySwitchFromBelow, jni.BooleanValue(jArg0),
+			midActivitySetAllowCrossUidActivitySwitchFromBelow, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4048,7 +4048,7 @@ func (m *activity) SetAllowCrossUidActivitySwitchFromBelow(arg0 bool) error {
 }
 
 // SetContentTransitionManager calls android.app.Activity.setContentTransitionManager.
-func (m *activity) SetContentTransitionManager(arg0 *jni.Object) error {
+func (m *Activity) SetContentTransitionManager(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4056,14 +4056,14 @@ func (m *activity) SetContentTransitionManager(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetContentTransitionManager == nil {
+		if midActivitySetContentTransitionManager == nil {
 			callErr = fmt.Errorf("android.app.Activity.setContentTransitionManager is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetContentTransitionManager, jni.ObjectValue(arg0),
+			midActivitySetContentTransitionManager, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4071,7 +4071,7 @@ func (m *activity) SetContentTransitionManager(arg0 *jni.Object) error {
 }
 
 // SetContentView1 calls android.app.Activity.setContentView.
-func (m *activity) SetContentView1(arg0 *jni.Object) error {
+func (m *Activity) SetContentView1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4079,14 +4079,14 @@ func (m *activity) SetContentView1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetContentView1 == nil {
+		if midActivitySetContentView1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.setContentView is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetContentView1, jni.ObjectValue(arg0),
+			midActivitySetContentView1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4094,7 +4094,7 @@ func (m *activity) SetContentView1(arg0 *jni.Object) error {
 }
 
 // SetContentView2_1 calls android.app.Activity.setContentView.
-func (m *activity) SetContentView2_1(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) SetContentView2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4102,14 +4102,14 @@ func (m *activity) SetContentView2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetContentView2_1 == nil {
+		if midActivitySetContentView2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.setContentView is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetContentView2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivitySetContentView2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -4117,7 +4117,7 @@ func (m *activity) SetContentView2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // SetContentView1_2 calls android.app.Activity.setContentView.
-func (m *activity) SetContentView1_2(arg0 int32) error {
+func (m *Activity) SetContentView1_2(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4125,14 +4125,14 @@ func (m *activity) SetContentView1_2(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetContentView1_2 == nil {
+		if midActivitySetContentView1_2 == nil {
 			callErr = fmt.Errorf("android.app.Activity.setContentView is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetContentView1_2, jni.IntValue(arg0),
+			midActivitySetContentView1_2, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -4140,7 +4140,7 @@ func (m *activity) SetContentView1_2(arg0 int32) error {
 }
 
 // SetEnterSharedElementCallback calls android.app.Activity.setEnterSharedElementCallback.
-func (m *activity) SetEnterSharedElementCallback(arg0 *jni.Object) error {
+func (m *Activity) SetEnterSharedElementCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4148,14 +4148,14 @@ func (m *activity) SetEnterSharedElementCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetEnterSharedElementCallback == nil {
+		if midActivitySetEnterSharedElementCallback == nil {
 			callErr = fmt.Errorf("android.app.Activity.setEnterSharedElementCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetEnterSharedElementCallback, jni.ObjectValue(arg0),
+			midActivitySetEnterSharedElementCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4163,7 +4163,7 @@ func (m *activity) SetEnterSharedElementCallback(arg0 *jni.Object) error {
 }
 
 // SetExitSharedElementCallback calls android.app.Activity.setExitSharedElementCallback.
-func (m *activity) SetExitSharedElementCallback(arg0 *jni.Object) error {
+func (m *Activity) SetExitSharedElementCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4171,14 +4171,14 @@ func (m *activity) SetExitSharedElementCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetExitSharedElementCallback == nil {
+		if midActivitySetExitSharedElementCallback == nil {
 			callErr = fmt.Errorf("android.app.Activity.setExitSharedElementCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetExitSharedElementCallback, jni.ObjectValue(arg0),
+			midActivitySetExitSharedElementCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4186,7 +4186,7 @@ func (m *activity) SetExitSharedElementCallback(arg0 *jni.Object) error {
 }
 
 // SetFinishOnTouchOutside calls android.app.Activity.setFinishOnTouchOutside.
-func (m *activity) SetFinishOnTouchOutside(arg0 bool) error {
+func (m *Activity) SetFinishOnTouchOutside(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4194,7 +4194,7 @@ func (m *activity) SetFinishOnTouchOutside(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetFinishOnTouchOutside == nil {
+		if midActivitySetFinishOnTouchOutside == nil {
 			callErr = fmt.Errorf("android.app.Activity.setFinishOnTouchOutside is not available on this device")
 			return callErr
 		}
@@ -4205,7 +4205,7 @@ func (m *activity) SetFinishOnTouchOutside(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetFinishOnTouchOutside, jni.BooleanValue(jArg0),
+			midActivitySetFinishOnTouchOutside, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4213,7 +4213,7 @@ func (m *activity) SetFinishOnTouchOutside(arg0 bool) error {
 }
 
 // SetImmersive calls android.app.Activity.setImmersive.
-func (m *activity) SetImmersive(arg0 bool) error {
+func (m *Activity) SetImmersive(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4221,7 +4221,7 @@ func (m *activity) SetImmersive(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetImmersive == nil {
+		if midActivitySetImmersive == nil {
 			callErr = fmt.Errorf("android.app.Activity.setImmersive is not available on this device")
 			return callErr
 		}
@@ -4232,7 +4232,7 @@ func (m *activity) SetImmersive(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetImmersive, jni.BooleanValue(jArg0),
+			midActivitySetImmersive, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4240,7 +4240,7 @@ func (m *activity) SetImmersive(arg0 bool) error {
 }
 
 // SetInheritShowWhenLocked calls android.app.Activity.setInheritShowWhenLocked.
-func (m *activity) SetInheritShowWhenLocked(arg0 bool) error {
+func (m *Activity) SetInheritShowWhenLocked(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4248,7 +4248,7 @@ func (m *activity) SetInheritShowWhenLocked(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetInheritShowWhenLocked == nil {
+		if midActivitySetInheritShowWhenLocked == nil {
 			callErr = fmt.Errorf("android.app.Activity.setInheritShowWhenLocked is not available on this device")
 			return callErr
 		}
@@ -4259,7 +4259,7 @@ func (m *activity) SetInheritShowWhenLocked(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetInheritShowWhenLocked, jni.BooleanValue(jArg0),
+			midActivitySetInheritShowWhenLocked, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4267,7 +4267,7 @@ func (m *activity) SetInheritShowWhenLocked(arg0 bool) error {
 }
 
 // SetIntent1 calls android.app.Activity.setIntent.
-func (m *activity) SetIntent1(arg0 *jni.Object) error {
+func (m *Activity) SetIntent1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4275,14 +4275,14 @@ func (m *activity) SetIntent1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetIntent1 == nil {
+		if midActivitySetIntent1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.setIntent is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetIntent1, jni.ObjectValue(arg0),
+			midActivitySetIntent1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4290,7 +4290,7 @@ func (m *activity) SetIntent1(arg0 *jni.Object) error {
 }
 
 // SetIntent2_1 calls android.app.Activity.setIntent.
-func (m *activity) SetIntent2_1(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) SetIntent2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4298,14 +4298,14 @@ func (m *activity) SetIntent2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetIntent2_1 == nil {
+		if midActivitySetIntent2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.setIntent is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetIntent2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivitySetIntent2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -4313,7 +4313,7 @@ func (m *activity) SetIntent2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // SetLocusContext calls android.app.Activity.setLocusContext.
-func (m *activity) SetLocusContext(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) SetLocusContext(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4321,14 +4321,14 @@ func (m *activity) SetLocusContext(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetLocusContext == nil {
+		if midActivitySetLocusContext == nil {
 			callErr = fmt.Errorf("android.app.Activity.setLocusContext is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetLocusContext, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivitySetLocusContext, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -4336,7 +4336,7 @@ func (m *activity) SetLocusContext(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // SetPictureInPictureParams calls android.app.Activity.setPictureInPictureParams.
-func (m *activity) SetPictureInPictureParams(arg0 *jni.Object) error {
+func (m *Activity) SetPictureInPictureParams(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4344,14 +4344,14 @@ func (m *activity) SetPictureInPictureParams(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetPictureInPictureParams == nil {
+		if midActivitySetPictureInPictureParams == nil {
 			callErr = fmt.Errorf("android.app.Activity.setPictureInPictureParams is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetPictureInPictureParams, jni.ObjectValue(arg0),
+			midActivitySetPictureInPictureParams, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4359,7 +4359,7 @@ func (m *activity) SetPictureInPictureParams(arg0 *jni.Object) error {
 }
 
 // SetRecentsScreenshotEnabled calls android.app.Activity.setRecentsScreenshotEnabled.
-func (m *activity) SetRecentsScreenshotEnabled(arg0 bool) error {
+func (m *Activity) SetRecentsScreenshotEnabled(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4367,7 +4367,7 @@ func (m *activity) SetRecentsScreenshotEnabled(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetRecentsScreenshotEnabled == nil {
+		if midActivitySetRecentsScreenshotEnabled == nil {
 			callErr = fmt.Errorf("android.app.Activity.setRecentsScreenshotEnabled is not available on this device")
 			return callErr
 		}
@@ -4378,7 +4378,7 @@ func (m *activity) SetRecentsScreenshotEnabled(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetRecentsScreenshotEnabled, jni.BooleanValue(jArg0),
+			midActivitySetRecentsScreenshotEnabled, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4386,7 +4386,7 @@ func (m *activity) SetRecentsScreenshotEnabled(arg0 bool) error {
 }
 
 // SetRequestedOrientation calls android.app.Activity.setRequestedOrientation.
-func (m *activity) SetRequestedOrientation(arg0 int32) error {
+func (m *Activity) SetRequestedOrientation(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4394,14 +4394,14 @@ func (m *activity) SetRequestedOrientation(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetRequestedOrientation == nil {
+		if midActivitySetRequestedOrientation == nil {
 			callErr = fmt.Errorf("android.app.Activity.setRequestedOrientation is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetRequestedOrientation, jni.IntValue(arg0),
+			midActivitySetRequestedOrientation, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -4409,7 +4409,7 @@ func (m *activity) SetRequestedOrientation(arg0 int32) error {
 }
 
 // SetShouldDockBigOverlays calls android.app.Activity.setShouldDockBigOverlays.
-func (m *activity) SetShouldDockBigOverlays(arg0 bool) error {
+func (m *Activity) SetShouldDockBigOverlays(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4417,7 +4417,7 @@ func (m *activity) SetShouldDockBigOverlays(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetShouldDockBigOverlays == nil {
+		if midActivitySetShouldDockBigOverlays == nil {
 			callErr = fmt.Errorf("android.app.Activity.setShouldDockBigOverlays is not available on this device")
 			return callErr
 		}
@@ -4428,7 +4428,7 @@ func (m *activity) SetShouldDockBigOverlays(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetShouldDockBigOverlays, jni.BooleanValue(jArg0),
+			midActivitySetShouldDockBigOverlays, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4436,7 +4436,7 @@ func (m *activity) SetShouldDockBigOverlays(arg0 bool) error {
 }
 
 // SetShowWhenLocked calls android.app.Activity.setShowWhenLocked.
-func (m *activity) SetShowWhenLocked(arg0 bool) error {
+func (m *Activity) SetShowWhenLocked(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4444,7 +4444,7 @@ func (m *activity) SetShowWhenLocked(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetShowWhenLocked == nil {
+		if midActivitySetShowWhenLocked == nil {
 			callErr = fmt.Errorf("android.app.Activity.setShowWhenLocked is not available on this device")
 			return callErr
 		}
@@ -4455,7 +4455,7 @@ func (m *activity) SetShowWhenLocked(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetShowWhenLocked, jni.BooleanValue(jArg0),
+			midActivitySetShowWhenLocked, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4463,7 +4463,7 @@ func (m *activity) SetShowWhenLocked(arg0 bool) error {
 }
 
 // SetTaskDescription calls android.app.Activity.setTaskDescription.
-func (m *activity) SetTaskDescription(arg0 *jni.Object) error {
+func (m *Activity) SetTaskDescription(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4471,14 +4471,14 @@ func (m *activity) SetTaskDescription(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetTaskDescription == nil {
+		if midActivitySetTaskDescription == nil {
 			callErr = fmt.Errorf("android.app.Activity.setTaskDescription is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetTaskDescription, jni.ObjectValue(arg0),
+			midActivitySetTaskDescription, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4486,7 +4486,7 @@ func (m *activity) SetTaskDescription(arg0 *jni.Object) error {
 }
 
 // SetTheme calls android.app.Activity.setTheme.
-func (m *activity) SetTheme(arg0 int32) error {
+func (m *Activity) SetTheme(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4494,14 +4494,14 @@ func (m *activity) SetTheme(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetTheme == nil {
+		if midActivitySetTheme == nil {
 			callErr = fmt.Errorf("android.app.Activity.setTheme is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetTheme, jni.IntValue(arg0),
+			midActivitySetTheme, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -4509,7 +4509,7 @@ func (m *activity) SetTheme(arg0 int32) error {
 }
 
 // SetTitle1 calls android.app.Activity.setTitle.
-func (m *activity) SetTitle1(arg0 int32) error {
+func (m *Activity) SetTitle1(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4517,14 +4517,14 @@ func (m *activity) SetTitle1(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetTitle1 == nil {
+		if midActivitySetTitle1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.setTitle is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetTitle1, jni.IntValue(arg0),
+			midActivitySetTitle1, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -4532,7 +4532,7 @@ func (m *activity) SetTitle1(arg0 int32) error {
 }
 
 // SetTitle1_1 calls android.app.Activity.setTitle.
-func (m *activity) SetTitle1_1(arg0 string) error {
+func (m *Activity) SetTitle1_1(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4540,7 +4540,7 @@ func (m *activity) SetTitle1_1(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetTitle1_1 == nil {
+		if midActivitySetTitle1_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.setTitle is not available on this device")
 			return callErr
 		}
@@ -4551,7 +4551,7 @@ func (m *activity) SetTitle1_1(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetTitle1_1, jni.ObjectValue(&jArg0.Object),
+			midActivitySetTitle1_1, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -4559,7 +4559,7 @@ func (m *activity) SetTitle1_1(arg0 string) error {
 }
 
 // SetTitleColor calls android.app.Activity.setTitleColor.
-func (m *activity) SetTitleColor(arg0 int32) error {
+func (m *Activity) SetTitleColor(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4567,14 +4567,14 @@ func (m *activity) SetTitleColor(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetTitleColor == nil {
+		if midActivitySetTitleColor == nil {
 			callErr = fmt.Errorf("android.app.Activity.setTitleColor is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetTitleColor, jni.IntValue(arg0),
+			midActivitySetTitleColor, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -4582,7 +4582,7 @@ func (m *activity) SetTitleColor(arg0 int32) error {
 }
 
 // SetTranslucent calls android.app.Activity.setTranslucent.
-func (m *activity) SetTranslucent(arg0 bool) (bool, error) {
+func (m *Activity) SetTranslucent(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4590,7 +4590,7 @@ func (m *activity) SetTranslucent(arg0 bool) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivitySetTranslucent == nil {
+		if midActivitySetTranslucent == nil {
 			callErr = fmt.Errorf("android.app.Activity.setTranslucent is not available on this device")
 			return callErr
 		}
@@ -4601,7 +4601,7 @@ func (m *activity) SetTranslucent(arg0 bool) (bool, error) {
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivitySetTranslucent, jni.BooleanValue(jArg0),
+			midActivitySetTranslucent, jni.BooleanValue(jArg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -4613,7 +4613,7 @@ func (m *activity) SetTranslucent(arg0 bool) (bool, error) {
 }
 
 // SetTurnScreenOn calls android.app.Activity.setTurnScreenOn.
-func (m *activity) SetTurnScreenOn(arg0 bool) error {
+func (m *Activity) SetTurnScreenOn(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4621,7 +4621,7 @@ func (m *activity) SetTurnScreenOn(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetTurnScreenOn == nil {
+		if midActivitySetTurnScreenOn == nil {
 			callErr = fmt.Errorf("android.app.Activity.setTurnScreenOn is not available on this device")
 			return callErr
 		}
@@ -4632,7 +4632,7 @@ func (m *activity) SetTurnScreenOn(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetTurnScreenOn, jni.BooleanValue(jArg0),
+			midActivitySetTurnScreenOn, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4640,7 +4640,7 @@ func (m *activity) SetTurnScreenOn(arg0 bool) error {
 }
 
 // SetVisible calls android.app.Activity.setVisible.
-func (m *activity) SetVisible(arg0 bool) error {
+func (m *Activity) SetVisible(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4648,7 +4648,7 @@ func (m *activity) SetVisible(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetVisible == nil {
+		if midActivitySetVisible == nil {
 			callErr = fmt.Errorf("android.app.Activity.setVisible is not available on this device")
 			return callErr
 		}
@@ -4659,7 +4659,7 @@ func (m *activity) SetVisible(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetVisible, jni.BooleanValue(jArg0),
+			midActivitySetVisible, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -4667,7 +4667,7 @@ func (m *activity) SetVisible(arg0 bool) error {
 }
 
 // SetVrModeEnabled calls android.app.Activity.setVrModeEnabled.
-func (m *activity) SetVrModeEnabled(arg0 bool, arg1 *jni.Object) error {
+func (m *Activity) SetVrModeEnabled(arg0 bool, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4675,7 +4675,7 @@ func (m *activity) SetVrModeEnabled(arg0 bool, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivitySetVrModeEnabled == nil {
+		if midActivitySetVrModeEnabled == nil {
 			callErr = fmt.Errorf("android.app.Activity.setVrModeEnabled is not available on this device")
 			return callErr
 		}
@@ -4686,7 +4686,7 @@ func (m *activity) SetVrModeEnabled(arg0 bool, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivitySetVrModeEnabled, jni.BooleanValue(jArg0), jni.ObjectValue(arg1),
+			midActivitySetVrModeEnabled, jni.BooleanValue(jArg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -4694,7 +4694,7 @@ func (m *activity) SetVrModeEnabled(arg0 bool, arg1 *jni.Object) error {
 }
 
 // ShouldDockBigOverlays calls android.app.Activity.shouldDockBigOverlays.
-func (m *activity) ShouldDockBigOverlays() (bool, error) {
+func (m *Activity) ShouldDockBigOverlays() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4702,13 +4702,13 @@ func (m *activity) ShouldDockBigOverlays() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityShouldDockBigOverlays == nil {
+		if midActivityShouldDockBigOverlays == nil {
 			callErr = fmt.Errorf("android.app.Activity.shouldDockBigOverlays is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityShouldDockBigOverlays,
+			midActivityShouldDockBigOverlays,
 		)
 		if callErr != nil {
 			return callErr
@@ -4720,7 +4720,7 @@ func (m *activity) ShouldDockBigOverlays() (bool, error) {
 }
 
 // ShouldShowRequestPermissionRationale1 calls android.app.Activity.shouldShowRequestPermissionRationale.
-func (m *activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, error) {
+func (m *Activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4728,7 +4728,7 @@ func (m *activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, err
 			callErr = err
 			return err
 		}
-		if midactivityShouldShowRequestPermissionRationale1 == nil {
+		if midActivityShouldShowRequestPermissionRationale1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.shouldShowRequestPermissionRationale is not available on this device")
 			return callErr
 		}
@@ -4739,7 +4739,7 @@ func (m *activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, err
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityShouldShowRequestPermissionRationale1, jni.ObjectValue(&jArg0.Object),
+			midActivityShouldShowRequestPermissionRationale1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -4751,7 +4751,7 @@ func (m *activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, err
 }
 
 // ShouldShowRequestPermissionRationale2_1 calls android.app.Activity.shouldShowRequestPermissionRationale.
-func (m *activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int32) (bool, error) {
+func (m *Activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4759,7 +4759,7 @@ func (m *activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int
 			callErr = err
 			return err
 		}
-		if midactivityShouldShowRequestPermissionRationale2_1 == nil {
+		if midActivityShouldShowRequestPermissionRationale2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.shouldShowRequestPermissionRationale is not available on this device")
 			return callErr
 		}
@@ -4770,7 +4770,7 @@ func (m *activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityShouldShowRequestPermissionRationale2_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+			midActivityShouldShowRequestPermissionRationale2_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -4782,7 +4782,7 @@ func (m *activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int
 }
 
 // ShouldUpRecreateTask calls android.app.Activity.shouldUpRecreateTask.
-func (m *activity) ShouldUpRecreateTask(arg0 *jni.Object) (bool, error) {
+func (m *Activity) ShouldUpRecreateTask(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4790,14 +4790,14 @@ func (m *activity) ShouldUpRecreateTask(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityShouldUpRecreateTask == nil {
+		if midActivityShouldUpRecreateTask == nil {
 			callErr = fmt.Errorf("android.app.Activity.shouldUpRecreateTask is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityShouldUpRecreateTask, jni.ObjectValue(arg0),
+			midActivityShouldUpRecreateTask, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -4809,7 +4809,7 @@ func (m *activity) ShouldUpRecreateTask(arg0 *jni.Object) (bool, error) {
 }
 
 // ShowAssist calls android.app.Activity.showAssist.
-func (m *activity) ShowAssist(arg0 *jni.Object) (bool, error) {
+func (m *Activity) ShowAssist(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4817,14 +4817,14 @@ func (m *activity) ShowAssist(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityShowAssist == nil {
+		if midActivityShowAssist == nil {
 			callErr = fmt.Errorf("android.app.Activity.showAssist is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityShowAssist, jni.ObjectValue(arg0),
+			midActivityShowAssist, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -4836,7 +4836,7 @@ func (m *activity) ShowAssist(arg0 *jni.Object) (bool, error) {
 }
 
 // ShowLockTaskEscapeMessage calls android.app.Activity.showLockTaskEscapeMessage.
-func (m *activity) ShowLockTaskEscapeMessage() error {
+func (m *Activity) ShowLockTaskEscapeMessage() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4844,13 +4844,13 @@ func (m *activity) ShowLockTaskEscapeMessage() error {
 			callErr = err
 			return err
 		}
-		if midactivityShowLockTaskEscapeMessage == nil {
+		if midActivityShowLockTaskEscapeMessage == nil {
 			callErr = fmt.Errorf("android.app.Activity.showLockTaskEscapeMessage is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityShowLockTaskEscapeMessage,
+			midActivityShowLockTaskEscapeMessage,
 		)
 		return callErr
 	})
@@ -4858,7 +4858,7 @@ func (m *activity) ShowLockTaskEscapeMessage() error {
 }
 
 // StartActionMode1 calls android.app.Activity.startActionMode.
-func (m *activity) StartActionMode1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Activity) StartActionMode1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4866,14 +4866,14 @@ func (m *activity) StartActionMode1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midactivityStartActionMode1 == nil {
+		if midActivityStartActionMode1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActionMode is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityStartActionMode1, jni.ObjectValue(arg0),
+			midActivityStartActionMode1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -4884,7 +4884,7 @@ func (m *activity) StartActionMode1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // StartActionMode2_1 calls android.app.Activity.startActionMode.
-func (m *activity) StartActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+func (m *Activity) StartActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4892,14 +4892,14 @@ func (m *activity) StartActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object
 			callErr = err
 			return err
 		}
-		if midactivityStartActionMode2_1 == nil {
+		if midActivityStartActionMode2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActionMode is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midactivityStartActionMode2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midActivityStartActionMode2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -4910,7 +4910,7 @@ func (m *activity) StartActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object
 }
 
 // StartActivities1 calls android.app.Activity.startActivities.
-func (m *activity) StartActivities1(arg0 *jni.Object) error {
+func (m *Activity) StartActivities1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4918,14 +4918,14 @@ func (m *activity) StartActivities1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityStartActivities1 == nil {
+		if midActivityStartActivities1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivities is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivities1, jni.ObjectValue(arg0),
+			midActivityStartActivities1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4933,7 +4933,7 @@ func (m *activity) StartActivities1(arg0 *jni.Object) error {
 }
 
 // StartActivities2_1 calls android.app.Activity.startActivities.
-func (m *activity) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4941,14 +4941,14 @@ func (m *activity) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error 
 			callErr = err
 			return err
 		}
-		if midactivityStartActivities2_1 == nil {
+		if midActivityStartActivities2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivities is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivities2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityStartActivities2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -4956,7 +4956,7 @@ func (m *activity) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error 
 }
 
 // StartActivity1 calls android.app.Activity.startActivity.
-func (m *activity) StartActivity1(arg0 *jni.Object) error {
+func (m *Activity) StartActivity1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4964,14 +4964,14 @@ func (m *activity) StartActivity1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityStartActivity1 == nil {
+		if midActivityStartActivity1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivity is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivity1, jni.ObjectValue(arg0),
+			midActivityStartActivity1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -4979,7 +4979,7 @@ func (m *activity) StartActivity1(arg0 *jni.Object) error {
 }
 
 // StartActivity2_1 calls android.app.Activity.startActivity.
-func (m *activity) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
+func (m *Activity) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -4987,14 +4987,14 @@ func (m *activity) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityStartActivity2_1 == nil {
+		if midActivityStartActivity2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivity is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivity2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityStartActivity2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -5002,7 +5002,7 @@ func (m *activity) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // StartActivityForResult2 calls android.app.Activity.startActivityForResult.
-func (m *activity) StartActivityForResult2(arg0 *jni.Object, arg1 int32) error {
+func (m *Activity) StartActivityForResult2(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5010,14 +5010,14 @@ func (m *activity) StartActivityForResult2(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityForResult2 == nil {
+		if midActivityStartActivityForResult2 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityForResult is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivityForResult2, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midActivityStartActivityForResult2, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -5025,7 +5025,7 @@ func (m *activity) StartActivityForResult2(arg0 *jni.Object, arg1 int32) error {
 }
 
 // StartActivityForResult3_1 calls android.app.Activity.startActivityForResult.
-func (m *activity) StartActivityForResult3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+func (m *Activity) StartActivityForResult3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5033,14 +5033,14 @@ func (m *activity) StartActivityForResult3_1(arg0 *jni.Object, arg1 int32, arg2 
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityForResult3_1 == nil {
+		if midActivityStartActivityForResult3_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityForResult is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivityForResult3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midActivityStartActivityForResult3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -5048,7 +5048,7 @@ func (m *activity) StartActivityForResult3_1(arg0 *jni.Object, arg1 int32, arg2 
 }
 
 // StartActivityFromChild3 calls android.app.Activity.startActivityFromChild.
-func (m *activity) StartActivityFromChild3(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) error {
+func (m *Activity) StartActivityFromChild3(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5056,14 +5056,14 @@ func (m *activity) StartActivityFromChild3(arg0 *jni.Object, arg1 *jni.Object, a
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityFromChild3 == nil {
+		if midActivityStartActivityFromChild3 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityFromChild is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivityFromChild3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
+			midActivityStartActivityFromChild3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -5071,7 +5071,7 @@ func (m *activity) StartActivityFromChild3(arg0 *jni.Object, arg1 *jni.Object, a
 }
 
 // StartActivityFromChild4_1 calls android.app.Activity.startActivityFromChild.
-func (m *activity) StartActivityFromChild4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object) error {
+func (m *Activity) StartActivityFromChild4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5079,14 +5079,14 @@ func (m *activity) StartActivityFromChild4_1(arg0 *jni.Object, arg1 *jni.Object,
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityFromChild4_1 == nil {
+		if midActivityStartActivityFromChild4_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityFromChild is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivityFromChild4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			midActivityStartActivityFromChild4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -5094,7 +5094,7 @@ func (m *activity) StartActivityFromChild4_1(arg0 *jni.Object, arg1 *jni.Object,
 }
 
 // StartActivityFromFragment3 calls android.app.Activity.startActivityFromFragment.
-func (m *activity) StartActivityFromFragment3(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) error {
+func (m *Activity) StartActivityFromFragment3(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5102,14 +5102,14 @@ func (m *activity) StartActivityFromFragment3(arg0 *jni.Object, arg1 *jni.Object
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityFromFragment3 == nil {
+		if midActivityStartActivityFromFragment3 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityFromFragment is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivityFromFragment3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
+			midActivityStartActivityFromFragment3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -5117,7 +5117,7 @@ func (m *activity) StartActivityFromFragment3(arg0 *jni.Object, arg1 *jni.Object
 }
 
 // StartActivityFromFragment4_1 calls android.app.Activity.startActivityFromFragment.
-func (m *activity) StartActivityFromFragment4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object) error {
+func (m *Activity) StartActivityFromFragment4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5125,14 +5125,14 @@ func (m *activity) StartActivityFromFragment4_1(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityFromFragment4_1 == nil {
+		if midActivityStartActivityFromFragment4_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityFromFragment is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartActivityFromFragment4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			midActivityStartActivityFromFragment4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -5140,7 +5140,7 @@ func (m *activity) StartActivityFromFragment4_1(arg0 *jni.Object, arg1 *jni.Obje
 }
 
 // StartActivityIfNeeded2 calls android.app.Activity.startActivityIfNeeded.
-func (m *activity) StartActivityIfNeeded2(arg0 *jni.Object, arg1 int32) (bool, error) {
+func (m *Activity) StartActivityIfNeeded2(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5148,14 +5148,14 @@ func (m *activity) StartActivityIfNeeded2(arg0 *jni.Object, arg1 int32) (bool, e
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityIfNeeded2 == nil {
+		if midActivityStartActivityIfNeeded2 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityIfNeeded is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityStartActivityIfNeeded2, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midActivityStartActivityIfNeeded2, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -5167,7 +5167,7 @@ func (m *activity) StartActivityIfNeeded2(arg0 *jni.Object, arg1 int32) (bool, e
 }
 
 // StartActivityIfNeeded3_1 calls android.app.Activity.startActivityIfNeeded.
-func (m *activity) StartActivityIfNeeded3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool, error) {
+func (m *Activity) StartActivityIfNeeded3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5175,14 +5175,14 @@ func (m *activity) StartActivityIfNeeded3_1(arg0 *jni.Object, arg1 int32, arg2 *
 			callErr = err
 			return err
 		}
-		if midactivityStartActivityIfNeeded3_1 == nil {
+		if midActivityStartActivityIfNeeded3_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startActivityIfNeeded is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityStartActivityIfNeeded3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midActivityStartActivityIfNeeded3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -5194,7 +5194,7 @@ func (m *activity) StartActivityIfNeeded3_1(arg0 *jni.Object, arg1 int32, arg2 *
 }
 
 // StartIntentSender5 calls android.app.Activity.startIntentSender.
-func (m *activity) StartIntentSender5(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32) error {
+func (m *Activity) StartIntentSender5(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5202,14 +5202,14 @@ func (m *activity) StartIntentSender5(arg0 *jni.Object, arg1 *jni.Object, arg2 i
 			callErr = err
 			return err
 		}
-		if midactivityStartIntentSender5 == nil {
+		if midActivityStartIntentSender5 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startIntentSender is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartIntentSender5, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4),
+			midActivityStartIntentSender5, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4),
 		)
 		return callErr
 	})
@@ -5217,7 +5217,7 @@ func (m *activity) StartIntentSender5(arg0 *jni.Object, arg1 *jni.Object, arg2 i
 }
 
 // StartIntentSender6_1 calls android.app.Activity.startIntentSender.
-func (m *activity) StartIntentSender6_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object) error {
+func (m *Activity) StartIntentSender6_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5225,14 +5225,14 @@ func (m *activity) StartIntentSender6_1(arg0 *jni.Object, arg1 *jni.Object, arg2
 			callErr = err
 			return err
 		}
-		if midactivityStartIntentSender6_1 == nil {
+		if midActivityStartIntentSender6_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startIntentSender is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartIntentSender6_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5),
+			midActivityStartIntentSender6_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5),
 		)
 		return callErr
 	})
@@ -5240,7 +5240,7 @@ func (m *activity) StartIntentSender6_1(arg0 *jni.Object, arg1 *jni.Object, arg2
 }
 
 // StartIntentSenderForResult6 calls android.app.Activity.startIntentSenderForResult.
-func (m *activity) StartIntentSenderForResult6(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 int32, arg5 int32) error {
+func (m *Activity) StartIntentSenderForResult6(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 int32, arg5 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5248,14 +5248,14 @@ func (m *activity) StartIntentSenderForResult6(arg0 *jni.Object, arg1 int32, arg
 			callErr = err
 			return err
 		}
-		if midactivityStartIntentSenderForResult6 == nil {
+		if midActivityStartIntentSenderForResult6 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startIntentSenderForResult is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartIntentSenderForResult6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5),
+			midActivityStartIntentSenderForResult6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5),
 		)
 		return callErr
 	})
@@ -5263,7 +5263,7 @@ func (m *activity) StartIntentSenderForResult6(arg0 *jni.Object, arg1 int32, arg
 }
 
 // StartIntentSenderForResult7_1 calls android.app.Activity.startIntentSenderForResult.
-func (m *activity) StartIntentSenderForResult7_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 int32, arg5 int32, arg6 *jni.Object) error {
+func (m *Activity) StartIntentSenderForResult7_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 int32, arg5 int32, arg6 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5271,14 +5271,14 @@ func (m *activity) StartIntentSenderForResult7_1(arg0 *jni.Object, arg1 int32, a
 			callErr = err
 			return err
 		}
-		if midactivityStartIntentSenderForResult7_1 == nil {
+		if midActivityStartIntentSenderForResult7_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startIntentSenderForResult is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartIntentSenderForResult7_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6),
+			midActivityStartIntentSenderForResult7_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6),
 		)
 		return callErr
 	})
@@ -5286,7 +5286,7 @@ func (m *activity) StartIntentSenderForResult7_1(arg0 *jni.Object, arg1 int32, a
 }
 
 // StartIntentSenderFromChild7 calls android.app.Activity.startIntentSenderFromChild.
-func (m *activity) StartIntentSenderFromChild7(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object, arg4 int32, arg5 int32, arg6 int32) error {
+func (m *Activity) StartIntentSenderFromChild7(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object, arg4 int32, arg5 int32, arg6 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5294,14 +5294,14 @@ func (m *activity) StartIntentSenderFromChild7(arg0 *jni.Object, arg1 *jni.Objec
 			callErr = err
 			return err
 		}
-		if midactivityStartIntentSenderFromChild7 == nil {
+		if midActivityStartIntentSenderFromChild7 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startIntentSenderFromChild is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartIntentSenderFromChild7, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
+			midActivityStartIntentSenderFromChild7, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
 		)
 		return callErr
 	})
@@ -5309,7 +5309,7 @@ func (m *activity) StartIntentSenderFromChild7(arg0 *jni.Object, arg1 *jni.Objec
 }
 
 // StartIntentSenderFromChild8_1 calls android.app.Activity.startIntentSenderFromChild.
-func (m *activity) StartIntentSenderFromChild8_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object, arg4 int32, arg5 int32, arg6 int32, arg7 *jni.Object) error {
+func (m *Activity) StartIntentSenderFromChild8_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object, arg4 int32, arg5 int32, arg6 int32, arg7 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5317,14 +5317,14 @@ func (m *activity) StartIntentSenderFromChild8_1(arg0 *jni.Object, arg1 *jni.Obj
 			callErr = err
 			return err
 		}
-		if midactivityStartIntentSenderFromChild8_1 == nil {
+		if midActivityStartIntentSenderFromChild8_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startIntentSenderFromChild is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartIntentSenderFromChild8_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6), jni.ObjectValue(arg7),
+			midActivityStartIntentSenderFromChild8_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6), jni.ObjectValue(arg7),
 		)
 		return callErr
 	})
@@ -5332,7 +5332,7 @@ func (m *activity) StartIntentSenderFromChild8_1(arg0 *jni.Object, arg1 *jni.Obj
 }
 
 // StartLocalVoiceInteraction calls android.app.Activity.startLocalVoiceInteraction.
-func (m *activity) StartLocalVoiceInteraction(arg0 *jni.Object) error {
+func (m *Activity) StartLocalVoiceInteraction(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5340,14 +5340,14 @@ func (m *activity) StartLocalVoiceInteraction(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityStartLocalVoiceInteraction == nil {
+		if midActivityStartLocalVoiceInteraction == nil {
 			callErr = fmt.Errorf("android.app.Activity.startLocalVoiceInteraction is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartLocalVoiceInteraction, jni.ObjectValue(arg0),
+			midActivityStartLocalVoiceInteraction, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -5355,7 +5355,7 @@ func (m *activity) StartLocalVoiceInteraction(arg0 *jni.Object) error {
 }
 
 // StartLockTask calls android.app.Activity.startLockTask.
-func (m *activity) StartLockTask() error {
+func (m *Activity) StartLockTask() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5363,13 +5363,13 @@ func (m *activity) StartLockTask() error {
 			callErr = err
 			return err
 		}
-		if midactivityStartLockTask == nil {
+		if midActivityStartLockTask == nil {
 			callErr = fmt.Errorf("android.app.Activity.startLockTask is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartLockTask,
+			midActivityStartLockTask,
 		)
 		return callErr
 	})
@@ -5377,7 +5377,7 @@ func (m *activity) StartLockTask() error {
 }
 
 // StartManagingCursor calls android.app.Activity.startManagingCursor.
-func (m *activity) StartManagingCursor(arg0 *jni.Object) error {
+func (m *Activity) StartManagingCursor(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5385,14 +5385,14 @@ func (m *activity) StartManagingCursor(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityStartManagingCursor == nil {
+		if midActivityStartManagingCursor == nil {
 			callErr = fmt.Errorf("android.app.Activity.startManagingCursor is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartManagingCursor, jni.ObjectValue(arg0),
+			midActivityStartManagingCursor, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -5400,7 +5400,7 @@ func (m *activity) StartManagingCursor(arg0 *jni.Object) error {
 }
 
 // StartNextMatchingActivity1 calls android.app.Activity.startNextMatchingActivity.
-func (m *activity) StartNextMatchingActivity1(arg0 *jni.Object) (bool, error) {
+func (m *Activity) StartNextMatchingActivity1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5408,14 +5408,14 @@ func (m *activity) StartNextMatchingActivity1(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midactivityStartNextMatchingActivity1 == nil {
+		if midActivityStartNextMatchingActivity1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startNextMatchingActivity is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityStartNextMatchingActivity1, jni.ObjectValue(arg0),
+			midActivityStartNextMatchingActivity1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -5427,7 +5427,7 @@ func (m *activity) StartNextMatchingActivity1(arg0 *jni.Object) (bool, error) {
 }
 
 // StartNextMatchingActivity2_1 calls android.app.Activity.startNextMatchingActivity.
-func (m *activity) StartNextMatchingActivity2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
+func (m *Activity) StartNextMatchingActivity2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5435,14 +5435,14 @@ func (m *activity) StartNextMatchingActivity2_1(arg0 *jni.Object, arg1 *jni.Obje
 			callErr = err
 			return err
 		}
-		if midactivityStartNextMatchingActivity2_1 == nil {
+		if midActivityStartNextMatchingActivity2_1 == nil {
 			callErr = fmt.Errorf("android.app.Activity.startNextMatchingActivity is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midactivityStartNextMatchingActivity2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midActivityStartNextMatchingActivity2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -5454,7 +5454,7 @@ func (m *activity) StartNextMatchingActivity2_1(arg0 *jni.Object, arg1 *jni.Obje
 }
 
 // StartPostponedEnterTransition calls android.app.Activity.startPostponedEnterTransition.
-func (m *activity) StartPostponedEnterTransition() error {
+func (m *Activity) StartPostponedEnterTransition() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5462,13 +5462,13 @@ func (m *activity) StartPostponedEnterTransition() error {
 			callErr = err
 			return err
 		}
-		if midactivityStartPostponedEnterTransition == nil {
+		if midActivityStartPostponedEnterTransition == nil {
 			callErr = fmt.Errorf("android.app.Activity.startPostponedEnterTransition is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartPostponedEnterTransition,
+			midActivityStartPostponedEnterTransition,
 		)
 		return callErr
 	})
@@ -5476,7 +5476,7 @@ func (m *activity) StartPostponedEnterTransition() error {
 }
 
 // StartSearch calls android.app.Activity.startSearch.
-func (m *activity) StartSearch(arg0 string, arg1 bool, arg2 *jni.Object, arg3 bool) error {
+func (m *Activity) StartSearch(arg0 string, arg1 bool, arg2 *jni.Object, arg3 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5484,7 +5484,7 @@ func (m *activity) StartSearch(arg0 string, arg1 bool, arg2 *jni.Object, arg3 bo
 			callErr = err
 			return err
 		}
-		if midactivityStartSearch == nil {
+		if midActivityStartSearch == nil {
 			callErr = fmt.Errorf("android.app.Activity.startSearch is not available on this device")
 			return callErr
 		}
@@ -5505,7 +5505,7 @@ func (m *activity) StartSearch(arg0 string, arg1 bool, arg2 *jni.Object, arg3 bo
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStartSearch, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3),
+			midActivityStartSearch, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3),
 		)
 		return callErr
 	})
@@ -5513,7 +5513,7 @@ func (m *activity) StartSearch(arg0 string, arg1 bool, arg2 *jni.Object, arg3 bo
 }
 
 // StopLocalVoiceInteraction calls android.app.Activity.stopLocalVoiceInteraction.
-func (m *activity) StopLocalVoiceInteraction() error {
+func (m *Activity) StopLocalVoiceInteraction() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5521,13 +5521,13 @@ func (m *activity) StopLocalVoiceInteraction() error {
 			callErr = err
 			return err
 		}
-		if midactivityStopLocalVoiceInteraction == nil {
+		if midActivityStopLocalVoiceInteraction == nil {
 			callErr = fmt.Errorf("android.app.Activity.stopLocalVoiceInteraction is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStopLocalVoiceInteraction,
+			midActivityStopLocalVoiceInteraction,
 		)
 		return callErr
 	})
@@ -5535,7 +5535,7 @@ func (m *activity) StopLocalVoiceInteraction() error {
 }
 
 // StopLockTask calls android.app.Activity.stopLockTask.
-func (m *activity) StopLockTask() error {
+func (m *Activity) StopLockTask() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5543,13 +5543,13 @@ func (m *activity) StopLockTask() error {
 			callErr = err
 			return err
 		}
-		if midactivityStopLockTask == nil {
+		if midActivityStopLockTask == nil {
 			callErr = fmt.Errorf("android.app.Activity.stopLockTask is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStopLockTask,
+			midActivityStopLockTask,
 		)
 		return callErr
 	})
@@ -5557,7 +5557,7 @@ func (m *activity) StopLockTask() error {
 }
 
 // StopManagingCursor calls android.app.Activity.stopManagingCursor.
-func (m *activity) StopManagingCursor(arg0 *jni.Object) error {
+func (m *Activity) StopManagingCursor(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5565,14 +5565,14 @@ func (m *activity) StopManagingCursor(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityStopManagingCursor == nil {
+		if midActivityStopManagingCursor == nil {
 			callErr = fmt.Errorf("android.app.Activity.stopManagingCursor is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityStopManagingCursor, jni.ObjectValue(arg0),
+			midActivityStopManagingCursor, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -5580,7 +5580,7 @@ func (m *activity) StopManagingCursor(arg0 *jni.Object) error {
 }
 
 // TakeKeyEvents calls android.app.Activity.takeKeyEvents.
-func (m *activity) TakeKeyEvents(arg0 bool) error {
+func (m *Activity) TakeKeyEvents(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5588,7 +5588,7 @@ func (m *activity) TakeKeyEvents(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midactivityTakeKeyEvents == nil {
+		if midActivityTakeKeyEvents == nil {
 			callErr = fmt.Errorf("android.app.Activity.takeKeyEvents is not available on this device")
 			return callErr
 		}
@@ -5599,7 +5599,7 @@ func (m *activity) TakeKeyEvents(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityTakeKeyEvents, jni.BooleanValue(jArg0),
+			midActivityTakeKeyEvents, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -5607,7 +5607,7 @@ func (m *activity) TakeKeyEvents(arg0 bool) error {
 }
 
 // TriggerSearch calls android.app.Activity.triggerSearch.
-func (m *activity) TriggerSearch(arg0 string, arg1 *jni.Object) error {
+func (m *Activity) TriggerSearch(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5615,7 +5615,7 @@ func (m *activity) TriggerSearch(arg0 string, arg1 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityTriggerSearch == nil {
+		if midActivityTriggerSearch == nil {
 			callErr = fmt.Errorf("android.app.Activity.triggerSearch is not available on this device")
 			return callErr
 		}
@@ -5626,7 +5626,7 @@ func (m *activity) TriggerSearch(arg0 string, arg1 *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityTriggerSearch, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			midActivityTriggerSearch, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -5634,7 +5634,7 @@ func (m *activity) TriggerSearch(arg0 string, arg1 *jni.Object) error {
 }
 
 // UnregisterActivityLifecycleCallbacks calls android.app.Activity.unregisterActivityLifecycleCallbacks.
-func (m *activity) UnregisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
+func (m *Activity) UnregisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5642,14 +5642,14 @@ func (m *activity) UnregisterActivityLifecycleCallbacks(arg0 *jni.Object) error 
 			callErr = err
 			return err
 		}
-		if midactivityUnregisterActivityLifecycleCallbacks == nil {
+		if midActivityUnregisterActivityLifecycleCallbacks == nil {
 			callErr = fmt.Errorf("android.app.Activity.unregisterActivityLifecycleCallbacks is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityUnregisterActivityLifecycleCallbacks, jni.ObjectValue(arg0),
+			midActivityUnregisterActivityLifecycleCallbacks, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -5657,7 +5657,7 @@ func (m *activity) UnregisterActivityLifecycleCallbacks(arg0 *jni.Object) error 
 }
 
 // UnregisterComponentCallbacks calls android.app.Activity.unregisterComponentCallbacks.
-func (m *activity) UnregisterComponentCallbacks(arg0 *jni.Object) error {
+func (m *Activity) UnregisterComponentCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5665,14 +5665,14 @@ func (m *activity) UnregisterComponentCallbacks(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityUnregisterComponentCallbacks == nil {
+		if midActivityUnregisterComponentCallbacks == nil {
 			callErr = fmt.Errorf("android.app.Activity.unregisterComponentCallbacks is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityUnregisterComponentCallbacks, jni.ObjectValue(arg0),
+			midActivityUnregisterComponentCallbacks, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -5680,7 +5680,7 @@ func (m *activity) UnregisterComponentCallbacks(arg0 *jni.Object) error {
 }
 
 // UnregisterForContextMenu calls android.app.Activity.unregisterForContextMenu.
-func (m *activity) UnregisterForContextMenu(arg0 *jni.Object) error {
+func (m *Activity) UnregisterForContextMenu(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5688,14 +5688,14 @@ func (m *activity) UnregisterForContextMenu(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityUnregisterForContextMenu == nil {
+		if midActivityUnregisterForContextMenu == nil {
 			callErr = fmt.Errorf("android.app.Activity.unregisterForContextMenu is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityUnregisterForContextMenu, jni.ObjectValue(arg0),
+			midActivityUnregisterForContextMenu, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -5703,7 +5703,7 @@ func (m *activity) UnregisterForContextMenu(arg0 *jni.Object) error {
 }
 
 // UnregisterScreenCaptureCallback calls android.app.Activity.unregisterScreenCaptureCallback.
-func (m *activity) UnregisterScreenCaptureCallback(arg0 *jni.Object) error {
+func (m *Activity) UnregisterScreenCaptureCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -5711,14 +5711,14 @@ func (m *activity) UnregisterScreenCaptureCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midactivityUnregisterScreenCaptureCallback == nil {
+		if midActivityUnregisterScreenCaptureCallback == nil {
 			callErr = fmt.Errorf("android.app.Activity.unregisterScreenCaptureCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midactivityUnregisterScreenCaptureCallback, jni.ObjectValue(arg0),
+			midActivityUnregisterScreenCaptureCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

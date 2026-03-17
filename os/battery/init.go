@@ -20,12 +20,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsbatteryManager                           *jni.GlobalRef
-	midbatteryManagerComputeChargeTimeRemaining jni.MethodID
-	midbatteryManagerGetIntProperty             jni.MethodID
-	midbatteryManagerGetLongProperty            jni.MethodID
-	midbatteryManagerGetStringProperty          jni.MethodID
-	midbatteryManagerIsCharging                 jni.MethodID
+	clsManager                           *jni.GlobalRef
+	midManagerComputeChargeTimeRemaining jni.MethodID
+	midManagerGetIntProperty             jni.MethodID
+	midManagerGetLongProperty            jni.MethodID
+	midManagerGetStringProperty          jni.MethodID
+	midManagerIsCharging                 jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -56,9 +56,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.os.BatteryManager: %w", err)
 	}
-	clsbatteryManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midbatteryManagerComputeChargeTimeRemaining, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "computeChargeTimeRemaining", "()J")
+	midManagerComputeChargeTimeRemaining, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "computeChargeTimeRemaining", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -66,7 +66,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.BatteryManager.computeChargeTimeRemaining")
 	}
 
-	midbatteryManagerGetIntProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "getIntProperty", "(I)I")
+	midManagerGetIntProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getIntProperty", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -74,7 +74,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.BatteryManager.getIntProperty")
 	}
 
-	midbatteryManagerGetLongProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "getLongProperty", "(I)J")
+	midManagerGetLongProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLongProperty", "(I)J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -82,7 +82,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.BatteryManager.getLongProperty")
 	}
 
-	midbatteryManagerGetStringProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "getStringProperty", "(I)Ljava/lang/String;")
+	midManagerGetStringProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStringProperty", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -90,7 +90,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.os.BatteryManager.getStringProperty")
 	}
 
-	midbatteryManagerIsCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "isCharging", "()Z")
+	midManagerIsCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isCharging", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

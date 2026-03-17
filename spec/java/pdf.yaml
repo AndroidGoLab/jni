@@ -2,7 +2,7 @@ package: pdf
 go_import: github.com/AndroidGoLab/jni/graphics/pdf
 classes:
     - java_class: android.graphics.Bitmap
-      go_type: bitmap
+      go_type: Bitmap
       methods:
         - java_method: asShared
           go_name: AsShared
@@ -585,7 +585,7 @@ classes:
           returns: android.graphics.Bitmap
           error: true
     - java_class: android.graphics.pdf.PdfRenderer
-      go_type: pdfRenderer
+      go_type: Renderer
       methods:
         - java_method: close
           go_name: Close
@@ -624,7 +624,7 @@ classes:
           returns: void
           error: true
     - java_class: android.graphics.pdf.PdfRenderer$Page
-      go_type: pdfRendererPage
+      go_type: RendererPage
       methods:
         - java_method: applyEdit
           go_name: ApplyEdit
@@ -735,7 +735,7 @@ classes:
           returns: android.graphics.pdf.models.selection.PageSelection
           error: true
     - java_class: android.os.ParcelFileDescriptor
-      go_type: parcelFileDescriptor
+      go_type: ParcelFileDescriptor
       methods:
         - java_method: canDetectErrors
           go_name: CanDetectErrors

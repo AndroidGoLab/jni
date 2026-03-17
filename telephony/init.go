@@ -20,147 +20,147 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clstelephonyManager                                          *jni.GlobalRef
-	midtelephonyManagerCanChangeDtmfToneLength                   jni.MethodID
-	midtelephonyManagerClearSignalStrengthUpdateRequest          jni.MethodID
-	midtelephonyManagerCreateForPhoneAccountHandle               jni.MethodID
-	midtelephonyManagerCreateForSubscriptionId                   jni.MethodID
-	midtelephonyManagerDoesSwitchMultiSimConfigTriggerReboot     jni.MethodID
-	midtelephonyManagerGetActiveModemCount                       jni.MethodID
-	midtelephonyManagerGetAllCellInfo                            jni.MethodID
-	midtelephonyManagerGetAllowedNetworkTypesForReason           jni.MethodID
-	midtelephonyManagerGetCallComposerStatus                     jni.MethodID
-	midtelephonyManagerGetCallState                              jni.MethodID
-	midtelephonyManagerGetCallStateForSubscription               jni.MethodID
-	midtelephonyManagerGetCardIdForDefaultEuicc                  jni.MethodID
-	midtelephonyManagerGetCarrierConfig                          jni.MethodID
-	midtelephonyManagerGetCarrierIdFromSimMccMnc                 jni.MethodID
-	midtelephonyManagerGetCarrierRestrictionStatus               jni.MethodID
-	midtelephonyManagerGetCellLocation                           jni.MethodID
-	midtelephonyManagerGetDataActivity                           jni.MethodID
-	midtelephonyManagerGetDataNetworkType                        jni.MethodID
-	midtelephonyManagerGetDataState                              jni.MethodID
-	midtelephonyManagerGetDeviceId0                              jni.MethodID
-	midtelephonyManagerGetDeviceId1_1                            jni.MethodID
-	midtelephonyManagerGetDeviceSoftwareVersion                  jni.MethodID
-	midtelephonyManagerGetEquivalentHomePlmns                    jni.MethodID
-	midtelephonyManagerGetForbiddenPlmns                         jni.MethodID
-	midtelephonyManagerGetGroupIdLevel1                          jni.MethodID
-	midtelephonyManagerGetIccAuthentication                      jni.MethodID
-	midtelephonyManagerGetImei0                                  jni.MethodID
-	midtelephonyManagerGetImei1_1                                jni.MethodID
-	midtelephonyManagerGetLine1Number                            jni.MethodID
-	midtelephonyManagerGetManualNetworkSelectionPlmn             jni.MethodID
-	midtelephonyManagerGetManufacturerCode0                      jni.MethodID
-	midtelephonyManagerGetManufacturerCode1_1                    jni.MethodID
-	midtelephonyManagerGetMeid0                                  jni.MethodID
-	midtelephonyManagerGetMeid1_1                                jni.MethodID
-	midtelephonyManagerGetMmsUAProfUrl                           jni.MethodID
-	midtelephonyManagerGetMmsUserAgent                           jni.MethodID
-	midtelephonyManagerGetNai                                    jni.MethodID
-	midtelephonyManagerGetNetworkCountryIso0                     jni.MethodID
-	midtelephonyManagerGetNetworkCountryIso1_1                   jni.MethodID
-	midtelephonyManagerGetNetworkOperator                        jni.MethodID
-	midtelephonyManagerGetNetworkOperatorName                    jni.MethodID
-	midtelephonyManagerGetNetworkSelectionMode                   jni.MethodID
-	midtelephonyManagerGetNetworkSlicingConfiguration            jni.MethodID
-	midtelephonyManagerGetNetworkSpecifier                       jni.MethodID
-	midtelephonyManagerGetNetworkType                            jni.MethodID
-	midtelephonyManagerGetPhoneAccountHandle                     jni.MethodID
-	midtelephonyManagerGetPhoneCount                             jni.MethodID
-	midtelephonyManagerGetPhoneType                              jni.MethodID
-	midtelephonyManagerGetPreferredOpportunisticDataSubscription jni.MethodID
-	midtelephonyManagerGetPrimaryImei                            jni.MethodID
-	midtelephonyManagerGetServiceState0                          jni.MethodID
-	midtelephonyManagerGetServiceState1_1                        jni.MethodID
-	midtelephonyManagerGetSignalStrength                         jni.MethodID
-	midtelephonyManagerGetSimCarrierId                           jni.MethodID
-	midtelephonyManagerGetSimCarrierIdName                       jni.MethodID
-	midtelephonyManagerGetSimCountryIso                          jni.MethodID
-	midtelephonyManagerGetSimOperator                            jni.MethodID
-	midtelephonyManagerGetSimOperatorName                        jni.MethodID
-	midtelephonyManagerGetSimSerialNumber                        jni.MethodID
-	midtelephonyManagerGetSimSpecificCarrierId                   jni.MethodID
-	midtelephonyManagerGetSimSpecificCarrierIdName               jni.MethodID
-	midtelephonyManagerGetSimState0                              jni.MethodID
-	midtelephonyManagerGetSimState1_1                            jni.MethodID
-	midtelephonyManagerGetSubscriberId                           jni.MethodID
-	midtelephonyManagerGetSubscriptionId0                        jni.MethodID
-	midtelephonyManagerGetSubscriptionId1_1                      jni.MethodID
-	midtelephonyManagerGetSupportedModemCount                    jni.MethodID
-	midtelephonyManagerGetSupportedRadioAccessFamily             jni.MethodID
-	midtelephonyManagerGetTypeAllocationCode0                    jni.MethodID
-	midtelephonyManagerGetTypeAllocationCode1_1                  jni.MethodID
-	midtelephonyManagerGetUiccCardsInfo                          jni.MethodID
-	midtelephonyManagerGetVisualVoicemailPackageName             jni.MethodID
-	midtelephonyManagerGetVoiceMailAlphaTag                      jni.MethodID
-	midtelephonyManagerGetVoiceMailNumber                        jni.MethodID
-	midtelephonyManagerGetVoiceNetworkType                       jni.MethodID
-	midtelephonyManagerGetVoicemailRingtoneUri                   jni.MethodID
-	midtelephonyManagerHasCarrierPrivileges                      jni.MethodID
-	midtelephonyManagerHasIccCard                                jni.MethodID
-	midtelephonyManagerIccCloseLogicalChannel                    jni.MethodID
-	midtelephonyManagerIccExchangeSimIO                          jni.MethodID
-	midtelephonyManagerIccOpenLogicalChannel1                    jni.MethodID
-	midtelephonyManagerIccOpenLogicalChannel2_1                  jni.MethodID
-	midtelephonyManagerIccTransmitApduBasicChannel               jni.MethodID
-	midtelephonyManagerIccTransmitApduLogicalChannel             jni.MethodID
-	midtelephonyManagerIsConcurrentVoiceAndDataSupported         jni.MethodID
-	midtelephonyManagerIsDataCapable                             jni.MethodID
-	midtelephonyManagerIsDataConnectionAllowed                   jni.MethodID
-	midtelephonyManagerIsDataEnabled                             jni.MethodID
-	midtelephonyManagerIsDataEnabledForReason                    jni.MethodID
-	midtelephonyManagerIsDataRoamingEnabled                      jni.MethodID
-	midtelephonyManagerIsDeviceSmsCapable                        jni.MethodID
-	midtelephonyManagerIsDeviceVoiceCapable                      jni.MethodID
-	midtelephonyManagerIsEmergencyNumber                         jni.MethodID
-	midtelephonyManagerIsHearingAidCompatibilitySupported        jni.MethodID
-	midtelephonyManagerIsManualNetworkSelectionAllowed           jni.MethodID
-	midtelephonyManagerIsModemEnabledForSlot                     jni.MethodID
-	midtelephonyManagerIsMultiSimSupported                       jni.MethodID
-	midtelephonyManagerIsNetworkRoaming                          jni.MethodID
-	midtelephonyManagerIsPremiumCapabilityAvailableForPurchase   jni.MethodID
-	midtelephonyManagerIsRadioInterfaceCapabilitySupported       jni.MethodID
-	midtelephonyManagerIsRttSupported                            jni.MethodID
-	midtelephonyManagerIsSmsCapable                              jni.MethodID
-	midtelephonyManagerIsTtyModeSupported                        jni.MethodID
-	midtelephonyManagerIsVoiceCapable                            jni.MethodID
-	midtelephonyManagerIsVoicemailVibrationEnabled               jni.MethodID
-	midtelephonyManagerIsWorldPhone                              jni.MethodID
-	midtelephonyManagerListen                                    jni.MethodID
-	midtelephonyManagerPurchasePremiumCapability                 jni.MethodID
-	midtelephonyManagerRebootModem                               jni.MethodID
-	midtelephonyManagerRegisterTelephonyCallback3                jni.MethodID
-	midtelephonyManagerRegisterTelephonyCallback2_1              jni.MethodID
-	midtelephonyManagerRequestCellInfoUpdate                     jni.MethodID
-	midtelephonyManagerRequestNetworkScan3                       jni.MethodID
-	midtelephonyManagerRequestNetworkScan4_1                     jni.MethodID
-	midtelephonyManagerSendDialerSpecialCode                     jni.MethodID
-	midtelephonyManagerSendEnvelopeWithStatus                    jni.MethodID
-	midtelephonyManagerSendVisualVoicemailSms                    jni.MethodID
-	midtelephonyManagerSetAllowedNetworkTypesForReason           jni.MethodID
-	midtelephonyManagerSetCallComposerStatus                     jni.MethodID
-	midtelephonyManagerSetDataEnabled                            jni.MethodID
-	midtelephonyManagerSetDataEnabledForReason                   jni.MethodID
-	midtelephonyManagerSetForbiddenPlmns                         jni.MethodID
-	midtelephonyManagerSetLine1NumberForDisplay                  jni.MethodID
-	midtelephonyManagerSetNetworkSelectionModeAutomatic          jni.MethodID
-	midtelephonyManagerSetNetworkSelectionModeManual2            jni.MethodID
-	midtelephonyManagerSetNetworkSelectionModeManual3_1          jni.MethodID
-	midtelephonyManagerSetOperatorBrandOverride                  jni.MethodID
-	midtelephonyManagerSetPreferredNetworkTypeToGlobal           jni.MethodID
-	midtelephonyManagerSetPreferredOpportunisticDataSubscription jni.MethodID
-	midtelephonyManagerSetSignalStrengthUpdateRequest            jni.MethodID
-	midtelephonyManagerSetVisualVoicemailSmsFilterSettings       jni.MethodID
-	midtelephonyManagerSetVoiceMailNumber                        jni.MethodID
-	midtelephonyManagerSetVoicemailRingtoneUri                   jni.MethodID
-	midtelephonyManagerSetVoicemailVibrationEnabled              jni.MethodID
-	midtelephonyManagerSwitchMultiSimConfig                      jni.MethodID
-	midtelephonyManagerUnregisterTelephonyCallback               jni.MethodID
-	midtelephonyManagerUpdateAvailableNetworks                   jni.MethodID
-	midtelephonyManagerUploadCallComposerPicture4                jni.MethodID
-	midtelephonyManagerUploadCallComposerPicture4_1              jni.MethodID
-	midtelephonyManagerGetMaximumCallComposerPictureSize         jni.MethodID
+	clsManager                                          *jni.GlobalRef
+	midManagerCanChangeDtmfToneLength                   jni.MethodID
+	midManagerClearSignalStrengthUpdateRequest          jni.MethodID
+	midManagerCreateForPhoneAccountHandle               jni.MethodID
+	midManagerCreateForSubscriptionId                   jni.MethodID
+	midManagerDoesSwitchMultiSimConfigTriggerReboot     jni.MethodID
+	midManagerGetActiveModemCount                       jni.MethodID
+	midManagerGetAllCellInfo                            jni.MethodID
+	midManagerGetAllowedNetworkTypesForReason           jni.MethodID
+	midManagerGetCallComposerStatus                     jni.MethodID
+	midManagerGetCallState                              jni.MethodID
+	midManagerGetCallStateForSubscription               jni.MethodID
+	midManagerGetCardIdForDefaultEuicc                  jni.MethodID
+	midManagerGetCarrierConfig                          jni.MethodID
+	midManagerGetCarrierIdFromSimMccMnc                 jni.MethodID
+	midManagerGetCarrierRestrictionStatus               jni.MethodID
+	midManagerGetCellLocation                           jni.MethodID
+	midManagerGetDataActivity                           jni.MethodID
+	midManagerGetDataNetworkType                        jni.MethodID
+	midManagerGetDataState                              jni.MethodID
+	midManagerGetDeviceId0                              jni.MethodID
+	midManagerGetDeviceId1_1                            jni.MethodID
+	midManagerGetDeviceSoftwareVersion                  jni.MethodID
+	midManagerGetEquivalentHomePlmns                    jni.MethodID
+	midManagerGetForbiddenPlmns                         jni.MethodID
+	midManagerGetGroupIdLevel1                          jni.MethodID
+	midManagerGetIccAuthentication                      jni.MethodID
+	midManagerGetImei0                                  jni.MethodID
+	midManagerGetImei1_1                                jni.MethodID
+	midManagerGetLine1Number                            jni.MethodID
+	midManagerGetManualNetworkSelectionPlmn             jni.MethodID
+	midManagerGetManufacturerCode0                      jni.MethodID
+	midManagerGetManufacturerCode1_1                    jni.MethodID
+	midManagerGetMeid0                                  jni.MethodID
+	midManagerGetMeid1_1                                jni.MethodID
+	midManagerGetMmsUAProfUrl                           jni.MethodID
+	midManagerGetMmsUserAgent                           jni.MethodID
+	midManagerGetNai                                    jni.MethodID
+	midManagerGetNetworkCountryIso0                     jni.MethodID
+	midManagerGetNetworkCountryIso1_1                   jni.MethodID
+	midManagerGetNetworkOperator                        jni.MethodID
+	midManagerGetNetworkOperatorName                    jni.MethodID
+	midManagerGetNetworkSelectionMode                   jni.MethodID
+	midManagerGetNetworkSlicingConfiguration            jni.MethodID
+	midManagerGetNetworkSpecifier                       jni.MethodID
+	midManagerGetNetworkType                            jni.MethodID
+	midManagerGetPhoneAccountHandle                     jni.MethodID
+	midManagerGetPhoneCount                             jni.MethodID
+	midManagerGetPhoneType                              jni.MethodID
+	midManagerGetPreferredOpportunisticDataSubscription jni.MethodID
+	midManagerGetPrimaryImei                            jni.MethodID
+	midManagerGetServiceState0                          jni.MethodID
+	midManagerGetServiceState1_1                        jni.MethodID
+	midManagerGetSignalStrength                         jni.MethodID
+	midManagerGetSimCarrierId                           jni.MethodID
+	midManagerGetSimCarrierIdName                       jni.MethodID
+	midManagerGetSimCountryIso                          jni.MethodID
+	midManagerGetSimOperator                            jni.MethodID
+	midManagerGetSimOperatorName                        jni.MethodID
+	midManagerGetSimSerialNumber                        jni.MethodID
+	midManagerGetSimSpecificCarrierId                   jni.MethodID
+	midManagerGetSimSpecificCarrierIdName               jni.MethodID
+	midManagerGetSimState0                              jni.MethodID
+	midManagerGetSimState1_1                            jni.MethodID
+	midManagerGetSubscriberId                           jni.MethodID
+	midManagerGetSubscriptionId0                        jni.MethodID
+	midManagerGetSubscriptionId1_1                      jni.MethodID
+	midManagerGetSupportedModemCount                    jni.MethodID
+	midManagerGetSupportedRadioAccessFamily             jni.MethodID
+	midManagerGetTypeAllocationCode0                    jni.MethodID
+	midManagerGetTypeAllocationCode1_1                  jni.MethodID
+	midManagerGetUiccCardsInfo                          jni.MethodID
+	midManagerGetVisualVoicemailPackageName             jni.MethodID
+	midManagerGetVoiceMailAlphaTag                      jni.MethodID
+	midManagerGetVoiceMailNumber                        jni.MethodID
+	midManagerGetVoiceNetworkType                       jni.MethodID
+	midManagerGetVoicemailRingtoneUri                   jni.MethodID
+	midManagerHasCarrierPrivileges                      jni.MethodID
+	midManagerHasIccCard                                jni.MethodID
+	midManagerIccCloseLogicalChannel                    jni.MethodID
+	midManagerIccExchangeSimIO                          jni.MethodID
+	midManagerIccOpenLogicalChannel1                    jni.MethodID
+	midManagerIccOpenLogicalChannel2_1                  jni.MethodID
+	midManagerIccTransmitApduBasicChannel               jni.MethodID
+	midManagerIccTransmitApduLogicalChannel             jni.MethodID
+	midManagerIsConcurrentVoiceAndDataSupported         jni.MethodID
+	midManagerIsDataCapable                             jni.MethodID
+	midManagerIsDataConnectionAllowed                   jni.MethodID
+	midManagerIsDataEnabled                             jni.MethodID
+	midManagerIsDataEnabledForReason                    jni.MethodID
+	midManagerIsDataRoamingEnabled                      jni.MethodID
+	midManagerIsDeviceSmsCapable                        jni.MethodID
+	midManagerIsDeviceVoiceCapable                      jni.MethodID
+	midManagerIsEmergencyNumber                         jni.MethodID
+	midManagerIsHearingAidCompatibilitySupported        jni.MethodID
+	midManagerIsManualNetworkSelectionAllowed           jni.MethodID
+	midManagerIsModemEnabledForSlot                     jni.MethodID
+	midManagerIsMultiSimSupported                       jni.MethodID
+	midManagerIsNetworkRoaming                          jni.MethodID
+	midManagerIsPremiumCapabilityAvailableForPurchase   jni.MethodID
+	midManagerIsRadioInterfaceCapabilitySupported       jni.MethodID
+	midManagerIsRttSupported                            jni.MethodID
+	midManagerIsSmsCapable                              jni.MethodID
+	midManagerIsTtyModeSupported                        jni.MethodID
+	midManagerIsVoiceCapable                            jni.MethodID
+	midManagerIsVoicemailVibrationEnabled               jni.MethodID
+	midManagerIsWorldPhone                              jni.MethodID
+	midManagerListen                                    jni.MethodID
+	midManagerPurchasePremiumCapability                 jni.MethodID
+	midManagerRebootModem                               jni.MethodID
+	midManagerRegisterTelephonyCallback3                jni.MethodID
+	midManagerRegisterTelephonyCallback2_1              jni.MethodID
+	midManagerRequestCellInfoUpdate                     jni.MethodID
+	midManagerRequestNetworkScan3                       jni.MethodID
+	midManagerRequestNetworkScan4_1                     jni.MethodID
+	midManagerSendDialerSpecialCode                     jni.MethodID
+	midManagerSendEnvelopeWithStatus                    jni.MethodID
+	midManagerSendVisualVoicemailSms                    jni.MethodID
+	midManagerSetAllowedNetworkTypesForReason           jni.MethodID
+	midManagerSetCallComposerStatus                     jni.MethodID
+	midManagerSetDataEnabled                            jni.MethodID
+	midManagerSetDataEnabledForReason                   jni.MethodID
+	midManagerSetForbiddenPlmns                         jni.MethodID
+	midManagerSetLine1NumberForDisplay                  jni.MethodID
+	midManagerSetNetworkSelectionModeAutomatic          jni.MethodID
+	midManagerSetNetworkSelectionModeManual2            jni.MethodID
+	midManagerSetNetworkSelectionModeManual3_1          jni.MethodID
+	midManagerSetOperatorBrandOverride                  jni.MethodID
+	midManagerSetPreferredNetworkTypeToGlobal           jni.MethodID
+	midManagerSetPreferredOpportunisticDataSubscription jni.MethodID
+	midManagerSetSignalStrengthUpdateRequest            jni.MethodID
+	midManagerSetVisualVoicemailSmsFilterSettings       jni.MethodID
+	midManagerSetVoiceMailNumber                        jni.MethodID
+	midManagerSetVoicemailRingtoneUri                   jni.MethodID
+	midManagerSetVoicemailVibrationEnabled              jni.MethodID
+	midManagerSwitchMultiSimConfig                      jni.MethodID
+	midManagerUnregisterTelephonyCallback               jni.MethodID
+	midManagerUpdateAvailableNetworks                   jni.MethodID
+	midManagerUploadCallComposerPicture4                jni.MethodID
+	midManagerUploadCallComposerPicture4_1              jni.MethodID
+	midManagerGetMaximumCallComposerPictureSize         jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -191,9 +191,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.telephony.TelephonyManager: %w", err)
 	}
-	clstelephonyManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midtelephonyManagerCanChangeDtmfToneLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "canChangeDtmfToneLength", "()Z")
+	midManagerCanChangeDtmfToneLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canChangeDtmfToneLength", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -201,7 +201,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.canChangeDtmfToneLength")
 	}
 
-	midtelephonyManagerClearSignalStrengthUpdateRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "clearSignalStrengthUpdateRequest", "(Landroid/telephony/SignalStrengthUpdateRequest;)V")
+	midManagerClearSignalStrengthUpdateRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearSignalStrengthUpdateRequest", "(Landroid/telephony/SignalStrengthUpdateRequest;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -209,7 +209,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.clearSignalStrengthUpdateRequest")
 	}
 
-	midtelephonyManagerCreateForPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "createForPhoneAccountHandle", "(Landroid/telecom/PhoneAccountHandle;)Landroid/telephony/TelephonyManager;")
+	midManagerCreateForPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createForPhoneAccountHandle", "(Landroid/telecom/PhoneAccountHandle;)Landroid/telephony/TelephonyManager;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -217,7 +217,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.createForPhoneAccountHandle")
 	}
 
-	midtelephonyManagerCreateForSubscriptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "createForSubscriptionId", "(I)Landroid/telephony/TelephonyManager;")
+	midManagerCreateForSubscriptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createForSubscriptionId", "(I)Landroid/telephony/TelephonyManager;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -225,7 +225,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.createForSubscriptionId")
 	}
 
-	midtelephonyManagerDoesSwitchMultiSimConfigTriggerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "doesSwitchMultiSimConfigTriggerReboot", "()Z")
+	midManagerDoesSwitchMultiSimConfigTriggerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "doesSwitchMultiSimConfigTriggerReboot", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -233,7 +233,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.doesSwitchMultiSimConfigTriggerReboot")
 	}
 
-	midtelephonyManagerGetActiveModemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getActiveModemCount", "()I")
+	midManagerGetActiveModemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActiveModemCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -241,7 +241,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getActiveModemCount")
 	}
 
-	midtelephonyManagerGetAllCellInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getAllCellInfo", "()Ljava/util/List;")
+	midManagerGetAllCellInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAllCellInfo", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -249,7 +249,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getAllCellInfo")
 	}
 
-	midtelephonyManagerGetAllowedNetworkTypesForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getAllowedNetworkTypesForReason", "(I)J")
+	midManagerGetAllowedNetworkTypesForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAllowedNetworkTypesForReason", "(I)J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -257,7 +257,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getAllowedNetworkTypesForReason")
 	}
 
-	midtelephonyManagerGetCallComposerStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCallComposerStatus", "()I")
+	midManagerGetCallComposerStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCallComposerStatus", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -265,7 +265,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCallComposerStatus")
 	}
 
-	midtelephonyManagerGetCallState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCallState", "()I")
+	midManagerGetCallState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCallState", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -273,7 +273,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCallState")
 	}
 
-	midtelephonyManagerGetCallStateForSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCallStateForSubscription", "()I")
+	midManagerGetCallStateForSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCallStateForSubscription", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -281,7 +281,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCallStateForSubscription")
 	}
 
-	midtelephonyManagerGetCardIdForDefaultEuicc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCardIdForDefaultEuicc", "()I")
+	midManagerGetCardIdForDefaultEuicc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCardIdForDefaultEuicc", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -289,7 +289,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCardIdForDefaultEuicc")
 	}
 
-	midtelephonyManagerGetCarrierConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierConfig", "()Landroid/os/PersistableBundle;")
+	midManagerGetCarrierConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCarrierConfig", "()Landroid/os/PersistableBundle;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -297,7 +297,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCarrierConfig")
 	}
 
-	midtelephonyManagerGetCarrierIdFromSimMccMnc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierIdFromSimMccMnc", "()I")
+	midManagerGetCarrierIdFromSimMccMnc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCarrierIdFromSimMccMnc", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -305,7 +305,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCarrierIdFromSimMccMnc")
 	}
 
-	midtelephonyManagerGetCarrierRestrictionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierRestrictionStatus", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midManagerGetCarrierRestrictionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCarrierRestrictionStatus", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -313,7 +313,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCarrierRestrictionStatus")
 	}
 
-	midtelephonyManagerGetCellLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCellLocation", "()Landroid/telephony/CellLocation;")
+	midManagerGetCellLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCellLocation", "()Landroid/telephony/CellLocation;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -321,7 +321,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getCellLocation")
 	}
 
-	midtelephonyManagerGetDataActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDataActivity", "()I")
+	midManagerGetDataActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDataActivity", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -329,7 +329,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getDataActivity")
 	}
 
-	midtelephonyManagerGetDataNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDataNetworkType", "()I")
+	midManagerGetDataNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDataNetworkType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -337,7 +337,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getDataNetworkType")
 	}
 
-	midtelephonyManagerGetDataState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDataState", "()I")
+	midManagerGetDataState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDataState", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -345,7 +345,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getDataState")
 	}
 
-	midtelephonyManagerGetDeviceId0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDeviceId", "()Ljava/lang/String;")
+	midManagerGetDeviceId0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDeviceId", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -353,7 +353,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getDeviceId")
 	}
 
-	midtelephonyManagerGetDeviceId1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDeviceId", "(I)Ljava/lang/String;")
+	midManagerGetDeviceId1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDeviceId", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -361,7 +361,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getDeviceId")
 	}
 
-	midtelephonyManagerGetDeviceSoftwareVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDeviceSoftwareVersion", "()Ljava/lang/String;")
+	midManagerGetDeviceSoftwareVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDeviceSoftwareVersion", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -369,7 +369,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getDeviceSoftwareVersion")
 	}
 
-	midtelephonyManagerGetEquivalentHomePlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getEquivalentHomePlmns", "()Ljava/util/List;")
+	midManagerGetEquivalentHomePlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getEquivalentHomePlmns", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -377,7 +377,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getEquivalentHomePlmns")
 	}
 
-	midtelephonyManagerGetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getForbiddenPlmns", "()[Ljava/lang/String;")
+	midManagerGetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getForbiddenPlmns", "()[Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -385,7 +385,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getForbiddenPlmns")
 	}
 
-	midtelephonyManagerGetGroupIdLevel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getGroupIdLevel1", "()Ljava/lang/String;")
+	midManagerGetGroupIdLevel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getGroupIdLevel1", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -393,7 +393,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getGroupIdLevel1")
 	}
 
-	midtelephonyManagerGetIccAuthentication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getIccAuthentication", "(IILjava/lang/String;)Ljava/lang/String;")
+	midManagerGetIccAuthentication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getIccAuthentication", "(IILjava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -401,7 +401,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getIccAuthentication")
 	}
 
-	midtelephonyManagerGetImei0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getImei", "()Ljava/lang/String;")
+	midManagerGetImei0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getImei", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -409,7 +409,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getImei")
 	}
 
-	midtelephonyManagerGetImei1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getImei", "(I)Ljava/lang/String;")
+	midManagerGetImei1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getImei", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -417,7 +417,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getImei")
 	}
 
-	midtelephonyManagerGetLine1Number, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getLine1Number", "()Ljava/lang/String;")
+	midManagerGetLine1Number, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLine1Number", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -425,7 +425,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getLine1Number")
 	}
 
-	midtelephonyManagerGetManualNetworkSelectionPlmn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getManualNetworkSelectionPlmn", "()Ljava/lang/String;")
+	midManagerGetManualNetworkSelectionPlmn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getManualNetworkSelectionPlmn", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -433,7 +433,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getManualNetworkSelectionPlmn")
 	}
 
-	midtelephonyManagerGetManufacturerCode0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getManufacturerCode", "()Ljava/lang/String;")
+	midManagerGetManufacturerCode0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getManufacturerCode", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -441,7 +441,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getManufacturerCode")
 	}
 
-	midtelephonyManagerGetManufacturerCode1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getManufacturerCode", "(I)Ljava/lang/String;")
+	midManagerGetManufacturerCode1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getManufacturerCode", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -449,7 +449,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getManufacturerCode")
 	}
 
-	midtelephonyManagerGetMeid0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMeid", "()Ljava/lang/String;")
+	midManagerGetMeid0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMeid", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -457,7 +457,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getMeid")
 	}
 
-	midtelephonyManagerGetMeid1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMeid", "(I)Ljava/lang/String;")
+	midManagerGetMeid1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMeid", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -465,7 +465,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getMeid")
 	}
 
-	midtelephonyManagerGetMmsUAProfUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMmsUAProfUrl", "()Ljava/lang/String;")
+	midManagerGetMmsUAProfUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMmsUAProfUrl", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -473,7 +473,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getMmsUAProfUrl")
 	}
 
-	midtelephonyManagerGetMmsUserAgent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMmsUserAgent", "()Ljava/lang/String;")
+	midManagerGetMmsUserAgent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMmsUserAgent", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -481,7 +481,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getMmsUserAgent")
 	}
 
-	midtelephonyManagerGetNai, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNai", "()Ljava/lang/String;")
+	midManagerGetNai, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNai", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -489,7 +489,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNai")
 	}
 
-	midtelephonyManagerGetNetworkCountryIso0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkCountryIso", "()Ljava/lang/String;")
+	midManagerGetNetworkCountryIso0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkCountryIso", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -497,7 +497,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkCountryIso")
 	}
 
-	midtelephonyManagerGetNetworkCountryIso1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkCountryIso", "(I)Ljava/lang/String;")
+	midManagerGetNetworkCountryIso1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkCountryIso", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -505,7 +505,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkCountryIso")
 	}
 
-	midtelephonyManagerGetNetworkOperator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkOperator", "()Ljava/lang/String;")
+	midManagerGetNetworkOperator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkOperator", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -513,7 +513,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkOperator")
 	}
 
-	midtelephonyManagerGetNetworkOperatorName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkOperatorName", "()Ljava/lang/String;")
+	midManagerGetNetworkOperatorName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkOperatorName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -521,7 +521,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkOperatorName")
 	}
 
-	midtelephonyManagerGetNetworkSelectionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSelectionMode", "()I")
+	midManagerGetNetworkSelectionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkSelectionMode", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -529,7 +529,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkSelectionMode")
 	}
 
-	midtelephonyManagerGetNetworkSlicingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSlicingConfiguration", "(Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+	midManagerGetNetworkSlicingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkSlicingConfiguration", "(Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -537,7 +537,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkSlicingConfiguration")
 	}
 
-	midtelephonyManagerGetNetworkSpecifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSpecifier", "()Ljava/lang/String;")
+	midManagerGetNetworkSpecifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkSpecifier", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -545,7 +545,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkSpecifier")
 	}
 
-	midtelephonyManagerGetNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkType", "()I")
+	midManagerGetNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -553,7 +553,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getNetworkType")
 	}
 
-	midtelephonyManagerGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
+	midManagerGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -561,7 +561,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getPhoneAccountHandle")
 	}
 
-	midtelephonyManagerGetPhoneCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPhoneCount", "()I")
+	midManagerGetPhoneCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPhoneCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -569,7 +569,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getPhoneCount")
 	}
 
-	midtelephonyManagerGetPhoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPhoneType", "()I")
+	midManagerGetPhoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPhoneType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -577,7 +577,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getPhoneType")
 	}
 
-	midtelephonyManagerGetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPreferredOpportunisticDataSubscription", "()I")
+	midManagerGetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPreferredOpportunisticDataSubscription", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -585,7 +585,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getPreferredOpportunisticDataSubscription")
 	}
 
-	midtelephonyManagerGetPrimaryImei, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPrimaryImei", "()Ljava/lang/String;")
+	midManagerGetPrimaryImei, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrimaryImei", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -593,7 +593,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getPrimaryImei")
 	}
 
-	midtelephonyManagerGetServiceState0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getServiceState", "()Landroid/telephony/ServiceState;")
+	midManagerGetServiceState0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getServiceState", "()Landroid/telephony/ServiceState;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -601,7 +601,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getServiceState")
 	}
 
-	midtelephonyManagerGetServiceState1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getServiceState", "(I)Landroid/telephony/ServiceState;")
+	midManagerGetServiceState1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getServiceState", "(I)Landroid/telephony/ServiceState;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -609,7 +609,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getServiceState")
 	}
 
-	midtelephonyManagerGetSignalStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSignalStrength", "()Landroid/telephony/SignalStrength;")
+	midManagerGetSignalStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSignalStrength", "()Landroid/telephony/SignalStrength;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -617,7 +617,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSignalStrength")
 	}
 
-	midtelephonyManagerGetSimCarrierId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimCarrierId", "()I")
+	midManagerGetSimCarrierId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCarrierId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -625,7 +625,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimCarrierId")
 	}
 
-	midtelephonyManagerGetSimCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimCarrierIdName", "()Ljava/lang/String;")
+	midManagerGetSimCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCarrierIdName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -633,7 +633,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimCarrierIdName")
 	}
 
-	midtelephonyManagerGetSimCountryIso, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimCountryIso", "()Ljava/lang/String;")
+	midManagerGetSimCountryIso, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCountryIso", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -641,7 +641,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimCountryIso")
 	}
 
-	midtelephonyManagerGetSimOperator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimOperator", "()Ljava/lang/String;")
+	midManagerGetSimOperator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimOperator", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -649,7 +649,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimOperator")
 	}
 
-	midtelephonyManagerGetSimOperatorName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimOperatorName", "()Ljava/lang/String;")
+	midManagerGetSimOperatorName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimOperatorName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -657,7 +657,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimOperatorName")
 	}
 
-	midtelephonyManagerGetSimSerialNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimSerialNumber", "()Ljava/lang/String;")
+	midManagerGetSimSerialNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimSerialNumber", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -665,7 +665,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimSerialNumber")
 	}
 
-	midtelephonyManagerGetSimSpecificCarrierId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimSpecificCarrierId", "()I")
+	midManagerGetSimSpecificCarrierId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimSpecificCarrierId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -673,7 +673,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimSpecificCarrierId")
 	}
 
-	midtelephonyManagerGetSimSpecificCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimSpecificCarrierIdName", "()Ljava/lang/String;")
+	midManagerGetSimSpecificCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimSpecificCarrierIdName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -681,7 +681,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimSpecificCarrierIdName")
 	}
 
-	midtelephonyManagerGetSimState0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimState", "()I")
+	midManagerGetSimState0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimState", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -689,7 +689,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimState")
 	}
 
-	midtelephonyManagerGetSimState1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimState", "(I)I")
+	midManagerGetSimState1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimState", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -697,7 +697,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimState")
 	}
 
-	midtelephonyManagerGetSubscriberId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSubscriberId", "()Ljava/lang/String;")
+	midManagerGetSubscriberId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSubscriberId", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -705,7 +705,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSubscriberId")
 	}
 
-	midtelephonyManagerGetSubscriptionId0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSubscriptionId", "()I")
+	midManagerGetSubscriptionId0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSubscriptionId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -713,7 +713,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSubscriptionId")
 	}
 
-	midtelephonyManagerGetSubscriptionId1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSubscriptionId", "(Landroid/telecom/PhoneAccountHandle;)I")
+	midManagerGetSubscriptionId1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSubscriptionId", "(Landroid/telecom/PhoneAccountHandle;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -721,7 +721,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSubscriptionId")
 	}
 
-	midtelephonyManagerGetSupportedModemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSupportedModemCount", "()I")
+	midManagerGetSupportedModemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSupportedModemCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -729,7 +729,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSupportedModemCount")
 	}
 
-	midtelephonyManagerGetSupportedRadioAccessFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSupportedRadioAccessFamily", "()J")
+	midManagerGetSupportedRadioAccessFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSupportedRadioAccessFamily", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -737,7 +737,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSupportedRadioAccessFamily")
 	}
 
-	midtelephonyManagerGetTypeAllocationCode0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getTypeAllocationCode", "()Ljava/lang/String;")
+	midManagerGetTypeAllocationCode0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getTypeAllocationCode", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -745,7 +745,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getTypeAllocationCode")
 	}
 
-	midtelephonyManagerGetTypeAllocationCode1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getTypeAllocationCode", "(I)Ljava/lang/String;")
+	midManagerGetTypeAllocationCode1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getTypeAllocationCode", "(I)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -753,7 +753,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getTypeAllocationCode")
 	}
 
-	midtelephonyManagerGetUiccCardsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getUiccCardsInfo", "()Ljava/util/List;")
+	midManagerGetUiccCardsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getUiccCardsInfo", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -761,7 +761,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getUiccCardsInfo")
 	}
 
-	midtelephonyManagerGetVisualVoicemailPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVisualVoicemailPackageName", "()Ljava/lang/String;")
+	midManagerGetVisualVoicemailPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVisualVoicemailPackageName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -769,7 +769,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getVisualVoicemailPackageName")
 	}
 
-	midtelephonyManagerGetVoiceMailAlphaTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoiceMailAlphaTag", "()Ljava/lang/String;")
+	midManagerGetVoiceMailAlphaTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVoiceMailAlphaTag", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -777,7 +777,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getVoiceMailAlphaTag")
 	}
 
-	midtelephonyManagerGetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoiceMailNumber", "()Ljava/lang/String;")
+	midManagerGetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVoiceMailNumber", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -785,7 +785,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getVoiceMailNumber")
 	}
 
-	midtelephonyManagerGetVoiceNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoiceNetworkType", "()I")
+	midManagerGetVoiceNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVoiceNetworkType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -793,7 +793,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getVoiceNetworkType")
 	}
 
-	midtelephonyManagerGetVoicemailRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoicemailRingtoneUri", "(Landroid/telecom/PhoneAccountHandle;)Landroid/net/Uri;")
+	midManagerGetVoicemailRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVoicemailRingtoneUri", "(Landroid/telecom/PhoneAccountHandle;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -801,7 +801,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getVoicemailRingtoneUri")
 	}
 
-	midtelephonyManagerHasCarrierPrivileges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "hasCarrierPrivileges", "()Z")
+	midManagerHasCarrierPrivileges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasCarrierPrivileges", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -809,7 +809,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.hasCarrierPrivileges")
 	}
 
-	midtelephonyManagerHasIccCard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "hasIccCard", "()Z")
+	midManagerHasIccCard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasIccCard", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -817,7 +817,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.hasIccCard")
 	}
 
-	midtelephonyManagerIccCloseLogicalChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccCloseLogicalChannel", "(I)Z")
+	midManagerIccCloseLogicalChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "iccCloseLogicalChannel", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -825,7 +825,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.iccCloseLogicalChannel")
 	}
 
-	midtelephonyManagerIccExchangeSimIO, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccExchangeSimIO", "(IIIIILjava/lang/String;)[B")
+	midManagerIccExchangeSimIO, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "iccExchangeSimIO", "(IIIIILjava/lang/String;)[B")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -833,7 +833,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.iccExchangeSimIO")
 	}
 
-	midtelephonyManagerIccOpenLogicalChannel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccOpenLogicalChannel", "(Ljava/lang/String;)Landroid/telephony/IccOpenLogicalChannelResponse;")
+	midManagerIccOpenLogicalChannel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "iccOpenLogicalChannel", "(Ljava/lang/String;)Landroid/telephony/IccOpenLogicalChannelResponse;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -841,7 +841,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.iccOpenLogicalChannel")
 	}
 
-	midtelephonyManagerIccOpenLogicalChannel2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccOpenLogicalChannel", "(Ljava/lang/String;I)Landroid/telephony/IccOpenLogicalChannelResponse;")
+	midManagerIccOpenLogicalChannel2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "iccOpenLogicalChannel", "(Ljava/lang/String;I)Landroid/telephony/IccOpenLogicalChannelResponse;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -849,7 +849,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.iccOpenLogicalChannel")
 	}
 
-	midtelephonyManagerIccTransmitApduBasicChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccTransmitApduBasicChannel", "(IIIIILjava/lang/String;)Ljava/lang/String;")
+	midManagerIccTransmitApduBasicChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "iccTransmitApduBasicChannel", "(IIIIILjava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -857,7 +857,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.iccTransmitApduBasicChannel")
 	}
 
-	midtelephonyManagerIccTransmitApduLogicalChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccTransmitApduLogicalChannel", "(IIIIIILjava/lang/String;)Ljava/lang/String;")
+	midManagerIccTransmitApduLogicalChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "iccTransmitApduLogicalChannel", "(IIIIIILjava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -865,7 +865,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.iccTransmitApduLogicalChannel")
 	}
 
-	midtelephonyManagerIsConcurrentVoiceAndDataSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isConcurrentVoiceAndDataSupported", "()Z")
+	midManagerIsConcurrentVoiceAndDataSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isConcurrentVoiceAndDataSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -873,7 +873,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isConcurrentVoiceAndDataSupported")
 	}
 
-	midtelephonyManagerIsDataCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataCapable", "()Z")
+	midManagerIsDataCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDataCapable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -881,7 +881,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isDataCapable")
 	}
 
-	midtelephonyManagerIsDataConnectionAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataConnectionAllowed", "()Z")
+	midManagerIsDataConnectionAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDataConnectionAllowed", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -889,7 +889,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isDataConnectionAllowed")
 	}
 
-	midtelephonyManagerIsDataEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataEnabled", "()Z")
+	midManagerIsDataEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDataEnabled", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -897,7 +897,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isDataEnabled")
 	}
 
-	midtelephonyManagerIsDataEnabledForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataEnabledForReason", "(I)Z")
+	midManagerIsDataEnabledForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDataEnabledForReason", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -905,7 +905,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isDataEnabledForReason")
 	}
 
-	midtelephonyManagerIsDataRoamingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataRoamingEnabled", "()Z")
+	midManagerIsDataRoamingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDataRoamingEnabled", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -913,7 +913,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isDataRoamingEnabled")
 	}
 
-	midtelephonyManagerIsDeviceSmsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDeviceSmsCapable", "()Z")
+	midManagerIsDeviceSmsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceSmsCapable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -921,7 +921,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isDeviceSmsCapable")
 	}
 
-	midtelephonyManagerIsDeviceVoiceCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDeviceVoiceCapable", "()Z")
+	midManagerIsDeviceVoiceCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceVoiceCapable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -929,7 +929,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isDeviceVoiceCapable")
 	}
 
-	midtelephonyManagerIsEmergencyNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isEmergencyNumber", "(Ljava/lang/String;)Z")
+	midManagerIsEmergencyNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isEmergencyNumber", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -937,7 +937,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isEmergencyNumber")
 	}
 
-	midtelephonyManagerIsHearingAidCompatibilitySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isHearingAidCompatibilitySupported", "()Z")
+	midManagerIsHearingAidCompatibilitySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isHearingAidCompatibilitySupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -945,7 +945,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isHearingAidCompatibilitySupported")
 	}
 
-	midtelephonyManagerIsManualNetworkSelectionAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isManualNetworkSelectionAllowed", "()Z")
+	midManagerIsManualNetworkSelectionAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isManualNetworkSelectionAllowed", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -953,7 +953,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isManualNetworkSelectionAllowed")
 	}
 
-	midtelephonyManagerIsModemEnabledForSlot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isModemEnabledForSlot", "(I)Z")
+	midManagerIsModemEnabledForSlot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isModemEnabledForSlot", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -961,7 +961,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isModemEnabledForSlot")
 	}
 
-	midtelephonyManagerIsMultiSimSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isMultiSimSupported", "()I")
+	midManagerIsMultiSimSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isMultiSimSupported", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -969,7 +969,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isMultiSimSupported")
 	}
 
-	midtelephonyManagerIsNetworkRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isNetworkRoaming", "()Z")
+	midManagerIsNetworkRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isNetworkRoaming", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -977,7 +977,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isNetworkRoaming")
 	}
 
-	midtelephonyManagerIsPremiumCapabilityAvailableForPurchase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isPremiumCapabilityAvailableForPurchase", "(I)Z")
+	midManagerIsPremiumCapabilityAvailableForPurchase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPremiumCapabilityAvailableForPurchase", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -985,7 +985,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isPremiumCapabilityAvailableForPurchase")
 	}
 
-	midtelephonyManagerIsRadioInterfaceCapabilitySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isRadioInterfaceCapabilitySupported", "(Ljava/lang/String;)Z")
+	midManagerIsRadioInterfaceCapabilitySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRadioInterfaceCapabilitySupported", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -993,7 +993,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isRadioInterfaceCapabilitySupported")
 	}
 
-	midtelephonyManagerIsRttSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isRttSupported", "()Z")
+	midManagerIsRttSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRttSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1001,7 +1001,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isRttSupported")
 	}
 
-	midtelephonyManagerIsSmsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isSmsCapable", "()Z")
+	midManagerIsSmsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSmsCapable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1009,7 +1009,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isSmsCapable")
 	}
 
-	midtelephonyManagerIsTtyModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isTtyModeSupported", "()Z")
+	midManagerIsTtyModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isTtyModeSupported", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1017,7 +1017,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isTtyModeSupported")
 	}
 
-	midtelephonyManagerIsVoiceCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isVoiceCapable", "()Z")
+	midManagerIsVoiceCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isVoiceCapable", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1025,7 +1025,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isVoiceCapable")
 	}
 
-	midtelephonyManagerIsVoicemailVibrationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isVoicemailVibrationEnabled", "(Landroid/telecom/PhoneAccountHandle;)Z")
+	midManagerIsVoicemailVibrationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isVoicemailVibrationEnabled", "(Landroid/telecom/PhoneAccountHandle;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1033,7 +1033,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isVoicemailVibrationEnabled")
 	}
 
-	midtelephonyManagerIsWorldPhone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isWorldPhone", "()Z")
+	midManagerIsWorldPhone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isWorldPhone", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1041,7 +1041,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.isWorldPhone")
 	}
 
-	midtelephonyManagerListen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "listen", "(Landroid/telephony/PhoneStateListener;I)V")
+	midManagerListen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "listen", "(Landroid/telephony/PhoneStateListener;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1049,7 +1049,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.listen")
 	}
 
-	midtelephonyManagerPurchasePremiumCapability, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "purchasePremiumCapability", "(ILjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midManagerPurchasePremiumCapability, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "purchasePremiumCapability", "(ILjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1057,7 +1057,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.purchasePremiumCapability")
 	}
 
-	midtelephonyManagerRebootModem, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "rebootModem", "()V")
+	midManagerRebootModem, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "rebootModem", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1065,7 +1065,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.rebootModem")
 	}
 
-	midtelephonyManagerRegisterTelephonyCallback3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "registerTelephonyCallback", "(ILjava/util/concurrent/Executor;Landroid/telephony/TelephonyCallback;)V")
+	midManagerRegisterTelephonyCallback3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerTelephonyCallback", "(ILjava/util/concurrent/Executor;Landroid/telephony/TelephonyCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1073,7 +1073,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.registerTelephonyCallback")
 	}
 
-	midtelephonyManagerRegisterTelephonyCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "registerTelephonyCallback", "(Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyCallback;)V")
+	midManagerRegisterTelephonyCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerTelephonyCallback", "(Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1081,7 +1081,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.registerTelephonyCallback")
 	}
 
-	midtelephonyManagerRequestCellInfoUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "requestCellInfoUpdate", "(Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyManager$CellInfoCallback;)V")
+	midManagerRequestCellInfoUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestCellInfoUpdate", "(Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyManager$CellInfoCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1089,7 +1089,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.requestCellInfoUpdate")
 	}
 
-	midtelephonyManagerRequestNetworkScan3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "requestNetworkScan", "(Landroid/telephony/NetworkScanRequest;Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyScanManager$NetworkScanCallback;)Landroid/telephony/NetworkScan;")
+	midManagerRequestNetworkScan3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestNetworkScan", "(Landroid/telephony/NetworkScanRequest;Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyScanManager$NetworkScanCallback;)Landroid/telephony/NetworkScan;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1097,7 +1097,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.requestNetworkScan")
 	}
 
-	midtelephonyManagerRequestNetworkScan4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "requestNetworkScan", "(ILandroid/telephony/NetworkScanRequest;Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyScanManager$NetworkScanCallback;)Landroid/telephony/NetworkScan;")
+	midManagerRequestNetworkScan4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestNetworkScan", "(ILandroid/telephony/NetworkScanRequest;Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyScanManager$NetworkScanCallback;)Landroid/telephony/NetworkScan;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1105,7 +1105,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.requestNetworkScan")
 	}
 
-	midtelephonyManagerSendDialerSpecialCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "sendDialerSpecialCode", "(Ljava/lang/String;)V")
+	midManagerSendDialerSpecialCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "sendDialerSpecialCode", "(Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1113,7 +1113,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.sendDialerSpecialCode")
 	}
 
-	midtelephonyManagerSendEnvelopeWithStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "sendEnvelopeWithStatus", "(Ljava/lang/String;)Ljava/lang/String;")
+	midManagerSendEnvelopeWithStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "sendEnvelopeWithStatus", "(Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1121,7 +1121,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.sendEnvelopeWithStatus")
 	}
 
-	midtelephonyManagerSendVisualVoicemailSms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "sendVisualVoicemailSms", "(Ljava/lang/String;ILjava/lang/String;Landroid/app/PendingIntent;)V")
+	midManagerSendVisualVoicemailSms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "sendVisualVoicemailSms", "(Ljava/lang/String;ILjava/lang/String;Landroid/app/PendingIntent;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1129,7 +1129,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.sendVisualVoicemailSms")
 	}
 
-	midtelephonyManagerSetAllowedNetworkTypesForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setAllowedNetworkTypesForReason", "(IJ)V")
+	midManagerSetAllowedNetworkTypesForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setAllowedNetworkTypesForReason", "(IJ)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1137,7 +1137,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setAllowedNetworkTypesForReason")
 	}
 
-	midtelephonyManagerSetCallComposerStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setCallComposerStatus", "(I)V")
+	midManagerSetCallComposerStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setCallComposerStatus", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1145,7 +1145,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setCallComposerStatus")
 	}
 
-	midtelephonyManagerSetDataEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setDataEnabled", "(Z)V")
+	midManagerSetDataEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setDataEnabled", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1153,7 +1153,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setDataEnabled")
 	}
 
-	midtelephonyManagerSetDataEnabledForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setDataEnabledForReason", "(IZ)V")
+	midManagerSetDataEnabledForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setDataEnabledForReason", "(IZ)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1161,7 +1161,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setDataEnabledForReason")
 	}
 
-	midtelephonyManagerSetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setForbiddenPlmns", "(Ljava/util/List;)I")
+	midManagerSetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setForbiddenPlmns", "(Ljava/util/List;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1169,7 +1169,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setForbiddenPlmns")
 	}
 
-	midtelephonyManagerSetLine1NumberForDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setLine1NumberForDisplay", "(Ljava/lang/String;Ljava/lang/String;)Z")
+	midManagerSetLine1NumberForDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setLine1NumberForDisplay", "(Ljava/lang/String;Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1177,7 +1177,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setLine1NumberForDisplay")
 	}
 
-	midtelephonyManagerSetNetworkSelectionModeAutomatic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setNetworkSelectionModeAutomatic", "()V")
+	midManagerSetNetworkSelectionModeAutomatic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setNetworkSelectionModeAutomatic", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1185,7 +1185,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setNetworkSelectionModeAutomatic")
 	}
 
-	midtelephonyManagerSetNetworkSelectionModeManual2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setNetworkSelectionModeManual", "(Ljava/lang/String;Z)Z")
+	midManagerSetNetworkSelectionModeManual2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setNetworkSelectionModeManual", "(Ljava/lang/String;Z)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1193,7 +1193,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setNetworkSelectionModeManual")
 	}
 
-	midtelephonyManagerSetNetworkSelectionModeManual3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setNetworkSelectionModeManual", "(Ljava/lang/String;ZI)Z")
+	midManagerSetNetworkSelectionModeManual3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setNetworkSelectionModeManual", "(Ljava/lang/String;ZI)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1201,7 +1201,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setNetworkSelectionModeManual")
 	}
 
-	midtelephonyManagerSetOperatorBrandOverride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setOperatorBrandOverride", "(Ljava/lang/String;)Z")
+	midManagerSetOperatorBrandOverride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setOperatorBrandOverride", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1209,7 +1209,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setOperatorBrandOverride")
 	}
 
-	midtelephonyManagerSetPreferredNetworkTypeToGlobal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setPreferredNetworkTypeToGlobal", "()Z")
+	midManagerSetPreferredNetworkTypeToGlobal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setPreferredNetworkTypeToGlobal", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1217,7 +1217,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setPreferredNetworkTypeToGlobal")
 	}
 
-	midtelephonyManagerSetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setPreferredOpportunisticDataSubscription", "(IZLjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midManagerSetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setPreferredOpportunisticDataSubscription", "(IZLjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1225,7 +1225,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setPreferredOpportunisticDataSubscription")
 	}
 
-	midtelephonyManagerSetSignalStrengthUpdateRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setSignalStrengthUpdateRequest", "(Landroid/telephony/SignalStrengthUpdateRequest;)V")
+	midManagerSetSignalStrengthUpdateRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setSignalStrengthUpdateRequest", "(Landroid/telephony/SignalStrengthUpdateRequest;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1233,7 +1233,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setSignalStrengthUpdateRequest")
 	}
 
-	midtelephonyManagerSetVisualVoicemailSmsFilterSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVisualVoicemailSmsFilterSettings", "(Landroid/telephony/VisualVoicemailSmsFilterSettings;)V")
+	midManagerSetVisualVoicemailSmsFilterSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setVisualVoicemailSmsFilterSettings", "(Landroid/telephony/VisualVoicemailSmsFilterSettings;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1241,7 +1241,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setVisualVoicemailSmsFilterSettings")
 	}
 
-	midtelephonyManagerSetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVoiceMailNumber", "(Ljava/lang/String;Ljava/lang/String;)Z")
+	midManagerSetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setVoiceMailNumber", "(Ljava/lang/String;Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1249,7 +1249,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setVoiceMailNumber")
 	}
 
-	midtelephonyManagerSetVoicemailRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVoicemailRingtoneUri", "(Landroid/telecom/PhoneAccountHandle;Landroid/net/Uri;)V")
+	midManagerSetVoicemailRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setVoicemailRingtoneUri", "(Landroid/telecom/PhoneAccountHandle;Landroid/net/Uri;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1257,7 +1257,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setVoicemailRingtoneUri")
 	}
 
-	midtelephonyManagerSetVoicemailVibrationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVoicemailVibrationEnabled", "(Landroid/telecom/PhoneAccountHandle;Z)V")
+	midManagerSetVoicemailVibrationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setVoicemailVibrationEnabled", "(Landroid/telecom/PhoneAccountHandle;Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1265,7 +1265,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.setVoicemailVibrationEnabled")
 	}
 
-	midtelephonyManagerSwitchMultiSimConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "switchMultiSimConfig", "(I)V")
+	midManagerSwitchMultiSimConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "switchMultiSimConfig", "(I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1273,7 +1273,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.switchMultiSimConfig")
 	}
 
-	midtelephonyManagerUnregisterTelephonyCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "unregisterTelephonyCallback", "(Landroid/telephony/TelephonyCallback;)V")
+	midManagerUnregisterTelephonyCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterTelephonyCallback", "(Landroid/telephony/TelephonyCallback;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1281,7 +1281,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.unregisterTelephonyCallback")
 	}
 
-	midtelephonyManagerUpdateAvailableNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "updateAvailableNetworks", "(Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midManagerUpdateAvailableNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "updateAvailableNetworks", "(Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1289,7 +1289,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.updateAvailableNetworks")
 	}
 
-	midtelephonyManagerUploadCallComposerPicture4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/io/InputStream;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+	midManagerUploadCallComposerPicture4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "uploadCallComposerPicture", "(Ljava/io/InputStream;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1297,7 +1297,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.uploadCallComposerPicture")
 	}
 
-	midtelephonyManagerUploadCallComposerPicture4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+	midManagerUploadCallComposerPicture4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "uploadCallComposerPicture", "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1305,7 +1305,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.uploadCallComposerPicture")
 	}
 
-	midtelephonyManagerGetMaximumCallComposerPictureSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMaximumCallComposerPictureSize", "()J")
+	midManagerGetMaximumCallComposerPictureSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMaximumCallComposerPictureSize", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

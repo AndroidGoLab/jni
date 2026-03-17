@@ -20,14 +20,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsjobScheduler                            *jni.GlobalRef
-	midjobSchedulerCanRunUserInitiatedJobs     jni.MethodID
-	midjobSchedulerCancelInAllNamespaces       jni.MethodID
-	midjobSchedulerForNamespace                jni.MethodID
-	midjobSchedulerGetNamespace                jni.MethodID
-	midjobSchedulerGetPendingJobReason         jni.MethodID
-	midjobSchedulerGetPendingJobReasons        jni.MethodID
-	midjobSchedulerGetPendingJobReasonsHistory jni.MethodID
+	clsScheduler                            *jni.GlobalRef
+	midSchedulerCanRunUserInitiatedJobs     jni.MethodID
+	midSchedulerCancelInAllNamespaces       jni.MethodID
+	midSchedulerForNamespace                jni.MethodID
+	midSchedulerGetNamespace                jni.MethodID
+	midSchedulerGetPendingJobReason         jni.MethodID
+	midSchedulerGetPendingJobReasons        jni.MethodID
+	midSchedulerGetPendingJobReasonsHistory jni.MethodID
 
 	clsjobInfo                                 *jni.GlobalRef
 	midjobInfoDescribeContents                 jni.MethodID
@@ -129,9 +129,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.job.JobScheduler: %w", err)
 	}
-	clsjobScheduler = env.NewGlobalRef(&c.Object)
+	clsScheduler = env.NewGlobalRef(&c.Object)
 
-	midjobSchedulerCanRunUserInitiatedJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobScheduler)), "canRunUserInitiatedJobs", "()Z")
+	midSchedulerCanRunUserInitiatedJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "canRunUserInitiatedJobs", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -139,7 +139,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.job.JobScheduler.canRunUserInitiatedJobs")
 	}
 
-	midjobSchedulerCancelInAllNamespaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobScheduler)), "cancelInAllNamespaces", "()V")
+	midSchedulerCancelInAllNamespaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancelInAllNamespaces", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -147,7 +147,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.job.JobScheduler.cancelInAllNamespaces")
 	}
 
-	midjobSchedulerForNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobScheduler)), "forNamespace", "(Ljava/lang/String;)Landroid/app/job/JobScheduler;")
+	midSchedulerForNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "forNamespace", "(Ljava/lang/String;)Landroid/app/job/JobScheduler;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -155,7 +155,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.job.JobScheduler.forNamespace")
 	}
 
-	midjobSchedulerGetNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobScheduler)), "getNamespace", "()Ljava/lang/String;")
+	midSchedulerGetNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getNamespace", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -163,7 +163,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getNamespace")
 	}
 
-	midjobSchedulerGetPendingJobReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobScheduler)), "getPendingJobReason", "(I)I")
+	midSchedulerGetPendingJobReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReason", "(I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -171,7 +171,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReason")
 	}
 
-	midjobSchedulerGetPendingJobReasons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobScheduler)), "getPendingJobReasons", "(I)[I")
+	midSchedulerGetPendingJobReasons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReasons", "(I)[I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -179,7 +179,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReasons")
 	}
 
-	midjobSchedulerGetPendingJobReasonsHistory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobScheduler)), "getPendingJobReasonsHistory", "(I)Ljava/util/List;")
+	midSchedulerGetPendingJobReasonsHistory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReasonsHistory", "(I)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

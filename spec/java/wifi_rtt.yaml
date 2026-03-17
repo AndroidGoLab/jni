@@ -2,7 +2,7 @@ package: wifi_rtt
 go_import: github.com/AndroidGoLab/jni/net/wifi/rtt
 classes:
     - java_class: android.net.wifi.rtt.WifiRttManager
-      go_type: wifiRttManager
+      go_type: Manager
       obtain: system_service
       service_name: wifirtt
       close: true

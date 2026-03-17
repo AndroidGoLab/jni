@@ -2,7 +2,7 @@ package: bluetooth
 go_import: github.com/AndroidGoLab/jni/bluetooth
 classes:
     - java_class: android.bluetooth.BluetoothGattService
-      go_type: bluetoothGattService
+      go_type: GattService
       methods:
         - java_method: addCharacteristic
           go_name: AddCharacteristic
@@ -59,7 +59,7 @@ classes:
           returns: void
           error: true
     - java_class: android.bluetooth.BluetoothDevice
-      go_type: bluetoothDevice
+      go_type: Device
       methods:
         - java_method: connectGatt
           go_name: ConnectGatt3
@@ -229,7 +229,7 @@ classes:
           returns: void
           error: true
     - java_class: android.bluetooth.BluetoothAdapter
-      go_type: bluetoothAdapter
+      go_type: Adapter
       methods:
         - java_method: cancelDiscovery
           go_name: CancelDiscovery
@@ -457,7 +457,7 @@ classes:
           returns: boolean
           error: true
     - java_class: android.bluetooth.BluetoothGattCharacteristic
-      go_type: bluetoothGattCharacteristic
+      go_type: GattCharacteristic
       methods:
         - java_method: addDescriptor
           go_name: AddDescriptor
@@ -589,7 +589,7 @@ classes:
           returns: void
           error: true
     - java_class: android.bluetooth.BluetoothSocket
-      go_type: bluetoothSocket
+      go_type: Socket
       methods:
         - java_method: close
           go_name: Close
@@ -632,7 +632,7 @@ classes:
           returns: String
           error: true
     - java_class: android.bluetooth.BluetoothGattServer
-      go_type: bluetoothGattServer
+      go_type: GattServer
       methods:
         - java_method: addService
           go_name: AddService
@@ -761,7 +761,7 @@ classes:
           returns: void
           error: true
     - java_class: android.bluetooth.BluetoothGatt
-      go_type: bluetoothGatt
+      go_type: Gatt
       methods:
         - java_method: abortReliableWrite
           go_name: AbortReliableWrite0
@@ -922,7 +922,7 @@ classes:
           returns: int
           error: true
     - java_class: android.bluetooth.BluetoothServerSocket
-      go_type: bluetoothServerSocket
+      go_type: ServerSocket
       methods:
         - java_method: accept
           go_name: Accept0
@@ -948,7 +948,7 @@ classes:
           returns: String
           error: true
     - java_class: android.bluetooth.BluetoothGattDescriptor
-      go_type: bluetoothGattDescriptor
+      go_type: GattDescriptor
       methods:
         - java_method: describeContents
           go_name: DescribeContents

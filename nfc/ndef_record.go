@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// ndefRecord wraps android.nfc.NdefRecord.
-type ndefRecord struct {
+// NdefRecord wraps android.nfc.NdefRecord.
+type NdefRecord struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.nfc.NdefRecord.describeContents.
-func (m *ndefRecord) DescribeContents() (int32, error) {
+func (m *NdefRecord) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *ndefRecord) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordDescribeContents == nil {
+		if midNdefRecordDescribeContents == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midndefRecordDescribeContents,
+			midNdefRecordDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *ndefRecord) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.nfc.NdefRecord.equals.
-func (m *ndefRecord) Equals(arg0 *jni.Object) (bool, error) {
+func (m *NdefRecord) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *ndefRecord) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordEquals == nil {
+		if midNdefRecordEquals == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midndefRecordEquals, jni.ObjectValue(arg0),
+			midNdefRecordEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *ndefRecord) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetId calls android.nfc.NdefRecord.getId.
-func (m *ndefRecord) GetId() (*jni.Object, error) {
+func (m *NdefRecord) GetId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *ndefRecord) GetId() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordGetId == nil {
+		if midNdefRecordGetId == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.getId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midndefRecordGetId,
+			midNdefRecordGetId,
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *ndefRecord) GetId() (*jni.Object, error) {
 }
 
 // GetPayload calls android.nfc.NdefRecord.getPayload.
-func (m *ndefRecord) GetPayload() (*jni.Object, error) {
+func (m *NdefRecord) GetPayload() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,13 +109,13 @@ func (m *ndefRecord) GetPayload() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordGetPayload == nil {
+		if midNdefRecordGetPayload == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.getPayload is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midndefRecordGetPayload,
+			midNdefRecordGetPayload,
 		)
 		if callErr != nil {
 			return callErr
@@ -126,7 +126,7 @@ func (m *ndefRecord) GetPayload() (*jni.Object, error) {
 }
 
 // GetTnf calls android.nfc.NdefRecord.getTnf.
-func (m *ndefRecord) GetTnf() (int16, error) {
+func (m *NdefRecord) GetTnf() (int16, error) {
 	var result int16
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -134,13 +134,13 @@ func (m *ndefRecord) GetTnf() (int16, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordGetTnf == nil {
+		if midNdefRecordGetTnf == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.getTnf is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallShortMethod(
 			m.Obj,
-			midndefRecordGetTnf,
+			midNdefRecordGetTnf,
 		)
 		if callErr != nil {
 			return callErr
@@ -151,7 +151,7 @@ func (m *ndefRecord) GetTnf() (int16, error) {
 }
 
 // GetType calls android.nfc.NdefRecord.getType.
-func (m *ndefRecord) GetType() (*jni.Object, error) {
+func (m *NdefRecord) GetType() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -159,13 +159,13 @@ func (m *ndefRecord) GetType() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordGetType == nil {
+		if midNdefRecordGetType == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.getType is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midndefRecordGetType,
+			midNdefRecordGetType,
 		)
 		if callErr != nil {
 			return callErr
@@ -176,7 +176,7 @@ func (m *ndefRecord) GetType() (*jni.Object, error) {
 }
 
 // HashCode calls android.nfc.NdefRecord.hashCode.
-func (m *ndefRecord) HashCode() (int32, error) {
+func (m *NdefRecord) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -184,13 +184,13 @@ func (m *ndefRecord) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordHashCode == nil {
+		if midNdefRecordHashCode == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midndefRecordHashCode,
+			midNdefRecordHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -201,7 +201,7 @@ func (m *ndefRecord) HashCode() (int32, error) {
 }
 
 // ToByteArray calls android.nfc.NdefRecord.toByteArray.
-func (m *ndefRecord) ToByteArray() (*jni.Object, error) {
+func (m *NdefRecord) ToByteArray() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -209,13 +209,13 @@ func (m *ndefRecord) ToByteArray() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordToByteArray == nil {
+		if midNdefRecordToByteArray == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.toByteArray is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midndefRecordToByteArray,
+			midNdefRecordToByteArray,
 		)
 		if callErr != nil {
 			return callErr
@@ -226,7 +226,7 @@ func (m *ndefRecord) ToByteArray() (*jni.Object, error) {
 }
 
 // ToMimeType calls android.nfc.NdefRecord.toMimeType.
-func (m *ndefRecord) ToMimeType() (string, error) {
+func (m *NdefRecord) ToMimeType() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -234,13 +234,13 @@ func (m *ndefRecord) ToMimeType() (string, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordToMimeType == nil {
+		if midNdefRecordToMimeType == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.toMimeType is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midndefRecordToMimeType,
+			midNdefRecordToMimeType,
 		)
 		if callErr != nil {
 			return callErr
@@ -252,7 +252,7 @@ func (m *ndefRecord) ToMimeType() (string, error) {
 }
 
 // ToString calls android.nfc.NdefRecord.toString.
-func (m *ndefRecord) ToString() (string, error) {
+func (m *NdefRecord) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -260,13 +260,13 @@ func (m *ndefRecord) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordToString == nil {
+		if midNdefRecordToString == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midndefRecordToString,
+			midNdefRecordToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -278,7 +278,7 @@ func (m *ndefRecord) ToString() (string, error) {
 }
 
 // ToUri calls android.nfc.NdefRecord.toUri.
-func (m *ndefRecord) ToUri() (*jni.Object, error) {
+func (m *NdefRecord) ToUri() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -286,13 +286,13 @@ func (m *ndefRecord) ToUri() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordToUri == nil {
+		if midNdefRecordToUri == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.toUri is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midndefRecordToUri,
+			midNdefRecordToUri,
 		)
 		if callErr != nil {
 			return callErr
@@ -303,7 +303,7 @@ func (m *ndefRecord) ToUri() (*jni.Object, error) {
 }
 
 // WriteToParcel calls android.nfc.NdefRecord.writeToParcel.
-func (m *ndefRecord) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *NdefRecord) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -311,14 +311,14 @@ func (m *ndefRecord) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midndefRecordWriteToParcel == nil {
+		if midNdefRecordWriteToParcel == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midndefRecordWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midNdefRecordWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -326,7 +326,7 @@ func (m *ndefRecord) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 }
 
 // CreateApplicationRecord calls android.nfc.NdefRecord.createApplicationRecord.
-func (m *ndefRecord) CreateApplicationRecord(arg0 string) (*jni.Object, error) {
+func (m *NdefRecord) CreateApplicationRecord(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -334,7 +334,7 @@ func (m *ndefRecord) CreateApplicationRecord(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordCreateApplicationRecord == nil {
+		if midNdefRecordCreateApplicationRecord == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.createApplicationRecord is not available on this device")
 			return callErr
 		}
@@ -344,8 +344,8 @@ func (m *ndefRecord) CreateApplicationRecord(arg0 string) (*jni.Object, error) {
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsndefRecord)),
-			midndefRecordCreateApplicationRecord, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsNdefRecord)),
+			midNdefRecordCreateApplicationRecord, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -356,7 +356,7 @@ func (m *ndefRecord) CreateApplicationRecord(arg0 string) (*jni.Object, error) {
 }
 
 // CreateExternal calls android.nfc.NdefRecord.createExternal.
-func (m *ndefRecord) CreateExternal(arg0 string, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
+func (m *NdefRecord) CreateExternal(arg0 string, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -364,7 +364,7 @@ func (m *ndefRecord) CreateExternal(arg0 string, arg1 string, arg2 *jni.Object) 
 			callErr = err
 			return err
 		}
-		if midndefRecordCreateExternal == nil {
+		if midNdefRecordCreateExternal == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.createExternal is not available on this device")
 			return callErr
 		}
@@ -379,8 +379,8 @@ func (m *ndefRecord) CreateExternal(arg0 string, arg1 string, arg2 *jni.Object) 
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsndefRecord)),
-			midndefRecordCreateExternal, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
+			(*jni.Class)(unsafe.Pointer(clsNdefRecord)),
+			midNdefRecordCreateExternal, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -391,7 +391,7 @@ func (m *ndefRecord) CreateExternal(arg0 string, arg1 string, arg2 *jni.Object) 
 }
 
 // CreateMime calls android.nfc.NdefRecord.createMime.
-func (m *ndefRecord) CreateMime(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+func (m *NdefRecord) CreateMime(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -399,7 +399,7 @@ func (m *ndefRecord) CreateMime(arg0 string, arg1 *jni.Object) (*jni.Object, err
 			callErr = err
 			return err
 		}
-		if midndefRecordCreateMime == nil {
+		if midNdefRecordCreateMime == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.createMime is not available on this device")
 			return callErr
 		}
@@ -409,8 +409,8 @@ func (m *ndefRecord) CreateMime(arg0 string, arg1 *jni.Object) (*jni.Object, err
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsndefRecord)),
-			midndefRecordCreateMime, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsNdefRecord)),
+			midNdefRecordCreateMime, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -421,7 +421,7 @@ func (m *ndefRecord) CreateMime(arg0 string, arg1 *jni.Object) (*jni.Object, err
 }
 
 // CreateTextRecord calls android.nfc.NdefRecord.createTextRecord.
-func (m *ndefRecord) CreateTextRecord(arg0 string, arg1 string) (*jni.Object, error) {
+func (m *NdefRecord) CreateTextRecord(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -429,7 +429,7 @@ func (m *ndefRecord) CreateTextRecord(arg0 string, arg1 string) (*jni.Object, er
 			callErr = err
 			return err
 		}
-		if midndefRecordCreateTextRecord == nil {
+		if midNdefRecordCreateTextRecord == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.createTextRecord is not available on this device")
 			return callErr
 		}
@@ -444,8 +444,8 @@ func (m *ndefRecord) CreateTextRecord(arg0 string, arg1 string) (*jni.Object, er
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsndefRecord)),
-			midndefRecordCreateTextRecord, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+			(*jni.Class)(unsafe.Pointer(clsNdefRecord)),
+			midNdefRecordCreateTextRecord, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -456,7 +456,7 @@ func (m *ndefRecord) CreateTextRecord(arg0 string, arg1 string) (*jni.Object, er
 }
 
 // CreateUri1 calls android.nfc.NdefRecord.createUri.
-func (m *ndefRecord) CreateUri1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *NdefRecord) CreateUri1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -464,14 +464,14 @@ func (m *ndefRecord) CreateUri1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordCreateUri1 == nil {
+		if midNdefRecordCreateUri1 == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.createUri is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsndefRecord)),
-			midndefRecordCreateUri1, jni.ObjectValue(arg0),
+			(*jni.Class)(unsafe.Pointer(clsNdefRecord)),
+			midNdefRecordCreateUri1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -482,7 +482,7 @@ func (m *ndefRecord) CreateUri1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // CreateUri1_1 calls android.nfc.NdefRecord.createUri.
-func (m *ndefRecord) CreateUri1_1(arg0 string) (*jni.Object, error) {
+func (m *NdefRecord) CreateUri1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -490,7 +490,7 @@ func (m *ndefRecord) CreateUri1_1(arg0 string) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefRecordCreateUri1_1 == nil {
+		if midNdefRecordCreateUri1_1 == nil {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.createUri is not available on this device")
 			return callErr
 		}
@@ -500,8 +500,8 @@ func (m *ndefRecord) CreateUri1_1(arg0 string) (*jni.Object, error) {
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsndefRecord)),
-			midndefRecordCreateUri1_1, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsNdefRecord)),
+			midNdefRecordCreateUri1_1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr

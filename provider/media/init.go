@@ -20,36 +20,36 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsmediaStore                                       *jni.GlobalRef
-	midmediaStoreCanManageMedia                         jni.MethodID
-	midmediaStoreCreateDeleteRequest                    jni.MethodID
-	midmediaStoreCreateFavoriteRequest                  jni.MethodID
-	midmediaStoreCreateTrashRequest                     jni.MethodID
-	midmediaStoreCreateWriteRequest                     jni.MethodID
-	midmediaStoreGetDocumentUri                         jni.MethodID
-	midmediaStoreGetExternalVolumeNames                 jni.MethodID
-	midmediaStoreGetGeneration                          jni.MethodID
-	midmediaStoreGetMediaScannerUri                     jni.MethodID
-	midmediaStoreGetMediaUri                            jni.MethodID
-	midmediaStoreGetOriginalMediaFormatFileDescriptor   jni.MethodID
-	midmediaStoreGetPickImagesMaxLimit                  jni.MethodID
-	midmediaStoreGetRecentExternalVolumeNames           jni.MethodID
-	midmediaStoreGetRedactedUri2                        jni.MethodID
-	midmediaStoreGetRedactedUri2_1                      jni.MethodID
-	midmediaStoreGetRequireOriginal                     jni.MethodID
-	midmediaStoreGetVersion1                            jni.MethodID
-	midmediaStoreGetVersion2_1                          jni.MethodID
-	midmediaStoreGetVolumeName                          jni.MethodID
-	midmediaStoreIsCurrentCloudMediaProviderAuthority   jni.MethodID
-	midmediaStoreIsCurrentSystemGallery                 jni.MethodID
-	midmediaStoreIsSupportedCloudMediaProviderAuthority jni.MethodID
-	midmediaStoreMarkIsFavoriteStatus                   jni.MethodID
-	midmediaStoreNotifyCloudMediaChangedEvent           jni.MethodID
-	midmediaStoreOpenAssetFileDescriptor                jni.MethodID
-	midmediaStoreOpenFileDescriptor                     jni.MethodID
-	midmediaStoreOpenTypedAssetFileDescriptor           jni.MethodID
-	midmediaStoreSetIncludePending                      jni.MethodID
-	midmediaStoreSetRequireOriginal                     jni.MethodID
+	clsMediaStore                                       *jni.GlobalRef
+	midMediaStoreCanManageMedia                         jni.MethodID
+	midMediaStoreCreateDeleteRequest                    jni.MethodID
+	midMediaStoreCreateFavoriteRequest                  jni.MethodID
+	midMediaStoreCreateTrashRequest                     jni.MethodID
+	midMediaStoreCreateWriteRequest                     jni.MethodID
+	midMediaStoreGetDocumentUri                         jni.MethodID
+	midMediaStoreGetExternalVolumeNames                 jni.MethodID
+	midMediaStoreGetGeneration                          jni.MethodID
+	midMediaStoreGetMediaScannerUri                     jni.MethodID
+	midMediaStoreGetMediaUri                            jni.MethodID
+	midMediaStoreGetOriginalMediaFormatFileDescriptor   jni.MethodID
+	midMediaStoreGetPickImagesMaxLimit                  jni.MethodID
+	midMediaStoreGetRecentExternalVolumeNames           jni.MethodID
+	midMediaStoreGetRedactedUri2                        jni.MethodID
+	midMediaStoreGetRedactedUri2_1                      jni.MethodID
+	midMediaStoreGetRequireOriginal                     jni.MethodID
+	midMediaStoreGetVersion1                            jni.MethodID
+	midMediaStoreGetVersion2_1                          jni.MethodID
+	midMediaStoreGetVolumeName                          jni.MethodID
+	midMediaStoreIsCurrentCloudMediaProviderAuthority   jni.MethodID
+	midMediaStoreIsCurrentSystemGallery                 jni.MethodID
+	midMediaStoreIsSupportedCloudMediaProviderAuthority jni.MethodID
+	midMediaStoreMarkIsFavoriteStatus                   jni.MethodID
+	midMediaStoreNotifyCloudMediaChangedEvent           jni.MethodID
+	midMediaStoreOpenAssetFileDescriptor                jni.MethodID
+	midMediaStoreOpenFileDescriptor                     jni.MethodID
+	midMediaStoreOpenTypedAssetFileDescriptor           jni.MethodID
+	midMediaStoreSetIncludePending                      jni.MethodID
+	midMediaStoreSetRequireOriginal                     jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -80,9 +80,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.provider.MediaStore: %w", err)
 	}
-	clsmediaStore = env.NewGlobalRef(&c.Object)
+	clsMediaStore = env.NewGlobalRef(&c.Object)
 
-	midmediaStoreCanManageMedia, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "canManageMedia", "(Landroid/content/Context;)Z")
+	midMediaStoreCanManageMedia, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "canManageMedia", "(Landroid/content/Context;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -90,7 +90,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.canManageMedia")
 	}
 
-	midmediaStoreCreateDeleteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createDeleteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;")
+	midMediaStoreCreateDeleteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "createDeleteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -98,7 +98,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.createDeleteRequest")
 	}
 
-	midmediaStoreCreateFavoriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createFavoriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;")
+	midMediaStoreCreateFavoriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "createFavoriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -106,7 +106,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.createFavoriteRequest")
 	}
 
-	midmediaStoreCreateTrashRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createTrashRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;")
+	midMediaStoreCreateTrashRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "createTrashRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -114,7 +114,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.createTrashRequest")
 	}
 
-	midmediaStoreCreateWriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "createWriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;")
+	midMediaStoreCreateWriteRequest, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "createWriteRequest", "(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -122,7 +122,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.createWriteRequest")
 	}
 
-	midmediaStoreGetDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
+	midMediaStoreGetDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -130,7 +130,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getDocumentUri")
 	}
 
-	midmediaStoreGetExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
+	midMediaStoreGetExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -138,7 +138,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getExternalVolumeNames")
 	}
 
-	midmediaStoreGetGeneration, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getGeneration", "(Landroid/content/Context;Ljava/lang/String;)J")
+	midMediaStoreGetGeneration, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getGeneration", "(Landroid/content/Context;Ljava/lang/String;)J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -146,7 +146,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getGeneration")
 	}
 
-	midmediaStoreGetMediaScannerUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getMediaScannerUri", "()Landroid/net/Uri;")
+	midMediaStoreGetMediaScannerUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getMediaScannerUri", "()Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -154,7 +154,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getMediaScannerUri")
 	}
 
-	midmediaStoreGetMediaUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getMediaUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
+	midMediaStoreGetMediaUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getMediaUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -162,7 +162,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getMediaUri")
 	}
 
-	midmediaStoreGetOriginalMediaFormatFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getOriginalMediaFormatFileDescriptor", "(Landroid/content/Context;Landroid/os/ParcelFileDescriptor;)Landroid/os/ParcelFileDescriptor;")
+	midMediaStoreGetOriginalMediaFormatFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getOriginalMediaFormatFileDescriptor", "(Landroid/content/Context;Landroid/os/ParcelFileDescriptor;)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -170,7 +170,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getOriginalMediaFormatFileDescriptor")
 	}
 
-	midmediaStoreGetPickImagesMaxLimit, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getPickImagesMaxLimit", "()I")
+	midMediaStoreGetPickImagesMaxLimit, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getPickImagesMaxLimit", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -178,7 +178,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getPickImagesMaxLimit")
 	}
 
-	midmediaStoreGetRecentExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRecentExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
+	midMediaStoreGetRecentExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRecentExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -186,7 +186,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getRecentExternalVolumeNames")
 	}
 
-	midmediaStoreGetRedactedUri2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
+	midMediaStoreGetRedactedUri2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -194,7 +194,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getRedactedUri")
 	}
 
-	midmediaStoreGetRedactedUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Ljava/util/List;)Ljava/util/List;")
+	midMediaStoreGetRedactedUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Ljava/util/List;)Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -202,7 +202,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getRedactedUri")
 	}
 
-	midmediaStoreGetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getRequireOriginal", "(Landroid/net/Uri;)Z")
+	midMediaStoreGetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRequireOriginal", "(Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -210,7 +210,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getRequireOriginal")
 	}
 
-	midmediaStoreGetVersion1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getVersion", "(Landroid/content/Context;)Ljava/lang/String;")
+	midMediaStoreGetVersion1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVersion", "(Landroid/content/Context;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -218,7 +218,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getVersion")
 	}
 
-	midmediaStoreGetVersion2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getVersion", "(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;")
+	midMediaStoreGetVersion2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVersion", "(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -226,7 +226,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getVersion")
 	}
 
-	midmediaStoreGetVolumeName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "getVolumeName", "(Landroid/net/Uri;)Ljava/lang/String;")
+	midMediaStoreGetVolumeName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVolumeName", "(Landroid/net/Uri;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -234,7 +234,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.getVolumeName")
 	}
 
-	midmediaStoreIsCurrentCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "isCurrentCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
+	midMediaStoreIsCurrentCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isCurrentCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -242,7 +242,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.isCurrentCloudMediaProviderAuthority")
 	}
 
-	midmediaStoreIsCurrentSystemGallery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "isCurrentSystemGallery", "(Landroid/content/ContentResolver;ILjava/lang/String;)Z")
+	midMediaStoreIsCurrentSystemGallery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isCurrentSystemGallery", "(Landroid/content/ContentResolver;ILjava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -250,7 +250,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.isCurrentSystemGallery")
 	}
 
-	midmediaStoreIsSupportedCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "isSupportedCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
+	midMediaStoreIsSupportedCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isSupportedCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -258,7 +258,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.isSupportedCloudMediaProviderAuthority")
 	}
 
-	midmediaStoreMarkIsFavoriteStatus, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "markIsFavoriteStatus", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)V")
+	midMediaStoreMarkIsFavoriteStatus, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "markIsFavoriteStatus", "(Landroid/content/ContentResolver;Ljava/util/Collection;Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -266,7 +266,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.markIsFavoriteStatus")
 	}
 
-	midmediaStoreNotifyCloudMediaChangedEvent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "notifyCloudMediaChangedEvent", "(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;)V")
+	midMediaStoreNotifyCloudMediaChangedEvent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "notifyCloudMediaChangedEvent", "(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -274,7 +274,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.notifyCloudMediaChangedEvent")
 	}
 
-	midmediaStoreOpenAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "openAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
+	midMediaStoreOpenAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -282,7 +282,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.openAssetFileDescriptor")
 	}
 
-	midmediaStoreOpenFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "openFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/os/ParcelFileDescriptor;")
+	midMediaStoreOpenFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/os/ParcelFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -290,7 +290,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.openFileDescriptor")
 	}
 
-	midmediaStoreOpenTypedAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "openTypedAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
+	midMediaStoreOpenTypedAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openTypedAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -298,7 +298,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.openTypedAssetFileDescriptor")
 	}
 
-	midmediaStoreSetIncludePending, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "setIncludePending", "(Landroid/net/Uri;)Landroid/net/Uri;")
+	midMediaStoreSetIncludePending, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "setIncludePending", "(Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -306,7 +306,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.MediaStore.setIncludePending")
 	}
 
-	midmediaStoreSetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaStore)), "setRequireOriginal", "(Landroid/net/Uri;)Landroid/net/Uri;")
+	midMediaStoreSetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "setRequireOriginal", "(Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

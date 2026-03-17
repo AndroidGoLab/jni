@@ -2,7 +2,7 @@ package: alarm
 go_import: github.com/AndroidGoLab/jni/app/alarm
 classes:
     - java_class: android.app.AlarmManager
-      go_type: alarmManager
+      go_type: Manager
       obtain: system_service
       service_name: alarm
       close: true
@@ -157,7 +157,7 @@ classes:
           returns: void
           error: true
     - java_class: android.app.AlarmManager$AlarmClockInfo
-      go_type: alarmManagerAlarmClockInfo
+      go_type: ManagerAlarmClockInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents

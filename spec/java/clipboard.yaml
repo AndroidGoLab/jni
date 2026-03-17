@@ -155,7 +155,7 @@ classes:
           returns: String
           error: true
     - java_class: android.content.ClipboardManager
-      go_type: clipboardManager
+      go_type: Manager
       obtain: system_service
       service_name: clipboard
       close: true

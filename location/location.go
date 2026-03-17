@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// location wraps android.location.Location.
-type location struct {
+// Location wraps android.location.Location.
+type Location struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // BearingTo calls android.location.Location.bearingTo.
-func (m *location) BearingTo(arg0 *jni.Object) (float32, error) {
+func (m *Location) BearingTo(arg0 *jni.Object) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *location) BearingTo(arg0 *jni.Object) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationBearingTo == nil {
+		if midLocationBearingTo == nil {
 			callErr = fmt.Errorf("android.location.Location.bearingTo is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationBearingTo, jni.ObjectValue(arg0),
+			midLocationBearingTo, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -50,7 +50,7 @@ func (m *location) BearingTo(arg0 *jni.Object) (float32, error) {
 }
 
 // DescribeContents calls android.location.Location.describeContents.
-func (m *location) DescribeContents() (int32, error) {
+func (m *Location) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -58,13 +58,13 @@ func (m *location) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationDescribeContents == nil {
+		if midLocationDescribeContents == nil {
 			callErr = fmt.Errorf("android.location.Location.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlocationDescribeContents,
+			midLocationDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -75,7 +75,7 @@ func (m *location) DescribeContents() (int32, error) {
 }
 
 // DistanceTo calls android.location.Location.distanceTo.
-func (m *location) DistanceTo(arg0 *jni.Object) (float32, error) {
+func (m *Location) DistanceTo(arg0 *jni.Object) (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -83,14 +83,14 @@ func (m *location) DistanceTo(arg0 *jni.Object) (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationDistanceTo == nil {
+		if midLocationDistanceTo == nil {
 			callErr = fmt.Errorf("android.location.Location.distanceTo is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationDistanceTo, jni.ObjectValue(arg0),
+			midLocationDistanceTo, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *location) DistanceTo(arg0 *jni.Object) (float32, error) {
 }
 
 // Dump calls android.location.Location.dump.
-func (m *location) Dump(arg0 *jni.Object, arg1 string) error {
+func (m *Location) Dump(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,7 +109,7 @@ func (m *location) Dump(arg0 *jni.Object, arg1 string) error {
 			callErr = err
 			return err
 		}
-		if midlocationDump == nil {
+		if midLocationDump == nil {
 			callErr = fmt.Errorf("android.location.Location.dump is not available on this device")
 			return callErr
 		}
@@ -121,7 +121,7 @@ func (m *location) Dump(arg0 *jni.Object, arg1 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationDump, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+			midLocationDump, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
 		return callErr
 	})
@@ -129,7 +129,7 @@ func (m *location) Dump(arg0 *jni.Object, arg1 string) error {
 }
 
 // Equals calls android.location.Location.equals.
-func (m *location) Equals(arg0 *jni.Object) (bool, error) {
+func (m *Location) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -137,14 +137,14 @@ func (m *location) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationEquals == nil {
+		if midLocationEquals == nil {
 			callErr = fmt.Errorf("android.location.Location.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationEquals, jni.ObjectValue(arg0),
+			midLocationEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -156,7 +156,7 @@ func (m *location) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetAccuracy calls android.location.Location.getAccuracy.
-func (m *location) GetAccuracy() (float32, error) {
+func (m *Location) GetAccuracy() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -164,13 +164,13 @@ func (m *location) GetAccuracy() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetAccuracy == nil {
+		if midLocationGetAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.getAccuracy is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationGetAccuracy,
+			midLocationGetAccuracy,
 		)
 		if callErr != nil {
 			return callErr
@@ -181,7 +181,7 @@ func (m *location) GetAccuracy() (float32, error) {
 }
 
 // GetAltitude calls android.location.Location.getAltitude.
-func (m *location) GetAltitude() (float64, error) {
+func (m *Location) GetAltitude() (float64, error) {
 	var result float64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -189,13 +189,13 @@ func (m *location) GetAltitude() (float64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetAltitude == nil {
+		if midLocationGetAltitude == nil {
 			callErr = fmt.Errorf("android.location.Location.getAltitude is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallDoubleMethod(
 			m.Obj,
-			midlocationGetAltitude,
+			midLocationGetAltitude,
 		)
 		if callErr != nil {
 			return callErr
@@ -206,7 +206,7 @@ func (m *location) GetAltitude() (float64, error) {
 }
 
 // GetBearing calls android.location.Location.getBearing.
-func (m *location) GetBearing() (float32, error) {
+func (m *Location) GetBearing() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -214,13 +214,13 @@ func (m *location) GetBearing() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetBearing == nil {
+		if midLocationGetBearing == nil {
 			callErr = fmt.Errorf("android.location.Location.getBearing is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationGetBearing,
+			midLocationGetBearing,
 		)
 		if callErr != nil {
 			return callErr
@@ -231,7 +231,7 @@ func (m *location) GetBearing() (float32, error) {
 }
 
 // GetBearingAccuracyDegrees calls android.location.Location.getBearingAccuracyDegrees.
-func (m *location) GetBearingAccuracyDegrees() (float32, error) {
+func (m *Location) GetBearingAccuracyDegrees() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -239,13 +239,13 @@ func (m *location) GetBearingAccuracyDegrees() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetBearingAccuracyDegrees == nil {
+		if midLocationGetBearingAccuracyDegrees == nil {
 			callErr = fmt.Errorf("android.location.Location.getBearingAccuracyDegrees is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationGetBearingAccuracyDegrees,
+			midLocationGetBearingAccuracyDegrees,
 		)
 		if callErr != nil {
 			return callErr
@@ -256,7 +256,7 @@ func (m *location) GetBearingAccuracyDegrees() (float32, error) {
 }
 
 // GetElapsedRealtimeAgeMillis0 calls android.location.Location.getElapsedRealtimeAgeMillis.
-func (m *location) GetElapsedRealtimeAgeMillis0() (int64, error) {
+func (m *Location) GetElapsedRealtimeAgeMillis0() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -264,13 +264,13 @@ func (m *location) GetElapsedRealtimeAgeMillis0() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetElapsedRealtimeAgeMillis0 == nil {
+		if midLocationGetElapsedRealtimeAgeMillis0 == nil {
 			callErr = fmt.Errorf("android.location.Location.getElapsedRealtimeAgeMillis is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midlocationGetElapsedRealtimeAgeMillis0,
+			midLocationGetElapsedRealtimeAgeMillis0,
 		)
 		if callErr != nil {
 			return callErr
@@ -281,7 +281,7 @@ func (m *location) GetElapsedRealtimeAgeMillis0() (int64, error) {
 }
 
 // GetElapsedRealtimeAgeMillis1_1 calls android.location.Location.getElapsedRealtimeAgeMillis.
-func (m *location) GetElapsedRealtimeAgeMillis1_1(arg0 int64) (int64, error) {
+func (m *Location) GetElapsedRealtimeAgeMillis1_1(arg0 int64) (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -289,14 +289,14 @@ func (m *location) GetElapsedRealtimeAgeMillis1_1(arg0 int64) (int64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetElapsedRealtimeAgeMillis1_1 == nil {
+		if midLocationGetElapsedRealtimeAgeMillis1_1 == nil {
 			callErr = fmt.Errorf("android.location.Location.getElapsedRealtimeAgeMillis is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midlocationGetElapsedRealtimeAgeMillis1_1, jni.LongValue(arg0),
+			midLocationGetElapsedRealtimeAgeMillis1_1, jni.LongValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -307,7 +307,7 @@ func (m *location) GetElapsedRealtimeAgeMillis1_1(arg0 int64) (int64, error) {
 }
 
 // GetElapsedRealtimeMillis calls android.location.Location.getElapsedRealtimeMillis.
-func (m *location) GetElapsedRealtimeMillis() (int64, error) {
+func (m *Location) GetElapsedRealtimeMillis() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -315,13 +315,13 @@ func (m *location) GetElapsedRealtimeMillis() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetElapsedRealtimeMillis == nil {
+		if midLocationGetElapsedRealtimeMillis == nil {
 			callErr = fmt.Errorf("android.location.Location.getElapsedRealtimeMillis is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midlocationGetElapsedRealtimeMillis,
+			midLocationGetElapsedRealtimeMillis,
 		)
 		if callErr != nil {
 			return callErr
@@ -332,7 +332,7 @@ func (m *location) GetElapsedRealtimeMillis() (int64, error) {
 }
 
 // GetElapsedRealtimeNanos calls android.location.Location.getElapsedRealtimeNanos.
-func (m *location) GetElapsedRealtimeNanos() (int64, error) {
+func (m *Location) GetElapsedRealtimeNanos() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -340,13 +340,13 @@ func (m *location) GetElapsedRealtimeNanos() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetElapsedRealtimeNanos == nil {
+		if midLocationGetElapsedRealtimeNanos == nil {
 			callErr = fmt.Errorf("android.location.Location.getElapsedRealtimeNanos is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midlocationGetElapsedRealtimeNanos,
+			midLocationGetElapsedRealtimeNanos,
 		)
 		if callErr != nil {
 			return callErr
@@ -357,7 +357,7 @@ func (m *location) GetElapsedRealtimeNanos() (int64, error) {
 }
 
 // GetElapsedRealtimeUncertaintyNanos calls android.location.Location.getElapsedRealtimeUncertaintyNanos.
-func (m *location) GetElapsedRealtimeUncertaintyNanos() (float64, error) {
+func (m *Location) GetElapsedRealtimeUncertaintyNanos() (float64, error) {
 	var result float64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -365,13 +365,13 @@ func (m *location) GetElapsedRealtimeUncertaintyNanos() (float64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetElapsedRealtimeUncertaintyNanos == nil {
+		if midLocationGetElapsedRealtimeUncertaintyNanos == nil {
 			callErr = fmt.Errorf("android.location.Location.getElapsedRealtimeUncertaintyNanos is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallDoubleMethod(
 			m.Obj,
-			midlocationGetElapsedRealtimeUncertaintyNanos,
+			midLocationGetElapsedRealtimeUncertaintyNanos,
 		)
 		if callErr != nil {
 			return callErr
@@ -382,7 +382,7 @@ func (m *location) GetElapsedRealtimeUncertaintyNanos() (float64, error) {
 }
 
 // GetExtras calls android.location.Location.getExtras.
-func (m *location) GetExtras() (*jni.Object, error) {
+func (m *Location) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -390,13 +390,13 @@ func (m *location) GetExtras() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetExtras == nil {
+		if midLocationGetExtras == nil {
 			callErr = fmt.Errorf("android.location.Location.getExtras is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midlocationGetExtras,
+			midLocationGetExtras,
 		)
 		if callErr != nil {
 			return callErr
@@ -407,7 +407,7 @@ func (m *location) GetExtras() (*jni.Object, error) {
 }
 
 // GetLatitude calls android.location.Location.getLatitude.
-func (m *location) GetLatitude() (float64, error) {
+func (m *Location) GetLatitude() (float64, error) {
 	var result float64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -415,13 +415,13 @@ func (m *location) GetLatitude() (float64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetLatitude == nil {
+		if midLocationGetLatitude == nil {
 			callErr = fmt.Errorf("android.location.Location.getLatitude is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallDoubleMethod(
 			m.Obj,
-			midlocationGetLatitude,
+			midLocationGetLatitude,
 		)
 		if callErr != nil {
 			return callErr
@@ -432,7 +432,7 @@ func (m *location) GetLatitude() (float64, error) {
 }
 
 // GetLongitude calls android.location.Location.getLongitude.
-func (m *location) GetLongitude() (float64, error) {
+func (m *Location) GetLongitude() (float64, error) {
 	var result float64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -440,13 +440,13 @@ func (m *location) GetLongitude() (float64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetLongitude == nil {
+		if midLocationGetLongitude == nil {
 			callErr = fmt.Errorf("android.location.Location.getLongitude is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallDoubleMethod(
 			m.Obj,
-			midlocationGetLongitude,
+			midLocationGetLongitude,
 		)
 		if callErr != nil {
 			return callErr
@@ -457,7 +457,7 @@ func (m *location) GetLongitude() (float64, error) {
 }
 
 // GetMslAltitudeAccuracyMeters calls android.location.Location.getMslAltitudeAccuracyMeters.
-func (m *location) GetMslAltitudeAccuracyMeters() (float32, error) {
+func (m *Location) GetMslAltitudeAccuracyMeters() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -465,13 +465,13 @@ func (m *location) GetMslAltitudeAccuracyMeters() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetMslAltitudeAccuracyMeters == nil {
+		if midLocationGetMslAltitudeAccuracyMeters == nil {
 			callErr = fmt.Errorf("android.location.Location.getMslAltitudeAccuracyMeters is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationGetMslAltitudeAccuracyMeters,
+			midLocationGetMslAltitudeAccuracyMeters,
 		)
 		if callErr != nil {
 			return callErr
@@ -482,7 +482,7 @@ func (m *location) GetMslAltitudeAccuracyMeters() (float32, error) {
 }
 
 // GetMslAltitudeMeters calls android.location.Location.getMslAltitudeMeters.
-func (m *location) GetMslAltitudeMeters() (float64, error) {
+func (m *Location) GetMslAltitudeMeters() (float64, error) {
 	var result float64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -490,13 +490,13 @@ func (m *location) GetMslAltitudeMeters() (float64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetMslAltitudeMeters == nil {
+		if midLocationGetMslAltitudeMeters == nil {
 			callErr = fmt.Errorf("android.location.Location.getMslAltitudeMeters is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallDoubleMethod(
 			m.Obj,
-			midlocationGetMslAltitudeMeters,
+			midLocationGetMslAltitudeMeters,
 		)
 		if callErr != nil {
 			return callErr
@@ -507,7 +507,7 @@ func (m *location) GetMslAltitudeMeters() (float64, error) {
 }
 
 // GetProvider calls android.location.Location.getProvider.
-func (m *location) GetProvider() (string, error) {
+func (m *Location) GetProvider() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -515,13 +515,13 @@ func (m *location) GetProvider() (string, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetProvider == nil {
+		if midLocationGetProvider == nil {
 			callErr = fmt.Errorf("android.location.Location.getProvider is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midlocationGetProvider,
+			midLocationGetProvider,
 		)
 		if callErr != nil {
 			return callErr
@@ -533,7 +533,7 @@ func (m *location) GetProvider() (string, error) {
 }
 
 // GetSpeed calls android.location.Location.getSpeed.
-func (m *location) GetSpeed() (float32, error) {
+func (m *Location) GetSpeed() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -541,13 +541,13 @@ func (m *location) GetSpeed() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetSpeed == nil {
+		if midLocationGetSpeed == nil {
 			callErr = fmt.Errorf("android.location.Location.getSpeed is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationGetSpeed,
+			midLocationGetSpeed,
 		)
 		if callErr != nil {
 			return callErr
@@ -558,7 +558,7 @@ func (m *location) GetSpeed() (float32, error) {
 }
 
 // GetSpeedAccuracyMetersPerSecond calls android.location.Location.getSpeedAccuracyMetersPerSecond.
-func (m *location) GetSpeedAccuracyMetersPerSecond() (float32, error) {
+func (m *Location) GetSpeedAccuracyMetersPerSecond() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -566,13 +566,13 @@ func (m *location) GetSpeedAccuracyMetersPerSecond() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetSpeedAccuracyMetersPerSecond == nil {
+		if midLocationGetSpeedAccuracyMetersPerSecond == nil {
 			callErr = fmt.Errorf("android.location.Location.getSpeedAccuracyMetersPerSecond is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationGetSpeedAccuracyMetersPerSecond,
+			midLocationGetSpeedAccuracyMetersPerSecond,
 		)
 		if callErr != nil {
 			return callErr
@@ -583,7 +583,7 @@ func (m *location) GetSpeedAccuracyMetersPerSecond() (float32, error) {
 }
 
 // GetTime calls android.location.Location.getTime.
-func (m *location) GetTime() (int64, error) {
+func (m *Location) GetTime() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -591,13 +591,13 @@ func (m *location) GetTime() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetTime == nil {
+		if midLocationGetTime == nil {
 			callErr = fmt.Errorf("android.location.Location.getTime is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midlocationGetTime,
+			midLocationGetTime,
 		)
 		if callErr != nil {
 			return callErr
@@ -608,7 +608,7 @@ func (m *location) GetTime() (int64, error) {
 }
 
 // GetVerticalAccuracyMeters calls android.location.Location.getVerticalAccuracyMeters.
-func (m *location) GetVerticalAccuracyMeters() (float32, error) {
+func (m *Location) GetVerticalAccuracyMeters() (float32, error) {
 	var result float32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -616,13 +616,13 @@ func (m *location) GetVerticalAccuracyMeters() (float32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationGetVerticalAccuracyMeters == nil {
+		if midLocationGetVerticalAccuracyMeters == nil {
 			callErr = fmt.Errorf("android.location.Location.getVerticalAccuracyMeters is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			midlocationGetVerticalAccuracyMeters,
+			midLocationGetVerticalAccuracyMeters,
 		)
 		if callErr != nil {
 			return callErr
@@ -633,7 +633,7 @@ func (m *location) GetVerticalAccuracyMeters() (float32, error) {
 }
 
 // HasAccuracy calls android.location.Location.hasAccuracy.
-func (m *location) HasAccuracy() (bool, error) {
+func (m *Location) HasAccuracy() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -641,13 +641,13 @@ func (m *location) HasAccuracy() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasAccuracy == nil {
+		if midLocationHasAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.hasAccuracy is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasAccuracy,
+			midLocationHasAccuracy,
 		)
 		if callErr != nil {
 			return callErr
@@ -659,7 +659,7 @@ func (m *location) HasAccuracy() (bool, error) {
 }
 
 // HasAltitude calls android.location.Location.hasAltitude.
-func (m *location) HasAltitude() (bool, error) {
+func (m *Location) HasAltitude() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -667,13 +667,13 @@ func (m *location) HasAltitude() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasAltitude == nil {
+		if midLocationHasAltitude == nil {
 			callErr = fmt.Errorf("android.location.Location.hasAltitude is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasAltitude,
+			midLocationHasAltitude,
 		)
 		if callErr != nil {
 			return callErr
@@ -685,7 +685,7 @@ func (m *location) HasAltitude() (bool, error) {
 }
 
 // HasBearing calls android.location.Location.hasBearing.
-func (m *location) HasBearing() (bool, error) {
+func (m *Location) HasBearing() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -693,13 +693,13 @@ func (m *location) HasBearing() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasBearing == nil {
+		if midLocationHasBearing == nil {
 			callErr = fmt.Errorf("android.location.Location.hasBearing is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasBearing,
+			midLocationHasBearing,
 		)
 		if callErr != nil {
 			return callErr
@@ -711,7 +711,7 @@ func (m *location) HasBearing() (bool, error) {
 }
 
 // HasBearingAccuracy calls android.location.Location.hasBearingAccuracy.
-func (m *location) HasBearingAccuracy() (bool, error) {
+func (m *Location) HasBearingAccuracy() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -719,13 +719,13 @@ func (m *location) HasBearingAccuracy() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasBearingAccuracy == nil {
+		if midLocationHasBearingAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.hasBearingAccuracy is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasBearingAccuracy,
+			midLocationHasBearingAccuracy,
 		)
 		if callErr != nil {
 			return callErr
@@ -737,7 +737,7 @@ func (m *location) HasBearingAccuracy() (bool, error) {
 }
 
 // HasElapsedRealtimeUncertaintyNanos calls android.location.Location.hasElapsedRealtimeUncertaintyNanos.
-func (m *location) HasElapsedRealtimeUncertaintyNanos() (bool, error) {
+func (m *Location) HasElapsedRealtimeUncertaintyNanos() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -745,13 +745,13 @@ func (m *location) HasElapsedRealtimeUncertaintyNanos() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasElapsedRealtimeUncertaintyNanos == nil {
+		if midLocationHasElapsedRealtimeUncertaintyNanos == nil {
 			callErr = fmt.Errorf("android.location.Location.hasElapsedRealtimeUncertaintyNanos is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasElapsedRealtimeUncertaintyNanos,
+			midLocationHasElapsedRealtimeUncertaintyNanos,
 		)
 		if callErr != nil {
 			return callErr
@@ -763,7 +763,7 @@ func (m *location) HasElapsedRealtimeUncertaintyNanos() (bool, error) {
 }
 
 // HasMslAltitude calls android.location.Location.hasMslAltitude.
-func (m *location) HasMslAltitude() (bool, error) {
+func (m *Location) HasMslAltitude() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -771,13 +771,13 @@ func (m *location) HasMslAltitude() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasMslAltitude == nil {
+		if midLocationHasMslAltitude == nil {
 			callErr = fmt.Errorf("android.location.Location.hasMslAltitude is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasMslAltitude,
+			midLocationHasMslAltitude,
 		)
 		if callErr != nil {
 			return callErr
@@ -789,7 +789,7 @@ func (m *location) HasMslAltitude() (bool, error) {
 }
 
 // HasMslAltitudeAccuracy calls android.location.Location.hasMslAltitudeAccuracy.
-func (m *location) HasMslAltitudeAccuracy() (bool, error) {
+func (m *Location) HasMslAltitudeAccuracy() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -797,13 +797,13 @@ func (m *location) HasMslAltitudeAccuracy() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasMslAltitudeAccuracy == nil {
+		if midLocationHasMslAltitudeAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.hasMslAltitudeAccuracy is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasMslAltitudeAccuracy,
+			midLocationHasMslAltitudeAccuracy,
 		)
 		if callErr != nil {
 			return callErr
@@ -815,7 +815,7 @@ func (m *location) HasMslAltitudeAccuracy() (bool, error) {
 }
 
 // HasSpeed calls android.location.Location.hasSpeed.
-func (m *location) HasSpeed() (bool, error) {
+func (m *Location) HasSpeed() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -823,13 +823,13 @@ func (m *location) HasSpeed() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasSpeed == nil {
+		if midLocationHasSpeed == nil {
 			callErr = fmt.Errorf("android.location.Location.hasSpeed is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasSpeed,
+			midLocationHasSpeed,
 		)
 		if callErr != nil {
 			return callErr
@@ -841,7 +841,7 @@ func (m *location) HasSpeed() (bool, error) {
 }
 
 // HasSpeedAccuracy calls android.location.Location.hasSpeedAccuracy.
-func (m *location) HasSpeedAccuracy() (bool, error) {
+func (m *Location) HasSpeedAccuracy() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -849,13 +849,13 @@ func (m *location) HasSpeedAccuracy() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasSpeedAccuracy == nil {
+		if midLocationHasSpeedAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.hasSpeedAccuracy is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasSpeedAccuracy,
+			midLocationHasSpeedAccuracy,
 		)
 		if callErr != nil {
 			return callErr
@@ -867,7 +867,7 @@ func (m *location) HasSpeedAccuracy() (bool, error) {
 }
 
 // HasVerticalAccuracy calls android.location.Location.hasVerticalAccuracy.
-func (m *location) HasVerticalAccuracy() (bool, error) {
+func (m *Location) HasVerticalAccuracy() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -875,13 +875,13 @@ func (m *location) HasVerticalAccuracy() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHasVerticalAccuracy == nil {
+		if midLocationHasVerticalAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.hasVerticalAccuracy is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationHasVerticalAccuracy,
+			midLocationHasVerticalAccuracy,
 		)
 		if callErr != nil {
 			return callErr
@@ -893,7 +893,7 @@ func (m *location) HasVerticalAccuracy() (bool, error) {
 }
 
 // HashCode calls android.location.Location.hashCode.
-func (m *location) HashCode() (int32, error) {
+func (m *Location) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -901,13 +901,13 @@ func (m *location) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlocationHashCode == nil {
+		if midLocationHashCode == nil {
 			callErr = fmt.Errorf("android.location.Location.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlocationHashCode,
+			midLocationHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -918,7 +918,7 @@ func (m *location) HashCode() (int32, error) {
 }
 
 // IsComplete calls android.location.Location.isComplete.
-func (m *location) IsComplete() (bool, error) {
+func (m *Location) IsComplete() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -926,13 +926,13 @@ func (m *location) IsComplete() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationIsComplete == nil {
+		if midLocationIsComplete == nil {
 			callErr = fmt.Errorf("android.location.Location.isComplete is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationIsComplete,
+			midLocationIsComplete,
 		)
 		if callErr != nil {
 			return callErr
@@ -944,7 +944,7 @@ func (m *location) IsComplete() (bool, error) {
 }
 
 // IsFromMockProvider calls android.location.Location.isFromMockProvider.
-func (m *location) IsFromMockProvider() (bool, error) {
+func (m *Location) IsFromMockProvider() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -952,13 +952,13 @@ func (m *location) IsFromMockProvider() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationIsFromMockProvider == nil {
+		if midLocationIsFromMockProvider == nil {
 			callErr = fmt.Errorf("android.location.Location.isFromMockProvider is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationIsFromMockProvider,
+			midLocationIsFromMockProvider,
 		)
 		if callErr != nil {
 			return callErr
@@ -970,7 +970,7 @@ func (m *location) IsFromMockProvider() (bool, error) {
 }
 
 // IsMock calls android.location.Location.isMock.
-func (m *location) IsMock() (bool, error) {
+func (m *Location) IsMock() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -978,13 +978,13 @@ func (m *location) IsMock() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlocationIsMock == nil {
+		if midLocationIsMock == nil {
 			callErr = fmt.Errorf("android.location.Location.isMock is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlocationIsMock,
+			midLocationIsMock,
 		)
 		if callErr != nil {
 			return callErr
@@ -996,7 +996,7 @@ func (m *location) IsMock() (bool, error) {
 }
 
 // RemoveAccuracy calls android.location.Location.removeAccuracy.
-func (m *location) RemoveAccuracy() error {
+func (m *Location) RemoveAccuracy() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1004,13 +1004,13 @@ func (m *location) RemoveAccuracy() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveAccuracy == nil {
+		if midLocationRemoveAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.removeAccuracy is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveAccuracy,
+			midLocationRemoveAccuracy,
 		)
 		return callErr
 	})
@@ -1018,7 +1018,7 @@ func (m *location) RemoveAccuracy() error {
 }
 
 // RemoveAltitude calls android.location.Location.removeAltitude.
-func (m *location) RemoveAltitude() error {
+func (m *Location) RemoveAltitude() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1026,13 +1026,13 @@ func (m *location) RemoveAltitude() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveAltitude == nil {
+		if midLocationRemoveAltitude == nil {
 			callErr = fmt.Errorf("android.location.Location.removeAltitude is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveAltitude,
+			midLocationRemoveAltitude,
 		)
 		return callErr
 	})
@@ -1040,7 +1040,7 @@ func (m *location) RemoveAltitude() error {
 }
 
 // RemoveBearing calls android.location.Location.removeBearing.
-func (m *location) RemoveBearing() error {
+func (m *Location) RemoveBearing() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1048,13 +1048,13 @@ func (m *location) RemoveBearing() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveBearing == nil {
+		if midLocationRemoveBearing == nil {
 			callErr = fmt.Errorf("android.location.Location.removeBearing is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveBearing,
+			midLocationRemoveBearing,
 		)
 		return callErr
 	})
@@ -1062,7 +1062,7 @@ func (m *location) RemoveBearing() error {
 }
 
 // RemoveBearingAccuracy calls android.location.Location.removeBearingAccuracy.
-func (m *location) RemoveBearingAccuracy() error {
+func (m *Location) RemoveBearingAccuracy() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1070,13 +1070,13 @@ func (m *location) RemoveBearingAccuracy() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveBearingAccuracy == nil {
+		if midLocationRemoveBearingAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.removeBearingAccuracy is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveBearingAccuracy,
+			midLocationRemoveBearingAccuracy,
 		)
 		return callErr
 	})
@@ -1084,7 +1084,7 @@ func (m *location) RemoveBearingAccuracy() error {
 }
 
 // RemoveElapsedRealtimeUncertaintyNanos calls android.location.Location.removeElapsedRealtimeUncertaintyNanos.
-func (m *location) RemoveElapsedRealtimeUncertaintyNanos() error {
+func (m *Location) RemoveElapsedRealtimeUncertaintyNanos() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1092,13 +1092,13 @@ func (m *location) RemoveElapsedRealtimeUncertaintyNanos() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveElapsedRealtimeUncertaintyNanos == nil {
+		if midLocationRemoveElapsedRealtimeUncertaintyNanos == nil {
 			callErr = fmt.Errorf("android.location.Location.removeElapsedRealtimeUncertaintyNanos is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveElapsedRealtimeUncertaintyNanos,
+			midLocationRemoveElapsedRealtimeUncertaintyNanos,
 		)
 		return callErr
 	})
@@ -1106,7 +1106,7 @@ func (m *location) RemoveElapsedRealtimeUncertaintyNanos() error {
 }
 
 // RemoveMslAltitude calls android.location.Location.removeMslAltitude.
-func (m *location) RemoveMslAltitude() error {
+func (m *Location) RemoveMslAltitude() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1114,13 +1114,13 @@ func (m *location) RemoveMslAltitude() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveMslAltitude == nil {
+		if midLocationRemoveMslAltitude == nil {
 			callErr = fmt.Errorf("android.location.Location.removeMslAltitude is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveMslAltitude,
+			midLocationRemoveMslAltitude,
 		)
 		return callErr
 	})
@@ -1128,7 +1128,7 @@ func (m *location) RemoveMslAltitude() error {
 }
 
 // RemoveMslAltitudeAccuracy calls android.location.Location.removeMslAltitudeAccuracy.
-func (m *location) RemoveMslAltitudeAccuracy() error {
+func (m *Location) RemoveMslAltitudeAccuracy() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1136,13 +1136,13 @@ func (m *location) RemoveMslAltitudeAccuracy() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveMslAltitudeAccuracy == nil {
+		if midLocationRemoveMslAltitudeAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.removeMslAltitudeAccuracy is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveMslAltitudeAccuracy,
+			midLocationRemoveMslAltitudeAccuracy,
 		)
 		return callErr
 	})
@@ -1150,7 +1150,7 @@ func (m *location) RemoveMslAltitudeAccuracy() error {
 }
 
 // RemoveSpeed calls android.location.Location.removeSpeed.
-func (m *location) RemoveSpeed() error {
+func (m *Location) RemoveSpeed() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1158,13 +1158,13 @@ func (m *location) RemoveSpeed() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveSpeed == nil {
+		if midLocationRemoveSpeed == nil {
 			callErr = fmt.Errorf("android.location.Location.removeSpeed is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveSpeed,
+			midLocationRemoveSpeed,
 		)
 		return callErr
 	})
@@ -1172,7 +1172,7 @@ func (m *location) RemoveSpeed() error {
 }
 
 // RemoveSpeedAccuracy calls android.location.Location.removeSpeedAccuracy.
-func (m *location) RemoveSpeedAccuracy() error {
+func (m *Location) RemoveSpeedAccuracy() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1180,13 +1180,13 @@ func (m *location) RemoveSpeedAccuracy() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveSpeedAccuracy == nil {
+		if midLocationRemoveSpeedAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.removeSpeedAccuracy is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveSpeedAccuracy,
+			midLocationRemoveSpeedAccuracy,
 		)
 		return callErr
 	})
@@ -1194,7 +1194,7 @@ func (m *location) RemoveSpeedAccuracy() error {
 }
 
 // RemoveVerticalAccuracy calls android.location.Location.removeVerticalAccuracy.
-func (m *location) RemoveVerticalAccuracy() error {
+func (m *Location) RemoveVerticalAccuracy() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1202,13 +1202,13 @@ func (m *location) RemoveVerticalAccuracy() error {
 			callErr = err
 			return err
 		}
-		if midlocationRemoveVerticalAccuracy == nil {
+		if midLocationRemoveVerticalAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.removeVerticalAccuracy is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationRemoveVerticalAccuracy,
+			midLocationRemoveVerticalAccuracy,
 		)
 		return callErr
 	})
@@ -1216,7 +1216,7 @@ func (m *location) RemoveVerticalAccuracy() error {
 }
 
 // Reset calls android.location.Location.reset.
-func (m *location) Reset() error {
+func (m *Location) Reset() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1224,13 +1224,13 @@ func (m *location) Reset() error {
 			callErr = err
 			return err
 		}
-		if midlocationReset == nil {
+		if midLocationReset == nil {
 			callErr = fmt.Errorf("android.location.Location.reset is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationReset,
+			midLocationReset,
 		)
 		return callErr
 	})
@@ -1238,7 +1238,7 @@ func (m *location) Reset() error {
 }
 
 // Set calls android.location.Location.set.
-func (m *location) Set(arg0 *jni.Object) error {
+func (m *Location) Set(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1246,14 +1246,14 @@ func (m *location) Set(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midlocationSet == nil {
+		if midLocationSet == nil {
 			callErr = fmt.Errorf("android.location.Location.set is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSet, jni.ObjectValue(arg0),
+			midLocationSet, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1261,7 +1261,7 @@ func (m *location) Set(arg0 *jni.Object) error {
 }
 
 // SetAccuracy calls android.location.Location.setAccuracy.
-func (m *location) SetAccuracy(arg0 float32) error {
+func (m *Location) SetAccuracy(arg0 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1269,14 +1269,14 @@ func (m *location) SetAccuracy(arg0 float32) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetAccuracy == nil {
+		if midLocationSetAccuracy == nil {
 			callErr = fmt.Errorf("android.location.Location.setAccuracy is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetAccuracy, jni.FloatValue(arg0),
+			midLocationSetAccuracy, jni.FloatValue(arg0),
 		)
 		return callErr
 	})
@@ -1284,7 +1284,7 @@ func (m *location) SetAccuracy(arg0 float32) error {
 }
 
 // SetAltitude calls android.location.Location.setAltitude.
-func (m *location) SetAltitude(arg0 float64) error {
+func (m *Location) SetAltitude(arg0 float64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1292,14 +1292,14 @@ func (m *location) SetAltitude(arg0 float64) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetAltitude == nil {
+		if midLocationSetAltitude == nil {
 			callErr = fmt.Errorf("android.location.Location.setAltitude is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetAltitude, jni.DoubleValue(arg0),
+			midLocationSetAltitude, jni.DoubleValue(arg0),
 		)
 		return callErr
 	})
@@ -1307,7 +1307,7 @@ func (m *location) SetAltitude(arg0 float64) error {
 }
 
 // SetBearing calls android.location.Location.setBearing.
-func (m *location) SetBearing(arg0 float32) error {
+func (m *Location) SetBearing(arg0 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1315,14 +1315,14 @@ func (m *location) SetBearing(arg0 float32) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetBearing == nil {
+		if midLocationSetBearing == nil {
 			callErr = fmt.Errorf("android.location.Location.setBearing is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetBearing, jni.FloatValue(arg0),
+			midLocationSetBearing, jni.FloatValue(arg0),
 		)
 		return callErr
 	})
@@ -1330,7 +1330,7 @@ func (m *location) SetBearing(arg0 float32) error {
 }
 
 // SetBearingAccuracyDegrees calls android.location.Location.setBearingAccuracyDegrees.
-func (m *location) SetBearingAccuracyDegrees(arg0 float32) error {
+func (m *Location) SetBearingAccuracyDegrees(arg0 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1338,14 +1338,14 @@ func (m *location) SetBearingAccuracyDegrees(arg0 float32) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetBearingAccuracyDegrees == nil {
+		if midLocationSetBearingAccuracyDegrees == nil {
 			callErr = fmt.Errorf("android.location.Location.setBearingAccuracyDegrees is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetBearingAccuracyDegrees, jni.FloatValue(arg0),
+			midLocationSetBearingAccuracyDegrees, jni.FloatValue(arg0),
 		)
 		return callErr
 	})
@@ -1353,7 +1353,7 @@ func (m *location) SetBearingAccuracyDegrees(arg0 float32) error {
 }
 
 // SetElapsedRealtimeNanos calls android.location.Location.setElapsedRealtimeNanos.
-func (m *location) SetElapsedRealtimeNanos(arg0 int64) error {
+func (m *Location) SetElapsedRealtimeNanos(arg0 int64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1361,14 +1361,14 @@ func (m *location) SetElapsedRealtimeNanos(arg0 int64) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetElapsedRealtimeNanos == nil {
+		if midLocationSetElapsedRealtimeNanos == nil {
 			callErr = fmt.Errorf("android.location.Location.setElapsedRealtimeNanos is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetElapsedRealtimeNanos, jni.LongValue(arg0),
+			midLocationSetElapsedRealtimeNanos, jni.LongValue(arg0),
 		)
 		return callErr
 	})
@@ -1376,7 +1376,7 @@ func (m *location) SetElapsedRealtimeNanos(arg0 int64) error {
 }
 
 // SetElapsedRealtimeUncertaintyNanos calls android.location.Location.setElapsedRealtimeUncertaintyNanos.
-func (m *location) SetElapsedRealtimeUncertaintyNanos(arg0 float64) error {
+func (m *Location) SetElapsedRealtimeUncertaintyNanos(arg0 float64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1384,14 +1384,14 @@ func (m *location) SetElapsedRealtimeUncertaintyNanos(arg0 float64) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetElapsedRealtimeUncertaintyNanos == nil {
+		if midLocationSetElapsedRealtimeUncertaintyNanos == nil {
 			callErr = fmt.Errorf("android.location.Location.setElapsedRealtimeUncertaintyNanos is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetElapsedRealtimeUncertaintyNanos, jni.DoubleValue(arg0),
+			midLocationSetElapsedRealtimeUncertaintyNanos, jni.DoubleValue(arg0),
 		)
 		return callErr
 	})
@@ -1399,7 +1399,7 @@ func (m *location) SetElapsedRealtimeUncertaintyNanos(arg0 float64) error {
 }
 
 // SetExtras calls android.location.Location.setExtras.
-func (m *location) SetExtras(arg0 *jni.Object) error {
+func (m *Location) SetExtras(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1407,14 +1407,14 @@ func (m *location) SetExtras(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetExtras == nil {
+		if midLocationSetExtras == nil {
 			callErr = fmt.Errorf("android.location.Location.setExtras is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetExtras, jni.ObjectValue(arg0),
+			midLocationSetExtras, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1422,7 +1422,7 @@ func (m *location) SetExtras(arg0 *jni.Object) error {
 }
 
 // SetLatitude calls android.location.Location.setLatitude.
-func (m *location) SetLatitude(arg0 float64) error {
+func (m *Location) SetLatitude(arg0 float64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1430,14 +1430,14 @@ func (m *location) SetLatitude(arg0 float64) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetLatitude == nil {
+		if midLocationSetLatitude == nil {
 			callErr = fmt.Errorf("android.location.Location.setLatitude is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetLatitude, jni.DoubleValue(arg0),
+			midLocationSetLatitude, jni.DoubleValue(arg0),
 		)
 		return callErr
 	})
@@ -1445,7 +1445,7 @@ func (m *location) SetLatitude(arg0 float64) error {
 }
 
 // SetLongitude calls android.location.Location.setLongitude.
-func (m *location) SetLongitude(arg0 float64) error {
+func (m *Location) SetLongitude(arg0 float64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1453,14 +1453,14 @@ func (m *location) SetLongitude(arg0 float64) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetLongitude == nil {
+		if midLocationSetLongitude == nil {
 			callErr = fmt.Errorf("android.location.Location.setLongitude is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetLongitude, jni.DoubleValue(arg0),
+			midLocationSetLongitude, jni.DoubleValue(arg0),
 		)
 		return callErr
 	})
@@ -1468,7 +1468,7 @@ func (m *location) SetLongitude(arg0 float64) error {
 }
 
 // SetMock calls android.location.Location.setMock.
-func (m *location) SetMock(arg0 bool) error {
+func (m *Location) SetMock(arg0 bool) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1476,7 +1476,7 @@ func (m *location) SetMock(arg0 bool) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetMock == nil {
+		if midLocationSetMock == nil {
 			callErr = fmt.Errorf("android.location.Location.setMock is not available on this device")
 			return callErr
 		}
@@ -1487,7 +1487,7 @@ func (m *location) SetMock(arg0 bool) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetMock, jni.BooleanValue(jArg0),
+			midLocationSetMock, jni.BooleanValue(jArg0),
 		)
 		return callErr
 	})
@@ -1495,7 +1495,7 @@ func (m *location) SetMock(arg0 bool) error {
 }
 
 // SetMslAltitudeAccuracyMeters calls android.location.Location.setMslAltitudeAccuracyMeters.
-func (m *location) SetMslAltitudeAccuracyMeters(arg0 float32) error {
+func (m *Location) SetMslAltitudeAccuracyMeters(arg0 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1503,14 +1503,14 @@ func (m *location) SetMslAltitudeAccuracyMeters(arg0 float32) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetMslAltitudeAccuracyMeters == nil {
+		if midLocationSetMslAltitudeAccuracyMeters == nil {
 			callErr = fmt.Errorf("android.location.Location.setMslAltitudeAccuracyMeters is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetMslAltitudeAccuracyMeters, jni.FloatValue(arg0),
+			midLocationSetMslAltitudeAccuracyMeters, jni.FloatValue(arg0),
 		)
 		return callErr
 	})
@@ -1518,7 +1518,7 @@ func (m *location) SetMslAltitudeAccuracyMeters(arg0 float32) error {
 }
 
 // SetMslAltitudeMeters calls android.location.Location.setMslAltitudeMeters.
-func (m *location) SetMslAltitudeMeters(arg0 float64) error {
+func (m *Location) SetMslAltitudeMeters(arg0 float64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1526,14 +1526,14 @@ func (m *location) SetMslAltitudeMeters(arg0 float64) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetMslAltitudeMeters == nil {
+		if midLocationSetMslAltitudeMeters == nil {
 			callErr = fmt.Errorf("android.location.Location.setMslAltitudeMeters is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetMslAltitudeMeters, jni.DoubleValue(arg0),
+			midLocationSetMslAltitudeMeters, jni.DoubleValue(arg0),
 		)
 		return callErr
 	})
@@ -1541,7 +1541,7 @@ func (m *location) SetMslAltitudeMeters(arg0 float64) error {
 }
 
 // SetProvider calls android.location.Location.setProvider.
-func (m *location) SetProvider(arg0 string) error {
+func (m *Location) SetProvider(arg0 string) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1549,7 +1549,7 @@ func (m *location) SetProvider(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetProvider == nil {
+		if midLocationSetProvider == nil {
 			callErr = fmt.Errorf("android.location.Location.setProvider is not available on this device")
 			return callErr
 		}
@@ -1560,7 +1560,7 @@ func (m *location) SetProvider(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetProvider, jni.ObjectValue(&jArg0.Object),
+			midLocationSetProvider, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})
@@ -1568,7 +1568,7 @@ func (m *location) SetProvider(arg0 string) error {
 }
 
 // SetSpeed calls android.location.Location.setSpeed.
-func (m *location) SetSpeed(arg0 float32) error {
+func (m *Location) SetSpeed(arg0 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1576,14 +1576,14 @@ func (m *location) SetSpeed(arg0 float32) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetSpeed == nil {
+		if midLocationSetSpeed == nil {
 			callErr = fmt.Errorf("android.location.Location.setSpeed is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetSpeed, jni.FloatValue(arg0),
+			midLocationSetSpeed, jni.FloatValue(arg0),
 		)
 		return callErr
 	})
@@ -1591,7 +1591,7 @@ func (m *location) SetSpeed(arg0 float32) error {
 }
 
 // SetSpeedAccuracyMetersPerSecond calls android.location.Location.setSpeedAccuracyMetersPerSecond.
-func (m *location) SetSpeedAccuracyMetersPerSecond(arg0 float32) error {
+func (m *Location) SetSpeedAccuracyMetersPerSecond(arg0 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1599,14 +1599,14 @@ func (m *location) SetSpeedAccuracyMetersPerSecond(arg0 float32) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetSpeedAccuracyMetersPerSecond == nil {
+		if midLocationSetSpeedAccuracyMetersPerSecond == nil {
 			callErr = fmt.Errorf("android.location.Location.setSpeedAccuracyMetersPerSecond is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetSpeedAccuracyMetersPerSecond, jni.FloatValue(arg0),
+			midLocationSetSpeedAccuracyMetersPerSecond, jni.FloatValue(arg0),
 		)
 		return callErr
 	})
@@ -1614,7 +1614,7 @@ func (m *location) SetSpeedAccuracyMetersPerSecond(arg0 float32) error {
 }
 
 // SetTime calls android.location.Location.setTime.
-func (m *location) SetTime(arg0 int64) error {
+func (m *Location) SetTime(arg0 int64) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1622,14 +1622,14 @@ func (m *location) SetTime(arg0 int64) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetTime == nil {
+		if midLocationSetTime == nil {
 			callErr = fmt.Errorf("android.location.Location.setTime is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetTime, jni.LongValue(arg0),
+			midLocationSetTime, jni.LongValue(arg0),
 		)
 		return callErr
 	})
@@ -1637,7 +1637,7 @@ func (m *location) SetTime(arg0 int64) error {
 }
 
 // SetVerticalAccuracyMeters calls android.location.Location.setVerticalAccuracyMeters.
-func (m *location) SetVerticalAccuracyMeters(arg0 float32) error {
+func (m *Location) SetVerticalAccuracyMeters(arg0 float32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1645,14 +1645,14 @@ func (m *location) SetVerticalAccuracyMeters(arg0 float32) error {
 			callErr = err
 			return err
 		}
-		if midlocationSetVerticalAccuracyMeters == nil {
+		if midLocationSetVerticalAccuracyMeters == nil {
 			callErr = fmt.Errorf("android.location.Location.setVerticalAccuracyMeters is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationSetVerticalAccuracyMeters, jni.FloatValue(arg0),
+			midLocationSetVerticalAccuracyMeters, jni.FloatValue(arg0),
 		)
 		return callErr
 	})
@@ -1660,7 +1660,7 @@ func (m *location) SetVerticalAccuracyMeters(arg0 float32) error {
 }
 
 // ToString calls android.location.Location.toString.
-func (m *location) ToString() (string, error) {
+func (m *Location) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1668,13 +1668,13 @@ func (m *location) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midlocationToString == nil {
+		if midLocationToString == nil {
 			callErr = fmt.Errorf("android.location.Location.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midlocationToString,
+			midLocationToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -1686,7 +1686,7 @@ func (m *location) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.location.Location.writeToParcel.
-func (m *location) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *Location) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1694,14 +1694,14 @@ func (m *location) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midlocationWriteToParcel == nil {
+		if midLocationWriteToParcel == nil {
 			callErr = fmt.Errorf("android.location.Location.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlocationWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midLocationWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -1709,7 +1709,7 @@ func (m *location) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 }
 
 // Convert2 calls android.location.Location.convert.
-func (m *location) Convert2(arg0 float64, arg1 int32) (string, error) {
+func (m *Location) Convert2(arg0 float64, arg1 int32) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1717,14 +1717,14 @@ func (m *location) Convert2(arg0 float64, arg1 int32) (string, error) {
 			callErr = err
 			return err
 		}
-		if midlocationConvert2 == nil {
+		if midLocationConvert2 == nil {
 			callErr = fmt.Errorf("android.location.Location.convert is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clslocation)),
-			midlocationConvert2, jni.DoubleValue(arg0), jni.IntValue(arg1),
+			(*jni.Class)(unsafe.Pointer(clsLocation)),
+			midLocationConvert2, jni.DoubleValue(arg0), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -1736,7 +1736,7 @@ func (m *location) Convert2(arg0 float64, arg1 int32) (string, error) {
 }
 
 // Convert1_1 calls android.location.Location.convert.
-func (m *location) Convert1_1(arg0 string) (float64, error) {
+func (m *Location) Convert1_1(arg0 string) (float64, error) {
 	var result float64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1744,7 +1744,7 @@ func (m *location) Convert1_1(arg0 string) (float64, error) {
 			callErr = err
 			return err
 		}
-		if midlocationConvert1_1 == nil {
+		if midLocationConvert1_1 == nil {
 			callErr = fmt.Errorf("android.location.Location.convert is not available on this device")
 			return callErr
 		}
@@ -1754,8 +1754,8 @@ func (m *location) Convert1_1(arg0 string) (float64, error) {
 		}
 
 		result, callErr = env.CallStaticDoubleMethod(
-			(*jni.Class)(unsafe.Pointer(clslocation)),
-			midlocationConvert1_1, jni.ObjectValue(&jArg0.Object),
+			(*jni.Class)(unsafe.Pointer(clsLocation)),
+			midLocationConvert1_1, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1766,7 +1766,7 @@ func (m *location) Convert1_1(arg0 string) (float64, error) {
 }
 
 // DistanceBetween calls android.location.Location.distanceBetween.
-func (m *location) DistanceBetween(arg0 float64, arg1 float64, arg2 float64, arg3 float64, arg4 *jni.Object) error {
+func (m *Location) DistanceBetween(arg0 float64, arg1 float64, arg2 float64, arg3 float64, arg4 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1774,14 +1774,14 @@ func (m *location) DistanceBetween(arg0 float64, arg1 float64, arg2 float64, arg
 			callErr = err
 			return err
 		}
-		if midlocationDistanceBetween == nil {
+		if midLocationDistanceBetween == nil {
 			callErr = fmt.Errorf("android.location.Location.distanceBetween is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallStaticVoidMethod(
-			(*jni.Class)(unsafe.Pointer(clslocation)),
-			midlocationDistanceBetween, jni.DoubleValue(arg0), jni.DoubleValue(arg1), jni.DoubleValue(arg2), jni.DoubleValue(arg3), jni.ObjectValue(arg4),
+			(*jni.Class)(unsafe.Pointer(clsLocation)),
+			midLocationDistanceBetween, jni.DoubleValue(arg0), jni.DoubleValue(arg1), jni.DoubleValue(arg2), jni.DoubleValue(arg3), jni.ObjectValue(arg4),
 		)
 		return callErr
 	})

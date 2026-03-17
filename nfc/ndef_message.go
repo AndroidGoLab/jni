@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// ndefMessage wraps android.nfc.NdefMessage.
-type ndefMessage struct {
+// NdefMessage wraps android.nfc.NdefMessage.
+type NdefMessage struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.nfc.NdefMessage.describeContents.
-func (m *ndefMessage) DescribeContents() (int32, error) {
+func (m *NdefMessage) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *ndefMessage) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midndefMessageDescribeContents == nil {
+		if midNdefMessageDescribeContents == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midndefMessageDescribeContents,
+			midNdefMessageDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *ndefMessage) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.nfc.NdefMessage.equals.
-func (m *ndefMessage) Equals(arg0 *jni.Object) (bool, error) {
+func (m *NdefMessage) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *ndefMessage) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midndefMessageEquals == nil {
+		if midNdefMessageEquals == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midndefMessageEquals, jni.ObjectValue(arg0),
+			midNdefMessageEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *ndefMessage) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetByteArrayLength calls android.nfc.NdefMessage.getByteArrayLength.
-func (m *ndefMessage) GetByteArrayLength() (int32, error) {
+func (m *NdefMessage) GetByteArrayLength() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *ndefMessage) GetByteArrayLength() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midndefMessageGetByteArrayLength == nil {
+		if midNdefMessageGetByteArrayLength == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.getByteArrayLength is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midndefMessageGetByteArrayLength,
+			midNdefMessageGetByteArrayLength,
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *ndefMessage) GetByteArrayLength() (int32, error) {
 }
 
 // GetRecords calls android.nfc.NdefMessage.getRecords.
-func (m *ndefMessage) GetRecords() (*jni.Object, error) {
+func (m *NdefMessage) GetRecords() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,13 +109,13 @@ func (m *ndefMessage) GetRecords() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefMessageGetRecords == nil {
+		if midNdefMessageGetRecords == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.getRecords is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midndefMessageGetRecords,
+			midNdefMessageGetRecords,
 		)
 		if callErr != nil {
 			return callErr
@@ -126,7 +126,7 @@ func (m *ndefMessage) GetRecords() (*jni.Object, error) {
 }
 
 // HashCode calls android.nfc.NdefMessage.hashCode.
-func (m *ndefMessage) HashCode() (int32, error) {
+func (m *NdefMessage) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -134,13 +134,13 @@ func (m *ndefMessage) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midndefMessageHashCode == nil {
+		if midNdefMessageHashCode == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midndefMessageHashCode,
+			midNdefMessageHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -151,7 +151,7 @@ func (m *ndefMessage) HashCode() (int32, error) {
 }
 
 // ToByteArray calls android.nfc.NdefMessage.toByteArray.
-func (m *ndefMessage) ToByteArray() (*jni.Object, error) {
+func (m *NdefMessage) ToByteArray() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -159,13 +159,13 @@ func (m *ndefMessage) ToByteArray() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midndefMessageToByteArray == nil {
+		if midNdefMessageToByteArray == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.toByteArray is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midndefMessageToByteArray,
+			midNdefMessageToByteArray,
 		)
 		if callErr != nil {
 			return callErr
@@ -176,7 +176,7 @@ func (m *ndefMessage) ToByteArray() (*jni.Object, error) {
 }
 
 // ToString calls android.nfc.NdefMessage.toString.
-func (m *ndefMessage) ToString() (string, error) {
+func (m *NdefMessage) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -184,13 +184,13 @@ func (m *ndefMessage) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midndefMessageToString == nil {
+		if midNdefMessageToString == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midndefMessageToString,
+			midNdefMessageToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -202,7 +202,7 @@ func (m *ndefMessage) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.nfc.NdefMessage.writeToParcel.
-func (m *ndefMessage) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *NdefMessage) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -210,14 +210,14 @@ func (m *ndefMessage) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midndefMessageWriteToParcel == nil {
+		if midNdefMessageWriteToParcel == nil {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midndefMessageWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midNdefMessageWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

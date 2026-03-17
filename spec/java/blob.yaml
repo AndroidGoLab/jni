@@ -2,7 +2,7 @@ package: blob
 go_import: github.com/AndroidGoLab/jni/app/blob
 classes:
     - java_class: android.app.blob.BlobStoreManager
-      go_type: blobStoreManager
+      go_type: Manager
       obtain: system_service
       service_name: blob_store
       close: true

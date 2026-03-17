@@ -20,10 +20,10 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsprintManager                      *jni.GlobalRef
-	midprintManagerGetPrintJobs          jni.MethodID
-	midprintManagerIsPrintServiceEnabled jni.MethodID
-	midprintManagerPrint                 jni.MethodID
+	clsManager                      *jni.GlobalRef
+	midManagerGetPrintJobs          jni.MethodID
+	midManagerIsPrintServiceEnabled jni.MethodID
+	midManagerPrint                 jni.MethodID
 
 	clsprintJobInfo                        *jni.GlobalRef
 	midprintJobInfoDescribeContents        jni.MethodID
@@ -84,9 +84,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.print.PrintManager: %w", err)
 	}
-	clsprintManager = env.NewGlobalRef(&c.Object)
+	clsManager = env.NewGlobalRef(&c.Object)
 
-	midprintManagerGetPrintJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintManager)), "getPrintJobs", "()Ljava/util/List;")
+	midManagerGetPrintJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrintJobs", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -94,7 +94,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.print.PrintManager.getPrintJobs")
 	}
 
-	midprintManagerIsPrintServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintManager)), "isPrintServiceEnabled", "(Landroid/content/ComponentName;)Z")
+	midManagerIsPrintServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPrintServiceEnabled", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -102,7 +102,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.print.PrintManager.isPrintServiceEnabled")
 	}
 
-	midprintManagerPrint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintManager)), "print", "(Ljava/lang/String;Landroid/print/PrintDocumentAdapter;Landroid/print/PrintAttributes;)Landroid/print/PrintJob;")
+	midManagerPrint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "print", "(Ljava/lang/String;Landroid/print/PrintDocumentAdapter;Landroid/print/PrintAttributes;)Landroid/print/PrintJob;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

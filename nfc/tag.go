@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// tag wraps android.nfc.Tag.
-type tag struct {
+// Tag wraps android.nfc.Tag.
+type Tag struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.nfc.Tag.describeContents.
-func (m *tag) DescribeContents() (int32, error) {
+func (m *Tag) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *tag) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midtagDescribeContents == nil {
+		if midTagDescribeContents == nil {
 			callErr = fmt.Errorf("android.nfc.Tag.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midtagDescribeContents,
+			midTagDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *tag) DescribeContents() (int32, error) {
 }
 
 // GetId calls android.nfc.Tag.getId.
-func (m *tag) GetId() (*jni.Object, error) {
+func (m *Tag) GetId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *tag) GetId() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midtagGetId == nil {
+		if midTagGetId == nil {
 			callErr = fmt.Errorf("android.nfc.Tag.getId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midtagGetId,
+			midTagGetId,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *tag) GetId() (*jni.Object, error) {
 }
 
 // GetTechList calls android.nfc.Tag.getTechList.
-func (m *tag) GetTechList() (*jni.Object, error) {
+func (m *Tag) GetTechList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *tag) GetTechList() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midtagGetTechList == nil {
+		if midTagGetTechList == nil {
 			callErr = fmt.Errorf("android.nfc.Tag.getTechList is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midtagGetTechList,
+			midTagGetTechList,
 		)
 		if callErr != nil {
 			return callErr
@@ -99,7 +99,7 @@ func (m *tag) GetTechList() (*jni.Object, error) {
 }
 
 // ToString calls android.nfc.Tag.toString.
-func (m *tag) ToString() (string, error) {
+func (m *Tag) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -107,13 +107,13 @@ func (m *tag) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midtagToString == nil {
+		if midTagToString == nil {
 			callErr = fmt.Errorf("android.nfc.Tag.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midtagToString,
+			midTagToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -125,7 +125,7 @@ func (m *tag) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.nfc.Tag.writeToParcel.
-func (m *tag) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *Tag) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -133,14 +133,14 @@ func (m *tag) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midtagWriteToParcel == nil {
+		if midTagWriteToParcel == nil {
 			callErr = fmt.Errorf("android.nfc.Tag.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtagWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midTagWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
