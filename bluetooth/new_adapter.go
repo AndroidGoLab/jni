@@ -21,7 +21,6 @@ func NewAdapter(ctx *app.Context) (*Adapter, error) {
 			return err
 		}
 
-		// Get BluetoothManager via getSystemService("bluetooth").
 		svc, err := ctx.GetSystemService("bluetooth")
 		if err != nil {
 			return fmt.Errorf("get bluetooth service: %w", err)
@@ -30,7 +29,6 @@ func NewAdapter(ctx *app.Context) (*Adapter, error) {
 			return fmt.Errorf("bluetooth service not available")
 		}
 
-		// Call BluetoothManager.getAdapter() to get the BluetoothAdapter.
 		bmClass, err := env.FindClass("android/bluetooth/BluetoothManager")
 		if err != nil {
 			return fmt.Errorf("find BluetoothManager: %w", err)
@@ -68,5 +66,4 @@ func (m *Adapter) Close() {
 	}
 }
 
-// Ensure imports are used.
 var _ = unsafe.Pointer(nil)

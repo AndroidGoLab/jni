@@ -106,8 +106,12 @@ func run(vm *jni.VM) error {
 	}
 
 	// Content resolver and package manager.
-	resolver := ctx.ContentResolver()
-	fmt.Fprintf(&output, "content resolver: %v\n", resolver)
+	resolver, err := ctx.ContentResolver()
+	if err != nil {
+		fmt.Fprintf(&output, "  ContentResolver: %v\n", err)
+	} else {
+		fmt.Fprintf(&output, "content resolver: %v\n", resolver)
+	}
 
 	pkgMgr, err := ctx.PackageManager()
 	if err != nil {

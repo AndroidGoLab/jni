@@ -1,4 +1,4 @@
-// Package testjvm provides a helper to create a JVM for testing.
+// Package testjvm creates and manages a JVM instance for use in tests.
 package testjvm
 
 // #cgo CFLAGS: -I/usr/lib/jvm/java-25-openjdk-amd64/include -I/usr/lib/jvm/java-25-openjdk-amd64/include/linux

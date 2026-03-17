@@ -50,19 +50,19 @@ func TestLookupProxyNotFound(t *testing.T) {
 	}
 }
 
-// --- cstringLiteral ---
+// --- newCString ---
 
-func TestCstringLiteral(t *testing.T) {
-	ptr := cstringLiteral("hello")
+func TestNewCString(t *testing.T) {
+	ptr := newCString("hello")
 	if ptr == nil {
-		t.Fatal("cstringLiteral returned nil")
+		t.Fatal("newCString returned nil")
 	}
 }
 
-func TestCstringLiteralEmpty(t *testing.T) {
-	ptr := cstringLiteral("")
+func TestNewCStringEmpty(t *testing.T) {
+	ptr := newCString("")
 	if ptr == nil {
-		t.Fatal("cstringLiteral returned nil for empty string")
+		t.Fatal("newCString returned nil for empty string")
 	}
 }
 

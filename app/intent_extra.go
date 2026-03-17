@@ -2,7 +2,6 @@ package app
 
 import (
 	"fmt"
-	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
 )
@@ -38,7 +37,10 @@ func NewIntent(vm *jni.VM) (*Intent, error) {
 }
 
 // PutStringExtra calls Intent.putExtra(key, value) for string values.
-func (i *Intent) PutStringExtra(key, value string) {
+func (i *Intent) PutStringExtra(
+	key string,
+	value string,
+) {
 	i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
 		mid, err := env.GetMethodID(cls, "putExtra",
@@ -61,7 +63,10 @@ func (i *Intent) PutStringExtra(key, value string) {
 }
 
 // PutIntExtra calls Intent.putExtra(key, value) for int values.
-func (i *Intent) PutIntExtra(key string, value int32) {
+func (i *Intent) PutIntExtra(
+	key string,
+	value int32,
+) {
 	i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
 		mid, err := env.GetMethodID(cls, "putExtra",
@@ -80,7 +85,10 @@ func (i *Intent) PutIntExtra(key string, value int32) {
 }
 
 // PutBoolExtra calls Intent.putExtra(key, value) for boolean values.
-func (i *Intent) PutBoolExtra(key string, value bool) {
+func (i *Intent) PutBoolExtra(
+	key string,
+	value bool,
+) {
 	i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
 		mid, err := env.GetMethodID(cls, "putExtra",
@@ -103,9 +111,10 @@ func (i *Intent) PutBoolExtra(key string, value bool) {
 }
 
 // GetBoolExtra calls Intent.getBooleanExtra(key, defaultValue).
-func (i *Intent) GetBoolExtra(key string, defaultValue bool) bool {
+func (i *Intent) GetBoolExtra(
+	key string,
+	defaultValue bool,
+) bool {
 	result, _ := i.GetBooleanExtra(key, defaultValue)
 	return result
 }
-
-var _ = unsafe.Pointer(nil)

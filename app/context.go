@@ -85,10 +85,12 @@ func (m *Context) PackageManager() (*jni.Object, error) {
 }
 
 // ContentResolver calls android.content.Context.getContentResolver().
-func (m *Context) ContentResolver() *jni.Object {
+func (m *Context) ContentResolver() (*jni.Object, error) {
 	var result *jni.Object
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureContextInit(env); err != nil {
+			callErr = err
 			return err
 		}
 		mid, err := env.GetMethodID(
@@ -97,12 +99,13 @@ func (m *Context) ContentResolver() *jni.Object {
 			"()Landroid/content/ContentResolver;",
 		)
 		if err != nil {
-			return err
+			callErr = fmt.Errorf("get getContentResolver: %w", err)
+			return callErr
 		}
-		result, _ = env.CallObjectMethod(m.Obj, mid)
-		return nil
+		result, callErr = env.CallObjectMethod(m.Obj, mid)
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
 // GetSystemService calls android.content.Context.getSystemService.

@@ -146,25 +146,12 @@ func extractGoString(env *capi.Env, jstr capi.String) string {
 }
 
 var (
-	cachedStringsOnce sync.Once
-	bGetName          *byte
-	bGetMessage       *byte
-	bVoidToString     *byte
+	cstrGetName      = sync.OnceValue(func() *byte { return newCString("getName") })
+	cstrGetMessage   = sync.OnceValue(func() *byte { return newCString("getMessage") })
+	cstrVoidToString = sync.OnceValue(func() *byte { return newCString("()Ljava/lang/String;") })
 )
 
-func initCachedStrings() {
-	cachedStringsOnce.Do(func() {
-		bGetName = cstringLiteral("getName")
-		bGetMessage = cstringLiteral("getMessage")
-		bVoidToString = cstringLiteral("()Ljava/lang/String;")
-	})
-}
-
-func cstrGetName() *byte      { initCachedStrings(); return bGetName }
-func cstrGetMessage() *byte   { initCachedStrings(); return bGetMessage }
-func cstrVoidToString() *byte { initCachedStrings(); return bVoidToString }
-
-func cstringLiteral(s string) *byte {
+func newCString(s string) *byte {
 	b := make([]byte, len(s)+1)
 	copy(b, s)
 	return &b[0]

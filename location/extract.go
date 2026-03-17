@@ -7,7 +7,7 @@ import (
 	"github.com/AndroidGoLab/jni"
 )
 
-// Location holds extracted fields from android.location.Location.
+// ExtractedLocation holds extracted fields from android.location.Location.
 type ExtractedLocation struct {
 	Latitude  float64
 	Longitude float64

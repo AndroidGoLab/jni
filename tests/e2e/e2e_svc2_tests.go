@@ -622,7 +622,10 @@ func testResolverWrapper(vm *jni.VM) error {
 	var res resolver.Resolver
 	res.VM = vm
 
-	resolverObj := ctx.ContentResolver()
+	resolverObj, err := ctx.ContentResolver()
+	if err != nil {
+		return fmt.Errorf("ContentResolver: %w", err)
+	}
 	if resolverObj == nil || resolverObj.Ref() == 0 {
 		return fmt.Errorf("ContentResolver() returned nil")
 	}

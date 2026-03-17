@@ -147,9 +147,61 @@ func ensureProxyInit(env *Env) error {
 	return proxyInitErr
 }
 
+// findClassWithFallback tries FindClass first, then falls back to
+// ClassLoader.loadClass() via proxyClassLoader for APK mode where
+// native threads use BootClassLoader which can't see APK classes.
+func findClassWithFallback(
+	env *capi.Env,
+	jniName *capi.Cchar,
+	javaName string,
+) capi.Class {
+	cls := capi.FindClass(env, jniName)
+	if cls != 0 {
+		return cls
+	}
+	capi.ExceptionClear(env)
+
+	if proxyClassLoader == 0 {
+		return 0
+	}
+
+	clCls := capi.FindClass(env, newCString("java/lang/ClassLoader"))
+	if clCls == 0 {
+		return 0
+	}
+	defer capi.DeleteLocalRef(env, capi.Object(clCls))
+
+	loadMID := capi.GetMethodID(
+		env, clCls,
+		newCString("loadClass"),
+		newCString("(Ljava/lang/String;)Ljava/lang/Class;"),
+	)
+	if loadMID == nil {
+		return 0
+	}
+
+	jName := capi.NewStringUTF(env, newCString(javaName))
+	if jName == 0 {
+		return 0
+	}
+	defer capi.DeleteLocalRef(env, capi.Object(jName))
+
+	var nameVal capi.Jvalue
+	binary.NativeEndian.PutUint64(nameVal[:], uint64(jName))
+	loaded := capi.CallObjectMethodA(env, proxyClassLoader, loadMID, &nameVal)
+	if capi.ExceptionCheck(env) == capi.JNI_TRUE {
+		capi.ExceptionClear(env)
+		return 0
+	}
+	if loaded != 0 {
+		return capi.Class(loaded)
+	}
+	return 0
+}
+
 func doProxyInit(env *Env) error {
 	// Find java.lang.reflect.Proxy
-	proxyName := cstringLiteral("java/lang/reflect/Proxy")
+	proxyName := newCString("java/lang/reflect/Proxy")
 	cls := capi.FindClass(env.ptr, proxyName)
 	if cls == 0 {
 		capi.ExceptionClear(env.ptr)
@@ -159,8 +211,8 @@ func doProxyInit(env *Env) error {
 	capi.DeleteLocalRef(env.ptr, capi.Object(cls))
 
 	// Find Proxy.newProxyInstance(ClassLoader, Class[], InvocationHandler) -> Object
-	newProxySig := cstringLiteral("(Ljava/lang/ClassLoader;[Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;")
-	newProxyName := cstringLiteral("newProxyInstance")
+	newProxySig := newCString("(Ljava/lang/ClassLoader;[Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object;")
+	newProxyName := newCString("newProxyInstance")
 	midNewProxyInstance = capi.GetStaticMethodID(env.ptr, clsProxy, newProxyName, newProxySig)
 	if midNewProxyInstance == nil {
 		capi.ExceptionClear(env.ptr)
@@ -168,7 +220,7 @@ func doProxyInit(env *Env) error {
 	}
 
 	// Find java.lang.Class (for creating Class[] arrays)
-	className := cstringLiteral("java/lang/Class")
+	className := newCString("java/lang/Class")
 	cc := capi.FindClass(env.ptr, className)
 	if cc == 0 {
 		capi.ExceptionClear(env.ptr)
@@ -178,8 +230,8 @@ func doProxyInit(env *Env) error {
 	capi.DeleteLocalRef(env.ptr, capi.Object(cc))
 
 	// Find Class.getClassLoader()
-	getClassLoaderName := cstringLiteral("getClassLoader")
-	getClassLoaderSig := cstringLiteral("()Ljava/lang/ClassLoader;")
+	getClassLoaderName := newCString("getClassLoader")
+	getClassLoaderSig := newCString("()Ljava/lang/ClassLoader;")
 	midGetClassLoader = capi.GetMethodID(env.ptr, clsClass, getClassLoaderName, getClassLoaderSig)
 	if midGetClassLoader == nil {
 		capi.ExceptionClear(env.ptr)
@@ -187,47 +239,23 @@ func doProxyInit(env *Env) error {
 	}
 
 	// Find center.dx.jni.internal.GoInvocationHandler.
-	// Try JNI FindClass first (works in app_process mode where the dex
-	// is on the system classpath). Fall back to ClassLoader.loadClass()
-	// for APK mode where native threads use BootClassLoader.
-	handlerClassName := cstringLiteral("center/dx/jni/internal/GoInvocationHandler")
-	hc := capi.FindClass(env.ptr, handlerClassName)
+	// FindClass works in app_process mode; falls back to
+	// ClassLoader.loadClass() for APK mode.
+	hc := findClassWithFallback(
+		env.ptr,
+		newCString("center/dx/jni/internal/GoInvocationHandler"),
+		"center.dx.jni.internal.GoInvocationHandler",
+	)
 	if hc == 0 {
-		capi.ExceptionClear(env.ptr)
-		if proxyClassLoader != 0 {
-			// Retry via ClassLoader.loadClass().
-			clCls := capi.FindClass(env.ptr, cstringLiteral("java/lang/ClassLoader"))
-			if clCls != 0 {
-				loadMID := capi.GetMethodID(env.ptr, clCls, cstringLiteral("loadClass"),
-					cstringLiteral("(Ljava/lang/String;)Ljava/lang/Class;"))
-				if loadMID != nil {
-					javaName := capi.NewStringUTF(env.ptr, cstringLiteral("center.dx.jni.internal.GoInvocationHandler"))
-					if javaName != 0 {
-						var nameVal capi.Jvalue
-						binary.NativeEndian.PutUint64(nameVal[:], uint64(javaName))
-						loaded := capi.CallObjectMethodA(env.ptr, proxyClassLoader, loadMID, &nameVal)
-						capi.DeleteLocalRef(env.ptr, capi.Object(javaName))
-						if capi.ExceptionCheck(env.ptr) == capi.JNI_TRUE {
-							capi.ExceptionClear(env.ptr)
-						} else if loaded != 0 {
-							hc = capi.Class(loaded)
-						}
-					}
-				}
-				capi.DeleteLocalRef(env.ptr, capi.Object(clCls))
-			}
-		}
-		if hc == 0 {
-			return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoInvocationHandler — " +
-				"ensure the helper class is on the classpath")
-		}
+		return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoInvocationHandler — " +
+			"ensure the class is on the classpath")
 	}
 	clsGoHandler = capi.Class(capi.NewGlobalRef(env.ptr, capi.Object(hc)))
 	capi.DeleteLocalRef(env.ptr, capi.Object(hc))
 
 	// Find GoInvocationHandler(long) constructor
-	initName := cstringLiteral("<init>")
-	initSig := cstringLiteral("(J)V")
+	initName := newCString("<init>")
+	initSig := newCString("(J)V")
 	midHandlerCtr = capi.GetMethodID(env.ptr, clsGoHandler, initName, initSig)
 	if midHandlerCtr == nil {
 		capi.ExceptionClear(env.ptr)
@@ -235,8 +263,8 @@ func doProxyInit(env *Env) error {
 	}
 
 	// Cache GoInvocationHandler.handlerID field ID (used by native dispatch).
-	handlerIDName := cstringLiteral("handlerID")
-	handlerIDSig := cstringLiteral("J")
+	handlerIDName := newCString("handlerID")
+	handlerIDSig := newCString("J")
 	fidHandlerID = capi.GetFieldID(env.ptr, clsGoHandler, handlerIDName, handlerIDSig)
 	if fidHandlerID == nil {
 		capi.ExceptionClear(env.ptr)
@@ -244,7 +272,7 @@ func doProxyInit(env *Env) error {
 	}
 
 	// Cache java.lang.reflect.Method.getName() for native dispatch.
-	methodClassName := cstringLiteral("java/lang/reflect/Method")
+	methodClassName := newCString("java/lang/reflect/Method")
 	mc := capi.FindClass(env.ptr, methodClassName)
 	if mc == 0 {
 		capi.ExceptionClear(env.ptr)
@@ -252,8 +280,8 @@ func doProxyInit(env *Env) error {
 	}
 	defer capi.DeleteLocalRef(env.ptr, capi.Object(mc))
 
-	getNameName := cstringLiteral("getName")
-	getNameSig := cstringLiteral("()Ljava/lang/String;")
+	getNameName := newCString("getName")
+	getNameSig := newCString("()Ljava/lang/String;")
 	midMethodGetName = capi.GetMethodID(env.ptr, mc, getNameName, getNameSig)
 	if midMethodGetName == nil {
 		capi.ExceptionClear(env.ptr)
@@ -268,37 +296,15 @@ func doProxyInit(env *Env) error {
 	}
 
 	// Find center.dx.jni.internal.GoAbstractDispatch using the same
-	// ClassLoader fallback pattern as GoInvocationHandler.
-	abstractClassName := cstringLiteral("center/dx/jni/internal/GoAbstractDispatch")
-	ac := capi.FindClass(env.ptr, abstractClassName)
+	// ClassLoader fallback as GoInvocationHandler.
+	ac := findClassWithFallback(
+		env.ptr,
+		newCString("center/dx/jni/internal/GoAbstractDispatch"),
+		"center.dx.jni.internal.GoAbstractDispatch",
+	)
 	if ac == 0 {
-		capi.ExceptionClear(env.ptr)
-		if proxyClassLoader != 0 {
-			clCls := capi.FindClass(env.ptr, cstringLiteral("java/lang/ClassLoader"))
-			if clCls != 0 {
-				loadMID := capi.GetMethodID(env.ptr, clCls, cstringLiteral("loadClass"),
-					cstringLiteral("(Ljava/lang/String;)Ljava/lang/Class;"))
-				if loadMID != nil {
-					javaName := capi.NewStringUTF(env.ptr, cstringLiteral("center.dx.jni.internal.GoAbstractDispatch"))
-					if javaName != 0 {
-						var nameVal capi.Jvalue
-						binary.NativeEndian.PutUint64(nameVal[:], uint64(javaName))
-						loaded := capi.CallObjectMethodA(env.ptr, proxyClassLoader, loadMID, &nameVal)
-						capi.DeleteLocalRef(env.ptr, capi.Object(javaName))
-						if capi.ExceptionCheck(env.ptr) == capi.JNI_TRUE {
-							capi.ExceptionClear(env.ptr)
-						} else if loaded != 0 {
-							ac = capi.Class(loaded)
-						}
-					}
-				}
-				capi.DeleteLocalRef(env.ptr, capi.Object(clCls))
-			}
-		}
-		if ac == 0 {
-			return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoAbstractDispatch — " +
-				"ensure the helper class is on the classpath")
-		}
+		return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoAbstractDispatch — " +
+			"ensure the class is on the classpath")
 	}
 	clsGoAbstractDispatch = capi.Class(capi.NewGlobalRef(env.ptr, capi.Object(ac)))
 	capi.DeleteLocalRef(env.ptr, capi.Object(ac))
@@ -504,8 +510,11 @@ func (e *Env) NewProxyFull(
 
 // throwGoError throws a Java RuntimeException with the given Go error
 // message. Uses raw capi calls to avoid checkException recursion.
-func throwGoError(env *Env, goErr error) {
-	clsName := cstringLiteral("java/lang/RuntimeException")
+func throwGoError(
+	env *Env,
+	goErr error,
+) {
+	clsName := newCString("java/lang/RuntimeException")
 	cls := capi.FindClass(env.ptr, clsName)
 	if cls == 0 {
 		capi.ExceptionClear(env.ptr)
@@ -514,7 +523,7 @@ func throwGoError(env *Env, goErr error) {
 	defer capi.DeleteLocalRef(env.ptr, capi.Object(cls))
 
 	msg := goErr.Error()
-	msgBytes := cstringLiteral(msg)
+	msgBytes := newCString(msg)
 	capi.ThrowNew(env.ptr, cls, msgBytes)
 }
 
@@ -587,18 +596,21 @@ func dispatchProxyInvocation(
 	return result.ref
 }
 
-// cstringLiteral allocates a null-terminated byte slice from a Go string
+// newCString allocates a null-terminated byte slice from a Go string
 // and returns a *capi.Cchar pointer suitable for passing to capi functions.
 // The backing array is managed by the Go GC and must remain live for the
 // duration of the C call.
-func cstringLiteral(s string) *capi.Cchar {
+func newCString(s string) *capi.Cchar {
 	b := make([]byte, len(s)+1)
 	copy(b, s)
 	return (*capi.Cchar)(unsafe.Pointer(&b[0]))
 }
 
 // extractGoString converts a JNI String to a Go string using raw capi calls.
-func extractGoString(env *capi.Env, jstr capi.String) string {
+func extractGoString(
+	env *capi.Env,
+	jstr capi.String,
+) string {
 	if jstr == 0 {
 		return ""
 	}

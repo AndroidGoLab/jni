@@ -149,7 +149,7 @@ func testAppBundle(vm *jni.VM) error {
 
 // testAlarmClockInfo creates an AlarmManager.AlarmClockInfo via JNI
 // constructor(long triggerTime, PendingIntent showIntent), then extracts
-// fields via alarm.ExtractalarmClockInfo and verifies the trigger time.
+// fields via alarm.ExtractAlarmClockInfo and verifies the trigger time.
 func testAlarmClockInfo(vm *jni.VM) error {
 	return vm.Do(func(env *jni.Env) error {
 		if err := alarm.Init(env); err != nil {
@@ -175,9 +175,9 @@ func testAlarmClockInfo(vm *jni.VM) error {
 		}
 
 		// Extract via the generated extraction function.
-		info, err := alarm.ExtractalarmClockInfo(env, obj)
+		info, err := alarm.ExtractAlarmClockInfo(env, obj)
 		if err != nil {
-			return fmt.Errorf("ExtractalarmClockInfo: %w", err)
+			return fmt.Errorf("ExtractAlarmClockInfo: %w", err)
 		}
 		if info.TriggerTime != wantTrigger {
 			return fmt.Errorf("TriggerTime = %d, want %d", info.TriggerTime, wantTrigger)
