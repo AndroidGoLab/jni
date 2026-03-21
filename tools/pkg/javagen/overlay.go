@@ -27,11 +27,14 @@ func LoadOverlay(path string) (*Overlay, error) {
 		}
 		return nil, fmt.Errorf("read overlay %s: %w", path, err)
 	}
+	return ParseOverlay(data)
+}
 
+// ParseOverlay parses an overlay from YAML data.
+func ParseOverlay(data []byte) (*Overlay, error) {
 	var ov Overlay
 	if err := yaml.Unmarshal(data, &ov); err != nil {
-		return nil, fmt.Errorf("parse overlay %s: %w", path, err)
+		return nil, fmt.Errorf("parse overlay: %w", err)
 	}
-
 	return &ov, nil
 }

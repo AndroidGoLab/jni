@@ -16,14 +16,18 @@ func LoadSpec(path string) (*Spec, error) {
 	if err != nil {
 		return nil, fmt.Errorf("read %s: %w", path, err)
 	}
+	return ParseSpec(data)
+}
 
+// ParseSpec validates and parses a Java API spec from YAML data.
+func ParseSpec(data []byte) (*Spec, error) {
 	var spec Spec
 	if err := yaml.Unmarshal(data, &spec); err != nil {
-		return nil, fmt.Errorf("parse %s: %w", path, err)
+		return nil, fmt.Errorf("parse spec: %w", err)
 	}
 
 	if err := validateSpec(&spec); err != nil {
-		return nil, fmt.Errorf("validate %s: %w", path, err)
+		return nil, fmt.Errorf("validate spec: %w", err)
 	}
 
 	return &spec, nil
