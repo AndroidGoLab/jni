@@ -82,8 +82,8 @@ func testPmWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	// PackageManager is obtained via Context.PackageManager(), not a NewManager.
-	pmObj, err := ctx.PackageManager()
+	// PackageManager is obtained via Context.GetPackageManager(), not a NewManager.
+	pmObj, err := ctx.GetPackageManager()
 	if err != nil {
 		return fmt.Errorf("get package manager: %w", err)
 	}
@@ -101,12 +101,12 @@ func testPmWrapper(vm *jni.VM) error {
 		return nil
 	})
 
-	mgr := &pm.Manager{
+	mgr := &pm.PackageManager{
 		VM:  vm,
 		Obj: pmGlobal,
 	}
 
-	_, err = mgr.HasSystemFeature("android.hardware.touchscreen")
+	_, err = mgr.HasSystemFeature1("android.hardware.touchscreen")
 	if err != nil {
 		return fmt.Errorf("hasSystemFeature: %w", err)
 	}
@@ -209,11 +209,11 @@ func testDisplayWrapper(vm *jni.VM) error {
 
 	// The windowManager type and its methods are unexported, so we can only
 	// verify that the system service is obtained successfully.
-	mgr, err := display.NewwindowManager(ctx)
+	mgr, err := display.NewWindowManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new window manager: %w", err)
 	}
-	defer deleteGlobalRef(vm, mgr.Obj)
+	defer mgr.Close()
 	return nil
 }
 

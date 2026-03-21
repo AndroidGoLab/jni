@@ -25,6 +25,7 @@ import (
 	"github.com/AndroidGoLab/jni/media/player"
 	"github.com/AndroidGoLab/jni/media/projection"
 	"github.com/AndroidGoLab/jni/media/recorder"
+	"github.com/AndroidGoLab/jni/media/ringtone"
 	"github.com/AndroidGoLab/jni/media/session"
 	"github.com/AndroidGoLab/jni/net"
 	"github.com/AndroidGoLab/jni/net/nsd"
@@ -34,6 +35,7 @@ import (
 	"github.com/AndroidGoLab/jni/print"
 	"github.com/AndroidGoLab/jni/provider/documents"
 	"github.com/AndroidGoLab/jni/provider/media"
+	"github.com/AndroidGoLab/jni/provider/settings"
 	"github.com/AndroidGoLab/jni/se/omapi"
 	"github.com/AndroidGoLab/jni/speech"
 	"github.com/AndroidGoLab/jni/telecom"
@@ -65,7 +67,7 @@ func testAudioManagerWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := audiomanager.NewManager(ctx)
+	mgr, err := audiomanager.NewAudioManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new audiomanager: %w", err)
 	}
@@ -115,11 +117,11 @@ func testCompanionWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := companion.NewManager(ctx)
+	mgr, err := companion.NewDeviceManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new companion manager: %w", err)
 	}
-	defer deleteGlobalRef(vm, mgr.Obj)
+	defer mgr.Close()
 
 	return nil
 }
@@ -147,7 +149,7 @@ func testInputMethodWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := inputmethod.NewManager(ctx)
+	mgr, err := inputmethod.NewInputMethodManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new inputmethod manager: %w", err)
 	}
@@ -163,13 +165,13 @@ func testIrWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := ir.NewManager(ctx)
+	mgr, err := ir.NewConsumerIrManager(ctx)
 	if err != nil {
 		// IR service may not exist on emulator -- non-fatal.
 		fmt.Fprintf(os.Stderr, "  IR manager (non-fatal): %v\n", err)
 		return nil
 	}
-	defer deleteGlobalRef(vm, mgr.Obj)
+	defer mgr.Close()
 
 	hasIR, err := mgr.HasIrEmitter()
 	if err != nil {
@@ -203,7 +205,23 @@ func testLightsWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := lights.NewManager(ctx)
+	// LightsManager has no generated constructor; obtain via GetSystemService.
+	var mgr lights.Manager
+	mgr.VM = vm
+	err = vm.Do(func(env *jni.Env) error {
+		if err := lights.Init(env); err != nil {
+			return err
+		}
+		svc, err := ctx.GetSystemService("lights")
+		if err != nil {
+			return err
+		}
+		if svc == nil || svc.Ref() == 0 {
+			return fmt.Errorf("lights service not available")
+		}
+		mgr.Obj = env.NewGlobalRef(svc)
+		return nil
+	})
 	if err != nil {
 		// LightsManager may not be available on older API levels.
 		fmt.Fprintf(os.Stderr, "  lights manager (non-fatal): %v\n", err)
@@ -221,7 +239,7 @@ func testNetWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := net.NewManager(ctx)
+	mgr, err := net.NewConnectivityManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new connectivity manager: %w", err)
 	}
@@ -277,7 +295,28 @@ func testOmapiWrapper(vm *jni.VM) error {
 }
 
 func testPlayerWrapper(vm *jni.VM) error {
-	p, err := player.NewPlayer(vm)
+	// MediaPlayer has no generated constructor; create via JNI new MediaPlayer().
+	var p player.MediaPlayer
+	p.VM = vm
+	err := vm.Do(func(env *jni.Env) error {
+		if err := player.Init(env); err != nil {
+			return err
+		}
+		cls, err := env.FindClass("android/media/MediaPlayer")
+		if err != nil {
+			return fmt.Errorf("find MediaPlayer: %w", err)
+		}
+		initMid, err := env.GetMethodID(cls, "<init>", "()V")
+		if err != nil {
+			return fmt.Errorf("get MediaPlayer.<init>: %w", err)
+		}
+		obj, err := env.NewObject(cls, initMid)
+		if err != nil {
+			return fmt.Errorf("new MediaPlayer: %w", err)
+		}
+		p.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
 	if err != nil {
 		return fmt.Errorf("new player: %w", err)
 	}
@@ -310,7 +349,7 @@ func testProjectionWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := projection.NewManager(ctx)
+	mgr, err := projection.NewMediaProjectionManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new projection manager: %w", err)
 	}
@@ -334,7 +373,7 @@ func testSessionWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := session.NewManager(ctx)
+	mgr, err := session.NewMediaSessionManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new session manager: %w", err)
 	}
@@ -378,11 +417,11 @@ func testUsageWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := usage.NewManager(ctx)
+	mgr, err := usage.NewStatsManager(ctx)
 	if err != nil {
 		return fmt.Errorf("new usage manager: %w", err)
 	}
-	defer deleteGlobalRef(vm, mgr.Obj)
+	defer mgr.Close()
 
 	// IsAppInactive is an exported read-only query.
 	inactive, err := mgr.IsAppInactive("com.android.shell")
@@ -418,7 +457,7 @@ func testWifiP2pWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := p2p.NewManager(ctx)
+	mgr, err := p2p.NewWifiP2pManager(ctx)
 	if err != nil {
 		// Wi-Fi P2P may not be available on emulator -- non-fatal.
 		fmt.Fprintf(os.Stderr, "  wifi_p2p manager (non-fatal): %v\n", err)
@@ -436,13 +475,13 @@ func testWifiRttWrapper(vm *jni.VM) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := rtt.NewManager(ctx)
+	mgr, err := rtt.NewWifiRttManager(ctx)
 	if err != nil {
 		// Wi-Fi RTT may not be available on emulator -- non-fatal.
 		fmt.Fprintf(os.Stderr, "  wifi_rtt manager (non-fatal): %v\n", err)
 		return nil
 	}
-	defer deleteGlobalRef(vm, mgr.Obj)
+	defer mgr.Close()
 
 	return nil
 }
@@ -457,7 +496,7 @@ func testAccountsWrapper(vm *jni.VM) error {
 	// AccountManager is obtained via static factory AccountManager.get(ctx).
 	// The wrapper's getManagerRaw is unexported, so we call the static method
 	// via JNI and populate the exported Manager struct fields.
-	var mgr accounts.Manager
+	var mgr accounts.AccountManager
 	mgr.VM = vm
 
 	err = vm.Do(func(env *jni.Env) error {
@@ -543,7 +582,7 @@ func testNfcAdapterWrapper(vm *jni.VM) error {
 		fmt.Fprintf(os.Stderr, "  NFC adapter not available on this device\n")
 		return nil
 	}
-	defer adapter.Close()
+	defer deleteGlobalRef(vm, adapter.Obj)
 
 	return nil
 }
@@ -557,7 +596,7 @@ func testPreferencesWrapper(vm *jni.VM) error {
 
 	// SharedPreferences is obtained via Context.getSharedPreferences(name, mode).
 	// No exported factory in the wrapper, so use JNI directly.
-	var prefs preferences.Preferences
+	var prefs preferences.SharedPreferences
 	prefs.VM = vm
 
 	err = vm.Do(func(env *jni.Env) error {
@@ -588,7 +627,7 @@ func testPreferencesWrapper(vm *jni.VM) error {
 	if err != nil {
 		return err
 	}
-	defer prefs.Close()
+	defer deleteGlobalRef(vm, prefs.Obj)
 
 	// GetString with a non-existent key should return the default value.
 	val, err := prefs.GetString("nonexistent_key", "default_val")
@@ -619,10 +658,10 @@ func testResolverWrapper(vm *jni.VM) error {
 	defer ctx.Close()
 
 	// ContentResolver is obtained via Context.getContentResolver().
-	var res resolver.Resolver
+	var res resolver.ContentResolver
 	res.VM = vm
 
-	resolverObj, err := ctx.ContentResolver()
+	resolverObj, err := ctx.GetContentResolver()
 	if err != nil {
 		return fmt.Errorf("ContentResolver: %w", err)
 	}
@@ -645,27 +684,175 @@ func testResolverWrapper(vm *jni.VM) error {
 	return nil
 }
 
-func testDocumentsInitWrapper(vm *jni.VM) error {
-	// DocumentsContract has only static methods on an unexported type.
-	// Verify Init resolves all classes and methods.
-	return vm.Do(func(env *jni.Env) error {
-		return documents.Init(env)
-	})
+func testDocumentsWrapper(vm *jni.VM) error {
+	// DocumentsContract has static URI-builder methods.
+	// Build a document URI and verify it is not nil.
+	var dc documents.Contract
+	dc.VM = vm
+
+	uri, err := dc.BuildDocumentUri("com.example.provider", "doc:1234")
+	if err != nil {
+		return fmt.Errorf("buildDocumentUri: %w", err)
+	}
+	if uri == nil || uri.Ref() == 0 {
+		return fmt.Errorf("buildDocumentUri returned nil")
+	}
+	defer deleteGlobalRef(vm, uri)
+
+	rootUri, err := dc.BuildRootUri("com.example.provider", "root:0")
+	if err != nil {
+		return fmt.Errorf("buildRootUri: %w", err)
+	}
+	if rootUri == nil || rootUri.Ref() == 0 {
+		return fmt.Errorf("buildRootUri returned nil")
+	}
+	defer deleteGlobalRef(vm, rootUri)
+
+	return nil
 }
 
-func testMediastoreInitWrapper(vm *jni.VM) error {
-	// MediaStore has only static methods on an unexported type.
-	// Verify Init resolves all classes and methods.
-	return vm.Do(func(env *jni.Env) error {
-		return media.Init(env)
-	})
+func testMediastoreWrapper(vm *jni.VM) error {
+	// MediaStore has static methods. Call GetMediaScannerUri and
+	// GetPickImagesMaxLimit to verify they work.
+	var ms media.MediaStore
+	ms.VM = vm
+
+	uri, err := ms.GetMediaScannerUri()
+	if err != nil {
+		return fmt.Errorf("getMediaScannerUri: %w", err)
+	}
+	if uri == nil || uri.Ref() == 0 {
+		return fmt.Errorf("getMediaScannerUri returned nil")
+	}
+	defer deleteGlobalRef(vm, uri)
+
+	limit, err := ms.GetPickImagesMaxLimit()
+	if err != nil {
+		// May not be available on older API levels -- non-fatal.
+		fmt.Fprintf(os.Stderr, "  getPickImagesMaxLimit (non-fatal): %v\n", err)
+	} else {
+		fmt.Fprintf(os.Stderr, "  pickImagesMaxLimit = %d\n", limit)
+	}
+
+	return nil
 }
 
-func testPdfInitWrapper(vm *jni.VM) error {
-	// PdfRenderer requires a ParcelFileDescriptor to construct.
-	// Verify Init resolves all classes and methods.
+func testPdfWrapper(vm *jni.VM) error {
+	// Create a small Bitmap via Bitmap.createBitmap(width, height, config),
+	// then verify its dimensions with GetWidth/GetHeight.
+	config, err := pdf.ARGB8888(vm)
+	if err != nil {
+		return fmt.Errorf("ARGB8888: %w", err)
+	}
+	defer deleteGlobalRef(vm, config)
+
+	var bmp pdf.Bitmap
+	bmp.VM = vm
+
+	bmpObj, err := bmp.CreateBitmap3_10(16, 32, config)
+	if err != nil {
+		return fmt.Errorf("createBitmap: %w", err)
+	}
+	if bmpObj == nil || bmpObj.Ref() == 0 {
+		return fmt.Errorf("createBitmap returned nil")
+	}
+
+	bmp.Obj = bmpObj
+	defer deleteGlobalRef(vm, bmp.Obj)
+
+	w, err := bmp.GetWidth()
+	if err != nil {
+		return fmt.Errorf("getWidth: %w", err)
+	}
+	if w != 16 {
+		return fmt.Errorf("getWidth = %d, want 16", w)
+	}
+
+	h, err := bmp.GetHeight()
+	if err != nil {
+		return fmt.Errorf("getHeight: %w", err)
+	}
+	if h != 32 {
+		return fmt.Errorf("getHeight = %d, want 32", h)
+	}
+
+	return nil
+}
+
+func testRingtoneWrapper(vm *jni.VM) error {
+	// Call the static RingtoneManager.getDefaultUri(TYPE_RINGTONE)
+	// to get the default ringtone URI and verify it is not nil.
+	var mgr ringtone.Manager
+	mgr.VM = vm
+
+	uri, err := mgr.GetDefaultUri(int32(ringtone.TypeRingtone))
+	if err != nil {
+		return fmt.Errorf("getDefaultUri: %w", err)
+	}
+	if uri == nil || uri.Ref() == 0 {
+		return fmt.Errorf("getDefaultUri returned nil")
+	}
+	defer deleteGlobalRef(vm, uri)
+
+	// Verify IsDefault returns true for the default URI.
+	isDef, err := mgr.IsDefault(uri)
+	if err != nil {
+		return fmt.Errorf("isDefault: %w", err)
+	}
+	if !isDef {
+		return fmt.Errorf("isDefault(defaultUri) = false, want true")
+	}
+
+	return nil
+}
+
+func testSettingsWrapper(vm *jni.VM) error {
+	// Read a system setting via Settings.System.getString using raw JNI.
+	// The settings package only resolves class references; reading values
+	// requires calling the static getString/getInt methods directly.
+	ctx, err := getSystemContext(vm)
+	if err != nil {
+		return fmt.Errorf("get system context: %w", err)
+	}
+	defer ctx.Close()
+
+	resolverObj, err := ctx.GetContentResolver()
+	if err != nil {
+		return fmt.Errorf("getContentResolver: %w", err)
+	}
+	if resolverObj == nil || resolverObj.Ref() == 0 {
+		return fmt.Errorf("getContentResolver returned nil")
+	}
+	defer deleteGlobalRef(vm, resolverObj)
+
 	return vm.Do(func(env *jni.Env) error {
-		return pdf.Init(env)
+		if err := settings.Init(env); err != nil {
+			return fmt.Errorf("settings.Init: %w", err)
+		}
+
+		// Read Settings.Global.getString(resolver, "device_name").
+		cls, err := env.FindClass("android/provider/Settings$Global")
+		if err != nil {
+			return fmt.Errorf("find Settings$Global: %w", err)
+		}
+		mid, err := env.GetStaticMethodID(cls, "getString",
+			"(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			return fmt.Errorf("get getString: %w", err)
+		}
+		jName, err := env.NewStringUTF("device_name")
+		if err != nil {
+			return fmt.Errorf("NewStringUTF: %w", err)
+		}
+		_, err = env.CallStaticObjectMethod(cls, mid,
+			jni.ObjectValue(resolverObj),
+			jni.ObjectValue(&jName.Object))
+		if err != nil {
+			return fmt.Errorf("getString(device_name): %w", err)
+		}
+		// device_name may be null on some devices, so we don't check the value.
+		// The fact that the call succeeded without error is sufficient.
+		return nil
 	})
 }
 

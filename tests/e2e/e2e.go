@@ -43,6 +43,7 @@ import (
 	"github.com/AndroidGoLab/jni/media/player"
 	"github.com/AndroidGoLab/jni/media/projection"
 	"github.com/AndroidGoLab/jni/media/recorder"
+	"github.com/AndroidGoLab/jni/media/ringtone"
 	"github.com/AndroidGoLab/jni/media/session"
 	"github.com/AndroidGoLab/jni/net"
 	"github.com/AndroidGoLab/jni/net/nsd"
@@ -142,7 +143,7 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("NewProxy", testNewProxy)
 
 	// --- Generated wrapper package Init (validates all FindClass + GetMethodID) ---
-	fmt.Fprintln(os.Stderr, "--- Package Init (all 53) ---")
+	fmt.Fprintln(os.Stderr, "--- Package Init (all 54) ---")
 	run("Init/accounts", initTest(accounts.Init))
 	run("Init/alarm", initTest(alarm.Init))
 	run("Init/app", initTest(app.Init))
@@ -183,6 +184,7 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("Init/projection", initTest(projection.Init))
 	run("Init/recorder", initTest(recorder.Init))
 	run("Init/resolver", initTest(resolver.Init))
+	run("Init/ringtone", initTest(ringtone.Init))
 	run("Init/session", initTest(session.Init))
 	run("Init/settings", initTest(settings.Init))
 	run("Init/speech", initTest(speech.Init))
@@ -252,9 +254,11 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("nfc/Adapter", testNfcAdapterWrapper)
 	run("preferences/Wrapper", testPreferencesWrapper)
 	run("resolver/Wrapper", testResolverWrapper)
-	run("documents/Init", testDocumentsInitWrapper)
-	run("mediastore/Init", testMediastoreInitWrapper)
-	run("pdf/Init", testPdfInitWrapper)
+	run("documents/Wrapper", testDocumentsWrapper)
+	run("mediastore/Wrapper", testMediastoreWrapper)
+	run("pdf/Wrapper", testPdfWrapper)
+	run("ringtone/Wrapper", testRingtoneWrapper)
+	run("settings/Wrapper", testSettingsWrapper)
 	run("toast/Init", testToastInitWrapper)
 
 	fmt.Fprintf(os.Stderr, "\n=== Results: %d passed, %d failed ===\n", passed, failed)
