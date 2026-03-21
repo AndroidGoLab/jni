@@ -14,7 +14,6 @@ const (
 	ElapsedRealtimeWakeup = consts.ElapsedRealtimeWakeup
 	Rtc                   = consts.Rtc
 	RtcWakeup             = consts.RtcWakeup
-	Creator               = consts.Creator
 )
 
 const (

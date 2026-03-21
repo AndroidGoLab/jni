@@ -5,7 +5,6 @@ package print
 import "github.com/AndroidGoLab/jni/print/consts"
 
 const (
-	Creator        = consts.Creator
 	StateBlocked   = consts.StateBlocked
 	StateCanceled  = consts.StateCanceled
 	StateCompleted = consts.StateCompleted

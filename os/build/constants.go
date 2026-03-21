@@ -40,15 +40,12 @@ const (
 )
 
 const (
-	Supported32BitAbis    = consts.Supported32BitAbis
-	Supported64BitAbis    = consts.Supported64BitAbis
-	SupportedAbis         = consts.SupportedAbis
+	Time = consts.Time
+)
+
+const (
 	MediaPerformanceClass = consts.MediaPerformanceClass
 	PreviewSdkInt         = consts.PreviewSdkInt
 	SdkInt                = consts.SdkInt
 	SdkIntFull            = consts.SdkIntFull
-)
-
-const (
-	Time = consts.Time
 )

@@ -47,5 +47,4 @@ const (
 	VisibilityUserManagedNotVisible int = 4
 	VisibilityUserManagedVisible    int = 2
 	VisibilityVisible               int = 1
-	Creator                         int = 0
 )

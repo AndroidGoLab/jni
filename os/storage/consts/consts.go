@@ -12,5 +12,4 @@ const (
 
 const (
 	UuidDefault int = 0
-	Creator     int = 0
 )

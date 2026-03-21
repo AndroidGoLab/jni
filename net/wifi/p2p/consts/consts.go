@@ -3,7 +3,6 @@
 package consts
 
 const (
-	Creator                                            int = 0
 	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
 	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
 	GroupOwnerBand2ghz                                 int = 1

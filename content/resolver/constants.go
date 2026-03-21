@@ -5,7 +5,6 @@ package resolver
 import "github.com/AndroidGoLab/jni/content/resolver/consts"
 
 const (
-	Creator                        = consts.Creator
 	Empty                          = consts.Empty
 	NotifyDelete                   = consts.NotifyDelete
 	NotifyInsert                   = consts.NotifyInsert

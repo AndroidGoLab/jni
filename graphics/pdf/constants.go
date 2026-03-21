@@ -14,7 +14,6 @@ const (
 	RenderModeForDisplay                = consts.RenderModeForDisplay
 	RenderModeForPrint                  = consts.RenderModeForPrint
 	AllSaveFlag                         = consts.AllSaveFlag
-	Creator                             = consts.Creator
 	ModeAppend                          = consts.ModeAppend
 	ModeCreate                          = consts.ModeCreate
 	ModeReadOnly                        = consts.ModeReadOnly

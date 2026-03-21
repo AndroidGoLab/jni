@@ -110,7 +110,6 @@ const (
 	ChannelWidth40mhz                                  int = 1
 	ChannelWidth80mhz                                  int = 2
 	ChannelWidth80mhzPlusMhz                           int = 4
-	Creator                                            int = 0
 	PreambleEht                                        int = 4
 	PreambleHe                                         int = 3
 	PreambleHt                                         int = 1

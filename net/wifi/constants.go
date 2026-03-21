@@ -112,7 +112,6 @@ const (
 	ChannelWidth40mhz                                  = consts.ChannelWidth40mhz
 	ChannelWidth80mhz                                  = consts.ChannelWidth80mhz
 	ChannelWidth80mhzPlusMhz                           = consts.ChannelWidth80mhzPlusMhz
-	Creator                                            = consts.Creator
 	PreambleEht                                        = consts.PreambleEht
 	PreambleHe                                         = consts.PreambleHe
 	PreambleHt                                         = consts.PreambleHt

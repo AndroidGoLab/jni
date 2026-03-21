@@ -56,7 +56,6 @@ const (
 	BondBonded                        int = 12
 	BondBonding                       int = 11
 	BondNone                          int = 10
-	Creator                           int = 0
 	DeviceTypeClassic                 int = 1
 	DeviceTypeDual                    int = 3
 	DeviceTypeLe                      int = 2

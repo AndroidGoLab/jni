@@ -39,7 +39,6 @@ const (
 	TypeVpn                              int = 17
 	TypeWifi                             int = 1
 	TypeWimax                            int = 6
-	Creator                              int = 0
 	NetCapabilityCaptivePortal           int = 17
 	NetCapabilityCbs                     int = 5
 	NetCapabilityDun                     int = 2

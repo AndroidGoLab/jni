@@ -5,7 +5,6 @@ package p2p
 import "github.com/AndroidGoLab/jni/net/wifi/p2p/consts"
 
 const (
-	Creator                                            = consts.Creator
 	GroupClientIpProvisioningModeIpv4Dhcp              = consts.GroupClientIpProvisioningModeIpv4Dhcp
 	GroupClientIpProvisioningModeIpv6LinkLocal         = consts.GroupClientIpProvisioningModeIpv6LinkLocal
 	GroupOwnerBand2ghz                                 = consts.GroupOwnerBand2ghz

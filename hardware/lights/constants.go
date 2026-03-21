@@ -5,7 +5,6 @@ package lights
 import "github.com/AndroidGoLab/jni/hardware/lights/consts"
 
 const (
-	Creator                    = consts.Creator
 	LightCapabilityBrightness  = consts.LightCapabilityBrightness
 	LightCapabilityColorRgb    = consts.LightCapabilityColorRgb
 	LightCapabilityRgb         = consts.LightCapabilityRgb

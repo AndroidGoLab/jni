@@ -28,7 +28,6 @@ const (
 	ResultSuccess                            = consts.ResultSuccess
 	BackoffPolicyExponential                 = consts.BackoffPolicyExponential
 	BackoffPolicyLinear                      = consts.BackoffPolicyLinear
-	Creator                                  = consts.Creator
 	NetworkBytesUnknown                      = consts.NetworkBytesUnknown
 	NetworkTypeAny                           = consts.NetworkTypeAny
 	NetworkTypeCellular                      = consts.NetworkTypeCellular

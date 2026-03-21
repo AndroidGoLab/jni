@@ -5,7 +5,6 @@ package app
 import "github.com/AndroidGoLab/jni/app/consts"
 
 const (
-	Creator                                    = consts.Creator
 	Empty                                      = consts.Empty
 	CaptureContentForNoteBlockedByAdmin        = consts.CaptureContentForNoteBlockedByAdmin
 	CaptureContentForNoteFailed                = consts.CaptureContentForNoteFailed

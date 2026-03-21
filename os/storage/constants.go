@@ -14,5 +14,4 @@ const (
 
 const (
 	UuidDefault = consts.UuidDefault
-	Creator     = consts.Creator
 )

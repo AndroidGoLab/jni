@@ -12,7 +12,6 @@ const (
 	ElapsedRealtimeWakeup int = 2
 	Rtc                   int = 1
 	RtcWakeup             int = 0
-	Creator               int = 0
 )
 
 const (

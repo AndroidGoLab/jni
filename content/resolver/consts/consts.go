@@ -3,7 +3,6 @@
 package consts
 
 const (
-	Creator                        int = 0
 	Empty                          int = 0
 	NotifyDelete                   int = 16
 	NotifyInsert                   int = 4

@@ -3,7 +3,6 @@
 package consts
 
 const (
-	Creator                                    int = 0
 	Empty                                      int = 0
 	CaptureContentForNoteBlockedByAdmin        int = 4
 	CaptureContentForNoteFailed                int = 1

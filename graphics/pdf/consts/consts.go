@@ -12,7 +12,6 @@ const (
 	RenderModeForDisplay                int = 1
 	RenderModeForPrint                  int = 2
 	AllSaveFlag                         int = 31
-	Creator                             int = 0
 	ModeAppend                          int = 33554432
 	ModeCreate                          int = 134217728
 	ModeReadOnly                        int = 268435456

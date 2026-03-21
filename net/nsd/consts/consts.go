@@ -16,5 +16,4 @@ const (
 	NsdStateDisabled           int = 1
 	NsdStateEnabled            int = 2
 	ProtocolDnsSd              int = 1
-	Creator                    int = 0
 )

@@ -58,7 +58,6 @@ const (
 	BondBonded                        = consts.BondBonded
 	BondBonding                       = consts.BondBonding
 	BondNone                          = consts.BondNone
-	Creator                           = consts.Creator
 	DeviceTypeClassic                 = consts.DeviceTypeClassic
 	DeviceTypeDual                    = consts.DeviceTypeDual
 	DeviceTypeLe                      = consts.DeviceTypeLe

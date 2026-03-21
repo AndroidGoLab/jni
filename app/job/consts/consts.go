@@ -26,7 +26,6 @@ const (
 	ResultSuccess                            int = 1
 	BackoffPolicyExponential                 int = 1
 	BackoffPolicyLinear                      int = 0
-	Creator                                  int = 0
 	NetworkBytesUnknown                      int = -1
 	NetworkTypeAny                           int = 1
 	NetworkTypeCellular                      int = 4

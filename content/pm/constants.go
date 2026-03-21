@@ -69,7 +69,6 @@ const (
 	VerificationAllow                      = consts.VerificationAllow
 	VerificationReject                     = consts.VerificationReject
 	VersionCodeHighest                     = consts.VersionCodeHighest
-	Creator                                = consts.Creator
 	InstallLocationAuto                    = consts.InstallLocationAuto
 	InstallLocationInternalOnly            = consts.InstallLocationInternalOnly
 	InstallLocationPreferExternal          = consts.InstallLocationPreferExternal

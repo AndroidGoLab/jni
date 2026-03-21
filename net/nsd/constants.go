@@ -18,5 +18,4 @@ const (
 	NsdStateDisabled           = consts.NsdStateDisabled
 	NsdStateEnabled            = consts.NsdStateEnabled
 	ProtocolDnsSd              = consts.ProtocolDnsSd
-	Creator                    = consts.Creator
 )
