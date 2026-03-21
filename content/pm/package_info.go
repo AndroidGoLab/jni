@@ -27,7 +27,7 @@ type PackageInfo struct {
 func (m *PackageInfo) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *PackageInfo) DescribeContents() (int32, error) {
 func (m *PackageInfo) GetApexPackageName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -61,7 +61,8 @@ func (m *PackageInfo) GetApexPackageName() (string, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.getApexPackageName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageInfoGetApexPackageName,
 		)
@@ -78,7 +79,7 @@ func (m *PackageInfo) GetApexPackageName() (string, error) {
 func (m *PackageInfo) GetArchiveTimeMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -103,7 +104,7 @@ func (m *PackageInfo) GetArchiveTimeMillis() (int64, error) {
 func (m *PackageInfo) GetLongVersionCode() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -128,7 +129,7 @@ func (m *PackageInfo) GetLongVersionCode() (int64, error) {
 func (m *PackageInfo) SetLongVersionCode(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -151,7 +152,7 @@ func (m *PackageInfo) SetLongVersionCode(arg0 int64) error {
 func (m *PackageInfo) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -160,7 +161,8 @@ func (m *PackageInfo) ToString() (string, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageInfo.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageInfoToString,
 		)
@@ -177,7 +179,7 @@ func (m *PackageInfo) ToString() (string, error) {
 func (m *PackageInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

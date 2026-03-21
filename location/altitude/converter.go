@@ -27,7 +27,7 @@ type Converter struct {
 func (m *Converter) AddMslAltitudeToLocation(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -50,7 +50,7 @@ func (m *Converter) AddMslAltitudeToLocation(arg0 *jni.Object, arg1 *jni.Object)
 func (m *Converter) TryAddMslAltitudeToLocation(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -60,7 +60,8 @@ func (m *Converter) TryAddMslAltitudeToLocation(arg0 *jni.Object) (bool, error) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midConverterTryAddMslAltitudeToLocation, jni.ObjectValue(arg0),
 		)

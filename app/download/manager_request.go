@@ -27,7 +27,7 @@ type ManagerRequest struct {
 func (m *ManagerRequest) AddRequestHeader(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -67,7 +67,7 @@ func (m *ManagerRequest) AddRequestHeader(arg0 string, arg1 string) (*jni.Object
 func (m *ManagerRequest) AllowScanningByMediaScanner() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -89,7 +89,7 @@ func (m *ManagerRequest) AllowScanningByMediaScanner() error {
 func (m *ManagerRequest) SetAllowedNetworkTypes(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +120,7 @@ func (m *ManagerRequest) SetAllowedNetworkTypes(arg0 int32) (*jni.Object, error)
 func (m *ManagerRequest) SetAllowedOverMetered(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -155,7 +155,7 @@ func (m *ManagerRequest) SetAllowedOverMetered(arg0 bool) (*jni.Object, error) {
 func (m *ManagerRequest) SetAllowedOverRoaming(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -190,7 +190,7 @@ func (m *ManagerRequest) SetAllowedOverRoaming(arg0 bool) (*jni.Object, error) {
 func (m *ManagerRequest) SetDescription(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -229,7 +229,7 @@ func (m *ManagerRequest) SetDestinationInExternalFilesDir(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -270,7 +270,7 @@ func (m *ManagerRequest) SetDestinationInExternalFilesDir(
 func (m *ManagerRequest) SetDestinationInExternalPublicDir(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -310,7 +310,7 @@ func (m *ManagerRequest) SetDestinationInExternalPublicDir(arg0 string, arg1 str
 func (m *ManagerRequest) SetDestinationUri(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -341,7 +341,7 @@ func (m *ManagerRequest) SetDestinationUri(arg0 *jni.Object) (*jni.Object, error
 func (m *ManagerRequest) SetMimeType(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -376,7 +376,7 @@ func (m *ManagerRequest) SetMimeType(arg0 string) (*jni.Object, error) {
 func (m *ManagerRequest) SetNotificationVisibility(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -407,7 +407,7 @@ func (m *ManagerRequest) SetNotificationVisibility(arg0 int32) (*jni.Object, err
 func (m *ManagerRequest) SetRequiresCharging(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -442,7 +442,7 @@ func (m *ManagerRequest) SetRequiresCharging(arg0 bool) (*jni.Object, error) {
 func (m *ManagerRequest) SetRequiresDeviceIdle(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -477,7 +477,7 @@ func (m *ManagerRequest) SetRequiresDeviceIdle(arg0 bool) (*jni.Object, error) {
 func (m *ManagerRequest) SetShowRunningNotification(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -512,7 +512,7 @@ func (m *ManagerRequest) SetShowRunningNotification(arg0 bool) (*jni.Object, err
 func (m *ManagerRequest) SetTitle(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -547,7 +547,7 @@ func (m *ManagerRequest) SetTitle(arg0 string) (*jni.Object, error) {
 func (m *ManagerRequest) SetVisibleInDownloadsUi(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

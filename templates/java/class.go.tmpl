@@ -152,7 +152,7 @@ func (m *{{$.GoType}}) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} {
 {{- end}}
 	{{.GoReturnVars}}
 	{{if .HasError}}var callErr error{{end}}
-	m.VM.Do(func(env *jni.Env) error {
+	{{if .HasError}}callErr = {{end}}m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			{{if .HasError}}callErr = err{{end}}
 			return err
@@ -167,7 +167,8 @@ func (m *{{$.GoType}}) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} {
 			{{if .Static}}(*jni.Class)(unsafe.Pointer(cls{{$.GoType}})){{else}}m.Obj{{end}},
 			mid{{$.GoType}}{{.GoName}}{{.JNIArgs}},
 		)
-{{else if eq .ReturnKind "string"}}		resultObj, {{if .HasError}}callErr{{else}}_{{end}} := env.Call{{if .Static}}Static{{end}}ObjectMethod(
+{{else if eq .ReturnKind "string"}}		var resultObj *jni.Object
+		resultObj, {{if .HasError}}callErr{{else}}_{{end}} = env.Call{{if .Static}}Static{{end}}ObjectMethod(
 			{{if .Static}}(*jni.Class)(unsafe.Pointer(cls{{$.GoType}})){{else}}m.Obj{{end}},
 			mid{{$.GoType}}{{.GoName}}{{.JNIArgs}},
 		)
@@ -175,7 +176,8 @@ func (m *{{$.GoType}}) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} {
 			return callErr
 		}{{end}}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-{{else if eq .ReturnKind "bool"}}		resultRaw, {{if .HasError}}callErr{{else}}_{{end}} := env.Call{{if .Static}}Static{{end}}BooleanMethod(
+{{else if eq .ReturnKind "bool"}}		var resultRaw uint8
+		resultRaw, {{if .HasError}}callErr{{else}}_{{end}} = env.Call{{if .Static}}Static{{end}}BooleanMethod(
 			{{if .Static}}(*jni.Class)(unsafe.Pointer(cls{{$.GoType}})){{else}}m.Obj{{end}},
 			mid{{$.GoType}}{{.GoName}}{{.JNIArgs}},
 		)

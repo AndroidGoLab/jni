@@ -27,7 +27,7 @@ type Contract struct {
 func (m *Contract) IsProfileId(arg0 int64) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *Contract) IsProfileId(arg0 int64) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractIsProfileId, jni.LongValue(arg0),
 		)

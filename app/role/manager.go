@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) CreateRequestRoleIntent(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -106,7 +106,7 @@ func (m *Manager) CreateRequestRoleIntent(arg0 string) (*jni.Object, error) {
 func (m *Manager) IsRoleAvailable(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +120,8 @@ func (m *Manager) IsRoleAvailable(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsRoleAvailable, jni.ObjectValue(&jArg0.Object),
 		)
@@ -137,7 +138,7 @@ func (m *Manager) IsRoleAvailable(arg0 string) (bool, error) {
 func (m *Manager) IsRoleHeld(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -151,7 +152,8 @@ func (m *Manager) IsRoleHeld(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsRoleHeld, jni.ObjectValue(&jArg0.Object),
 		)

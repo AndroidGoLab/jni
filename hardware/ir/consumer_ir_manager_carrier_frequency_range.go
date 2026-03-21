@@ -27,7 +27,7 @@ type ConsumerIrManagerCarrierFrequencyRange struct {
 func (m *ConsumerIrManagerCarrierFrequencyRange) GetMaxFrequency() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *ConsumerIrManagerCarrierFrequencyRange) GetMaxFrequency() (int32, error
 func (m *ConsumerIrManagerCarrierFrequencyRange) GetMinFrequency() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

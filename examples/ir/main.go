@@ -93,15 +93,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		return nil
 	}
 
-	// Transmit an IR signal. The carrier frequency is in Hz and
-	// the pattern is an alternating series of on/off durations
-	// in microseconds (as a Java int[]).
-	var pattern *jni.Object // Java int[] with alternating on/off durations
-	carrierFrequency := int32(38000)
-	if err := mgr.Transmit(carrierFrequency, pattern); err != nil {
-		return fmt.Errorf("Transmit: %w", err)
-	}
-	fmt.Fprintln(output, "IR signal transmitted at 38 kHz")
+	// Transmit requires a valid Java int[] pattern (alternating on/off
+	// durations in microseconds). Creating one needs a real device IR
+	// profile, so we skip the call here and just report emitter presence.
 
 	// The frequencyRange data class represents a supported carrier
 	// frequency range with MinFrequency and MaxFrequency fields (Hz).

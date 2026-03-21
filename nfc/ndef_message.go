@@ -27,7 +27,7 @@ type NdefMessage struct {
 func (m *NdefMessage) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *NdefMessage) DescribeContents() (int32, error) {
 func (m *NdefMessage) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *NdefMessage) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midNdefMessageEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *NdefMessage) Equals(arg0 *jni.Object) (bool, error) {
 func (m *NdefMessage) GetByteArrayLength() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -104,7 +105,7 @@ func (m *NdefMessage) GetByteArrayLength() (int32, error) {
 func (m *NdefMessage) GetRecords() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -134,7 +135,7 @@ func (m *NdefMessage) GetRecords() (*jni.Object, error) {
 func (m *NdefMessage) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +160,7 @@ func (m *NdefMessage) HashCode() (int32, error) {
 func (m *NdefMessage) ToByteArray() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +190,7 @@ func (m *NdefMessage) ToByteArray() (*jni.Object, error) {
 func (m *NdefMessage) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -198,7 +199,8 @@ func (m *NdefMessage) ToString() (string, error) {
 			callErr = fmt.Errorf("android.nfc.NdefMessage.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNdefMessageToString,
 		)
@@ -215,7 +217,7 @@ func (m *NdefMessage) ToString() (string, error) {
 func (m *NdefMessage) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

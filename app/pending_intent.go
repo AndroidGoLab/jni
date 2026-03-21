@@ -25,7 +25,7 @@ type PendingIntent struct {
 func (m *PendingIntent) Cancel() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -47,7 +47,7 @@ func (m *PendingIntent) Cancel() error {
 func (m *PendingIntent) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -72,7 +72,7 @@ func (m *PendingIntent) DescribeContents() (int32, error) {
 func (m *PendingIntent) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,8 @@ func (m *PendingIntent) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPendingIntentEquals, jni.ObjectValue(arg0),
 		)
@@ -99,7 +100,7 @@ func (m *PendingIntent) Equals(arg0 *jni.Object) (bool, error) {
 func (m *PendingIntent) GetCreatorPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -108,7 +109,8 @@ func (m *PendingIntent) GetCreatorPackage() (string, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.getCreatorPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPendingIntentGetCreatorPackage,
 		)
@@ -125,7 +127,7 @@ func (m *PendingIntent) GetCreatorPackage() (string, error) {
 func (m *PendingIntent) GetCreatorUid() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -150,7 +152,7 @@ func (m *PendingIntent) GetCreatorUid() (int32, error) {
 func (m *PendingIntent) GetCreatorUserHandle() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -180,7 +182,7 @@ func (m *PendingIntent) GetCreatorUserHandle() (*jni.Object, error) {
 func (m *PendingIntent) GetIntentSender() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -210,7 +212,7 @@ func (m *PendingIntent) GetIntentSender() (*jni.Object, error) {
 func (m *PendingIntent) GetTargetPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +221,8 @@ func (m *PendingIntent) GetTargetPackage() (string, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.getTargetPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPendingIntentGetTargetPackage,
 		)
@@ -236,7 +239,7 @@ func (m *PendingIntent) GetTargetPackage() (string, error) {
 func (m *PendingIntent) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -261,7 +264,7 @@ func (m *PendingIntent) HashCode() (int32, error) {
 func (m *PendingIntent) IsActivity() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -270,7 +273,8 @@ func (m *PendingIntent) IsActivity() (bool, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.isActivity is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPendingIntentIsActivity,
 		)
@@ -287,7 +291,7 @@ func (m *PendingIntent) IsActivity() (bool, error) {
 func (m *PendingIntent) IsBroadcast() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -296,7 +300,8 @@ func (m *PendingIntent) IsBroadcast() (bool, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.isBroadcast is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPendingIntentIsBroadcast,
 		)
@@ -313,7 +318,7 @@ func (m *PendingIntent) IsBroadcast() (bool, error) {
 func (m *PendingIntent) IsForegroundService() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -322,7 +327,8 @@ func (m *PendingIntent) IsForegroundService() (bool, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.isForegroundService is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPendingIntentIsForegroundService,
 		)
@@ -339,7 +345,7 @@ func (m *PendingIntent) IsForegroundService() (bool, error) {
 func (m *PendingIntent) IsImmutable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -348,7 +354,8 @@ func (m *PendingIntent) IsImmutable() (bool, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.isImmutable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPendingIntentIsImmutable,
 		)
@@ -365,7 +372,7 @@ func (m *PendingIntent) IsImmutable() (bool, error) {
 func (m *PendingIntent) IsService() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -374,7 +381,8 @@ func (m *PendingIntent) IsService() (bool, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.isService is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPendingIntentIsService,
 		)
@@ -391,7 +399,7 @@ func (m *PendingIntent) IsService() (bool, error) {
 func (m *PendingIntent) Send0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -417,7 +425,7 @@ func (m *PendingIntent) Send3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -440,7 +448,7 @@ func (m *PendingIntent) Send3_1(
 func (m *PendingIntent) Send1_2(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -463,7 +471,7 @@ func (m *PendingIntent) Send1_2(arg0 *jni.Object) error {
 func (m *PendingIntent) Send1_3(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -486,7 +494,7 @@ func (m *PendingIntent) Send1_3(arg0 int32) error {
 func (m *PendingIntent) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -495,7 +503,8 @@ func (m *PendingIntent) ToString() (string, error) {
 			callErr = fmt.Errorf("android.app.PendingIntent.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPendingIntentToString,
 		)
@@ -512,7 +521,7 @@ func (m *PendingIntent) ToString() (string, error) {
 func (m *PendingIntent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -540,7 +549,7 @@ func (m *PendingIntent) GetActivities4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -577,7 +586,7 @@ func (m *PendingIntent) GetActivities5_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -613,7 +622,7 @@ func (m *PendingIntent) GetActivity4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -650,7 +659,7 @@ func (m *PendingIntent) GetActivity5_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -686,7 +695,7 @@ func (m *PendingIntent) GetBroadcast(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -722,7 +731,7 @@ func (m *PendingIntent) GetForegroundService(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -758,7 +767,7 @@ func (m *PendingIntent) GetService(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -789,7 +798,7 @@ func (m *PendingIntent) GetService(
 func (m *PendingIntent) ReadPendingIntentOrNullFromParcel(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -820,7 +829,7 @@ func (m *PendingIntent) ReadPendingIntentOrNullFromParcel(arg0 *jni.Object) (*jn
 func (m *PendingIntent) WritePendingIntentOrNullToParcel(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

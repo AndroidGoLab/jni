@@ -27,7 +27,7 @@ type VirtualDisplay struct {
 func (m *VirtualDisplay) GetDisplay() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *VirtualDisplay) GetDisplay() (*jni.Object, error) {
 func (m *VirtualDisplay) GetSurface() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -87,7 +87,7 @@ func (m *VirtualDisplay) GetSurface() (*jni.Object, error) {
 func (m *VirtualDisplay) Release() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -113,7 +113,7 @@ func (m *VirtualDisplay) Resize(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -136,7 +136,7 @@ func (m *VirtualDisplay) Resize(
 func (m *VirtualDisplay) SetRotation(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +159,7 @@ func (m *VirtualDisplay) SetRotation(arg0 int32) error {
 func (m *VirtualDisplay) SetSurface(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -182,7 +182,7 @@ func (m *VirtualDisplay) SetSurface(arg0 *jni.Object) error {
 func (m *VirtualDisplay) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -191,7 +191,8 @@ func (m *VirtualDisplay) ToString() (string, error) {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midVirtualDisplayToString,
 		)

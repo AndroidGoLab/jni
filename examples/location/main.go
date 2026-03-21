@@ -146,7 +146,7 @@ func printLocation(vm *jni.VM, provider string, locObj *jni.Object, output *byte
 // requestFreshLocation uses requestLocationUpdates with a JNI proxy
 // LocationListener to obtain a fresh GPS fix. It creates a HandlerThread
 // with its own Looper so callbacks can be delivered while the main thread
-// waits. Waits up to 15 seconds.
+// waits. Waits up to 30 seconds.
 func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.ExtractedLocation, error) {
 	var mu sync.Mutex
 	var result *location.ExtractedLocation

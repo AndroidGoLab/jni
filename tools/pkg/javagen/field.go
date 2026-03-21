@@ -20,9 +20,6 @@ func (f Field) GetterName() string {
 		return f.JavaMethod
 	}
 	if f.JavaField != "" {
-		if len(f.JavaField) == 0 {
-			return ""
-		}
 		return "get" + strings.ToUpper(f.JavaField[:1]) + f.JavaField[1:]
 	}
 	return ""

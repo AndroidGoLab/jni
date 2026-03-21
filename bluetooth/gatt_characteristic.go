@@ -27,7 +27,7 @@ type GattCharacteristic struct {
 func (m *GattCharacteristic) AddDescriptor(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *GattCharacteristic) AddDescriptor(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattCharacteristicAddDescriptor, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *GattCharacteristic) AddDescriptor(arg0 *jni.Object) (bool, error) {
 func (m *GattCharacteristic) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -79,7 +80,7 @@ func (m *GattCharacteristic) DescribeContents() (int32, error) {
 func (m *GattCharacteristic) GetDescriptor(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -110,7 +111,7 @@ func (m *GattCharacteristic) GetDescriptor(arg0 *jni.Object) (*jni.Object, error
 func (m *GattCharacteristic) GetDescriptors() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -140,7 +141,7 @@ func (m *GattCharacteristic) GetDescriptors() (*jni.Object, error) {
 func (m *GattCharacteristic) GetFloatValue(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -171,7 +172,7 @@ func (m *GattCharacteristic) GetFloatValue(arg0 int32, arg1 int32) (*jni.Object,
 func (m *GattCharacteristic) GetInstanceId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -196,7 +197,7 @@ func (m *GattCharacteristic) GetInstanceId() (int32, error) {
 func (m *GattCharacteristic) GetIntValue(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -227,7 +228,7 @@ func (m *GattCharacteristic) GetIntValue(arg0 int32, arg1 int32) (*jni.Object, e
 func (m *GattCharacteristic) GetPermissions() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -252,7 +253,7 @@ func (m *GattCharacteristic) GetPermissions() (int32, error) {
 func (m *GattCharacteristic) GetProperties() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -277,7 +278,7 @@ func (m *GattCharacteristic) GetProperties() (int32, error) {
 func (m *GattCharacteristic) GetService() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -307,7 +308,7 @@ func (m *GattCharacteristic) GetService() (*jni.Object, error) {
 func (m *GattCharacteristic) GetStringValue(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -317,7 +318,8 @@ func (m *GattCharacteristic) GetStringValue(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midGattCharacteristicGetStringValue, jni.IntValue(arg0),
 		)
@@ -334,7 +336,7 @@ func (m *GattCharacteristic) GetStringValue(arg0 int32) (string, error) {
 func (m *GattCharacteristic) GetUuid() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -364,7 +366,7 @@ func (m *GattCharacteristic) GetUuid() (*jni.Object, error) {
 func (m *GattCharacteristic) GetValue() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -394,7 +396,7 @@ func (m *GattCharacteristic) GetValue() (*jni.Object, error) {
 func (m *GattCharacteristic) GetWriteType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -419,7 +421,7 @@ func (m *GattCharacteristic) GetWriteType() (int32, error) {
 func (m *GattCharacteristic) SetValue1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -429,7 +431,8 @@ func (m *GattCharacteristic) SetValue1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattCharacteristicSetValue1, jni.ObjectValue(arg0),
 		)
@@ -450,7 +453,7 @@ func (m *GattCharacteristic) SetValue3_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -460,7 +463,8 @@ func (m *GattCharacteristic) SetValue3_1(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattCharacteristicSetValue3_1, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
@@ -482,7 +486,7 @@ func (m *GattCharacteristic) SetValue4_2(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -492,7 +496,8 @@ func (m *GattCharacteristic) SetValue4_2(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattCharacteristicSetValue4_2, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3),
 		)
@@ -509,7 +514,7 @@ func (m *GattCharacteristic) SetValue4_2(
 func (m *GattCharacteristic) SetValue1_3(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -523,7 +528,8 @@ func (m *GattCharacteristic) SetValue1_3(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattCharacteristicSetValue1_3, jni.ObjectValue(&jArg0.Object),
 		)
@@ -540,7 +546,7 @@ func (m *GattCharacteristic) SetValue1_3(arg0 string) (bool, error) {
 func (m *GattCharacteristic) SetWriteType(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -563,7 +569,7 @@ func (m *GattCharacteristic) SetWriteType(arg0 int32) error {
 func (m *GattCharacteristic) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

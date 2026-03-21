@@ -27,7 +27,7 @@ type LightStateBuilder struct {
 func (m *LightStateBuilder) Build() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *LightStateBuilder) Build() (*jni.Object, error) {
 func (m *LightStateBuilder) SetColor(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +88,7 @@ func (m *LightStateBuilder) SetColor(arg0 int32) (*jni.Object, error) {
 func (m *LightStateBuilder) SetPlayerId(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -75,7 +75,7 @@ func (m *WifiP2pManager) AddExternalApprover(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -102,7 +102,7 @@ func (m *WifiP2pManager) AddLocalService(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -129,7 +129,7 @@ func (m *WifiP2pManager) AddServiceRequest(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -152,7 +152,7 @@ func (m *WifiP2pManager) AddServiceRequest(
 func (m *WifiP2pManager) CancelConnect(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -175,7 +175,7 @@ func (m *WifiP2pManager) CancelConnect(arg0 *jni.Object, arg1 *jni.Object) error
 func (m *WifiP2pManager) ClearLocalServices(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -198,7 +198,7 @@ func (m *WifiP2pManager) ClearLocalServices(arg0 *jni.Object, arg1 *jni.Object) 
 func (m *WifiP2pManager) ClearServiceRequests(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -225,7 +225,7 @@ func (m *WifiP2pManager) Connect(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -252,7 +252,7 @@ func (m *WifiP2pManager) CreateGroup3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -275,7 +275,7 @@ func (m *WifiP2pManager) CreateGroup3(
 func (m *WifiP2pManager) CreateGroup2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -298,7 +298,7 @@ func (m *WifiP2pManager) CreateGroup2_1(arg0 *jni.Object, arg1 *jni.Object) erro
 func (m *WifiP2pManager) DiscoverPeers(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -321,7 +321,7 @@ func (m *WifiP2pManager) DiscoverPeers(arg0 *jni.Object, arg1 *jni.Object) error
 func (m *WifiP2pManager) DiscoverPeersOnSocialChannels(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -348,7 +348,7 @@ func (m *WifiP2pManager) DiscoverPeersOnSpecificFrequency(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -371,7 +371,7 @@ func (m *WifiP2pManager) DiscoverPeersOnSpecificFrequency(
 func (m *WifiP2pManager) DiscoverServices(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -398,7 +398,7 @@ func (m *WifiP2pManager) DiscoverUsdBasedServices(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -425,7 +425,7 @@ func (m *WifiP2pManager) GetListenState(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -452,7 +452,7 @@ func (m *WifiP2pManager) Initialize(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -483,7 +483,7 @@ func (m *WifiP2pManager) Initialize(
 func (m *WifiP2pManager) IsChannelConstrainedDiscoverySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -492,7 +492,8 @@ func (m *WifiP2pManager) IsChannelConstrainedDiscoverySupported() (bool, error) 
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isChannelConstrainedDiscoverySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiP2pManagerIsChannelConstrainedDiscoverySupported,
 		)
@@ -509,7 +510,7 @@ func (m *WifiP2pManager) IsChannelConstrainedDiscoverySupported() (bool, error) 
 func (m *WifiP2pManager) IsGroupClientRemovalSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -518,7 +519,8 @@ func (m *WifiP2pManager) IsGroupClientRemovalSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isGroupClientRemovalSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiP2pManagerIsGroupClientRemovalSupported,
 		)
@@ -535,7 +537,7 @@ func (m *WifiP2pManager) IsGroupClientRemovalSupported() (bool, error) {
 func (m *WifiP2pManager) IsGroupOwnerIPv6LinkLocalAddressProvided() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -544,7 +546,8 @@ func (m *WifiP2pManager) IsGroupOwnerIPv6LinkLocalAddressProvided() (bool, error
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isGroupOwnerIPv6LinkLocalAddressProvided is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiP2pManagerIsGroupOwnerIPv6LinkLocalAddressProvided,
 		)
@@ -561,7 +564,7 @@ func (m *WifiP2pManager) IsGroupOwnerIPv6LinkLocalAddressProvided() (bool, error
 func (m *WifiP2pManager) IsPccModeSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -570,7 +573,8 @@ func (m *WifiP2pManager) IsPccModeSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isPccModeSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiP2pManagerIsPccModeSupported,
 		)
@@ -587,7 +591,7 @@ func (m *WifiP2pManager) IsPccModeSupported() (bool, error) {
 func (m *WifiP2pManager) IsSetVendorElementsSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -596,7 +600,8 @@ func (m *WifiP2pManager) IsSetVendorElementsSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isSetVendorElementsSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiP2pManagerIsSetVendorElementsSupported,
 		)
@@ -613,7 +618,7 @@ func (m *WifiP2pManager) IsSetVendorElementsSupported() (bool, error) {
 func (m *WifiP2pManager) IsWiFiDirectR2Supported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -622,7 +627,8 @@ func (m *WifiP2pManager) IsWiFiDirectR2Supported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.isWiFiDirectR2Supported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiP2pManagerIsWiFiDirectR2Supported,
 		)
@@ -639,7 +645,7 @@ func (m *WifiP2pManager) IsWiFiDirectR2Supported() (bool, error) {
 func (m *WifiP2pManager) RegisterWifiP2pListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -666,7 +672,7 @@ func (m *WifiP2pManager) RemoveClient(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -693,7 +699,7 @@ func (m *WifiP2pManager) RemoveExternalApprover(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -716,7 +722,7 @@ func (m *WifiP2pManager) RemoveExternalApprover(
 func (m *WifiP2pManager) RemoveGroup(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -743,7 +749,7 @@ func (m *WifiP2pManager) RemoveLocalService(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -770,7 +776,7 @@ func (m *WifiP2pManager) RemoveServiceRequest(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -793,7 +799,7 @@ func (m *WifiP2pManager) RemoveServiceRequest(
 func (m *WifiP2pManager) RequestConnectionInfo(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -816,7 +822,7 @@ func (m *WifiP2pManager) RequestConnectionInfo(arg0 *jni.Object, arg1 *jni.Objec
 func (m *WifiP2pManager) RequestDeviceInfo(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -843,7 +849,7 @@ func (m *WifiP2pManager) RequestDirInfo(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -866,7 +872,7 @@ func (m *WifiP2pManager) RequestDirInfo(
 func (m *WifiP2pManager) RequestDiscoveryState(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -889,7 +895,7 @@ func (m *WifiP2pManager) RequestDiscoveryState(arg0 *jni.Object, arg1 *jni.Objec
 func (m *WifiP2pManager) RequestGroupInfo(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -912,7 +918,7 @@ func (m *WifiP2pManager) RequestGroupInfo(arg0 *jni.Object, arg1 *jni.Object) er
 func (m *WifiP2pManager) RequestNetworkInfo(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -935,7 +941,7 @@ func (m *WifiP2pManager) RequestNetworkInfo(arg0 *jni.Object, arg1 *jni.Object) 
 func (m *WifiP2pManager) RequestP2pState(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -958,7 +964,7 @@ func (m *WifiP2pManager) RequestP2pState(arg0 *jni.Object, arg1 *jni.Object) err
 func (m *WifiP2pManager) RequestPeers(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -986,7 +992,7 @@ func (m *WifiP2pManager) SetConnectionRequestResult4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1015,7 +1021,7 @@ func (m *WifiP2pManager) SetConnectionRequestResult5_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1047,7 +1053,7 @@ func (m *WifiP2pManager) SetDnsSdResponseListeners(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1070,7 +1076,7 @@ func (m *WifiP2pManager) SetDnsSdResponseListeners(
 func (m *WifiP2pManager) SetServiceResponseListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1093,7 +1099,7 @@ func (m *WifiP2pManager) SetServiceResponseListener(arg0 *jni.Object, arg1 *jni.
 func (m *WifiP2pManager) SetUpnpServiceResponseListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1120,7 +1126,7 @@ func (m *WifiP2pManager) SetVendorElements(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1147,7 +1153,7 @@ func (m *WifiP2pManager) SetWfdInfo(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1170,7 +1176,7 @@ func (m *WifiP2pManager) SetWfdInfo(
 func (m *WifiP2pManager) StartListening(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1197,7 +1203,7 @@ func (m *WifiP2pManager) StartPeerDiscovery(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1225,7 +1231,7 @@ func (m *WifiP2pManager) StartUsdBasedLocalServiceAdvertisement(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1248,7 +1254,7 @@ func (m *WifiP2pManager) StartUsdBasedLocalServiceAdvertisement(
 func (m *WifiP2pManager) StopListening(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1271,7 +1277,7 @@ func (m *WifiP2pManager) StopListening(arg0 *jni.Object, arg1 *jni.Object) error
 func (m *WifiP2pManager) StopPeerDiscovery(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1294,7 +1300,7 @@ func (m *WifiP2pManager) StopPeerDiscovery(arg0 *jni.Object, arg1 *jni.Object) e
 func (m *WifiP2pManager) UnregisterWifiP2pListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1322,7 +1328,7 @@ func (m *WifiP2pManager) ValidateDirInfo(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1345,7 +1351,7 @@ func (m *WifiP2pManager) ValidateDirInfo(
 func (m *WifiP2pManager) GetP2pMaxAllowedVendorElementsLengthBytes() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

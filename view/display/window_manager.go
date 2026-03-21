@@ -71,7 +71,7 @@ func (m *WindowManager) Close() {
 func (m *WindowManager) GetDefaultDisplay() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -101,7 +101,7 @@ func (m *WindowManager) GetDefaultDisplay() (*jni.Object, error) {
 func (m *WindowManager) RemoveViewImmediate(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

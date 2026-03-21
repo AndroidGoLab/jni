@@ -27,7 +27,7 @@ type Endpoint struct {
 func (m *Endpoint) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *Endpoint) DescribeContents() (int32, error) {
 func (m *Endpoint) GetAddress() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -77,7 +77,7 @@ func (m *Endpoint) GetAddress() (int32, error) {
 func (m *Endpoint) GetAttributes() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -102,7 +102,7 @@ func (m *Endpoint) GetAttributes() (int32, error) {
 func (m *Endpoint) GetDirection() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -127,7 +127,7 @@ func (m *Endpoint) GetDirection() (int32, error) {
 func (m *Endpoint) GetEndpointNumber() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -152,7 +152,7 @@ func (m *Endpoint) GetEndpointNumber() (int32, error) {
 func (m *Endpoint) GetInterval() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -177,7 +177,7 @@ func (m *Endpoint) GetInterval() (int32, error) {
 func (m *Endpoint) GetMaxPacketSize() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -202,7 +202,7 @@ func (m *Endpoint) GetMaxPacketSize() (int32, error) {
 func (m *Endpoint) GetType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -227,7 +227,7 @@ func (m *Endpoint) GetType() (int32, error) {
 func (m *Endpoint) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -236,7 +236,8 @@ func (m *Endpoint) ToString() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbEndpoint.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midEndpointToString,
 		)
@@ -253,7 +254,7 @@ func (m *Endpoint) ToString() (string, error) {
 func (m *Endpoint) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

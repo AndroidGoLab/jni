@@ -27,7 +27,7 @@ type Reader struct {
 func (m *Reader) CloseSessions() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Reader) CloseSessions() error {
 func (m *Reader) GetName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -58,7 +58,8 @@ func (m *Reader) GetName() (string, error) {
 			callErr = fmt.Errorf("android.se.omapi.Reader.getName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midReaderGetName,
 		)
@@ -75,7 +76,7 @@ func (m *Reader) GetName() (string, error) {
 func (m *Reader) GetSEService() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -105,7 +106,7 @@ func (m *Reader) GetSEService() (*jni.Object, error) {
 func (m *Reader) IsSecureElementPresent() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -114,7 +115,8 @@ func (m *Reader) IsSecureElementPresent() (bool, error) {
 			callErr = fmt.Errorf("android.se.omapi.Reader.isSecureElementPresent is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midReaderIsSecureElementPresent,
 		)
@@ -131,7 +133,7 @@ func (m *Reader) IsSecureElementPresent() (bool, error) {
 func (m *Reader) OpenSession() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

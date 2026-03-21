@@ -157,7 +157,6 @@ func mergeMethod(m *Method, overlay *Overlay) (*MergedMethod, error) {
 		Params:     params,
 		Returns:    retType,
 		GoReturn:   goReturn,
-		Error:      m.Error,
 		JNISig:     jniSig,
 		CallSuffix: retConv.CallSuffix,
 		ReturnKind: retKind,
@@ -187,7 +186,7 @@ func mergeParam(p Param, overlay *Overlay) MergedParam {
 		}
 	}
 
-	isString := p.JavaType == "String" || p.JavaType == "java.lang.String" || p.JavaType == "java.lang.CharSequence"
+	isString := p.JavaType == "String" || p.JavaType == "java.lang.String" || p.JavaType == "CharSequence" || p.JavaType == "java.lang.CharSequence"
 	isBool := p.JavaType == "boolean"
 
 	goName := sanitizeGoName(p.GoName)
@@ -267,7 +266,7 @@ func mergeCallback(cb *Callback, overlay *Overlay) (*MergedCallback, error) {
 		var params []MergedParam
 		for i, jt := range m.Params {
 			goName := fmt.Sprintf("arg%d", i)
-			isString := jt == "String" || jt == "java.lang.String"
+			isString := jt == "String" || jt == "java.lang.String" || jt == "java.lang.CharSequence" || jt == "CharSequence"
 			// Callback args arrive as autoboxed Object[] via JNI proxy.
 			// Only strings get converted to Go string; everything else is *jni.Object.
 			goType := "*jni.Object"

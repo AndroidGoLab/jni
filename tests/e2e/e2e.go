@@ -98,7 +98,7 @@ func runE2ETests(cvm *C.JavaVM) {
 			passed++
 		} else {
 			fmt.Fprintf(os.Stderr, "XPASS: %s (unexpected pass)\n", name)
-			passed++
+			failed++
 		}
 	}
 
@@ -1024,7 +1024,9 @@ func testAppIntent(vm *jni.VM) error {
 	}
 
 	// SetAction + GetAction round-trip
-	intent.SetAction("android.intent.action.VIEW")
+	if _, err := intent.SetAction("android.intent.action.VIEW"); err != nil {
+		return err
+	}
 	action, err := intent.GetAction()
 	if err != nil {
 		return fmt.Errorf("GetAction: %w", err)

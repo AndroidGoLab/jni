@@ -27,7 +27,7 @@ type MediaController struct {
 func (m *MediaController) AdjustVolume(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -50,7 +50,7 @@ func (m *MediaController) AdjustVolume(arg0 int32, arg1 int32) error {
 func (m *MediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -60,7 +60,8 @@ func (m *MediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, erro
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midMediaControllerDispatchMediaButtonEvent, jni.ObjectValue(arg0),
 		)
@@ -77,7 +78,7 @@ func (m *MediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, erro
 func (m *MediaController) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +108,7 @@ func (m *MediaController) GetExtras() (*jni.Object, error) {
 func (m *MediaController) GetFlags() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -132,7 +133,7 @@ func (m *MediaController) GetFlags() (int64, error) {
 func (m *MediaController) GetMetadata() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -162,7 +163,7 @@ func (m *MediaController) GetMetadata() (*jni.Object, error) {
 func (m *MediaController) GetPackageName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -171,7 +172,8 @@ func (m *MediaController) GetPackageName() (string, error) {
 			callErr = fmt.Errorf("android.media.session.MediaController.getPackageName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaControllerGetPackageName,
 		)
@@ -188,7 +190,7 @@ func (m *MediaController) GetPackageName() (string, error) {
 func (m *MediaController) GetPlaybackInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -218,7 +220,7 @@ func (m *MediaController) GetPlaybackInfo() (*jni.Object, error) {
 func (m *MediaController) GetPlaybackState() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -248,7 +250,7 @@ func (m *MediaController) GetPlaybackState() (*jni.Object, error) {
 func (m *MediaController) GetQueue() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -278,7 +280,7 @@ func (m *MediaController) GetQueue() (*jni.Object, error) {
 func (m *MediaController) GetQueueTitle() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -287,7 +289,8 @@ func (m *MediaController) GetQueueTitle() (string, error) {
 			callErr = fmt.Errorf("android.media.session.MediaController.getQueueTitle is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaControllerGetQueueTitle,
 		)
@@ -304,7 +307,7 @@ func (m *MediaController) GetQueueTitle() (string, error) {
 func (m *MediaController) GetRatingType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -329,7 +332,7 @@ func (m *MediaController) GetRatingType() (int32, error) {
 func (m *MediaController) GetSessionActivity() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -359,7 +362,7 @@ func (m *MediaController) GetSessionActivity() (*jni.Object, error) {
 func (m *MediaController) GetSessionInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -389,7 +392,7 @@ func (m *MediaController) GetSessionInfo() (*jni.Object, error) {
 func (m *MediaController) GetSessionToken() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -419,7 +422,7 @@ func (m *MediaController) GetSessionToken() (*jni.Object, error) {
 func (m *MediaController) GetTag() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -428,7 +431,8 @@ func (m *MediaController) GetTag() (string, error) {
 			callErr = fmt.Errorf("android.media.session.MediaController.getTag is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaControllerGetTag,
 		)
@@ -445,7 +449,7 @@ func (m *MediaController) GetTag() (string, error) {
 func (m *MediaController) GetTransportControls() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -475,7 +479,7 @@ func (m *MediaController) GetTransportControls() (*jni.Object, error) {
 func (m *MediaController) RegisterCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -502,7 +506,7 @@ func (m *MediaController) SendCommand(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -529,7 +533,7 @@ func (m *MediaController) SendCommand(
 func (m *MediaController) SetVolumeTo(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -552,7 +556,7 @@ func (m *MediaController) SetVolumeTo(arg0 int32, arg1 int32) error {
 func (m *MediaController) UnregisterCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

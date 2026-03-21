@@ -1991,9 +1991,6 @@ constants:
     - go_name: VersionCodeHighest
       value: "-1"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: InstallLocationAuto
       value: "0"
       go_type: int

@@ -27,7 +27,7 @@ type GnssStatus struct {
 func (m *GnssStatus) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *GnssStatus) DescribeContents() (int32, error) {
 func (m *GnssStatus) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *GnssStatus) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGnssStatusEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *GnssStatus) Equals(arg0 *jni.Object) (bool, error) {
 func (m *GnssStatus) GetAzimuthDegrees(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -105,7 +106,7 @@ func (m *GnssStatus) GetAzimuthDegrees(arg0 int32) (float32, error) {
 func (m *GnssStatus) GetBasebandCn0DbHz(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -131,7 +132,7 @@ func (m *GnssStatus) GetBasebandCn0DbHz(arg0 int32) (float32, error) {
 func (m *GnssStatus) GetCarrierFrequencyHz(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -157,7 +158,7 @@ func (m *GnssStatus) GetCarrierFrequencyHz(arg0 int32) (float32, error) {
 func (m *GnssStatus) GetCn0DbHz(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -183,7 +184,7 @@ func (m *GnssStatus) GetCn0DbHz(arg0 int32) (float32, error) {
 func (m *GnssStatus) GetConstellationType(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -209,7 +210,7 @@ func (m *GnssStatus) GetConstellationType(arg0 int32) (int32, error) {
 func (m *GnssStatus) GetElevationDegrees(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -235,7 +236,7 @@ func (m *GnssStatus) GetElevationDegrees(arg0 int32) (float32, error) {
 func (m *GnssStatus) GetSatelliteCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -260,7 +261,7 @@ func (m *GnssStatus) GetSatelliteCount() (int32, error) {
 func (m *GnssStatus) GetSvid(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -286,7 +287,7 @@ func (m *GnssStatus) GetSvid(arg0 int32) (int32, error) {
 func (m *GnssStatus) HasAlmanacData(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -296,7 +297,8 @@ func (m *GnssStatus) HasAlmanacData(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGnssStatusHasAlmanacData, jni.IntValue(arg0),
 		)
@@ -313,7 +315,7 @@ func (m *GnssStatus) HasAlmanacData(arg0 int32) (bool, error) {
 func (m *GnssStatus) HasBasebandCn0DbHz(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -323,7 +325,8 @@ func (m *GnssStatus) HasBasebandCn0DbHz(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGnssStatusHasBasebandCn0DbHz, jni.IntValue(arg0),
 		)
@@ -340,7 +343,7 @@ func (m *GnssStatus) HasBasebandCn0DbHz(arg0 int32) (bool, error) {
 func (m *GnssStatus) HasCarrierFrequencyHz(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -350,7 +353,8 @@ func (m *GnssStatus) HasCarrierFrequencyHz(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGnssStatusHasCarrierFrequencyHz, jni.IntValue(arg0),
 		)
@@ -367,7 +371,7 @@ func (m *GnssStatus) HasCarrierFrequencyHz(arg0 int32) (bool, error) {
 func (m *GnssStatus) HasEphemerisData(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -377,7 +381,8 @@ func (m *GnssStatus) HasEphemerisData(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGnssStatusHasEphemerisData, jni.IntValue(arg0),
 		)
@@ -394,7 +399,7 @@ func (m *GnssStatus) HasEphemerisData(arg0 int32) (bool, error) {
 func (m *GnssStatus) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -419,7 +424,7 @@ func (m *GnssStatus) HashCode() (int32, error) {
 func (m *GnssStatus) UsedInFix(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -429,7 +434,8 @@ func (m *GnssStatus) UsedInFix(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGnssStatusUsedInFix, jni.IntValue(arg0),
 		)
@@ -446,7 +452,7 @@ func (m *GnssStatus) UsedInFix(arg0 int32) (bool, error) {
 func (m *GnssStatus) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

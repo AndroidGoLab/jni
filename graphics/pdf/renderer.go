@@ -27,7 +27,7 @@ type Renderer struct {
 func (m *Renderer) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Renderer) Close() error {
 func (m *Renderer) GetDocumentLinearizationType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -74,7 +74,7 @@ func (m *Renderer) GetDocumentLinearizationType() (int32, error) {
 func (m *Renderer) GetPageCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -99,7 +99,7 @@ func (m *Renderer) GetPageCount() (int32, error) {
 func (m *Renderer) GetPdfFormType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -124,7 +124,7 @@ func (m *Renderer) GetPdfFormType() (int32, error) {
 func (m *Renderer) OpenPage(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -155,7 +155,7 @@ func (m *Renderer) OpenPage(arg0 int32) (*jni.Object, error) {
 func (m *Renderer) ShouldScaleForPrinting() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +164,8 @@ func (m *Renderer) ShouldScaleForPrinting() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.pdf.PdfRenderer.shouldScaleForPrinting is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRendererShouldScaleForPrinting,
 		)
@@ -181,7 +182,7 @@ func (m *Renderer) ShouldScaleForPrinting() (bool, error) {
 func (m *Renderer) Write(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

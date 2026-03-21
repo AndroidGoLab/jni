@@ -27,7 +27,7 @@ type Display struct {
 func (m *Display) GetAppVsyncOffsetNanos() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *Display) GetAppVsyncOffsetNanos() (int64, error) {
 func (m *Display) GetCurrentSizeRange(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -75,7 +75,7 @@ func (m *Display) GetCurrentSizeRange(arg0 *jni.Object, arg1 *jni.Object) error 
 func (m *Display) GetCutout() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -105,7 +105,7 @@ func (m *Display) GetCutout() (*jni.Object, error) {
 func (m *Display) GetDeviceProductInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -135,7 +135,7 @@ func (m *Display) GetDeviceProductInfo() (*jni.Object, error) {
 func (m *Display) GetDisplayId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -160,7 +160,7 @@ func (m *Display) GetDisplayId() (int32, error) {
 func (m *Display) GetFlags() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -185,7 +185,7 @@ func (m *Display) GetFlags() (int32, error) {
 func (m *Display) GetHdrCapabilities() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -215,7 +215,7 @@ func (m *Display) GetHdrCapabilities() (*jni.Object, error) {
 func (m *Display) GetHdrSdrRatio() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -240,7 +240,7 @@ func (m *Display) GetHdrSdrRatio() (float32, error) {
 func (m *Display) GetHeight() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -265,7 +265,7 @@ func (m *Display) GetHeight() (int32, error) {
 func (m *Display) GetHighestHdrSdrRatio() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -290,7 +290,7 @@ func (m *Display) GetHighestHdrSdrRatio() (float32, error) {
 func (m *Display) GetMetrics(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -313,7 +313,7 @@ func (m *Display) GetMetrics(arg0 *jni.Object) error {
 func (m *Display) GetMode() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -343,7 +343,7 @@ func (m *Display) GetMode() (*jni.Object, error) {
 func (m *Display) GetName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -352,7 +352,8 @@ func (m *Display) GetName() (string, error) {
 			callErr = fmt.Errorf("android.view.Display.getName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDisplayGetName,
 		)
@@ -369,7 +370,7 @@ func (m *Display) GetName() (string, error) {
 func (m *Display) GetOrientation() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -394,7 +395,7 @@ func (m *Display) GetOrientation() (int32, error) {
 func (m *Display) GetOverlaySupport() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -424,7 +425,7 @@ func (m *Display) GetOverlaySupport() (*jni.Object, error) {
 func (m *Display) GetPixelFormat() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -449,7 +450,7 @@ func (m *Display) GetPixelFormat() (int32, error) {
 func (m *Display) GetPreferredWideGamutColorSpace() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -479,7 +480,7 @@ func (m *Display) GetPreferredWideGamutColorSpace() (*jni.Object, error) {
 func (m *Display) GetPresentationDeadlineNanos() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -504,7 +505,7 @@ func (m *Display) GetPresentationDeadlineNanos() (int64, error) {
 func (m *Display) GetRealMetrics(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -527,7 +528,7 @@ func (m *Display) GetRealMetrics(arg0 *jni.Object) error {
 func (m *Display) GetRealSize(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -550,7 +551,7 @@ func (m *Display) GetRealSize(arg0 *jni.Object) error {
 func (m *Display) GetRectSize(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -573,7 +574,7 @@ func (m *Display) GetRectSize(arg0 *jni.Object) error {
 func (m *Display) GetRefreshRate() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -598,7 +599,7 @@ func (m *Display) GetRefreshRate() (float32, error) {
 func (m *Display) GetRotation() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -623,7 +624,7 @@ func (m *Display) GetRotation() (int32, error) {
 func (m *Display) GetRoundedCorner(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -654,7 +655,7 @@ func (m *Display) GetRoundedCorner(arg0 int32) (*jni.Object, error) {
 func (m *Display) GetShape() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -684,7 +685,7 @@ func (m *Display) GetShape() (*jni.Object, error) {
 func (m *Display) GetSize(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -707,7 +708,7 @@ func (m *Display) GetSize(arg0 *jni.Object) error {
 func (m *Display) GetState() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -732,7 +733,7 @@ func (m *Display) GetState() (int32, error) {
 func (m *Display) GetSuggestedFrameRate(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -758,7 +759,7 @@ func (m *Display) GetSuggestedFrameRate(arg0 int32) (float32, error) {
 func (m *Display) GetSupportedModes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -788,7 +789,7 @@ func (m *Display) GetSupportedModes() (*jni.Object, error) {
 func (m *Display) GetSupportedRefreshRates() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -818,7 +819,7 @@ func (m *Display) GetSupportedRefreshRates() (*jni.Object, error) {
 func (m *Display) GetWidth() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -843,7 +844,7 @@ func (m *Display) GetWidth() (int32, error) {
 func (m *Display) HasArrSupport() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -852,7 +853,8 @@ func (m *Display) HasArrSupport() (bool, error) {
 			callErr = fmt.Errorf("android.view.Display.hasArrSupport is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDisplayHasArrSupport,
 		)
@@ -869,7 +871,7 @@ func (m *Display) HasArrSupport() (bool, error) {
 func (m *Display) IsHdr() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -878,7 +880,8 @@ func (m *Display) IsHdr() (bool, error) {
 			callErr = fmt.Errorf("android.view.Display.isHdr is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDisplayIsHdr,
 		)
@@ -895,7 +898,7 @@ func (m *Display) IsHdr() (bool, error) {
 func (m *Display) IsHdrSdrRatioAvailable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -904,7 +907,8 @@ func (m *Display) IsHdrSdrRatioAvailable() (bool, error) {
 			callErr = fmt.Errorf("android.view.Display.isHdrSdrRatioAvailable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDisplayIsHdrSdrRatioAvailable,
 		)
@@ -921,7 +925,7 @@ func (m *Display) IsHdrSdrRatioAvailable() (bool, error) {
 func (m *Display) IsMinimalPostProcessingSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -930,7 +934,8 @@ func (m *Display) IsMinimalPostProcessingSupported() (bool, error) {
 			callErr = fmt.Errorf("android.view.Display.isMinimalPostProcessingSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDisplayIsMinimalPostProcessingSupported,
 		)
@@ -947,7 +952,7 @@ func (m *Display) IsMinimalPostProcessingSupported() (bool, error) {
 func (m *Display) IsValid() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -956,7 +961,8 @@ func (m *Display) IsValid() (bool, error) {
 			callErr = fmt.Errorf("android.view.Display.isValid is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDisplayIsValid,
 		)
@@ -973,7 +979,7 @@ func (m *Display) IsValid() (bool, error) {
 func (m *Display) IsWideColorGamut() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -982,7 +988,8 @@ func (m *Display) IsWideColorGamut() (bool, error) {
 			callErr = fmt.Errorf("android.view.Display.isWideColorGamut is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDisplayIsWideColorGamut,
 		)
@@ -999,7 +1006,7 @@ func (m *Display) IsWideColorGamut() (bool, error) {
 func (m *Display) RegisterHdrSdrRatioChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1022,7 +1029,7 @@ func (m *Display) RegisterHdrSdrRatioChangedListener(arg0 *jni.Object, arg1 *jni
 func (m *Display) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1031,7 +1038,8 @@ func (m *Display) ToString() (string, error) {
 			callErr = fmt.Errorf("android.view.Display.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDisplayToString,
 		)
@@ -1048,7 +1056,7 @@ func (m *Display) ToString() (string, error) {
 func (m *Display) UnregisterHdrSdrRatioChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -27,7 +27,7 @@ type SharedPreferencesEditor struct {
 func (m *SharedPreferencesEditor) Apply() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *SharedPreferencesEditor) Apply() error {
 func (m *SharedPreferencesEditor) Clear() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -79,7 +79,7 @@ func (m *SharedPreferencesEditor) Clear() (*jni.Object, error) {
 func (m *SharedPreferencesEditor) Commit() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +88,8 @@ func (m *SharedPreferencesEditor) Commit() (bool, error) {
 			callErr = fmt.Errorf("android.content.SharedPreferences$Editor.commit is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midSharedPreferencesEditorCommit,
 		)
@@ -105,7 +106,7 @@ func (m *SharedPreferencesEditor) Commit() (bool, error) {
 func (m *SharedPreferencesEditor) PutBoolean(arg0 string, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -145,7 +146,7 @@ func (m *SharedPreferencesEditor) PutBoolean(arg0 string, arg1 bool) (*jni.Objec
 func (m *SharedPreferencesEditor) PutFloat(arg0 string, arg1 float32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -180,7 +181,7 @@ func (m *SharedPreferencesEditor) PutFloat(arg0 string, arg1 float32) (*jni.Obje
 func (m *SharedPreferencesEditor) PutInt(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -215,7 +216,7 @@ func (m *SharedPreferencesEditor) PutInt(arg0 string, arg1 int32) (*jni.Object, 
 func (m *SharedPreferencesEditor) PutLong(arg0 string, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -250,7 +251,7 @@ func (m *SharedPreferencesEditor) PutLong(arg0 string, arg1 int64) (*jni.Object,
 func (m *SharedPreferencesEditor) PutString(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -290,7 +291,7 @@ func (m *SharedPreferencesEditor) PutString(arg0 string, arg1 string) (*jni.Obje
 func (m *SharedPreferencesEditor) PutStringSet(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -325,7 +326,7 @@ func (m *SharedPreferencesEditor) PutStringSet(arg0 string, arg1 *jni.Object) (*
 func (m *SharedPreferencesEditor) Remove(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

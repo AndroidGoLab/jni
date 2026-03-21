@@ -27,7 +27,7 @@ type ParcelFileDescriptor struct {
 func (m *ParcelFileDescriptor) CanDetectErrors() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -36,7 +36,8 @@ func (m *ParcelFileDescriptor) CanDetectErrors() (bool, error) {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.canDetectErrors is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midParcelFileDescriptorCanDetectErrors,
 		)
@@ -53,7 +54,7 @@ func (m *ParcelFileDescriptor) CanDetectErrors() (bool, error) {
 func (m *ParcelFileDescriptor) CheckError() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -75,7 +76,7 @@ func (m *ParcelFileDescriptor) CheckError() error {
 func (m *ParcelFileDescriptor) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -97,7 +98,7 @@ func (m *ParcelFileDescriptor) Close() error {
 func (m *ParcelFileDescriptor) CloseWithError(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -124,7 +125,7 @@ func (m *ParcelFileDescriptor) CloseWithError(arg0 string) error {
 func (m *ParcelFileDescriptor) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -149,7 +150,7 @@ func (m *ParcelFileDescriptor) DescribeContents() (int32, error) {
 func (m *ParcelFileDescriptor) DetachFd() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -174,7 +175,7 @@ func (m *ParcelFileDescriptor) DetachFd() (int32, error) {
 func (m *ParcelFileDescriptor) Dup0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -204,7 +205,7 @@ func (m *ParcelFileDescriptor) Dup0() (*jni.Object, error) {
 func (m *ParcelFileDescriptor) GetFd() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -229,7 +230,7 @@ func (m *ParcelFileDescriptor) GetFd() (int32, error) {
 func (m *ParcelFileDescriptor) GetFileDescriptor() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -259,7 +260,7 @@ func (m *ParcelFileDescriptor) GetFileDescriptor() (*jni.Object, error) {
 func (m *ParcelFileDescriptor) GetStatSize() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -284,7 +285,7 @@ func (m *ParcelFileDescriptor) GetStatSize() (int64, error) {
 func (m *ParcelFileDescriptor) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -293,7 +294,8 @@ func (m *ParcelFileDescriptor) ToString() (string, error) {
 			callErr = fmt.Errorf("android.os.ParcelFileDescriptor.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midParcelFileDescriptorToString,
 		)
@@ -310,7 +312,7 @@ func (m *ParcelFileDescriptor) ToString() (string, error) {
 func (m *ParcelFileDescriptor) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -333,7 +335,7 @@ func (m *ParcelFileDescriptor) WriteToParcel(arg0 *jni.Object, arg1 int32) error
 func (m *ParcelFileDescriptor) AdoptFd(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -364,7 +366,7 @@ func (m *ParcelFileDescriptor) AdoptFd(arg0 int32) (*jni.Object, error) {
 func (m *ParcelFileDescriptor) CreatePipe() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -394,7 +396,7 @@ func (m *ParcelFileDescriptor) CreatePipe() (*jni.Object, error) {
 func (m *ParcelFileDescriptor) CreateReliablePipe() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -424,7 +426,7 @@ func (m *ParcelFileDescriptor) CreateReliablePipe() (*jni.Object, error) {
 func (m *ParcelFileDescriptor) CreateReliableSocketPair() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -454,7 +456,7 @@ func (m *ParcelFileDescriptor) CreateReliableSocketPair() (*jni.Object, error) {
 func (m *ParcelFileDescriptor) CreateSocketPair() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -484,7 +486,7 @@ func (m *ParcelFileDescriptor) CreateSocketPair() (*jni.Object, error) {
 func (m *ParcelFileDescriptor) Dup1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -515,7 +517,7 @@ func (m *ParcelFileDescriptor) Dup1_1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *ParcelFileDescriptor) FromDatagramSocket(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -546,7 +548,7 @@ func (m *ParcelFileDescriptor) FromDatagramSocket(arg0 *jni.Object) (*jni.Object
 func (m *ParcelFileDescriptor) FromFd(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -577,7 +579,7 @@ func (m *ParcelFileDescriptor) FromFd(arg0 int32) (*jni.Object, error) {
 func (m *ParcelFileDescriptor) FromSocket(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -608,7 +610,7 @@ func (m *ParcelFileDescriptor) FromSocket(arg0 *jni.Object) (*jni.Object, error)
 func (m *ParcelFileDescriptor) Open(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -639,7 +641,7 @@ func (m *ParcelFileDescriptor) Open(arg0 *jni.Object, arg1 int32) (*jni.Object, 
 func (m *ParcelFileDescriptor) ParseMode(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

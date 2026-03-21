@@ -27,7 +27,7 @@ type WifiP2pGroup struct {
 func (m *WifiP2pGroup) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *WifiP2pGroup) DescribeContents() (int32, error) {
 func (m *WifiP2pGroup) GetClientList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *WifiP2pGroup) GetClientList() (*jni.Object, error) {
 func (m *WifiP2pGroup) GetFrequency() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +107,7 @@ func (m *WifiP2pGroup) GetFrequency() (int32, error) {
 func (m *WifiP2pGroup) GetGroupOwnerBssid() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -137,7 +137,7 @@ func (m *WifiP2pGroup) GetGroupOwnerBssid() (*jni.Object, error) {
 func (m *WifiP2pGroup) GetInterface() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -146,7 +146,8 @@ func (m *WifiP2pGroup) GetInterface() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pGroup.getInterface is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midWifiP2pGroupGetInterface,
 		)
@@ -163,7 +164,7 @@ func (m *WifiP2pGroup) GetInterface() (string, error) {
 func (m *WifiP2pGroup) GetNetworkId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -188,7 +189,7 @@ func (m *WifiP2pGroup) GetNetworkId() (int32, error) {
 func (m *WifiP2pGroup) GetNetworkName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -197,7 +198,8 @@ func (m *WifiP2pGroup) GetNetworkName() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pGroup.getNetworkName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midWifiP2pGroupGetNetworkName,
 		)
@@ -214,7 +216,7 @@ func (m *WifiP2pGroup) GetNetworkName() (string, error) {
 func (m *WifiP2pGroup) GetOwner() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -244,7 +246,7 @@ func (m *WifiP2pGroup) GetOwner() (*jni.Object, error) {
 func (m *WifiP2pGroup) GetPassphrase() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -253,7 +255,8 @@ func (m *WifiP2pGroup) GetPassphrase() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pGroup.getPassphrase is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midWifiP2pGroupGetPassphrase,
 		)
@@ -270,7 +273,7 @@ func (m *WifiP2pGroup) GetPassphrase() (string, error) {
 func (m *WifiP2pGroup) GetSecurityType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -295,7 +298,7 @@ func (m *WifiP2pGroup) GetSecurityType() (int32, error) {
 func (m *WifiP2pGroup) IsGroupOwner() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -304,7 +307,8 @@ func (m *WifiP2pGroup) IsGroupOwner() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pGroup.isGroupOwner is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiP2pGroupIsGroupOwner,
 		)
@@ -321,7 +325,7 @@ func (m *WifiP2pGroup) IsGroupOwner() (bool, error) {
 func (m *WifiP2pGroup) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -330,7 +334,8 @@ func (m *WifiP2pGroup) ToString() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pGroup.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midWifiP2pGroupToString,
 		)
@@ -347,7 +352,7 @@ func (m *WifiP2pGroup) ToString() (string, error) {
 func (m *WifiP2pGroup) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

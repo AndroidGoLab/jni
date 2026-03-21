@@ -71,7 +71,7 @@ func (m *MediaSessionManager) Close() {
 func (m *MediaSessionManager) AddOnActiveSessionsChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *MediaSessionManager) AddOnActiveSessionsChangedListener(arg0 *jni.Objec
 func (m *MediaSessionManager) AddOnMediaKeyEventSessionChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -117,7 +117,7 @@ func (m *MediaSessionManager) AddOnMediaKeyEventSessionChangedListener(arg0 *jni
 func (m *MediaSessionManager) AddOnSession2TokensChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -140,7 +140,7 @@ func (m *MediaSessionManager) AddOnSession2TokensChangedListener(arg0 *jni.Objec
 func (m *MediaSessionManager) GetActiveSessions(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -171,7 +171,7 @@ func (m *MediaSessionManager) GetActiveSessions(arg0 *jni.Object) (*jni.Object, 
 func (m *MediaSessionManager) GetMediaKeyEventSession() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -201,7 +201,7 @@ func (m *MediaSessionManager) GetMediaKeyEventSession() (*jni.Object, error) {
 func (m *MediaSessionManager) GetMediaKeyEventSessionPackageName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -210,7 +210,8 @@ func (m *MediaSessionManager) GetMediaKeyEventSessionPackageName() (string, erro
 			callErr = fmt.Errorf("android.media.session.MediaSessionManager.getMediaKeyEventSessionPackageName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaSessionManagerGetMediaKeyEventSessionPackageName,
 		)
@@ -227,7 +228,7 @@ func (m *MediaSessionManager) GetMediaKeyEventSessionPackageName() (string, erro
 func (m *MediaSessionManager) GetSession2Tokens() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -257,7 +258,7 @@ func (m *MediaSessionManager) GetSession2Tokens() (*jni.Object, error) {
 func (m *MediaSessionManager) IsTrustedForMediaControl(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -267,7 +268,8 @@ func (m *MediaSessionManager) IsTrustedForMediaControl(arg0 *jni.Object) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midMediaSessionManagerIsTrustedForMediaControl, jni.ObjectValue(arg0),
 		)
@@ -284,7 +286,7 @@ func (m *MediaSessionManager) IsTrustedForMediaControl(arg0 *jni.Object) (bool, 
 func (m *MediaSessionManager) NotifySession2Created(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -307,7 +309,7 @@ func (m *MediaSessionManager) NotifySession2Created(arg0 *jni.Object) error {
 func (m *MediaSessionManager) RemoveOnActiveSessionsChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -330,7 +332,7 @@ func (m *MediaSessionManager) RemoveOnActiveSessionsChangedListener(arg0 *jni.Ob
 func (m *MediaSessionManager) RemoveOnMediaKeyEventSessionChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -353,7 +355,7 @@ func (m *MediaSessionManager) RemoveOnMediaKeyEventSessionChangedListener(arg0 *
 func (m *MediaSessionManager) RemoveOnSession2TokensChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -27,7 +27,7 @@ type ContentResolver struct {
 func (m *ContentResolver) AcquireContentProviderClient1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -58,7 +58,7 @@ func (m *ContentResolver) AcquireContentProviderClient1(arg0 *jni.Object) (*jni.
 func (m *ContentResolver) AcquireContentProviderClient1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -93,7 +93,7 @@ func (m *ContentResolver) AcquireContentProviderClient1_1(arg0 string) (*jni.Obj
 func (m *ContentResolver) AcquireUnstableContentProviderClient1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -124,7 +124,7 @@ func (m *ContentResolver) AcquireUnstableContentProviderClient1(arg0 *jni.Object
 func (m *ContentResolver) AcquireUnstableContentProviderClient1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +159,7 @@ func (m *ContentResolver) AcquireUnstableContentProviderClient1_1(arg0 string) (
 func (m *ContentResolver) ApplyBatch(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -194,7 +194,7 @@ func (m *ContentResolver) ApplyBatch(arg0 string, arg1 *jni.Object) (*jni.Object
 func (m *ContentResolver) BulkInsert(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -225,7 +225,7 @@ func (m *ContentResolver) Call4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -271,7 +271,7 @@ func (m *ContentResolver) Call4_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -316,7 +316,7 @@ func (m *ContentResolver) Call4_1(
 func (m *ContentResolver) CancelSync1_2(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +339,7 @@ func (m *ContentResolver) CancelSync1_2(arg0 *jni.Object) error {
 func (m *ContentResolver) Canonicalize(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -370,7 +370,7 @@ func (m *ContentResolver) Canonicalize(arg0 *jni.Object) (*jni.Object, error) {
 func (m *ContentResolver) Delete2(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -400,7 +400,7 @@ func (m *ContentResolver) Delete3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -431,7 +431,7 @@ func (m *ContentResolver) Delete3_1(
 func (m *ContentResolver) GetOutgoingPersistedUriPermissions() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -461,7 +461,7 @@ func (m *ContentResolver) GetOutgoingPersistedUriPermissions() (*jni.Object, err
 func (m *ContentResolver) GetPersistedUriPermissions() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -491,7 +491,7 @@ func (m *ContentResolver) GetPersistedUriPermissions() (*jni.Object, error) {
 func (m *ContentResolver) GetStreamTypes(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -527,7 +527,7 @@ func (m *ContentResolver) GetStreamTypes(arg0 *jni.Object, arg1 string) (*jni.Ob
 func (m *ContentResolver) GetType(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -537,7 +537,8 @@ func (m *ContentResolver) GetType(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContentResolverGetType, jni.ObjectValue(arg0),
 		)
@@ -554,7 +555,7 @@ func (m *ContentResolver) GetType(arg0 *jni.Object) (string, error) {
 func (m *ContentResolver) GetTypeInfo(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -589,7 +590,7 @@ func (m *ContentResolver) GetTypeInfo(arg0 string) (*jni.Object, error) {
 func (m *ContentResolver) Insert2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -624,7 +625,7 @@ func (m *ContentResolver) Insert3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -659,7 +660,7 @@ func (m *ContentResolver) LoadThumbnail(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -690,7 +691,7 @@ func (m *ContentResolver) LoadThumbnail(
 func (m *ContentResolver) NotifyChange2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -717,7 +718,7 @@ func (m *ContentResolver) NotifyChange3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -749,7 +750,7 @@ func (m *ContentResolver) NotifyChange3_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -776,7 +777,7 @@ func (m *ContentResolver) NotifyChange3_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -803,7 +804,7 @@ func (m *ContentResolver) OpenAssetFile(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -839,7 +840,7 @@ func (m *ContentResolver) OpenAssetFile(
 func (m *ContentResolver) OpenAssetFileDescriptor2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -879,7 +880,7 @@ func (m *ContentResolver) OpenAssetFileDescriptor3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -919,7 +920,7 @@ func (m *ContentResolver) OpenFile(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -955,7 +956,7 @@ func (m *ContentResolver) OpenFile(
 func (m *ContentResolver) OpenFileDescriptor2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -995,7 +996,7 @@ func (m *ContentResolver) OpenFileDescriptor3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1031,7 +1032,7 @@ func (m *ContentResolver) OpenFileDescriptor3_1(
 func (m *ContentResolver) OpenInputStream(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1062,7 +1063,7 @@ func (m *ContentResolver) OpenInputStream(arg0 *jni.Object) (*jni.Object, error)
 func (m *ContentResolver) OpenOutputStream1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1093,7 +1094,7 @@ func (m *ContentResolver) OpenOutputStream1(arg0 *jni.Object) (*jni.Object, erro
 func (m *ContentResolver) OpenOutputStream2_1(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1134,7 +1135,7 @@ func (m *ContentResolver) OpenTypedAssetFile(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1174,7 +1175,7 @@ func (m *ContentResolver) OpenTypedAssetFileDescriptor3(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1215,7 +1216,7 @@ func (m *ContentResolver) OpenTypedAssetFileDescriptor4_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1256,7 +1257,7 @@ func (m *ContentResolver) Query4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1293,7 +1294,7 @@ func (m *ContentResolver) Query5_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1341,7 +1342,7 @@ func (m *ContentResolver) Query6_2(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1386,7 +1387,7 @@ func (m *ContentResolver) Refresh(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1396,7 +1397,8 @@ func (m *ContentResolver) Refresh(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContentResolverRefresh, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -1417,7 +1419,7 @@ func (m *ContentResolver) RegisterContentObserver(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1445,7 +1447,7 @@ func (m *ContentResolver) RegisterContentObserver(
 func (m *ContentResolver) ReleasePersistableUriPermission(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1468,7 +1470,7 @@ func (m *ContentResolver) ReleasePersistableUriPermission(arg0 *jni.Object, arg1
 func (m *ContentResolver) StartSync(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1491,7 +1493,7 @@ func (m *ContentResolver) StartSync(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *ContentResolver) TakePersistableUriPermission(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1514,7 +1516,7 @@ func (m *ContentResolver) TakePersistableUriPermission(arg0 *jni.Object, arg1 in
 func (m *ContentResolver) Uncanonicalize(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1545,7 +1547,7 @@ func (m *ContentResolver) Uncanonicalize(arg0 *jni.Object) (*jni.Object, error) 
 func (m *ContentResolver) UnregisterContentObserver(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1572,7 +1574,7 @@ func (m *ContentResolver) Update3(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1603,7 +1605,7 @@ func (m *ContentResolver) Update4_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1639,7 +1641,7 @@ func (m *ContentResolver) AddPeriodicSync(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1667,7 +1669,7 @@ func (m *ContentResolver) AddPeriodicSync(
 func (m *ContentResolver) AddStatusChangeListener(arg0 int32, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1698,7 +1700,7 @@ func (m *ContentResolver) AddStatusChangeListener(arg0 int32, arg1 *jni.Object) 
 func (m *ContentResolver) CancelSync2(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1726,7 +1728,7 @@ func (m *ContentResolver) CancelSync2(arg0 *jni.Object, arg1 string) error {
 func (m *ContentResolver) CancelSync1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1749,7 +1751,7 @@ func (m *ContentResolver) CancelSync1_1(arg0 *jni.Object) error {
 func (m *ContentResolver) GetCurrentSync() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1779,7 +1781,7 @@ func (m *ContentResolver) GetCurrentSync() (*jni.Object, error) {
 func (m *ContentResolver) GetCurrentSyncs() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1809,7 +1811,7 @@ func (m *ContentResolver) GetCurrentSyncs() (*jni.Object, error) {
 func (m *ContentResolver) GetIsSyncable(arg0 *jni.Object, arg1 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1840,7 +1842,7 @@ func (m *ContentResolver) GetIsSyncable(arg0 *jni.Object, arg1 string) (int32, e
 func (m *ContentResolver) GetMasterSyncAutomatically() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1849,7 +1851,8 @@ func (m *ContentResolver) GetMasterSyncAutomatically() (bool, error) {
 			callErr = fmt.Errorf("android.content.ContentResolver.getMasterSyncAutomatically is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
 			midContentResolverGetMasterSyncAutomatically,
 		)
@@ -1866,7 +1869,7 @@ func (m *ContentResolver) GetMasterSyncAutomatically() (bool, error) {
 func (m *ContentResolver) GetPeriodicSyncs(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1902,7 +1905,7 @@ func (m *ContentResolver) GetPeriodicSyncs(arg0 *jni.Object, arg1 string) (*jni.
 func (m *ContentResolver) GetSyncAdapterTypes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1932,7 +1935,7 @@ func (m *ContentResolver) GetSyncAdapterTypes() (*jni.Object, error) {
 func (m *ContentResolver) GetSyncAutomatically(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1947,7 +1950,8 @@ func (m *ContentResolver) GetSyncAutomatically(arg0 *jni.Object, arg1 string) (b
 			return err
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
 			midContentResolverGetSyncAutomatically, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -1964,7 +1968,7 @@ func (m *ContentResolver) GetSyncAutomatically(arg0 *jni.Object, arg1 string) (b
 func (m *ContentResolver) IsSyncActive(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1979,7 +1983,8 @@ func (m *ContentResolver) IsSyncActive(arg0 *jni.Object, arg1 string) (bool, err
 			return err
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
 			midContentResolverIsSyncActive, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -1996,7 +2001,7 @@ func (m *ContentResolver) IsSyncActive(arg0 *jni.Object, arg1 string) (bool, err
 func (m *ContentResolver) IsSyncPending(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2011,7 +2016,8 @@ func (m *ContentResolver) IsSyncPending(arg0 *jni.Object, arg1 string) (bool, er
 			return err
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
 			midContentResolverIsSyncPending, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -2032,7 +2038,7 @@ func (m *ContentResolver) RemovePeriodicSync(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2060,7 +2066,7 @@ func (m *ContentResolver) RemovePeriodicSync(
 func (m *ContentResolver) RemoveStatusChangeListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2087,7 +2093,7 @@ func (m *ContentResolver) RequestSync3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2115,7 +2121,7 @@ func (m *ContentResolver) RequestSync3(
 func (m *ContentResolver) RequestSync1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2142,7 +2148,7 @@ func (m *ContentResolver) SetIsSyncable(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2170,7 +2176,7 @@ func (m *ContentResolver) SetIsSyncable(
 func (m *ContentResolver) SetMasterSyncAutomatically(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2201,7 +2207,7 @@ func (m *ContentResolver) SetSyncAutomatically(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2234,7 +2240,7 @@ func (m *ContentResolver) SetSyncAutomatically(
 func (m *ContentResolver) ValidateSyncExtrasBundle(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2257,7 +2263,7 @@ func (m *ContentResolver) ValidateSyncExtrasBundle(arg0 *jni.Object) error {
 func (m *ContentResolver) Wrap1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2288,7 +2294,7 @@ func (m *ContentResolver) Wrap1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *ContentResolver) Wrap1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

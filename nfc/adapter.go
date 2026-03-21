@@ -27,7 +27,7 @@ type Adapter struct {
 func (m *Adapter) Disable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -36,7 +36,8 @@ func (m *Adapter) Disable() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.disable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterDisable,
 		)
@@ -53,7 +54,7 @@ func (m *Adapter) Disable() (bool, error) {
 func (m *Adapter) DisableForegroundDispatch(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -76,7 +77,7 @@ func (m *Adapter) DisableForegroundDispatch(arg0 *jni.Object) error {
 func (m *Adapter) DisableReaderMode(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -99,7 +100,7 @@ func (m *Adapter) DisableReaderMode(arg0 *jni.Object) error {
 func (m *Adapter) Enable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -108,7 +109,8 @@ func (m *Adapter) Enable() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.enable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterEnable,
 		)
@@ -130,7 +132,7 @@ func (m *Adapter) EnableForegroundDispatch(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -158,7 +160,7 @@ func (m *Adapter) EnableReaderMode(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -181,7 +183,7 @@ func (m *Adapter) EnableReaderMode(
 func (m *Adapter) GetNfcAntennaInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -211,7 +213,7 @@ func (m *Adapter) GetNfcAntennaInfo() (*jni.Object, error) {
 func (m *Adapter) IsEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -220,7 +222,8 @@ func (m *Adapter) IsEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsEnabled,
 		)
@@ -237,7 +240,7 @@ func (m *Adapter) IsEnabled() (bool, error) {
 func (m *Adapter) IsObserveModeEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -246,7 +249,8 @@ func (m *Adapter) IsObserveModeEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isObserveModeEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsObserveModeEnabled,
 		)
@@ -263,7 +267,7 @@ func (m *Adapter) IsObserveModeEnabled() (bool, error) {
 func (m *Adapter) IsObserveModeSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -272,7 +276,8 @@ func (m *Adapter) IsObserveModeSupported() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isObserveModeSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsObserveModeSupported,
 		)
@@ -289,7 +294,7 @@ func (m *Adapter) IsObserveModeSupported() (bool, error) {
 func (m *Adapter) IsReaderOptionEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -298,7 +303,8 @@ func (m *Adapter) IsReaderOptionEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isReaderOptionEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsReaderOptionEnabled,
 		)
@@ -315,7 +321,7 @@ func (m *Adapter) IsReaderOptionEnabled() (bool, error) {
 func (m *Adapter) IsReaderOptionSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -324,7 +330,8 @@ func (m *Adapter) IsReaderOptionSupported() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isReaderOptionSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsReaderOptionSupported,
 		)
@@ -341,7 +348,7 @@ func (m *Adapter) IsReaderOptionSupported() (bool, error) {
 func (m *Adapter) IsSecureNfcEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -350,7 +357,8 @@ func (m *Adapter) IsSecureNfcEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isSecureNfcEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsSecureNfcEnabled,
 		)
@@ -367,7 +375,7 @@ func (m *Adapter) IsSecureNfcEnabled() (bool, error) {
 func (m *Adapter) IsSecureNfcSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -376,7 +384,8 @@ func (m *Adapter) IsSecureNfcSupported() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isSecureNfcSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsSecureNfcSupported,
 		)
@@ -393,7 +402,7 @@ func (m *Adapter) IsSecureNfcSupported() (bool, error) {
 func (m *Adapter) IsTagIntentAllowed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -402,7 +411,8 @@ func (m *Adapter) IsTagIntentAllowed() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isTagIntentAllowed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsTagIntentAllowed,
 		)
@@ -419,7 +429,7 @@ func (m *Adapter) IsTagIntentAllowed() (bool, error) {
 func (m *Adapter) IsTagIntentAppPreferenceSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -428,7 +438,8 @@ func (m *Adapter) IsTagIntentAppPreferenceSupported() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.NfcAdapter.isTagIntentAppPreferenceSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsTagIntentAppPreferenceSupported,
 		)
@@ -445,7 +456,7 @@ func (m *Adapter) IsTagIntentAppPreferenceSupported() (bool, error) {
 func (m *Adapter) ResetDiscoveryTechnology(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -472,7 +483,7 @@ func (m *Adapter) SetDiscoveryTechnology(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -495,7 +506,7 @@ func (m *Adapter) SetDiscoveryTechnology(
 func (m *Adapter) SetObserveModeEnabled(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -509,7 +520,8 @@ func (m *Adapter) SetObserveModeEnabled(arg0 bool) (bool, error) {
 			jArg0 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterSetObserveModeEnabled, jni.BooleanValue(jArg0),
 		)
@@ -526,7 +538,7 @@ func (m *Adapter) SetObserveModeEnabled(arg0 bool) (bool, error) {
 func (m *Adapter) GetDefaultAdapter(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

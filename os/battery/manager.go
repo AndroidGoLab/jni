@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) ComputeChargeTimeRemaining() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -96,7 +96,7 @@ func (m *Manager) ComputeChargeTimeRemaining() (int64, error) {
 func (m *Manager) GetIntProperty(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -122,7 +122,7 @@ func (m *Manager) GetIntProperty(arg0 int32) (int32, error) {
 func (m *Manager) GetLongProperty(arg0 int32) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -148,7 +148,7 @@ func (m *Manager) GetLongProperty(arg0 int32) (int64, error) {
 func (m *Manager) GetStringProperty(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -158,7 +158,8 @@ func (m *Manager) GetStringProperty(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetStringProperty, jni.IntValue(arg0),
 		)
@@ -175,7 +176,7 @@ func (m *Manager) GetStringProperty(arg0 int32) (string, error) {
 func (m *Manager) IsCharging() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -184,7 +185,8 @@ func (m *Manager) IsCharging() (bool, error) {
 			callErr = fmt.Errorf("android.os.BatteryManager.isCharging is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsCharging,
 		)

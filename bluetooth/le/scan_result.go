@@ -27,7 +27,7 @@ type ScanResult struct {
 func (m *ScanResult) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *ScanResult) DescribeContents() (int32, error) {
 func (m *ScanResult) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *ScanResult) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *ScanResult) Equals(arg0 *jni.Object) (bool, error) {
 func (m *ScanResult) GetAdvertisingSid() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -104,7 +105,7 @@ func (m *ScanResult) GetAdvertisingSid() (int32, error) {
 func (m *ScanResult) GetDataStatus() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -129,7 +130,7 @@ func (m *ScanResult) GetDataStatus() (int32, error) {
 func (m *ScanResult) GetDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +160,7 @@ func (m *ScanResult) GetDevice() (*jni.Object, error) {
 func (m *ScanResult) GetPeriodicAdvertisingInterval() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -184,7 +185,7 @@ func (m *ScanResult) GetPeriodicAdvertisingInterval() (int32, error) {
 func (m *ScanResult) GetPrimaryPhy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -209,7 +210,7 @@ func (m *ScanResult) GetPrimaryPhy() (int32, error) {
 func (m *ScanResult) GetRssi() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -234,7 +235,7 @@ func (m *ScanResult) GetRssi() (int32, error) {
 func (m *ScanResult) GetScanRecord() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -264,7 +265,7 @@ func (m *ScanResult) GetScanRecord() (*jni.Object, error) {
 func (m *ScanResult) GetSecondaryPhy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -289,7 +290,7 @@ func (m *ScanResult) GetSecondaryPhy() (int32, error) {
 func (m *ScanResult) GetTimestampNanos() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -314,7 +315,7 @@ func (m *ScanResult) GetTimestampNanos() (int64, error) {
 func (m *ScanResult) GetTxPower() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +340,7 @@ func (m *ScanResult) GetTxPower() (int32, error) {
 func (m *ScanResult) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -364,7 +365,7 @@ func (m *ScanResult) HashCode() (int32, error) {
 func (m *ScanResult) IsConnectable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -373,7 +374,8 @@ func (m *ScanResult) IsConnectable() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.isConnectable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIsConnectable,
 		)
@@ -390,7 +392,7 @@ func (m *ScanResult) IsConnectable() (bool, error) {
 func (m *ScanResult) IsLegacy() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -399,7 +401,8 @@ func (m *ScanResult) IsLegacy() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.isLegacy is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIsLegacy,
 		)
@@ -416,7 +419,7 @@ func (m *ScanResult) IsLegacy() (bool, error) {
 func (m *ScanResult) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -425,7 +428,8 @@ func (m *ScanResult) ToString() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midScanResultToString,
 		)
@@ -442,7 +446,7 @@ func (m *ScanResult) ToString() (string, error) {
 func (m *ScanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

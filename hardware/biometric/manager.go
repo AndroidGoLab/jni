@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) CanAuthenticate0() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -96,7 +96,7 @@ func (m *Manager) CanAuthenticate0() (int32, error) {
 func (m *Manager) CanAuthenticate1_1(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -122,7 +122,7 @@ func (m *Manager) CanAuthenticate1_1(arg0 int32) (int32, error) {
 func (m *Manager) GetLastAuthenticationTime(arg0 int32) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -148,7 +148,7 @@ func (m *Manager) GetLastAuthenticationTime(arg0 int32) (int64, error) {
 func (m *Manager) GetStrings(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

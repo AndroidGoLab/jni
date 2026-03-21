@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) AddGpsStatusListener(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -81,7 +81,8 @@ func (m *Manager) AddGpsStatusListener(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAddGpsStatusListener, jni.ObjectValue(arg0),
 		)
@@ -98,7 +99,7 @@ func (m *Manager) AddGpsStatusListener(arg0 *jni.Object) (bool, error) {
 func (m *Manager) AddNmeaListener1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -108,7 +109,8 @@ func (m *Manager) AddNmeaListener1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAddNmeaListener1, jni.ObjectValue(arg0),
 		)
@@ -125,7 +127,7 @@ func (m *Manager) AddNmeaListener1(arg0 *jni.Object) (bool, error) {
 func (m *Manager) AddNmeaListener1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -135,7 +137,8 @@ func (m *Manager) AddNmeaListener1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAddNmeaListener1_1, jni.ObjectValue(arg0),
 		)
@@ -152,7 +155,7 @@ func (m *Manager) AddNmeaListener1_1(arg0 *jni.Object) (bool, error) {
 func (m *Manager) AddNmeaListener2_2(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -162,7 +165,8 @@ func (m *Manager) AddNmeaListener2_2(arg0 *jni.Object, arg1 *jni.Object) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAddNmeaListener2_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -185,7 +189,7 @@ func (m *Manager) AddProximityAlert(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -208,7 +212,7 @@ func (m *Manager) AddProximityAlert(
 func (m *Manager) AddTestProvider2(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -239,7 +243,7 @@ func (m *Manager) AddTestProvider3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -277,7 +281,7 @@ func (m *Manager) AddTestProvider10_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +343,7 @@ func (m *Manager) AddTestProvider10_2(
 func (m *Manager) ClearTestProviderEnabled(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -366,7 +370,7 @@ func (m *Manager) ClearTestProviderEnabled(arg0 string) error {
 func (m *Manager) ClearTestProviderLocation(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -393,7 +397,7 @@ func (m *Manager) ClearTestProviderLocation(arg0 string) error {
 func (m *Manager) ClearTestProviderStatus(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -420,7 +424,7 @@ func (m *Manager) ClearTestProviderStatus(arg0 string) error {
 func (m *Manager) GetAllProviders() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -450,7 +454,7 @@ func (m *Manager) GetAllProviders() (*jni.Object, error) {
 func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -465,7 +469,8 @@ func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 			jArg1 = jniTrue
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetBestProvider, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -488,7 +493,7 @@ func (m *Manager) GetCurrentLocation5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -520,7 +525,7 @@ func (m *Manager) GetCurrentLocation4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -547,7 +552,7 @@ func (m *Manager) GetCurrentLocation4_1(
 func (m *Manager) GetGnssAntennaInfos() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -577,7 +582,7 @@ func (m *Manager) GetGnssAntennaInfos() (*jni.Object, error) {
 func (m *Manager) GetGnssCapabilities() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -607,7 +612,7 @@ func (m *Manager) GetGnssCapabilities() (*jni.Object, error) {
 func (m *Manager) GetGnssHardwareModelName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -616,7 +621,8 @@ func (m *Manager) GetGnssHardwareModelName() (string, error) {
 			callErr = fmt.Errorf("android.location.LocationManager.getGnssHardwareModelName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetGnssHardwareModelName,
 		)
@@ -633,7 +639,7 @@ func (m *Manager) GetGnssHardwareModelName() (string, error) {
 func (m *Manager) GetGnssYearOfHardware() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -658,7 +664,7 @@ func (m *Manager) GetGnssYearOfHardware() (int32, error) {
 func (m *Manager) GetGpsStatus(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -689,7 +695,7 @@ func (m *Manager) GetGpsStatus(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) GetLastKnownLocation(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -724,7 +730,7 @@ func (m *Manager) GetLastKnownLocation(arg0 string) (*jni.Object, error) {
 func (m *Manager) GetProvider(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -759,7 +765,7 @@ func (m *Manager) GetProvider(arg0 string) (*jni.Object, error) {
 func (m *Manager) GetProviderProperties(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -794,7 +800,7 @@ func (m *Manager) GetProviderProperties(arg0 string) (*jni.Object, error) {
 func (m *Manager) GetProviders2(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -830,7 +836,7 @@ func (m *Manager) GetProviders2(arg0 *jni.Object, arg1 bool) (*jni.Object, error
 func (m *Manager) GetProviders1_1(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -865,7 +871,7 @@ func (m *Manager) GetProviders1_1(arg0 bool) (*jni.Object, error) {
 func (m *Manager) HasProvider(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -879,7 +885,8 @@ func (m *Manager) HasProvider(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHasProvider, jni.ObjectValue(&jArg0.Object),
 		)
@@ -896,7 +903,7 @@ func (m *Manager) HasProvider(arg0 string) (bool, error) {
 func (m *Manager) IsLocationEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -905,7 +912,8 @@ func (m *Manager) IsLocationEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.location.LocationManager.isLocationEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsLocationEnabled,
 		)
@@ -922,7 +930,7 @@ func (m *Manager) IsLocationEnabled() (bool, error) {
 func (m *Manager) IsProviderEnabled(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -936,7 +944,8 @@ func (m *Manager) IsProviderEnabled(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsProviderEnabled, jni.ObjectValue(&jArg0.Object),
 		)
@@ -953,7 +962,7 @@ func (m *Manager) IsProviderEnabled(arg0 string) (bool, error) {
 func (m *Manager) RegisterAntennaInfoListener(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -963,7 +972,8 @@ func (m *Manager) RegisterAntennaInfoListener(arg0 *jni.Object, arg1 *jni.Object
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterAntennaInfoListener, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -984,7 +994,7 @@ func (m *Manager) RegisterGnssMeasurementsCallback3(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -994,7 +1004,8 @@ func (m *Manager) RegisterGnssMeasurementsCallback3(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterGnssMeasurementsCallback3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -1011,7 +1022,7 @@ func (m *Manager) RegisterGnssMeasurementsCallback3(
 func (m *Manager) RegisterGnssMeasurementsCallback1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1021,7 +1032,8 @@ func (m *Manager) RegisterGnssMeasurementsCallback1_1(arg0 *jni.Object) (bool, e
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterGnssMeasurementsCallback1_1, jni.ObjectValue(arg0),
 		)
@@ -1038,7 +1050,7 @@ func (m *Manager) RegisterGnssMeasurementsCallback1_1(arg0 *jni.Object) (bool, e
 func (m *Manager) RegisterGnssMeasurementsCallback2_2(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1048,7 +1060,8 @@ func (m *Manager) RegisterGnssMeasurementsCallback2_2(arg0 *jni.Object, arg1 *jn
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterGnssMeasurementsCallback2_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -1065,7 +1078,7 @@ func (m *Manager) RegisterGnssMeasurementsCallback2_2(arg0 *jni.Object, arg1 *jn
 func (m *Manager) RegisterGnssNavigationMessageCallback1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1075,7 +1088,8 @@ func (m *Manager) RegisterGnssNavigationMessageCallback1(arg0 *jni.Object) (bool
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterGnssNavigationMessageCallback1, jni.ObjectValue(arg0),
 		)
@@ -1092,7 +1106,7 @@ func (m *Manager) RegisterGnssNavigationMessageCallback1(arg0 *jni.Object) (bool
 func (m *Manager) RegisterGnssNavigationMessageCallback2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1102,7 +1116,8 @@ func (m *Manager) RegisterGnssNavigationMessageCallback2_1(arg0 *jni.Object, arg
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterGnssNavigationMessageCallback2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -1119,7 +1134,7 @@ func (m *Manager) RegisterGnssNavigationMessageCallback2_1(arg0 *jni.Object, arg
 func (m *Manager) RegisterGnssStatusCallback1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1129,7 +1144,8 @@ func (m *Manager) RegisterGnssStatusCallback1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterGnssStatusCallback1, jni.ObjectValue(arg0),
 		)
@@ -1146,7 +1162,7 @@ func (m *Manager) RegisterGnssStatusCallback1(arg0 *jni.Object) (bool, error) {
 func (m *Manager) RegisterGnssStatusCallback2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1156,7 +1172,8 @@ func (m *Manager) RegisterGnssStatusCallback2_1(arg0 *jni.Object, arg1 *jni.Obje
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRegisterGnssStatusCallback2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -1173,7 +1190,7 @@ func (m *Manager) RegisterGnssStatusCallback2_1(arg0 *jni.Object, arg1 *jni.Obje
 func (m *Manager) RemoveGpsStatusListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1196,7 +1213,7 @@ func (m *Manager) RemoveGpsStatusListener(arg0 *jni.Object) error {
 func (m *Manager) RemoveNmeaListener1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1219,7 +1236,7 @@ func (m *Manager) RemoveNmeaListener1(arg0 *jni.Object) error {
 func (m *Manager) RemoveNmeaListener1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1242,7 +1259,7 @@ func (m *Manager) RemoveNmeaListener1_1(arg0 *jni.Object) error {
 func (m *Manager) RemoveProximityAlert(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1265,7 +1282,7 @@ func (m *Manager) RemoveProximityAlert(arg0 *jni.Object) error {
 func (m *Manager) RemoveTestProvider(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1292,7 +1309,7 @@ func (m *Manager) RemoveTestProvider(arg0 string) error {
 func (m *Manager) RemoveUpdates1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1315,7 +1332,7 @@ func (m *Manager) RemoveUpdates1(arg0 *jni.Object) error {
 func (m *Manager) RemoveUpdates1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1342,7 +1359,7 @@ func (m *Manager) RequestFlush3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1373,7 +1390,7 @@ func (m *Manager) RequestFlush3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1404,7 +1421,7 @@ func (m *Manager) RequestLocationUpdates3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1436,7 +1453,7 @@ func (m *Manager) RequestLocationUpdates4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1468,7 +1485,7 @@ func (m *Manager) RequestLocationUpdates4_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1500,7 +1517,7 @@ func (m *Manager) RequestLocationUpdates4_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1533,7 +1550,7 @@ func (m *Manager) RequestLocationUpdates5_4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1566,7 +1583,7 @@ func (m *Manager) RequestLocationUpdates5_5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1598,7 +1615,7 @@ func (m *Manager) RequestLocationUpdates4_6(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1627,7 +1644,7 @@ func (m *Manager) RequestLocationUpdates5_7(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1656,7 +1673,7 @@ func (m *Manager) RequestLocationUpdates5_8(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1679,7 +1696,7 @@ func (m *Manager) RequestLocationUpdates5_8(
 func (m *Manager) RequestSingleUpdate2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1706,7 +1723,7 @@ func (m *Manager) RequestSingleUpdate3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1729,7 +1746,7 @@ func (m *Manager) RequestSingleUpdate3_1(
 func (m *Manager) RequestSingleUpdate2_2(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1760,7 +1777,7 @@ func (m *Manager) RequestSingleUpdate3_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1791,7 +1808,7 @@ func (m *Manager) SendExtraCommand(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1810,7 +1827,8 @@ func (m *Manager) SendExtraCommand(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerSendExtraCommand, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
@@ -1827,7 +1845,7 @@ func (m *Manager) SendExtraCommand(
 func (m *Manager) SetTestProviderEnabled(arg0 string, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1859,7 +1877,7 @@ func (m *Manager) SetTestProviderEnabled(arg0 string, arg1 bool) error {
 func (m *Manager) SetTestProviderLocation(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1891,7 +1909,7 @@ func (m *Manager) SetTestProviderStatus(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1918,7 +1936,7 @@ func (m *Manager) SetTestProviderStatus(
 func (m *Manager) UnregisterAntennaInfoListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1941,7 +1959,7 @@ func (m *Manager) UnregisterAntennaInfoListener(arg0 *jni.Object) error {
 func (m *Manager) UnregisterGnssMeasurementsCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1964,7 +1982,7 @@ func (m *Manager) UnregisterGnssMeasurementsCallback(arg0 *jni.Object) error {
 func (m *Manager) UnregisterGnssNavigationMessageCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1987,7 +2005,7 @@ func (m *Manager) UnregisterGnssNavigationMessageCallback(arg0 *jni.Object) erro
 func (m *Manager) UnregisterGnssStatusCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

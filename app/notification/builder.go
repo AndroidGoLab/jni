@@ -27,7 +27,7 @@ type Builder struct {
 func (m *Builder) AddAction1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,7 @@ func (m *Builder) AddAction3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -98,7 +98,7 @@ func (m *Builder) AddAction3_1(
 func (m *Builder) AddExtras(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -129,7 +129,7 @@ func (m *Builder) AddExtras(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) AddPerson1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -160,7 +160,7 @@ func (m *Builder) AddPerson1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) AddPerson1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +195,7 @@ func (m *Builder) AddPerson1_1(arg0 string) (*jni.Object, error) {
 func (m *Builder) Build() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -225,7 +225,7 @@ func (m *Builder) Build() (*jni.Object, error) {
 func (m *Builder) CreateBigContentView() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -255,7 +255,7 @@ func (m *Builder) CreateBigContentView() (*jni.Object, error) {
 func (m *Builder) CreateContentView() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -285,7 +285,7 @@ func (m *Builder) CreateContentView() (*jni.Object, error) {
 func (m *Builder) CreateHeadsUpContentView() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -315,7 +315,7 @@ func (m *Builder) CreateHeadsUpContentView() (*jni.Object, error) {
 func (m *Builder) Extend(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -346,7 +346,7 @@ func (m *Builder) Extend(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -376,7 +376,7 @@ func (m *Builder) GetExtras() (*jni.Object, error) {
 func (m *Builder) GetNotification() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -406,7 +406,7 @@ func (m *Builder) GetNotification() (*jni.Object, error) {
 func (m *Builder) GetStyle() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -436,7 +436,7 @@ func (m *Builder) GetStyle() (*jni.Object, error) {
 func (m *Builder) SetActions(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -467,7 +467,7 @@ func (m *Builder) SetActions(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetAllowSystemGeneratedContextualActions(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -502,7 +502,7 @@ func (m *Builder) SetAllowSystemGeneratedContextualActions(arg0 bool) (*jni.Obje
 func (m *Builder) SetAutoCancel(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -537,7 +537,7 @@ func (m *Builder) SetAutoCancel(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetBadgeIconType(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -568,7 +568,7 @@ func (m *Builder) SetBadgeIconType(arg0 int32) (*jni.Object, error) {
 func (m *Builder) SetBubbleMetadata(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -599,7 +599,7 @@ func (m *Builder) SetBubbleMetadata(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetCategory(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -634,7 +634,7 @@ func (m *Builder) SetCategory(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetChannelId(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -669,7 +669,7 @@ func (m *Builder) SetChannelId(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetChronometerCountDown(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -704,7 +704,7 @@ func (m *Builder) SetChronometerCountDown(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetColor(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -735,7 +735,7 @@ func (m *Builder) SetColor(arg0 int32) (*jni.Object, error) {
 func (m *Builder) SetColorized(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -770,7 +770,7 @@ func (m *Builder) SetColorized(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetContent(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -801,7 +801,7 @@ func (m *Builder) SetContent(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetContentInfo(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -836,7 +836,7 @@ func (m *Builder) SetContentInfo(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetContentIntent(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -867,7 +867,7 @@ func (m *Builder) SetContentIntent(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetContentText(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -902,7 +902,7 @@ func (m *Builder) SetContentText(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetContentTitle(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -937,7 +937,7 @@ func (m *Builder) SetContentTitle(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetCustomBigContentView(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -968,7 +968,7 @@ func (m *Builder) SetCustomBigContentView(arg0 *jni.Object) (*jni.Object, error)
 func (m *Builder) SetCustomContentView(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -999,7 +999,7 @@ func (m *Builder) SetCustomContentView(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetCustomHeadsUpContentView(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1030,7 +1030,7 @@ func (m *Builder) SetCustomHeadsUpContentView(arg0 *jni.Object) (*jni.Object, er
 func (m *Builder) SetDefaults(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1061,7 +1061,7 @@ func (m *Builder) SetDefaults(arg0 int32) (*jni.Object, error) {
 func (m *Builder) SetDeleteIntent(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1092,7 +1092,7 @@ func (m *Builder) SetDeleteIntent(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetExtras(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1123,7 +1123,7 @@ func (m *Builder) SetExtras(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetFlag(arg0 int32, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1159,7 +1159,7 @@ func (m *Builder) SetFlag(arg0 int32, arg1 bool) (*jni.Object, error) {
 func (m *Builder) SetForegroundServiceBehavior(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1190,7 +1190,7 @@ func (m *Builder) SetForegroundServiceBehavior(arg0 int32) (*jni.Object, error) 
 func (m *Builder) SetFullScreenIntent(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1226,7 +1226,7 @@ func (m *Builder) SetFullScreenIntent(arg0 *jni.Object, arg1 bool) (*jni.Object,
 func (m *Builder) SetGroup(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1261,7 +1261,7 @@ func (m *Builder) SetGroup(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetGroupAlertBehavior(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1292,7 +1292,7 @@ func (m *Builder) SetGroupAlertBehavior(arg0 int32) (*jni.Object, error) {
 func (m *Builder) SetGroupSummary(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1327,7 +1327,7 @@ func (m *Builder) SetGroupSummary(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetLargeIcon1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1358,7 +1358,7 @@ func (m *Builder) SetLargeIcon1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetLargeIcon1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1393,7 +1393,7 @@ func (m *Builder) SetLights(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1424,7 +1424,7 @@ func (m *Builder) SetLights(
 func (m *Builder) SetLocalOnly(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1459,7 +1459,7 @@ func (m *Builder) SetLocalOnly(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetLocusId(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1490,7 +1490,7 @@ func (m *Builder) SetLocusId(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetNumber(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1521,7 +1521,7 @@ func (m *Builder) SetNumber(arg0 int32) (*jni.Object, error) {
 func (m *Builder) SetOngoing(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1556,7 +1556,7 @@ func (m *Builder) SetOngoing(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetOnlyAlertOnce(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1591,7 +1591,7 @@ func (m *Builder) SetOnlyAlertOnce(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetPriority(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1626,7 +1626,7 @@ func (m *Builder) SetProgress(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1662,7 +1662,7 @@ func (m *Builder) SetProgress(
 func (m *Builder) SetPublicVersion(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1693,7 +1693,7 @@ func (m *Builder) SetPublicVersion(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetRemoteInputHistory(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1724,7 +1724,7 @@ func (m *Builder) SetRemoteInputHistory(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetSettingsText(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1759,7 +1759,7 @@ func (m *Builder) SetSettingsText(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetShortCriticalText(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1794,7 +1794,7 @@ func (m *Builder) SetShortCriticalText(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetShortcutId(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1829,7 +1829,7 @@ func (m *Builder) SetShortcutId(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetShowWhen(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1864,7 +1864,7 @@ func (m *Builder) SetShowWhen(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetSmallIcon1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1895,7 +1895,7 @@ func (m *Builder) SetSmallIcon1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetSmallIcon1_1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1926,7 +1926,7 @@ func (m *Builder) SetSmallIcon1_1(arg0 int32) (*jni.Object, error) {
 func (m *Builder) SetSmallIcon2_2(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1957,7 +1957,7 @@ func (m *Builder) SetSmallIcon2_2(arg0 int32, arg1 int32) (*jni.Object, error) {
 func (m *Builder) SetSortKey(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1992,7 +1992,7 @@ func (m *Builder) SetSortKey(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetSound1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2023,7 +2023,7 @@ func (m *Builder) SetSound1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetSound2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2054,7 +2054,7 @@ func (m *Builder) SetSound2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, 
 func (m *Builder) SetSound2_2(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2085,7 +2085,7 @@ func (m *Builder) SetSound2_2(arg0 *jni.Object, arg1 int32) (*jni.Object, error)
 func (m *Builder) SetStyle(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2116,7 +2116,7 @@ func (m *Builder) SetStyle(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetSubText(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2151,7 +2151,7 @@ func (m *Builder) SetSubText(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetTicker1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2186,7 +2186,7 @@ func (m *Builder) SetTicker1(arg0 string) (*jni.Object, error) {
 func (m *Builder) SetTicker2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2221,7 +2221,7 @@ func (m *Builder) SetTicker2_1(arg0 string, arg1 *jni.Object) (*jni.Object, erro
 func (m *Builder) SetTimeoutAfter(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2252,7 +2252,7 @@ func (m *Builder) SetTimeoutAfter(arg0 int64) (*jni.Object, error) {
 func (m *Builder) SetUsesChronometer(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2287,7 +2287,7 @@ func (m *Builder) SetUsesChronometer(arg0 bool) (*jni.Object, error) {
 func (m *Builder) SetVibrate(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2318,7 +2318,7 @@ func (m *Builder) SetVibrate(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Builder) SetVisibility(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2349,7 +2349,7 @@ func (m *Builder) SetVisibility(arg0 int32) (*jni.Object, error) {
 func (m *Builder) SetWhen(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2380,7 +2380,7 @@ func (m *Builder) SetWhen(arg0 int64) (*jni.Object, error) {
 func (m *Builder) RecoverBuilder(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

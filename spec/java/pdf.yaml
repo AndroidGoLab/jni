@@ -3257,9 +3257,6 @@ constants:
     - go_name: AllSaveFlag
       value: "31"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: ModeAppend
       value: "33554432"
       go_type: int

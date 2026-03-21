@@ -27,7 +27,7 @@ type Canvas struct {
 func (m *Canvas) ClipOutPath(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *Canvas) ClipOutPath(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipOutPath, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *Canvas) ClipOutPath(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) ClipOutRect1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -64,7 +65,8 @@ func (m *Canvas) ClipOutRect1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipOutRect1, jni.ObjectValue(arg0),
 		)
@@ -81,7 +83,7 @@ func (m *Canvas) ClipOutRect1(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) ClipOutRect1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -91,7 +93,8 @@ func (m *Canvas) ClipOutRect1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipOutRect1_1, jni.ObjectValue(arg0),
 		)
@@ -113,7 +116,7 @@ func (m *Canvas) ClipOutRect4_2(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -123,7 +126,8 @@ func (m *Canvas) ClipOutRect4_2(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipOutRect4_2, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3),
 		)
@@ -145,7 +149,7 @@ func (m *Canvas) ClipOutRect4_3(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -155,7 +159,8 @@ func (m *Canvas) ClipOutRect4_3(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipOutRect4_3, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3),
 		)
@@ -172,7 +177,7 @@ func (m *Canvas) ClipOutRect4_3(
 func (m *Canvas) ClipOutShader(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +200,7 @@ func (m *Canvas) ClipOutShader(arg0 *jni.Object) error {
 func (m *Canvas) ClipPath1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -205,7 +210,8 @@ func (m *Canvas) ClipPath1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipPath1, jni.ObjectValue(arg0),
 		)
@@ -222,7 +228,7 @@ func (m *Canvas) ClipPath1(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) ClipPath2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -232,7 +238,8 @@ func (m *Canvas) ClipPath2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipPath2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -249,7 +256,7 @@ func (m *Canvas) ClipPath2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 func (m *Canvas) ClipRect1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -259,7 +266,8 @@ func (m *Canvas) ClipRect1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipRect1, jni.ObjectValue(arg0),
 		)
@@ -276,7 +284,7 @@ func (m *Canvas) ClipRect1(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) ClipRect2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -286,7 +294,8 @@ func (m *Canvas) ClipRect2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipRect2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -303,7 +312,7 @@ func (m *Canvas) ClipRect2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 func (m *Canvas) ClipRect1_2(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -313,7 +322,8 @@ func (m *Canvas) ClipRect1_2(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipRect1_2, jni.ObjectValue(arg0),
 		)
@@ -330,7 +340,7 @@ func (m *Canvas) ClipRect1_2(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) ClipRect2_3(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -340,7 +350,8 @@ func (m *Canvas) ClipRect2_3(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipRect2_3, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -362,7 +373,7 @@ func (m *Canvas) ClipRect4_4(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -372,7 +383,8 @@ func (m *Canvas) ClipRect4_4(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipRect4_4, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3),
 		)
@@ -395,7 +407,7 @@ func (m *Canvas) ClipRect5_5(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -405,7 +417,8 @@ func (m *Canvas) ClipRect5_5(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipRect5_5, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.ObjectValue(arg4),
 		)
@@ -427,7 +440,7 @@ func (m *Canvas) ClipRect4_6(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -437,7 +450,8 @@ func (m *Canvas) ClipRect4_6(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasClipRect4_6, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3),
 		)
@@ -454,7 +468,7 @@ func (m *Canvas) ClipRect4_6(
 func (m *Canvas) ClipShader(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -477,7 +491,7 @@ func (m *Canvas) ClipShader(arg0 *jni.Object) error {
 func (m *Canvas) Concat1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -500,7 +514,7 @@ func (m *Canvas) Concat1(arg0 *jni.Object) error {
 func (m *Canvas) Concat1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -523,7 +537,7 @@ func (m *Canvas) Concat1_1(arg0 *jni.Object) error {
 func (m *Canvas) DisableZ() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -550,7 +564,7 @@ func (m *Canvas) DrawARGB(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -579,7 +593,7 @@ func (m *Canvas) DrawArc5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -616,7 +630,7 @@ func (m *Canvas) DrawArc8_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -648,7 +662,7 @@ func (m *Canvas) DrawBitmap3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -676,7 +690,7 @@ func (m *Canvas) DrawBitmap4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -704,7 +718,7 @@ func (m *Canvas) DrawBitmap4_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -732,7 +746,7 @@ func (m *Canvas) DrawBitmap4_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -765,7 +779,7 @@ func (m *Canvas) DrawBitmap9_4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -803,7 +817,7 @@ func (m *Canvas) DrawBitmap9_5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -840,7 +854,7 @@ func (m *Canvas) DrawBitmapMesh(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -868,7 +882,7 @@ func (m *Canvas) DrawCircle(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -891,7 +905,7 @@ func (m *Canvas) DrawCircle(
 func (m *Canvas) DrawColor1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -914,7 +928,7 @@ func (m *Canvas) DrawColor1(arg0 int32) error {
 func (m *Canvas) DrawColor2_1(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -937,7 +951,7 @@ func (m *Canvas) DrawColor2_1(arg0 int32, arg1 *jni.Object) error {
 func (m *Canvas) DrawColor2_2(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -960,7 +974,7 @@ func (m *Canvas) DrawColor2_2(arg0 int32, arg1 *jni.Object) error {
 func (m *Canvas) DrawColor1_3(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -983,7 +997,7 @@ func (m *Canvas) DrawColor1_3(arg0 int64) error {
 func (m *Canvas) DrawColor2_4(arg0 int64, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1014,7 +1028,7 @@ func (m *Canvas) DrawDoubleRoundRect7(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1043,7 +1057,7 @@ func (m *Canvas) DrawDoubleRoundRect5_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1074,7 +1088,7 @@ func (m *Canvas) DrawGlyphs(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1103,7 +1117,7 @@ func (m *Canvas) DrawLine(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1126,7 +1140,7 @@ func (m *Canvas) DrawLine(
 func (m *Canvas) DrawLines2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1154,7 +1168,7 @@ func (m *Canvas) DrawLines4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1181,7 +1195,7 @@ func (m *Canvas) DrawMesh(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1204,7 +1218,7 @@ func (m *Canvas) DrawMesh(
 func (m *Canvas) DrawOval2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1233,7 +1247,7 @@ func (m *Canvas) DrawOval5_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1256,7 +1270,7 @@ func (m *Canvas) DrawOval5_1(
 func (m *Canvas) DrawPaint(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1283,7 +1297,7 @@ func (m *Canvas) DrawPatch3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1310,7 +1324,7 @@ func (m *Canvas) DrawPatch3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1333,7 +1347,7 @@ func (m *Canvas) DrawPatch3_1(
 func (m *Canvas) DrawPath(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1356,7 +1370,7 @@ func (m *Canvas) DrawPath(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Canvas) DrawPicture1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1379,7 +1393,7 @@ func (m *Canvas) DrawPicture1(arg0 *jni.Object) error {
 func (m *Canvas) DrawPicture2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1402,7 +1416,7 @@ func (m *Canvas) DrawPicture2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Canvas) DrawPicture2_2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1429,7 +1443,7 @@ func (m *Canvas) DrawPoint(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1452,7 +1466,7 @@ func (m *Canvas) DrawPoint(
 func (m *Canvas) DrawPoints2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1480,7 +1494,7 @@ func (m *Canvas) DrawPoints4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1509,7 +1523,7 @@ func (m *Canvas) DrawPosText5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1536,7 +1550,7 @@ func (m *Canvas) DrawPosText3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1567,7 +1581,7 @@ func (m *Canvas) DrawRGB(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1590,7 +1604,7 @@ func (m *Canvas) DrawRGB(
 func (m *Canvas) DrawRect2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1613,7 +1627,7 @@ func (m *Canvas) DrawRect2(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Canvas) DrawRect2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1642,7 +1656,7 @@ func (m *Canvas) DrawRect5_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1665,7 +1679,7 @@ func (m *Canvas) DrawRect5_2(
 func (m *Canvas) DrawRegion(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1688,7 +1702,7 @@ func (m *Canvas) DrawRegion(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Canvas) DrawRenderNode(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1716,7 +1730,7 @@ func (m *Canvas) DrawRoundRect4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1747,7 +1761,7 @@ func (m *Canvas) DrawRoundRect7_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1777,7 +1791,7 @@ func (m *Canvas) DrawText6(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1807,7 +1821,7 @@ func (m *Canvas) DrawText6_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1839,7 +1853,7 @@ func (m *Canvas) DrawText4_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1873,7 +1887,7 @@ func (m *Canvas) DrawText6_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1908,7 +1922,7 @@ func (m *Canvas) DrawTextOnPath7(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1937,7 +1951,7 @@ func (m *Canvas) DrawTextOnPath5_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1974,7 +1988,7 @@ func (m *Canvas) DrawTextRun9(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2012,7 +2026,7 @@ func (m *Canvas) DrawTextRun9_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2050,7 +2064,7 @@ func (m *Canvas) DrawTextRun9_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2095,7 +2109,7 @@ func (m *Canvas) DrawVertices(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2118,7 +2132,7 @@ func (m *Canvas) DrawVertices(
 func (m *Canvas) EnableZ() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2140,7 +2154,7 @@ func (m *Canvas) EnableZ() error {
 func (m *Canvas) GetClipBounds0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2170,7 +2184,7 @@ func (m *Canvas) GetClipBounds0() (*jni.Object, error) {
 func (m *Canvas) GetClipBounds1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2180,7 +2194,8 @@ func (m *Canvas) GetClipBounds1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasGetClipBounds1_1, jni.ObjectValue(arg0),
 		)
@@ -2197,7 +2212,7 @@ func (m *Canvas) GetClipBounds1_1(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) GetDensity() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2222,7 +2237,7 @@ func (m *Canvas) GetDensity() (int32, error) {
 func (m *Canvas) GetDrawFilter() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2252,7 +2267,7 @@ func (m *Canvas) GetDrawFilter() (*jni.Object, error) {
 func (m *Canvas) GetHeight() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2277,7 +2292,7 @@ func (m *Canvas) GetHeight() (int32, error) {
 func (m *Canvas) GetMatrix0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2307,7 +2322,7 @@ func (m *Canvas) GetMatrix0() (*jni.Object, error) {
 func (m *Canvas) GetMatrix1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2330,7 +2345,7 @@ func (m *Canvas) GetMatrix1_1(arg0 *jni.Object) error {
 func (m *Canvas) GetMaximumBitmapHeight() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2355,7 +2370,7 @@ func (m *Canvas) GetMaximumBitmapHeight() (int32, error) {
 func (m *Canvas) GetMaximumBitmapWidth() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2380,7 +2395,7 @@ func (m *Canvas) GetMaximumBitmapWidth() (int32, error) {
 func (m *Canvas) GetSaveCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2405,7 +2420,7 @@ func (m *Canvas) GetSaveCount() (int32, error) {
 func (m *Canvas) GetWidth() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2430,7 +2445,7 @@ func (m *Canvas) GetWidth() (int32, error) {
 func (m *Canvas) IsHardwareAccelerated() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2439,7 +2454,8 @@ func (m *Canvas) IsHardwareAccelerated() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Canvas.isHardwareAccelerated is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasIsHardwareAccelerated,
 		)
@@ -2456,7 +2472,7 @@ func (m *Canvas) IsHardwareAccelerated() (bool, error) {
 func (m *Canvas) IsOpaque() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2465,7 +2481,8 @@ func (m *Canvas) IsOpaque() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Canvas.isOpaque is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasIsOpaque,
 		)
@@ -2482,7 +2499,7 @@ func (m *Canvas) IsOpaque() (bool, error) {
 func (m *Canvas) QuickReject1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2492,7 +2509,8 @@ func (m *Canvas) QuickReject1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasQuickReject1, jni.ObjectValue(arg0),
 		)
@@ -2509,7 +2527,7 @@ func (m *Canvas) QuickReject1(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) QuickReject2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2519,7 +2537,8 @@ func (m *Canvas) QuickReject2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasQuickReject2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2536,7 +2555,7 @@ func (m *Canvas) QuickReject2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error
 func (m *Canvas) QuickReject1_2(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2546,7 +2565,8 @@ func (m *Canvas) QuickReject1_2(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasQuickReject1_2, jni.ObjectValue(arg0),
 		)
@@ -2563,7 +2583,7 @@ func (m *Canvas) QuickReject1_2(arg0 *jni.Object) (bool, error) {
 func (m *Canvas) QuickReject2_3(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2573,7 +2593,8 @@ func (m *Canvas) QuickReject2_3(arg0 *jni.Object, arg1 *jni.Object) (bool, error
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasQuickReject2_3, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2595,7 +2616,7 @@ func (m *Canvas) QuickReject4_4(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2605,7 +2626,8 @@ func (m *Canvas) QuickReject4_4(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasQuickReject4_4, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3),
 		)
@@ -2628,7 +2650,7 @@ func (m *Canvas) QuickReject5_5(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2638,7 +2660,8 @@ func (m *Canvas) QuickReject5_5(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCanvasQuickReject5_5, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.ObjectValue(arg4),
 		)
@@ -2655,7 +2678,7 @@ func (m *Canvas) QuickReject5_5(
 func (m *Canvas) Restore() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2677,7 +2700,7 @@ func (m *Canvas) Restore() error {
 func (m *Canvas) RestoreToCount(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2700,7 +2723,7 @@ func (m *Canvas) RestoreToCount(arg0 int32) error {
 func (m *Canvas) Rotate1(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2727,7 +2750,7 @@ func (m *Canvas) Rotate3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2750,7 +2773,7 @@ func (m *Canvas) Rotate3_1(
 func (m *Canvas) Save() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2775,7 +2798,7 @@ func (m *Canvas) Save() (int32, error) {
 func (m *Canvas) SaveLayer2(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2805,7 +2828,7 @@ func (m *Canvas) SaveLayer3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2837,7 +2860,7 @@ func (m *Canvas) SaveLayer5_2(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2870,7 +2893,7 @@ func (m *Canvas) SaveLayer6_3(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2896,7 +2919,7 @@ func (m *Canvas) SaveLayer6_3(
 func (m *Canvas) SaveLayerAlpha2(arg0 *jni.Object, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2926,7 +2949,7 @@ func (m *Canvas) SaveLayerAlpha3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2958,7 +2981,7 @@ func (m *Canvas) SaveLayerAlpha5_2(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2991,7 +3014,7 @@ func (m *Canvas) SaveLayerAlpha6_3(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3017,7 +3040,7 @@ func (m *Canvas) SaveLayerAlpha6_3(
 func (m *Canvas) Scale2(arg0 float32, arg1 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3045,7 +3068,7 @@ func (m *Canvas) Scale4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3068,7 +3091,7 @@ func (m *Canvas) Scale4_1(
 func (m *Canvas) SetBitmap(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3091,7 +3114,7 @@ func (m *Canvas) SetBitmap(arg0 *jni.Object) error {
 func (m *Canvas) SetDensity(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3114,7 +3137,7 @@ func (m *Canvas) SetDensity(arg0 int32) error {
 func (m *Canvas) SetDrawFilter(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3137,7 +3160,7 @@ func (m *Canvas) SetDrawFilter(arg0 *jni.Object) error {
 func (m *Canvas) SetMatrix(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3160,7 +3183,7 @@ func (m *Canvas) SetMatrix(arg0 *jni.Object) error {
 func (m *Canvas) Skew(arg0 float32, arg1 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3183,7 +3206,7 @@ func (m *Canvas) Skew(arg0 float32, arg1 float32) error {
 func (m *Canvas) Translate(arg0 float32, arg1 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

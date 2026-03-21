@@ -27,7 +27,7 @@ type Paint struct {
 func (m *Paint) Ascent() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -58,7 +58,7 @@ func (m *Paint) BreakText5(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -91,7 +91,7 @@ func (m *Paint) BreakText6_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -131,7 +131,7 @@ func (m *Paint) BreakText4_2(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -166,7 +166,7 @@ func (m *Paint) BreakText4_2(
 func (m *Paint) ClearShadowLayer() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -188,7 +188,7 @@ func (m *Paint) ClearShadowLayer() error {
 func (m *Paint) Descent() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -213,7 +213,7 @@ func (m *Paint) Descent() (float32, error) {
 func (m *Paint) EqualsForTextMeasurement(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -223,7 +223,8 @@ func (m *Paint) EqualsForTextMeasurement(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintEqualsForTextMeasurement, jni.ObjectValue(arg0),
 		)
@@ -240,7 +241,7 @@ func (m *Paint) EqualsForTextMeasurement(arg0 *jni.Object) (bool, error) {
 func (m *Paint) GetAlpha() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -265,7 +266,7 @@ func (m *Paint) GetAlpha() (int32, error) {
 func (m *Paint) GetBlendMode() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -295,7 +296,7 @@ func (m *Paint) GetBlendMode() (*jni.Object, error) {
 func (m *Paint) GetColor() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -320,7 +321,7 @@ func (m *Paint) GetColor() (int32, error) {
 func (m *Paint) GetColorFilter() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -350,7 +351,7 @@ func (m *Paint) GetColorFilter() (*jni.Object, error) {
 func (m *Paint) GetColorLong() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -375,7 +376,7 @@ func (m *Paint) GetColorLong() (int64, error) {
 func (m *Paint) GetEndHyphenEdit() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -400,7 +401,7 @@ func (m *Paint) GetEndHyphenEdit() (int32, error) {
 func (m *Paint) GetFillPath(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -410,7 +411,8 @@ func (m *Paint) GetFillPath(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintGetFillPath, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -427,7 +429,7 @@ func (m *Paint) GetFillPath(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 func (m *Paint) GetFlags() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -452,7 +454,7 @@ func (m *Paint) GetFlags() (int32, error) {
 func (m *Paint) GetFontFeatureSettings() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -461,7 +463,8 @@ func (m *Paint) GetFontFeatureSettings() (string, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.getFontFeatureSettings is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPaintGetFontFeatureSettings,
 		)
@@ -478,7 +481,7 @@ func (m *Paint) GetFontFeatureSettings() (string, error) {
 func (m *Paint) GetFontMetrics0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -508,7 +511,7 @@ func (m *Paint) GetFontMetrics0() (*jni.Object, error) {
 func (m *Paint) GetFontMetrics1_1(arg0 *jni.Object) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -534,7 +537,7 @@ func (m *Paint) GetFontMetrics1_1(arg0 *jni.Object) (float32, error) {
 func (m *Paint) GetFontMetricsForLocale(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -557,7 +560,7 @@ func (m *Paint) GetFontMetricsForLocale(arg0 *jni.Object) error {
 func (m *Paint) GetFontMetricsInt0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -587,7 +590,7 @@ func (m *Paint) GetFontMetricsInt0() (*jni.Object, error) {
 func (m *Paint) GetFontMetricsInt1_1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -621,7 +624,7 @@ func (m *Paint) GetFontMetricsInt7_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -657,7 +660,7 @@ func (m *Paint) GetFontMetricsInt7_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -689,7 +692,7 @@ func (m *Paint) GetFontMetricsInt7_3(
 func (m *Paint) GetFontMetricsIntForLocale(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -712,7 +715,7 @@ func (m *Paint) GetFontMetricsIntForLocale(arg0 *jni.Object) error {
 func (m *Paint) GetFontSpacing() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -737,7 +740,7 @@ func (m *Paint) GetFontSpacing() (float32, error) {
 func (m *Paint) GetFontVariationSettings() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -746,7 +749,8 @@ func (m *Paint) GetFontVariationSettings() (string, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.getFontVariationSettings is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPaintGetFontVariationSettings,
 		)
@@ -763,7 +767,7 @@ func (m *Paint) GetFontVariationSettings() (string, error) {
 func (m *Paint) GetHinting() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -788,7 +792,7 @@ func (m *Paint) GetHinting() (int32, error) {
 func (m *Paint) GetLetterSpacing() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -813,7 +817,7 @@ func (m *Paint) GetLetterSpacing() (float32, error) {
 func (m *Paint) GetMaskFilter() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -851,7 +855,7 @@ func (m *Paint) GetOffsetForAdvance7(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -890,7 +894,7 @@ func (m *Paint) GetOffsetForAdvance7_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -925,7 +929,7 @@ func (m *Paint) GetOffsetForAdvance7_1(
 func (m *Paint) GetPathEffect() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -963,7 +967,7 @@ func (m *Paint) GetRunAdvance7(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1002,7 +1006,7 @@ func (m *Paint) GetRunAdvance7_1(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1047,7 +1051,7 @@ func (m *Paint) GetRunCharacterAdvance9(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1088,7 +1092,7 @@ func (m *Paint) GetRunCharacterAdvance9_1(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1123,7 +1127,7 @@ func (m *Paint) GetRunCharacterAdvance9_1(
 func (m *Paint) GetShader() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1153,7 +1157,7 @@ func (m *Paint) GetShader() (*jni.Object, error) {
 func (m *Paint) GetShadowLayerColor() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1178,7 +1182,7 @@ func (m *Paint) GetShadowLayerColor() (int32, error) {
 func (m *Paint) GetShadowLayerColorLong() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1203,7 +1207,7 @@ func (m *Paint) GetShadowLayerColorLong() (int64, error) {
 func (m *Paint) GetShadowLayerDx() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1228,7 +1232,7 @@ func (m *Paint) GetShadowLayerDx() (float32, error) {
 func (m *Paint) GetShadowLayerDy() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1253,7 +1257,7 @@ func (m *Paint) GetShadowLayerDy() (float32, error) {
 func (m *Paint) GetShadowLayerRadius() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1278,7 +1282,7 @@ func (m *Paint) GetShadowLayerRadius() (float32, error) {
 func (m *Paint) GetStartHyphenEdit() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1303,7 +1307,7 @@ func (m *Paint) GetStartHyphenEdit() (int32, error) {
 func (m *Paint) GetStrikeThruPosition() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1328,7 +1332,7 @@ func (m *Paint) GetStrikeThruPosition() (float32, error) {
 func (m *Paint) GetStrikeThruThickness() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1353,7 +1357,7 @@ func (m *Paint) GetStrikeThruThickness() (float32, error) {
 func (m *Paint) GetStrokeCap() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1383,7 +1387,7 @@ func (m *Paint) GetStrokeCap() (*jni.Object, error) {
 func (m *Paint) GetStrokeJoin() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1413,7 +1417,7 @@ func (m *Paint) GetStrokeJoin() (*jni.Object, error) {
 func (m *Paint) GetStrokeMiter() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1438,7 +1442,7 @@ func (m *Paint) GetStrokeMiter() (float32, error) {
 func (m *Paint) GetStrokeWidth() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1463,7 +1467,7 @@ func (m *Paint) GetStrokeWidth() (float32, error) {
 func (m *Paint) GetStyle() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1493,7 +1497,7 @@ func (m *Paint) GetStyle() (*jni.Object, error) {
 func (m *Paint) GetTextAlign() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1528,7 +1532,7 @@ func (m *Paint) GetTextBounds4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1556,7 +1560,7 @@ func (m *Paint) GetTextBounds4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1588,7 +1592,7 @@ func (m *Paint) GetTextBounds4_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1615,7 +1619,7 @@ func (m *Paint) GetTextBounds4_2(
 func (m *Paint) GetTextLocale() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1645,7 +1649,7 @@ func (m *Paint) GetTextLocale() (*jni.Object, error) {
 func (m *Paint) GetTextLocales() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1682,7 +1686,7 @@ func (m *Paint) GetTextPath6(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1712,7 +1716,7 @@ func (m *Paint) GetTextPath6_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1748,7 +1752,7 @@ func (m *Paint) GetTextRunAdvances(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1786,7 +1790,7 @@ func (m *Paint) GetTextRunCursor6(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1824,7 +1828,7 @@ func (m *Paint) GetTextRunCursor6_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1859,7 +1863,7 @@ func (m *Paint) GetTextRunCursor6_1(
 func (m *Paint) GetTextScaleX() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1884,7 +1888,7 @@ func (m *Paint) GetTextScaleX() (float32, error) {
 func (m *Paint) GetTextSize() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1909,7 +1913,7 @@ func (m *Paint) GetTextSize() (float32, error) {
 func (m *Paint) GetTextSkewX() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1939,7 +1943,7 @@ func (m *Paint) GetTextWidths4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1970,7 +1974,7 @@ func (m *Paint) GetTextWidths4_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2000,7 +2004,7 @@ func (m *Paint) GetTextWidths4_1(
 func (m *Paint) GetTextWidths2_2(arg0 string, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2035,7 +2039,7 @@ func (m *Paint) GetTextWidths4_3(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2065,7 +2069,7 @@ func (m *Paint) GetTextWidths4_3(
 func (m *Paint) GetTypeface() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2095,7 +2099,7 @@ func (m *Paint) GetTypeface() (*jni.Object, error) {
 func (m *Paint) GetUnderlinePosition() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2120,7 +2124,7 @@ func (m *Paint) GetUnderlinePosition() (float32, error) {
 func (m *Paint) GetUnderlineThickness() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2145,7 +2149,7 @@ func (m *Paint) GetUnderlineThickness() (float32, error) {
 func (m *Paint) GetWordSpacing() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2170,7 +2174,7 @@ func (m *Paint) GetWordSpacing() (float32, error) {
 func (m *Paint) GetXfermode() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2200,7 +2204,7 @@ func (m *Paint) GetXfermode() (*jni.Object, error) {
 func (m *Paint) HasGlyph(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2214,7 +2218,8 @@ func (m *Paint) HasGlyph(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintHasGlyph, jni.ObjectValue(&jArg0.Object),
 		)
@@ -2231,7 +2236,7 @@ func (m *Paint) HasGlyph(arg0 string) (bool, error) {
 func (m *Paint) IsAntiAlias() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2240,7 +2245,8 @@ func (m *Paint) IsAntiAlias() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isAntiAlias is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsAntiAlias,
 		)
@@ -2257,7 +2263,7 @@ func (m *Paint) IsAntiAlias() (bool, error) {
 func (m *Paint) IsDither() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2266,7 +2272,8 @@ func (m *Paint) IsDither() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isDither is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsDither,
 		)
@@ -2283,7 +2290,7 @@ func (m *Paint) IsDither() (bool, error) {
 func (m *Paint) IsElegantTextHeight() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2292,7 +2299,8 @@ func (m *Paint) IsElegantTextHeight() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isElegantTextHeight is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsElegantTextHeight,
 		)
@@ -2309,7 +2317,7 @@ func (m *Paint) IsElegantTextHeight() (bool, error) {
 func (m *Paint) IsFakeBoldText() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2318,7 +2326,8 @@ func (m *Paint) IsFakeBoldText() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isFakeBoldText is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsFakeBoldText,
 		)
@@ -2335,7 +2344,7 @@ func (m *Paint) IsFakeBoldText() (bool, error) {
 func (m *Paint) IsFilterBitmap() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2344,7 +2353,8 @@ func (m *Paint) IsFilterBitmap() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isFilterBitmap is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsFilterBitmap,
 		)
@@ -2361,7 +2371,7 @@ func (m *Paint) IsFilterBitmap() (bool, error) {
 func (m *Paint) IsLinearText() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2370,7 +2380,8 @@ func (m *Paint) IsLinearText() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isLinearText is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsLinearText,
 		)
@@ -2387,7 +2398,7 @@ func (m *Paint) IsLinearText() (bool, error) {
 func (m *Paint) IsStrikeThruText() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2396,7 +2407,8 @@ func (m *Paint) IsStrikeThruText() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isStrikeThruText is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsStrikeThruText,
 		)
@@ -2413,7 +2425,7 @@ func (m *Paint) IsStrikeThruText() (bool, error) {
 func (m *Paint) IsSubpixelText() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2422,7 +2434,8 @@ func (m *Paint) IsSubpixelText() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isSubpixelText is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsSubpixelText,
 		)
@@ -2439,7 +2452,7 @@ func (m *Paint) IsSubpixelText() (bool, error) {
 func (m *Paint) IsUnderlineText() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2448,7 +2461,8 @@ func (m *Paint) IsUnderlineText() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Paint.isUnderlineText is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintIsUnderlineText,
 		)
@@ -2469,7 +2483,7 @@ func (m *Paint) MeasureText3(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2499,7 +2513,7 @@ func (m *Paint) MeasureText3_1(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2529,7 +2543,7 @@ func (m *Paint) MeasureText3_1(
 func (m *Paint) MeasureText1_2(arg0 string) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2563,7 +2577,7 @@ func (m *Paint) MeasureText3_3(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2593,7 +2607,7 @@ func (m *Paint) MeasureText3_3(
 func (m *Paint) Reset() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2615,7 +2629,7 @@ func (m *Paint) Reset() error {
 func (m *Paint) Set(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2643,7 +2657,7 @@ func (m *Paint) SetARGB(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2666,7 +2680,7 @@ func (m *Paint) SetARGB(
 func (m *Paint) SetAlpha(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2689,7 +2703,7 @@ func (m *Paint) SetAlpha(arg0 int32) error {
 func (m *Paint) SetAntiAlias(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2716,7 +2730,7 @@ func (m *Paint) SetAntiAlias(arg0 bool) error {
 func (m *Paint) SetBlendMode(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2739,7 +2753,7 @@ func (m *Paint) SetBlendMode(arg0 *jni.Object) error {
 func (m *Paint) SetColor1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2762,7 +2776,7 @@ func (m *Paint) SetColor1(arg0 int32) error {
 func (m *Paint) SetColor1_1(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2785,7 +2799,7 @@ func (m *Paint) SetColor1_1(arg0 int64) error {
 func (m *Paint) SetColorFilter(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2816,7 +2830,7 @@ func (m *Paint) SetColorFilter(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Paint) SetDither(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2843,7 +2857,7 @@ func (m *Paint) SetDither(arg0 bool) error {
 func (m *Paint) SetElegantTextHeight(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2870,7 +2884,7 @@ func (m *Paint) SetElegantTextHeight(arg0 bool) error {
 func (m *Paint) SetEndHyphenEdit(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2893,7 +2907,7 @@ func (m *Paint) SetEndHyphenEdit(arg0 int32) error {
 func (m *Paint) SetFakeBoldText(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2920,7 +2934,7 @@ func (m *Paint) SetFakeBoldText(arg0 bool) error {
 func (m *Paint) SetFilterBitmap(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2947,7 +2961,7 @@ func (m *Paint) SetFilterBitmap(arg0 bool) error {
 func (m *Paint) SetFlags(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2970,7 +2984,7 @@ func (m *Paint) SetFlags(arg0 int32) error {
 func (m *Paint) SetFontFeatureSettings(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2997,7 +3011,7 @@ func (m *Paint) SetFontFeatureSettings(arg0 string) error {
 func (m *Paint) SetFontVariationSettings(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3011,7 +3025,8 @@ func (m *Paint) SetFontVariationSettings(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPaintSetFontVariationSettings, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3028,7 +3043,7 @@ func (m *Paint) SetFontVariationSettings(arg0 string) (bool, error) {
 func (m *Paint) SetHinting(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3051,7 +3066,7 @@ func (m *Paint) SetHinting(arg0 int32) error {
 func (m *Paint) SetLetterSpacing(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3074,7 +3089,7 @@ func (m *Paint) SetLetterSpacing(arg0 float32) error {
 func (m *Paint) SetLinearText(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3101,7 +3116,7 @@ func (m *Paint) SetLinearText(arg0 bool) error {
 func (m *Paint) SetMaskFilter(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3132,7 +3147,7 @@ func (m *Paint) SetMaskFilter(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Paint) SetPathEffect(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3163,7 +3178,7 @@ func (m *Paint) SetPathEffect(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Paint) SetShader(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3199,7 +3214,7 @@ func (m *Paint) SetShadowLayer4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3227,7 +3242,7 @@ func (m *Paint) SetShadowLayer4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3250,7 +3265,7 @@ func (m *Paint) SetShadowLayer4_1(
 func (m *Paint) SetStartHyphenEdit(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3273,7 +3288,7 @@ func (m *Paint) SetStartHyphenEdit(arg0 int32) error {
 func (m *Paint) SetStrikeThruText(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3300,7 +3315,7 @@ func (m *Paint) SetStrikeThruText(arg0 bool) error {
 func (m *Paint) SetStrokeCap(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3323,7 +3338,7 @@ func (m *Paint) SetStrokeCap(arg0 *jni.Object) error {
 func (m *Paint) SetStrokeJoin(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3346,7 +3361,7 @@ func (m *Paint) SetStrokeJoin(arg0 *jni.Object) error {
 func (m *Paint) SetStrokeMiter(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3369,7 +3384,7 @@ func (m *Paint) SetStrokeMiter(arg0 float32) error {
 func (m *Paint) SetStrokeWidth(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3392,7 +3407,7 @@ func (m *Paint) SetStrokeWidth(arg0 float32) error {
 func (m *Paint) SetStyle(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3415,7 +3430,7 @@ func (m *Paint) SetStyle(arg0 *jni.Object) error {
 func (m *Paint) SetSubpixelText(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3442,7 +3457,7 @@ func (m *Paint) SetSubpixelText(arg0 bool) error {
 func (m *Paint) SetTextAlign(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3465,7 +3480,7 @@ func (m *Paint) SetTextAlign(arg0 *jni.Object) error {
 func (m *Paint) SetTextLocale(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3488,7 +3503,7 @@ func (m *Paint) SetTextLocale(arg0 *jni.Object) error {
 func (m *Paint) SetTextLocales(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3511,7 +3526,7 @@ func (m *Paint) SetTextLocales(arg0 *jni.Object) error {
 func (m *Paint) SetTextScaleX(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3534,7 +3549,7 @@ func (m *Paint) SetTextScaleX(arg0 float32) error {
 func (m *Paint) SetTextSize(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3557,7 +3572,7 @@ func (m *Paint) SetTextSize(arg0 float32) error {
 func (m *Paint) SetTextSkewX(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3580,7 +3595,7 @@ func (m *Paint) SetTextSkewX(arg0 float32) error {
 func (m *Paint) SetTypeface(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3611,7 +3626,7 @@ func (m *Paint) SetTypeface(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Paint) SetUnderlineText(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3638,7 +3653,7 @@ func (m *Paint) SetUnderlineText(arg0 bool) error {
 func (m *Paint) SetWordSpacing(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3661,7 +3676,7 @@ func (m *Paint) SetWordSpacing(arg0 float32) error {
 func (m *Paint) SetXfermode(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -27,7 +27,7 @@ type Channel struct {
 func (m *Channel) CanBubble() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -36,7 +36,8 @@ func (m *Channel) CanBubble() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.canBubble is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelCanBubble,
 		)
@@ -53,7 +54,7 @@ func (m *Channel) CanBubble() (bool, error) {
 func (m *Channel) CanBypassDnd() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +63,8 @@ func (m *Channel) CanBypassDnd() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.canBypassDnd is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelCanBypassDnd,
 		)
@@ -79,7 +81,7 @@ func (m *Channel) CanBypassDnd() (bool, error) {
 func (m *Channel) CanShowBadge() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +90,8 @@ func (m *Channel) CanShowBadge() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.canShowBadge is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelCanShowBadge,
 		)
@@ -105,7 +108,7 @@ func (m *Channel) CanShowBadge() (bool, error) {
 func (m *Channel) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -130,7 +133,7 @@ func (m *Channel) DescribeContents() (int32, error) {
 func (m *Channel) EnableLights(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -157,7 +160,7 @@ func (m *Channel) EnableLights(arg0 bool) error {
 func (m *Channel) EnableVibration(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -184,7 +187,7 @@ func (m *Channel) EnableVibration(arg0 bool) error {
 func (m *Channel) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -194,7 +197,8 @@ func (m *Channel) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelEquals, jni.ObjectValue(arg0),
 		)
@@ -211,7 +215,7 @@ func (m *Channel) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Channel) GetAudioAttributes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -241,7 +245,7 @@ func (m *Channel) GetAudioAttributes() (*jni.Object, error) {
 func (m *Channel) GetConversationId() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -250,7 +254,8 @@ func (m *Channel) GetConversationId() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getConversationId is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelGetConversationId,
 		)
@@ -267,7 +272,7 @@ func (m *Channel) GetConversationId() (string, error) {
 func (m *Channel) GetDescription() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -276,7 +281,8 @@ func (m *Channel) GetDescription() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getDescription is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelGetDescription,
 		)
@@ -293,7 +299,7 @@ func (m *Channel) GetDescription() (string, error) {
 func (m *Channel) GetGroup() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -302,7 +308,8 @@ func (m *Channel) GetGroup() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getGroup is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelGetGroup,
 		)
@@ -319,7 +326,7 @@ func (m *Channel) GetGroup() (string, error) {
 func (m *Channel) GetId() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -328,7 +335,8 @@ func (m *Channel) GetId() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getId is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelGetId,
 		)
@@ -345,7 +353,7 @@ func (m *Channel) GetId() (string, error) {
 func (m *Channel) GetImportance() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -370,7 +378,7 @@ func (m *Channel) GetImportance() (int32, error) {
 func (m *Channel) GetLightColor() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -395,7 +403,7 @@ func (m *Channel) GetLightColor() (int32, error) {
 func (m *Channel) GetLockscreenVisibility() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -420,7 +428,7 @@ func (m *Channel) GetLockscreenVisibility() (int32, error) {
 func (m *Channel) GetName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -429,7 +437,8 @@ func (m *Channel) GetName() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelGetName,
 		)
@@ -446,7 +455,7 @@ func (m *Channel) GetName() (string, error) {
 func (m *Channel) GetParentChannelId() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -455,7 +464,8 @@ func (m *Channel) GetParentChannelId() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getParentChannelId is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelGetParentChannelId,
 		)
@@ -472,7 +482,7 @@ func (m *Channel) GetParentChannelId() (string, error) {
 func (m *Channel) GetSound() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -502,7 +512,7 @@ func (m *Channel) GetSound() (*jni.Object, error) {
 func (m *Channel) GetVibrationEffect() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -532,7 +542,7 @@ func (m *Channel) GetVibrationEffect() (*jni.Object, error) {
 func (m *Channel) GetVibrationPattern() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -562,7 +572,7 @@ func (m *Channel) GetVibrationPattern() (*jni.Object, error) {
 func (m *Channel) HasUserSetImportance() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -571,7 +581,8 @@ func (m *Channel) HasUserSetImportance() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.hasUserSetImportance is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelHasUserSetImportance,
 		)
@@ -588,7 +599,7 @@ func (m *Channel) HasUserSetImportance() (bool, error) {
 func (m *Channel) HasUserSetSound() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -597,7 +608,8 @@ func (m *Channel) HasUserSetSound() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.hasUserSetSound is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelHasUserSetSound,
 		)
@@ -614,7 +626,7 @@ func (m *Channel) HasUserSetSound() (bool, error) {
 func (m *Channel) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -639,7 +651,7 @@ func (m *Channel) HashCode() (int32, error) {
 func (m *Channel) IsBlockable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -648,7 +660,8 @@ func (m *Channel) IsBlockable() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isBlockable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelIsBlockable,
 		)
@@ -665,7 +678,7 @@ func (m *Channel) IsBlockable() (bool, error) {
 func (m *Channel) IsConversation() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -674,7 +687,8 @@ func (m *Channel) IsConversation() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isConversation is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelIsConversation,
 		)
@@ -691,7 +705,7 @@ func (m *Channel) IsConversation() (bool, error) {
 func (m *Channel) IsDemoted() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -700,7 +714,8 @@ func (m *Channel) IsDemoted() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isDemoted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelIsDemoted,
 		)
@@ -717,7 +732,7 @@ func (m *Channel) IsDemoted() (bool, error) {
 func (m *Channel) IsImportantConversation() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -726,7 +741,8 @@ func (m *Channel) IsImportantConversation() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.isImportantConversation is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelIsImportantConversation,
 		)
@@ -743,7 +759,7 @@ func (m *Channel) IsImportantConversation() (bool, error) {
 func (m *Channel) SetAllowBubbles(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -770,7 +786,7 @@ func (m *Channel) SetAllowBubbles(arg0 bool) error {
 func (m *Channel) SetBlockable(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -797,7 +813,7 @@ func (m *Channel) SetBlockable(arg0 bool) error {
 func (m *Channel) SetBypassDnd(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -824,7 +840,7 @@ func (m *Channel) SetBypassDnd(arg0 bool) error {
 func (m *Channel) SetConversationId(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -856,7 +872,7 @@ func (m *Channel) SetConversationId(arg0 string, arg1 string) error {
 func (m *Channel) SetDescription(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -883,7 +899,7 @@ func (m *Channel) SetDescription(arg0 string) error {
 func (m *Channel) SetGroup(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -910,7 +926,7 @@ func (m *Channel) SetGroup(arg0 string) error {
 func (m *Channel) SetImportance(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -933,7 +949,7 @@ func (m *Channel) SetImportance(arg0 int32) error {
 func (m *Channel) SetLightColor(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -956,7 +972,7 @@ func (m *Channel) SetLightColor(arg0 int32) error {
 func (m *Channel) SetLockscreenVisibility(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -979,7 +995,7 @@ func (m *Channel) SetLockscreenVisibility(arg0 int32) error {
 func (m *Channel) SetName(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1006,7 +1022,7 @@ func (m *Channel) SetName(arg0 string) error {
 func (m *Channel) SetShowBadge(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1033,7 +1049,7 @@ func (m *Channel) SetShowBadge(arg0 bool) error {
 func (m *Channel) SetSound(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1056,7 +1072,7 @@ func (m *Channel) SetSound(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Channel) SetVibrationEffect(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1079,7 +1095,7 @@ func (m *Channel) SetVibrationEffect(arg0 *jni.Object) error {
 func (m *Channel) SetVibrationPattern(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1102,7 +1118,7 @@ func (m *Channel) SetVibrationPattern(arg0 *jni.Object) error {
 func (m *Channel) ShouldShowLights() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1111,7 +1127,8 @@ func (m *Channel) ShouldShowLights() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.shouldShowLights is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelShouldShowLights,
 		)
@@ -1128,7 +1145,7 @@ func (m *Channel) ShouldShowLights() (bool, error) {
 func (m *Channel) ShouldVibrate() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1137,7 +1154,8 @@ func (m *Channel) ShouldVibrate() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.shouldVibrate is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelShouldVibrate,
 		)
@@ -1154,7 +1172,7 @@ func (m *Channel) ShouldVibrate() (bool, error) {
 func (m *Channel) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1163,7 +1181,8 @@ func (m *Channel) ToString() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelToString,
 		)
@@ -1180,7 +1199,7 @@ func (m *Channel) ToString() (string, error) {
 func (m *Channel) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

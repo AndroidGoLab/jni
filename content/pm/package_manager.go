@@ -27,7 +27,7 @@ type PackageManager struct {
 func (m *PackageManager) AddPackageToPreferred(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -54,7 +54,7 @@ func (m *PackageManager) AddPackageToPreferred(arg0 string) error {
 func (m *PackageManager) AddPermission(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -64,7 +64,8 @@ func (m *PackageManager) AddPermission(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerAddPermission, jni.ObjectValue(arg0),
 		)
@@ -81,7 +82,7 @@ func (m *PackageManager) AddPermission(arg0 *jni.Object) (bool, error) {
 func (m *PackageManager) AddPermissionAsync(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -91,7 +92,8 @@ func (m *PackageManager) AddPermissionAsync(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerAddPermissionAsync, jni.ObjectValue(arg0),
 		)
@@ -113,7 +115,7 @@ func (m *PackageManager) AddPreferredActivity(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -140,7 +142,7 @@ func (m *PackageManager) AddWhitelistedRestrictedPermission(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +161,8 @@ func (m *PackageManager) AddWhitelistedRestrictedPermission(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerAddWhitelistedRestrictedPermission, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
 		)
@@ -176,7 +179,7 @@ func (m *PackageManager) AddWhitelistedRestrictedPermission(
 func (m *PackageManager) CanPackageQuery2(arg0 string, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +198,8 @@ func (m *PackageManager) CanPackageQuery2(arg0 string, arg1 string) (bool, error
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerCanPackageQuery2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
@@ -212,7 +216,7 @@ func (m *PackageManager) CanPackageQuery2(arg0 string, arg1 string) (bool, error
 func (m *PackageManager) CanPackageQuery2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -247,7 +251,7 @@ func (m *PackageManager) CanPackageQuery2_1(arg0 string, arg1 *jni.Object) (*jni
 func (m *PackageManager) CanRequestPackageInstalls() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -256,7 +260,8 @@ func (m *PackageManager) CanRequestPackageInstalls() (bool, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageManager.canRequestPackageInstalls is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerCanRequestPackageInstalls,
 		)
@@ -273,7 +278,7 @@ func (m *PackageManager) CanRequestPackageInstalls() (bool, error) {
 func (m *PackageManager) CanonicalToCurrentPackageNames(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -304,7 +309,7 @@ func (m *PackageManager) CanonicalToCurrentPackageNames(arg0 *jni.Object) (*jni.
 func (m *PackageManager) CheckPermission(arg0 string, arg1 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +344,7 @@ func (m *PackageManager) CheckPermission(arg0 string, arg1 string) (int32, error
 func (m *PackageManager) CheckSignatures2(arg0 int32, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -365,7 +370,7 @@ func (m *PackageManager) CheckSignatures2(arg0 int32, arg1 int32) (int32, error)
 func (m *PackageManager) CheckSignatures2_1(arg0 string, arg1 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -400,7 +405,7 @@ func (m *PackageManager) CheckSignatures2_1(arg0 string, arg1 string) (int32, er
 func (m *PackageManager) ClearInstantAppCookie() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -422,7 +427,7 @@ func (m *PackageManager) ClearInstantAppCookie() error {
 func (m *PackageManager) ClearPackagePreferredActivities(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -449,7 +454,7 @@ func (m *PackageManager) ClearPackagePreferredActivities(arg0 string) error {
 func (m *PackageManager) CurrentToCanonicalPackageNames(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -484,7 +489,7 @@ func (m *PackageManager) ExtendVerificationTimeout(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -507,7 +512,7 @@ func (m *PackageManager) ExtendVerificationTimeout(
 func (m *PackageManager) GetActivityBanner1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -538,7 +543,7 @@ func (m *PackageManager) GetActivityBanner1(arg0 *jni.Object) (*jni.Object, erro
 func (m *PackageManager) GetActivityBanner1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -569,7 +574,7 @@ func (m *PackageManager) GetActivityBanner1_1(arg0 *jni.Object) (*jni.Object, er
 func (m *PackageManager) GetActivityIcon1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -600,7 +605,7 @@ func (m *PackageManager) GetActivityIcon1(arg0 *jni.Object) (*jni.Object, error)
 func (m *PackageManager) GetActivityIcon1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -631,7 +636,7 @@ func (m *PackageManager) GetActivityIcon1_1(arg0 *jni.Object) (*jni.Object, erro
 func (m *PackageManager) GetActivityInfo2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -662,7 +667,7 @@ func (m *PackageManager) GetActivityInfo2(arg0 *jni.Object, arg1 *jni.Object) (*
 func (m *PackageManager) GetActivityInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -693,7 +698,7 @@ func (m *PackageManager) GetActivityInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.
 func (m *PackageManager) GetActivityLogo1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -724,7 +729,7 @@ func (m *PackageManager) GetActivityLogo1(arg0 *jni.Object) (*jni.Object, error)
 func (m *PackageManager) GetActivityLogo1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -755,7 +760,7 @@ func (m *PackageManager) GetActivityLogo1_1(arg0 *jni.Object) (*jni.Object, erro
 func (m *PackageManager) GetAllPermissionGroups(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -786,7 +791,7 @@ func (m *PackageManager) GetAllPermissionGroups(arg0 int32) (*jni.Object, error)
 func (m *PackageManager) GetApplicationBanner1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -817,7 +822,7 @@ func (m *PackageManager) GetApplicationBanner1(arg0 *jni.Object) (*jni.Object, e
 func (m *PackageManager) GetApplicationBanner1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -852,7 +857,7 @@ func (m *PackageManager) GetApplicationBanner1_1(arg0 string) (*jni.Object, erro
 func (m *PackageManager) GetApplicationEnabledSetting(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -882,7 +887,7 @@ func (m *PackageManager) GetApplicationEnabledSetting(arg0 string) (int32, error
 func (m *PackageManager) GetApplicationIcon1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -913,7 +918,7 @@ func (m *PackageManager) GetApplicationIcon1(arg0 *jni.Object) (*jni.Object, err
 func (m *PackageManager) GetApplicationIcon1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -948,7 +953,7 @@ func (m *PackageManager) GetApplicationIcon1_1(arg0 string) (*jni.Object, error)
 func (m *PackageManager) GetApplicationInfo2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -983,7 +988,7 @@ func (m *PackageManager) GetApplicationInfo2(arg0 string, arg1 *jni.Object) (*jn
 func (m *PackageManager) GetApplicationInfo2_1(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1018,7 +1023,7 @@ func (m *PackageManager) GetApplicationInfo2_1(arg0 string, arg1 int32) (*jni.Ob
 func (m *PackageManager) GetApplicationLabel(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1028,7 +1033,8 @@ func (m *PackageManager) GetApplicationLabel(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetApplicationLabel, jni.ObjectValue(arg0),
 		)
@@ -1045,7 +1051,7 @@ func (m *PackageManager) GetApplicationLabel(arg0 *jni.Object) (string, error) {
 func (m *PackageManager) GetApplicationLogo1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1076,7 +1082,7 @@ func (m *PackageManager) GetApplicationLogo1(arg0 *jni.Object) (*jni.Object, err
 func (m *PackageManager) GetApplicationLogo1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1111,7 +1117,7 @@ func (m *PackageManager) GetApplicationLogo1_1(arg0 string) (*jni.Object, error)
 func (m *PackageManager) GetArchivedPackage(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1146,7 +1152,7 @@ func (m *PackageManager) GetArchivedPackage(arg0 string) (*jni.Object, error) {
 func (m *PackageManager) GetBackgroundPermissionOptionLabel() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1155,7 +1161,8 @@ func (m *PackageManager) GetBackgroundPermissionOptionLabel() (string, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageManager.getBackgroundPermissionOptionLabel is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetBackgroundPermissionOptionLabel,
 		)
@@ -1172,7 +1179,7 @@ func (m *PackageManager) GetBackgroundPermissionOptionLabel() (string, error) {
 func (m *PackageManager) GetChangedPackages(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1203,7 +1210,7 @@ func (m *PackageManager) GetChangedPackages(arg0 int32) (*jni.Object, error) {
 func (m *PackageManager) GetComponentEnabledSetting(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1229,7 +1236,7 @@ func (m *PackageManager) GetComponentEnabledSetting(arg0 *jni.Object) (int32, er
 func (m *PackageManager) GetDefaultActivityIcon() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1263,7 +1270,7 @@ func (m *PackageManager) GetDrawable(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1302,7 +1309,7 @@ func (m *PackageManager) GetGroupOfPlatformPermission(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1329,7 +1336,7 @@ func (m *PackageManager) GetGroupOfPlatformPermission(
 func (m *PackageManager) GetInstallSourceInfo(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1364,7 +1371,7 @@ func (m *PackageManager) GetInstallSourceInfo(arg0 string) (*jni.Object, error) 
 func (m *PackageManager) GetInstalledApplications1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1395,7 +1402,7 @@ func (m *PackageManager) GetInstalledApplications1(arg0 *jni.Object) (*jni.Objec
 func (m *PackageManager) GetInstalledApplications1_1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1426,7 +1433,7 @@ func (m *PackageManager) GetInstalledApplications1_1(arg0 int32) (*jni.Object, e
 func (m *PackageManager) GetInstalledModules(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1457,7 +1464,7 @@ func (m *PackageManager) GetInstalledModules(arg0 int32) (*jni.Object, error) {
 func (m *PackageManager) GetInstalledPackages1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1488,7 +1495,7 @@ func (m *PackageManager) GetInstalledPackages1(arg0 *jni.Object) (*jni.Object, e
 func (m *PackageManager) GetInstalledPackages1_1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1519,7 +1526,7 @@ func (m *PackageManager) GetInstalledPackages1_1(arg0 int32) (*jni.Object, error
 func (m *PackageManager) GetInstallerPackageName(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1533,7 +1540,8 @@ func (m *PackageManager) GetInstallerPackageName(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetInstallerPackageName, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1550,7 +1558,7 @@ func (m *PackageManager) GetInstallerPackageName(arg0 string) (string, error) {
 func (m *PackageManager) GetInstantAppCookie() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1580,7 +1588,7 @@ func (m *PackageManager) GetInstantAppCookie() (*jni.Object, error) {
 func (m *PackageManager) GetInstantAppCookieMaxBytes() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1605,7 +1613,7 @@ func (m *PackageManager) GetInstantAppCookieMaxBytes() (int32, error) {
 func (m *PackageManager) GetInstrumentationInfo(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1636,7 +1644,7 @@ func (m *PackageManager) GetInstrumentationInfo(arg0 *jni.Object, arg1 int32) (*
 func (m *PackageManager) GetLaunchIntentForPackage(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1671,7 +1679,7 @@ func (m *PackageManager) GetLaunchIntentForPackage(arg0 string) (*jni.Object, er
 func (m *PackageManager) GetLaunchIntentSenderForPackage(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1706,7 +1714,7 @@ func (m *PackageManager) GetLaunchIntentSenderForPackage(arg0 string) (*jni.Obje
 func (m *PackageManager) GetLeanbackLaunchIntentForPackage(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1741,7 +1749,7 @@ func (m *PackageManager) GetLeanbackLaunchIntentForPackage(arg0 string) (*jni.Ob
 func (m *PackageManager) GetMimeGroup(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1776,7 +1784,7 @@ func (m *PackageManager) GetMimeGroup(arg0 string) (*jni.Object, error) {
 func (m *PackageManager) GetModuleInfo(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1811,7 +1819,7 @@ func (m *PackageManager) GetModuleInfo(arg0 string, arg1 int32) (*jni.Object, er
 func (m *PackageManager) GetNameForUid(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1821,7 +1829,8 @@ func (m *PackageManager) GetNameForUid(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetNameForUid, jni.IntValue(arg0),
 		)
@@ -1838,7 +1847,7 @@ func (m *PackageManager) GetNameForUid(arg0 int32) (string, error) {
 func (m *PackageManager) GetPackageArchiveInfo2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1873,7 +1882,7 @@ func (m *PackageManager) GetPackageArchiveInfo2(arg0 string, arg1 *jni.Object) (
 func (m *PackageManager) GetPackageArchiveInfo2_1(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1908,7 +1917,7 @@ func (m *PackageManager) GetPackageArchiveInfo2_1(arg0 string, arg1 int32) (*jni
 func (m *PackageManager) GetPackageGids1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1943,7 +1952,7 @@ func (m *PackageManager) GetPackageGids1(arg0 string) (*jni.Object, error) {
 func (m *PackageManager) GetPackageGids2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1978,7 +1987,7 @@ func (m *PackageManager) GetPackageGids2_1(arg0 string, arg1 *jni.Object) (*jni.
 func (m *PackageManager) GetPackageGids2_2(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2013,7 +2022,7 @@ func (m *PackageManager) GetPackageGids2_2(arg0 string, arg1 int32) (*jni.Object
 func (m *PackageManager) GetPackageInfo2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2044,7 +2053,7 @@ func (m *PackageManager) GetPackageInfo2(arg0 *jni.Object, arg1 *jni.Object) (*j
 func (m *PackageManager) GetPackageInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2075,7 +2084,7 @@ func (m *PackageManager) GetPackageInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.O
 func (m *PackageManager) GetPackageInfo2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2110,7 +2119,7 @@ func (m *PackageManager) GetPackageInfo2_2(arg0 string, arg1 *jni.Object) (*jni.
 func (m *PackageManager) GetPackageInfo2_3(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2145,7 +2154,7 @@ func (m *PackageManager) GetPackageInfo2_3(arg0 string, arg1 int32) (*jni.Object
 func (m *PackageManager) GetPackageInstaller() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2175,7 +2184,7 @@ func (m *PackageManager) GetPackageInstaller() (*jni.Object, error) {
 func (m *PackageManager) GetPackageUid2(arg0 string, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2205,7 +2214,7 @@ func (m *PackageManager) GetPackageUid2(arg0 string, arg1 *jni.Object) (int32, e
 func (m *PackageManager) GetPackageUid2_1(arg0 string, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2235,7 +2244,7 @@ func (m *PackageManager) GetPackageUid2_1(arg0 string, arg1 int32) (int32, error
 func (m *PackageManager) GetPackagesForUid(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2266,7 +2275,7 @@ func (m *PackageManager) GetPackagesForUid(arg0 int32) (*jni.Object, error) {
 func (m *PackageManager) GetPackagesHoldingPermissions2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2297,7 +2306,7 @@ func (m *PackageManager) GetPackagesHoldingPermissions2(arg0 *jni.Object, arg1 *
 func (m *PackageManager) GetPackagesHoldingPermissions2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2328,7 +2337,7 @@ func (m *PackageManager) GetPackagesHoldingPermissions2_1(arg0 *jni.Object, arg1
 func (m *PackageManager) GetPermissionGroupInfo(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2363,7 +2372,7 @@ func (m *PackageManager) GetPermissionGroupInfo(arg0 string, arg1 int32) (*jni.O
 func (m *PackageManager) GetPermissionInfo(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2402,7 +2411,7 @@ func (m *PackageManager) GetPlatformPermissionsForGroup(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2433,7 +2442,7 @@ func (m *PackageManager) GetPreferredActivities(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2464,7 +2473,7 @@ func (m *PackageManager) GetPreferredActivities(
 func (m *PackageManager) GetPreferredPackages(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2495,7 +2504,7 @@ func (m *PackageManager) GetPreferredPackages(arg0 int32) (*jni.Object, error) {
 func (m *PackageManager) GetProperty2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2530,7 +2539,7 @@ func (m *PackageManager) GetProperty2(arg0 string, arg1 *jni.Object) (*jni.Objec
 func (m *PackageManager) GetProperty2_1(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2570,7 +2579,7 @@ func (m *PackageManager) GetProperty2_1(arg0 string, arg1 string) (*jni.Object, 
 func (m *PackageManager) GetProviderInfo2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2601,7 +2610,7 @@ func (m *PackageManager) GetProviderInfo2(arg0 *jni.Object, arg1 *jni.Object) (*
 func (m *PackageManager) GetProviderInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2632,7 +2641,7 @@ func (m *PackageManager) GetProviderInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.
 func (m *PackageManager) GetReceiverInfo2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2663,7 +2672,7 @@ func (m *PackageManager) GetReceiverInfo2(arg0 *jni.Object, arg1 *jni.Object) (*
 func (m *PackageManager) GetReceiverInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2694,7 +2703,7 @@ func (m *PackageManager) GetReceiverInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.
 func (m *PackageManager) GetResourcesForActivity(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2725,7 +2734,7 @@ func (m *PackageManager) GetResourcesForActivity(arg0 *jni.Object) (*jni.Object,
 func (m *PackageManager) GetResourcesForApplication1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2756,7 +2765,7 @@ func (m *PackageManager) GetResourcesForApplication1(arg0 *jni.Object) (*jni.Obj
 func (m *PackageManager) GetResourcesForApplication2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2787,7 +2796,7 @@ func (m *PackageManager) GetResourcesForApplication2_1(arg0 *jni.Object, arg1 *j
 func (m *PackageManager) GetResourcesForApplication1_2(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2822,7 +2831,7 @@ func (m *PackageManager) GetResourcesForApplication1_2(arg0 string) (*jni.Object
 func (m *PackageManager) GetServiceInfo2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2853,7 +2862,7 @@ func (m *PackageManager) GetServiceInfo2(arg0 *jni.Object, arg1 *jni.Object) (*j
 func (m *PackageManager) GetServiceInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2884,7 +2893,7 @@ func (m *PackageManager) GetServiceInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.O
 func (m *PackageManager) GetSharedLibraries1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2915,7 +2924,7 @@ func (m *PackageManager) GetSharedLibraries1(arg0 *jni.Object) (*jni.Object, err
 func (m *PackageManager) GetSharedLibraries1_1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2946,7 +2955,7 @@ func (m *PackageManager) GetSharedLibraries1_1(arg0 int32) (*jni.Object, error) 
 func (m *PackageManager) GetSuspendedPackageAppExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2976,7 +2985,7 @@ func (m *PackageManager) GetSuspendedPackageAppExtras() (*jni.Object, error) {
 func (m *PackageManager) GetSyntheticAppDetailsActivityEnabled(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2990,7 +2999,8 @@ func (m *PackageManager) GetSyntheticAppDetailsActivityEnabled(arg0 string) (boo
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerGetSyntheticAppDetailsActivityEnabled, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3007,7 +3017,7 @@ func (m *PackageManager) GetSyntheticAppDetailsActivityEnabled(arg0 string) (boo
 func (m *PackageManager) GetSystemAvailableFeatures() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3037,7 +3047,7 @@ func (m *PackageManager) GetSystemAvailableFeatures() (*jni.Object, error) {
 func (m *PackageManager) GetSystemSharedLibraryNames() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3067,7 +3077,7 @@ func (m *PackageManager) GetSystemSharedLibraryNames() (*jni.Object, error) {
 func (m *PackageManager) GetTargetSdkVersion(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3101,7 +3111,7 @@ func (m *PackageManager) GetText(
 ) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3115,7 +3125,8 @@ func (m *PackageManager) GetText(
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetText, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -3137,7 +3148,7 @@ func (m *PackageManager) GetUserBadgedDrawableForDensity(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3168,7 +3179,7 @@ func (m *PackageManager) GetUserBadgedDrawableForDensity(
 func (m *PackageManager) GetUserBadgedIcon(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3199,7 +3210,7 @@ func (m *PackageManager) GetUserBadgedIcon(arg0 *jni.Object, arg1 *jni.Object) (
 func (m *PackageManager) GetUserBadgedLabel(arg0 string, arg1 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3213,7 +3224,8 @@ func (m *PackageManager) GetUserBadgedLabel(arg0 string, arg1 *jni.Object) (stri
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetUserBadgedLabel, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
@@ -3230,7 +3242,7 @@ func (m *PackageManager) GetUserBadgedLabel(arg0 string, arg1 *jni.Object) (stri
 func (m *PackageManager) GetWhitelistedRestrictedPermissions(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3269,7 +3281,7 @@ func (m *PackageManager) GetXml(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3308,7 +3320,7 @@ func (m *PackageManager) HasSigningCertificate3(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3318,7 +3330,8 @@ func (m *PackageManager) HasSigningCertificate3(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerHasSigningCertificate3, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
@@ -3339,7 +3352,7 @@ func (m *PackageManager) HasSigningCertificate3_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3353,7 +3366,8 @@ func (m *PackageManager) HasSigningCertificate3_1(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerHasSigningCertificate3_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
@@ -3370,7 +3384,7 @@ func (m *PackageManager) HasSigningCertificate3_1(
 func (m *PackageManager) HasSystemFeature1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3384,7 +3398,8 @@ func (m *PackageManager) HasSystemFeature1(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerHasSystemFeature1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3401,7 +3416,7 @@ func (m *PackageManager) HasSystemFeature1(arg0 string) (bool, error) {
 func (m *PackageManager) HasSystemFeature2_1(arg0 string, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3415,7 +3430,8 @@ func (m *PackageManager) HasSystemFeature2_1(arg0 string, arg1 int32) (bool, err
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerHasSystemFeature2_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
@@ -3432,7 +3448,7 @@ func (m *PackageManager) HasSystemFeature2_1(arg0 string, arg1 int32) (bool, err
 func (m *PackageManager) IsAppArchivable(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3446,7 +3462,8 @@ func (m *PackageManager) IsAppArchivable(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsAppArchivable, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3463,7 +3480,7 @@ func (m *PackageManager) IsAppArchivable(arg0 string) (bool, error) {
 func (m *PackageManager) IsAutoRevokeWhitelisted0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3472,7 +3489,8 @@ func (m *PackageManager) IsAutoRevokeWhitelisted0() (bool, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageManager.isAutoRevokeWhitelisted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsAutoRevokeWhitelisted0,
 		)
@@ -3489,7 +3507,7 @@ func (m *PackageManager) IsAutoRevokeWhitelisted0() (bool, error) {
 func (m *PackageManager) IsAutoRevokeWhitelisted1_1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3503,7 +3521,8 @@ func (m *PackageManager) IsAutoRevokeWhitelisted1_1(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsAutoRevokeWhitelisted1_1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3520,7 +3539,7 @@ func (m *PackageManager) IsAutoRevokeWhitelisted1_1(arg0 string) (bool, error) {
 func (m *PackageManager) IsDefaultApplicationIcon(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3530,7 +3549,8 @@ func (m *PackageManager) IsDefaultApplicationIcon(arg0 *jni.Object) (bool, error
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsDefaultApplicationIcon, jni.ObjectValue(arg0),
 		)
@@ -3547,7 +3567,7 @@ func (m *PackageManager) IsDefaultApplicationIcon(arg0 *jni.Object) (bool, error
 func (m *PackageManager) IsDeviceUpgrading() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3556,7 +3576,8 @@ func (m *PackageManager) IsDeviceUpgrading() (bool, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageManager.isDeviceUpgrading is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsDeviceUpgrading,
 		)
@@ -3573,7 +3594,7 @@ func (m *PackageManager) IsDeviceUpgrading() (bool, error) {
 func (m *PackageManager) IsInstantApp0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3582,7 +3603,8 @@ func (m *PackageManager) IsInstantApp0() (bool, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageManager.isInstantApp is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsInstantApp0,
 		)
@@ -3599,7 +3621,7 @@ func (m *PackageManager) IsInstantApp0() (bool, error) {
 func (m *PackageManager) IsInstantApp1_1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3613,7 +3635,8 @@ func (m *PackageManager) IsInstantApp1_1(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsInstantApp1_1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3630,7 +3653,7 @@ func (m *PackageManager) IsInstantApp1_1(arg0 string) (bool, error) {
 func (m *PackageManager) IsPackageStopped(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3644,7 +3667,8 @@ func (m *PackageManager) IsPackageStopped(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsPackageStopped, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3661,7 +3685,7 @@ func (m *PackageManager) IsPackageStopped(arg0 string) (bool, error) {
 func (m *PackageManager) IsPackageSuspended0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3670,7 +3694,8 @@ func (m *PackageManager) IsPackageSuspended0() (bool, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageManager.isPackageSuspended is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsPackageSuspended0,
 		)
@@ -3687,7 +3712,7 @@ func (m *PackageManager) IsPackageSuspended0() (bool, error) {
 func (m *PackageManager) IsPackageSuspended1_1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3701,7 +3726,8 @@ func (m *PackageManager) IsPackageSuspended1_1(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsPackageSuspended1_1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3718,7 +3744,7 @@ func (m *PackageManager) IsPackageSuspended1_1(arg0 string) (bool, error) {
 func (m *PackageManager) IsPermissionRevokedByPolicy(arg0 string, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3737,7 +3763,8 @@ func (m *PackageManager) IsPermissionRevokedByPolicy(arg0 string, arg1 string) (
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsPermissionRevokedByPolicy, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
@@ -3754,7 +3781,7 @@ func (m *PackageManager) IsPermissionRevokedByPolicy(arg0 string, arg1 string) (
 func (m *PackageManager) IsSafeMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3763,7 +3790,8 @@ func (m *PackageManager) IsSafeMode() (bool, error) {
 			callErr = fmt.Errorf("android.content.pm.PackageManager.isSafeMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerIsSafeMode,
 		)
@@ -3780,7 +3808,7 @@ func (m *PackageManager) IsSafeMode() (bool, error) {
 func (m *PackageManager) QueryActivityProperty(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3815,7 +3843,7 @@ func (m *PackageManager) QueryActivityProperty(arg0 string) (*jni.Object, error)
 func (m *PackageManager) QueryApplicationProperty(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3850,7 +3878,7 @@ func (m *PackageManager) QueryApplicationProperty(arg0 string) (*jni.Object, err
 func (m *PackageManager) QueryBroadcastReceivers2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3881,7 +3909,7 @@ func (m *PackageManager) QueryBroadcastReceivers2(arg0 *jni.Object, arg1 *jni.Ob
 func (m *PackageManager) QueryBroadcastReceivers2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3916,7 +3944,7 @@ func (m *PackageManager) QueryContentProviders3(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3955,7 +3983,7 @@ func (m *PackageManager) QueryContentProviders3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3990,7 +4018,7 @@ func (m *PackageManager) QueryContentProviders3_1(
 func (m *PackageManager) QueryInstrumentation(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4025,7 +4053,7 @@ func (m *PackageManager) QueryInstrumentation(arg0 string, arg1 int32) (*jni.Obj
 func (m *PackageManager) QueryIntentActivities2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4056,7 +4084,7 @@ func (m *PackageManager) QueryIntentActivities2(arg0 *jni.Object, arg1 *jni.Obje
 func (m *PackageManager) QueryIntentActivities2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4092,7 +4120,7 @@ func (m *PackageManager) QueryIntentActivityOptions4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4128,7 +4156,7 @@ func (m *PackageManager) QueryIntentActivityOptions4_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4159,7 +4187,7 @@ func (m *PackageManager) QueryIntentActivityOptions4_1(
 func (m *PackageManager) QueryIntentContentProviders2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4190,7 +4218,7 @@ func (m *PackageManager) QueryIntentContentProviders2(arg0 *jni.Object, arg1 *jn
 func (m *PackageManager) QueryIntentContentProviders2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4221,7 +4249,7 @@ func (m *PackageManager) QueryIntentContentProviders2_1(arg0 *jni.Object, arg1 i
 func (m *PackageManager) QueryIntentServices2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4252,7 +4280,7 @@ func (m *PackageManager) QueryIntentServices2(arg0 *jni.Object, arg1 *jni.Object
 func (m *PackageManager) QueryIntentServices2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4283,7 +4311,7 @@ func (m *PackageManager) QueryIntentServices2_1(arg0 *jni.Object, arg1 int32) (*
 func (m *PackageManager) QueryPermissionsByGroup(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4318,7 +4346,7 @@ func (m *PackageManager) QueryPermissionsByGroup(arg0 string, arg1 int32) (*jni.
 func (m *PackageManager) QueryProviderProperty(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4353,7 +4381,7 @@ func (m *PackageManager) QueryProviderProperty(arg0 string) (*jni.Object, error)
 func (m *PackageManager) QueryReceiverProperty(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4388,7 +4416,7 @@ func (m *PackageManager) QueryReceiverProperty(arg0 string) (*jni.Object, error)
 func (m *PackageManager) QueryServiceProperty(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4423,7 +4451,7 @@ func (m *PackageManager) QueryServiceProperty(arg0 string) (*jni.Object, error) 
 func (m *PackageManager) RelinquishUpdateOwnership(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4450,7 +4478,7 @@ func (m *PackageManager) RelinquishUpdateOwnership(arg0 string) error {
 func (m *PackageManager) RemovePackageFromPreferred(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4477,7 +4505,7 @@ func (m *PackageManager) RemovePackageFromPreferred(arg0 string) error {
 func (m *PackageManager) RemovePermission(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4508,7 +4536,7 @@ func (m *PackageManager) RemoveWhitelistedRestrictedPermission(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4527,7 +4555,8 @@ func (m *PackageManager) RemoveWhitelistedRestrictedPermission(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerRemoveWhitelistedRestrictedPermission, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
 		)
@@ -4550,7 +4579,7 @@ func (m *PackageManager) RequestChecksums(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4582,7 +4611,7 @@ func (m *PackageManager) RequestChecksums(
 func (m *PackageManager) ResolveActivity2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4613,7 +4642,7 @@ func (m *PackageManager) ResolveActivity2(arg0 *jni.Object, arg1 *jni.Object) (*
 func (m *PackageManager) ResolveActivity2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4644,7 +4673,7 @@ func (m *PackageManager) ResolveActivity2_1(arg0 *jni.Object, arg1 int32) (*jni.
 func (m *PackageManager) ResolveContentProvider2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4679,7 +4708,7 @@ func (m *PackageManager) ResolveContentProvider2(arg0 string, arg1 *jni.Object) 
 func (m *PackageManager) ResolveContentProvider2_1(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4714,7 +4743,7 @@ func (m *PackageManager) ResolveContentProvider2_1(arg0 string, arg1 int32) (*jn
 func (m *PackageManager) ResolveService2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4745,7 +4774,7 @@ func (m *PackageManager) ResolveService2(arg0 *jni.Object, arg1 *jni.Object) (*j
 func (m *PackageManager) ResolveService2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4776,7 +4805,7 @@ func (m *PackageManager) ResolveService2_1(arg0 *jni.Object, arg1 int32) (*jni.O
 func (m *PackageManager) SetApplicationCategoryHint(arg0 string, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4807,7 +4836,7 @@ func (m *PackageManager) SetApplicationEnabledSetting(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4834,7 +4863,7 @@ func (m *PackageManager) SetApplicationEnabledSetting(
 func (m *PackageManager) SetAutoRevokeWhitelisted(arg0 string, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4853,7 +4882,8 @@ func (m *PackageManager) SetAutoRevokeWhitelisted(arg0 string, arg1 bool) (bool,
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPackageManagerSetAutoRevokeWhitelisted, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
 		)
@@ -4874,7 +4904,7 @@ func (m *PackageManager) SetComponentEnabledSetting(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4897,7 +4927,7 @@ func (m *PackageManager) SetComponentEnabledSetting(
 func (m *PackageManager) SetComponentEnabledSettings(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4920,7 +4950,7 @@ func (m *PackageManager) SetComponentEnabledSettings(arg0 *jni.Object) error {
 func (m *PackageManager) SetInstallerPackageName(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4952,7 +4982,7 @@ func (m *PackageManager) SetInstallerPackageName(arg0 string, arg1 string) error
 func (m *PackageManager) SetMimeGroup(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4979,7 +5009,7 @@ func (m *PackageManager) SetMimeGroup(arg0 string, arg1 *jni.Object) error {
 func (m *PackageManager) UpdateInstantAppCookie(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5002,7 +5032,7 @@ func (m *PackageManager) UpdateInstantAppCookie(arg0 *jni.Object) error {
 func (m *PackageManager) VerifyPendingInstall(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5025,7 +5055,7 @@ func (m *PackageManager) VerifyPendingInstall(arg0 int32, arg1 int32) error {
 func (m *PackageManager) GetVerifiedSigningInfo(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

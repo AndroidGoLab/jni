@@ -27,7 +27,7 @@ type TextToSpeech struct {
 func (m *TextToSpeech) AddEarcon2(arg0 string, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *TextToSpeech) AddEarcon2(arg0 string, arg1 *jni.Object) (int32, error) 
 func (m *TextToSpeech) AddEarcon2_1(arg0 string, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -87,7 +87,7 @@ func (m *TextToSpeech) AddEarcon2_1(arg0 string, arg1 *jni.Object) (int32, error
 func (m *TextToSpeech) AddEarcon2_2(arg0 string, arg1 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -126,7 +126,7 @@ func (m *TextToSpeech) AddEarcon3_3(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -161,7 +161,7 @@ func (m *TextToSpeech) AddEarcon3_3(
 func (m *TextToSpeech) AddSpeech2(arg0 string, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -191,7 +191,7 @@ func (m *TextToSpeech) AddSpeech2(arg0 string, arg1 *jni.Object) (int32, error) 
 func (m *TextToSpeech) AddSpeech2_1(arg0 string, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -225,7 +225,7 @@ func (m *TextToSpeech) AddSpeech3_2(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -260,7 +260,7 @@ func (m *TextToSpeech) AddSpeech3_2(
 func (m *TextToSpeech) AddSpeech2_3(arg0 string, arg1 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -299,7 +299,7 @@ func (m *TextToSpeech) AddSpeech3_4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -334,7 +334,7 @@ func (m *TextToSpeech) AddSpeech3_4(
 func (m *TextToSpeech) AreDefaultsEnforced() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -343,7 +343,8 @@ func (m *TextToSpeech) AreDefaultsEnforced() (bool, error) {
 			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.areDefaultsEnforced is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midTextToSpeechAreDefaultsEnforced,
 		)
@@ -360,7 +361,7 @@ func (m *TextToSpeech) AreDefaultsEnforced() (bool, error) {
 func (m *TextToSpeech) GetAvailableLanguages() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -390,7 +391,7 @@ func (m *TextToSpeech) GetAvailableLanguages() (*jni.Object, error) {
 func (m *TextToSpeech) GetDefaultEngine() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -399,7 +400,8 @@ func (m *TextToSpeech) GetDefaultEngine() (string, error) {
 			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getDefaultEngine is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midTextToSpeechGetDefaultEngine,
 		)
@@ -416,7 +418,7 @@ func (m *TextToSpeech) GetDefaultEngine() (string, error) {
 func (m *TextToSpeech) GetDefaultLanguage() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -446,7 +448,7 @@ func (m *TextToSpeech) GetDefaultLanguage() (*jni.Object, error) {
 func (m *TextToSpeech) GetDefaultVoice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -476,7 +478,7 @@ func (m *TextToSpeech) GetDefaultVoice() (*jni.Object, error) {
 func (m *TextToSpeech) GetEngines() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -506,7 +508,7 @@ func (m *TextToSpeech) GetEngines() (*jni.Object, error) {
 func (m *TextToSpeech) GetFeatures(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -537,7 +539,7 @@ func (m *TextToSpeech) GetFeatures(arg0 *jni.Object) (*jni.Object, error) {
 func (m *TextToSpeech) GetLanguage() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -567,7 +569,7 @@ func (m *TextToSpeech) GetLanguage() (*jni.Object, error) {
 func (m *TextToSpeech) GetVoice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -597,7 +599,7 @@ func (m *TextToSpeech) GetVoice() (*jni.Object, error) {
 func (m *TextToSpeech) GetVoices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -627,7 +629,7 @@ func (m *TextToSpeech) GetVoices() (*jni.Object, error) {
 func (m *TextToSpeech) IsLanguageAvailable(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -653,7 +655,7 @@ func (m *TextToSpeech) IsLanguageAvailable(arg0 *jni.Object) (int32, error) {
 func (m *TextToSpeech) IsSpeaking() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -662,7 +664,8 @@ func (m *TextToSpeech) IsSpeaking() (bool, error) {
 			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.isSpeaking is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midTextToSpeechIsSpeaking,
 		)
@@ -684,7 +687,7 @@ func (m *TextToSpeech) PlayEarcon4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -723,7 +726,7 @@ func (m *TextToSpeech) PlayEarcon3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -757,7 +760,7 @@ func (m *TextToSpeech) PlaySilence(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -787,7 +790,7 @@ func (m *TextToSpeech) PlaySilentUtterance(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -818,7 +821,7 @@ func (m *TextToSpeech) PlaySilentUtterance(
 func (m *TextToSpeech) SetAudioAttributes(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -844,7 +847,7 @@ func (m *TextToSpeech) SetAudioAttributes(arg0 *jni.Object) (int32, error) {
 func (m *TextToSpeech) SetEngineByPackageName(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -874,7 +877,7 @@ func (m *TextToSpeech) SetEngineByPackageName(arg0 string) (int32, error) {
 func (m *TextToSpeech) SetLanguage(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -900,7 +903,7 @@ func (m *TextToSpeech) SetLanguage(arg0 *jni.Object) (int32, error) {
 func (m *TextToSpeech) SetOnUtteranceCompletedListener(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -926,7 +929,7 @@ func (m *TextToSpeech) SetOnUtteranceCompletedListener(arg0 *jni.Object) (int32,
 func (m *TextToSpeech) SetOnUtteranceProgressListener(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -952,7 +955,7 @@ func (m *TextToSpeech) SetOnUtteranceProgressListener(arg0 *jni.Object) (int32, 
 func (m *TextToSpeech) SetPitch(arg0 float32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -978,7 +981,7 @@ func (m *TextToSpeech) SetPitch(arg0 float32) (int32, error) {
 func (m *TextToSpeech) SetSpeechRate(arg0 float32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1004,7 +1007,7 @@ func (m *TextToSpeech) SetSpeechRate(arg0 float32) (int32, error) {
 func (m *TextToSpeech) SetVoice(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1030,7 +1033,7 @@ func (m *TextToSpeech) SetVoice(arg0 *jni.Object) (int32, error) {
 func (m *TextToSpeech) Shutdown() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1057,7 +1060,7 @@ func (m *TextToSpeech) Speak4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1096,7 +1099,7 @@ func (m *TextToSpeech) Speak3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1126,7 +1129,7 @@ func (m *TextToSpeech) Speak3_1(
 func (m *TextToSpeech) Stop() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1156,7 +1159,7 @@ func (m *TextToSpeech) SynthesizeToFile4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1196,7 +1199,7 @@ func (m *TextToSpeech) SynthesizeToFile4_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1235,7 +1238,7 @@ func (m *TextToSpeech) SynthesizeToFile3_2(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1270,7 +1273,7 @@ func (m *TextToSpeech) SynthesizeToFile3_2(
 func (m *TextToSpeech) GetMaxSpeechInputLength() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

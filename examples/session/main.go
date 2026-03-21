@@ -154,6 +154,8 @@ func printMediaSessions(
 			pkg, _ := ctrl.GetPackageName()
 			tag, _ := ctrl.GetTag()
 			fmt.Fprintf(output, "  [%d] pkg=%s tag=%s\n", i, pkg, tag)
+
+			env.DeleteGlobalRef(ctrl.Obj)
 		}
 		return nil
 	})

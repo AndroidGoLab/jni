@@ -75,7 +75,7 @@ func (m *DeviceManager) Associate(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -102,7 +102,7 @@ func (m *DeviceManager) AttachSystemDataTransport(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -125,7 +125,7 @@ func (m *DeviceManager) AttachSystemDataTransport(
 func (m *DeviceManager) BuildAssociationCancellationIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -155,7 +155,7 @@ func (m *DeviceManager) BuildAssociationCancellationIntent() (*jni.Object, error
 func (m *DeviceManager) BuildPermissionTransferUserConsentIntent(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -186,7 +186,7 @@ func (m *DeviceManager) BuildPermissionTransferUserConsentIntent(arg0 int32) (*j
 func (m *DeviceManager) DetachSystemDataTransport(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -209,7 +209,7 @@ func (m *DeviceManager) DetachSystemDataTransport(arg0 int32) error {
 func (m *DeviceManager) DisableSystemDataSyncForTypes(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -232,7 +232,7 @@ func (m *DeviceManager) DisableSystemDataSyncForTypes(arg0 int32, arg1 int32) er
 func (m *DeviceManager) Disassociate1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -255,7 +255,7 @@ func (m *DeviceManager) Disassociate1(arg0 int32) error {
 func (m *DeviceManager) Disassociate1_1(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -282,7 +282,7 @@ func (m *DeviceManager) Disassociate1_1(arg0 string) error {
 func (m *DeviceManager) EnableSystemDataSyncForTypes(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -305,7 +305,7 @@ func (m *DeviceManager) EnableSystemDataSyncForTypes(arg0 int32, arg1 int32) err
 func (m *DeviceManager) GetAssociations() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -335,7 +335,7 @@ func (m *DeviceManager) GetAssociations() (*jni.Object, error) {
 func (m *DeviceManager) GetMyAssociations() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -365,7 +365,7 @@ func (m *DeviceManager) GetMyAssociations() (*jni.Object, error) {
 func (m *DeviceManager) HasNotificationAccess(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -375,7 +375,8 @@ func (m *DeviceManager) HasNotificationAccess(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceManagerHasNotificationAccess, jni.ObjectValue(arg0),
 		)
@@ -392,7 +393,7 @@ func (m *DeviceManager) HasNotificationAccess(arg0 *jni.Object) (bool, error) {
 func (m *DeviceManager) IsPermissionTransferUserConsented(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -402,7 +403,8 @@ func (m *DeviceManager) IsPermissionTransferUserConsented(arg0 int32) (bool, err
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceManagerIsPermissionTransferUserConsented, jni.IntValue(arg0),
 		)
@@ -419,7 +421,7 @@ func (m *DeviceManager) IsPermissionTransferUserConsented(arg0 int32) (bool, err
 func (m *DeviceManager) RemoveBond(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -429,7 +431,8 @@ func (m *DeviceManager) RemoveBond(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceManagerRemoveBond, jni.IntValue(arg0),
 		)
@@ -446,7 +449,7 @@ func (m *DeviceManager) RemoveBond(arg0 int32) (bool, error) {
 func (m *DeviceManager) RequestNotificationAccess(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -469,7 +472,7 @@ func (m *DeviceManager) RequestNotificationAccess(arg0 *jni.Object) error {
 func (m *DeviceManager) SetDeviceId(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -492,7 +495,7 @@ func (m *DeviceManager) SetDeviceId(arg0 int32, arg1 *jni.Object) error {
 func (m *DeviceManager) StartObservingDevicePresence1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -515,7 +518,7 @@ func (m *DeviceManager) StartObservingDevicePresence1(arg0 *jni.Object) error {
 func (m *DeviceManager) StartObservingDevicePresence1_1(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -546,7 +549,7 @@ func (m *DeviceManager) StartSystemDataTransfer(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -569,7 +572,7 @@ func (m *DeviceManager) StartSystemDataTransfer(
 func (m *DeviceManager) StopObservingDevicePresence1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -592,7 +595,7 @@ func (m *DeviceManager) StopObservingDevicePresence1(arg0 *jni.Object) error {
 func (m *DeviceManager) StopObservingDevicePresence1_1(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

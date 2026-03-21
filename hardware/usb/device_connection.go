@@ -32,7 +32,7 @@ func (m *DeviceConnection) BulkTransfer4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -64,7 +64,7 @@ func (m *DeviceConnection) BulkTransfer5_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -90,7 +90,7 @@ func (m *DeviceConnection) BulkTransfer5_1(
 func (m *DeviceConnection) ClaimInterface(arg0 *jni.Object, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -105,7 +105,8 @@ func (m *DeviceConnection) ClaimInterface(arg0 *jni.Object, arg1 bool) (bool, er
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceConnectionClaimInterface, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -122,7 +123,7 @@ func (m *DeviceConnection) ClaimInterface(arg0 *jni.Object, arg1 bool) (bool, er
 func (m *DeviceConnection) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -152,7 +153,7 @@ func (m *DeviceConnection) ControlTransfer7(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -187,7 +188,7 @@ func (m *DeviceConnection) ControlTransfer8_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -213,7 +214,7 @@ func (m *DeviceConnection) ControlTransfer8_1(
 func (m *DeviceConnection) GetFileDescriptor() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -238,7 +239,7 @@ func (m *DeviceConnection) GetFileDescriptor() (int32, error) {
 func (m *DeviceConnection) GetRawDescriptors() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -268,7 +269,7 @@ func (m *DeviceConnection) GetRawDescriptors() (*jni.Object, error) {
 func (m *DeviceConnection) GetSerial() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -277,7 +278,8 @@ func (m *DeviceConnection) GetSerial() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbDeviceConnection.getSerial is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceConnectionGetSerial,
 		)
@@ -294,7 +296,7 @@ func (m *DeviceConnection) GetSerial() (string, error) {
 func (m *DeviceConnection) ReleaseInterface(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -304,7 +306,8 @@ func (m *DeviceConnection) ReleaseInterface(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceConnectionReleaseInterface, jni.ObjectValue(arg0),
 		)
@@ -321,7 +324,7 @@ func (m *DeviceConnection) ReleaseInterface(arg0 *jni.Object) (bool, error) {
 func (m *DeviceConnection) RequestWait0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -351,7 +354,7 @@ func (m *DeviceConnection) RequestWait0() (*jni.Object, error) {
 func (m *DeviceConnection) RequestWait1_1(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -382,7 +385,7 @@ func (m *DeviceConnection) RequestWait1_1(arg0 int64) (*jni.Object, error) {
 func (m *DeviceConnection) SetConfiguration(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -392,7 +395,8 @@ func (m *DeviceConnection) SetConfiguration(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceConnectionSetConfiguration, jni.ObjectValue(arg0),
 		)
@@ -409,7 +413,7 @@ func (m *DeviceConnection) SetConfiguration(arg0 *jni.Object) (bool, error) {
 func (m *DeviceConnection) SetInterface(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -419,7 +423,8 @@ func (m *DeviceConnection) SetInterface(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceConnectionSetInterface, jni.ObjectValue(arg0),
 		)

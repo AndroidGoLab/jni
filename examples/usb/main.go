@@ -177,14 +177,17 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 				if err != nil || ifObj == nil {
 					continue
 				}
-				iface := usb.Interface{VM: vm, Obj: env.NewGlobalRef(ifObj)}
+				iface := usb.Interface{VM: vm, Obj: ifObj}
 				ifID, _ := iface.GetId()
 				ifClass, _ := iface.GetInterfaceClass()
 				ifSub, _ := iface.GetInterfaceSubclass()
 				epCount, _ := iface.GetEndpointCount()
 				fmt.Fprintf(output, "      IF%d: cls=%d sub=%d eps=%d\n",
 					ifID, ifClass, ifSub, epCount)
+				env.DeleteGlobalRef(iface.Obj)
 			}
+
+			env.DeleteGlobalRef(dev.Obj)
 		}
 
 		return nil

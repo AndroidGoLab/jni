@@ -31,7 +31,7 @@ func (m *BluetoothLeAdvertiser) StartAdvertising3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -59,7 +59,7 @@ func (m *BluetoothLeAdvertiser) StartAdvertising4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -89,7 +89,7 @@ func (m *BluetoothLeAdvertiser) StartAdvertisingSet6(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -121,7 +121,7 @@ func (m *BluetoothLeAdvertiser) StartAdvertisingSet8_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -144,7 +144,7 @@ func (m *BluetoothLeAdvertiser) StartAdvertisingSet8_1(
 func (m *BluetoothLeAdvertiser) StopAdvertising(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -167,7 +167,7 @@ func (m *BluetoothLeAdvertiser) StopAdvertising(arg0 *jni.Object) error {
 func (m *BluetoothLeAdvertiser) StopAdvertisingSet(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

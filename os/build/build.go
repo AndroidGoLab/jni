@@ -27,7 +27,7 @@ type Build struct {
 func (m *Build) GetFingerprintedPartitions() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *Build) GetFingerprintedPartitions() (*jni.Object, error) {
 func (m *Build) GetMajorSdkVersion(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -83,7 +83,7 @@ func (m *Build) GetMajorSdkVersion(arg0 int32) (int32, error) {
 func (m *Build) GetMinorSdkVersion(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -109,7 +109,7 @@ func (m *Build) GetMinorSdkVersion(arg0 int32) (int32, error) {
 func (m *Build) GetRadioVersion() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -118,7 +118,8 @@ func (m *Build) GetRadioVersion() (string, error) {
 			callErr = fmt.Errorf("android.os.Build.getRadioVersion is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsBuild)),
 			midBuildGetRadioVersion,
 		)
@@ -135,7 +136,7 @@ func (m *Build) GetRadioVersion() (string, error) {
 func (m *Build) GetSerial() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -144,7 +145,8 @@ func (m *Build) GetSerial() (string, error) {
 			callErr = fmt.Errorf("android.os.Build.getSerial is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsBuild)),
 			midBuildGetSerial,
 		)

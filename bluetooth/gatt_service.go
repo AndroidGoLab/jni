@@ -27,7 +27,7 @@ type GattService struct {
 func (m *GattService) AddCharacteristic(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *GattService) AddCharacteristic(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattServiceAddCharacteristic, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *GattService) AddCharacteristic(arg0 *jni.Object) (bool, error) {
 func (m *GattService) AddService(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -64,7 +65,8 @@ func (m *GattService) AddService(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattServiceAddService, jni.ObjectValue(arg0),
 		)
@@ -81,7 +83,7 @@ func (m *GattService) AddService(arg0 *jni.Object) (bool, error) {
 func (m *GattService) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -106,7 +108,7 @@ func (m *GattService) DescribeContents() (int32, error) {
 func (m *GattService) GetCharacteristic(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -137,7 +139,7 @@ func (m *GattService) GetCharacteristic(arg0 *jni.Object) (*jni.Object, error) {
 func (m *GattService) GetCharacteristics() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -167,7 +169,7 @@ func (m *GattService) GetCharacteristics() (*jni.Object, error) {
 func (m *GattService) GetIncludedServices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -197,7 +199,7 @@ func (m *GattService) GetIncludedServices() (*jni.Object, error) {
 func (m *GattService) GetInstanceId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -222,7 +224,7 @@ func (m *GattService) GetInstanceId() (int32, error) {
 func (m *GattService) GetType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -247,7 +249,7 @@ func (m *GattService) GetType() (int32, error) {
 func (m *GattService) GetUuid() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -277,7 +279,7 @@ func (m *GattService) GetUuid() (*jni.Object, error) {
 func (m *GattService) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

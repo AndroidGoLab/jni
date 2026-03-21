@@ -27,7 +27,7 @@ type PromptBuilder struct {
 func (m *PromptBuilder) Build() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *PromptBuilder) Build() (*jni.Object, error) {
 func (m *PromptBuilder) SetAllowedAuthenticators(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +88,7 @@ func (m *PromptBuilder) SetAllowedAuthenticators(arg0 int32) (*jni.Object, error
 func (m *PromptBuilder) SetConfirmationRequired(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -123,7 +123,7 @@ func (m *PromptBuilder) SetConfirmationRequired(arg0 bool) (*jni.Object, error) 
 func (m *PromptBuilder) SetContentView(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -154,7 +154,7 @@ func (m *PromptBuilder) SetContentView(arg0 *jni.Object) (*jni.Object, error) {
 func (m *PromptBuilder) SetDescription(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +189,7 @@ func (m *PromptBuilder) SetDescription(arg0 string) (*jni.Object, error) {
 func (m *PromptBuilder) SetDeviceCredentialAllowed(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -224,7 +224,7 @@ func (m *PromptBuilder) SetDeviceCredentialAllowed(arg0 bool) (*jni.Object, erro
 func (m *PromptBuilder) SetLogoBitmap(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -255,7 +255,7 @@ func (m *PromptBuilder) SetLogoBitmap(arg0 *jni.Object) (*jni.Object, error) {
 func (m *PromptBuilder) SetLogoDescription(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -290,7 +290,7 @@ func (m *PromptBuilder) SetLogoDescription(arg0 string) (*jni.Object, error) {
 func (m *PromptBuilder) SetLogoRes(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -325,7 +325,7 @@ func (m *PromptBuilder) SetNegativeButton(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -360,7 +360,7 @@ func (m *PromptBuilder) SetNegativeButton(
 func (m *PromptBuilder) SetSubtitle(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -395,7 +395,7 @@ func (m *PromptBuilder) SetSubtitle(arg0 string) (*jni.Object, error) {
 func (m *PromptBuilder) SetTitle(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

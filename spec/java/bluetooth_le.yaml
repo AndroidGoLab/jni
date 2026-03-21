@@ -226,9 +226,6 @@ constants:
     - go_name: ExtraListScanResult
       value: '"android.bluetooth.le.extra.LIST_SCAN_RESULT"'
       go_type: string
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: DataComplete
       value: "0"
       go_type: int

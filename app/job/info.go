@@ -27,7 +27,7 @@ type Info struct {
 func (m *Info) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *Info) DescribeContents() (int32, error) {
 func (m *Info) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *Info) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *Info) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Info) GetBackoffPolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -104,7 +105,7 @@ func (m *Info) GetBackoffPolicy() (int32, error) {
 func (m *Info) GetClipData() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -134,7 +135,7 @@ func (m *Info) GetClipData() (*jni.Object, error) {
 func (m *Info) GetClipGrantFlags() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +160,7 @@ func (m *Info) GetClipGrantFlags() (int32, error) {
 func (m *Info) GetDebugTags() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +190,7 @@ func (m *Info) GetDebugTags() (*jni.Object, error) {
 func (m *Info) GetEstimatedNetworkDownloadBytes() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -214,7 +215,7 @@ func (m *Info) GetEstimatedNetworkDownloadBytes() (int64, error) {
 func (m *Info) GetEstimatedNetworkUploadBytes() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -239,7 +240,7 @@ func (m *Info) GetEstimatedNetworkUploadBytes() (int64, error) {
 func (m *Info) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -269,7 +270,7 @@ func (m *Info) GetExtras() (*jni.Object, error) {
 func (m *Info) GetFlexMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -294,7 +295,7 @@ func (m *Info) GetFlexMillis() (int64, error) {
 func (m *Info) GetId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -319,7 +320,7 @@ func (m *Info) GetId() (int32, error) {
 func (m *Info) GetInitialBackoffMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -344,7 +345,7 @@ func (m *Info) GetInitialBackoffMillis() (int64, error) {
 func (m *Info) GetIntervalMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -369,7 +370,7 @@ func (m *Info) GetIntervalMillis() (int64, error) {
 func (m *Info) GetMaxExecutionDelayMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -394,7 +395,7 @@ func (m *Info) GetMaxExecutionDelayMillis() (int64, error) {
 func (m *Info) GetMinLatencyMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -419,7 +420,7 @@ func (m *Info) GetMinLatencyMillis() (int64, error) {
 func (m *Info) GetMinimumNetworkChunkBytes() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -444,7 +445,7 @@ func (m *Info) GetMinimumNetworkChunkBytes() (int64, error) {
 func (m *Info) GetNetworkType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -469,7 +470,7 @@ func (m *Info) GetNetworkType() (int32, error) {
 func (m *Info) GetPriority() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -494,7 +495,7 @@ func (m *Info) GetPriority() (int32, error) {
 func (m *Info) GetRequiredNetwork() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -524,7 +525,7 @@ func (m *Info) GetRequiredNetwork() (*jni.Object, error) {
 func (m *Info) GetService() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -554,7 +555,7 @@ func (m *Info) GetService() (*jni.Object, error) {
 func (m *Info) GetTraceTag() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -563,7 +564,8 @@ func (m *Info) GetTraceTag() (string, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.getTraceTag is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoGetTraceTag,
 		)
@@ -580,7 +582,7 @@ func (m *Info) GetTraceTag() (string, error) {
 func (m *Info) GetTransientExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -610,7 +612,7 @@ func (m *Info) GetTransientExtras() (*jni.Object, error) {
 func (m *Info) GetTriggerContentMaxDelay() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -635,7 +637,7 @@ func (m *Info) GetTriggerContentMaxDelay() (int64, error) {
 func (m *Info) GetTriggerContentUpdateDelay() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -660,7 +662,7 @@ func (m *Info) GetTriggerContentUpdateDelay() (int64, error) {
 func (m *Info) GetTriggerContentUris() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -690,7 +692,7 @@ func (m *Info) GetTriggerContentUris() (*jni.Object, error) {
 func (m *Info) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -715,7 +717,7 @@ func (m *Info) HashCode() (int32, error) {
 func (m *Info) IsExpedited() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -724,7 +726,8 @@ func (m *Info) IsExpedited() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isExpedited is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsExpedited,
 		)
@@ -741,7 +744,7 @@ func (m *Info) IsExpedited() (bool, error) {
 func (m *Info) IsImportantWhileForeground() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -750,7 +753,8 @@ func (m *Info) IsImportantWhileForeground() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isImportantWhileForeground is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsImportantWhileForeground,
 		)
@@ -767,7 +771,7 @@ func (m *Info) IsImportantWhileForeground() (bool, error) {
 func (m *Info) IsPeriodic() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -776,7 +780,8 @@ func (m *Info) IsPeriodic() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isPeriodic is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsPeriodic,
 		)
@@ -793,7 +798,7 @@ func (m *Info) IsPeriodic() (bool, error) {
 func (m *Info) IsPersisted() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -802,7 +807,8 @@ func (m *Info) IsPersisted() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isPersisted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsPersisted,
 		)
@@ -819,7 +825,7 @@ func (m *Info) IsPersisted() (bool, error) {
 func (m *Info) IsPrefetch() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -828,7 +834,8 @@ func (m *Info) IsPrefetch() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isPrefetch is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsPrefetch,
 		)
@@ -845,7 +852,7 @@ func (m *Info) IsPrefetch() (bool, error) {
 func (m *Info) IsRequireBatteryNotLow() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -854,7 +861,8 @@ func (m *Info) IsRequireBatteryNotLow() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireBatteryNotLow is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsRequireBatteryNotLow,
 		)
@@ -871,7 +879,7 @@ func (m *Info) IsRequireBatteryNotLow() (bool, error) {
 func (m *Info) IsRequireCharging() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -880,7 +888,8 @@ func (m *Info) IsRequireCharging() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireCharging is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsRequireCharging,
 		)
@@ -897,7 +906,7 @@ func (m *Info) IsRequireCharging() (bool, error) {
 func (m *Info) IsRequireDeviceIdle() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -906,7 +915,8 @@ func (m *Info) IsRequireDeviceIdle() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireDeviceIdle is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsRequireDeviceIdle,
 		)
@@ -923,7 +933,7 @@ func (m *Info) IsRequireDeviceIdle() (bool, error) {
 func (m *Info) IsRequireStorageNotLow() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -932,7 +942,8 @@ func (m *Info) IsRequireStorageNotLow() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isRequireStorageNotLow is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsRequireStorageNotLow,
 		)
@@ -949,7 +960,7 @@ func (m *Info) IsRequireStorageNotLow() (bool, error) {
 func (m *Info) IsUserInitiated() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -958,7 +969,8 @@ func (m *Info) IsUserInitiated() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.isUserInitiated is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsUserInitiated,
 		)
@@ -975,7 +987,7 @@ func (m *Info) IsUserInitiated() (bool, error) {
 func (m *Info) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -984,7 +996,8 @@ func (m *Info) ToString() (string, error) {
 			callErr = fmt.Errorf("android.app.job.JobInfo.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoToString,
 		)
@@ -1001,7 +1014,7 @@ func (m *Info) ToString() (string, error) {
 func (m *Info) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1024,7 +1037,7 @@ func (m *Info) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *Info) GetMinFlexMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1049,7 +1062,7 @@ func (m *Info) GetMinFlexMillis() (int64, error) {
 func (m *Info) GetMinPeriodMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

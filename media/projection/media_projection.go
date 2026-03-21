@@ -27,7 +27,7 @@ type MediaProjection struct {
 func (m *MediaProjection) Stop() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *MediaProjection) Stop() error {
 func (m *MediaProjection) UnregisterCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

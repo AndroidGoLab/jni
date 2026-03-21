@@ -27,7 +27,7 @@ type Stats struct {
 func (m *Stats) Add(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -50,7 +50,7 @@ func (m *Stats) Add(arg0 *jni.Object) error {
 func (m *Stats) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -75,7 +75,7 @@ func (m *Stats) DescribeContents() (int32, error) {
 func (m *Stats) GetFirstTimeStamp() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -100,7 +100,7 @@ func (m *Stats) GetFirstTimeStamp() (int64, error) {
 func (m *Stats) GetLastTimeForegroundServiceUsed() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -125,7 +125,7 @@ func (m *Stats) GetLastTimeForegroundServiceUsed() (int64, error) {
 func (m *Stats) GetLastTimeStamp() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -150,7 +150,7 @@ func (m *Stats) GetLastTimeStamp() (int64, error) {
 func (m *Stats) GetLastTimeUsed() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -175,7 +175,7 @@ func (m *Stats) GetLastTimeUsed() (int64, error) {
 func (m *Stats) GetLastTimeVisible() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -200,7 +200,7 @@ func (m *Stats) GetLastTimeVisible() (int64, error) {
 func (m *Stats) GetPackageName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -209,7 +209,8 @@ func (m *Stats) GetPackageName() (string, error) {
 			callErr = fmt.Errorf("android.app.usage.UsageStats.getPackageName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midStatsGetPackageName,
 		)
@@ -226,7 +227,7 @@ func (m *Stats) GetPackageName() (string, error) {
 func (m *Stats) GetTotalTimeForegroundServiceUsed() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -251,7 +252,7 @@ func (m *Stats) GetTotalTimeForegroundServiceUsed() (int64, error) {
 func (m *Stats) GetTotalTimeInForeground() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -276,7 +277,7 @@ func (m *Stats) GetTotalTimeInForeground() (int64, error) {
 func (m *Stats) GetTotalTimeVisible() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -301,7 +302,7 @@ func (m *Stats) GetTotalTimeVisible() (int64, error) {
 func (m *Stats) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

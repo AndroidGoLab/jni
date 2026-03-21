@@ -27,7 +27,7 @@ type Session struct {
 func (m *Session) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Session) Close() error {
 func (m *Session) CloseChannels() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -71,7 +71,7 @@ func (m *Session) CloseChannels() error {
 func (m *Session) GetATR() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -101,7 +101,7 @@ func (m *Session) GetATR() (*jni.Object, error) {
 func (m *Session) GetReader() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -131,7 +131,7 @@ func (m *Session) GetReader() (*jni.Object, error) {
 func (m *Session) IsClosed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -140,7 +140,8 @@ func (m *Session) IsClosed() (bool, error) {
 			callErr = fmt.Errorf("android.se.omapi.Session.isClosed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midSessionIsClosed,
 		)
@@ -157,7 +158,7 @@ func (m *Session) IsClosed() (bool, error) {
 func (m *Session) OpenBasicChannel1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -188,7 +189,7 @@ func (m *Session) OpenBasicChannel1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Session) OpenBasicChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +220,7 @@ func (m *Session) OpenBasicChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object,
 func (m *Session) OpenLogicalChannel1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -250,7 +251,7 @@ func (m *Session) OpenLogicalChannel1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Session) OpenLogicalChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

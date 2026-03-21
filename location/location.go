@@ -27,7 +27,7 @@ type Location struct {
 func (m *Location) BearingTo(arg0 *jni.Object) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -53,7 +53,7 @@ func (m *Location) BearingTo(arg0 *jni.Object) (float32, error) {
 func (m *Location) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -78,7 +78,7 @@ func (m *Location) DescribeContents() (int32, error) {
 func (m *Location) DistanceTo(arg0 *jni.Object) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -104,7 +104,7 @@ func (m *Location) DistanceTo(arg0 *jni.Object) (float32, error) {
 func (m *Location) Dump(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -132,7 +132,7 @@ func (m *Location) Dump(arg0 *jni.Object, arg1 string) error {
 func (m *Location) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -142,7 +142,8 @@ func (m *Location) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationEquals, jni.ObjectValue(arg0),
 		)
@@ -159,7 +160,7 @@ func (m *Location) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Location) GetAccuracy() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -184,7 +185,7 @@ func (m *Location) GetAccuracy() (float32, error) {
 func (m *Location) GetAltitude() (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -209,7 +210,7 @@ func (m *Location) GetAltitude() (float64, error) {
 func (m *Location) GetBearing() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -234,7 +235,7 @@ func (m *Location) GetBearing() (float32, error) {
 func (m *Location) GetBearingAccuracyDegrees() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -259,7 +260,7 @@ func (m *Location) GetBearingAccuracyDegrees() (float32, error) {
 func (m *Location) GetElapsedRealtimeAgeMillis0() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -284,7 +285,7 @@ func (m *Location) GetElapsedRealtimeAgeMillis0() (int64, error) {
 func (m *Location) GetElapsedRealtimeAgeMillis1_1(arg0 int64) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -310,7 +311,7 @@ func (m *Location) GetElapsedRealtimeAgeMillis1_1(arg0 int64) (int64, error) {
 func (m *Location) GetElapsedRealtimeMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -335,7 +336,7 @@ func (m *Location) GetElapsedRealtimeMillis() (int64, error) {
 func (m *Location) GetElapsedRealtimeNanos() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -360,7 +361,7 @@ func (m *Location) GetElapsedRealtimeNanos() (int64, error) {
 func (m *Location) GetElapsedRealtimeUncertaintyNanos() (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -385,7 +386,7 @@ func (m *Location) GetElapsedRealtimeUncertaintyNanos() (float64, error) {
 func (m *Location) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -415,7 +416,7 @@ func (m *Location) GetExtras() (*jni.Object, error) {
 func (m *Location) GetLatitude() (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -440,7 +441,7 @@ func (m *Location) GetLatitude() (float64, error) {
 func (m *Location) GetLongitude() (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -465,7 +466,7 @@ func (m *Location) GetLongitude() (float64, error) {
 func (m *Location) GetMslAltitudeAccuracyMeters() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -490,7 +491,7 @@ func (m *Location) GetMslAltitudeAccuracyMeters() (float32, error) {
 func (m *Location) GetMslAltitudeMeters() (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -515,7 +516,7 @@ func (m *Location) GetMslAltitudeMeters() (float64, error) {
 func (m *Location) GetProvider() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -524,7 +525,8 @@ func (m *Location) GetProvider() (string, error) {
 			callErr = fmt.Errorf("android.location.Location.getProvider is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midLocationGetProvider,
 		)
@@ -541,7 +543,7 @@ func (m *Location) GetProvider() (string, error) {
 func (m *Location) GetSpeed() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -566,7 +568,7 @@ func (m *Location) GetSpeed() (float32, error) {
 func (m *Location) GetSpeedAccuracyMetersPerSecond() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -591,7 +593,7 @@ func (m *Location) GetSpeedAccuracyMetersPerSecond() (float32, error) {
 func (m *Location) GetTime() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -616,7 +618,7 @@ func (m *Location) GetTime() (int64, error) {
 func (m *Location) GetVerticalAccuracyMeters() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -641,7 +643,7 @@ func (m *Location) GetVerticalAccuracyMeters() (float32, error) {
 func (m *Location) HasAccuracy() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -650,7 +652,8 @@ func (m *Location) HasAccuracy() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasAccuracy is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasAccuracy,
 		)
@@ -667,7 +670,7 @@ func (m *Location) HasAccuracy() (bool, error) {
 func (m *Location) HasAltitude() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -676,7 +679,8 @@ func (m *Location) HasAltitude() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasAltitude is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasAltitude,
 		)
@@ -693,7 +697,7 @@ func (m *Location) HasAltitude() (bool, error) {
 func (m *Location) HasBearing() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -702,7 +706,8 @@ func (m *Location) HasBearing() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasBearing is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasBearing,
 		)
@@ -719,7 +724,7 @@ func (m *Location) HasBearing() (bool, error) {
 func (m *Location) HasBearingAccuracy() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -728,7 +733,8 @@ func (m *Location) HasBearingAccuracy() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasBearingAccuracy is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasBearingAccuracy,
 		)
@@ -745,7 +751,7 @@ func (m *Location) HasBearingAccuracy() (bool, error) {
 func (m *Location) HasElapsedRealtimeUncertaintyNanos() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -754,7 +760,8 @@ func (m *Location) HasElapsedRealtimeUncertaintyNanos() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasElapsedRealtimeUncertaintyNanos is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasElapsedRealtimeUncertaintyNanos,
 		)
@@ -771,7 +778,7 @@ func (m *Location) HasElapsedRealtimeUncertaintyNanos() (bool, error) {
 func (m *Location) HasMslAltitude() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -780,7 +787,8 @@ func (m *Location) HasMslAltitude() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasMslAltitude is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasMslAltitude,
 		)
@@ -797,7 +805,7 @@ func (m *Location) HasMslAltitude() (bool, error) {
 func (m *Location) HasMslAltitudeAccuracy() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -806,7 +814,8 @@ func (m *Location) HasMslAltitudeAccuracy() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasMslAltitudeAccuracy is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasMslAltitudeAccuracy,
 		)
@@ -823,7 +832,7 @@ func (m *Location) HasMslAltitudeAccuracy() (bool, error) {
 func (m *Location) HasSpeed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -832,7 +841,8 @@ func (m *Location) HasSpeed() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasSpeed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasSpeed,
 		)
@@ -849,7 +859,7 @@ func (m *Location) HasSpeed() (bool, error) {
 func (m *Location) HasSpeedAccuracy() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -858,7 +868,8 @@ func (m *Location) HasSpeedAccuracy() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasSpeedAccuracy is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasSpeedAccuracy,
 		)
@@ -875,7 +886,7 @@ func (m *Location) HasSpeedAccuracy() (bool, error) {
 func (m *Location) HasVerticalAccuracy() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -884,7 +895,8 @@ func (m *Location) HasVerticalAccuracy() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.hasVerticalAccuracy is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationHasVerticalAccuracy,
 		)
@@ -901,7 +913,7 @@ func (m *Location) HasVerticalAccuracy() (bool, error) {
 func (m *Location) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -926,7 +938,7 @@ func (m *Location) HashCode() (int32, error) {
 func (m *Location) IsComplete() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -935,7 +947,8 @@ func (m *Location) IsComplete() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.isComplete is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationIsComplete,
 		)
@@ -952,7 +965,7 @@ func (m *Location) IsComplete() (bool, error) {
 func (m *Location) IsFromMockProvider() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -961,7 +974,8 @@ func (m *Location) IsFromMockProvider() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.isFromMockProvider is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationIsFromMockProvider,
 		)
@@ -978,7 +992,7 @@ func (m *Location) IsFromMockProvider() (bool, error) {
 func (m *Location) IsMock() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -987,7 +1001,8 @@ func (m *Location) IsMock() (bool, error) {
 			callErr = fmt.Errorf("android.location.Location.isMock is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLocationIsMock,
 		)
@@ -1004,7 +1019,7 @@ func (m *Location) IsMock() (bool, error) {
 func (m *Location) RemoveAccuracy() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1026,7 +1041,7 @@ func (m *Location) RemoveAccuracy() error {
 func (m *Location) RemoveAltitude() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1048,7 +1063,7 @@ func (m *Location) RemoveAltitude() error {
 func (m *Location) RemoveBearing() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1070,7 +1085,7 @@ func (m *Location) RemoveBearing() error {
 func (m *Location) RemoveBearingAccuracy() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1092,7 +1107,7 @@ func (m *Location) RemoveBearingAccuracy() error {
 func (m *Location) RemoveElapsedRealtimeUncertaintyNanos() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1114,7 +1129,7 @@ func (m *Location) RemoveElapsedRealtimeUncertaintyNanos() error {
 func (m *Location) RemoveMslAltitude() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1136,7 +1151,7 @@ func (m *Location) RemoveMslAltitude() error {
 func (m *Location) RemoveMslAltitudeAccuracy() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1158,7 +1173,7 @@ func (m *Location) RemoveMslAltitudeAccuracy() error {
 func (m *Location) RemoveSpeed() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1180,7 +1195,7 @@ func (m *Location) RemoveSpeed() error {
 func (m *Location) RemoveSpeedAccuracy() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1202,7 +1217,7 @@ func (m *Location) RemoveSpeedAccuracy() error {
 func (m *Location) RemoveVerticalAccuracy() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1224,7 +1239,7 @@ func (m *Location) RemoveVerticalAccuracy() error {
 func (m *Location) Reset() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1246,7 +1261,7 @@ func (m *Location) Reset() error {
 func (m *Location) Set(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1269,7 +1284,7 @@ func (m *Location) Set(arg0 *jni.Object) error {
 func (m *Location) SetAccuracy(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1292,7 +1307,7 @@ func (m *Location) SetAccuracy(arg0 float32) error {
 func (m *Location) SetAltitude(arg0 float64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1315,7 +1330,7 @@ func (m *Location) SetAltitude(arg0 float64) error {
 func (m *Location) SetBearing(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1338,7 +1353,7 @@ func (m *Location) SetBearing(arg0 float32) error {
 func (m *Location) SetBearingAccuracyDegrees(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1361,7 +1376,7 @@ func (m *Location) SetBearingAccuracyDegrees(arg0 float32) error {
 func (m *Location) SetElapsedRealtimeNanos(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1384,7 +1399,7 @@ func (m *Location) SetElapsedRealtimeNanos(arg0 int64) error {
 func (m *Location) SetElapsedRealtimeUncertaintyNanos(arg0 float64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1407,7 +1422,7 @@ func (m *Location) SetElapsedRealtimeUncertaintyNanos(arg0 float64) error {
 func (m *Location) SetExtras(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1430,7 +1445,7 @@ func (m *Location) SetExtras(arg0 *jni.Object) error {
 func (m *Location) SetLatitude(arg0 float64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1453,7 +1468,7 @@ func (m *Location) SetLatitude(arg0 float64) error {
 func (m *Location) SetLongitude(arg0 float64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1476,7 +1491,7 @@ func (m *Location) SetLongitude(arg0 float64) error {
 func (m *Location) SetMock(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1503,7 +1518,7 @@ func (m *Location) SetMock(arg0 bool) error {
 func (m *Location) SetMslAltitudeAccuracyMeters(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1526,7 +1541,7 @@ func (m *Location) SetMslAltitudeAccuracyMeters(arg0 float32) error {
 func (m *Location) SetMslAltitudeMeters(arg0 float64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1549,7 +1564,7 @@ func (m *Location) SetMslAltitudeMeters(arg0 float64) error {
 func (m *Location) SetProvider(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1576,7 +1591,7 @@ func (m *Location) SetProvider(arg0 string) error {
 func (m *Location) SetSpeed(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1599,7 +1614,7 @@ func (m *Location) SetSpeed(arg0 float32) error {
 func (m *Location) SetSpeedAccuracyMetersPerSecond(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1622,7 +1637,7 @@ func (m *Location) SetSpeedAccuracyMetersPerSecond(arg0 float32) error {
 func (m *Location) SetTime(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1645,7 +1660,7 @@ func (m *Location) SetTime(arg0 int64) error {
 func (m *Location) SetVerticalAccuracyMeters(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1668,7 +1683,7 @@ func (m *Location) SetVerticalAccuracyMeters(arg0 float32) error {
 func (m *Location) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1677,7 +1692,8 @@ func (m *Location) ToString() (string, error) {
 			callErr = fmt.Errorf("android.location.Location.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midLocationToString,
 		)
@@ -1694,7 +1710,7 @@ func (m *Location) ToString() (string, error) {
 func (m *Location) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1717,7 +1733,7 @@ func (m *Location) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *Location) Convert2(arg0 float64, arg1 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1727,7 +1743,8 @@ func (m *Location) Convert2(arg0 float64, arg1 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsLocation)),
 			midLocationConvert2, jni.DoubleValue(arg0), jni.IntValue(arg1),
 		)
@@ -1744,7 +1761,7 @@ func (m *Location) Convert2(arg0 float64, arg1 int32) (string, error) {
 func (m *Location) Convert1_1(arg0 string) (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1780,7 +1797,7 @@ func (m *Location) DistanceBetween(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

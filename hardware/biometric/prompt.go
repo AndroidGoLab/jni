@@ -32,7 +32,7 @@ func (m *Prompt) Authenticate4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -59,7 +59,7 @@ func (m *Prompt) Authenticate3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *Prompt) Authenticate3_1(
 func (m *Prompt) GetAllowedAuthenticators() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +107,7 @@ func (m *Prompt) GetAllowedAuthenticators() (int32, error) {
 func (m *Prompt) GetContentView() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -137,7 +137,7 @@ func (m *Prompt) GetContentView() (*jni.Object, error) {
 func (m *Prompt) GetDescription() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -146,7 +146,8 @@ func (m *Prompt) GetDescription() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getDescription is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetDescription,
 		)
@@ -163,7 +164,7 @@ func (m *Prompt) GetDescription() (string, error) {
 func (m *Prompt) GetLogoBitmap() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -193,7 +194,7 @@ func (m *Prompt) GetLogoBitmap() (*jni.Object, error) {
 func (m *Prompt) GetLogoDescription() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -202,7 +203,8 @@ func (m *Prompt) GetLogoDescription() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getLogoDescription is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetLogoDescription,
 		)
@@ -219,7 +221,7 @@ func (m *Prompt) GetLogoDescription() (string, error) {
 func (m *Prompt) GetLogoRes() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -244,7 +246,7 @@ func (m *Prompt) GetLogoRes() (int32, error) {
 func (m *Prompt) GetNegativeButtonText() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -253,7 +255,8 @@ func (m *Prompt) GetNegativeButtonText() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getNegativeButtonText is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetNegativeButtonText,
 		)
@@ -270,7 +273,7 @@ func (m *Prompt) GetNegativeButtonText() (string, error) {
 func (m *Prompt) GetSubtitle() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -279,7 +282,8 @@ func (m *Prompt) GetSubtitle() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getSubtitle is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetSubtitle,
 		)
@@ -296,7 +300,7 @@ func (m *Prompt) GetSubtitle() (string, error) {
 func (m *Prompt) GetTitle() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -305,7 +309,8 @@ func (m *Prompt) GetTitle() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getTitle is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetTitle,
 		)
@@ -322,7 +327,7 @@ func (m *Prompt) GetTitle() (string, error) {
 func (m *Prompt) IsConfirmationRequired() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -331,7 +336,8 @@ func (m *Prompt) IsConfirmationRequired() (bool, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.isConfirmationRequired is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midPromptIsConfirmationRequired,
 		)

@@ -27,7 +27,7 @@ type Manager struct {
 func (m *Manager) GetCursor() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *Manager) GetCursor() (*jni.Object, error) {
 func (m *Manager) GetIncludeDrm() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -66,7 +66,8 @@ func (m *Manager) GetIncludeDrm() (bool, error) {
 			callErr = fmt.Errorf("android.media.RingtoneManager.getIncludeDrm is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerGetIncludeDrm,
 		)
@@ -83,7 +84,7 @@ func (m *Manager) GetIncludeDrm() (bool, error) {
 func (m *Manager) GetRingtone1_1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -114,7 +115,7 @@ func (m *Manager) GetRingtone1_1(arg0 int32) (*jni.Object, error) {
 func (m *Manager) GetRingtonePosition(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -140,7 +141,7 @@ func (m *Manager) GetRingtonePosition(arg0 *jni.Object) (int32, error) {
 func (m *Manager) GetRingtoneUri(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -171,7 +172,7 @@ func (m *Manager) GetRingtoneUri(arg0 int32) (*jni.Object, error) {
 func (m *Manager) GetStopPreviousRingtone() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -180,7 +181,8 @@ func (m *Manager) GetStopPreviousRingtone() (bool, error) {
 			callErr = fmt.Errorf("android.media.RingtoneManager.getStopPreviousRingtone is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerGetStopPreviousRingtone,
 		)
@@ -197,7 +199,7 @@ func (m *Manager) GetStopPreviousRingtone() (bool, error) {
 func (m *Manager) HasHapticChannels1_2(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -207,7 +209,8 @@ func (m *Manager) HasHapticChannels1_2(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHasHapticChannels1_2, jni.IntValue(arg0),
 		)
@@ -224,7 +227,7 @@ func (m *Manager) HasHapticChannels1_2(arg0 int32) (bool, error) {
 func (m *Manager) InferStreamType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -249,7 +252,7 @@ func (m *Manager) InferStreamType() (int32, error) {
 func (m *Manager) SetIncludeDrm(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -276,7 +279,7 @@ func (m *Manager) SetIncludeDrm(arg0 bool) error {
 func (m *Manager) SetStopPreviousRingtone(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -303,7 +306,7 @@ func (m *Manager) SetStopPreviousRingtone(arg0 bool) error {
 func (m *Manager) SetType(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -326,7 +329,7 @@ func (m *Manager) SetType(arg0 int32) error {
 func (m *Manager) StopPreviousRingtone() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -348,7 +351,7 @@ func (m *Manager) StopPreviousRingtone() error {
 func (m *Manager) GetActualDefaultRingtoneUri(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -379,7 +382,7 @@ func (m *Manager) GetActualDefaultRingtoneUri(arg0 *jni.Object, arg1 int32) (*jn
 func (m *Manager) GetDefaultType(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -405,7 +408,7 @@ func (m *Manager) GetDefaultType(arg0 *jni.Object) (int32, error) {
 func (m *Manager) GetDefaultUri(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -436,7 +439,7 @@ func (m *Manager) GetDefaultUri(arg0 int32) (*jni.Object, error) {
 func (m *Manager) GetRingtone2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -467,7 +470,7 @@ func (m *Manager) GetRingtone2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object,
 func (m *Manager) GetValidRingtoneUri(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -498,7 +501,7 @@ func (m *Manager) GetValidRingtoneUri(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) HasHapticChannels2(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -508,7 +511,8 @@ func (m *Manager) HasHapticChannels2(arg0 *jni.Object, arg1 *jni.Object) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsManager)),
 			midManagerHasHapticChannels2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -525,7 +529,7 @@ func (m *Manager) HasHapticChannels2(arg0 *jni.Object, arg1 *jni.Object) (bool, 
 func (m *Manager) HasHapticChannels1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -535,7 +539,8 @@ func (m *Manager) HasHapticChannels1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsManager)),
 			midManagerHasHapticChannels1_1, jni.ObjectValue(arg0),
 		)
@@ -552,7 +557,7 @@ func (m *Manager) HasHapticChannels1_1(arg0 *jni.Object) (bool, error) {
 func (m *Manager) IsDefault(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -562,7 +567,8 @@ func (m *Manager) IsDefault(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsManager)),
 			midManagerIsDefault, jni.ObjectValue(arg0),
 		)
@@ -579,7 +585,7 @@ func (m *Manager) IsDefault(arg0 *jni.Object) (bool, error) {
 func (m *Manager) OpenDefaultRingtoneUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -614,7 +620,7 @@ func (m *Manager) SetActualDefaultRingtoneUri(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

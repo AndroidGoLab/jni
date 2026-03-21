@@ -27,7 +27,7 @@ type ScanResult struct {
 func (m *ScanResult) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *ScanResult) DescribeContents() (int32, error) {
 func (m *ScanResult) GetAffiliatedMloLinks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *ScanResult) GetAffiliatedMloLinks() (*jni.Object, error) {
 func (m *ScanResult) GetApMldMacAddress() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -112,7 +112,7 @@ func (m *ScanResult) GetApMldMacAddress() (*jni.Object, error) {
 func (m *ScanResult) GetApMloLinkId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -137,7 +137,7 @@ func (m *ScanResult) GetApMloLinkId() (int32, error) {
 func (m *ScanResult) GetInformationElements() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -167,7 +167,7 @@ func (m *ScanResult) GetInformationElements() (*jni.Object, error) {
 func (m *ScanResult) GetSecurityTypes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -197,7 +197,7 @@ func (m *ScanResult) GetSecurityTypes() (*jni.Object, error) {
 func (m *ScanResult) GetWifiSsid() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -227,7 +227,7 @@ func (m *ScanResult) GetWifiSsid() (*jni.Object, error) {
 func (m *ScanResult) GetWifiStandard() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -252,7 +252,7 @@ func (m *ScanResult) GetWifiStandard() (int32, error) {
 func (m *ScanResult) Is80211azNtbResponder() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -261,7 +261,8 @@ func (m *ScanResult) Is80211azNtbResponder() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.is80211azNtbResponder is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIs80211azNtbResponder,
 		)
@@ -278,7 +279,7 @@ func (m *ScanResult) Is80211azNtbResponder() (bool, error) {
 func (m *ScanResult) Is80211mcResponder() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -287,7 +288,8 @@ func (m *ScanResult) Is80211mcResponder() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.is80211mcResponder is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIs80211mcResponder,
 		)
@@ -304,7 +306,7 @@ func (m *ScanResult) Is80211mcResponder() (bool, error) {
 func (m *ScanResult) IsPasspointNetwork() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -313,7 +315,8 @@ func (m *ScanResult) IsPasspointNetwork() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isPasspointNetwork is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIsPasspointNetwork,
 		)
@@ -330,7 +333,7 @@ func (m *ScanResult) IsPasspointNetwork() (bool, error) {
 func (m *ScanResult) IsRangingFrameProtectionRequired() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +342,8 @@ func (m *ScanResult) IsRangingFrameProtectionRequired() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isRangingFrameProtectionRequired is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIsRangingFrameProtectionRequired,
 		)
@@ -356,7 +360,7 @@ func (m *ScanResult) IsRangingFrameProtectionRequired() (bool, error) {
 func (m *ScanResult) IsSecureHeLtfSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -365,7 +369,8 @@ func (m *ScanResult) IsSecureHeLtfSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isSecureHeLtfSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIsSecureHeLtfSupported,
 		)
@@ -382,7 +387,7 @@ func (m *ScanResult) IsSecureHeLtfSupported() (bool, error) {
 func (m *ScanResult) IsTwtResponder() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -391,7 +396,8 @@ func (m *ScanResult) IsTwtResponder() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.isTwtResponder is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midScanResultIsTwtResponder,
 		)
@@ -408,7 +414,7 @@ func (m *ScanResult) IsTwtResponder() (bool, error) {
 func (m *ScanResult) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -417,7 +423,8 @@ func (m *ScanResult) ToString() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.ScanResult.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midScanResultToString,
 		)
@@ -434,7 +441,7 @@ func (m *ScanResult) ToString() (string, error) {
 func (m *ScanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -457,7 +464,7 @@ func (m *ScanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *ScanResult) ConvertChannelToFrequencyMhzIfSupported(arg0 int32, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -483,7 +490,7 @@ func (m *ScanResult) ConvertChannelToFrequencyMhzIfSupported(arg0 int32, arg1 in
 func (m *ScanResult) ConvertFrequencyMhzToChannelIfSupported(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

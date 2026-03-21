@@ -27,7 +27,7 @@ type Cursor struct {
 func (m *Cursor) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Cursor) Close() error {
 func (m *Cursor) CopyStringToBuffer(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -72,7 +72,7 @@ func (m *Cursor) CopyStringToBuffer(arg0 int32, arg1 *jni.Object) error {
 func (m *Cursor) Deactivate() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *Cursor) Deactivate() error {
 func (m *Cursor) GetBlob(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -125,7 +125,7 @@ func (m *Cursor) GetBlob(arg0 int32) (*jni.Object, error) {
 func (m *Cursor) GetColumnCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -150,7 +150,7 @@ func (m *Cursor) GetColumnCount() (int32, error) {
 func (m *Cursor) GetColumnIndex(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -180,7 +180,7 @@ func (m *Cursor) GetColumnIndex(arg0 string) (int32, error) {
 func (m *Cursor) GetColumnIndexOrThrow(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -210,7 +210,7 @@ func (m *Cursor) GetColumnIndexOrThrow(arg0 string) (int32, error) {
 func (m *Cursor) GetColumnName(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -220,7 +220,8 @@ func (m *Cursor) GetColumnName(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midCursorGetColumnName, jni.IntValue(arg0),
 		)
@@ -237,7 +238,7 @@ func (m *Cursor) GetColumnName(arg0 int32) (string, error) {
 func (m *Cursor) GetColumnNames() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -267,7 +268,7 @@ func (m *Cursor) GetColumnNames() (*jni.Object, error) {
 func (m *Cursor) GetCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -292,7 +293,7 @@ func (m *Cursor) GetCount() (int32, error) {
 func (m *Cursor) GetDouble(arg0 int32) (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -318,7 +319,7 @@ func (m *Cursor) GetDouble(arg0 int32) (float64, error) {
 func (m *Cursor) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -348,7 +349,7 @@ func (m *Cursor) GetExtras() (*jni.Object, error) {
 func (m *Cursor) GetFloat(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -374,7 +375,7 @@ func (m *Cursor) GetFloat(arg0 int32) (float32, error) {
 func (m *Cursor) GetInt(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -400,7 +401,7 @@ func (m *Cursor) GetInt(arg0 int32) (int32, error) {
 func (m *Cursor) GetLong(arg0 int32) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -426,7 +427,7 @@ func (m *Cursor) GetLong(arg0 int32) (int64, error) {
 func (m *Cursor) GetNotificationUri() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -456,7 +457,7 @@ func (m *Cursor) GetNotificationUri() (*jni.Object, error) {
 func (m *Cursor) GetPosition() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -481,7 +482,7 @@ func (m *Cursor) GetPosition() (int32, error) {
 func (m *Cursor) GetShort(arg0 int32) (int16, error) {
 	var result int16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -507,7 +508,7 @@ func (m *Cursor) GetShort(arg0 int32) (int16, error) {
 func (m *Cursor) GetString(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -517,7 +518,8 @@ func (m *Cursor) GetString(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midCursorGetString, jni.IntValue(arg0),
 		)
@@ -534,7 +536,7 @@ func (m *Cursor) GetString(arg0 int32) (string, error) {
 func (m *Cursor) GetType(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -560,7 +562,7 @@ func (m *Cursor) GetType(arg0 int32) (int32, error) {
 func (m *Cursor) GetWantsAllOnMoveCalls() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -569,7 +571,8 @@ func (m *Cursor) GetWantsAllOnMoveCalls() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.getWantsAllOnMoveCalls is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorGetWantsAllOnMoveCalls,
 		)
@@ -586,7 +589,7 @@ func (m *Cursor) GetWantsAllOnMoveCalls() (bool, error) {
 func (m *Cursor) IsAfterLast() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -595,7 +598,8 @@ func (m *Cursor) IsAfterLast() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.isAfterLast is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorIsAfterLast,
 		)
@@ -612,7 +616,7 @@ func (m *Cursor) IsAfterLast() (bool, error) {
 func (m *Cursor) IsBeforeFirst() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -621,7 +625,8 @@ func (m *Cursor) IsBeforeFirst() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.isBeforeFirst is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorIsBeforeFirst,
 		)
@@ -638,7 +643,7 @@ func (m *Cursor) IsBeforeFirst() (bool, error) {
 func (m *Cursor) IsClosed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -647,7 +652,8 @@ func (m *Cursor) IsClosed() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.isClosed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorIsClosed,
 		)
@@ -664,7 +670,7 @@ func (m *Cursor) IsClosed() (bool, error) {
 func (m *Cursor) IsFirst() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -673,7 +679,8 @@ func (m *Cursor) IsFirst() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.isFirst is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorIsFirst,
 		)
@@ -690,7 +697,7 @@ func (m *Cursor) IsFirst() (bool, error) {
 func (m *Cursor) IsLast() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -699,7 +706,8 @@ func (m *Cursor) IsLast() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.isLast is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorIsLast,
 		)
@@ -716,7 +724,7 @@ func (m *Cursor) IsLast() (bool, error) {
 func (m *Cursor) IsNull(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -726,7 +734,8 @@ func (m *Cursor) IsNull(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorIsNull, jni.IntValue(arg0),
 		)
@@ -743,7 +752,7 @@ func (m *Cursor) IsNull(arg0 int32) (bool, error) {
 func (m *Cursor) Move(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -753,7 +762,8 @@ func (m *Cursor) Move(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorMove, jni.IntValue(arg0),
 		)
@@ -770,7 +780,7 @@ func (m *Cursor) Move(arg0 int32) (bool, error) {
 func (m *Cursor) MoveToFirst() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -779,7 +789,8 @@ func (m *Cursor) MoveToFirst() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.moveToFirst is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorMoveToFirst,
 		)
@@ -796,7 +807,7 @@ func (m *Cursor) MoveToFirst() (bool, error) {
 func (m *Cursor) MoveToLast() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -805,7 +816,8 @@ func (m *Cursor) MoveToLast() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.moveToLast is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorMoveToLast,
 		)
@@ -822,7 +834,7 @@ func (m *Cursor) MoveToLast() (bool, error) {
 func (m *Cursor) MoveToNext() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -831,7 +843,8 @@ func (m *Cursor) MoveToNext() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.moveToNext is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorMoveToNext,
 		)
@@ -848,7 +861,7 @@ func (m *Cursor) MoveToNext() (bool, error) {
 func (m *Cursor) MoveToPosition(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -858,7 +871,8 @@ func (m *Cursor) MoveToPosition(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorMoveToPosition, jni.IntValue(arg0),
 		)
@@ -875,7 +889,7 @@ func (m *Cursor) MoveToPosition(arg0 int32) (bool, error) {
 func (m *Cursor) MoveToPrevious() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -884,7 +898,8 @@ func (m *Cursor) MoveToPrevious() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.moveToPrevious is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorMoveToPrevious,
 		)
@@ -901,7 +916,7 @@ func (m *Cursor) MoveToPrevious() (bool, error) {
 func (m *Cursor) RegisterContentObserver(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -924,7 +939,7 @@ func (m *Cursor) RegisterContentObserver(arg0 *jni.Object) error {
 func (m *Cursor) RegisterDataSetObserver(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -947,7 +962,7 @@ func (m *Cursor) RegisterDataSetObserver(arg0 *jni.Object) error {
 func (m *Cursor) Requery() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -956,7 +971,8 @@ func (m *Cursor) Requery() (bool, error) {
 			callErr = fmt.Errorf("android.database.Cursor.requery is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCursorRequery,
 		)
@@ -973,7 +989,7 @@ func (m *Cursor) Requery() (bool, error) {
 func (m *Cursor) Respond(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1004,7 +1020,7 @@ func (m *Cursor) Respond(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Cursor) SetExtras(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1027,7 +1043,7 @@ func (m *Cursor) SetExtras(arg0 *jni.Object) error {
 func (m *Cursor) SetNotificationUri(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1050,7 +1066,7 @@ func (m *Cursor) SetNotificationUri(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Cursor) UnregisterContentObserver(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1073,7 +1089,7 @@ func (m *Cursor) UnregisterContentObserver(arg0 *jni.Object) error {
 func (m *Cursor) UnregisterDataSetObserver(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

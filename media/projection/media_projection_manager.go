@@ -71,7 +71,7 @@ func (m *MediaProjectionManager) Close() {
 func (m *MediaProjectionManager) CreateScreenCaptureIntent0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -101,7 +101,7 @@ func (m *MediaProjectionManager) CreateScreenCaptureIntent0() (*jni.Object, erro
 func (m *MediaProjectionManager) CreateScreenCaptureIntent1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -132,7 +132,7 @@ func (m *MediaProjectionManager) CreateScreenCaptureIntent1_1(arg0 *jni.Object) 
 func (m *MediaProjectionManager) GetMediaProjection(arg0 int32, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

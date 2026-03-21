@@ -3,6 +3,7 @@
 package jni
 
 import (
+	"fmt"
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni/capi"
@@ -740,6 +741,9 @@ func (e *Env) DefineClass(
 	loader *Object,
 	buf []byte,
 ) (*Class, error) {
+	if len(buf) == 0 {
+		return nil, fmt.Errorf("jni: DefineClass: empty class bytes")
+	}
 	cName := append([]byte(name), 0)
 	_ret := capi.DefineClass(e.ptr, (*capi.Cchar)(unsafe.Pointer(&cName[0])), loader.Ref(), (*capi.Jbyte)(unsafe.Pointer(&buf[0])), capi.Jint(len(buf)))
 	if err := jnierr.CheckException(e.ptr); err != nil {
@@ -1191,6 +1195,9 @@ func (e *Env) GetStringRegion(
 	len int32,
 	buf []uint16,
 ) error {
+	if buf == nil {
+		return nil
+	}
 	capi.GetStringRegion(e.ptr, capi.String(str.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jchar)(unsafe.Pointer(&buf[0])))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return err
@@ -1220,6 +1227,9 @@ func (e *Env) GetStringUTFRegion(
 	len int32,
 	buf []byte,
 ) error {
+	if buf == nil {
+		return nil
+	}
 	capi.GetStringUTFRegion(e.ptr, capi.String(str.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Cchar)(unsafe.Pointer(&buf[0])))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return err
@@ -1379,6 +1389,9 @@ func (e *Env) NewShortArray(length int32) *ShortArray {
 
 // NewString wraps the JNI NewString function.
 func (e *Env) NewString(unicodeChars []uint16) (*String, error) {
+	if len(unicodeChars) == 0 {
+		return e.NewStringUTF("")
+	}
 	_ret := capi.NewString(e.ptr, (*capi.Jchar)(unsafe.Pointer(&unicodeChars[0])), capi.Jint(len(unicodeChars)))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err

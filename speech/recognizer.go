@@ -27,7 +27,7 @@ type Recognizer struct {
 func (m *Recognizer) Cancel() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -53,7 +53,7 @@ func (m *Recognizer) CheckRecognitionSupport(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -76,7 +76,7 @@ func (m *Recognizer) CheckRecognitionSupport(
 func (m *Recognizer) Destroy() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -98,7 +98,7 @@ func (m *Recognizer) Destroy() error {
 func (m *Recognizer) SetRecognitionListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -121,7 +121,7 @@ func (m *Recognizer) SetRecognitionListener(arg0 *jni.Object) error {
 func (m *Recognizer) StartListening(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -144,7 +144,7 @@ func (m *Recognizer) StartListening(arg0 *jni.Object) error {
 func (m *Recognizer) StopListening() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -166,7 +166,7 @@ func (m *Recognizer) StopListening() error {
 func (m *Recognizer) TriggerModelDownload1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -193,7 +193,7 @@ func (m *Recognizer) TriggerModelDownload3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -216,7 +216,7 @@ func (m *Recognizer) TriggerModelDownload3_1(
 func (m *Recognizer) CreateOnDeviceSpeechRecognizer(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -247,7 +247,7 @@ func (m *Recognizer) CreateOnDeviceSpeechRecognizer(arg0 *jni.Object) (*jni.Obje
 func (m *Recognizer) CreateSpeechRecognizer1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -278,7 +278,7 @@ func (m *Recognizer) CreateSpeechRecognizer1(arg0 *jni.Object) (*jni.Object, err
 func (m *Recognizer) CreateSpeechRecognizer2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -309,7 +309,7 @@ func (m *Recognizer) CreateSpeechRecognizer2_1(arg0 *jni.Object, arg1 *jni.Objec
 func (m *Recognizer) IsOnDeviceRecognitionAvailable(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -319,7 +319,8 @@ func (m *Recognizer) IsOnDeviceRecognitionAvailable(arg0 *jni.Object) (bool, err
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsRecognizer)),
 			midRecognizerIsOnDeviceRecognitionAvailable, jni.ObjectValue(arg0),
 		)
@@ -336,7 +337,7 @@ func (m *Recognizer) IsOnDeviceRecognitionAvailable(arg0 *jni.Object) (bool, err
 func (m *Recognizer) IsRecognitionAvailable(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -346,7 +347,8 @@ func (m *Recognizer) IsRecognitionAvailable(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsRecognizer)),
 			midRecognizerIsRecognitionAvailable, jni.ObjectValue(arg0),
 		)

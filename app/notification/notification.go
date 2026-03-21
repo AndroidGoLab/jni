@@ -27,7 +27,7 @@ type Notification struct {
 func (m *Notification) Clone0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *Notification) Clone0() (*jni.Object, error) {
 func (m *Notification) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *Notification) DescribeContents() (int32, error) {
 func (m *Notification) GetAllowSystemGeneratedContextualActions() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -91,7 +91,8 @@ func (m *Notification) GetAllowSystemGeneratedContextualActions() (bool, error) 
 			callErr = fmt.Errorf("android.app.Notification.getAllowSystemGeneratedContextualActions is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midNotificationGetAllowSystemGeneratedContextualActions,
 		)
@@ -108,7 +109,7 @@ func (m *Notification) GetAllowSystemGeneratedContextualActions() (bool, error) 
 func (m *Notification) GetBadgeIconType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -133,7 +134,7 @@ func (m *Notification) GetBadgeIconType() (int32, error) {
 func (m *Notification) GetBubbleMetadata() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -163,7 +164,7 @@ func (m *Notification) GetBubbleMetadata() (*jni.Object, error) {
 func (m *Notification) GetChannelId() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -172,7 +173,8 @@ func (m *Notification) GetChannelId() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.getChannelId is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationGetChannelId,
 		)
@@ -189,7 +191,7 @@ func (m *Notification) GetChannelId() (string, error) {
 func (m *Notification) GetContextualActions() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +221,7 @@ func (m *Notification) GetContextualActions() (*jni.Object, error) {
 func (m *Notification) GetGroup() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -228,7 +230,8 @@ func (m *Notification) GetGroup() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.getGroup is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationGetGroup,
 		)
@@ -245,7 +248,7 @@ func (m *Notification) GetGroup() (string, error) {
 func (m *Notification) GetGroupAlertBehavior() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -270,7 +273,7 @@ func (m *Notification) GetGroupAlertBehavior() (int32, error) {
 func (m *Notification) GetLargeIcon() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -300,7 +303,7 @@ func (m *Notification) GetLargeIcon() (*jni.Object, error) {
 func (m *Notification) GetLocusId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -330,7 +333,7 @@ func (m *Notification) GetLocusId() (*jni.Object, error) {
 func (m *Notification) GetSettingsText() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +342,8 @@ func (m *Notification) GetSettingsText() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.getSettingsText is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationGetSettingsText,
 		)
@@ -356,7 +360,7 @@ func (m *Notification) GetSettingsText() (string, error) {
 func (m *Notification) GetShortCriticalText() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -365,7 +369,8 @@ func (m *Notification) GetShortCriticalText() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.getShortCriticalText is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationGetShortCriticalText,
 		)
@@ -382,7 +387,7 @@ func (m *Notification) GetShortCriticalText() (string, error) {
 func (m *Notification) GetShortcutId() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -391,7 +396,8 @@ func (m *Notification) GetShortcutId() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.getShortcutId is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationGetShortcutId,
 		)
@@ -408,7 +414,7 @@ func (m *Notification) GetShortcutId() (string, error) {
 func (m *Notification) GetSmallIcon() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -438,7 +444,7 @@ func (m *Notification) GetSmallIcon() (*jni.Object, error) {
 func (m *Notification) GetSortKey() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -447,7 +453,8 @@ func (m *Notification) GetSortKey() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.getSortKey is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationGetSortKey,
 		)
@@ -464,7 +471,7 @@ func (m *Notification) GetSortKey() (string, error) {
 func (m *Notification) GetTimeoutAfter() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -489,7 +496,7 @@ func (m *Notification) GetTimeoutAfter() (int64, error) {
 func (m *Notification) HasImage() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -498,7 +505,8 @@ func (m *Notification) HasImage() (bool, error) {
 			callErr = fmt.Errorf("android.app.Notification.hasImage is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midNotificationHasImage,
 		)
@@ -515,7 +523,7 @@ func (m *Notification) HasImage() (bool, error) {
 func (m *Notification) HasPromotableCharacteristics() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -524,7 +532,8 @@ func (m *Notification) HasPromotableCharacteristics() (bool, error) {
 			callErr = fmt.Errorf("android.app.Notification.hasPromotableCharacteristics is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midNotificationHasPromotableCharacteristics,
 		)
@@ -541,7 +550,7 @@ func (m *Notification) HasPromotableCharacteristics() (bool, error) {
 func (m *Notification) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -550,7 +559,8 @@ func (m *Notification) ToString() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationToString,
 		)
@@ -567,7 +577,7 @@ func (m *Notification) ToString() (string, error) {
 func (m *Notification) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -590,7 +600,7 @@ func (m *Notification) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *Notification) Clone0_1() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

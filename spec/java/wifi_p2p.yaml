@@ -702,9 +702,6 @@ classes:
           returns: void
           error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: GroupClientIpProvisioningModeIpv4Dhcp
       value: "0"
       go_type: int

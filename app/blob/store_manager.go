@@ -71,7 +71,7 @@ func (m *StoreManager) Close() {
 func (m *StoreManager) AbandonSession(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *StoreManager) AbandonSession(arg0 int64) error {
 func (m *StoreManager) AcquireLease2(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -121,7 +121,7 @@ func (m *StoreManager) AcquireLease3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -144,7 +144,7 @@ func (m *StoreManager) AcquireLease3_1(
 func (m *StoreManager) AcquireLease2_2(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -176,7 +176,7 @@ func (m *StoreManager) AcquireLease3_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -204,7 +204,7 @@ func (m *StoreManager) AcquireLease3_3(
 func (m *StoreManager) CreateSession(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -230,7 +230,7 @@ func (m *StoreManager) CreateSession(arg0 *jni.Object) (int64, error) {
 func (m *StoreManager) GetLeasedBlobs() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -260,7 +260,7 @@ func (m *StoreManager) GetLeasedBlobs() (*jni.Object, error) {
 func (m *StoreManager) GetRemainingLeaseQuotaBytes() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -285,7 +285,7 @@ func (m *StoreManager) GetRemainingLeaseQuotaBytes() (int64, error) {
 func (m *StoreManager) OpenBlob(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -316,7 +316,7 @@ func (m *StoreManager) OpenBlob(arg0 *jni.Object) (*jni.Object, error) {
 func (m *StoreManager) OpenSession(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -347,7 +347,7 @@ func (m *StoreManager) OpenSession(arg0 int64) (*jni.Object, error) {
 func (m *StoreManager) ReleaseLease(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

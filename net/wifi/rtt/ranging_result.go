@@ -27,7 +27,7 @@ type RangingResult struct {
 func (m *RangingResult) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *RangingResult) DescribeContents() (int32, error) {
 func (m *RangingResult) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *RangingResult) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRangingResultEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *RangingResult) Equals(arg0 *jni.Object) (bool, error) {
 func (m *RangingResult) Get80211azInitiatorTxLtfRepetitionsCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -104,7 +105,7 @@ func (m *RangingResult) Get80211azInitiatorTxLtfRepetitionsCount() (int32, error
 func (m *RangingResult) Get80211azNumberOfRxSpatialStreams() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -129,7 +130,7 @@ func (m *RangingResult) Get80211azNumberOfRxSpatialStreams() (int32, error) {
 func (m *RangingResult) Get80211azNumberOfTxSpatialStreams() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -154,7 +155,7 @@ func (m *RangingResult) Get80211azNumberOfTxSpatialStreams() (int32, error) {
 func (m *RangingResult) Get80211azResponderTxLtfRepetitionsCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -179,7 +180,7 @@ func (m *RangingResult) Get80211azResponderTxLtfRepetitionsCount() (int32, error
 func (m *RangingResult) GetDistanceMm() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -204,7 +205,7 @@ func (m *RangingResult) GetDistanceMm() (int32, error) {
 func (m *RangingResult) GetDistanceStdDevMm() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -229,7 +230,7 @@ func (m *RangingResult) GetDistanceStdDevMm() (int32, error) {
 func (m *RangingResult) GetLci() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -259,7 +260,7 @@ func (m *RangingResult) GetLci() (*jni.Object, error) {
 func (m *RangingResult) GetLcr() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -289,7 +290,7 @@ func (m *RangingResult) GetLcr() (*jni.Object, error) {
 func (m *RangingResult) GetMacAddress() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -319,7 +320,7 @@ func (m *RangingResult) GetMacAddress() (*jni.Object, error) {
 func (m *RangingResult) GetMaxTimeBetweenNtbMeasurementsMicros() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -344,7 +345,7 @@ func (m *RangingResult) GetMaxTimeBetweenNtbMeasurementsMicros() (int64, error) 
 func (m *RangingResult) GetMeasurementBandwidth() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -369,7 +370,7 @@ func (m *RangingResult) GetMeasurementBandwidth() (int32, error) {
 func (m *RangingResult) GetMeasurementChannelFrequencyMHz() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -394,7 +395,7 @@ func (m *RangingResult) GetMeasurementChannelFrequencyMHz() (int32, error) {
 func (m *RangingResult) GetMinTimeBetweenNtbMeasurementsMicros() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -419,7 +420,7 @@ func (m *RangingResult) GetMinTimeBetweenNtbMeasurementsMicros() (int64, error) 
 func (m *RangingResult) GetNumAttemptedMeasurements() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -444,7 +445,7 @@ func (m *RangingResult) GetNumAttemptedMeasurements() (int32, error) {
 func (m *RangingResult) GetNumSuccessfulMeasurements() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -469,7 +470,7 @@ func (m *RangingResult) GetNumSuccessfulMeasurements() (int32, error) {
 func (m *RangingResult) GetPasnComebackAfterMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -494,7 +495,7 @@ func (m *RangingResult) GetPasnComebackAfterMillis() (int64, error) {
 func (m *RangingResult) GetPasnComebackCookie() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -524,7 +525,7 @@ func (m *RangingResult) GetPasnComebackCookie() (*jni.Object, error) {
 func (m *RangingResult) GetPeerHandle() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -554,7 +555,7 @@ func (m *RangingResult) GetPeerHandle() (*jni.Object, error) {
 func (m *RangingResult) GetRangingTimestampMillis() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -579,7 +580,7 @@ func (m *RangingResult) GetRangingTimestampMillis() (int64, error) {
 func (m *RangingResult) GetRssi() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -604,7 +605,7 @@ func (m *RangingResult) GetRssi() (int32, error) {
 func (m *RangingResult) GetSecureHeLtfProtocolVersion() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -629,7 +630,7 @@ func (m *RangingResult) GetSecureHeLtfProtocolVersion() (int32, error) {
 func (m *RangingResult) GetStatus() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -654,7 +655,7 @@ func (m *RangingResult) GetStatus() (int32, error) {
 func (m *RangingResult) GetUnverifiedResponderLocation() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -684,7 +685,7 @@ func (m *RangingResult) GetUnverifiedResponderLocation() (*jni.Object, error) {
 func (m *RangingResult) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -709,7 +710,7 @@ func (m *RangingResult) HashCode() (int32, error) {
 func (m *RangingResult) Is80211azNtbMeasurement() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -718,7 +719,8 @@ func (m *RangingResult) Is80211azNtbMeasurement() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.is80211azNtbMeasurement is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRangingResultIs80211azNtbMeasurement,
 		)
@@ -735,7 +737,7 @@ func (m *RangingResult) Is80211azNtbMeasurement() (bool, error) {
 func (m *RangingResult) Is80211mcMeasurement() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -744,7 +746,8 @@ func (m *RangingResult) Is80211mcMeasurement() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.is80211mcMeasurement is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRangingResultIs80211mcMeasurement,
 		)
@@ -761,7 +764,7 @@ func (m *RangingResult) Is80211mcMeasurement() (bool, error) {
 func (m *RangingResult) IsRangingAuthenticated() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -770,7 +773,8 @@ func (m *RangingResult) IsRangingAuthenticated() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.isRangingAuthenticated is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRangingResultIsRangingAuthenticated,
 		)
@@ -787,7 +791,7 @@ func (m *RangingResult) IsRangingAuthenticated() (bool, error) {
 func (m *RangingResult) IsRangingFrameProtected() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -796,7 +800,8 @@ func (m *RangingResult) IsRangingFrameProtected() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.isRangingFrameProtected is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRangingResultIsRangingFrameProtected,
 		)
@@ -813,7 +818,7 @@ func (m *RangingResult) IsRangingFrameProtected() (bool, error) {
 func (m *RangingResult) IsSecureHeLtfEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -822,7 +827,8 @@ func (m *RangingResult) IsSecureHeLtfEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.isSecureHeLtfEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRangingResultIsSecureHeLtfEnabled,
 		)
@@ -839,7 +845,7 @@ func (m *RangingResult) IsSecureHeLtfEnabled() (bool, error) {
 func (m *RangingResult) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -848,7 +854,8 @@ func (m *RangingResult) ToString() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midRangingResultToString,
 		)
@@ -865,7 +872,7 @@ func (m *RangingResult) ToString() (string, error) {
 func (m *RangingResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

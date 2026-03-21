@@ -31,7 +31,7 @@ func (m *Device) ConnectGatt3(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -72,7 +72,7 @@ func (m *Device) ConnectGatt4_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -114,7 +114,7 @@ func (m *Device) ConnectGatt5_2(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -150,7 +150,7 @@ func (m *Device) ConnectGatt5_2(
 func (m *Device) CreateBond() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +159,8 @@ func (m *Device) CreateBond() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothDevice.createBond is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceCreateBond,
 		)
@@ -176,7 +177,7 @@ func (m *Device) CreateBond() (bool, error) {
 func (m *Device) CreateInsecureL2capChannel(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -207,7 +208,7 @@ func (m *Device) CreateInsecureL2capChannel(arg0 int32) (*jni.Object, error) {
 func (m *Device) CreateInsecureRfcommSocketToServiceRecord(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -238,7 +239,7 @@ func (m *Device) CreateInsecureRfcommSocketToServiceRecord(arg0 *jni.Object) (*j
 func (m *Device) CreateL2capChannel(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -269,7 +270,7 @@ func (m *Device) CreateL2capChannel(arg0 int32) (*jni.Object, error) {
 func (m *Device) CreateRfcommSocketToServiceRecord(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -300,7 +301,7 @@ func (m *Device) CreateRfcommSocketToServiceRecord(arg0 *jni.Object) (*jni.Objec
 func (m *Device) CreateUsingSocketSettings(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -331,7 +332,7 @@ func (m *Device) CreateUsingSocketSettings(arg0 *jni.Object) (*jni.Object, error
 func (m *Device) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -356,7 +357,7 @@ func (m *Device) DescribeContents() (int32, error) {
 func (m *Device) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -366,7 +367,8 @@ func (m *Device) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceEquals, jni.ObjectValue(arg0),
 		)
@@ -383,7 +385,7 @@ func (m *Device) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Device) FetchUuidsWithSdp() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -392,7 +394,8 @@ func (m *Device) FetchUuidsWithSdp() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothDevice.fetchUuidsWithSdp is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceFetchUuidsWithSdp,
 		)
@@ -409,7 +412,7 @@ func (m *Device) FetchUuidsWithSdp() (bool, error) {
 func (m *Device) GetAddress() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -418,7 +421,8 @@ func (m *Device) GetAddress() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothDevice.getAddress is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetAddress,
 		)
@@ -435,7 +439,7 @@ func (m *Device) GetAddress() (string, error) {
 func (m *Device) GetAddressType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -460,7 +464,7 @@ func (m *Device) GetAddressType() (int32, error) {
 func (m *Device) GetAlias() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -469,7 +473,8 @@ func (m *Device) GetAlias() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothDevice.getAlias is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetAlias,
 		)
@@ -486,7 +491,7 @@ func (m *Device) GetAlias() (string, error) {
 func (m *Device) GetBluetoothClass() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -516,7 +521,7 @@ func (m *Device) GetBluetoothClass() (*jni.Object, error) {
 func (m *Device) GetBondState() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -541,7 +546,7 @@ func (m *Device) GetBondState() (int32, error) {
 func (m *Device) GetIdentityAddressWithType() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -571,7 +576,7 @@ func (m *Device) GetIdentityAddressWithType() (*jni.Object, error) {
 func (m *Device) GetName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -580,7 +585,8 @@ func (m *Device) GetName() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothDevice.getName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetName,
 		)
@@ -597,7 +603,7 @@ func (m *Device) GetName() (string, error) {
 func (m *Device) GetType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -622,7 +628,7 @@ func (m *Device) GetType() (int32, error) {
 func (m *Device) GetUuids() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -652,7 +658,7 @@ func (m *Device) GetUuids() (*jni.Object, error) {
 func (m *Device) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -677,7 +683,7 @@ func (m *Device) HashCode() (int32, error) {
 func (m *Device) SetAlias(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -707,7 +713,7 @@ func (m *Device) SetAlias(arg0 string) (int32, error) {
 func (m *Device) SetPairingConfirmation(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -721,7 +727,8 @@ func (m *Device) SetPairingConfirmation(arg0 bool) (bool, error) {
 			jArg0 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceSetPairingConfirmation, jni.BooleanValue(jArg0),
 		)
@@ -738,7 +745,7 @@ func (m *Device) SetPairingConfirmation(arg0 bool) (bool, error) {
 func (m *Device) SetPin(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -748,7 +755,8 @@ func (m *Device) SetPin(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceSetPin, jni.ObjectValue(arg0),
 		)
@@ -765,7 +773,7 @@ func (m *Device) SetPin(arg0 *jni.Object) (bool, error) {
 func (m *Device) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -774,7 +782,8 @@ func (m *Device) ToString() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothDevice.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceToString,
 		)
@@ -791,7 +800,7 @@ func (m *Device) ToString() (string, error) {
 func (m *Device) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

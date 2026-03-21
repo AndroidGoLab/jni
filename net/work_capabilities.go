@@ -27,7 +27,7 @@ type workCapabilities struct {
 func (m *workCapabilities) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *workCapabilities) DescribeContents() (int32, error) {
 func (m *workCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *workCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midworkCapabilitiesEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *workCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 func (m *workCapabilities) GetCapabilities() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -109,7 +110,7 @@ func (m *workCapabilities) GetCapabilities() (*jni.Object, error) {
 func (m *workCapabilities) GetEnterpriseIds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -139,7 +140,7 @@ func (m *workCapabilities) GetEnterpriseIds() (*jni.Object, error) {
 func (m *workCapabilities) GetLinkDownstreamBandwidthKbps() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +165,7 @@ func (m *workCapabilities) GetLinkDownstreamBandwidthKbps() (int32, error) {
 func (m *workCapabilities) GetLinkUpstreamBandwidthKbps() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +190,7 @@ func (m *workCapabilities) GetLinkUpstreamBandwidthKbps() (int32, error) {
 func (m *workCapabilities) GetNetworkSpecifier() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +220,7 @@ func (m *workCapabilities) GetNetworkSpecifier() (*jni.Object, error) {
 func (m *workCapabilities) GetOwnerUid() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -244,7 +245,7 @@ func (m *workCapabilities) GetOwnerUid() (int32, error) {
 func (m *workCapabilities) GetSignalStrength() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -269,7 +270,7 @@ func (m *workCapabilities) GetSignalStrength() (int32, error) {
 func (m *workCapabilities) GetSubscriptionIds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -299,7 +300,7 @@ func (m *workCapabilities) GetSubscriptionIds() (*jni.Object, error) {
 func (m *workCapabilities) GetTransportInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -329,7 +330,7 @@ func (m *workCapabilities) GetTransportInfo() (*jni.Object, error) {
 func (m *workCapabilities) HasCapability(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +340,8 @@ func (m *workCapabilities) HasCapability(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midworkCapabilitiesHasCapability, jni.IntValue(arg0),
 		)
@@ -356,7 +358,7 @@ func (m *workCapabilities) HasCapability(arg0 int32) (bool, error) {
 func (m *workCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -366,7 +368,8 @@ func (m *workCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midworkCapabilitiesHasEnterpriseId, jni.IntValue(arg0),
 		)
@@ -383,7 +386,7 @@ func (m *workCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
 func (m *workCapabilities) HasTransport(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -393,7 +396,8 @@ func (m *workCapabilities) HasTransport(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midworkCapabilitiesHasTransport, jni.IntValue(arg0),
 		)
@@ -410,7 +414,7 @@ func (m *workCapabilities) HasTransport(arg0 int32) (bool, error) {
 func (m *workCapabilities) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -435,7 +439,7 @@ func (m *workCapabilities) HashCode() (int32, error) {
 func (m *workCapabilities) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -444,7 +448,8 @@ func (m *workCapabilities) ToString() (string, error) {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midworkCapabilitiesToString,
 		)
@@ -461,7 +466,7 @@ func (m *workCapabilities) ToString() (string, error) {
 func (m *workCapabilities) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

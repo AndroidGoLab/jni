@@ -27,7 +27,7 @@ type MediaStore struct {
 func (m *MediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *MediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreCanManageMedia, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *MediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
 func (m *MediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -89,7 +90,7 @@ func (m *MediaStore) CreateFavoriteRequest(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -129,7 +130,7 @@ func (m *MediaStore) CreateTrashRequest(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -165,7 +166,7 @@ func (m *MediaStore) CreateTrashRequest(
 func (m *MediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -196,7 +197,7 @@ func (m *MediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jn
 func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -227,7 +228,7 @@ func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 func (m *MediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -258,7 +259,7 @@ func (m *MediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, erro
 func (m *MediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -289,7 +290,7 @@ func (m *MediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error)
 func (m *MediaStore) GetMediaScannerUri() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -319,7 +320,7 @@ func (m *MediaStore) GetMediaScannerUri() (*jni.Object, error) {
 func (m *MediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -350,7 +351,7 @@ func (m *MediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 func (m *MediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -381,7 +382,7 @@ func (m *MediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1
 func (m *MediaStore) GetPickImagesMaxLimit() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -406,7 +407,7 @@ func (m *MediaStore) GetPickImagesMaxLimit() (int32, error) {
 func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -437,7 +438,7 @@ func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object
 func (m *MediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -468,7 +469,7 @@ func (m *MediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.O
 func (m *MediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -499,7 +500,7 @@ func (m *MediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni
 func (m *MediaStore) GetRequireOriginal(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -509,7 +510,8 @@ func (m *MediaStore) GetRequireOriginal(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreGetRequireOriginal, jni.ObjectValue(arg0),
 		)
@@ -526,7 +528,7 @@ func (m *MediaStore) GetRequireOriginal(arg0 *jni.Object) (bool, error) {
 func (m *MediaStore) GetVersion1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -536,7 +538,8 @@ func (m *MediaStore) GetVersion1(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreGetVersion1, jni.ObjectValue(arg0),
 		)
@@ -553,7 +556,7 @@ func (m *MediaStore) GetVersion1(arg0 *jni.Object) (string, error) {
 func (m *MediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -568,7 +571,8 @@ func (m *MediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error
 			return err
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreGetVersion2_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -585,7 +589,7 @@ func (m *MediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error
 func (m *MediaStore) GetVolumeName(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -595,7 +599,8 @@ func (m *MediaStore) GetVolumeName(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreGetVolumeName, jni.ObjectValue(arg0),
 		)
@@ -612,7 +617,7 @@ func (m *MediaStore) GetVolumeName(arg0 *jni.Object) (string, error) {
 func (m *MediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -627,7 +632,8 @@ func (m *MediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1
 			return err
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreIsCurrentCloudMediaProviderAuthority, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -648,7 +654,7 @@ func (m *MediaStore) IsCurrentSystemGallery(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -663,7 +669,8 @@ func (m *MediaStore) IsCurrentSystemGallery(
 			return err
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreIsCurrentSystemGallery, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object),
 		)
@@ -680,7 +687,7 @@ func (m *MediaStore) IsCurrentSystemGallery(
 func (m *MediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -695,7 +702,8 @@ func (m *MediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, ar
 			return err
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreIsSupportedCloudMediaProviderAuthority, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -716,7 +724,7 @@ func (m *MediaStore) MarkIsFavoriteStatus(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -748,7 +756,7 @@ func (m *MediaStore) NotifyCloudMediaChangedEvent(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -786,7 +794,7 @@ func (m *MediaStore) OpenAssetFileDescriptor(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -827,7 +835,7 @@ func (m *MediaStore) OpenFileDescriptor(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -869,7 +877,7 @@ func (m *MediaStore) OpenTypedAssetFileDescriptor(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -905,7 +913,7 @@ func (m *MediaStore) OpenTypedAssetFileDescriptor(
 func (m *MediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -936,7 +944,7 @@ func (m *MediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
 func (m *MediaStore) SetRequireOriginal(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -27,7 +27,7 @@ type Service struct {
 func (m *Service) IsAlwaysOn() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -36,7 +36,8 @@ func (m *Service) IsAlwaysOn() (bool, error) {
 			callErr = fmt.Errorf("android.net.VpnService.isAlwaysOn is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midServiceIsAlwaysOn,
 		)
@@ -53,7 +54,7 @@ func (m *Service) IsAlwaysOn() (bool, error) {
 func (m *Service) IsLockdownEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +63,8 @@ func (m *Service) IsLockdownEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.net.VpnService.isLockdownEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midServiceIsLockdownEnabled,
 		)
@@ -79,7 +81,7 @@ func (m *Service) IsLockdownEnabled() (bool, error) {
 func (m *Service) OnBind(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -110,7 +112,7 @@ func (m *Service) OnBind(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Service) OnRevoke() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -132,7 +134,7 @@ func (m *Service) OnRevoke() error {
 func (m *Service) Protect1(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -142,7 +144,8 @@ func (m *Service) Protect1(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midServiceProtect1, jni.IntValue(arg0),
 		)
@@ -159,7 +162,7 @@ func (m *Service) Protect1(arg0 int32) (bool, error) {
 func (m *Service) Protect1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -169,7 +172,8 @@ func (m *Service) Protect1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midServiceProtect1_1, jni.ObjectValue(arg0),
 		)
@@ -186,7 +190,7 @@ func (m *Service) Protect1_1(arg0 *jni.Object) (bool, error) {
 func (m *Service) Protect1_2(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -196,7 +200,8 @@ func (m *Service) Protect1_2(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midServiceProtect1_2, jni.ObjectValue(arg0),
 		)
@@ -213,7 +218,7 @@ func (m *Service) Protect1_2(arg0 *jni.Object) (bool, error) {
 func (m *Service) SetUnderlyingNetworks(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -223,7 +228,8 @@ func (m *Service) SetUnderlyingNetworks(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midServiceSetUnderlyingNetworks, jni.ObjectValue(arg0),
 		)
@@ -240,7 +246,7 @@ func (m *Service) SetUnderlyingNetworks(arg0 *jni.Object) (bool, error) {
 func (m *Service) Prepare(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

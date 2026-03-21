@@ -27,7 +27,7 @@ type Light struct {
 func (m *Light) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *Light) DescribeContents() (int32, error) {
 func (m *Light) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *Light) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLightEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *Light) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Light) GetId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -104,7 +105,7 @@ func (m *Light) GetId() (int32, error) {
 func (m *Light) GetName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -113,7 +114,8 @@ func (m *Light) GetName() (string, error) {
 			callErr = fmt.Errorf("android.hardware.lights.Light.getName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midLightGetName,
 		)
@@ -130,7 +132,7 @@ func (m *Light) GetName() (string, error) {
 func (m *Light) GetOrdinal() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -155,7 +157,7 @@ func (m *Light) GetOrdinal() (int32, error) {
 func (m *Light) GetType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -180,7 +182,7 @@ func (m *Light) GetType() (int32, error) {
 func (m *Light) HasBrightnessControl() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +191,8 @@ func (m *Light) HasBrightnessControl() (bool, error) {
 			callErr = fmt.Errorf("android.hardware.lights.Light.hasBrightnessControl is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLightHasBrightnessControl,
 		)
@@ -206,7 +209,7 @@ func (m *Light) HasBrightnessControl() (bool, error) {
 func (m *Light) HasRgbControl() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -215,7 +218,8 @@ func (m *Light) HasRgbControl() (bool, error) {
 			callErr = fmt.Errorf("android.hardware.lights.Light.hasRgbControl is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midLightHasRgbControl,
 		)
@@ -232,7 +236,7 @@ func (m *Light) HasRgbControl() (bool, error) {
 func (m *Light) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -257,7 +261,7 @@ func (m *Light) HashCode() (int32, error) {
 func (m *Light) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -266,7 +270,8 @@ func (m *Light) ToString() (string, error) {
 			callErr = fmt.Errorf("android.hardware.lights.Light.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midLightToString,
 		)
@@ -283,7 +288,7 @@ func (m *Light) ToString() (string, error) {
 func (m *Light) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

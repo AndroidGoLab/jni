@@ -27,7 +27,7 @@ type SharedPreferences struct {
 func (m *SharedPreferences) Contains(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -41,7 +41,8 @@ func (m *SharedPreferences) Contains(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midSharedPreferencesContains, jni.ObjectValue(&jArg0.Object),
 		)
@@ -58,7 +59,7 @@ func (m *SharedPreferences) Contains(arg0 string) (bool, error) {
 func (m *SharedPreferences) Edit() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +89,7 @@ func (m *SharedPreferences) Edit() (*jni.Object, error) {
 func (m *SharedPreferences) GetBoolean(arg0 string, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +108,8 @@ func (m *SharedPreferences) GetBoolean(arg0 string, arg1 bool) (bool, error) {
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midSharedPreferencesGetBoolean, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
 		)
@@ -124,7 +126,7 @@ func (m *SharedPreferences) GetBoolean(arg0 string, arg1 bool) (bool, error) {
 func (m *SharedPreferences) GetFloat(arg0 string, arg1 float32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -154,7 +156,7 @@ func (m *SharedPreferences) GetFloat(arg0 string, arg1 float32) (float32, error)
 func (m *SharedPreferences) GetInt(arg0 string, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -184,7 +186,7 @@ func (m *SharedPreferences) GetInt(arg0 string, arg1 int32) (int32, error) {
 func (m *SharedPreferences) GetLong(arg0 string, arg1 int64) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -214,7 +216,7 @@ func (m *SharedPreferences) GetLong(arg0 string, arg1 int64) (int64, error) {
 func (m *SharedPreferences) GetString(arg0 string, arg1 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -233,7 +235,8 @@ func (m *SharedPreferences) GetString(arg0 string, arg1 string) (string, error) 
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSharedPreferencesGetString, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
@@ -250,7 +253,7 @@ func (m *SharedPreferences) GetString(arg0 string, arg1 string) (string, error) 
 func (m *SharedPreferences) GetStringSet(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -285,7 +288,7 @@ func (m *SharedPreferences) GetStringSet(arg0 string, arg1 *jni.Object) (*jni.Ob
 func (m *SharedPreferences) RegisterOnSharedPreferenceChangeListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -308,7 +311,7 @@ func (m *SharedPreferences) RegisterOnSharedPreferenceChangeListener(arg0 *jni.O
 func (m *SharedPreferences) UnregisterOnSharedPreferenceChangeListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

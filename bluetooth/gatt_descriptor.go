@@ -27,7 +27,7 @@ type GattDescriptor struct {
 func (m *GattDescriptor) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *GattDescriptor) DescribeContents() (int32, error) {
 func (m *GattDescriptor) GetCharacteristic() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *GattDescriptor) GetCharacteristic() (*jni.Object, error) {
 func (m *GattDescriptor) GetPermissions() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +107,7 @@ func (m *GattDescriptor) GetPermissions() (int32, error) {
 func (m *GattDescriptor) GetUuid() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -137,7 +137,7 @@ func (m *GattDescriptor) GetUuid() (*jni.Object, error) {
 func (m *GattDescriptor) GetValue() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -167,7 +167,7 @@ func (m *GattDescriptor) GetValue() (*jni.Object, error) {
 func (m *GattDescriptor) SetValue(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -177,7 +177,8 @@ func (m *GattDescriptor) SetValue(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattDescriptorSetValue, jni.ObjectValue(arg0),
 		)
@@ -194,7 +195,7 @@ func (m *GattDescriptor) SetValue(arg0 *jni.Object) (bool, error) {
 func (m *GattDescriptor) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

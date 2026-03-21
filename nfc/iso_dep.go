@@ -27,7 +27,7 @@ type IsoDep struct {
 func (m *IsoDep) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *IsoDep) Close() error {
 func (m *IsoDep) Connect() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -71,7 +71,7 @@ func (m *IsoDep) Connect() error {
 func (m *IsoDep) GetHiLayerResponse() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -101,7 +101,7 @@ func (m *IsoDep) GetHiLayerResponse() (*jni.Object, error) {
 func (m *IsoDep) GetHistoricalBytes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -131,7 +131,7 @@ func (m *IsoDep) GetHistoricalBytes() (*jni.Object, error) {
 func (m *IsoDep) GetMaxTransceiveLength() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -156,7 +156,7 @@ func (m *IsoDep) GetMaxTransceiveLength() (int32, error) {
 func (m *IsoDep) GetTag() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -186,7 +186,7 @@ func (m *IsoDep) GetTag() (*jni.Object, error) {
 func (m *IsoDep) GetTimeout() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -211,7 +211,7 @@ func (m *IsoDep) GetTimeout() (int32, error) {
 func (m *IsoDep) IsConnected() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -220,7 +220,8 @@ func (m *IsoDep) IsConnected() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.isConnected is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIsoDepIsConnected,
 		)
@@ -237,7 +238,7 @@ func (m *IsoDep) IsConnected() (bool, error) {
 func (m *IsoDep) IsExtendedLengthApduSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -246,7 +247,8 @@ func (m *IsoDep) IsExtendedLengthApduSupported() (bool, error) {
 			callErr = fmt.Errorf("android.nfc.tech.IsoDep.isExtendedLengthApduSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIsoDepIsExtendedLengthApduSupported,
 		)
@@ -263,7 +265,7 @@ func (m *IsoDep) IsExtendedLengthApduSupported() (bool, error) {
 func (m *IsoDep) SetTimeout(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -286,7 +288,7 @@ func (m *IsoDep) SetTimeout(arg0 int32) error {
 func (m *IsoDep) Transceive(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -317,7 +319,7 @@ func (m *IsoDep) Transceive(arg0 *jni.Object) (*jni.Object, error) {
 func (m *IsoDep) Get(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

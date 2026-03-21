@@ -27,7 +27,7 @@ type Job struct {
 func (m *Job) Cancel() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Job) Cancel() error {
 func (m *Job) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -59,7 +59,8 @@ func (m *Job) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobEquals, jni.ObjectValue(arg0),
 		)
@@ -76,7 +77,7 @@ func (m *Job) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Job) GetId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -106,7 +107,7 @@ func (m *Job) GetId() (*jni.Object, error) {
 func (m *Job) GetInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -136,7 +137,7 @@ func (m *Job) GetInfo() (*jni.Object, error) {
 func (m *Job) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -161,7 +162,7 @@ func (m *Job) HashCode() (int32, error) {
 func (m *Job) IsBlocked() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -170,7 +171,8 @@ func (m *Job) IsBlocked() (bool, error) {
 			callErr = fmt.Errorf("android.print.PrintJob.isBlocked is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobIsBlocked,
 		)
@@ -187,7 +189,7 @@ func (m *Job) IsBlocked() (bool, error) {
 func (m *Job) IsCancelled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -196,7 +198,8 @@ func (m *Job) IsCancelled() (bool, error) {
 			callErr = fmt.Errorf("android.print.PrintJob.isCancelled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobIsCancelled,
 		)
@@ -213,7 +216,7 @@ func (m *Job) IsCancelled() (bool, error) {
 func (m *Job) IsCompleted() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -222,7 +225,8 @@ func (m *Job) IsCompleted() (bool, error) {
 			callErr = fmt.Errorf("android.print.PrintJob.isCompleted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobIsCompleted,
 		)
@@ -239,7 +243,7 @@ func (m *Job) IsCompleted() (bool, error) {
 func (m *Job) IsFailed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -248,7 +252,8 @@ func (m *Job) IsFailed() (bool, error) {
 			callErr = fmt.Errorf("android.print.PrintJob.isFailed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobIsFailed,
 		)
@@ -265,7 +270,7 @@ func (m *Job) IsFailed() (bool, error) {
 func (m *Job) IsQueued() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -274,7 +279,8 @@ func (m *Job) IsQueued() (bool, error) {
 			callErr = fmt.Errorf("android.print.PrintJob.isQueued is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobIsQueued,
 		)
@@ -291,7 +297,7 @@ func (m *Job) IsQueued() (bool, error) {
 func (m *Job) IsStarted() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -300,7 +306,8 @@ func (m *Job) IsStarted() (bool, error) {
 			callErr = fmt.Errorf("android.print.PrintJob.isStarted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobIsStarted,
 		)
@@ -317,7 +324,7 @@ func (m *Job) IsStarted() (bool, error) {
 func (m *Job) Restart() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) AddKeyguardLockedStateListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *Manager) AddKeyguardLockedStateListener(arg0 *jni.Object, arg1 *jni.Obj
 func (m *Manager) CreateConfirmDeviceCredentialIntent(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -134,7 +134,7 @@ func (m *Manager) CreateConfirmDeviceCredentialIntent(arg0 string, arg1 string) 
 func (m *Manager) ExitKeyguardSecurely(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -157,7 +157,7 @@ func (m *Manager) ExitKeyguardSecurely(arg0 *jni.Object) error {
 func (m *Manager) InKeyguardRestrictedInputMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -166,7 +166,8 @@ func (m *Manager) InKeyguardRestrictedInputMode() (bool, error) {
 			callErr = fmt.Errorf("android.app.KeyguardManager.inKeyguardRestrictedInputMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerInKeyguardRestrictedInputMode,
 		)
@@ -183,7 +184,7 @@ func (m *Manager) InKeyguardRestrictedInputMode() (bool, error) {
 func (m *Manager) IsDeviceLocked() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -192,7 +193,8 @@ func (m *Manager) IsDeviceLocked() (bool, error) {
 			callErr = fmt.Errorf("android.app.KeyguardManager.isDeviceLocked is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsDeviceLocked,
 		)
@@ -209,7 +211,7 @@ func (m *Manager) IsDeviceLocked() (bool, error) {
 func (m *Manager) IsDeviceSecure() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -218,7 +220,8 @@ func (m *Manager) IsDeviceSecure() (bool, error) {
 			callErr = fmt.Errorf("android.app.KeyguardManager.isDeviceSecure is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsDeviceSecure,
 		)
@@ -235,7 +238,7 @@ func (m *Manager) IsDeviceSecure() (bool, error) {
 func (m *Manager) IsKeyguardLocked() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -244,7 +247,8 @@ func (m *Manager) IsKeyguardLocked() (bool, error) {
 			callErr = fmt.Errorf("android.app.KeyguardManager.isKeyguardLocked is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsKeyguardLocked,
 		)
@@ -261,7 +265,7 @@ func (m *Manager) IsKeyguardLocked() (bool, error) {
 func (m *Manager) IsKeyguardSecure() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -270,7 +274,8 @@ func (m *Manager) IsKeyguardSecure() (bool, error) {
 			callErr = fmt.Errorf("android.app.KeyguardManager.isKeyguardSecure is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsKeyguardSecure,
 		)
@@ -287,7 +292,7 @@ func (m *Manager) IsKeyguardSecure() (bool, error) {
 func (m *Manager) NewKeyguardLock(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -322,7 +327,7 @@ func (m *Manager) NewKeyguardLock(arg0 string) (*jni.Object, error) {
 func (m *Manager) RemoveKeyguardLockedStateListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -345,7 +350,7 @@ func (m *Manager) RemoveKeyguardLockedStateListener(arg0 *jni.Object) error {
 func (m *Manager) RequestDismissKeyguard(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

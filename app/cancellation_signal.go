@@ -25,7 +25,7 @@ type CancellationSignal struct {
 func (m *CancellationSignal) Cancel() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -47,7 +47,7 @@ func (m *CancellationSignal) Cancel() error {
 func (m *CancellationSignal) IsCanceled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -56,7 +56,8 @@ func (m *CancellationSignal) IsCanceled() (bool, error) {
 			callErr = fmt.Errorf("android.os.CancellationSignal.isCanceled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midCancellationSignalIsCanceled,
 		)
@@ -73,7 +74,7 @@ func (m *CancellationSignal) IsCanceled() (bool, error) {
 func (m *CancellationSignal) SetOnCancelListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -96,7 +97,7 @@ func (m *CancellationSignal) SetOnCancelListener(arg0 *jni.Object) error {
 func (m *CancellationSignal) ThrowIfCanceled() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

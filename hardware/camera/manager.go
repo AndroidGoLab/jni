@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) GetCameraCharacteristics(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -106,7 +106,7 @@ func (m *Manager) GetCameraCharacteristics(arg0 string) (*jni.Object, error) {
 func (m *Manager) GetCameraDeviceSetup(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -141,7 +141,7 @@ func (m *Manager) GetCameraDeviceSetup(arg0 string) (*jni.Object, error) {
 func (m *Manager) GetCameraExtensionCharacteristics(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -176,7 +176,7 @@ func (m *Manager) GetCameraExtensionCharacteristics(arg0 string) (*jni.Object, e
 func (m *Manager) GetCameraIdList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -206,7 +206,7 @@ func (m *Manager) GetCameraIdList() (*jni.Object, error) {
 func (m *Manager) GetConcurrentCameraIds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -236,7 +236,7 @@ func (m *Manager) GetConcurrentCameraIds() (*jni.Object, error) {
 func (m *Manager) GetTorchStrengthLevel(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -266,7 +266,7 @@ func (m *Manager) GetTorchStrengthLevel(arg0 string) (int32, error) {
 func (m *Manager) IsCameraDeviceSetupSupported(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -280,7 +280,8 @@ func (m *Manager) IsCameraDeviceSetupSupported(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsCameraDeviceSetupSupported, jni.ObjectValue(&jArg0.Object),
 		)
@@ -297,7 +298,7 @@ func (m *Manager) IsCameraDeviceSetupSupported(arg0 string) (bool, error) {
 func (m *Manager) IsConcurrentSessionConfigurationSupported(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -307,7 +308,8 @@ func (m *Manager) IsConcurrentSessionConfigurationSupported(arg0 *jni.Object) (b
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsConcurrentSessionConfigurationSupported, jni.ObjectValue(arg0),
 		)
@@ -328,7 +330,7 @@ func (m *Manager) OpenCamera(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -355,7 +357,7 @@ func (m *Manager) OpenCamera(
 func (m *Manager) RegisterAvailabilityCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -378,7 +380,7 @@ func (m *Manager) RegisterAvailabilityCallback(arg0 *jni.Object, arg1 *jni.Objec
 func (m *Manager) RegisterTorchCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -401,7 +403,7 @@ func (m *Manager) RegisterTorchCallback(arg0 *jni.Object, arg1 *jni.Object) erro
 func (m *Manager) SetTorchMode(arg0 string, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -433,7 +435,7 @@ func (m *Manager) SetTorchMode(arg0 string, arg1 bool) error {
 func (m *Manager) TurnOnTorchWithStrengthLevel(arg0 string, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -460,7 +462,7 @@ func (m *Manager) TurnOnTorchWithStrengthLevel(arg0 string, arg1 int32) error {
 func (m *Manager) UnregisterAvailabilityCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -483,7 +485,7 @@ func (m *Manager) UnregisterAvailabilityCallback(arg0 *jni.Object) error {
 func (m *Manager) UnregisterTorchCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

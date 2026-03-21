@@ -542,9 +542,6 @@ constants:
     - go_name: BackoffPolicyLinear
       value: "0"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: DefaultInitialBackoffMillis
       value: "30000"
       go_type: int64

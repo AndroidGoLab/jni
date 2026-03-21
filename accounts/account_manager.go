@@ -75,7 +75,7 @@ func (m *AccountManager) AddAccountExplicitly3(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -90,7 +90,8 @@ func (m *AccountManager) AddAccountExplicitly3(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAccountManagerAddAccountExplicitly3, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
@@ -112,7 +113,7 @@ func (m *AccountManager) AddAccountExplicitly4_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -127,7 +128,8 @@ func (m *AccountManager) AddAccountExplicitly4_1(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAccountManagerAddAccountExplicitly4_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
@@ -148,7 +150,7 @@ func (m *AccountManager) BlockingGetAuthToken(
 ) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -168,7 +170,8 @@ func (m *AccountManager) BlockingGetAuthToken(
 			jArg2 = jniTrue
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAccountManagerBlockingGetAuthToken, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2),
 		)
@@ -185,7 +188,7 @@ func (m *AccountManager) BlockingGetAuthToken(
 func (m *AccountManager) ClearPassword(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -208,7 +211,7 @@ func (m *AccountManager) ClearPassword(arg0 *jni.Object) error {
 func (m *AccountManager) GetAccountVisibility(arg0 *jni.Object, arg1 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -239,7 +242,7 @@ func (m *AccountManager) GetAccountVisibility(arg0 *jni.Object, arg1 string) (in
 func (m *AccountManager) GetAccounts() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -269,7 +272,7 @@ func (m *AccountManager) GetAccounts() (*jni.Object, error) {
 func (m *AccountManager) GetAccountsByType(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -304,7 +307,7 @@ func (m *AccountManager) GetAccountsByType(arg0 string) (*jni.Object, error) {
 func (m *AccountManager) GetAccountsByTypeForPackage(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -344,7 +347,7 @@ func (m *AccountManager) GetAccountsByTypeForPackage(arg0 string, arg1 string) (
 func (m *AccountManager) GetAuthenticatorTypes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -374,7 +377,7 @@ func (m *AccountManager) GetAuthenticatorTypes() (*jni.Object, error) {
 func (m *AccountManager) GetPassword(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -384,7 +387,8 @@ func (m *AccountManager) GetPassword(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAccountManagerGetPassword, jni.ObjectValue(arg0),
 		)
@@ -401,7 +405,7 @@ func (m *AccountManager) GetPassword(arg0 *jni.Object) (string, error) {
 func (m *AccountManager) GetPreviousName(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -411,7 +415,8 @@ func (m *AccountManager) GetPreviousName(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAccountManagerGetPreviousName, jni.ObjectValue(arg0),
 		)
@@ -428,7 +433,7 @@ func (m *AccountManager) GetPreviousName(arg0 *jni.Object) (string, error) {
 func (m *AccountManager) GetUserData(arg0 *jni.Object, arg1 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -443,7 +448,8 @@ func (m *AccountManager) GetUserData(arg0 *jni.Object, arg1 string) (string, err
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAccountManagerGetUserData, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -460,7 +466,7 @@ func (m *AccountManager) GetUserData(arg0 *jni.Object, arg1 string) (string, err
 func (m *AccountManager) InvalidateAuthToken(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -492,7 +498,7 @@ func (m *AccountManager) InvalidateAuthToken(arg0 string, arg1 string) error {
 func (m *AccountManager) NotifyAccountAuthenticated(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -502,7 +508,8 @@ func (m *AccountManager) NotifyAccountAuthenticated(arg0 *jni.Object) (bool, err
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAccountManagerNotifyAccountAuthenticated, jni.ObjectValue(arg0),
 		)
@@ -519,7 +526,7 @@ func (m *AccountManager) NotifyAccountAuthenticated(arg0 *jni.Object) (bool, err
 func (m *AccountManager) PeekAuthToken(arg0 *jni.Object, arg1 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -534,7 +541,8 @@ func (m *AccountManager) PeekAuthToken(arg0 *jni.Object, arg1 string) (string, e
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAccountManagerPeekAuthToken, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -551,7 +559,7 @@ func (m *AccountManager) PeekAuthToken(arg0 *jni.Object, arg1 string) (string, e
 func (m *AccountManager) RemoveAccountExplicitly(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -561,7 +569,8 @@ func (m *AccountManager) RemoveAccountExplicitly(arg0 *jni.Object) (bool, error)
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAccountManagerRemoveAccountExplicitly, jni.ObjectValue(arg0),
 		)
@@ -578,7 +587,7 @@ func (m *AccountManager) RemoveAccountExplicitly(arg0 *jni.Object) (bool, error)
 func (m *AccountManager) RemoveOnAccountsUpdatedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -605,7 +614,7 @@ func (m *AccountManager) SetAccountVisibility(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -620,7 +629,8 @@ func (m *AccountManager) SetAccountVisibility(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAccountManagerSetAccountVisibility, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
 		)
@@ -641,7 +651,7 @@ func (m *AccountManager) SetAuthToken(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -674,7 +684,7 @@ func (m *AccountManager) SetAuthToken(
 func (m *AccountManager) SetPassword(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -706,7 +716,7 @@ func (m *AccountManager) SetUserData(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -739,7 +749,7 @@ func (m *AccountManager) SetUserData(
 func (m *AccountManager) Get(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -779,7 +789,7 @@ func (m *AccountManager) NewChooseAccountIntent8(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -833,7 +843,7 @@ func (m *AccountManager) NewChooseAccountIntent7_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -71,7 +71,7 @@ func (m *AudioManager) Close() {
 func (m *AudioManager) AbandonAudioFocus(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -97,7 +97,7 @@ func (m *AudioManager) AbandonAudioFocus(arg0 *jni.Object) (int32, error) {
 func (m *AudioManager) AbandonAudioFocusRequest(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -123,7 +123,7 @@ func (m *AudioManager) AbandonAudioFocusRequest(arg0 *jni.Object) (int32, error)
 func (m *AudioManager) AddOnCommunicationDeviceChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -146,7 +146,7 @@ func (m *AudioManager) AddOnCommunicationDeviceChangedListener(arg0 *jni.Object,
 func (m *AudioManager) AddOnModeChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -169,7 +169,7 @@ func (m *AudioManager) AddOnModeChangedListener(arg0 *jni.Object, arg1 *jni.Obje
 func (m *AudioManager) AddOnPreferredMixerAttributesChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -196,7 +196,7 @@ func (m *AudioManager) AdjustStreamVolume(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -223,7 +223,7 @@ func (m *AudioManager) AdjustSuggestedStreamVolume(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -246,7 +246,7 @@ func (m *AudioManager) AdjustSuggestedStreamVolume(
 func (m *AudioManager) AdjustVolume(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -273,7 +273,7 @@ func (m *AudioManager) AdjustVolumeGroupVolume(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -296,7 +296,7 @@ func (m *AudioManager) AdjustVolumeGroupVolume(
 func (m *AudioManager) ClearCommunicationDevice() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -318,7 +318,7 @@ func (m *AudioManager) ClearCommunicationDevice() error {
 func (m *AudioManager) ClearPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -328,7 +328,8 @@ func (m *AudioManager) ClearPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerClearPreferredMixerAttributes, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -345,7 +346,7 @@ func (m *AudioManager) ClearPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni
 func (m *AudioManager) DispatchMediaKeyEvent(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -368,7 +369,7 @@ func (m *AudioManager) DispatchMediaKeyEvent(arg0 *jni.Object) error {
 func (m *AudioManager) GenerateAudioSessionId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -393,7 +394,7 @@ func (m *AudioManager) GenerateAudioSessionId() (int32, error) {
 func (m *AudioManager) GetActivePlaybackConfigurations() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -423,7 +424,7 @@ func (m *AudioManager) GetActivePlaybackConfigurations() (*jni.Object, error) {
 func (m *AudioManager) GetActiveRecordingConfigurations() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -453,7 +454,7 @@ func (m *AudioManager) GetActiveRecordingConfigurations() (*jni.Object, error) {
 func (m *AudioManager) GetAllowedCapturePolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -478,7 +479,7 @@ func (m *AudioManager) GetAllowedCapturePolicy() (int32, error) {
 func (m *AudioManager) GetAudioDevicesForAttributes(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -509,7 +510,7 @@ func (m *AudioManager) GetAudioDevicesForAttributes(arg0 *jni.Object) (*jni.Obje
 func (m *AudioManager) GetAudioHwSyncForSession(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -535,7 +536,7 @@ func (m *AudioManager) GetAudioHwSyncForSession(arg0 int32) (int32, error) {
 func (m *AudioManager) GetAvailableCommunicationDevices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -565,7 +566,7 @@ func (m *AudioManager) GetAvailableCommunicationDevices() (*jni.Object, error) {
 func (m *AudioManager) GetCommunicationDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -595,7 +596,7 @@ func (m *AudioManager) GetCommunicationDevice() (*jni.Object, error) {
 func (m *AudioManager) GetDevices(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -626,7 +627,7 @@ func (m *AudioManager) GetDevices(arg0 int32) (*jni.Object, error) {
 func (m *AudioManager) GetDirectProfilesForAttributes(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -657,7 +658,7 @@ func (m *AudioManager) GetDirectProfilesForAttributes(arg0 *jni.Object) (*jni.Ob
 func (m *AudioManager) GetEncodedSurroundMode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -682,7 +683,7 @@ func (m *AudioManager) GetEncodedSurroundMode() (int32, error) {
 func (m *AudioManager) GetMicrophones() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -712,7 +713,7 @@ func (m *AudioManager) GetMicrophones() (*jni.Object, error) {
 func (m *AudioManager) GetMode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -737,7 +738,7 @@ func (m *AudioManager) GetMode() (int32, error) {
 func (m *AudioManager) GetParameters(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -751,7 +752,8 @@ func (m *AudioManager) GetParameters(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAudioManagerGetParameters, jni.ObjectValue(&jArg0.Object),
 		)
@@ -768,7 +770,7 @@ func (m *AudioManager) GetParameters(arg0 string) (string, error) {
 func (m *AudioManager) GetPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -799,7 +801,7 @@ func (m *AudioManager) GetPreferredMixerAttributes(arg0 *jni.Object, arg1 *jni.O
 func (m *AudioManager) GetProperty(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -813,7 +815,8 @@ func (m *AudioManager) GetProperty(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAudioManagerGetProperty, jni.ObjectValue(&jArg0.Object),
 		)
@@ -830,7 +833,7 @@ func (m *AudioManager) GetProperty(arg0 string) (string, error) {
 func (m *AudioManager) GetRingerMode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -855,7 +858,7 @@ func (m *AudioManager) GetRingerMode() (int32, error) {
 func (m *AudioManager) GetRouting(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -881,7 +884,7 @@ func (m *AudioManager) GetRouting(arg0 int32) (int32, error) {
 func (m *AudioManager) GetSpatializer() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -911,7 +914,7 @@ func (m *AudioManager) GetSpatializer() (*jni.Object, error) {
 func (m *AudioManager) GetStreamMaxVolume(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -937,7 +940,7 @@ func (m *AudioManager) GetStreamMaxVolume(arg0 int32) (int32, error) {
 func (m *AudioManager) GetStreamMinVolume(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -963,7 +966,7 @@ func (m *AudioManager) GetStreamMinVolume(arg0 int32) (int32, error) {
 func (m *AudioManager) GetStreamVolume(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -993,7 +996,7 @@ func (m *AudioManager) GetStreamVolumeDb(
 ) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1019,7 +1022,7 @@ func (m *AudioManager) GetStreamVolumeDb(
 func (m *AudioManager) GetSupportedDeviceTypes(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1050,7 +1053,7 @@ func (m *AudioManager) GetSupportedDeviceTypes(arg0 int32) (*jni.Object, error) 
 func (m *AudioManager) GetSupportedMixerAttributes(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1081,7 +1084,7 @@ func (m *AudioManager) GetSupportedMixerAttributes(arg0 *jni.Object) (*jni.Objec
 func (m *AudioManager) GetVibrateSetting(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1107,7 +1110,7 @@ func (m *AudioManager) GetVibrateSetting(arg0 int32) (int32, error) {
 func (m *AudioManager) GetVolumeGroupIdForAttributes(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1133,7 +1136,7 @@ func (m *AudioManager) GetVolumeGroupIdForAttributes(arg0 *jni.Object) (int32, e
 func (m *AudioManager) IsBluetoothA2dpOn() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1142,7 +1145,8 @@ func (m *AudioManager) IsBluetoothA2dpOn() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isBluetoothA2dpOn is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsBluetoothA2dpOn,
 		)
@@ -1159,7 +1163,7 @@ func (m *AudioManager) IsBluetoothA2dpOn() (bool, error) {
 func (m *AudioManager) IsBluetoothScoAvailableOffCall() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1168,7 +1172,8 @@ func (m *AudioManager) IsBluetoothScoAvailableOffCall() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isBluetoothScoAvailableOffCall is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsBluetoothScoAvailableOffCall,
 		)
@@ -1185,7 +1190,7 @@ func (m *AudioManager) IsBluetoothScoAvailableOffCall() (bool, error) {
 func (m *AudioManager) IsBluetoothScoOn() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1194,7 +1199,8 @@ func (m *AudioManager) IsBluetoothScoOn() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isBluetoothScoOn is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsBluetoothScoOn,
 		)
@@ -1211,7 +1217,7 @@ func (m *AudioManager) IsBluetoothScoOn() (bool, error) {
 func (m *AudioManager) IsCallScreeningModeSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1220,7 +1226,8 @@ func (m *AudioManager) IsCallScreeningModeSupported() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isCallScreeningModeSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsCallScreeningModeSupported,
 		)
@@ -1237,7 +1244,7 @@ func (m *AudioManager) IsCallScreeningModeSupported() (bool, error) {
 func (m *AudioManager) IsMicrophoneMute() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1246,7 +1253,8 @@ func (m *AudioManager) IsMicrophoneMute() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isMicrophoneMute is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsMicrophoneMute,
 		)
@@ -1263,7 +1271,7 @@ func (m *AudioManager) IsMicrophoneMute() (bool, error) {
 func (m *AudioManager) IsMusicActive() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1272,7 +1280,8 @@ func (m *AudioManager) IsMusicActive() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isMusicActive is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsMusicActive,
 		)
@@ -1289,7 +1298,7 @@ func (m *AudioManager) IsMusicActive() (bool, error) {
 func (m *AudioManager) IsRampingRingerEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1298,7 +1307,8 @@ func (m *AudioManager) IsRampingRingerEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isRampingRingerEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsRampingRingerEnabled,
 		)
@@ -1315,7 +1325,7 @@ func (m *AudioManager) IsRampingRingerEnabled() (bool, error) {
 func (m *AudioManager) IsSpeakerphoneOn() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1324,7 +1334,8 @@ func (m *AudioManager) IsSpeakerphoneOn() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isSpeakerphoneOn is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsSpeakerphoneOn,
 		)
@@ -1341,7 +1352,7 @@ func (m *AudioManager) IsSpeakerphoneOn() (bool, error) {
 func (m *AudioManager) IsStreamMute(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1351,7 +1362,8 @@ func (m *AudioManager) IsStreamMute(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsStreamMute, jni.IntValue(arg0),
 		)
@@ -1368,7 +1380,7 @@ func (m *AudioManager) IsStreamMute(arg0 int32) (bool, error) {
 func (m *AudioManager) IsSurroundFormatEnabled(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1378,7 +1390,8 @@ func (m *AudioManager) IsSurroundFormatEnabled(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsSurroundFormatEnabled, jni.IntValue(arg0),
 		)
@@ -1395,7 +1408,7 @@ func (m *AudioManager) IsSurroundFormatEnabled(arg0 int32) (bool, error) {
 func (m *AudioManager) IsVolumeFixed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1404,7 +1417,8 @@ func (m *AudioManager) IsVolumeFixed() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isVolumeFixed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsVolumeFixed,
 		)
@@ -1421,7 +1435,7 @@ func (m *AudioManager) IsVolumeFixed() (bool, error) {
 func (m *AudioManager) IsVolumeGroupMuted(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1431,7 +1445,8 @@ func (m *AudioManager) IsVolumeGroupMuted(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsVolumeGroupMuted, jni.IntValue(arg0),
 		)
@@ -1448,7 +1463,7 @@ func (m *AudioManager) IsVolumeGroupMuted(arg0 int32) (bool, error) {
 func (m *AudioManager) IsWiredHeadsetOn() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1457,7 +1472,8 @@ func (m *AudioManager) IsWiredHeadsetOn() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isWiredHeadsetOn is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerIsWiredHeadsetOn,
 		)
@@ -1474,7 +1490,7 @@ func (m *AudioManager) IsWiredHeadsetOn() (bool, error) {
 func (m *AudioManager) LoadSoundEffects() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1496,7 +1512,7 @@ func (m *AudioManager) LoadSoundEffects() error {
 func (m *AudioManager) PlaySoundEffect1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1519,7 +1535,7 @@ func (m *AudioManager) PlaySoundEffect1(arg0 int32) error {
 func (m *AudioManager) PlaySoundEffect2_1(arg0 int32, arg1 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1542,7 +1558,7 @@ func (m *AudioManager) PlaySoundEffect2_1(arg0 int32, arg1 float32) error {
 func (m *AudioManager) RegisterMediaButtonEventReceiver1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1565,7 +1581,7 @@ func (m *AudioManager) RegisterMediaButtonEventReceiver1(arg0 *jni.Object) error
 func (m *AudioManager) RegisterMediaButtonEventReceiver1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1588,7 +1604,7 @@ func (m *AudioManager) RegisterMediaButtonEventReceiver1_1(arg0 *jni.Object) err
 func (m *AudioManager) RegisterRemoteControlClient(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1611,7 +1627,7 @@ func (m *AudioManager) RegisterRemoteControlClient(arg0 *jni.Object) error {
 func (m *AudioManager) RegisterRemoteController(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1621,7 +1637,8 @@ func (m *AudioManager) RegisterRemoteController(arg0 *jni.Object) (bool, error) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerRegisterRemoteController, jni.ObjectValue(arg0),
 		)
@@ -1638,7 +1655,7 @@ func (m *AudioManager) RegisterRemoteController(arg0 *jni.Object) (bool, error) 
 func (m *AudioManager) RemoveOnCommunicationDeviceChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1661,7 +1678,7 @@ func (m *AudioManager) RemoveOnCommunicationDeviceChangedListener(arg0 *jni.Obje
 func (m *AudioManager) RemoveOnModeChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1684,7 +1701,7 @@ func (m *AudioManager) RemoveOnModeChangedListener(arg0 *jni.Object) error {
 func (m *AudioManager) RemoveOnPreferredMixerAttributesChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1707,7 +1724,7 @@ func (m *AudioManager) RemoveOnPreferredMixerAttributesChangedListener(arg0 *jni
 func (m *AudioManager) RequestAudioFocus1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1737,7 +1754,7 @@ func (m *AudioManager) RequestAudioFocus3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1763,7 +1780,7 @@ func (m *AudioManager) RequestAudioFocus3_1(
 func (m *AudioManager) SetAllowedCapturePolicy(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1786,7 +1803,7 @@ func (m *AudioManager) SetAllowedCapturePolicy(arg0 int32) error {
 func (m *AudioManager) SetBluetoothA2dpOn(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1813,7 +1830,7 @@ func (m *AudioManager) SetBluetoothA2dpOn(arg0 bool) error {
 func (m *AudioManager) SetBluetoothScoOn(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1840,7 +1857,7 @@ func (m *AudioManager) SetBluetoothScoOn(arg0 bool) error {
 func (m *AudioManager) SetCommunicationDevice(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1850,7 +1867,8 @@ func (m *AudioManager) SetCommunicationDevice(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerSetCommunicationDevice, jni.ObjectValue(arg0),
 		)
@@ -1867,7 +1885,7 @@ func (m *AudioManager) SetCommunicationDevice(arg0 *jni.Object) (bool, error) {
 func (m *AudioManager) SetEncodedSurroundMode(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1877,7 +1895,8 @@ func (m *AudioManager) SetEncodedSurroundMode(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerSetEncodedSurroundMode, jni.IntValue(arg0),
 		)
@@ -1894,7 +1913,7 @@ func (m *AudioManager) SetEncodedSurroundMode(arg0 int32) (bool, error) {
 func (m *AudioManager) SetMicrophoneMute(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1921,7 +1940,7 @@ func (m *AudioManager) SetMicrophoneMute(arg0 bool) error {
 func (m *AudioManager) SetMode(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1944,7 +1963,7 @@ func (m *AudioManager) SetMode(arg0 int32) error {
 func (m *AudioManager) SetParameters(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1975,7 +1994,7 @@ func (m *AudioManager) SetPreferredMixerAttributes(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1985,7 +2004,8 @@ func (m *AudioManager) SetPreferredMixerAttributes(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerSetPreferredMixerAttributes, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -2002,7 +2022,7 @@ func (m *AudioManager) SetPreferredMixerAttributes(
 func (m *AudioManager) SetRingerMode(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2029,7 +2049,7 @@ func (m *AudioManager) SetRouting(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2052,7 +2072,7 @@ func (m *AudioManager) SetRouting(
 func (m *AudioManager) SetSpeakerphoneOn(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2079,7 +2099,7 @@ func (m *AudioManager) SetSpeakerphoneOn(arg0 bool) error {
 func (m *AudioManager) SetStreamMute(arg0 int32, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2107,7 +2127,7 @@ func (m *AudioManager) SetStreamMute(arg0 int32, arg1 bool) error {
 func (m *AudioManager) SetStreamSolo(arg0 int32, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2139,7 +2159,7 @@ func (m *AudioManager) SetStreamVolume(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2162,7 +2182,7 @@ func (m *AudioManager) SetStreamVolume(
 func (m *AudioManager) SetSurroundFormatEnabled(arg0 int32, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2177,7 +2197,8 @@ func (m *AudioManager) SetSurroundFormatEnabled(arg0 int32, arg1 bool) (bool, er
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerSetSurroundFormatEnabled, jni.IntValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -2194,7 +2215,7 @@ func (m *AudioManager) SetSurroundFormatEnabled(arg0 int32, arg1 bool) (bool, er
 func (m *AudioManager) SetVibrateSetting(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2217,7 +2238,7 @@ func (m *AudioManager) SetVibrateSetting(arg0 int32, arg1 int32) error {
 func (m *AudioManager) SetWiredHeadsetOn(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2244,7 +2265,7 @@ func (m *AudioManager) SetWiredHeadsetOn(arg0 bool) error {
 func (m *AudioManager) ShouldVibrate(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2254,7 +2275,8 @@ func (m *AudioManager) ShouldVibrate(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioManagerShouldVibrate, jni.IntValue(arg0),
 		)
@@ -2271,7 +2293,7 @@ func (m *AudioManager) ShouldVibrate(arg0 int32) (bool, error) {
 func (m *AudioManager) StartBluetoothSco() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2293,7 +2315,7 @@ func (m *AudioManager) StartBluetoothSco() error {
 func (m *AudioManager) StopBluetoothSco() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2315,7 +2337,7 @@ func (m *AudioManager) StopBluetoothSco() error {
 func (m *AudioManager) UnloadSoundEffects() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2337,7 +2359,7 @@ func (m *AudioManager) UnloadSoundEffects() error {
 func (m *AudioManager) UnregisterAudioDeviceCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2360,7 +2382,7 @@ func (m *AudioManager) UnregisterAudioDeviceCallback(arg0 *jni.Object) error {
 func (m *AudioManager) UnregisterAudioPlaybackCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2383,7 +2405,7 @@ func (m *AudioManager) UnregisterAudioPlaybackCallback(arg0 *jni.Object) error {
 func (m *AudioManager) UnregisterAudioRecordingCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2406,7 +2428,7 @@ func (m *AudioManager) UnregisterAudioRecordingCallback(arg0 *jni.Object) error 
 func (m *AudioManager) UnregisterMediaButtonEventReceiver1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2429,7 +2451,7 @@ func (m *AudioManager) UnregisterMediaButtonEventReceiver1(arg0 *jni.Object) err
 func (m *AudioManager) UnregisterMediaButtonEventReceiver1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2452,7 +2474,7 @@ func (m *AudioManager) UnregisterMediaButtonEventReceiver1_1(arg0 *jni.Object) e
 func (m *AudioManager) UnregisterRemoteControlClient(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2475,7 +2497,7 @@ func (m *AudioManager) UnregisterRemoteControlClient(arg0 *jni.Object) error {
 func (m *AudioManager) UnregisterRemoteController(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2498,7 +2520,7 @@ func (m *AudioManager) UnregisterRemoteController(arg0 *jni.Object) error {
 func (m *AudioManager) GetDirectPlaybackSupport(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2524,7 +2546,7 @@ func (m *AudioManager) GetDirectPlaybackSupport(arg0 *jni.Object, arg1 *jni.Obje
 func (m *AudioManager) GetPlaybackOffloadSupport(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2550,7 +2572,7 @@ func (m *AudioManager) GetPlaybackOffloadSupport(arg0 *jni.Object, arg1 *jni.Obj
 func (m *AudioManager) IsHapticPlaybackSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2559,7 +2581,8 @@ func (m *AudioManager) IsHapticPlaybackSupported() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioManager.isHapticPlaybackSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsAudioManager)),
 			midAudioManagerIsHapticPlaybackSupported,
 		)
@@ -2576,7 +2599,7 @@ func (m *AudioManager) IsHapticPlaybackSupported() (bool, error) {
 func (m *AudioManager) IsOffloadedPlaybackSupported(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2586,7 +2609,8 @@ func (m *AudioManager) IsOffloadedPlaybackSupported(arg0 *jni.Object, arg1 *jni.
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsAudioManager)),
 			midAudioManagerIsOffloadedPlaybackSupported, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)

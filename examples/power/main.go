@@ -70,6 +70,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("power.NewManager: %w", err)
 	}
+	defer mgr.Close()
 
 	// --- IsInteractive ---
 	interactive, err := mgr.IsInteractive()

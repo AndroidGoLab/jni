@@ -27,7 +27,7 @@ type Contract struct {
 func (m *Contract) BuildChildDocumentsUri(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -67,7 +67,7 @@ func (m *Contract) BuildChildDocumentsUri(arg0 string, arg1 string) (*jni.Object
 func (m *Contract) BuildChildDocumentsUriUsingTree(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -103,7 +103,7 @@ func (m *Contract) BuildChildDocumentsUriUsingTree(arg0 *jni.Object, arg1 string
 func (m *Contract) BuildDocumentUri(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -143,7 +143,7 @@ func (m *Contract) BuildDocumentUri(arg0 string, arg1 string) (*jni.Object, erro
 func (m *Contract) BuildDocumentUriUsingTree(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -179,7 +179,7 @@ func (m *Contract) BuildDocumentUriUsingTree(arg0 *jni.Object, arg1 string) (*jn
 func (m *Contract) BuildRecentDocumentsUri(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +219,7 @@ func (m *Contract) BuildRecentDocumentsUri(arg0 string, arg1 string) (*jni.Objec
 func (m *Contract) BuildRootUri(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -259,7 +259,7 @@ func (m *Contract) BuildRootUri(arg0 string, arg1 string) (*jni.Object, error) {
 func (m *Contract) BuildRootsUri(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -298,7 +298,7 @@ func (m *Contract) BuildSearchDocumentsUri(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -343,7 +343,7 @@ func (m *Contract) BuildSearchDocumentsUri(
 func (m *Contract) BuildTreeDocumentUri(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -387,7 +387,7 @@ func (m *Contract) CopyDocument(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -423,7 +423,7 @@ func (m *Contract) CreateDocument(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -468,7 +468,7 @@ func (m *Contract) CreateWebLinkIntent(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -499,7 +499,7 @@ func (m *Contract) CreateWebLinkIntent(
 func (m *Contract) DeleteDocument(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -509,7 +509,8 @@ func (m *Contract) DeleteDocument(arg0 *jni.Object, arg1 *jni.Object) (bool, err
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractDeleteDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -526,7 +527,7 @@ func (m *Contract) DeleteDocument(arg0 *jni.Object, arg1 *jni.Object) (bool, err
 func (m *Contract) EjectRoot(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -549,7 +550,7 @@ func (m *Contract) EjectRoot(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Contract) FindDocumentPath(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -580,7 +581,7 @@ func (m *Contract) FindDocumentPath(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 func (m *Contract) GetDocumentId(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -590,7 +591,8 @@ func (m *Contract) GetDocumentId(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractGetDocumentId, jni.ObjectValue(arg0),
 		)
@@ -607,7 +609,7 @@ func (m *Contract) GetDocumentId(arg0 *jni.Object) (string, error) {
 func (m *Contract) GetDocumentMetadata(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -643,7 +645,7 @@ func (m *Contract) GetDocumentThumbnail(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -674,7 +676,7 @@ func (m *Contract) GetDocumentThumbnail(
 func (m *Contract) GetRootId(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -684,7 +686,8 @@ func (m *Contract) GetRootId(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractGetRootId, jni.ObjectValue(arg0),
 		)
@@ -701,7 +704,7 @@ func (m *Contract) GetRootId(arg0 *jni.Object) (string, error) {
 func (m *Contract) GetSearchDocumentsQuery(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -711,7 +714,8 @@ func (m *Contract) GetSearchDocumentsQuery(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractGetSearchDocumentsQuery, jni.ObjectValue(arg0),
 		)
@@ -728,7 +732,7 @@ func (m *Contract) GetSearchDocumentsQuery(arg0 *jni.Object) (string, error) {
 func (m *Contract) GetTreeDocumentId(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -738,7 +742,8 @@ func (m *Contract) GetTreeDocumentId(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractGetTreeDocumentId, jni.ObjectValue(arg0),
 		)
@@ -759,7 +764,7 @@ func (m *Contract) IsChildDocument(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -769,7 +774,8 @@ func (m *Contract) IsChildDocument(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractIsChildDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -786,7 +792,7 @@ func (m *Contract) IsChildDocument(
 func (m *Contract) IsDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -796,7 +802,8 @@ func (m *Contract) IsDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (bool, erro
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractIsDocumentUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -813,7 +820,7 @@ func (m *Contract) IsDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (bool, erro
 func (m *Contract) IsRootUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -823,7 +830,8 @@ func (m *Contract) IsRootUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractIsRootUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -840,7 +848,7 @@ func (m *Contract) IsRootUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 func (m *Contract) IsRootsUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -850,7 +858,8 @@ func (m *Contract) IsRootsUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractIsRootsUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -867,7 +876,7 @@ func (m *Contract) IsRootsUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) 
 func (m *Contract) IsTreeUri(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -877,7 +886,8 @@ func (m *Contract) IsTreeUri(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractIsTreeUri, jni.ObjectValue(arg0),
 		)
@@ -899,7 +909,7 @@ func (m *Contract) MoveDocument(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -934,7 +944,7 @@ func (m *Contract) RemoveDocument(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -944,7 +954,8 @@ func (m *Contract) RemoveDocument(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsContract)),
 			midContractRemoveDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -965,7 +976,7 @@ func (m *Contract) RenameDocument(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -79,7 +79,7 @@ func (m *Manager) AddCompletedDownload7(
 ) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -144,7 +144,7 @@ func (m *Manager) AddCompletedDownload9_1(
 ) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -199,7 +199,7 @@ func (m *Manager) AddCompletedDownload9_1(
 func (m *Manager) Enqueue(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -225,7 +225,7 @@ func (m *Manager) Enqueue(arg0 *jni.Object) (int64, error) {
 func (m *Manager) GetMimeTypeForDownloadedFile(arg0 int64) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -235,7 +235,8 @@ func (m *Manager) GetMimeTypeForDownloadedFile(arg0 int64) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetMimeTypeForDownloadedFile, jni.LongValue(arg0),
 		)
@@ -252,7 +253,7 @@ func (m *Manager) GetMimeTypeForDownloadedFile(arg0 int64) (string, error) {
 func (m *Manager) GetUriForDownloadedFile(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -283,7 +284,7 @@ func (m *Manager) GetUriForDownloadedFile(arg0 int64) (*jni.Object, error) {
 func (m *Manager) OpenDownloadedFile(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -314,7 +315,7 @@ func (m *Manager) OpenDownloadedFile(arg0 int64) (*jni.Object, error) {
 func (m *Manager) Query(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -345,7 +346,7 @@ func (m *Manager) Query(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) Remove(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -371,7 +372,7 @@ func (m *Manager) Remove(arg0 *jni.Object) (int32, error) {
 func (m *Manager) GetMaxBytesOverMobile(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -402,7 +403,7 @@ func (m *Manager) GetMaxBytesOverMobile(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) GetRecommendedMaxBytesOverMobile(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

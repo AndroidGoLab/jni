@@ -27,7 +27,7 @@ type BroadcastReceiver struct {
 func (m *BroadcastReceiver) AbortBroadcast() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *BroadcastReceiver) AbortBroadcast() error {
 func (m *BroadcastReceiver) ClearAbortBroadcast() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -71,7 +71,7 @@ func (m *BroadcastReceiver) ClearAbortBroadcast() error {
 func (m *BroadcastReceiver) GetAbortBroadcast() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -80,7 +80,8 @@ func (m *BroadcastReceiver) GetAbortBroadcast() (bool, error) {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.getAbortBroadcast is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBroadcastReceiverGetAbortBroadcast,
 		)
@@ -97,7 +98,7 @@ func (m *BroadcastReceiver) GetAbortBroadcast() (bool, error) {
 func (m *BroadcastReceiver) GetDebugUnregister() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -106,7 +107,8 @@ func (m *BroadcastReceiver) GetDebugUnregister() (bool, error) {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.getDebugUnregister is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBroadcastReceiverGetDebugUnregister,
 		)
@@ -123,7 +125,7 @@ func (m *BroadcastReceiver) GetDebugUnregister() (bool, error) {
 func (m *BroadcastReceiver) GetResultCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -148,7 +150,7 @@ func (m *BroadcastReceiver) GetResultCode() (int32, error) {
 func (m *BroadcastReceiver) GetResultData() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -157,7 +159,8 @@ func (m *BroadcastReceiver) GetResultData() (string, error) {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.getResultData is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midBroadcastReceiverGetResultData,
 		)
@@ -174,7 +177,7 @@ func (m *BroadcastReceiver) GetResultData() (string, error) {
 func (m *BroadcastReceiver) GetResultExtras(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -209,7 +212,7 @@ func (m *BroadcastReceiver) GetResultExtras(arg0 bool) (*jni.Object, error) {
 func (m *BroadcastReceiver) GetSentFromPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -218,7 +221,8 @@ func (m *BroadcastReceiver) GetSentFromPackage() (string, error) {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.getSentFromPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midBroadcastReceiverGetSentFromPackage,
 		)
@@ -235,7 +239,7 @@ func (m *BroadcastReceiver) GetSentFromPackage() (string, error) {
 func (m *BroadcastReceiver) GetSentFromUid() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -260,7 +264,7 @@ func (m *BroadcastReceiver) GetSentFromUid() (int32, error) {
 func (m *BroadcastReceiver) GoAsync() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -290,7 +294,7 @@ func (m *BroadcastReceiver) GoAsync() (*jni.Object, error) {
 func (m *BroadcastReceiver) IsInitialStickyBroadcast() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -299,7 +303,8 @@ func (m *BroadcastReceiver) IsInitialStickyBroadcast() (bool, error) {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.isInitialStickyBroadcast is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBroadcastReceiverIsInitialStickyBroadcast,
 		)
@@ -316,7 +321,7 @@ func (m *BroadcastReceiver) IsInitialStickyBroadcast() (bool, error) {
 func (m *BroadcastReceiver) IsOrderedBroadcast() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -325,7 +330,8 @@ func (m *BroadcastReceiver) IsOrderedBroadcast() (bool, error) {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.isOrderedBroadcast is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBroadcastReceiverIsOrderedBroadcast,
 		)
@@ -342,7 +348,7 @@ func (m *BroadcastReceiver) IsOrderedBroadcast() (bool, error) {
 func (m *BroadcastReceiver) OnReceive(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -365,7 +371,7 @@ func (m *BroadcastReceiver) OnReceive(arg0 *jni.Object, arg1 *jni.Object) error 
 func (m *BroadcastReceiver) PeekService(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -396,7 +402,7 @@ func (m *BroadcastReceiver) PeekService(arg0 *jni.Object, arg1 *jni.Object) (*jn
 func (m *BroadcastReceiver) SetDebugUnregister(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -423,7 +429,7 @@ func (m *BroadcastReceiver) SetDebugUnregister(arg0 bool) error {
 func (m *BroadcastReceiver) SetOrderedHint(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -454,7 +460,7 @@ func (m *BroadcastReceiver) SetResult(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -482,7 +488,7 @@ func (m *BroadcastReceiver) SetResult(
 func (m *BroadcastReceiver) SetResultCode(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -505,7 +511,7 @@ func (m *BroadcastReceiver) SetResultCode(arg0 int32) error {
 func (m *BroadcastReceiver) SetResultData(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -532,7 +538,7 @@ func (m *BroadcastReceiver) SetResultData(arg0 string) error {
 func (m *BroadcastReceiver) SetResultExtras(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

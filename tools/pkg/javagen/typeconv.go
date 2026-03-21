@@ -97,7 +97,7 @@ func ResolveType(javaType string) TypeConv {
 			CallSuffix: "Object",
 			IsObject:   true,
 		}
-	case "java.lang.CharSequence":
+	case "CharSequence", "java.lang.CharSequence":
 		return TypeConv{
 			GoType:     "string",
 			JNISig:     "Ljava/lang/CharSequence;",

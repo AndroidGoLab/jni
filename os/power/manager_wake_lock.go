@@ -27,7 +27,7 @@ type ManagerWakeLock struct {
 func (m *ManagerWakeLock) Acquire0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *ManagerWakeLock) Acquire0() error {
 func (m *ManagerWakeLock) Acquire1_1(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -72,7 +72,7 @@ func (m *ManagerWakeLock) Acquire1_1(arg0 int64) error {
 func (m *ManagerWakeLock) IsHeld() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -81,7 +81,8 @@ func (m *ManagerWakeLock) IsHeld() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.isHeld is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerWakeLockIsHeld,
 		)
@@ -98,7 +99,7 @@ func (m *ManagerWakeLock) IsHeld() (bool, error) {
 func (m *ManagerWakeLock) Release0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +121,7 @@ func (m *ManagerWakeLock) Release0() error {
 func (m *ManagerWakeLock) Release1_1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -143,7 +144,7 @@ func (m *ManagerWakeLock) Release1_1(arg0 int32) error {
 func (m *ManagerWakeLock) SetReferenceCounted(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -170,7 +171,7 @@ func (m *ManagerWakeLock) SetReferenceCounted(arg0 bool) error {
 func (m *ManagerWakeLock) SetStateListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -193,7 +194,7 @@ func (m *ManagerWakeLock) SetStateListener(arg0 *jni.Object, arg1 *jni.Object) e
 func (m *ManagerWakeLock) SetWorkSource(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -216,7 +217,7 @@ func (m *ManagerWakeLock) SetWorkSource(arg0 *jni.Object) error {
 func (m *ManagerWakeLock) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -225,7 +226,8 @@ func (m *ManagerWakeLock) ToString() (string, error) {
 			callErr = fmt.Errorf("android.os.PowerManager$WakeLock.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerWakeLockToString,
 		)

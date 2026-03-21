@@ -27,7 +27,7 @@ type ManagerAlarmClockInfo struct {
 func (m *ManagerAlarmClockInfo) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *ManagerAlarmClockInfo) DescribeContents() (int32, error) {
 func (m *ManagerAlarmClockInfo) GetShowIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *ManagerAlarmClockInfo) GetShowIntent() (*jni.Object, error) {
 func (m *ManagerAlarmClockInfo) GetTriggerTime() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +107,7 @@ func (m *ManagerAlarmClockInfo) GetTriggerTime() (int64, error) {
 func (m *ManagerAlarmClockInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -71,7 +71,7 @@ func (m *WifiRttManager) Close() {
 func (m *WifiRttManager) GetRttCharacteristics() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -101,7 +101,7 @@ func (m *WifiRttManager) GetRttCharacteristics() (*jni.Object, error) {
 func (m *WifiRttManager) IsAvailable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -110,7 +110,8 @@ func (m *WifiRttManager) IsAvailable() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.rtt.WifiRttManager.isAvailable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midWifiRttManagerIsAvailable,
 		)
@@ -131,7 +132,7 @@ func (m *WifiRttManager) StartRanging(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

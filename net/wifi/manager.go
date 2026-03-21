@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) AddLocalOnlyConnectionFailureListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *Manager) AddLocalOnlyConnectionFailureListener(arg0 *jni.Object, arg1 *
 func (m *Manager) AddNetwork(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +120,7 @@ func (m *Manager) AddNetwork(arg0 *jni.Object) (int32, error) {
 func (m *Manager) AddNetworkPrivileged(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -151,7 +151,7 @@ func (m *Manager) AddNetworkPrivileged(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) AddNetworkSuggestions(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -177,7 +177,7 @@ func (m *Manager) AddNetworkSuggestions(arg0 *jni.Object) (int32, error) {
 func (m *Manager) AddOrUpdatePasspointConfiguration(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -200,7 +200,7 @@ func (m *Manager) AddOrUpdatePasspointConfiguration(arg0 *jni.Object) error {
 func (m *Manager) AddSuggestionConnectionStatusListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -223,7 +223,7 @@ func (m *Manager) AddSuggestionConnectionStatusListener(arg0 *jni.Object, arg1 *
 func (m *Manager) AddSuggestionUserApprovalStatusListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -246,7 +246,7 @@ func (m *Manager) AddSuggestionUserApprovalStatusListener(arg0 *jni.Object, arg1
 func (m *Manager) AddWifiStateChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -269,7 +269,7 @@ func (m *Manager) AddWifiStateChangedListener(arg0 *jni.Object, arg1 *jni.Object
 func (m *Manager) AllowAutojoinGlobal(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -296,7 +296,7 @@ func (m *Manager) AllowAutojoinGlobal(arg0 bool) error {
 func (m *Manager) CalculateSignalLevel1(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -322,7 +322,7 @@ func (m *Manager) CalculateSignalLevel1(arg0 int32) (int32, error) {
 func (m *Manager) CancelWps(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -345,7 +345,7 @@ func (m *Manager) CancelWps(arg0 *jni.Object) error {
 func (m *Manager) CreateMulticastLock(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -380,7 +380,7 @@ func (m *Manager) CreateMulticastLock(arg0 string) (*jni.Object, error) {
 func (m *Manager) CreateWifiLock2(arg0 int32, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -416,7 +416,7 @@ func (m *Manager) CreateWifiLock2(arg0 int32, arg1 string) (*jni.Object, error) 
 func (m *Manager) CreateWifiLock1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -451,7 +451,7 @@ func (m *Manager) CreateWifiLock1_1(arg0 string) (*jni.Object, error) {
 func (m *Manager) DisableNetwork(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -461,7 +461,8 @@ func (m *Manager) DisableNetwork(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerDisableNetwork, jni.IntValue(arg0),
 		)
@@ -478,7 +479,7 @@ func (m *Manager) DisableNetwork(arg0 int32) (bool, error) {
 func (m *Manager) DisallowCurrentSuggestedNetwork(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -501,7 +502,7 @@ func (m *Manager) DisallowCurrentSuggestedNetwork(arg0 *jni.Object) error {
 func (m *Manager) Disconnect() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -510,7 +511,8 @@ func (m *Manager) Disconnect() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.disconnect is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerDisconnect,
 		)
@@ -527,7 +529,7 @@ func (m *Manager) Disconnect() (bool, error) {
 func (m *Manager) EnableNetwork(arg0 int32, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -542,7 +544,8 @@ func (m *Manager) EnableNetwork(arg0 int32, arg1 bool) (bool, error) {
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerEnableNetwork, jni.IntValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -559,7 +562,7 @@ func (m *Manager) EnableNetwork(arg0 int32, arg1 bool) (bool, error) {
 func (m *Manager) FlushPasspointAnqpCache() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -581,7 +584,7 @@ func (m *Manager) FlushPasspointAnqpCache() error {
 func (m *Manager) GetAllowedChannels(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -612,7 +615,7 @@ func (m *Manager) GetAllowedChannels(arg0 int32, arg1 int32) (*jni.Object, error
 func (m *Manager) GetCallerConfiguredNetworks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -642,7 +645,7 @@ func (m *Manager) GetCallerConfiguredNetworks() (*jni.Object, error) {
 func (m *Manager) GetChannelData(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -665,7 +668,7 @@ func (m *Manager) GetChannelData(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Manager) GetConfiguredNetworks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -695,7 +698,7 @@ func (m *Manager) GetConfiguredNetworks() (*jni.Object, error) {
 func (m *Manager) GetConnectionInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -725,7 +728,7 @@ func (m *Manager) GetConnectionInfo() (*jni.Object, error) {
 func (m *Manager) GetDhcpInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -755,7 +758,7 @@ func (m *Manager) GetDhcpInfo() (*jni.Object, error) {
 func (m *Manager) GetMaxNumberOfChannelsPerNetworkSpecifierRequest() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -780,7 +783,7 @@ func (m *Manager) GetMaxNumberOfChannelsPerNetworkSpecifierRequest() (int32, err
 func (m *Manager) GetMaxNumberOfNetworkSuggestionsPerApp() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -805,7 +808,7 @@ func (m *Manager) GetMaxNumberOfNetworkSuggestionsPerApp() (int32, error) {
 func (m *Manager) GetMaxSignalLevel() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -830,7 +833,7 @@ func (m *Manager) GetMaxSignalLevel() (int32, error) {
 func (m *Manager) GetMaxSupportedConcurrentTdlsSessions(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -853,7 +856,7 @@ func (m *Manager) GetMaxSupportedConcurrentTdlsSessions(arg0 *jni.Object, arg1 *
 func (m *Manager) GetNetworkSuggestions() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -883,7 +886,7 @@ func (m *Manager) GetNetworkSuggestions() (*jni.Object, error) {
 func (m *Manager) GetNumberOfEnabledTdlsSessions(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -906,7 +909,7 @@ func (m *Manager) GetNumberOfEnabledTdlsSessions(arg0 *jni.Object, arg1 *jni.Obj
 func (m *Manager) GetPasspointConfigurations() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -936,7 +939,7 @@ func (m *Manager) GetPasspointConfigurations() (*jni.Object, error) {
 func (m *Manager) GetPerSsidRoamingModes(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -959,7 +962,7 @@ func (m *Manager) GetPerSsidRoamingModes(arg0 *jni.Object, arg1 *jni.Object) err
 func (m *Manager) GetScanResults() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -989,7 +992,7 @@ func (m *Manager) GetScanResults() (*jni.Object, error) {
 func (m *Manager) GetStaConcurrencyForMultiInternetMode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1014,7 +1017,7 @@ func (m *Manager) GetStaConcurrencyForMultiInternetMode() (int32, error) {
 func (m *Manager) GetUsableChannels(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1045,7 +1048,7 @@ func (m *Manager) GetUsableChannels(arg0 int32, arg1 int32) (*jni.Object, error)
 func (m *Manager) GetWifiState() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1070,7 +1073,7 @@ func (m *Manager) GetWifiState() (int32, error) {
 func (m *Manager) Is24GHzBandSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1079,7 +1082,8 @@ func (m *Manager) Is24GHzBandSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.is24GHzBandSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIs24GHzBandSupported,
 		)
@@ -1096,7 +1100,7 @@ func (m *Manager) Is24GHzBandSupported() (bool, error) {
 func (m *Manager) Is5GHzBandSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1105,7 +1109,8 @@ func (m *Manager) Is5GHzBandSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.is5GHzBandSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIs5GHzBandSupported,
 		)
@@ -1122,7 +1127,7 @@ func (m *Manager) Is5GHzBandSupported() (bool, error) {
 func (m *Manager) Is60GHzBandSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1131,7 +1136,8 @@ func (m *Manager) Is60GHzBandSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.is60GHzBandSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIs60GHzBandSupported,
 		)
@@ -1148,7 +1154,7 @@ func (m *Manager) Is60GHzBandSupported() (bool, error) {
 func (m *Manager) Is6GHzBandSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1157,7 +1163,8 @@ func (m *Manager) Is6GHzBandSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.is6GHzBandSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIs6GHzBandSupported,
 		)
@@ -1174,7 +1181,7 @@ func (m *Manager) Is6GHzBandSupported() (bool, error) {
 func (m *Manager) IsAggressiveRoamingModeSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1183,7 +1190,8 @@ func (m *Manager) IsAggressiveRoamingModeSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isAggressiveRoamingModeSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsAggressiveRoamingModeSupported,
 		)
@@ -1200,7 +1208,7 @@ func (m *Manager) IsAggressiveRoamingModeSupported() (bool, error) {
 func (m *Manager) IsAutoWakeupEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1209,7 +1217,8 @@ func (m *Manager) IsAutoWakeupEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isAutoWakeupEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsAutoWakeupEnabled,
 		)
@@ -1226,7 +1235,7 @@ func (m *Manager) IsAutoWakeupEnabled() (bool, error) {
 func (m *Manager) IsBridgedApConcurrencySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1235,7 +1244,8 @@ func (m *Manager) IsBridgedApConcurrencySupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isBridgedApConcurrencySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsBridgedApConcurrencySupported,
 		)
@@ -1252,7 +1262,7 @@ func (m *Manager) IsBridgedApConcurrencySupported() (bool, error) {
 func (m *Manager) IsCarrierNetworkOffloadEnabled(arg0 int32, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1267,7 +1277,8 @@ func (m *Manager) IsCarrierNetworkOffloadEnabled(arg0 int32, arg1 bool) (bool, e
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsCarrierNetworkOffloadEnabled, jni.IntValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -1284,7 +1295,7 @@ func (m *Manager) IsCarrierNetworkOffloadEnabled(arg0 int32, arg1 bool) (bool, e
 func (m *Manager) IsD2dSupportedWhenInfraStaDisabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1293,7 +1304,8 @@ func (m *Manager) IsD2dSupportedWhenInfraStaDisabled() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isD2dSupportedWhenInfraStaDisabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsD2dSupportedWhenInfraStaDisabled,
 		)
@@ -1310,7 +1322,7 @@ func (m *Manager) IsD2dSupportedWhenInfraStaDisabled() (bool, error) {
 func (m *Manager) IsDecoratedIdentitySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1319,7 +1331,8 @@ func (m *Manager) IsDecoratedIdentitySupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isDecoratedIdentitySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsDecoratedIdentitySupported,
 		)
@@ -1336,7 +1349,7 @@ func (m *Manager) IsDecoratedIdentitySupported() (bool, error) {
 func (m *Manager) IsDeviceToApRttSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1345,7 +1358,8 @@ func (m *Manager) IsDeviceToApRttSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isDeviceToApRttSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsDeviceToApRttSupported,
 		)
@@ -1362,7 +1376,7 @@ func (m *Manager) IsDeviceToApRttSupported() (bool, error) {
 func (m *Manager) IsDualBandSimultaneousSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1371,7 +1385,8 @@ func (m *Manager) IsDualBandSimultaneousSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isDualBandSimultaneousSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsDualBandSimultaneousSupported,
 		)
@@ -1388,7 +1403,7 @@ func (m *Manager) IsDualBandSimultaneousSupported() (bool, error) {
 func (m *Manager) IsEasyConnectDppAkmSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1397,7 +1412,8 @@ func (m *Manager) IsEasyConnectDppAkmSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isEasyConnectDppAkmSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsEasyConnectDppAkmSupported,
 		)
@@ -1414,7 +1430,7 @@ func (m *Manager) IsEasyConnectDppAkmSupported() (bool, error) {
 func (m *Manager) IsEasyConnectEnrolleeResponderModeSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1423,7 +1439,8 @@ func (m *Manager) IsEasyConnectEnrolleeResponderModeSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isEasyConnectEnrolleeResponderModeSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsEasyConnectEnrolleeResponderModeSupported,
 		)
@@ -1440,7 +1457,7 @@ func (m *Manager) IsEasyConnectEnrolleeResponderModeSupported() (bool, error) {
 func (m *Manager) IsEasyConnectSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1449,7 +1466,8 @@ func (m *Manager) IsEasyConnectSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isEasyConnectSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsEasyConnectSupported,
 		)
@@ -1466,7 +1484,7 @@ func (m *Manager) IsEasyConnectSupported() (bool, error) {
 func (m *Manager) IsEnhancedOpenSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1475,7 +1493,8 @@ func (m *Manager) IsEnhancedOpenSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isEnhancedOpenSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsEnhancedOpenSupported,
 		)
@@ -1492,7 +1511,7 @@ func (m *Manager) IsEnhancedOpenSupported() (bool, error) {
 func (m *Manager) IsEnhancedPowerReportingSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1501,7 +1520,8 @@ func (m *Manager) IsEnhancedPowerReportingSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isEnhancedPowerReportingSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsEnhancedPowerReportingSupported,
 		)
@@ -1518,7 +1538,7 @@ func (m *Manager) IsEnhancedPowerReportingSupported() (bool, error) {
 func (m *Manager) IsMakeBeforeBreakWifiSwitchingSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1527,7 +1547,8 @@ func (m *Manager) IsMakeBeforeBreakWifiSwitchingSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isMakeBeforeBreakWifiSwitchingSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsMakeBeforeBreakWifiSwitchingSupported,
 		)
@@ -1544,7 +1565,7 @@ func (m *Manager) IsMakeBeforeBreakWifiSwitchingSupported() (bool, error) {
 func (m *Manager) IsP2pSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1553,7 +1574,8 @@ func (m *Manager) IsP2pSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isP2pSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsP2pSupported,
 		)
@@ -1570,7 +1592,7 @@ func (m *Manager) IsP2pSupported() (bool, error) {
 func (m *Manager) IsPasspointTermsAndConditionsSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1579,7 +1601,8 @@ func (m *Manager) IsPasspointTermsAndConditionsSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isPasspointTermsAndConditionsSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsPasspointTermsAndConditionsSupported,
 		)
@@ -1596,7 +1619,7 @@ func (m *Manager) IsPasspointTermsAndConditionsSupported() (bool, error) {
 func (m *Manager) IsPreferredNetworkOffloadSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1605,7 +1628,8 @@ func (m *Manager) IsPreferredNetworkOffloadSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isPreferredNetworkOffloadSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsPreferredNetworkOffloadSupported,
 		)
@@ -1622,7 +1646,7 @@ func (m *Manager) IsPreferredNetworkOffloadSupported() (bool, error) {
 func (m *Manager) IsScanAlwaysAvailable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1631,7 +1655,8 @@ func (m *Manager) IsScanAlwaysAvailable() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isScanAlwaysAvailable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsScanAlwaysAvailable,
 		)
@@ -1648,7 +1673,7 @@ func (m *Manager) IsScanAlwaysAvailable() (bool, error) {
 func (m *Manager) IsScanThrottleEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1657,7 +1682,8 @@ func (m *Manager) IsScanThrottleEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isScanThrottleEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsScanThrottleEnabled,
 		)
@@ -1674,7 +1700,7 @@ func (m *Manager) IsScanThrottleEnabled() (bool, error) {
 func (m *Manager) IsStaApConcurrencySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1683,7 +1709,8 @@ func (m *Manager) IsStaApConcurrencySupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isStaApConcurrencySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsStaApConcurrencySupported,
 		)
@@ -1700,7 +1727,7 @@ func (m *Manager) IsStaApConcurrencySupported() (bool, error) {
 func (m *Manager) IsStaBridgedApConcurrencySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1709,7 +1736,8 @@ func (m *Manager) IsStaBridgedApConcurrencySupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isStaBridgedApConcurrencySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsStaBridgedApConcurrencySupported,
 		)
@@ -1726,7 +1754,7 @@ func (m *Manager) IsStaBridgedApConcurrencySupported() (bool, error) {
 func (m *Manager) IsStaConcurrencyForLocalOnlyConnectionsSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1735,7 +1763,8 @@ func (m *Manager) IsStaConcurrencyForLocalOnlyConnectionsSupported() (bool, erro
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isStaConcurrencyForLocalOnlyConnectionsSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsStaConcurrencyForLocalOnlyConnectionsSupported,
 		)
@@ -1752,7 +1781,7 @@ func (m *Manager) IsStaConcurrencyForLocalOnlyConnectionsSupported() (bool, erro
 func (m *Manager) IsStaConcurrencyForMultiInternetSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1761,7 +1790,8 @@ func (m *Manager) IsStaConcurrencyForMultiInternetSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isStaConcurrencyForMultiInternetSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsStaConcurrencyForMultiInternetSupported,
 		)
@@ -1778,7 +1808,7 @@ func (m *Manager) IsStaConcurrencyForMultiInternetSupported() (bool, error) {
 func (m *Manager) IsTdlsOperationCurrentlyAvailable(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1801,7 +1831,7 @@ func (m *Manager) IsTdlsOperationCurrentlyAvailable(arg0 *jni.Object, arg1 *jni.
 func (m *Manager) IsTdlsSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1810,7 +1840,8 @@ func (m *Manager) IsTdlsSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isTdlsSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsTdlsSupported,
 		)
@@ -1827,7 +1858,7 @@ func (m *Manager) IsTdlsSupported() (bool, error) {
 func (m *Manager) IsTidToLinkMappingNegotiationSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1836,7 +1867,8 @@ func (m *Manager) IsTidToLinkMappingNegotiationSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isTidToLinkMappingNegotiationSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsTidToLinkMappingNegotiationSupported,
 		)
@@ -1853,7 +1885,7 @@ func (m *Manager) IsTidToLinkMappingNegotiationSupported() (bool, error) {
 func (m *Manager) IsTlsMinimumVersionSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1862,7 +1894,8 @@ func (m *Manager) IsTlsMinimumVersionSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isTlsMinimumVersionSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsTlsMinimumVersionSupported,
 		)
@@ -1879,7 +1912,7 @@ func (m *Manager) IsTlsMinimumVersionSupported() (bool, error) {
 func (m *Manager) IsTlsV13Supported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1888,7 +1921,8 @@ func (m *Manager) IsTlsV13Supported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isTlsV13Supported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsTlsV13Supported,
 		)
@@ -1905,7 +1939,7 @@ func (m *Manager) IsTlsV13Supported() (bool, error) {
 func (m *Manager) IsTrustOnFirstUseSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1914,7 +1948,8 @@ func (m *Manager) IsTrustOnFirstUseSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isTrustOnFirstUseSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsTrustOnFirstUseSupported,
 		)
@@ -1931,7 +1966,7 @@ func (m *Manager) IsTrustOnFirstUseSupported() (bool, error) {
 func (m *Manager) IsWapiSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1940,7 +1975,8 @@ func (m *Manager) IsWapiSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWapiSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWapiSupported,
 		)
@@ -1957,7 +1993,7 @@ func (m *Manager) IsWapiSupported() (bool, error) {
 func (m *Manager) IsWepSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1966,7 +2002,8 @@ func (m *Manager) IsWepSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWepSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWepSupported,
 		)
@@ -1983,7 +2020,7 @@ func (m *Manager) IsWepSupported() (bool, error) {
 func (m *Manager) IsWifiDisplayR2Supported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1992,7 +2029,8 @@ func (m *Manager) IsWifiDisplayR2Supported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWifiDisplayR2Supported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWifiDisplayR2Supported,
 		)
@@ -2009,7 +2047,7 @@ func (m *Manager) IsWifiDisplayR2Supported() (bool, error) {
 func (m *Manager) IsWifiEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2018,7 +2056,8 @@ func (m *Manager) IsWifiEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWifiEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWifiEnabled,
 		)
@@ -2035,7 +2074,7 @@ func (m *Manager) IsWifiEnabled() (bool, error) {
 func (m *Manager) IsWifiPasspointEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2044,7 +2083,8 @@ func (m *Manager) IsWifiPasspointEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWifiPasspointEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWifiPasspointEnabled,
 		)
@@ -2061,7 +2101,7 @@ func (m *Manager) IsWifiPasspointEnabled() (bool, error) {
 func (m *Manager) IsWifiStandardSupported(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2071,7 +2111,8 @@ func (m *Manager) IsWifiStandardSupported(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWifiStandardSupported, jni.IntValue(arg0),
 		)
@@ -2088,7 +2129,7 @@ func (m *Manager) IsWifiStandardSupported(arg0 int32) (bool, error) {
 func (m *Manager) IsWpa3SaeH2eSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2097,7 +2138,8 @@ func (m *Manager) IsWpa3SaeH2eSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWpa3SaeH2eSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWpa3SaeH2eSupported,
 		)
@@ -2114,7 +2156,7 @@ func (m *Manager) IsWpa3SaeH2eSupported() (bool, error) {
 func (m *Manager) IsWpa3SaePublicKeySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2123,7 +2165,8 @@ func (m *Manager) IsWpa3SaePublicKeySupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWpa3SaePublicKeySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWpa3SaePublicKeySupported,
 		)
@@ -2140,7 +2183,7 @@ func (m *Manager) IsWpa3SaePublicKeySupported() (bool, error) {
 func (m *Manager) IsWpa3SaeSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2149,7 +2192,8 @@ func (m *Manager) IsWpa3SaeSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWpa3SaeSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWpa3SaeSupported,
 		)
@@ -2166,7 +2210,7 @@ func (m *Manager) IsWpa3SaeSupported() (bool, error) {
 func (m *Manager) IsWpa3SuiteBSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2175,7 +2219,8 @@ func (m *Manager) IsWpa3SuiteBSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWpa3SuiteBSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWpa3SuiteBSupported,
 		)
@@ -2192,7 +2237,7 @@ func (m *Manager) IsWpa3SuiteBSupported() (bool, error) {
 func (m *Manager) IsWpaPersonalSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2201,7 +2246,8 @@ func (m *Manager) IsWpaPersonalSupported() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.isWpaPersonalSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWpaPersonalSupported,
 		)
@@ -2218,7 +2264,7 @@ func (m *Manager) IsWpaPersonalSupported() (bool, error) {
 func (m *Manager) PingSupplicant() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2227,7 +2273,8 @@ func (m *Manager) PingSupplicant() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.pingSupplicant is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerPingSupplicant,
 		)
@@ -2244,7 +2291,7 @@ func (m *Manager) PingSupplicant() (bool, error) {
 func (m *Manager) QueryAutojoinGlobal(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2267,7 +2314,7 @@ func (m *Manager) QueryAutojoinGlobal(arg0 *jni.Object, arg1 *jni.Object) error 
 func (m *Manager) QuerySendDhcpHostnameRestriction(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2290,7 +2337,7 @@ func (m *Manager) QuerySendDhcpHostnameRestriction(arg0 *jni.Object, arg1 *jni.O
 func (m *Manager) Reassociate() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2299,7 +2346,8 @@ func (m *Manager) Reassociate() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.reassociate is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerReassociate,
 		)
@@ -2316,7 +2364,7 @@ func (m *Manager) Reassociate() (bool, error) {
 func (m *Manager) Reconnect() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2325,7 +2373,8 @@ func (m *Manager) Reconnect() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.reconnect is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerReconnect,
 		)
@@ -2342,7 +2391,7 @@ func (m *Manager) Reconnect() (bool, error) {
 func (m *Manager) RegisterScanResultsCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2365,7 +2414,7 @@ func (m *Manager) RegisterScanResultsCallback(arg0 *jni.Object, arg1 *jni.Object
 func (m *Manager) RegisterSubsystemRestartTrackingCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2388,7 +2437,7 @@ func (m *Manager) RegisterSubsystemRestartTrackingCallback(arg0 *jni.Object, arg
 func (m *Manager) RemoveLocalOnlyConnectionFailureListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2411,7 +2460,7 @@ func (m *Manager) RemoveLocalOnlyConnectionFailureListener(arg0 *jni.Object) err
 func (m *Manager) RemoveNetwork(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2421,7 +2470,8 @@ func (m *Manager) RemoveNetwork(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRemoveNetwork, jni.IntValue(arg0),
 		)
@@ -2438,7 +2488,7 @@ func (m *Manager) RemoveNetwork(arg0 int32) (bool, error) {
 func (m *Manager) RemoveNetworkSuggestions1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2464,7 +2514,7 @@ func (m *Manager) RemoveNetworkSuggestions1(arg0 *jni.Object) (int32, error) {
 func (m *Manager) RemoveNetworkSuggestions2_1(arg0 *jni.Object, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2490,7 +2540,7 @@ func (m *Manager) RemoveNetworkSuggestions2_1(arg0 *jni.Object, arg1 int32) (int
 func (m *Manager) RemoveNonCallerConfiguredNetworks() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2499,7 +2549,8 @@ func (m *Manager) RemoveNonCallerConfiguredNetworks() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.removeNonCallerConfiguredNetworks is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRemoveNonCallerConfiguredNetworks,
 		)
@@ -2516,7 +2567,7 @@ func (m *Manager) RemoveNonCallerConfiguredNetworks() (bool, error) {
 func (m *Manager) RemovePasspointConfiguration(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2543,7 +2594,7 @@ func (m *Manager) RemovePasspointConfiguration(arg0 string) error {
 func (m *Manager) RemovePerSsidRoamingMode(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2566,7 +2617,7 @@ func (m *Manager) RemovePerSsidRoamingMode(arg0 *jni.Object) error {
 func (m *Manager) RemoveSuggestionConnectionStatusListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2589,7 +2640,7 @@ func (m *Manager) RemoveSuggestionConnectionStatusListener(arg0 *jni.Object) err
 func (m *Manager) RemoveSuggestionUserApprovalStatusListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2612,7 +2663,7 @@ func (m *Manager) RemoveSuggestionUserApprovalStatusListener(arg0 *jni.Object) e
 func (m *Manager) RemoveWifiStateChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2640,7 +2691,7 @@ func (m *Manager) ReportCreateInterfaceImpact(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2668,7 +2719,7 @@ func (m *Manager) ReportCreateInterfaceImpact(
 func (m *Manager) SaveConfiguration() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2677,7 +2728,8 @@ func (m *Manager) SaveConfiguration() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.saveConfiguration is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerSaveConfiguration,
 		)
@@ -2694,7 +2746,7 @@ func (m *Manager) SaveConfiguration() (bool, error) {
 func (m *Manager) SetPerSsidRoamingMode(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2717,7 +2769,7 @@ func (m *Manager) SetPerSsidRoamingMode(arg0 *jni.Object, arg1 int32) error {
 func (m *Manager) SetSendDhcpHostnameRestriction(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2740,7 +2792,7 @@ func (m *Manager) SetSendDhcpHostnameRestriction(arg0 int32) error {
 func (m *Manager) SetTdlsEnabled2(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2773,7 +2825,7 @@ func (m *Manager) SetTdlsEnabled4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2801,7 +2853,7 @@ func (m *Manager) SetTdlsEnabled4_1(
 func (m *Manager) SetTdlsEnabledWithMacAddress2(arg0 string, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2838,7 +2890,7 @@ func (m *Manager) SetTdlsEnabledWithMacAddress4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2870,7 +2922,7 @@ func (m *Manager) SetTdlsEnabledWithMacAddress4_1(
 func (m *Manager) SetWifiEnabled(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2884,7 +2936,8 @@ func (m *Manager) SetWifiEnabled(arg0 bool) (bool, error) {
 			jArg0 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerSetWifiEnabled, jni.BooleanValue(jArg0),
 		)
@@ -2905,7 +2958,7 @@ func (m *Manager) StartLocalOnlyHotspotWithConfiguration(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2928,7 +2981,7 @@ func (m *Manager) StartLocalOnlyHotspotWithConfiguration(
 func (m *Manager) StartScan() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2937,7 +2990,8 @@ func (m *Manager) StartScan() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiManager.startScan is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerStartScan,
 		)
@@ -2954,7 +3008,7 @@ func (m *Manager) StartScan() (bool, error) {
 func (m *Manager) StartWps(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2977,7 +3031,7 @@ func (m *Manager) StartWps(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Manager) UnregisterScanResultsCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3000,7 +3054,7 @@ func (m *Manager) UnregisterScanResultsCallback(arg0 *jni.Object) error {
 func (m *Manager) UnregisterSubsystemRestartTrackingCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3023,7 +3077,7 @@ func (m *Manager) UnregisterSubsystemRestartTrackingCallback(arg0 *jni.Object) e
 func (m *Manager) UpdateNetwork(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3049,7 +3103,7 @@ func (m *Manager) UpdateNetwork(arg0 *jni.Object) (int32, error) {
 func (m *Manager) ValidateSoftApConfiguration(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3059,7 +3113,8 @@ func (m *Manager) ValidateSoftApConfiguration(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerValidateSoftApConfiguration, jni.ObjectValue(arg0),
 		)
@@ -3076,7 +3131,7 @@ func (m *Manager) ValidateSoftApConfiguration(arg0 *jni.Object) (bool, error) {
 func (m *Manager) CalculateSignalLevel2_1(arg0 int32, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3102,7 +3157,7 @@ func (m *Manager) CalculateSignalLevel2_1(arg0 int32, arg1 int32) (int32, error)
 func (m *Manager) CompareSignalLevel(arg0 int32, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

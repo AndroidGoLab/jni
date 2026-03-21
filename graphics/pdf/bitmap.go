@@ -27,7 +27,7 @@ type Bitmap struct {
 func (m *Bitmap) AsShared() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -61,7 +61,7 @@ func (m *Bitmap) Compress(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -71,7 +71,8 @@ func (m *Bitmap) Compress(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapCompress, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -88,7 +89,7 @@ func (m *Bitmap) Compress(
 func (m *Bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -124,7 +125,7 @@ func (m *Bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 func (m *Bitmap) CopyPixelsFromBuffer(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -147,7 +148,7 @@ func (m *Bitmap) CopyPixelsFromBuffer(arg0 *jni.Object) error {
 func (m *Bitmap) CopyPixelsToBuffer(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -170,7 +171,7 @@ func (m *Bitmap) CopyPixelsToBuffer(arg0 *jni.Object) error {
 func (m *Bitmap) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +196,7 @@ func (m *Bitmap) DescribeContents() (int32, error) {
 func (m *Bitmap) EraseColor1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -218,7 +219,7 @@ func (m *Bitmap) EraseColor1(arg0 int32) error {
 func (m *Bitmap) EraseColor1_1(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -241,7 +242,7 @@ func (m *Bitmap) EraseColor1_1(arg0 int64) error {
 func (m *Bitmap) ExtractAlpha0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -271,7 +272,7 @@ func (m *Bitmap) ExtractAlpha0() (*jni.Object, error) {
 func (m *Bitmap) ExtractAlpha2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -302,7 +303,7 @@ func (m *Bitmap) ExtractAlpha2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 func (m *Bitmap) GetAllocationByteCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -327,7 +328,7 @@ func (m *Bitmap) GetAllocationByteCount() (int32, error) {
 func (m *Bitmap) GetByteCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -352,7 +353,7 @@ func (m *Bitmap) GetByteCount() (int32, error) {
 func (m *Bitmap) GetColor(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -383,7 +384,7 @@ func (m *Bitmap) GetColor(arg0 int32, arg1 int32) (*jni.Object, error) {
 func (m *Bitmap) GetColorSpace() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -413,7 +414,7 @@ func (m *Bitmap) GetColorSpace() (*jni.Object, error) {
 func (m *Bitmap) GetConfig() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -443,7 +444,7 @@ func (m *Bitmap) GetConfig() (*jni.Object, error) {
 func (m *Bitmap) GetDensity() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -468,7 +469,7 @@ func (m *Bitmap) GetDensity() (int32, error) {
 func (m *Bitmap) GetGainmap() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -498,7 +499,7 @@ func (m *Bitmap) GetGainmap() (*jni.Object, error) {
 func (m *Bitmap) GetGenerationId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -523,7 +524,7 @@ func (m *Bitmap) GetGenerationId() (int32, error) {
 func (m *Bitmap) GetHardwareBuffer() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -553,7 +554,7 @@ func (m *Bitmap) GetHardwareBuffer() (*jni.Object, error) {
 func (m *Bitmap) GetHeight() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -578,7 +579,7 @@ func (m *Bitmap) GetHeight() (int32, error) {
 func (m *Bitmap) GetNinePatchChunk() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -608,7 +609,7 @@ func (m *Bitmap) GetNinePatchChunk() (*jni.Object, error) {
 func (m *Bitmap) GetPixel(arg0 int32, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -642,7 +643,7 @@ func (m *Bitmap) GetPixels(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -665,7 +666,7 @@ func (m *Bitmap) GetPixels(
 func (m *Bitmap) GetRowBytes() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -690,7 +691,7 @@ func (m *Bitmap) GetRowBytes() (int32, error) {
 func (m *Bitmap) GetScaledHeight1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -716,7 +717,7 @@ func (m *Bitmap) GetScaledHeight1(arg0 *jni.Object) (int32, error) {
 func (m *Bitmap) GetScaledHeight1_1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -742,7 +743,7 @@ func (m *Bitmap) GetScaledHeight1_1(arg0 *jni.Object) (int32, error) {
 func (m *Bitmap) GetScaledHeight1_2(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -768,7 +769,7 @@ func (m *Bitmap) GetScaledHeight1_2(arg0 int32) (int32, error) {
 func (m *Bitmap) GetScaledWidth1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -794,7 +795,7 @@ func (m *Bitmap) GetScaledWidth1(arg0 *jni.Object) (int32, error) {
 func (m *Bitmap) GetScaledWidth1_1(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -820,7 +821,7 @@ func (m *Bitmap) GetScaledWidth1_1(arg0 *jni.Object) (int32, error) {
 func (m *Bitmap) GetScaledWidth1_2(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -846,7 +847,7 @@ func (m *Bitmap) GetScaledWidth1_2(arg0 int32) (int32, error) {
 func (m *Bitmap) GetWidth() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -871,7 +872,7 @@ func (m *Bitmap) GetWidth() (int32, error) {
 func (m *Bitmap) HasAlpha() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -880,7 +881,8 @@ func (m *Bitmap) HasAlpha() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Bitmap.hasAlpha is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapHasAlpha,
 		)
@@ -897,7 +899,7 @@ func (m *Bitmap) HasAlpha() (bool, error) {
 func (m *Bitmap) HasGainmap() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -906,7 +908,8 @@ func (m *Bitmap) HasGainmap() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Bitmap.hasGainmap is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapHasGainmap,
 		)
@@ -923,7 +926,7 @@ func (m *Bitmap) HasGainmap() (bool, error) {
 func (m *Bitmap) HasMipMap() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -932,7 +935,8 @@ func (m *Bitmap) HasMipMap() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Bitmap.hasMipMap is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapHasMipMap,
 		)
@@ -949,7 +953,7 @@ func (m *Bitmap) HasMipMap() (bool, error) {
 func (m *Bitmap) IsMutable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -958,7 +962,8 @@ func (m *Bitmap) IsMutable() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Bitmap.isMutable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapIsMutable,
 		)
@@ -975,7 +980,7 @@ func (m *Bitmap) IsMutable() (bool, error) {
 func (m *Bitmap) IsPremultiplied() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -984,7 +989,8 @@ func (m *Bitmap) IsPremultiplied() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Bitmap.isPremultiplied is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapIsPremultiplied,
 		)
@@ -1001,7 +1007,7 @@ func (m *Bitmap) IsPremultiplied() (bool, error) {
 func (m *Bitmap) IsRecycled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1010,7 +1016,8 @@ func (m *Bitmap) IsRecycled() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Bitmap.isRecycled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapIsRecycled,
 		)
@@ -1027,7 +1034,7 @@ func (m *Bitmap) IsRecycled() (bool, error) {
 func (m *Bitmap) PrepareToDraw() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1053,7 +1060,7 @@ func (m *Bitmap) Reconfigure(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1076,7 +1083,7 @@ func (m *Bitmap) Reconfigure(
 func (m *Bitmap) Recycle() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1098,7 +1105,7 @@ func (m *Bitmap) Recycle() error {
 func (m *Bitmap) SameAs(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1108,7 +1115,8 @@ func (m *Bitmap) SameAs(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBitmapSameAs, jni.ObjectValue(arg0),
 		)
@@ -1125,7 +1133,7 @@ func (m *Bitmap) SameAs(arg0 *jni.Object) (bool, error) {
 func (m *Bitmap) SetColorSpace(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1148,7 +1156,7 @@ func (m *Bitmap) SetColorSpace(arg0 *jni.Object) error {
 func (m *Bitmap) SetConfig(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1171,7 +1179,7 @@ func (m *Bitmap) SetConfig(arg0 *jni.Object) error {
 func (m *Bitmap) SetDensity(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1194,7 +1202,7 @@ func (m *Bitmap) SetDensity(arg0 int32) error {
 func (m *Bitmap) SetGainmap(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1217,7 +1225,7 @@ func (m *Bitmap) SetGainmap(arg0 *jni.Object) error {
 func (m *Bitmap) SetHasAlpha(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1244,7 +1252,7 @@ func (m *Bitmap) SetHasAlpha(arg0 bool) error {
 func (m *Bitmap) SetHasMipMap(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1271,7 +1279,7 @@ func (m *Bitmap) SetHasMipMap(arg0 bool) error {
 func (m *Bitmap) SetHeight(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1298,7 +1306,7 @@ func (m *Bitmap) SetPixel(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1329,7 +1337,7 @@ func (m *Bitmap) SetPixels(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1352,7 +1360,7 @@ func (m *Bitmap) SetPixels(
 func (m *Bitmap) SetPremultiplied(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1379,7 +1387,7 @@ func (m *Bitmap) SetPremultiplied(arg0 bool) error {
 func (m *Bitmap) SetWidth(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1402,7 +1410,7 @@ func (m *Bitmap) SetWidth(arg0 int32) error {
 func (m *Bitmap) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1425,7 +1433,7 @@ func (m *Bitmap) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *Bitmap) CreateBitmap1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1462,7 +1470,7 @@ func (m *Bitmap) CreateBitmap5_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1501,7 +1509,7 @@ func (m *Bitmap) CreateBitmap7_2(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1537,7 +1545,7 @@ func (m *Bitmap) CreateBitmap7_2(
 func (m *Bitmap) CreateBitmap1_3(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1573,7 +1581,7 @@ func (m *Bitmap) CreateBitmap4_4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1609,7 +1617,7 @@ func (m *Bitmap) CreateBitmap4_5(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1646,7 +1654,7 @@ func (m *Bitmap) CreateBitmap5_6(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1689,7 +1697,7 @@ func (m *Bitmap) CreateBitmap6_7(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1731,7 +1739,7 @@ func (m *Bitmap) CreateBitmap5_8(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1770,7 +1778,7 @@ func (m *Bitmap) CreateBitmap7_9(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1805,7 +1813,7 @@ func (m *Bitmap) CreateBitmap3_10(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1841,7 +1849,7 @@ func (m *Bitmap) CreateBitmap4_11(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1883,7 +1891,7 @@ func (m *Bitmap) CreateBitmap5_12(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1924,7 +1932,7 @@ func (m *Bitmap) CreateBitmap4_13(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1962,7 +1970,7 @@ func (m *Bitmap) CreateBitmap6_14(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1998,7 +2006,7 @@ func (m *Bitmap) CreateScaledBitmap(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2034,7 +2042,7 @@ func (m *Bitmap) CreateScaledBitmap(
 func (m *Bitmap) WrapHardwareBuffer(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

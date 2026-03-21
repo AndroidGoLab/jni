@@ -25,7 +25,7 @@ type Bundle struct {
 func (m *Bundle) Clear() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -47,7 +47,7 @@ func (m *Bundle) Clear() error {
 func (m *Bundle) Clone() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -77,7 +77,7 @@ func (m *Bundle) Clone() (*jni.Object, error) {
 func (m *Bundle) DeepCopy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +107,7 @@ func (m *Bundle) DeepCopy() (*jni.Object, error) {
 func (m *Bundle) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -132,7 +132,7 @@ func (m *Bundle) DescribeContents() (int32, error) {
 func (m *Bundle) GetBinder(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -167,7 +167,7 @@ func (m *Bundle) GetBinder(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetBundle(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -202,7 +202,7 @@ func (m *Bundle) GetBundle(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetByte1(arg0 string) (int8, error) {
 	var result int8
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -232,7 +232,7 @@ func (m *Bundle) GetByte1(arg0 string) (int8, error) {
 func (m *Bundle) GetByte2_1(arg0 string, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -267,7 +267,7 @@ func (m *Bundle) GetByte2_1(arg0 string, arg1 int8) (*jni.Object, error) {
 func (m *Bundle) GetByteArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -302,7 +302,7 @@ func (m *Bundle) GetByteArray(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetChar1(arg0 string) (uint16, error) {
 	var result uint16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -332,7 +332,7 @@ func (m *Bundle) GetChar1(arg0 string) (uint16, error) {
 func (m *Bundle) GetChar2_1(arg0 string, arg1 uint16) (uint16, error) {
 	var result uint16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -362,7 +362,7 @@ func (m *Bundle) GetChar2_1(arg0 string, arg1 uint16) (uint16, error) {
 func (m *Bundle) GetCharArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -397,7 +397,7 @@ func (m *Bundle) GetCharArray(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetCharSequence1(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -411,7 +411,8 @@ func (m *Bundle) GetCharSequence1(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midBundleGetCharSequence1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -428,7 +429,7 @@ func (m *Bundle) GetCharSequence1(arg0 string) (string, error) {
 func (m *Bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -447,7 +448,8 @@ func (m *Bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midBundleGetCharSequence2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
@@ -464,7 +466,7 @@ func (m *Bundle) GetCharSequence2_1(arg0 string, arg1 string) (string, error) {
 func (m *Bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -499,7 +501,7 @@ func (m *Bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -534,7 +536,7 @@ func (m *Bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetClassLoader() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -564,7 +566,7 @@ func (m *Bundle) GetClassLoader() (*jni.Object, error) {
 func (m *Bundle) GetFloat1(arg0 string) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -594,7 +596,7 @@ func (m *Bundle) GetFloat1(arg0 string) (float32, error) {
 func (m *Bundle) GetFloat2_1(arg0 string, arg1 float32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -624,7 +626,7 @@ func (m *Bundle) GetFloat2_1(arg0 string, arg1 float32) (float32, error) {
 func (m *Bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -659,7 +661,7 @@ func (m *Bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -694,7 +696,7 @@ func (m *Bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetParcelableArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -729,7 +731,7 @@ func (m *Bundle) GetParcelableArray(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetSerializable(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -764,7 +766,7 @@ func (m *Bundle) GetSerializable(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetShort1(arg0 string) (int16, error) {
 	var result int16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -794,7 +796,7 @@ func (m *Bundle) GetShort1(arg0 string) (int16, error) {
 func (m *Bundle) GetShort2_1(arg0 string, arg1 int16) (int16, error) {
 	var result int16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -824,7 +826,7 @@ func (m *Bundle) GetShort2_1(arg0 string, arg1 int16) (int16, error) {
 func (m *Bundle) GetShortArray(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -859,7 +861,7 @@ func (m *Bundle) GetShortArray(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetSize(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -894,7 +896,7 @@ func (m *Bundle) GetSize(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetSizeF(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -929,7 +931,7 @@ func (m *Bundle) GetSizeF(arg0 string) (*jni.Object, error) {
 func (m *Bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -964,7 +966,7 @@ func (m *Bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
 func (m *Bundle) HasFileDescriptors() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -973,7 +975,8 @@ func (m *Bundle) HasFileDescriptors() (bool, error) {
 			callErr = fmt.Errorf("android.os.Bundle.hasFileDescriptors is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midBundleHasFileDescriptors,
 		)
@@ -990,7 +993,7 @@ func (m *Bundle) HasFileDescriptors() (bool, error) {
 func (m *Bundle) PutAll(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1013,7 +1016,7 @@ func (m *Bundle) PutAll(arg0 *jni.Object) error {
 func (m *Bundle) PutBinder(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1040,7 +1043,7 @@ func (m *Bundle) PutBinder(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutBundle(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1067,7 +1070,7 @@ func (m *Bundle) PutBundle(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutByte(arg0 string, arg1 int8) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1094,7 +1097,7 @@ func (m *Bundle) PutByte(arg0 string, arg1 int8) error {
 func (m *Bundle) PutByteArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1121,7 +1124,7 @@ func (m *Bundle) PutByteArray(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutChar(arg0 string, arg1 uint16) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1148,7 +1151,7 @@ func (m *Bundle) PutChar(arg0 string, arg1 uint16) error {
 func (m *Bundle) PutCharArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1175,7 +1178,7 @@ func (m *Bundle) PutCharArray(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutCharSequence(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1207,7 +1210,7 @@ func (m *Bundle) PutCharSequence(arg0 string, arg1 string) error {
 func (m *Bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1234,7 +1237,7 @@ func (m *Bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1261,7 +1264,7 @@ func (m *Bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutFloat(arg0 string, arg1 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1288,7 +1291,7 @@ func (m *Bundle) PutFloat(arg0 string, arg1 float32) error {
 func (m *Bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1315,7 +1318,7 @@ func (m *Bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1342,7 +1345,7 @@ func (m *Bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1369,7 +1372,7 @@ func (m *Bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1396,7 +1399,7 @@ func (m *Bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1423,7 +1426,7 @@ func (m *Bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutSerializable(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1450,7 +1453,7 @@ func (m *Bundle) PutSerializable(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutShort(arg0 string, arg1 int16) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1477,7 +1480,7 @@ func (m *Bundle) PutShort(arg0 string, arg1 int16) error {
 func (m *Bundle) PutShortArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1504,7 +1507,7 @@ func (m *Bundle) PutShortArray(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutSize(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1531,7 +1534,7 @@ func (m *Bundle) PutSize(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1558,7 +1561,7 @@ func (m *Bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1585,7 +1588,7 @@ func (m *Bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1612,7 +1615,7 @@ func (m *Bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
 func (m *Bundle) ReadFromParcel(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1635,7 +1638,7 @@ func (m *Bundle) ReadFromParcel(arg0 *jni.Object) error {
 func (m *Bundle) Remove(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1662,7 +1665,7 @@ func (m *Bundle) Remove(arg0 string) error {
 func (m *Bundle) SetClassLoader(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1685,7 +1688,7 @@ func (m *Bundle) SetClassLoader(arg0 *jni.Object) error {
 func (m *Bundle) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

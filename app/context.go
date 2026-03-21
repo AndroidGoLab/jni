@@ -31,7 +31,7 @@ func (m *Context) BindIsolatedService5(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -46,7 +46,8 @@ func (m *Context) BindIsolatedService5(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindIsolatedService5, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
 		)
@@ -69,7 +70,7 @@ func (m *Context) BindIsolatedService5_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -84,7 +85,8 @@ func (m *Context) BindIsolatedService5_1(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindIsolatedService5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
 		)
@@ -106,7 +108,7 @@ func (m *Context) BindService4(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -116,7 +118,8 @@ func (m *Context) BindService4(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindService4, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
@@ -137,7 +140,7 @@ func (m *Context) BindService3_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -147,7 +150,8 @@ func (m *Context) BindService3_1(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindService3_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -168,7 +172,7 @@ func (m *Context) BindService3_2(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -178,7 +182,8 @@ func (m *Context) BindService3_2(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindService3_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
@@ -200,7 +205,7 @@ func (m *Context) BindService4_3(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -210,7 +215,8 @@ func (m *Context) BindService4_3(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindService4_3, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
@@ -232,7 +238,7 @@ func (m *Context) BindServiceAsUser4(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -242,7 +248,8 @@ func (m *Context) BindServiceAsUser4(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindServiceAsUser4, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
@@ -264,7 +271,7 @@ func (m *Context) BindServiceAsUser4_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -274,7 +281,8 @@ func (m *Context) BindServiceAsUser4_1(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextBindServiceAsUser4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
@@ -291,7 +299,7 @@ func (m *Context) BindServiceAsUser4_1(
 func (m *Context) CheckCallingOrSelfPermission(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -321,7 +329,7 @@ func (m *Context) CheckCallingOrSelfPermission(arg0 string) (int32, error) {
 func (m *Context) CheckCallingOrSelfUriPermission(arg0 *jni.Object, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -347,7 +355,7 @@ func (m *Context) CheckCallingOrSelfUriPermission(arg0 *jni.Object, arg1 int32) 
 func (m *Context) CheckCallingOrSelfUriPermissions(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -378,7 +386,7 @@ func (m *Context) CheckCallingOrSelfUriPermissions(arg0 *jni.Object, arg1 int32)
 func (m *Context) CheckCallingPermission(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -408,7 +416,7 @@ func (m *Context) CheckCallingPermission(arg0 string) (int32, error) {
 func (m *Context) CheckCallingUriPermission(arg0 *jni.Object, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -434,7 +442,7 @@ func (m *Context) CheckCallingUriPermission(arg0 *jni.Object, arg1 int32) (int32
 func (m *Context) CheckCallingUriPermissions(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -470,7 +478,7 @@ func (m *Context) CheckContentUriPermissionFull(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -500,7 +508,7 @@ func (m *Context) CheckPermission(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -530,7 +538,7 @@ func (m *Context) CheckPermission(
 func (m *Context) CheckSelfPermission(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -565,7 +573,7 @@ func (m *Context) CheckUriPermission4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -598,7 +606,7 @@ func (m *Context) CheckUriPermission6_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -639,7 +647,7 @@ func (m *Context) CheckUriPermissions(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -670,7 +678,7 @@ func (m *Context) CheckUriPermissions(
 func (m *Context) ClearWallpaper() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -692,7 +700,7 @@ func (m *Context) ClearWallpaper() error {
 func (m *Context) CreateAttributionContext(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -727,7 +735,7 @@ func (m *Context) CreateAttributionContext(arg0 string) (*jni.Object, error) {
 func (m *Context) CreateConfigurationContext(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -758,7 +766,7 @@ func (m *Context) CreateConfigurationContext(arg0 *jni.Object) (*jni.Object, err
 func (m *Context) CreateContext(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -789,7 +797,7 @@ func (m *Context) CreateContext(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Context) CreateContextForSplit(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -824,7 +832,7 @@ func (m *Context) CreateContextForSplit(arg0 string) (*jni.Object, error) {
 func (m *Context) CreateDeviceContext(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -855,7 +863,7 @@ func (m *Context) CreateDeviceContext(arg0 int32) (*jni.Object, error) {
 func (m *Context) CreateDeviceProtectedStorageContext() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -885,7 +893,7 @@ func (m *Context) CreateDeviceProtectedStorageContext() (*jni.Object, error) {
 func (m *Context) CreateDisplayContext(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -916,7 +924,7 @@ func (m *Context) CreateDisplayContext(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Context) CreatePackageContext(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -955,7 +963,7 @@ func (m *Context) CreateWindowContext3(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -986,7 +994,7 @@ func (m *Context) CreateWindowContext3(
 func (m *Context) CreateWindowContext2_1(arg0 int32, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1017,7 +1025,7 @@ func (m *Context) CreateWindowContext2_1(arg0 int32, arg1 *jni.Object) (*jni.Obj
 func (m *Context) DatabaseList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1047,7 +1055,7 @@ func (m *Context) DatabaseList() (*jni.Object, error) {
 func (m *Context) DeleteDatabase(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1061,7 +1069,8 @@ func (m *Context) DeleteDatabase(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextDeleteDatabase, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1078,7 +1087,7 @@ func (m *Context) DeleteDatabase(arg0 string) (bool, error) {
 func (m *Context) DeleteFile(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1092,7 +1101,8 @@ func (m *Context) DeleteFile(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextDeleteFile, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1109,7 +1119,7 @@ func (m *Context) DeleteFile(arg0 string) (bool, error) {
 func (m *Context) DeleteSharedPreferences(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1123,7 +1133,8 @@ func (m *Context) DeleteSharedPreferences(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextDeleteSharedPreferences, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1140,7 +1151,7 @@ func (m *Context) DeleteSharedPreferences(arg0 string) (bool, error) {
 func (m *Context) EnforceCallingOrSelfPermission(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1176,7 +1187,7 @@ func (m *Context) EnforceCallingOrSelfUriPermission(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1204,7 +1215,7 @@ func (m *Context) EnforceCallingOrSelfUriPermission(
 func (m *Context) EnforceCallingPermission(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1240,7 +1251,7 @@ func (m *Context) EnforceCallingUriPermission(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1273,7 +1284,7 @@ func (m *Context) EnforcePermission(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1311,7 +1322,7 @@ func (m *Context) EnforceUriPermission5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1347,7 +1358,7 @@ func (m *Context) EnforceUriPermission7_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1385,7 +1396,7 @@ func (m *Context) EnforceUriPermission7_1(
 func (m *Context) FileList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1415,7 +1426,7 @@ func (m *Context) FileList() (*jni.Object, error) {
 func (m *Context) GetApplicationContext() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1445,7 +1456,7 @@ func (m *Context) GetApplicationContext() (*jni.Object, error) {
 func (m *Context) GetApplicationInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1475,7 +1486,7 @@ func (m *Context) GetApplicationInfo() (*jni.Object, error) {
 func (m *Context) GetAssets() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1505,7 +1516,7 @@ func (m *Context) GetAssets() (*jni.Object, error) {
 func (m *Context) GetAttributionSource() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1535,7 +1546,7 @@ func (m *Context) GetAttributionSource() (*jni.Object, error) {
 func (m *Context) GetAttributionTag() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1544,7 +1555,8 @@ func (m *Context) GetAttributionTag() (string, error) {
 			callErr = fmt.Errorf("android.content.Context.getAttributionTag is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetAttributionTag,
 		)
@@ -1561,7 +1573,7 @@ func (m *Context) GetAttributionTag() (string, error) {
 func (m *Context) GetCacheDir() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1591,7 +1603,7 @@ func (m *Context) GetCacheDir() (*jni.Object, error) {
 func (m *Context) GetClassLoader() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1621,7 +1633,7 @@ func (m *Context) GetClassLoader() (*jni.Object, error) {
 func (m *Context) GetCodeCacheDir() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1651,7 +1663,7 @@ func (m *Context) GetCodeCacheDir() (*jni.Object, error) {
 func (m *Context) GetColor(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1677,7 +1689,7 @@ func (m *Context) GetColor(arg0 int32) (int32, error) {
 func (m *Context) GetColorStateList(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1708,7 +1720,7 @@ func (m *Context) GetColorStateList(arg0 int32) (*jni.Object, error) {
 func (m *Context) GetContentResolver() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1738,7 +1750,7 @@ func (m *Context) GetContentResolver() (*jni.Object, error) {
 func (m *Context) GetDataDir() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1768,7 +1780,7 @@ func (m *Context) GetDataDir() (*jni.Object, error) {
 func (m *Context) GetDatabasePath(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1803,7 +1815,7 @@ func (m *Context) GetDatabasePath(arg0 string) (*jni.Object, error) {
 func (m *Context) GetDeviceId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1828,7 +1840,7 @@ func (m *Context) GetDeviceId() (int32, error) {
 func (m *Context) GetDir(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1863,7 +1875,7 @@ func (m *Context) GetDir(arg0 string, arg1 int32) (*jni.Object, error) {
 func (m *Context) GetDisplay() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1893,7 +1905,7 @@ func (m *Context) GetDisplay() (*jni.Object, error) {
 func (m *Context) GetDrawable(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1924,7 +1936,7 @@ func (m *Context) GetDrawable(arg0 int32) (*jni.Object, error) {
 func (m *Context) GetExternalCacheDir() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1954,7 +1966,7 @@ func (m *Context) GetExternalCacheDir() (*jni.Object, error) {
 func (m *Context) GetExternalCacheDirs() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1984,7 +1996,7 @@ func (m *Context) GetExternalCacheDirs() (*jni.Object, error) {
 func (m *Context) GetExternalFilesDir(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2019,7 +2031,7 @@ func (m *Context) GetExternalFilesDir(arg0 string) (*jni.Object, error) {
 func (m *Context) GetExternalFilesDirs(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2054,7 +2066,7 @@ func (m *Context) GetExternalFilesDirs(arg0 string) (*jni.Object, error) {
 func (m *Context) GetExternalMediaDirs() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2084,7 +2096,7 @@ func (m *Context) GetExternalMediaDirs() (*jni.Object, error) {
 func (m *Context) GetFileStreamPath(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2119,7 +2131,7 @@ func (m *Context) GetFileStreamPath(arg0 string) (*jni.Object, error) {
 func (m *Context) GetFilesDir() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2149,7 +2161,7 @@ func (m *Context) GetFilesDir() (*jni.Object, error) {
 func (m *Context) GetMainExecutor() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2179,7 +2191,7 @@ func (m *Context) GetMainExecutor() (*jni.Object, error) {
 func (m *Context) GetMainLooper() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2209,7 +2221,7 @@ func (m *Context) GetMainLooper() (*jni.Object, error) {
 func (m *Context) GetNoBackupFilesDir() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2239,7 +2251,7 @@ func (m *Context) GetNoBackupFilesDir() (*jni.Object, error) {
 func (m *Context) GetObbDir() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2269,7 +2281,7 @@ func (m *Context) GetObbDir() (*jni.Object, error) {
 func (m *Context) GetObbDirs() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2299,7 +2311,7 @@ func (m *Context) GetObbDirs() (*jni.Object, error) {
 func (m *Context) GetOpPackageName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2308,7 +2320,8 @@ func (m *Context) GetOpPackageName() (string, error) {
 			callErr = fmt.Errorf("android.content.Context.getOpPackageName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetOpPackageName,
 		)
@@ -2325,7 +2338,7 @@ func (m *Context) GetOpPackageName() (string, error) {
 func (m *Context) GetPackageCodePath() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2334,7 +2347,8 @@ func (m *Context) GetPackageCodePath() (string, error) {
 			callErr = fmt.Errorf("android.content.Context.getPackageCodePath is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetPackageCodePath,
 		)
@@ -2351,7 +2365,7 @@ func (m *Context) GetPackageCodePath() (string, error) {
 func (m *Context) GetPackageManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2381,7 +2395,7 @@ func (m *Context) GetPackageManager() (*jni.Object, error) {
 func (m *Context) GetPackageName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2390,7 +2404,8 @@ func (m *Context) GetPackageName() (string, error) {
 			callErr = fmt.Errorf("android.content.Context.getPackageName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetPackageName,
 		)
@@ -2407,7 +2422,7 @@ func (m *Context) GetPackageName() (string, error) {
 func (m *Context) GetPackageResourcePath() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2416,7 +2431,8 @@ func (m *Context) GetPackageResourcePath() (string, error) {
 			callErr = fmt.Errorf("android.content.Context.getPackageResourcePath is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetPackageResourcePath,
 		)
@@ -2433,7 +2449,7 @@ func (m *Context) GetPackageResourcePath() (string, error) {
 func (m *Context) GetParams() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2463,7 +2479,7 @@ func (m *Context) GetParams() (*jni.Object, error) {
 func (m *Context) GetResources() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2493,7 +2509,7 @@ func (m *Context) GetResources() (*jni.Object, error) {
 func (m *Context) GetSharedPreferences(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2528,7 +2544,7 @@ func (m *Context) GetSharedPreferences(arg0 string, arg1 int32) (*jni.Object, er
 func (m *Context) GetString1(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2538,7 +2554,8 @@ func (m *Context) GetString1(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetString1, jni.IntValue(arg0),
 		)
@@ -2555,7 +2572,7 @@ func (m *Context) GetString1(arg0 int32) (string, error) {
 func (m *Context) GetString2_1(arg0 int32, arg1 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2565,7 +2582,8 @@ func (m *Context) GetString2_1(arg0 int32, arg1 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetString2_1, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2582,7 +2600,7 @@ func (m *Context) GetString2_1(arg0 int32, arg1 *jni.Object) (string, error) {
 func (m *Context) GetSystemService(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2617,7 +2635,7 @@ func (m *Context) GetSystemService(arg0 string) (*jni.Object, error) {
 func (m *Context) GetSystemServiceName(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2627,7 +2645,8 @@ func (m *Context) GetSystemServiceName(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetSystemServiceName, jni.ObjectValue(arg0),
 		)
@@ -2644,7 +2663,7 @@ func (m *Context) GetSystemServiceName(arg0 *jni.Object) (string, error) {
 func (m *Context) GetText(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2654,7 +2673,8 @@ func (m *Context) GetText(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midContextGetText, jni.IntValue(arg0),
 		)
@@ -2671,7 +2691,7 @@ func (m *Context) GetText(arg0 int32) (string, error) {
 func (m *Context) GetTheme() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2701,7 +2721,7 @@ func (m *Context) GetTheme() (*jni.Object, error) {
 func (m *Context) GetWallpaper() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2731,7 +2751,7 @@ func (m *Context) GetWallpaper() (*jni.Object, error) {
 func (m *Context) GetWallpaperDesiredMinimumHeight() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2756,7 +2776,7 @@ func (m *Context) GetWallpaperDesiredMinimumHeight() (int32, error) {
 func (m *Context) GetWallpaperDesiredMinimumWidth() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2785,7 +2805,7 @@ func (m *Context) GrantUriPermission(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2812,7 +2832,7 @@ func (m *Context) GrantUriPermission(
 func (m *Context) IsDeviceProtectedStorage() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2821,7 +2841,8 @@ func (m *Context) IsDeviceProtectedStorage() (bool, error) {
 			callErr = fmt.Errorf("android.content.Context.isDeviceProtectedStorage is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextIsDeviceProtectedStorage,
 		)
@@ -2838,7 +2859,7 @@ func (m *Context) IsDeviceProtectedStorage() (bool, error) {
 func (m *Context) IsRestricted() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2847,7 +2868,8 @@ func (m *Context) IsRestricted() (bool, error) {
 			callErr = fmt.Errorf("android.content.Context.isRestricted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextIsRestricted,
 		)
@@ -2864,7 +2886,7 @@ func (m *Context) IsRestricted() (bool, error) {
 func (m *Context) IsUiContext() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2873,7 +2895,8 @@ func (m *Context) IsUiContext() (bool, error) {
 			callErr = fmt.Errorf("android.content.Context.isUiContext is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextIsUiContext,
 		)
@@ -2890,7 +2913,7 @@ func (m *Context) IsUiContext() (bool, error) {
 func (m *Context) MoveDatabaseFrom(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2905,7 +2928,8 @@ func (m *Context) MoveDatabaseFrom(arg0 *jni.Object, arg1 string) (bool, error) 
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextMoveDatabaseFrom, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -2922,7 +2946,7 @@ func (m *Context) MoveDatabaseFrom(arg0 *jni.Object, arg1 string) (bool, error) 
 func (m *Context) MoveSharedPreferencesFrom(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2937,7 +2961,8 @@ func (m *Context) MoveSharedPreferencesFrom(arg0 *jni.Object, arg1 string) (bool
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextMoveSharedPreferencesFrom, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -2954,7 +2979,7 @@ func (m *Context) MoveSharedPreferencesFrom(arg0 *jni.Object, arg1 string) (bool
 func (m *Context) ObtainStyledAttributes2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2990,7 +3015,7 @@ func (m *Context) ObtainStyledAttributes4_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3021,7 +3046,7 @@ func (m *Context) ObtainStyledAttributes4_1(
 func (m *Context) ObtainStyledAttributes2_2(arg0 int32, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3052,7 +3077,7 @@ func (m *Context) ObtainStyledAttributes2_2(arg0 int32, arg1 *jni.Object) (*jni.
 func (m *Context) ObtainStyledAttributes1_3(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3083,7 +3108,7 @@ func (m *Context) ObtainStyledAttributes1_3(arg0 *jni.Object) (*jni.Object, erro
 func (m *Context) OpenFileInput(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3118,7 +3143,7 @@ func (m *Context) OpenFileInput(arg0 string) (*jni.Object, error) {
 func (m *Context) OpenFileOutput(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3157,7 +3182,7 @@ func (m *Context) OpenOrCreateDatabase(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3192,7 +3217,7 @@ func (m *Context) OpenOrCreateDatabase(
 func (m *Context) PeekWallpaper() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3222,7 +3247,7 @@ func (m *Context) PeekWallpaper() (*jni.Object, error) {
 func (m *Context) RegisterComponentCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3245,7 +3270,7 @@ func (m *Context) RegisterComponentCallbacks(arg0 *jni.Object) error {
 func (m *Context) RegisterDeviceIdChangeListener(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3268,7 +3293,7 @@ func (m *Context) RegisterDeviceIdChangeListener(arg0 *jni.Object, arg1 *jni.Obj
 func (m *Context) RegisterReceiver2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3303,7 +3328,7 @@ func (m *Context) RegisterReceiver3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3334,7 +3359,7 @@ func (m *Context) RegisterReceiver3_1(
 func (m *Context) RemoveStickyBroadcast(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3357,7 +3382,7 @@ func (m *Context) RemoveStickyBroadcast(arg0 *jni.Object) error {
 func (m *Context) RemoveStickyBroadcastAsUser(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3380,7 +3405,7 @@ func (m *Context) RemoveStickyBroadcastAsUser(arg0 *jni.Object, arg1 *jni.Object
 func (m *Context) RevokeSelfPermissionOnKill(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3407,7 +3432,7 @@ func (m *Context) RevokeSelfPermissionOnKill(arg0 string) error {
 func (m *Context) RevokeSelfPermissionsOnKill(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3430,7 +3455,7 @@ func (m *Context) RevokeSelfPermissionsOnKill(arg0 *jni.Object) error {
 func (m *Context) RevokeUriPermission2(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3457,7 +3482,7 @@ func (m *Context) RevokeUriPermission3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3484,7 +3509,7 @@ func (m *Context) RevokeUriPermission3_1(
 func (m *Context) SendBroadcast1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3507,7 +3532,7 @@ func (m *Context) SendBroadcast1(arg0 *jni.Object) error {
 func (m *Context) SendBroadcast2_1(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3539,7 +3564,7 @@ func (m *Context) SendBroadcast3_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3567,7 +3592,7 @@ func (m *Context) SendBroadcast3_2(
 func (m *Context) SendBroadcastAsUser2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3594,7 +3619,7 @@ func (m *Context) SendBroadcastAsUser3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3622,7 +3647,7 @@ func (m *Context) SendBroadcastAsUser3_1(
 func (m *Context) SendBroadcastWithMultiplePermissions(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3645,7 +3670,7 @@ func (m *Context) SendBroadcastWithMultiplePermissions(arg0 *jni.Object, arg1 *j
 func (m *Context) SendOrderedBroadcast2(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3677,7 +3702,7 @@ func (m *Context) SendOrderedBroadcast3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3705,7 +3730,7 @@ func (m *Context) SendOrderedBroadcast3_1(
 func (m *Context) SendStickyBroadcast1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3728,7 +3753,7 @@ func (m *Context) SendStickyBroadcast1(arg0 *jni.Object) error {
 func (m *Context) SendStickyBroadcast2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3751,7 +3776,7 @@ func (m *Context) SendStickyBroadcast2_1(arg0 *jni.Object, arg1 *jni.Object) err
 func (m *Context) SendStickyBroadcastAsUser(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3774,7 +3799,7 @@ func (m *Context) SendStickyBroadcastAsUser(arg0 *jni.Object, arg1 *jni.Object) 
 func (m *Context) SetTheme(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3797,7 +3822,7 @@ func (m *Context) SetTheme(arg0 int32) error {
 func (m *Context) SetWallpaper1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3820,7 +3845,7 @@ func (m *Context) SetWallpaper1(arg0 *jni.Object) error {
 func (m *Context) SetWallpaper1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3843,7 +3868,7 @@ func (m *Context) SetWallpaper1_1(arg0 *jni.Object) error {
 func (m *Context) StartActivities1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3866,7 +3891,7 @@ func (m *Context) StartActivities1(arg0 *jni.Object) error {
 func (m *Context) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3889,7 +3914,7 @@ func (m *Context) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Context) StartActivity1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3912,7 +3937,7 @@ func (m *Context) StartActivity1(arg0 *jni.Object) error {
 func (m *Context) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3935,7 +3960,7 @@ func (m *Context) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Context) StartForegroundService(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3970,7 +3995,7 @@ func (m *Context) StartInstrumentation(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3985,7 +4010,8 @@ func (m *Context) StartInstrumentation(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextStartInstrumentation, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
@@ -4008,7 +4034,7 @@ func (m *Context) StartIntentSender5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4038,7 +4064,7 @@ func (m *Context) StartIntentSender6_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4061,7 +4087,7 @@ func (m *Context) StartIntentSender6_1(
 func (m *Context) StartService(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4092,7 +4118,7 @@ func (m *Context) StartService(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Context) StopService(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4102,7 +4128,8 @@ func (m *Context) StopService(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midContextStopService, jni.ObjectValue(arg0),
 		)
@@ -4119,7 +4146,7 @@ func (m *Context) StopService(arg0 *jni.Object) (bool, error) {
 func (m *Context) UnbindService(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4142,7 +4169,7 @@ func (m *Context) UnbindService(arg0 *jni.Object) error {
 func (m *Context) UnregisterComponentCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4165,7 +4192,7 @@ func (m *Context) UnregisterComponentCallbacks(arg0 *jni.Object) error {
 func (m *Context) UnregisterDeviceIdChangeListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4188,7 +4215,7 @@ func (m *Context) UnregisterDeviceIdChangeListener(arg0 *jni.Object) error {
 func (m *Context) UnregisterReceiver(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4215,7 +4242,7 @@ func (m *Context) UpdateServiceGroup(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) GetAccessoryList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -101,7 +101,7 @@ func (m *Manager) GetAccessoryList() (*jni.Object, error) {
 func (m *Manager) HasPermission1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -111,7 +111,8 @@ func (m *Manager) HasPermission1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHasPermission1, jni.ObjectValue(arg0),
 		)
@@ -128,7 +129,7 @@ func (m *Manager) HasPermission1(arg0 *jni.Object) (bool, error) {
 func (m *Manager) HasPermission1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -138,7 +139,8 @@ func (m *Manager) HasPermission1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHasPermission1_1, jni.ObjectValue(arg0),
 		)
@@ -155,7 +157,7 @@ func (m *Manager) HasPermission1_1(arg0 *jni.Object) (bool, error) {
 func (m *Manager) OpenAccessory(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -186,7 +188,7 @@ func (m *Manager) OpenAccessory(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) OpenAccessoryInputStream(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -217,7 +219,7 @@ func (m *Manager) OpenAccessoryInputStream(arg0 *jni.Object) (*jni.Object, error
 func (m *Manager) OpenAccessoryOutputStream(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -248,7 +250,7 @@ func (m *Manager) OpenAccessoryOutputStream(arg0 *jni.Object) (*jni.Object, erro
 func (m *Manager) OpenDevice(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -279,7 +281,7 @@ func (m *Manager) OpenDevice(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) RequestPermission2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -302,7 +304,7 @@ func (m *Manager) RequestPermission2(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Manager) RequestPermission2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

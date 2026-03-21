@@ -75,7 +75,7 @@ func (m *Manager) AcceptHandover(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -98,7 +98,7 @@ func (m *Manager) AcceptHandover(
 func (m *Manager) AcceptRingingCall0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +120,7 @@ func (m *Manager) AcceptRingingCall0() error {
 func (m *Manager) AcceptRingingCall1_1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -149,7 +149,7 @@ func (m *Manager) AddCall(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -172,7 +172,7 @@ func (m *Manager) AddCall(
 func (m *Manager) AddNewIncomingCall(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +195,7 @@ func (m *Manager) AddNewIncomingCall(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Manager) AddNewIncomingConference(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -218,7 +218,7 @@ func (m *Manager) AddNewIncomingConference(arg0 *jni.Object, arg1 *jni.Object) e
 func (m *Manager) CancelMissedCallsNotification() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -240,7 +240,7 @@ func (m *Manager) CancelMissedCallsNotification() error {
 func (m *Manager) CreateManageBlockedNumbersIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -270,7 +270,7 @@ func (m *Manager) CreateManageBlockedNumbersIntent() (*jni.Object, error) {
 func (m *Manager) EndCall() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -279,7 +279,8 @@ func (m *Manager) EndCall() (bool, error) {
 			callErr = fmt.Errorf("android.telecom.TelecomManager.endCall is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerEndCall,
 		)
@@ -296,7 +297,7 @@ func (m *Manager) EndCall() (bool, error) {
 func (m *Manager) GetAdnUriForPhoneAccount(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -327,7 +328,7 @@ func (m *Manager) GetAdnUriForPhoneAccount(arg0 *jni.Object) (*jni.Object, error
 func (m *Manager) GetCallCapablePhoneAccounts() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -357,7 +358,7 @@ func (m *Manager) GetCallCapablePhoneAccounts() (*jni.Object, error) {
 func (m *Manager) GetDefaultDialerPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -366,7 +367,8 @@ func (m *Manager) GetDefaultDialerPackage() (string, error) {
 			callErr = fmt.Errorf("android.telecom.TelecomManager.getDefaultDialerPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetDefaultDialerPackage,
 		)
@@ -383,7 +385,7 @@ func (m *Manager) GetDefaultDialerPackage() (string, error) {
 func (m *Manager) GetDefaultOutgoingPhoneAccount(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -418,7 +420,7 @@ func (m *Manager) GetDefaultOutgoingPhoneAccount(arg0 string) (*jni.Object, erro
 func (m *Manager) GetLine1Number(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -428,7 +430,8 @@ func (m *Manager) GetLine1Number(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetLine1Number, jni.ObjectValue(arg0),
 		)
@@ -445,7 +448,7 @@ func (m *Manager) GetLine1Number(arg0 *jni.Object) (string, error) {
 func (m *Manager) GetOwnSelfManagedPhoneAccounts() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -475,7 +478,7 @@ func (m *Manager) GetOwnSelfManagedPhoneAccounts() (*jni.Object, error) {
 func (m *Manager) GetPhoneAccount(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -506,7 +509,7 @@ func (m *Manager) GetPhoneAccount(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) GetRegisteredPhoneAccounts() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -536,7 +539,7 @@ func (m *Manager) GetRegisteredPhoneAccounts() (*jni.Object, error) {
 func (m *Manager) GetSelfManagedPhoneAccounts() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -566,7 +569,7 @@ func (m *Manager) GetSelfManagedPhoneAccounts() (*jni.Object, error) {
 func (m *Manager) GetSimCallManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -596,7 +599,7 @@ func (m *Manager) GetSimCallManager() (*jni.Object, error) {
 func (m *Manager) GetSimCallManagerForSubscription(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -627,7 +630,7 @@ func (m *Manager) GetSimCallManagerForSubscription(arg0 int32) (*jni.Object, err
 func (m *Manager) GetSystemDialerPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -636,7 +639,8 @@ func (m *Manager) GetSystemDialerPackage() (string, error) {
 			callErr = fmt.Errorf("android.telecom.TelecomManager.getSystemDialerPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetSystemDialerPackage,
 		)
@@ -653,7 +657,7 @@ func (m *Manager) GetSystemDialerPackage() (string, error) {
 func (m *Manager) GetUserSelectedOutgoingPhoneAccount() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -683,7 +687,7 @@ func (m *Manager) GetUserSelectedOutgoingPhoneAccount() (*jni.Object, error) {
 func (m *Manager) GetVoiceMailNumber(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -693,7 +697,8 @@ func (m *Manager) GetVoiceMailNumber(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetVoiceMailNumber, jni.ObjectValue(arg0),
 		)
@@ -710,7 +715,7 @@ func (m *Manager) GetVoiceMailNumber(arg0 *jni.Object) (string, error) {
 func (m *Manager) HandleMmi1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -724,7 +729,8 @@ func (m *Manager) HandleMmi1(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHandleMmi1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -741,7 +747,7 @@ func (m *Manager) HandleMmi1(arg0 string) (bool, error) {
 func (m *Manager) HandleMmi2_1(arg0 string, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -755,7 +761,8 @@ func (m *Manager) HandleMmi2_1(arg0 string, arg1 *jni.Object) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHandleMmi2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
@@ -772,7 +779,7 @@ func (m *Manager) HandleMmi2_1(arg0 string, arg1 *jni.Object) (bool, error) {
 func (m *Manager) HasManageOngoingCallsPermission() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -781,7 +788,8 @@ func (m *Manager) HasManageOngoingCallsPermission() (bool, error) {
 			callErr = fmt.Errorf("android.telecom.TelecomManager.hasManageOngoingCallsPermission is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHasManageOngoingCallsPermission,
 		)
@@ -798,7 +806,7 @@ func (m *Manager) HasManageOngoingCallsPermission() (bool, error) {
 func (m *Manager) IsInCall() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -807,7 +815,8 @@ func (m *Manager) IsInCall() (bool, error) {
 			callErr = fmt.Errorf("android.telecom.TelecomManager.isInCall is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsInCall,
 		)
@@ -824,7 +833,7 @@ func (m *Manager) IsInCall() (bool, error) {
 func (m *Manager) IsInManagedCall() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -833,7 +842,8 @@ func (m *Manager) IsInManagedCall() (bool, error) {
 			callErr = fmt.Errorf("android.telecom.TelecomManager.isInManagedCall is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsInManagedCall,
 		)
@@ -850,7 +860,7 @@ func (m *Manager) IsInManagedCall() (bool, error) {
 func (m *Manager) IsIncomingCallPermitted(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -860,7 +870,8 @@ func (m *Manager) IsIncomingCallPermitted(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsIncomingCallPermitted, jni.ObjectValue(arg0),
 		)
@@ -877,7 +888,7 @@ func (m *Manager) IsIncomingCallPermitted(arg0 *jni.Object) (bool, error) {
 func (m *Manager) IsOutgoingCallPermitted(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -887,7 +898,8 @@ func (m *Manager) IsOutgoingCallPermitted(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsOutgoingCallPermitted, jni.ObjectValue(arg0),
 		)
@@ -904,7 +916,7 @@ func (m *Manager) IsOutgoingCallPermitted(arg0 *jni.Object) (bool, error) {
 func (m *Manager) IsTtySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -913,7 +925,8 @@ func (m *Manager) IsTtySupported() (bool, error) {
 			callErr = fmt.Errorf("android.telecom.TelecomManager.isTtySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsTtySupported,
 		)
@@ -930,7 +943,7 @@ func (m *Manager) IsTtySupported() (bool, error) {
 func (m *Manager) IsVoiceMailNumber(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -945,7 +958,8 @@ func (m *Manager) IsVoiceMailNumber(arg0 *jni.Object, arg1 string) (bool, error)
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsVoiceMailNumber, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -962,7 +976,7 @@ func (m *Manager) IsVoiceMailNumber(arg0 *jni.Object, arg1 string) (bool, error)
 func (m *Manager) PlaceCall(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -985,7 +999,7 @@ func (m *Manager) PlaceCall(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Manager) RegisterPhoneAccount(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1008,7 +1022,7 @@ func (m *Manager) RegisterPhoneAccount(arg0 *jni.Object) error {
 func (m *Manager) ShowInCallScreen(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1035,7 +1049,7 @@ func (m *Manager) ShowInCallScreen(arg0 bool) error {
 func (m *Manager) SilenceRinger() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1057,7 +1071,7 @@ func (m *Manager) SilenceRinger() error {
 func (m *Manager) StartConference(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1080,7 +1094,7 @@ func (m *Manager) StartConference(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Manager) UnregisterPhoneAccount(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

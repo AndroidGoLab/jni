@@ -105,6 +105,11 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		} else {
 			fmt.Fprintf(output, "  [%d] %s\n", i, str)
 		}
+
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(acct.Obj)
+			return nil
+		})
 	}
 
 	authArray, err := mgr.GetAuthenticatorTypes()

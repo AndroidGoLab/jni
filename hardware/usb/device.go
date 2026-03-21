@@ -27,7 +27,7 @@ type Device struct {
 func (m *Device) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *Device) DescribeContents() (int32, error) {
 func (m *Device) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *Device) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDeviceEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *Device) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Device) GetConfiguration(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -110,7 +111,7 @@ func (m *Device) GetConfiguration(arg0 int32) (*jni.Object, error) {
 func (m *Device) GetConfigurationCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -135,7 +136,7 @@ func (m *Device) GetConfigurationCount() (int32, error) {
 func (m *Device) GetDeviceClass() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -160,7 +161,7 @@ func (m *Device) GetDeviceClass() (int32, error) {
 func (m *Device) GetDeviceId0() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -185,7 +186,7 @@ func (m *Device) GetDeviceId0() (int32, error) {
 func (m *Device) GetDeviceName0() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -194,7 +195,8 @@ func (m *Device) GetDeviceName0() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbDevice.getDeviceName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetDeviceName0,
 		)
@@ -211,7 +213,7 @@ func (m *Device) GetDeviceName0() (string, error) {
 func (m *Device) GetDeviceProtocol() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -236,7 +238,7 @@ func (m *Device) GetDeviceProtocol() (int32, error) {
 func (m *Device) GetDeviceSubclass() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -261,7 +263,7 @@ func (m *Device) GetDeviceSubclass() (int32, error) {
 func (m *Device) GetInterface(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -292,7 +294,7 @@ func (m *Device) GetInterface(arg0 int32) (*jni.Object, error) {
 func (m *Device) GetInterfaceCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -317,7 +319,7 @@ func (m *Device) GetInterfaceCount() (int32, error) {
 func (m *Device) GetManufacturerName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -326,7 +328,8 @@ func (m *Device) GetManufacturerName() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbDevice.getManufacturerName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetManufacturerName,
 		)
@@ -343,7 +346,7 @@ func (m *Device) GetManufacturerName() (string, error) {
 func (m *Device) GetProductId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -368,7 +371,7 @@ func (m *Device) GetProductId() (int32, error) {
 func (m *Device) GetProductName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -377,7 +380,8 @@ func (m *Device) GetProductName() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbDevice.getProductName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetProductName,
 		)
@@ -394,7 +398,7 @@ func (m *Device) GetProductName() (string, error) {
 func (m *Device) GetSerialNumber() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -403,7 +407,8 @@ func (m *Device) GetSerialNumber() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbDevice.getSerialNumber is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetSerialNumber,
 		)
@@ -420,7 +425,7 @@ func (m *Device) GetSerialNumber() (string, error) {
 func (m *Device) GetVendorId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -445,7 +450,7 @@ func (m *Device) GetVendorId() (int32, error) {
 func (m *Device) GetVersion() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -454,7 +459,8 @@ func (m *Device) GetVersion() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbDevice.getVersion is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceGetVersion,
 		)
@@ -471,7 +477,7 @@ func (m *Device) GetVersion() (string, error) {
 func (m *Device) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -496,7 +502,7 @@ func (m *Device) HashCode() (int32, error) {
 func (m *Device) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -505,7 +511,8 @@ func (m *Device) ToString() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbDevice.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDeviceToString,
 		)
@@ -522,7 +529,7 @@ func (m *Device) ToString() (string, error) {
 func (m *Device) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -545,7 +552,7 @@ func (m *Device) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *Device) GetDeviceId1_1(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -575,7 +582,7 @@ func (m *Device) GetDeviceId1_1(arg0 string) (int32, error) {
 func (m *Device) GetDeviceName1_1(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -585,7 +592,8 @@ func (m *Device) GetDeviceName1_1(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsDevice)),
 			midDeviceGetDeviceName1_1, jni.IntValue(arg0),
 		)

@@ -1,7 +1,11 @@
 # E2E test harness for JNI Go bindings on Android.
 # Requires: Android SDK (with build-tools, platform-tools, NDK), running emulator.
 
-ANDROID_SDK ?= $(HOME)/android-sdk
+ANDROID_SDK ?= $(shell \
+	if [ -n "$$ANDROID_HOME" ]; then echo "$$ANDROID_HOME"; \
+	elif [ -d "$$HOME/Android/Sdk" ]; then echo "$$HOME/Android/Sdk"; \
+	elif [ -d "$$HOME/android-sdk" ]; then echo "$$HOME/android-sdk"; \
+	fi)
 NDK_VERSION ?= $(shell ls $(ANDROID_SDK)/ndk 2>/dev/null | sort -V | tail -1)
 NDK         ?= $(ANDROID_SDK)/ndk/$(NDK_VERSION)
 API_LEVEL   ?= 30
@@ -46,7 +50,7 @@ $(BUILD_DIR)/classes.dex: TestRunner.java
 	$(D8) --lib $(PLATFORM)/android.jar --output $(BUILD_DIR) \
 		$$(find $(BUILD_DIR) -name '*.class')
 
-$(BUILD_DIR)/libe2etest.so: e2e.go jni_onload.c
+$(BUILD_DIR)/libe2etest.so: $(wildcard *.go) jni_onload.c
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=$(GOARCH) CC=$(CC) \
 		go build -buildmode=c-shared -o tests/e2e/$(BUILD_DIR)/libe2etest.so ./tests/e2e/
 

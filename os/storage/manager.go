@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) AllocateBytes2(arg0 *jni.Object, arg1 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *Manager) AllocateBytes2(arg0 *jni.Object, arg1 int64) error {
 func (m *Manager) AllocateBytes2_1(arg0 *jni.Object, arg1 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -117,7 +117,7 @@ func (m *Manager) AllocateBytes2_1(arg0 *jni.Object, arg1 int64) error {
 func (m *Manager) GetAllocatableBytes(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -143,7 +143,7 @@ func (m *Manager) GetAllocatableBytes(arg0 *jni.Object) (int64, error) {
 func (m *Manager) GetCacheQuotaBytes(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -169,7 +169,7 @@ func (m *Manager) GetCacheQuotaBytes(arg0 *jni.Object) (int64, error) {
 func (m *Manager) GetCacheSizeBytes(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +195,7 @@ func (m *Manager) GetCacheSizeBytes(arg0 *jni.Object) (int64, error) {
 func (m *Manager) GetManageSpaceActivityIntent(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -230,7 +230,7 @@ func (m *Manager) GetManageSpaceActivityIntent(arg0 string, arg1 int32) (*jni.Ob
 func (m *Manager) GetMountedObbPath(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -244,7 +244,8 @@ func (m *Manager) GetMountedObbPath(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetMountedObbPath, jni.ObjectValue(&jArg0.Object),
 		)
@@ -261,7 +262,7 @@ func (m *Manager) GetMountedObbPath(arg0 string) (string, error) {
 func (m *Manager) GetPrimaryStorageVolume() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -291,7 +292,7 @@ func (m *Manager) GetPrimaryStorageVolume() (*jni.Object, error) {
 func (m *Manager) GetRecentStorageVolumes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -321,7 +322,7 @@ func (m *Manager) GetRecentStorageVolumes() (*jni.Object, error) {
 func (m *Manager) GetStorageVolume1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -352,7 +353,7 @@ func (m *Manager) GetStorageVolume1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) GetStorageVolume1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -383,7 +384,7 @@ func (m *Manager) GetStorageVolume1_1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) GetStorageVolumes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -413,7 +414,7 @@ func (m *Manager) GetStorageVolumes() (*jni.Object, error) {
 func (m *Manager) GetStorageVolumesIncludingSharedProfiles() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -443,7 +444,7 @@ func (m *Manager) GetStorageVolumesIncludingSharedProfiles() (*jni.Object, error
 func (m *Manager) GetUuidForPath(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -474,7 +475,7 @@ func (m *Manager) GetUuidForPath(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Manager) IsAllocationSupported(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -484,7 +485,8 @@ func (m *Manager) IsAllocationSupported(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsAllocationSupported, jni.ObjectValue(arg0),
 		)
@@ -501,7 +503,7 @@ func (m *Manager) IsAllocationSupported(arg0 *jni.Object) (bool, error) {
 func (m *Manager) IsCacheBehaviorGroup(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -511,7 +513,8 @@ func (m *Manager) IsCacheBehaviorGroup(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsCacheBehaviorGroup, jni.ObjectValue(arg0),
 		)
@@ -528,7 +531,7 @@ func (m *Manager) IsCacheBehaviorGroup(arg0 *jni.Object) (bool, error) {
 func (m *Manager) IsCacheBehaviorTombstone(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -538,7 +541,8 @@ func (m *Manager) IsCacheBehaviorTombstone(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsCacheBehaviorTombstone, jni.ObjectValue(arg0),
 		)
@@ -555,7 +559,7 @@ func (m *Manager) IsCacheBehaviorTombstone(arg0 *jni.Object) (bool, error) {
 func (m *Manager) IsCheckpointSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -564,7 +568,8 @@ func (m *Manager) IsCheckpointSupported() (bool, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageManager.isCheckpointSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsCheckpointSupported,
 		)
@@ -581,7 +586,7 @@ func (m *Manager) IsCheckpointSupported() (bool, error) {
 func (m *Manager) IsEncrypted(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -591,7 +596,8 @@ func (m *Manager) IsEncrypted(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsEncrypted, jni.ObjectValue(arg0),
 		)
@@ -608,7 +614,7 @@ func (m *Manager) IsEncrypted(arg0 *jni.Object) (bool, error) {
 func (m *Manager) IsObbMounted(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -622,7 +628,8 @@ func (m *Manager) IsObbMounted(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsObbMounted, jni.ObjectValue(&jArg0.Object),
 		)
@@ -643,7 +650,7 @@ func (m *Manager) MountObb(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -662,7 +669,8 @@ func (m *Manager) MountObb(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerMountObb, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
@@ -679,7 +687,7 @@ func (m *Manager) MountObb(
 func (m *Manager) RegisterStorageVolumeCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -702,7 +710,7 @@ func (m *Manager) RegisterStorageVolumeCallback(arg0 *jni.Object, arg1 *jni.Obje
 func (m *Manager) SetCacheBehaviorGroup(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -730,7 +738,7 @@ func (m *Manager) SetCacheBehaviorGroup(arg0 *jni.Object, arg1 bool) error {
 func (m *Manager) SetCacheBehaviorTombstone(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -762,7 +770,7 @@ func (m *Manager) UnmountObb(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -781,7 +789,8 @@ func (m *Manager) UnmountObb(
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerUnmountObb, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.ObjectValue(arg2),
 		)
@@ -798,7 +807,7 @@ func (m *Manager) UnmountObb(
 func (m *Manager) UnregisterStorageVolumeCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

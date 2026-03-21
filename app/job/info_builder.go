@@ -27,7 +27,7 @@ type InfoBuilder struct {
 func (m *InfoBuilder) AddDebugTag(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,7 @@ func (m *InfoBuilder) AddDebugTag(arg0 string) (*jni.Object, error) {
 func (m *InfoBuilder) AddTriggerContentUri(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -93,7 +93,7 @@ func (m *InfoBuilder) AddTriggerContentUri(arg0 *jni.Object) (*jni.Object, error
 func (m *InfoBuilder) Build() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -123,7 +123,7 @@ func (m *InfoBuilder) Build() (*jni.Object, error) {
 func (m *InfoBuilder) RemoveDebugTag(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -158,7 +158,7 @@ func (m *InfoBuilder) RemoveDebugTag(arg0 string) (*jni.Object, error) {
 func (m *InfoBuilder) SetBackoffCriteria(arg0 int64, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +189,7 @@ func (m *InfoBuilder) SetBackoffCriteria(arg0 int64, arg1 int32) (*jni.Object, e
 func (m *InfoBuilder) SetClipData(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -220,7 +220,7 @@ func (m *InfoBuilder) SetClipData(arg0 *jni.Object, arg1 int32) (*jni.Object, er
 func (m *InfoBuilder) SetEstimatedNetworkBytes(arg0 int64, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -251,7 +251,7 @@ func (m *InfoBuilder) SetEstimatedNetworkBytes(arg0 int64, arg1 int64) (*jni.Obj
 func (m *InfoBuilder) SetExpedited(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -286,7 +286,7 @@ func (m *InfoBuilder) SetExpedited(arg0 bool) (*jni.Object, error) {
 func (m *InfoBuilder) SetExtras(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -317,7 +317,7 @@ func (m *InfoBuilder) SetExtras(arg0 *jni.Object) (*jni.Object, error) {
 func (m *InfoBuilder) SetImportantWhileForeground(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -352,7 +352,7 @@ func (m *InfoBuilder) SetImportantWhileForeground(arg0 bool) (*jni.Object, error
 func (m *InfoBuilder) SetMinimumLatency(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -383,7 +383,7 @@ func (m *InfoBuilder) SetMinimumLatency(arg0 int64) (*jni.Object, error) {
 func (m *InfoBuilder) SetMinimumNetworkChunkBytes(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -414,7 +414,7 @@ func (m *InfoBuilder) SetMinimumNetworkChunkBytes(arg0 int64) (*jni.Object, erro
 func (m *InfoBuilder) SetOverrideDeadline(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -445,7 +445,7 @@ func (m *InfoBuilder) SetOverrideDeadline(arg0 int64) (*jni.Object, error) {
 func (m *InfoBuilder) SetPeriodic1(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -476,7 +476,7 @@ func (m *InfoBuilder) SetPeriodic1(arg0 int64) (*jni.Object, error) {
 func (m *InfoBuilder) SetPeriodic2_1(arg0 int64, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -507,7 +507,7 @@ func (m *InfoBuilder) SetPeriodic2_1(arg0 int64, arg1 int64) (*jni.Object, error
 func (m *InfoBuilder) SetPersisted(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -542,7 +542,7 @@ func (m *InfoBuilder) SetPersisted(arg0 bool) (*jni.Object, error) {
 func (m *InfoBuilder) SetPrefetch(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -577,7 +577,7 @@ func (m *InfoBuilder) SetPrefetch(arg0 bool) (*jni.Object, error) {
 func (m *InfoBuilder) SetPriority(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -608,7 +608,7 @@ func (m *InfoBuilder) SetPriority(arg0 int32) (*jni.Object, error) {
 func (m *InfoBuilder) SetRequiredNetwork(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -639,7 +639,7 @@ func (m *InfoBuilder) SetRequiredNetwork(arg0 *jni.Object) (*jni.Object, error) 
 func (m *InfoBuilder) SetRequiredNetworkType(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -670,7 +670,7 @@ func (m *InfoBuilder) SetRequiredNetworkType(arg0 int32) (*jni.Object, error) {
 func (m *InfoBuilder) SetRequiresBatteryNotLow(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -705,7 +705,7 @@ func (m *InfoBuilder) SetRequiresBatteryNotLow(arg0 bool) (*jni.Object, error) {
 func (m *InfoBuilder) SetRequiresCharging(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -740,7 +740,7 @@ func (m *InfoBuilder) SetRequiresCharging(arg0 bool) (*jni.Object, error) {
 func (m *InfoBuilder) SetRequiresDeviceIdle(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -775,7 +775,7 @@ func (m *InfoBuilder) SetRequiresDeviceIdle(arg0 bool) (*jni.Object, error) {
 func (m *InfoBuilder) SetRequiresStorageNotLow(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -810,7 +810,7 @@ func (m *InfoBuilder) SetRequiresStorageNotLow(arg0 bool) (*jni.Object, error) {
 func (m *InfoBuilder) SetTraceTag(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -845,7 +845,7 @@ func (m *InfoBuilder) SetTraceTag(arg0 string) (*jni.Object, error) {
 func (m *InfoBuilder) SetTransientExtras(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -876,7 +876,7 @@ func (m *InfoBuilder) SetTransientExtras(arg0 *jni.Object) (*jni.Object, error) 
 func (m *InfoBuilder) SetTriggerContentMaxDelay(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -907,7 +907,7 @@ func (m *InfoBuilder) SetTriggerContentMaxDelay(arg0 int64) (*jni.Object, error)
 func (m *InfoBuilder) SetTriggerContentUpdateDelay(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -938,7 +938,7 @@ func (m *InfoBuilder) SetTriggerContentUpdateDelay(arg0 int64) (*jni.Object, err
 func (m *InfoBuilder) SetUserInitiated(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

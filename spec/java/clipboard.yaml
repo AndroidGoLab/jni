@@ -216,7 +216,3 @@ classes:
           go_name: ToString
           returns: String
           error: true
-constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int

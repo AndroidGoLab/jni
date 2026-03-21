@@ -27,7 +27,7 @@ type ManagerQuery struct {
 func (m *ManagerQuery) SetFilterById(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -58,7 +58,7 @@ func (m *ManagerQuery) SetFilterById(arg0 *jni.Object) (*jni.Object, error) {
 func (m *ManagerQuery) SetFilterByStatus(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -152,6 +152,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			infoObj, err := job.GetInfo()
 			if err != nil || infoObj == nil {
 				fmt.Fprintf(output, "\n  Job #%d: (no info)\n", i)
+				env.DeleteGlobalRef(job.Obj)
 				continue
 			}
 
@@ -170,6 +171,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			fmt.Fprintf(output, "    State:    %s\n", jobStateName(int(state)))
 			fmt.Fprintf(output, "    Copies:   %d\n", copies)
 			fmt.Fprintf(output, "    Created:  %d\n", creationTime)
+
+			env.DeleteGlobalRef(jobInfo.Obj)
+			env.DeleteGlobalRef(job.Obj)
 		}
 
 		return nil

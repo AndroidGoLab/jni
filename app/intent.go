@@ -25,7 +25,7 @@ type Intent struct {
 func (m *Intent) AddCategory(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -60,7 +60,7 @@ func (m *Intent) AddCategory(arg0 string) (*jni.Object, error) {
 func (m *Intent) AddFlags(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -91,7 +91,7 @@ func (m *Intent) AddFlags(arg0 int32) (*jni.Object, error) {
 func (m *Intent) Clone() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -121,7 +121,7 @@ func (m *Intent) Clone() (*jni.Object, error) {
 func (m *Intent) CloneFilter() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -151,7 +151,7 @@ func (m *Intent) CloneFilter() (*jni.Object, error) {
 func (m *Intent) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -176,7 +176,7 @@ func (m *Intent) DescribeContents() (int32, error) {
 func (m *Intent) FillIn(arg0 *jni.Object, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -202,7 +202,7 @@ func (m *Intent) FillIn(arg0 *jni.Object, arg1 int32) (int32, error) {
 func (m *Intent) FilterEquals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -212,7 +212,8 @@ func (m *Intent) FilterEquals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIntentFilterEquals, jni.ObjectValue(arg0),
 		)
@@ -229,7 +230,7 @@ func (m *Intent) FilterEquals(arg0 *jni.Object) (bool, error) {
 func (m *Intent) FilterHashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -254,7 +255,7 @@ func (m *Intent) FilterHashCode() (int32, error) {
 func (m *Intent) GetAction() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -263,7 +264,8 @@ func (m *Intent) GetAction() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.getAction is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetAction,
 		)
@@ -280,7 +282,7 @@ func (m *Intent) GetAction() (string, error) {
 func (m *Intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -315,7 +317,7 @@ func (m *Intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -334,7 +336,8 @@ func (m *Intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIntentGetBooleanExtra, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
 		)
@@ -351,7 +354,7 @@ func (m *Intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 func (m *Intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -386,7 +389,7 @@ func (m *Intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -421,7 +424,7 @@ func (m *Intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
 	var result int8
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -451,7 +454,7 @@ func (m *Intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
 func (m *Intent) GetCategories() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -481,7 +484,7 @@ func (m *Intent) GetCategories() (*jni.Object, error) {
 func (m *Intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -516,7 +519,7 @@ func (m *Intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
 	var result uint16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -546,7 +549,7 @@ func (m *Intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
 func (m *Intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -581,7 +584,7 @@ func (m *Intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -616,7 +619,7 @@ func (m *Intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error)
 func (m *Intent) GetCharSequenceExtra(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -630,7 +633,8 @@ func (m *Intent) GetCharSequenceExtra(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetCharSequenceExtra, jni.ObjectValue(&jArg0.Object),
 		)
@@ -647,7 +651,7 @@ func (m *Intent) GetCharSequenceExtra(arg0 string) (string, error) {
 func (m *Intent) GetClipData() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -677,7 +681,7 @@ func (m *Intent) GetClipData() (*jni.Object, error) {
 func (m *Intent) GetComponent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -707,7 +711,7 @@ func (m *Intent) GetComponent() (*jni.Object, error) {
 func (m *Intent) GetData() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -737,7 +741,7 @@ func (m *Intent) GetData() (*jni.Object, error) {
 func (m *Intent) GetDataString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -746,7 +750,8 @@ func (m *Intent) GetDataString() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.getDataString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetDataString,
 		)
@@ -763,7 +768,7 @@ func (m *Intent) GetDataString() (string, error) {
 func (m *Intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -798,7 +803,7 @@ func (m *Intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
 	var result float64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -828,7 +833,7 @@ func (m *Intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
 func (m *Intent) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -858,7 +863,7 @@ func (m *Intent) GetExtras() (*jni.Object, error) {
 func (m *Intent) GetFlags() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -883,7 +888,7 @@ func (m *Intent) GetFlags() (int32, error) {
 func (m *Intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -918,7 +923,7 @@ func (m *Intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -948,7 +953,7 @@ func (m *Intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
 func (m *Intent) GetIdentifier() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -957,7 +962,8 @@ func (m *Intent) GetIdentifier() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.getIdentifier is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetIdentifier,
 		)
@@ -974,7 +980,7 @@ func (m *Intent) GetIdentifier() (string, error) {
 func (m *Intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1009,7 +1015,7 @@ func (m *Intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1039,7 +1045,7 @@ func (m *Intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 func (m *Intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1074,7 +1080,7 @@ func (m *Intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1109,7 +1115,7 @@ func (m *Intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1139,7 +1145,7 @@ func (m *Intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
 func (m *Intent) GetPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1148,7 +1154,8 @@ func (m *Intent) GetPackage() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.getPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetPackage,
 		)
@@ -1165,7 +1172,7 @@ func (m *Intent) GetPackage() (string, error) {
 func (m *Intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1200,7 +1207,7 @@ func (m *Intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetScheme() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1209,7 +1216,8 @@ func (m *Intent) GetScheme() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.getScheme is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetScheme,
 		)
@@ -1226,7 +1234,7 @@ func (m *Intent) GetScheme() (string, error) {
 func (m *Intent) GetSelector() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1256,7 +1264,7 @@ func (m *Intent) GetSelector() (*jni.Object, error) {
 func (m *Intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1291,7 +1299,7 @@ func (m *Intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1326,7 +1334,7 @@ func (m *Intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
 	var result int16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1356,7 +1364,7 @@ func (m *Intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
 func (m *Intent) GetSourceBounds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1386,7 +1394,7 @@ func (m *Intent) GetSourceBounds() (*jni.Object, error) {
 func (m *Intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1421,7 +1429,7 @@ func (m *Intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1456,7 +1464,7 @@ func (m *Intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetStringExtra(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1470,7 +1478,8 @@ func (m *Intent) GetStringExtra(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetStringExtra, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1487,7 +1496,7 @@ func (m *Intent) GetStringExtra(arg0 string) (string, error) {
 func (m *Intent) GetType() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1496,7 +1505,8 @@ func (m *Intent) GetType() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.getType is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetType,
 		)
@@ -1513,7 +1523,7 @@ func (m *Intent) GetType() (string, error) {
 func (m *Intent) HasCategory(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1527,7 +1537,8 @@ func (m *Intent) HasCategory(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIntentHasCategory, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1544,7 +1555,7 @@ func (m *Intent) HasCategory(arg0 string) (bool, error) {
 func (m *Intent) HasExtra(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1558,7 +1569,8 @@ func (m *Intent) HasExtra(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIntentHasExtra, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1575,7 +1587,7 @@ func (m *Intent) HasExtra(arg0 string) (bool, error) {
 func (m *Intent) HasFileDescriptors() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1584,7 +1596,8 @@ func (m *Intent) HasFileDescriptors() (bool, error) {
 			callErr = fmt.Errorf("android.content.Intent.hasFileDescriptors is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIntentHasFileDescriptors,
 		)
@@ -1601,7 +1614,7 @@ func (m *Intent) HasFileDescriptors() (bool, error) {
 func (m *Intent) IsMismatchingFilter() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1610,7 +1623,8 @@ func (m *Intent) IsMismatchingFilter() (bool, error) {
 			callErr = fmt.Errorf("android.content.Intent.isMismatchingFilter is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midIntentIsMismatchingFilter,
 		)
@@ -1627,7 +1641,7 @@ func (m *Intent) IsMismatchingFilter() (bool, error) {
 func (m *Intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1662,7 +1676,7 @@ func (m *Intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*
 func (m *Intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1697,7 +1711,7 @@ func (m *Intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 func (m *Intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1732,7 +1746,7 @@ func (m *Intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 func (m *Intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1767,7 +1781,7 @@ func (m *Intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 func (m *Intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1807,7 +1821,7 @@ func (m *Intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
 func (m *Intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1842,7 +1856,7 @@ func (m *Intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 func (m *Intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1877,7 +1891,7 @@ func (m *Intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
 func (m *Intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1912,7 +1926,7 @@ func (m *Intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 func (m *Intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1947,7 +1961,7 @@ func (m *Intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
 func (m *Intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1982,7 +1996,7 @@ func (m *Intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 func (m *Intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2017,7 +2031,7 @@ func (m *Intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
 func (m *Intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2052,7 +2066,7 @@ func (m *Intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2087,7 +2101,7 @@ func (m *Intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
 func (m *Intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2122,7 +2136,7 @@ func (m *Intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2157,7 +2171,7 @@ func (m *Intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
 func (m *Intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2192,7 +2206,7 @@ func (m *Intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2227,7 +2241,7 @@ func (m *Intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2267,7 +2281,7 @@ func (m *Intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
 func (m *Intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2302,7 +2316,7 @@ func (m *Intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2342,7 +2356,7 @@ func (m *Intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
 func (m *Intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2377,7 +2391,7 @@ func (m *Intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2412,7 +2426,7 @@ func (m *Intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
 func (m *Intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2447,7 +2461,7 @@ func (m *Intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2482,7 +2496,7 @@ func (m *Intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
 func (m *Intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2517,7 +2531,7 @@ func (m *Intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error
 func (m *Intent) PutExtras1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2548,7 +2562,7 @@ func (m *Intent) PutExtras1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2579,7 +2593,7 @@ func (m *Intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2614,7 +2628,7 @@ func (m *Intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.O
 func (m *Intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2649,7 +2663,7 @@ func (m *Intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jn
 func (m *Intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2684,7 +2698,7 @@ func (m *Intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Ob
 func (m *Intent) ReadFromParcel(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2707,7 +2721,7 @@ func (m *Intent) ReadFromParcel(arg0 *jni.Object) error {
 func (m *Intent) RemoveCategory(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2734,7 +2748,7 @@ func (m *Intent) RemoveCategory(arg0 string) error {
 func (m *Intent) RemoveExtra(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2761,7 +2775,7 @@ func (m *Intent) RemoveExtra(arg0 string) error {
 func (m *Intent) RemoveFlags(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2784,7 +2798,7 @@ func (m *Intent) RemoveFlags(arg0 int32) error {
 func (m *Intent) RemoveLaunchSecurityProtection() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2806,7 +2820,7 @@ func (m *Intent) RemoveLaunchSecurityProtection() error {
 func (m *Intent) ReplaceExtras1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2837,7 +2851,7 @@ func (m *Intent) ReplaceExtras1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) ReplaceExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2868,7 +2882,7 @@ func (m *Intent) ReplaceExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) ResolveActivity(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2899,7 +2913,7 @@ func (m *Intent) ResolveActivity(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) ResolveActivityInfo(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2930,7 +2944,7 @@ func (m *Intent) ResolveActivityInfo(arg0 *jni.Object, arg1 int32) (*jni.Object,
 func (m *Intent) ResolveType1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2940,7 +2954,8 @@ func (m *Intent) ResolveType1(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentResolveType1, jni.ObjectValue(arg0),
 		)
@@ -2957,7 +2972,7 @@ func (m *Intent) ResolveType1(arg0 *jni.Object) (string, error) {
 func (m *Intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2967,7 +2982,8 @@ func (m *Intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentResolveType1_1, jni.ObjectValue(arg0),
 		)
@@ -2984,7 +3000,7 @@ func (m *Intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
 func (m *Intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2994,7 +3010,8 @@ func (m *Intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentResolveTypeIfNeeded, jni.ObjectValue(arg0),
 		)
@@ -3011,7 +3028,7 @@ func (m *Intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
 func (m *Intent) SetAction(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3046,7 +3063,7 @@ func (m *Intent) SetAction(arg0 string) (*jni.Object, error) {
 func (m *Intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3077,7 +3094,7 @@ func (m *Intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, erro
 func (m *Intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3113,7 +3130,7 @@ func (m *Intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 func (m *Intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3153,7 +3170,7 @@ func (m *Intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) 
 func (m *Intent) SetClipData(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3176,7 +3193,7 @@ func (m *Intent) SetClipData(arg0 *jni.Object) error {
 func (m *Intent) SetComponent(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3207,7 +3224,7 @@ func (m *Intent) SetComponent(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) SetData(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3238,7 +3255,7 @@ func (m *Intent) SetData(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) SetDataAndNormalize(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3269,7 +3286,7 @@ func (m *Intent) SetDataAndNormalize(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3305,7 +3322,7 @@ func (m *Intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, err
 func (m *Intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3341,7 +3358,7 @@ func (m *Intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni
 func (m *Intent) SetExtrasClassLoader(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3364,7 +3381,7 @@ func (m *Intent) SetExtrasClassLoader(arg0 *jni.Object) error {
 func (m *Intent) SetFlags(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3395,7 +3412,7 @@ func (m *Intent) SetFlags(arg0 int32) (*jni.Object, error) {
 func (m *Intent) SetIdentifier(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3430,7 +3447,7 @@ func (m *Intent) SetIdentifier(arg0 string) (*jni.Object, error) {
 func (m *Intent) SetPackage(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3465,7 +3482,7 @@ func (m *Intent) SetPackage(arg0 string) (*jni.Object, error) {
 func (m *Intent) SetSelector(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3488,7 +3505,7 @@ func (m *Intent) SetSelector(arg0 *jni.Object) error {
 func (m *Intent) SetSourceBounds(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3511,7 +3528,7 @@ func (m *Intent) SetSourceBounds(arg0 *jni.Object) error {
 func (m *Intent) SetType(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3546,7 +3563,7 @@ func (m *Intent) SetType(arg0 string) (*jni.Object, error) {
 func (m *Intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3581,7 +3598,7 @@ func (m *Intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
 func (m *Intent) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3590,7 +3607,8 @@ func (m *Intent) ToString() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentToString,
 		)
@@ -3607,7 +3625,7 @@ func (m *Intent) ToString() (string, error) {
 func (m *Intent) ToURI() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3616,7 +3634,8 @@ func (m *Intent) ToURI() (string, error) {
 			callErr = fmt.Errorf("android.content.Intent.toURI is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentToURI,
 		)
@@ -3633,7 +3652,7 @@ func (m *Intent) ToURI() (string, error) {
 func (m *Intent) ToUri(arg0 int32) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3643,7 +3662,8 @@ func (m *Intent) ToUri(arg0 int32) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentToUri, jni.IntValue(arg0),
 		)
@@ -3660,7 +3680,7 @@ func (m *Intent) ToUri(arg0 int32) (string, error) {
 func (m *Intent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3683,7 +3703,7 @@ func (m *Intent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *Intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3723,7 +3743,7 @@ func (m *Intent) CreateChooser3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3759,7 +3779,7 @@ func (m *Intent) CreateChooser3_1(
 func (m *Intent) GetIntent(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3794,7 +3814,7 @@ func (m *Intent) GetIntent(arg0 string) (*jni.Object, error) {
 func (m *Intent) GetIntentOld(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3829,7 +3849,7 @@ func (m *Intent) GetIntentOld(arg0 string) (*jni.Object, error) {
 func (m *Intent) MakeMainActivity(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3860,7 +3880,7 @@ func (m *Intent) MakeMainActivity(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3900,7 +3920,7 @@ func (m *Intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object
 func (m *Intent) MakeRestartActivityTask(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3931,7 +3951,7 @@ func (m *Intent) MakeRestartActivityTask(arg0 *jni.Object) (*jni.Object, error) 
 func (m *Intent) NormalizeMimeType(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3945,7 +3965,8 @@ func (m *Intent) NormalizeMimeType(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsIntent)),
 			midIntentNormalizeMimeType, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3966,7 +3987,7 @@ func (m *Intent) ParseIntent(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3997,7 +4018,7 @@ func (m *Intent) ParseIntent(
 func (m *Intent) ParseUri(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

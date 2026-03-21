@@ -27,7 +27,7 @@ type NdefRecord struct {
 func (m *NdefRecord) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *NdefRecord) DescribeContents() (int32, error) {
 func (m *NdefRecord) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *NdefRecord) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midNdefRecordEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *NdefRecord) Equals(arg0 *jni.Object) (bool, error) {
 func (m *NdefRecord) GetId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -109,7 +110,7 @@ func (m *NdefRecord) GetId() (*jni.Object, error) {
 func (m *NdefRecord) GetPayload() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -139,7 +140,7 @@ func (m *NdefRecord) GetPayload() (*jni.Object, error) {
 func (m *NdefRecord) GetTnf() (int16, error) {
 	var result int16
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +165,7 @@ func (m *NdefRecord) GetTnf() (int16, error) {
 func (m *NdefRecord) GetType() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -194,7 +195,7 @@ func (m *NdefRecord) GetType() (*jni.Object, error) {
 func (m *NdefRecord) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +220,7 @@ func (m *NdefRecord) HashCode() (int32, error) {
 func (m *NdefRecord) ToByteArray() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -249,7 +250,7 @@ func (m *NdefRecord) ToByteArray() (*jni.Object, error) {
 func (m *NdefRecord) ToMimeType() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -258,7 +259,8 @@ func (m *NdefRecord) ToMimeType() (string, error) {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.toMimeType is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNdefRecordToMimeType,
 		)
@@ -275,7 +277,7 @@ func (m *NdefRecord) ToMimeType() (string, error) {
 func (m *NdefRecord) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -284,7 +286,8 @@ func (m *NdefRecord) ToString() (string, error) {
 			callErr = fmt.Errorf("android.nfc.NdefRecord.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNdefRecordToString,
 		)
@@ -301,7 +304,7 @@ func (m *NdefRecord) ToString() (string, error) {
 func (m *NdefRecord) ToUri() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -331,7 +334,7 @@ func (m *NdefRecord) ToUri() (*jni.Object, error) {
 func (m *NdefRecord) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -354,7 +357,7 @@ func (m *NdefRecord) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *NdefRecord) CreateApplicationRecord(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -393,7 +396,7 @@ func (m *NdefRecord) CreateExternal(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -433,7 +436,7 @@ func (m *NdefRecord) CreateExternal(
 func (m *NdefRecord) CreateMime(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -468,7 +471,7 @@ func (m *NdefRecord) CreateMime(arg0 string, arg1 *jni.Object) (*jni.Object, err
 func (m *NdefRecord) CreateTextRecord(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -508,7 +511,7 @@ func (m *NdefRecord) CreateTextRecord(arg0 string, arg1 string) (*jni.Object, er
 func (m *NdefRecord) CreateUri1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -539,7 +542,7 @@ func (m *NdefRecord) CreateUri1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *NdefRecord) CreateUri1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

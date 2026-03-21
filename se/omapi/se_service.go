@@ -27,7 +27,7 @@ type SEService struct {
 func (m *SEService) GetReaders() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *SEService) GetReaders() (*jni.Object, error) {
 func (m *SEService) GetUiccReader(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +88,7 @@ func (m *SEService) GetUiccReader(arg0 int32) (*jni.Object, error) {
 func (m *SEService) GetVersion() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -97,7 +97,8 @@ func (m *SEService) GetVersion() (string, error) {
 			callErr = fmt.Errorf("android.se.omapi.SEService.getVersion is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSEServiceGetVersion,
 		)
@@ -114,7 +115,7 @@ func (m *SEService) GetVersion() (string, error) {
 func (m *SEService) IsConnected() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -123,7 +124,8 @@ func (m *SEService) IsConnected() (bool, error) {
 			callErr = fmt.Errorf("android.se.omapi.SEService.isConnected is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midSEServiceIsConnected,
 		)
@@ -140,7 +142,7 @@ func (m *SEService) IsConnected() (bool, error) {
 func (m *SEService) Shutdown() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

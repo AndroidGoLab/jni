@@ -31,7 +31,7 @@ func (m *MediaPlayer) AddTimedTextSource3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -59,7 +59,7 @@ func (m *MediaPlayer) AddTimedTextSource3(
 func (m *MediaPlayer) AddTimedTextSource2_1(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -92,7 +92,7 @@ func (m *MediaPlayer) AddTimedTextSource4_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +120,7 @@ func (m *MediaPlayer) AddTimedTextSource4_2(
 func (m *MediaPlayer) AddTimedTextSource2_3(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -152,7 +152,7 @@ func (m *MediaPlayer) AddTimedTextSource2_3(arg0 string, arg1 string) error {
 func (m *MediaPlayer) ClearOnMediaTimeDiscontinuityListener() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -174,7 +174,7 @@ func (m *MediaPlayer) ClearOnMediaTimeDiscontinuityListener() error {
 func (m *MediaPlayer) ClearOnSubtitleDataListener() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -196,7 +196,7 @@ func (m *MediaPlayer) ClearOnSubtitleDataListener() error {
 func (m *MediaPlayer) CreateVolumeShaper(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -227,7 +227,7 @@ func (m *MediaPlayer) CreateVolumeShaper(arg0 *jni.Object) (*jni.Object, error) 
 func (m *MediaPlayer) DeselectTrack(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -250,7 +250,7 @@ func (m *MediaPlayer) DeselectTrack(arg0 int32) error {
 func (m *MediaPlayer) GetDrmInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -280,7 +280,7 @@ func (m *MediaPlayer) GetDrmInfo() (*jni.Object, error) {
 func (m *MediaPlayer) GetDrmPropertyString(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -294,7 +294,8 @@ func (m *MediaPlayer) GetDrmPropertyString(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaPlayerGetDrmPropertyString, jni.ObjectValue(&jArg0.Object),
 		)
@@ -317,7 +318,7 @@ func (m *MediaPlayer) GetKeyRequest(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -353,7 +354,7 @@ func (m *MediaPlayer) GetKeyRequest(
 func (m *MediaPlayer) GetMetrics() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -383,7 +384,7 @@ func (m *MediaPlayer) GetMetrics() (*jni.Object, error) {
 func (m *MediaPlayer) GetPreferredDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -413,7 +414,7 @@ func (m *MediaPlayer) GetPreferredDevice() (*jni.Object, error) {
 func (m *MediaPlayer) GetRoutedDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -443,7 +444,7 @@ func (m *MediaPlayer) GetRoutedDevice() (*jni.Object, error) {
 func (m *MediaPlayer) GetRoutedDevices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -473,7 +474,7 @@ func (m *MediaPlayer) GetRoutedDevices() (*jni.Object, error) {
 func (m *MediaPlayer) GetSelectedTrack(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -499,7 +500,7 @@ func (m *MediaPlayer) GetSelectedTrack(arg0 int32) (int32, error) {
 func (m *MediaPlayer) GetTimestamp() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -529,7 +530,7 @@ func (m *MediaPlayer) GetTimestamp() (*jni.Object, error) {
 func (m *MediaPlayer) GetTrackInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -559,7 +560,7 @@ func (m *MediaPlayer) GetTrackInfo() (*jni.Object, error) {
 func (m *MediaPlayer) Pause() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -581,7 +582,7 @@ func (m *MediaPlayer) Pause() error {
 func (m *MediaPlayer) Prepare() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -603,7 +604,7 @@ func (m *MediaPlayer) Prepare() error {
 func (m *MediaPlayer) PrepareAsync() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -625,7 +626,7 @@ func (m *MediaPlayer) PrepareAsync() error {
 func (m *MediaPlayer) PrepareDrm(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -648,7 +649,7 @@ func (m *MediaPlayer) PrepareDrm(arg0 *jni.Object) error {
 func (m *MediaPlayer) ProvideKeyResponse(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -679,7 +680,7 @@ func (m *MediaPlayer) ProvideKeyResponse(arg0 *jni.Object, arg1 *jni.Object) (*j
 func (m *MediaPlayer) Release() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -701,7 +702,7 @@ func (m *MediaPlayer) Release() error {
 func (m *MediaPlayer) ReleaseDrm() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -723,7 +724,7 @@ func (m *MediaPlayer) ReleaseDrm() error {
 func (m *MediaPlayer) RemoveOnRoutingChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -746,7 +747,7 @@ func (m *MediaPlayer) RemoveOnRoutingChangedListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) Reset() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -768,7 +769,7 @@ func (m *MediaPlayer) Reset() error {
 func (m *MediaPlayer) RestoreKeys(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -791,7 +792,7 @@ func (m *MediaPlayer) RestoreKeys(arg0 *jni.Object) error {
 func (m *MediaPlayer) SeekTo1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -814,7 +815,7 @@ func (m *MediaPlayer) SeekTo1(arg0 int32) error {
 func (m *MediaPlayer) SeekTo2_1(arg0 int64, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -837,7 +838,7 @@ func (m *MediaPlayer) SeekTo2_1(arg0 int64, arg1 int32) error {
 func (m *MediaPlayer) SelectTrack(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -860,7 +861,7 @@ func (m *MediaPlayer) SelectTrack(arg0 int32) error {
 func (m *MediaPlayer) SetAudioAttributes(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -883,7 +884,7 @@ func (m *MediaPlayer) SetAudioAttributes(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetAudioSessionId(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -906,7 +907,7 @@ func (m *MediaPlayer) SetAudioSessionId(arg0 int32) error {
 func (m *MediaPlayer) SetAudioStreamType(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -929,7 +930,7 @@ func (m *MediaPlayer) SetAudioStreamType(arg0 int32) error {
 func (m *MediaPlayer) SetAuxEffectSendLevel(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -952,7 +953,7 @@ func (m *MediaPlayer) SetAuxEffectSendLevel(arg0 float32) error {
 func (m *MediaPlayer) SetDataSource2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -979,7 +980,7 @@ func (m *MediaPlayer) SetDataSource3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1007,7 +1008,7 @@ func (m *MediaPlayer) SetDataSource4_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1030,7 +1031,7 @@ func (m *MediaPlayer) SetDataSource4_2(
 func (m *MediaPlayer) SetDataSource1_3(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1053,7 +1054,7 @@ func (m *MediaPlayer) SetDataSource1_3(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetDataSource1_4(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1076,7 +1077,7 @@ func (m *MediaPlayer) SetDataSource1_4(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetDataSource1_5(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1103,7 +1104,7 @@ func (m *MediaPlayer) SetDataSource3_6(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1126,7 +1127,7 @@ func (m *MediaPlayer) SetDataSource3_6(
 func (m *MediaPlayer) SetDataSource1_7(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1153,7 +1154,7 @@ func (m *MediaPlayer) SetDataSource1_7(arg0 string) error {
 func (m *MediaPlayer) SetDisplay(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1176,7 +1177,7 @@ func (m *MediaPlayer) SetDisplay(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetDrmPropertyString(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1208,7 +1209,7 @@ func (m *MediaPlayer) SetDrmPropertyString(arg0 string, arg1 string) error {
 func (m *MediaPlayer) SetOnBufferingUpdateListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1231,7 +1232,7 @@ func (m *MediaPlayer) SetOnBufferingUpdateListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnCompletionListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1254,7 +1255,7 @@ func (m *MediaPlayer) SetOnCompletionListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnDrmConfigHelper(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1277,7 +1278,7 @@ func (m *MediaPlayer) SetOnDrmConfigHelper(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnDrmInfoListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1300,7 +1301,7 @@ func (m *MediaPlayer) SetOnDrmInfoListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnDrmPreparedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1323,7 +1324,7 @@ func (m *MediaPlayer) SetOnDrmPreparedListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnErrorListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1346,7 +1347,7 @@ func (m *MediaPlayer) SetOnErrorListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnInfoListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1369,7 +1370,7 @@ func (m *MediaPlayer) SetOnInfoListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnMediaTimeDiscontinuityListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1392,7 +1393,7 @@ func (m *MediaPlayer) SetOnMediaTimeDiscontinuityListener(arg0 *jni.Object) erro
 func (m *MediaPlayer) SetOnPreparedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1415,7 +1416,7 @@ func (m *MediaPlayer) SetOnPreparedListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnSeekCompleteListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1438,7 +1439,7 @@ func (m *MediaPlayer) SetOnSeekCompleteListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnSubtitleDataListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1461,7 +1462,7 @@ func (m *MediaPlayer) SetOnSubtitleDataListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnTimedMetaDataAvailableListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1484,7 +1485,7 @@ func (m *MediaPlayer) SetOnTimedMetaDataAvailableListener(arg0 *jni.Object) erro
 func (m *MediaPlayer) SetOnTimedTextListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1507,7 +1508,7 @@ func (m *MediaPlayer) SetOnTimedTextListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetOnVideoSizeChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1530,7 +1531,7 @@ func (m *MediaPlayer) SetOnVideoSizeChangedListener(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1540,7 +1541,8 @@ func (m *MediaPlayer) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midMediaPlayerSetPreferredDevice, jni.ObjectValue(arg0),
 		)
@@ -1557,7 +1559,7 @@ func (m *MediaPlayer) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 func (m *MediaPlayer) SetScreenOnWhilePlaying(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1584,7 +1586,7 @@ func (m *MediaPlayer) SetScreenOnWhilePlaying(arg0 bool) error {
 func (m *MediaPlayer) SetSurface(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1607,7 +1609,7 @@ func (m *MediaPlayer) SetSurface(arg0 *jni.Object) error {
 func (m *MediaPlayer) SetVideoScalingMode(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1630,7 +1632,7 @@ func (m *MediaPlayer) SetVideoScalingMode(arg0 int32) error {
 func (m *MediaPlayer) SetVolume(arg0 float32, arg1 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1653,7 +1655,7 @@ func (m *MediaPlayer) SetVolume(arg0 float32, arg1 float32) error {
 func (m *MediaPlayer) SetWakeMode(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1676,7 +1678,7 @@ func (m *MediaPlayer) SetWakeMode(arg0 *jni.Object, arg1 int32) error {
 func (m *MediaPlayer) Start() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1698,7 +1700,7 @@ func (m *MediaPlayer) Start() error {
 func (m *MediaPlayer) Stop() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1720,7 +1722,7 @@ func (m *MediaPlayer) Stop() error {
 func (m *MediaPlayer) Create2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1755,7 +1757,7 @@ func (m *MediaPlayer) Create3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1792,7 +1794,7 @@ func (m *MediaPlayer) Create5_2(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1823,7 +1825,7 @@ func (m *MediaPlayer) Create5_2(
 func (m *MediaPlayer) Create2_3(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1859,7 +1861,7 @@ func (m *MediaPlayer) Create4_4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

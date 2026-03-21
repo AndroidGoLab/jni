@@ -71,7 +71,7 @@ func (m *InputMethodManager) Close() {
 func (m *InputMethodManager) AcceptStylusHandwritingDelegation1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -81,7 +81,8 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation1(arg0 *jni.Object
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerAcceptStylusHandwritingDelegation1, jni.ObjectValue(arg0),
 		)
@@ -98,7 +99,7 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation1(arg0 *jni.Object
 func (m *InputMethodManager) AcceptStylusHandwritingDelegation2_1(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -113,7 +114,8 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation2_1(arg0 *jni.Obje
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerAcceptStylusHandwritingDelegation2_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -136,7 +138,7 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation5_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -169,7 +171,7 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation4_3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -197,7 +199,7 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation4_3(
 func (m *InputMethodManager) DispatchKeyEventFromInputMethod(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -220,7 +222,7 @@ func (m *InputMethodManager) DispatchKeyEventFromInputMethod(arg0 *jni.Object, a
 func (m *InputMethodManager) DisplayCompletions(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -243,7 +245,7 @@ func (m *InputMethodManager) DisplayCompletions(arg0 *jni.Object, arg1 *jni.Obje
 func (m *InputMethodManager) GetCurrentInputMethodInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -273,7 +275,7 @@ func (m *InputMethodManager) GetCurrentInputMethodInfo() (*jni.Object, error) {
 func (m *InputMethodManager) GetCurrentInputMethodSubtype() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -303,7 +305,7 @@ func (m *InputMethodManager) GetCurrentInputMethodSubtype() (*jni.Object, error)
 func (m *InputMethodManager) GetEnabledInputMethodList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -333,7 +335,7 @@ func (m *InputMethodManager) GetEnabledInputMethodList() (*jni.Object, error) {
 func (m *InputMethodManager) GetEnabledInputMethodSubtypeList(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -369,7 +371,7 @@ func (m *InputMethodManager) GetEnabledInputMethodSubtypeList(arg0 *jni.Object, 
 func (m *InputMethodManager) GetInputMethodList() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -399,7 +401,7 @@ func (m *InputMethodManager) GetInputMethodList() (*jni.Object, error) {
 func (m *InputMethodManager) GetLastInputMethodSubtype() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -429,7 +431,7 @@ func (m *InputMethodManager) GetLastInputMethodSubtype() (*jni.Object, error) {
 func (m *InputMethodManager) HideSoftInputFromInputMethod(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -452,7 +454,7 @@ func (m *InputMethodManager) HideSoftInputFromInputMethod(arg0 *jni.Object, arg1
 func (m *InputMethodManager) HideSoftInputFromWindow2(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -462,7 +464,8 @@ func (m *InputMethodManager) HideSoftInputFromWindow2(arg0 *jni.Object, arg1 int
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerHideSoftInputFromWindow2, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
@@ -483,7 +486,7 @@ func (m *InputMethodManager) HideSoftInputFromWindow3_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -493,7 +496,8 @@ func (m *InputMethodManager) HideSoftInputFromWindow3_1(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerHideSoftInputFromWindow3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -510,7 +514,7 @@ func (m *InputMethodManager) HideSoftInputFromWindow3_1(
 func (m *InputMethodManager) HideStatusIcon(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -533,7 +537,7 @@ func (m *InputMethodManager) HideStatusIcon(arg0 *jni.Object) error {
 func (m *InputMethodManager) InvalidateInput(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -556,7 +560,7 @@ func (m *InputMethodManager) InvalidateInput(arg0 *jni.Object) error {
 func (m *InputMethodManager) IsAcceptingText() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -565,7 +569,8 @@ func (m *InputMethodManager) IsAcceptingText() (bool, error) {
 			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isAcceptingText is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsAcceptingText,
 		)
@@ -582,7 +587,7 @@ func (m *InputMethodManager) IsAcceptingText() (bool, error) {
 func (m *InputMethodManager) IsActive0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -591,7 +596,8 @@ func (m *InputMethodManager) IsActive0() (bool, error) {
 			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isActive is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsActive0,
 		)
@@ -608,7 +614,7 @@ func (m *InputMethodManager) IsActive0() (bool, error) {
 func (m *InputMethodManager) IsActive1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -618,7 +624,8 @@ func (m *InputMethodManager) IsActive1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsActive1_1, jni.ObjectValue(arg0),
 		)
@@ -635,7 +642,7 @@ func (m *InputMethodManager) IsActive1_1(arg0 *jni.Object) (bool, error) {
 func (m *InputMethodManager) IsConnectionlessStylusHandwritingAvailable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -644,7 +651,8 @@ func (m *InputMethodManager) IsConnectionlessStylusHandwritingAvailable() (bool,
 			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isConnectionlessStylusHandwritingAvailable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsConnectionlessStylusHandwritingAvailable,
 		)
@@ -661,7 +669,7 @@ func (m *InputMethodManager) IsConnectionlessStylusHandwritingAvailable() (bool,
 func (m *InputMethodManager) IsFullscreenMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -670,7 +678,8 @@ func (m *InputMethodManager) IsFullscreenMode() (bool, error) {
 			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isFullscreenMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsFullscreenMode,
 		)
@@ -687,7 +696,7 @@ func (m *InputMethodManager) IsFullscreenMode() (bool, error) {
 func (m *InputMethodManager) IsInputMethodSuppressingSpellChecker() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -696,7 +705,8 @@ func (m *InputMethodManager) IsInputMethodSuppressingSpellChecker() (bool, error
 			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isInputMethodSuppressingSpellChecker is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsInputMethodSuppressingSpellChecker,
 		)
@@ -713,7 +723,7 @@ func (m *InputMethodManager) IsInputMethodSuppressingSpellChecker() (bool, error
 func (m *InputMethodManager) IsStylusHandwritingAvailable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -722,7 +732,8 @@ func (m *InputMethodManager) IsStylusHandwritingAvailable() (bool, error) {
 			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.isStylusHandwritingAvailable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsStylusHandwritingAvailable,
 		)
@@ -739,7 +750,7 @@ func (m *InputMethodManager) IsStylusHandwritingAvailable() (bool, error) {
 func (m *InputMethodManager) IsWatchingCursor(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -749,7 +760,8 @@ func (m *InputMethodManager) IsWatchingCursor(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerIsWatchingCursor, jni.ObjectValue(arg0),
 		)
@@ -766,7 +778,7 @@ func (m *InputMethodManager) IsWatchingCursor(arg0 *jni.Object) (bool, error) {
 func (m *InputMethodManager) PrepareStylusHandwritingDelegation1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -789,7 +801,7 @@ func (m *InputMethodManager) PrepareStylusHandwritingDelegation1(arg0 *jni.Objec
 func (m *InputMethodManager) PrepareStylusHandwritingDelegation2_1(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -817,7 +829,7 @@ func (m *InputMethodManager) PrepareStylusHandwritingDelegation2_1(arg0 *jni.Obj
 func (m *InputMethodManager) RestartInput(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -844,7 +856,7 @@ func (m *InputMethodManager) SendAppPrivateCommand(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -872,7 +884,7 @@ func (m *InputMethodManager) SendAppPrivateCommand(
 func (m *InputMethodManager) SetAdditionalInputMethodSubtypes(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -899,7 +911,7 @@ func (m *InputMethodManager) SetAdditionalInputMethodSubtypes(arg0 string, arg1 
 func (m *InputMethodManager) SetCurrentInputMethodSubtype(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -909,7 +921,8 @@ func (m *InputMethodManager) SetCurrentInputMethodSubtype(arg0 *jni.Object) (boo
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerSetCurrentInputMethodSubtype, jni.ObjectValue(arg0),
 		)
@@ -926,7 +939,7 @@ func (m *InputMethodManager) SetCurrentInputMethodSubtype(arg0 *jni.Object) (boo
 func (m *InputMethodManager) SetExplicitlyEnabledInputMethodSubtypes(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -953,7 +966,7 @@ func (m *InputMethodManager) SetExplicitlyEnabledInputMethodSubtypes(arg0 string
 func (m *InputMethodManager) SetInputMethod(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -985,7 +998,7 @@ func (m *InputMethodManager) SetInputMethodAndSubtype(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1013,7 +1026,7 @@ func (m *InputMethodManager) SetInputMethodAndSubtype(
 func (m *InputMethodManager) ShouldOfferSwitchingToNextInputMethod(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1023,7 +1036,8 @@ func (m *InputMethodManager) ShouldOfferSwitchingToNextInputMethod(arg0 *jni.Obj
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerShouldOfferSwitchingToNextInputMethod, jni.ObjectValue(arg0),
 		)
@@ -1040,7 +1054,7 @@ func (m *InputMethodManager) ShouldOfferSwitchingToNextInputMethod(arg0 *jni.Obj
 func (m *InputMethodManager) ShowInputMethodAndSubtypeEnabler(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1067,7 +1081,7 @@ func (m *InputMethodManager) ShowInputMethodAndSubtypeEnabler(arg0 string) error
 func (m *InputMethodManager) ShowInputMethodPicker() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1089,7 +1103,7 @@ func (m *InputMethodManager) ShowInputMethodPicker() error {
 func (m *InputMethodManager) ShowSoftInput2(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1099,7 +1113,8 @@ func (m *InputMethodManager) ShowSoftInput2(arg0 *jni.Object, arg1 int32) (bool,
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerShowSoftInput2, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
@@ -1120,7 +1135,7 @@ func (m *InputMethodManager) ShowSoftInput3_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1130,7 +1145,8 @@ func (m *InputMethodManager) ShowSoftInput3_1(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerShowSoftInput3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -1147,7 +1163,7 @@ func (m *InputMethodManager) ShowSoftInput3_1(
 func (m *InputMethodManager) ShowSoftInputFromInputMethod(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1174,7 +1190,7 @@ func (m *InputMethodManager) ShowStatusIcon(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1207,7 +1223,7 @@ func (m *InputMethodManager) StartConnectionlessStylusHandwriting(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1236,7 +1252,7 @@ func (m *InputMethodManager) StartConnectionlessStylusHandwritingForDelegation5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1269,7 +1285,7 @@ func (m *InputMethodManager) StartConnectionlessStylusHandwritingForDelegation4_
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1292,7 +1308,7 @@ func (m *InputMethodManager) StartConnectionlessStylusHandwritingForDelegation4_
 func (m *InputMethodManager) StartStylusHandwriting(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1315,7 +1331,7 @@ func (m *InputMethodManager) StartStylusHandwriting(arg0 *jni.Object) error {
 func (m *InputMethodManager) SwitchToLastInputMethod(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1325,7 +1341,8 @@ func (m *InputMethodManager) SwitchToLastInputMethod(arg0 *jni.Object) (bool, er
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerSwitchToLastInputMethod, jni.ObjectValue(arg0),
 		)
@@ -1342,7 +1359,7 @@ func (m *InputMethodManager) SwitchToLastInputMethod(arg0 *jni.Object) (bool, er
 func (m *InputMethodManager) SwitchToNextInputMethod(arg0 *jni.Object, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1357,7 +1374,8 @@ func (m *InputMethodManager) SwitchToNextInputMethod(arg0 *jni.Object, arg1 bool
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInputMethodManagerSwitchToNextInputMethod, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -1374,7 +1392,7 @@ func (m *InputMethodManager) SwitchToNextInputMethod(arg0 *jni.Object, arg1 bool
 func (m *InputMethodManager) ToggleSoftInput(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1401,7 +1419,7 @@ func (m *InputMethodManager) ToggleSoftInputFromWindow(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1430,7 +1448,7 @@ func (m *InputMethodManager) UpdateCursor(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1453,7 +1471,7 @@ func (m *InputMethodManager) UpdateCursor(
 func (m *InputMethodManager) UpdateCursorAnchorInfo(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1480,7 +1498,7 @@ func (m *InputMethodManager) UpdateExtractedText(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1509,7 +1527,7 @@ func (m *InputMethodManager) UpdateSelection(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1532,7 +1550,7 @@ func (m *InputMethodManager) UpdateSelection(
 func (m *InputMethodManager) ViewClicked(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

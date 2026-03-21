@@ -27,7 +27,7 @@ type GattServer struct {
 func (m *GattServer) AddService(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *GattServer) AddService(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattServerAddService, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *GattServer) AddService(arg0 *jni.Object) (bool, error) {
 func (m *GattServer) CancelConnection(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -77,7 +78,7 @@ func (m *GattServer) CancelConnection(arg0 *jni.Object) error {
 func (m *GattServer) ClearServices() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -99,7 +100,7 @@ func (m *GattServer) ClearServices() error {
 func (m *GattServer) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -121,7 +122,7 @@ func (m *GattServer) Close() error {
 func (m *GattServer) Connect(arg0 *jni.Object, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -136,7 +137,8 @@ func (m *GattServer) Connect(arg0 *jni.Object, arg1 bool) (bool, error) {
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattServerConnect, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -153,7 +155,7 @@ func (m *GattServer) Connect(arg0 *jni.Object, arg1 bool) (bool, error) {
 func (m *GattServer) GetConnectedDevices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -183,7 +185,7 @@ func (m *GattServer) GetConnectedDevices() (*jni.Object, error) {
 func (m *GattServer) GetConnectionState(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -209,7 +211,7 @@ func (m *GattServer) GetConnectionState(arg0 *jni.Object) (int32, error) {
 func (m *GattServer) GetDevicesMatchingConnectionStates(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -240,7 +242,7 @@ func (m *GattServer) GetDevicesMatchingConnectionStates(arg0 *jni.Object) (*jni.
 func (m *GattServer) GetService(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -271,7 +273,7 @@ func (m *GattServer) GetService(arg0 *jni.Object) (*jni.Object, error) {
 func (m *GattServer) GetServices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -305,7 +307,7 @@ func (m *GattServer) NotifyCharacteristicChanged3(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -320,7 +322,8 @@ func (m *GattServer) NotifyCharacteristicChanged3(
 			jArg2 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattServerNotifyCharacteristicChanged3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
 		)
@@ -342,7 +345,7 @@ func (m *GattServer) NotifyCharacteristicChanged4_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -373,7 +376,7 @@ func (m *GattServer) NotifyCharacteristicChanged4_1(
 func (m *GattServer) ReadPhy(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -396,7 +399,7 @@ func (m *GattServer) ReadPhy(arg0 *jni.Object) error {
 func (m *GattServer) RemoveService(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -406,7 +409,8 @@ func (m *GattServer) RemoveService(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattServerRemoveService, jni.ObjectValue(arg0),
 		)
@@ -429,7 +433,7 @@ func (m *GattServer) SendResponse(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -439,7 +443,8 @@ func (m *GattServer) SendResponse(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattServerSendResponse, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
 		)
@@ -461,7 +466,7 @@ func (m *GattServer) SetPreferredPhy(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

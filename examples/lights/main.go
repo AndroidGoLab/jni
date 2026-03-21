@@ -215,7 +215,11 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 				} else {
 					fmt.Fprintf(output, "    PlayerID: %d\n", playerId)
 				}
+
+				env.DeleteGlobalRef(ls.Obj)
 			}
+
+			env.DeleteGlobalRef(light.Obj)
 		}
 
 		return nil

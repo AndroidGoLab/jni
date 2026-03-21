@@ -8,7 +8,6 @@ type MergedMethod struct {
 	Params     []MergedParam
 	Returns    string
 	GoReturn   string
-	Error      bool
 	JNISig     string
 	CallSuffix string
 	ReturnKind ReturnKind

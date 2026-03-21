@@ -71,7 +71,7 @@ func (m *Vibrator) Close() {
 func (m *Vibrator) AreAllEffectsSupported(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -97,7 +97,7 @@ func (m *Vibrator) AreAllEffectsSupported(arg0 *jni.Object) (int32, error) {
 func (m *Vibrator) AreAllPrimitivesSupported(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +107,8 @@ func (m *Vibrator) AreAllPrimitivesSupported(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVibratorAreAllPrimitivesSupported, jni.ObjectValue(arg0),
 		)
@@ -124,7 +125,7 @@ func (m *Vibrator) AreAllPrimitivesSupported(arg0 *jni.Object) (bool, error) {
 func (m *Vibrator) AreEffectsSupported(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -155,7 +156,7 @@ func (m *Vibrator) AreEffectsSupported(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Vibrator) AreEnvelopeEffectsSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +165,8 @@ func (m *Vibrator) AreEnvelopeEffectsSupported() (bool, error) {
 			callErr = fmt.Errorf("android.os.Vibrator.areEnvelopeEffectsSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVibratorAreEnvelopeEffectsSupported,
 		)
@@ -181,7 +183,7 @@ func (m *Vibrator) AreEnvelopeEffectsSupported() (bool, error) {
 func (m *Vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -212,7 +214,7 @@ func (m *Vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error)
 func (m *Vibrator) Cancel() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -234,7 +236,7 @@ func (m *Vibrator) Cancel() error {
 func (m *Vibrator) GetEnvelopeEffectInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -264,7 +266,7 @@ func (m *Vibrator) GetEnvelopeEffectInfo() (*jni.Object, error) {
 func (m *Vibrator) GetFrequencyProfile() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -294,7 +296,7 @@ func (m *Vibrator) GetFrequencyProfile() (*jni.Object, error) {
 func (m *Vibrator) GetId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -319,7 +321,7 @@ func (m *Vibrator) GetId() (int32, error) {
 func (m *Vibrator) GetPrimitiveDurations(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -350,7 +352,7 @@ func (m *Vibrator) GetPrimitiveDurations(arg0 *jni.Object) (*jni.Object, error) 
 func (m *Vibrator) GetQFactor() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -375,7 +377,7 @@ func (m *Vibrator) GetQFactor() (float32, error) {
 func (m *Vibrator) GetResonantFrequency() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -400,7 +402,7 @@ func (m *Vibrator) GetResonantFrequency() (float32, error) {
 func (m *Vibrator) HasAmplitudeControl() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -409,7 +411,8 @@ func (m *Vibrator) HasAmplitudeControl() (bool, error) {
 			callErr = fmt.Errorf("android.os.Vibrator.hasAmplitudeControl is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVibratorHasAmplitudeControl,
 		)
@@ -426,7 +429,7 @@ func (m *Vibrator) HasAmplitudeControl() (bool, error) {
 func (m *Vibrator) HasVibrator() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -435,7 +438,8 @@ func (m *Vibrator) HasVibrator() (bool, error) {
 			callErr = fmt.Errorf("android.os.Vibrator.hasVibrator is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVibratorHasVibrator,
 		)
@@ -452,7 +456,7 @@ func (m *Vibrator) HasVibrator() (bool, error) {
 func (m *Vibrator) Vibrate1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -475,7 +479,7 @@ func (m *Vibrator) Vibrate1(arg0 *jni.Object) error {
 func (m *Vibrator) Vibrate2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -498,7 +502,7 @@ func (m *Vibrator) Vibrate2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Vibrator) Vibrate2_2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -521,7 +525,7 @@ func (m *Vibrator) Vibrate2_2(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Vibrator) Vibrate1_3(arg0 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -544,7 +548,7 @@ func (m *Vibrator) Vibrate1_3(arg0 int64) error {
 func (m *Vibrator) Vibrate2_4(arg0 int64, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -567,7 +571,7 @@ func (m *Vibrator) Vibrate2_4(arg0 int64, arg1 *jni.Object) error {
 func (m *Vibrator) Vibrate2_5(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -594,7 +598,7 @@ func (m *Vibrator) Vibrate3_6(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

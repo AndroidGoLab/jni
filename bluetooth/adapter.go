@@ -27,7 +27,7 @@ type Adapter struct {
 func (m *Adapter) CancelDiscovery() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -36,7 +36,8 @@ func (m *Adapter) CancelDiscovery() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.cancelDiscovery is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterCancelDiscovery,
 		)
@@ -53,7 +54,7 @@ func (m *Adapter) CancelDiscovery() (bool, error) {
 func (m *Adapter) CloseProfileProxy(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -76,7 +77,7 @@ func (m *Adapter) CloseProfileProxy(arg0 int32, arg1 *jni.Object) error {
 func (m *Adapter) Disable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -85,7 +86,8 @@ func (m *Adapter) Disable() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.disable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterDisable,
 		)
@@ -102,7 +104,7 @@ func (m *Adapter) Disable() (bool, error) {
 func (m *Adapter) Enable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -111,7 +113,8 @@ func (m *Adapter) Enable() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.enable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterEnable,
 		)
@@ -128,7 +131,7 @@ func (m *Adapter) Enable() (bool, error) {
 func (m *Adapter) GetAddress() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -137,7 +140,8 @@ func (m *Adapter) GetAddress() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.getAddress is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAdapterGetAddress,
 		)
@@ -154,7 +158,7 @@ func (m *Adapter) GetAddress() (string, error) {
 func (m *Adapter) GetBluetoothLeAdvertiser() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -184,7 +188,7 @@ func (m *Adapter) GetBluetoothLeAdvertiser() (*jni.Object, error) {
 func (m *Adapter) GetBluetoothLeScanner() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -214,7 +218,7 @@ func (m *Adapter) GetBluetoothLeScanner() (*jni.Object, error) {
 func (m *Adapter) GetBondedDevices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -244,7 +248,7 @@ func (m *Adapter) GetBondedDevices() (*jni.Object, error) {
 func (m *Adapter) GetDiscoverableTimeout() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -274,7 +278,7 @@ func (m *Adapter) GetDiscoverableTimeout() (*jni.Object, error) {
 func (m *Adapter) GetLeMaximumAdvertisingDataLength() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -299,7 +303,7 @@ func (m *Adapter) GetLeMaximumAdvertisingDataLength() (int32, error) {
 func (m *Adapter) GetMaxConnectedAudioDevices() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -324,7 +328,7 @@ func (m *Adapter) GetMaxConnectedAudioDevices() (int32, error) {
 func (m *Adapter) GetName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -333,7 +337,8 @@ func (m *Adapter) GetName() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.getName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAdapterGetName,
 		)
@@ -350,7 +355,7 @@ func (m *Adapter) GetName() (string, error) {
 func (m *Adapter) GetProfileConnectionState(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -380,7 +385,7 @@ func (m *Adapter) GetProfileProxy(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -390,7 +395,8 @@ func (m *Adapter) GetProfileProxy(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterGetProfileProxy, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
@@ -407,7 +413,7 @@ func (m *Adapter) GetProfileProxy(
 func (m *Adapter) GetRemoteDevice1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -438,7 +444,7 @@ func (m *Adapter) GetRemoteDevice1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Adapter) GetRemoteDevice1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -473,7 +479,7 @@ func (m *Adapter) GetRemoteDevice1_1(arg0 string) (*jni.Object, error) {
 func (m *Adapter) GetRemoteLeDevice(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -508,7 +514,7 @@ func (m *Adapter) GetRemoteLeDevice(arg0 string, arg1 int32) (*jni.Object, error
 func (m *Adapter) GetScanMode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -533,7 +539,7 @@ func (m *Adapter) GetScanMode() (int32, error) {
 func (m *Adapter) GetState() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -558,7 +564,7 @@ func (m *Adapter) GetState() (int32, error) {
 func (m *Adapter) IsDiscovering() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -567,7 +573,8 @@ func (m *Adapter) IsDiscovering() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isDiscovering is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsDiscovering,
 		)
@@ -584,7 +591,7 @@ func (m *Adapter) IsDiscovering() (bool, error) {
 func (m *Adapter) IsEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -593,7 +600,8 @@ func (m *Adapter) IsEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsEnabled,
 		)
@@ -610,7 +618,7 @@ func (m *Adapter) IsEnabled() (bool, error) {
 func (m *Adapter) IsLe2MPhySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -619,7 +627,8 @@ func (m *Adapter) IsLe2MPhySupported() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isLe2MPhySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsLe2MPhySupported,
 		)
@@ -636,7 +645,7 @@ func (m *Adapter) IsLe2MPhySupported() (bool, error) {
 func (m *Adapter) IsLeAudioBroadcastAssistantSupported() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -661,7 +670,7 @@ func (m *Adapter) IsLeAudioBroadcastAssistantSupported() (int32, error) {
 func (m *Adapter) IsLeAudioBroadcastSourceSupported() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -686,7 +695,7 @@ func (m *Adapter) IsLeAudioBroadcastSourceSupported() (int32, error) {
 func (m *Adapter) IsLeAudioSupported() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -711,7 +720,7 @@ func (m *Adapter) IsLeAudioSupported() (int32, error) {
 func (m *Adapter) IsLeCodedPhySupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -720,7 +729,8 @@ func (m *Adapter) IsLeCodedPhySupported() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isLeCodedPhySupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsLeCodedPhySupported,
 		)
@@ -737,7 +747,7 @@ func (m *Adapter) IsLeCodedPhySupported() (bool, error) {
 func (m *Adapter) IsLeExtendedAdvertisingSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -746,7 +756,8 @@ func (m *Adapter) IsLeExtendedAdvertisingSupported() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isLeExtendedAdvertisingSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsLeExtendedAdvertisingSupported,
 		)
@@ -763,7 +774,7 @@ func (m *Adapter) IsLeExtendedAdvertisingSupported() (bool, error) {
 func (m *Adapter) IsLePeriodicAdvertisingSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -772,7 +783,8 @@ func (m *Adapter) IsLePeriodicAdvertisingSupported() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isLePeriodicAdvertisingSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsLePeriodicAdvertisingSupported,
 		)
@@ -789,7 +801,7 @@ func (m *Adapter) IsLePeriodicAdvertisingSupported() (bool, error) {
 func (m *Adapter) IsMultipleAdvertisementSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -798,7 +810,8 @@ func (m *Adapter) IsMultipleAdvertisementSupported() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isMultipleAdvertisementSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsMultipleAdvertisementSupported,
 		)
@@ -815,7 +828,7 @@ func (m *Adapter) IsMultipleAdvertisementSupported() (bool, error) {
 func (m *Adapter) IsOffloadedFilteringSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -824,7 +837,8 @@ func (m *Adapter) IsOffloadedFilteringSupported() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isOffloadedFilteringSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsOffloadedFilteringSupported,
 		)
@@ -841,7 +855,7 @@ func (m *Adapter) IsOffloadedFilteringSupported() (bool, error) {
 func (m *Adapter) IsOffloadedScanBatchingSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -850,7 +864,8 @@ func (m *Adapter) IsOffloadedScanBatchingSupported() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.isOffloadedScanBatchingSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterIsOffloadedScanBatchingSupported,
 		)
@@ -867,7 +882,7 @@ func (m *Adapter) IsOffloadedScanBatchingSupported() (bool, error) {
 func (m *Adapter) ListenUsingInsecureL2capChannel() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -897,7 +912,7 @@ func (m *Adapter) ListenUsingInsecureL2capChannel() (*jni.Object, error) {
 func (m *Adapter) ListenUsingInsecureRfcommWithServiceRecord(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -932,7 +947,7 @@ func (m *Adapter) ListenUsingInsecureRfcommWithServiceRecord(arg0 string, arg1 *
 func (m *Adapter) ListenUsingL2capChannel() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -962,7 +977,7 @@ func (m *Adapter) ListenUsingL2capChannel() (*jni.Object, error) {
 func (m *Adapter) ListenUsingRfcommWithServiceRecord(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -997,7 +1012,7 @@ func (m *Adapter) ListenUsingRfcommWithServiceRecord(arg0 string, arg1 *jni.Obje
 func (m *Adapter) ListenUsingSocketSettings(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1028,7 +1043,7 @@ func (m *Adapter) ListenUsingSocketSettings(arg0 *jni.Object) (*jni.Object, erro
 func (m *Adapter) SetName(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1042,7 +1057,8 @@ func (m *Adapter) SetName(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterSetName, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1059,7 +1075,7 @@ func (m *Adapter) SetName(arg0 string) (bool, error) {
 func (m *Adapter) StartDiscovery() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1068,7 +1084,8 @@ func (m *Adapter) StartDiscovery() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothAdapter.startDiscovery is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterStartDiscovery,
 		)
@@ -1085,7 +1102,7 @@ func (m *Adapter) StartDiscovery() (bool, error) {
 func (m *Adapter) StartLeScan1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1095,7 +1112,8 @@ func (m *Adapter) StartLeScan1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterStartLeScan1, jni.ObjectValue(arg0),
 		)
@@ -1112,7 +1130,7 @@ func (m *Adapter) StartLeScan1(arg0 *jni.Object) (bool, error) {
 func (m *Adapter) StartLeScan2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1122,7 +1140,8 @@ func (m *Adapter) StartLeScan2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, erro
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAdapterStartLeScan2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -1139,7 +1158,7 @@ func (m *Adapter) StartLeScan2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, erro
 func (m *Adapter) StopLeScan(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1162,7 +1181,7 @@ func (m *Adapter) StopLeScan(arg0 *jni.Object) error {
 func (m *Adapter) CheckBluetoothAddress(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1176,7 +1195,8 @@ func (m *Adapter) CheckBluetoothAddress(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsAdapter)),
 			midAdapterCheckBluetoothAddress, jni.ObjectValue(&jArg0.Object),
 		)

@@ -71,7 +71,7 @@ func (m *StatsManager) Close() {
 func (m *StatsManager) GetAppStandbyBucket() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -96,7 +96,7 @@ func (m *StatsManager) GetAppStandbyBucket() (int32, error) {
 func (m *StatsManager) IsAppInactive(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -110,7 +110,8 @@ func (m *StatsManager) IsAppInactive(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midStatsManagerIsAppInactive, jni.ObjectValue(&jArg0.Object),
 		)
@@ -131,7 +132,7 @@ func (m *StatsManager) QueryConfigurations(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -166,7 +167,7 @@ func (m *StatsManager) QueryEventStats(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -197,7 +198,7 @@ func (m *StatsManager) QueryEventStats(
 func (m *StatsManager) QueryEvents1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -228,7 +229,7 @@ func (m *StatsManager) QueryEvents1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *StatsManager) QueryEvents2_1(arg0 int64, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -259,7 +260,7 @@ func (m *StatsManager) QueryEvents2_1(arg0 int64, arg1 int64) (*jni.Object, erro
 func (m *StatsManager) QueryEventsForSelf(arg0 int64, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -294,7 +295,7 @@ func (m *StatsManager) QueryUsageStats(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

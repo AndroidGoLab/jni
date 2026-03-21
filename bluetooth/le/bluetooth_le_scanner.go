@@ -27,7 +27,7 @@ type BluetoothLeScanner struct {
 func (m *BluetoothLeScanner) FlushPendingScanResults(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -50,7 +50,7 @@ func (m *BluetoothLeScanner) FlushPendingScanResults(arg0 *jni.Object) error {
 func (m *BluetoothLeScanner) StartScan1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -77,7 +77,7 @@ func (m *BluetoothLeScanner) StartScan3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +107,7 @@ func (m *BluetoothLeScanner) StartScan3_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -130,7 +130,7 @@ func (m *BluetoothLeScanner) StartScan3_2(
 func (m *BluetoothLeScanner) StopScan1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -153,7 +153,7 @@ func (m *BluetoothLeScanner) StopScan1(arg0 *jni.Object) error {
 func (m *BluetoothLeScanner) StopScan1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

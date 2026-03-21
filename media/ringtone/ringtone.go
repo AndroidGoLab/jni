@@ -27,7 +27,7 @@ type Ringtone struct {
 func (m *Ringtone) GetAudioAttributes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *Ringtone) GetAudioAttributes() (*jni.Object, error) {
 func (m *Ringtone) GetStreamType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *Ringtone) GetStreamType() (int32, error) {
 func (m *Ringtone) GetTitle(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -92,7 +92,8 @@ func (m *Ringtone) GetTitle(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midRingtoneGetTitle, jni.ObjectValue(arg0),
 		)
@@ -109,7 +110,7 @@ func (m *Ringtone) GetTitle(arg0 *jni.Object) (string, error) {
 func (m *Ringtone) GetVolume() (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -134,7 +135,7 @@ func (m *Ringtone) GetVolume() (float32, error) {
 func (m *Ringtone) IsHapticGeneratorEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -143,7 +144,8 @@ func (m *Ringtone) IsHapticGeneratorEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.media.Ringtone.isHapticGeneratorEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRingtoneIsHapticGeneratorEnabled,
 		)
@@ -160,7 +162,7 @@ func (m *Ringtone) IsHapticGeneratorEnabled() (bool, error) {
 func (m *Ringtone) IsLooping() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -169,7 +171,8 @@ func (m *Ringtone) IsLooping() (bool, error) {
 			callErr = fmt.Errorf("android.media.Ringtone.isLooping is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRingtoneIsLooping,
 		)
@@ -186,7 +189,7 @@ func (m *Ringtone) IsLooping() (bool, error) {
 func (m *Ringtone) IsPlaying() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +198,8 @@ func (m *Ringtone) IsPlaying() (bool, error) {
 			callErr = fmt.Errorf("android.media.Ringtone.isPlaying is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRingtoneIsPlaying,
 		)
@@ -212,7 +216,7 @@ func (m *Ringtone) IsPlaying() (bool, error) {
 func (m *Ringtone) Play() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -234,7 +238,7 @@ func (m *Ringtone) Play() error {
 func (m *Ringtone) SetAudioAttributes(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -257,7 +261,7 @@ func (m *Ringtone) SetAudioAttributes(arg0 *jni.Object) error {
 func (m *Ringtone) SetHapticGeneratorEnabled(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -271,7 +275,8 @@ func (m *Ringtone) SetHapticGeneratorEnabled(arg0 bool) (bool, error) {
 			jArg0 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midRingtoneSetHapticGeneratorEnabled, jni.BooleanValue(jArg0),
 		)
@@ -288,7 +293,7 @@ func (m *Ringtone) SetHapticGeneratorEnabled(arg0 bool) (bool, error) {
 func (m *Ringtone) SetLooping(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -315,7 +320,7 @@ func (m *Ringtone) SetLooping(arg0 bool) error {
 func (m *Ringtone) SetStreamType(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -338,7 +343,7 @@ func (m *Ringtone) SetStreamType(arg0 int32) error {
 func (m *Ringtone) SetVolume(arg0 float32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -361,7 +366,7 @@ func (m *Ringtone) SetVolume(arg0 float32) error {
 func (m *Ringtone) Stop() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

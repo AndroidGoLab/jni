@@ -27,7 +27,7 @@ type Channel struct {
 func (m *Channel) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Channel) Close() error {
 func (m *Channel) GetSelectResponse() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -79,7 +79,7 @@ func (m *Channel) GetSelectResponse() (*jni.Object, error) {
 func (m *Channel) GetSession() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -109,7 +109,7 @@ func (m *Channel) GetSession() (*jni.Object, error) {
 func (m *Channel) IsBasicChannel() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -118,7 +118,8 @@ func (m *Channel) IsBasicChannel() (bool, error) {
 			callErr = fmt.Errorf("android.se.omapi.Channel.isBasicChannel is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelIsBasicChannel,
 		)
@@ -135,7 +136,7 @@ func (m *Channel) IsBasicChannel() (bool, error) {
 func (m *Channel) IsOpen() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -144,7 +145,8 @@ func (m *Channel) IsOpen() (bool, error) {
 			callErr = fmt.Errorf("android.se.omapi.Channel.isOpen is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelIsOpen,
 		)
@@ -161,7 +163,7 @@ func (m *Channel) IsOpen() (bool, error) {
 func (m *Channel) SelectNext() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -170,7 +172,8 @@ func (m *Channel) SelectNext() (bool, error) {
 			callErr = fmt.Errorf("android.se.omapi.Channel.selectNext is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midChannelSelectNext,
 		)
@@ -187,7 +190,7 @@ func (m *Channel) SelectNext() (bool, error) {
 func (m *Channel) Transmit(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

@@ -27,7 +27,7 @@ type Metrics struct {
 func (m *Metrics) Equals1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *Metrics) Equals1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midMetricsEquals1, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *Metrics) Equals1(arg0 *jni.Object) (bool, error) {
 func (m *Metrics) Equals1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -64,7 +65,8 @@ func (m *Metrics) Equals1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midMetricsEquals1_1, jni.ObjectValue(arg0),
 		)
@@ -81,7 +83,7 @@ func (m *Metrics) Equals1_1(arg0 *jni.Object) (bool, error) {
 func (m *Metrics) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -106,7 +108,7 @@ func (m *Metrics) HashCode() (int32, error) {
 func (m *Metrics) SetTo(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -129,7 +131,7 @@ func (m *Metrics) SetTo(arg0 *jni.Object) error {
 func (m *Metrics) SetToDefaults() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -151,7 +153,7 @@ func (m *Metrics) SetToDefaults() error {
 func (m *Metrics) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -160,7 +162,8 @@ func (m *Metrics) ToString() (string, error) {
 			callErr = fmt.Errorf("android.util.DisplayMetrics.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMetricsToString,
 		)

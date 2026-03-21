@@ -25,7 +25,7 @@ type Activity struct {
 func (m *Activity) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -48,7 +48,7 @@ func (m *Activity) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Activity) ClearOverrideActivityTransition(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -71,7 +71,7 @@ func (m *Activity) ClearOverrideActivityTransition(arg0 int32) error {
 func (m *Activity) CloseContextMenu() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -93,7 +93,7 @@ func (m *Activity) CloseContextMenu() error {
 func (m *Activity) CloseOptionsMenu() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -119,7 +119,7 @@ func (m *Activity) CreatePendingResult(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -150,7 +150,7 @@ func (m *Activity) CreatePendingResult(
 func (m *Activity) DismissDialog(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -173,7 +173,7 @@ func (m *Activity) DismissDialog(arg0 int32) error {
 func (m *Activity) DismissKeyboardShortcutsHelper() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -195,7 +195,7 @@ func (m *Activity) DismissKeyboardShortcutsHelper() error {
 func (m *Activity) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -205,7 +205,8 @@ func (m *Activity) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityDispatchGenericMotionEvent, jni.ObjectValue(arg0),
 		)
@@ -222,7 +223,7 @@ func (m *Activity) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 func (m *Activity) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -232,7 +233,8 @@ func (m *Activity) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityDispatchKeyEvent, jni.ObjectValue(arg0),
 		)
@@ -249,7 +251,7 @@ func (m *Activity) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 func (m *Activity) DispatchKeyShortcutEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -259,7 +261,8 @@ func (m *Activity) DispatchKeyShortcutEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityDispatchKeyShortcutEvent, jni.ObjectValue(arg0),
 		)
@@ -276,7 +279,7 @@ func (m *Activity) DispatchKeyShortcutEvent(arg0 *jni.Object) (bool, error) {
 func (m *Activity) DispatchPopulateAccessibilityEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -286,7 +289,8 @@ func (m *Activity) DispatchPopulateAccessibilityEvent(arg0 *jni.Object) (bool, e
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityDispatchPopulateAccessibilityEvent, jni.ObjectValue(arg0),
 		)
@@ -303,7 +307,7 @@ func (m *Activity) DispatchPopulateAccessibilityEvent(arg0 *jni.Object) (bool, e
 func (m *Activity) DispatchTouchEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -313,7 +317,8 @@ func (m *Activity) DispatchTouchEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityDispatchTouchEvent, jni.ObjectValue(arg0),
 		)
@@ -330,7 +335,7 @@ func (m *Activity) DispatchTouchEvent(arg0 *jni.Object) (bool, error) {
 func (m *Activity) DispatchTrackballEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -340,7 +345,8 @@ func (m *Activity) DispatchTrackballEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityDispatchTrackballEvent, jni.ObjectValue(arg0),
 		)
@@ -362,7 +368,7 @@ func (m *Activity) Dump(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -389,7 +395,7 @@ func (m *Activity) Dump(
 func (m *Activity) EnterPictureInPictureMode0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -411,7 +417,7 @@ func (m *Activity) EnterPictureInPictureMode0() error {
 func (m *Activity) EnterPictureInPictureMode1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -421,7 +427,8 @@ func (m *Activity) EnterPictureInPictureMode1_1(arg0 *jni.Object) (bool, error) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityEnterPictureInPictureMode1_1, jni.ObjectValue(arg0),
 		)
@@ -438,7 +445,7 @@ func (m *Activity) EnterPictureInPictureMode1_1(arg0 *jni.Object) (bool, error) 
 func (m *Activity) Finish() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -460,7 +467,7 @@ func (m *Activity) Finish() error {
 func (m *Activity) FinishActivity(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -483,7 +490,7 @@ func (m *Activity) FinishActivity(arg0 int32) error {
 func (m *Activity) FinishActivityFromChild(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -506,7 +513,7 @@ func (m *Activity) FinishActivityFromChild(arg0 *jni.Object, arg1 int32) error {
 func (m *Activity) FinishAffinity() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -528,7 +535,7 @@ func (m *Activity) FinishAffinity() error {
 func (m *Activity) FinishAfterTransition() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -550,7 +557,7 @@ func (m *Activity) FinishAfterTransition() error {
 func (m *Activity) FinishAndRemoveTask() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -572,7 +579,7 @@ func (m *Activity) FinishAndRemoveTask() error {
 func (m *Activity) FinishFromChild(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -595,7 +602,7 @@ func (m *Activity) FinishFromChild(arg0 *jni.Object) error {
 func (m *Activity) GetActionBar() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -625,7 +632,7 @@ func (m *Activity) GetActionBar() (*jni.Object, error) {
 func (m *Activity) GetApplication() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -655,7 +662,7 @@ func (m *Activity) GetApplication() (*jni.Object, error) {
 func (m *Activity) GetCaller() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -685,7 +692,7 @@ func (m *Activity) GetCaller() (*jni.Object, error) {
 func (m *Activity) GetCallingActivity() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -715,7 +722,7 @@ func (m *Activity) GetCallingActivity() (*jni.Object, error) {
 func (m *Activity) GetCallingPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -724,7 +731,8 @@ func (m *Activity) GetCallingPackage() (string, error) {
 			callErr = fmt.Errorf("android.app.Activity.getCallingPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midActivityGetCallingPackage,
 		)
@@ -741,7 +749,7 @@ func (m *Activity) GetCallingPackage() (string, error) {
 func (m *Activity) GetChangingConfigurations() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -766,7 +774,7 @@ func (m *Activity) GetChangingConfigurations() (int32, error) {
 func (m *Activity) GetComponentName() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -796,7 +804,7 @@ func (m *Activity) GetComponentName() (*jni.Object, error) {
 func (m *Activity) GetContentScene() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -826,7 +834,7 @@ func (m *Activity) GetContentScene() (*jni.Object, error) {
 func (m *Activity) GetContentTransitionManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -856,7 +864,7 @@ func (m *Activity) GetContentTransitionManager() (*jni.Object, error) {
 func (m *Activity) GetCurrentCaller() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -886,7 +894,7 @@ func (m *Activity) GetCurrentCaller() (*jni.Object, error) {
 func (m *Activity) GetCurrentFocus() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -916,7 +924,7 @@ func (m *Activity) GetCurrentFocus() (*jni.Object, error) {
 func (m *Activity) GetFragmentManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -946,7 +954,7 @@ func (m *Activity) GetFragmentManager() (*jni.Object, error) {
 func (m *Activity) GetInitialCaller() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -976,7 +984,7 @@ func (m *Activity) GetInitialCaller() (*jni.Object, error) {
 func (m *Activity) GetIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1006,7 +1014,7 @@ func (m *Activity) GetIntent() (*jni.Object, error) {
 func (m *Activity) GetLastNonConfigurationInstance() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1036,7 +1044,7 @@ func (m *Activity) GetLastNonConfigurationInstance() (*jni.Object, error) {
 func (m *Activity) GetLaunchedFromPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1045,7 +1053,8 @@ func (m *Activity) GetLaunchedFromPackage() (string, error) {
 			callErr = fmt.Errorf("android.app.Activity.getLaunchedFromPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midActivityGetLaunchedFromPackage,
 		)
@@ -1062,7 +1071,7 @@ func (m *Activity) GetLaunchedFromPackage() (string, error) {
 func (m *Activity) GetLaunchedFromUid() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1087,7 +1096,7 @@ func (m *Activity) GetLaunchedFromUid() (int32, error) {
 func (m *Activity) GetLayoutInflater() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1117,7 +1126,7 @@ func (m *Activity) GetLayoutInflater() (*jni.Object, error) {
 func (m *Activity) GetLoaderManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1147,7 +1156,7 @@ func (m *Activity) GetLoaderManager() (*jni.Object, error) {
 func (m *Activity) GetLocalClassName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1156,7 +1165,8 @@ func (m *Activity) GetLocalClassName() (string, error) {
 			callErr = fmt.Errorf("android.app.Activity.getLocalClassName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midActivityGetLocalClassName,
 		)
@@ -1173,7 +1183,7 @@ func (m *Activity) GetLocalClassName() (string, error) {
 func (m *Activity) GetMaxNumPictureInPictureActions() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1198,7 +1208,7 @@ func (m *Activity) GetMaxNumPictureInPictureActions() (int32, error) {
 func (m *Activity) GetMediaController() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1228,7 +1238,7 @@ func (m *Activity) GetMediaController() (*jni.Object, error) {
 func (m *Activity) GetMenuInflater() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1258,7 +1268,7 @@ func (m *Activity) GetMenuInflater() (*jni.Object, error) {
 func (m *Activity) GetOnBackInvokedDispatcher() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1288,7 +1298,7 @@ func (m *Activity) GetOnBackInvokedDispatcher() (*jni.Object, error) {
 func (m *Activity) GetParent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1318,7 +1328,7 @@ func (m *Activity) GetParent() (*jni.Object, error) {
 func (m *Activity) GetParentActivityIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1348,7 +1358,7 @@ func (m *Activity) GetParentActivityIntent() (*jni.Object, error) {
 func (m *Activity) GetPreferences(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1379,7 +1389,7 @@ func (m *Activity) GetPreferences(arg0 int32) (*jni.Object, error) {
 func (m *Activity) GetReferrer() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1409,7 +1419,7 @@ func (m *Activity) GetReferrer() (*jni.Object, error) {
 func (m *Activity) GetRequestedOrientation() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1434,7 +1444,7 @@ func (m *Activity) GetRequestedOrientation() (int32, error) {
 func (m *Activity) GetSearchEvent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1464,7 +1474,7 @@ func (m *Activity) GetSearchEvent() (*jni.Object, error) {
 func (m *Activity) GetSplashScreen() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1494,7 +1504,7 @@ func (m *Activity) GetSplashScreen() (*jni.Object, error) {
 func (m *Activity) GetSystemService(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1529,7 +1539,7 @@ func (m *Activity) GetSystemService(arg0 string) (*jni.Object, error) {
 func (m *Activity) GetTaskId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1554,7 +1564,7 @@ func (m *Activity) GetTaskId() (int32, error) {
 func (m *Activity) GetTitle() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1563,7 +1573,8 @@ func (m *Activity) GetTitle() (string, error) {
 			callErr = fmt.Errorf("android.app.Activity.getTitle is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midActivityGetTitle,
 		)
@@ -1580,7 +1591,7 @@ func (m *Activity) GetTitle() (string, error) {
 func (m *Activity) GetTitleColor() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1605,7 +1616,7 @@ func (m *Activity) GetTitleColor() (int32, error) {
 func (m *Activity) GetVoiceInteractor() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1635,7 +1646,7 @@ func (m *Activity) GetVoiceInteractor() (*jni.Object, error) {
 func (m *Activity) GetVolumeControlStream() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1660,7 +1671,7 @@ func (m *Activity) GetVolumeControlStream() (int32, error) {
 func (m *Activity) GetWindow() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1690,7 +1701,7 @@ func (m *Activity) GetWindow() (*jni.Object, error) {
 func (m *Activity) GetWindowManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1720,7 +1731,7 @@ func (m *Activity) GetWindowManager() (*jni.Object, error) {
 func (m *Activity) HasWindowFocus() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1729,7 +1740,8 @@ func (m *Activity) HasWindowFocus() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.hasWindowFocus is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityHasWindowFocus,
 		)
@@ -1746,7 +1758,7 @@ func (m *Activity) HasWindowFocus() (bool, error) {
 func (m *Activity) InvalidateOptionsMenu() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1768,7 +1780,7 @@ func (m *Activity) InvalidateOptionsMenu() error {
 func (m *Activity) IsActivityTransitionRunning() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1777,7 +1789,8 @@ func (m *Activity) IsActivityTransitionRunning() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isActivityTransitionRunning is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsActivityTransitionRunning,
 		)
@@ -1794,7 +1807,7 @@ func (m *Activity) IsActivityTransitionRunning() (bool, error) {
 func (m *Activity) IsChangingConfigurations() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1803,7 +1816,8 @@ func (m *Activity) IsChangingConfigurations() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isChangingConfigurations is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsChangingConfigurations,
 		)
@@ -1820,7 +1834,7 @@ func (m *Activity) IsChangingConfigurations() (bool, error) {
 func (m *Activity) IsChild() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1829,7 +1843,8 @@ func (m *Activity) IsChild() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isChild is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsChild,
 		)
@@ -1846,7 +1861,7 @@ func (m *Activity) IsChild() (bool, error) {
 func (m *Activity) IsDestroyed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1855,7 +1870,8 @@ func (m *Activity) IsDestroyed() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isDestroyed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsDestroyed,
 		)
@@ -1872,7 +1888,7 @@ func (m *Activity) IsDestroyed() (bool, error) {
 func (m *Activity) IsFinishing() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1881,7 +1897,8 @@ func (m *Activity) IsFinishing() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isFinishing is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsFinishing,
 		)
@@ -1898,7 +1915,7 @@ func (m *Activity) IsFinishing() (bool, error) {
 func (m *Activity) IsImmersive() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1907,7 +1924,8 @@ func (m *Activity) IsImmersive() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isImmersive is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsImmersive,
 		)
@@ -1924,7 +1942,7 @@ func (m *Activity) IsImmersive() (bool, error) {
 func (m *Activity) IsInMultiWindowMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1933,7 +1951,8 @@ func (m *Activity) IsInMultiWindowMode() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isInMultiWindowMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsInMultiWindowMode,
 		)
@@ -1950,7 +1969,7 @@ func (m *Activity) IsInMultiWindowMode() (bool, error) {
 func (m *Activity) IsInPictureInPictureMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1959,7 +1978,8 @@ func (m *Activity) IsInPictureInPictureMode() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isInPictureInPictureMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsInPictureInPictureMode,
 		)
@@ -1976,7 +1996,7 @@ func (m *Activity) IsInPictureInPictureMode() (bool, error) {
 func (m *Activity) IsLaunchedFromBubble() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1985,7 +2005,8 @@ func (m *Activity) IsLaunchedFromBubble() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isLaunchedFromBubble is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsLaunchedFromBubble,
 		)
@@ -2002,7 +2023,7 @@ func (m *Activity) IsLaunchedFromBubble() (bool, error) {
 func (m *Activity) IsLocalVoiceInteractionSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2011,7 +2032,8 @@ func (m *Activity) IsLocalVoiceInteractionSupported() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isLocalVoiceInteractionSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsLocalVoiceInteractionSupported,
 		)
@@ -2028,7 +2050,7 @@ func (m *Activity) IsLocalVoiceInteractionSupported() (bool, error) {
 func (m *Activity) IsTaskRoot() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2037,7 +2059,8 @@ func (m *Activity) IsTaskRoot() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isTaskRoot is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsTaskRoot,
 		)
@@ -2054,7 +2077,7 @@ func (m *Activity) IsTaskRoot() (bool, error) {
 func (m *Activity) IsVoiceInteraction() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2063,7 +2086,8 @@ func (m *Activity) IsVoiceInteraction() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isVoiceInteraction is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsVoiceInteraction,
 		)
@@ -2080,7 +2104,7 @@ func (m *Activity) IsVoiceInteraction() (bool, error) {
 func (m *Activity) IsVoiceInteractionRoot() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2089,7 +2113,8 @@ func (m *Activity) IsVoiceInteractionRoot() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.isVoiceInteractionRoot is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityIsVoiceInteractionRoot,
 		)
@@ -2112,7 +2137,7 @@ func (m *Activity) ManagedQuery(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2153,7 +2178,7 @@ func (m *Activity) ManagedQuery(
 func (m *Activity) MoveTaskToBack(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2167,7 +2192,8 @@ func (m *Activity) MoveTaskToBack(arg0 bool) (bool, error) {
 			jArg0 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityMoveTaskToBack, jni.BooleanValue(jArg0),
 		)
@@ -2184,7 +2210,7 @@ func (m *Activity) MoveTaskToBack(arg0 bool) (bool, error) {
 func (m *Activity) NavigateUpTo(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2194,7 +2220,8 @@ func (m *Activity) NavigateUpTo(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityNavigateUpTo, jni.ObjectValue(arg0),
 		)
@@ -2211,7 +2238,7 @@ func (m *Activity) NavigateUpTo(arg0 *jni.Object) (bool, error) {
 func (m *Activity) NavigateUpToFromChild(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2221,7 +2248,8 @@ func (m *Activity) NavigateUpToFromChild(arg0 *jni.Object, arg1 *jni.Object) (bo
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityNavigateUpToFromChild, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2238,7 +2266,7 @@ func (m *Activity) NavigateUpToFromChild(arg0 *jni.Object, arg1 *jni.Object) (bo
 func (m *Activity) OnActionModeFinished(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2261,7 +2289,7 @@ func (m *Activity) OnActionModeFinished(arg0 *jni.Object) error {
 func (m *Activity) OnActionModeStarted(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2284,7 +2312,7 @@ func (m *Activity) OnActionModeStarted(arg0 *jni.Object) error {
 func (m *Activity) OnActivityReenter(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2312,7 +2340,7 @@ func (m *Activity) OnActivityResult(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2335,7 +2363,7 @@ func (m *Activity) OnActivityResult(
 func (m *Activity) OnAttachFragment(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2358,7 +2386,7 @@ func (m *Activity) OnAttachFragment(arg0 *jni.Object) error {
 func (m *Activity) OnAttachedToWindow() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2380,7 +2408,7 @@ func (m *Activity) OnAttachedToWindow() error {
 func (m *Activity) OnBackPressed() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2402,7 +2430,7 @@ func (m *Activity) OnBackPressed() error {
 func (m *Activity) OnConfigurationChanged(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2425,7 +2453,7 @@ func (m *Activity) OnConfigurationChanged(arg0 *jni.Object) error {
 func (m *Activity) OnContentChanged() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2447,7 +2475,7 @@ func (m *Activity) OnContentChanged() error {
 func (m *Activity) OnContextItemSelected(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2457,7 +2485,8 @@ func (m *Activity) OnContextItemSelected(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnContextItemSelected, jni.ObjectValue(arg0),
 		)
@@ -2474,7 +2503,7 @@ func (m *Activity) OnContextItemSelected(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnContextMenuClosed(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2497,7 +2526,7 @@ func (m *Activity) OnContextMenuClosed(arg0 *jni.Object) error {
 func (m *Activity) OnCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2524,7 +2553,7 @@ func (m *Activity) OnCreateContextMenu(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2547,7 +2576,7 @@ func (m *Activity) OnCreateContextMenu(
 func (m *Activity) OnCreateDescription() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2556,7 +2585,8 @@ func (m *Activity) OnCreateDescription() (string, error) {
 			callErr = fmt.Errorf("android.app.Activity.onCreateDescription is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midActivityOnCreateDescription,
 		)
@@ -2573,7 +2603,7 @@ func (m *Activity) OnCreateDescription() (string, error) {
 func (m *Activity) OnCreateNavigateUpTaskStack(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2596,7 +2626,7 @@ func (m *Activity) OnCreateNavigateUpTaskStack(arg0 *jni.Object) error {
 func (m *Activity) OnCreateOptionsMenu(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2606,7 +2636,8 @@ func (m *Activity) OnCreateOptionsMenu(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnCreateOptionsMenu, jni.ObjectValue(arg0),
 		)
@@ -2623,7 +2654,7 @@ func (m *Activity) OnCreateOptionsMenu(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnCreatePanelMenu(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2633,7 +2664,8 @@ func (m *Activity) OnCreatePanelMenu(arg0 int32, arg1 *jni.Object) (bool, error)
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnCreatePanelMenu, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2650,7 +2682,7 @@ func (m *Activity) OnCreatePanelMenu(arg0 int32, arg1 *jni.Object) (bool, error)
 func (m *Activity) OnCreatePanelView(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2681,7 +2713,7 @@ func (m *Activity) OnCreatePanelView(arg0 int32) (*jni.Object, error) {
 func (m *Activity) OnCreateThumbnail(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2691,7 +2723,8 @@ func (m *Activity) OnCreateThumbnail(arg0 *jni.Object, arg1 *jni.Object) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnCreateThumbnail, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2713,7 +2746,7 @@ func (m *Activity) OnCreateView4(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2753,7 +2786,7 @@ func (m *Activity) OnCreateView3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2788,7 +2821,7 @@ func (m *Activity) OnCreateView3_1(
 func (m *Activity) OnDetachedFromWindow() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2810,7 +2843,7 @@ func (m *Activity) OnDetachedFromWindow() error {
 func (m *Activity) OnEnterAnimationComplete() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2832,7 +2865,7 @@ func (m *Activity) OnEnterAnimationComplete() error {
 func (m *Activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2842,7 +2875,8 @@ func (m *Activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnGenericMotionEvent, jni.ObjectValue(arg0),
 		)
@@ -2859,7 +2893,7 @@ func (m *Activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnGetDirectActions(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2882,7 +2916,7 @@ func (m *Activity) OnGetDirectActions(arg0 *jni.Object, arg1 *jni.Object) error 
 func (m *Activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2892,7 +2926,8 @@ func (m *Activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnKeyDown, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2909,7 +2944,7 @@ func (m *Activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
 func (m *Activity) OnKeyLongPress(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2919,7 +2954,8 @@ func (m *Activity) OnKeyLongPress(arg0 int32, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnKeyLongPress, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2940,7 +2976,7 @@ func (m *Activity) OnKeyMultiple(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2950,7 +2986,8 @@ func (m *Activity) OnKeyMultiple(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnKeyMultiple, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -2967,7 +3004,7 @@ func (m *Activity) OnKeyMultiple(
 func (m *Activity) OnKeyShortcut(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2977,7 +3014,8 @@ func (m *Activity) OnKeyShortcut(arg0 int32, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnKeyShortcut, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -2994,7 +3032,7 @@ func (m *Activity) OnKeyShortcut(arg0 int32, arg1 *jni.Object) (bool, error) {
 func (m *Activity) OnKeyUp(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3004,7 +3042,8 @@ func (m *Activity) OnKeyUp(arg0 int32, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnKeyUp, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -3021,7 +3060,7 @@ func (m *Activity) OnKeyUp(arg0 int32, arg1 *jni.Object) (bool, error) {
 func (m *Activity) OnLocalVoiceInteractionStarted() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3043,7 +3082,7 @@ func (m *Activity) OnLocalVoiceInteractionStarted() error {
 func (m *Activity) OnLocalVoiceInteractionStopped() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3065,7 +3104,7 @@ func (m *Activity) OnLocalVoiceInteractionStopped() error {
 func (m *Activity) OnLowMemory() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3087,7 +3126,7 @@ func (m *Activity) OnLowMemory() error {
 func (m *Activity) OnMenuItemSelected(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3097,7 +3136,8 @@ func (m *Activity) OnMenuItemSelected(arg0 int32, arg1 *jni.Object) (bool, error
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnMenuItemSelected, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -3114,7 +3154,7 @@ func (m *Activity) OnMenuItemSelected(arg0 int32, arg1 *jni.Object) (bool, error
 func (m *Activity) OnMenuOpened(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3124,7 +3164,8 @@ func (m *Activity) OnMenuOpened(arg0 int32, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnMenuOpened, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -3141,7 +3182,7 @@ func (m *Activity) OnMenuOpened(arg0 int32, arg1 *jni.Object) (bool, error) {
 func (m *Activity) OnMultiWindowModeChanged1(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3168,7 +3209,7 @@ func (m *Activity) OnMultiWindowModeChanged1(arg0 bool) error {
 func (m *Activity) OnMultiWindowModeChanged2_1(arg0 bool, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3195,7 +3236,7 @@ func (m *Activity) OnMultiWindowModeChanged2_1(arg0 bool, arg1 *jni.Object) erro
 func (m *Activity) OnNavigateUp() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3204,7 +3245,8 @@ func (m *Activity) OnNavigateUp() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.onNavigateUp is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnNavigateUp,
 		)
@@ -3221,7 +3263,7 @@ func (m *Activity) OnNavigateUp() (bool, error) {
 func (m *Activity) OnNavigateUpFromChild(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3231,7 +3273,8 @@ func (m *Activity) OnNavigateUpFromChild(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnNavigateUpFromChild, jni.ObjectValue(arg0),
 		)
@@ -3248,7 +3291,7 @@ func (m *Activity) OnNavigateUpFromChild(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnNewIntent(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3271,7 +3314,7 @@ func (m *Activity) OnNewIntent(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Activity) OnOptionsItemSelected(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3281,7 +3324,8 @@ func (m *Activity) OnOptionsItemSelected(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnOptionsItemSelected, jni.ObjectValue(arg0),
 		)
@@ -3298,7 +3342,7 @@ func (m *Activity) OnOptionsItemSelected(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnOptionsMenuClosed(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3321,7 +3365,7 @@ func (m *Activity) OnOptionsMenuClosed(arg0 *jni.Object) error {
 func (m *Activity) OnPanelClosed(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3349,7 +3393,7 @@ func (m *Activity) OnPerformDirectAction(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3376,7 +3420,7 @@ func (m *Activity) OnPerformDirectAction(
 func (m *Activity) OnPictureInPictureModeChanged1(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3403,7 +3447,7 @@ func (m *Activity) OnPictureInPictureModeChanged1(arg0 bool) error {
 func (m *Activity) OnPictureInPictureModeChanged2_1(arg0 bool, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3430,7 +3474,7 @@ func (m *Activity) OnPictureInPictureModeChanged2_1(arg0 bool, arg1 *jni.Object)
 func (m *Activity) OnPictureInPictureRequested() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3439,7 +3483,8 @@ func (m *Activity) OnPictureInPictureRequested() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.onPictureInPictureRequested is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnPictureInPictureRequested,
 		)
@@ -3456,7 +3501,7 @@ func (m *Activity) OnPictureInPictureRequested() (bool, error) {
 func (m *Activity) OnPictureInPictureUiStateChanged(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3479,7 +3524,7 @@ func (m *Activity) OnPictureInPictureUiStateChanged(arg0 *jni.Object) error {
 func (m *Activity) OnPostCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3502,7 +3547,7 @@ func (m *Activity) OnPostCreate(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Activity) OnPrepareNavigateUpTaskStack(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3525,7 +3570,7 @@ func (m *Activity) OnPrepareNavigateUpTaskStack(arg0 *jni.Object) error {
 func (m *Activity) OnPrepareOptionsMenu(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3535,7 +3580,8 @@ func (m *Activity) OnPrepareOptionsMenu(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnPrepareOptionsMenu, jni.ObjectValue(arg0),
 		)
@@ -3556,7 +3602,7 @@ func (m *Activity) OnPreparePanel(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3566,7 +3612,8 @@ func (m *Activity) OnPreparePanel(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnPreparePanel, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -3583,7 +3630,7 @@ func (m *Activity) OnPreparePanel(
 func (m *Activity) OnProvideAssistContent(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3606,7 +3653,7 @@ func (m *Activity) OnProvideAssistContent(arg0 *jni.Object) error {
 func (m *Activity) OnProvideAssistData(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3633,7 +3680,7 @@ func (m *Activity) OnProvideKeyboardShortcuts(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3656,7 +3703,7 @@ func (m *Activity) OnProvideKeyboardShortcuts(
 func (m *Activity) OnProvideReferrer() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3690,7 +3737,7 @@ func (m *Activity) OnRequestPermissionsResult3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3718,7 +3765,7 @@ func (m *Activity) OnRequestPermissionsResult4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3741,7 +3788,7 @@ func (m *Activity) OnRequestPermissionsResult4_1(
 func (m *Activity) OnRestoreInstanceState(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3764,7 +3811,7 @@ func (m *Activity) OnRestoreInstanceState(arg0 *jni.Object, arg1 *jni.Object) er
 func (m *Activity) OnRetainNonConfigurationInstance() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3794,7 +3841,7 @@ func (m *Activity) OnRetainNonConfigurationInstance() (*jni.Object, error) {
 func (m *Activity) OnSaveInstanceState(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3817,7 +3864,7 @@ func (m *Activity) OnSaveInstanceState(arg0 *jni.Object, arg1 *jni.Object) error
 func (m *Activity) OnSearchRequested0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3826,7 +3873,8 @@ func (m *Activity) OnSearchRequested0() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.onSearchRequested is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnSearchRequested0,
 		)
@@ -3843,7 +3891,7 @@ func (m *Activity) OnSearchRequested0() (bool, error) {
 func (m *Activity) OnSearchRequested1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3853,7 +3901,8 @@ func (m *Activity) OnSearchRequested1_1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnSearchRequested1_1, jni.ObjectValue(arg0),
 		)
@@ -3870,7 +3919,7 @@ func (m *Activity) OnSearchRequested1_1(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnStateNotSaved() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3892,7 +3941,7 @@ func (m *Activity) OnStateNotSaved() error {
 func (m *Activity) OnTopResumedActivityChanged(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3919,7 +3968,7 @@ func (m *Activity) OnTopResumedActivityChanged(arg0 bool) error {
 func (m *Activity) OnTouchEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3929,7 +3978,8 @@ func (m *Activity) OnTouchEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnTouchEvent, jni.ObjectValue(arg0),
 		)
@@ -3946,7 +3996,7 @@ func (m *Activity) OnTouchEvent(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnTrackballEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3956,7 +4006,8 @@ func (m *Activity) OnTrackballEvent(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityOnTrackballEvent, jni.ObjectValue(arg0),
 		)
@@ -3973,7 +4024,7 @@ func (m *Activity) OnTrackballEvent(arg0 *jni.Object) (bool, error) {
 func (m *Activity) OnTrimMemory(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3996,7 +4047,7 @@ func (m *Activity) OnTrimMemory(arg0 int32) error {
 func (m *Activity) OnUserInteraction() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4018,7 +4069,7 @@ func (m *Activity) OnUserInteraction() error {
 func (m *Activity) OnVisibleBehindCanceled() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4040,7 +4091,7 @@ func (m *Activity) OnVisibleBehindCanceled() error {
 func (m *Activity) OnWindowAttributesChanged(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4063,7 +4114,7 @@ func (m *Activity) OnWindowAttributesChanged(arg0 *jni.Object) error {
 func (m *Activity) OnWindowFocusChanged(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4090,7 +4141,7 @@ func (m *Activity) OnWindowFocusChanged(arg0 bool) error {
 func (m *Activity) OnWindowStartingActionMode1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4121,7 +4172,7 @@ func (m *Activity) OnWindowStartingActionMode1(arg0 *jni.Object) (*jni.Object, e
 func (m *Activity) OnWindowStartingActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4152,7 +4203,7 @@ func (m *Activity) OnWindowStartingActionMode2_1(arg0 *jni.Object, arg1 int32) (
 func (m *Activity) OpenContextMenu(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4175,7 +4226,7 @@ func (m *Activity) OpenContextMenu(arg0 *jni.Object) error {
 func (m *Activity) OpenOptionsMenu() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4201,7 +4252,7 @@ func (m *Activity) OverrideActivityTransition3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4229,7 +4280,7 @@ func (m *Activity) OverrideActivityTransition4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4252,7 +4303,7 @@ func (m *Activity) OverrideActivityTransition4_1(
 func (m *Activity) OverridePendingTransition2(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4279,7 +4330,7 @@ func (m *Activity) OverridePendingTransition3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4302,7 +4353,7 @@ func (m *Activity) OverridePendingTransition3_1(
 func (m *Activity) PostponeEnterTransition() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4324,7 +4375,7 @@ func (m *Activity) PostponeEnterTransition() error {
 func (m *Activity) Recreate() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4346,7 +4397,7 @@ func (m *Activity) Recreate() error {
 func (m *Activity) RegisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4369,7 +4420,7 @@ func (m *Activity) RegisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
 func (m *Activity) RegisterComponentCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4392,7 +4443,7 @@ func (m *Activity) RegisterComponentCallbacks(arg0 *jni.Object) error {
 func (m *Activity) RegisterForContextMenu(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4415,7 +4466,7 @@ func (m *Activity) RegisterForContextMenu(arg0 *jni.Object) error {
 func (m *Activity) RegisterScreenCaptureCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4438,7 +4489,7 @@ func (m *Activity) RegisterScreenCaptureCallback(arg0 *jni.Object, arg1 *jni.Obj
 func (m *Activity) ReleaseInstance() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4447,7 +4498,8 @@ func (m *Activity) ReleaseInstance() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.releaseInstance is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityReleaseInstance,
 		)
@@ -4464,7 +4516,7 @@ func (m *Activity) ReleaseInstance() (bool, error) {
 func (m *Activity) RemoveDialog(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4487,7 +4539,7 @@ func (m *Activity) RemoveDialog(arg0 int32) error {
 func (m *Activity) ReportFullyDrawn() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4509,7 +4561,7 @@ func (m *Activity) ReportFullyDrawn() error {
 func (m *Activity) RequestDragAndDropPermissions(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4540,7 +4592,7 @@ func (m *Activity) RequestDragAndDropPermissions(arg0 *jni.Object) (*jni.Object,
 func (m *Activity) RequestFullscreenMode(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4563,7 +4615,7 @@ func (m *Activity) RequestFullscreenMode(arg0 int32, arg1 *jni.Object) error {
 func (m *Activity) RequestOpenInBrowserEducation() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4585,7 +4637,7 @@ func (m *Activity) RequestOpenInBrowserEducation() error {
 func (m *Activity) RequestPermissions2(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4612,7 +4664,7 @@ func (m *Activity) RequestPermissions3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4635,7 +4687,7 @@ func (m *Activity) RequestPermissions3_1(
 func (m *Activity) RequestShowKeyboardShortcuts() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4657,7 +4709,7 @@ func (m *Activity) RequestShowKeyboardShortcuts() error {
 func (m *Activity) RequestVisibleBehind(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4671,7 +4723,8 @@ func (m *Activity) RequestVisibleBehind(arg0 bool) (bool, error) {
 			jArg0 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityRequestVisibleBehind, jni.BooleanValue(jArg0),
 		)
@@ -4688,7 +4741,7 @@ func (m *Activity) RequestVisibleBehind(arg0 bool) (bool, error) {
 func (m *Activity) RequestWindowFeature(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4698,7 +4751,8 @@ func (m *Activity) RequestWindowFeature(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityRequestWindowFeature, jni.IntValue(arg0),
 		)
@@ -4715,7 +4769,7 @@ func (m *Activity) RequestWindowFeature(arg0 int32) (bool, error) {
 func (m *Activity) RunOnUiThread(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4738,7 +4792,7 @@ func (m *Activity) RunOnUiThread(arg0 *jni.Object) error {
 func (m *Activity) SetActionBar(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4761,7 +4815,7 @@ func (m *Activity) SetActionBar(arg0 *jni.Object) error {
 func (m *Activity) SetAllowCrossUidActivitySwitchFromBelow(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4788,7 +4842,7 @@ func (m *Activity) SetAllowCrossUidActivitySwitchFromBelow(arg0 bool) error {
 func (m *Activity) SetContentTransitionManager(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4811,7 +4865,7 @@ func (m *Activity) SetContentTransitionManager(arg0 *jni.Object) error {
 func (m *Activity) SetContentView1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4834,7 +4888,7 @@ func (m *Activity) SetContentView1(arg0 *jni.Object) error {
 func (m *Activity) SetContentView2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4857,7 +4911,7 @@ func (m *Activity) SetContentView2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Activity) SetContentView1_2(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4880,7 +4934,7 @@ func (m *Activity) SetContentView1_2(arg0 int32) error {
 func (m *Activity) SetDefaultKeyMode(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4903,7 +4957,7 @@ func (m *Activity) SetDefaultKeyMode(arg0 int32) error {
 func (m *Activity) SetEnterSharedElementCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4926,7 +4980,7 @@ func (m *Activity) SetEnterSharedElementCallback(arg0 *jni.Object) error {
 func (m *Activity) SetExitSharedElementCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4949,7 +5003,7 @@ func (m *Activity) SetExitSharedElementCallback(arg0 *jni.Object) error {
 func (m *Activity) SetFeatureDrawable(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4972,7 +5026,7 @@ func (m *Activity) SetFeatureDrawable(arg0 int32, arg1 *jni.Object) error {
 func (m *Activity) SetFeatureDrawableAlpha(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4995,7 +5049,7 @@ func (m *Activity) SetFeatureDrawableAlpha(arg0 int32, arg1 int32) error {
 func (m *Activity) SetFeatureDrawableResource(arg0 int32, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5018,7 +5072,7 @@ func (m *Activity) SetFeatureDrawableResource(arg0 int32, arg1 int32) error {
 func (m *Activity) SetFeatureDrawableUri(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5041,7 +5095,7 @@ func (m *Activity) SetFeatureDrawableUri(arg0 int32, arg1 *jni.Object) error {
 func (m *Activity) SetFinishOnTouchOutside(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5068,7 +5122,7 @@ func (m *Activity) SetFinishOnTouchOutside(arg0 bool) error {
 func (m *Activity) SetImmersive(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5095,7 +5149,7 @@ func (m *Activity) SetImmersive(arg0 bool) error {
 func (m *Activity) SetInheritShowWhenLocked(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5122,7 +5176,7 @@ func (m *Activity) SetInheritShowWhenLocked(arg0 bool) error {
 func (m *Activity) SetIntent1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5145,7 +5199,7 @@ func (m *Activity) SetIntent1(arg0 *jni.Object) error {
 func (m *Activity) SetIntent2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5168,7 +5222,7 @@ func (m *Activity) SetIntent2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Activity) SetLocusContext(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5191,7 +5245,7 @@ func (m *Activity) SetLocusContext(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Activity) SetMediaController(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5214,7 +5268,7 @@ func (m *Activity) SetMediaController(arg0 *jni.Object) error {
 func (m *Activity) SetPictureInPictureParams(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5237,7 +5291,7 @@ func (m *Activity) SetPictureInPictureParams(arg0 *jni.Object) error {
 func (m *Activity) SetProgress(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5260,7 +5314,7 @@ func (m *Activity) SetProgress(arg0 int32) error {
 func (m *Activity) SetProgressBarIndeterminate(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5287,7 +5341,7 @@ func (m *Activity) SetProgressBarIndeterminate(arg0 bool) error {
 func (m *Activity) SetProgressBarIndeterminateVisibility(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5314,7 +5368,7 @@ func (m *Activity) SetProgressBarIndeterminateVisibility(arg0 bool) error {
 func (m *Activity) SetProgressBarVisibility(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5341,7 +5395,7 @@ func (m *Activity) SetProgressBarVisibility(arg0 bool) error {
 func (m *Activity) SetRecentsScreenshotEnabled(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5368,7 +5422,7 @@ func (m *Activity) SetRecentsScreenshotEnabled(arg0 bool) error {
 func (m *Activity) SetRequestedOrientation(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5391,7 +5445,7 @@ func (m *Activity) SetRequestedOrientation(arg0 int32) error {
 func (m *Activity) SetResult1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5414,7 +5468,7 @@ func (m *Activity) SetResult1(arg0 int32) error {
 func (m *Activity) SetResult2_1(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5437,7 +5491,7 @@ func (m *Activity) SetResult2_1(arg0 int32, arg1 *jni.Object) error {
 func (m *Activity) SetSecondaryProgress(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5460,7 +5514,7 @@ func (m *Activity) SetSecondaryProgress(arg0 int32) error {
 func (m *Activity) SetShouldDockBigOverlays(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5487,7 +5541,7 @@ func (m *Activity) SetShouldDockBigOverlays(arg0 bool) error {
 func (m *Activity) SetShowWhenLocked(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5514,7 +5568,7 @@ func (m *Activity) SetShowWhenLocked(arg0 bool) error {
 func (m *Activity) SetTaskDescription(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5537,7 +5591,7 @@ func (m *Activity) SetTaskDescription(arg0 *jni.Object) error {
 func (m *Activity) SetTheme(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5560,7 +5614,7 @@ func (m *Activity) SetTheme(arg0 int32) error {
 func (m *Activity) SetTitle1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5583,7 +5637,7 @@ func (m *Activity) SetTitle1(arg0 int32) error {
 func (m *Activity) SetTitle1_1(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5610,7 +5664,7 @@ func (m *Activity) SetTitle1_1(arg0 string) error {
 func (m *Activity) SetTitleColor(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5633,7 +5687,7 @@ func (m *Activity) SetTitleColor(arg0 int32) error {
 func (m *Activity) SetTranslucent(arg0 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5647,7 +5701,8 @@ func (m *Activity) SetTranslucent(arg0 bool) (bool, error) {
 			jArg0 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivitySetTranslucent, jni.BooleanValue(jArg0),
 		)
@@ -5664,7 +5719,7 @@ func (m *Activity) SetTranslucent(arg0 bool) (bool, error) {
 func (m *Activity) SetTurnScreenOn(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5691,7 +5746,7 @@ func (m *Activity) SetTurnScreenOn(arg0 bool) error {
 func (m *Activity) SetVisible(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5718,7 +5773,7 @@ func (m *Activity) SetVisible(arg0 bool) error {
 func (m *Activity) SetVolumeControlStream(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5741,7 +5796,7 @@ func (m *Activity) SetVolumeControlStream(arg0 int32) error {
 func (m *Activity) SetVrModeEnabled(arg0 bool, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5768,7 +5823,7 @@ func (m *Activity) SetVrModeEnabled(arg0 bool, arg1 *jni.Object) error {
 func (m *Activity) ShouldDockBigOverlays() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5777,7 +5832,8 @@ func (m *Activity) ShouldDockBigOverlays() (bool, error) {
 			callErr = fmt.Errorf("android.app.Activity.shouldDockBigOverlays is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityShouldDockBigOverlays,
 		)
@@ -5794,7 +5850,7 @@ func (m *Activity) ShouldDockBigOverlays() (bool, error) {
 func (m *Activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5808,7 +5864,8 @@ func (m *Activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, err
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityShouldShowRequestPermissionRationale1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -5825,7 +5882,7 @@ func (m *Activity) ShouldShowRequestPermissionRationale1(arg0 string) (bool, err
 func (m *Activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5839,7 +5896,8 @@ func (m *Activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityShouldShowRequestPermissionRationale2_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
@@ -5856,7 +5914,7 @@ func (m *Activity) ShouldShowRequestPermissionRationale2_1(arg0 string, arg1 int
 func (m *Activity) ShouldUpRecreateTask(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5866,7 +5924,8 @@ func (m *Activity) ShouldUpRecreateTask(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityShouldUpRecreateTask, jni.ObjectValue(arg0),
 		)
@@ -5883,7 +5942,7 @@ func (m *Activity) ShouldUpRecreateTask(arg0 *jni.Object) (bool, error) {
 func (m *Activity) ShowAssist(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5893,7 +5952,8 @@ func (m *Activity) ShowAssist(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityShowAssist, jni.ObjectValue(arg0),
 		)
@@ -5910,7 +5970,7 @@ func (m *Activity) ShowAssist(arg0 *jni.Object) (bool, error) {
 func (m *Activity) ShowDialog1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5933,7 +5993,7 @@ func (m *Activity) ShowDialog1(arg0 int32) error {
 func (m *Activity) ShowDialog2_1(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5943,7 +6003,8 @@ func (m *Activity) ShowDialog2_1(arg0 int32, arg1 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityShowDialog2_1, jni.IntValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -5960,7 +6021,7 @@ func (m *Activity) ShowDialog2_1(arg0 int32, arg1 *jni.Object) (bool, error) {
 func (m *Activity) ShowLockTaskEscapeMessage() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5982,7 +6043,7 @@ func (m *Activity) ShowLockTaskEscapeMessage() error {
 func (m *Activity) StartActionMode1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6013,7 +6074,7 @@ func (m *Activity) StartActionMode1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Activity) StartActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6044,7 +6105,7 @@ func (m *Activity) StartActionMode2_1(arg0 *jni.Object, arg1 int32) (*jni.Object
 func (m *Activity) StartActivities1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6067,7 +6128,7 @@ func (m *Activity) StartActivities1(arg0 *jni.Object) error {
 func (m *Activity) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6090,7 +6151,7 @@ func (m *Activity) StartActivities2_1(arg0 *jni.Object, arg1 *jni.Object) error 
 func (m *Activity) StartActivity1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6113,7 +6174,7 @@ func (m *Activity) StartActivity1(arg0 *jni.Object) error {
 func (m *Activity) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6136,7 +6197,7 @@ func (m *Activity) StartActivity2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 func (m *Activity) StartActivityForResult2(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6163,7 +6224,7 @@ func (m *Activity) StartActivityForResult3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6190,7 +6251,7 @@ func (m *Activity) StartActivityFromChild3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6218,7 +6279,7 @@ func (m *Activity) StartActivityFromChild4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6245,7 +6306,7 @@ func (m *Activity) StartActivityFromFragment3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6273,7 +6334,7 @@ func (m *Activity) StartActivityFromFragment4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6296,7 +6357,7 @@ func (m *Activity) StartActivityFromFragment4_1(
 func (m *Activity) StartActivityIfNeeded2(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6306,7 +6367,8 @@ func (m *Activity) StartActivityIfNeeded2(arg0 *jni.Object, arg1 int32) (bool, e
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityStartActivityIfNeeded2, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
@@ -6327,7 +6389,7 @@ func (m *Activity) StartActivityIfNeeded3_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6337,7 +6399,8 @@ func (m *Activity) StartActivityIfNeeded3_1(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityStartActivityIfNeeded3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -6360,7 +6423,7 @@ func (m *Activity) StartIntentSender5(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6390,7 +6453,7 @@ func (m *Activity) StartIntentSender6_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6420,7 +6483,7 @@ func (m *Activity) StartIntentSenderForResult6(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6451,7 +6514,7 @@ func (m *Activity) StartIntentSenderForResult7_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6482,7 +6545,7 @@ func (m *Activity) StartIntentSenderFromChild7(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6514,7 +6577,7 @@ func (m *Activity) StartIntentSenderFromChild8_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6537,7 +6600,7 @@ func (m *Activity) StartIntentSenderFromChild8_1(
 func (m *Activity) StartLocalVoiceInteraction(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6560,7 +6623,7 @@ func (m *Activity) StartLocalVoiceInteraction(arg0 *jni.Object) error {
 func (m *Activity) StartLockTask() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6582,7 +6645,7 @@ func (m *Activity) StartLockTask() error {
 func (m *Activity) StartManagingCursor(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6605,7 +6668,7 @@ func (m *Activity) StartManagingCursor(arg0 *jni.Object) error {
 func (m *Activity) StartNextMatchingActivity1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6615,7 +6678,8 @@ func (m *Activity) StartNextMatchingActivity1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityStartNextMatchingActivity1, jni.ObjectValue(arg0),
 		)
@@ -6632,7 +6696,7 @@ func (m *Activity) StartNextMatchingActivity1(arg0 *jni.Object) (bool, error) {
 func (m *Activity) StartNextMatchingActivity2_1(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6642,7 +6706,8 @@ func (m *Activity) StartNextMatchingActivity2_1(arg0 *jni.Object, arg1 *jni.Obje
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midActivityStartNextMatchingActivity2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -6659,7 +6724,7 @@ func (m *Activity) StartNextMatchingActivity2_1(arg0 *jni.Object, arg1 *jni.Obje
 func (m *Activity) StartPostponedEnterTransition() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6686,7 +6751,7 @@ func (m *Activity) StartSearch(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6723,7 +6788,7 @@ func (m *Activity) StartSearch(
 func (m *Activity) StopLocalVoiceInteraction() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6745,7 +6810,7 @@ func (m *Activity) StopLocalVoiceInteraction() error {
 func (m *Activity) StopLockTask() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6767,7 +6832,7 @@ func (m *Activity) StopLockTask() error {
 func (m *Activity) StopManagingCursor(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6790,7 +6855,7 @@ func (m *Activity) StopManagingCursor(arg0 *jni.Object) error {
 func (m *Activity) TakeKeyEvents(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6817,7 +6882,7 @@ func (m *Activity) TakeKeyEvents(arg0 bool) error {
 func (m *Activity) TriggerSearch(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6844,7 +6909,7 @@ func (m *Activity) TriggerSearch(arg0 string, arg1 *jni.Object) error {
 func (m *Activity) UnregisterActivityLifecycleCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6867,7 +6932,7 @@ func (m *Activity) UnregisterActivityLifecycleCallbacks(arg0 *jni.Object) error 
 func (m *Activity) UnregisterComponentCallbacks(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6890,7 +6955,7 @@ func (m *Activity) UnregisterComponentCallbacks(arg0 *jni.Object) error {
 func (m *Activity) UnregisterForContextMenu(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6913,7 +6978,7 @@ func (m *Activity) UnregisterForContextMenu(arg0 *jni.Object) error {
 func (m *Activity) UnregisterScreenCaptureCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

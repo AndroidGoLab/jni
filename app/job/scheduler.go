@@ -71,7 +71,7 @@ func (m *Scheduler) Close() {
 func (m *Scheduler) CanRunUserInitiatedJobs() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -80,7 +80,8 @@ func (m *Scheduler) CanRunUserInitiatedJobs() (bool, error) {
 			callErr = fmt.Errorf("android.app.job.JobScheduler.canRunUserInitiatedJobs is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midSchedulerCanRunUserInitiatedJobs,
 		)
@@ -97,7 +98,7 @@ func (m *Scheduler) CanRunUserInitiatedJobs() (bool, error) {
 func (m *Scheduler) Cancel(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +121,7 @@ func (m *Scheduler) Cancel(arg0 int32) error {
 func (m *Scheduler) CancelAll() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -142,7 +143,7 @@ func (m *Scheduler) CancelAll() error {
 func (m *Scheduler) CancelInAllNamespaces() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +165,7 @@ func (m *Scheduler) CancelInAllNamespaces() error {
 func (m *Scheduler) Enqueue(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -190,7 +191,7 @@ func (m *Scheduler) Enqueue(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 func (m *Scheduler) ForNamespace(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -225,7 +226,7 @@ func (m *Scheduler) ForNamespace(arg0 string) (*jni.Object, error) {
 func (m *Scheduler) GetAllPendingJobs() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -255,7 +256,7 @@ func (m *Scheduler) GetAllPendingJobs() (*jni.Object, error) {
 func (m *Scheduler) GetNamespace() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -264,7 +265,8 @@ func (m *Scheduler) GetNamespace() (string, error) {
 			callErr = fmt.Errorf("android.app.job.JobScheduler.getNamespace is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSchedulerGetNamespace,
 		)
@@ -281,7 +283,7 @@ func (m *Scheduler) GetNamespace() (string, error) {
 func (m *Scheduler) GetPendingJob(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -312,7 +314,7 @@ func (m *Scheduler) GetPendingJob(arg0 int32) (*jni.Object, error) {
 func (m *Scheduler) GetPendingJobReason(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -338,7 +340,7 @@ func (m *Scheduler) GetPendingJobReason(arg0 int32) (int32, error) {
 func (m *Scheduler) GetPendingJobReasons(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -369,7 +371,7 @@ func (m *Scheduler) GetPendingJobReasons(arg0 int32) (*jni.Object, error) {
 func (m *Scheduler) GetPendingJobReasonsHistory(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -400,7 +402,7 @@ func (m *Scheduler) GetPendingJobReasonsHistory(arg0 int32) (*jni.Object, error)
 func (m *Scheduler) Schedule(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

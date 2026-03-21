@@ -27,7 +27,7 @@ type ServiceInfo struct {
 func (m *ServiceInfo) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *ServiceInfo) DescribeContents() (int32, error) {
 func (m *ServiceInfo) GetHost() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *ServiceInfo) GetHost() (*jni.Object, error) {
 func (m *ServiceInfo) GetHostAddresses() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -112,7 +112,7 @@ func (m *ServiceInfo) GetHostAddresses() (*jni.Object, error) {
 func (m *ServiceInfo) GetHostname() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -121,7 +121,8 @@ func (m *ServiceInfo) GetHostname() (string, error) {
 			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getHostname is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midServiceInfoGetHostname,
 		)
@@ -138,7 +139,7 @@ func (m *ServiceInfo) GetHostname() (string, error) {
 func (m *ServiceInfo) GetNetwork() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -168,7 +169,7 @@ func (m *ServiceInfo) GetNetwork() (*jni.Object, error) {
 func (m *ServiceInfo) GetPort() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -193,7 +194,7 @@ func (m *ServiceInfo) GetPort() (int32, error) {
 func (m *ServiceInfo) GetServiceName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -202,7 +203,8 @@ func (m *ServiceInfo) GetServiceName() (string, error) {
 			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getServiceName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midServiceInfoGetServiceName,
 		)
@@ -219,7 +221,7 @@ func (m *ServiceInfo) GetServiceName() (string, error) {
 func (m *ServiceInfo) GetServiceType() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -228,7 +230,8 @@ func (m *ServiceInfo) GetServiceType() (string, error) {
 			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.getServiceType is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midServiceInfoGetServiceType,
 		)
@@ -245,7 +248,7 @@ func (m *ServiceInfo) GetServiceType() (string, error) {
 func (m *ServiceInfo) GetSubtypes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -275,7 +278,7 @@ func (m *ServiceInfo) GetSubtypes() (*jni.Object, error) {
 func (m *ServiceInfo) RemoveAttribute(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -302,7 +305,7 @@ func (m *ServiceInfo) RemoveAttribute(arg0 string) error {
 func (m *ServiceInfo) SetAttribute(arg0 string, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -334,7 +337,7 @@ func (m *ServiceInfo) SetAttribute(arg0 string, arg1 string) error {
 func (m *ServiceInfo) SetHost(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -357,7 +360,7 @@ func (m *ServiceInfo) SetHost(arg0 *jni.Object) error {
 func (m *ServiceInfo) SetHostAddresses(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -380,7 +383,7 @@ func (m *ServiceInfo) SetHostAddresses(arg0 *jni.Object) error {
 func (m *ServiceInfo) SetNetwork(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -403,7 +406,7 @@ func (m *ServiceInfo) SetNetwork(arg0 *jni.Object) error {
 func (m *ServiceInfo) SetPort(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -426,7 +429,7 @@ func (m *ServiceInfo) SetPort(arg0 int32) error {
 func (m *ServiceInfo) SetServiceName(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -453,7 +456,7 @@ func (m *ServiceInfo) SetServiceName(arg0 string) error {
 func (m *ServiceInfo) SetServiceType(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -480,7 +483,7 @@ func (m *ServiceInfo) SetServiceType(arg0 string) error {
 func (m *ServiceInfo) SetSubtypes(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -503,7 +506,7 @@ func (m *ServiceInfo) SetSubtypes(arg0 *jni.Object) error {
 func (m *ServiceInfo) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -512,7 +515,8 @@ func (m *ServiceInfo) ToString() (string, error) {
 			callErr = fmt.Errorf("android.net.nsd.NsdServiceInfo.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midServiceInfoToString,
 		)
@@ -529,7 +533,7 @@ func (m *ServiceInfo) ToString() (string, error) {
 func (m *ServiceInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

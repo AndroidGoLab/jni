@@ -27,7 +27,7 @@ type AudioRecord struct {
 func (m *AudioRecord) GetActiveMicrophones() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *AudioRecord) GetActiveMicrophones() (*jni.Object, error) {
 func (m *AudioRecord) GetActiveRecordingConfiguration() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -87,7 +87,7 @@ func (m *AudioRecord) GetActiveRecordingConfiguration() (*jni.Object, error) {
 func (m *AudioRecord) GetAudioFormat() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -112,7 +112,7 @@ func (m *AudioRecord) GetAudioFormat() (int32, error) {
 func (m *AudioRecord) GetAudioSessionId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -137,7 +137,7 @@ func (m *AudioRecord) GetAudioSessionId() (int32, error) {
 func (m *AudioRecord) GetAudioSource() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -162,7 +162,7 @@ func (m *AudioRecord) GetAudioSource() (int32, error) {
 func (m *AudioRecord) GetBufferSizeInFrames() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -187,7 +187,7 @@ func (m *AudioRecord) GetBufferSizeInFrames() (int32, error) {
 func (m *AudioRecord) GetChannelConfiguration() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -212,7 +212,7 @@ func (m *AudioRecord) GetChannelConfiguration() (int32, error) {
 func (m *AudioRecord) GetChannelCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -237,7 +237,7 @@ func (m *AudioRecord) GetChannelCount() (int32, error) {
 func (m *AudioRecord) GetFormat() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -267,7 +267,7 @@ func (m *AudioRecord) GetFormat() (*jni.Object, error) {
 func (m *AudioRecord) GetLogSessionId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -297,7 +297,7 @@ func (m *AudioRecord) GetLogSessionId() (*jni.Object, error) {
 func (m *AudioRecord) GetMetrics() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -327,7 +327,7 @@ func (m *AudioRecord) GetMetrics() (*jni.Object, error) {
 func (m *AudioRecord) GetNotificationMarkerPosition() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -352,7 +352,7 @@ func (m *AudioRecord) GetNotificationMarkerPosition() (int32, error) {
 func (m *AudioRecord) GetPositionNotificationPeriod() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -377,7 +377,7 @@ func (m *AudioRecord) GetPositionNotificationPeriod() (int32, error) {
 func (m *AudioRecord) GetPreferredDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -407,7 +407,7 @@ func (m *AudioRecord) GetPreferredDevice() (*jni.Object, error) {
 func (m *AudioRecord) GetRecordingState() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -432,7 +432,7 @@ func (m *AudioRecord) GetRecordingState() (int32, error) {
 func (m *AudioRecord) GetRoutedDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -462,7 +462,7 @@ func (m *AudioRecord) GetRoutedDevice() (*jni.Object, error) {
 func (m *AudioRecord) GetRoutedDevices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -492,7 +492,7 @@ func (m *AudioRecord) GetRoutedDevices() (*jni.Object, error) {
 func (m *AudioRecord) GetSampleRate() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -517,7 +517,7 @@ func (m *AudioRecord) GetSampleRate() (int32, error) {
 func (m *AudioRecord) GetState() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -542,7 +542,7 @@ func (m *AudioRecord) GetState() (int32, error) {
 func (m *AudioRecord) GetTimestamp(arg0 *jni.Object, arg1 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -568,7 +568,7 @@ func (m *AudioRecord) GetTimestamp(arg0 *jni.Object, arg1 int32) (int32, error) 
 func (m *AudioRecord) IsPrivacySensitive() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -577,7 +577,8 @@ func (m *AudioRecord) IsPrivacySensitive() (bool, error) {
 			callErr = fmt.Errorf("android.media.AudioRecord.isPrivacySensitive is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioRecordIsPrivacySensitive,
 		)
@@ -598,7 +599,7 @@ func (m *AudioRecord) Read3(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -629,7 +630,7 @@ func (m *AudioRecord) Read4_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -660,7 +661,7 @@ func (m *AudioRecord) Read4_2(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -690,7 +691,7 @@ func (m *AudioRecord) Read3_3(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -721,7 +722,7 @@ func (m *AudioRecord) Read4_4(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -747,7 +748,7 @@ func (m *AudioRecord) Read4_4(
 func (m *AudioRecord) RegisterAudioRecordingCallback(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -770,7 +771,7 @@ func (m *AudioRecord) RegisterAudioRecordingCallback(arg0 *jni.Object, arg1 *jni
 func (m *AudioRecord) Release() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -792,7 +793,7 @@ func (m *AudioRecord) Release() error {
 func (m *AudioRecord) RemoveOnRoutingChangedListener1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -815,7 +816,7 @@ func (m *AudioRecord) RemoveOnRoutingChangedListener1(arg0 *jni.Object) error {
 func (m *AudioRecord) RemoveOnRoutingChangedListener1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -838,7 +839,7 @@ func (m *AudioRecord) RemoveOnRoutingChangedListener1_1(arg0 *jni.Object) error 
 func (m *AudioRecord) SetLogSessionId(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -861,7 +862,7 @@ func (m *AudioRecord) SetLogSessionId(arg0 *jni.Object) error {
 func (m *AudioRecord) SetNotificationMarkerPosition(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -887,7 +888,7 @@ func (m *AudioRecord) SetNotificationMarkerPosition(arg0 int32) (int32, error) {
 func (m *AudioRecord) SetPositionNotificationPeriod(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -913,7 +914,7 @@ func (m *AudioRecord) SetPositionNotificationPeriod(arg0 int32) (int32, error) {
 func (m *AudioRecord) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -923,7 +924,8 @@ func (m *AudioRecord) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioRecordSetPreferredDevice, jni.ObjectValue(arg0),
 		)
@@ -940,7 +942,7 @@ func (m *AudioRecord) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 func (m *AudioRecord) SetPreferredMicrophoneDirection(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -950,7 +952,8 @@ func (m *AudioRecord) SetPreferredMicrophoneDirection(arg0 int32) (bool, error) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioRecordSetPreferredMicrophoneDirection, jni.IntValue(arg0),
 		)
@@ -967,7 +970,7 @@ func (m *AudioRecord) SetPreferredMicrophoneDirection(arg0 int32) (bool, error) 
 func (m *AudioRecord) SetPreferredMicrophoneFieldDimension(arg0 float32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -977,7 +980,8 @@ func (m *AudioRecord) SetPreferredMicrophoneFieldDimension(arg0 float32) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midAudioRecordSetPreferredMicrophoneFieldDimension, jni.FloatValue(arg0),
 		)
@@ -994,7 +998,7 @@ func (m *AudioRecord) SetPreferredMicrophoneFieldDimension(arg0 float32) (bool, 
 func (m *AudioRecord) SetRecordPositionUpdateListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1017,7 +1021,7 @@ func (m *AudioRecord) SetRecordPositionUpdateListener(arg0 *jni.Object) error {
 func (m *AudioRecord) StartRecording0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1039,7 +1043,7 @@ func (m *AudioRecord) StartRecording0() error {
 func (m *AudioRecord) StartRecording1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1062,7 +1066,7 @@ func (m *AudioRecord) StartRecording1_1(arg0 *jni.Object) error {
 func (m *AudioRecord) Stop() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1084,7 +1088,7 @@ func (m *AudioRecord) Stop() error {
 func (m *AudioRecord) UnregisterAudioRecordingCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1111,7 +1115,7 @@ func (m *AudioRecord) GetMinBufferSize(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

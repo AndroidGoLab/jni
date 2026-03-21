@@ -27,7 +27,7 @@ type Interface struct {
 func (m *Interface) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *Interface) DescribeContents() (int32, error) {
 func (m *Interface) GetAlternateSetting() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -77,7 +77,7 @@ func (m *Interface) GetAlternateSetting() (int32, error) {
 func (m *Interface) GetEndpoint(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -108,7 +108,7 @@ func (m *Interface) GetEndpoint(arg0 int32) (*jni.Object, error) {
 func (m *Interface) GetEndpointCount() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -133,7 +133,7 @@ func (m *Interface) GetEndpointCount() (int32, error) {
 func (m *Interface) GetId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -158,7 +158,7 @@ func (m *Interface) GetId() (int32, error) {
 func (m *Interface) GetInterfaceClass() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -183,7 +183,7 @@ func (m *Interface) GetInterfaceClass() (int32, error) {
 func (m *Interface) GetInterfaceProtocol() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -208,7 +208,7 @@ func (m *Interface) GetInterfaceProtocol() (int32, error) {
 func (m *Interface) GetInterfaceSubclass() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -233,7 +233,7 @@ func (m *Interface) GetInterfaceSubclass() (int32, error) {
 func (m *Interface) GetName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -242,7 +242,8 @@ func (m *Interface) GetName() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbInterface.getName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInterfaceGetName,
 		)
@@ -259,7 +260,7 @@ func (m *Interface) GetName() (string, error) {
 func (m *Interface) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -268,7 +269,8 @@ func (m *Interface) ToString() (string, error) {
 			callErr = fmt.Errorf("android.hardware.usb.UsbInterface.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInterfaceToString,
 		)
@@ -285,7 +287,7 @@ func (m *Interface) ToString() (string, error) {
 func (m *Interface) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

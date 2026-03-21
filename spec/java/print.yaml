@@ -161,9 +161,6 @@ classes:
           returns: android.print.PrintJob
           error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: StateBlocked
       value: "4"
       go_type: int

@@ -27,7 +27,7 @@ type Typeface struct {
 func (m *Typeface) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *Typeface) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midTypefaceEquals, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *Typeface) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Typeface) GetStyle() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -79,7 +80,7 @@ func (m *Typeface) GetStyle() (int32, error) {
 func (m *Typeface) GetSystemFontFamilyName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +89,8 @@ func (m *Typeface) GetSystemFontFamilyName() (string, error) {
 			callErr = fmt.Errorf("android.graphics.Typeface.getSystemFontFamilyName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midTypefaceGetSystemFontFamilyName,
 		)
@@ -105,7 +107,7 @@ func (m *Typeface) GetSystemFontFamilyName() (string, error) {
 func (m *Typeface) GetWeight() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -130,7 +132,7 @@ func (m *Typeface) GetWeight() (int32, error) {
 func (m *Typeface) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -155,7 +157,7 @@ func (m *Typeface) HashCode() (int32, error) {
 func (m *Typeface) IsBold() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +166,8 @@ func (m *Typeface) IsBold() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Typeface.isBold is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midTypefaceIsBold,
 		)
@@ -181,7 +184,7 @@ func (m *Typeface) IsBold() (bool, error) {
 func (m *Typeface) IsItalic() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -190,7 +193,8 @@ func (m *Typeface) IsItalic() (bool, error) {
 			callErr = fmt.Errorf("android.graphics.Typeface.isItalic is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midTypefaceIsItalic,
 		)
@@ -207,7 +211,7 @@ func (m *Typeface) IsItalic() (bool, error) {
 func (m *Typeface) Create2(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -242,7 +246,7 @@ func (m *Typeface) Create3_1(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -278,7 +282,7 @@ func (m *Typeface) Create3_1(
 func (m *Typeface) Create2_2(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -313,7 +317,7 @@ func (m *Typeface) Create2_2(arg0 string, arg1 int32) (*jni.Object, error) {
 func (m *Typeface) CreateFromAsset(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -349,7 +353,7 @@ func (m *Typeface) CreateFromAsset(arg0 *jni.Object, arg1 string) (*jni.Object, 
 func (m *Typeface) CreateFromFile1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -380,7 +384,7 @@ func (m *Typeface) CreateFromFile1(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Typeface) CreateFromFile1_1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -415,7 +419,7 @@ func (m *Typeface) CreateFromFile1_1(arg0 string) (*jni.Object, error) {
 func (m *Typeface) DefaultFromStyle(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

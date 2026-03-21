@@ -27,7 +27,7 @@ type Environment struct {
 func (m *Environment) GetDataDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *Environment) GetDataDirectory() (*jni.Object, error) {
 func (m *Environment) GetDownloadCacheDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -87,7 +87,7 @@ func (m *Environment) GetDownloadCacheDirectory() (*jni.Object, error) {
 func (m *Environment) GetExternalStorageDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -117,7 +117,7 @@ func (m *Environment) GetExternalStorageDirectory() (*jni.Object, error) {
 func (m *Environment) GetExternalStoragePublicDirectory(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -152,7 +152,7 @@ func (m *Environment) GetExternalStoragePublicDirectory(arg0 string) (*jni.Objec
 func (m *Environment) GetExternalStorageState0() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -161,7 +161,8 @@ func (m *Environment) GetExternalStorageState0() (string, error) {
 			callErr = fmt.Errorf("android.os.Environment.getExternalStorageState is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentGetExternalStorageState0,
 		)
@@ -178,7 +179,7 @@ func (m *Environment) GetExternalStorageState0() (string, error) {
 func (m *Environment) GetExternalStorageState1_1(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -188,7 +189,8 @@ func (m *Environment) GetExternalStorageState1_1(arg0 *jni.Object) (string, erro
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentGetExternalStorageState1_1, jni.ObjectValue(arg0),
 		)
@@ -205,7 +207,7 @@ func (m *Environment) GetExternalStorageState1_1(arg0 *jni.Object) (string, erro
 func (m *Environment) GetRootDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -235,7 +237,7 @@ func (m *Environment) GetRootDirectory() (*jni.Object, error) {
 func (m *Environment) GetStorageDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -265,7 +267,7 @@ func (m *Environment) GetStorageDirectory() (*jni.Object, error) {
 func (m *Environment) GetStorageState(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -275,7 +277,8 @@ func (m *Environment) GetStorageState(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallStaticObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentGetStorageState, jni.ObjectValue(arg0),
 		)
@@ -292,7 +295,7 @@ func (m *Environment) GetStorageState(arg0 *jni.Object) (string, error) {
 func (m *Environment) IsExternalStorageEmulated0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -301,7 +304,8 @@ func (m *Environment) IsExternalStorageEmulated0() (bool, error) {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageEmulated is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageEmulated0,
 		)
@@ -318,7 +322,7 @@ func (m *Environment) IsExternalStorageEmulated0() (bool, error) {
 func (m *Environment) IsExternalStorageEmulated1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -328,7 +332,8 @@ func (m *Environment) IsExternalStorageEmulated1_1(arg0 *jni.Object) (bool, erro
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageEmulated1_1, jni.ObjectValue(arg0),
 		)
@@ -345,7 +350,7 @@ func (m *Environment) IsExternalStorageEmulated1_1(arg0 *jni.Object) (bool, erro
 func (m *Environment) IsExternalStorageLegacy0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -354,7 +359,8 @@ func (m *Environment) IsExternalStorageLegacy0() (bool, error) {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageLegacy is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageLegacy0,
 		)
@@ -371,7 +377,7 @@ func (m *Environment) IsExternalStorageLegacy0() (bool, error) {
 func (m *Environment) IsExternalStorageLegacy1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -381,7 +387,8 @@ func (m *Environment) IsExternalStorageLegacy1_1(arg0 *jni.Object) (bool, error)
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageLegacy1_1, jni.ObjectValue(arg0),
 		)
@@ -398,7 +405,7 @@ func (m *Environment) IsExternalStorageLegacy1_1(arg0 *jni.Object) (bool, error)
 func (m *Environment) IsExternalStorageManager0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -407,7 +414,8 @@ func (m *Environment) IsExternalStorageManager0() (bool, error) {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageManager is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageManager0,
 		)
@@ -424,7 +432,7 @@ func (m *Environment) IsExternalStorageManager0() (bool, error) {
 func (m *Environment) IsExternalStorageManager1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -434,7 +442,8 @@ func (m *Environment) IsExternalStorageManager1_1(arg0 *jni.Object) (bool, error
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageManager1_1, jni.ObjectValue(arg0),
 		)
@@ -451,7 +460,7 @@ func (m *Environment) IsExternalStorageManager1_1(arg0 *jni.Object) (bool, error
 func (m *Environment) IsExternalStorageRemovable0() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -460,7 +469,8 @@ func (m *Environment) IsExternalStorageRemovable0() (bool, error) {
 			callErr = fmt.Errorf("android.os.Environment.isExternalStorageRemovable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageRemovable0,
 		)
@@ -477,7 +487,7 @@ func (m *Environment) IsExternalStorageRemovable0() (bool, error) {
 func (m *Environment) IsExternalStorageRemovable1_1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -487,7 +497,8 @@ func (m *Environment) IsExternalStorageRemovable1_1(arg0 *jni.Object) (bool, err
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsEnvironment)),
 			midEnvironmentIsExternalStorageRemovable1_1, jni.ObjectValue(arg0),
 		)

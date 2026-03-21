@@ -27,7 +27,7 @@ type Gatt struct {
 func (m *Gatt) AbortReliableWrite0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Gatt) AbortReliableWrite0() error {
 func (m *Gatt) AbortReliableWrite1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -72,7 +72,7 @@ func (m *Gatt) AbortReliableWrite1_1(arg0 *jni.Object) error {
 func (m *Gatt) BeginReliableWrite() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -81,7 +81,8 @@ func (m *Gatt) BeginReliableWrite() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.beginReliableWrite is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattBeginReliableWrite,
 		)
@@ -98,7 +99,7 @@ func (m *Gatt) BeginReliableWrite() (bool, error) {
 func (m *Gatt) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +121,7 @@ func (m *Gatt) Close() error {
 func (m *Gatt) Connect() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -129,7 +130,8 @@ func (m *Gatt) Connect() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.connect is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattConnect,
 		)
@@ -146,7 +148,7 @@ func (m *Gatt) Connect() (bool, error) {
 func (m *Gatt) Disconnect() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -168,7 +170,7 @@ func (m *Gatt) Disconnect() error {
 func (m *Gatt) DiscoverServices() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -177,7 +179,8 @@ func (m *Gatt) DiscoverServices() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.discoverServices is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattDiscoverServices,
 		)
@@ -194,7 +197,7 @@ func (m *Gatt) DiscoverServices() (bool, error) {
 func (m *Gatt) ExecuteReliableWrite() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -203,7 +206,8 @@ func (m *Gatt) ExecuteReliableWrite() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.executeReliableWrite is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattExecuteReliableWrite,
 		)
@@ -220,7 +224,7 @@ func (m *Gatt) ExecuteReliableWrite() (bool, error) {
 func (m *Gatt) GetConnectedDevices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -250,7 +254,7 @@ func (m *Gatt) GetConnectedDevices() (*jni.Object, error) {
 func (m *Gatt) GetConnectionState(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -276,7 +280,7 @@ func (m *Gatt) GetConnectionState(arg0 *jni.Object) (int32, error) {
 func (m *Gatt) GetDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -306,7 +310,7 @@ func (m *Gatt) GetDevice() (*jni.Object, error) {
 func (m *Gatt) GetDevicesMatchingConnectionStates(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -337,7 +341,7 @@ func (m *Gatt) GetDevicesMatchingConnectionStates(arg0 *jni.Object) (*jni.Object
 func (m *Gatt) GetService(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -368,7 +372,7 @@ func (m *Gatt) GetService(arg0 *jni.Object) (*jni.Object, error) {
 func (m *Gatt) GetServices() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -398,7 +402,7 @@ func (m *Gatt) GetServices() (*jni.Object, error) {
 func (m *Gatt) ReadCharacteristic(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -408,7 +412,8 @@ func (m *Gatt) ReadCharacteristic(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattReadCharacteristic, jni.ObjectValue(arg0),
 		)
@@ -425,7 +430,7 @@ func (m *Gatt) ReadCharacteristic(arg0 *jni.Object) (bool, error) {
 func (m *Gatt) ReadDescriptor(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -435,7 +440,8 @@ func (m *Gatt) ReadDescriptor(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattReadDescriptor, jni.ObjectValue(arg0),
 		)
@@ -452,7 +458,7 @@ func (m *Gatt) ReadDescriptor(arg0 *jni.Object) (bool, error) {
 func (m *Gatt) ReadPhy() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -474,7 +480,7 @@ func (m *Gatt) ReadPhy() error {
 func (m *Gatt) ReadRemoteRssi() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -483,7 +489,8 @@ func (m *Gatt) ReadRemoteRssi() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.readRemoteRssi is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattReadRemoteRssi,
 		)
@@ -500,7 +507,7 @@ func (m *Gatt) ReadRemoteRssi() (bool, error) {
 func (m *Gatt) RequestConnectionPriority(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -510,7 +517,8 @@ func (m *Gatt) RequestConnectionPriority(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattRequestConnectionPriority, jni.IntValue(arg0),
 		)
@@ -527,7 +535,7 @@ func (m *Gatt) RequestConnectionPriority(arg0 int32) (bool, error) {
 func (m *Gatt) RequestMtu(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -537,7 +545,8 @@ func (m *Gatt) RequestMtu(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattRequestMtu, jni.IntValue(arg0),
 		)
@@ -554,7 +563,7 @@ func (m *Gatt) RequestMtu(arg0 int32) (bool, error) {
 func (m *Gatt) SetCharacteristicNotification(arg0 *jni.Object, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -569,7 +578,8 @@ func (m *Gatt) SetCharacteristicNotification(arg0 *jni.Object, arg1 bool) (bool,
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattSetCharacteristicNotification, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -590,7 +600,7 @@ func (m *Gatt) SetPreferredPhy(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -613,7 +623,7 @@ func (m *Gatt) SetPreferredPhy(
 func (m *Gatt) WriteCharacteristic1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -623,7 +633,8 @@ func (m *Gatt) WriteCharacteristic1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattWriteCharacteristic1, jni.ObjectValue(arg0),
 		)
@@ -644,7 +655,7 @@ func (m *Gatt) WriteCharacteristic3_1(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -670,7 +681,7 @@ func (m *Gatt) WriteCharacteristic3_1(
 func (m *Gatt) WriteDescriptor1(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -680,7 +691,8 @@ func (m *Gatt) WriteDescriptor1(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midGattWriteDescriptor1, jni.ObjectValue(arg0),
 		)
@@ -697,7 +709,7 @@ func (m *Gatt) WriteDescriptor1(arg0 *jni.Object) (bool, error) {
 func (m *Gatt) WriteDescriptor2_1(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

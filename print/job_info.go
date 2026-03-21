@@ -27,7 +27,7 @@ type JobInfo struct {
 func (m *JobInfo) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *JobInfo) DescribeContents() (int32, error) {
 func (m *JobInfo) GetAdvancedIntOption(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -82,7 +82,7 @@ func (m *JobInfo) GetAdvancedIntOption(arg0 string) (int32, error) {
 func (m *JobInfo) GetAdvancedStringOption(arg0 string) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -96,7 +96,8 @@ func (m *JobInfo) GetAdvancedStringOption(arg0 string) (string, error) {
 			return err
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midJobInfoGetAdvancedStringOption, jni.ObjectValue(&jArg0.Object),
 		)
@@ -113,7 +114,7 @@ func (m *JobInfo) GetAdvancedStringOption(arg0 string) (string, error) {
 func (m *JobInfo) GetAttributes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -143,7 +144,7 @@ func (m *JobInfo) GetAttributes() (*jni.Object, error) {
 func (m *JobInfo) GetCopies() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -168,7 +169,7 @@ func (m *JobInfo) GetCopies() (int32, error) {
 func (m *JobInfo) GetCreationTime() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -193,7 +194,7 @@ func (m *JobInfo) GetCreationTime() (int64, error) {
 func (m *JobInfo) GetId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -223,7 +224,7 @@ func (m *JobInfo) GetId() (*jni.Object, error) {
 func (m *JobInfo) GetLabel() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -232,7 +233,8 @@ func (m *JobInfo) GetLabel() (string, error) {
 			callErr = fmt.Errorf("android.print.PrintJobInfo.getLabel is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midJobInfoGetLabel,
 		)
@@ -249,7 +251,7 @@ func (m *JobInfo) GetLabel() (string, error) {
 func (m *JobInfo) GetPages() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -279,7 +281,7 @@ func (m *JobInfo) GetPages() (*jni.Object, error) {
 func (m *JobInfo) GetPrinterId() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -309,7 +311,7 @@ func (m *JobInfo) GetPrinterId() (*jni.Object, error) {
 func (m *JobInfo) GetState() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -334,7 +336,7 @@ func (m *JobInfo) GetState() (int32, error) {
 func (m *JobInfo) HasAdvancedOption(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -348,7 +350,8 @@ func (m *JobInfo) HasAdvancedOption(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midJobInfoHasAdvancedOption, jni.ObjectValue(&jArg0.Object),
 		)
@@ -365,7 +368,7 @@ func (m *JobInfo) HasAdvancedOption(arg0 string) (bool, error) {
 func (m *JobInfo) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -374,7 +377,8 @@ func (m *JobInfo) ToString() (string, error) {
 			callErr = fmt.Errorf("android.print.PrintJobInfo.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midJobInfoToString,
 		)
@@ -391,7 +395,7 @@ func (m *JobInfo) ToString() (string, error) {
 func (m *JobInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

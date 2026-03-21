@@ -27,7 +27,7 @@ type ServerSocket struct {
 func (m *ServerSocket) Accept0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -57,7 +57,7 @@ func (m *ServerSocket) Accept0() (*jni.Object, error) {
 func (m *ServerSocket) Accept1_1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -88,7 +88,7 @@ func (m *ServerSocket) Accept1_1(arg0 int32) (*jni.Object, error) {
 func (m *ServerSocket) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -110,7 +110,7 @@ func (m *ServerSocket) Close() error {
 func (m *ServerSocket) GetPsm() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -135,7 +135,7 @@ func (m *ServerSocket) GetPsm() (int32, error) {
 func (m *ServerSocket) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -144,7 +144,8 @@ func (m *ServerSocket) ToString() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothServerSocket.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midServerSocketToString,
 		)

@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) AddPrimaryClipChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *Manager) AddPrimaryClipChangedListener(arg0 *jni.Object) error {
 func (m *Manager) ClearPrimaryClip() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -116,7 +116,7 @@ func (m *Manager) ClearPrimaryClip() error {
 func (m *Manager) GetPrimaryClip() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -146,7 +146,7 @@ func (m *Manager) GetPrimaryClip() (*jni.Object, error) {
 func (m *Manager) GetPrimaryClipDescription() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -176,7 +176,7 @@ func (m *Manager) GetPrimaryClipDescription() (*jni.Object, error) {
 func (m *Manager) GetText() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -185,7 +185,8 @@ func (m *Manager) GetText() (string, error) {
 			callErr = fmt.Errorf("android.content.ClipboardManager.getText is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetText,
 		)
@@ -202,7 +203,7 @@ func (m *Manager) GetText() (string, error) {
 func (m *Manager) HasPrimaryClip() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -211,7 +212,8 @@ func (m *Manager) HasPrimaryClip() (bool, error) {
 			callErr = fmt.Errorf("android.content.ClipboardManager.hasPrimaryClip is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHasPrimaryClip,
 		)
@@ -228,7 +230,7 @@ func (m *Manager) HasPrimaryClip() (bool, error) {
 func (m *Manager) HasText() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -237,7 +239,8 @@ func (m *Manager) HasText() (bool, error) {
 			callErr = fmt.Errorf("android.content.ClipboardManager.hasText is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerHasText,
 		)
@@ -254,7 +257,7 @@ func (m *Manager) HasText() (bool, error) {
 func (m *Manager) RemovePrimaryClipChangedListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -277,7 +280,7 @@ func (m *Manager) RemovePrimaryClipChangedListener(arg0 *jni.Object) error {
 func (m *Manager) SetPrimaryClip(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -300,7 +303,7 @@ func (m *Manager) SetPrimaryClip(arg0 *jni.Object) error {
 func (m *Manager) SetText(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

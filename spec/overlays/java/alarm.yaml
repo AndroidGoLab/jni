@@ -99,10 +99,7 @@ overrides:
         params: []
         returns: { go_type: void, error: true }
         implementation_notes: |
-          Note: Android AlarmManager has no cancelAll() method.
-          This is a convenience method that should be documented as requiring
-          the caller to track and cancel individual PendingIntents.
-          Remove this method if not feasible; rely on Cancel(intent) instead.
+          Direct delegation to cancelAll().
 
 transforms:
   time_to_millis:

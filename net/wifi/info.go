@@ -27,7 +27,7 @@ type Info struct {
 func (m *Info) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -52,7 +52,7 @@ func (m *Info) DescribeContents() (int32, error) {
 func (m *Info) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,8 @@ func (m *Info) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoEquals, jni.ObjectValue(arg0),
 		)
@@ -79,7 +80,7 @@ func (m *Info) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Info) GetAffiliatedMloLinks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -109,7 +110,7 @@ func (m *Info) GetAffiliatedMloLinks() (*jni.Object, error) {
 func (m *Info) GetApMldMacAddress() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -139,7 +140,7 @@ func (m *Info) GetApMldMacAddress() (*jni.Object, error) {
 func (m *Info) GetApMloLinkId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +165,7 @@ func (m *Info) GetApMloLinkId() (int32, error) {
 func (m *Info) GetApplicableRedactions() (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +190,7 @@ func (m *Info) GetApplicableRedactions() (int64, error) {
 func (m *Info) GetAssociatedMloLinks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +220,7 @@ func (m *Info) GetAssociatedMloLinks() (*jni.Object, error) {
 func (m *Info) GetBSSID() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -228,7 +229,8 @@ func (m *Info) GetBSSID() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getBSSID is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoGetBSSID,
 		)
@@ -245,7 +247,7 @@ func (m *Info) GetBSSID() (string, error) {
 func (m *Info) GetCurrentSecurityType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -270,7 +272,7 @@ func (m *Info) GetCurrentSecurityType() (int32, error) {
 func (m *Info) GetFrequency() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -295,7 +297,7 @@ func (m *Info) GetFrequency() (int32, error) {
 func (m *Info) GetHiddenSSID() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -304,7 +306,8 @@ func (m *Info) GetHiddenSSID() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getHiddenSSID is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoGetHiddenSSID,
 		)
@@ -321,7 +324,7 @@ func (m *Info) GetHiddenSSID() (bool, error) {
 func (m *Info) GetInformationElements() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -351,7 +354,7 @@ func (m *Info) GetInformationElements() (*jni.Object, error) {
 func (m *Info) GetIpAddress() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -376,7 +379,7 @@ func (m *Info) GetIpAddress() (int32, error) {
 func (m *Info) GetLinkSpeed() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -401,7 +404,7 @@ func (m *Info) GetLinkSpeed() (int32, error) {
 func (m *Info) GetMacAddress() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -410,7 +413,8 @@ func (m *Info) GetMacAddress() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getMacAddress is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoGetMacAddress,
 		)
@@ -427,7 +431,7 @@ func (m *Info) GetMacAddress() (string, error) {
 func (m *Info) GetMaxSupportedRxLinkSpeedMbps() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -452,7 +456,7 @@ func (m *Info) GetMaxSupportedRxLinkSpeedMbps() (int32, error) {
 func (m *Info) GetMaxSupportedTxLinkSpeedMbps() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -477,7 +481,7 @@ func (m *Info) GetMaxSupportedTxLinkSpeedMbps() (int32, error) {
 func (m *Info) GetNetworkId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -502,7 +506,7 @@ func (m *Info) GetNetworkId() (int32, error) {
 func (m *Info) GetPasspointFqdn() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -511,7 +515,8 @@ func (m *Info) GetPasspointFqdn() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getPasspointFqdn is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoGetPasspointFqdn,
 		)
@@ -528,7 +533,7 @@ func (m *Info) GetPasspointFqdn() (string, error) {
 func (m *Info) GetPasspointProviderFriendlyName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -537,7 +542,8 @@ func (m *Info) GetPasspointProviderFriendlyName() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getPasspointProviderFriendlyName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoGetPasspointProviderFriendlyName,
 		)
@@ -554,7 +560,7 @@ func (m *Info) GetPasspointProviderFriendlyName() (string, error) {
 func (m *Info) GetPasspointUniqueId() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -563,7 +569,8 @@ func (m *Info) GetPasspointUniqueId() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getPasspointUniqueId is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoGetPasspointUniqueId,
 		)
@@ -580,7 +587,7 @@ func (m *Info) GetPasspointUniqueId() (string, error) {
 func (m *Info) GetRssi() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -605,7 +612,7 @@ func (m *Info) GetRssi() (int32, error) {
 func (m *Info) GetRxLinkSpeedMbps() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -630,7 +637,7 @@ func (m *Info) GetRxLinkSpeedMbps() (int32, error) {
 func (m *Info) GetSSID() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -639,7 +646,8 @@ func (m *Info) GetSSID() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getSSID is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoGetSSID,
 		)
@@ -656,7 +664,7 @@ func (m *Info) GetSSID() (string, error) {
 func (m *Info) GetSubscriptionId() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -681,7 +689,7 @@ func (m *Info) GetSubscriptionId() (int32, error) {
 func (m *Info) GetSupplicantState() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -711,7 +719,7 @@ func (m *Info) GetSupplicantState() (*jni.Object, error) {
 func (m *Info) GetTxLinkSpeedMbps() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -736,7 +744,7 @@ func (m *Info) GetTxLinkSpeedMbps() (int32, error) {
 func (m *Info) GetWifiStandard() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -761,7 +769,7 @@ func (m *Info) GetWifiStandard() (int32, error) {
 func (m *Info) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -786,7 +794,7 @@ func (m *Info) HashCode() (int32, error) {
 func (m *Info) IsRestricted() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -795,7 +803,8 @@ func (m *Info) IsRestricted() (bool, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.isRestricted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midInfoIsRestricted,
 		)
@@ -812,7 +821,7 @@ func (m *Info) IsRestricted() (bool, error) {
 func (m *Info) MakeCopy(arg0 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -843,7 +852,7 @@ func (m *Info) MakeCopy(arg0 int64) (*jni.Object, error) {
 func (m *Info) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -852,7 +861,8 @@ func (m *Info) ToString() (string, error) {
 			callErr = fmt.Errorf("android.net.wifi.WifiInfo.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInfoToString,
 		)
@@ -869,7 +879,7 @@ func (m *Info) ToString() (string, error) {
 func (m *Info) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -892,7 +902,7 @@ func (m *Info) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 func (m *Info) GetDetailedStateOf(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

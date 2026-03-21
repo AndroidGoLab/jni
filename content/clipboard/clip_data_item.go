@@ -27,7 +27,7 @@ type ClipDataItem struct {
 func (m *ClipDataItem) CoerceToHtmlText(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -37,7 +37,8 @@ func (m *ClipDataItem) CoerceToHtmlText(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midClipDataItemCoerceToHtmlText, jni.ObjectValue(arg0),
 		)
@@ -54,7 +55,7 @@ func (m *ClipDataItem) CoerceToHtmlText(arg0 *jni.Object) (string, error) {
 func (m *ClipDataItem) CoerceToStyledText(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -64,7 +65,8 @@ func (m *ClipDataItem) CoerceToStyledText(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midClipDataItemCoerceToStyledText, jni.ObjectValue(arg0),
 		)
@@ -81,7 +83,7 @@ func (m *ClipDataItem) CoerceToStyledText(arg0 *jni.Object) (string, error) {
 func (m *ClipDataItem) CoerceToText(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -91,7 +93,8 @@ func (m *ClipDataItem) CoerceToText(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midClipDataItemCoerceToText, jni.ObjectValue(arg0),
 		)
@@ -108,7 +111,7 @@ func (m *ClipDataItem) CoerceToText(arg0 *jni.Object) (string, error) {
 func (m *ClipDataItem) GetHtmlText() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -117,7 +120,8 @@ func (m *ClipDataItem) GetHtmlText() (string, error) {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getHtmlText is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midClipDataItemGetHtmlText,
 		)
@@ -134,7 +138,7 @@ func (m *ClipDataItem) GetHtmlText() (string, error) {
 func (m *ClipDataItem) GetIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -164,7 +168,7 @@ func (m *ClipDataItem) GetIntent() (*jni.Object, error) {
 func (m *ClipDataItem) GetIntentSender() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -194,7 +198,7 @@ func (m *ClipDataItem) GetIntentSender() (*jni.Object, error) {
 func (m *ClipDataItem) GetText() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -203,7 +207,8 @@ func (m *ClipDataItem) GetText() (string, error) {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getText is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midClipDataItemGetText,
 		)
@@ -220,7 +225,7 @@ func (m *ClipDataItem) GetText() (string, error) {
 func (m *ClipDataItem) GetTextLinks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -250,7 +255,7 @@ func (m *ClipDataItem) GetTextLinks() (*jni.Object, error) {
 func (m *ClipDataItem) GetUri() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -280,7 +285,7 @@ func (m *ClipDataItem) GetUri() (*jni.Object, error) {
 func (m *ClipDataItem) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -289,7 +294,8 @@ func (m *ClipDataItem) ToString() (string, error) {
 			callErr = fmt.Errorf("android.content.ClipData$Item.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midClipDataItemToString,
 		)

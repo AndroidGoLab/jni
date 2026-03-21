@@ -27,7 +27,7 @@ type RendererPage struct {
 func (m *RendererPage) ApplyEdit(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -58,7 +58,7 @@ func (m *RendererPage) ApplyEdit(arg0 *jni.Object) (*jni.Object, error) {
 func (m *RendererPage) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -80,7 +80,7 @@ func (m *RendererPage) Close() error {
 func (m *RendererPage) GetFormWidgetInfoAtIndex(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -111,7 +111,7 @@ func (m *RendererPage) GetFormWidgetInfoAtIndex(arg0 int32) (*jni.Object, error)
 func (m *RendererPage) GetFormWidgetInfoAtPosition(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -142,7 +142,7 @@ func (m *RendererPage) GetFormWidgetInfoAtPosition(arg0 int32, arg1 int32) (*jni
 func (m *RendererPage) GetFormWidgetInfos0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -172,7 +172,7 @@ func (m *RendererPage) GetFormWidgetInfos0() (*jni.Object, error) {
 func (m *RendererPage) GetFormWidgetInfos1_1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -203,7 +203,7 @@ func (m *RendererPage) GetFormWidgetInfos1_1(arg0 *jni.Object) (*jni.Object, err
 func (m *RendererPage) GetGotoLinks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -233,7 +233,7 @@ func (m *RendererPage) GetGotoLinks() (*jni.Object, error) {
 func (m *RendererPage) GetHeight() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -258,7 +258,7 @@ func (m *RendererPage) GetHeight() (int32, error) {
 func (m *RendererPage) GetImageContents() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -288,7 +288,7 @@ func (m *RendererPage) GetImageContents() (*jni.Object, error) {
 func (m *RendererPage) GetIndex() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -313,7 +313,7 @@ func (m *RendererPage) GetIndex() (int32, error) {
 func (m *RendererPage) GetLinkContents() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -343,7 +343,7 @@ func (m *RendererPage) GetLinkContents() (*jni.Object, error) {
 func (m *RendererPage) GetTextContents() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -373,7 +373,7 @@ func (m *RendererPage) GetTextContents() (*jni.Object, error) {
 func (m *RendererPage) GetWidth() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -403,7 +403,7 @@ func (m *RendererPage) Render4(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -431,7 +431,7 @@ func (m *RendererPage) Render4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -454,7 +454,7 @@ func (m *RendererPage) Render4_1(
 func (m *RendererPage) SearchText(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -489,7 +489,7 @@ func (m *RendererPage) SearchText(arg0 string) (*jni.Object, error) {
 func (m *RendererPage) SelectContent(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

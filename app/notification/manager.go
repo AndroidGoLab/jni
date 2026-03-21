@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) AddAutomaticZenRule(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -81,7 +81,8 @@ func (m *Manager) AddAutomaticZenRule(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerAddAutomaticZenRule, jni.ObjectValue(arg0),
 		)
@@ -98,7 +99,7 @@ func (m *Manager) AddAutomaticZenRule(arg0 *jni.Object) (string, error) {
 func (m *Manager) AreAutomaticZenRulesUserManaged() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -107,7 +108,8 @@ func (m *Manager) AreAutomaticZenRulesUserManaged() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.areAutomaticZenRulesUserManaged is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAreAutomaticZenRulesUserManaged,
 		)
@@ -124,7 +126,7 @@ func (m *Manager) AreAutomaticZenRulesUserManaged() (bool, error) {
 func (m *Manager) AreBubblesAllowed() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -133,7 +135,8 @@ func (m *Manager) AreBubblesAllowed() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.areBubblesAllowed is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAreBubblesAllowed,
 		)
@@ -150,7 +153,7 @@ func (m *Manager) AreBubblesAllowed() (bool, error) {
 func (m *Manager) AreBubblesEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +162,8 @@ func (m *Manager) AreBubblesEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.areBubblesEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAreBubblesEnabled,
 		)
@@ -176,7 +180,7 @@ func (m *Manager) AreBubblesEnabled() (bool, error) {
 func (m *Manager) AreNotificationsEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -185,7 +189,8 @@ func (m *Manager) AreNotificationsEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.areNotificationsEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAreNotificationsEnabled,
 		)
@@ -202,7 +207,7 @@ func (m *Manager) AreNotificationsEnabled() (bool, error) {
 func (m *Manager) AreNotificationsPaused() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -211,7 +216,8 @@ func (m *Manager) AreNotificationsPaused() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.areNotificationsPaused is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerAreNotificationsPaused,
 		)
@@ -228,7 +234,7 @@ func (m *Manager) AreNotificationsPaused() (bool, error) {
 func (m *Manager) CanNotifyAsPackage(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -242,7 +248,8 @@ func (m *Manager) CanNotifyAsPackage(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerCanNotifyAsPackage, jni.ObjectValue(&jArg0.Object),
 		)
@@ -259,7 +266,7 @@ func (m *Manager) CanNotifyAsPackage(arg0 string) (bool, error) {
 func (m *Manager) CanPostPromotedNotifications() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -268,7 +275,8 @@ func (m *Manager) CanPostPromotedNotifications() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.canPostPromotedNotifications is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerCanPostPromotedNotifications,
 		)
@@ -285,7 +293,7 @@ func (m *Manager) CanPostPromotedNotifications() (bool, error) {
 func (m *Manager) CanUseFullScreenIntent() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -294,7 +302,8 @@ func (m *Manager) CanUseFullScreenIntent() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.canUseFullScreenIntent is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerCanUseFullScreenIntent,
 		)
@@ -311,7 +320,7 @@ func (m *Manager) CanUseFullScreenIntent() (bool, error) {
 func (m *Manager) Cancel1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -334,7 +343,7 @@ func (m *Manager) Cancel1(arg0 int32) error {
 func (m *Manager) Cancel2_1(arg0 string, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -361,7 +370,7 @@ func (m *Manager) Cancel2_1(arg0 string, arg1 int32) error {
 func (m *Manager) CancelAll() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -387,7 +396,7 @@ func (m *Manager) CancelAsPackage(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -419,7 +428,7 @@ func (m *Manager) CancelAsPackage(
 func (m *Manager) CreateNotificationChannel(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -442,7 +451,7 @@ func (m *Manager) CreateNotificationChannel(arg0 *jni.Object) error {
 func (m *Manager) CreateNotificationChannelGroup(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -465,7 +474,7 @@ func (m *Manager) CreateNotificationChannelGroup(arg0 *jni.Object) error {
 func (m *Manager) CreateNotificationChannelGroups(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -488,7 +497,7 @@ func (m *Manager) CreateNotificationChannelGroups(arg0 *jni.Object) error {
 func (m *Manager) CreateNotificationChannels(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -511,7 +520,7 @@ func (m *Manager) CreateNotificationChannels(arg0 *jni.Object) error {
 func (m *Manager) DeleteNotificationChannel(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -538,7 +547,7 @@ func (m *Manager) DeleteNotificationChannel(arg0 string) error {
 func (m *Manager) DeleteNotificationChannelGroup(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -565,7 +574,7 @@ func (m *Manager) DeleteNotificationChannelGroup(arg0 string) error {
 func (m *Manager) GetActiveNotifications() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -595,7 +604,7 @@ func (m *Manager) GetActiveNotifications() (*jni.Object, error) {
 func (m *Manager) GetAutomaticZenRule(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -630,7 +639,7 @@ func (m *Manager) GetAutomaticZenRule(arg0 string) (*jni.Object, error) {
 func (m *Manager) GetAutomaticZenRuleState(arg0 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -660,7 +669,7 @@ func (m *Manager) GetAutomaticZenRuleState(arg0 string) (int32, error) {
 func (m *Manager) GetBubblePreference() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -685,7 +694,7 @@ func (m *Manager) GetBubblePreference() (int32, error) {
 func (m *Manager) GetConsolidatedNotificationPolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -715,7 +724,7 @@ func (m *Manager) GetConsolidatedNotificationPolicy() (*jni.Object, error) {
 func (m *Manager) GetCurrentInterruptionFilter() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -740,7 +749,7 @@ func (m *Manager) GetCurrentInterruptionFilter() (int32, error) {
 func (m *Manager) GetImportance() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -765,7 +774,7 @@ func (m *Manager) GetImportance() (int32, error) {
 func (m *Manager) GetNotificationChannel1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -800,7 +809,7 @@ func (m *Manager) GetNotificationChannel1(arg0 string) (*jni.Object, error) {
 func (m *Manager) GetNotificationChannel2_1(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -840,7 +849,7 @@ func (m *Manager) GetNotificationChannel2_1(arg0 string, arg1 string) (*jni.Obje
 func (m *Manager) GetNotificationChannelGroup(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -875,7 +884,7 @@ func (m *Manager) GetNotificationChannelGroup(arg0 string) (*jni.Object, error) 
 func (m *Manager) GetNotificationChannelGroups() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -905,7 +914,7 @@ func (m *Manager) GetNotificationChannelGroups() (*jni.Object, error) {
 func (m *Manager) GetNotificationChannels() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -935,7 +944,7 @@ func (m *Manager) GetNotificationChannels() (*jni.Object, error) {
 func (m *Manager) GetNotificationDelegate() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -944,7 +953,8 @@ func (m *Manager) GetNotificationDelegate() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.getNotificationDelegate is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetNotificationDelegate,
 		)
@@ -961,7 +971,7 @@ func (m *Manager) GetNotificationDelegate() (string, error) {
 func (m *Manager) GetNotificationPolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -991,7 +1001,7 @@ func (m *Manager) GetNotificationPolicy() (*jni.Object, error) {
 func (m *Manager) IsNotificationListenerAccessGranted(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1001,7 +1011,8 @@ func (m *Manager) IsNotificationListenerAccessGranted(arg0 *jni.Object) (bool, e
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsNotificationListenerAccessGranted, jni.ObjectValue(arg0),
 		)
@@ -1018,7 +1029,7 @@ func (m *Manager) IsNotificationListenerAccessGranted(arg0 *jni.Object) (bool, e
 func (m *Manager) IsNotificationPolicyAccessGranted() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1027,7 +1038,8 @@ func (m *Manager) IsNotificationPolicyAccessGranted() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.isNotificationPolicyAccessGranted is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsNotificationPolicyAccessGranted,
 		)
@@ -1044,7 +1056,7 @@ func (m *Manager) IsNotificationPolicyAccessGranted() (bool, error) {
 func (m *Manager) MatchesCallFilter(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1054,7 +1066,8 @@ func (m *Manager) MatchesCallFilter(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerMatchesCallFilter, jni.ObjectValue(arg0),
 		)
@@ -1071,7 +1084,7 @@ func (m *Manager) MatchesCallFilter(arg0 *jni.Object) (bool, error) {
 func (m *Manager) Notify2(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1098,7 +1111,7 @@ func (m *Manager) Notify3_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1130,7 +1143,7 @@ func (m *Manager) NotifyAsPackage(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1162,7 +1175,7 @@ func (m *Manager) NotifyAsPackage(
 func (m *Manager) RemoveAutomaticZenRule(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1176,7 +1189,8 @@ func (m *Manager) RemoveAutomaticZenRule(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerRemoveAutomaticZenRule, jni.ObjectValue(&jArg0.Object),
 		)
@@ -1193,7 +1207,7 @@ func (m *Manager) RemoveAutomaticZenRule(arg0 string) (bool, error) {
 func (m *Manager) SetAutomaticZenRuleState(arg0 string, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1220,7 +1234,7 @@ func (m *Manager) SetAutomaticZenRuleState(arg0 string, arg1 *jni.Object) error 
 func (m *Manager) SetInterruptionFilter(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1243,7 +1257,7 @@ func (m *Manager) SetInterruptionFilter(arg0 int32) error {
 func (m *Manager) SetNotificationDelegate(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1270,7 +1284,7 @@ func (m *Manager) SetNotificationDelegate(arg0 string) error {
 func (m *Manager) SetNotificationPolicy(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1293,7 +1307,7 @@ func (m *Manager) SetNotificationPolicy(arg0 *jni.Object) error {
 func (m *Manager) ShouldHideSilentStatusBarIcons() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1302,7 +1316,8 @@ func (m *Manager) ShouldHideSilentStatusBarIcons() (bool, error) {
 			callErr = fmt.Errorf("android.app.NotificationManager.shouldHideSilentStatusBarIcons is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerShouldHideSilentStatusBarIcons,
 		)
@@ -1319,7 +1334,7 @@ func (m *Manager) ShouldHideSilentStatusBarIcons() (bool, error) {
 func (m *Manager) UpdateAutomaticZenRule(arg0 string, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1333,7 +1348,8 @@ func (m *Manager) UpdateAutomaticZenRule(arg0 string, arg1 *jni.Object) (bool, e
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerUpdateAutomaticZenRule, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)

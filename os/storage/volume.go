@@ -27,7 +27,7 @@ type Volume struct {
 func (m *Volume) CreateAccessIntent(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -62,7 +62,7 @@ func (m *Volume) CreateAccessIntent(arg0 string) (*jni.Object, error) {
 func (m *Volume) CreateOpenDocumentTreeIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -92,7 +92,7 @@ func (m *Volume) CreateOpenDocumentTreeIntent() (*jni.Object, error) {
 func (m *Volume) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -117,7 +117,7 @@ func (m *Volume) DescribeContents() (int32, error) {
 func (m *Volume) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -127,7 +127,8 @@ func (m *Volume) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVolumeEquals, jni.ObjectValue(arg0),
 		)
@@ -144,7 +145,7 @@ func (m *Volume) Equals(arg0 *jni.Object) (bool, error) {
 func (m *Volume) GetDescription(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -154,7 +155,8 @@ func (m *Volume) GetDescription(arg0 *jni.Object) (string, error) {
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midVolumeGetDescription, jni.ObjectValue(arg0),
 		)
@@ -171,7 +173,7 @@ func (m *Volume) GetDescription(arg0 *jni.Object) (string, error) {
 func (m *Volume) GetDirectory() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -201,7 +203,7 @@ func (m *Volume) GetDirectory() (*jni.Object, error) {
 func (m *Volume) GetMediaStoreVolumeName() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -210,7 +212,8 @@ func (m *Volume) GetMediaStoreVolumeName() (string, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageVolume.getMediaStoreVolumeName is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midVolumeGetMediaStoreVolumeName,
 		)
@@ -227,7 +230,7 @@ func (m *Volume) GetMediaStoreVolumeName() (string, error) {
 func (m *Volume) GetOwner() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -257,7 +260,7 @@ func (m *Volume) GetOwner() (*jni.Object, error) {
 func (m *Volume) GetState() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -266,7 +269,8 @@ func (m *Volume) GetState() (string, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageVolume.getState is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midVolumeGetState,
 		)
@@ -283,7 +287,7 @@ func (m *Volume) GetState() (string, error) {
 func (m *Volume) GetStorageUuid() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -313,7 +317,7 @@ func (m *Volume) GetStorageUuid() (*jni.Object, error) {
 func (m *Volume) GetUuid() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -322,7 +326,8 @@ func (m *Volume) GetUuid() (string, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageVolume.getUuid is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midVolumeGetUuid,
 		)
@@ -339,7 +344,7 @@ func (m *Volume) GetUuid() (string, error) {
 func (m *Volume) HashCode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -364,7 +369,7 @@ func (m *Volume) HashCode() (int32, error) {
 func (m *Volume) IsEmulated() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -373,7 +378,8 @@ func (m *Volume) IsEmulated() (bool, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageVolume.isEmulated is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVolumeIsEmulated,
 		)
@@ -390,7 +396,7 @@ func (m *Volume) IsEmulated() (bool, error) {
 func (m *Volume) IsPrimary() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -399,7 +405,8 @@ func (m *Volume) IsPrimary() (bool, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageVolume.isPrimary is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVolumeIsPrimary,
 		)
@@ -416,7 +423,7 @@ func (m *Volume) IsPrimary() (bool, error) {
 func (m *Volume) IsRemovable() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -425,7 +432,8 @@ func (m *Volume) IsRemovable() (bool, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageVolume.isRemovable is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midVolumeIsRemovable,
 		)
@@ -442,7 +450,7 @@ func (m *Volume) IsRemovable() (bool, error) {
 func (m *Volume) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -451,7 +459,8 @@ func (m *Volume) ToString() (string, error) {
 			callErr = fmt.Errorf("android.os.storage.StorageVolume.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midVolumeToString,
 		)
@@ -468,7 +477,7 @@ func (m *Volume) ToString() (string, error) {
 func (m *Volume) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

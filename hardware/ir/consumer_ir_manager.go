@@ -71,7 +71,7 @@ func (m *ConsumerIrManager) Close() {
 func (m *ConsumerIrManager) GetCarrierFrequencies() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -101,7 +101,7 @@ func (m *ConsumerIrManager) GetCarrierFrequencies() (*jni.Object, error) {
 func (m *ConsumerIrManager) HasIrEmitter() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -110,7 +110,8 @@ func (m *ConsumerIrManager) HasIrEmitter() (bool, error) {
 			callErr = fmt.Errorf("android.hardware.ConsumerIrManager.hasIrEmitter is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midConsumerIrManagerHasIrEmitter,
 		)
@@ -127,7 +128,7 @@ func (m *ConsumerIrManager) HasIrEmitter() (bool, error) {
 func (m *ConsumerIrManager) Transmit(arg0 int32, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

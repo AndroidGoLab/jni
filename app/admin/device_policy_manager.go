@@ -71,7 +71,7 @@ func (m *DevicePolicyManager) Close() {
 func (m *DevicePolicyManager) AcknowledgeDeviceCompliant() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -97,7 +97,7 @@ func (m *DevicePolicyManager) AddCrossProfileIntentFilter(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -120,7 +120,7 @@ func (m *DevicePolicyManager) AddCrossProfileIntentFilter(
 func (m *DevicePolicyManager) AddCrossProfileWidgetProvider(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -135,7 +135,8 @@ func (m *DevicePolicyManager) AddCrossProfileWidgetProvider(arg0 *jni.Object, ar
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerAddCrossProfileWidgetProvider, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -152,7 +153,7 @@ func (m *DevicePolicyManager) AddCrossProfileWidgetProvider(arg0 *jni.Object, ar
 func (m *DevicePolicyManager) AddOverrideApn(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -182,7 +183,7 @@ func (m *DevicePolicyManager) AddPersistentPreferredActivity(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -205,7 +206,7 @@ func (m *DevicePolicyManager) AddPersistentPreferredActivity(
 func (m *DevicePolicyManager) AddUserRestriction(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -233,7 +234,7 @@ func (m *DevicePolicyManager) AddUserRestriction(arg0 *jni.Object, arg1 string) 
 func (m *DevicePolicyManager) AddUserRestrictionGlobally(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -266,7 +267,7 @@ func (m *DevicePolicyManager) BindDeviceAdminServiceAsUser5(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -276,7 +277,8 @@ func (m *DevicePolicyManager) BindDeviceAdminServiceAsUser5(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerBindDeviceAdminServiceAsUser5, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
 		)
@@ -299,7 +301,7 @@ func (m *DevicePolicyManager) BindDeviceAdminServiceAsUser5_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -309,7 +311,8 @@ func (m *DevicePolicyManager) BindDeviceAdminServiceAsUser5_1(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerBindDeviceAdminServiceAsUser5_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
 		)
@@ -326,7 +329,7 @@ func (m *DevicePolicyManager) BindDeviceAdminServiceAsUser5_1(
 func (m *DevicePolicyManager) CanAdminGrantSensorsPermissions() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -335,7 +338,8 @@ func (m *DevicePolicyManager) CanAdminGrantSensorsPermissions() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.canAdminGrantSensorsPermissions is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerCanAdminGrantSensorsPermissions,
 		)
@@ -352,7 +356,7 @@ func (m *DevicePolicyManager) CanAdminGrantSensorsPermissions() (bool, error) {
 func (m *DevicePolicyManager) CanUsbDataSignalingBeDisabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -361,7 +365,8 @@ func (m *DevicePolicyManager) CanUsbDataSignalingBeDisabled() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.canUsbDataSignalingBeDisabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerCanUsbDataSignalingBeDisabled,
 		)
@@ -383,7 +388,7 @@ func (m *DevicePolicyManager) ClearApplicationUserData(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -411,7 +416,7 @@ func (m *DevicePolicyManager) ClearApplicationUserData(
 func (m *DevicePolicyManager) ClearCrossProfileIntentFilters(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -434,7 +439,7 @@ func (m *DevicePolicyManager) ClearCrossProfileIntentFilters(arg0 *jni.Object) e
 func (m *DevicePolicyManager) ClearDeviceOwnerApp(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -461,7 +466,7 @@ func (m *DevicePolicyManager) ClearDeviceOwnerApp(arg0 string) error {
 func (m *DevicePolicyManager) ClearPackagePersistentPreferredActivities(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -489,7 +494,7 @@ func (m *DevicePolicyManager) ClearPackagePersistentPreferredActivities(arg0 *jn
 func (m *DevicePolicyManager) ClearProfileOwner(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -512,7 +517,7 @@ func (m *DevicePolicyManager) ClearProfileOwner(arg0 *jni.Object) error {
 func (m *DevicePolicyManager) ClearResetPasswordToken(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -522,7 +527,8 @@ func (m *DevicePolicyManager) ClearResetPasswordToken(arg0 *jni.Object) (bool, e
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerClearResetPasswordToken, jni.ObjectValue(arg0),
 		)
@@ -539,7 +545,7 @@ func (m *DevicePolicyManager) ClearResetPasswordToken(arg0 *jni.Object) (bool, e
 func (m *DevicePolicyManager) ClearUserRestriction(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -567,7 +573,7 @@ func (m *DevicePolicyManager) ClearUserRestriction(arg0 *jni.Object, arg1 string
 func (m *DevicePolicyManager) CreateAdminSupportIntent(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -608,7 +614,7 @@ func (m *DevicePolicyManager) CreateAndManageUser(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -644,7 +650,7 @@ func (m *DevicePolicyManager) CreateAndManageUser(
 func (m *DevicePolicyManager) EnableSystemApp2(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -670,7 +676,7 @@ func (m *DevicePolicyManager) EnableSystemApp2(arg0 *jni.Object, arg1 *jni.Objec
 func (m *DevicePolicyManager) EnableSystemApp2_1(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -703,7 +709,7 @@ func (m *DevicePolicyManager) GenerateKeyPair(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -739,7 +745,7 @@ func (m *DevicePolicyManager) GenerateKeyPair(
 func (m *DevicePolicyManager) GetAccountTypesWithManagementDisabled() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -769,7 +775,7 @@ func (m *DevicePolicyManager) GetAccountTypesWithManagementDisabled() (*jni.Obje
 func (m *DevicePolicyManager) GetActiveAdmins() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -799,7 +805,7 @@ func (m *DevicePolicyManager) GetActiveAdmins() (*jni.Object, error) {
 func (m *DevicePolicyManager) GetAffiliationIds(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -830,7 +836,7 @@ func (m *DevicePolicyManager) GetAffiliationIds(arg0 *jni.Object) (*jni.Object, 
 func (m *DevicePolicyManager) GetAlwaysOnVpnLockdownWhitelist(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -861,7 +867,7 @@ func (m *DevicePolicyManager) GetAlwaysOnVpnLockdownWhitelist(arg0 *jni.Object) 
 func (m *DevicePolicyManager) GetAlwaysOnVpnPackage(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -871,7 +877,8 @@ func (m *DevicePolicyManager) GetAlwaysOnVpnPackage(arg0 *jni.Object) (string, e
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetAlwaysOnVpnPackage, jni.ObjectValue(arg0),
 		)
@@ -888,7 +895,7 @@ func (m *DevicePolicyManager) GetAlwaysOnVpnPackage(arg0 *jni.Object) (string, e
 func (m *DevicePolicyManager) GetAppFunctionsPolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -913,7 +920,7 @@ func (m *DevicePolicyManager) GetAppFunctionsPolicy() (int32, error) {
 func (m *DevicePolicyManager) GetApplicationRestrictions(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -949,7 +956,7 @@ func (m *DevicePolicyManager) GetApplicationRestrictions(arg0 *jni.Object, arg1 
 func (m *DevicePolicyManager) GetApplicationRestrictionsManagingPackage(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -959,7 +966,8 @@ func (m *DevicePolicyManager) GetApplicationRestrictionsManagingPackage(arg0 *jn
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetApplicationRestrictionsManagingPackage, jni.ObjectValue(arg0),
 		)
@@ -976,7 +984,7 @@ func (m *DevicePolicyManager) GetApplicationRestrictionsManagingPackage(arg0 *jn
 func (m *DevicePolicyManager) GetAutoTimeEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -986,7 +994,8 @@ func (m *DevicePolicyManager) GetAutoTimeEnabled(arg0 *jni.Object) (bool, error)
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetAutoTimeEnabled, jni.ObjectValue(arg0),
 		)
@@ -1003,7 +1012,7 @@ func (m *DevicePolicyManager) GetAutoTimeEnabled(arg0 *jni.Object) (bool, error)
 func (m *DevicePolicyManager) GetAutoTimePolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1028,7 +1037,7 @@ func (m *DevicePolicyManager) GetAutoTimePolicy() (int32, error) {
 func (m *DevicePolicyManager) GetAutoTimeRequired() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1037,7 +1046,8 @@ func (m *DevicePolicyManager) GetAutoTimeRequired() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAutoTimeRequired is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetAutoTimeRequired,
 		)
@@ -1054,7 +1064,7 @@ func (m *DevicePolicyManager) GetAutoTimeRequired() (bool, error) {
 func (m *DevicePolicyManager) GetAutoTimeZoneEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1064,7 +1074,8 @@ func (m *DevicePolicyManager) GetAutoTimeZoneEnabled(arg0 *jni.Object) (bool, er
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetAutoTimeZoneEnabled, jni.ObjectValue(arg0),
 		)
@@ -1081,7 +1092,7 @@ func (m *DevicePolicyManager) GetAutoTimeZoneEnabled(arg0 *jni.Object) (bool, er
 func (m *DevicePolicyManager) GetAutoTimeZonePolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1106,7 +1117,7 @@ func (m *DevicePolicyManager) GetAutoTimeZonePolicy() (int32, error) {
 func (m *DevicePolicyManager) GetBindDeviceAdminTargetUsers(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1137,7 +1148,7 @@ func (m *DevicePolicyManager) GetBindDeviceAdminTargetUsers(arg0 *jni.Object) (*
 func (m *DevicePolicyManager) GetBluetoothContactSharingDisabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1147,7 +1158,8 @@ func (m *DevicePolicyManager) GetBluetoothContactSharingDisabled(arg0 *jni.Objec
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetBluetoothContactSharingDisabled, jni.ObjectValue(arg0),
 		)
@@ -1164,7 +1176,7 @@ func (m *DevicePolicyManager) GetBluetoothContactSharingDisabled(arg0 *jni.Objec
 func (m *DevicePolicyManager) GetCameraDisabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1174,7 +1186,8 @@ func (m *DevicePolicyManager) GetCameraDisabled(arg0 *jni.Object) (bool, error) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetCameraDisabled, jni.ObjectValue(arg0),
 		)
@@ -1191,7 +1204,7 @@ func (m *DevicePolicyManager) GetCameraDisabled(arg0 *jni.Object) (bool, error) 
 func (m *DevicePolicyManager) GetCertInstallerPackage(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1201,7 +1214,8 @@ func (m *DevicePolicyManager) GetCertInstallerPackage(arg0 *jni.Object) (string,
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetCertInstallerPackage, jni.ObjectValue(arg0),
 		)
@@ -1218,7 +1232,7 @@ func (m *DevicePolicyManager) GetCertInstallerPackage(arg0 *jni.Object) (string,
 func (m *DevicePolicyManager) GetContentProtectionPolicy(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1244,7 +1258,7 @@ func (m *DevicePolicyManager) GetContentProtectionPolicy(arg0 *jni.Object) (int3
 func (m *DevicePolicyManager) GetCredentialManagerPolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1274,7 +1288,7 @@ func (m *DevicePolicyManager) GetCredentialManagerPolicy() (*jni.Object, error) 
 func (m *DevicePolicyManager) GetCrossProfileCalendarPackages(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1305,7 +1319,7 @@ func (m *DevicePolicyManager) GetCrossProfileCalendarPackages(arg0 *jni.Object) 
 func (m *DevicePolicyManager) GetCrossProfileCallerIdDisabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1315,7 +1329,8 @@ func (m *DevicePolicyManager) GetCrossProfileCallerIdDisabled(arg0 *jni.Object) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetCrossProfileCallerIdDisabled, jni.ObjectValue(arg0),
 		)
@@ -1332,7 +1347,7 @@ func (m *DevicePolicyManager) GetCrossProfileCallerIdDisabled(arg0 *jni.Object) 
 func (m *DevicePolicyManager) GetCrossProfileContactsSearchDisabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1342,7 +1357,8 @@ func (m *DevicePolicyManager) GetCrossProfileContactsSearchDisabled(arg0 *jni.Ob
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetCrossProfileContactsSearchDisabled, jni.ObjectValue(arg0),
 		)
@@ -1359,7 +1375,7 @@ func (m *DevicePolicyManager) GetCrossProfileContactsSearchDisabled(arg0 *jni.Ob
 func (m *DevicePolicyManager) GetCrossProfilePackages(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1390,7 +1406,7 @@ func (m *DevicePolicyManager) GetCrossProfilePackages(arg0 *jni.Object) (*jni.Ob
 func (m *DevicePolicyManager) GetCrossProfileWidgetProviders(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1421,7 +1437,7 @@ func (m *DevicePolicyManager) GetCrossProfileWidgetProviders(arg0 *jni.Object) (
 func (m *DevicePolicyManager) GetCurrentFailedPasswordAttempts() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1446,7 +1462,7 @@ func (m *DevicePolicyManager) GetCurrentFailedPasswordAttempts() (int32, error) 
 func (m *DevicePolicyManager) GetDelegatePackages(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1482,7 +1498,7 @@ func (m *DevicePolicyManager) GetDelegatePackages(arg0 *jni.Object, arg1 string)
 func (m *DevicePolicyManager) GetDelegatedScopes(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1518,7 +1534,7 @@ func (m *DevicePolicyManager) GetDelegatedScopes(arg0 *jni.Object, arg1 string) 
 func (m *DevicePolicyManager) GetDeviceOwnerLockScreenInfo() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1527,7 +1543,8 @@ func (m *DevicePolicyManager) GetDeviceOwnerLockScreenInfo() (string, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDeviceOwnerLockScreenInfo is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetDeviceOwnerLockScreenInfo,
 		)
@@ -1544,7 +1561,7 @@ func (m *DevicePolicyManager) GetDeviceOwnerLockScreenInfo() (string, error) {
 func (m *DevicePolicyManager) GetDevicePolicyManagementRoleHolderPackage() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1553,7 +1570,8 @@ func (m *DevicePolicyManager) GetDevicePolicyManagementRoleHolderPackage() (stri
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDevicePolicyManagementRoleHolderPackage is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetDevicePolicyManagementRoleHolderPackage,
 		)
@@ -1570,7 +1588,7 @@ func (m *DevicePolicyManager) GetDevicePolicyManagementRoleHolderPackage() (stri
 func (m *DevicePolicyManager) GetEndUserSessionMessage(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1580,7 +1598,8 @@ func (m *DevicePolicyManager) GetEndUserSessionMessage(arg0 *jni.Object) (string
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetEndUserSessionMessage, jni.ObjectValue(arg0),
 		)
@@ -1597,7 +1616,7 @@ func (m *DevicePolicyManager) GetEndUserSessionMessage(arg0 *jni.Object) (string
 func (m *DevicePolicyManager) GetEnrollmentSpecificId() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1606,7 +1625,8 @@ func (m *DevicePolicyManager) GetEnrollmentSpecificId() (string, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getEnrollmentSpecificId is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetEnrollmentSpecificId,
 		)
@@ -1623,7 +1643,7 @@ func (m *DevicePolicyManager) GetEnrollmentSpecificId() (string, error) {
 func (m *DevicePolicyManager) GetFactoryResetProtectionPolicy(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1654,7 +1674,7 @@ func (m *DevicePolicyManager) GetFactoryResetProtectionPolicy(arg0 *jni.Object) 
 func (m *DevicePolicyManager) GetGlobalPrivateDnsHost(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1664,7 +1684,8 @@ func (m *DevicePolicyManager) GetGlobalPrivateDnsHost(arg0 *jni.Object) (string,
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetGlobalPrivateDnsHost, jni.ObjectValue(arg0),
 		)
@@ -1681,7 +1702,7 @@ func (m *DevicePolicyManager) GetGlobalPrivateDnsHost(arg0 *jni.Object) (string,
 func (m *DevicePolicyManager) GetGlobalPrivateDnsMode(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1707,7 +1728,7 @@ func (m *DevicePolicyManager) GetGlobalPrivateDnsMode(arg0 *jni.Object) (int32, 
 func (m *DevicePolicyManager) GetInstalledCaCerts(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1738,7 +1759,7 @@ func (m *DevicePolicyManager) GetInstalledCaCerts(arg0 *jni.Object) (*jni.Object
 func (m *DevicePolicyManager) GetKeepUninstalledPackages(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1769,7 +1790,7 @@ func (m *DevicePolicyManager) GetKeepUninstalledPackages(arg0 *jni.Object) (*jni
 func (m *DevicePolicyManager) GetKeyguardDisabledFeatures(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1795,7 +1816,7 @@ func (m *DevicePolicyManager) GetKeyguardDisabledFeatures(arg0 *jni.Object) (int
 func (m *DevicePolicyManager) GetLockTaskFeatures(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1821,7 +1842,7 @@ func (m *DevicePolicyManager) GetLockTaskFeatures(arg0 *jni.Object) (int32, erro
 func (m *DevicePolicyManager) GetLockTaskPackages(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1852,7 +1873,7 @@ func (m *DevicePolicyManager) GetLockTaskPackages(arg0 *jni.Object) (*jni.Object
 func (m *DevicePolicyManager) GetLongSupportMessage(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1862,7 +1883,8 @@ func (m *DevicePolicyManager) GetLongSupportMessage(arg0 *jni.Object) (string, e
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetLongSupportMessage, jni.ObjectValue(arg0),
 		)
@@ -1879,7 +1901,7 @@ func (m *DevicePolicyManager) GetLongSupportMessage(arg0 *jni.Object) (string, e
 func (m *DevicePolicyManager) GetManagedProfileCallerIdAccessPolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1909,7 +1931,7 @@ func (m *DevicePolicyManager) GetManagedProfileCallerIdAccessPolicy() (*jni.Obje
 func (m *DevicePolicyManager) GetManagedProfileContactsAccessPolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1939,7 +1961,7 @@ func (m *DevicePolicyManager) GetManagedProfileContactsAccessPolicy() (*jni.Obje
 func (m *DevicePolicyManager) GetManagedProfileMaximumTimeOff(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1965,7 +1987,7 @@ func (m *DevicePolicyManager) GetManagedProfileMaximumTimeOff(arg0 *jni.Object) 
 func (m *DevicePolicyManager) GetManagedSubscriptionsPolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1995,7 +2017,7 @@ func (m *DevicePolicyManager) GetManagedSubscriptionsPolicy() (*jni.Object, erro
 func (m *DevicePolicyManager) GetMaximumFailedPasswordsForWipe(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2021,7 +2043,7 @@ func (m *DevicePolicyManager) GetMaximumFailedPasswordsForWipe(arg0 *jni.Object)
 func (m *DevicePolicyManager) GetMaximumTimeToLock(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2047,7 +2069,7 @@ func (m *DevicePolicyManager) GetMaximumTimeToLock(arg0 *jni.Object) (int64, err
 func (m *DevicePolicyManager) GetMeteredDataDisabledPackages(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2078,7 +2100,7 @@ func (m *DevicePolicyManager) GetMeteredDataDisabledPackages(arg0 *jni.Object) (
 func (m *DevicePolicyManager) GetMinimumRequiredWifiSecurityLevel() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2103,7 +2125,7 @@ func (m *DevicePolicyManager) GetMinimumRequiredWifiSecurityLevel() (int32, erro
 func (m *DevicePolicyManager) GetMtePolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2128,7 +2150,7 @@ func (m *DevicePolicyManager) GetMtePolicy() (int32, error) {
 func (m *DevicePolicyManager) GetNearbyAppStreamingPolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2153,7 +2175,7 @@ func (m *DevicePolicyManager) GetNearbyAppStreamingPolicy() (int32, error) {
 func (m *DevicePolicyManager) GetNearbyNotificationStreamingPolicy() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2178,7 +2200,7 @@ func (m *DevicePolicyManager) GetNearbyNotificationStreamingPolicy() (int32, err
 func (m *DevicePolicyManager) GetOrganizationColor(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2204,7 +2226,7 @@ func (m *DevicePolicyManager) GetOrganizationColor(arg0 *jni.Object) (int32, err
 func (m *DevicePolicyManager) GetOrganizationName(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2214,7 +2236,8 @@ func (m *DevicePolicyManager) GetOrganizationName(arg0 *jni.Object) (string, err
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetOrganizationName, jni.ObjectValue(arg0),
 		)
@@ -2231,7 +2254,7 @@ func (m *DevicePolicyManager) GetOrganizationName(arg0 *jni.Object) (string, err
 func (m *DevicePolicyManager) GetOverrideApns(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2262,7 +2285,7 @@ func (m *DevicePolicyManager) GetOverrideApns(arg0 *jni.Object) (*jni.Object, er
 func (m *DevicePolicyManager) GetParentProfileInstance(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2293,7 +2316,7 @@ func (m *DevicePolicyManager) GetParentProfileInstance(arg0 *jni.Object) (*jni.O
 func (m *DevicePolicyManager) GetPasswordComplexity() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2318,7 +2341,7 @@ func (m *DevicePolicyManager) GetPasswordComplexity() (int32, error) {
 func (m *DevicePolicyManager) GetPasswordExpiration(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2344,7 +2367,7 @@ func (m *DevicePolicyManager) GetPasswordExpiration(arg0 *jni.Object) (int64, er
 func (m *DevicePolicyManager) GetPasswordExpirationTimeout(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2370,7 +2393,7 @@ func (m *DevicePolicyManager) GetPasswordExpirationTimeout(arg0 *jni.Object) (in
 func (m *DevicePolicyManager) GetPasswordHistoryLength(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2396,7 +2419,7 @@ func (m *DevicePolicyManager) GetPasswordHistoryLength(arg0 *jni.Object) (int32,
 func (m *DevicePolicyManager) GetPasswordMaximumLength(arg0 int32) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2422,7 +2445,7 @@ func (m *DevicePolicyManager) GetPasswordMaximumLength(arg0 int32) (int32, error
 func (m *DevicePolicyManager) GetPasswordMinimumLength(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2448,7 +2471,7 @@ func (m *DevicePolicyManager) GetPasswordMinimumLength(arg0 *jni.Object) (int32,
 func (m *DevicePolicyManager) GetPasswordMinimumLetters(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2474,7 +2497,7 @@ func (m *DevicePolicyManager) GetPasswordMinimumLetters(arg0 *jni.Object) (int32
 func (m *DevicePolicyManager) GetPasswordMinimumLowerCase(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2500,7 +2523,7 @@ func (m *DevicePolicyManager) GetPasswordMinimumLowerCase(arg0 *jni.Object) (int
 func (m *DevicePolicyManager) GetPasswordMinimumNonLetter(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2526,7 +2549,7 @@ func (m *DevicePolicyManager) GetPasswordMinimumNonLetter(arg0 *jni.Object) (int
 func (m *DevicePolicyManager) GetPasswordMinimumNumeric(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2552,7 +2575,7 @@ func (m *DevicePolicyManager) GetPasswordMinimumNumeric(arg0 *jni.Object) (int32
 func (m *DevicePolicyManager) GetPasswordMinimumSymbols(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2578,7 +2601,7 @@ func (m *DevicePolicyManager) GetPasswordMinimumSymbols(arg0 *jni.Object) (int32
 func (m *DevicePolicyManager) GetPasswordMinimumUpperCase(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2604,7 +2627,7 @@ func (m *DevicePolicyManager) GetPasswordMinimumUpperCase(arg0 *jni.Object) (int
 func (m *DevicePolicyManager) GetPasswordQuality(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2630,7 +2653,7 @@ func (m *DevicePolicyManager) GetPasswordQuality(arg0 *jni.Object) (int32, error
 func (m *DevicePolicyManager) GetPendingSystemUpdate(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2665,7 +2688,7 @@ func (m *DevicePolicyManager) GetPermissionGrantState(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2701,7 +2724,7 @@ func (m *DevicePolicyManager) GetPermissionGrantState(
 func (m *DevicePolicyManager) GetPermissionPolicy(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2727,7 +2750,7 @@ func (m *DevicePolicyManager) GetPermissionPolicy(arg0 *jni.Object) (int32, erro
 func (m *DevicePolicyManager) GetPermittedAccessibilityServices(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2758,7 +2781,7 @@ func (m *DevicePolicyManager) GetPermittedAccessibilityServices(arg0 *jni.Object
 func (m *DevicePolicyManager) GetPermittedCrossProfileNotificationListeners(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2789,7 +2812,7 @@ func (m *DevicePolicyManager) GetPermittedCrossProfileNotificationListeners(arg0
 func (m *DevicePolicyManager) GetPermittedInputMethods(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2820,7 +2843,7 @@ func (m *DevicePolicyManager) GetPermittedInputMethods(arg0 *jni.Object) (*jni.O
 func (m *DevicePolicyManager) GetPersonalAppsSuspendedReasons(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2846,7 +2869,7 @@ func (m *DevicePolicyManager) GetPersonalAppsSuspendedReasons(arg0 *jni.Object) 
 func (m *DevicePolicyManager) GetPreferentialNetworkServiceConfigs() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2876,7 +2899,7 @@ func (m *DevicePolicyManager) GetPreferentialNetworkServiceConfigs() (*jni.Objec
 func (m *DevicePolicyManager) GetRequiredPasswordComplexity() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2901,7 +2924,7 @@ func (m *DevicePolicyManager) GetRequiredPasswordComplexity() (int32, error) {
 func (m *DevicePolicyManager) GetRequiredStrongAuthTimeout(arg0 *jni.Object) (int64, error) {
 	var result int64
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2927,7 +2950,7 @@ func (m *DevicePolicyManager) GetRequiredStrongAuthTimeout(arg0 *jni.Object) (in
 func (m *DevicePolicyManager) GetResources() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2957,7 +2980,7 @@ func (m *DevicePolicyManager) GetResources() (*jni.Object, error) {
 func (m *DevicePolicyManager) GetScreenCaptureDisabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -2967,7 +2990,8 @@ func (m *DevicePolicyManager) GetScreenCaptureDisabled(arg0 *jni.Object) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetScreenCaptureDisabled, jni.ObjectValue(arg0),
 		)
@@ -2984,7 +3008,7 @@ func (m *DevicePolicyManager) GetScreenCaptureDisabled(arg0 *jni.Object) (bool, 
 func (m *DevicePolicyManager) GetSecondaryUsers(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3015,7 +3039,7 @@ func (m *DevicePolicyManager) GetSecondaryUsers(arg0 *jni.Object) (*jni.Object, 
 func (m *DevicePolicyManager) GetShortSupportMessage(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3025,7 +3049,8 @@ func (m *DevicePolicyManager) GetShortSupportMessage(arg0 *jni.Object) (string, 
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetShortSupportMessage, jni.ObjectValue(arg0),
 		)
@@ -3042,7 +3067,7 @@ func (m *DevicePolicyManager) GetShortSupportMessage(arg0 *jni.Object) (string, 
 func (m *DevicePolicyManager) GetStartUserSessionMessage(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3052,7 +3077,8 @@ func (m *DevicePolicyManager) GetStartUserSessionMessage(arg0 *jni.Object) (stri
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetStartUserSessionMessage, jni.ObjectValue(arg0),
 		)
@@ -3069,7 +3095,7 @@ func (m *DevicePolicyManager) GetStartUserSessionMessage(arg0 *jni.Object) (stri
 func (m *DevicePolicyManager) GetStorageEncryption(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3079,7 +3105,8 @@ func (m *DevicePolicyManager) GetStorageEncryption(arg0 *jni.Object) (bool, erro
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGetStorageEncryption, jni.ObjectValue(arg0),
 		)
@@ -3096,7 +3123,7 @@ func (m *DevicePolicyManager) GetStorageEncryption(arg0 *jni.Object) (bool, erro
 func (m *DevicePolicyManager) GetStorageEncryptionStatus() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3121,7 +3148,7 @@ func (m *DevicePolicyManager) GetStorageEncryptionStatus() (int32, error) {
 func (m *DevicePolicyManager) GetSubscriptionIds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3151,7 +3178,7 @@ func (m *DevicePolicyManager) GetSubscriptionIds() (*jni.Object, error) {
 func (m *DevicePolicyManager) GetSystemUpdatePolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3181,7 +3208,7 @@ func (m *DevicePolicyManager) GetSystemUpdatePolicy() (*jni.Object, error) {
 func (m *DevicePolicyManager) GetTransferOwnershipBundle() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3211,7 +3238,7 @@ func (m *DevicePolicyManager) GetTransferOwnershipBundle() (*jni.Object, error) 
 func (m *DevicePolicyManager) GetTrustAgentConfiguration(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3242,7 +3269,7 @@ func (m *DevicePolicyManager) GetTrustAgentConfiguration(arg0 *jni.Object, arg1 
 func (m *DevicePolicyManager) GetUserControlDisabledPackages(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3273,7 +3300,7 @@ func (m *DevicePolicyManager) GetUserControlDisabledPackages(arg0 *jni.Object) (
 func (m *DevicePolicyManager) GetUserRestrictions(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3304,7 +3331,7 @@ func (m *DevicePolicyManager) GetUserRestrictions(arg0 *jni.Object) (*jni.Object
 func (m *DevicePolicyManager) GetUserRestrictionsGlobally() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3334,7 +3361,7 @@ func (m *DevicePolicyManager) GetUserRestrictionsGlobally() (*jni.Object, error)
 func (m *DevicePolicyManager) GetWifiMacAddress(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3344,7 +3371,8 @@ func (m *DevicePolicyManager) GetWifiMacAddress(arg0 *jni.Object) (string, error
 			return callErr
 		}
 
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetWifiMacAddress, jni.ObjectValue(arg0),
 		)
@@ -3361,7 +3389,7 @@ func (m *DevicePolicyManager) GetWifiMacAddress(arg0 *jni.Object) (string, error
 func (m *DevicePolicyManager) GetWifiSsidPolicy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3395,7 +3423,7 @@ func (m *DevicePolicyManager) GrantKeyPairToApp(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3415,7 +3443,8 @@ func (m *DevicePolicyManager) GrantKeyPairToApp(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGrantKeyPairToApp, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
 		)
@@ -3432,7 +3461,7 @@ func (m *DevicePolicyManager) GrantKeyPairToApp(
 func (m *DevicePolicyManager) GrantKeyPairToWifiAuth(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3446,7 +3475,8 @@ func (m *DevicePolicyManager) GrantKeyPairToWifiAuth(arg0 string) (bool, error) 
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerGrantKeyPairToWifiAuth, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3463,7 +3493,7 @@ func (m *DevicePolicyManager) GrantKeyPairToWifiAuth(arg0 string) (bool, error) 
 func (m *DevicePolicyManager) HasCaCertInstalled(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3473,7 +3503,8 @@ func (m *DevicePolicyManager) HasCaCertInstalled(arg0 *jni.Object, arg1 *jni.Obj
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerHasCaCertInstalled, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -3490,7 +3521,7 @@ func (m *DevicePolicyManager) HasCaCertInstalled(arg0 *jni.Object, arg1 *jni.Obj
 func (m *DevicePolicyManager) HasGrantedPolicy(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3500,7 +3531,8 @@ func (m *DevicePolicyManager) HasGrantedPolicy(arg0 *jni.Object, arg1 int32) (bo
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerHasGrantedPolicy, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
@@ -3517,7 +3549,7 @@ func (m *DevicePolicyManager) HasGrantedPolicy(arg0 *jni.Object, arg1 int32) (bo
 func (m *DevicePolicyManager) HasKeyPair(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3531,7 +3563,8 @@ func (m *DevicePolicyManager) HasKeyPair(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerHasKeyPair, jni.ObjectValue(&jArg0.Object),
 		)
@@ -3548,7 +3581,7 @@ func (m *DevicePolicyManager) HasKeyPair(arg0 string) (bool, error) {
 func (m *DevicePolicyManager) HasLockdownAdminConfiguredNetworks(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3558,7 +3591,8 @@ func (m *DevicePolicyManager) HasLockdownAdminConfiguredNetworks(arg0 *jni.Objec
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerHasLockdownAdminConfiguredNetworks, jni.ObjectValue(arg0),
 		)
@@ -3575,7 +3609,7 @@ func (m *DevicePolicyManager) HasLockdownAdminConfiguredNetworks(arg0 *jni.Objec
 func (m *DevicePolicyManager) InstallCaCert(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3585,7 +3619,8 @@ func (m *DevicePolicyManager) InstallCaCert(arg0 *jni.Object, arg1 *jni.Object) 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerInstallCaCert, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -3602,7 +3637,7 @@ func (m *DevicePolicyManager) InstallCaCert(arg0 *jni.Object, arg1 *jni.Object) 
 func (m *DevicePolicyManager) InstallExistingPackage(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3617,7 +3652,8 @@ func (m *DevicePolicyManager) InstallExistingPackage(arg0 *jni.Object, arg1 stri
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerInstallExistingPackage, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -3639,7 +3675,7 @@ func (m *DevicePolicyManager) InstallKeyPair4(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3654,7 +3690,8 @@ func (m *DevicePolicyManager) InstallKeyPair4(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerInstallKeyPair4, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object),
 		)
@@ -3677,7 +3714,7 @@ func (m *DevicePolicyManager) InstallKeyPair5_1(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3697,7 +3734,8 @@ func (m *DevicePolicyManager) InstallKeyPair5_1(
 			jArg4 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerInstallKeyPair5_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object), jni.BooleanValue(jArg4),
 		)
@@ -3720,7 +3758,7 @@ func (m *DevicePolicyManager) InstallKeyPair5_2(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3735,7 +3773,8 @@ func (m *DevicePolicyManager) InstallKeyPair5_2(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerInstallKeyPair5_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object), jni.IntValue(arg4),
 		)
@@ -3757,7 +3796,7 @@ func (m *DevicePolicyManager) InstallSystemUpdate(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3780,7 +3819,7 @@ func (m *DevicePolicyManager) InstallSystemUpdate(
 func (m *DevicePolicyManager) IsActivePasswordSufficient() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3789,7 +3828,8 @@ func (m *DevicePolicyManager) IsActivePasswordSufficient() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isActivePasswordSufficient is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsActivePasswordSufficient,
 		)
@@ -3806,7 +3846,7 @@ func (m *DevicePolicyManager) IsActivePasswordSufficient() (bool, error) {
 func (m *DevicePolicyManager) IsActivePasswordSufficientForDeviceRequirement() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3815,7 +3855,8 @@ func (m *DevicePolicyManager) IsActivePasswordSufficientForDeviceRequirement() (
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isActivePasswordSufficientForDeviceRequirement is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsActivePasswordSufficientForDeviceRequirement,
 		)
@@ -3832,7 +3873,7 @@ func (m *DevicePolicyManager) IsActivePasswordSufficientForDeviceRequirement() (
 func (m *DevicePolicyManager) IsAdminActive(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3842,7 +3883,8 @@ func (m *DevicePolicyManager) IsAdminActive(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsAdminActive, jni.ObjectValue(arg0),
 		)
@@ -3859,7 +3901,7 @@ func (m *DevicePolicyManager) IsAdminActive(arg0 *jni.Object) (bool, error) {
 func (m *DevicePolicyManager) IsAffiliatedUser() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3868,7 +3910,8 @@ func (m *DevicePolicyManager) IsAffiliatedUser() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isAffiliatedUser is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsAffiliatedUser,
 		)
@@ -3885,7 +3928,7 @@ func (m *DevicePolicyManager) IsAffiliatedUser() (bool, error) {
 func (m *DevicePolicyManager) IsAlwaysOnVpnLockdownEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3895,7 +3938,8 @@ func (m *DevicePolicyManager) IsAlwaysOnVpnLockdownEnabled(arg0 *jni.Object) (bo
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsAlwaysOnVpnLockdownEnabled, jni.ObjectValue(arg0),
 		)
@@ -3912,7 +3956,7 @@ func (m *DevicePolicyManager) IsAlwaysOnVpnLockdownEnabled(arg0 *jni.Object) (bo
 func (m *DevicePolicyManager) IsApplicationHidden(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3927,7 +3971,8 @@ func (m *DevicePolicyManager) IsApplicationHidden(arg0 *jni.Object, arg1 string)
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsApplicationHidden, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -3944,7 +3989,7 @@ func (m *DevicePolicyManager) IsApplicationHidden(arg0 *jni.Object, arg1 string)
 func (m *DevicePolicyManager) IsBackupServiceEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3954,7 +3999,8 @@ func (m *DevicePolicyManager) IsBackupServiceEnabled(arg0 *jni.Object) (bool, er
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsBackupServiceEnabled, jni.ObjectValue(arg0),
 		)
@@ -3971,7 +4017,7 @@ func (m *DevicePolicyManager) IsBackupServiceEnabled(arg0 *jni.Object) (bool, er
 func (m *DevicePolicyManager) IsCallerApplicationRestrictionsManagingPackage() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -3980,7 +4026,8 @@ func (m *DevicePolicyManager) IsCallerApplicationRestrictionsManagingPackage() (
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isCallerApplicationRestrictionsManagingPackage is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsCallerApplicationRestrictionsManagingPackage,
 		)
@@ -3997,7 +4044,7 @@ func (m *DevicePolicyManager) IsCallerApplicationRestrictionsManagingPackage() (
 func (m *DevicePolicyManager) IsCommonCriteriaModeEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4007,7 +4054,8 @@ func (m *DevicePolicyManager) IsCommonCriteriaModeEnabled(arg0 *jni.Object) (boo
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsCommonCriteriaModeEnabled, jni.ObjectValue(arg0),
 		)
@@ -4024,7 +4072,7 @@ func (m *DevicePolicyManager) IsCommonCriteriaModeEnabled(arg0 *jni.Object) (boo
 func (m *DevicePolicyManager) IsComplianceAcknowledgementRequired() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4033,7 +4081,8 @@ func (m *DevicePolicyManager) IsComplianceAcknowledgementRequired() (bool, error
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isComplianceAcknowledgementRequired is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsComplianceAcknowledgementRequired,
 		)
@@ -4050,7 +4099,7 @@ func (m *DevicePolicyManager) IsComplianceAcknowledgementRequired() (bool, error
 func (m *DevicePolicyManager) IsDeviceFinanced() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4059,7 +4108,8 @@ func (m *DevicePolicyManager) IsDeviceFinanced() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isDeviceFinanced is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsDeviceFinanced,
 		)
@@ -4076,7 +4126,7 @@ func (m *DevicePolicyManager) IsDeviceFinanced() (bool, error) {
 func (m *DevicePolicyManager) IsDeviceIdAttestationSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4085,7 +4135,8 @@ func (m *DevicePolicyManager) IsDeviceIdAttestationSupported() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isDeviceIdAttestationSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsDeviceIdAttestationSupported,
 		)
@@ -4102,7 +4153,7 @@ func (m *DevicePolicyManager) IsDeviceIdAttestationSupported() (bool, error) {
 func (m *DevicePolicyManager) IsDeviceOwnerApp(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4116,7 +4167,8 @@ func (m *DevicePolicyManager) IsDeviceOwnerApp(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsDeviceOwnerApp, jni.ObjectValue(&jArg0.Object),
 		)
@@ -4133,7 +4185,7 @@ func (m *DevicePolicyManager) IsDeviceOwnerApp(arg0 string) (bool, error) {
 func (m *DevicePolicyManager) IsEphemeralUser(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4143,7 +4195,8 @@ func (m *DevicePolicyManager) IsEphemeralUser(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsEphemeralUser, jni.ObjectValue(arg0),
 		)
@@ -4160,7 +4213,7 @@ func (m *DevicePolicyManager) IsEphemeralUser(arg0 *jni.Object) (bool, error) {
 func (m *DevicePolicyManager) IsKeyPairGrantedToWifiAuth(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4174,7 +4227,8 @@ func (m *DevicePolicyManager) IsKeyPairGrantedToWifiAuth(arg0 string) (bool, err
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsKeyPairGrantedToWifiAuth, jni.ObjectValue(&jArg0.Object),
 		)
@@ -4191,7 +4245,7 @@ func (m *DevicePolicyManager) IsKeyPairGrantedToWifiAuth(arg0 string) (bool, err
 func (m *DevicePolicyManager) IsLockTaskPermitted(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4205,7 +4259,8 @@ func (m *DevicePolicyManager) IsLockTaskPermitted(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsLockTaskPermitted, jni.ObjectValue(&jArg0.Object),
 		)
@@ -4222,7 +4277,7 @@ func (m *DevicePolicyManager) IsLockTaskPermitted(arg0 string) (bool, error) {
 func (m *DevicePolicyManager) IsLogoutEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4231,7 +4286,8 @@ func (m *DevicePolicyManager) IsLogoutEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isLogoutEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsLogoutEnabled,
 		)
@@ -4248,7 +4304,7 @@ func (m *DevicePolicyManager) IsLogoutEnabled() (bool, error) {
 func (m *DevicePolicyManager) IsManagedProfile(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4258,7 +4314,8 @@ func (m *DevicePolicyManager) IsManagedProfile(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsManagedProfile, jni.ObjectValue(arg0),
 		)
@@ -4275,7 +4332,7 @@ func (m *DevicePolicyManager) IsManagedProfile(arg0 *jni.Object) (bool, error) {
 func (m *DevicePolicyManager) IsMasterVolumeMuted(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4285,7 +4342,8 @@ func (m *DevicePolicyManager) IsMasterVolumeMuted(arg0 *jni.Object) (bool, error
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsMasterVolumeMuted, jni.ObjectValue(arg0),
 		)
@@ -4302,7 +4360,7 @@ func (m *DevicePolicyManager) IsMasterVolumeMuted(arg0 *jni.Object) (bool, error
 func (m *DevicePolicyManager) IsNetworkLoggingEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4312,7 +4370,8 @@ func (m *DevicePolicyManager) IsNetworkLoggingEnabled(arg0 *jni.Object) (bool, e
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsNetworkLoggingEnabled, jni.ObjectValue(arg0),
 		)
@@ -4329,7 +4388,7 @@ func (m *DevicePolicyManager) IsNetworkLoggingEnabled(arg0 *jni.Object) (bool, e
 func (m *DevicePolicyManager) IsOrganizationOwnedDeviceWithManagedProfile() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4338,7 +4397,8 @@ func (m *DevicePolicyManager) IsOrganizationOwnedDeviceWithManagedProfile() (boo
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsOrganizationOwnedDeviceWithManagedProfile,
 		)
@@ -4355,7 +4415,7 @@ func (m *DevicePolicyManager) IsOrganizationOwnedDeviceWithManagedProfile() (boo
 func (m *DevicePolicyManager) IsOverrideApnEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4365,7 +4425,8 @@ func (m *DevicePolicyManager) IsOverrideApnEnabled(arg0 *jni.Object) (bool, erro
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsOverrideApnEnabled, jni.ObjectValue(arg0),
 		)
@@ -4382,7 +4443,7 @@ func (m *DevicePolicyManager) IsOverrideApnEnabled(arg0 *jni.Object) (bool, erro
 func (m *DevicePolicyManager) IsPackageSuspended(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4397,7 +4458,8 @@ func (m *DevicePolicyManager) IsPackageSuspended(arg0 *jni.Object, arg1 string) 
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsPackageSuspended, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -4414,7 +4476,7 @@ func (m *DevicePolicyManager) IsPackageSuspended(arg0 *jni.Object, arg1 string) 
 func (m *DevicePolicyManager) IsPreferentialNetworkServiceEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4423,7 +4485,8 @@ func (m *DevicePolicyManager) IsPreferentialNetworkServiceEnabled() (bool, error
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isPreferentialNetworkServiceEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsPreferentialNetworkServiceEnabled,
 		)
@@ -4440,7 +4503,7 @@ func (m *DevicePolicyManager) IsPreferentialNetworkServiceEnabled() (bool, error
 func (m *DevicePolicyManager) IsProfileOwnerApp(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4454,7 +4517,8 @@ func (m *DevicePolicyManager) IsProfileOwnerApp(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsProfileOwnerApp, jni.ObjectValue(&jArg0.Object),
 		)
@@ -4471,7 +4535,7 @@ func (m *DevicePolicyManager) IsProfileOwnerApp(arg0 string) (bool, error) {
 func (m *DevicePolicyManager) IsProvisioningAllowed(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4485,7 +4549,8 @@ func (m *DevicePolicyManager) IsProvisioningAllowed(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsProvisioningAllowed, jni.ObjectValue(&jArg0.Object),
 		)
@@ -4502,7 +4567,7 @@ func (m *DevicePolicyManager) IsProvisioningAllowed(arg0 string) (bool, error) {
 func (m *DevicePolicyManager) IsResetPasswordTokenActive(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4512,7 +4577,8 @@ func (m *DevicePolicyManager) IsResetPasswordTokenActive(arg0 *jni.Object) (bool
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsResetPasswordTokenActive, jni.ObjectValue(arg0),
 		)
@@ -4529,7 +4595,7 @@ func (m *DevicePolicyManager) IsResetPasswordTokenActive(arg0 *jni.Object) (bool
 func (m *DevicePolicyManager) IsSafeOperation(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4539,7 +4605,8 @@ func (m *DevicePolicyManager) IsSafeOperation(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsSafeOperation, jni.IntValue(arg0),
 		)
@@ -4556,7 +4623,7 @@ func (m *DevicePolicyManager) IsSafeOperation(arg0 int32) (bool, error) {
 func (m *DevicePolicyManager) IsSecurityLoggingEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4566,7 +4633,8 @@ func (m *DevicePolicyManager) IsSecurityLoggingEnabled(arg0 *jni.Object) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsSecurityLoggingEnabled, jni.ObjectValue(arg0),
 		)
@@ -4583,7 +4651,7 @@ func (m *DevicePolicyManager) IsSecurityLoggingEnabled(arg0 *jni.Object) (bool, 
 func (m *DevicePolicyManager) IsStatusBarDisabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4592,7 +4660,8 @@ func (m *DevicePolicyManager) IsStatusBarDisabled() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isStatusBarDisabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsStatusBarDisabled,
 		)
@@ -4609,7 +4678,7 @@ func (m *DevicePolicyManager) IsStatusBarDisabled() (bool, error) {
 func (m *DevicePolicyManager) IsUninstallBlocked(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4624,7 +4693,8 @@ func (m *DevicePolicyManager) IsUninstallBlocked(arg0 *jni.Object, arg1 string) 
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsUninstallBlocked, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -4641,7 +4711,7 @@ func (m *DevicePolicyManager) IsUninstallBlocked(arg0 *jni.Object, arg1 string) 
 func (m *DevicePolicyManager) IsUniqueDeviceAttestationSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4650,7 +4720,8 @@ func (m *DevicePolicyManager) IsUniqueDeviceAttestationSupported() (bool, error)
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isUniqueDeviceAttestationSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsUniqueDeviceAttestationSupported,
 		)
@@ -4667,7 +4738,7 @@ func (m *DevicePolicyManager) IsUniqueDeviceAttestationSupported() (bool, error)
 func (m *DevicePolicyManager) IsUsbDataSignalingEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4676,7 +4747,8 @@ func (m *DevicePolicyManager) IsUsbDataSignalingEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isUsbDataSignalingEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsUsbDataSignalingEnabled,
 		)
@@ -4693,7 +4765,7 @@ func (m *DevicePolicyManager) IsUsbDataSignalingEnabled() (bool, error) {
 func (m *DevicePolicyManager) IsUsingUnifiedPassword(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4703,7 +4775,8 @@ func (m *DevicePolicyManager) IsUsingUnifiedPassword(arg0 *jni.Object) (bool, er
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerIsUsingUnifiedPassword, jni.ObjectValue(arg0),
 		)
@@ -4720,7 +4793,7 @@ func (m *DevicePolicyManager) IsUsingUnifiedPassword(arg0 *jni.Object) (bool, er
 func (m *DevicePolicyManager) ListForegroundAffiliatedUsers() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4750,7 +4823,7 @@ func (m *DevicePolicyManager) ListForegroundAffiliatedUsers() (*jni.Object, erro
 func (m *DevicePolicyManager) LockNow0() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4772,7 +4845,7 @@ func (m *DevicePolicyManager) LockNow0() error {
 func (m *DevicePolicyManager) LockNow1_1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4795,7 +4868,7 @@ func (m *DevicePolicyManager) LockNow1_1(arg0 int32) error {
 func (m *DevicePolicyManager) LogoutUser(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4821,7 +4894,7 @@ func (m *DevicePolicyManager) LogoutUser(arg0 *jni.Object) (int32, error) {
 func (m *DevicePolicyManager) Reboot(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4844,7 +4917,7 @@ func (m *DevicePolicyManager) Reboot(arg0 *jni.Object) error {
 func (m *DevicePolicyManager) RemoveActiveAdmin(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4867,7 +4940,7 @@ func (m *DevicePolicyManager) RemoveActiveAdmin(arg0 *jni.Object) error {
 func (m *DevicePolicyManager) RemoveCrossProfileWidgetProvider(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4882,7 +4955,8 @@ func (m *DevicePolicyManager) RemoveCrossProfileWidgetProvider(arg0 *jni.Object,
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerRemoveCrossProfileWidgetProvider, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -4899,7 +4973,7 @@ func (m *DevicePolicyManager) RemoveCrossProfileWidgetProvider(arg0 *jni.Object,
 func (m *DevicePolicyManager) RemoveKeyPair(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4914,7 +4988,8 @@ func (m *DevicePolicyManager) RemoveKeyPair(arg0 *jni.Object, arg1 string) (bool
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerRemoveKeyPair, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -4931,7 +5006,7 @@ func (m *DevicePolicyManager) RemoveKeyPair(arg0 *jni.Object, arg1 string) (bool
 func (m *DevicePolicyManager) RemoveOverrideApn(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4941,7 +5016,8 @@ func (m *DevicePolicyManager) RemoveOverrideApn(arg0 *jni.Object, arg1 int32) (b
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerRemoveOverrideApn, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
@@ -4958,7 +5034,7 @@ func (m *DevicePolicyManager) RemoveOverrideApn(arg0 *jni.Object, arg1 int32) (b
 func (m *DevicePolicyManager) RemoveUser(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4968,7 +5044,8 @@ func (m *DevicePolicyManager) RemoveUser(arg0 *jni.Object, arg1 *jni.Object) (bo
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerRemoveUser, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -4985,7 +5062,7 @@ func (m *DevicePolicyManager) RemoveUser(arg0 *jni.Object, arg1 *jni.Object) (bo
 func (m *DevicePolicyManager) RequestBugreport(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -4995,7 +5072,8 @@ func (m *DevicePolicyManager) RequestBugreport(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerRequestBugreport, jni.ObjectValue(arg0),
 		)
@@ -5012,7 +5090,7 @@ func (m *DevicePolicyManager) RequestBugreport(arg0 *jni.Object) (bool, error) {
 func (m *DevicePolicyManager) ResetPassword(arg0 string, arg1 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5026,7 +5104,8 @@ func (m *DevicePolicyManager) ResetPassword(arg0 string, arg1 int32) (bool, erro
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerResetPassword, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
@@ -5048,7 +5127,7 @@ func (m *DevicePolicyManager) ResetPasswordWithToken(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5063,7 +5142,8 @@ func (m *DevicePolicyManager) ResetPasswordWithToken(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerResetPasswordWithToken, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.IntValue(arg3),
 		)
@@ -5080,7 +5160,7 @@ func (m *DevicePolicyManager) ResetPasswordWithToken(
 func (m *DevicePolicyManager) RetrieveNetworkLogs(arg0 *jni.Object, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5111,7 +5191,7 @@ func (m *DevicePolicyManager) RetrieveNetworkLogs(arg0 *jni.Object, arg1 int64) 
 func (m *DevicePolicyManager) RetrievePreRebootSecurityLogs(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5142,7 +5222,7 @@ func (m *DevicePolicyManager) RetrievePreRebootSecurityLogs(arg0 *jni.Object) (*
 func (m *DevicePolicyManager) RetrieveSecurityLogs(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5177,7 +5257,7 @@ func (m *DevicePolicyManager) RevokeKeyPairFromApp(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5197,7 +5277,8 @@ func (m *DevicePolicyManager) RevokeKeyPairFromApp(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerRevokeKeyPairFromApp, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
 		)
@@ -5214,7 +5295,7 @@ func (m *DevicePolicyManager) RevokeKeyPairFromApp(
 func (m *DevicePolicyManager) RevokeKeyPairFromWifiAuth(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5228,7 +5309,8 @@ func (m *DevicePolicyManager) RevokeKeyPairFromWifiAuth(arg0 string) (bool, erro
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerRevokeKeyPairFromWifiAuth, jni.ObjectValue(&jArg0.Object),
 		)
@@ -5249,7 +5331,7 @@ func (m *DevicePolicyManager) SetAccountManagementDisabled(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5282,7 +5364,7 @@ func (m *DevicePolicyManager) SetAccountManagementDisabled(
 func (m *DevicePolicyManager) SetAffiliationIds(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5309,7 +5391,7 @@ func (m *DevicePolicyManager) SetAlwaysOnVpnPackage3(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5347,7 +5429,7 @@ func (m *DevicePolicyManager) SetAlwaysOnVpnPackage4_1(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5380,7 +5462,7 @@ func (m *DevicePolicyManager) SetAlwaysOnVpnPackage4_1(
 func (m *DevicePolicyManager) SetAppFunctionsPolicy(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5407,7 +5489,7 @@ func (m *DevicePolicyManager) SetApplicationHidden(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5427,7 +5509,8 @@ func (m *DevicePolicyManager) SetApplicationHidden(
 			jArg2 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetApplicationHidden, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2),
 		)
@@ -5448,7 +5531,7 @@ func (m *DevicePolicyManager) SetApplicationRestrictions(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5476,7 +5559,7 @@ func (m *DevicePolicyManager) SetApplicationRestrictions(
 func (m *DevicePolicyManager) SetApplicationRestrictionsManagingPackage(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5504,7 +5587,7 @@ func (m *DevicePolicyManager) SetApplicationRestrictionsManagingPackage(arg0 *jn
 func (m *DevicePolicyManager) SetAutoTimeEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5532,7 +5615,7 @@ func (m *DevicePolicyManager) SetAutoTimeEnabled(arg0 *jni.Object, arg1 bool) er
 func (m *DevicePolicyManager) SetAutoTimePolicy(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5555,7 +5638,7 @@ func (m *DevicePolicyManager) SetAutoTimePolicy(arg0 int32) error {
 func (m *DevicePolicyManager) SetAutoTimeRequired(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5583,7 +5666,7 @@ func (m *DevicePolicyManager) SetAutoTimeRequired(arg0 *jni.Object, arg1 bool) e
 func (m *DevicePolicyManager) SetAutoTimeZoneEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5611,7 +5694,7 @@ func (m *DevicePolicyManager) SetAutoTimeZoneEnabled(arg0 *jni.Object, arg1 bool
 func (m *DevicePolicyManager) SetAutoTimeZonePolicy(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5634,7 +5717,7 @@ func (m *DevicePolicyManager) SetAutoTimeZonePolicy(arg0 int32) error {
 func (m *DevicePolicyManager) SetBackupServiceEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5662,7 +5745,7 @@ func (m *DevicePolicyManager) SetBackupServiceEnabled(arg0 *jni.Object, arg1 boo
 func (m *DevicePolicyManager) SetBluetoothContactSharingDisabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5690,7 +5773,7 @@ func (m *DevicePolicyManager) SetBluetoothContactSharingDisabled(arg0 *jni.Objec
 func (m *DevicePolicyManager) SetCameraDisabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5718,7 +5801,7 @@ func (m *DevicePolicyManager) SetCameraDisabled(arg0 *jni.Object, arg1 bool) err
 func (m *DevicePolicyManager) SetCertInstallerPackage(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5746,7 +5829,7 @@ func (m *DevicePolicyManager) SetCertInstallerPackage(arg0 *jni.Object, arg1 str
 func (m *DevicePolicyManager) SetCommonCriteriaModeEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5774,7 +5857,7 @@ func (m *DevicePolicyManager) SetCommonCriteriaModeEnabled(arg0 *jni.Object, arg
 func (m *DevicePolicyManager) SetConfiguredNetworksLockdownState(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5802,7 +5885,7 @@ func (m *DevicePolicyManager) SetConfiguredNetworksLockdownState(arg0 *jni.Objec
 func (m *DevicePolicyManager) SetContentProtectionPolicy(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5825,7 +5908,7 @@ func (m *DevicePolicyManager) SetContentProtectionPolicy(arg0 *jni.Object, arg1 
 func (m *DevicePolicyManager) SetCredentialManagerPolicy(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5848,7 +5931,7 @@ func (m *DevicePolicyManager) SetCredentialManagerPolicy(arg0 *jni.Object) error
 func (m *DevicePolicyManager) SetCrossProfileCalendarPackages(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5871,7 +5954,7 @@ func (m *DevicePolicyManager) SetCrossProfileCalendarPackages(arg0 *jni.Object, 
 func (m *DevicePolicyManager) SetCrossProfileCallerIdDisabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5899,7 +5982,7 @@ func (m *DevicePolicyManager) SetCrossProfileCallerIdDisabled(arg0 *jni.Object, 
 func (m *DevicePolicyManager) SetCrossProfileContactsSearchDisabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5927,7 +6010,7 @@ func (m *DevicePolicyManager) SetCrossProfileContactsSearchDisabled(arg0 *jni.Ob
 func (m *DevicePolicyManager) SetCrossProfilePackages(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5950,7 +6033,7 @@ func (m *DevicePolicyManager) SetCrossProfilePackages(arg0 *jni.Object, arg1 *jn
 func (m *DevicePolicyManager) SetDefaultDialerApplication(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -5977,7 +6060,7 @@ func (m *DevicePolicyManager) SetDefaultDialerApplication(arg0 string) error {
 func (m *DevicePolicyManager) SetDefaultSmsApplication(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6009,7 +6092,7 @@ func (m *DevicePolicyManager) SetDelegatedScopes(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6037,7 +6120,7 @@ func (m *DevicePolicyManager) SetDelegatedScopes(
 func (m *DevicePolicyManager) SetDeviceOwnerLockScreenInfo(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6065,7 +6148,7 @@ func (m *DevicePolicyManager) SetDeviceOwnerLockScreenInfo(arg0 *jni.Object, arg
 func (m *DevicePolicyManager) SetEndUserSessionMessage(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6093,7 +6176,7 @@ func (m *DevicePolicyManager) SetEndUserSessionMessage(arg0 *jni.Object, arg1 st
 func (m *DevicePolicyManager) SetFactoryResetProtectionPolicy(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6116,7 +6199,7 @@ func (m *DevicePolicyManager) SetFactoryResetProtectionPolicy(arg0 *jni.Object, 
 func (m *DevicePolicyManager) SetGlobalPrivateDnsModeOpportunistic(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6142,7 +6225,7 @@ func (m *DevicePolicyManager) SetGlobalPrivateDnsModeOpportunistic(arg0 *jni.Obj
 func (m *DevicePolicyManager) SetGlobalPrivateDnsModeSpecifiedHost(arg0 *jni.Object, arg1 string) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6177,7 +6260,7 @@ func (m *DevicePolicyManager) SetGlobalSetting(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6210,7 +6293,7 @@ func (m *DevicePolicyManager) SetGlobalSetting(
 func (m *DevicePolicyManager) SetKeepUninstalledPackages(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6238,7 +6321,7 @@ func (m *DevicePolicyManager) SetKeyPairCertificate(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6258,7 +6341,8 @@ func (m *DevicePolicyManager) SetKeyPairCertificate(
 			jArg3 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetKeyPairCertificate, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.BooleanValue(jArg3),
 		)
@@ -6275,7 +6359,7 @@ func (m *DevicePolicyManager) SetKeyPairCertificate(
 func (m *DevicePolicyManager) SetKeyguardDisabled(arg0 *jni.Object, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6290,7 +6374,8 @@ func (m *DevicePolicyManager) SetKeyguardDisabled(arg0 *jni.Object, arg1 bool) (
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetKeyguardDisabled, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -6307,7 +6392,7 @@ func (m *DevicePolicyManager) SetKeyguardDisabled(arg0 *jni.Object, arg1 bool) (
 func (m *DevicePolicyManager) SetKeyguardDisabledFeatures(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6330,7 +6415,7 @@ func (m *DevicePolicyManager) SetKeyguardDisabledFeatures(arg0 *jni.Object, arg1
 func (m *DevicePolicyManager) SetLocationEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6358,7 +6443,7 @@ func (m *DevicePolicyManager) SetLocationEnabled(arg0 *jni.Object, arg1 bool) er
 func (m *DevicePolicyManager) SetLockTaskFeatures(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6381,7 +6466,7 @@ func (m *DevicePolicyManager) SetLockTaskFeatures(arg0 *jni.Object, arg1 int32) 
 func (m *DevicePolicyManager) SetLockTaskPackages(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6404,7 +6489,7 @@ func (m *DevicePolicyManager) SetLockTaskPackages(arg0 *jni.Object, arg1 *jni.Ob
 func (m *DevicePolicyManager) SetLogoutEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6432,7 +6517,7 @@ func (m *DevicePolicyManager) SetLogoutEnabled(arg0 *jni.Object, arg1 bool) erro
 func (m *DevicePolicyManager) SetLongSupportMessage(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6460,7 +6545,7 @@ func (m *DevicePolicyManager) SetLongSupportMessage(arg0 *jni.Object, arg1 strin
 func (m *DevicePolicyManager) SetManagedProfileCallerIdAccessPolicy(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6483,7 +6568,7 @@ func (m *DevicePolicyManager) SetManagedProfileCallerIdAccessPolicy(arg0 *jni.Ob
 func (m *DevicePolicyManager) SetManagedProfileContactsAccessPolicy(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6506,7 +6591,7 @@ func (m *DevicePolicyManager) SetManagedProfileContactsAccessPolicy(arg0 *jni.Ob
 func (m *DevicePolicyManager) SetManagedProfileMaximumTimeOff(arg0 *jni.Object, arg1 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6529,7 +6614,7 @@ func (m *DevicePolicyManager) SetManagedProfileMaximumTimeOff(arg0 *jni.Object, 
 func (m *DevicePolicyManager) SetManagedSubscriptionsPolicy(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6552,7 +6637,7 @@ func (m *DevicePolicyManager) SetManagedSubscriptionsPolicy(arg0 *jni.Object) er
 func (m *DevicePolicyManager) SetMasterVolumeMuted(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6580,7 +6665,7 @@ func (m *DevicePolicyManager) SetMasterVolumeMuted(arg0 *jni.Object, arg1 bool) 
 func (m *DevicePolicyManager) SetMaximumFailedPasswordsForWipe(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6603,7 +6688,7 @@ func (m *DevicePolicyManager) SetMaximumFailedPasswordsForWipe(arg0 *jni.Object,
 func (m *DevicePolicyManager) SetMaximumTimeToLock(arg0 *jni.Object, arg1 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6626,7 +6711,7 @@ func (m *DevicePolicyManager) SetMaximumTimeToLock(arg0 *jni.Object, arg1 int64)
 func (m *DevicePolicyManager) SetMeteredDataDisabledPackages(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6657,7 +6742,7 @@ func (m *DevicePolicyManager) SetMeteredDataDisabledPackages(arg0 *jni.Object, a
 func (m *DevicePolicyManager) SetMinimumRequiredWifiSecurityLevel(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6680,7 +6765,7 @@ func (m *DevicePolicyManager) SetMinimumRequiredWifiSecurityLevel(arg0 int32) er
 func (m *DevicePolicyManager) SetMtePolicy(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6703,7 +6788,7 @@ func (m *DevicePolicyManager) SetMtePolicy(arg0 int32) error {
 func (m *DevicePolicyManager) SetNearbyAppStreamingPolicy(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6726,7 +6811,7 @@ func (m *DevicePolicyManager) SetNearbyAppStreamingPolicy(arg0 int32) error {
 func (m *DevicePolicyManager) SetNearbyNotificationStreamingPolicy(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6749,7 +6834,7 @@ func (m *DevicePolicyManager) SetNearbyNotificationStreamingPolicy(arg0 int32) e
 func (m *DevicePolicyManager) SetNetworkLoggingEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6777,7 +6862,7 @@ func (m *DevicePolicyManager) SetNetworkLoggingEnabled(arg0 *jni.Object, arg1 bo
 func (m *DevicePolicyManager) SetOrganizationColor(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6800,7 +6885,7 @@ func (m *DevicePolicyManager) SetOrganizationColor(arg0 *jni.Object, arg1 int32)
 func (m *DevicePolicyManager) SetOrganizationId(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6827,7 +6912,7 @@ func (m *DevicePolicyManager) SetOrganizationId(arg0 string) error {
 func (m *DevicePolicyManager) SetOrganizationName(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6855,7 +6940,7 @@ func (m *DevicePolicyManager) SetOrganizationName(arg0 *jni.Object, arg1 string)
 func (m *DevicePolicyManager) SetOverrideApnsEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6887,7 +6972,7 @@ func (m *DevicePolicyManager) SetPackagesSuspended(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6923,7 +7008,7 @@ func (m *DevicePolicyManager) SetPackagesSuspended(
 func (m *DevicePolicyManager) SetPasswordExpirationTimeout(arg0 *jni.Object, arg1 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6946,7 +7031,7 @@ func (m *DevicePolicyManager) SetPasswordExpirationTimeout(arg0 *jni.Object, arg
 func (m *DevicePolicyManager) SetPasswordHistoryLength(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6969,7 +7054,7 @@ func (m *DevicePolicyManager) SetPasswordHistoryLength(arg0 *jni.Object, arg1 in
 func (m *DevicePolicyManager) SetPasswordMinimumLength(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -6992,7 +7077,7 @@ func (m *DevicePolicyManager) SetPasswordMinimumLength(arg0 *jni.Object, arg1 in
 func (m *DevicePolicyManager) SetPasswordMinimumLetters(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7015,7 +7100,7 @@ func (m *DevicePolicyManager) SetPasswordMinimumLetters(arg0 *jni.Object, arg1 i
 func (m *DevicePolicyManager) SetPasswordMinimumLowerCase(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7038,7 +7123,7 @@ func (m *DevicePolicyManager) SetPasswordMinimumLowerCase(arg0 *jni.Object, arg1
 func (m *DevicePolicyManager) SetPasswordMinimumNonLetter(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7061,7 +7146,7 @@ func (m *DevicePolicyManager) SetPasswordMinimumNonLetter(arg0 *jni.Object, arg1
 func (m *DevicePolicyManager) SetPasswordMinimumNumeric(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7084,7 +7169,7 @@ func (m *DevicePolicyManager) SetPasswordMinimumNumeric(arg0 *jni.Object, arg1 i
 func (m *DevicePolicyManager) SetPasswordMinimumSymbols(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7107,7 +7192,7 @@ func (m *DevicePolicyManager) SetPasswordMinimumSymbols(arg0 *jni.Object, arg1 i
 func (m *DevicePolicyManager) SetPasswordMinimumUpperCase(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7130,7 +7215,7 @@ func (m *DevicePolicyManager) SetPasswordMinimumUpperCase(arg0 *jni.Object, arg1
 func (m *DevicePolicyManager) SetPasswordQuality(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7158,7 +7243,7 @@ func (m *DevicePolicyManager) SetPermissionGrantState(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7178,7 +7263,8 @@ func (m *DevicePolicyManager) SetPermissionGrantState(
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetPermissionGrantState, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3),
 		)
@@ -7195,7 +7281,7 @@ func (m *DevicePolicyManager) SetPermissionGrantState(
 func (m *DevicePolicyManager) SetPermissionPolicy(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7218,7 +7304,7 @@ func (m *DevicePolicyManager) SetPermissionPolicy(arg0 *jni.Object, arg1 int32) 
 func (m *DevicePolicyManager) SetPermittedAccessibilityServices(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7228,7 +7314,8 @@ func (m *DevicePolicyManager) SetPermittedAccessibilityServices(arg0 *jni.Object
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetPermittedAccessibilityServices, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -7245,7 +7332,7 @@ func (m *DevicePolicyManager) SetPermittedAccessibilityServices(arg0 *jni.Object
 func (m *DevicePolicyManager) SetPermittedCrossProfileNotificationListeners(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7255,7 +7342,8 @@ func (m *DevicePolicyManager) SetPermittedCrossProfileNotificationListeners(arg0
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetPermittedCrossProfileNotificationListeners, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -7272,7 +7360,7 @@ func (m *DevicePolicyManager) SetPermittedCrossProfileNotificationListeners(arg0
 func (m *DevicePolicyManager) SetPermittedInputMethods(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7282,7 +7370,8 @@ func (m *DevicePolicyManager) SetPermittedInputMethods(arg0 *jni.Object, arg1 *j
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetPermittedInputMethods, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -7299,7 +7388,7 @@ func (m *DevicePolicyManager) SetPermittedInputMethods(arg0 *jni.Object, arg1 *j
 func (m *DevicePolicyManager) SetPersonalAppsSuspended(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7327,7 +7416,7 @@ func (m *DevicePolicyManager) SetPersonalAppsSuspended(arg0 *jni.Object, arg1 bo
 func (m *DevicePolicyManager) SetPreferentialNetworkServiceConfigs(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7350,7 +7439,7 @@ func (m *DevicePolicyManager) SetPreferentialNetworkServiceConfigs(arg0 *jni.Obj
 func (m *DevicePolicyManager) SetPreferentialNetworkServiceEnabled(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7377,7 +7466,7 @@ func (m *DevicePolicyManager) SetPreferentialNetworkServiceEnabled(arg0 bool) er
 func (m *DevicePolicyManager) SetProfileEnabled(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7400,7 +7489,7 @@ func (m *DevicePolicyManager) SetProfileEnabled(arg0 *jni.Object) error {
 func (m *DevicePolicyManager) SetProfileName(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7428,7 +7517,7 @@ func (m *DevicePolicyManager) SetProfileName(arg0 *jni.Object, arg1 string) erro
 func (m *DevicePolicyManager) SetRecommendedGlobalProxy(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7451,7 +7540,7 @@ func (m *DevicePolicyManager) SetRecommendedGlobalProxy(arg0 *jni.Object, arg1 *
 func (m *DevicePolicyManager) SetRequiredPasswordComplexity(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7474,7 +7563,7 @@ func (m *DevicePolicyManager) SetRequiredPasswordComplexity(arg0 int32) error {
 func (m *DevicePolicyManager) SetRequiredStrongAuthTimeout(arg0 *jni.Object, arg1 int64) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7497,7 +7586,7 @@ func (m *DevicePolicyManager) SetRequiredStrongAuthTimeout(arg0 *jni.Object, arg
 func (m *DevicePolicyManager) SetResetPasswordToken(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7507,7 +7596,8 @@ func (m *DevicePolicyManager) SetResetPasswordToken(arg0 *jni.Object, arg1 *jni.
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetResetPasswordToken, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -7524,7 +7614,7 @@ func (m *DevicePolicyManager) SetResetPasswordToken(arg0 *jni.Object, arg1 *jni.
 func (m *DevicePolicyManager) SetRestrictionsProvider(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7547,7 +7637,7 @@ func (m *DevicePolicyManager) SetRestrictionsProvider(arg0 *jni.Object, arg1 *jn
 func (m *DevicePolicyManager) SetScreenCaptureDisabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7579,7 +7669,7 @@ func (m *DevicePolicyManager) SetSecureSetting(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7612,7 +7702,7 @@ func (m *DevicePolicyManager) SetSecureSetting(
 func (m *DevicePolicyManager) SetSecurityLoggingEnabled(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7640,7 +7730,7 @@ func (m *DevicePolicyManager) SetSecurityLoggingEnabled(arg0 *jni.Object, arg1 b
 func (m *DevicePolicyManager) SetShortSupportMessage(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7668,7 +7758,7 @@ func (m *DevicePolicyManager) SetShortSupportMessage(arg0 *jni.Object, arg1 stri
 func (m *DevicePolicyManager) SetStartUserSessionMessage(arg0 *jni.Object, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7696,7 +7786,7 @@ func (m *DevicePolicyManager) SetStartUserSessionMessage(arg0 *jni.Object, arg1 
 func (m *DevicePolicyManager) SetStatusBarDisabled(arg0 *jni.Object, arg1 bool) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7711,7 +7801,8 @@ func (m *DevicePolicyManager) SetStatusBarDisabled(arg0 *jni.Object, arg1 bool) 
 			jArg1 = jniTrue
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetStatusBarDisabled, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
 		)
@@ -7728,7 +7819,7 @@ func (m *DevicePolicyManager) SetStatusBarDisabled(arg0 *jni.Object, arg1 bool) 
 func (m *DevicePolicyManager) SetStorageEncryption(arg0 *jni.Object, arg1 bool) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7763,7 +7854,7 @@ func (m *DevicePolicyManager) SetSystemSetting(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7796,7 +7887,7 @@ func (m *DevicePolicyManager) SetSystemSetting(
 func (m *DevicePolicyManager) SetSystemUpdatePolicy(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7819,7 +7910,7 @@ func (m *DevicePolicyManager) SetSystemUpdatePolicy(arg0 *jni.Object, arg1 *jni.
 func (m *DevicePolicyManager) SetTime(arg0 *jni.Object, arg1 int64) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7829,7 +7920,8 @@ func (m *DevicePolicyManager) SetTime(arg0 *jni.Object, arg1 int64) (bool, error
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetTime, jni.ObjectValue(arg0), jni.LongValue(arg1),
 		)
@@ -7846,7 +7938,7 @@ func (m *DevicePolicyManager) SetTime(arg0 *jni.Object, arg1 int64) (bool, error
 func (m *DevicePolicyManager) SetTimeZone(arg0 *jni.Object, arg1 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7861,7 +7953,8 @@ func (m *DevicePolicyManager) SetTimeZone(arg0 *jni.Object, arg1 string) (bool, 
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSetTimeZone, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
 		)
@@ -7882,7 +7975,7 @@ func (m *DevicePolicyManager) SetTrustAgentConfiguration(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7909,7 +8002,7 @@ func (m *DevicePolicyManager) SetUninstallBlocked(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7942,7 +8035,7 @@ func (m *DevicePolicyManager) SetUninstallBlocked(
 func (m *DevicePolicyManager) SetUsbDataSignalingEnabled(arg0 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7969,7 +8062,7 @@ func (m *DevicePolicyManager) SetUsbDataSignalingEnabled(arg0 bool) error {
 func (m *DevicePolicyManager) SetUserControlDisabledPackages(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -7992,7 +8085,7 @@ func (m *DevicePolicyManager) SetUserControlDisabledPackages(arg0 *jni.Object, a
 func (m *DevicePolicyManager) SetUserIcon(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8015,7 +8108,7 @@ func (m *DevicePolicyManager) SetUserIcon(arg0 *jni.Object, arg1 *jni.Object) er
 func (m *DevicePolicyManager) SetWifiSsidPolicy(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8038,7 +8131,7 @@ func (m *DevicePolicyManager) SetWifiSsidPolicy(arg0 *jni.Object) error {
 func (m *DevicePolicyManager) StartUserInBackground(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8064,7 +8157,7 @@ func (m *DevicePolicyManager) StartUserInBackground(arg0 *jni.Object, arg1 *jni.
 func (m *DevicePolicyManager) StopUser(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8090,7 +8183,7 @@ func (m *DevicePolicyManager) StopUser(arg0 *jni.Object, arg1 *jni.Object) (int3
 func (m *DevicePolicyManager) SwitchUser(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8100,7 +8193,8 @@ func (m *DevicePolicyManager) SwitchUser(arg0 *jni.Object, arg1 *jni.Object) (bo
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerSwitchUser, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
@@ -8121,7 +8215,7 @@ func (m *DevicePolicyManager) TransferOwnership(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8144,7 +8238,7 @@ func (m *DevicePolicyManager) TransferOwnership(
 func (m *DevicePolicyManager) UninstallAllUserCaCerts(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8167,7 +8261,7 @@ func (m *DevicePolicyManager) UninstallAllUserCaCerts(arg0 *jni.Object) error {
 func (m *DevicePolicyManager) UninstallCaCert(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8194,7 +8288,7 @@ func (m *DevicePolicyManager) UpdateOverrideApn(
 ) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8204,7 +8298,8 @@ func (m *DevicePolicyManager) UpdateOverrideApn(
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midDevicePolicyManagerUpdateOverrideApn, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
@@ -8221,7 +8316,7 @@ func (m *DevicePolicyManager) UpdateOverrideApn(
 func (m *DevicePolicyManager) WipeData1(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8244,7 +8339,7 @@ func (m *DevicePolicyManager) WipeData1(arg0 int32) error {
 func (m *DevicePolicyManager) WipeData2_1(arg0 int32, arg1 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8272,7 +8367,7 @@ func (m *DevicePolicyManager) WipeData2_1(arg0 int32, arg1 string) error {
 func (m *DevicePolicyManager) WipeDevice(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8295,7 +8390,7 @@ func (m *DevicePolicyManager) WipeDevice(arg0 int32) error {
 func (m *DevicePolicyManager) IsMtePolicyEnforced() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -8304,7 +8399,8 @@ func (m *DevicePolicyManager) IsMtePolicyEnforced() (bool, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.isMtePolicyEnforced is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsDevicePolicyManager)),
 			midDevicePolicyManagerIsMtePolicyEnforced,
 		)

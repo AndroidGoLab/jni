@@ -71,7 +71,7 @@ func (m *ConnectivityManager) Close() {
 func (m *ConnectivityManager) AddDefaultNetworkActiveListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *ConnectivityManager) AddDefaultNetworkActiveListener(arg0 *jni.Object) 
 func (m *ConnectivityManager) BindProcessToNetwork(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -104,7 +104,8 @@ func (m *ConnectivityManager) BindProcessToNetwork(arg0 *jni.Object) (bool, erro
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midConnectivityManagerBindProcessToNetwork, jni.ObjectValue(arg0),
 		)
@@ -128,7 +129,7 @@ func (m *ConnectivityManager) CreateSocketKeepalive(
 ) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -159,7 +160,7 @@ func (m *ConnectivityManager) CreateSocketKeepalive(
 func (m *ConnectivityManager) GetActiveNetwork() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -189,7 +190,7 @@ func (m *ConnectivityManager) GetActiveNetwork() (*jni.Object, error) {
 func (m *ConnectivityManager) GetActiveNetworkInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -219,7 +220,7 @@ func (m *ConnectivityManager) GetActiveNetworkInfo() (*jni.Object, error) {
 func (m *ConnectivityManager) GetAllNetworkInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -249,7 +250,7 @@ func (m *ConnectivityManager) GetAllNetworkInfo() (*jni.Object, error) {
 func (m *ConnectivityManager) GetAllNetworks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -279,7 +280,7 @@ func (m *ConnectivityManager) GetAllNetworks() (*jni.Object, error) {
 func (m *ConnectivityManager) GetBackgroundDataSetting() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -288,7 +289,8 @@ func (m *ConnectivityManager) GetBackgroundDataSetting() (bool, error) {
 			callErr = fmt.Errorf("android.net.ConnectivityManager.getBackgroundDataSetting is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midConnectivityManagerGetBackgroundDataSetting,
 		)
@@ -305,7 +307,7 @@ func (m *ConnectivityManager) GetBackgroundDataSetting() (bool, error) {
 func (m *ConnectivityManager) GetBoundNetworkForProcess() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -339,7 +341,7 @@ func (m *ConnectivityManager) GetConnectionOwnerUid(
 ) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -365,7 +367,7 @@ func (m *ConnectivityManager) GetConnectionOwnerUid(
 func (m *ConnectivityManager) GetDefaultProxy() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -395,7 +397,7 @@ func (m *ConnectivityManager) GetDefaultProxy() (*jni.Object, error) {
 func (m *ConnectivityManager) GetLinkProperties(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -426,7 +428,7 @@ func (m *ConnectivityManager) GetLinkProperties(arg0 *jni.Object) (*jni.Object, 
 func (m *ConnectivityManager) GetMultipathPreference(arg0 *jni.Object) (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -452,7 +454,7 @@ func (m *ConnectivityManager) GetMultipathPreference(arg0 *jni.Object) (int32, e
 func (m *ConnectivityManager) GetNetworkCapabilities(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -483,7 +485,7 @@ func (m *ConnectivityManager) GetNetworkCapabilities(arg0 *jni.Object) (*jni.Obj
 func (m *ConnectivityManager) GetNetworkInfo1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -514,7 +516,7 @@ func (m *ConnectivityManager) GetNetworkInfo1(arg0 *jni.Object) (*jni.Object, er
 func (m *ConnectivityManager) GetNetworkInfo1_1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -545,7 +547,7 @@ func (m *ConnectivityManager) GetNetworkInfo1_1(arg0 int32) (*jni.Object, error)
 func (m *ConnectivityManager) GetNetworkPreference() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -570,7 +572,7 @@ func (m *ConnectivityManager) GetNetworkPreference() (int32, error) {
 func (m *ConnectivityManager) GetNetworkWatchlistConfigHash() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -600,7 +602,7 @@ func (m *ConnectivityManager) GetNetworkWatchlistConfigHash() (*jni.Object, erro
 func (m *ConnectivityManager) GetRestrictBackgroundStatus() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -625,7 +627,7 @@ func (m *ConnectivityManager) GetRestrictBackgroundStatus() (int32, error) {
 func (m *ConnectivityManager) IsActiveNetworkMetered() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -634,7 +636,8 @@ func (m *ConnectivityManager) IsActiveNetworkMetered() (bool, error) {
 			callErr = fmt.Errorf("android.net.ConnectivityManager.isActiveNetworkMetered is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midConnectivityManagerIsActiveNetworkMetered,
 		)
@@ -651,7 +654,7 @@ func (m *ConnectivityManager) IsActiveNetworkMetered() (bool, error) {
 func (m *ConnectivityManager) IsDefaultNetworkActive() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -660,7 +663,8 @@ func (m *ConnectivityManager) IsDefaultNetworkActive() (bool, error) {
 			callErr = fmt.Errorf("android.net.ConnectivityManager.isDefaultNetworkActive is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midConnectivityManagerIsDefaultNetworkActive,
 		)
@@ -677,7 +681,7 @@ func (m *ConnectivityManager) IsDefaultNetworkActive() (bool, error) {
 func (m *ConnectivityManager) RegisterDefaultNetworkCallback(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -700,7 +704,7 @@ func (m *ConnectivityManager) RegisterDefaultNetworkCallback(arg0 *jni.Object) e
 func (m *ConnectivityManager) RegisterNetworkCallback2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -723,7 +727,7 @@ func (m *ConnectivityManager) RegisterNetworkCallback2(arg0 *jni.Object, arg1 *j
 func (m *ConnectivityManager) RegisterNetworkCallback2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -746,7 +750,7 @@ func (m *ConnectivityManager) RegisterNetworkCallback2_1(arg0 *jni.Object, arg1 
 func (m *ConnectivityManager) ReleaseNetworkRequest(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -769,7 +773,7 @@ func (m *ConnectivityManager) ReleaseNetworkRequest(arg0 *jni.Object) error {
 func (m *ConnectivityManager) RemoveDefaultNetworkActiveListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -792,7 +796,7 @@ func (m *ConnectivityManager) RemoveDefaultNetworkActiveListener(arg0 *jni.Objec
 func (m *ConnectivityManager) ReportBadNetwork(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -815,7 +819,7 @@ func (m *ConnectivityManager) ReportBadNetwork(arg0 *jni.Object) error {
 func (m *ConnectivityManager) ReportNetworkConnectivity(arg0 *jni.Object, arg1 bool) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -843,7 +847,7 @@ func (m *ConnectivityManager) ReportNetworkConnectivity(arg0 *jni.Object, arg1 b
 func (m *ConnectivityManager) RequestBandwidthUpdate(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -853,7 +857,8 @@ func (m *ConnectivityManager) RequestBandwidthUpdate(arg0 *jni.Object) (bool, er
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midConnectivityManagerRequestBandwidthUpdate, jni.ObjectValue(arg0),
 		)
@@ -870,7 +875,7 @@ func (m *ConnectivityManager) RequestBandwidthUpdate(arg0 *jni.Object) (bool, er
 func (m *ConnectivityManager) RequestNetwork2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -893,7 +898,7 @@ func (m *ConnectivityManager) RequestNetwork2(arg0 *jni.Object, arg1 *jni.Object
 func (m *ConnectivityManager) RequestNetwork2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -920,7 +925,7 @@ func (m *ConnectivityManager) RequestNetwork3_2(
 ) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -943,7 +948,7 @@ func (m *ConnectivityManager) RequestNetwork3_2(
 func (m *ConnectivityManager) SetNetworkPreference(arg0 int32) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -966,7 +971,7 @@ func (m *ConnectivityManager) SetNetworkPreference(arg0 int32) error {
 func (m *ConnectivityManager) UnregisterNetworkCallback1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -989,7 +994,7 @@ func (m *ConnectivityManager) UnregisterNetworkCallback1(arg0 *jni.Object) error
 func (m *ConnectivityManager) UnregisterNetworkCallback1_1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1012,7 +1017,7 @@ func (m *ConnectivityManager) UnregisterNetworkCallback1_1(arg0 *jni.Object) err
 func (m *ConnectivityManager) GetProcessDefaultNetwork() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1042,7 +1047,7 @@ func (m *ConnectivityManager) GetProcessDefaultNetwork() (*jni.Object, error) {
 func (m *ConnectivityManager) IsNetworkTypeValid(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1052,7 +1057,8 @@ func (m *ConnectivityManager) IsNetworkTypeValid(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsConnectivityManager)),
 			midConnectivityManagerIsNetworkTypeValid, jni.IntValue(arg0),
 		)
@@ -1069,7 +1075,7 @@ func (m *ConnectivityManager) IsNetworkTypeValid(arg0 int32) (bool, error) {
 func (m *ConnectivityManager) SetProcessDefaultNetwork(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -1079,7 +1085,8 @@ func (m *ConnectivityManager) SetProcessDefaultNetwork(arg0 *jni.Object) (bool, 
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallStaticBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsConnectivityManager)),
 			midConnectivityManagerSetProcessDefaultNetwork, jni.ObjectValue(arg0),
 		)

@@ -27,7 +27,7 @@ type Socket struct {
 func (m *Socket) Close() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -49,7 +49,7 @@ func (m *Socket) Close() error {
 func (m *Socket) Connect() error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -71,7 +71,7 @@ func (m *Socket) Connect() error {
 func (m *Socket) GetConnectionType() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -96,7 +96,7 @@ func (m *Socket) GetConnectionType() (int32, error) {
 func (m *Socket) GetInputStream() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -126,7 +126,7 @@ func (m *Socket) GetInputStream() (*jni.Object, error) {
 func (m *Socket) GetMaxReceivePacketSize() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -151,7 +151,7 @@ func (m *Socket) GetMaxReceivePacketSize() (int32, error) {
 func (m *Socket) GetMaxTransmitPacketSize() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -176,7 +176,7 @@ func (m *Socket) GetMaxTransmitPacketSize() (int32, error) {
 func (m *Socket) GetOutputStream() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -206,7 +206,7 @@ func (m *Socket) GetOutputStream() (*jni.Object, error) {
 func (m *Socket) GetRemoteDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -236,7 +236,7 @@ func (m *Socket) GetRemoteDevice() (*jni.Object, error) {
 func (m *Socket) IsConnected() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -245,7 +245,8 @@ func (m *Socket) IsConnected() (bool, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothSocket.isConnected is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midSocketIsConnected,
 		)
@@ -262,7 +263,7 @@ func (m *Socket) IsConnected() (bool, error) {
 func (m *Socket) ToString() (string, error) {
 	var result string
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -271,7 +272,8 @@ func (m *Socket) ToString() (string, error) {
 			callErr = fmt.Errorf("android.bluetooth.BluetoothSocket.toString is not available on this device")
 			return callErr
 		}
-		resultObj, callErr := env.CallObjectMethod(
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSocketToString,
 		)

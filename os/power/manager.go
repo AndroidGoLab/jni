@@ -71,7 +71,7 @@ func (m *Manager) Close() {
 func (m *Manager) AddThermalHeadroomListener1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -94,7 +94,7 @@ func (m *Manager) AddThermalHeadroomListener1(arg0 *jni.Object) error {
 func (m *Manager) AddThermalHeadroomListener2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -117,7 +117,7 @@ func (m *Manager) AddThermalHeadroomListener2_1(arg0 *jni.Object, arg1 *jni.Obje
 func (m *Manager) AddThermalStatusListener1(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -140,7 +140,7 @@ func (m *Manager) AddThermalStatusListener1(arg0 *jni.Object) error {
 func (m *Manager) AddThermalStatusListener2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -163,7 +163,7 @@ func (m *Manager) AddThermalStatusListener2_1(arg0 *jni.Object, arg1 *jni.Object
 func (m *Manager) GetBatteryDischargePrediction() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -193,7 +193,7 @@ func (m *Manager) GetBatteryDischargePrediction() (*jni.Object, error) {
 func (m *Manager) GetCurrentThermalStatus() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -218,7 +218,7 @@ func (m *Manager) GetCurrentThermalStatus() (int32, error) {
 func (m *Manager) GetLocationPowerSaveMode() (int32, error) {
 	var result int32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -243,7 +243,7 @@ func (m *Manager) GetLocationPowerSaveMode() (int32, error) {
 func (m *Manager) GetThermalHeadroom(arg0 int32) (float32, error) {
 	var result float32
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -269,7 +269,7 @@ func (m *Manager) GetThermalHeadroom(arg0 int32) (float32, error) {
 func (m *Manager) IsAllowedInLowPowerStandby1(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -279,7 +279,8 @@ func (m *Manager) IsAllowedInLowPowerStandby1(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsAllowedInLowPowerStandby1, jni.IntValue(arg0),
 		)
@@ -296,7 +297,7 @@ func (m *Manager) IsAllowedInLowPowerStandby1(arg0 int32) (bool, error) {
 func (m *Manager) IsAllowedInLowPowerStandby1_1(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -310,7 +311,8 @@ func (m *Manager) IsAllowedInLowPowerStandby1_1(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsAllowedInLowPowerStandby1_1, jni.ObjectValue(&jArg0.Object),
 		)
@@ -327,7 +329,7 @@ func (m *Manager) IsAllowedInLowPowerStandby1_1(arg0 string) (bool, error) {
 func (m *Manager) IsBatteryDischargePredictionPersonalized() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -336,7 +338,8 @@ func (m *Manager) IsBatteryDischargePredictionPersonalized() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isBatteryDischargePredictionPersonalized is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsBatteryDischargePredictionPersonalized,
 		)
@@ -353,7 +356,7 @@ func (m *Manager) IsBatteryDischargePredictionPersonalized() (bool, error) {
 func (m *Manager) IsDeviceIdleMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -362,7 +365,8 @@ func (m *Manager) IsDeviceIdleMode() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isDeviceIdleMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsDeviceIdleMode,
 		)
@@ -379,7 +383,7 @@ func (m *Manager) IsDeviceIdleMode() (bool, error) {
 func (m *Manager) IsDeviceLightIdleMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -388,7 +392,8 @@ func (m *Manager) IsDeviceLightIdleMode() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isDeviceLightIdleMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsDeviceLightIdleMode,
 		)
@@ -405,7 +410,7 @@ func (m *Manager) IsDeviceLightIdleMode() (bool, error) {
 func (m *Manager) IsExemptFromLowPowerStandby() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -414,7 +419,8 @@ func (m *Manager) IsExemptFromLowPowerStandby() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isExemptFromLowPowerStandby is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsExemptFromLowPowerStandby,
 		)
@@ -431,7 +437,7 @@ func (m *Manager) IsExemptFromLowPowerStandby() (bool, error) {
 func (m *Manager) IsIgnoringBatteryOptimizations(arg0 string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -445,7 +451,8 @@ func (m *Manager) IsIgnoringBatteryOptimizations(arg0 string) (bool, error) {
 			return err
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsIgnoringBatteryOptimizations, jni.ObjectValue(&jArg0.Object),
 		)
@@ -462,7 +469,7 @@ func (m *Manager) IsIgnoringBatteryOptimizations(arg0 string) (bool, error) {
 func (m *Manager) IsInteractive() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -471,7 +478,8 @@ func (m *Manager) IsInteractive() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isInteractive is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsInteractive,
 		)
@@ -488,7 +496,7 @@ func (m *Manager) IsInteractive() (bool, error) {
 func (m *Manager) IsLowPowerStandbyEnabled() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -497,7 +505,8 @@ func (m *Manager) IsLowPowerStandbyEnabled() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isLowPowerStandbyEnabled is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsLowPowerStandbyEnabled,
 		)
@@ -514,7 +523,7 @@ func (m *Manager) IsLowPowerStandbyEnabled() (bool, error) {
 func (m *Manager) IsPowerSaveMode() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -523,7 +532,8 @@ func (m *Manager) IsPowerSaveMode() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isPowerSaveMode is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsPowerSaveMode,
 		)
@@ -540,7 +550,7 @@ func (m *Manager) IsPowerSaveMode() (bool, error) {
 func (m *Manager) IsRebootingUserspaceSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -549,7 +559,8 @@ func (m *Manager) IsRebootingUserspaceSupported() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isRebootingUserspaceSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsRebootingUserspaceSupported,
 		)
@@ -566,7 +577,7 @@ func (m *Manager) IsRebootingUserspaceSupported() (bool, error) {
 func (m *Manager) IsScreenOn() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -575,7 +586,8 @@ func (m *Manager) IsScreenOn() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isScreenOn is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsScreenOn,
 		)
@@ -592,7 +604,7 @@ func (m *Manager) IsScreenOn() (bool, error) {
 func (m *Manager) IsSustainedPerformanceModeSupported() (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -601,7 +613,8 @@ func (m *Manager) IsSustainedPerformanceModeSupported() (bool, error) {
 			callErr = fmt.Errorf("android.os.PowerManager.isSustainedPerformanceModeSupported is not available on this device")
 			return callErr
 		}
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsSustainedPerformanceModeSupported,
 		)
@@ -618,7 +631,7 @@ func (m *Manager) IsSustainedPerformanceModeSupported() (bool, error) {
 func (m *Manager) IsWakeLockLevelSupported(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -628,7 +641,8 @@ func (m *Manager) IsWakeLockLevelSupported(arg0 int32) (bool, error) {
 			return callErr
 		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsWakeLockLevelSupported, jni.IntValue(arg0),
 		)
@@ -645,7 +659,7 @@ func (m *Manager) IsWakeLockLevelSupported(arg0 int32) (bool, error) {
 func (m *Manager) NewWakeLock(arg0 int32, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -681,7 +695,7 @@ func (m *Manager) NewWakeLock(arg0 int32, arg1 string) (*jni.Object, error) {
 func (m *Manager) Reboot(arg0 string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -708,7 +722,7 @@ func (m *Manager) Reboot(arg0 string) error {
 func (m *Manager) RemoveThermalHeadroomListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
@@ -731,7 +745,7 @@ func (m *Manager) RemoveThermalHeadroomListener(arg0 *jni.Object) error {
 func (m *Manager) RemoveThermalStatusListener(arg0 *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err

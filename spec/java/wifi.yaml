@@ -1269,9 +1269,6 @@ constants:
     - go_name: ChannelWidth80mhzPlusMhz
       value: "4"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: PreambleEht
       value: "4"
       go_type: int
