@@ -67,9 +67,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := inputmethod.NewManager(ctx)
+	mgr, err := inputmethod.NewInputMethodManager(ctx)
 	if err != nil {
-		return fmt.Errorf("inputmethod.NewManager: %v", err)
+		return fmt.Errorf("inputmethod.NewInputMethodManager: %v", err)
 	}
 	defer mgr.Close()
 

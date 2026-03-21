@@ -64,9 +64,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	defer ctx.Close()
 
 	// --- NewManager ---
-	mgr, err := projection.NewManager(ctx)
+	mgr, err := projection.NewMediaProjectionManager(ctx)
 	if err != nil {
-		return fmt.Errorf("projection.NewManager: %v", err)
+		return fmt.Errorf("projection.NewMediaProjectionManager: %v", err)
 	}
 	defer mgr.Close()
 

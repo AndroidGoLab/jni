@@ -62,7 +62,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	// The Recorder type wraps android.media.MediaRecorder with VM and
 	// Obj fields for JNI access.
-	var rec recorder.Recorder
+	var rec recorder.MediaRecorder
 	_ = rec
 	fmt.Fprintln(output, "Recorder type available")
 

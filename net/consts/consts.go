@@ -3,6 +3,42 @@
 package consts
 
 const (
+	ActionBackgroundDataSettingChanged string = "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED"
+	ActionCaptivePortalSignIn          string = "android.net.conn.CAPTIVE_PORTAL"
+	ActionRestrictBackgroundChanged    string = "android.net.conn.RESTRICT_BACKGROUND_CHANGED"
+	ConnectivityAction                 string = "android.net.conn.CONNECTIVITY_CHANGE"
+	ExtraCaptivePortal                 string = "android.net.extra.CAPTIVE_PORTAL"
+	ExtraCaptivePortalUrl              string = "android.net.extra.CAPTIVE_PORTAL_URL"
+	ExtraExtraInfo                     string = "extraInfo"
+	ExtraIsFailover                    string = "isFailover"
+	ExtraNetwork                       string = "android.net.extra.NETWORK"
+	ExtraNetworkInfo                   string = "networkInfo"
+	ExtraNetworkRequest                string = "android.net.extra.NETWORK_REQUEST"
+	ExtraNetworkType                   string = "networkType"
+	ExtraNoConnectivity                string = "noConnectivity"
+	ExtraOtherNetworkInfo              string = "otherNetwork"
+	ExtraReason                        string = "reason"
+)
+
+const (
+	DefaultNetworkPreference             int = 1
+	MultipathPreferenceHandover          int = 1
+	MultipathPreferencePerformance       int = 4
+	MultipathPreferenceReliability       int = 2
+	RestrictBackgroundStatusDisabled     int = 1
+	RestrictBackgroundStatusEnabled      int = 3
+	RestrictBackgroundStatusWhitelisted  int = 2
+	TypeBluetooth                        int = 7
+	TypeDummy                            int = 8
+	TypeEthernet                         int = 9
+	TypeMobile                           int = 0
+	TypeMobileDun                        int = 4
+	TypeMobileHipri                      int = 5
+	TypeMobileMms                        int = 2
+	TypeMobileSupl                       int = 3
+	TypeVpn                              int = 17
+	TypeWifi                             int = 1
+	TypeWimax                            int = 6
 	Creator                              int = 0
 	NetCapabilityCaptivePortal           int = 17
 	NetCapabilityCbs                     int = 5
@@ -51,40 +87,4 @@ const (
 	TransportVpn                         int = 4
 	TransportWifi                        int = 1
 	TransportWifiAware                   int = 5
-	DefaultNetworkPreference             int = 1
-	MultipathPreferenceHandover          int = 1
-	MultipathPreferencePerformance       int = 4
-	MultipathPreferenceReliability       int = 2
-	RestrictBackgroundStatusDisabled     int = 1
-	RestrictBackgroundStatusEnabled      int = 3
-	RestrictBackgroundStatusWhitelisted  int = 2
-	TypeBluetooth                        int = 7
-	TypeDummy                            int = 8
-	TypeEthernet                         int = 9
-	TypeMobile                           int = 0
-	TypeMobileDun                        int = 4
-	TypeMobileHipri                      int = 5
-	TypeMobileMms                        int = 2
-	TypeMobileSupl                       int = 3
-	TypeVpn                              int = 17
-	TypeWifi                             int = 1
-	TypeWimax                            int = 6
-)
-
-const (
-	ActionBackgroundDataSettingChanged string = "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED"
-	ActionCaptivePortalSignIn          string = "android.net.conn.CAPTIVE_PORTAL"
-	ActionRestrictBackgroundChanged    string = "android.net.conn.RESTRICT_BACKGROUND_CHANGED"
-	ConnectivityAction                 string = "android.net.conn.CONNECTIVITY_CHANGE"
-	ExtraCaptivePortal                 string = "android.net.extra.CAPTIVE_PORTAL"
-	ExtraCaptivePortalUrl              string = "android.net.extra.CAPTIVE_PORTAL_URL"
-	ExtraExtraInfo                     string = "extraInfo"
-	ExtraIsFailover                    string = "isFailover"
-	ExtraNetwork                       string = "android.net.extra.NETWORK"
-	ExtraNetworkInfo                   string = "networkInfo"
-	ExtraNetworkRequest                string = "android.net.extra.NETWORK_REQUEST"
-	ExtraNetworkType                   string = "networkType"
-	ExtraNoConnectivity                string = "noConnectivity"
-	ExtraOtherNetworkInfo              string = "otherNetwork"
-	ExtraReason                        string = "reason"
 )

@@ -3,11 +3,7 @@
 package consts
 
 const (
-	ExtraEventAction   string = "android.app.usage.extra.EVENT_ACTION"
-	ExtraEventCategory string = "android.app.usage.extra.EVENT_CATEGORY"
-)
-
-const (
+	Creator                 int = 0
 	IntervalBest            int = 4
 	IntervalDaily           int = 0
 	IntervalMonthly         int = 2
@@ -18,5 +14,9 @@ const (
 	StandbyBucketRare       int = 40
 	StandbyBucketRestricted int = 45
 	StandbyBucketWorkingSet int = 20
-	Creator                 int = 0
+)
+
+const (
+	ExtraEventAction   string = "android.app.usage.extra.EVENT_ACTION"
+	ExtraEventCategory string = "android.app.usage.extra.EVENT_CATEGORY"
 )

@@ -113,8 +113,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	// --- Adapter lifecycle ---
 	var adapter nfc.Adapter
 	// adapter.VM and adapter.Obj would be populated by the runtime.
-	// Always close when done to release the JNI global reference.
-	defer adapter.Close()
+	_ = adapter
 
 	fmt.Fprintln(output, "\nNFC example complete.")
 	return nil

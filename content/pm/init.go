@@ -480,7 +480,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getApplicationInfo")
 	}
 
-	midPackageManagerGetApplicationLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getApplicationLabel", "(Landroid/content/pm/ApplicationInfo;)Ljava/lang/String;")
+	midPackageManagerGetApplicationLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getApplicationLabel", "(Landroid/content/pm/ApplicationInfo;)Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -512,7 +512,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getArchivedPackage")
 	}
 
-	midPackageManagerGetBackgroundPermissionOptionLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getBackgroundPermissionOptionLabel", "()Ljava/lang/String;")
+	midPackageManagerGetBackgroundPermissionOptionLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getBackgroundPermissionOptionLabel", "()Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1000,7 +1000,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getTargetSdkVersion")
 	}
 
-	midPackageManagerGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getText", "(Ljava/lang/String;ILandroid/content/pm/ApplicationInfo;)Ljava/lang/String;")
+	midPackageManagerGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getText", "(Ljava/lang/String;ILandroid/content/pm/ApplicationInfo;)Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1024,7 +1024,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.pm.PackageManager.getUserBadgedIcon")
 	}
 
-	midPackageManagerGetUserBadgedLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getUserBadgedLabel", "(Ljava/lang/String;Landroid/os/UserHandle;)Ljava/lang/String;")
+	midPackageManagerGetUserBadgedLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getUserBadgedLabel", "(Ljava/lang/CharSequence;Landroid/os/UserHandle;)Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

@@ -5,59 +5,6 @@
 package: display
 go_import: github.com/AndroidGoLab/jni/view/display
 classes:
-    - java_class: android.view.WindowManager
-      go_type: WindowManager
-      obtain: system_service
-      service_name: window
-      close: true
-      methods:
-        - java_method: getDefaultDisplay
-          go_name: GetDefaultDisplay
-          returns: android.view.Display
-          error: true
-        - java_method: removeViewImmediate
-          go_name: RemoveViewImmediate
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.util.DisplayMetrics
-      go_type: Metrics
-      methods:
-        - java_method: equals
-          go_name: Equals1
-          params:
-            - java_type: android.util.DisplayMetrics
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: equals
-          go_name: Equals1_1
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: setTo
-          go_name: SetTo
-          params:
-            - java_type: android.util.DisplayMetrics
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setToDefaults
-          go_name: SetToDefaults
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
     - java_class: android.view.Display
       go_type: Display
       methods:
@@ -255,7 +202,108 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.view.WindowManager
+      go_type: WindowManager
+      obtain: system_service
+      service_name: window
+      close: true
+      methods:
+        - java_method: getDefaultDisplay
+          go_name: GetDefaultDisplay
+          returns: android.view.Display
+          error: true
+        - java_method: removeViewImmediate
+          go_name: RemoveViewImmediate
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.util.DisplayMetrics
+      go_type: Metrics
+      methods:
+        - java_method: equals
+          go_name: Equals1
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: equals
+          go_name: Equals1_1
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: setTo
+          go_name: SetTo
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setToDefaults
+          go_name: SetToDefaults
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
 constants:
+    - go_name: DefaultDisplay
+      value: "0"
+      go_type: int
+    - go_name: FlagPresentation
+      value: "8"
+      go_type: int
+    - go_name: FlagPrivate
+      value: "4"
+      go_type: int
+    - go_name: FlagRound
+      value: "16"
+      go_type: int
+    - go_name: FlagSecure
+      value: "2"
+      go_type: int
+    - go_name: FlagSupportsProtectedBuffers
+      value: "1"
+      go_type: int
+    - go_name: FrameRateCategoryHigh
+      value: "1"
+      go_type: int
+    - go_name: FrameRateCategoryNormal
+      value: "0"
+      go_type: int
+    - go_name: InvalidDisplay
+      value: "-1"
+      go_type: int
+    - go_name: StateDoze
+      value: "3"
+      go_type: int
+    - go_name: StateDozeSuspend
+      value: "4"
+      go_type: int
+    - go_name: StateOff
+      value: "1"
+      go_type: int
+    - go_name: StateOn
+      value: "2"
+      go_type: int
+    - go_name: StateOnSuspend
+      value: "6"
+      go_type: int
+    - go_name: StateUnknown
+      value: "0"
+      go_type: int
+    - go_name: StateVr
+      value: "5"
+      go_type: int
     - go_name: CompatSmallCoverScreenOptIn
       value: "1"
       go_type: int
@@ -393,52 +441,4 @@ constants:
       go_type: int
     - go_name: DensityXxxhigh
       value: "640"
-      go_type: int
-    - go_name: DefaultDisplay
-      value: "0"
-      go_type: int
-    - go_name: FlagPresentation
-      value: "8"
-      go_type: int
-    - go_name: FlagPrivate
-      value: "4"
-      go_type: int
-    - go_name: FlagRound
-      value: "16"
-      go_type: int
-    - go_name: FlagSecure
-      value: "2"
-      go_type: int
-    - go_name: FlagSupportsProtectedBuffers
-      value: "1"
-      go_type: int
-    - go_name: FrameRateCategoryHigh
-      value: "1"
-      go_type: int
-    - go_name: FrameRateCategoryNormal
-      value: "0"
-      go_type: int
-    - go_name: InvalidDisplay
-      value: "-1"
-      go_type: int
-    - go_name: StateDoze
-      value: "3"
-      go_type: int
-    - go_name: StateDozeSuspend
-      value: "4"
-      go_type: int
-    - go_name: StateOff
-      value: "1"
-      go_type: int
-    - go_name: StateOn
-      value: "2"
-      go_type: int
-    - go_name: StateOnSuspend
-      value: "6"
-      go_type: int
-    - go_name: StateUnknown
-      value: "0"
-      go_type: int
-    - go_name: StateVr
-      value: "5"
       go_type: int

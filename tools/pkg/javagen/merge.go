@@ -187,7 +187,7 @@ func mergeParam(p Param, overlay *Overlay) MergedParam {
 		}
 	}
 
-	isString := p.JavaType == "String" || p.JavaType == "java.lang.String"
+	isString := p.JavaType == "String" || p.JavaType == "java.lang.String" || p.JavaType == "java.lang.CharSequence"
 	isBool := p.JavaType == "boolean"
 
 	goName := sanitizeGoName(p.GoName)
@@ -463,7 +463,7 @@ func classifyReturn(retType string, retConv TypeConv) ReturnKind {
 	switch {
 	case retType == "void":
 		return ReturnVoid
-	case retType == "String" || retType == "java.lang.String":
+	case retType == "String" || retType == "java.lang.String" || retType == "java.lang.CharSequence":
 		return ReturnString
 	case retType == "boolean":
 		return ReturnBool

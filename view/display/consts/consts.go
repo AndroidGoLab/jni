@@ -3,6 +3,22 @@
 package consts
 
 const (
+	DefaultDisplay                 int = 0
+	FlagPresentation               int = 8
+	FlagPrivate                    int = 4
+	FlagRound                      int = 16
+	FlagSecure                     int = 2
+	FlagSupportsProtectedBuffers   int = 1
+	FrameRateCategoryHigh          int = 1
+	FrameRateCategoryNormal        int = 0
+	InvalidDisplay                 int = -1
+	StateDoze                      int = 3
+	StateDozeSuspend               int = 4
+	StateOff                       int = 1
+	StateOn                        int = 2
+	StateOnSuspend                 int = 6
+	StateUnknown                   int = 0
+	StateVr                        int = 5
 	CompatSmallCoverScreenOptIn    int = 1
 	ScreenRecordingStateNotVisible int = 0
 	ScreenRecordingStateVisible    int = 1
@@ -32,22 +48,6 @@ const (
 	DensityXhigh                   int = 320
 	DensityXxhigh                  int = 480
 	DensityXxxhigh                 int = 640
-	DefaultDisplay                 int = 0
-	FlagPresentation               int = 8
-	FlagPrivate                    int = 4
-	FlagRound                      int = 16
-	FlagSecure                     int = 2
-	FlagSupportsProtectedBuffers   int = 1
-	FrameRateCategoryHigh          int = 1
-	FrameRateCategoryNormal        int = 0
-	InvalidDisplay                 int = -1
-	StateDoze                      int = 3
-	StateDozeSuspend               int = 4
-	StateOff                       int = 1
-	StateOn                        int = 2
-	StateOnSuspend                 int = 6
-	StateUnknown                   int = 0
-	StateVr                        int = 5
 )
 
 const (

@@ -44,11 +44,6 @@ const (
 )
 
 const (
-	MifareClassic                      = consts.MifareClassic
-	NfcForumType1                      = consts.NfcForumType1
-	NfcForumType2                      = consts.NfcForumType2
-	NfcForumType3                      = consts.NfcForumType3
-	NfcForumType4                      = consts.NfcForumType4
 	ActionAdapterStateChanged          = consts.ActionAdapterStateChanged
 	ActionChangeTagIntentPreference    = consts.ActionChangeTagIntentPreference
 	ActionNdefDiscovered               = consts.ActionNdefDiscovered
@@ -65,4 +60,9 @@ const (
 	ExtraReaderPresenceCheckDelay      = consts.ExtraReaderPresenceCheckDelay
 	ExtraSecureElementName             = consts.ExtraSecureElementName
 	ExtraTag                           = consts.ExtraTag
+	MifareClassic                      = consts.MifareClassic
+	NfcForumType1                      = consts.NfcForumType1
+	NfcForumType2                      = consts.NfcForumType2
+	NfcForumType3                      = consts.NfcForumType3
+	NfcForumType4                      = consts.NfcForumType4
 )

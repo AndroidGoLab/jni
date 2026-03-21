@@ -23,9 +23,9 @@ classes:
         - java_method: createConfirmDeviceCredentialIntent
           go_name: CreateConfirmDeviceCredentialIntent
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: android.content.Intent
           error: true

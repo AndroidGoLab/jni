@@ -11,6 +11,7 @@ const (
 	PdfFormTypeXfaFull                  int = 2
 	RenderModeForDisplay                int = 1
 	RenderModeForPrint                  int = 2
+	AllSaveFlag                         int = 31
 	Creator                             int = 0
 	ModeAppend                          int = 33554432
 	ModeCreate                          int = 134217728
@@ -20,6 +21,15 @@ const (
 	ModeWorldReadable                   int = 1
 	ModeWorldWriteable                  int = 2
 	ModeWriteOnly                       int = 536870912
+	Bold                                int = 1
+	BoldItalic                          int = 3
+	Default                             int = 0
+	DefaultBold                         int = 0
+	Italic                              int = 2
+	Monospace                           int = 0
+	Normal                              int = 0
+	SansSerif                           int = 0
+	Serif                               int = 0
 	DensityNone                         int = 0
 	Alpha8                              int = 0
 	Argb4444                            int = 0
@@ -58,14 +68,4 @@ const (
 	TextRunFlagRightEdge                int = 16384
 	UnderlineTextFlag                   int = 8
 	VerticalTextFlag                    int = 4096
-	AllSaveFlag                         int = 31
-	Bold                                int = 1
-	BoldItalic                          int = 3
-	Default                             int = 0
-	DefaultBold                         int = 0
-	Italic                              int = 2
-	Monospace                           int = 0
-	Normal                              int = 0
-	SansSerif                           int = 0
-	Serif                               int = 0
 )

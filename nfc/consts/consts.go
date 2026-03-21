@@ -42,11 +42,6 @@ const (
 )
 
 const (
-	MifareClassic                      string = "com.nxp.ndef.mifareclassic"
-	NfcForumType1                      string = "org.nfcforum.ndef.type1"
-	NfcForumType2                      string = "org.nfcforum.ndef.type2"
-	NfcForumType3                      string = "org.nfcforum.ndef.type3"
-	NfcForumType4                      string = "org.nfcforum.ndef.type4"
 	ActionAdapterStateChanged          string = "android.nfc.action.ADAPTER_STATE_CHANGED"
 	ActionChangeTagIntentPreference    string = "android.nfc.action.CHANGE_TAG_INTENT_PREFERENCE"
 	ActionNdefDiscovered               string = "android.nfc.action.NDEF_DISCOVERED"
@@ -63,4 +58,9 @@ const (
 	ExtraReaderPresenceCheckDelay      string = "presence"
 	ExtraSecureElementName             string = "android.nfc.extra.SECURE_ELEMENT_NAME"
 	ExtraTag                           string = "android.nfc.extra.TAG"
+	MifareClassic                      string = "com.nxp.ndef.mifareclassic"
+	NfcForumType1                      string = "org.nfcforum.ndef.type1"
+	NfcForumType2                      string = "org.nfcforum.ndef.type2"
+	NfcForumType3                      string = "org.nfcforum.ndef.type3"
+	NfcForumType4                      string = "org.nfcforum.ndef.type4"
 )

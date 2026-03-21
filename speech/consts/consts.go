@@ -3,6 +3,7 @@
 package consts
 
 const (
+	ActionTtsQueueProcessingCompleted string = "android.speech.tts.TTS_QUEUE_PROCESSING_COMPLETED"
 	ConfidenceScores                  string = "confidence_scores"
 	DetectedLanguage                  string = "detected_language"
 	LanguageDetectionConfidenceLevel  string = "language_detection_confidence_level"
@@ -11,10 +12,26 @@ const (
 	ResultsAlternatives               string = "results_alternatives"
 	ResultsRecognition                string = "results_recognition"
 	TopLocaleAlternatives             string = "top_locale_alternatives"
-	ActionTtsQueueProcessingCompleted string = "android.speech.tts.TTS_QUEUE_PROCESSING_COMPLETED"
 )
 
 const (
+	Error                                           int = -1
+	ErrorInvalidRequest                             int = -8
+	ErrorNetwork                                    int = -6
+	ErrorNetworkTimeout                             int = -7
+	ErrorNotInstalledYet                            int = -9
+	ErrorOutput                                     int = -5
+	ErrorService                                    int = -4
+	ErrorSynthesis                                  int = -3
+	LangAvailable                                   int = 0
+	LangCountryAvailable                            int = 1
+	LangCountryVarAvailable                         int = 2
+	LangMissingData                                 int = -1
+	LangNotSupported                                int = -2
+	QueueAdd                                        int = 1
+	QueueFlush                                      int = 0
+	Stopped                                         int = -2
+	Success                                         int = 0
 	ErrorAudio                                      int = 3
 	ErrorCannotCheckSupport                         int = 14
 	ErrorCannotListenToDownloadEvents               int = 15
@@ -22,8 +39,6 @@ const (
 	ErrorInsufficientPermissions                    int = 9
 	ErrorLanguageNotSupported                       int = 12
 	ErrorLanguageUnavailable                        int = 13
-	ErrorNetwork                                    int = 2
-	ErrorNetworkTimeout                             int = 1
 	ErrorNoMatch                                    int = 7
 	ErrorRecognizerBusy                             int = 8
 	ErrorServer                                     int = 4
@@ -38,19 +53,4 @@ const (
 	LanguageSwitchResultNotAttempted                int = 0
 	LanguageSwitchResultSkippedNoModel              int = 3
 	LanguageSwitchResultSucceeded                   int = 1
-	Error                                           int = -1
-	ErrorInvalidRequest                             int = -8
-	ErrorNotInstalledYet                            int = -9
-	ErrorOutput                                     int = -5
-	ErrorService                                    int = -4
-	ErrorSynthesis                                  int = -3
-	LangAvailable                                   int = 0
-	LangCountryAvailable                            int = 1
-	LangCountryVarAvailable                         int = 2
-	LangMissingData                                 int = -1
-	LangNotSupported                                int = -2
-	QueueAdd                                        int = 1
-	QueueFlush                                      int = 0
-	Stopped                                         int = -2
-	Success                                         int = 0
 )

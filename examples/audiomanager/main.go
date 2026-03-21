@@ -63,9 +63,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := audiomanager.NewManager(ctx)
+	mgr, err := audiomanager.NewAudioManager(ctx)
 	if err != nil {
-		return fmt.Errorf("audiomanager.NewManager: %v", err)
+		return fmt.Errorf("audiomanager.NewAudioManager: %v", err)
 	}
 	defer mgr.Close()
 

@@ -5,40 +5,6 @@
 package: omapi
 go_import: github.com/AndroidGoLab/jni/se/omapi
 classes:
-    - java_class: android.se.omapi.Channel
-      go_type: Channel
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getSelectResponse
-          go_name: GetSelectResponse
-          returns: '[B'
-          error: true
-        - java_method: getSession
-          go_name: GetSession
-          returns: android.se.omapi.Session
-          error: true
-        - java_method: isBasicChannel
-          go_name: IsBasicChannel
-          returns: boolean
-          error: true
-        - java_method: isOpen
-          go_name: IsOpen
-          returns: boolean
-          error: true
-        - java_method: selectNext
-          go_name: SelectNext
-          returns: boolean
-          error: true
-        - java_method: transmit
-          go_name: Transmit
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: '[B'
-          error: true
     - java_class: android.se.omapi.SEService
       go_type: SEService
       methods:
@@ -119,6 +85,40 @@ classes:
             - java_type: byte
               go_name: arg1
           returns: android.se.omapi.Channel
+          error: true
+    - java_class: android.se.omapi.Channel
+      go_type: Channel
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getSelectResponse
+          go_name: GetSelectResponse
+          returns: '[B'
+          error: true
+        - java_method: getSession
+          go_name: GetSession
+          returns: android.se.omapi.Session
+          error: true
+        - java_method: isBasicChannel
+          go_name: IsBasicChannel
+          returns: boolean
+          error: true
+        - java_method: isOpen
+          go_name: IsOpen
+          returns: boolean
+          error: true
+        - java_method: selectNext
+          go_name: SelectNext
+          returns: boolean
+          error: true
+        - java_method: transmit
+          go_name: Transmit
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: '[B'
           error: true
     - java_class: android.se.omapi.Reader
       go_type: Reader

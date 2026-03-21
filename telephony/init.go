@@ -628,7 +628,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimCarrierId")
 	}
 
-	midManagerGetSimCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCarrierIdName", "()Ljava/lang/String;")
+	midManagerGetSimCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCarrierIdName", "()Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -676,7 +676,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.telephony.TelephonyManager.getSimSpecificCarrierId")
 	}
 
-	midManagerGetSimSpecificCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimSpecificCarrierIdName", "()Ljava/lang/String;")
+	midManagerGetSimSpecificCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimSpecificCarrierIdName", "()Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

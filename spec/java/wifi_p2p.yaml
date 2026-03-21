@@ -158,66 +158,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.net.wifi.p2p.WifiP2pGroup
-      go_type: WifiP2pGroup
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getClientList
-          go_name: GetClientList
-          returns: java.util.Collection<android.net.wifi.p2p.WifiP2pDevice>
-          error: true
-        - java_method: getFrequency
-          go_name: GetFrequency
-          returns: int
-          error: true
-        - java_method: getGroupOwnerBssid
-          go_name: GetGroupOwnerBssid
-          returns: android.net.MacAddress
-          error: true
-        - java_method: getInterface
-          go_name: GetInterface
-          returns: String
-          error: true
-        - java_method: getNetworkId
-          go_name: GetNetworkId
-          returns: int
-          error: true
-        - java_method: getNetworkName
-          go_name: GetNetworkName
-          returns: String
-          error: true
-        - java_method: getOwner
-          go_name: GetOwner
-          returns: android.net.wifi.p2p.WifiP2pDevice
-          error: true
-        - java_method: getPassphrase
-          go_name: GetPassphrase
-          returns: String
-          error: true
-        - java_method: getSecurityType
-          go_name: GetSecurityType
-          returns: int
-          error: true
-        - java_method: isGroupOwner
-          go_name: IsGroupOwner
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.net.wifi.p2p.WifiP2pManager
       go_type: WifiP2pManager
       obtain: system_service
@@ -701,6 +641,66 @@ classes:
           go_name: GetP2pMaxAllowedVendorElementsLengthBytes
           returns: int
           error: true
+    - java_class: android.net.wifi.p2p.WifiP2pGroup
+      go_type: WifiP2pGroup
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getClientList
+          go_name: GetClientList
+          returns: java.util.Collection<android.net.wifi.p2p.WifiP2pDevice>
+          error: true
+        - java_method: getFrequency
+          go_name: GetFrequency
+          returns: int
+          error: true
+        - java_method: getGroupOwnerBssid
+          go_name: GetGroupOwnerBssid
+          returns: android.net.MacAddress
+          error: true
+        - java_method: getInterface
+          go_name: GetInterface
+          returns: String
+          error: true
+        - java_method: getNetworkId
+          go_name: GetNetworkId
+          returns: int
+          error: true
+        - java_method: getNetworkName
+          go_name: GetNetworkName
+          returns: String
+          error: true
+        - java_method: getOwner
+          go_name: GetOwner
+          returns: android.net.wifi.p2p.WifiP2pDevice
+          error: true
+        - java_method: getPassphrase
+          go_name: GetPassphrase
+          returns: String
+          error: true
+        - java_method: getSecurityType
+          go_name: GetSecurityType
+          returns: int
+          error: true
+        - java_method: isGroupOwner
+          go_name: IsGroupOwner
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
 constants:
     - go_name: Creator
       value: "0"
@@ -761,24 +761,6 @@ constants:
       go_type: int
     - go_name: Unavailable
       value: "4"
-      go_type: int
-    - go_name: NetworkIdPersistent
-      value: "-2"
-      go_type: int
-    - go_name: NetworkIdTemporary
-      value: "-1"
-      go_type: int
-    - go_name: SecurityTypeUnknown
-      value: "-1"
-      go_type: int
-    - go_name: SecurityTypeWpa2Psk
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeWpa3Compatibility
-      value: "1"
-      go_type: int
-    - go_name: SecurityTypeWpa3Sae
-      value: "2"
       go_type: int
     - go_name: ActionWifiP2pListenStateChanged
       value: '"android.net.wifi.p2p.action.WIFI_P2P_LISTEN_STATE_CHANGED"'
@@ -903,3 +885,21 @@ constants:
     - go_name: WifiP2pThisDeviceChangedAction
       value: '"android.net.wifi.p2p.THIS_DEVICE_CHANGED"'
       go_type: string
+    - go_name: NetworkIdPersistent
+      value: "-2"
+      go_type: int
+    - go_name: NetworkIdTemporary
+      value: "-1"
+      go_type: int
+    - go_name: SecurityTypeUnknown
+      value: "-1"
+      go_type: int
+    - go_name: SecurityTypeWpa2Psk
+      value: "0"
+      go_type: int
+    - go_name: SecurityTypeWpa3Compatibility
+      value: "1"
+      go_type: int
+    - go_name: SecurityTypeWpa3Sae
+      value: "2"
+      go_type: int

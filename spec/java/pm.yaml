@@ -263,7 +263,7 @@ classes:
           params:
             - java_type: android.content.pm.ApplicationInfo
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getApplicationLogo
           go_name: GetApplicationLogo1
@@ -288,7 +288,7 @@ classes:
           error: true
         - java_method: getBackgroundPermissionOptionLabel
           go_name: GetBackgroundPermissionOptionLabel
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getChangedPackages
           go_name: GetChangedPackages
@@ -764,7 +764,7 @@ classes:
               go_name: arg1
             - java_type: android.content.pm.ApplicationInfo
               go_name: arg2
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getUserBadgedDrawableForDensity
           go_name: GetUserBadgedDrawableForDensity
@@ -791,11 +791,11 @@ classes:
         - java_method: getUserBadgedLabel
           go_name: GetUserBadgedLabel
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
             - java_type: android.os.UserHandle
               go_name: arg1
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getWhitelistedRestrictedPermissions
           go_name: GetWhitelistedRestrictedPermissions

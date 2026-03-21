@@ -5,6 +5,446 @@
 package: app
 go_import: github.com/AndroidGoLab/jni/app
 classes:
+    - java_class: android.os.Bundle
+      go_type: Bundle
+      methods:
+        - java_method: clear
+          go_name: Clear
+          returns: void
+          error: true
+        - java_method: clone
+          go_name: Clone
+          returns: java.lang.Object
+          error: true
+        - java_method: deepCopy
+          go_name: DeepCopy
+          returns: android.os.Bundle
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getBinder
+          go_name: GetBinder
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: getBundle
+          go_name: GetBundle
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Bundle
+          error: true
+        - java_method: getByte
+          go_name: GetByte1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: byte
+          error: true
+        - java_method: getByte
+          go_name: GetByte2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: java.lang.Byte
+          error: true
+        - java_method: getByteArray
+          go_name: GetByteArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[B'
+          error: true
+        - java_method: getChar
+          go_name: GetChar1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: char
+          error: true
+        - java_method: getChar
+          go_name: GetChar2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: char
+          error: true
+        - java_method: getCharArray
+          go_name: GetCharArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: char[]
+          error: true
+        - java_method: getCharSequence
+          go_name: GetCharSequence1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getCharSequence
+          go_name: GetCharSequence2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.CharSequence
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getCharSequenceArray
+          go_name: GetCharSequenceArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.CharSequence[]
+          error: true
+        - java_method: getCharSequenceArrayList
+          go_name: GetCharSequenceArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.CharSequence>
+          error: true
+        - java_method: getClassLoader
+          go_name: GetClassLoader
+          returns: java.lang.ClassLoader
+          error: true
+        - java_method: getFloat
+          go_name: GetFloat1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getFloat
+          go_name: GetFloat2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: float
+          error: true
+        - java_method: getFloatArray
+          go_name: GetFloatArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float[]
+          error: true
+        - java_method: getIntegerArrayList
+          go_name: GetIntegerArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.Integer>
+          error: true
+        - java_method: getParcelableArray
+          go_name: GetParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Parcelable[]
+          error: true
+        - java_method: getSerializable
+          go_name: GetSerializable
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.io.Serializable
+          error: true
+        - java_method: getShort
+          go_name: GetShort1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: short
+          error: true
+        - java_method: getShort
+          go_name: GetShort2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: short
+          error: true
+        - java_method: getShortArray
+          go_name: GetShortArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: short[]
+          error: true
+        - java_method: getSize
+          go_name: GetSize
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.util.Size
+          error: true
+        - java_method: getSizeF
+          go_name: GetSizeF
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.util.SizeF
+          error: true
+        - java_method: getStringArrayList
+          go_name: GetStringArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.String>
+          error: true
+        - java_method: hasFileDescriptors
+          go_name: HasFileDescriptors
+          returns: boolean
+          error: true
+        - java_method: putAll
+          go_name: PutAll
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: putBinder
+          go_name: PutBinder
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.IBinder
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putBundle
+          go_name: PutBundle
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putByte
+          go_name: PutByte
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putByteArray
+          go_name: PutByteArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putChar
+          go_name: PutChar
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharArray
+          go_name: PutCharArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequence
+          go_name: PutCharSequence
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.CharSequence
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequenceArray
+          go_name: PutCharSequenceArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.CharSequence[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequenceArrayList
+          go_name: PutCharSequenceArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.CharSequence>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putFloat
+          go_name: PutFloat
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putFloatArray
+          go_name: PutFloatArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putIntegerArrayList
+          go_name: PutIntegerArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.Integer>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelable
+          go_name: PutParcelable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelableArray
+          go_name: PutParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelableArrayList
+          go_name: PutParcelableArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<? extends android.os.Parcelable>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSerializable
+          go_name: PutSerializable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.Serializable
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putShort
+          go_name: PutShort
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putShortArray
+          go_name: PutShortArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSize
+          go_name: PutSize
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.Size
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSizeF
+          go_name: PutSizeF
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.SizeF
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSparseParcelableArray
+          go_name: PutSparseParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.SparseArray<? extends android.os.Parcelable>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putStringArrayList
+          go_name: PutStringArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: readFromParcel
+          go_name: ReadFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: remove
+          go_name: Remove
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setClassLoader
+          go_name: SetClassLoader
+          params:
+            - java_type: java.lang.ClassLoader
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.content.Intent
       go_type: Intent
       methods:
@@ -136,7 +576,7 @@ classes:
           params:
             - java_type: String
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getClipData
           go_name: GetClipData
@@ -488,7 +928,7 @@ classes:
           params:
             - java_type: String
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: android.content.Intent
           error: true
@@ -845,7 +1285,7 @@ classes:
           params:
             - java_type: android.content.Intent
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: android.content.Intent
           error: true
@@ -854,7 +1294,7 @@ classes:
           params:
             - java_type: android.content.Intent
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
             - java_type: android.content.IntentSender
               go_name: arg2
@@ -1218,7 +1658,7 @@ classes:
           error: true
         - java_method: getTitle
           go_name: GetTitle
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getTitleColor
           go_name: GetTitleColor
@@ -1436,7 +1876,7 @@ classes:
           error: true
         - java_method: onCreateDescription
           go_name: OnCreateDescription
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: onCreateNavigateUpTaskStack
           go_name: OnCreateNavigateUpTaskStack
@@ -2328,7 +2768,7 @@ classes:
         - java_method: setTitle
           go_name: SetTitle1_1
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
           returns: void
           error: true
@@ -2784,446 +3224,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.os.Bundle
-      go_type: Bundle
-      methods:
-        - java_method: clear
-          go_name: Clear
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone
-          returns: java.lang.Object
-          error: true
-        - java_method: deepCopy
-          go_name: DeepCopy
-          returns: android.os.Bundle
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getBinder
-          go_name: GetBinder
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: getBundle
-          go_name: GetBundle
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.Bundle
-          error: true
-        - java_method: getByte
-          go_name: GetByte1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: byte
-          error: true
-        - java_method: getByte
-          go_name: GetByte2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: java.lang.Byte
-          error: true
-        - java_method: getByteArray
-          go_name: GetByteArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: '[B'
-          error: true
-        - java_method: getChar
-          go_name: GetChar1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: char
-          error: true
-        - java_method: getChar
-          go_name: GetChar2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char
-              go_name: arg1
-          returns: char
-          error: true
-        - java_method: getCharArray
-          go_name: GetCharArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: char[]
-          error: true
-        - java_method: getCharSequence
-          go_name: GetCharSequence1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getCharSequence
-          go_name: GetCharSequence2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: String
-          error: true
-        - java_method: getCharSequenceArray
-          go_name: GetCharSequenceArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.CharSequence[]
-          error: true
-        - java_method: getCharSequenceArrayList
-          go_name: GetCharSequenceArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.CharSequence>
-          error: true
-        - java_method: getClassLoader
-          go_name: GetClassLoader
-          returns: java.lang.ClassLoader
-          error: true
-        - java_method: getFloat
-          go_name: GetFloat1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getFloat
-          go_name: GetFloat2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: float
-          error: true
-        - java_method: getFloatArray
-          go_name: GetFloatArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: float[]
-          error: true
-        - java_method: getIntegerArrayList
-          go_name: GetIntegerArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.Integer>
-          error: true
-        - java_method: getParcelableArray
-          go_name: GetParcelableArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.Parcelable[]
-          error: true
-        - java_method: getSerializable
-          go_name: GetSerializable
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.io.Serializable
-          error: true
-        - java_method: getShort
-          go_name: GetShort1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: short
-          error: true
-        - java_method: getShort
-          go_name: GetShort2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short
-              go_name: arg1
-          returns: short
-          error: true
-        - java_method: getShortArray
-          go_name: GetShortArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: short[]
-          error: true
-        - java_method: getSize
-          go_name: GetSize
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.util.Size
-          error: true
-        - java_method: getSizeF
-          go_name: GetSizeF
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.util.SizeF
-          error: true
-        - java_method: getStringArrayList
-          go_name: GetStringArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.String>
-          error: true
-        - java_method: hasFileDescriptors
-          go_name: HasFileDescriptors
-          returns: boolean
-          error: true
-        - java_method: putAll
-          go_name: PutAll
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: putBinder
-          go_name: PutBinder
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.IBinder
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putBundle
-          go_name: PutBundle
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putByte
-          go_name: PutByte
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putByteArray
-          go_name: PutByteArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putChar
-          go_name: PutChar
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharArray
-          go_name: PutCharArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharSequence
-          go_name: PutCharSequence
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharSequenceArray
-          go_name: PutCharSequenceArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.CharSequence[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharSequenceArrayList
-          go_name: PutCharSequenceArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.CharSequence>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putFloat
-          go_name: PutFloat
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putFloatArray
-          go_name: PutFloatArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putIntegerArrayList
-          go_name: PutIntegerArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.Integer>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putParcelable
-          go_name: PutParcelable
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Parcelable
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putParcelableArray
-          go_name: PutParcelableArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Parcelable[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putParcelableArrayList
-          go_name: PutParcelableArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<? extends android.os.Parcelable>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSerializable
-          go_name: PutSerializable
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.io.Serializable
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putShort
-          go_name: PutShort
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putShortArray
-          go_name: PutShortArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSize
-          go_name: PutSize
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.util.Size
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSizeF
-          go_name: PutSizeF
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.util.SizeF
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSparseParcelableArray
-          go_name: PutSparseParcelableArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.util.SparseArray<? extends android.os.Parcelable>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putStringArrayList
-          go_name: PutStringArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.String>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: readFromParcel
-          go_name: ReadFromParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: remove
-          go_name: Remove
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setClassLoader
-          go_name: SetClassLoader
-          params:
-            - java_type: java.lang.ClassLoader
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.app.PendingIntent
       go_type: PendingIntent
       methods:
@@ -3438,28 +3438,6 @@ classes:
               go_name: arg0
             - java_type: android.os.Parcel
               go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.os.CancellationSignal
-      go_type: CancellationSignal
-      methods:
-        - java_method: cancel
-          go_name: Cancel
-          returns: void
-          error: true
-        - java_method: isCanceled
-          go_name: IsCanceled
-          returns: boolean
-          error: true
-        - java_method: setOnCancelListener
-          go_name: SetOnCancelListener
-          params:
-            - java_type: android.os.CancellationSignal$OnCancelListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: throwIfCanceled
-          go_name: ThrowIfCanceled
           returns: void
           error: true
     - java_class: android.content.Context
@@ -4102,7 +4080,7 @@ classes:
           params:
             - java_type: int
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getTheme
           go_name: GetTheme
@@ -4573,7 +4551,35 @@ classes:
               go_name: arg2
           returns: void
           error: true
+    - java_class: android.os.CancellationSignal
+      go_type: CancellationSignal
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
+        - java_method: isCanceled
+          go_name: IsCanceled
+          returns: boolean
+          error: true
+        - java_method: setOnCancelListener
+          go_name: SetOnCancelListener
+          params:
+            - java_type: android.os.CancellationSignal$OnCancelListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: throwIfCanceled
+          go_name: ThrowIfCanceled
+          returns: void
+          error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: Empty
+      value: "0"
+      go_type: int
     - go_name: ActionAirplaneModeChanged
       value: '"android.intent.action.AIRPLANE_MODE"'
       go_type: string
@@ -5159,9 +5165,6 @@ constants:
     - go_name: ChooserContentTypeAlbum
       value: "1"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: ExtraAlarmCount
       value: '"android.intent.extra.ALARM_COUNT"'
       go_type: string
@@ -5641,9 +5644,6 @@ constants:
       go_type: int
     - go_name: ResultOk
       value: "-1"
-      go_type: int
-    - go_name: Empty
-      value: "0"
       go_type: int
     - go_name: FlagAllowUnsafeImplicitIntent
       value: "16777216"

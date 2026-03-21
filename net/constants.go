@@ -5,6 +5,42 @@ package net
 import "github.com/AndroidGoLab/jni/net/consts"
 
 const (
+	ActionBackgroundDataSettingChanged = consts.ActionBackgroundDataSettingChanged
+	ActionCaptivePortalSignIn          = consts.ActionCaptivePortalSignIn
+	ActionRestrictBackgroundChanged    = consts.ActionRestrictBackgroundChanged
+	ConnectivityAction                 = consts.ConnectivityAction
+	ExtraCaptivePortal                 = consts.ExtraCaptivePortal
+	ExtraCaptivePortalUrl              = consts.ExtraCaptivePortalUrl
+	ExtraExtraInfo                     = consts.ExtraExtraInfo
+	ExtraIsFailover                    = consts.ExtraIsFailover
+	ExtraNetwork                       = consts.ExtraNetwork
+	ExtraNetworkInfo                   = consts.ExtraNetworkInfo
+	ExtraNetworkRequest                = consts.ExtraNetworkRequest
+	ExtraNetworkType                   = consts.ExtraNetworkType
+	ExtraNoConnectivity                = consts.ExtraNoConnectivity
+	ExtraOtherNetworkInfo              = consts.ExtraOtherNetworkInfo
+	ExtraReason                        = consts.ExtraReason
+)
+
+const (
+	DefaultNetworkPreference             = consts.DefaultNetworkPreference
+	MultipathPreferenceHandover          = consts.MultipathPreferenceHandover
+	MultipathPreferencePerformance       = consts.MultipathPreferencePerformance
+	MultipathPreferenceReliability       = consts.MultipathPreferenceReliability
+	RestrictBackgroundStatusDisabled     = consts.RestrictBackgroundStatusDisabled
+	RestrictBackgroundStatusEnabled      = consts.RestrictBackgroundStatusEnabled
+	RestrictBackgroundStatusWhitelisted  = consts.RestrictBackgroundStatusWhitelisted
+	TypeBluetooth                        = consts.TypeBluetooth
+	TypeDummy                            = consts.TypeDummy
+	TypeEthernet                         = consts.TypeEthernet
+	TypeMobile                           = consts.TypeMobile
+	TypeMobileDun                        = consts.TypeMobileDun
+	TypeMobileHipri                      = consts.TypeMobileHipri
+	TypeMobileMms                        = consts.TypeMobileMms
+	TypeMobileSupl                       = consts.TypeMobileSupl
+	TypeVpn                              = consts.TypeVpn
+	TypeWifi                             = consts.TypeWifi
+	TypeWimax                            = consts.TypeWimax
 	Creator                              = consts.Creator
 	NetCapabilityCaptivePortal           = consts.NetCapabilityCaptivePortal
 	NetCapabilityCbs                     = consts.NetCapabilityCbs
@@ -53,40 +89,4 @@ const (
 	TransportVpn                         = consts.TransportVpn
 	TransportWifi                        = consts.TransportWifi
 	TransportWifiAware                   = consts.TransportWifiAware
-	DefaultNetworkPreference             = consts.DefaultNetworkPreference
-	MultipathPreferenceHandover          = consts.MultipathPreferenceHandover
-	MultipathPreferencePerformance       = consts.MultipathPreferencePerformance
-	MultipathPreferenceReliability       = consts.MultipathPreferenceReliability
-	RestrictBackgroundStatusDisabled     = consts.RestrictBackgroundStatusDisabled
-	RestrictBackgroundStatusEnabled      = consts.RestrictBackgroundStatusEnabled
-	RestrictBackgroundStatusWhitelisted  = consts.RestrictBackgroundStatusWhitelisted
-	TypeBluetooth                        = consts.TypeBluetooth
-	TypeDummy                            = consts.TypeDummy
-	TypeEthernet                         = consts.TypeEthernet
-	TypeMobile                           = consts.TypeMobile
-	TypeMobileDun                        = consts.TypeMobileDun
-	TypeMobileHipri                      = consts.TypeMobileHipri
-	TypeMobileMms                        = consts.TypeMobileMms
-	TypeMobileSupl                       = consts.TypeMobileSupl
-	TypeVpn                              = consts.TypeVpn
-	TypeWifi                             = consts.TypeWifi
-	TypeWimax                            = consts.TypeWimax
-)
-
-const (
-	ActionBackgroundDataSettingChanged = consts.ActionBackgroundDataSettingChanged
-	ActionCaptivePortalSignIn          = consts.ActionCaptivePortalSignIn
-	ActionRestrictBackgroundChanged    = consts.ActionRestrictBackgroundChanged
-	ConnectivityAction                 = consts.ConnectivityAction
-	ExtraCaptivePortal                 = consts.ExtraCaptivePortal
-	ExtraCaptivePortalUrl              = consts.ExtraCaptivePortalUrl
-	ExtraExtraInfo                     = consts.ExtraExtraInfo
-	ExtraIsFailover                    = consts.ExtraIsFailover
-	ExtraNetwork                       = consts.ExtraNetwork
-	ExtraNetworkInfo                   = consts.ExtraNetworkInfo
-	ExtraNetworkRequest                = consts.ExtraNetworkRequest
-	ExtraNetworkType                   = consts.ExtraNetworkType
-	ExtraNoConnectivity                = consts.ExtraNoConnectivity
-	ExtraOtherNetworkInfo              = consts.ExtraOtherNetworkInfo
-	ExtraReason                        = consts.ExtraReason
 )

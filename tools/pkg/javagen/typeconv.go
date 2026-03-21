@@ -86,11 +86,21 @@ func ResolveType(javaType string) TypeConv {
 		return tc
 	}
 
-	// Check String specifically.
-	if javaType == "String" || javaType == "java.lang.String" {
+	// Check String and CharSequence specifically.
+	// CharSequence uses the same Go type (string) but a different JNI
+	// descriptor, since the JVM distinguishes the two at method lookup.
+	switch javaType {
+	case "String", "java.lang.String":
 		return TypeConv{
 			GoType:     "string",
 			JNISig:     "Ljava/lang/String;",
+			CallSuffix: "Object",
+			IsObject:   true,
+		}
+	case "java.lang.CharSequence":
+		return TypeConv{
+			GoType:     "string",
+			JNISig:     "Ljava/lang/CharSequence;",
 			CallSuffix: "Object",
 			IsObject:   true,
 		}

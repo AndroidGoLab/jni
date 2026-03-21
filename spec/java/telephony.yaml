@@ -276,7 +276,7 @@ classes:
           error: true
         - java_method: getSimCarrierIdName
           go_name: GetSimCarrierIdName
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getSimCountryIso
           go_name: GetSimCountryIso
@@ -300,7 +300,7 @@ classes:
           error: true
         - java_method: getSimSpecificCarrierIdName
           go_name: GetSimSpecificCarrierIdName
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getSimState
           go_name: GetSimState0

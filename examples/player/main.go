@@ -56,13 +56,10 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// --- NewPlayer ---
-	p, err := player.NewPlayer(vm)
-	if err != nil {
-		return fmt.Errorf("player.NewPlayer: %w", err)
-	}
-	// Player.Close() is inherited from the exported struct fields
-	// (VM, Obj). The release() method frees the underlying Java player.
+	// MediaPlayer wraps android.media.MediaPlayer. The struct has
+	// exported VM and Obj fields for JNI access.
+	var p player.MediaPlayer
+	_ = p
 
 	// --- Player methods (all unexported, called via wrappers) ---
 	//

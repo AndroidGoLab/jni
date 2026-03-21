@@ -23,11 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                      *jni.GlobalRef
-	midManagerGetPrintJobs          jni.MethodID
-	midManagerIsPrintServiceEnabled jni.MethodID
-	midManagerPrint                 jni.MethodID
-
 	clsJob            *jni.GlobalRef
 	midJobCancel      jni.MethodID
 	midJobEquals      jni.MethodID
@@ -57,6 +52,11 @@ var (
 	midJobInfoHasAdvancedOption       jni.MethodID
 	midJobInfoToString                jni.MethodID
 	midJobInfoWriteToParcel           jni.MethodID
+
+	clsManager                      *jni.GlobalRef
+	midManagerGetPrintJobs          jni.MethodID
+	midManagerIsPrintServiceEnabled jni.MethodID
+	midManagerPrint                 jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -82,36 +82,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/print/PrintManager")
-	if err != nil {
-		return fmt.Errorf("find class android.print.PrintManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerGetPrintJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrintJobs", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.print.PrintManager.getPrintJobs")
-	}
-
-	midManagerIsPrintServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPrintServiceEnabled", "(Landroid/content/ComponentName;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.print.PrintManager.isPrintServiceEnabled")
-	}
-
-	midManagerPrint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "print", "(Ljava/lang/String;Landroid/print/PrintDocumentAdapter;Landroid/print/PrintAttributes;)Landroid/print/PrintJob;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.print.PrintManager.print")
-	}
 
 	c, err = env.FindClass("android/print/PrintJob")
 	if err != nil {
@@ -331,6 +301,36 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.print.PrintJobInfo.writeToParcel")
+	}
+
+	c, err = env.FindClass("android/print/PrintManager")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintManager: %w", err)
+	}
+	clsManager = env.NewGlobalRef(&c.Object)
+
+	midManagerGetPrintJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrintJobs", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.print.PrintManager.getPrintJobs")
+	}
+
+	midManagerIsPrintServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPrintServiceEnabled", "(Landroid/content/ComponentName;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.print.PrintManager.isPrintServiceEnabled")
+	}
+
+	midManagerPrint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "print", "(Ljava/lang/String;Landroid/print/PrintDocumentAdapter;Landroid/print/PrintAttributes;)Landroid/print/PrintJob;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.print.PrintManager.print")
 	}
 
 	return nil

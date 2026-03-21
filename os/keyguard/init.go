@@ -75,7 +75,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.KeyguardManager.addKeyguardLockedStateListener")
 	}
 
-	midManagerCreateConfirmDeviceCredentialIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createConfirmDeviceCredentialIntent", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	midManagerCreateConfirmDeviceCredentialIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createConfirmDeviceCredentialIntent", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

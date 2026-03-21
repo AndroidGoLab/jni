@@ -105,7 +105,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			fmt.Fprintf(output, "  %s: no cached location\n", provider)
 			continue
 		}
-		printLocation(vm, provider, locObj)
+		printLocation(vm, provider, locObj, output)
 		gotLocation = true
 	}
 
@@ -129,7 +129,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	return nil
 }
 
-func printLocation(vm *jni.VM, provider string, locObj *jni.Object) {
+func printLocation(vm *jni.VM, provider string, locObj *jni.Object, output *bytes.Buffer) {
 	var loc *location.ExtractedLocation
 	var err error
 	vm.Do(func(env *jni.Env) error {

@@ -32,7 +32,7 @@ classes:
           error: true
         - java_method: getText
           go_name: GetText
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: hasPrimaryClip
           go_name: HasPrimaryClip
@@ -59,7 +59,7 @@ classes:
         - java_method: setText
           go_name: SetText
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
           returns: void
           error: true
@@ -118,9 +118,9 @@ classes:
         - java_method: newHtmlText
           go_name: NewHtmlText
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
             - java_type: String
               go_name: arg2
@@ -129,7 +129,7 @@ classes:
         - java_method: newIntent
           go_name: NewIntent
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
             - java_type: android.content.Intent
               go_name: arg1
@@ -138,16 +138,16 @@ classes:
         - java_method: newPlainText
           go_name: NewPlainText
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: android.content.ClipData
           error: true
         - java_method: newRawUri
           go_name: NewRawUri
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
             - java_type: android.net.Uri
               go_name: arg1
@@ -158,7 +158,7 @@ classes:
           params:
             - java_type: android.content.ContentResolver
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
             - java_type: android.net.Uri
               go_name: arg2
@@ -179,14 +179,14 @@ classes:
           params:
             - java_type: android.content.Context
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: coerceToText
           go_name: CoerceToText
           params:
             - java_type: android.content.Context
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getHtmlText
           go_name: GetHtmlText
@@ -202,7 +202,7 @@ classes:
           error: true
         - java_method: getText
           go_name: GetText
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getTextLinks
           go_name: GetTextLinks

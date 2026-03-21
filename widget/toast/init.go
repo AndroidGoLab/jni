@@ -187,7 +187,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.setText")
 	}
 
-	midToastSetText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setText", "(Ljava/lang/String;)V")
+	midToastSetText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "setText", "(Ljava/lang/CharSequence;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -219,7 +219,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.widget.Toast.makeText")
 	}
 
-	midToastMakeText3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "makeText", "(Landroid/content/Context;Ljava/lang/String;I)Landroid/widget/Toast;")
+	midToastMakeText3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "makeText", "(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

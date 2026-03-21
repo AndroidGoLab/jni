@@ -64,7 +64,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := ir.NewManager(ctx)
+	mgr, err := ir.NewConsumerIrManager(ctx)
 	if err != nil {
 		if strings.Contains(err.Error(), "service not available") {
 			fmt.Fprintln(output, "ConsumerIrManager not available on this device")
@@ -79,7 +79,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			fmt.Fprintln(output, "    - MaxFrequency int")
 			return nil
 		}
-		return fmt.Errorf("ir.NewManager: %v", err)
+		return fmt.Errorf("ir.NewConsumerIrManager: %v", err)
 	}
 
 	// Check whether the device has an IR emitter.

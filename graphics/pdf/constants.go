@@ -13,6 +13,7 @@ const (
 	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
 	RenderModeForDisplay                = consts.RenderModeForDisplay
 	RenderModeForPrint                  = consts.RenderModeForPrint
+	AllSaveFlag                         = consts.AllSaveFlag
 	Creator                             = consts.Creator
 	ModeAppend                          = consts.ModeAppend
 	ModeCreate                          = consts.ModeCreate
@@ -22,6 +23,15 @@ const (
 	ModeWorldReadable                   = consts.ModeWorldReadable
 	ModeWorldWriteable                  = consts.ModeWorldWriteable
 	ModeWriteOnly                       = consts.ModeWriteOnly
+	Bold                                = consts.Bold
+	BoldItalic                          = consts.BoldItalic
+	Default                             = consts.Default
+	DefaultBold                         = consts.DefaultBold
+	Italic                              = consts.Italic
+	Monospace                           = consts.Monospace
+	Normal                              = consts.Normal
+	SansSerif                           = consts.SansSerif
+	Serif                               = consts.Serif
 	DensityNone                         = consts.DensityNone
 	Alpha8                              = consts.Alpha8
 	Argb4444                            = consts.Argb4444
@@ -60,14 +70,4 @@ const (
 	TextRunFlagRightEdge                = consts.TextRunFlagRightEdge
 	UnderlineTextFlag                   = consts.UnderlineTextFlag
 	VerticalTextFlag                    = consts.VerticalTextFlag
-	AllSaveFlag                         = consts.AllSaveFlag
-	Bold                                = consts.Bold
-	BoldItalic                          = consts.BoldItalic
-	Default                             = consts.Default
-	DefaultBold                         = consts.DefaultBold
-	Italic                              = consts.Italic
-	Monospace                           = consts.Monospace
-	Normal                              = consts.Normal
-	SansSerif                           = consts.SansSerif
-	Serif                               = consts.Serif
 )

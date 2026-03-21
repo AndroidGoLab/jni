@@ -63,10 +63,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := lights.NewManager(ctx)
-	if err != nil {
-		return fmt.Errorf("lights.NewManager: %v", err)
-	}
+	// lights.Manager has no constructor; it wraps
+	// android.hardware.lights.LightsManager obtained via getSystemService.
+	var mgr lights.Manager
 	_ = mgr
 
 	// Print all light type constants.

@@ -69,14 +69,14 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 
 	// Content resolver and package manager.
-	resolver, err := ctx.ContentResolver()
+	resolver, err := ctx.GetContentResolver()
 	if err != nil {
 		fmt.Fprintf(output, "  ContentResolver: %v\n", err)
 	} else {
 		fmt.Fprintf(output, "content resolver: %v\n", resolver != nil)
 	}
 
-	pkgMgr, err := ctx.PackageManager()
+	pkgMgr, err := ctx.GetPackageManager()
 	if err != nil {
 		fmt.Fprintf(output, "  PackageManager: %v\n", err)
 	} else {
@@ -98,8 +98,8 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintf(output, "intent action: %s\n", action)
 	}
 
-	intent.SetFlags(app.FlagActivityNewTask)
-	intent.AddFlags(app.FlagActivityClearTop)
+	intent.SetFlags(int32(app.FlagActivityNewTask))
+	intent.AddFlags(int32(app.FlagActivityClearTop))
 
 	// Intent extras.
 	if err := intent.PutStringExtra("key", "value"); err != nil {

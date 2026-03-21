@@ -64,9 +64,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := usage.NewManager(ctx)
+	mgr, err := usage.NewStatsManager(ctx)
 	if err != nil {
-		return fmt.Errorf("usage.NewManager: %w", err)
+		return fmt.Errorf("usage.NewStatsManager: %w", err)
 	}
 
 	// Check if an app is inactive.

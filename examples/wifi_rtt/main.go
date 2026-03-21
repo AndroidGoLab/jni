@@ -66,13 +66,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := rtt.NewManager(ctx)
+	mgr, err := rtt.NewWifiRttManager(ctx)
 	if err != nil {
 		if strings.Contains(err.Error(), "service not available") {
 			fmt.Fprintln(output, "WifiRttManager not available on this device")
 			fmt.Fprintln(output, "")
 		} else {
-			return fmt.Errorf("rtt.NewManager: %w", err)
+			return fmt.Errorf("rtt.NewWifiRttManager: %w", err)
 		}
 	} else {
 		fmt.Fprintln(output, "WifiRttManager obtained successfully")

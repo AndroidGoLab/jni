@@ -65,9 +65,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := session.NewManager(ctx)
+	mgr, err := session.NewMediaSessionManager(ctx)
 	if err != nil {
-		return fmt.Errorf("session.NewManager: %w", err)
+		return fmt.Errorf("session.NewMediaSessionManager: %w", err)
 	}
 	defer mgr.Close()
 

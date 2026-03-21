@@ -63,9 +63,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := net.NewManager(ctx)
+	mgr, err := net.NewConnectivityManager(ctx)
 	if err != nil {
-		return fmt.Errorf("net.NewManager: %v", err)
+		return fmt.Errorf("net.NewConnectivityManager: %v", err)
 	}
 	defer mgr.Close()
 

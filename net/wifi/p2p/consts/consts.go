@@ -23,12 +23,6 @@ const (
 	Failed                                             int = 2
 	Invited                                            int = 1
 	Unavailable                                        int = 4
-	NetworkIdPersistent                                int = -2
-	NetworkIdTemporary                                 int = -1
-	SecurityTypeUnknown                                int = -1
-	SecurityTypeWpa2Psk                                int = 0
-	SecurityTypeWpa3Compatibility                      int = 1
-	SecurityTypeWpa3Sae                                int = 2
 	Busy                                               int = 2
 	ConnectionRequestAccept                            int = 0
 	ConnectionRequestDeferShowPinToService             int = 3
@@ -53,6 +47,12 @@ const (
 	WifiP2pScanSocial                                  int = 1
 	WifiP2pStateDisabled                               int = 1
 	WifiP2pStateEnabled                                int = 2
+	NetworkIdPersistent                                int = -2
+	NetworkIdTemporary                                 int = -1
+	SecurityTypeUnknown                                int = -1
+	SecurityTypeWpa2Psk                                int = 0
+	SecurityTypeWpa3Compatibility                      int = 1
+	SecurityTypeWpa3Sae                                int = 2
 )
 
 const (

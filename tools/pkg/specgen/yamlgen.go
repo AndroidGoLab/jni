@@ -540,8 +540,10 @@ func javaTypeToSpecType(jt string) string {
 		return "float"
 	case "double":
 		return "double"
-	case "java.lang.String", "java.lang.CharSequence":
+	case "java.lang.String":
 		return "String"
+	case "java.lang.CharSequence":
+		return "java.lang.CharSequence"
 	case "byte[]":
 		return "[B"
 	case "int[]":

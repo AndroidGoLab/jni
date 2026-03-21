@@ -96,7 +96,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "ParcelFD API: getFd, detachFd")
 
 	// The Resolver and Uri types are the main exported types.
-	var r resolver.Resolver
+	var r resolver.ContentResolver
 	var u resolver.Uri
 	_, _ = r, u
 	fmt.Fprintln(output, "Resolver example complete.")

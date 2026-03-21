@@ -66,7 +66,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	defer ctx.Close()
 
 	// NewManager obtains the CompanionDeviceManager system service.
-	mgr, err := companion.NewManager(ctx)
+	mgr, err := companion.NewDeviceManager(ctx)
 	if err != nil {
 		if strings.Contains(err.Error(), "service not available") {
 			fmt.Fprintln(output, "CompanionDeviceManager not available on this device")
@@ -83,7 +83,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			fmt.Fprintln(output, "  companionCallback (OnDeviceFound, OnFailure)")
 			return nil
 		}
-		return fmt.Errorf("companion.NewManager: %v", err)
+		return fmt.Errorf("companion.NewDeviceManager: %v", err)
 	}
 
 	fmt.Fprintln(output, "CompanionDeviceManager obtained successfully")

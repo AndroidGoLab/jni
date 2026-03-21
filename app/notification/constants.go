@@ -66,14 +66,6 @@ const (
 )
 
 const (
-	DefaultChannelId                                = consts.DefaultChannelId
-	EditConversation                                = consts.EditConversation
-	EditImportance                                  = consts.EditImportance
-	EditLauncher                                    = consts.EditLauncher
-	EditLockedDevice                                = consts.EditLockedDevice
-	EditSound                                       = consts.EditSound
-	EditVibration                                   = consts.EditVibration
-	EditZen                                         = consts.EditZen
 	CategoryAlarm                                   = consts.CategoryAlarm
 	CategoryCall                                    = consts.CategoryCall
 	CategoryEmail                                   = consts.CategoryEmail
@@ -147,6 +139,14 @@ const (
 	ExtraVerificationIcon                           = consts.ExtraVerificationIcon
 	ExtraVerificationText                           = consts.ExtraVerificationText
 	IntentCategoryNotificationPreferences           = consts.IntentCategoryNotificationPreferences
+	DefaultChannelId                                = consts.DefaultChannelId
+	EditConversation                                = consts.EditConversation
+	EditImportance                                  = consts.EditImportance
+	EditLauncher                                    = consts.EditLauncher
+	EditLockedDevice                                = consts.EditLockedDevice
+	EditSound                                       = consts.EditSound
+	EditVibration                                   = consts.EditVibration
+	EditZen                                         = consts.EditZen
 	ActionAppBlockStateChanged                      = consts.ActionAppBlockStateChanged
 	ActionAutomaticZenRule                          = consts.ActionAutomaticZenRule
 	ActionAutomaticZenRuleStatusChanged             = consts.ActionAutomaticZenRuleStatusChanged

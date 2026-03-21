@@ -5,6 +5,22 @@ package display
 import "github.com/AndroidGoLab/jni/view/display/consts"
 
 const (
+	DefaultDisplay                 = consts.DefaultDisplay
+	FlagPresentation               = consts.FlagPresentation
+	FlagPrivate                    = consts.FlagPrivate
+	FlagRound                      = consts.FlagRound
+	FlagSecure                     = consts.FlagSecure
+	FlagSupportsProtectedBuffers   = consts.FlagSupportsProtectedBuffers
+	FrameRateCategoryHigh          = consts.FrameRateCategoryHigh
+	FrameRateCategoryNormal        = consts.FrameRateCategoryNormal
+	InvalidDisplay                 = consts.InvalidDisplay
+	StateDoze                      = consts.StateDoze
+	StateDozeSuspend               = consts.StateDozeSuspend
+	StateOff                       = consts.StateOff
+	StateOn                        = consts.StateOn
+	StateOnSuspend                 = consts.StateOnSuspend
+	StateUnknown                   = consts.StateUnknown
+	StateVr                        = consts.StateVr
 	CompatSmallCoverScreenOptIn    = consts.CompatSmallCoverScreenOptIn
 	ScreenRecordingStateNotVisible = consts.ScreenRecordingStateNotVisible
 	ScreenRecordingStateVisible    = consts.ScreenRecordingStateVisible
@@ -34,22 +50,6 @@ const (
 	DensityXhigh                   = consts.DensityXhigh
 	DensityXxhigh                  = consts.DensityXxhigh
 	DensityXxxhigh                 = consts.DensityXxxhigh
-	DefaultDisplay                 = consts.DefaultDisplay
-	FlagPresentation               = consts.FlagPresentation
-	FlagPrivate                    = consts.FlagPrivate
-	FlagRound                      = consts.FlagRound
-	FlagSecure                     = consts.FlagSecure
-	FlagSupportsProtectedBuffers   = consts.FlagSupportsProtectedBuffers
-	FrameRateCategoryHigh          = consts.FrameRateCategoryHigh
-	FrameRateCategoryNormal        = consts.FrameRateCategoryNormal
-	InvalidDisplay                 = consts.InvalidDisplay
-	StateDoze                      = consts.StateDoze
-	StateDozeSuspend               = consts.StateDozeSuspend
-	StateOff                       = consts.StateOff
-	StateOn                        = consts.StateOn
-	StateOnSuspend                 = consts.StateOnSuspend
-	StateUnknown                   = consts.StateUnknown
-	StateVr                        = consts.StateVr
 )
 
 const (

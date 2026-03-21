@@ -394,7 +394,7 @@ classes:
           error: true
         - java_method: getDeviceOwnerLockScreenInfo
           go_name: GetDeviceOwnerLockScreenInfo
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getDevicePolicyManagementRoleHolderPackage
           go_name: GetDevicePolicyManagementRoleHolderPackage
@@ -405,7 +405,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getEnrollmentSpecificId
           go_name: GetEnrollmentSpecificId
@@ -472,7 +472,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getManagedProfileCallerIdAccessPolicy
           go_name: GetManagedProfileCallerIdAccessPolicy
@@ -542,7 +542,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getOverrideApns
           go_name: GetOverrideApns
@@ -737,14 +737,14 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getStartUserSessionMessage
           go_name: GetStartUserSessionMessage
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-          returns: String
+          returns: java.lang.CharSequence
           error: true
         - java_method: getStorageEncryption
           go_name: GetStorageEncryption
@@ -1539,7 +1539,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true
@@ -1548,7 +1548,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true
@@ -1669,7 +1669,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true
@@ -1797,7 +1797,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true
@@ -2076,7 +2076,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true
@@ -2085,7 +2085,7 @@ classes:
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true
@@ -2276,7 +2276,7 @@ classes:
           params:
             - java_type: int
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true

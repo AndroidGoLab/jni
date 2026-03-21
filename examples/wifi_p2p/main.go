@@ -63,9 +63,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	mgr, err := p2p.NewManager(ctx)
+	mgr, err := p2p.NewWifiP2pManager(ctx)
 	if err != nil {
-		return fmt.Errorf("p2p.NewManager: %w", err)
+		return fmt.Errorf("p2p.NewWifiP2pManager: %w", err)
 	}
 	defer mgr.Close()
 

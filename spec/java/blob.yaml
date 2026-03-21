@@ -43,7 +43,7 @@ classes:
           params:
             - java_type: android.app.blob.BlobHandle
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
           returns: void
           error: true
@@ -52,7 +52,7 @@ classes:
           params:
             - java_type: android.app.blob.BlobHandle
               go_name: arg0
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg1
             - java_type: long
               go_name: arg2

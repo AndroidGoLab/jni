@@ -167,7 +167,7 @@ classes:
         - java_method: setDescription
           go_name: SetDescription
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
           returns: android.app.DownloadManager$Request
           error: true
@@ -236,7 +236,7 @@ classes:
         - java_method: setTitle
           go_name: SetTitle
           params:
-            - java_type: String
+            - java_type: java.lang.CharSequence
               go_name: arg0
           returns: android.app.DownloadManager$Request
           error: true

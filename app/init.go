@@ -23,6 +23,65 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsBundle                         *jni.GlobalRef
+	midBundleClear                    jni.MethodID
+	midBundleClone                    jni.MethodID
+	midBundleDeepCopy                 jni.MethodID
+	midBundleDescribeContents         jni.MethodID
+	midBundleGetBinder                jni.MethodID
+	midBundleGetBundle                jni.MethodID
+	midBundleGetByte1                 jni.MethodID
+	midBundleGetByte2_1               jni.MethodID
+	midBundleGetByteArray             jni.MethodID
+	midBundleGetChar1                 jni.MethodID
+	midBundleGetChar2_1               jni.MethodID
+	midBundleGetCharArray             jni.MethodID
+	midBundleGetCharSequence1         jni.MethodID
+	midBundleGetCharSequence2_1       jni.MethodID
+	midBundleGetCharSequenceArray     jni.MethodID
+	midBundleGetCharSequenceArrayList jni.MethodID
+	midBundleGetClassLoader           jni.MethodID
+	midBundleGetFloat1                jni.MethodID
+	midBundleGetFloat2_1              jni.MethodID
+	midBundleGetFloatArray            jni.MethodID
+	midBundleGetIntegerArrayList      jni.MethodID
+	midBundleGetParcelableArray       jni.MethodID
+	midBundleGetSerializable          jni.MethodID
+	midBundleGetShort1                jni.MethodID
+	midBundleGetShort2_1              jni.MethodID
+	midBundleGetShortArray            jni.MethodID
+	midBundleGetSize                  jni.MethodID
+	midBundleGetSizeF                 jni.MethodID
+	midBundleGetStringArrayList       jni.MethodID
+	midBundleHasFileDescriptors       jni.MethodID
+	midBundlePutAll                   jni.MethodID
+	midBundlePutBinder                jni.MethodID
+	midBundlePutBundle                jni.MethodID
+	midBundlePutByte                  jni.MethodID
+	midBundlePutByteArray             jni.MethodID
+	midBundlePutChar                  jni.MethodID
+	midBundlePutCharArray             jni.MethodID
+	midBundlePutCharSequence          jni.MethodID
+	midBundlePutCharSequenceArray     jni.MethodID
+	midBundlePutCharSequenceArrayList jni.MethodID
+	midBundlePutFloat                 jni.MethodID
+	midBundlePutFloatArray            jni.MethodID
+	midBundlePutIntegerArrayList      jni.MethodID
+	midBundlePutParcelable            jni.MethodID
+	midBundlePutParcelableArray       jni.MethodID
+	midBundlePutParcelableArrayList   jni.MethodID
+	midBundlePutSerializable          jni.MethodID
+	midBundlePutShort                 jni.MethodID
+	midBundlePutShortArray            jni.MethodID
+	midBundlePutSize                  jni.MethodID
+	midBundlePutSizeF                 jni.MethodID
+	midBundlePutSparseParcelableArray jni.MethodID
+	midBundlePutStringArrayList       jni.MethodID
+	midBundleReadFromParcel           jni.MethodID
+	midBundleRemove                   jni.MethodID
+	midBundleSetClassLoader           jni.MethodID
+	midBundleWriteToParcel            jni.MethodID
+
 	clsIntent                               *jni.GlobalRef
 	midIntentAddCategory                    jni.MethodID
 	midIntentAddFlags                       jni.MethodID
@@ -418,65 +477,6 @@ var (
 	midActivityUnregisterForContextMenu                jni.MethodID
 	midActivityUnregisterScreenCaptureCallback         jni.MethodID
 
-	clsBundle                         *jni.GlobalRef
-	midBundleClear                    jni.MethodID
-	midBundleClone                    jni.MethodID
-	midBundleDeepCopy                 jni.MethodID
-	midBundleDescribeContents         jni.MethodID
-	midBundleGetBinder                jni.MethodID
-	midBundleGetBundle                jni.MethodID
-	midBundleGetByte1                 jni.MethodID
-	midBundleGetByte2_1               jni.MethodID
-	midBundleGetByteArray             jni.MethodID
-	midBundleGetChar1                 jni.MethodID
-	midBundleGetChar2_1               jni.MethodID
-	midBundleGetCharArray             jni.MethodID
-	midBundleGetCharSequence1         jni.MethodID
-	midBundleGetCharSequence2_1       jni.MethodID
-	midBundleGetCharSequenceArray     jni.MethodID
-	midBundleGetCharSequenceArrayList jni.MethodID
-	midBundleGetClassLoader           jni.MethodID
-	midBundleGetFloat1                jni.MethodID
-	midBundleGetFloat2_1              jni.MethodID
-	midBundleGetFloatArray            jni.MethodID
-	midBundleGetIntegerArrayList      jni.MethodID
-	midBundleGetParcelableArray       jni.MethodID
-	midBundleGetSerializable          jni.MethodID
-	midBundleGetShort1                jni.MethodID
-	midBundleGetShort2_1              jni.MethodID
-	midBundleGetShortArray            jni.MethodID
-	midBundleGetSize                  jni.MethodID
-	midBundleGetSizeF                 jni.MethodID
-	midBundleGetStringArrayList       jni.MethodID
-	midBundleHasFileDescriptors       jni.MethodID
-	midBundlePutAll                   jni.MethodID
-	midBundlePutBinder                jni.MethodID
-	midBundlePutBundle                jni.MethodID
-	midBundlePutByte                  jni.MethodID
-	midBundlePutByteArray             jni.MethodID
-	midBundlePutChar                  jni.MethodID
-	midBundlePutCharArray             jni.MethodID
-	midBundlePutCharSequence          jni.MethodID
-	midBundlePutCharSequenceArray     jni.MethodID
-	midBundlePutCharSequenceArrayList jni.MethodID
-	midBundlePutFloat                 jni.MethodID
-	midBundlePutFloatArray            jni.MethodID
-	midBundlePutIntegerArrayList      jni.MethodID
-	midBundlePutParcelable            jni.MethodID
-	midBundlePutParcelableArray       jni.MethodID
-	midBundlePutParcelableArrayList   jni.MethodID
-	midBundlePutSerializable          jni.MethodID
-	midBundlePutShort                 jni.MethodID
-	midBundlePutShortArray            jni.MethodID
-	midBundlePutSize                  jni.MethodID
-	midBundlePutSizeF                 jni.MethodID
-	midBundlePutSparseParcelableArray jni.MethodID
-	midBundlePutStringArrayList       jni.MethodID
-	midBundleReadFromParcel           jni.MethodID
-	midBundleRemove                   jni.MethodID
-	midBundleSetClassLoader           jni.MethodID
-	midBundleWriteToParcel            jni.MethodID
-
 	clsPendingIntent                                  *jni.GlobalRef
 	midPendingIntentCancel                            jni.MethodID
 	midPendingIntentDescribeContents                  jni.MethodID
@@ -507,12 +507,6 @@ var (
 	midPendingIntentGetService                        jni.MethodID
 	midPendingIntentReadPendingIntentOrNullFromParcel jni.MethodID
 	midPendingIntentWritePendingIntentOrNullToParcel  jni.MethodID
-
-	clsCancellationSignal                    *jni.GlobalRef
-	midCancellationSignalCancel              jni.MethodID
-	midCancellationSignalIsCanceled          jni.MethodID
-	midCancellationSignalSetOnCancelListener jni.MethodID
-	midCancellationSignalThrowIfCanceled     jni.MethodID
 
 	clsContext                                     *jni.GlobalRef
 	midContextBindIsolatedService5                 jni.MethodID
@@ -657,6 +651,12 @@ var (
 	midContextUnregisterDeviceIdChangeListener     jni.MethodID
 	midContextUnregisterReceiver                   jni.MethodID
 	midContextUpdateServiceGroup                   jni.MethodID
+
+	clsCancellationSignal                    *jni.GlobalRef
+	midCancellationSignalCancel              jni.MethodID
+	midCancellationSignalIsCanceled          jni.MethodID
+	midCancellationSignalSetOnCancelListener jni.MethodID
+	midCancellationSignalThrowIfCanceled     jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -682,6 +682,468 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/os/Bundle")
+	if err != nil {
+		return fmt.Errorf("find class android.os.Bundle: %w", err)
+	}
+	clsBundle = env.NewGlobalRef(&c.Object)
+
+	midBundleClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "clear", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.clear")
+	}
+
+	midBundleClone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "clone", "()Ljava/lang/Object;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.clone")
+	}
+
+	midBundleDeepCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "deepCopy", "()Landroid/os/Bundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.deepCopy")
+	}
+
+	midBundleDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.describeContents")
+	}
+
+	midBundleGetBinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getBinder", "(Ljava/lang/String;)Landroid/os/IBinder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getBinder")
+	}
+
+	midBundleGetBundle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getBundle", "(Ljava/lang/String;)Landroid/os/Bundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getBundle")
+	}
+
+	midBundleGetByte1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getByte", "(Ljava/lang/String;)B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getByte")
+	}
+
+	midBundleGetByte2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getByte", "(Ljava/lang/String;B)Ljava/lang/Byte;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getByte")
+	}
+
+	midBundleGetByteArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getByteArray", "(Ljava/lang/String;)[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getByteArray")
+	}
+
+	midBundleGetChar1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getChar", "(Ljava/lang/String;)C")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getChar")
+	}
+
+	midBundleGetChar2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getChar", "(Ljava/lang/String;C)C")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getChar")
+	}
+
+	midBundleGetCharArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharArray", "(Ljava/lang/String;)[C")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getCharArray")
+	}
+
+	midBundleGetCharSequence1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequence", "(Ljava/lang/String;)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequence")
+	}
+
+	midBundleGetCharSequence2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequence", "(Ljava/lang/String;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequence")
+	}
+
+	midBundleGetCharSequenceArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequenceArray", "(Ljava/lang/String;)[Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequenceArray")
+	}
+
+	midBundleGetCharSequenceArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequenceArrayList", "(Ljava/lang/String;)Ljava/util/ArrayList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequenceArrayList")
+	}
+
+	midBundleGetClassLoader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getClassLoader", "()Ljava/lang/ClassLoader;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getClassLoader")
+	}
+
+	midBundleGetFloat1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getFloat", "(Ljava/lang/String;)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getFloat")
+	}
+
+	midBundleGetFloat2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getFloat", "(Ljava/lang/String;F)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getFloat")
+	}
+
+	midBundleGetFloatArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getFloatArray", "(Ljava/lang/String;)[F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getFloatArray")
+	}
+
+	midBundleGetIntegerArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getIntegerArrayList", "(Ljava/lang/String;)Ljava/util/ArrayList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getIntegerArrayList")
+	}
+
+	midBundleGetParcelableArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getParcelableArray", "(Ljava/lang/String;)[Landroid/os/Parcelable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getParcelableArray")
+	}
+
+	midBundleGetSerializable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getSerializable", "(Ljava/lang/String;)Ljava/io/Serializable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getSerializable")
+	}
+
+	midBundleGetShort1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getShort", "(Ljava/lang/String;)S")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getShort")
+	}
+
+	midBundleGetShort2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getShort", "(Ljava/lang/String;S)S")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getShort")
+	}
+
+	midBundleGetShortArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getShortArray", "(Ljava/lang/String;)[S")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getShortArray")
+	}
+
+	midBundleGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getSize", "(Ljava/lang/String;)Landroid/util/Size;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getSize")
+	}
+
+	midBundleGetSizeF, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getSizeF", "(Ljava/lang/String;)Landroid/util/SizeF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getSizeF")
+	}
+
+	midBundleGetStringArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getStringArrayList", "(Ljava/lang/String;)Ljava/util/ArrayList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.getStringArrayList")
+	}
+
+	midBundleHasFileDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "hasFileDescriptors", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.hasFileDescriptors")
+	}
+
+	midBundlePutAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putAll", "(Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putAll")
+	}
+
+	midBundlePutBinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putBinder", "(Ljava/lang/String;Landroid/os/IBinder;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putBinder")
+	}
+
+	midBundlePutBundle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putBundle", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putBundle")
+	}
+
+	midBundlePutByte, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putByte", "(Ljava/lang/String;B)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putByte")
+	}
+
+	midBundlePutByteArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putByteArray", "(Ljava/lang/String;[B)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putByteArray")
+	}
+
+	midBundlePutChar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putChar", "(Ljava/lang/String;C)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putChar")
+	}
+
+	midBundlePutCharArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharArray", "(Ljava/lang/String;[C)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putCharArray")
+	}
+
+	midBundlePutCharSequence, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharSequence", "(Ljava/lang/String;Ljava/lang/CharSequence;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putCharSequence")
+	}
+
+	midBundlePutCharSequenceArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharSequenceArray", "(Ljava/lang/String;[Ljava/lang/CharSequence;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putCharSequenceArray")
+	}
+
+	midBundlePutCharSequenceArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharSequenceArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putCharSequenceArrayList")
+	}
+
+	midBundlePutFloat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putFloat", "(Ljava/lang/String;F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putFloat")
+	}
+
+	midBundlePutFloatArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putFloatArray", "(Ljava/lang/String;[F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putFloatArray")
+	}
+
+	midBundlePutIntegerArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putIntegerArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putIntegerArrayList")
+	}
+
+	midBundlePutParcelable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putParcelable", "(Ljava/lang/String;Landroid/os/Parcelable;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putParcelable")
+	}
+
+	midBundlePutParcelableArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putParcelableArray", "(Ljava/lang/String;[Landroid/os/Parcelable;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putParcelableArray")
+	}
+
+	midBundlePutParcelableArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putParcelableArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putParcelableArrayList")
+	}
+
+	midBundlePutSerializable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSerializable", "(Ljava/lang/String;Ljava/io/Serializable;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putSerializable")
+	}
+
+	midBundlePutShort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putShort", "(Ljava/lang/String;S)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putShort")
+	}
+
+	midBundlePutShortArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putShortArray", "(Ljava/lang/String;[S)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putShortArray")
+	}
+
+	midBundlePutSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSize", "(Ljava/lang/String;Landroid/util/Size;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putSize")
+	}
+
+	midBundlePutSizeF, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSizeF", "(Ljava/lang/String;Landroid/util/SizeF;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putSizeF")
+	}
+
+	midBundlePutSparseParcelableArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSparseParcelableArray", "(Ljava/lang/String;Landroid/util/SparseArray;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putSparseParcelableArray")
+	}
+
+	midBundlePutStringArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putStringArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.putStringArrayList")
+	}
+
+	midBundleReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "readFromParcel", "(Landroid/os/Parcel;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.readFromParcel")
+	}
+
+	midBundleRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "remove", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.remove")
+	}
+
+	midBundleSetClassLoader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "setClassLoader", "(Ljava/lang/ClassLoader;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.setClassLoader")
+	}
+
+	midBundleWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Bundle.writeToParcel")
+	}
 
 	c, err = env.FindClass("android/content/Intent")
 	if err != nil {
@@ -841,7 +1303,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.Intent.getCharSequenceArrayListExtra")
 	}
 
-	midIntentGetCharSequenceExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "getCharSequenceExtra", "(Ljava/lang/String;)Ljava/lang/String;")
+	midIntentGetCharSequenceExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "getCharSequenceExtra", "(Ljava/lang/String;)Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1241,7 +1703,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.Intent.putExtra")
 	}
 
-	midIntentPutExtra2_16, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "putExtra", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	midIntentPutExtra2_16, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "putExtra", "(Ljava/lang/String;Ljava/lang/CharSequence;)Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1617,7 +2079,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.Intent.writeToParcel")
 	}
 
-	midIntentCreateChooser2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/String;)Landroid/content/Intent;")
+	midIntentCreateChooser2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/CharSequence;)Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1625,7 +2087,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.Intent.createChooser")
 	}
 
-	midIntentCreateChooser3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/String;Landroid/content/IntentSender;)Landroid/content/Intent;")
+	midIntentCreateChooser3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/CharSequence;Landroid/content/IntentSender;)Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -2151,7 +2613,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.Activity.getTaskId")
 	}
 
-	midActivityGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getTitle", "()Ljava/lang/String;")
+	midActivityGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getTitle", "()Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -2455,7 +2917,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.Activity.onCreateContextMenu")
 	}
 
-	midActivityOnCreateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onCreateDescription", "()Ljava/lang/String;")
+	midActivityOnCreateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onCreateDescription", "()Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -3415,7 +3877,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.Activity.setTitle")
 	}
 
-	midActivitySetTitle1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setTitle", "(Ljava/lang/String;)V")
+	midActivitySetTitle1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setTitle", "(Ljava/lang/CharSequence;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -3823,468 +4285,6 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.Activity.unregisterScreenCaptureCallback")
 	}
 
-	c, err = env.FindClass("android/os/Bundle")
-	if err != nil {
-		return fmt.Errorf("find class android.os.Bundle: %w", err)
-	}
-	clsBundle = env.NewGlobalRef(&c.Object)
-
-	midBundleClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "clear", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.clear")
-	}
-
-	midBundleClone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "clone", "()Ljava/lang/Object;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.clone")
-	}
-
-	midBundleDeepCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "deepCopy", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.deepCopy")
-	}
-
-	midBundleDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.describeContents")
-	}
-
-	midBundleGetBinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getBinder", "(Ljava/lang/String;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getBinder")
-	}
-
-	midBundleGetBundle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getBundle", "(Ljava/lang/String;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getBundle")
-	}
-
-	midBundleGetByte1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getByte", "(Ljava/lang/String;)B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getByte")
-	}
-
-	midBundleGetByte2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getByte", "(Ljava/lang/String;B)Ljava/lang/Byte;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getByte")
-	}
-
-	midBundleGetByteArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getByteArray", "(Ljava/lang/String;)[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getByteArray")
-	}
-
-	midBundleGetChar1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getChar", "(Ljava/lang/String;)C")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getChar")
-	}
-
-	midBundleGetChar2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getChar", "(Ljava/lang/String;C)C")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getChar")
-	}
-
-	midBundleGetCharArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharArray", "(Ljava/lang/String;)[C")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getCharArray")
-	}
-
-	midBundleGetCharSequence1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequence", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequence")
-	}
-
-	midBundleGetCharSequence2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequence", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequence")
-	}
-
-	midBundleGetCharSequenceArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequenceArray", "(Ljava/lang/String;)[Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequenceArray")
-	}
-
-	midBundleGetCharSequenceArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getCharSequenceArrayList", "(Ljava/lang/String;)Ljava/util/ArrayList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getCharSequenceArrayList")
-	}
-
-	midBundleGetClassLoader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getClassLoader", "()Ljava/lang/ClassLoader;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getClassLoader")
-	}
-
-	midBundleGetFloat1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getFloat", "(Ljava/lang/String;)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getFloat")
-	}
-
-	midBundleGetFloat2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getFloat", "(Ljava/lang/String;F)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getFloat")
-	}
-
-	midBundleGetFloatArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getFloatArray", "(Ljava/lang/String;)[F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getFloatArray")
-	}
-
-	midBundleGetIntegerArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getIntegerArrayList", "(Ljava/lang/String;)Ljava/util/ArrayList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getIntegerArrayList")
-	}
-
-	midBundleGetParcelableArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getParcelableArray", "(Ljava/lang/String;)[Landroid/os/Parcelable;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getParcelableArray")
-	}
-
-	midBundleGetSerializable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getSerializable", "(Ljava/lang/String;)Ljava/io/Serializable;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getSerializable")
-	}
-
-	midBundleGetShort1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getShort", "(Ljava/lang/String;)S")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getShort")
-	}
-
-	midBundleGetShort2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getShort", "(Ljava/lang/String;S)S")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getShort")
-	}
-
-	midBundleGetShortArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getShortArray", "(Ljava/lang/String;)[S")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getShortArray")
-	}
-
-	midBundleGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getSize", "(Ljava/lang/String;)Landroid/util/Size;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getSize")
-	}
-
-	midBundleGetSizeF, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getSizeF", "(Ljava/lang/String;)Landroid/util/SizeF;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getSizeF")
-	}
-
-	midBundleGetStringArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "getStringArrayList", "(Ljava/lang/String;)Ljava/util/ArrayList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.getStringArrayList")
-	}
-
-	midBundleHasFileDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "hasFileDescriptors", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.hasFileDescriptors")
-	}
-
-	midBundlePutAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putAll", "(Landroid/os/Bundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putAll")
-	}
-
-	midBundlePutBinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putBinder", "(Ljava/lang/String;Landroid/os/IBinder;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putBinder")
-	}
-
-	midBundlePutBundle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putBundle", "(Ljava/lang/String;Landroid/os/Bundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putBundle")
-	}
-
-	midBundlePutByte, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putByte", "(Ljava/lang/String;B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putByte")
-	}
-
-	midBundlePutByteArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putByteArray", "(Ljava/lang/String;[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putByteArray")
-	}
-
-	midBundlePutChar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putChar", "(Ljava/lang/String;C)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putChar")
-	}
-
-	midBundlePutCharArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharArray", "(Ljava/lang/String;[C)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putCharArray")
-	}
-
-	midBundlePutCharSequence, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharSequence", "(Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putCharSequence")
-	}
-
-	midBundlePutCharSequenceArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharSequenceArray", "(Ljava/lang/String;[Ljava/lang/CharSequence;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putCharSequenceArray")
-	}
-
-	midBundlePutCharSequenceArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putCharSequenceArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putCharSequenceArrayList")
-	}
-
-	midBundlePutFloat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putFloat", "(Ljava/lang/String;F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putFloat")
-	}
-
-	midBundlePutFloatArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putFloatArray", "(Ljava/lang/String;[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putFloatArray")
-	}
-
-	midBundlePutIntegerArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putIntegerArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putIntegerArrayList")
-	}
-
-	midBundlePutParcelable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putParcelable", "(Ljava/lang/String;Landroid/os/Parcelable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putParcelable")
-	}
-
-	midBundlePutParcelableArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putParcelableArray", "(Ljava/lang/String;[Landroid/os/Parcelable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putParcelableArray")
-	}
-
-	midBundlePutParcelableArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putParcelableArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putParcelableArrayList")
-	}
-
-	midBundlePutSerializable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSerializable", "(Ljava/lang/String;Ljava/io/Serializable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putSerializable")
-	}
-
-	midBundlePutShort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putShort", "(Ljava/lang/String;S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putShort")
-	}
-
-	midBundlePutShortArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putShortArray", "(Ljava/lang/String;[S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putShortArray")
-	}
-
-	midBundlePutSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSize", "(Ljava/lang/String;Landroid/util/Size;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putSize")
-	}
-
-	midBundlePutSizeF, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSizeF", "(Ljava/lang/String;Landroid/util/SizeF;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putSizeF")
-	}
-
-	midBundlePutSparseParcelableArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putSparseParcelableArray", "(Ljava/lang/String;Landroid/util/SparseArray;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putSparseParcelableArray")
-	}
-
-	midBundlePutStringArrayList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "putStringArrayList", "(Ljava/lang/String;Ljava/util/ArrayList;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.putStringArrayList")
-	}
-
-	midBundleReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "readFromParcel", "(Landroid/os/Parcel;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.readFromParcel")
-	}
-
-	midBundleRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "remove", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.remove")
-	}
-
-	midBundleSetClassLoader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "setClassLoader", "(Ljava/lang/ClassLoader;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.setClassLoader")
-	}
-
-	midBundleWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundle)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Bundle.writeToParcel")
-	}
-
 	c, err = env.FindClass("android/app/PendingIntent")
 	if err != nil {
 		return fmt.Errorf("find class android.app.PendingIntent: %w", err)
@@ -4521,44 +4521,6 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.app.PendingIntent.writePendingIntentOrNullToParcel")
-	}
-
-	c, err = env.FindClass("android/os/CancellationSignal")
-	if err != nil {
-		return fmt.Errorf("find class android.os.CancellationSignal: %w", err)
-	}
-	clsCancellationSignal = env.NewGlobalRef(&c.Object)
-
-	midCancellationSignalCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "cancel", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.CancellationSignal.cancel")
-	}
-
-	midCancellationSignalIsCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "isCanceled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.CancellationSignal.isCanceled")
-	}
-
-	midCancellationSignalSetOnCancelListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "setOnCancelListener", "(Landroid/os/CancellationSignal$OnCancelListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.CancellationSignal.setOnCancelListener")
-	}
-
-	midCancellationSignalThrowIfCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "throwIfCanceled", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.CancellationSignal.throwIfCanceled")
 	}
 
 	c, err = env.FindClass("android/content/Context")
@@ -5239,7 +5201,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.Context.getSystemServiceName")
 	}
 
-	midContextGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getText", "(I)Ljava/lang/String;")
+	midContextGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getText", "(I)Ljava/lang/CharSequence;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -5701,6 +5663,44 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.content.Context.updateServiceGroup")
+	}
+
+	c, err = env.FindClass("android/os/CancellationSignal")
+	if err != nil {
+		return fmt.Errorf("find class android.os.CancellationSignal: %w", err)
+	}
+	clsCancellationSignal = env.NewGlobalRef(&c.Object)
+
+	midCancellationSignalCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "cancel", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.CancellationSignal.cancel")
+	}
+
+	midCancellationSignalIsCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "isCanceled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.CancellationSignal.isCanceled")
+	}
+
+	midCancellationSignalSetOnCancelListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "setOnCancelListener", "(Landroid/os/CancellationSignal$OnCancelListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.CancellationSignal.setOnCancelListener")
+	}
+
+	midCancellationSignalThrowIfCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), "throwIfCanceled", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.CancellationSignal.throwIfCanceled")
 	}
 
 	return nil

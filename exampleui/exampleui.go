@@ -48,6 +48,7 @@ const (
 	leftMargin  = float32(32) // px from left edge
 	topMargin   = float32(120) // px from top (below status bar)
 	bottomPad   = 100          // px reserved at bottom
+	wrapWidth   = 25           // chars per line before wrapping (monospace estimate)
 
 	// PackageManager.GET_META_DATA
 	pmGetMetaData = 128
@@ -217,7 +218,7 @@ func renderText(text string) {
 		_, _ = paint.SetTypeface(monoObj)
 	}
 
-	// Draw each line of text.
+	// Draw each line of text, wrapping long lines.
 	lines := strings.Split(text, "\n")
 	y := topMargin
 	for _, line := range lines {
@@ -225,8 +226,21 @@ func renderText(text string) {
 			y += lineHeight
 			continue
 		}
-		_ = canvas.DrawText4_2(line, leftMargin, y, paint.Obj)
-		y += lineHeight
+		// Wrap long lines at wrapWidth characters.
+		for len(line) > 0 {
+			chunk := line
+			if len(chunk) > wrapWidth {
+				chunk = line[:wrapWidth]
+				line = line[wrapWidth:]
+			} else {
+				line = ""
+			}
+			_ = canvas.DrawText4_2(chunk, leftMargin, y, paint.Obj)
+			y += lineHeight
+			if y > float32(windowHeight-bottomPad) {
+				break
+			}
+		}
 		if y > float32(windowHeight-bottomPad) {
 			break
 		}
