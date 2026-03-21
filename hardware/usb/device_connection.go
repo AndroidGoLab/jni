@@ -24,7 +24,12 @@ type DeviceConnection struct {
 }
 
 // BulkTransfer4 calls android.hardware.usb.UsbDeviceConnection.bulkTransfer.
-func (m *DeviceConnection) BulkTransfer4(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32) (int32, error) {
+func (m *DeviceConnection) BulkTransfer4(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 int32,
+	arg3 int32,
+) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -50,7 +55,13 @@ func (m *DeviceConnection) BulkTransfer4(arg0 *jni.Object, arg1 *jni.Object, arg
 }
 
 // BulkTransfer5_1 calls android.hardware.usb.UsbDeviceConnection.bulkTransfer.
-func (m *DeviceConnection) BulkTransfer5_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32) (int32, error) {
+func (m *DeviceConnection) BulkTransfer5_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -91,7 +102,7 @@ func (m *DeviceConnection) ClaimInterface(arg0 *jni.Object, arg1 bool) (bool, er
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -130,7 +141,15 @@ func (m *DeviceConnection) Close() error {
 }
 
 // ControlTransfer7 calls android.hardware.usb.UsbDeviceConnection.controlTransfer.
-func (m *DeviceConnection) ControlTransfer7(arg0 int32, arg1 int32, arg2 int32, arg3 int32, arg4 *jni.Object, arg5 int32, arg6 int32) (int32, error) {
+func (m *DeviceConnection) ControlTransfer7(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 *jni.Object,
+	arg5 int32,
+	arg6 int32,
+) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -156,7 +175,16 @@ func (m *DeviceConnection) ControlTransfer7(arg0 int32, arg1 int32, arg2 int32, 
 }
 
 // ControlTransfer8_1 calls android.hardware.usb.UsbDeviceConnection.controlTransfer.
-func (m *DeviceConnection) ControlTransfer8_1(arg0 int32, arg1 int32, arg2 int32, arg3 int32, arg4 *jni.Object, arg5 int32, arg6 int32, arg7 int32) (int32, error) {
+func (m *DeviceConnection) ControlTransfer8_1(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 *jni.Object,
+	arg5 int32,
+	arg6 int32,
+	arg7 int32,
+) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

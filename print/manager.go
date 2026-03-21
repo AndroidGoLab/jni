@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "print"
+
 // Manager wraps android.print.PrintManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("print")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("print service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -118,7 +120,11 @@ func (m *Manager) IsPrintServiceEnabled(arg0 *jni.Object) (bool, error) {
 }
 
 // Print calls android.print.PrintManager.print.
-func (m *Manager) Print(arg0 string, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Manager) Print(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

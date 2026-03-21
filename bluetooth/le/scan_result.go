@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// scanResult wraps android.bluetooth.le.ScanResult.
-type scanResult struct {
+// ScanResult wraps android.bluetooth.le.ScanResult.
+type ScanResult struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.bluetooth.le.ScanResult.describeContents.
-func (m *scanResult) DescribeContents() (int32, error) {
+func (m *ScanResult) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *scanResult) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultDescribeContents == nil {
+		if midScanResultDescribeContents == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultDescribeContents,
+			midScanResultDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *scanResult) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.bluetooth.le.ScanResult.equals.
-func (m *scanResult) Equals(arg0 *jni.Object) (bool, error) {
+func (m *ScanResult) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *scanResult) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultEquals == nil {
+		if midScanResultEquals == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultEquals, jni.ObjectValue(arg0),
+			midScanResultEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *scanResult) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetAdvertisingSid calls android.bluetooth.le.ScanResult.getAdvertisingSid.
-func (m *scanResult) GetAdvertisingSid() (int32, error) {
+func (m *ScanResult) GetAdvertisingSid() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *scanResult) GetAdvertisingSid() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetAdvertisingSid == nil {
+		if midScanResultGetAdvertisingSid == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getAdvertisingSid is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetAdvertisingSid,
+			midScanResultGetAdvertisingSid,
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *scanResult) GetAdvertisingSid() (int32, error) {
 }
 
 // GetDataStatus calls android.bluetooth.le.ScanResult.getDataStatus.
-func (m *scanResult) GetDataStatus() (int32, error) {
+func (m *ScanResult) GetDataStatus() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,13 +109,13 @@ func (m *scanResult) GetDataStatus() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetDataStatus == nil {
+		if midScanResultGetDataStatus == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getDataStatus is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetDataStatus,
+			midScanResultGetDataStatus,
 		)
 		if callErr != nil {
 			return callErr
@@ -126,7 +126,7 @@ func (m *scanResult) GetDataStatus() (int32, error) {
 }
 
 // GetDevice calls android.bluetooth.le.ScanResult.getDevice.
-func (m *scanResult) GetDevice() (*jni.Object, error) {
+func (m *ScanResult) GetDevice() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -134,13 +134,13 @@ func (m *scanResult) GetDevice() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetDevice == nil {
+		if midScanResultGetDevice == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getDevice is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midscanResultGetDevice,
+			midScanResultGetDevice,
 		)
 		if callErr != nil {
 			return callErr
@@ -151,7 +151,7 @@ func (m *scanResult) GetDevice() (*jni.Object, error) {
 }
 
 // GetPeriodicAdvertisingInterval calls android.bluetooth.le.ScanResult.getPeriodicAdvertisingInterval.
-func (m *scanResult) GetPeriodicAdvertisingInterval() (int32, error) {
+func (m *ScanResult) GetPeriodicAdvertisingInterval() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -159,13 +159,13 @@ func (m *scanResult) GetPeriodicAdvertisingInterval() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetPeriodicAdvertisingInterval == nil {
+		if midScanResultGetPeriodicAdvertisingInterval == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getPeriodicAdvertisingInterval is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetPeriodicAdvertisingInterval,
+			midScanResultGetPeriodicAdvertisingInterval,
 		)
 		if callErr != nil {
 			return callErr
@@ -176,7 +176,7 @@ func (m *scanResult) GetPeriodicAdvertisingInterval() (int32, error) {
 }
 
 // GetPrimaryPhy calls android.bluetooth.le.ScanResult.getPrimaryPhy.
-func (m *scanResult) GetPrimaryPhy() (int32, error) {
+func (m *ScanResult) GetPrimaryPhy() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -184,13 +184,13 @@ func (m *scanResult) GetPrimaryPhy() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetPrimaryPhy == nil {
+		if midScanResultGetPrimaryPhy == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getPrimaryPhy is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetPrimaryPhy,
+			midScanResultGetPrimaryPhy,
 		)
 		if callErr != nil {
 			return callErr
@@ -201,7 +201,7 @@ func (m *scanResult) GetPrimaryPhy() (int32, error) {
 }
 
 // GetRssi calls android.bluetooth.le.ScanResult.getRssi.
-func (m *scanResult) GetRssi() (int32, error) {
+func (m *ScanResult) GetRssi() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -209,13 +209,13 @@ func (m *scanResult) GetRssi() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetRssi == nil {
+		if midScanResultGetRssi == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getRssi is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetRssi,
+			midScanResultGetRssi,
 		)
 		if callErr != nil {
 			return callErr
@@ -226,7 +226,7 @@ func (m *scanResult) GetRssi() (int32, error) {
 }
 
 // GetScanRecord calls android.bluetooth.le.ScanResult.getScanRecord.
-func (m *scanResult) GetScanRecord() (*jni.Object, error) {
+func (m *ScanResult) GetScanRecord() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -234,13 +234,13 @@ func (m *scanResult) GetScanRecord() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetScanRecord == nil {
+		if midScanResultGetScanRecord == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getScanRecord is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midscanResultGetScanRecord,
+			midScanResultGetScanRecord,
 		)
 		if callErr != nil {
 			return callErr
@@ -251,7 +251,7 @@ func (m *scanResult) GetScanRecord() (*jni.Object, error) {
 }
 
 // GetSecondaryPhy calls android.bluetooth.le.ScanResult.getSecondaryPhy.
-func (m *scanResult) GetSecondaryPhy() (int32, error) {
+func (m *ScanResult) GetSecondaryPhy() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -259,13 +259,13 @@ func (m *scanResult) GetSecondaryPhy() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetSecondaryPhy == nil {
+		if midScanResultGetSecondaryPhy == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getSecondaryPhy is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetSecondaryPhy,
+			midScanResultGetSecondaryPhy,
 		)
 		if callErr != nil {
 			return callErr
@@ -276,7 +276,7 @@ func (m *scanResult) GetSecondaryPhy() (int32, error) {
 }
 
 // GetTimestampNanos calls android.bluetooth.le.ScanResult.getTimestampNanos.
-func (m *scanResult) GetTimestampNanos() (int64, error) {
+func (m *ScanResult) GetTimestampNanos() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -284,13 +284,13 @@ func (m *scanResult) GetTimestampNanos() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetTimestampNanos == nil {
+		if midScanResultGetTimestampNanos == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getTimestampNanos is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midscanResultGetTimestampNanos,
+			midScanResultGetTimestampNanos,
 		)
 		if callErr != nil {
 			return callErr
@@ -301,7 +301,7 @@ func (m *scanResult) GetTimestampNanos() (int64, error) {
 }
 
 // GetTxPower calls android.bluetooth.le.ScanResult.getTxPower.
-func (m *scanResult) GetTxPower() (int32, error) {
+func (m *ScanResult) GetTxPower() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -309,13 +309,13 @@ func (m *scanResult) GetTxPower() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultGetTxPower == nil {
+		if midScanResultGetTxPower == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.getTxPower is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultGetTxPower,
+			midScanResultGetTxPower,
 		)
 		if callErr != nil {
 			return callErr
@@ -326,7 +326,7 @@ func (m *scanResult) GetTxPower() (int32, error) {
 }
 
 // HashCode calls android.bluetooth.le.ScanResult.hashCode.
-func (m *scanResult) HashCode() (int32, error) {
+func (m *ScanResult) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -334,13 +334,13 @@ func (m *scanResult) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultHashCode == nil {
+		if midScanResultHashCode == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midscanResultHashCode,
+			midScanResultHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -351,7 +351,7 @@ func (m *scanResult) HashCode() (int32, error) {
 }
 
 // IsConnectable calls android.bluetooth.le.ScanResult.isConnectable.
-func (m *scanResult) IsConnectable() (bool, error) {
+func (m *ScanResult) IsConnectable() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -359,13 +359,13 @@ func (m *scanResult) IsConnectable() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIsConnectable == nil {
+		if midScanResultIsConnectable == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.isConnectable is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIsConnectable,
+			midScanResultIsConnectable,
 		)
 		if callErr != nil {
 			return callErr
@@ -377,7 +377,7 @@ func (m *scanResult) IsConnectable() (bool, error) {
 }
 
 // IsLegacy calls android.bluetooth.le.ScanResult.isLegacy.
-func (m *scanResult) IsLegacy() (bool, error) {
+func (m *ScanResult) IsLegacy() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -385,13 +385,13 @@ func (m *scanResult) IsLegacy() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultIsLegacy == nil {
+		if midScanResultIsLegacy == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.isLegacy is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midscanResultIsLegacy,
+			midScanResultIsLegacy,
 		)
 		if callErr != nil {
 			return callErr
@@ -403,7 +403,7 @@ func (m *scanResult) IsLegacy() (bool, error) {
 }
 
 // ToString calls android.bluetooth.le.ScanResult.toString.
-func (m *scanResult) ToString() (string, error) {
+func (m *ScanResult) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -411,13 +411,13 @@ func (m *scanResult) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midscanResultToString == nil {
+		if midScanResultToString == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midscanResultToString,
+			midScanResultToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -429,7 +429,7 @@ func (m *scanResult) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.bluetooth.le.ScanResult.writeToParcel.
-func (m *scanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *ScanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -437,14 +437,14 @@ func (m *scanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midscanResultWriteToParcel == nil {
+		if midScanResultWriteToParcel == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanResult.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midscanResultWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midScanResultWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

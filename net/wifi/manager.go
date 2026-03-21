@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "wifi"
+
 // Manager wraps android.net.wifi.WifiManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("wifi")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("wifi service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -273,7 +275,7 @@ func (m *Manager) AllowAutojoinGlobal(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -517,7 +519,7 @@ func (m *Manager) EnableNetwork(arg0 int32, arg1 bool) (bool, error) {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1197,7 +1199,7 @@ func (m *Manager) IsCarrierNetworkOffloadEnabled(arg0 int32, arg1 bool) (bool, e
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -2565,7 +2567,12 @@ func (m *Manager) RemoveWifiStateChangedListener(arg0 *jni.Object) error {
 }
 
 // ReportCreateInterfaceImpact calls android.net.wifi.WifiManager.reportCreateInterfaceImpact.
-func (m *Manager) ReportCreateInterfaceImpact(arg0 int32, arg1 bool, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) ReportCreateInterfaceImpact(
+	arg0 int32,
+	arg1 bool,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2580,7 +2587,7 @@ func (m *Manager) ReportCreateInterfaceImpact(arg0 int32, arg1 bool, arg2 *jni.O
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -2680,7 +2687,7 @@ func (m *Manager) SetTdlsEnabled2(arg0 *jni.Object, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -2693,7 +2700,12 @@ func (m *Manager) SetTdlsEnabled2(arg0 *jni.Object, arg1 bool) error {
 }
 
 // SetTdlsEnabled4_1 calls android.net.wifi.WifiManager.setTdlsEnabled.
-func (m *Manager) SetTdlsEnabled4_1(arg0 *jni.Object, arg1 bool, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) SetTdlsEnabled4_1(
+	arg0 *jni.Object,
+	arg1 bool,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2708,7 +2720,7 @@ func (m *Manager) SetTdlsEnabled4_1(arg0 *jni.Object, arg1 bool, arg2 *jni.Objec
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -2740,7 +2752,7 @@ func (m *Manager) SetTdlsEnabledWithMacAddress2(arg0 string, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -2753,7 +2765,12 @@ func (m *Manager) SetTdlsEnabledWithMacAddress2(arg0 string, arg1 bool) error {
 }
 
 // SetTdlsEnabledWithMacAddress4_1 calls android.net.wifi.WifiManager.setTdlsEnabledWithMacAddress.
-func (m *Manager) SetTdlsEnabledWithMacAddress4_1(arg0 string, arg1 bool, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) SetTdlsEnabledWithMacAddress4_1(
+	arg0 string,
+	arg1 bool,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2772,7 +2789,7 @@ func (m *Manager) SetTdlsEnabledWithMacAddress4_1(arg0 string, arg1 bool, arg2 *
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -2799,7 +2816,7 @@ func (m *Manager) SetWifiEnabled(arg0 bool) (bool, error) {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -2816,7 +2833,11 @@ func (m *Manager) SetWifiEnabled(arg0 bool) (bool, error) {
 }
 
 // StartLocalOnlyHotspotWithConfiguration calls android.net.wifi.WifiManager.startLocalOnlyHotspotWithConfiguration.
-func (m *Manager) StartLocalOnlyHotspotWithConfiguration(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) StartLocalOnlyHotspotWithConfiguration(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

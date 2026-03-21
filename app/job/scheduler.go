@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "jobscheduler"
+
 // Scheduler wraps android.app.job.JobScheduler.
 type Scheduler struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewScheduler(ctx *app.Context) (*Scheduler, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("jobscheduler")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("jobscheduler service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -91,6 +93,51 @@ func (m *Scheduler) CanRunUserInitiatedJobs() (bool, error) {
 	return result, callErr
 }
 
+// Cancel calls android.app.job.JobScheduler.cancel.
+func (m *Scheduler) Cancel(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchedulerCancel == nil {
+			callErr = fmt.Errorf("android.app.job.JobScheduler.cancel is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midSchedulerCancel, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// CancelAll calls android.app.job.JobScheduler.cancelAll.
+func (m *Scheduler) CancelAll() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchedulerCancelAll == nil {
+			callErr = fmt.Errorf("android.app.job.JobScheduler.cancelAll is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midSchedulerCancelAll,
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // CancelInAllNamespaces calls android.app.job.JobScheduler.cancelInAllNamespaces.
 func (m *Scheduler) CancelInAllNamespaces() error {
 
@@ -111,6 +158,32 @@ func (m *Scheduler) CancelInAllNamespaces() error {
 		return callErr
 	})
 	return callErr
+}
+
+// Enqueue calls android.app.job.JobScheduler.enqueue.
+func (m *Scheduler) Enqueue(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchedulerEnqueue == nil {
+			callErr = fmt.Errorf("android.app.job.JobScheduler.enqueue is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midSchedulerEnqueue, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // ForNamespace calls android.app.job.JobScheduler.forNamespace.
@@ -143,6 +216,31 @@ func (m *Scheduler) ForNamespace(arg0 string) (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetAllPendingJobs calls android.app.job.JobScheduler.getAllPendingJobs.
+func (m *Scheduler) GetAllPendingJobs() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchedulerGetAllPendingJobs == nil {
+			callErr = fmt.Errorf("android.app.job.JobScheduler.getAllPendingJobs is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSchedulerGetAllPendingJobs,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetNamespace calls android.app.job.JobScheduler.getNamespace.
 func (m *Scheduler) GetNamespace() (string, error) {
 	var result string
@@ -164,6 +262,32 @@ func (m *Scheduler) GetNamespace() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPendingJob calls android.app.job.JobScheduler.getPendingJob.
+func (m *Scheduler) GetPendingJob(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchedulerGetPendingJob == nil {
+			callErr = fmt.Errorf("android.app.job.JobScheduler.getPendingJob is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSchedulerGetPendingJob, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
 		return callErr
 	})
 	return result, callErr
@@ -238,6 +362,32 @@ func (m *Scheduler) GetPendingJobReasonsHistory(arg0 int32) (*jni.Object, error)
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSchedulerGetPendingJobReasonsHistory, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// Schedule calls android.app.job.JobScheduler.schedule.
+func (m *Scheduler) Schedule(arg0 *jni.Object) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchedulerSchedule == nil {
+			callErr = fmt.Errorf("android.app.job.JobScheduler.schedule is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midSchedulerSchedule, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

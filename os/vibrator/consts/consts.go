@@ -3,7 +3,7 @@
 package consts
 
 const (
-	VibrationEffectSupportNo      = 2
-	VibrationEffectSupportUnknown = 0
-	VibrationEffectSupportYes     = 1
+	VibrationEffectSupportNo      int = 2
+	VibrationEffectSupportUnknown int = 0
+	VibrationEffectSupportYes     int = 1
 )

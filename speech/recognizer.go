@@ -46,7 +46,11 @@ func (m *Recognizer) Cancel() error {
 }
 
 // CheckRecognitionSupport calls android.speech.SpeechRecognizer.checkRecognitionSupport.
-func (m *Recognizer) CheckRecognitionSupport(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Recognizer) CheckRecognitionSupport(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -182,7 +186,11 @@ func (m *Recognizer) TriggerModelDownload1(arg0 *jni.Object) error {
 }
 
 // TriggerModelDownload3_1 calls android.speech.SpeechRecognizer.triggerModelDownload.
-func (m *Recognizer) TriggerModelDownload3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Recognizer) TriggerModelDownload3_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

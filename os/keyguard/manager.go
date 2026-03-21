@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "keyguard"
+
 // Manager wraps android.app.KeyguardManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("keyguard")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("keyguard service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil

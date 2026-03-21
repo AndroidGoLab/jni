@@ -16,16 +16,36 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPreferences          *jni.GlobalRef
-	midPreferencesGetString jni.MethodID
-	midPreferencesContains  jni.MethodID
-	midPreferencesGetAll    jni.MethodID
+	clsSharedPreferences                                           *jni.GlobalRef
+	midSharedPreferencesContains                                   jni.MethodID
+	midSharedPreferencesEdit                                       jni.MethodID
+	midSharedPreferencesGetBoolean                                 jni.MethodID
+	midSharedPreferencesGetFloat                                   jni.MethodID
+	midSharedPreferencesGetInt                                     jni.MethodID
+	midSharedPreferencesGetLong                                    jni.MethodID
+	midSharedPreferencesGetString                                  jni.MethodID
+	midSharedPreferencesGetStringSet                               jni.MethodID
+	midSharedPreferencesRegisterOnSharedPreferenceChangeListener   jni.MethodID
+	midSharedPreferencesUnregisterOnSharedPreferenceChangeListener jni.MethodID
 
-	clsEditor *jni.GlobalRef
+	clsSharedPreferencesEditor             *jni.GlobalRef
+	midSharedPreferencesEditorApply        jni.MethodID
+	midSharedPreferencesEditorClear        jni.MethodID
+	midSharedPreferencesEditorCommit       jni.MethodID
+	midSharedPreferencesEditorPutBoolean   jni.MethodID
+	midSharedPreferencesEditorPutFloat     jni.MethodID
+	midSharedPreferencesEditorPutInt       jni.MethodID
+	midSharedPreferencesEditorPutLong      jni.MethodID
+	midSharedPreferencesEditorPutString    jni.MethodID
+	midSharedPreferencesEditorPutStringSet jni.MethodID
+	midSharedPreferencesEditorRemove       jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -56,17 +76,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.content.SharedPreferences: %w", err)
 	}
-	clsPreferences = env.NewGlobalRef(&c.Object)
+	clsSharedPreferences = env.NewGlobalRef(&c.Object)
 
-	midPreferencesGetString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getString", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.SharedPreferences.getString")
-	}
-
-	midPreferencesContains, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "contains", "(Ljava/lang/String;)Z")
+	midSharedPreferencesContains, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "contains", "(Ljava/lang/String;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -74,19 +86,163 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.SharedPreferences.contains")
 	}
 
-	midPreferencesGetAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getAll", "()Ljava/util/Map;")
+	midSharedPreferencesEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "edit", "()Landroid/content/SharedPreferences$Editor;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.SharedPreferences.getAll")
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.edit")
+	}
+
+	midSharedPreferencesGetBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "getBoolean", "(Ljava/lang/String;Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getBoolean")
+	}
+
+	midSharedPreferencesGetFloat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "getFloat", "(Ljava/lang/String;F)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getFloat")
+	}
+
+	midSharedPreferencesGetInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "getInt", "(Ljava/lang/String;I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getInt")
+	}
+
+	midSharedPreferencesGetLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "getLong", "(Ljava/lang/String;J)J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getLong")
+	}
+
+	midSharedPreferencesGetString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "getString", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getString")
+	}
+
+	midSharedPreferencesGetStringSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "getStringSet", "(Ljava/lang/String;Ljava/util/Set;)Ljava/util/Set;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.getStringSet")
+	}
+
+	midSharedPreferencesRegisterOnSharedPreferenceChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "registerOnSharedPreferenceChangeListener", "(Landroid/content/SharedPreferences$OnSharedPreferenceChangeListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.registerOnSharedPreferenceChangeListener")
+	}
+
+	midSharedPreferencesUnregisterOnSharedPreferenceChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "unregisterOnSharedPreferenceChangeListener", "(Landroid/content/SharedPreferences$OnSharedPreferenceChangeListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences.unregisterOnSharedPreferenceChangeListener")
 	}
 
 	c, err = env.FindClass("android/content/SharedPreferences$Editor")
 	if err != nil {
 		return fmt.Errorf("find class android.content.SharedPreferences$Editor: %w", err)
 	}
-	clsEditor = env.NewGlobalRef(&c.Object)
+	clsSharedPreferencesEditor = env.NewGlobalRef(&c.Object)
+
+	midSharedPreferencesEditorApply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "apply", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.apply")
+	}
+
+	midSharedPreferencesEditorClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "clear", "()Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.clear")
+	}
+
+	midSharedPreferencesEditorCommit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "commit", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.commit")
+	}
+
+	midSharedPreferencesEditorPutBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "putBoolean", "(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.putBoolean")
+	}
+
+	midSharedPreferencesEditorPutFloat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "putFloat", "(Ljava/lang/String;F)Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.putFloat")
+	}
+
+	midSharedPreferencesEditorPutInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "putInt", "(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.putInt")
+	}
+
+	midSharedPreferencesEditorPutLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "putLong", "(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.putLong")
+	}
+
+	midSharedPreferencesEditorPutString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "putString", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.putString")
+	}
+
+	midSharedPreferencesEditorPutStringSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "putStringSet", "(Ljava/lang/String;Ljava/util/Set;)Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.putStringSet")
+	}
+
+	midSharedPreferencesEditorRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "remove", "(Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.content.SharedPreferences$Editor.remove")
+	}
 
 	return nil
 }

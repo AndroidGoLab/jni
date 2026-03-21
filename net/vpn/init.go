@@ -16,18 +16,23 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clsvpnService                      *jni.GlobalRef
-	midvpnServiceOnBind                jni.MethodID
-	midvpnServiceOnRevoke              jni.MethodID
-	midvpnServiceProtect1              jni.MethodID
-	midvpnServiceProtect1_1            jni.MethodID
-	midvpnServiceProtect1_2            jni.MethodID
-	midvpnServiceSetUnderlyingNetworks jni.MethodID
-	midvpnServicePrepare               jni.MethodID
+	clsService                      *jni.GlobalRef
+	midServiceIsAlwaysOn            jni.MethodID
+	midServiceIsLockdownEnabled     jni.MethodID
+	midServiceOnBind                jni.MethodID
+	midServiceOnRevoke              jni.MethodID
+	midServiceProtect1              jni.MethodID
+	midServiceProtect1_1            jni.MethodID
+	midServiceProtect1_2            jni.MethodID
+	midServiceSetUnderlyingNetworks jni.MethodID
+	midServicePrepare               jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -58,9 +63,25 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.net.VpnService: %w", err)
 	}
-	clsvpnService = env.NewGlobalRef(&c.Object)
+	clsService = env.NewGlobalRef(&c.Object)
 
-	midvpnServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvpnService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+	midServiceIsAlwaysOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isAlwaysOn", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.VpnService.isAlwaysOn")
+	}
+
+	midServiceIsLockdownEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isLockdownEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.VpnService.isLockdownEnabled")
+	}
+
+	midServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -68,7 +89,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.VpnService.onBind")
 	}
 
-	midvpnServiceOnRevoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvpnService)), "onRevoke", "()V")
+	midServiceOnRevoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onRevoke", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -76,7 +97,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.VpnService.onRevoke")
 	}
 
-	midvpnServiceProtect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvpnService)), "protect", "(I)Z")
+	midServiceProtect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(I)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -84,7 +105,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.VpnService.protect")
 	}
 
-	midvpnServiceProtect1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvpnService)), "protect", "(Ljava/net/DatagramSocket;)Z")
+	midServiceProtect1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(Ljava/net/DatagramSocket;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -92,7 +113,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.VpnService.protect")
 	}
 
-	midvpnServiceProtect1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvpnService)), "protect", "(Ljava/net/Socket;)Z")
+	midServiceProtect1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(Ljava/net/Socket;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -100,7 +121,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.VpnService.protect")
 	}
 
-	midvpnServiceSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvpnService)), "setUnderlyingNetworks", "([Landroid/net/Network;)Z")
+	midServiceSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "setUnderlyingNetworks", "([Landroid/net/Network;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -108,7 +129,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.net.VpnService.setUnderlyingNetworks")
 	}
 
-	midvpnServicePrepare, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsvpnService)), "prepare", "(Landroid/content/Context;)Landroid/content/Intent;")
+	midServicePrepare, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsService)), "prepare", "(Landroid/content/Context;)Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

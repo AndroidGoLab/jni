@@ -2,7 +2,7 @@ package: documents
 go_import: github.com/AndroidGoLab/jni/provider/documents
 classes:
     - java_class: android.provider.DocumentsContract
-      go_type: DocumentsContract
+      go_type: Contract
       static_methods:
         - java_method: buildChildDocumentsUri
           go_name: BuildChildDocumentsUri

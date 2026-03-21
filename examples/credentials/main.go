@@ -11,22 +11,51 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
+	"unsafe"
 	"bytes"
 	"fmt"
 
 	"github.com/AndroidGoLab/jni/credentials"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
+}
+
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+}
+
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	// PasswordCredential holds data extracted from a
 	// androidx.credentials.PasswordCredential JNI object.
 	// It has two exported fields: ID and Password.
@@ -34,8 +63,8 @@ func goRun(cvm *C.JavaVM) {
 		ID:       "user@example.com",
 		Password: "s3cret",
 	}
-	fmt.Fprintf(&output, "PasswordCredential ID: %s\n", pwCred.ID)
-	fmt.Fprintf(&output, "PasswordCredential Password: %s\n", pwCred.Password)
+	fmt.Fprintf(output, "PasswordCredential ID: %s\n", pwCred.ID)
+	fmt.Fprintf(output, "PasswordCredential Password: %s\n", pwCred.Password)
 
 	// PublicKeyCredential holds data extracted from a
 	// androidx.credentials.publickeycredential.PublicKeyCredential JNI object.
@@ -43,7 +72,7 @@ func goRun(cvm *C.JavaVM) {
 	pkCred := credentials.PublicKeyCredential{
 		AuthResponseJSON: `{"type":"public-key","id":"abc123","response":{"clientDataJSON":"...","authenticatorData":"..."}}`,
 	}
-	fmt.Fprintf(&output, "PublicKeyCredential AuthResponseJSON: %s\n", pkCred.AuthResponseJSON)
+	fmt.Fprintf(output, "PublicKeyCredential AuthResponseJSON: %s\n", pkCred.AuthResponseJSON)
 
 	// The following types and methods are unexported (package-internal):
 	//
@@ -68,9 +97,5 @@ func goRun(cvm *C.JavaVM) {
 	//
 	// extractPasswordCredential(env, obj) extracts PasswordCredential fields.
 	// extractPublicKeyCredential(env, obj) extracts PublicKeyCredential fields.
-}
-
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+	return nil
 }

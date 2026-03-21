@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "alarm"
+
 // Manager wraps android.app.AlarmManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("alarm")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("alarm service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -185,7 +187,11 @@ func (m *Manager) GetNextAlarmClock() (*jni.Object, error) {
 }
 
 // Set calls android.app.AlarmManager.set.
-func (m *Manager) Set(arg0 int32, arg1 int64, arg2 *jni.Object) error {
+func (m *Manager) Set(
+	arg0 int32,
+	arg1 int64,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -231,7 +237,11 @@ func (m *Manager) SetAlarmClock(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // SetAndAllowWhileIdle calls android.app.AlarmManager.setAndAllowWhileIdle.
-func (m *Manager) SetAndAllowWhileIdle(arg0 int32, arg1 int64, arg2 *jni.Object) error {
+func (m *Manager) SetAndAllowWhileIdle(
+	arg0 int32,
+	arg1 int64,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -254,7 +264,11 @@ func (m *Manager) SetAndAllowWhileIdle(arg0 int32, arg1 int64, arg2 *jni.Object)
 }
 
 // SetExact calls android.app.AlarmManager.setExact.
-func (m *Manager) SetExact(arg0 int32, arg1 int64, arg2 *jni.Object) error {
+func (m *Manager) SetExact(
+	arg0 int32,
+	arg1 int64,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -277,7 +291,11 @@ func (m *Manager) SetExact(arg0 int32, arg1 int64, arg2 *jni.Object) error {
 }
 
 // SetExactAndAllowWhileIdle calls android.app.AlarmManager.setExactAndAllowWhileIdle.
-func (m *Manager) SetExactAndAllowWhileIdle(arg0 int32, arg1 int64, arg2 *jni.Object) error {
+func (m *Manager) SetExactAndAllowWhileIdle(
+	arg0 int32,
+	arg1 int64,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -300,7 +318,12 @@ func (m *Manager) SetExactAndAllowWhileIdle(arg0 int32, arg1 int64, arg2 *jni.Ob
 }
 
 // SetInexactRepeating calls android.app.AlarmManager.setInexactRepeating.
-func (m *Manager) SetInexactRepeating(arg0 int32, arg1 int64, arg2 int64, arg3 *jni.Object) error {
+func (m *Manager) SetInexactRepeating(
+	arg0 int32,
+	arg1 int64,
+	arg2 int64,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -323,7 +346,12 @@ func (m *Manager) SetInexactRepeating(arg0 int32, arg1 int64, arg2 int64, arg3 *
 }
 
 // SetRepeating calls android.app.AlarmManager.setRepeating.
-func (m *Manager) SetRepeating(arg0 int32, arg1 int64, arg2 int64, arg3 *jni.Object) error {
+func (m *Manager) SetRepeating(
+	arg0 int32,
+	arg1 int64,
+	arg2 int64,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -396,7 +424,12 @@ func (m *Manager) SetTimeZone(arg0 string) error {
 }
 
 // SetWindow4 calls android.app.AlarmManager.setWindow.
-func (m *Manager) SetWindow4(arg0 int32, arg1 int64, arg2 int64, arg3 *jni.Object) error {
+func (m *Manager) SetWindow4(
+	arg0 int32,
+	arg1 int64,
+	arg2 int64,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -419,7 +452,14 @@ func (m *Manager) SetWindow4(arg0 int32, arg1 int64, arg2 int64, arg3 *jni.Objec
 }
 
 // SetWindow6_1 calls android.app.AlarmManager.setWindow.
-func (m *Manager) SetWindow6_1(arg0 int32, arg1 int64, arg2 int64, arg3 string, arg4 *jni.Object, arg5 *jni.Object) error {
+func (m *Manager) SetWindow6_1(
+	arg0 int32,
+	arg1 int64,
+	arg2 int64,
+	arg3 string,
+	arg4 *jni.Object,
+	arg5 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

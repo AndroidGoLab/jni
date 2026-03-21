@@ -1482,7 +1482,7 @@ func (m *Location) SetMock(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1766,7 +1766,13 @@ func (m *Location) Convert1_1(arg0 string) (float64, error) {
 }
 
 // DistanceBetween calls android.location.Location.distanceBetween.
-func (m *Location) DistanceBetween(arg0 float64, arg1 float64, arg2 float64, arg3 float64, arg4 *jni.Object) error {
+func (m *Location) DistanceBetween(
+	arg0 float64,
+	arg1 float64,
+	arg2 float64,
+	arg3 float64,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

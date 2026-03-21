@@ -11,7 +11,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -20,28 +25,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/hardware/lights"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -55,11 +70,11 @@ func run(vm *jni.VM) error {
 	_ = mgr
 
 	// Print all light type constants.
-	fmt.Fprintln(&output, "Light type constants:")
-	fmt.Fprintf(&output, "  LightTypeInput             = %d\n", lights.LightTypeInput)
-	fmt.Fprintf(&output, "  LightTypeKeyboardBacklight = %d\n", lights.LightTypeKeyboardBacklight)
-	fmt.Fprintf(&output, "  LightTypeMicrophone        = %d\n", lights.LightTypeMicrophone)
-	fmt.Fprintf(&output, "  LightTypePlayerId          = %d\n", lights.LightTypePlayerId)
+	fmt.Fprintln(output, "Light type constants:")
+	fmt.Fprintf(output, "  LightTypeInput             = %d\n", lights.LightTypeInput)
+	fmt.Fprintf(output, "  LightTypeKeyboardBacklight = %d\n", lights.LightTypeKeyboardBacklight)
+	fmt.Fprintf(output, "  LightTypeMicrophone        = %d\n", lights.LightTypeMicrophone)
+	fmt.Fprintf(output, "  LightTypePlayerId          = %d\n", lights.LightTypePlayerId)
 
 	// The Light data class (exported) has these fields:
 	//   ID   int    - unique light identifier
@@ -85,7 +100,7 @@ func run(vm *jni.VM) error {
 	//   clearLight(light)        - clear a previously set light
 	//   build()                  - produce the LightsRequest
 
-	fmt.Fprintln(&output, "LightsManager ready")
+	fmt.Fprintln(output, "LightsManager ready")
 	return nil
 }
 

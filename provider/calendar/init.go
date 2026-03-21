@@ -16,12 +16,15 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clscalendarContract                                       *jni.GlobalRef
-	midcalendarContractStartViewCalendarEventInManagedProfile jni.MethodID
+	clsContract                                       *jni.GlobalRef
+	midContractStartViewCalendarEventInManagedProfile jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -52,9 +55,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.provider.CalendarContract: %w", err)
 	}
-	clscalendarContract = env.NewGlobalRef(&c.Object)
+	clsContract = env.NewGlobalRef(&c.Object)
 
-	midcalendarContractStartViewCalendarEventInManagedProfile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscalendarContract)), "startViewCalendarEventInManagedProfile", "(Landroid/content/Context;JJJZI)Z")
+	midContractStartViewCalendarEventInManagedProfile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "startViewCalendarEventInManagedProfile", "(Landroid/content/Context;JJJZI)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

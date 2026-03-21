@@ -5,7 +5,35 @@ package notification
 import "github.com/AndroidGoLab/jni/app/notification/consts"
 
 const (
-	Creator                        = consts.Creator
+	ActionAppBlockStateChanged                      = consts.ActionAppBlockStateChanged
+	ActionAutomaticZenRule                          = consts.ActionAutomaticZenRule
+	ActionAutomaticZenRuleStatusChanged             = consts.ActionAutomaticZenRuleStatusChanged
+	ActionConsolidatedNotificationPolicyChanged     = consts.ActionConsolidatedNotificationPolicyChanged
+	ActionInterruptionFilterChanged                 = consts.ActionInterruptionFilterChanged
+	ActionNotificationChannelBlockStateChanged      = consts.ActionNotificationChannelBlockStateChanged
+	ActionNotificationChannelGroupBlockStateChanged = consts.ActionNotificationChannelGroupBlockStateChanged
+	ActionNotificationPolicyAccessGrantedChanged    = consts.ActionNotificationPolicyAccessGrantedChanged
+	ActionNotificationPolicyChanged                 = consts.ActionNotificationPolicyChanged
+	ExtraAutomaticRuleId                            = consts.ExtraAutomaticRuleId
+	ExtraAutomaticZenRuleId                         = consts.ExtraAutomaticZenRuleId
+	ExtraAutomaticZenRuleStatus                     = consts.ExtraAutomaticZenRuleStatus
+	ExtraBlockedState                               = consts.ExtraBlockedState
+	ExtraNotificationChannelGroupId                 = consts.ExtraNotificationChannelGroupId
+	ExtraNotificationChannelId                      = consts.ExtraNotificationChannelId
+	ExtraNotificationPolicy                         = consts.ExtraNotificationPolicy
+	MetaDataAutomaticRuleType                       = consts.MetaDataAutomaticRuleType
+	MetaDataRuleInstanceLimit                       = consts.MetaDataRuleInstanceLimit
+	DefaultChannelId                                = consts.DefaultChannelId
+	EditConversation                                = consts.EditConversation
+	EditImportance                                  = consts.EditImportance
+	EditLauncher                                    = consts.EditLauncher
+	EditLockedDevice                                = consts.EditLockedDevice
+	EditSound                                       = consts.EditSound
+	EditVibration                                   = consts.EditVibration
+	EditZen                                         = consts.EditZen
+)
+
+const (
 	AutomaticRuleStatusActivated   = consts.AutomaticRuleStatusActivated
 	AutomaticRuleStatusDeactivated = consts.AutomaticRuleStatusDeactivated
 	AutomaticRuleStatusDisabled    = consts.AutomaticRuleStatusDisabled
@@ -27,33 +55,5 @@ const (
 	InterruptionFilterNone         = consts.InterruptionFilterNone
 	InterruptionFilterPriority     = consts.InterruptionFilterPriority
 	InterruptionFilterUnknown      = consts.InterruptionFilterUnknown
-)
-
-const (
-	DefaultChannelId                                = consts.DefaultChannelId
-	EditConversation                                = consts.EditConversation
-	EditImportance                                  = consts.EditImportance
-	EditLauncher                                    = consts.EditLauncher
-	EditLockedDevice                                = consts.EditLockedDevice
-	EditSound                                       = consts.EditSound
-	EditVibration                                   = consts.EditVibration
-	EditZen                                         = consts.EditZen
-	ActionAppBlockStateChanged                      = consts.ActionAppBlockStateChanged
-	ActionAutomaticZenRule                          = consts.ActionAutomaticZenRule
-	ActionAutomaticZenRuleStatusChanged             = consts.ActionAutomaticZenRuleStatusChanged
-	ActionConsolidatedNotificationPolicyChanged     = consts.ActionConsolidatedNotificationPolicyChanged
-	ActionInterruptionFilterChanged                 = consts.ActionInterruptionFilterChanged
-	ActionNotificationChannelBlockStateChanged      = consts.ActionNotificationChannelBlockStateChanged
-	ActionNotificationChannelGroupBlockStateChanged = consts.ActionNotificationChannelGroupBlockStateChanged
-	ActionNotificationPolicyAccessGrantedChanged    = consts.ActionNotificationPolicyAccessGrantedChanged
-	ActionNotificationPolicyChanged                 = consts.ActionNotificationPolicyChanged
-	ExtraAutomaticRuleId                            = consts.ExtraAutomaticRuleId
-	ExtraAutomaticZenRuleId                         = consts.ExtraAutomaticZenRuleId
-	ExtraAutomaticZenRuleStatus                     = consts.ExtraAutomaticZenRuleStatus
-	ExtraBlockedState                               = consts.ExtraBlockedState
-	ExtraNotificationChannelGroupId                 = consts.ExtraNotificationChannelGroupId
-	ExtraNotificationChannelId                      = consts.ExtraNotificationChannelId
-	ExtraNotificationPolicy                         = consts.ExtraNotificationPolicy
-	MetaDataAutomaticRuleType                       = consts.MetaDataAutomaticRuleType
-	MetaDataRuleInstanceLimit                       = consts.MetaDataRuleInstanceLimit
+	Creator                        = consts.Creator
 )

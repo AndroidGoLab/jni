@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "vibrator"
+
 // Vibrator wraps android.os.Vibrator.
 type Vibrator struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewVibrator(ctx *app.Context) (*Vibrator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("vibrator")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("vibrator service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -65,8 +67,34 @@ func (m *Vibrator) Close() {
 	}
 }
 
-// HasVibrator calls android.os.Vibrator.hasVibrator.
-func (m *Vibrator) HasVibrator() (bool, error) {
+// AreAllEffectsSupported calls android.os.Vibrator.areAllEffectsSupported.
+func (m *Vibrator) AreAllEffectsSupported(arg0 *jni.Object) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVibratorAreAllEffectsSupported == nil {
+			callErr = fmt.Errorf("android.os.Vibrator.areAllEffectsSupported is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midVibratorAreAllEffectsSupported, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// AreAllPrimitivesSupported calls android.os.Vibrator.areAllPrimitivesSupported.
+func (m *Vibrator) AreAllPrimitivesSupported(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -74,13 +102,14 @@ func (m *Vibrator) HasVibrator() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midVibratorHasVibrator == nil {
-			callErr = fmt.Errorf("android.os.Vibrator.hasVibrator is not available on this device")
+		if midVibratorAreAllPrimitivesSupported == nil {
+			callErr = fmt.Errorf("android.os.Vibrator.areAllPrimitivesSupported is not available on this device")
 			return callErr
 		}
+
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midVibratorHasVibrator,
+			midVibratorAreAllPrimitivesSupported, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -167,6 +196,28 @@ func (m *Vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error)
 		return callErr
 	})
 	return result, callErr
+}
+
+// Cancel calls android.os.Vibrator.cancel.
+func (m *Vibrator) Cancel() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVibratorCancel == nil {
+			callErr = fmt.Errorf("android.os.Vibrator.cancel is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midVibratorCancel,
+		)
+		return callErr
+	})
+	return callErr
 }
 
 // GetEnvelopeEffectInfo calls android.os.Vibrator.getEnvelopeEffectInfo.
@@ -320,6 +371,58 @@ func (m *Vibrator) GetResonantFrequency() (float32, error) {
 	return result, callErr
 }
 
+// HasAmplitudeControl calls android.os.Vibrator.hasAmplitudeControl.
+func (m *Vibrator) HasAmplitudeControl() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVibratorHasAmplitudeControl == nil {
+			callErr = fmt.Errorf("android.os.Vibrator.hasAmplitudeControl is not available on this device")
+			return callErr
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midVibratorHasAmplitudeControl,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasVibrator calls android.os.Vibrator.hasVibrator.
+func (m *Vibrator) HasVibrator() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVibratorHasVibrator == nil {
+			callErr = fmt.Errorf("android.os.Vibrator.hasVibrator is not available on this device")
+			return callErr
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midVibratorHasVibrator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
 // Vibrate1 calls android.os.Vibrator.vibrate.
 func (m *Vibrator) Vibrate1(arg0 *jni.Object) error {
 
@@ -459,7 +562,11 @@ func (m *Vibrator) Vibrate2_5(arg0 *jni.Object, arg1 int32) error {
 }
 
 // Vibrate3_6 calls android.os.Vibrator.vibrate.
-func (m *Vibrator) Vibrate3_6(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+func (m *Vibrator) Vibrate3_6(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

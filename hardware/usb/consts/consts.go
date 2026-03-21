@@ -3,15 +3,15 @@
 package consts
 
 const (
-	Creator = 0
+	ActionUsbAccessoryAttached string = "android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+	ActionUsbAccessoryDetached string = "android.hardware.usb.action.USB_ACCESSORY_DETACHED"
+	ActionUsbDeviceAttached    string = "android.hardware.usb.action.USB_DEVICE_ATTACHED"
+	ActionUsbDeviceDetached    string = "android.hardware.usb.action.USB_DEVICE_DETACHED"
+	ExtraAccessory             string = "accessory"
+	ExtraDevice                string = "device"
+	ExtraPermissionGranted     string = "permission"
 )
 
 const (
-	ActionUsbAccessoryAttached = "android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
-	ActionUsbAccessoryDetached = "android.hardware.usb.action.USB_ACCESSORY_DETACHED"
-	ActionUsbDeviceAttached    = "android.hardware.usb.action.USB_DEVICE_ATTACHED"
-	ActionUsbDeviceDetached    = "android.hardware.usb.action.USB_DEVICE_DETACHED"
-	ExtraAccessory             = "accessory"
-	ExtraDevice                = "device"
-	ExtraPermissionGranted     = "permission"
+	Creator int = 0
 )

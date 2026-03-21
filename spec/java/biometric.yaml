@@ -158,9 +158,6 @@ classes:
           error: true
     - java_class: android.hardware.biometrics.BiometricManager
       go_type: Manager
-      obtain: system_service
-      service_name: biometric
-      close: true
       methods:
         - java_method: canAuthenticate
           go_name: CanAuthenticate0

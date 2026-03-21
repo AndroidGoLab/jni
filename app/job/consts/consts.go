@@ -3,45 +3,45 @@
 package consts
 
 const (
-	PendingJobReasonApp                      = 1
-	PendingJobReasonAppStandby               = 2
-	PendingJobReasonBackgroundRestriction    = 3
-	PendingJobReasonConstraintBatteryNotLow  = 4
-	PendingJobReasonConstraintCharging       = 5
-	PendingJobReasonConstraintConnectivity   = 6
-	PendingJobReasonConstraintContentTrigger = 7
-	PendingJobReasonConstraintDeadline       = 16
-	PendingJobReasonConstraintDeviceIdle     = 8
-	PendingJobReasonConstraintMinimumLatency = 9
-	PendingJobReasonConstraintPrefetch       = 10
-	PendingJobReasonConstraintStorageNotLow  = 11
-	PendingJobReasonDeviceState              = 12
-	PendingJobReasonExecuting                = -1
-	PendingJobReasonInvalidJobId             = -2
-	PendingJobReasonJobSchedulerOptimization = 13
-	PendingJobReasonQuota                    = 14
-	PendingJobReasonUndefined                = 0
-	PendingJobReasonUser                     = 15
-	ResultFailure                            = 0
-	ResultSuccess                            = 1
-	BackoffPolicyExponential                 = 1
-	BackoffPolicyLinear                      = 0
-	Creator                                  = 0
-	NetworkBytesUnknown                      = -1
-	NetworkTypeAny                           = 1
-	NetworkTypeCellular                      = 4
-	NetworkTypeMetered                       = 4
-	NetworkTypeNone                          = 0
-	NetworkTypeNotRoaming                    = 3
-	NetworkTypeUnmetered                     = 2
-	PriorityDefault                          = 300
-	PriorityHigh                             = 400
-	PriorityLow                              = 200
-	PriorityMax                              = 500
-	PriorityMin                              = 100
+	BackoffPolicyExponential                 int = 1
+	BackoffPolicyLinear                      int = 0
+	Creator                                  int = 0
+	NetworkBytesUnknown                      int = -1
+	NetworkTypeAny                           int = 1
+	NetworkTypeCellular                      int = 4
+	NetworkTypeMetered                       int = 4
+	NetworkTypeNone                          int = 0
+	NetworkTypeNotRoaming                    int = 3
+	NetworkTypeUnmetered                     int = 2
+	PriorityDefault                          int = 300
+	PriorityHigh                             int = 400
+	PriorityLow                              int = 200
+	PriorityMax                              int = 500
+	PriorityMin                              int = 100
+	PendingJobReasonApp                      int = 1
+	PendingJobReasonAppStandby               int = 2
+	PendingJobReasonBackgroundRestriction    int = 3
+	PendingJobReasonConstraintBatteryNotLow  int = 4
+	PendingJobReasonConstraintCharging       int = 5
+	PendingJobReasonConstraintConnectivity   int = 6
+	PendingJobReasonConstraintContentTrigger int = 7
+	PendingJobReasonConstraintDeadline       int = 16
+	PendingJobReasonConstraintDeviceIdle     int = 8
+	PendingJobReasonConstraintMinimumLatency int = 9
+	PendingJobReasonConstraintPrefetch       int = 10
+	PendingJobReasonConstraintStorageNotLow  int = 11
+	PendingJobReasonDeviceState              int = 12
+	PendingJobReasonExecuting                int = -1
+	PendingJobReasonInvalidJobId             int = -2
+	PendingJobReasonJobSchedulerOptimization int = 13
+	PendingJobReasonQuota                    int = 14
+	PendingJobReasonUndefined                int = 0
+	PendingJobReasonUser                     int = 15
+	ResultFailure                            int = 0
+	ResultSuccess                            int = 1
 )
 
 const (
-	DefaultInitialBackoffMillis = 30000
-	MaxBackoffDelayMillis       = 18000000
+	DefaultInitialBackoffMillis int = 30000
+	MaxBackoffDelayMillis       int = 18000000
 )

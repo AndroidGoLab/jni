@@ -7,14 +7,6 @@ import "github.com/AndroidGoLab/jni/graphics/pdf/consts"
 const (
 	Creator                             = consts.Creator
 	DensityNone                         = consts.DensityNone
-	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
-	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
-	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
-	PdfFormTypeNone                     = consts.PdfFormTypeNone
-	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
-	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
-	RenderModeForDisplay                = consts.RenderModeForDisplay
-	RenderModeForPrint                  = consts.RenderModeForPrint
 	ModeAppend                          = consts.ModeAppend
 	ModeCreate                          = consts.ModeCreate
 	ModeReadOnly                        = consts.ModeReadOnly
@@ -23,4 +15,12 @@ const (
 	ModeWorldReadable                   = consts.ModeWorldReadable
 	ModeWorldWriteable                  = consts.ModeWorldWriteable
 	ModeWriteOnly                       = consts.ModeWriteOnly
+	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
+	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
+	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
+	PdfFormTypeNone                     = consts.PdfFormTypeNone
+	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
+	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
+	RenderModeForDisplay                = consts.RenderModeForDisplay
+	RenderModeForPrint                  = consts.RenderModeForPrint
 )

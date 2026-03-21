@@ -3,6 +3,7 @@ package center.dx.jni.example;
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,10 +68,12 @@ public class ExampleActivity extends Activity {
     private void runAndDisplay() {
         // Show a loading message immediately so the user knows it's working.
         ScrollView sv = new ScrollView(this);
+        sv.setFitsSystemWindows(true);
         TextView tv = new TextView(this);
         tv.setPadding(32, 32, 32, 32);
         tv.setTextSize(14f);
         tv.setTypeface(Typeface.MONOSPACE);
+        tv.setTextColor(Color.DKGRAY);
         tv.setText("Running example…");
         sv.addView(tv);
         setContentView(sv);

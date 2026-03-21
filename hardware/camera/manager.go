@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "camera"
+
 // Manager wraps android.hardware.camera2.CameraManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("camera")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("camera service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -294,7 +296,11 @@ func (m *Manager) IsConcurrentSessionConfigurationSupported(arg0 *jni.Object) (b
 }
 
 // OpenCamera calls android.hardware.camera2.CameraManager.openCamera.
-func (m *Manager) OpenCamera(arg0 string, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) OpenCamera(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -386,7 +392,7 @@ func (m *Manager) SetTorchMode(arg0 string, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(

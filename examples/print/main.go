@@ -11,7 +11,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -20,28 +25,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/print"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -50,14 +65,14 @@ func run(vm *jni.VM) error {
 
 	// --- Constants ---
 	// JobState is a typed constant representing print job states.
-	fmt.Fprintln(&output, "Print job state constants (type JobState):")
-	fmt.Fprintf(&output, "  JobCreated   = %d\n", print.StateCreated)
-	fmt.Fprintf(&output, "  JobQueued    = %d\n", print.StateQueued)
-	fmt.Fprintf(&output, "  JobStarted   = %d\n", print.StateStarted)
-	fmt.Fprintf(&output, "  JobBlocked   = %d\n", print.StateBlocked)
-	fmt.Fprintf(&output, "  JobCompleted = %d\n", print.StateCompleted)
-	fmt.Fprintf(&output, "  JobFailed    = %d\n", print.StateFailed)
-	fmt.Fprintf(&output, "  JobCanceled  = %d\n", print.StateCanceled)
+	fmt.Fprintln(output, "Print job state constants (type JobState):")
+	fmt.Fprintf(output, "  JobCreated   = %d\n", print.StateCreated)
+	fmt.Fprintf(output, "  JobQueued    = %d\n", print.StateQueued)
+	fmt.Fprintf(output, "  JobStarted   = %d\n", print.StateStarted)
+	fmt.Fprintf(output, "  JobBlocked   = %d\n", print.StateBlocked)
+	fmt.Fprintf(output, "  JobCompleted = %d\n", print.StateCompleted)
+	fmt.Fprintf(output, "  JobFailed    = %d\n", print.StateFailed)
+	fmt.Fprintf(output, "  JobCanceled  = %d\n", print.StateCanceled)
 
 	// --- NewManager ---
 	mgr, err := print.NewManager(ctx)
@@ -92,19 +107,19 @@ func run(vm *jni.VM) error {
 	state := print.StateCompleted
 	switch state {
 	case print.StateCreated:
-		fmt.Fprintln(&output, "job: created")
+		fmt.Fprintln(output, "job: created")
 	case print.StateQueued:
-		fmt.Fprintln(&output, "job: queued")
+		fmt.Fprintln(output, "job: queued")
 	case print.StateStarted:
-		fmt.Fprintln(&output, "job: started")
+		fmt.Fprintln(output, "job: started")
 	case print.StateBlocked:
-		fmt.Fprintln(&output, "job: blocked")
+		fmt.Fprintln(output, "job: blocked")
 	case print.StateCompleted:
-		fmt.Fprintln(&output, "job: completed")
+		fmt.Fprintln(output, "job: completed")
 	case print.StateFailed:
-		fmt.Fprintln(&output, "job: failed")
+		fmt.Fprintln(output, "job: failed")
 	case print.StateCanceled:
-		fmt.Fprintln(&output, "job: canceled")
+		fmt.Fprintln(output, "job: canceled")
 	}
 	return nil
 }

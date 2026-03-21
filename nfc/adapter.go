@@ -23,18 +23,6 @@ type Adapter struct {
 	Obj *jni.GlobalRef
 }
 
-// Close releases the global reference to the underlying Java object.
-// After Close, the Adapter must not be used.
-func (m *Adapter) Close() {
-	if m.Obj != nil {
-		m.VM.Do(func(env *jni.Env) error {
-			env.DeleteGlobalRef(m.Obj)
-			m.Obj = nil
-			return nil
-		})
-	}
-}
-
 // Disable calls android.nfc.NfcAdapter.disable.
 func (m *Adapter) Disable() (bool, error) {
 	var result bool
@@ -134,7 +122,12 @@ func (m *Adapter) Enable() (bool, error) {
 }
 
 // EnableForegroundDispatch calls android.nfc.NfcAdapter.enableForegroundDispatch.
-func (m *Adapter) EnableForegroundDispatch(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Adapter) EnableForegroundDispatch(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -157,7 +150,12 @@ func (m *Adapter) EnableForegroundDispatch(arg0 *jni.Object, arg1 *jni.Object, a
 }
 
 // EnableReaderMode calls android.nfc.NfcAdapter.enableReaderMode.
-func (m *Adapter) EnableReaderMode(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 *jni.Object) error {
+func (m *Adapter) EnableReaderMode(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 int32,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -462,7 +460,11 @@ func (m *Adapter) ResetDiscoveryTechnology(arg0 *jni.Object) error {
 }
 
 // SetDiscoveryTechnology calls android.nfc.NfcAdapter.setDiscoveryTechnology.
-func (m *Adapter) SetDiscoveryTechnology(arg0 *jni.Object, arg1 int32, arg2 int32) error {
+func (m *Adapter) SetDiscoveryTechnology(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -499,7 +501,7 @@ func (m *Adapter) SetObserveModeEnabled(arg0 bool) (bool, error) {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(

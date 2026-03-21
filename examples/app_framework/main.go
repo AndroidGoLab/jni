@@ -8,7 +8,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -17,27 +22,37 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	// --- Context ---
 	ctx, err := getAppContext(vm)
 	if err != nil {
@@ -48,24 +63,24 @@ func run(vm *jni.VM) error {
 	// Context provides system service lookup.
 	svc, err := ctx.GetSystemService("alarm")
 	if err != nil {
-		fmt.Fprintf(&output, "  GetSystemService(alarm): %v\n", err)
+		fmt.Fprintf(output, "  GetSystemService(alarm): %v\n", err)
 	} else {
-		fmt.Fprintf(&output, "alarm service: %v\n", svc)
+		fmt.Fprintf(output, "alarm service: %v\n", svc)
 	}
 
 	// Content resolver and package manager.
 	resolver, err := ctx.ContentResolver()
 	if err != nil {
-		fmt.Fprintf(&output, "  ContentResolver: %v\n", err)
+		fmt.Fprintf(output, "  ContentResolver: %v\n", err)
 	} else {
-		fmt.Fprintf(&output, "content resolver: %v\n", resolver != nil)
+		fmt.Fprintf(output, "content resolver: %v\n", resolver != nil)
 	}
 
 	pkgMgr, err := ctx.PackageManager()
 	if err != nil {
-		fmt.Fprintf(&output, "  PackageManager: %v\n", err)
+		fmt.Fprintf(output, "  PackageManager: %v\n", err)
 	} else {
-		fmt.Fprintf(&output, "package manager: %v\n", pkgMgr != nil)
+		fmt.Fprintf(output, "package manager: %v\n", pkgMgr != nil)
 	}
 
 	// --- Intent ---
@@ -78,9 +93,9 @@ func run(vm *jni.VM) error {
 	intent.SetAction(app.ActionView)
 	action, err := intent.GetAction()
 	if err != nil {
-		fmt.Fprintf(&output, "  GetAction: %v\n", err)
+		fmt.Fprintf(output, "  GetAction: %v\n", err)
 	} else {
-		fmt.Fprintf(&output, "intent action: %s\n", action)
+		fmt.Fprintf(output, "intent action: %s\n", action)
 	}
 
 	intent.SetFlags(app.FlagActivityNewTask)
@@ -88,35 +103,35 @@ func run(vm *jni.VM) error {
 
 	// Intent extras.
 	if err := intent.PutStringExtra("key", "value"); err != nil {
-		fmt.Fprintf(&output, "  PutStringExtra: %v\n", err)
+		fmt.Fprintf(output, "  PutStringExtra: %v\n", err)
 	}
 	if err := intent.PutIntExtra("count", 42); err != nil {
-		fmt.Fprintf(&output, "  PutIntExtra: %v\n", err)
+		fmt.Fprintf(output, "  PutIntExtra: %v\n", err)
 	}
 	if err := intent.PutBoolExtra("enabled", true); err != nil {
-		fmt.Fprintf(&output, "  PutBoolExtra: %v\n", err)
+		fmt.Fprintf(output, "  PutBoolExtra: %v\n", err)
 	}
 
 	extra, err := intent.GetStringExtra("key")
 	if err != nil {
-		fmt.Fprintf(&output, "  GetStringExtra: %v\n", err)
+		fmt.Fprintf(output, "  GetStringExtra: %v\n", err)
 	} else {
-		fmt.Fprintf(&output, "string extra: %s\n", extra)
+		fmt.Fprintf(output, "string extra: %s\n", extra)
 	}
 
 	intExtra, err := intent.GetIntExtra("count", 0)
 	if err != nil {
-		fmt.Fprintf(&output, "  GetIntExtra: %v\n", err)
+		fmt.Fprintf(output, "  GetIntExtra: %v\n", err)
 	} else {
-		fmt.Fprintf(&output, "int extra: %d\n", intExtra)
+		fmt.Fprintf(output, "int extra: %d\n", intExtra)
 	}
 
 	// Intent action constants.
-	fmt.Fprintf(&output, "intent actions: VIEW=%q, SEND=%q\n",
+	fmt.Fprintf(output, "intent actions: VIEW=%q, SEND=%q\n",
 		app.ActionView, app.ActionSend)
 
 	// Intent flag constants.
-	fmt.Fprintf(&output, "intent flags: NEW_TASK=0x%x, CLEAR_TOP=0x%x, GRANT_READ_URI=0x%x\n",
+	fmt.Fprintf(output, "intent flags: NEW_TASK=0x%x, CLEAR_TOP=0x%x, GRANT_READ_URI=0x%x\n",
 		app.FlagActivityNewTask, app.FlagActivityClearTop, app.FlagGrantReadUriPermission)
 
 	return nil

@@ -30,7 +30,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -39,28 +44,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/bluetooth"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -70,31 +85,31 @@ func run(vm *jni.VM) error {
 	// --- Constants ---
 	// The bluetooth package exports all relevant Android constants as
 	// typed Go values.
-	fmt.Fprintln(&output, "=== Device type constants ===")
-	fmt.Fprintf(&output, "  DeviceTypeClassic = %d\n", bluetooth.DeviceTypeClassic)
-	fmt.Fprintf(&output, "  DeviceTypeLe      = %d\n", bluetooth.DeviceTypeLe)
-	fmt.Fprintf(&output, "  DeviceTypeDual    = %d\n", bluetooth.DeviceTypeDual)
+	fmt.Fprintln(output, "=== Device type constants ===")
+	fmt.Fprintf(output, "  DeviceTypeClassic = %d\n", bluetooth.DeviceTypeClassic)
+	fmt.Fprintf(output, "  DeviceTypeLe      = %d\n", bluetooth.DeviceTypeLe)
+	fmt.Fprintf(output, "  DeviceTypeDual    = %d\n", bluetooth.DeviceTypeDual)
 
-	fmt.Fprintln(&output, "=== Bond state constants ===")
-	fmt.Fprintf(&output, "  BondNone    = %d\n", bluetooth.BondNone)
-	fmt.Fprintf(&output, "  BondBonding = %d\n", bluetooth.BondBonding)
-	fmt.Fprintf(&output, "  BondBonded  = %d\n", bluetooth.BondBonded)
+	fmt.Fprintln(output, "=== Bond state constants ===")
+	fmt.Fprintf(output, "  BondNone    = %d\n", bluetooth.BondNone)
+	fmt.Fprintf(output, "  BondBonding = %d\n", bluetooth.BondBonding)
+	fmt.Fprintf(output, "  BondBonded  = %d\n", bluetooth.BondBonded)
 
-	fmt.Fprintln(&output, "=== Scan mode constants ===")
-	fmt.Fprintf(&output, "  ScanModeNone                    = %d\n", bluetooth.ScanModeNone)
-	fmt.Fprintf(&output, "  ScanModeConnectable             = %d\n", bluetooth.ScanModeConnectable)
-	fmt.Fprintf(&output, "  ScanModeConnectableDiscoverable = %d\n", bluetooth.ScanModeConnectableDiscoverable)
+	fmt.Fprintln(output, "=== Scan mode constants ===")
+	fmt.Fprintf(output, "  ScanModeNone                    = %d\n", bluetooth.ScanModeNone)
+	fmt.Fprintf(output, "  ScanModeConnectable             = %d\n", bluetooth.ScanModeConnectable)
+	fmt.Fprintf(output, "  ScanModeConnectableDiscoverable = %d\n", bluetooth.ScanModeConnectableDiscoverable)
 
-	fmt.Fprintln(&output, "=== GATT characteristic property constants ===")
-	fmt.Fprintf(&output, "  PropertyRead     = %d\n", bluetooth.PropertyRead)
-	fmt.Fprintf(&output, "  PropertyWrite    = %d\n", bluetooth.PropertyWrite)
-	fmt.Fprintf(&output, "  PropertyNotify   = %d\n", bluetooth.PropertyNotify)
-	fmt.Fprintf(&output, "  PropertyIndicate = %d\n", bluetooth.PropertyIndicate)
+	fmt.Fprintln(output, "=== GATT characteristic property constants ===")
+	fmt.Fprintf(output, "  PropertyRead     = %d\n", bluetooth.PropertyRead)
+	fmt.Fprintf(output, "  PropertyWrite    = %d\n", bluetooth.PropertyWrite)
+	fmt.Fprintf(output, "  PropertyNotify   = %d\n", bluetooth.PropertyNotify)
+	fmt.Fprintf(output, "  PropertyIndicate = %d\n", bluetooth.PropertyIndicate)
 
-	fmt.Fprintln(&output, "=== GATT status & connection state constants ===")
-	fmt.Fprintf(&output, "  GattSuccess       = %d\n", bluetooth.GattSuccess)
-	fmt.Fprintf(&output, "  StateDisconnected = %d\n", bluetooth.StateDisconnected)
-	fmt.Fprintf(&output, "  StateConnected    = %d\n", bluetooth.StateConnected)
+	fmt.Fprintln(output, "=== GATT status & connection state constants ===")
+	fmt.Fprintf(output, "  GattSuccess       = %d\n", bluetooth.GattSuccess)
+	fmt.Fprintf(output, "  StateDisconnected = %d\n", bluetooth.StateDisconnected)
+	fmt.Fprintf(output, "  StateConnected    = %d\n", bluetooth.StateConnected)
 
 	// --- Adapter ---
 	adapter, err := bluetooth.NewAdapter(ctx)
@@ -107,9 +122,9 @@ func run(vm *jni.VM) error {
 	if err != nil {
 		return fmt.Errorf("IsEnabled: %v", err)
 	}
-	fmt.Fprintf(&output, "\nBluetooth enabled: %v\n", enabled)
+	fmt.Fprintf(output, "\nBluetooth enabled: %v\n", enabled)
 	if !enabled {
-		fmt.Fprintln(&output, "Bluetooth is off; enable it in Settings.")
+		fmt.Fprintln(output, "Bluetooth is off; enable it in Settings.")
 		return nil
 	}
 
@@ -117,13 +132,13 @@ func run(vm *jni.VM) error {
 	if err != nil {
 		return fmt.Errorf("GetName: %v", err)
 	}
-	fmt.Fprintf(&output, "Adapter name: %s\n", name)
+	fmt.Fprintf(output, "Adapter name: %s\n", name)
 
 	addr, err := adapter.GetAddress()
 	if err != nil {
 		return fmt.Errorf("GetAddress: %v", err)
 	}
-	fmt.Fprintf(&output, "Adapter address: %s\n", addr)
+	fmt.Fprintf(output, "Adapter address: %s\n", addr)
 
 	// --- Bonded devices (Device data class) ---
 	// GetBondedDevices returns a raw Java Set object. Each element is a
@@ -133,7 +148,7 @@ func run(vm *jni.VM) error {
 	if err != nil {
 		return fmt.Errorf("GetBondedDevices: %v", err)
 	}
-	fmt.Fprintf(&output, "Bonded devices (raw Set): %v\n", bonded)
+	fmt.Fprintf(output, "Bonded devices (raw Set): %v\n", bonded)
 
 	// --- Classic discovery (package-internal) ---
 	// startDiscovery / cancelDiscovery control the classic Bluetooth
@@ -158,7 +173,7 @@ func run(vm *jni.VM) error {
 	//
 	// Each ScanResult carries Device, RSSI, and a scan Record.
 	// adapter.getLeScanner() -> (*jni.Object, error)
-	fmt.Fprintln(&output, "LE scanner available (BLE scanning ready)")
+	fmt.Fprintln(output, "LE scanner available (BLE scanning ready)")
 
 	// --- BLE advertising ---
 	// The LE advertiser is also obtained from the adapter.
@@ -183,7 +198,7 @@ func run(vm *jni.VM) error {
 	//   OnStartSuccess(settingsInEffect *jni.Object)
 	//   OnStartFailure(errorCode int32)
 	// adapter.getLeAdvertiser() -> (*jni.Object, error)
-	fmt.Fprintln(&output, "LE advertiser available (BLE advertising ready)")
+	fmt.Fprintln(output, "LE advertiser available (BLE advertising ready)")
 
 	// --- RFCOMM (classic Bluetooth sockets) ---
 	// listenRfcomm creates a BluetoothServerSocket for an RFCOMM channel.
@@ -196,7 +211,7 @@ func run(vm *jni.VM) error {
 	//   dev := socket.RemoteDevice()
 	//   socket.Close()
 	//   serverSocket.Close()
-	fmt.Fprintln(&output, "RFCOMM server socket API available (listenRfcomm)")
+	fmt.Fprintln(output, "RFCOMM server socket API available (listenRfcomm)")
 
 	// --- GATT client ---
 	// A GATTClient is obtained by connecting to a remote device (via
@@ -218,7 +233,7 @@ func run(vm *jni.VM) error {
 	//   OnCharacteristicChanged(gatt, characteristic)
 	//   OnMtuChanged(gatt, mtu, status)
 	//   OnReadRemoteRssi(gatt, rssi, status)
-	fmt.Fprintln(&output, "GATT client API available (discoverServices, read/write, notify, MTU, RSSI)")
+	fmt.Fprintln(output, "GATT client API available (discoverServices, read/write, notify, MTU, RSSI)")
 
 	// --- GATT server ---
 	// A GATTServer is used to host GATT services on this device.
@@ -231,7 +246,7 @@ func run(vm *jni.VM) error {
 	//   OnCharacteristicReadRequest(device, requestId, offset, characteristic)
 	//   OnCharacteristicWriteRequest(device, requestId, characteristic,
 	//       preparedWrite, responseNeeded, offset, value)
-	fmt.Fprintln(&output, "GATT server API available (AddService, NotifyCharacteristic)")
+	fmt.Fprintln(output, "GATT server API available (AddService, NotifyCharacteristic)")
 
 	// --- Data classes ---
 	// Service:        UUID string, Characteristics []Characteristic
@@ -239,7 +254,7 @@ func run(vm *jni.VM) error {
 	// Descriptor:     UUID string
 	// ScanResult:     Device Device, RSSI int32, Record []byte
 	// Device:         Name string, Address string, Type int, BondState int, UUIDs []string
-	fmt.Fprintln(&output, "\nAll bluetooth package features demonstrated.")
+	fmt.Fprintln(output, "\nAll bluetooth package features demonstrated.")
 
 	return nil
 }

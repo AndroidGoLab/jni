@@ -3,12 +3,12 @@
 package consts
 
 const (
-	Creator        = 0
-	StateBlocked   = 4
-	StateCanceled  = 7
-	StateCompleted = 5
-	StateCreated   = 1
-	StateFailed    = 6
-	StateQueued    = 2
-	StateStarted   = 3
+	Creator        int = 0
+	StateBlocked   int = 4
+	StateCanceled  int = 7
+	StateCompleted int = 5
+	StateCreated   int = 1
+	StateFailed    int = 6
+	StateQueued    int = 2
+	StateStarted   int = 3
 )

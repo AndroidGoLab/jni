@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// virtualDisplay wraps android.hardware.display.VirtualDisplay.
-type virtualDisplay struct {
+// VirtualDisplay wraps android.hardware.display.VirtualDisplay.
+type VirtualDisplay struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // GetDisplay calls android.hardware.display.VirtualDisplay.getDisplay.
-func (m *virtualDisplay) GetDisplay() (*jni.Object, error) {
+func (m *VirtualDisplay) GetDisplay() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *virtualDisplay) GetDisplay() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midvirtualDisplayGetDisplay == nil {
+		if midVirtualDisplayGetDisplay == nil {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.getDisplay is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midvirtualDisplayGetDisplay,
+			midVirtualDisplayGetDisplay,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *virtualDisplay) GetDisplay() (*jni.Object, error) {
 }
 
 // GetSurface calls android.hardware.display.VirtualDisplay.getSurface.
-func (m *virtualDisplay) GetSurface() (*jni.Object, error) {
+func (m *VirtualDisplay) GetSurface() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *virtualDisplay) GetSurface() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midvirtualDisplayGetSurface == nil {
+		if midVirtualDisplayGetSurface == nil {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.getSurface is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midvirtualDisplayGetSurface,
+			midVirtualDisplayGetSurface,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *virtualDisplay) GetSurface() (*jni.Object, error) {
 }
 
 // Release calls android.hardware.display.VirtualDisplay.release.
-func (m *virtualDisplay) Release() error {
+func (m *VirtualDisplay) Release() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *virtualDisplay) Release() error {
 			callErr = err
 			return err
 		}
-		if midvirtualDisplayRelease == nil {
+		if midVirtualDisplayRelease == nil {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.release is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvirtualDisplayRelease,
+			midVirtualDisplayRelease,
 		)
 		return callErr
 	})
@@ -96,7 +96,11 @@ func (m *virtualDisplay) Release() error {
 }
 
 // Resize calls android.hardware.display.VirtualDisplay.resize.
-func (m *virtualDisplay) Resize(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *VirtualDisplay) Resize(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -104,14 +108,14 @@ func (m *virtualDisplay) Resize(arg0 int32, arg1 int32, arg2 int32) error {
 			callErr = err
 			return err
 		}
-		if midvirtualDisplayResize == nil {
+		if midVirtualDisplayResize == nil {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.resize is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvirtualDisplayResize, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			midVirtualDisplayResize, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -119,7 +123,7 @@ func (m *virtualDisplay) Resize(arg0 int32, arg1 int32, arg2 int32) error {
 }
 
 // SetRotation calls android.hardware.display.VirtualDisplay.setRotation.
-func (m *virtualDisplay) SetRotation(arg0 int32) error {
+func (m *VirtualDisplay) SetRotation(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -127,14 +131,14 @@ func (m *virtualDisplay) SetRotation(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midvirtualDisplaySetRotation == nil {
+		if midVirtualDisplaySetRotation == nil {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.setRotation is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvirtualDisplaySetRotation, jni.IntValue(arg0),
+			midVirtualDisplaySetRotation, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -142,7 +146,7 @@ func (m *virtualDisplay) SetRotation(arg0 int32) error {
 }
 
 // SetSurface calls android.hardware.display.VirtualDisplay.setSurface.
-func (m *virtualDisplay) SetSurface(arg0 *jni.Object) error {
+func (m *VirtualDisplay) SetSurface(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -150,14 +154,14 @@ func (m *virtualDisplay) SetSurface(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midvirtualDisplaySetSurface == nil {
+		if midVirtualDisplaySetSurface == nil {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.setSurface is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midvirtualDisplaySetSurface, jni.ObjectValue(arg0),
+			midVirtualDisplaySetSurface, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -165,7 +169,7 @@ func (m *virtualDisplay) SetSurface(arg0 *jni.Object) error {
 }
 
 // ToString calls android.hardware.display.VirtualDisplay.toString.
-func (m *virtualDisplay) ToString() (string, error) {
+func (m *VirtualDisplay) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -173,13 +177,13 @@ func (m *virtualDisplay) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midvirtualDisplayToString == nil {
+		if midVirtualDisplayToString == nil {
 			callErr = fmt.Errorf("android.hardware.display.VirtualDisplay.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midvirtualDisplayToString,
+			midVirtualDisplayToString,
 		)
 		if callErr != nil {
 			return callErr

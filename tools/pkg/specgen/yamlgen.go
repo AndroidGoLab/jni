@@ -71,7 +71,7 @@ func GenerateSpec(
 		GoImport: pkgMapping.GoImport,
 	}
 
-	cls := classFromJavap(jc)
+	cls := classFromJavap(jc, pkgMapping.Package)
 	spec.Classes = append(spec.Classes, cls)
 
 	return spec, nil
@@ -154,7 +154,7 @@ func GenerateFromRefDir(
 		if err != nil {
 			return fmt.Errorf("javap %s: %w", entry.className, err)
 		}
-		cls := classFromJavap(jc)
+		cls := classFromJavap(jc, mapping.Package)
 		spec.Classes = append(spec.Classes, cls)
 		addConstants(spec, jc)
 
@@ -164,7 +164,7 @@ func GenerateFromRefDir(
 			if err != nil {
 				return fmt.Errorf("javap %s: %w", inner.className, err)
 			}
-			icls := classFromJavap(ijc)
+			icls := classFromJavap(ijc, mapping.Package)
 			spec.Classes = append(spec.Classes, icls)
 			addConstants(spec, ijc)
 		}
@@ -210,10 +210,10 @@ func formatConstantValue(c JavapConstant) string {
 	}
 }
 
-func classFromJavap(jc *JavapClass) SpecClass {
+func classFromJavap(jc *JavapClass, goPkg string) SpecClass {
 	cls := SpecClass{
 		JavaClass: jc.FullName,
-		GoType:    inferGoType(jc.FullName),
+		GoType:    inferGoType(jc.FullName, goPkg),
 	}
 
 	// Determine obtain type.
@@ -372,6 +372,7 @@ func inferClassMapping(className string, goModule string) PackageMapping {
 		"android.media.AudioRecord":                          {"audiorecord", "media/audiorecord"},
 		"android.media.MediaPlayer":                          {"player", "media/player"},
 		"android.media.MediaRecorder":                        {"recorder", "media/recorder"},
+		"android.media.Ringtone":                             {"ringtone", "media/ringtone"},
 		"android.media.RingtoneManager":                      {"ringtone", "media/ringtone"},
 		"android.media.projection.MediaProjection":           {"projection", "media/projection"},
 		"android.media.projection.MediaProjectionManager":    {"projection", "media/projection"},
@@ -594,20 +595,30 @@ func javaMethodToGoName(name string) string {
 	return goName
 }
 
-// inferGoType determines the unexported Go type name for a Java class.
-func inferGoType(fullClass string) string {
+// inferGoType determines the exported Go type name for a Java class.
+// It strips the Go package name prefix when redundant (e.g.,
+// "AlarmManager" in package "alarm" becomes "Manager").
+func inferGoType(fullClass string, goPkg string) string {
 	parts := strings.Split(fullClass, ".")
 	name := parts[len(parts)-1]
 
-	// Handle inner classes: Foo$Bar → fooBar (include parent for uniqueness).
+	// Handle inner classes: Foo$Bar → FooBar (include parent for uniqueness).
 	if idx := strings.LastIndex(name, "$"); idx >= 0 {
 		parent := name[:idx]
 		child := name[idx+1:]
 		name = parent + child
 	}
 
-	// Unexport it (lowercase first letter).
-	return strings.ToLower(name[:1]) + name[1:]
+	// Strip Go package name prefix when redundant (e.g.,
+	// "AlarmManager" in package "alarm" → "Manager").
+	if len(goPkg) > 0 {
+		prefix := strings.ToUpper(goPkg[:1]) + goPkg[1:]
+		if strings.HasPrefix(name, prefix) && len(name) > len(prefix) {
+			name = name[len(prefix):]
+		}
+	}
+
+	return name
 }
 
 // javaConstantToGoName converts SCREAMING_SNAKE_CASE to PascalCase.

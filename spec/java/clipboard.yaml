@@ -2,7 +2,7 @@ package: clipboard
 go_import: github.com/AndroidGoLab/jni/content/clipboard
 classes:
     - java_class: android.content.ClipData
-      go_type: clipData
+      go_type: ClipData
       methods:
         - java_method: addItem
           go_name: AddItem1
@@ -103,7 +103,7 @@ classes:
           returns: android.content.ClipData
           error: true
     - java_class: android.content.ClipData$Item
-      go_type: clipDataItem
+      go_type: ClipDataItem
       methods:
         - java_method: coerceToHtmlText
           go_name: CoerceToHtmlText

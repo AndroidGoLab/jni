@@ -2,7 +2,7 @@ package: calendar
 go_import: github.com/AndroidGoLab/jni/provider/calendar
 classes:
     - java_class: android.provider.CalendarContract
-      go_type: calendarContract
+      go_type: Contract
       static_methods:
         - java_method: startViewCalendarEventInManagedProfile
           go_name: StartViewCalendarEventInManagedProfile

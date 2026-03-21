@@ -306,7 +306,7 @@ func (m *Intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -1628,7 +1628,7 @@ func (m *Intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -3336,7 +3336,11 @@ func (m *Intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, err
 }
 
 // CreateChooser3_1 calls android.content.Intent.createChooser.
-func (m *Intent) CreateChooser3_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Intent) CreateChooser3_1(
+	arg0 *jni.Object,
+	arg1 string,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3545,7 +3549,11 @@ func (m *Intent) NormalizeMimeType(arg0 string) (string, error) {
 }
 
 // ParseIntent calls android.content.Intent.parseIntent.
-func (m *Intent) ParseIntent(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Intent) ParseIntent(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

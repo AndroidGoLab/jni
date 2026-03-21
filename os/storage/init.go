@@ -16,9 +16,31 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
+
+	clsVolume                             *jni.GlobalRef
+	midVolumeCreateAccessIntent           jni.MethodID
+	midVolumeCreateOpenDocumentTreeIntent jni.MethodID
+	midVolumeDescribeContents             jni.MethodID
+	midVolumeEquals                       jni.MethodID
+	midVolumeGetDescription               jni.MethodID
+	midVolumeGetDirectory                 jni.MethodID
+	midVolumeGetMediaStoreVolumeName      jni.MethodID
+	midVolumeGetOwner                     jni.MethodID
+	midVolumeGetState                     jni.MethodID
+	midVolumeGetStorageUuid               jni.MethodID
+	midVolumeGetUuid                      jni.MethodID
+	midVolumeHashCode                     jni.MethodID
+	midVolumeIsEmulated                   jni.MethodID
+	midVolumeIsPrimary                    jni.MethodID
+	midVolumeIsRemovable                  jni.MethodID
+	midVolumeToString                     jni.MethodID
+	midVolumeWriteToParcel                jni.MethodID
 
 	clsManager                                         *jni.GlobalRef
 	midManagerAllocateBytes2                           jni.MethodID
@@ -47,25 +69,6 @@ var (
 	midManagerSetCacheBehaviorTombstone                jni.MethodID
 	midManagerUnmountObb                               jni.MethodID
 	midManagerUnregisterStorageVolumeCallback          jni.MethodID
-
-	clsstorageVolume                             *jni.GlobalRef
-	midstorageVolumeCreateAccessIntent           jni.MethodID
-	midstorageVolumeCreateOpenDocumentTreeIntent jni.MethodID
-	midstorageVolumeDescribeContents             jni.MethodID
-	midstorageVolumeEquals                       jni.MethodID
-	midstorageVolumeGetDescription               jni.MethodID
-	midstorageVolumeGetDirectory                 jni.MethodID
-	midstorageVolumeGetMediaStoreVolumeName      jni.MethodID
-	midstorageVolumeGetOwner                     jni.MethodID
-	midstorageVolumeGetState                     jni.MethodID
-	midstorageVolumeGetStorageUuid               jni.MethodID
-	midstorageVolumeGetUuid                      jni.MethodID
-	midstorageVolumeHashCode                     jni.MethodID
-	midstorageVolumeIsEmulated                   jni.MethodID
-	midstorageVolumeIsPrimary                    jni.MethodID
-	midstorageVolumeIsRemovable                  jni.MethodID
-	midstorageVolumeToString                     jni.MethodID
-	midstorageVolumeWriteToParcel                jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -91,6 +94,148 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/os/storage/StorageVolume")
+	if err != nil {
+		return fmt.Errorf("find class android.os.storage.StorageVolume: %w", err)
+	}
+	clsVolume = env.NewGlobalRef(&c.Object)
+
+	midVolumeCreateAccessIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "createAccessIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.createAccessIntent")
+	}
+
+	midVolumeCreateOpenDocumentTreeIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "createOpenDocumentTreeIntent", "()Landroid/content/Intent;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.createOpenDocumentTreeIntent")
+	}
+
+	midVolumeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.describeContents")
+	}
+
+	midVolumeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.equals")
+	}
+
+	midVolumeGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getDescription", "(Landroid/content/Context;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getDescription")
+	}
+
+	midVolumeGetDirectory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getDirectory", "()Ljava/io/File;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getDirectory")
+	}
+
+	midVolumeGetMediaStoreVolumeName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getMediaStoreVolumeName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getMediaStoreVolumeName")
+	}
+
+	midVolumeGetOwner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getOwner", "()Landroid/os/UserHandle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getOwner")
+	}
+
+	midVolumeGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getState", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getState")
+	}
+
+	midVolumeGetStorageUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getStorageUuid", "()Ljava/util/UUID;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getStorageUuid")
+	}
+
+	midVolumeGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getUuid", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getUuid")
+	}
+
+	midVolumeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.hashCode")
+	}
+
+	midVolumeIsEmulated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "isEmulated", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.isEmulated")
+	}
+
+	midVolumeIsPrimary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "isPrimary", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.isPrimary")
+	}
+
+	midVolumeIsRemovable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "isRemovable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.isRemovable")
+	}
+
+	midVolumeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.toString")
+	}
+
+	midVolumeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.writeToParcel")
+	}
 
 	c, err = env.FindClass("android/os/storage/StorageManager")
 	if err != nil {
@@ -304,148 +449,6 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.os.storage.StorageManager.unregisterStorageVolumeCallback")
-	}
-
-	c, err = env.FindClass("android/os/storage/StorageVolume")
-	if err != nil {
-		return fmt.Errorf("find class android.os.storage.StorageVolume: %w", err)
-	}
-	clsstorageVolume = env.NewGlobalRef(&c.Object)
-
-	midstorageVolumeCreateAccessIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "createAccessIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.createAccessIntent")
-	}
-
-	midstorageVolumeCreateOpenDocumentTreeIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "createOpenDocumentTreeIntent", "()Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.createOpenDocumentTreeIntent")
-	}
-
-	midstorageVolumeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.describeContents")
-	}
-
-	midstorageVolumeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.equals")
-	}
-
-	midstorageVolumeGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getDescription", "(Landroid/content/Context;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getDescription")
-	}
-
-	midstorageVolumeGetDirectory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getDirectory", "()Ljava/io/File;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getDirectory")
-	}
-
-	midstorageVolumeGetMediaStoreVolumeName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getMediaStoreVolumeName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getMediaStoreVolumeName")
-	}
-
-	midstorageVolumeGetOwner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getOwner", "()Landroid/os/UserHandle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getOwner")
-	}
-
-	midstorageVolumeGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getState", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getState")
-	}
-
-	midstorageVolumeGetStorageUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getStorageUuid", "()Ljava/util/UUID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getStorageUuid")
-	}
-
-	midstorageVolumeGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getUuid", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.getUuid")
-	}
-
-	midstorageVolumeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.hashCode")
-	}
-
-	midstorageVolumeIsEmulated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "isEmulated", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.isEmulated")
-	}
-
-	midstorageVolumeIsPrimary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "isPrimary", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.isPrimary")
-	}
-
-	midstorageVolumeIsRemovable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "isRemovable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.isRemovable")
-	}
-
-	midstorageVolumeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.toString")
-	}
-
-	midstorageVolumeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.storage.StorageVolume.writeToParcel")
 	}
 
 	return nil

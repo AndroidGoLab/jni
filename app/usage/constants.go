@@ -5,11 +5,7 @@ package usage
 import "github.com/AndroidGoLab/jni/app/usage/consts"
 
 const (
-	ExtraEventAction   = consts.ExtraEventAction
-	ExtraEventCategory = consts.ExtraEventCategory
-)
-
-const (
+	Creator                 = consts.Creator
 	IntervalBest            = consts.IntervalBest
 	IntervalDaily           = consts.IntervalDaily
 	IntervalMonthly         = consts.IntervalMonthly
@@ -20,5 +16,9 @@ const (
 	StandbyBucketRare       = consts.StandbyBucketRare
 	StandbyBucketRestricted = consts.StandbyBucketRestricted
 	StandbyBucketWorkingSet = consts.StandbyBucketWorkingSet
-	Creator                 = consts.Creator
+)
+
+const (
+	ExtraEventAction   = consts.ExtraEventAction
+	ExtraEventCategory = consts.ExtraEventCategory
 )

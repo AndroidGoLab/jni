@@ -400,7 +400,11 @@ func (m *PendingIntent) Send0() error {
 }
 
 // Send3_1 calls android.app.PendingIntent.send.
-func (m *PendingIntent) Send3_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+func (m *PendingIntent) Send3_1(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -518,7 +522,12 @@ func (m *PendingIntent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 }
 
 // GetActivities4 calls android.app.PendingIntent.getActivities.
-func (m *PendingIntent) GetActivities4(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetActivities4(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -544,7 +553,13 @@ func (m *PendingIntent) GetActivities4(arg0 *jni.Object, arg1 int32, arg2 *jni.O
 }
 
 // GetActivities5_1 calls android.app.PendingIntent.getActivities.
-func (m *PendingIntent) GetActivities5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
+func (m *PendingIntent) GetActivities5_1(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int32,
+	arg4 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -570,7 +585,12 @@ func (m *PendingIntent) GetActivities5_1(arg0 *jni.Object, arg1 int32, arg2 *jni
 }
 
 // GetActivity4 calls android.app.PendingIntent.getActivity.
-func (m *PendingIntent) GetActivity4(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetActivity4(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -596,7 +616,13 @@ func (m *PendingIntent) GetActivity4(arg0 *jni.Object, arg1 int32, arg2 *jni.Obj
 }
 
 // GetActivity5_1 calls android.app.PendingIntent.getActivity.
-func (m *PendingIntent) GetActivity5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
+func (m *PendingIntent) GetActivity5_1(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int32,
+	arg4 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -622,7 +648,12 @@ func (m *PendingIntent) GetActivity5_1(arg0 *jni.Object, arg1 int32, arg2 *jni.O
 }
 
 // GetBroadcast calls android.app.PendingIntent.getBroadcast.
-func (m *PendingIntent) GetBroadcast(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetBroadcast(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -648,7 +679,12 @@ func (m *PendingIntent) GetBroadcast(arg0 *jni.Object, arg1 int32, arg2 *jni.Obj
 }
 
 // GetForegroundService calls android.app.PendingIntent.getForegroundService.
-func (m *PendingIntent) GetForegroundService(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetForegroundService(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -674,7 +710,12 @@ func (m *PendingIntent) GetForegroundService(arg0 *jni.Object, arg1 int32, arg2 
 }
 
 // GetService calls android.app.PendingIntent.getService.
-func (m *PendingIntent) GetService(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *PendingIntent) GetService(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

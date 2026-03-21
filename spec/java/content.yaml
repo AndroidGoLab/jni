@@ -2,8 +2,39 @@ package: content
 go_import: github.com/AndroidGoLab/jni/content
 classes:
     - java_class: android.content.BroadcastReceiver
-      go_type: broadcastReceiver
+      go_type: BroadcastReceiver
       methods:
+        - java_method: abortBroadcast
+          go_name: AbortBroadcast
+          returns: void
+          error: true
+        - java_method: clearAbortBroadcast
+          go_name: ClearAbortBroadcast
+          returns: void
+          error: true
+        - java_method: getAbortBroadcast
+          go_name: GetAbortBroadcast
+          returns: boolean
+          error: true
+        - java_method: getDebugUnregister
+          go_name: GetDebugUnregister
+          returns: boolean
+          error: true
+        - java_method: getResultCode
+          go_name: GetResultCode
+          returns: int
+          error: true
+        - java_method: getResultData
+          go_name: GetResultData
+          returns: String
+          error: true
+        - java_method: getResultExtras
+          go_name: GetResultExtras
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.os.Bundle
+          error: true
         - java_method: getSentFromPackage
           go_name: GetSentFromPackage
           returns: String
@@ -11,6 +42,27 @@ classes:
         - java_method: getSentFromUid
           go_name: GetSentFromUid
           returns: int
+          error: true
+        - java_method: goAsync
+          go_name: GoAsync
+          returns: android.content.BroadcastReceiver$PendingResult
+          error: true
+        - java_method: isInitialStickyBroadcast
+          go_name: IsInitialStickyBroadcast
+          returns: boolean
+          error: true
+        - java_method: isOrderedBroadcast
+          go_name: IsOrderedBroadcast
+          returns: boolean
+          error: true
+        - java_method: onReceive
+          go_name: OnReceive
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+          returns: void
           error: true
         - java_method: peekService
           go_name: PeekService
@@ -20,4 +72,50 @@ classes:
             - java_type: android.content.Intent
               go_name: arg1
           returns: android.os.IBinder
+          error: true
+        - java_method: setDebugUnregister
+          go_name: SetDebugUnregister
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOrderedHint
+          go_name: SetOrderedHint
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResult
+          go_name: SetResult
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setResultCode
+          go_name: SetResultCode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResultData
+          go_name: SetResultData
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResultExtras
+          go_name: SetResultExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
           error: true

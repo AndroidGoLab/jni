@@ -350,7 +350,12 @@ func (m *RendererPage) GetWidth() (int32, error) {
 }
 
 // Render4 calls android.graphics.pdf.PdfRenderer$Page.render.
-func (m *RendererPage) Render4(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *RendererPage) Render4(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -373,7 +378,12 @@ func (m *RendererPage) Render4(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Obj
 }
 
 // Render4_1 calls android.graphics.pdf.PdfRenderer$Page.render.
-func (m *RendererPage) Render4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 int32) error {
+func (m *RendererPage) Render4_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

@@ -49,7 +49,11 @@ func (m *Bitmap) AsShared() (*jni.Object, error) {
 }
 
 // Compress calls android.graphics.Bitmap.compress.
-func (m *Bitmap) Compress(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool, error) {
+func (m *Bitmap) Compress(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -91,7 +95,7 @@ func (m *Bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -577,7 +581,15 @@ func (m *Bitmap) GetPixel(arg0 int32, arg1 int32) (int32, error) {
 }
 
 // GetPixels calls android.graphics.Bitmap.getPixels.
-func (m *Bitmap) GetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
+func (m *Bitmap) GetPixels(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 int32,
+	arg6 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -984,7 +996,11 @@ func (m *Bitmap) PrepareToDraw() error {
 }
 
 // Reconfigure calls android.graphics.Bitmap.reconfigure.
-func (m *Bitmap) Reconfigure(arg0 int32, arg1 int32, arg2 *jni.Object) error {
+func (m *Bitmap) Reconfigure(
+	arg0 int32,
+	arg1 int32,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1162,7 +1178,7 @@ func (m *Bitmap) SetHasAlpha(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1189,7 +1205,7 @@ func (m *Bitmap) SetHasMipMap(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1225,7 +1241,11 @@ func (m *Bitmap) SetHeight(arg0 int32) error {
 }
 
 // SetPixel calls android.graphics.Bitmap.setPixel.
-func (m *Bitmap) SetPixel(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *Bitmap) SetPixel(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1248,7 +1268,15 @@ func (m *Bitmap) SetPixel(arg0 int32, arg1 int32, arg2 int32) error {
 }
 
 // SetPixels calls android.graphics.Bitmap.setPixels.
-func (m *Bitmap) SetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
+func (m *Bitmap) SetPixels(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 int32,
+	arg6 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1285,7 +1313,7 @@ func (m *Bitmap) SetPremultiplied(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1370,7 +1398,13 @@ func (m *Bitmap) CreateBitmap1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // CreateBitmap5_1 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap5_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_1(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1396,7 +1430,15 @@ func (m *Bitmap) CreateBitmap5_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap7_2 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object, arg6 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap7_2(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 *jni.Object,
+	arg6 bool,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1411,7 +1453,7 @@ func (m *Bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 
 		var jArg6 uint8
 		if arg6 {
-			jArg6 = 1
+			jArg6 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -1453,7 +1495,12 @@ func (m *Bitmap) CreateBitmap1_3(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // CreateBitmap4_4 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_4(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1479,7 +1526,12 @@ func (m *Bitmap) CreateBitmap4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap4_5 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap4_5(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_5(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1505,7 +1557,13 @@ func (m *Bitmap) CreateBitmap4_5(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap5_6 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_6(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 *jni.Object,
+	arg4 bool,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1520,7 +1578,7 @@ func (m *Bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 
 		var jArg4 uint8
 		if arg4 {
-			jArg4 = 1
+			jArg4 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -1536,7 +1594,14 @@ func (m *Bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap6_7 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool, arg5 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap6_7(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 *jni.Object,
+	arg4 bool,
+	arg5 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1551,7 +1616,7 @@ func (m *Bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 
 		var jArg4 uint8
 		if arg4 {
-			jArg4 = 1
+			jArg4 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -1567,7 +1632,13 @@ func (m *Bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 }
 
 // CreateBitmap5_8 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap5_8(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_8(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 int32,
+	arg3 int32,
+	arg4 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1593,7 +1664,15 @@ func (m *Bitmap) CreateBitmap5_8(arg0 *jni.Object, arg1 *jni.Object, arg2 int32,
 }
 
 // CreateBitmap7_9 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap7_9(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap7_9(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 int32,
+	arg6 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1619,7 +1698,11 @@ func (m *Bitmap) CreateBitmap7_9(arg0 *jni.Object, arg1 *jni.Object, arg2 int32,
 }
 
 // CreateBitmap3_10 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap3_10(arg0 int32, arg1 int32, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap3_10(
+	arg0 int32,
+	arg1 int32,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1645,7 +1728,12 @@ func (m *Bitmap) CreateBitmap3_10(arg0 int32, arg1 int32, arg2 *jni.Object) (*jn
 }
 
 // CreateBitmap4_11 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_11(
+	arg0 int32,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 bool,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1660,7 +1748,7 @@ func (m *Bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 
 		var jArg3 uint8
 		if arg3 {
-			jArg3 = 1
+			jArg3 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -1676,7 +1764,13 @@ func (m *Bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 }
 
 // CreateBitmap5_12 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool, arg4 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap5_12(
+	arg0 int32,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 bool,
+	arg4 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1691,7 +1785,7 @@ func (m *Bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 
 		var jArg3 uint8
 		if arg3 {
-			jArg3 = 1
+			jArg3 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -1707,7 +1801,12 @@ func (m *Bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3
 }
 
 // CreateBitmap4_13 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap4_13(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap4_13(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1733,7 +1832,14 @@ func (m *Bitmap) CreateBitmap4_13(arg0 *jni.Object, arg1 int32, arg2 int32, arg3
 }
 
 // CreateBitmap6_14 calls android.graphics.Bitmap.createBitmap.
-func (m *Bitmap) CreateBitmap6_14(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object) (*jni.Object, error) {
+func (m *Bitmap) CreateBitmap6_14(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1759,7 +1865,12 @@ func (m *Bitmap) CreateBitmap6_14(arg0 *jni.Object, arg1 int32, arg2 int32, arg3
 }
 
 // CreateScaledBitmap calls android.graphics.Bitmap.createScaledBitmap.
-func (m *Bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 bool) (*jni.Object, error) {
+func (m *Bitmap) CreateScaledBitmap(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 bool,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1774,7 +1885,7 @@ func (m *Bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, ar
 
 		var jArg3 uint8
 		if arg3 {
-			jArg3 = 1
+			jArg3 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(

@@ -3,38 +3,38 @@
 package consts
 
 const (
-	MediaErrorIo                             = -1004
-	MediaErrorMalformed                      = -1007
-	MediaErrorNotValidForProgressivePlayback = 200
-	MediaErrorServerDied                     = 100
-	MediaErrorTimedOut                       = -110
-	MediaErrorUnknown                        = 1
-	MediaErrorUnsupported                    = -1010
-	MediaInfoAudioNotPlaying                 = 804
-	MediaInfoBadInterleaving                 = 800
-	MediaInfoBufferingEnd                    = 702
-	MediaInfoBufferingStart                  = 701
-	MediaInfoMetadataUpdate                  = 802
-	MediaInfoNotSeekable                     = 801
-	MediaInfoStartedAsNext                   = 2
-	MediaInfoSubtitleTimedOut                = 902
-	MediaInfoUnknown                         = 1
-	MediaInfoUnsupportedSubtitle             = 901
-	MediaInfoVideoNotPlaying                 = 805
-	MediaInfoVideoRenderingStart             = 3
-	MediaInfoVideoTrackLagging               = 700
-	PrepareDrmStatusPreparationError         = 3
-	PrepareDrmStatusProvisioningNetworkError = 1
-	PrepareDrmStatusProvisioningServerError  = 2
-	PrepareDrmStatusSuccess                  = 0
-	SeekClosest                              = 3
-	SeekClosestSync                          = 2
-	SeekNextSync                             = 1
-	SeekPreviousSync                         = 0
-	VideoScalingModeScaleToFit               = 1
-	VideoScalingModeScaleToFitWithCropping   = 2
+	MediaErrorIo                             int = -1004
+	MediaErrorMalformed                      int = -1007
+	MediaErrorNotValidForProgressivePlayback int = 200
+	MediaErrorServerDied                     int = 100
+	MediaErrorTimedOut                       int = -110
+	MediaErrorUnknown                        int = 1
+	MediaErrorUnsupported                    int = -1010
+	MediaInfoAudioNotPlaying                 int = 804
+	MediaInfoBadInterleaving                 int = 800
+	MediaInfoBufferingEnd                    int = 702
+	MediaInfoBufferingStart                  int = 701
+	MediaInfoMetadataUpdate                  int = 802
+	MediaInfoNotSeekable                     int = 801
+	MediaInfoStartedAsNext                   int = 2
+	MediaInfoSubtitleTimedOut                int = 902
+	MediaInfoUnknown                         int = 1
+	MediaInfoUnsupportedSubtitle             int = 901
+	MediaInfoVideoNotPlaying                 int = 805
+	MediaInfoVideoRenderingStart             int = 3
+	MediaInfoVideoTrackLagging               int = 700
+	PrepareDrmStatusPreparationError         int = 3
+	PrepareDrmStatusProvisioningNetworkError int = 1
+	PrepareDrmStatusProvisioningServerError  int = 2
+	PrepareDrmStatusSuccess                  int = 0
+	SeekClosest                              int = 3
+	SeekClosestSync                          int = 2
+	SeekNextSync                             int = 1
+	SeekPreviousSync                         int = 0
+	VideoScalingModeScaleToFit               int = 1
+	VideoScalingModeScaleToFitWithCropping   int = 2
 )
 
 const (
-	MediaMimetypeTextSubrip = "application/x-subrip"
+	MediaMimetypeTextSubrip string = "application/x-subrip"
 )

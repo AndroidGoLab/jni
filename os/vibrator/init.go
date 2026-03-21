@@ -16,21 +16,28 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
 	clsVibrator                            *jni.GlobalRef
-	midVibratorHasVibrator                 jni.MethodID
+	midVibratorAreAllEffectsSupported      jni.MethodID
+	midVibratorAreAllPrimitivesSupported   jni.MethodID
 	midVibratorAreEffectsSupported         jni.MethodID
 	midVibratorAreEnvelopeEffectsSupported jni.MethodID
 	midVibratorArePrimitivesSupported      jni.MethodID
+	midVibratorCancel                      jni.MethodID
 	midVibratorGetEnvelopeEffectInfo       jni.MethodID
 	midVibratorGetFrequencyProfile         jni.MethodID
 	midVibratorGetId                       jni.MethodID
 	midVibratorGetPrimitiveDurations       jni.MethodID
 	midVibratorGetQFactor                  jni.MethodID
 	midVibratorGetResonantFrequency        jni.MethodID
+	midVibratorHasAmplitudeControl         jni.MethodID
+	midVibratorHasVibrator                 jni.MethodID
 	midVibratorVibrate1                    jni.MethodID
 	midVibratorVibrate2_1                  jni.MethodID
 	midVibratorVibrate2_2                  jni.MethodID
@@ -70,12 +77,20 @@ func doInit(env *jni.Env) error {
 	}
 	clsVibrator = env.NewGlobalRef(&c.Object)
 
-	midVibratorHasVibrator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasVibrator", "()Z")
+	midVibratorAreAllEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areAllEffectsSupported", "([I)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Vibrator.hasVibrator")
+		initSkipped = append(initSkipped, "android.os.Vibrator.areAllEffectsSupported")
+	}
+
+	midVibratorAreAllPrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areAllPrimitivesSupported", "([I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.areAllPrimitivesSupported")
 	}
 
 	midVibratorAreEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areEffectsSupported", "([I)[I")
@@ -100,6 +115,14 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.os.Vibrator.arePrimitivesSupported")
+	}
+
+	midVibratorCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "cancel", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.cancel")
 	}
 
 	midVibratorGetEnvelopeEffectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getEnvelopeEffectInfo", "()Landroid/os/vibrator/VibratorEnvelopeEffectInfo;")
@@ -148,6 +171,22 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.os.Vibrator.getResonantFrequency")
+	}
+
+	midVibratorHasAmplitudeControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasAmplitudeControl", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.hasAmplitudeControl")
+	}
+
+	midVibratorHasVibrator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasVibrator", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.Vibrator.hasVibrator")
 	}
 
 	midVibratorVibrate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(Landroid/os/VibrationEffect;)V")

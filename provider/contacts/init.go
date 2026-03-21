@@ -16,12 +16,15 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clscontactsContract            *jni.GlobalRef
-	midcontactsContractIsProfileId jni.MethodID
+	clsContract            *jni.GlobalRef
+	midContractIsProfileId jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -52,9 +55,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.provider.ContactsContract: %w", err)
 	}
-	clscontactsContract = env.NewGlobalRef(&c.Object)
+	clsContract = env.NewGlobalRef(&c.Object)
 
-	midcontactsContractIsProfileId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clscontactsContract)), "isProfileId", "(J)Z")
+	midContractIsProfileId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isProfileId", "(J)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

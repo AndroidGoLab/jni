@@ -1,8 +1,303 @@
 package: notification
 go_import: github.com/AndroidGoLab/jni/app/notification
 classes:
+    - java_class: android.app.NotificationManager
+      go_type: Manager
+      obtain: system_service
+      service_name: notification
+      close: true
+      methods:
+        - java_method: addAutomaticZenRule
+          go_name: AddAutomaticZenRule
+          params:
+            - java_type: android.app.AutomaticZenRule
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: areAutomaticZenRulesUserManaged
+          go_name: AreAutomaticZenRulesUserManaged
+          returns: boolean
+          error: true
+        - java_method: areBubblesAllowed
+          go_name: AreBubblesAllowed
+          returns: boolean
+          error: true
+        - java_method: areBubblesEnabled
+          go_name: AreBubblesEnabled
+          returns: boolean
+          error: true
+        - java_method: areNotificationsEnabled
+          go_name: AreNotificationsEnabled
+          returns: boolean
+          error: true
+        - java_method: areNotificationsPaused
+          go_name: AreNotificationsPaused
+          returns: boolean
+          error: true
+        - java_method: canNotifyAsPackage
+          go_name: CanNotifyAsPackage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: canPostPromotedNotifications
+          go_name: CanPostPromotedNotifications
+          returns: boolean
+          error: true
+        - java_method: canUseFullScreenIntent
+          go_name: CanUseFullScreenIntent
+          returns: boolean
+          error: true
+        - java_method: cancel
+          go_name: Cancel1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancel
+          go_name: Cancel2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: cancelAll
+          go_name: CancelAll
+          returns: void
+          error: true
+        - java_method: cancelAsPackage
+          go_name: CancelAsPackage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: createNotificationChannel
+          go_name: CreateNotificationChannel
+          params:
+            - java_type: android.app.NotificationChannel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createNotificationChannelGroup
+          go_name: CreateNotificationChannelGroup
+          params:
+            - java_type: android.app.NotificationChannelGroup
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createNotificationChannelGroups
+          go_name: CreateNotificationChannelGroups
+          params:
+            - java_type: java.util.List<android.app.NotificationChannelGroup>
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createNotificationChannels
+          go_name: CreateNotificationChannels
+          params:
+            - java_type: java.util.List<android.app.NotificationChannel>
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: deleteNotificationChannel
+          go_name: DeleteNotificationChannel
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: deleteNotificationChannelGroup
+          go_name: DeleteNotificationChannelGroup
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getActiveNotifications
+          go_name: GetActiveNotifications
+          returns: android.service.notification.StatusBarNotification[]
+          error: true
+        - java_method: getAutomaticZenRule
+          go_name: GetAutomaticZenRule
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.AutomaticZenRule
+          error: true
+        - java_method: getAutomaticZenRuleState
+          go_name: GetAutomaticZenRuleState
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getBubblePreference
+          go_name: GetBubblePreference
+          returns: int
+          error: true
+        - java_method: getConsolidatedNotificationPolicy
+          go_name: GetConsolidatedNotificationPolicy
+          returns: android.app.NotificationManager$Policy
+          error: true
+        - java_method: getCurrentInterruptionFilter
+          go_name: GetCurrentInterruptionFilter
+          returns: int
+          error: true
+        - java_method: getImportance
+          go_name: GetImportance
+          returns: int
+          error: true
+        - java_method: getNotificationChannel
+          go_name: GetNotificationChannel1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.NotificationChannel
+          error: true
+        - java_method: getNotificationChannel
+          go_name: GetNotificationChannel2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.app.NotificationChannel
+          error: true
+        - java_method: getNotificationChannelGroup
+          go_name: GetNotificationChannelGroup
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.NotificationChannelGroup
+          error: true
+        - java_method: getNotificationChannelGroups
+          go_name: GetNotificationChannelGroups
+          returns: java.util.List<android.app.NotificationChannelGroup>
+          error: true
+        - java_method: getNotificationChannels
+          go_name: GetNotificationChannels
+          returns: java.util.List<android.app.NotificationChannel>
+          error: true
+        - java_method: getNotificationDelegate
+          go_name: GetNotificationDelegate
+          returns: String
+          error: true
+        - java_method: getNotificationPolicy
+          go_name: GetNotificationPolicy
+          returns: android.app.NotificationManager$Policy
+          error: true
+        - java_method: isNotificationListenerAccessGranted
+          go_name: IsNotificationListenerAccessGranted
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isNotificationPolicyAccessGranted
+          go_name: IsNotificationPolicyAccessGranted
+          returns: boolean
+          error: true
+        - java_method: matchesCallFilter
+          go_name: MatchesCallFilter
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: notify
+          go_name: Notify2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.app.Notification
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: notify
+          go_name: Notify3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.app.Notification
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: notifyAsPackage
+          go_name: NotifyAsPackage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.app.Notification
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: removeAutomaticZenRule
+          go_name: RemoveAutomaticZenRule
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setAutomaticZenRuleState
+          go_name: SetAutomaticZenRuleState
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.service.notification.Condition
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setInterruptionFilter
+          go_name: SetInterruptionFilter
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNotificationDelegate
+          go_name: SetNotificationDelegate
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNotificationPolicy
+          go_name: SetNotificationPolicy
+          params:
+            - java_type: android.app.NotificationManager$Policy
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: shouldHideSilentStatusBarIcons
+          go_name: ShouldHideSilentStatusBarIcons
+          returns: boolean
+          error: true
+        - java_method: updateAutomaticZenRule
+          go_name: UpdateAutomaticZenRule
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.app.AutomaticZenRule
+              go_name: arg1
+          returns: boolean
+          error: true
     - java_class: android.app.NotificationChannel
-      go_type: NotificationChannel
+      go_type: Channel
       methods:
         - java_method: canBubble
           go_name: CanBubble
@@ -343,318 +638,7 @@ classes:
           go_name: Clone0_1
           returns: java.lang.Object
           error: true
-    - java_class: android.app.NotificationManager
-      go_type: Manager
-      obtain: system_service
-      service_name: notification
-      close: true
-      methods:
-        - java_method: addAutomaticZenRule
-          go_name: AddAutomaticZenRule
-          params:
-            - java_type: android.app.AutomaticZenRule
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: areAutomaticZenRulesUserManaged
-          go_name: AreAutomaticZenRulesUserManaged
-          returns: boolean
-          error: true
-        - java_method: areBubblesAllowed
-          go_name: AreBubblesAllowed
-          returns: boolean
-          error: true
-        - java_method: areBubblesEnabled
-          go_name: AreBubblesEnabled
-          returns: boolean
-          error: true
-        - java_method: areNotificationsEnabled
-          go_name: AreNotificationsEnabled
-          returns: boolean
-          error: true
-        - java_method: areNotificationsPaused
-          go_name: AreNotificationsPaused
-          returns: boolean
-          error: true
-        - java_method: canNotifyAsPackage
-          go_name: CanNotifyAsPackage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: canPostPromotedNotifications
-          go_name: CanPostPromotedNotifications
-          returns: boolean
-          error: true
-        - java_method: canUseFullScreenIntent
-          go_name: CanUseFullScreenIntent
-          returns: boolean
-          error: true
-        - java_method: cancel
-          go_name: Cancel1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: cancel
-          go_name: Cancel2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: cancelAll
-          go_name: CancelAll
-          returns: void
-          error: true
-        - java_method: cancelAsPackage
-          go_name: CancelAsPackage
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: createNotificationChannel
-          go_name: CreateNotificationChannel
-          params:
-            - java_type: android.app.NotificationChannel
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: createNotificationChannelGroup
-          go_name: CreateNotificationChannelGroup
-          params:
-            - java_type: android.app.NotificationChannelGroup
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: createNotificationChannelGroups
-          go_name: CreateNotificationChannelGroups
-          params:
-            - java_type: java.util.List<android.app.NotificationChannelGroup>
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: createNotificationChannels
-          go_name: CreateNotificationChannels
-          params:
-            - java_type: java.util.List<android.app.NotificationChannel>
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: deleteNotificationChannel
-          go_name: DeleteNotificationChannel
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: deleteNotificationChannelGroup
-          go_name: DeleteNotificationChannelGroup
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getActiveNotifications
-          go_name: GetActiveNotifications
-          returns: android.service.notification.StatusBarNotification[]
-          error: true
-        - java_method: getAutomaticZenRule
-          go_name: GetAutomaticZenRule
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.app.AutomaticZenRule
-          error: true
-        - java_method: getAutomaticZenRuleState
-          go_name: GetAutomaticZenRuleState
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getBubblePreference
-          go_name: GetBubblePreference
-          returns: int
-          error: true
-        - java_method: getConsolidatedNotificationPolicy
-          go_name: GetConsolidatedNotificationPolicy
-          returns: android.app.NotificationManager$Policy
-          error: true
-        - java_method: getImportance
-          go_name: GetImportance
-          returns: int
-          error: true
-        - java_method: getNotificationChannel
-          go_name: GetNotificationChannel1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.app.NotificationChannel
-          error: true
-        - java_method: getNotificationChannel
-          go_name: GetNotificationChannel2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.app.NotificationChannel
-          error: true
-        - java_method: getNotificationChannelGroup
-          go_name: GetNotificationChannelGroup
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.app.NotificationChannelGroup
-          error: true
-        - java_method: getNotificationChannelGroups
-          go_name: GetNotificationChannelGroups
-          returns: java.util.List<android.app.NotificationChannelGroup>
-          error: true
-        - java_method: getNotificationChannels
-          go_name: GetNotificationChannels
-          returns: java.util.List<android.app.NotificationChannel>
-          error: true
-        - java_method: getNotificationDelegate
-          go_name: GetNotificationDelegate
-          returns: String
-          error: true
-        - java_method: getNotificationPolicy
-          go_name: GetNotificationPolicy
-          returns: android.app.NotificationManager$Policy
-          error: true
-        - java_method: isNotificationListenerAccessGranted
-          go_name: IsNotificationListenerAccessGranted
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isNotificationPolicyAccessGranted
-          go_name: IsNotificationPolicyAccessGranted
-          returns: boolean
-          error: true
-        - java_method: matchesCallFilter
-          go_name: MatchesCallFilter
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: notify
-          go_name: Notify2
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.app.Notification
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: notify
-          go_name: Notify3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.app.Notification
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: notifyAsPackage
-          go_name: NotifyAsPackage
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: android.app.Notification
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: removeAutomaticZenRule
-          go_name: RemoveAutomaticZenRule
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setAutomaticZenRuleState
-          go_name: SetAutomaticZenRuleState
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.service.notification.Condition
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setNotificationDelegate
-          go_name: SetNotificationDelegate
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setNotificationPolicy
-          go_name: SetNotificationPolicy
-          params:
-            - java_type: android.app.NotificationManager$Policy
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: shouldHideSilentStatusBarIcons
-          go_name: ShouldHideSilentStatusBarIcons
-          returns: boolean
-          error: true
-        - java_method: updateAutomaticZenRule
-          go_name: UpdateAutomaticZenRule
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.app.AutomaticZenRule
-              go_name: arg1
-          returns: boolean
-          error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: DefaultChannelId
-      value: '"miscellaneous"'
-      go_type: string
-    - go_name: EditConversation
-      value: '"conversation"'
-      go_type: string
-    - go_name: EditImportance
-      value: '"importance"'
-      go_type: string
-    - go_name: EditLauncher
-      value: '"launcher"'
-      go_type: string
-    - go_name: EditLockedDevice
-      value: '"locked"'
-      go_type: string
-    - go_name: EditSound
-      value: '"sound"'
-      go_type: string
-    - go_name: EditVibration
-      value: '"vibration"'
-      go_type: string
-    - go_name: EditZen
-      value: '"zen"'
-      go_type: string
     - go_name: ActionAppBlockStateChanged
       value: '"android.app.action.APP_BLOCK_STATE_CHANGED"'
       go_type: string
@@ -771,4 +755,31 @@ constants:
       go_type: string
     - go_name: MetaDataRuleInstanceLimit
       value: '"android.service.zen.automatic.ruleInstanceLimit"'
+      go_type: string
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: DefaultChannelId
+      value: '"miscellaneous"'
+      go_type: string
+    - go_name: EditConversation
+      value: '"conversation"'
+      go_type: string
+    - go_name: EditImportance
+      value: '"importance"'
+      go_type: string
+    - go_name: EditLauncher
+      value: '"launcher"'
+      go_type: string
+    - go_name: EditLockedDevice
+      value: '"locked"'
+      go_type: string
+    - go_name: EditSound
+      value: '"sound"'
+      go_type: string
+    - go_name: EditVibration
+      value: '"vibration"'
+      go_type: string
+    - go_name: EditZen
+      value: '"zen"'
       go_type: string

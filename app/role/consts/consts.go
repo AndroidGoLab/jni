@@ -3,14 +3,14 @@
 package consts
 
 const (
-	RoleAssistant       = "android.app.role.ASSISTANT"
-	RoleBrowser         = "android.app.role.BROWSER"
-	RoleCallRedirection = "android.app.role.CALL_REDIRECTION"
-	RoleCallScreening   = "android.app.role.CALL_SCREENING"
-	RoleDialer          = "android.app.role.DIALER"
-	RoleEmergency       = "android.app.role.EMERGENCY"
-	RoleHome            = "android.app.role.HOME"
-	RoleNotes           = "android.app.role.NOTES"
-	RoleSms             = "android.app.role.SMS"
-	RoleWallet          = "android.app.role.WALLET"
+	RoleAssistant       string = "android.app.role.ASSISTANT"
+	RoleBrowser         string = "android.app.role.BROWSER"
+	RoleCallRedirection string = "android.app.role.CALL_REDIRECTION"
+	RoleCallScreening   string = "android.app.role.CALL_SCREENING"
+	RoleDialer          string = "android.app.role.DIALER"
+	RoleEmergency       string = "android.app.role.EMERGENCY"
+	RoleHome            string = "android.app.role.HOME"
+	RoleNotes           string = "android.app.role.NOTES"
+	RoleSms             string = "android.app.role.SMS"
+	RoleWallet          string = "android.app.role.WALLET"
 )

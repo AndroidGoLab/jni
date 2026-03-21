@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "notification"
+
 // Manager wraps android.app.NotificationManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("notification")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("notification service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -378,7 +380,11 @@ func (m *Manager) CancelAll() error {
 }
 
 // CancelAsPackage calls android.app.NotificationManager.cancelAsPackage.
-func (m *Manager) CancelAsPackage(arg0 string, arg1 string, arg2 int32) error {
+func (m *Manager) CancelAsPackage(
+	arg0 string,
+	arg1 string,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -681,6 +687,31 @@ func (m *Manager) GetConsolidatedNotificationPolicy() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetConsolidatedNotificationPolicy,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCurrentInterruptionFilter calls android.app.NotificationManager.getCurrentInterruptionFilter.
+func (m *Manager) GetCurrentInterruptionFilter() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetCurrentInterruptionFilter == nil {
+			callErr = fmt.Errorf("android.app.NotificationManager.getCurrentInterruptionFilter is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midManagerGetCurrentInterruptionFilter,
 		)
 		if callErr != nil {
 			return callErr
@@ -1015,7 +1046,11 @@ func (m *Manager) Notify2(arg0 int32, arg1 *jni.Object) error {
 }
 
 // Notify3_1 calls android.app.NotificationManager.notify.
-func (m *Manager) Notify3_1(arg0 string, arg1 int32, arg2 *jni.Object) error {
+func (m *Manager) Notify3_1(
+	arg0 string,
+	arg1 int32,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1042,7 +1077,12 @@ func (m *Manager) Notify3_1(arg0 string, arg1 int32, arg2 *jni.Object) error {
 }
 
 // NotifyAsPackage calls android.app.NotificationManager.notifyAsPackage.
-func (m *Manager) NotifyAsPackage(arg0 string, arg1 string, arg2 int32, arg3 *jni.Object) error {
+func (m *Manager) NotifyAsPackage(
+	arg0 string,
+	arg1 string,
+	arg2 int32,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1125,6 +1165,29 @@ func (m *Manager) SetAutomaticZenRuleState(arg0 string, arg1 *jni.Object) error 
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midManagerSetAutomaticZenRuleState, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetInterruptionFilter calls android.app.NotificationManager.setInterruptionFilter.
+func (m *Manager) SetInterruptionFilter(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerSetInterruptionFilter == nil {
+			callErr = fmt.Errorf("android.app.NotificationManager.setInterruptionFilter is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midManagerSetInterruptionFilter, jni.IntValue(arg0),
 		)
 		return callErr
 	})

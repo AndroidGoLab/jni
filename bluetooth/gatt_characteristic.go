@@ -408,7 +408,11 @@ func (m *GattCharacteristic) SetValue1(arg0 *jni.Object) (bool, error) {
 }
 
 // SetValue3_1 calls android.bluetooth.BluetoothGattCharacteristic.setValue.
-func (m *GattCharacteristic) SetValue3_1(arg0 int32, arg1 int32, arg2 int32) (bool, error) {
+func (m *GattCharacteristic) SetValue3_1(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -435,7 +439,12 @@ func (m *GattCharacteristic) SetValue3_1(arg0 int32, arg1 int32, arg2 int32) (bo
 }
 
 // SetValue4_2 calls android.bluetooth.BluetoothGattCharacteristic.setValue.
-func (m *GattCharacteristic) SetValue4_2(arg0 int32, arg1 int32, arg2 int32, arg3 int32) (bool, error) {
+func (m *GattCharacteristic) SetValue4_2(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

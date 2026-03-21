@@ -3,22 +3,22 @@
 package consts
 
 const (
-	ActionNextAlarmClockChanged                    = "android.app.action.NEXT_ALARM_CLOCK_CHANGED"
-	ActionScheduleExactAlarmPermissionStateChanged = "android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED"
+	ActionNextAlarmClockChanged                    string = "android.app.action.NEXT_ALARM_CLOCK_CHANGED"
+	ActionScheduleExactAlarmPermissionStateChanged string = "android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED"
 )
 
 const (
-	ElapsedRealtime       = 3
-	ElapsedRealtimeWakeup = 2
-	Rtc                   = 1
-	RtcWakeup             = 0
-	Creator               = 0
+	ElapsedRealtime       int = 3
+	ElapsedRealtimeWakeup int = 2
+	Rtc                   int = 1
+	RtcWakeup             int = 0
+	Creator               int = 0
 )
 
 const (
-	IntervalDay            = 86400000
-	IntervalFifteenMinutes = 900000
-	IntervalHalfDay        = 43200000
-	IntervalHalfHour       = 1800000
-	IntervalHour           = 3600000
+	IntervalDay            int = 86400000
+	IntervalFifteenMinutes int = 900000
+	IntervalHalfDay        int = 43200000
+	IntervalHalfHour       int = 1800000
+	IntervalHour           int = 3600000
 )

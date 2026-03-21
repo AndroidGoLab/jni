@@ -23,7 +23,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -32,28 +37,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/app/notification"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -63,12 +78,12 @@ func run(vm *jni.VM) error {
 	// --- Constants ---
 	// Channel importance levels mirror
 	// NotificationManager.IMPORTANCE_NONE through IMPORTANCE_HIGH.
-	fmt.Fprintln(&output, "=== Importance constants ===")
-	fmt.Fprintf(&output, "  ImportanceNone    = %d\n", notification.ImportanceNone)
-	fmt.Fprintf(&output, "  ImportanceMin     = %d\n", notification.ImportanceMin)
-	fmt.Fprintf(&output, "  ImportanceLow     = %d\n", notification.ImportanceLow)
-	fmt.Fprintf(&output, "  ImportanceDefault = %d\n", notification.ImportanceDefault)
-	fmt.Fprintf(&output, "  ImportanceHigh    = %d\n", notification.ImportanceHigh)
+	fmt.Fprintln(output, "=== Importance constants ===")
+	fmt.Fprintf(output, "  ImportanceNone    = %d\n", notification.ImportanceNone)
+	fmt.Fprintf(output, "  ImportanceMin     = %d\n", notification.ImportanceMin)
+	fmt.Fprintf(output, "  ImportanceLow     = %d\n", notification.ImportanceLow)
+	fmt.Fprintf(output, "  ImportanceDefault = %d\n", notification.ImportanceDefault)
+	fmt.Fprintf(output, "  ImportanceHigh    = %d\n", notification.ImportanceHigh)
 
 	// --- Manager ---
 	mgr, err := notification.NewManager(ctx)
@@ -80,7 +95,7 @@ func run(vm *jni.VM) error {
 	// --- Check notification permission (package-internal) ---
 	// areNotificationsEnabled checks whether the app can post notifications.
 	//   mgr.areNotificationsEnabled() (bool, error)
-	fmt.Fprintln(&output, "\nareNotificationsEnabled API available")
+	fmt.Fprintln(output, "\nareNotificationsEnabled API available")
 
 	// --- Create a notification channel (required API 26+) ---
 	// notificationChannel wraps android.app.NotificationChannel.
@@ -97,14 +112,14 @@ func run(vm *jni.VM) error {
 	//
 	//   ch.setDescription("General app notifications")
 	//   mgr.createNotificationChannel(ch.Obj.Object())
-	//   fmt.Fprintf(&output, "Channel ID: %s, Importance: %d\n",
+	//   fmt.Fprintf(output, "Channel ID: %s, Importance: %d\n",
 	//       ch.getId(), ch.getImportance())
-	fmt.Fprintln(&output, "NotificationChannel API: setDescription, getId, getName, getDescription, getImportance")
+	fmt.Fprintln(output, "NotificationChannel API: setDescription, getId, getName, getDescription, getImportance")
 
 	// --- List existing channels (package-internal) ---
 	// getNotificationChannelsRaw returns a raw Java List of channels.
 	//   mgr.getNotificationChannelsRaw() (*jni.Object, error)
-	fmt.Fprintln(&output, "getNotificationChannelsRaw API available")
+	fmt.Fprintln(output, "getNotificationChannelsRaw API available")
 
 	// --- Build a notification ---
 	// notificationBuilder wraps android.app.Notification$Builder.
@@ -130,9 +145,9 @@ func run(vm *jni.VM) error {
 	//   builder.setGroup("my_group")
 	//   builder.setProgress(100, 50, false)
 	//   notif, _ := builder.build()
-	fmt.Fprintln(&output, "\nNotification.Builder API: setContentTitle, setContentText, setSmallIcon,")
-	fmt.Fprintln(&output, "  setContentIntent, setAutoCancel, setOngoing, setStyle, setGroup,")
-	fmt.Fprintln(&output, "  setProgress, addAction, build")
+	fmt.Fprintln(output, "\nNotification.Builder API: setContentTitle, setContentText, setSmallIcon,")
+	fmt.Fprintln(output, "  setContentIntent, setAutoCancel, setOngoing, setStyle, setGroup,")
+	fmt.Fprintln(output, "  setProgress, addAction, build")
 
 	// --- BigTextStyle ---
 	// bigTextStyle wraps android.app.Notification$BigTextStyle.
@@ -140,7 +155,7 @@ func run(vm *jni.VM) error {
 	//
 	// Usage: create a BigTextStyle, call bigText(), then pass to
 	// builder.setStyle().
-	fmt.Fprintln(&output, "BigTextStyle API: bigText")
+	fmt.Fprintln(output, "BigTextStyle API: bigText")
 
 	// --- Post / cancel notifications (package-internal) ---
 	// notifyRaw posts a notification with a given integer ID.
@@ -149,22 +164,22 @@ func run(vm *jni.VM) error {
 	//   mgr.notifyRaw(id int32, notification *jni.Object) error
 	//   mgr.cancel(id int32) error
 	//   mgr.cancelAll() error
-	fmt.Fprintln(&output, "\nManager API: notifyRaw(id, notification), cancel(id), cancelAll()")
+	fmt.Fprintln(output, "\nManager API: notifyRaw(id, notification), cancel(id), cancelAll()")
 
 	// --- Query active notifications (package-internal) ---
 	// getActiveNotificationsRaw returns an array of StatusBarNotification
 	// objects. The statusBarNotification data class has:
 	//   ID int32  (the notification identifier)
 	//   mgr.getActiveNotificationsRaw() ([]*jni.Object, error)
-	fmt.Fprintln(&output, "getActiveNotificationsRaw API available (returns StatusBarNotification array)")
+	fmt.Fprintln(output, "getActiveNotificationsRaw API available (returns StatusBarNotification array)")
 
 	// --- Delete a channel (package-internal) ---
 	// deleteNotificationChannel removes a channel by its string ID.
 	//   mgr.deleteNotificationChannel(channelId string) error
 	//   mgr.createNotificationChannel(channel *jni.Object) error
-	fmt.Fprintln(&output, "deleteNotificationChannel(channelId string) available")
+	fmt.Fprintln(output, "deleteNotificationChannel(channelId string) available")
 
-	fmt.Fprintln(&output, "\nAll notification package features demonstrated.")
+	fmt.Fprintln(output, "\nAll notification package features demonstrated.")
 	return nil
 }
 

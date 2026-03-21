@@ -3,36 +3,36 @@
 package consts
 
 const (
-	ActionGnssCapabilitiesChanged = "android.location.action.GNSS_CAPABILITIES_CHANGED"
-	ExtraGnssCapabilities         = "android.location.extra.GNSS_CAPABILITIES"
-	ExtraLocationEnabled          = "android.location.extra.LOCATION_ENABLED"
-	ExtraProviderEnabled          = "android.location.extra.PROVIDER_ENABLED"
-	ExtraProviderName             = "android.location.extra.PROVIDER_NAME"
-	FusedProvider                 = "fused"
-	GpsProvider                   = "gps"
-	KeyFlushComplete              = "flushComplete"
-	KeyLocations                  = "locations"
-	KeyLocationChanged            = "location"
-	KeyProviderEnabled            = "providerEnabled"
-	KeyProximityEntering          = "entering"
-	KeyStatusChanged              = "status"
-	ModeChangedAction             = "android.location.MODE_CHANGED"
-	NetworkProvider               = "network"
-	PassiveProvider               = "passive"
-	ProvidersChangedAction        = "android.location.PROVIDERS_CHANGED"
+	ActionGnssCapabilitiesChanged string = "android.location.action.GNSS_CAPABILITIES_CHANGED"
+	ExtraGnssCapabilities         string = "android.location.extra.GNSS_CAPABILITIES"
+	ExtraLocationEnabled          string = "android.location.extra.LOCATION_ENABLED"
+	ExtraProviderEnabled          string = "android.location.extra.PROVIDER_ENABLED"
+	ExtraProviderName             string = "android.location.extra.PROVIDER_NAME"
+	FusedProvider                 string = "fused"
+	GpsProvider                   string = "gps"
+	KeyFlushComplete              string = "flushComplete"
+	KeyLocations                  string = "locations"
+	KeyLocationChanged            string = "location"
+	KeyProviderEnabled            string = "providerEnabled"
+	KeyProximityEntering          string = "entering"
+	KeyStatusChanged              string = "status"
+	ModeChangedAction             string = "android.location.MODE_CHANGED"
+	NetworkProvider               string = "network"
+	PassiveProvider               string = "passive"
+	ProvidersChangedAction        string = "android.location.PROVIDERS_CHANGED"
 )
 
 const (
-	Creator              = 0
-	FormatDegrees        = 0
-	FormatMinutes        = 1
-	FormatSeconds        = 2
-	ConstellationBeidou  = 5
-	ConstellationGalileo = 6
-	ConstellationGlonass = 3
-	ConstellationGps     = 1
-	ConstellationIrnss   = 7
-	ConstellationQzss    = 4
-	ConstellationSbas    = 2
-	ConstellationUnknown = 0
+	ConstellationBeidou  int = 5
+	ConstellationGalileo int = 6
+	ConstellationGlonass int = 3
+	ConstellationGps     int = 1
+	ConstellationIrnss   int = 7
+	ConstellationQzss    int = 4
+	ConstellationSbas    int = 2
+	ConstellationUnknown int = 0
+	Creator              int = 0
+	FormatDegrees        int = 0
+	FormatMinutes        int = 1
+	FormatSeconds        int = 2
 )

@@ -11,8 +11,8 @@ import (
 // The SEService(Context, Executor, OnConnectedListener) constructor is
 // required on newer APIs; this uses a simplified no-arg path available
 // in app_process context.
-func NewService(vm *jni.VM) (*Service, error) {
-	var svc Service
+func NewService(vm *jni.VM) (*SEService, error) {
+	var svc SEService
 	svc.VM = vm
 
 	err := vm.Do(func(env *jni.Env) error {
@@ -42,7 +42,7 @@ func NewService(vm *jni.VM) (*Service, error) {
 }
 
 // Close releases the global reference to the underlying Java object.
-func (m *Service) Close() {
+func (m *SEService) Close() {
 	if m.Obj != nil {
 		_ = m.VM.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(m.Obj)

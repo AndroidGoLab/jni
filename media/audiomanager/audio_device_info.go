@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// audioDeviceInfo wraps android.media.AudioDeviceInfo.
-type audioDeviceInfo struct {
+// AudioDeviceInfo wraps android.media.AudioDeviceInfo.
+type AudioDeviceInfo struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Equals calls android.media.AudioDeviceInfo.equals.
-func (m *audioDeviceInfo) Equals(arg0 *jni.Object) (bool, error) {
+func (m *AudioDeviceInfo) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *audioDeviceInfo) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoEquals == nil {
+		if midAudioDeviceInfoEquals == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midaudioDeviceInfoEquals, jni.ObjectValue(arg0),
+			midAudioDeviceInfoEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -51,7 +51,7 @@ func (m *audioDeviceInfo) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetAddress calls android.media.AudioDeviceInfo.getAddress.
-func (m *audioDeviceInfo) GetAddress() (string, error) {
+func (m *AudioDeviceInfo) GetAddress() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -59,13 +59,13 @@ func (m *audioDeviceInfo) GetAddress() (string, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetAddress == nil {
+		if midAudioDeviceInfoGetAddress == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getAddress is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetAddress,
+			midAudioDeviceInfoGetAddress,
 		)
 		if callErr != nil {
 			return callErr
@@ -77,7 +77,7 @@ func (m *audioDeviceInfo) GetAddress() (string, error) {
 }
 
 // GetAudioDescriptors calls android.media.AudioDeviceInfo.getAudioDescriptors.
-func (m *audioDeviceInfo) GetAudioDescriptors() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetAudioDescriptors() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -85,13 +85,13 @@ func (m *audioDeviceInfo) GetAudioDescriptors() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetAudioDescriptors == nil {
+		if midAudioDeviceInfoGetAudioDescriptors == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getAudioDescriptors is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetAudioDescriptors,
+			midAudioDeviceInfoGetAudioDescriptors,
 		)
 		if callErr != nil {
 			return callErr
@@ -102,7 +102,7 @@ func (m *audioDeviceInfo) GetAudioDescriptors() (*jni.Object, error) {
 }
 
 // GetAudioProfiles calls android.media.AudioDeviceInfo.getAudioProfiles.
-func (m *audioDeviceInfo) GetAudioProfiles() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetAudioProfiles() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -110,13 +110,13 @@ func (m *audioDeviceInfo) GetAudioProfiles() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetAudioProfiles == nil {
+		if midAudioDeviceInfoGetAudioProfiles == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getAudioProfiles is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetAudioProfiles,
+			midAudioDeviceInfoGetAudioProfiles,
 		)
 		if callErr != nil {
 			return callErr
@@ -127,7 +127,7 @@ func (m *audioDeviceInfo) GetAudioProfiles() (*jni.Object, error) {
 }
 
 // GetChannelCounts calls android.media.AudioDeviceInfo.getChannelCounts.
-func (m *audioDeviceInfo) GetChannelCounts() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetChannelCounts() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -135,13 +135,13 @@ func (m *audioDeviceInfo) GetChannelCounts() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetChannelCounts == nil {
+		if midAudioDeviceInfoGetChannelCounts == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getChannelCounts is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetChannelCounts,
+			midAudioDeviceInfoGetChannelCounts,
 		)
 		if callErr != nil {
 			return callErr
@@ -152,7 +152,7 @@ func (m *audioDeviceInfo) GetChannelCounts() (*jni.Object, error) {
 }
 
 // GetChannelIndexMasks calls android.media.AudioDeviceInfo.getChannelIndexMasks.
-func (m *audioDeviceInfo) GetChannelIndexMasks() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetChannelIndexMasks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -160,13 +160,13 @@ func (m *audioDeviceInfo) GetChannelIndexMasks() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetChannelIndexMasks == nil {
+		if midAudioDeviceInfoGetChannelIndexMasks == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getChannelIndexMasks is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetChannelIndexMasks,
+			midAudioDeviceInfoGetChannelIndexMasks,
 		)
 		if callErr != nil {
 			return callErr
@@ -177,7 +177,7 @@ func (m *audioDeviceInfo) GetChannelIndexMasks() (*jni.Object, error) {
 }
 
 // GetChannelMasks calls android.media.AudioDeviceInfo.getChannelMasks.
-func (m *audioDeviceInfo) GetChannelMasks() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetChannelMasks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -185,13 +185,13 @@ func (m *audioDeviceInfo) GetChannelMasks() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetChannelMasks == nil {
+		if midAudioDeviceInfoGetChannelMasks == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getChannelMasks is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetChannelMasks,
+			midAudioDeviceInfoGetChannelMasks,
 		)
 		if callErr != nil {
 			return callErr
@@ -202,7 +202,7 @@ func (m *audioDeviceInfo) GetChannelMasks() (*jni.Object, error) {
 }
 
 // GetEncapsulationMetadataTypes calls android.media.AudioDeviceInfo.getEncapsulationMetadataTypes.
-func (m *audioDeviceInfo) GetEncapsulationMetadataTypes() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetEncapsulationMetadataTypes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -210,13 +210,13 @@ func (m *audioDeviceInfo) GetEncapsulationMetadataTypes() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetEncapsulationMetadataTypes == nil {
+		if midAudioDeviceInfoGetEncapsulationMetadataTypes == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getEncapsulationMetadataTypes is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetEncapsulationMetadataTypes,
+			midAudioDeviceInfoGetEncapsulationMetadataTypes,
 		)
 		if callErr != nil {
 			return callErr
@@ -227,7 +227,7 @@ func (m *audioDeviceInfo) GetEncapsulationMetadataTypes() (*jni.Object, error) {
 }
 
 // GetEncapsulationModes calls android.media.AudioDeviceInfo.getEncapsulationModes.
-func (m *audioDeviceInfo) GetEncapsulationModes() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetEncapsulationModes() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -235,13 +235,13 @@ func (m *audioDeviceInfo) GetEncapsulationModes() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetEncapsulationModes == nil {
+		if midAudioDeviceInfoGetEncapsulationModes == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getEncapsulationModes is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetEncapsulationModes,
+			midAudioDeviceInfoGetEncapsulationModes,
 		)
 		if callErr != nil {
 			return callErr
@@ -252,7 +252,7 @@ func (m *audioDeviceInfo) GetEncapsulationModes() (*jni.Object, error) {
 }
 
 // GetEncodings calls android.media.AudioDeviceInfo.getEncodings.
-func (m *audioDeviceInfo) GetEncodings() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetEncodings() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -260,13 +260,13 @@ func (m *audioDeviceInfo) GetEncodings() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetEncodings == nil {
+		if midAudioDeviceInfoGetEncodings == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getEncodings is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetEncodings,
+			midAudioDeviceInfoGetEncodings,
 		)
 		if callErr != nil {
 			return callErr
@@ -277,7 +277,7 @@ func (m *audioDeviceInfo) GetEncodings() (*jni.Object, error) {
 }
 
 // GetId calls android.media.AudioDeviceInfo.getId.
-func (m *audioDeviceInfo) GetId() (int32, error) {
+func (m *AudioDeviceInfo) GetId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -285,13 +285,13 @@ func (m *audioDeviceInfo) GetId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetId == nil {
+		if midAudioDeviceInfoGetId == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midaudioDeviceInfoGetId,
+			midAudioDeviceInfoGetId,
 		)
 		if callErr != nil {
 			return callErr
@@ -302,7 +302,7 @@ func (m *audioDeviceInfo) GetId() (int32, error) {
 }
 
 // GetProductName calls android.media.AudioDeviceInfo.getProductName.
-func (m *audioDeviceInfo) GetProductName() (string, error) {
+func (m *AudioDeviceInfo) GetProductName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -310,13 +310,13 @@ func (m *audioDeviceInfo) GetProductName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetProductName == nil {
+		if midAudioDeviceInfoGetProductName == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getProductName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetProductName,
+			midAudioDeviceInfoGetProductName,
 		)
 		if callErr != nil {
 			return callErr
@@ -328,7 +328,7 @@ func (m *audioDeviceInfo) GetProductName() (string, error) {
 }
 
 // GetSampleRates calls android.media.AudioDeviceInfo.getSampleRates.
-func (m *audioDeviceInfo) GetSampleRates() (*jni.Object, error) {
+func (m *AudioDeviceInfo) GetSampleRates() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -336,13 +336,13 @@ func (m *audioDeviceInfo) GetSampleRates() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetSampleRates == nil {
+		if midAudioDeviceInfoGetSampleRates == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getSampleRates is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midaudioDeviceInfoGetSampleRates,
+			midAudioDeviceInfoGetSampleRates,
 		)
 		if callErr != nil {
 			return callErr
@@ -353,7 +353,7 @@ func (m *audioDeviceInfo) GetSampleRates() (*jni.Object, error) {
 }
 
 // GetSpeakerLayoutChannelMask calls android.media.AudioDeviceInfo.getSpeakerLayoutChannelMask.
-func (m *audioDeviceInfo) GetSpeakerLayoutChannelMask() (int32, error) {
+func (m *AudioDeviceInfo) GetSpeakerLayoutChannelMask() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -361,13 +361,13 @@ func (m *audioDeviceInfo) GetSpeakerLayoutChannelMask() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetSpeakerLayoutChannelMask == nil {
+		if midAudioDeviceInfoGetSpeakerLayoutChannelMask == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getSpeakerLayoutChannelMask is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midaudioDeviceInfoGetSpeakerLayoutChannelMask,
+			midAudioDeviceInfoGetSpeakerLayoutChannelMask,
 		)
 		if callErr != nil {
 			return callErr
@@ -378,7 +378,7 @@ func (m *audioDeviceInfo) GetSpeakerLayoutChannelMask() (int32, error) {
 }
 
 // GetType calls android.media.AudioDeviceInfo.getType.
-func (m *audioDeviceInfo) GetType() (int32, error) {
+func (m *AudioDeviceInfo) GetType() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -386,13 +386,13 @@ func (m *audioDeviceInfo) GetType() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoGetType == nil {
+		if midAudioDeviceInfoGetType == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getType is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midaudioDeviceInfoGetType,
+			midAudioDeviceInfoGetType,
 		)
 		if callErr != nil {
 			return callErr
@@ -403,7 +403,7 @@ func (m *audioDeviceInfo) GetType() (int32, error) {
 }
 
 // HashCode calls android.media.AudioDeviceInfo.hashCode.
-func (m *audioDeviceInfo) HashCode() (int32, error) {
+func (m *AudioDeviceInfo) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -411,13 +411,13 @@ func (m *audioDeviceInfo) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoHashCode == nil {
+		if midAudioDeviceInfoHashCode == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midaudioDeviceInfoHashCode,
+			midAudioDeviceInfoHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -428,7 +428,7 @@ func (m *audioDeviceInfo) HashCode() (int32, error) {
 }
 
 // IsSink calls android.media.AudioDeviceInfo.isSink.
-func (m *audioDeviceInfo) IsSink() (bool, error) {
+func (m *AudioDeviceInfo) IsSink() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -436,13 +436,13 @@ func (m *audioDeviceInfo) IsSink() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoIsSink == nil {
+		if midAudioDeviceInfoIsSink == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.isSink is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midaudioDeviceInfoIsSink,
+			midAudioDeviceInfoIsSink,
 		)
 		if callErr != nil {
 			return callErr
@@ -454,7 +454,7 @@ func (m *audioDeviceInfo) IsSink() (bool, error) {
 }
 
 // IsSource calls android.media.AudioDeviceInfo.isSource.
-func (m *audioDeviceInfo) IsSource() (bool, error) {
+func (m *AudioDeviceInfo) IsSource() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -462,13 +462,13 @@ func (m *audioDeviceInfo) IsSource() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midaudioDeviceInfoIsSource == nil {
+		if midAudioDeviceInfoIsSource == nil {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.isSource is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midaudioDeviceInfoIsSource,
+			midAudioDeviceInfoIsSource,
 		)
 		if callErr != nil {
 			return callErr

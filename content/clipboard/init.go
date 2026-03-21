@@ -16,36 +16,39 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clsclipData                 *jni.GlobalRef
-	midclipDataAddItem1         jni.MethodID
-	midclipDataAddItem2_1       jni.MethodID
-	midclipDataDescribeContents jni.MethodID
-	midclipDataGetDescription   jni.MethodID
-	midclipDataGetItemAt        jni.MethodID
-	midclipDataGetItemCount     jni.MethodID
-	midclipDataToString         jni.MethodID
-	midclipDataWriteToParcel    jni.MethodID
-	midclipDataNewHtmlText      jni.MethodID
-	midclipDataNewIntent        jni.MethodID
-	midclipDataNewPlainText     jni.MethodID
-	midclipDataNewRawUri        jni.MethodID
-	midclipDataNewUri           jni.MethodID
+	clsClipData                 *jni.GlobalRef
+	midClipDataAddItem1         jni.MethodID
+	midClipDataAddItem2_1       jni.MethodID
+	midClipDataDescribeContents jni.MethodID
+	midClipDataGetDescription   jni.MethodID
+	midClipDataGetItemAt        jni.MethodID
+	midClipDataGetItemCount     jni.MethodID
+	midClipDataToString         jni.MethodID
+	midClipDataWriteToParcel    jni.MethodID
+	midClipDataNewHtmlText      jni.MethodID
+	midClipDataNewIntent        jni.MethodID
+	midClipDataNewPlainText     jni.MethodID
+	midClipDataNewRawUri        jni.MethodID
+	midClipDataNewUri           jni.MethodID
 
-	clsclipDataItem                   *jni.GlobalRef
-	midclipDataItemCoerceToHtmlText   jni.MethodID
-	midclipDataItemCoerceToStyledText jni.MethodID
-	midclipDataItemCoerceToText       jni.MethodID
-	midclipDataItemGetHtmlText        jni.MethodID
-	midclipDataItemGetIntent          jni.MethodID
-	midclipDataItemGetIntentSender    jni.MethodID
-	midclipDataItemGetText            jni.MethodID
-	midclipDataItemGetTextLinks       jni.MethodID
-	midclipDataItemGetUri             jni.MethodID
-	midclipDataItemToString           jni.MethodID
+	clsClipDataItem                   *jni.GlobalRef
+	midClipDataItemCoerceToHtmlText   jni.MethodID
+	midClipDataItemCoerceToStyledText jni.MethodID
+	midClipDataItemCoerceToText       jni.MethodID
+	midClipDataItemGetHtmlText        jni.MethodID
+	midClipDataItemGetIntent          jni.MethodID
+	midClipDataItemGetIntentSender    jni.MethodID
+	midClipDataItemGetText            jni.MethodID
+	midClipDataItemGetTextLinks       jni.MethodID
+	midClipDataItemGetUri             jni.MethodID
+	midClipDataItemToString           jni.MethodID
 
 	clsManager                                 *jni.GlobalRef
 	midManagerAddPrimaryClipChangedListener    jni.MethodID
@@ -88,9 +91,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.content.ClipData: %w", err)
 	}
-	clsclipData = env.NewGlobalRef(&c.Object)
+	clsClipData = env.NewGlobalRef(&c.Object)
 
-	midclipDataAddItem1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "addItem", "(Landroid/content/ClipData$Item;)V")
+	midClipDataAddItem1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "addItem", "(Landroid/content/ClipData$Item;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -98,7 +101,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.addItem")
 	}
 
-	midclipDataAddItem2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "addItem", "(Landroid/content/ContentResolver;Landroid/content/ClipData$Item;)V")
+	midClipDataAddItem2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "addItem", "(Landroid/content/ContentResolver;Landroid/content/ClipData$Item;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -106,7 +109,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.addItem")
 	}
 
-	midclipDataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "describeContents", "()I")
+	midClipDataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -114,7 +117,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.describeContents")
 	}
 
-	midclipDataGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "getDescription", "()Landroid/content/ClipDescription;")
+	midClipDataGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "getDescription", "()Landroid/content/ClipDescription;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -122,7 +125,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.getDescription")
 	}
 
-	midclipDataGetItemAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "getItemAt", "(I)Landroid/content/ClipData$Item;")
+	midClipDataGetItemAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "getItemAt", "(I)Landroid/content/ClipData$Item;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -130,7 +133,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.getItemAt")
 	}
 
-	midclipDataGetItemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "getItemCount", "()I")
+	midClipDataGetItemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "getItemCount", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -138,7 +141,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.getItemCount")
 	}
 
-	midclipDataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "toString", "()Ljava/lang/String;")
+	midClipDataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -146,7 +149,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.toString")
 	}
 
-	midclipDataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midClipDataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -154,7 +157,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.writeToParcel")
 	}
 
-	midclipDataNewHtmlText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newHtmlText", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/content/ClipData;")
+	midClipDataNewHtmlText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newHtmlText", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/content/ClipData;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -162,7 +165,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.newHtmlText")
 	}
 
-	midclipDataNewIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newIntent", "(Ljava/lang/String;Landroid/content/Intent;)Landroid/content/ClipData;")
+	midClipDataNewIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newIntent", "(Ljava/lang/String;Landroid/content/Intent;)Landroid/content/ClipData;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -170,7 +173,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.newIntent")
 	}
 
-	midclipDataNewPlainText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newPlainText", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/ClipData;")
+	midClipDataNewPlainText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newPlainText", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/ClipData;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -178,7 +181,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.newPlainText")
 	}
 
-	midclipDataNewRawUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newRawUri", "(Ljava/lang/String;Landroid/net/Uri;)Landroid/content/ClipData;")
+	midClipDataNewRawUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newRawUri", "(Ljava/lang/String;Landroid/net/Uri;)Landroid/content/ClipData;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -186,7 +189,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData.newRawUri")
 	}
 
-	midclipDataNewUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newUri", "(Landroid/content/ContentResolver;Ljava/lang/String;Landroid/net/Uri;)Landroid/content/ClipData;")
+	midClipDataNewUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newUri", "(Landroid/content/ContentResolver;Ljava/lang/String;Landroid/net/Uri;)Landroid/content/ClipData;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -198,9 +201,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.content.ClipData$Item: %w", err)
 	}
-	clsclipDataItem = env.NewGlobalRef(&c.Object)
+	clsClipDataItem = env.NewGlobalRef(&c.Object)
 
-	midclipDataItemCoerceToHtmlText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "coerceToHtmlText", "(Landroid/content/Context;)Ljava/lang/String;")
+	midClipDataItemCoerceToHtmlText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "coerceToHtmlText", "(Landroid/content/Context;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -208,7 +211,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.coerceToHtmlText")
 	}
 
-	midclipDataItemCoerceToStyledText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "coerceToStyledText", "(Landroid/content/Context;)Ljava/lang/String;")
+	midClipDataItemCoerceToStyledText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "coerceToStyledText", "(Landroid/content/Context;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -216,7 +219,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.coerceToStyledText")
 	}
 
-	midclipDataItemCoerceToText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "coerceToText", "(Landroid/content/Context;)Ljava/lang/String;")
+	midClipDataItemCoerceToText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "coerceToText", "(Landroid/content/Context;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -224,7 +227,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.coerceToText")
 	}
 
-	midclipDataItemGetHtmlText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getHtmlText", "()Ljava/lang/String;")
+	midClipDataItemGetHtmlText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getHtmlText", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -232,7 +235,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.getHtmlText")
 	}
 
-	midclipDataItemGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getIntent", "()Landroid/content/Intent;")
+	midClipDataItemGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getIntent", "()Landroid/content/Intent;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -240,7 +243,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.getIntent")
 	}
 
-	midclipDataItemGetIntentSender, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getIntentSender", "()Landroid/content/IntentSender;")
+	midClipDataItemGetIntentSender, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getIntentSender", "()Landroid/content/IntentSender;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -248,7 +251,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.getIntentSender")
 	}
 
-	midclipDataItemGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getText", "()Ljava/lang/String;")
+	midClipDataItemGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getText", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -256,7 +259,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.getText")
 	}
 
-	midclipDataItemGetTextLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getTextLinks", "()Landroid/view/textclassifier/TextLinks;")
+	midClipDataItemGetTextLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getTextLinks", "()Landroid/view/textclassifier/TextLinks;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -264,7 +267,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.getTextLinks")
 	}
 
-	midclipDataItemGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getUri", "()Landroid/net/Uri;")
+	midClipDataItemGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getUri", "()Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -272,7 +275,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.content.ClipData$Item.getUri")
 	}
 
-	midclipDataItemToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "toString", "()Ljava/lang/String;")
+	midClipDataItemToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

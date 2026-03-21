@@ -3,19 +3,19 @@
 package consts
 
 const (
-	AccountTypeLocal                      = "LOCAL"
-	ActionEventReminder                   = "android.intent.action.EVENT_REMINDER"
-	ActionHandleCustomEvent               = "android.provider.calendar.action.HANDLE_CUSTOM_EVENT"
-	ActionViewManagedProfileCalendarEvent = "android.provider.calendar.action.VIEW_MANAGED_PROFILE_CALENDAR_EVENT"
-	Authority                             = "com.android.calendar"
-	CallerIsSyncadapter                   = "caller_is_syncadapter"
-	ExtraCustomAppUri                     = "customAppUri"
-	ExtraEventAllDay                      = "allDay"
-	ExtraEventBeginTime                   = "beginTime"
-	ExtraEventEndTime                     = "endTime"
-	ExtraEventId                          = "id"
+	AccountTypeLocal                      string = "LOCAL"
+	ActionEventReminder                   string = "android.intent.action.EVENT_REMINDER"
+	ActionHandleCustomEvent               string = "android.provider.calendar.action.HANDLE_CUSTOM_EVENT"
+	ActionViewManagedProfileCalendarEvent string = "android.provider.calendar.action.VIEW_MANAGED_PROFILE_CALENDAR_EVENT"
+	Authority                             string = "com.android.calendar"
+	CallerIsSyncadapter                   string = "caller_is_syncadapter"
+	ExtraCustomAppUri                     string = "customAppUri"
+	ExtraEventAllDay                      string = "allDay"
+	ExtraEventBeginTime                   string = "beginTime"
+	ExtraEventEndTime                     string = "endTime"
+	ExtraEventId                          string = "id"
 )
 
 const (
-	ContentUri = 0
+	ContentUri int = 0
 )

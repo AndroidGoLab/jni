@@ -11,7 +11,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -20,28 +25,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/net"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -56,11 +71,11 @@ func run(vm *jni.VM) error {
 
 	// Print all transport type constants.
 	// These identify the transport mechanism of a network.
-	fmt.Fprintln(&output, "Transport types:")
-	fmt.Fprintf(&output, "  TransportCellular  = %d\n", net.TransportCellular)
-	fmt.Fprintf(&output, "  TransportWifi      = %d\n", net.TransportWifi)
-	fmt.Fprintf(&output, "  TransportBluetooth = %d\n", net.TransportBluetooth)
-	fmt.Fprintf(&output, "  TransportVpn       = %d\n", net.TransportVpn)
+	fmt.Fprintln(output, "Transport types:")
+	fmt.Fprintf(output, "  TransportCellular  = %d\n", net.TransportCellular)
+	fmt.Fprintf(output, "  TransportWifi      = %d\n", net.TransportWifi)
+	fmt.Fprintf(output, "  TransportBluetooth = %d\n", net.TransportBluetooth)
+	fmt.Fprintf(output, "  TransportVpn       = %d\n", net.TransportVpn)
 
 	// Package-internal Manager methods:
 	//   getActiveNetworkRaw()                    - get the active Network object
@@ -82,7 +97,7 @@ func run(vm *jni.VM) error {
 	//   OnCapabilitiesChanged(network *jni.Object, caps *jni.Object)
 	//     Called when network capabilities change.
 
-	fmt.Fprintln(&output, "ConnectivityManager ready")
+	fmt.Fprintln(output, "ConnectivityManager ready")
 	return nil
 }
 

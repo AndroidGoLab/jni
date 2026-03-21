@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// mediaController wraps android.media.session.MediaController.
-type mediaController struct {
+// MediaController wraps android.media.session.MediaController.
+type MediaController struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // AdjustVolume calls android.media.session.MediaController.adjustVolume.
-func (m *mediaController) AdjustVolume(arg0 int32, arg1 int32) error {
+func (m *MediaController) AdjustVolume(arg0 int32, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *mediaController) AdjustVolume(arg0 int32, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midmediaControllerAdjustVolume == nil {
+		if midMediaControllerAdjustVolume == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.adjustVolume is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaControllerAdjustVolume, jni.IntValue(arg0), jni.IntValue(arg1),
+			midMediaControllerAdjustVolume, jni.IntValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -47,7 +47,7 @@ func (m *mediaController) AdjustVolume(arg0 int32, arg1 int32) error {
 }
 
 // DispatchMediaButtonEvent calls android.media.session.MediaController.dispatchMediaButtonEvent.
-func (m *mediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, error) {
+func (m *MediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -55,14 +55,14 @@ func (m *mediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, erro
 			callErr = err
 			return err
 		}
-		if midmediaControllerDispatchMediaButtonEvent == nil {
+		if midMediaControllerDispatchMediaButtonEvent == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.dispatchMediaButtonEvent is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midmediaControllerDispatchMediaButtonEvent, jni.ObjectValue(arg0),
+			midMediaControllerDispatchMediaButtonEvent, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *mediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, erro
 }
 
 // GetExtras calls android.media.session.MediaController.getExtras.
-func (m *mediaController) GetExtras() (*jni.Object, error) {
+func (m *MediaController) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *mediaController) GetExtras() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetExtras == nil {
+		if midMediaControllerGetExtras == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getExtras is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetExtras,
+			midMediaControllerGetExtras,
 		)
 		if callErr != nil {
 			return callErr
@@ -99,7 +99,7 @@ func (m *mediaController) GetExtras() (*jni.Object, error) {
 }
 
 // GetFlags calls android.media.session.MediaController.getFlags.
-func (m *mediaController) GetFlags() (int64, error) {
+func (m *MediaController) GetFlags() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -107,13 +107,13 @@ func (m *mediaController) GetFlags() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetFlags == nil {
+		if midMediaControllerGetFlags == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getFlags is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midmediaControllerGetFlags,
+			midMediaControllerGetFlags,
 		)
 		if callErr != nil {
 			return callErr
@@ -124,7 +124,7 @@ func (m *mediaController) GetFlags() (int64, error) {
 }
 
 // GetMetadata calls android.media.session.MediaController.getMetadata.
-func (m *mediaController) GetMetadata() (*jni.Object, error) {
+func (m *MediaController) GetMetadata() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -132,13 +132,13 @@ func (m *mediaController) GetMetadata() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetMetadata == nil {
+		if midMediaControllerGetMetadata == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getMetadata is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetMetadata,
+			midMediaControllerGetMetadata,
 		)
 		if callErr != nil {
 			return callErr
@@ -149,7 +149,7 @@ func (m *mediaController) GetMetadata() (*jni.Object, error) {
 }
 
 // GetPackageName calls android.media.session.MediaController.getPackageName.
-func (m *mediaController) GetPackageName() (string, error) {
+func (m *MediaController) GetPackageName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -157,13 +157,13 @@ func (m *mediaController) GetPackageName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetPackageName == nil {
+		if midMediaControllerGetPackageName == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getPackageName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetPackageName,
+			midMediaControllerGetPackageName,
 		)
 		if callErr != nil {
 			return callErr
@@ -175,7 +175,7 @@ func (m *mediaController) GetPackageName() (string, error) {
 }
 
 // GetPlaybackInfo calls android.media.session.MediaController.getPlaybackInfo.
-func (m *mediaController) GetPlaybackInfo() (*jni.Object, error) {
+func (m *MediaController) GetPlaybackInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -183,13 +183,13 @@ func (m *mediaController) GetPlaybackInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetPlaybackInfo == nil {
+		if midMediaControllerGetPlaybackInfo == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getPlaybackInfo is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetPlaybackInfo,
+			midMediaControllerGetPlaybackInfo,
 		)
 		if callErr != nil {
 			return callErr
@@ -200,7 +200,7 @@ func (m *mediaController) GetPlaybackInfo() (*jni.Object, error) {
 }
 
 // GetPlaybackState calls android.media.session.MediaController.getPlaybackState.
-func (m *mediaController) GetPlaybackState() (*jni.Object, error) {
+func (m *MediaController) GetPlaybackState() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -208,13 +208,13 @@ func (m *mediaController) GetPlaybackState() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetPlaybackState == nil {
+		if midMediaControllerGetPlaybackState == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getPlaybackState is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetPlaybackState,
+			midMediaControllerGetPlaybackState,
 		)
 		if callErr != nil {
 			return callErr
@@ -225,7 +225,7 @@ func (m *mediaController) GetPlaybackState() (*jni.Object, error) {
 }
 
 // GetQueue calls android.media.session.MediaController.getQueue.
-func (m *mediaController) GetQueue() (*jni.Object, error) {
+func (m *MediaController) GetQueue() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -233,13 +233,13 @@ func (m *mediaController) GetQueue() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetQueue == nil {
+		if midMediaControllerGetQueue == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getQueue is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetQueue,
+			midMediaControllerGetQueue,
 		)
 		if callErr != nil {
 			return callErr
@@ -250,7 +250,7 @@ func (m *mediaController) GetQueue() (*jni.Object, error) {
 }
 
 // GetQueueTitle calls android.media.session.MediaController.getQueueTitle.
-func (m *mediaController) GetQueueTitle() (string, error) {
+func (m *MediaController) GetQueueTitle() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -258,13 +258,13 @@ func (m *mediaController) GetQueueTitle() (string, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetQueueTitle == nil {
+		if midMediaControllerGetQueueTitle == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getQueueTitle is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetQueueTitle,
+			midMediaControllerGetQueueTitle,
 		)
 		if callErr != nil {
 			return callErr
@@ -276,7 +276,7 @@ func (m *mediaController) GetQueueTitle() (string, error) {
 }
 
 // GetRatingType calls android.media.session.MediaController.getRatingType.
-func (m *mediaController) GetRatingType() (int32, error) {
+func (m *MediaController) GetRatingType() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -284,13 +284,13 @@ func (m *mediaController) GetRatingType() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetRatingType == nil {
+		if midMediaControllerGetRatingType == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getRatingType is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midmediaControllerGetRatingType,
+			midMediaControllerGetRatingType,
 		)
 		if callErr != nil {
 			return callErr
@@ -301,7 +301,7 @@ func (m *mediaController) GetRatingType() (int32, error) {
 }
 
 // GetSessionActivity calls android.media.session.MediaController.getSessionActivity.
-func (m *mediaController) GetSessionActivity() (*jni.Object, error) {
+func (m *MediaController) GetSessionActivity() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -309,13 +309,13 @@ func (m *mediaController) GetSessionActivity() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetSessionActivity == nil {
+		if midMediaControllerGetSessionActivity == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getSessionActivity is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetSessionActivity,
+			midMediaControllerGetSessionActivity,
 		)
 		if callErr != nil {
 			return callErr
@@ -326,7 +326,7 @@ func (m *mediaController) GetSessionActivity() (*jni.Object, error) {
 }
 
 // GetSessionInfo calls android.media.session.MediaController.getSessionInfo.
-func (m *mediaController) GetSessionInfo() (*jni.Object, error) {
+func (m *MediaController) GetSessionInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -334,13 +334,13 @@ func (m *mediaController) GetSessionInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetSessionInfo == nil {
+		if midMediaControllerGetSessionInfo == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getSessionInfo is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetSessionInfo,
+			midMediaControllerGetSessionInfo,
 		)
 		if callErr != nil {
 			return callErr
@@ -351,7 +351,7 @@ func (m *mediaController) GetSessionInfo() (*jni.Object, error) {
 }
 
 // GetSessionToken calls android.media.session.MediaController.getSessionToken.
-func (m *mediaController) GetSessionToken() (*jni.Object, error) {
+func (m *MediaController) GetSessionToken() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -359,13 +359,13 @@ func (m *mediaController) GetSessionToken() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetSessionToken == nil {
+		if midMediaControllerGetSessionToken == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getSessionToken is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetSessionToken,
+			midMediaControllerGetSessionToken,
 		)
 		if callErr != nil {
 			return callErr
@@ -376,7 +376,7 @@ func (m *mediaController) GetSessionToken() (*jni.Object, error) {
 }
 
 // GetTag calls android.media.session.MediaController.getTag.
-func (m *mediaController) GetTag() (string, error) {
+func (m *MediaController) GetTag() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -384,13 +384,13 @@ func (m *mediaController) GetTag() (string, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetTag == nil {
+		if midMediaControllerGetTag == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getTag is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetTag,
+			midMediaControllerGetTag,
 		)
 		if callErr != nil {
 			return callErr
@@ -402,7 +402,7 @@ func (m *mediaController) GetTag() (string, error) {
 }
 
 // GetTransportControls calls android.media.session.MediaController.getTransportControls.
-func (m *mediaController) GetTransportControls() (*jni.Object, error) {
+func (m *MediaController) GetTransportControls() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -410,13 +410,13 @@ func (m *mediaController) GetTransportControls() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midmediaControllerGetTransportControls == nil {
+		if midMediaControllerGetTransportControls == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.getTransportControls is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midmediaControllerGetTransportControls,
+			midMediaControllerGetTransportControls,
 		)
 		if callErr != nil {
 			return callErr
@@ -427,7 +427,7 @@ func (m *mediaController) GetTransportControls() (*jni.Object, error) {
 }
 
 // RegisterCallback calls android.media.session.MediaController.registerCallback.
-func (m *mediaController) RegisterCallback(arg0 *jni.Object) error {
+func (m *MediaController) RegisterCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -435,14 +435,14 @@ func (m *mediaController) RegisterCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midmediaControllerRegisterCallback == nil {
+		if midMediaControllerRegisterCallback == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.registerCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaControllerRegisterCallback, jni.ObjectValue(arg0),
+			midMediaControllerRegisterCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -450,7 +450,11 @@ func (m *mediaController) RegisterCallback(arg0 *jni.Object) error {
 }
 
 // SendCommand calls android.media.session.MediaController.sendCommand.
-func (m *mediaController) SendCommand(arg0 string, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *MediaController) SendCommand(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -458,7 +462,7 @@ func (m *mediaController) SendCommand(arg0 string, arg1 *jni.Object, arg2 *jni.O
 			callErr = err
 			return err
 		}
-		if midmediaControllerSendCommand == nil {
+		if midMediaControllerSendCommand == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.sendCommand is not available on this device")
 			return callErr
 		}
@@ -469,7 +473,7 @@ func (m *mediaController) SendCommand(arg0 string, arg1 *jni.Object, arg2 *jni.O
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaControllerSendCommand, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midMediaControllerSendCommand, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -477,7 +481,7 @@ func (m *mediaController) SendCommand(arg0 string, arg1 *jni.Object, arg2 *jni.O
 }
 
 // SetVolumeTo calls android.media.session.MediaController.setVolumeTo.
-func (m *mediaController) SetVolumeTo(arg0 int32, arg1 int32) error {
+func (m *MediaController) SetVolumeTo(arg0 int32, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -485,14 +489,14 @@ func (m *mediaController) SetVolumeTo(arg0 int32, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midmediaControllerSetVolumeTo == nil {
+		if midMediaControllerSetVolumeTo == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.setVolumeTo is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaControllerSetVolumeTo, jni.IntValue(arg0), jni.IntValue(arg1),
+			midMediaControllerSetVolumeTo, jni.IntValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -500,7 +504,7 @@ func (m *mediaController) SetVolumeTo(arg0 int32, arg1 int32) error {
 }
 
 // UnregisterCallback calls android.media.session.MediaController.unregisterCallback.
-func (m *mediaController) UnregisterCallback(arg0 *jni.Object) error {
+func (m *MediaController) UnregisterCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -508,14 +512,14 @@ func (m *mediaController) UnregisterCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midmediaControllerUnregisterCallback == nil {
+		if midMediaControllerUnregisterCallback == nil {
 			callErr = fmt.Errorf("android.media.session.MediaController.unregisterCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaControllerUnregisterCallback, jni.ObjectValue(arg0),
+			midMediaControllerUnregisterCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

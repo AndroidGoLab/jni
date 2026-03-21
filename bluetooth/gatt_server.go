@@ -133,7 +133,7 @@ func (m *GattServer) Connect(arg0 *jni.Object, arg1 bool) (bool, error) {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -278,7 +278,11 @@ func (m *GattServer) GetServices() (*jni.Object, error) {
 }
 
 // NotifyCharacteristicChanged3 calls android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged.
-func (m *GattServer) NotifyCharacteristicChanged3(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (bool, error) {
+func (m *GattServer) NotifyCharacteristicChanged3(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 bool,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -293,7 +297,7 @@ func (m *GattServer) NotifyCharacteristicChanged3(arg0 *jni.Object, arg1 *jni.Ob
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -310,7 +314,12 @@ func (m *GattServer) NotifyCharacteristicChanged3(arg0 *jni.Object, arg1 *jni.Ob
 }
 
 // NotifyCharacteristicChanged4_1 calls android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged.
-func (m *GattServer) NotifyCharacteristicChanged4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 bool, arg3 *jni.Object) (int32, error) {
+func (m *GattServer) NotifyCharacteristicChanged4_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 bool,
+	arg3 *jni.Object,
+) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -325,7 +334,7 @@ func (m *GattServer) NotifyCharacteristicChanged4_1(arg0 *jni.Object, arg1 *jni.
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		result, callErr = env.CallIntMethod(
@@ -391,7 +400,13 @@ func (m *GattServer) RemoveService(arg0 *jni.Object) (bool, error) {
 }
 
 // SendResponse calls android.bluetooth.BluetoothGattServer.sendResponse.
-func (m *GattServer) SendResponse(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 *jni.Object) (bool, error) {
+func (m *GattServer) SendResponse(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 *jni.Object,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -418,7 +433,12 @@ func (m *GattServer) SendResponse(arg0 *jni.Object, arg1 int32, arg2 int32, arg3
 }
 
 // SetPreferredPhy calls android.bluetooth.BluetoothGattServer.setPreferredPhy.
-func (m *GattServer) SetPreferredPhy(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32) error {
+func (m *GattServer) SetPreferredPhy(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

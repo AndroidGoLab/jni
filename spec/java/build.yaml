@@ -31,7 +31,7 @@ classes:
           returns: String
           error: true
     - java_class: android.os.Build$VERSION
-      go_type: BuildVERSION
+      go_type: VERSION
 constants:
     - go_name: Board
       value: '""'

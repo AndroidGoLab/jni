@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// bluetoothLeScanner wraps android.bluetooth.le.BluetoothLeScanner.
-type bluetoothLeScanner struct {
+// BluetoothLeScanner wraps android.bluetooth.le.BluetoothLeScanner.
+type BluetoothLeScanner struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // FlushPendingScanResults calls android.bluetooth.le.BluetoothLeScanner.flushPendingScanResults.
-func (m *bluetoothLeScanner) FlushPendingScanResults(arg0 *jni.Object) error {
+func (m *BluetoothLeScanner) FlushPendingScanResults(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *bluetoothLeScanner) FlushPendingScanResults(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbluetoothLeScannerFlushPendingScanResults == nil {
+		if midBluetoothLeScannerFlushPendingScanResults == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.flushPendingScanResults is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeScannerFlushPendingScanResults, jni.ObjectValue(arg0),
+			midBluetoothLeScannerFlushPendingScanResults, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -47,7 +47,7 @@ func (m *bluetoothLeScanner) FlushPendingScanResults(arg0 *jni.Object) error {
 }
 
 // StartScan1 calls android.bluetooth.le.BluetoothLeScanner.startScan.
-func (m *bluetoothLeScanner) StartScan1(arg0 *jni.Object) error {
+func (m *BluetoothLeScanner) StartScan1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -55,14 +55,14 @@ func (m *bluetoothLeScanner) StartScan1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbluetoothLeScannerStartScan1 == nil {
+		if midBluetoothLeScannerStartScan1 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.startScan is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeScannerStartScan1, jni.ObjectValue(arg0),
+			midBluetoothLeScannerStartScan1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -70,7 +70,11 @@ func (m *bluetoothLeScanner) StartScan1(arg0 *jni.Object) error {
 }
 
 // StartScan3_1 calls android.bluetooth.le.BluetoothLeScanner.startScan.
-func (m *bluetoothLeScanner) StartScan3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (int32, error) {
+func (m *BluetoothLeScanner) StartScan3_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -78,14 +82,14 @@ func (m *bluetoothLeScanner) StartScan3_1(arg0 *jni.Object, arg1 *jni.Object, ar
 			callErr = err
 			return err
 		}
-		if midbluetoothLeScannerStartScan3_1 == nil {
+		if midBluetoothLeScannerStartScan3_1 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.startScan is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbluetoothLeScannerStartScan3_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midBluetoothLeScannerStartScan3_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -96,7 +100,11 @@ func (m *bluetoothLeScanner) StartScan3_1(arg0 *jni.Object, arg1 *jni.Object, ar
 }
 
 // StartScan3_2 calls android.bluetooth.le.BluetoothLeScanner.startScan.
-func (m *bluetoothLeScanner) StartScan3_2(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *BluetoothLeScanner) StartScan3_2(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -104,14 +112,14 @@ func (m *bluetoothLeScanner) StartScan3_2(arg0 *jni.Object, arg1 *jni.Object, ar
 			callErr = err
 			return err
 		}
-		if midbluetoothLeScannerStartScan3_2 == nil {
+		if midBluetoothLeScannerStartScan3_2 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.startScan is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeScannerStartScan3_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midBluetoothLeScannerStartScan3_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -119,7 +127,7 @@ func (m *bluetoothLeScanner) StartScan3_2(arg0 *jni.Object, arg1 *jni.Object, ar
 }
 
 // StopScan1 calls android.bluetooth.le.BluetoothLeScanner.stopScan.
-func (m *bluetoothLeScanner) StopScan1(arg0 *jni.Object) error {
+func (m *BluetoothLeScanner) StopScan1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -127,14 +135,14 @@ func (m *bluetoothLeScanner) StopScan1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbluetoothLeScannerStopScan1 == nil {
+		if midBluetoothLeScannerStopScan1 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.stopScan is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeScannerStopScan1, jni.ObjectValue(arg0),
+			midBluetoothLeScannerStopScan1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -142,7 +150,7 @@ func (m *bluetoothLeScanner) StopScan1(arg0 *jni.Object) error {
 }
 
 // StopScan1_1 calls android.bluetooth.le.BluetoothLeScanner.stopScan.
-func (m *bluetoothLeScanner) StopScan1_1(arg0 *jni.Object) error {
+func (m *BluetoothLeScanner) StopScan1_1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -150,14 +158,14 @@ func (m *bluetoothLeScanner) StopScan1_1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbluetoothLeScannerStopScan1_1 == nil {
+		if midBluetoothLeScannerStopScan1_1 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.stopScan is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeScannerStopScan1_1, jni.ObjectValue(arg0),
+			midBluetoothLeScannerStopScan1_1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

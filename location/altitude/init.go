@@ -16,13 +16,16 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clsaltitudeConverter                            *jni.GlobalRef
-	midaltitudeConverterAddMslAltitudeToLocation    jni.MethodID
-	midaltitudeConverterTryAddMslAltitudeToLocation jni.MethodID
+	clsConverter                            *jni.GlobalRef
+	midConverterAddMslAltitudeToLocation    jni.MethodID
+	midConverterTryAddMslAltitudeToLocation jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -53,9 +56,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.location.altitude.AltitudeConverter: %w", err)
 	}
-	clsaltitudeConverter = env.NewGlobalRef(&c.Object)
+	clsConverter = env.NewGlobalRef(&c.Object)
 
-	midaltitudeConverterAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaltitudeConverter)), "addMslAltitudeToLocation", "(Landroid/content/Context;Landroid/location/Location;)V")
+	midConverterAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "addMslAltitudeToLocation", "(Landroid/content/Context;Landroid/location/Location;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -63,7 +66,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.location.altitude.AltitudeConverter.addMslAltitudeToLocation")
 	}
 
-	midaltitudeConverterTryAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaltitudeConverter)), "tryAddMslAltitudeToLocation", "(Landroid/location/Location;)Z")
+	midConverterTryAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "tryAddMslAltitudeToLocation", "(Landroid/location/Location;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

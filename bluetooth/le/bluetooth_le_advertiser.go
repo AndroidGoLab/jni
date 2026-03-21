@@ -17,14 +17,18 @@ var (
 	_ *app.Context
 )
 
-// bluetoothLeAdvertiser wraps android.bluetooth.le.BluetoothLeAdvertiser.
-type bluetoothLeAdvertiser struct {
+// BluetoothLeAdvertiser wraps android.bluetooth.le.BluetoothLeAdvertiser.
+type BluetoothLeAdvertiser struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // StartAdvertising3 calls android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising.
-func (m *bluetoothLeAdvertiser) StartAdvertising3(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *BluetoothLeAdvertiser) StartAdvertising3(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +36,14 @@ func (m *bluetoothLeAdvertiser) StartAdvertising3(arg0 *jni.Object, arg1 *jni.Ob
 			callErr = err
 			return err
 		}
-		if midbluetoothLeAdvertiserStartAdvertising3 == nil {
+		if midBluetoothLeAdvertiserStartAdvertising3 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeAdvertiserStartAdvertising3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midBluetoothLeAdvertiserStartAdvertising3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -47,7 +51,12 @@ func (m *bluetoothLeAdvertiser) StartAdvertising3(arg0 *jni.Object, arg1 *jni.Ob
 }
 
 // StartAdvertising4_1 calls android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising.
-func (m *bluetoothLeAdvertiser) StartAdvertising4_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *BluetoothLeAdvertiser) StartAdvertising4_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -55,14 +64,14 @@ func (m *bluetoothLeAdvertiser) StartAdvertising4_1(arg0 *jni.Object, arg1 *jni.
 			callErr = err
 			return err
 		}
-		if midbluetoothLeAdvertiserStartAdvertising4_1 == nil {
+		if midBluetoothLeAdvertiserStartAdvertising4_1 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeAdvertiserStartAdvertising4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midBluetoothLeAdvertiserStartAdvertising4_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
@@ -70,7 +79,14 @@ func (m *bluetoothLeAdvertiser) StartAdvertising4_1(arg0 *jni.Object, arg1 *jni.
 }
 
 // StartAdvertisingSet6 calls android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet.
-func (m *bluetoothLeAdvertiser) StartAdvertisingSet6(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object, arg5 *jni.Object) error {
+func (m *BluetoothLeAdvertiser) StartAdvertisingSet6(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+	arg5 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -78,14 +94,14 @@ func (m *bluetoothLeAdvertiser) StartAdvertisingSet6(arg0 *jni.Object, arg1 *jni
 			callErr = err
 			return err
 		}
-		if midbluetoothLeAdvertiserStartAdvertisingSet6 == nil {
+		if midBluetoothLeAdvertiserStartAdvertisingSet6 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeAdvertiserStartAdvertisingSet6, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5),
+			midBluetoothLeAdvertiserStartAdvertisingSet6, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5),
 		)
 		return callErr
 	})
@@ -93,7 +109,16 @@ func (m *bluetoothLeAdvertiser) StartAdvertisingSet6(arg0 *jni.Object, arg1 *jni
 }
 
 // StartAdvertisingSet8_1 calls android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet.
-func (m *bluetoothLeAdvertiser) StartAdvertisingSet8_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object, arg5 int32, arg6 int32, arg7 *jni.Object) error {
+func (m *BluetoothLeAdvertiser) StartAdvertisingSet8_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+	arg5 int32,
+	arg6 int32,
+	arg7 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -101,14 +126,14 @@ func (m *bluetoothLeAdvertiser) StartAdvertisingSet8_1(arg0 *jni.Object, arg1 *j
 			callErr = err
 			return err
 		}
-		if midbluetoothLeAdvertiserStartAdvertisingSet8_1 == nil {
+		if midBluetoothLeAdvertiserStartAdvertisingSet8_1 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.startAdvertisingSet is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeAdvertiserStartAdvertisingSet8_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6), jni.ObjectValue(arg7),
+			midBluetoothLeAdvertiserStartAdvertisingSet8_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6), jni.ObjectValue(arg7),
 		)
 		return callErr
 	})
@@ -116,7 +141,7 @@ func (m *bluetoothLeAdvertiser) StartAdvertisingSet8_1(arg0 *jni.Object, arg1 *j
 }
 
 // StopAdvertising calls android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertising.
-func (m *bluetoothLeAdvertiser) StopAdvertising(arg0 *jni.Object) error {
+func (m *BluetoothLeAdvertiser) StopAdvertising(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -124,14 +149,14 @@ func (m *bluetoothLeAdvertiser) StopAdvertising(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbluetoothLeAdvertiserStopAdvertising == nil {
+		if midBluetoothLeAdvertiserStopAdvertising == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertising is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeAdvertiserStopAdvertising, jni.ObjectValue(arg0),
+			midBluetoothLeAdvertiserStopAdvertising, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -139,7 +164,7 @@ func (m *bluetoothLeAdvertiser) StopAdvertising(arg0 *jni.Object) error {
 }
 
 // StopAdvertisingSet calls android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertisingSet.
-func (m *bluetoothLeAdvertiser) StopAdvertisingSet(arg0 *jni.Object) error {
+func (m *BluetoothLeAdvertiser) StopAdvertisingSet(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -147,14 +172,14 @@ func (m *bluetoothLeAdvertiser) StopAdvertisingSet(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midbluetoothLeAdvertiserStopAdvertisingSet == nil {
+		if midBluetoothLeAdvertiserStopAdvertisingSet == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertisingSet is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbluetoothLeAdvertiserStopAdvertisingSet, jni.ObjectValue(arg0),
+			midBluetoothLeAdvertiserStopAdvertisingSet, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

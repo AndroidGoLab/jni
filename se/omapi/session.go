@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// session wraps android.se.omapi.Session.
-type session struct {
+// Session wraps android.se.omapi.Session.
+type Session struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Close calls android.se.omapi.Session.close.
-func (m *session) Close() error {
+func (m *Session) Close() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *session) Close() error {
 			callErr = err
 			return err
 		}
-		if midsessionClose == nil {
+		if midSessionClose == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.close is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midsessionClose,
+			midSessionClose,
 		)
 		return callErr
 	})
@@ -46,7 +46,7 @@ func (m *session) Close() error {
 }
 
 // CloseChannels calls android.se.omapi.Session.closeChannels.
-func (m *session) CloseChannels() error {
+func (m *Session) CloseChannels() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -54,13 +54,13 @@ func (m *session) CloseChannels() error {
 			callErr = err
 			return err
 		}
-		if midsessionCloseChannels == nil {
+		if midSessionCloseChannels == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.closeChannels is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midsessionCloseChannels,
+			midSessionCloseChannels,
 		)
 		return callErr
 	})
@@ -68,7 +68,7 @@ func (m *session) CloseChannels() error {
 }
 
 // GetATR calls android.se.omapi.Session.getATR.
-func (m *session) GetATR() (*jni.Object, error) {
+func (m *Session) GetATR() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -76,13 +76,13 @@ func (m *session) GetATR() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midsessionGetATR == nil {
+		if midSessionGetATR == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.getATR is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midsessionGetATR,
+			midSessionGetATR,
 		)
 		if callErr != nil {
 			return callErr
@@ -93,7 +93,7 @@ func (m *session) GetATR() (*jni.Object, error) {
 }
 
 // GetReader calls android.se.omapi.Session.getReader.
-func (m *session) GetReader() (*jni.Object, error) {
+func (m *Session) GetReader() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -101,13 +101,13 @@ func (m *session) GetReader() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midsessionGetReader == nil {
+		if midSessionGetReader == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.getReader is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midsessionGetReader,
+			midSessionGetReader,
 		)
 		if callErr != nil {
 			return callErr
@@ -118,7 +118,7 @@ func (m *session) GetReader() (*jni.Object, error) {
 }
 
 // IsClosed calls android.se.omapi.Session.isClosed.
-func (m *session) IsClosed() (bool, error) {
+func (m *Session) IsClosed() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -126,13 +126,13 @@ func (m *session) IsClosed() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midsessionIsClosed == nil {
+		if midSessionIsClosed == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.isClosed is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midsessionIsClosed,
+			midSessionIsClosed,
 		)
 		if callErr != nil {
 			return callErr
@@ -144,7 +144,7 @@ func (m *session) IsClosed() (bool, error) {
 }
 
 // OpenBasicChannel1 calls android.se.omapi.Session.openBasicChannel.
-func (m *session) OpenBasicChannel1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Session) OpenBasicChannel1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -152,14 +152,14 @@ func (m *session) OpenBasicChannel1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midsessionOpenBasicChannel1 == nil {
+		if midSessionOpenBasicChannel1 == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.openBasicChannel is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midsessionOpenBasicChannel1, jni.ObjectValue(arg0),
+			midSessionOpenBasicChannel1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -170,7 +170,7 @@ func (m *session) OpenBasicChannel1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // OpenBasicChannel2_1 calls android.se.omapi.Session.openBasicChannel.
-func (m *session) OpenBasicChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object, error) {
+func (m *Session) OpenBasicChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -178,14 +178,14 @@ func (m *session) OpenBasicChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object,
 			callErr = err
 			return err
 		}
-		if midsessionOpenBasicChannel2_1 == nil {
+		if midSessionOpenBasicChannel2_1 == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.openBasicChannel is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midsessionOpenBasicChannel2_1, jni.ObjectValue(arg0), jni.ByteValue(arg1),
+			midSessionOpenBasicChannel2_1, jni.ObjectValue(arg0), jni.ByteValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -196,7 +196,7 @@ func (m *session) OpenBasicChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object,
 }
 
 // OpenLogicalChannel1 calls android.se.omapi.Session.openLogicalChannel.
-func (m *session) OpenLogicalChannel1(arg0 *jni.Object) (*jni.Object, error) {
+func (m *Session) OpenLogicalChannel1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -204,14 +204,14 @@ func (m *session) OpenLogicalChannel1(arg0 *jni.Object) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midsessionOpenLogicalChannel1 == nil {
+		if midSessionOpenLogicalChannel1 == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.openLogicalChannel is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midsessionOpenLogicalChannel1, jni.ObjectValue(arg0),
+			midSessionOpenLogicalChannel1, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -222,7 +222,7 @@ func (m *session) OpenLogicalChannel1(arg0 *jni.Object) (*jni.Object, error) {
 }
 
 // OpenLogicalChannel2_1 calls android.se.omapi.Session.openLogicalChannel.
-func (m *session) OpenLogicalChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object, error) {
+func (m *Session) OpenLogicalChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -230,14 +230,14 @@ func (m *session) OpenLogicalChannel2_1(arg0 *jni.Object, arg1 int8) (*jni.Objec
 			callErr = err
 			return err
 		}
-		if midsessionOpenLogicalChannel2_1 == nil {
+		if midSessionOpenLogicalChannel2_1 == nil {
 			callErr = fmt.Errorf("android.se.omapi.Session.openLogicalChannel is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midsessionOpenLogicalChannel2_1, jni.ObjectValue(arg0), jni.ByteValue(arg1),
+			midSessionOpenLogicalChannel2_1, jni.ObjectValue(arg0), jni.ByteValue(arg1),
 		)
 		if callErr != nil {
 			return callErr

@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// lightState wraps android.hardware.lights.LightState.
-type lightState struct {
+// LightState wraps android.hardware.lights.LightState.
+type LightState struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.hardware.lights.LightState.describeContents.
-func (m *lightState) DescribeContents() (int32, error) {
+func (m *LightState) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *lightState) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightStateDescribeContents == nil {
+		if midLightStateDescribeContents == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightStateDescribeContents,
+			midLightStateDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *lightState) DescribeContents() (int32, error) {
 }
 
 // GetColor calls android.hardware.lights.LightState.getColor.
-func (m *lightState) GetColor() (int32, error) {
+func (m *LightState) GetColor() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *lightState) GetColor() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightStateGetColor == nil {
+		if midLightStateGetColor == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState.getColor is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightStateGetColor,
+			midLightStateGetColor,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *lightState) GetColor() (int32, error) {
 }
 
 // GetPlayerId calls android.hardware.lights.LightState.getPlayerId.
-func (m *lightState) GetPlayerId() (int32, error) {
+func (m *LightState) GetPlayerId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *lightState) GetPlayerId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightStateGetPlayerId == nil {
+		if midLightStateGetPlayerId == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState.getPlayerId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightStateGetPlayerId,
+			midLightStateGetPlayerId,
 		)
 		if callErr != nil {
 			return callErr
@@ -99,7 +99,7 @@ func (m *lightState) GetPlayerId() (int32, error) {
 }
 
 // ToString calls android.hardware.lights.LightState.toString.
-func (m *lightState) ToString() (string, error) {
+func (m *LightState) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -107,13 +107,13 @@ func (m *lightState) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midlightStateToString == nil {
+		if midLightStateToString == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midlightStateToString,
+			midLightStateToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -125,7 +125,7 @@ func (m *lightState) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.hardware.lights.LightState.writeToParcel.
-func (m *lightState) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *LightState) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -133,14 +133,14 @@ func (m *lightState) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midlightStateWriteToParcel == nil {
+		if midLightStateWriteToParcel == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlightStateWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midLightStateWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

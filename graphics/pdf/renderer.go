@@ -188,7 +188,7 @@ func (m *Renderer) Write(arg0 *jni.Object, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(

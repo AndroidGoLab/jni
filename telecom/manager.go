@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "telecom"
+
 // Manager wraps android.telecom.TelecomManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("telecom")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("telecom service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -66,7 +68,11 @@ func (m *Manager) Close() {
 }
 
 // AcceptHandover calls android.telecom.TelecomManager.acceptHandover.
-func (m *Manager) AcceptHandover(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+func (m *Manager) AcceptHandover(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -134,7 +140,13 @@ func (m *Manager) AcceptRingingCall1_1(arg0 int32) error {
 }
 
 // AddCall calls android.telecom.TelecomManager.addCall.
-func (m *Manager) AddCall(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) AddCall(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -952,7 +964,7 @@ func (m *Manager) ShowInCallScreen(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(

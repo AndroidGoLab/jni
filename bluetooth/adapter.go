@@ -353,7 +353,11 @@ func (m *Adapter) GetProfileConnectionState(arg0 int32) (int32, error) {
 }
 
 // GetProfileProxy calls android.bluetooth.BluetoothAdapter.getProfileProxy.
-func (m *Adapter) GetProfileProxy(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) (bool, error) {
+func (m *Adapter) GetProfileProxy(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 int32,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

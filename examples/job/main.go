@@ -11,7 +11,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -20,28 +25,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/app/job"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -55,31 +70,31 @@ func run(vm *jni.VM) error {
 	defer sched.Close()
 
 	// Print all result code constants.
-	fmt.Fprintln(&output, "Result codes:")
-	fmt.Fprintf(&output, "  ResultSuccess = %d\n", job.ResultSuccess)
-	fmt.Fprintf(&output, "  ResultFailure = %d\n", job.ResultFailure)
+	fmt.Fprintln(output, "Result codes:")
+	fmt.Fprintf(output, "  ResultSuccess = %d\n", job.ResultSuccess)
+	fmt.Fprintf(output, "  ResultFailure = %d\n", job.ResultFailure)
 
 	// Print all network type constants.
-	fmt.Fprintln(&output, "Network types:")
-	fmt.Fprintf(&output, "  NetworkTypeNone       = %d\n", job.NetworkTypeNone)
-	fmt.Fprintf(&output, "  NetworkTypeAny        = %d\n", job.NetworkTypeAny)
-	fmt.Fprintf(&output, "  NetworkTypeUnmetered  = %d\n", job.NetworkTypeUnmetered)
-	fmt.Fprintf(&output, "  NetworkTypeNotRoaming = %d\n", job.NetworkTypeNotRoaming)
-	fmt.Fprintf(&output, "  NetworkTypeCellular   = %d\n", job.NetworkTypeCellular)
+	fmt.Fprintln(output, "Network types:")
+	fmt.Fprintf(output, "  NetworkTypeNone       = %d\n", job.NetworkTypeNone)
+	fmt.Fprintf(output, "  NetworkTypeAny        = %d\n", job.NetworkTypeAny)
+	fmt.Fprintf(output, "  NetworkTypeUnmetered  = %d\n", job.NetworkTypeUnmetered)
+	fmt.Fprintf(output, "  NetworkTypeNotRoaming = %d\n", job.NetworkTypeNotRoaming)
+	fmt.Fprintf(output, "  NetworkTypeCellular   = %d\n", job.NetworkTypeCellular)
 
 	// Print backoff policy constants.
-	fmt.Fprintln(&output, "Backoff policies:")
-	fmt.Fprintf(&output, "  BackoffPolicyLinear      = %d\n", job.BackoffPolicyLinear)
-	fmt.Fprintf(&output, "  BackoffPolicyExponential = %d\n", job.BackoffPolicyExponential)
+	fmt.Fprintln(output, "Backoff policies:")
+	fmt.Fprintf(output, "  BackoffPolicyLinear      = %d\n", job.BackoffPolicyLinear)
+	fmt.Fprintf(output, "  BackoffPolicyExponential = %d\n", job.BackoffPolicyExponential)
 
 	// CancelInAllNamespaces cancels all jobs in all namespaces.
 	if err := sched.CancelInAllNamespaces(); err != nil {
-		fmt.Fprintf(&output, "CancelInAllNamespaces: %v (expected on older APIs)\n", err)
+		fmt.Fprintf(output, "CancelInAllNamespaces: %v (expected on older APIs)\n", err)
 	} else {
-		fmt.Fprintln(&output, "cancelled all jobs in all namespaces")
+		fmt.Fprintln(output, "cancelled all jobs in all namespaces")
 	}
 
-	fmt.Fprintln(&output, "JobScheduler example complete")
+	fmt.Fprintln(output, "JobScheduler example complete")
 	return nil
 }
 

@@ -20,53 +20,15 @@ var (
 // Manager wraps android.net.nsd.NsdManager.
 type Manager struct {
 	VM  *jni.VM
-	Ctx *app.Context
 	Obj *jni.GlobalRef
 }
 
-// NewManager obtains android.net.nsd.NsdManager from the Android system service manager.
-func NewManager(ctx *app.Context) (*Manager, error) {
-	if ctx == nil {
-		return nil, fmt.Errorf("Manager: nil Context")
-	}
-	var mgr Manager
-	mgr.VM = ctx.VM
-	mgr.Ctx = ctx
-
-	err := mgr.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		svc, err := ctx.GetSystemService("servicediscovery")
-		if err != nil {
-			return err
-		}
-		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("servicediscovery service not available")
-		}
-		mgr.Obj = env.NewGlobalRef(svc)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &mgr, nil
-}
-
-// Close releases the global reference to the underlying Java object.
-// After Close, the Manager must not be used.
-func (m *Manager) Close() {
-	if m.Obj != nil {
-		m.VM.Do(func(env *jni.Env) error {
-			env.DeleteGlobalRef(m.Obj)
-			m.Obj = nil
-			return nil
-		})
-	}
-}
-
 // DiscoverServices3 calls android.net.nsd.NsdManager.discoverServices.
-func (m *Manager) DiscoverServices3(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) DiscoverServices3(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -89,7 +51,13 @@ func (m *Manager) DiscoverServices3(arg0 *jni.Object, arg1 *jni.Object, arg2 *jn
 }
 
 // DiscoverServices5_1 calls android.net.nsd.NsdManager.discoverServices.
-func (m *Manager) DiscoverServices5_1(arg0 string, arg1 int32, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) DiscoverServices5_1(
+	arg0 string,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -116,7 +84,13 @@ func (m *Manager) DiscoverServices5_1(arg0 string, arg1 int32, arg2 *jni.Object,
 }
 
 // DiscoverServices5_2 calls android.net.nsd.NsdManager.discoverServices.
-func (m *Manager) DiscoverServices5_2(arg0 string, arg1 int32, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) DiscoverServices5_2(
+	arg0 string,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -143,7 +117,11 @@ func (m *Manager) DiscoverServices5_2(arg0 string, arg1 int32, arg2 *jni.Object,
 }
 
 // DiscoverServices3_3 calls android.net.nsd.NsdManager.discoverServices.
-func (m *Manager) DiscoverServices3_3(arg0 string, arg1 int32, arg2 *jni.Object) error {
+func (m *Manager) DiscoverServices3_3(
+	arg0 string,
+	arg1 int32,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -170,7 +148,11 @@ func (m *Manager) DiscoverServices3_3(arg0 string, arg1 int32, arg2 *jni.Object)
 }
 
 // RegisterService3 calls android.net.nsd.NsdManager.registerService.
-func (m *Manager) RegisterService3(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+func (m *Manager) RegisterService3(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -193,7 +175,12 @@ func (m *Manager) RegisterService3(arg0 *jni.Object, arg1 int32, arg2 *jni.Objec
 }
 
 // RegisterService4_1 calls android.net.nsd.NsdManager.registerService.
-func (m *Manager) RegisterService4_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) RegisterService4_1(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -216,7 +203,11 @@ func (m *Manager) RegisterService4_1(arg0 *jni.Object, arg1 int32, arg2 *jni.Obj
 }
 
 // RegisterServiceInfoCallback calls android.net.nsd.NsdManager.registerServiceInfoCallback.
-func (m *Manager) RegisterServiceInfoCallback(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) RegisterServiceInfoCallback(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -262,7 +253,11 @@ func (m *Manager) ResolveService2(arg0 *jni.Object, arg1 *jni.Object) error {
 }
 
 // ResolveService3_1 calls android.net.nsd.NsdManager.resolveService.
-func (m *Manager) ResolveService3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) ResolveService3_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

@@ -3,12 +3,12 @@
 package consts
 
 const (
-	Creator                    = 0
-	LightCapabilityBrightness  = 1
-	LightCapabilityColorRgb    = 2
-	LightCapabilityRgb         = 0
-	LightTypeInput             = 10001
-	LightTypeKeyboardBacklight = 10003
-	LightTypeMicrophone        = 8
-	LightTypePlayerId          = 10002
+	Creator                    int = 0
+	LightCapabilityBrightness  int = 1
+	LightCapabilityColorRgb    int = 2
+	LightCapabilityRgb         int = 0
+	LightTypeInput             int = 10001
+	LightTypeKeyboardBacklight int = 10003
+	LightTypeMicrophone        int = 8
+	LightTypePlayerId          int = 10002
 )

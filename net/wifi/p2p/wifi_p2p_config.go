@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// wifiP2pConfig wraps android.net.wifi.p2p.WifiP2pConfig.
-type wifiP2pConfig struct {
+// WifiP2pConfig wraps android.net.wifi.p2p.WifiP2pConfig.
+type WifiP2pConfig struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.net.wifi.p2p.WifiP2pConfig.describeContents.
-func (m *wifiP2pConfig) DescribeContents() (int32, error) {
+func (m *WifiP2pConfig) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *wifiP2pConfig) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigDescribeContents == nil {
+		if midWifiP2pConfigDescribeContents == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pConfigDescribeContents,
+			midWifiP2pConfigDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *wifiP2pConfig) DescribeContents() (int32, error) {
 }
 
 // GetGroupClientIpProvisioningMode calls android.net.wifi.p2p.WifiP2pConfig.getGroupClientIpProvisioningMode.
-func (m *wifiP2pConfig) GetGroupClientIpProvisioningMode() (int32, error) {
+func (m *WifiP2pConfig) GetGroupClientIpProvisioningMode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,13 +57,13 @@ func (m *wifiP2pConfig) GetGroupClientIpProvisioningMode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetGroupClientIpProvisioningMode == nil {
+		if midWifiP2pConfigGetGroupClientIpProvisioningMode == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getGroupClientIpProvisioningMode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pConfigGetGroupClientIpProvisioningMode,
+			midWifiP2pConfigGetGroupClientIpProvisioningMode,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,7 +74,7 @@ func (m *wifiP2pConfig) GetGroupClientIpProvisioningMode() (int32, error) {
 }
 
 // GetGroupOwnerBand calls android.net.wifi.p2p.WifiP2pConfig.getGroupOwnerBand.
-func (m *wifiP2pConfig) GetGroupOwnerBand() (int32, error) {
+func (m *WifiP2pConfig) GetGroupOwnerBand() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -82,13 +82,13 @@ func (m *wifiP2pConfig) GetGroupOwnerBand() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetGroupOwnerBand == nil {
+		if midWifiP2pConfigGetGroupOwnerBand == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getGroupOwnerBand is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pConfigGetGroupOwnerBand,
+			midWifiP2pConfigGetGroupOwnerBand,
 		)
 		if callErr != nil {
 			return callErr
@@ -99,7 +99,7 @@ func (m *wifiP2pConfig) GetGroupOwnerBand() (int32, error) {
 }
 
 // GetGroupOwnerVersion calls android.net.wifi.p2p.WifiP2pConfig.getGroupOwnerVersion.
-func (m *wifiP2pConfig) GetGroupOwnerVersion() (int32, error) {
+func (m *WifiP2pConfig) GetGroupOwnerVersion() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -107,13 +107,13 @@ func (m *wifiP2pConfig) GetGroupOwnerVersion() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetGroupOwnerVersion == nil {
+		if midWifiP2pConfigGetGroupOwnerVersion == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getGroupOwnerVersion is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pConfigGetGroupOwnerVersion,
+			midWifiP2pConfigGetGroupOwnerVersion,
 		)
 		if callErr != nil {
 			return callErr
@@ -124,7 +124,7 @@ func (m *wifiP2pConfig) GetGroupOwnerVersion() (int32, error) {
 }
 
 // GetNetworkId calls android.net.wifi.p2p.WifiP2pConfig.getNetworkId.
-func (m *wifiP2pConfig) GetNetworkId() (int32, error) {
+func (m *WifiP2pConfig) GetNetworkId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -132,13 +132,13 @@ func (m *wifiP2pConfig) GetNetworkId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetNetworkId == nil {
+		if midWifiP2pConfigGetNetworkId == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getNetworkId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pConfigGetNetworkId,
+			midWifiP2pConfigGetNetworkId,
 		)
 		if callErr != nil {
 			return callErr
@@ -149,7 +149,7 @@ func (m *wifiP2pConfig) GetNetworkId() (int32, error) {
 }
 
 // GetNetworkName calls android.net.wifi.p2p.WifiP2pConfig.getNetworkName.
-func (m *wifiP2pConfig) GetNetworkName() (string, error) {
+func (m *WifiP2pConfig) GetNetworkName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -157,13 +157,13 @@ func (m *wifiP2pConfig) GetNetworkName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetNetworkName == nil {
+		if midWifiP2pConfigGetNetworkName == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getNetworkName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pConfigGetNetworkName,
+			midWifiP2pConfigGetNetworkName,
 		)
 		if callErr != nil {
 			return callErr
@@ -175,7 +175,7 @@ func (m *wifiP2pConfig) GetNetworkName() (string, error) {
 }
 
 // GetPairingBootstrappingConfig calls android.net.wifi.p2p.WifiP2pConfig.getPairingBootstrappingConfig.
-func (m *wifiP2pConfig) GetPairingBootstrappingConfig() (*jni.Object, error) {
+func (m *WifiP2pConfig) GetPairingBootstrappingConfig() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -183,13 +183,13 @@ func (m *wifiP2pConfig) GetPairingBootstrappingConfig() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetPairingBootstrappingConfig == nil {
+		if midWifiP2pConfigGetPairingBootstrappingConfig == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getPairingBootstrappingConfig is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pConfigGetPairingBootstrappingConfig,
+			midWifiP2pConfigGetPairingBootstrappingConfig,
 		)
 		if callErr != nil {
 			return callErr
@@ -200,7 +200,7 @@ func (m *wifiP2pConfig) GetPairingBootstrappingConfig() (*jni.Object, error) {
 }
 
 // GetPassphrase calls android.net.wifi.p2p.WifiP2pConfig.getPassphrase.
-func (m *wifiP2pConfig) GetPassphrase() (string, error) {
+func (m *WifiP2pConfig) GetPassphrase() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -208,13 +208,13 @@ func (m *wifiP2pConfig) GetPassphrase() (string, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetPassphrase == nil {
+		if midWifiP2pConfigGetPassphrase == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getPassphrase is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pConfigGetPassphrase,
+			midWifiP2pConfigGetPassphrase,
 		)
 		if callErr != nil {
 			return callErr
@@ -226,7 +226,7 @@ func (m *wifiP2pConfig) GetPassphrase() (string, error) {
 }
 
 // GetPccModeConnectionType calls android.net.wifi.p2p.WifiP2pConfig.getPccModeConnectionType.
-func (m *wifiP2pConfig) GetPccModeConnectionType() (int32, error) {
+func (m *WifiP2pConfig) GetPccModeConnectionType() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -234,13 +234,13 @@ func (m *wifiP2pConfig) GetPccModeConnectionType() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigGetPccModeConnectionType == nil {
+		if midWifiP2pConfigGetPccModeConnectionType == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.getPccModeConnectionType is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pConfigGetPccModeConnectionType,
+			midWifiP2pConfigGetPccModeConnectionType,
 		)
 		if callErr != nil {
 			return callErr
@@ -251,7 +251,7 @@ func (m *wifiP2pConfig) GetPccModeConnectionType() (int32, error) {
 }
 
 // IsAuthorizeConnectionFromPeerEnabled calls android.net.wifi.p2p.WifiP2pConfig.isAuthorizeConnectionFromPeerEnabled.
-func (m *wifiP2pConfig) IsAuthorizeConnectionFromPeerEnabled() (bool, error) {
+func (m *WifiP2pConfig) IsAuthorizeConnectionFromPeerEnabled() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -259,13 +259,13 @@ func (m *wifiP2pConfig) IsAuthorizeConnectionFromPeerEnabled() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigIsAuthorizeConnectionFromPeerEnabled == nil {
+		if midWifiP2pConfigIsAuthorizeConnectionFromPeerEnabled == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.isAuthorizeConnectionFromPeerEnabled is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pConfigIsAuthorizeConnectionFromPeerEnabled,
+			midWifiP2pConfigIsAuthorizeConnectionFromPeerEnabled,
 		)
 		if callErr != nil {
 			return callErr
@@ -277,7 +277,7 @@ func (m *wifiP2pConfig) IsAuthorizeConnectionFromPeerEnabled() (bool, error) {
 }
 
 // SetGroupOwnerVersion calls android.net.wifi.p2p.WifiP2pConfig.setGroupOwnerVersion.
-func (m *wifiP2pConfig) SetGroupOwnerVersion(arg0 int32) error {
+func (m *WifiP2pConfig) SetGroupOwnerVersion(arg0 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -285,14 +285,14 @@ func (m *wifiP2pConfig) SetGroupOwnerVersion(arg0 int32) error {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigSetGroupOwnerVersion == nil {
+		if midWifiP2pConfigSetGroupOwnerVersion == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.setGroupOwnerVersion is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midwifiP2pConfigSetGroupOwnerVersion, jni.IntValue(arg0),
+			midWifiP2pConfigSetGroupOwnerVersion, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -300,7 +300,7 @@ func (m *wifiP2pConfig) SetGroupOwnerVersion(arg0 int32) error {
 }
 
 // ToString calls android.net.wifi.p2p.WifiP2pConfig.toString.
-func (m *wifiP2pConfig) ToString() (string, error) {
+func (m *WifiP2pConfig) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -308,13 +308,13 @@ func (m *wifiP2pConfig) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigToString == nil {
+		if midWifiP2pConfigToString == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pConfigToString,
+			midWifiP2pConfigToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -326,7 +326,7 @@ func (m *wifiP2pConfig) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.net.wifi.p2p.WifiP2pConfig.writeToParcel.
-func (m *wifiP2pConfig) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *WifiP2pConfig) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -334,14 +334,14 @@ func (m *wifiP2pConfig) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midwifiP2pConfigWriteToParcel == nil {
+		if midWifiP2pConfigWriteToParcel == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pConfig.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midwifiP2pConfigWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midWifiP2pConfigWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

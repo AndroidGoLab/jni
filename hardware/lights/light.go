@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// light wraps android.hardware.lights.Light.
-type light struct {
+// Light wraps android.hardware.lights.Light.
+type Light struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.hardware.lights.Light.describeContents.
-func (m *light) DescribeContents() (int32, error) {
+func (m *Light) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *light) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightDescribeContents == nil {
+		if midLightDescribeContents == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightDescribeContents,
+			midLightDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *light) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.hardware.lights.Light.equals.
-func (m *light) Equals(arg0 *jni.Object) (bool, error) {
+func (m *Light) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *light) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlightEquals == nil {
+		if midLightEquals == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlightEquals, jni.ObjectValue(arg0),
+			midLightEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *light) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetId calls android.hardware.lights.Light.getId.
-func (m *light) GetId() (int32, error) {
+func (m *Light) GetId() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *light) GetId() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightGetId == nil {
+		if midLightGetId == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.getId is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightGetId,
+			midLightGetId,
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *light) GetId() (int32, error) {
 }
 
 // GetName calls android.hardware.lights.Light.getName.
-func (m *light) GetName() (string, error) {
+func (m *Light) GetName() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,13 +109,13 @@ func (m *light) GetName() (string, error) {
 			callErr = err
 			return err
 		}
-		if midlightGetName == nil {
+		if midLightGetName == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.getName is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midlightGetName,
+			midLightGetName,
 		)
 		if callErr != nil {
 			return callErr
@@ -127,7 +127,7 @@ func (m *light) GetName() (string, error) {
 }
 
 // GetOrdinal calls android.hardware.lights.Light.getOrdinal.
-func (m *light) GetOrdinal() (int32, error) {
+func (m *Light) GetOrdinal() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -135,13 +135,13 @@ func (m *light) GetOrdinal() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightGetOrdinal == nil {
+		if midLightGetOrdinal == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.getOrdinal is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightGetOrdinal,
+			midLightGetOrdinal,
 		)
 		if callErr != nil {
 			return callErr
@@ -152,7 +152,7 @@ func (m *light) GetOrdinal() (int32, error) {
 }
 
 // GetType calls android.hardware.lights.Light.getType.
-func (m *light) GetType() (int32, error) {
+func (m *Light) GetType() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -160,13 +160,13 @@ func (m *light) GetType() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightGetType == nil {
+		if midLightGetType == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.getType is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightGetType,
+			midLightGetType,
 		)
 		if callErr != nil {
 			return callErr
@@ -177,7 +177,7 @@ func (m *light) GetType() (int32, error) {
 }
 
 // HasBrightnessControl calls android.hardware.lights.Light.hasBrightnessControl.
-func (m *light) HasBrightnessControl() (bool, error) {
+func (m *Light) HasBrightnessControl() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -185,13 +185,13 @@ func (m *light) HasBrightnessControl() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlightHasBrightnessControl == nil {
+		if midLightHasBrightnessControl == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.hasBrightnessControl is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlightHasBrightnessControl,
+			midLightHasBrightnessControl,
 		)
 		if callErr != nil {
 			return callErr
@@ -203,7 +203,7 @@ func (m *light) HasBrightnessControl() (bool, error) {
 }
 
 // HasRgbControl calls android.hardware.lights.Light.hasRgbControl.
-func (m *light) HasRgbControl() (bool, error) {
+func (m *Light) HasRgbControl() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -211,13 +211,13 @@ func (m *light) HasRgbControl() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midlightHasRgbControl == nil {
+		if midLightHasRgbControl == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.hasRgbControl is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midlightHasRgbControl,
+			midLightHasRgbControl,
 		)
 		if callErr != nil {
 			return callErr
@@ -229,7 +229,7 @@ func (m *light) HasRgbControl() (bool, error) {
 }
 
 // HashCode calls android.hardware.lights.Light.hashCode.
-func (m *light) HashCode() (int32, error) {
+func (m *Light) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -237,13 +237,13 @@ func (m *light) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midlightHashCode == nil {
+		if midLightHashCode == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midlightHashCode,
+			midLightHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -254,7 +254,7 @@ func (m *light) HashCode() (int32, error) {
 }
 
 // ToString calls android.hardware.lights.Light.toString.
-func (m *light) ToString() (string, error) {
+func (m *Light) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -262,13 +262,13 @@ func (m *light) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midlightToString == nil {
+		if midLightToString == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midlightToString,
+			midLightToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -280,7 +280,7 @@ func (m *light) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.hardware.lights.Light.writeToParcel.
-func (m *light) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *Light) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -288,14 +288,14 @@ func (m *light) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midlightWriteToParcel == nil {
+		if midLightWriteToParcel == nil {
 			callErr = fmt.Errorf("android.hardware.lights.Light.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midlightWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midLightWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

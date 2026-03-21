@@ -3,15 +3,15 @@
 package consts
 
 const (
-	MediaBadRemoval      = "bad_removal"
-	MediaChecking        = "checking"
-	MediaEjecting        = "ejecting"
-	MediaMounted         = "mounted"
-	MediaMountedReadOnly = "mounted_ro"
-	MediaNofs            = "nofs"
-	MediaRemoved         = "removed"
-	MediaShared          = "shared"
-	MediaUnknown         = "unknown"
-	MediaUnmountable     = "unmountable"
-	MediaUnmounted       = "unmounted"
+	MediaBadRemoval      string = "bad_removal"
+	MediaChecking        string = "checking"
+	MediaEjecting        string = "ejecting"
+	MediaMounted         string = "mounted"
+	MediaMountedReadOnly string = "mounted_ro"
+	MediaNofs            string = "nofs"
+	MediaRemoved         string = "removed"
+	MediaShared          string = "shared"
+	MediaUnknown         string = "unknown"
+	MediaUnmountable     string = "unmountable"
+	MediaUnmounted       string = "unmounted"
 )

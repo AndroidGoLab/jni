@@ -9,36 +9,56 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
+	"unsafe"
 	"bytes"
 	"fmt"
 
 	"github.com/AndroidGoLab/jni/graphics/pdf"
+	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(_ *C.JavaVM) {
-	run()
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run() {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	// --- Constants ---
-	fmt.Fprintln(&output, "Render modes:")
-	fmt.Fprintf(&output, "  RenderModeForDisplay = %d\n", pdf.RenderModeForDisplay)
-	fmt.Fprintf(&output, "  RenderModeForPrint   = %d\n", pdf.RenderModeForPrint)
-	fmt.Fprintf(&output, "  ModeReadOnly         = %d (0x%X)\n", pdf.ModeReadOnly, pdf.ModeReadOnly)
+	fmt.Fprintln(output, "Render modes:")
+	fmt.Fprintf(output, "  RenderModeForDisplay = %d\n", pdf.RenderModeForDisplay)
+	fmt.Fprintf(output, "  RenderModeForPrint   = %d\n", pdf.RenderModeForPrint)
+	fmt.Fprintf(output, "  ModeReadOnly         = %d (0x%X)\n", pdf.ModeReadOnly, pdf.ModeReadOnly)
 
 	// --- Renderer ---
 	// To create a Renderer you need a ParcelFileDescriptor pointing at a
@@ -74,5 +94,6 @@ func run() {
 	//   createBitmapRaw(width, height, config) to create a rendering target.
 	//   copyPixelsToBufferRaw(buffer) to extract pixel data.
 
-	fmt.Fprintln(&output, "PDF example complete.")
+	fmt.Fprintln(output, "PDF example complete.")
+	return nil
 }

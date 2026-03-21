@@ -2,7 +2,7 @@ package: audiorecord
 go_import: github.com/AndroidGoLab/jni/media/audiorecord
 classes:
     - java_class: android.media.AudioRecord
-      go_type: audioRecord
+      go_type: AudioRecord
       methods:
         - java_method: getActiveMicrophones
           go_name: GetActiveMicrophones

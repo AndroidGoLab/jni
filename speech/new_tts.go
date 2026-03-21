@@ -9,8 +9,8 @@ import (
 
 // NewTTS creates a new TextToSpeech instance via the no-arg constructor
 // available in app_process context.
-func NewTTS(vm *jni.VM) (*TTS, error) {
-	var tts TTS
+func NewTTS(vm *jni.VM) (*TextToSpeech, error) {
+	var tts TextToSpeech
 	tts.VM = vm
 
 	err := vm.Do(func(env *jni.Env) error {
@@ -40,7 +40,7 @@ func NewTTS(vm *jni.VM) (*TTS, error) {
 }
 
 // Close releases the global reference to the underlying Java object.
-func (m *TTS) Close() {
+func (m *TextToSpeech) Close() {
 	if m.Obj != nil {
 		_ = m.VM.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(m.Obj)

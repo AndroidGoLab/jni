@@ -12,7 +12,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -21,27 +26,37 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/speech"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	// --- Text-to-Speech ---
 
 	tts, err := speech.NewTTS(vm)
@@ -50,7 +65,7 @@ func run(vm *jni.VM) error {
 	}
 	defer tts.Close()
 
-	fmt.Fprintln(&output, "TTS engine created")
+	fmt.Fprintln(output, "TTS engine created")
 
 	// TTS provides unexported methods for speech synthesis:
 	//   speakRaw(text, queueMode, params, utteranceId) -- synthesizes speech.
@@ -77,20 +92,20 @@ func run(vm *jni.VM) error {
 
 	// --- Error Constants ---
 	// These correspond to SpeechRecognizer.ERROR_* values:
-	fmt.Fprintf(&output, "ErrorNetworkTimeout:          %d\n", speech.ErrorNetworkTimeout)
-	fmt.Fprintf(&output, "ErrorNetwork:                 %d\n", speech.ErrorNetwork)
-	fmt.Fprintf(&output, "ErrorAudio:                   %d\n", speech.ErrorAudio)
-	fmt.Fprintf(&output, "ErrorServer:                  %d\n", speech.ErrorServer)
-	fmt.Fprintf(&output, "ErrorClient:                  %d\n", speech.ErrorClient)
-	fmt.Fprintf(&output, "ErrorSpeechTimeout:           %d\n", speech.ErrorSpeechTimeout)
-	fmt.Fprintf(&output, "ErrorNoMatch:                 %d\n", speech.ErrorNoMatch)
-	fmt.Fprintf(&output, "ErrorRecognizerBusy:          %d\n", speech.ErrorRecognizerBusy)
-	fmt.Fprintf(&output, "ErrorInsufficientPermissions: %d\n", speech.ErrorInsufficientPermissions)
+	fmt.Fprintf(output, "ErrorNetworkTimeout:          %d\n", speech.ErrorNetworkTimeout)
+	fmt.Fprintf(output, "ErrorNetwork:                 %d\n", speech.ErrorNetwork)
+	fmt.Fprintf(output, "ErrorAudio:                   %d\n", speech.ErrorAudio)
+	fmt.Fprintf(output, "ErrorServer:                  %d\n", speech.ErrorServer)
+	fmt.Fprintf(output, "ErrorClient:                  %d\n", speech.ErrorClient)
+	fmt.Fprintf(output, "ErrorSpeechTimeout:           %d\n", speech.ErrorSpeechTimeout)
+	fmt.Fprintf(output, "ErrorNoMatch:                 %d\n", speech.ErrorNoMatch)
+	fmt.Fprintf(output, "ErrorRecognizerBusy:          %d\n", speech.ErrorRecognizerBusy)
+	fmt.Fprintf(output, "ErrorInsufficientPermissions: %d\n", speech.ErrorInsufficientPermissions)
 
 	// --- TTS Queue Mode Constants ---
 	// These correspond to TextToSpeech.QUEUE_* values:
-	fmt.Fprintf(&output, "QueueFlush: %d\n", speech.QueueFlush)
-	fmt.Fprintf(&output, "QueueAdd:   %d\n", speech.QueueAdd)
+	fmt.Fprintf(output, "QueueFlush: %d\n", speech.QueueFlush)
+	fmt.Fprintf(output, "QueueAdd:   %d\n", speech.QueueAdd)
 
 	// --- Callback Types (all unexported) ---
 	// recognitionListener: OnResults, OnPartialResults, OnError,

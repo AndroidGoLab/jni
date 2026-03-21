@@ -16,6 +16,9 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
@@ -87,6 +90,25 @@ var (
 	midManagerUnregisterGnssMeasurementsCallback       jni.MethodID
 	midManagerUnregisterGnssNavigationMessageCallback  jni.MethodID
 	midManagerUnregisterGnssStatusCallback             jni.MethodID
+
+	clsGnssStatus                      *jni.GlobalRef
+	midGnssStatusDescribeContents      jni.MethodID
+	midGnssStatusEquals                jni.MethodID
+	midGnssStatusGetAzimuthDegrees     jni.MethodID
+	midGnssStatusGetBasebandCn0DbHz    jni.MethodID
+	midGnssStatusGetCarrierFrequencyHz jni.MethodID
+	midGnssStatusGetCn0DbHz            jni.MethodID
+	midGnssStatusGetConstellationType  jni.MethodID
+	midGnssStatusGetElevationDegrees   jni.MethodID
+	midGnssStatusGetSatelliteCount     jni.MethodID
+	midGnssStatusGetSvid               jni.MethodID
+	midGnssStatusHasAlmanacData        jni.MethodID
+	midGnssStatusHasBasebandCn0DbHz    jni.MethodID
+	midGnssStatusHasCarrierFrequencyHz jni.MethodID
+	midGnssStatusHasEphemerisData      jni.MethodID
+	midGnssStatusHashCode              jni.MethodID
+	midGnssStatusUsedInFix             jni.MethodID
+	midGnssStatusWriteToParcel         jni.MethodID
 
 	clsLocation                                      *jni.GlobalRef
 	midLocationBearingTo                             jni.MethodID
@@ -161,25 +183,6 @@ var (
 	midLocationConvert2                              jni.MethodID
 	midLocationConvert1_1                            jni.MethodID
 	midLocationDistanceBetween                       jni.MethodID
-
-	clsGnssStatus                      *jni.GlobalRef
-	midGnssStatusDescribeContents      jni.MethodID
-	midGnssStatusEquals                jni.MethodID
-	midGnssStatusGetAzimuthDegrees     jni.MethodID
-	midGnssStatusGetBasebandCn0DbHz    jni.MethodID
-	midGnssStatusGetCarrierFrequencyHz jni.MethodID
-	midGnssStatusGetCn0DbHz            jni.MethodID
-	midGnssStatusGetConstellationType  jni.MethodID
-	midGnssStatusGetElevationDegrees   jni.MethodID
-	midGnssStatusGetSatelliteCount     jni.MethodID
-	midGnssStatusGetSvid               jni.MethodID
-	midGnssStatusHasAlmanacData        jni.MethodID
-	midGnssStatusHasBasebandCn0DbHz    jni.MethodID
-	midGnssStatusHasCarrierFrequencyHz jni.MethodID
-	midGnssStatusHasEphemerisData      jni.MethodID
-	midGnssStatusHashCode              jni.MethodID
-	midGnssStatusUsedInFix             jni.MethodID
-	midGnssStatusWriteToParcel         jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -738,6 +741,148 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.location.LocationManager.unregisterGnssStatusCallback")
+	}
+
+	c, err = env.FindClass("android/location/GnssStatus")
+	if err != nil {
+		return fmt.Errorf("find class android.location.GnssStatus: %w", err)
+	}
+	clsGnssStatus = env.NewGlobalRef(&c.Object)
+
+	midGnssStatusDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.describeContents")
+	}
+
+	midGnssStatusEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.equals")
+	}
+
+	midGnssStatusGetAzimuthDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getAzimuthDegrees", "(I)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getAzimuthDegrees")
+	}
+
+	midGnssStatusGetBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getBasebandCn0DbHz", "(I)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getBasebandCn0DbHz")
+	}
+
+	midGnssStatusGetCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getCarrierFrequencyHz", "(I)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getCarrierFrequencyHz")
+	}
+
+	midGnssStatusGetCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getCn0DbHz", "(I)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getCn0DbHz")
+	}
+
+	midGnssStatusGetConstellationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getConstellationType", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getConstellationType")
+	}
+
+	midGnssStatusGetElevationDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getElevationDegrees", "(I)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getElevationDegrees")
+	}
+
+	midGnssStatusGetSatelliteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getSatelliteCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getSatelliteCount")
+	}
+
+	midGnssStatusGetSvid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getSvid", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.getSvid")
+	}
+
+	midGnssStatusHasAlmanacData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasAlmanacData", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.hasAlmanacData")
+	}
+
+	midGnssStatusHasBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasBasebandCn0DbHz", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.hasBasebandCn0DbHz")
+	}
+
+	midGnssStatusHasCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasCarrierFrequencyHz", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.hasCarrierFrequencyHz")
+	}
+
+	midGnssStatusHasEphemerisData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasEphemerisData", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.hasEphemerisData")
+	}
+
+	midGnssStatusHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.hashCode")
+	}
+
+	midGnssStatusUsedInFix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "usedInFix", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.usedInFix")
+	}
+
+	midGnssStatusWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.location.GnssStatus.writeToParcel")
 	}
 
 	c, err = env.FindClass("android/location/Location")
@@ -1320,148 +1465,6 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.location.Location.distanceBetween")
-	}
-
-	c, err = env.FindClass("android/location/GnssStatus")
-	if err != nil {
-		return fmt.Errorf("find class android.location.GnssStatus: %w", err)
-	}
-	clsGnssStatus = env.NewGlobalRef(&c.Object)
-
-	midGnssStatusDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.describeContents")
-	}
-
-	midGnssStatusEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.equals")
-	}
-
-	midGnssStatusGetAzimuthDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getAzimuthDegrees", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getAzimuthDegrees")
-	}
-
-	midGnssStatusGetBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getBasebandCn0DbHz", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getBasebandCn0DbHz")
-	}
-
-	midGnssStatusGetCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getCarrierFrequencyHz", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getCarrierFrequencyHz")
-	}
-
-	midGnssStatusGetCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getCn0DbHz", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getCn0DbHz")
-	}
-
-	midGnssStatusGetConstellationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getConstellationType", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getConstellationType")
-	}
-
-	midGnssStatusGetElevationDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getElevationDegrees", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getElevationDegrees")
-	}
-
-	midGnssStatusGetSatelliteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getSatelliteCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getSatelliteCount")
-	}
-
-	midGnssStatusGetSvid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "getSvid", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.getSvid")
-	}
-
-	midGnssStatusHasAlmanacData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasAlmanacData", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.hasAlmanacData")
-	}
-
-	midGnssStatusHasBasebandCn0DbHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasBasebandCn0DbHz", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.hasBasebandCn0DbHz")
-	}
-
-	midGnssStatusHasCarrierFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasCarrierFrequencyHz", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.hasCarrierFrequencyHz")
-	}
-
-	midGnssStatusHasEphemerisData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hasEphemerisData", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.hasEphemerisData")
-	}
-
-	midGnssStatusHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.hashCode")
-	}
-
-	midGnssStatusUsedInFix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "usedInFix", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.usedInFix")
-	}
-
-	midGnssStatusWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.location.GnssStatus.writeToParcel")
 	}
 
 	return nil

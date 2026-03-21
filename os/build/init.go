@@ -16,6 +16,9 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
@@ -27,7 +30,7 @@ var (
 	midBuildGetRadioVersion            jni.MethodID
 	midBuildGetSerial                  jni.MethodID
 
-	clsBuildVERSION *jni.GlobalRef
+	clsVERSION *jni.GlobalRef
 )
 
 // initSkipped records methods that were not found during init.
@@ -104,7 +107,7 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.os.Build$VERSION: %w", err)
 	}
-	clsBuildVERSION = env.NewGlobalRef(&c.Object)
+	clsVERSION = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// mediaProjection wraps android.media.projection.MediaProjection.
-type mediaProjection struct {
+// MediaProjection wraps android.media.projection.MediaProjection.
+type MediaProjection struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Stop calls android.media.projection.MediaProjection.stop.
-func (m *mediaProjection) Stop() error {
+func (m *MediaProjection) Stop() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *mediaProjection) Stop() error {
 			callErr = err
 			return err
 		}
-		if midmediaProjectionStop == nil {
+		if midMediaProjectionStop == nil {
 			callErr = fmt.Errorf("android.media.projection.MediaProjection.stop is not available on this device")
 			return callErr
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaProjectionStop,
+			midMediaProjectionStop,
 		)
 		return callErr
 	})
@@ -46,7 +46,7 @@ func (m *mediaProjection) Stop() error {
 }
 
 // UnregisterCallback calls android.media.projection.MediaProjection.unregisterCallback.
-func (m *mediaProjection) UnregisterCallback(arg0 *jni.Object) error {
+func (m *MediaProjection) UnregisterCallback(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -54,14 +54,14 @@ func (m *mediaProjection) UnregisterCallback(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midmediaProjectionUnregisterCallback == nil {
+		if midMediaProjectionUnregisterCallback == nil {
 			callErr = fmt.Errorf("android.media.projection.MediaProjection.unregisterCallback is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midmediaProjectionUnregisterCallback, jni.ObjectValue(arg0),
+			midMediaProjectionUnregisterCallback, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

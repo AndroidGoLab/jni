@@ -13,7 +13,7 @@ var (
 	implementsRe    = regexp.MustCompile(`implements\s+(.+?)\s*\{?\s*$`)
 	constantRe      = regexp.MustCompile(`^\s+public static final\s+(\S+)\s+(\w+);`)
 	constantValueRe = regexp.MustCompile(`^\s+ConstantValue:\s+(\S+)\s+(.+)$`)
-	methodRe        = regexp.MustCompile(`^\s+public\s+(static\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
+	methodRe        = regexp.MustCompile(`^\s+public\s+(static\s+)?(abstract\s+)?(final\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
 )
 
 // RunJavap executes javap and parses the output for a single class.
@@ -86,10 +86,10 @@ func parseJavap(output string) (*JavapClass, error) {
 		if m := methodRe.FindStringSubmatch(line); m != nil {
 			lastConstIdx = -1
 			isStatic := strings.TrimSpace(m[1]) == "static"
-			retType := m[2]
-			name := m[3]
-			paramsStr := m[4]
-			throwsStr := m[5]
+			retType := m[4]
+			name := m[5]
+			paramsStr := m[6]
+			throwsStr := m[7]
 
 			method := JavapMethod{
 				Name:       name,

@@ -3,6 +3,6 @@
 package consts
 
 const (
-	ServiceInterface                = "android.net.VpnService"
-	ServiceMetaDataSupportsAlwaysOn = "android.net.VpnService.SUPPORTS_ALWAYS_ON"
+	ServiceInterface                string = "android.net.VpnService"
+	ServiceMetaDataSupportsAlwaysOn string = "android.net.VpnService.SUPPORTS_ALWAYS_ON"
 )

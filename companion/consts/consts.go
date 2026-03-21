@@ -3,16 +3,16 @@
 package consts
 
 const (
-	ExtraAssociation = "android.companion.extra.ASSOCIATION"
-	ExtraDevice      = "android.companion.extra.DEVICE"
+	ExtraAssociation string = "android.companion.extra.ASSOCIATION"
+	ExtraDevice      string = "android.companion.extra.DEVICE"
 )
 
 const (
-	FlagCallMetadata       = 1
-	ResultCanceled         = 0
-	ResultDiscoveryTimeout = 2
-	ResultInternalError    = 3
-	ResultOk               = -1
-	ResultSecurityError    = 4
-	ResultUserRejected     = 1
+	FlagCallMetadata       int = 1
+	ResultCanceled         int = 0
+	ResultDiscoveryTimeout int = 2
+	ResultInternalError    int = 3
+	ResultOk               int = -1
+	ResultSecurityError    int = 4
+	ResultUserRejected     int = 1
 )

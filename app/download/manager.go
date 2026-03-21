@@ -20,53 +20,19 @@ var (
 // Manager wraps android.app.DownloadManager.
 type Manager struct {
 	VM  *jni.VM
-	Ctx *app.Context
 	Obj *jni.GlobalRef
 }
 
-// NewManager obtains android.app.DownloadManager from the Android system service manager.
-func NewManager(ctx *app.Context) (*Manager, error) {
-	if ctx == nil {
-		return nil, fmt.Errorf("Manager: nil Context")
-	}
-	var mgr Manager
-	mgr.VM = ctx.VM
-	mgr.Ctx = ctx
-
-	err := mgr.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		svc, err := ctx.GetSystemService("download")
-		if err != nil {
-			return err
-		}
-		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("download service not available")
-		}
-		mgr.Obj = env.NewGlobalRef(svc)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &mgr, nil
-}
-
-// Close releases the global reference to the underlying Java object.
-// After Close, the Manager must not be used.
-func (m *Manager) Close() {
-	if m.Obj != nil {
-		m.VM.Do(func(env *jni.Env) error {
-			env.DeleteGlobalRef(m.Obj)
-			m.Obj = nil
-			return nil
-		})
-	}
-}
-
 // AddCompletedDownload7 calls android.app.DownloadManager.addCompletedDownload.
-func (m *Manager) AddCompletedDownload7(arg0 string, arg1 string, arg2 bool, arg3 string, arg4 string, arg5 int64, arg6 bool) (int64, error) {
+func (m *Manager) AddCompletedDownload7(
+	arg0 string,
+	arg1 string,
+	arg2 bool,
+	arg3 string,
+	arg4 string,
+	arg5 int64,
+	arg6 bool,
+) (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -90,7 +56,7 @@ func (m *Manager) AddCompletedDownload7(arg0 string, arg1 string, arg2 bool, arg
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		jArg3, err := env.NewStringUTF(arg3)
@@ -105,7 +71,7 @@ func (m *Manager) AddCompletedDownload7(arg0 string, arg1 string, arg2 bool, arg
 
 		var jArg6 uint8
 		if arg6 {
-			jArg6 = 1
+			jArg6 = jniTrue
 		}
 
 		result, callErr = env.CallLongMethod(
@@ -121,7 +87,17 @@ func (m *Manager) AddCompletedDownload7(arg0 string, arg1 string, arg2 bool, arg
 }
 
 // AddCompletedDownload9_1 calls android.app.DownloadManager.addCompletedDownload.
-func (m *Manager) AddCompletedDownload9_1(arg0 string, arg1 string, arg2 bool, arg3 string, arg4 string, arg5 int64, arg6 bool, arg7 *jni.Object, arg8 *jni.Object) (int64, error) {
+func (m *Manager) AddCompletedDownload9_1(
+	arg0 string,
+	arg1 string,
+	arg2 bool,
+	arg3 string,
+	arg4 string,
+	arg5 int64,
+	arg6 bool,
+	arg7 *jni.Object,
+	arg8 *jni.Object,
+) (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -145,7 +121,7 @@ func (m *Manager) AddCompletedDownload9_1(arg0 string, arg1 string, arg2 bool, a
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		jArg3, err := env.NewStringUTF(arg3)
@@ -160,7 +136,7 @@ func (m *Manager) AddCompletedDownload9_1(arg0 string, arg1 string, arg2 bool, a
 
 		var jArg6 uint8
 		if arg6 {
-			jArg6 = 1
+			jArg6 = jniTrue
 		}
 
 		result, callErr = env.CallLongMethod(

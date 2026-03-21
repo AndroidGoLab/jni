@@ -24,7 +24,11 @@ type Device struct {
 }
 
 // ConnectGatt3 calls android.bluetooth.BluetoothDevice.connectGatt.
-func (m *Device) ConnectGatt3(arg0 *jni.Object, arg1 bool, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Device) ConnectGatt3(
+	arg0 *jni.Object,
+	arg1 bool,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -39,7 +43,7 @@ func (m *Device) ConnectGatt3(arg0 *jni.Object, arg1 bool, arg2 *jni.Object) (*j
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -55,7 +59,12 @@ func (m *Device) ConnectGatt3(arg0 *jni.Object, arg1 bool, arg2 *jni.Object) (*j
 }
 
 // ConnectGatt4_1 calls android.bluetooth.BluetoothDevice.connectGatt.
-func (m *Device) ConnectGatt4_1(arg0 *jni.Object, arg1 bool, arg2 *jni.Object, arg3 int32) (*jni.Object, error) {
+func (m *Device) ConnectGatt4_1(
+	arg0 *jni.Object,
+	arg1 bool,
+	arg2 *jni.Object,
+	arg3 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -70,7 +79,7 @@ func (m *Device) ConnectGatt4_1(arg0 *jni.Object, arg1 bool, arg2 *jni.Object, a
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -86,7 +95,13 @@ func (m *Device) ConnectGatt4_1(arg0 *jni.Object, arg1 bool, arg2 *jni.Object, a
 }
 
 // ConnectGatt5_2 calls android.bluetooth.BluetoothDevice.connectGatt.
-func (m *Device) ConnectGatt5_2(arg0 *jni.Object, arg1 bool, arg2 *jni.Object, arg3 int32, arg4 int32) (*jni.Object, error) {
+func (m *Device) ConnectGatt5_2(
+	arg0 *jni.Object,
+	arg1 bool,
+	arg2 *jni.Object,
+	arg3 int32,
+	arg4 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -101,7 +116,7 @@ func (m *Device) ConnectGatt5_2(arg0 *jni.Object, arg1 bool, arg2 *jni.Object, a
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -648,7 +663,7 @@ func (m *Device) SetPairingConfirmation(arg0 bool) (bool, error) {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(

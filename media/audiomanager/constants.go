@@ -5,31 +5,38 @@ package audiomanager
 import "github.com/AndroidGoLab/jni/media/audiomanager/consts"
 
 const (
-	ActionAudioBecomingNoisy              = consts.ActionAudioBecomingNoisy
-	ActionHdmiAudioPlug                   = consts.ActionHdmiAudioPlug
-	ActionHeadsetPlug                     = consts.ActionHeadsetPlug
-	ActionMicrophoneMuteChanged           = consts.ActionMicrophoneMuteChanged
-	ActionScoAudioStateChanged            = consts.ActionScoAudioStateChanged
-	ActionScoAudioStateUpdated            = consts.ActionScoAudioStateUpdated
-	ActionSpeakerphoneStateChanged        = consts.ActionSpeakerphoneStateChanged
-	ExtraAudioPlugState                   = consts.ExtraAudioPlugState
-	ExtraEncodings                        = consts.ExtraEncodings
-	ExtraMaxChannelCount                  = consts.ExtraMaxChannelCount
-	ExtraRingerMode                       = consts.ExtraRingerMode
-	ExtraScoAudioPreviousState            = consts.ExtraScoAudioPreviousState
-	ExtraScoAudioState                    = consts.ExtraScoAudioState
-	ExtraVibrateSetting                   = consts.ExtraVibrateSetting
-	ExtraVibrateType                      = consts.ExtraVibrateType
-	PropertyOutputFramesPerBuffer         = consts.PropertyOutputFramesPerBuffer
-	PropertyOutputSampleRate              = consts.PropertyOutputSampleRate
-	PropertySupportAudioSourceUnprocessed = consts.PropertySupportAudioSourceUnprocessed
-	PropertySupportMicNearUltrasound      = consts.PropertySupportMicNearUltrasound
-	PropertySupportSpeakerNearUltrasound  = consts.PropertySupportSpeakerNearUltrasound
-	RingerModeChangedAction               = consts.RingerModeChangedAction
-	VibrateSettingChangedAction           = consts.VibrateSettingChangedAction
-)
-
-const (
+	TypeAuxLine                           = consts.TypeAuxLine
+	TypeBleBroadcast                      = consts.TypeBleBroadcast
+	TypeBleHeadset                        = consts.TypeBleHeadset
+	TypeBleSpeaker                        = consts.TypeBleSpeaker
+	TypeBluetoothA2dp                     = consts.TypeBluetoothA2dp
+	TypeBluetoothSco                      = consts.TypeBluetoothSco
+	TypeBuiltinEarpiece                   = consts.TypeBuiltinEarpiece
+	TypeBuiltinMic                        = consts.TypeBuiltinMic
+	TypeBuiltinSpeaker                    = consts.TypeBuiltinSpeaker
+	TypeBuiltinSpeakerSafe                = consts.TypeBuiltinSpeakerSafe
+	TypeBus                               = consts.TypeBus
+	TypeDock                              = consts.TypeDock
+	TypeDockAnalog                        = consts.TypeDockAnalog
+	TypeFm                                = consts.TypeFm
+	TypeFmTuner                           = consts.TypeFmTuner
+	TypeHdmi                              = consts.TypeHdmi
+	TypeHdmiArc                           = consts.TypeHdmiArc
+	TypeHdmiEarc                          = consts.TypeHdmiEarc
+	TypeHearingAid                        = consts.TypeHearingAid
+	TypeIp                                = consts.TypeIp
+	TypeLineAnalog                        = consts.TypeLineAnalog
+	TypeLineDigital                       = consts.TypeLineDigital
+	TypeMultichannelGroup                 = consts.TypeMultichannelGroup
+	TypeRemoteSubmix                      = consts.TypeRemoteSubmix
+	TypeTelephony                         = consts.TypeTelephony
+	TypeTvTuner                           = consts.TypeTvTuner
+	TypeUnknown                           = consts.TypeUnknown
+	TypeUsbAccessory                      = consts.TypeUsbAccessory
+	TypeUsbDevice                         = consts.TypeUsbDevice
+	TypeUsbHeadset                        = consts.TypeUsbHeadset
+	TypeWiredHeadphones                   = consts.TypeWiredHeadphones
+	TypeWiredHeadset                      = consts.TypeWiredHeadset
 	AdjustLower                           = consts.AdjustLower
 	AdjustMute                            = consts.AdjustMute
 	AdjustRaise                           = consts.AdjustRaise
@@ -119,36 +126,29 @@ const (
 	VibrateSettingOnlySilent              = consts.VibrateSettingOnlySilent
 	VibrateTypeNotification               = consts.VibrateTypeNotification
 	VibrateTypeRinger                     = consts.VibrateTypeRinger
-	TypeAuxLine                           = consts.TypeAuxLine
-	TypeBleBroadcast                      = consts.TypeBleBroadcast
-	TypeBleHeadset                        = consts.TypeBleHeadset
-	TypeBleSpeaker                        = consts.TypeBleSpeaker
-	TypeBluetoothA2dp                     = consts.TypeBluetoothA2dp
-	TypeBluetoothSco                      = consts.TypeBluetoothSco
-	TypeBuiltinEarpiece                   = consts.TypeBuiltinEarpiece
-	TypeBuiltinMic                        = consts.TypeBuiltinMic
-	TypeBuiltinSpeaker                    = consts.TypeBuiltinSpeaker
-	TypeBuiltinSpeakerSafe                = consts.TypeBuiltinSpeakerSafe
-	TypeBus                               = consts.TypeBus
-	TypeDock                              = consts.TypeDock
-	TypeDockAnalog                        = consts.TypeDockAnalog
-	TypeFm                                = consts.TypeFm
-	TypeFmTuner                           = consts.TypeFmTuner
-	TypeHdmi                              = consts.TypeHdmi
-	TypeHdmiArc                           = consts.TypeHdmiArc
-	TypeHdmiEarc                          = consts.TypeHdmiEarc
-	TypeHearingAid                        = consts.TypeHearingAid
-	TypeIp                                = consts.TypeIp
-	TypeLineAnalog                        = consts.TypeLineAnalog
-	TypeLineDigital                       = consts.TypeLineDigital
-	TypeMultichannelGroup                 = consts.TypeMultichannelGroup
-	TypeRemoteSubmix                      = consts.TypeRemoteSubmix
-	TypeTelephony                         = consts.TypeTelephony
-	TypeTvTuner                           = consts.TypeTvTuner
-	TypeUnknown                           = consts.TypeUnknown
-	TypeUsbAccessory                      = consts.TypeUsbAccessory
-	TypeUsbDevice                         = consts.TypeUsbDevice
-	TypeUsbHeadset                        = consts.TypeUsbHeadset
-	TypeWiredHeadphones                   = consts.TypeWiredHeadphones
-	TypeWiredHeadset                      = consts.TypeWiredHeadset
+)
+
+const (
+	ActionAudioBecomingNoisy              = consts.ActionAudioBecomingNoisy
+	ActionHdmiAudioPlug                   = consts.ActionHdmiAudioPlug
+	ActionHeadsetPlug                     = consts.ActionHeadsetPlug
+	ActionMicrophoneMuteChanged           = consts.ActionMicrophoneMuteChanged
+	ActionScoAudioStateChanged            = consts.ActionScoAudioStateChanged
+	ActionScoAudioStateUpdated            = consts.ActionScoAudioStateUpdated
+	ActionSpeakerphoneStateChanged        = consts.ActionSpeakerphoneStateChanged
+	ExtraAudioPlugState                   = consts.ExtraAudioPlugState
+	ExtraEncodings                        = consts.ExtraEncodings
+	ExtraMaxChannelCount                  = consts.ExtraMaxChannelCount
+	ExtraRingerMode                       = consts.ExtraRingerMode
+	ExtraScoAudioPreviousState            = consts.ExtraScoAudioPreviousState
+	ExtraScoAudioState                    = consts.ExtraScoAudioState
+	ExtraVibrateSetting                   = consts.ExtraVibrateSetting
+	ExtraVibrateType                      = consts.ExtraVibrateType
+	PropertyOutputFramesPerBuffer         = consts.PropertyOutputFramesPerBuffer
+	PropertyOutputSampleRate              = consts.PropertyOutputSampleRate
+	PropertySupportAudioSourceUnprocessed = consts.PropertySupportAudioSourceUnprocessed
+	PropertySupportMicNearUltrasound      = consts.PropertySupportMicNearUltrasound
+	PropertySupportSpeakerNearUltrasound  = consts.PropertySupportSpeakerNearUltrasound
+	RingerModeChangedAction               = consts.RingerModeChangedAction
+	VibrateSettingChangedAction           = consts.VibrateSettingChangedAction
 )

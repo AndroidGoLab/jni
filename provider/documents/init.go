@@ -16,40 +16,43 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDocumentsContract                                *jni.GlobalRef
-	midDocumentsContractBuildChildDocumentsUri          jni.MethodID
-	midDocumentsContractBuildChildDocumentsUriUsingTree jni.MethodID
-	midDocumentsContractBuildDocumentUri                jni.MethodID
-	midDocumentsContractBuildDocumentUriUsingTree       jni.MethodID
-	midDocumentsContractBuildRecentDocumentsUri         jni.MethodID
-	midDocumentsContractBuildRootUri                    jni.MethodID
-	midDocumentsContractBuildRootsUri                   jni.MethodID
-	midDocumentsContractBuildSearchDocumentsUri         jni.MethodID
-	midDocumentsContractBuildTreeDocumentUri            jni.MethodID
-	midDocumentsContractCopyDocument                    jni.MethodID
-	midDocumentsContractCreateDocument                  jni.MethodID
-	midDocumentsContractCreateWebLinkIntent             jni.MethodID
-	midDocumentsContractDeleteDocument                  jni.MethodID
-	midDocumentsContractEjectRoot                       jni.MethodID
-	midDocumentsContractFindDocumentPath                jni.MethodID
-	midDocumentsContractGetDocumentId                   jni.MethodID
-	midDocumentsContractGetDocumentMetadata             jni.MethodID
-	midDocumentsContractGetDocumentThumbnail            jni.MethodID
-	midDocumentsContractGetRootId                       jni.MethodID
-	midDocumentsContractGetSearchDocumentsQuery         jni.MethodID
-	midDocumentsContractGetTreeDocumentId               jni.MethodID
-	midDocumentsContractIsChildDocument                 jni.MethodID
-	midDocumentsContractIsDocumentUri                   jni.MethodID
-	midDocumentsContractIsRootUri                       jni.MethodID
-	midDocumentsContractIsRootsUri                      jni.MethodID
-	midDocumentsContractIsTreeUri                       jni.MethodID
-	midDocumentsContractMoveDocument                    jni.MethodID
-	midDocumentsContractRemoveDocument                  jni.MethodID
-	midDocumentsContractRenameDocument                  jni.MethodID
+	clsContract                                *jni.GlobalRef
+	midContractBuildChildDocumentsUri          jni.MethodID
+	midContractBuildChildDocumentsUriUsingTree jni.MethodID
+	midContractBuildDocumentUri                jni.MethodID
+	midContractBuildDocumentUriUsingTree       jni.MethodID
+	midContractBuildRecentDocumentsUri         jni.MethodID
+	midContractBuildRootUri                    jni.MethodID
+	midContractBuildRootsUri                   jni.MethodID
+	midContractBuildSearchDocumentsUri         jni.MethodID
+	midContractBuildTreeDocumentUri            jni.MethodID
+	midContractCopyDocument                    jni.MethodID
+	midContractCreateDocument                  jni.MethodID
+	midContractCreateWebLinkIntent             jni.MethodID
+	midContractDeleteDocument                  jni.MethodID
+	midContractEjectRoot                       jni.MethodID
+	midContractFindDocumentPath                jni.MethodID
+	midContractGetDocumentId                   jni.MethodID
+	midContractGetDocumentMetadata             jni.MethodID
+	midContractGetDocumentThumbnail            jni.MethodID
+	midContractGetRootId                       jni.MethodID
+	midContractGetSearchDocumentsQuery         jni.MethodID
+	midContractGetTreeDocumentId               jni.MethodID
+	midContractIsChildDocument                 jni.MethodID
+	midContractIsDocumentUri                   jni.MethodID
+	midContractIsRootUri                       jni.MethodID
+	midContractIsRootsUri                      jni.MethodID
+	midContractIsTreeUri                       jni.MethodID
+	midContractMoveDocument                    jni.MethodID
+	midContractRemoveDocument                  jni.MethodID
+	midContractRenameDocument                  jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -80,9 +83,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.provider.DocumentsContract: %w", err)
 	}
-	clsDocumentsContract = env.NewGlobalRef(&c.Object)
+	clsContract = env.NewGlobalRef(&c.Object)
 
-	midDocumentsContractBuildChildDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildChildDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildChildDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildChildDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -90,7 +93,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildChildDocumentsUri")
 	}
 
-	midDocumentsContractBuildChildDocumentsUriUsingTree, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildChildDocumentsUriUsingTree", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildChildDocumentsUriUsingTree, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildChildDocumentsUriUsingTree", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -98,7 +101,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildChildDocumentsUriUsingTree")
 	}
 
-	midDocumentsContractBuildDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildDocumentUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildDocumentUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -106,7 +109,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildDocumentUri")
 	}
 
-	midDocumentsContractBuildDocumentUriUsingTree, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildDocumentUriUsingTree", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildDocumentUriUsingTree, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildDocumentUriUsingTree", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -114,7 +117,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildDocumentUriUsingTree")
 	}
 
-	midDocumentsContractBuildRecentDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildRecentDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildRecentDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildRecentDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -122,7 +125,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildRecentDocumentsUri")
 	}
 
-	midDocumentsContractBuildRootUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildRootUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildRootUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildRootUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -130,7 +133,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildRootUri")
 	}
 
-	midDocumentsContractBuildRootsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildRootsUri", "(Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildRootsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildRootsUri", "(Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -138,7 +141,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildRootsUri")
 	}
 
-	midDocumentsContractBuildSearchDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildSearchDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildSearchDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildSearchDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -146,7 +149,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildSearchDocumentsUri")
 	}
 
-	midDocumentsContractBuildTreeDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "buildTreeDocumentUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractBuildTreeDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildTreeDocumentUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -154,7 +157,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.buildTreeDocumentUri")
 	}
 
-	midDocumentsContractCopyDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "copyDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
+	midContractCopyDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "copyDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -162,7 +165,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.copyDocument")
 	}
 
-	midDocumentsContractCreateDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "createDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractCreateDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "createDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -170,7 +173,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.createDocument")
 	}
 
-	midDocumentsContractCreateWebLinkIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "createWebLinkIntent", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/os/Bundle;)Landroid/content/IntentSender;")
+	midContractCreateWebLinkIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "createWebLinkIntent", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/os/Bundle;)Landroid/content/IntentSender;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -178,7 +181,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.createWebLinkIntent")
 	}
 
-	midDocumentsContractDeleteDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "deleteDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Z")
+	midContractDeleteDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "deleteDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -186,7 +189,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.deleteDocument")
 	}
 
-	midDocumentsContractEjectRoot, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "ejectRoot", "(Landroid/content/ContentResolver;Landroid/net/Uri;)V")
+	midContractEjectRoot, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "ejectRoot", "(Landroid/content/ContentResolver;Landroid/net/Uri;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -194,7 +197,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.ejectRoot")
 	}
 
-	midDocumentsContractFindDocumentPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "findDocumentPath", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/provider/DocumentsContract$Path;")
+	midContractFindDocumentPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "findDocumentPath", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/provider/DocumentsContract$Path;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -202,7 +205,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.findDocumentPath")
 	}
 
-	midDocumentsContractGetDocumentId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "getDocumentId", "(Landroid/net/Uri;)Ljava/lang/String;")
+	midContractGetDocumentId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "getDocumentId", "(Landroid/net/Uri;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -210,7 +213,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.getDocumentId")
 	}
 
-	midDocumentsContractGetDocumentMetadata, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "getDocumentMetadata", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/os/Bundle;")
+	midContractGetDocumentMetadata, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "getDocumentMetadata", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/os/Bundle;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -218,7 +221,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.getDocumentMetadata")
 	}
 
-	midDocumentsContractGetDocumentThumbnail, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "getDocumentThumbnail", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/graphics/Point;Landroid/os/CancellationSignal;)Landroid/graphics/Bitmap;")
+	midContractGetDocumentThumbnail, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "getDocumentThumbnail", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/graphics/Point;Landroid/os/CancellationSignal;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -226,7 +229,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.getDocumentThumbnail")
 	}
 
-	midDocumentsContractGetRootId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "getRootId", "(Landroid/net/Uri;)Ljava/lang/String;")
+	midContractGetRootId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "getRootId", "(Landroid/net/Uri;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -234,7 +237,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.getRootId")
 	}
 
-	midDocumentsContractGetSearchDocumentsQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "getSearchDocumentsQuery", "(Landroid/net/Uri;)Ljava/lang/String;")
+	midContractGetSearchDocumentsQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "getSearchDocumentsQuery", "(Landroid/net/Uri;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -242,7 +245,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.getSearchDocumentsQuery")
 	}
 
-	midDocumentsContractGetTreeDocumentId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "getTreeDocumentId", "(Landroid/net/Uri;)Ljava/lang/String;")
+	midContractGetTreeDocumentId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "getTreeDocumentId", "(Landroid/net/Uri;)Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -250,7 +253,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.getTreeDocumentId")
 	}
 
-	midDocumentsContractIsChildDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "isChildDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Z")
+	midContractIsChildDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isChildDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -258,7 +261,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.isChildDocument")
 	}
 
-	midDocumentsContractIsDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "isDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
+	midContractIsDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -266,7 +269,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.isDocumentUri")
 	}
 
-	midDocumentsContractIsRootUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "isRootUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
+	midContractIsRootUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isRootUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -274,7 +277,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.isRootUri")
 	}
 
-	midDocumentsContractIsRootsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "isRootsUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
+	midContractIsRootsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isRootsUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -282,7 +285,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.isRootsUri")
 	}
 
-	midDocumentsContractIsTreeUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "isTreeUri", "(Landroid/net/Uri;)Z")
+	midContractIsTreeUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isTreeUri", "(Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -290,7 +293,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.isTreeUri")
 	}
 
-	midDocumentsContractMoveDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "moveDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
+	midContractMoveDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "moveDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -298,7 +301,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.moveDocument")
 	}
 
-	midDocumentsContractRemoveDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "removeDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Z")
+	midContractRemoveDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "removeDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -306,7 +309,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.provider.DocumentsContract.removeDocument")
 	}
 
-	midDocumentsContractRenameDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentsContract)), "renameDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	midContractRenameDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "renameDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

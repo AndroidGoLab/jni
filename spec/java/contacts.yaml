@@ -2,7 +2,7 @@ package: contacts
 go_import: github.com/AndroidGoLab/jni/provider/contacts
 classes:
     - java_class: android.provider.ContactsContract
-      go_type: contactsContract
+      go_type: Contract
       static_methods:
         - java_method: isProfileId
           go_name: IsProfileId

@@ -2,14 +2,41 @@ package: pm
 go_import: github.com/AndroidGoLab/jni/content/pm
 classes:
     - java_class: android.content.pm.PackageManager
-      go_type: Manager
+      go_type: PackageManager
       methods:
-        - java_method: hasSystemFeature
-          go_name: HasSystemFeature
+        - java_method: addPackageToPreferred
+          go_name: AddPackageToPreferred
           params:
             - java_type: String
               go_name: arg0
+          returns: void
+          error: true
+        - java_method: addPermission
+          go_name: AddPermission
+          params:
+            - java_type: android.content.pm.PermissionInfo
+              go_name: arg0
           returns: boolean
+          error: true
+        - java_method: addPermissionAsync
+          go_name: AddPermissionAsync
+          params:
+            - java_type: android.content.pm.PermissionInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: addPreferredActivity
+          go_name: AddPreferredActivity
+          params:
+            - java_type: android.content.IntentFilter
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.ComponentName[]
+              go_name: arg2
+            - java_type: android.content.ComponentName
+              go_name: arg3
+          returns: void
           error: true
         - java_method: addWhitelistedRestrictedPermission
           go_name: AddWhitelistedRestrictedPermission
@@ -40,8 +67,103 @@ classes:
               go_name: arg1
           returns: boolean[]
           error: true
+        - java_method: canRequestPackageInstalls
+          go_name: CanRequestPackageInstalls
+          returns: boolean
+          error: true
+        - java_method: canonicalToCurrentPackageNames
+          go_name: CanonicalToCurrentPackageNames
+          params:
+            - java_type: java.lang.String[]
+              go_name: arg0
+          returns: java.lang.String[]
+          error: true
+        - java_method: checkPermission
+          go_name: CheckPermission
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: checkSignatures
+          go_name: CheckSignatures2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: checkSignatures
+          go_name: CheckSignatures2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: clearInstantAppCookie
+          go_name: ClearInstantAppCookie
+          returns: void
+          error: true
+        - java_method: clearPackagePreferredActivities
+          go_name: ClearPackagePreferredActivities
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: currentToCanonicalPackageNames
+          go_name: CurrentToCanonicalPackageNames
+          params:
+            - java_type: java.lang.String[]
+              go_name: arg0
+          returns: java.lang.String[]
+          error: true
+        - java_method: extendVerificationTimeout
+          go_name: ExtendVerificationTimeout
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: getActivityBanner
+          go_name: GetActivityBanner1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getActivityBanner
+          go_name: GetActivityBanner1_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getActivityIcon
+          go_name: GetActivityIcon1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getActivityIcon
+          go_name: GetActivityIcon1_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
         - java_method: getActivityInfo
-          go_name: GetActivityInfo
+          go_name: GetActivityInfo2
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
@@ -49,14 +171,109 @@ classes:
               go_name: arg1
           returns: android.content.pm.ActivityInfo
           error: true
+        - java_method: getActivityInfo
+          go_name: GetActivityInfo2_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ActivityInfo
+          error: true
+        - java_method: getActivityLogo
+          go_name: GetActivityLogo1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getActivityLogo
+          go_name: GetActivityLogo1_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getAllPermissionGroups
+          go_name: GetAllPermissionGroups
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.content.pm.PermissionGroupInfo>
+          error: true
+        - java_method: getApplicationBanner
+          go_name: GetApplicationBanner1
+          params:
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getApplicationBanner
+          go_name: GetApplicationBanner1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getApplicationEnabledSetting
+          go_name: GetApplicationEnabledSetting
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getApplicationIcon
+          go_name: GetApplicationIcon1
+          params:
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getApplicationIcon
+          go_name: GetApplicationIcon1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
         - java_method: getApplicationInfo
-          go_name: GetApplicationInfo
+          go_name: GetApplicationInfo2
           params:
             - java_type: String
               go_name: arg0
             - java_type: android.content.pm.PackageManager$ApplicationInfoFlags
               go_name: arg1
           returns: android.content.pm.ApplicationInfo
+          error: true
+        - java_method: getApplicationInfo
+          go_name: GetApplicationInfo2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ApplicationInfo
+          error: true
+        - java_method: getApplicationLabel
+          go_name: GetApplicationLabel
+          params:
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getApplicationLogo
+          go_name: GetApplicationLogo1
+          params:
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getApplicationLogo
+          go_name: GetApplicationLogo1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
           error: true
         - java_method: getArchivedPackage
           go_name: GetArchivedPackage
@@ -68,6 +285,35 @@ classes:
         - java_method: getBackgroundPermissionOptionLabel
           go_name: GetBackgroundPermissionOptionLabel
           returns: String
+          error: true
+        - java_method: getChangedPackages
+          go_name: GetChangedPackages
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.pm.ChangedPackages
+          error: true
+        - java_method: getComponentEnabledSetting
+          go_name: GetComponentEnabledSetting
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getDefaultActivityIcon
+          go_name: GetDefaultActivityIcon
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getDrawable
+          go_name: GetDrawable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg2
+          returns: android.graphics.drawable.Drawable
           error: true
         - java_method: getGroupOfPlatformPermission
           go_name: GetGroupOfPlatformPermission
@@ -88,9 +334,16 @@ classes:
           returns: android.content.pm.InstallSourceInfo
           error: true
         - java_method: getInstalledApplications
-          go_name: GetInstalledApplications
+          go_name: GetInstalledApplications1
           params:
             - java_type: android.content.pm.PackageManager$ApplicationInfoFlags
+              go_name: arg0
+          returns: java.util.List<android.content.pm.ApplicationInfo>
+          error: true
+        - java_method: getInstalledApplications
+          go_name: GetInstalledApplications1_1
+          params:
+            - java_type: int
               go_name: arg0
           returns: java.util.List<android.content.pm.ApplicationInfo>
           error: true
@@ -102,11 +355,49 @@ classes:
           returns: java.util.List<android.content.pm.ModuleInfo>
           error: true
         - java_method: getInstalledPackages
-          go_name: GetInstalledPackages
+          go_name: GetInstalledPackages1
           params:
             - java_type: android.content.pm.PackageManager$PackageInfoFlags
               go_name: arg0
           returns: java.util.List<android.content.pm.PackageInfo>
+          error: true
+        - java_method: getInstalledPackages
+          go_name: GetInstalledPackages1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.content.pm.PackageInfo>
+          error: true
+        - java_method: getInstallerPackageName
+          go_name: GetInstallerPackageName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getInstantAppCookie
+          go_name: GetInstantAppCookie
+          returns: '[B'
+          error: true
+        - java_method: getInstantAppCookieMaxBytes
+          go_name: GetInstantAppCookieMaxBytes
+          returns: int
+          error: true
+        - java_method: getInstrumentationInfo
+          go_name: GetInstrumentationInfo
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.InstrumentationInfo
+          error: true
+        - java_method: getLaunchIntentForPackage
+          go_name: GetLaunchIntentForPackage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
           error: true
         - java_method: getLaunchIntentSenderForPackage
           go_name: GetLaunchIntentSenderForPackage
@@ -114,6 +405,13 @@ classes:
             - java_type: String
               go_name: arg0
           returns: android.content.IntentSender
+          error: true
+        - java_method: getLeanbackLaunchIntentForPackage
+          go_name: GetLeanbackLaunchIntentForPackage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
           error: true
         - java_method: getMimeGroup
           go_name: GetMimeGroup
@@ -130,6 +428,13 @@ classes:
             - java_type: int
               go_name: arg1
           returns: android.content.pm.ModuleInfo
+          error: true
+        - java_method: getNameForUid
+          go_name: GetNameForUid
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
           error: true
         - java_method: getPackageArchiveInfo
           go_name: GetPackageArchiveInfo2
@@ -150,11 +455,27 @@ classes:
           returns: android.content.pm.PackageInfo
           error: true
         - java_method: getPackageGids
-          go_name: GetPackageGids
+          go_name: GetPackageGids1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: getPackageGids
+          go_name: GetPackageGids2_1
           params:
             - java_type: String
               go_name: arg0
             - java_type: android.content.pm.PackageManager$PackageInfoFlags
+              go_name: arg1
+          returns: '[I'
+          error: true
+        - java_method: getPackageGids
+          go_name: GetPackageGids2_2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
               go_name: arg1
           returns: '[I'
           error: true
@@ -170,14 +491,36 @@ classes:
         - java_method: getPackageInfo
           go_name: GetPackageInfo2_1
           params:
+            - java_type: android.content.pm.VersionedPackage
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.PackageInfo
+          error: true
+        - java_method: getPackageInfo
+          go_name: GetPackageInfo2_2
+          params:
             - java_type: String
               go_name: arg0
             - java_type: android.content.pm.PackageManager$PackageInfoFlags
               go_name: arg1
           returns: android.content.pm.PackageInfo
           error: true
+        - java_method: getPackageInfo
+          go_name: GetPackageInfo2_3
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.PackageInfo
+          error: true
+        - java_method: getPackageInstaller
+          go_name: GetPackageInstaller
+          returns: android.content.pm.PackageInstaller
+          error: true
         - java_method: getPackageUid
-          go_name: GetPackageUid
+          go_name: GetPackageUid2
           params:
             - java_type: String
               go_name: arg0
@@ -185,14 +528,57 @@ classes:
               go_name: arg1
           returns: int
           error: true
+        - java_method: getPackageUid
+          go_name: GetPackageUid2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getPackagesForUid
+          go_name: GetPackagesForUid
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.lang.String[]
+          error: true
         - java_method: getPackagesHoldingPermissions
-          go_name: GetPackagesHoldingPermissions
+          go_name: GetPackagesHoldingPermissions2
           params:
             - java_type: java.lang.String[]
               go_name: arg0
             - java_type: android.content.pm.PackageManager$PackageInfoFlags
               go_name: arg1
           returns: java.util.List<android.content.pm.PackageInfo>
+          error: true
+        - java_method: getPackagesHoldingPermissions
+          go_name: GetPackagesHoldingPermissions2_1
+          params:
+            - java_type: java.lang.String[]
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.util.List<android.content.pm.PackageInfo>
+          error: true
+        - java_method: getPermissionGroupInfo
+          go_name: GetPermissionGroupInfo
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.PermissionGroupInfo
+          error: true
+        - java_method: getPermissionInfo
+          go_name: GetPermissionInfo
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.PermissionInfo
           error: true
         - java_method: getPlatformPermissionsForGroup
           go_name: GetPlatformPermissionsForGroup
@@ -204,6 +590,24 @@ classes:
             - java_type: java.util.function.Consumer<java.util.List<java.lang.String>>
               go_name: arg2
           returns: void
+          error: true
+        - java_method: getPreferredActivities
+          go_name: GetPreferredActivities
+          params:
+            - java_type: java.util.List<android.content.IntentFilter>
+              go_name: arg0
+            - java_type: java.util.List<android.content.ComponentName>
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: getPreferredPackages
+          go_name: GetPreferredPackages
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.content.pm.PackageInfo>
           error: true
         - java_method: getProperty
           go_name: GetProperty2
@@ -224,7 +628,7 @@ classes:
           returns: android.content.pm.PackageManager$Property
           error: true
         - java_method: getProviderInfo
-          go_name: GetProviderInfo
+          go_name: GetProviderInfo2
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
@@ -232,8 +636,17 @@ classes:
               go_name: arg1
           returns: android.content.pm.ProviderInfo
           error: true
+        - java_method: getProviderInfo
+          go_name: GetProviderInfo2_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ProviderInfo
+          error: true
         - java_method: getReceiverInfo
-          go_name: GetReceiverInfo
+          go_name: GetReceiverInfo2
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
@@ -241,8 +654,31 @@ classes:
               go_name: arg1
           returns: android.content.pm.ActivityInfo
           error: true
+        - java_method: getReceiverInfo
+          go_name: GetReceiverInfo2_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ActivityInfo
+          error: true
+        - java_method: getResourcesForActivity
+          go_name: GetResourcesForActivity
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.content.res.Resources
+          error: true
         - java_method: getResourcesForApplication
-          go_name: GetResourcesForApplication
+          go_name: GetResourcesForApplication1
+          params:
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg0
+          returns: android.content.res.Resources
+          error: true
+        - java_method: getResourcesForApplication
+          go_name: GetResourcesForApplication2_1
           params:
             - java_type: android.content.pm.ApplicationInfo
               go_name: arg0
@@ -250,8 +686,15 @@ classes:
               go_name: arg1
           returns: android.content.res.Resources
           error: true
+        - java_method: getResourcesForApplication
+          go_name: GetResourcesForApplication1_2
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.res.Resources
+          error: true
         - java_method: getServiceInfo
-          go_name: GetServiceInfo
+          go_name: GetServiceInfo2
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
@@ -259,10 +702,26 @@ classes:
               go_name: arg1
           returns: android.content.pm.ServiceInfo
           error: true
+        - java_method: getServiceInfo
+          go_name: GetServiceInfo2_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ServiceInfo
+          error: true
         - java_method: getSharedLibraries
-          go_name: GetSharedLibraries
+          go_name: GetSharedLibraries1
           params:
             - java_type: android.content.pm.PackageManager$PackageInfoFlags
+              go_name: arg0
+          returns: java.util.List<android.content.pm.SharedLibraryInfo>
+          error: true
+        - java_method: getSharedLibraries
+          go_name: GetSharedLibraries1_1
+          params:
+            - java_type: int
               go_name: arg0
           returns: java.util.List<android.content.pm.SharedLibraryInfo>
           error: true
@@ -277,12 +736,62 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+        - java_method: getSystemAvailableFeatures
+          go_name: GetSystemAvailableFeatures
+          returns: android.content.pm.FeatureInfo[]
+          error: true
+        - java_method: getSystemSharedLibraryNames
+          go_name: GetSystemSharedLibraryNames
+          returns: java.lang.String[]
+          error: true
         - java_method: getTargetSdkVersion
           go_name: GetTargetSdkVersion
           params:
             - java_type: String
               go_name: arg0
           returns: int
+          error: true
+        - java_method: getText
+          go_name: GetText
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg2
+          returns: String
+          error: true
+        - java_method: getUserBadgedDrawableForDensity
+          go_name: GetUserBadgedDrawableForDensity
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+            - java_type: android.graphics.Rect
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getUserBadgedIcon
+          go_name: GetUserBadgedIcon
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getUserBadgedLabel
+          go_name: GetUserBadgedLabel
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: String
           error: true
         - java_method: getWhitelistedRestrictedPermissions
           go_name: GetWhitelistedRestrictedPermissions
@@ -292,6 +801,17 @@ classes:
             - java_type: int
               go_name: arg1
           returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getXml
+          go_name: GetXml
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.pm.ApplicationInfo
+              go_name: arg2
+          returns: android.content.res.XmlResourceParser
           error: true
         - java_method: hasSigningCertificate
           go_name: HasSigningCertificate3
@@ -313,6 +833,22 @@ classes:
               go_name: arg1
             - java_type: int
               go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: hasSystemFeature
+          go_name: HasSystemFeature1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasSystemFeature
+          go_name: HasSystemFeature2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: boolean
           error: true
         - java_method: isAppArchivable
@@ -344,6 +880,17 @@ classes:
           go_name: IsDeviceUpgrading
           returns: boolean
           error: true
+        - java_method: isInstantApp
+          go_name: IsInstantApp0
+          returns: boolean
+          error: true
+        - java_method: isInstantApp
+          go_name: IsInstantApp1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
         - java_method: isPackageStopped
           go_name: IsPackageStopped
           params:
@@ -362,6 +909,19 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+        - java_method: isPermissionRevokedByPolicy
+          go_name: IsPermissionRevokedByPolicy
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isSafeMode
+          go_name: IsSafeMode
+          returns: boolean
+          error: true
         - java_method: queryActivityProperty
           go_name: QueryActivityProperty
           params:
@@ -377,7 +937,7 @@ classes:
           returns: java.util.List<android.content.pm.PackageManager$Property>
           error: true
         - java_method: queryBroadcastReceivers
-          go_name: QueryBroadcastReceivers
+          go_name: QueryBroadcastReceivers2
           params:
             - java_type: android.content.Intent
               go_name: arg0
@@ -385,8 +945,17 @@ classes:
               go_name: arg1
           returns: java.util.List<android.content.pm.ResolveInfo>
           error: true
+        - java_method: queryBroadcastReceivers
+          go_name: QueryBroadcastReceivers2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.util.List<android.content.pm.ResolveInfo>
+          error: true
         - java_method: queryContentProviders
-          go_name: QueryContentProviders
+          go_name: QueryContentProviders3
           params:
             - java_type: String
               go_name: arg0
@@ -396,8 +965,28 @@ classes:
               go_name: arg2
           returns: java.util.List<android.content.pm.ProviderInfo>
           error: true
+        - java_method: queryContentProviders
+          go_name: QueryContentProviders3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: java.util.List<android.content.pm.ProviderInfo>
+          error: true
+        - java_method: queryInstrumentation
+          go_name: QueryInstrumentation
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.util.List<android.content.pm.InstrumentationInfo>
+          error: true
         - java_method: queryIntentActivities
-          go_name: QueryIntentActivities
+          go_name: QueryIntentActivities2
           params:
             - java_type: android.content.Intent
               go_name: arg0
@@ -405,8 +994,30 @@ classes:
               go_name: arg1
           returns: java.util.List<android.content.pm.ResolveInfo>
           error: true
+        - java_method: queryIntentActivities
+          go_name: QueryIntentActivities2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.util.List<android.content.pm.ResolveInfo>
+          error: true
         - java_method: queryIntentActivityOptions
-          go_name: QueryIntentActivityOptions
+          go_name: QueryIntentActivityOptions4
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.Intent[]
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: java.util.List<android.content.pm.ResolveInfo>
+          error: true
+        - java_method: queryIntentActivityOptions
+          go_name: QueryIntentActivityOptions4_1
           params:
             - java_type: android.content.ComponentName
               go_name: arg0
@@ -419,7 +1030,25 @@ classes:
           returns: java.util.List<android.content.pm.ResolveInfo>
           error: true
         - java_method: queryIntentContentProviders
-          go_name: QueryIntentContentProviders
+          go_name: QueryIntentContentProviders2
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.content.pm.PackageManager$ResolveInfoFlags
+              go_name: arg1
+          returns: java.util.List<android.content.pm.ResolveInfo>
+          error: true
+        - java_method: queryIntentContentProviders
+          go_name: QueryIntentContentProviders2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.util.List<android.content.pm.ResolveInfo>
+          error: true
+        - java_method: queryIntentServices
+          go_name: QueryIntentServices2
           params:
             - java_type: android.content.Intent
               go_name: arg0
@@ -428,13 +1057,22 @@ classes:
           returns: java.util.List<android.content.pm.ResolveInfo>
           error: true
         - java_method: queryIntentServices
-          go_name: QueryIntentServices
+          go_name: QueryIntentServices2_1
           params:
             - java_type: android.content.Intent
               go_name: arg0
-            - java_type: android.content.pm.PackageManager$ResolveInfoFlags
+            - java_type: int
               go_name: arg1
           returns: java.util.List<android.content.pm.ResolveInfo>
+          error: true
+        - java_method: queryPermissionsByGroup
+          go_name: QueryPermissionsByGroup
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.util.List<android.content.pm.PermissionInfo>
           error: true
         - java_method: queryProviderProperty
           go_name: QueryProviderProperty
@@ -459,6 +1097,20 @@ classes:
           error: true
         - java_method: relinquishUpdateOwnership
           go_name: RelinquishUpdateOwnership
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removePackageFromPreferred
+          go_name: RemovePackageFromPreferred
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removePermission
+          go_name: RemovePermission
           params:
             - java_type: String
               go_name: arg0
@@ -491,7 +1143,7 @@ classes:
           returns: void
           error: true
         - java_method: resolveActivity
-          go_name: ResolveActivity
+          go_name: ResolveActivity2
           params:
             - java_type: android.content.Intent
               go_name: arg0
@@ -499,8 +1151,17 @@ classes:
               go_name: arg1
           returns: android.content.pm.ResolveInfo
           error: true
+        - java_method: resolveActivity
+          go_name: ResolveActivity2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ResolveInfo
+          error: true
         - java_method: resolveContentProvider
-          go_name: ResolveContentProvider
+          go_name: ResolveContentProvider2
           params:
             - java_type: String
               go_name: arg0
@@ -508,14 +1169,52 @@ classes:
               go_name: arg1
           returns: android.content.pm.ProviderInfo
           error: true
+        - java_method: resolveContentProvider
+          go_name: ResolveContentProvider2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ProviderInfo
+          error: true
         - java_method: resolveService
-          go_name: ResolveService
+          go_name: ResolveService2
           params:
             - java_type: android.content.Intent
               go_name: arg0
             - java_type: android.content.pm.PackageManager$ResolveInfoFlags
               go_name: arg1
           returns: android.content.pm.ResolveInfo
+          error: true
+        - java_method: resolveService
+          go_name: ResolveService2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ResolveInfo
+          error: true
+        - java_method: setApplicationCategoryHint
+          go_name: SetApplicationCategoryHint
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setApplicationEnabledSetting
+          go_name: SetApplicationEnabledSetting
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
           error: true
         - java_method: setAutoRevokeWhitelisted
           go_name: SetAutoRevokeWhitelisted
@@ -526,11 +1225,31 @@ classes:
               go_name: arg1
           returns: boolean
           error: true
+        - java_method: setComponentEnabledSetting
+          go_name: SetComponentEnabledSetting
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
         - java_method: setComponentEnabledSettings
           go_name: SetComponentEnabledSettings
           params:
             - java_type: java.util.List<android.content.pm.PackageManager$ComponentEnabledSetting>
               go_name: arg0
+          returns: void
+          error: true
+        - java_method: setInstallerPackageName
+          go_name: SetInstallerPackageName
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
           returns: void
           error: true
         - java_method: setMimeGroup
@@ -539,6 +1258,22 @@ classes:
             - java_type: String
               go_name: arg0
             - java_type: java.util.Set<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: updateInstantAppCookie
+          go_name: UpdateInstantAppCookie
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: verifyPendingInstall
+          go_name: VerifyPendingInstall
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
               go_name: arg1
           returns: void
           error: true

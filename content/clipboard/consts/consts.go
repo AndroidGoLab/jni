@@ -3,5 +3,5 @@
 package consts
 
 const (
-	Creator = 0
+	Creator int = 0
 )

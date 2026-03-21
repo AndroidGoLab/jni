@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// clipDataItem wraps android.content.ClipData$Item.
-type clipDataItem struct {
+// ClipDataItem wraps android.content.ClipData$Item.
+type ClipDataItem struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // CoerceToHtmlText calls android.content.ClipData$Item.coerceToHtmlText.
-func (m *clipDataItem) CoerceToHtmlText(arg0 *jni.Object) (string, error) {
+func (m *ClipDataItem) CoerceToHtmlText(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *clipDataItem) CoerceToHtmlText(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemCoerceToHtmlText == nil {
+		if midClipDataItemCoerceToHtmlText == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.coerceToHtmlText is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemCoerceToHtmlText, jni.ObjectValue(arg0),
+			midClipDataItemCoerceToHtmlText, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -51,7 +51,7 @@ func (m *clipDataItem) CoerceToHtmlText(arg0 *jni.Object) (string, error) {
 }
 
 // CoerceToStyledText calls android.content.ClipData$Item.coerceToStyledText.
-func (m *clipDataItem) CoerceToStyledText(arg0 *jni.Object) (string, error) {
+func (m *ClipDataItem) CoerceToStyledText(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -59,14 +59,14 @@ func (m *clipDataItem) CoerceToStyledText(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemCoerceToStyledText == nil {
+		if midClipDataItemCoerceToStyledText == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.coerceToStyledText is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemCoerceToStyledText, jni.ObjectValue(arg0),
+			midClipDataItemCoerceToStyledText, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -78,7 +78,7 @@ func (m *clipDataItem) CoerceToStyledText(arg0 *jni.Object) (string, error) {
 }
 
 // CoerceToText calls android.content.ClipData$Item.coerceToText.
-func (m *clipDataItem) CoerceToText(arg0 *jni.Object) (string, error) {
+func (m *ClipDataItem) CoerceToText(arg0 *jni.Object) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -86,14 +86,14 @@ func (m *clipDataItem) CoerceToText(arg0 *jni.Object) (string, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemCoerceToText == nil {
+		if midClipDataItemCoerceToText == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.coerceToText is not available on this device")
 			return callErr
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemCoerceToText, jni.ObjectValue(arg0),
+			midClipDataItemCoerceToText, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -105,7 +105,7 @@ func (m *clipDataItem) CoerceToText(arg0 *jni.Object) (string, error) {
 }
 
 // GetHtmlText calls android.content.ClipData$Item.getHtmlText.
-func (m *clipDataItem) GetHtmlText() (string, error) {
+func (m *ClipDataItem) GetHtmlText() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -113,13 +113,13 @@ func (m *clipDataItem) GetHtmlText() (string, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemGetHtmlText == nil {
+		if midClipDataItemGetHtmlText == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getHtmlText is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemGetHtmlText,
+			midClipDataItemGetHtmlText,
 		)
 		if callErr != nil {
 			return callErr
@@ -131,7 +131,7 @@ func (m *clipDataItem) GetHtmlText() (string, error) {
 }
 
 // GetIntent calls android.content.ClipData$Item.getIntent.
-func (m *clipDataItem) GetIntent() (*jni.Object, error) {
+func (m *ClipDataItem) GetIntent() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -139,13 +139,13 @@ func (m *clipDataItem) GetIntent() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemGetIntent == nil {
+		if midClipDataItemGetIntent == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getIntent is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemGetIntent,
+			midClipDataItemGetIntent,
 		)
 		if callErr != nil {
 			return callErr
@@ -156,7 +156,7 @@ func (m *clipDataItem) GetIntent() (*jni.Object, error) {
 }
 
 // GetIntentSender calls android.content.ClipData$Item.getIntentSender.
-func (m *clipDataItem) GetIntentSender() (*jni.Object, error) {
+func (m *ClipDataItem) GetIntentSender() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -164,13 +164,13 @@ func (m *clipDataItem) GetIntentSender() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemGetIntentSender == nil {
+		if midClipDataItemGetIntentSender == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getIntentSender is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemGetIntentSender,
+			midClipDataItemGetIntentSender,
 		)
 		if callErr != nil {
 			return callErr
@@ -181,7 +181,7 @@ func (m *clipDataItem) GetIntentSender() (*jni.Object, error) {
 }
 
 // GetText calls android.content.ClipData$Item.getText.
-func (m *clipDataItem) GetText() (string, error) {
+func (m *ClipDataItem) GetText() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -189,13 +189,13 @@ func (m *clipDataItem) GetText() (string, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemGetText == nil {
+		if midClipDataItemGetText == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getText is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemGetText,
+			midClipDataItemGetText,
 		)
 		if callErr != nil {
 			return callErr
@@ -207,7 +207,7 @@ func (m *clipDataItem) GetText() (string, error) {
 }
 
 // GetTextLinks calls android.content.ClipData$Item.getTextLinks.
-func (m *clipDataItem) GetTextLinks() (*jni.Object, error) {
+func (m *ClipDataItem) GetTextLinks() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -215,13 +215,13 @@ func (m *clipDataItem) GetTextLinks() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemGetTextLinks == nil {
+		if midClipDataItemGetTextLinks == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getTextLinks is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemGetTextLinks,
+			midClipDataItemGetTextLinks,
 		)
 		if callErr != nil {
 			return callErr
@@ -232,7 +232,7 @@ func (m *clipDataItem) GetTextLinks() (*jni.Object, error) {
 }
 
 // GetUri calls android.content.ClipData$Item.getUri.
-func (m *clipDataItem) GetUri() (*jni.Object, error) {
+func (m *ClipDataItem) GetUri() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -240,13 +240,13 @@ func (m *clipDataItem) GetUri() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemGetUri == nil {
+		if midClipDataItemGetUri == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.getUri is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemGetUri,
+			midClipDataItemGetUri,
 		)
 		if callErr != nil {
 			return callErr
@@ -257,7 +257,7 @@ func (m *clipDataItem) GetUri() (*jni.Object, error) {
 }
 
 // ToString calls android.content.ClipData$Item.toString.
-func (m *clipDataItem) ToString() (string, error) {
+func (m *ClipDataItem) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -265,13 +265,13 @@ func (m *clipDataItem) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midclipDataItemToString == nil {
+		if midClipDataItemToString == nil {
 			callErr = fmt.Errorf("android.content.ClipData$Item.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midclipDataItemToString,
+			midClipDataItemToString,
 		)
 		if callErr != nil {
 			return callErr

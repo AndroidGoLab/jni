@@ -609,6 +609,121 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.location.GnssStatus
+      go_type: GnssStatus
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAzimuthDegrees
+          go_name: GetAzimuthDegrees
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getBasebandCn0DbHz
+          go_name: GetBasebandCn0DbHz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getCarrierFrequencyHz
+          go_name: GetCarrierFrequencyHz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getCn0DbHz
+          go_name: GetCn0DbHz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getConstellationType
+          go_name: GetConstellationType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getElevationDegrees
+          go_name: GetElevationDegrees
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getSatelliteCount
+          go_name: GetSatelliteCount
+          returns: int
+          error: true
+        - java_method: getSvid
+          go_name: GetSvid
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: hasAlmanacData
+          go_name: HasAlmanacData
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasBasebandCn0DbHz
+          go_name: HasBasebandCn0DbHz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasCarrierFrequencyHz
+          go_name: HasCarrierFrequencyHz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasEphemerisData
+          go_name: HasEphemerisData
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: usedInFix
+          go_name: UsedInFix
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.location.Location
       go_type: Location
       methods:
@@ -996,121 +1111,6 @@ classes:
               go_name: arg4
           returns: void
           error: true
-    - java_class: android.location.GnssStatus
-      go_type: GnssStatus
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAzimuthDegrees
-          go_name: GetAzimuthDegrees
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getBasebandCn0DbHz
-          go_name: GetBasebandCn0DbHz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getCarrierFrequencyHz
-          go_name: GetCarrierFrequencyHz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getCn0DbHz
-          go_name: GetCn0DbHz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getConstellationType
-          go_name: GetConstellationType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getElevationDegrees
-          go_name: GetElevationDegrees
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getSatelliteCount
-          go_name: GetSatelliteCount
-          returns: int
-          error: true
-        - java_method: getSvid
-          go_name: GetSvid
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: hasAlmanacData
-          go_name: HasAlmanacData
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasBasebandCn0DbHz
-          go_name: HasBasebandCn0DbHz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasCarrierFrequencyHz
-          go_name: HasCarrierFrequencyHz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasEphemerisData
-          go_name: HasEphemerisData
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: usedInFix
-          go_name: UsedInFix
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
 constants:
     - go_name: ActionGnssCapabilitiesChanged
       value: '"android.location.action.GNSS_CAPABILITIES_CHANGED"'
@@ -1163,18 +1163,6 @@ constants:
     - go_name: ProvidersChangedAction
       value: '"android.location.PROVIDERS_CHANGED"'
       go_type: string
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: FormatDegrees
-      value: "0"
-      go_type: int
-    - go_name: FormatMinutes
-      value: "1"
-      go_type: int
-    - go_name: FormatSeconds
-      value: "2"
-      go_type: int
     - go_name: ConstellationBeidou
       value: "5"
       go_type: int
@@ -1198,4 +1186,16 @@ constants:
       go_type: int
     - go_name: ConstellationUnknown
       value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: FormatDegrees
+      value: "0"
+      go_type: int
+    - go_name: FormatMinutes
+      value: "1"
+      go_type: int
+    - go_name: FormatSeconds
+      value: "2"
       go_type: int

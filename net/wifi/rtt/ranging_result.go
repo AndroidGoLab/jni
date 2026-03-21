@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// rangingResult wraps android.net.wifi.rtt.RangingResult.
-type rangingResult struct {
+// RangingResult wraps android.net.wifi.rtt.RangingResult.
+type RangingResult struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.net.wifi.rtt.RangingResult.describeContents.
-func (m *rangingResult) DescribeContents() (int32, error) {
+func (m *RangingResult) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *rangingResult) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultDescribeContents == nil {
+		if midRangingResultDescribeContents == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultDescribeContents,
+			midRangingResultDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *rangingResult) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.net.wifi.rtt.RangingResult.equals.
-func (m *rangingResult) Equals(arg0 *jni.Object) (bool, error) {
+func (m *RangingResult) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *rangingResult) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultEquals == nil {
+		if midRangingResultEquals == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midrangingResultEquals, jni.ObjectValue(arg0),
+			midRangingResultEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *rangingResult) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // Get80211azInitiatorTxLtfRepetitionsCount calls android.net.wifi.rtt.RangingResult.get80211azInitiatorTxLtfRepetitionsCount.
-func (m *rangingResult) Get80211azInitiatorTxLtfRepetitionsCount() (int32, error) {
+func (m *RangingResult) Get80211azInitiatorTxLtfRepetitionsCount() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *rangingResult) Get80211azInitiatorTxLtfRepetitionsCount() (int32, error
 			callErr = err
 			return err
 		}
-		if midrangingResultGet80211azInitiatorTxLtfRepetitionsCount == nil {
+		if midRangingResultGet80211azInitiatorTxLtfRepetitionsCount == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.get80211azInitiatorTxLtfRepetitionsCount is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGet80211azInitiatorTxLtfRepetitionsCount,
+			midRangingResultGet80211azInitiatorTxLtfRepetitionsCount,
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *rangingResult) Get80211azInitiatorTxLtfRepetitionsCount() (int32, error
 }
 
 // Get80211azNumberOfRxSpatialStreams calls android.net.wifi.rtt.RangingResult.get80211azNumberOfRxSpatialStreams.
-func (m *rangingResult) Get80211azNumberOfRxSpatialStreams() (int32, error) {
+func (m *RangingResult) Get80211azNumberOfRxSpatialStreams() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,13 +109,13 @@ func (m *rangingResult) Get80211azNumberOfRxSpatialStreams() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGet80211azNumberOfRxSpatialStreams == nil {
+		if midRangingResultGet80211azNumberOfRxSpatialStreams == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.get80211azNumberOfRxSpatialStreams is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGet80211azNumberOfRxSpatialStreams,
+			midRangingResultGet80211azNumberOfRxSpatialStreams,
 		)
 		if callErr != nil {
 			return callErr
@@ -126,7 +126,7 @@ func (m *rangingResult) Get80211azNumberOfRxSpatialStreams() (int32, error) {
 }
 
 // Get80211azNumberOfTxSpatialStreams calls android.net.wifi.rtt.RangingResult.get80211azNumberOfTxSpatialStreams.
-func (m *rangingResult) Get80211azNumberOfTxSpatialStreams() (int32, error) {
+func (m *RangingResult) Get80211azNumberOfTxSpatialStreams() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -134,13 +134,13 @@ func (m *rangingResult) Get80211azNumberOfTxSpatialStreams() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGet80211azNumberOfTxSpatialStreams == nil {
+		if midRangingResultGet80211azNumberOfTxSpatialStreams == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.get80211azNumberOfTxSpatialStreams is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGet80211azNumberOfTxSpatialStreams,
+			midRangingResultGet80211azNumberOfTxSpatialStreams,
 		)
 		if callErr != nil {
 			return callErr
@@ -151,7 +151,7 @@ func (m *rangingResult) Get80211azNumberOfTxSpatialStreams() (int32, error) {
 }
 
 // Get80211azResponderTxLtfRepetitionsCount calls android.net.wifi.rtt.RangingResult.get80211azResponderTxLtfRepetitionsCount.
-func (m *rangingResult) Get80211azResponderTxLtfRepetitionsCount() (int32, error) {
+func (m *RangingResult) Get80211azResponderTxLtfRepetitionsCount() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -159,13 +159,13 @@ func (m *rangingResult) Get80211azResponderTxLtfRepetitionsCount() (int32, error
 			callErr = err
 			return err
 		}
-		if midrangingResultGet80211azResponderTxLtfRepetitionsCount == nil {
+		if midRangingResultGet80211azResponderTxLtfRepetitionsCount == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.get80211azResponderTxLtfRepetitionsCount is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGet80211azResponderTxLtfRepetitionsCount,
+			midRangingResultGet80211azResponderTxLtfRepetitionsCount,
 		)
 		if callErr != nil {
 			return callErr
@@ -176,7 +176,7 @@ func (m *rangingResult) Get80211azResponderTxLtfRepetitionsCount() (int32, error
 }
 
 // GetDistanceMm calls android.net.wifi.rtt.RangingResult.getDistanceMm.
-func (m *rangingResult) GetDistanceMm() (int32, error) {
+func (m *RangingResult) GetDistanceMm() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -184,13 +184,13 @@ func (m *rangingResult) GetDistanceMm() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetDistanceMm == nil {
+		if midRangingResultGetDistanceMm == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getDistanceMm is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetDistanceMm,
+			midRangingResultGetDistanceMm,
 		)
 		if callErr != nil {
 			return callErr
@@ -201,7 +201,7 @@ func (m *rangingResult) GetDistanceMm() (int32, error) {
 }
 
 // GetDistanceStdDevMm calls android.net.wifi.rtt.RangingResult.getDistanceStdDevMm.
-func (m *rangingResult) GetDistanceStdDevMm() (int32, error) {
+func (m *RangingResult) GetDistanceStdDevMm() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -209,13 +209,13 @@ func (m *rangingResult) GetDistanceStdDevMm() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetDistanceStdDevMm == nil {
+		if midRangingResultGetDistanceStdDevMm == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getDistanceStdDevMm is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetDistanceStdDevMm,
+			midRangingResultGetDistanceStdDevMm,
 		)
 		if callErr != nil {
 			return callErr
@@ -226,7 +226,7 @@ func (m *rangingResult) GetDistanceStdDevMm() (int32, error) {
 }
 
 // GetLci calls android.net.wifi.rtt.RangingResult.getLci.
-func (m *rangingResult) GetLci() (*jni.Object, error) {
+func (m *RangingResult) GetLci() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -234,13 +234,13 @@ func (m *rangingResult) GetLci() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetLci == nil {
+		if midRangingResultGetLci == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getLci is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midrangingResultGetLci,
+			midRangingResultGetLci,
 		)
 		if callErr != nil {
 			return callErr
@@ -251,7 +251,7 @@ func (m *rangingResult) GetLci() (*jni.Object, error) {
 }
 
 // GetLcr calls android.net.wifi.rtt.RangingResult.getLcr.
-func (m *rangingResult) GetLcr() (*jni.Object, error) {
+func (m *RangingResult) GetLcr() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -259,13 +259,13 @@ func (m *rangingResult) GetLcr() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetLcr == nil {
+		if midRangingResultGetLcr == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getLcr is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midrangingResultGetLcr,
+			midRangingResultGetLcr,
 		)
 		if callErr != nil {
 			return callErr
@@ -276,7 +276,7 @@ func (m *rangingResult) GetLcr() (*jni.Object, error) {
 }
 
 // GetMacAddress calls android.net.wifi.rtt.RangingResult.getMacAddress.
-func (m *rangingResult) GetMacAddress() (*jni.Object, error) {
+func (m *RangingResult) GetMacAddress() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -284,13 +284,13 @@ func (m *rangingResult) GetMacAddress() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetMacAddress == nil {
+		if midRangingResultGetMacAddress == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getMacAddress is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midrangingResultGetMacAddress,
+			midRangingResultGetMacAddress,
 		)
 		if callErr != nil {
 			return callErr
@@ -301,7 +301,7 @@ func (m *rangingResult) GetMacAddress() (*jni.Object, error) {
 }
 
 // GetMaxTimeBetweenNtbMeasurementsMicros calls android.net.wifi.rtt.RangingResult.getMaxTimeBetweenNtbMeasurementsMicros.
-func (m *rangingResult) GetMaxTimeBetweenNtbMeasurementsMicros() (int64, error) {
+func (m *RangingResult) GetMaxTimeBetweenNtbMeasurementsMicros() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -309,13 +309,13 @@ func (m *rangingResult) GetMaxTimeBetweenNtbMeasurementsMicros() (int64, error) 
 			callErr = err
 			return err
 		}
-		if midrangingResultGetMaxTimeBetweenNtbMeasurementsMicros == nil {
+		if midRangingResultGetMaxTimeBetweenNtbMeasurementsMicros == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getMaxTimeBetweenNtbMeasurementsMicros is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midrangingResultGetMaxTimeBetweenNtbMeasurementsMicros,
+			midRangingResultGetMaxTimeBetweenNtbMeasurementsMicros,
 		)
 		if callErr != nil {
 			return callErr
@@ -326,7 +326,7 @@ func (m *rangingResult) GetMaxTimeBetweenNtbMeasurementsMicros() (int64, error) 
 }
 
 // GetMeasurementBandwidth calls android.net.wifi.rtt.RangingResult.getMeasurementBandwidth.
-func (m *rangingResult) GetMeasurementBandwidth() (int32, error) {
+func (m *RangingResult) GetMeasurementBandwidth() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -334,13 +334,13 @@ func (m *rangingResult) GetMeasurementBandwidth() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetMeasurementBandwidth == nil {
+		if midRangingResultGetMeasurementBandwidth == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getMeasurementBandwidth is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetMeasurementBandwidth,
+			midRangingResultGetMeasurementBandwidth,
 		)
 		if callErr != nil {
 			return callErr
@@ -351,7 +351,7 @@ func (m *rangingResult) GetMeasurementBandwidth() (int32, error) {
 }
 
 // GetMeasurementChannelFrequencyMHz calls android.net.wifi.rtt.RangingResult.getMeasurementChannelFrequencyMHz.
-func (m *rangingResult) GetMeasurementChannelFrequencyMHz() (int32, error) {
+func (m *RangingResult) GetMeasurementChannelFrequencyMHz() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -359,13 +359,13 @@ func (m *rangingResult) GetMeasurementChannelFrequencyMHz() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetMeasurementChannelFrequencyMHz == nil {
+		if midRangingResultGetMeasurementChannelFrequencyMHz == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getMeasurementChannelFrequencyMHz is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetMeasurementChannelFrequencyMHz,
+			midRangingResultGetMeasurementChannelFrequencyMHz,
 		)
 		if callErr != nil {
 			return callErr
@@ -376,7 +376,7 @@ func (m *rangingResult) GetMeasurementChannelFrequencyMHz() (int32, error) {
 }
 
 // GetMinTimeBetweenNtbMeasurementsMicros calls android.net.wifi.rtt.RangingResult.getMinTimeBetweenNtbMeasurementsMicros.
-func (m *rangingResult) GetMinTimeBetweenNtbMeasurementsMicros() (int64, error) {
+func (m *RangingResult) GetMinTimeBetweenNtbMeasurementsMicros() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -384,13 +384,13 @@ func (m *rangingResult) GetMinTimeBetweenNtbMeasurementsMicros() (int64, error) 
 			callErr = err
 			return err
 		}
-		if midrangingResultGetMinTimeBetweenNtbMeasurementsMicros == nil {
+		if midRangingResultGetMinTimeBetweenNtbMeasurementsMicros == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getMinTimeBetweenNtbMeasurementsMicros is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midrangingResultGetMinTimeBetweenNtbMeasurementsMicros,
+			midRangingResultGetMinTimeBetweenNtbMeasurementsMicros,
 		)
 		if callErr != nil {
 			return callErr
@@ -401,7 +401,7 @@ func (m *rangingResult) GetMinTimeBetweenNtbMeasurementsMicros() (int64, error) 
 }
 
 // GetNumAttemptedMeasurements calls android.net.wifi.rtt.RangingResult.getNumAttemptedMeasurements.
-func (m *rangingResult) GetNumAttemptedMeasurements() (int32, error) {
+func (m *RangingResult) GetNumAttemptedMeasurements() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -409,13 +409,13 @@ func (m *rangingResult) GetNumAttemptedMeasurements() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetNumAttemptedMeasurements == nil {
+		if midRangingResultGetNumAttemptedMeasurements == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getNumAttemptedMeasurements is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetNumAttemptedMeasurements,
+			midRangingResultGetNumAttemptedMeasurements,
 		)
 		if callErr != nil {
 			return callErr
@@ -426,7 +426,7 @@ func (m *rangingResult) GetNumAttemptedMeasurements() (int32, error) {
 }
 
 // GetNumSuccessfulMeasurements calls android.net.wifi.rtt.RangingResult.getNumSuccessfulMeasurements.
-func (m *rangingResult) GetNumSuccessfulMeasurements() (int32, error) {
+func (m *RangingResult) GetNumSuccessfulMeasurements() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -434,13 +434,13 @@ func (m *rangingResult) GetNumSuccessfulMeasurements() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetNumSuccessfulMeasurements == nil {
+		if midRangingResultGetNumSuccessfulMeasurements == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getNumSuccessfulMeasurements is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetNumSuccessfulMeasurements,
+			midRangingResultGetNumSuccessfulMeasurements,
 		)
 		if callErr != nil {
 			return callErr
@@ -451,7 +451,7 @@ func (m *rangingResult) GetNumSuccessfulMeasurements() (int32, error) {
 }
 
 // GetPasnComebackAfterMillis calls android.net.wifi.rtt.RangingResult.getPasnComebackAfterMillis.
-func (m *rangingResult) GetPasnComebackAfterMillis() (int64, error) {
+func (m *RangingResult) GetPasnComebackAfterMillis() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -459,13 +459,13 @@ func (m *rangingResult) GetPasnComebackAfterMillis() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetPasnComebackAfterMillis == nil {
+		if midRangingResultGetPasnComebackAfterMillis == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getPasnComebackAfterMillis is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midrangingResultGetPasnComebackAfterMillis,
+			midRangingResultGetPasnComebackAfterMillis,
 		)
 		if callErr != nil {
 			return callErr
@@ -476,7 +476,7 @@ func (m *rangingResult) GetPasnComebackAfterMillis() (int64, error) {
 }
 
 // GetPasnComebackCookie calls android.net.wifi.rtt.RangingResult.getPasnComebackCookie.
-func (m *rangingResult) GetPasnComebackCookie() (*jni.Object, error) {
+func (m *RangingResult) GetPasnComebackCookie() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -484,13 +484,13 @@ func (m *rangingResult) GetPasnComebackCookie() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetPasnComebackCookie == nil {
+		if midRangingResultGetPasnComebackCookie == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getPasnComebackCookie is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midrangingResultGetPasnComebackCookie,
+			midRangingResultGetPasnComebackCookie,
 		)
 		if callErr != nil {
 			return callErr
@@ -501,7 +501,7 @@ func (m *rangingResult) GetPasnComebackCookie() (*jni.Object, error) {
 }
 
 // GetPeerHandle calls android.net.wifi.rtt.RangingResult.getPeerHandle.
-func (m *rangingResult) GetPeerHandle() (*jni.Object, error) {
+func (m *RangingResult) GetPeerHandle() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -509,13 +509,13 @@ func (m *rangingResult) GetPeerHandle() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetPeerHandle == nil {
+		if midRangingResultGetPeerHandle == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getPeerHandle is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midrangingResultGetPeerHandle,
+			midRangingResultGetPeerHandle,
 		)
 		if callErr != nil {
 			return callErr
@@ -526,7 +526,7 @@ func (m *rangingResult) GetPeerHandle() (*jni.Object, error) {
 }
 
 // GetRangingTimestampMillis calls android.net.wifi.rtt.RangingResult.getRangingTimestampMillis.
-func (m *rangingResult) GetRangingTimestampMillis() (int64, error) {
+func (m *RangingResult) GetRangingTimestampMillis() (int64, error) {
 	var result int64
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -534,13 +534,13 @@ func (m *rangingResult) GetRangingTimestampMillis() (int64, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetRangingTimestampMillis == nil {
+		if midRangingResultGetRangingTimestampMillis == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getRangingTimestampMillis is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midrangingResultGetRangingTimestampMillis,
+			midRangingResultGetRangingTimestampMillis,
 		)
 		if callErr != nil {
 			return callErr
@@ -551,7 +551,7 @@ func (m *rangingResult) GetRangingTimestampMillis() (int64, error) {
 }
 
 // GetRssi calls android.net.wifi.rtt.RangingResult.getRssi.
-func (m *rangingResult) GetRssi() (int32, error) {
+func (m *RangingResult) GetRssi() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -559,13 +559,13 @@ func (m *rangingResult) GetRssi() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetRssi == nil {
+		if midRangingResultGetRssi == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getRssi is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetRssi,
+			midRangingResultGetRssi,
 		)
 		if callErr != nil {
 			return callErr
@@ -576,7 +576,7 @@ func (m *rangingResult) GetRssi() (int32, error) {
 }
 
 // GetSecureHeLtfProtocolVersion calls android.net.wifi.rtt.RangingResult.getSecureHeLtfProtocolVersion.
-func (m *rangingResult) GetSecureHeLtfProtocolVersion() (int32, error) {
+func (m *RangingResult) GetSecureHeLtfProtocolVersion() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -584,13 +584,13 @@ func (m *rangingResult) GetSecureHeLtfProtocolVersion() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetSecureHeLtfProtocolVersion == nil {
+		if midRangingResultGetSecureHeLtfProtocolVersion == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getSecureHeLtfProtocolVersion is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetSecureHeLtfProtocolVersion,
+			midRangingResultGetSecureHeLtfProtocolVersion,
 		)
 		if callErr != nil {
 			return callErr
@@ -601,7 +601,7 @@ func (m *rangingResult) GetSecureHeLtfProtocolVersion() (int32, error) {
 }
 
 // GetStatus calls android.net.wifi.rtt.RangingResult.getStatus.
-func (m *rangingResult) GetStatus() (int32, error) {
+func (m *RangingResult) GetStatus() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -609,13 +609,13 @@ func (m *rangingResult) GetStatus() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetStatus == nil {
+		if midRangingResultGetStatus == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getStatus is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultGetStatus,
+			midRangingResultGetStatus,
 		)
 		if callErr != nil {
 			return callErr
@@ -626,7 +626,7 @@ func (m *rangingResult) GetStatus() (int32, error) {
 }
 
 // GetUnverifiedResponderLocation calls android.net.wifi.rtt.RangingResult.getUnverifiedResponderLocation.
-func (m *rangingResult) GetUnverifiedResponderLocation() (*jni.Object, error) {
+func (m *RangingResult) GetUnverifiedResponderLocation() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -634,13 +634,13 @@ func (m *rangingResult) GetUnverifiedResponderLocation() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultGetUnverifiedResponderLocation == nil {
+		if midRangingResultGetUnverifiedResponderLocation == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.getUnverifiedResponderLocation is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midrangingResultGetUnverifiedResponderLocation,
+			midRangingResultGetUnverifiedResponderLocation,
 		)
 		if callErr != nil {
 			return callErr
@@ -651,7 +651,7 @@ func (m *rangingResult) GetUnverifiedResponderLocation() (*jni.Object, error) {
 }
 
 // HashCode calls android.net.wifi.rtt.RangingResult.hashCode.
-func (m *rangingResult) HashCode() (int32, error) {
+func (m *RangingResult) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -659,13 +659,13 @@ func (m *rangingResult) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultHashCode == nil {
+		if midRangingResultHashCode == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midrangingResultHashCode,
+			midRangingResultHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -676,7 +676,7 @@ func (m *rangingResult) HashCode() (int32, error) {
 }
 
 // Is80211azNtbMeasurement calls android.net.wifi.rtt.RangingResult.is80211azNtbMeasurement.
-func (m *rangingResult) Is80211azNtbMeasurement() (bool, error) {
+func (m *RangingResult) Is80211azNtbMeasurement() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -684,13 +684,13 @@ func (m *rangingResult) Is80211azNtbMeasurement() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultIs80211azNtbMeasurement == nil {
+		if midRangingResultIs80211azNtbMeasurement == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.is80211azNtbMeasurement is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midrangingResultIs80211azNtbMeasurement,
+			midRangingResultIs80211azNtbMeasurement,
 		)
 		if callErr != nil {
 			return callErr
@@ -702,7 +702,7 @@ func (m *rangingResult) Is80211azNtbMeasurement() (bool, error) {
 }
 
 // Is80211mcMeasurement calls android.net.wifi.rtt.RangingResult.is80211mcMeasurement.
-func (m *rangingResult) Is80211mcMeasurement() (bool, error) {
+func (m *RangingResult) Is80211mcMeasurement() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -710,13 +710,13 @@ func (m *rangingResult) Is80211mcMeasurement() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultIs80211mcMeasurement == nil {
+		if midRangingResultIs80211mcMeasurement == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.is80211mcMeasurement is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midrangingResultIs80211mcMeasurement,
+			midRangingResultIs80211mcMeasurement,
 		)
 		if callErr != nil {
 			return callErr
@@ -728,7 +728,7 @@ func (m *rangingResult) Is80211mcMeasurement() (bool, error) {
 }
 
 // IsRangingAuthenticated calls android.net.wifi.rtt.RangingResult.isRangingAuthenticated.
-func (m *rangingResult) IsRangingAuthenticated() (bool, error) {
+func (m *RangingResult) IsRangingAuthenticated() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -736,13 +736,13 @@ func (m *rangingResult) IsRangingAuthenticated() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultIsRangingAuthenticated == nil {
+		if midRangingResultIsRangingAuthenticated == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.isRangingAuthenticated is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midrangingResultIsRangingAuthenticated,
+			midRangingResultIsRangingAuthenticated,
 		)
 		if callErr != nil {
 			return callErr
@@ -754,7 +754,7 @@ func (m *rangingResult) IsRangingAuthenticated() (bool, error) {
 }
 
 // IsRangingFrameProtected calls android.net.wifi.rtt.RangingResult.isRangingFrameProtected.
-func (m *rangingResult) IsRangingFrameProtected() (bool, error) {
+func (m *RangingResult) IsRangingFrameProtected() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -762,13 +762,13 @@ func (m *rangingResult) IsRangingFrameProtected() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultIsRangingFrameProtected == nil {
+		if midRangingResultIsRangingFrameProtected == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.isRangingFrameProtected is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midrangingResultIsRangingFrameProtected,
+			midRangingResultIsRangingFrameProtected,
 		)
 		if callErr != nil {
 			return callErr
@@ -780,7 +780,7 @@ func (m *rangingResult) IsRangingFrameProtected() (bool, error) {
 }
 
 // IsSecureHeLtfEnabled calls android.net.wifi.rtt.RangingResult.isSecureHeLtfEnabled.
-func (m *rangingResult) IsSecureHeLtfEnabled() (bool, error) {
+func (m *RangingResult) IsSecureHeLtfEnabled() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -788,13 +788,13 @@ func (m *rangingResult) IsSecureHeLtfEnabled() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultIsSecureHeLtfEnabled == nil {
+		if midRangingResultIsSecureHeLtfEnabled == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.isSecureHeLtfEnabled is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midrangingResultIsSecureHeLtfEnabled,
+			midRangingResultIsSecureHeLtfEnabled,
 		)
 		if callErr != nil {
 			return callErr
@@ -806,7 +806,7 @@ func (m *rangingResult) IsSecureHeLtfEnabled() (bool, error) {
 }
 
 // ToString calls android.net.wifi.rtt.RangingResult.toString.
-func (m *rangingResult) ToString() (string, error) {
+func (m *RangingResult) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -814,13 +814,13 @@ func (m *rangingResult) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midrangingResultToString == nil {
+		if midRangingResultToString == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midrangingResultToString,
+			midRangingResultToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -832,7 +832,7 @@ func (m *rangingResult) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.net.wifi.rtt.RangingResult.writeToParcel.
-func (m *rangingResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *RangingResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -840,14 +840,14 @@ func (m *rangingResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midrangingResultWriteToParcel == nil {
+		if midRangingResultWriteToParcel == nil {
 			callErr = fmt.Errorf("android.net.wifi.rtt.RangingResult.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midrangingResultWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midRangingResultWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

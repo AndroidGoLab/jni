@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// lightStateBuilder wraps android.hardware.lights.LightState$Builder.
-type lightStateBuilder struct {
+// LightStateBuilder wraps android.hardware.lights.LightState$Builder.
+type LightStateBuilder struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // Build calls android.hardware.lights.LightState$Builder.build.
-func (m *lightStateBuilder) Build() (*jni.Object, error) {
+func (m *LightStateBuilder) Build() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *lightStateBuilder) Build() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midlightStateBuilderBuild == nil {
+		if midLightStateBuilderBuild == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState$Builder.build is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midlightStateBuilderBuild,
+			midLightStateBuilderBuild,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *lightStateBuilder) Build() (*jni.Object, error) {
 }
 
 // SetColor calls android.hardware.lights.LightState$Builder.setColor.
-func (m *lightStateBuilder) SetColor(arg0 int32) (*jni.Object, error) {
+func (m *LightStateBuilder) SetColor(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *lightStateBuilder) SetColor(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midlightStateBuilderSetColor == nil {
+		if midLightStateBuilderSetColor == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState$Builder.setColor is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midlightStateBuilderSetColor, jni.IntValue(arg0),
+			midLightStateBuilderSetColor, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -75,7 +75,7 @@ func (m *lightStateBuilder) SetColor(arg0 int32) (*jni.Object, error) {
 }
 
 // SetPlayerId calls android.hardware.lights.LightState$Builder.setPlayerId.
-func (m *lightStateBuilder) SetPlayerId(arg0 int32) (*jni.Object, error) {
+func (m *LightStateBuilder) SetPlayerId(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -83,14 +83,14 @@ func (m *lightStateBuilder) SetPlayerId(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midlightStateBuilderSetPlayerId == nil {
+		if midLightStateBuilderSetPlayerId == nil {
 			callErr = fmt.Errorf("android.hardware.lights.LightState$Builder.setPlayerId is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midlightStateBuilderSetPlayerId, jni.IntValue(arg0),
+			midLightStateBuilderSetPlayerId, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

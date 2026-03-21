@@ -5,11 +5,7 @@ package nsd
 import "github.com/AndroidGoLab/jni/net/nsd/consts"
 
 const (
-	ActionNsdStateChanged = consts.ActionNsdStateChanged
-	ExtraNsdState         = consts.ExtraNsdState
-)
-
-const (
+	Creator                    = consts.Creator
 	FailureAlreadyActive       = consts.FailureAlreadyActive
 	FailureBadParameters       = consts.FailureBadParameters
 	FailureInternalError       = consts.FailureInternalError
@@ -18,5 +14,9 @@ const (
 	NsdStateDisabled           = consts.NsdStateDisabled
 	NsdStateEnabled            = consts.NsdStateEnabled
 	ProtocolDnsSd              = consts.ProtocolDnsSd
-	Creator                    = consts.Creator
+)
+
+const (
+	ActionNsdStateChanged = consts.ActionNsdStateChanged
+	ExtraNsdState         = consts.ExtraNsdState
 )

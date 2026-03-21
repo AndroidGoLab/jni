@@ -15,7 +15,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -24,28 +29,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/widget/toast"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -55,9 +70,9 @@ func run(vm *jni.VM) error {
 	// --- Constants ---
 	// The toast package provides duration constants matching the Android
 	// Toast.LENGTH_SHORT and Toast.LENGTH_LONG values.
-	fmt.Fprintln(&output, "=== Toast duration constants ===")
-	fmt.Fprintf(&output, "  Short (LENGTH_SHORT) = %d\n", toast.LengthShort)
-	fmt.Fprintf(&output, "  Long  (LENGTH_LONG)  = %d\n", toast.LengthLong)
+	fmt.Fprintln(output, "=== Toast duration constants ===")
+	fmt.Fprintf(output, "  Short (LENGTH_SHORT) = %d\n", toast.LengthShort)
+	fmt.Fprintf(output, "  Long  (LENGTH_LONG)  = %d\n", toast.LengthLong)
 
 	// --- Showing a toast ---
 	// The toast type wraps android.widget.Toast. Its single method is:
@@ -102,7 +117,7 @@ func run(vm *jni.VM) error {
 			jni.IntValue(int32(toast.LengthShort)),
 		)
 		if err != nil {
-			fmt.Fprintf(&output, "  makeText (requires UI thread): %v\n", err)
+			fmt.Fprintf(output, "  makeText (requires UI thread): %v\n", err)
 			return nil
 		}
 
@@ -120,14 +135,14 @@ func run(vm *jni.VM) error {
 		//   )
 		_ = toastObj
 
-		fmt.Fprintln(&output, "Toast created via generated API")
+		fmt.Fprintln(output, "Toast created via generated API")
 		return nil
 	})
 	if err != nil {
 		return fmt.Errorf("toast: %w", err)
 	}
 
-	fmt.Fprintln(&output, "\nAll toast package features demonstrated.")
+	fmt.Fprintln(output, "\nAll toast package features demonstrated.")
 	return nil
 }
 

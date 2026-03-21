@@ -3,18 +3,18 @@
 package consts
 
 const (
-	Authority               = "com.android.contacts"
-	CallerIsSyncadapter     = "caller_is_syncadapter"
-	DeferredSnippeting      = "deferred_snippeting"
-	DeferredSnippetingQuery = "deferred_snippeting_query"
-	DirectoryParamKey       = "directory"
-	LimitParamKey           = "limit"
-	PrimaryAccountName      = "name_for_primary_account"
-	PrimaryAccountType      = "type_for_primary_account"
-	RemoveDuplicateEntries  = "remove_duplicate_entries"
-	StrequentPhoneOnly      = "strequent_phone_only"
+	Authority               string = "com.android.contacts"
+	CallerIsSyncadapter     string = "caller_is_syncadapter"
+	DeferredSnippeting      string = "deferred_snippeting"
+	DeferredSnippetingQuery string = "deferred_snippeting_query"
+	DirectoryParamKey       string = "directory"
+	LimitParamKey           string = "limit"
+	PrimaryAccountName      string = "name_for_primary_account"
+	PrimaryAccountType      string = "type_for_primary_account"
+	RemoveDuplicateEntries  string = "remove_duplicate_entries"
+	StrequentPhoneOnly      string = "strequent_phone_only"
 )
 
 const (
-	AuthorityUri = 0
+	AuthorityUri int = 0
 )

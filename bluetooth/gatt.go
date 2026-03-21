@@ -541,7 +541,7 @@ func (m *Gatt) SetCharacteristicNotification(arg0 *jni.Object, arg1 bool) (bool,
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -558,7 +558,11 @@ func (m *Gatt) SetCharacteristicNotification(arg0 *jni.Object, arg1 bool) (bool,
 }
 
 // SetPreferredPhy calls android.bluetooth.BluetoothGatt.setPreferredPhy.
-func (m *Gatt) SetPreferredPhy(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *Gatt) SetPreferredPhy(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -608,7 +612,11 @@ func (m *Gatt) WriteCharacteristic1(arg0 *jni.Object) (bool, error) {
 }
 
 // WriteCharacteristic3_1 calls android.bluetooth.BluetoothGatt.writeCharacteristic.
-func (m *Gatt) WriteCharacteristic3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 int32) (int32, error) {
+func (m *Gatt) WriteCharacteristic3_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 int32,
+) (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// wifiP2pDevice wraps android.net.wifi.p2p.WifiP2pDevice.
-type wifiP2pDevice struct {
+// WifiP2pDevice wraps android.net.wifi.p2p.WifiP2pDevice.
+type WifiP2pDevice struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.net.wifi.p2p.WifiP2pDevice.describeContents.
-func (m *wifiP2pDevice) DescribeContents() (int32, error) {
+func (m *WifiP2pDevice) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *wifiP2pDevice) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceDescribeContents == nil {
+		if midWifiP2pDeviceDescribeContents == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pDeviceDescribeContents,
+			midWifiP2pDeviceDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *wifiP2pDevice) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.net.wifi.p2p.WifiP2pDevice.equals.
-func (m *wifiP2pDevice) Equals(arg0 *jni.Object) (bool, error) {
+func (m *WifiP2pDevice) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,14 +57,14 @@ func (m *wifiP2pDevice) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceEquals == nil {
+		if midWifiP2pDeviceEquals == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.equals is not available on this device")
 			return callErr
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceEquals, jni.ObjectValue(arg0),
+			midWifiP2pDeviceEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -76,7 +76,7 @@ func (m *wifiP2pDevice) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetIpAddress calls android.net.wifi.p2p.WifiP2pDevice.getIpAddress.
-func (m *wifiP2pDevice) GetIpAddress() (*jni.Object, error) {
+func (m *WifiP2pDevice) GetIpAddress() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -84,13 +84,13 @@ func (m *wifiP2pDevice) GetIpAddress() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceGetIpAddress == nil {
+		if midWifiP2pDeviceGetIpAddress == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.getIpAddress is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pDeviceGetIpAddress,
+			midWifiP2pDeviceGetIpAddress,
 		)
 		if callErr != nil {
 			return callErr
@@ -101,7 +101,7 @@ func (m *wifiP2pDevice) GetIpAddress() (*jni.Object, error) {
 }
 
 // GetVendorElements calls android.net.wifi.p2p.WifiP2pDevice.getVendorElements.
-func (m *wifiP2pDevice) GetVendorElements() (*jni.Object, error) {
+func (m *WifiP2pDevice) GetVendorElements() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -109,13 +109,13 @@ func (m *wifiP2pDevice) GetVendorElements() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceGetVendorElements == nil {
+		if midWifiP2pDeviceGetVendorElements == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.getVendorElements is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pDeviceGetVendorElements,
+			midWifiP2pDeviceGetVendorElements,
 		)
 		if callErr != nil {
 			return callErr
@@ -126,7 +126,7 @@ func (m *wifiP2pDevice) GetVendorElements() (*jni.Object, error) {
 }
 
 // GetWfdInfo calls android.net.wifi.p2p.WifiP2pDevice.getWfdInfo.
-func (m *wifiP2pDevice) GetWfdInfo() (*jni.Object, error) {
+func (m *WifiP2pDevice) GetWfdInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -134,13 +134,13 @@ func (m *wifiP2pDevice) GetWfdInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceGetWfdInfo == nil {
+		if midWifiP2pDeviceGetWfdInfo == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.getWfdInfo is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pDeviceGetWfdInfo,
+			midWifiP2pDeviceGetWfdInfo,
 		)
 		if callErr != nil {
 			return callErr
@@ -151,7 +151,7 @@ func (m *wifiP2pDevice) GetWfdInfo() (*jni.Object, error) {
 }
 
 // HashCode calls android.net.wifi.p2p.WifiP2pDevice.hashCode.
-func (m *wifiP2pDevice) HashCode() (int32, error) {
+func (m *WifiP2pDevice) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -159,13 +159,13 @@ func (m *wifiP2pDevice) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceHashCode == nil {
+		if midWifiP2pDeviceHashCode == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midwifiP2pDeviceHashCode,
+			midWifiP2pDeviceHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -176,7 +176,7 @@ func (m *wifiP2pDevice) HashCode() (int32, error) {
 }
 
 // IsGroupOwner calls android.net.wifi.p2p.WifiP2pDevice.isGroupOwner.
-func (m *wifiP2pDevice) IsGroupOwner() (bool, error) {
+func (m *WifiP2pDevice) IsGroupOwner() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -184,13 +184,13 @@ func (m *wifiP2pDevice) IsGroupOwner() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceIsGroupOwner == nil {
+		if midWifiP2pDeviceIsGroupOwner == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.isGroupOwner is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceIsGroupOwner,
+			midWifiP2pDeviceIsGroupOwner,
 		)
 		if callErr != nil {
 			return callErr
@@ -202,7 +202,7 @@ func (m *wifiP2pDevice) IsGroupOwner() (bool, error) {
 }
 
 // IsOpportunisticBootstrappingMethodSupported calls android.net.wifi.p2p.WifiP2pDevice.isOpportunisticBootstrappingMethodSupported.
-func (m *wifiP2pDevice) IsOpportunisticBootstrappingMethodSupported() (bool, error) {
+func (m *WifiP2pDevice) IsOpportunisticBootstrappingMethodSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -210,13 +210,13 @@ func (m *wifiP2pDevice) IsOpportunisticBootstrappingMethodSupported() (bool, err
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceIsOpportunisticBootstrappingMethodSupported == nil {
+		if midWifiP2pDeviceIsOpportunisticBootstrappingMethodSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.isOpportunisticBootstrappingMethodSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceIsOpportunisticBootstrappingMethodSupported,
+			midWifiP2pDeviceIsOpportunisticBootstrappingMethodSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -228,7 +228,7 @@ func (m *wifiP2pDevice) IsOpportunisticBootstrappingMethodSupported() (bool, err
 }
 
 // IsPassphraseDisplayBootstrappingMethodSupported calls android.net.wifi.p2p.WifiP2pDevice.isPassphraseDisplayBootstrappingMethodSupported.
-func (m *wifiP2pDevice) IsPassphraseDisplayBootstrappingMethodSupported() (bool, error) {
+func (m *WifiP2pDevice) IsPassphraseDisplayBootstrappingMethodSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -236,13 +236,13 @@ func (m *wifiP2pDevice) IsPassphraseDisplayBootstrappingMethodSupported() (bool,
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceIsPassphraseDisplayBootstrappingMethodSupported == nil {
+		if midWifiP2pDeviceIsPassphraseDisplayBootstrappingMethodSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.isPassphraseDisplayBootstrappingMethodSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceIsPassphraseDisplayBootstrappingMethodSupported,
+			midWifiP2pDeviceIsPassphraseDisplayBootstrappingMethodSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -254,7 +254,7 @@ func (m *wifiP2pDevice) IsPassphraseDisplayBootstrappingMethodSupported() (bool,
 }
 
 // IsPassphraseKeypadBootstrappingMethodSupported calls android.net.wifi.p2p.WifiP2pDevice.isPassphraseKeypadBootstrappingMethodSupported.
-func (m *wifiP2pDevice) IsPassphraseKeypadBootstrappingMethodSupported() (bool, error) {
+func (m *WifiP2pDevice) IsPassphraseKeypadBootstrappingMethodSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -262,13 +262,13 @@ func (m *wifiP2pDevice) IsPassphraseKeypadBootstrappingMethodSupported() (bool, 
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceIsPassphraseKeypadBootstrappingMethodSupported == nil {
+		if midWifiP2pDeviceIsPassphraseKeypadBootstrappingMethodSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.isPassphraseKeypadBootstrappingMethodSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceIsPassphraseKeypadBootstrappingMethodSupported,
+			midWifiP2pDeviceIsPassphraseKeypadBootstrappingMethodSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -280,7 +280,7 @@ func (m *wifiP2pDevice) IsPassphraseKeypadBootstrappingMethodSupported() (bool, 
 }
 
 // IsPinCodeDisplayBootstrappingMethodSupported calls android.net.wifi.p2p.WifiP2pDevice.isPinCodeDisplayBootstrappingMethodSupported.
-func (m *wifiP2pDevice) IsPinCodeDisplayBootstrappingMethodSupported() (bool, error) {
+func (m *WifiP2pDevice) IsPinCodeDisplayBootstrappingMethodSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -288,13 +288,13 @@ func (m *wifiP2pDevice) IsPinCodeDisplayBootstrappingMethodSupported() (bool, er
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceIsPinCodeDisplayBootstrappingMethodSupported == nil {
+		if midWifiP2pDeviceIsPinCodeDisplayBootstrappingMethodSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.isPinCodeDisplayBootstrappingMethodSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceIsPinCodeDisplayBootstrappingMethodSupported,
+			midWifiP2pDeviceIsPinCodeDisplayBootstrappingMethodSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -306,7 +306,7 @@ func (m *wifiP2pDevice) IsPinCodeDisplayBootstrappingMethodSupported() (bool, er
 }
 
 // IsPinCodeKeypadBootstrappingMethodSupported calls android.net.wifi.p2p.WifiP2pDevice.isPinCodeKeypadBootstrappingMethodSupported.
-func (m *wifiP2pDevice) IsPinCodeKeypadBootstrappingMethodSupported() (bool, error) {
+func (m *WifiP2pDevice) IsPinCodeKeypadBootstrappingMethodSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -314,13 +314,13 @@ func (m *wifiP2pDevice) IsPinCodeKeypadBootstrappingMethodSupported() (bool, err
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceIsPinCodeKeypadBootstrappingMethodSupported == nil {
+		if midWifiP2pDeviceIsPinCodeKeypadBootstrappingMethodSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.isPinCodeKeypadBootstrappingMethodSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceIsPinCodeKeypadBootstrappingMethodSupported,
+			midWifiP2pDeviceIsPinCodeKeypadBootstrappingMethodSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -332,7 +332,7 @@ func (m *wifiP2pDevice) IsPinCodeKeypadBootstrappingMethodSupported() (bool, err
 }
 
 // IsServiceDiscoveryCapable calls android.net.wifi.p2p.WifiP2pDevice.isServiceDiscoveryCapable.
-func (m *wifiP2pDevice) IsServiceDiscoveryCapable() (bool, error) {
+func (m *WifiP2pDevice) IsServiceDiscoveryCapable() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -340,13 +340,13 @@ func (m *wifiP2pDevice) IsServiceDiscoveryCapable() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceIsServiceDiscoveryCapable == nil {
+		if midWifiP2pDeviceIsServiceDiscoveryCapable == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.isServiceDiscoveryCapable is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceIsServiceDiscoveryCapable,
+			midWifiP2pDeviceIsServiceDiscoveryCapable,
 		)
 		if callErr != nil {
 			return callErr
@@ -358,7 +358,7 @@ func (m *wifiP2pDevice) IsServiceDiscoveryCapable() (bool, error) {
 }
 
 // ToString calls android.net.wifi.p2p.WifiP2pDevice.toString.
-func (m *wifiP2pDevice) ToString() (string, error) {
+func (m *WifiP2pDevice) ToString() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -366,13 +366,13 @@ func (m *wifiP2pDevice) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceToString == nil {
+		if midWifiP2pDeviceToString == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.toString is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midwifiP2pDeviceToString,
+			midWifiP2pDeviceToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -384,7 +384,7 @@ func (m *wifiP2pDevice) ToString() (string, error) {
 }
 
 // Update calls android.net.wifi.p2p.WifiP2pDevice.update.
-func (m *wifiP2pDevice) Update(arg0 *jni.Object) error {
+func (m *WifiP2pDevice) Update(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -392,14 +392,14 @@ func (m *wifiP2pDevice) Update(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceUpdate == nil {
+		if midWifiP2pDeviceUpdate == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.update is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midwifiP2pDeviceUpdate, jni.ObjectValue(arg0),
+			midWifiP2pDeviceUpdate, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -407,7 +407,7 @@ func (m *wifiP2pDevice) Update(arg0 *jni.Object) error {
 }
 
 // WpsDisplaySupported calls android.net.wifi.p2p.WifiP2pDevice.wpsDisplaySupported.
-func (m *wifiP2pDevice) WpsDisplaySupported() (bool, error) {
+func (m *WifiP2pDevice) WpsDisplaySupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -415,13 +415,13 @@ func (m *wifiP2pDevice) WpsDisplaySupported() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceWpsDisplaySupported == nil {
+		if midWifiP2pDeviceWpsDisplaySupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.wpsDisplaySupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceWpsDisplaySupported,
+			midWifiP2pDeviceWpsDisplaySupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -433,7 +433,7 @@ func (m *wifiP2pDevice) WpsDisplaySupported() (bool, error) {
 }
 
 // WpsKeypadSupported calls android.net.wifi.p2p.WifiP2pDevice.wpsKeypadSupported.
-func (m *wifiP2pDevice) WpsKeypadSupported() (bool, error) {
+func (m *WifiP2pDevice) WpsKeypadSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -441,13 +441,13 @@ func (m *wifiP2pDevice) WpsKeypadSupported() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceWpsKeypadSupported == nil {
+		if midWifiP2pDeviceWpsKeypadSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.wpsKeypadSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceWpsKeypadSupported,
+			midWifiP2pDeviceWpsKeypadSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -459,7 +459,7 @@ func (m *wifiP2pDevice) WpsKeypadSupported() (bool, error) {
 }
 
 // WpsPbcSupported calls android.net.wifi.p2p.WifiP2pDevice.wpsPbcSupported.
-func (m *wifiP2pDevice) WpsPbcSupported() (bool, error) {
+func (m *WifiP2pDevice) WpsPbcSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -467,13 +467,13 @@ func (m *wifiP2pDevice) WpsPbcSupported() (bool, error) {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceWpsPbcSupported == nil {
+		if midWifiP2pDeviceWpsPbcSupported == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.wpsPbcSupported is not available on this device")
 			return callErr
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midwifiP2pDeviceWpsPbcSupported,
+			midWifiP2pDeviceWpsPbcSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -485,7 +485,7 @@ func (m *wifiP2pDevice) WpsPbcSupported() (bool, error) {
 }
 
 // WriteToParcel calls android.net.wifi.p2p.WifiP2pDevice.writeToParcel.
-func (m *wifiP2pDevice) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *WifiP2pDevice) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -493,14 +493,14 @@ func (m *wifiP2pDevice) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 			callErr = err
 			return err
 		}
-		if midwifiP2pDeviceWriteToParcel == nil {
+		if midWifiP2pDeviceWriteToParcel == nil {
 			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midwifiP2pDeviceWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midWifiP2pDeviceWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

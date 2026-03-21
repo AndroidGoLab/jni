@@ -356,7 +356,11 @@ func (m *NdefRecord) CreateApplicationRecord(arg0 string) (*jni.Object, error) {
 }
 
 // CreateExternal calls android.nfc.NdefRecord.createExternal.
-func (m *NdefRecord) CreateExternal(arg0 string, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
+func (m *NdefRecord) CreateExternal(
+	arg0 string,
+	arg1 string,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

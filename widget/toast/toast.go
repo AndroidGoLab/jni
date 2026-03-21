@@ -290,7 +290,11 @@ func (m *Toast) SetDuration(arg0 int32) error {
 }
 
 // SetGravity calls android.widget.Toast.setGravity.
-func (m *Toast) SetGravity(arg0 int32, arg1 int32, arg2 int32) error {
+func (m *Toast) SetGravity(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -431,7 +435,11 @@ func (m *Toast) Show() error {
 }
 
 // MakeText3 calls android.widget.Toast.makeText.
-func (m *Toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object, error) {
+func (m *Toast) MakeText3(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -457,7 +465,11 @@ func (m *Toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object
 }
 
 // MakeText3_1 calls android.widget.Toast.makeText.
-func (m *Toast) MakeText3_1(arg0 *jni.Object, arg1 string, arg2 int32) (*jni.Object, error) {
+func (m *Toast) MakeText3_1(
+	arg0 *jni.Object,
+	arg1 string,
+	arg2 int32,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

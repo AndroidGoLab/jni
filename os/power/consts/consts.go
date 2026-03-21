@@ -3,36 +3,36 @@
 package consts
 
 const (
-	AcquireCausesWakeup                                = 268435456
-	FullWakeLock                                       = 26
-	LocationModeAllDisabledWhenScreenOff               = 2
-	LocationModeForegroundOnly                         = 3
-	LocationModeGpsDisabledWhenScreenOff               = 1
-	LocationModeNoChange                               = 0
-	LocationModeThrottleRequestsWhenScreenOff          = 4
-	LowPowerStandbyAllowedReasonOngoingCall            = 4
-	LowPowerStandbyAllowedReasonTempPowerSaveAllowlist = 2
-	LowPowerStandbyAllowedReasonVoiceInteraction       = 1
-	OnAfterRelease                                     = 536870912
-	PartialWakeLock                                    = 1
-	ProximityScreenOffWakeLock                         = 32
-	ReleaseFlagWaitForNoProximity                      = 1
-	ScreenBrightWakeLock                               = 10
-	ScreenDimWakeLock                                  = 6
-	ThermalStatusCritical                              = 4
-	ThermalStatusEmergency                             = 5
-	ThermalStatusLight                                 = 1
-	ThermalStatusModerate                              = 2
-	ThermalStatusNone                                  = 0
-	ThermalStatusSevere                                = 3
-	ThermalStatusShutdown                              = 6
+	AcquireCausesWakeup                                int = 268435456
+	FullWakeLock                                       int = 26
+	LocationModeAllDisabledWhenScreenOff               int = 2
+	LocationModeForegroundOnly                         int = 3
+	LocationModeGpsDisabledWhenScreenOff               int = 1
+	LocationModeNoChange                               int = 0
+	LocationModeThrottleRequestsWhenScreenOff          int = 4
+	LowPowerStandbyAllowedReasonOngoingCall            int = 4
+	LowPowerStandbyAllowedReasonTempPowerSaveAllowlist int = 2
+	LowPowerStandbyAllowedReasonVoiceInteraction       int = 1
+	OnAfterRelease                                     int = 536870912
+	PartialWakeLock                                    int = 1
+	ProximityScreenOffWakeLock                         int = 32
+	ReleaseFlagWaitForNoProximity                      int = 1
+	ScreenBrightWakeLock                               int = 10
+	ScreenDimWakeLock                                  int = 6
+	ThermalStatusCritical                              int = 4
+	ThermalStatusEmergency                             int = 5
+	ThermalStatusLight                                 int = 1
+	ThermalStatusModerate                              int = 2
+	ThermalStatusNone                                  int = 0
+	ThermalStatusSevere                                int = 3
+	ThermalStatusShutdown                              int = 6
 )
 
 const (
-	ActionDeviceIdleModeChanged         = "android.os.action.DEVICE_IDLE_MODE_CHANGED"
-	ActionDeviceLightIdleModeChanged    = "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED"
-	ActionLowPowerStandbyEnabledChanged = "android.os.action.LOW_POWER_STANDBY_ENABLED_CHANGED"
-	ActionLowPowerStandbyPolicyChanged  = "android.os.action.LOW_POWER_STANDBY_POLICY_CHANGED"
-	ActionPowerSaveModeChanged          = "android.os.action.POWER_SAVE_MODE_CHANGED"
-	FeatureWakeOnLanInLowPowerStandby   = "com.android.lowpowerstandby.WAKE_ON_LAN"
+	ActionDeviceIdleModeChanged         string = "android.os.action.DEVICE_IDLE_MODE_CHANGED"
+	ActionDeviceLightIdleModeChanged    string = "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED"
+	ActionLowPowerStandbyEnabledChanged string = "android.os.action.LOW_POWER_STANDBY_ENABLED_CHANGED"
+	ActionLowPowerStandbyPolicyChanged  string = "android.os.action.LOW_POWER_STANDBY_POLICY_CHANGED"
+	ActionPowerSaveModeChanged          string = "android.os.action.POWER_SAVE_MODE_CHANGED"
+	FeatureWakeOnLanInLowPowerStandby   string = "com.android.lowpowerstandby.WAKE_ON_LAN"
 )

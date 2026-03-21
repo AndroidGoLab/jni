@@ -3,15 +3,15 @@
 package consts
 
 const (
-	Error                 = -1
-	ErrorBadValue         = -2
-	ErrorDeadObject       = -6
-	ErrorInvalidOperation = -3
-	ReadBlocking          = 0
-	ReadNonBlocking       = 1
-	RecordstateRecording  = 3
-	RecordstateStopped    = 1
-	StateInitialized      = 1
-	StateUninitialized    = 0
-	Success               = 0
+	Error                 int = -1
+	ErrorBadValue         int = -2
+	ErrorDeadObject       int = -6
+	ErrorInvalidOperation int = -3
+	ReadBlocking          int = 0
+	ReadNonBlocking       int = 1
+	RecordstateRecording  int = 3
+	RecordstateStopped    int = 1
+	StateInitialized      int = 1
+	StateUninitialized    int = 0
+	Success               int = 0
 )

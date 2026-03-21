@@ -7,8 +7,18 @@ classes:
       service_name: vibrator
       close: true
       methods:
-        - java_method: hasVibrator
-          go_name: HasVibrator
+        - java_method: areAllEffectsSupported
+          go_name: AreAllEffectsSupported
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: areAllPrimitivesSupported
+          go_name: AreAllPrimitivesSupported
+          params:
+            - java_type: int...
+              go_name: arg0
           returns: boolean
           error: true
         - java_method: areEffectsSupported
@@ -28,6 +38,10 @@ classes:
             - java_type: int...
               go_name: arg0
           returns: boolean[]
+          error: true
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
           error: true
         - java_method: getEnvelopeEffectInfo
           go_name: GetEnvelopeEffectInfo
@@ -55,6 +69,14 @@ classes:
         - java_method: getResonantFrequency
           go_name: GetResonantFrequency
           returns: float
+          error: true
+        - java_method: hasAmplitudeControl
+          go_name: HasAmplitudeControl
+          returns: boolean
+          error: true
+        - java_method: hasVibrator
+          go_name: HasVibrator
+          returns: boolean
           error: true
         - java_method: vibrate
           go_name: Vibrate1

@@ -3,11 +3,11 @@
 package consts
 
 const (
-	MediaErrorServerDied                    = 100
-	MediaRecorderErrorUnknown               = 1
-	MediaRecorderInfoMaxDurationReached     = 800
-	MediaRecorderInfoMaxFilesizeApproaching = 802
-	MediaRecorderInfoMaxFilesizeReached     = 801
-	MediaRecorderInfoNextOutputFileStarted  = 803
-	MediaRecorderInfoUnknown                = 1
+	MediaErrorServerDied                    int = 100
+	MediaRecorderErrorUnknown               int = 1
+	MediaRecorderInfoMaxDurationReached     int = 800
+	MediaRecorderInfoMaxFilesizeApproaching int = 802
+	MediaRecorderInfoMaxFilesizeReached     int = 801
+	MediaRecorderInfoNextOutputFileStarted  int = 803
+	MediaRecorderInfoUnknown                int = 1
 )

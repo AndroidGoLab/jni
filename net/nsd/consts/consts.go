@@ -3,18 +3,18 @@
 package consts
 
 const (
-	ActionNsdStateChanged = "android.net.nsd.STATE_CHANGED"
-	ExtraNsdState         = "nsd_state"
+	Creator                    int = 0
+	FailureAlreadyActive       int = 3
+	FailureBadParameters       int = 6
+	FailureInternalError       int = 0
+	FailureMaxLimit            int = 4
+	FailureOperationNotRunning int = 5
+	NsdStateDisabled           int = 1
+	NsdStateEnabled            int = 2
+	ProtocolDnsSd              int = 1
 )
 
 const (
-	FailureAlreadyActive       = 3
-	FailureBadParameters       = 6
-	FailureInternalError       = 0
-	FailureMaxLimit            = 4
-	FailureOperationNotRunning = 5
-	NsdStateDisabled           = 1
-	NsdStateEnabled            = 2
-	ProtocolDnsSd              = 1
-	Creator                    = 0
+	ActionNsdStateChanged string = "android.net.nsd.STATE_CHANGED"
+	ExtraNsdState         string = "nsd_state"
 )

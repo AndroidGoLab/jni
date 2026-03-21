@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "location"
+
 // Manager wraps android.location.LocationManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("location")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("location service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -174,7 +176,13 @@ func (m *Manager) AddNmeaListener2_2(arg0 *jni.Object, arg1 *jni.Object) (bool, 
 }
 
 // AddProximityAlert calls android.location.LocationManager.addProximityAlert.
-func (m *Manager) AddProximityAlert(arg0 float64, arg1 float64, arg2 float32, arg3 int64, arg4 *jni.Object) error {
+func (m *Manager) AddProximityAlert(
+	arg0 float64,
+	arg1 float64,
+	arg2 float32,
+	arg3 int64,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -224,7 +232,11 @@ func (m *Manager) AddTestProvider2(arg0 string, arg1 *jni.Object) error {
 }
 
 // AddTestProvider3_1 calls android.location.LocationManager.addTestProvider.
-func (m *Manager) AddTestProvider3_1(arg0 string, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) AddTestProvider3_1(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -251,7 +263,18 @@ func (m *Manager) AddTestProvider3_1(arg0 string, arg1 *jni.Object, arg2 *jni.Ob
 }
 
 // AddTestProvider10_2 calls android.location.LocationManager.addTestProvider.
-func (m *Manager) AddTestProvider10_2(arg0 string, arg1 bool, arg2 bool, arg3 bool, arg4 bool, arg5 bool, arg6 bool, arg7 bool, arg8 int32, arg9 int32) error {
+func (m *Manager) AddTestProvider10_2(
+	arg0 string,
+	arg1 bool,
+	arg2 bool,
+	arg3 bool,
+	arg4 bool,
+	arg5 bool,
+	arg6 bool,
+	arg7 bool,
+	arg8 int32,
+	arg9 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -270,37 +293,37 @@ func (m *Manager) AddTestProvider10_2(arg0 string, arg1 bool, arg2 bool, arg3 bo
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		var jArg3 uint8
 		if arg3 {
-			jArg3 = 1
+			jArg3 = jniTrue
 		}
 
 		var jArg4 uint8
 		if arg4 {
-			jArg4 = 1
+			jArg4 = jniTrue
 		}
 
 		var jArg5 uint8
 		if arg5 {
-			jArg5 = 1
+			jArg5 = jniTrue
 		}
 
 		var jArg6 uint8
 		if arg6 {
-			jArg6 = 1
+			jArg6 = jniTrue
 		}
 
 		var jArg7 uint8
 		if arg7 {
-			jArg7 = 1
+			jArg7 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -434,7 +457,7 @@ func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultObj, callErr := env.CallObjectMethod(
@@ -451,7 +474,13 @@ func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 }
 
 // GetCurrentLocation5 calls android.location.LocationManager.getCurrentLocation.
-func (m *Manager) GetCurrentLocation5(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) GetCurrentLocation5(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -478,7 +507,12 @@ func (m *Manager) GetCurrentLocation5(arg0 string, arg1 *jni.Object, arg2 *jni.O
 }
 
 // GetCurrentLocation4_1 calls android.location.LocationManager.getCurrentLocation.
-func (m *Manager) GetCurrentLocation4_1(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) GetCurrentLocation4_1(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -737,7 +771,7 @@ func (m *Manager) GetProviders2(arg0 *jni.Object, arg1 bool) (*jni.Object, error
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -767,7 +801,7 @@ func (m *Manager) GetProviders1_1(arg0 bool) (*jni.Object, error) {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -898,7 +932,11 @@ func (m *Manager) RegisterAntennaInfoListener(arg0 *jni.Object, arg1 *jni.Object
 }
 
 // RegisterGnssMeasurementsCallback3 calls android.location.LocationManager.registerGnssMeasurementsCallback.
-func (m *Manager) RegisterGnssMeasurementsCallback3(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (bool, error) {
+func (m *Manager) RegisterGnssMeasurementsCallback3(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1252,7 +1290,11 @@ func (m *Manager) RemoveUpdates1_1(arg0 *jni.Object) error {
 }
 
 // RequestFlush3 calls android.location.LocationManager.requestFlush.
-func (m *Manager) RequestFlush3(arg0 string, arg1 *jni.Object, arg2 int32) error {
+func (m *Manager) RequestFlush3(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1279,7 +1321,11 @@ func (m *Manager) RequestFlush3(arg0 string, arg1 *jni.Object, arg2 int32) error
 }
 
 // RequestFlush3_1 calls android.location.LocationManager.requestFlush.
-func (m *Manager) RequestFlush3_1(arg0 string, arg1 *jni.Object, arg2 int32) error {
+func (m *Manager) RequestFlush3_1(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 int32,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1306,7 +1352,11 @@ func (m *Manager) RequestFlush3_1(arg0 string, arg1 *jni.Object, arg2 int32) err
 }
 
 // RequestLocationUpdates3 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates3(arg0 string, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates3(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1333,7 +1383,12 @@ func (m *Manager) RequestLocationUpdates3(arg0 string, arg1 *jni.Object, arg2 *j
 }
 
 // RequestLocationUpdates4_1 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates4_1(arg0 string, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates4_1(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1360,7 +1415,12 @@ func (m *Manager) RequestLocationUpdates4_1(arg0 string, arg1 *jni.Object, arg2 
 }
 
 // RequestLocationUpdates4_2 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates4_2(arg0 string, arg1 int64, arg2 float32, arg3 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates4_2(
+	arg0 string,
+	arg1 int64,
+	arg2 float32,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1387,7 +1447,12 @@ func (m *Manager) RequestLocationUpdates4_2(arg0 string, arg1 int64, arg2 float3
 }
 
 // RequestLocationUpdates4_3 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates4_3(arg0 string, arg1 int64, arg2 float32, arg3 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates4_3(
+	arg0 string,
+	arg1 int64,
+	arg2 float32,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1414,7 +1479,13 @@ func (m *Manager) RequestLocationUpdates4_3(arg0 string, arg1 int64, arg2 float3
 }
 
 // RequestLocationUpdates5_4 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates5_4(arg0 string, arg1 int64, arg2 float32, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates5_4(
+	arg0 string,
+	arg1 int64,
+	arg2 float32,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1441,7 +1512,13 @@ func (m *Manager) RequestLocationUpdates5_4(arg0 string, arg1 int64, arg2 float3
 }
 
 // RequestLocationUpdates5_5 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates5_5(arg0 string, arg1 int64, arg2 float32, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates5_5(
+	arg0 string,
+	arg1 int64,
+	arg2 float32,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1468,7 +1545,12 @@ func (m *Manager) RequestLocationUpdates5_5(arg0 string, arg1 int64, arg2 float3
 }
 
 // RequestLocationUpdates4_6 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates4_6(arg0 int64, arg1 float32, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates4_6(
+	arg0 int64,
+	arg1 float32,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1491,7 +1573,13 @@ func (m *Manager) RequestLocationUpdates4_6(arg0 int64, arg1 float32, arg2 *jni.
 }
 
 // RequestLocationUpdates5_7 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates5_7(arg0 int64, arg1 float32, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates5_7(
+	arg0 int64,
+	arg1 float32,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1514,7 +1602,13 @@ func (m *Manager) RequestLocationUpdates5_7(arg0 int64, arg1 float32, arg2 *jni.
 }
 
 // RequestLocationUpdates5_8 calls android.location.LocationManager.requestLocationUpdates.
-func (m *Manager) RequestLocationUpdates5_8(arg0 int64, arg1 float32, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object) error {
+func (m *Manager) RequestLocationUpdates5_8(
+	arg0 int64,
+	arg1 float32,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1560,7 +1654,11 @@ func (m *Manager) RequestSingleUpdate2(arg0 *jni.Object, arg1 *jni.Object) error
 }
 
 // RequestSingleUpdate3_1 calls android.location.LocationManager.requestSingleUpdate.
-func (m *Manager) RequestSingleUpdate3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) RequestSingleUpdate3_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1610,7 +1708,11 @@ func (m *Manager) RequestSingleUpdate2_2(arg0 string, arg1 *jni.Object) error {
 }
 
 // RequestSingleUpdate3_3 calls android.location.LocationManager.requestSingleUpdate.
-func (m *Manager) RequestSingleUpdate3_3(arg0 string, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) RequestSingleUpdate3_3(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1637,7 +1739,11 @@ func (m *Manager) RequestSingleUpdate3_3(arg0 string, arg1 *jni.Object, arg2 *jn
 }
 
 // SendExtraCommand calls android.location.LocationManager.sendExtraCommand.
-func (m *Manager) SendExtraCommand(arg0 string, arg1 string, arg2 *jni.Object) (bool, error) {
+func (m *Manager) SendExtraCommand(
+	arg0 string,
+	arg1 string,
+	arg2 *jni.Object,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -1692,7 +1798,7 @@ func (m *Manager) SetTestProviderEnabled(arg0 string, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -1732,7 +1838,12 @@ func (m *Manager) SetTestProviderLocation(arg0 string, arg1 *jni.Object) error {
 }
 
 // SetTestProviderStatus calls android.location.LocationManager.setTestProviderStatus.
-func (m *Manager) SetTestProviderStatus(arg0 string, arg1 int32, arg2 *jni.Object, arg3 int64) error {
+func (m *Manager) SetTestProviderStatus(
+	arg0 string,
+	arg1 int32,
+	arg2 *jni.Object,
+	arg3 int64,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

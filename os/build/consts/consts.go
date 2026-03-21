@@ -3,50 +3,50 @@
 package consts
 
 const (
-	Board                   = ""
-	Bootloader              = ""
-	Brand                   = ""
-	CpuAbi                  = ""
-	CpuAbi2                 = ""
-	Device                  = ""
-	Display                 = ""
-	Fingerprint             = ""
-	Hardware                = ""
-	Host                    = ""
-	Id                      = ""
-	Manufacturer            = ""
-	Model                   = ""
-	OdmSku                  = ""
-	Product                 = ""
-	Radio                   = ""
-	Serial                  = ""
-	Sku                     = ""
-	SocManufacturer         = ""
-	SocModel                = ""
-	Tags                    = ""
-	Type                    = ""
-	Unknown                 = "unknown"
-	User                    = ""
-	BaseOs                  = ""
-	Codename                = ""
-	Incremental             = ""
-	Release                 = ""
-	ReleaseOrCodename       = ""
-	ReleaseOrPreviewDisplay = ""
-	Sdk                     = ""
-	SecurityPatch           = ""
+	Board                   string = ""
+	Bootloader              string = ""
+	Brand                   string = ""
+	CpuAbi                  string = ""
+	CpuAbi2                 string = ""
+	Device                  string = ""
+	Display                 string = ""
+	Fingerprint             string = ""
+	Hardware                string = ""
+	Host                    string = ""
+	Id                      string = ""
+	Manufacturer            string = ""
+	Model                   string = ""
+	OdmSku                  string = ""
+	Product                 string = ""
+	Radio                   string = ""
+	Serial                  string = ""
+	Sku                     string = ""
+	SocManufacturer         string = ""
+	SocModel                string = ""
+	Tags                    string = ""
+	Type                    string = ""
+	Unknown                 string = "unknown"
+	User                    string = ""
+	BaseOs                  string = ""
+	Codename                string = ""
+	Incremental             string = ""
+	Release                 string = ""
+	ReleaseOrCodename       string = ""
+	ReleaseOrPreviewDisplay string = ""
+	Sdk                     string = ""
+	SecurityPatch           string = ""
 )
 
 const (
-	Supported32BitAbis    = 0
-	Supported64BitAbis    = 0
-	SupportedAbis         = 0
-	MediaPerformanceClass = 0
-	PreviewSdkInt         = 0
-	SdkInt                = 0
-	SdkIntFull            = 0
+	Supported32BitAbis    int = 0
+	Supported64BitAbis    int = 0
+	SupportedAbis         int = 0
+	MediaPerformanceClass int = 0
+	PreviewSdkInt         int = 0
+	SdkInt                int = 0
+	SdkIntFull            int = 0
 )
 
 const (
-	Time = 0
+	Time int = 0
 )

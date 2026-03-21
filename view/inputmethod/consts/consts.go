@@ -3,13 +3,13 @@
 package consts
 
 const (
-	HandwritingDelegateFlagHomeDelegatorAllowed = 1
-	HideImplicitOnly                            = 1
-	HideNotAlways                               = 2
-	ResultHidden                                = 3
-	ResultShown                                 = 2
-	ResultUnchangedHidden                       = 1
-	ResultUnchangedShown                        = 0
-	ShowForced                                  = 2
-	ShowImplicit                                = 1
+	HandwritingDelegateFlagHomeDelegatorAllowed int = 1
+	HideImplicitOnly                            int = 1
+	HideNotAlways                               int = 2
+	ResultHidden                                int = 3
+	ResultShown                                 int = 2
+	ResultUnchangedHidden                       int = 1
+	ResultUnchangedShown                        int = 0
+	ShowForced                                  int = 2
+	ShowImplicit                                int = 1
 )

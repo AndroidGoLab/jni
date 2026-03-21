@@ -11,7 +11,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -20,28 +25,38 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/os/keyguard"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -59,28 +74,28 @@ func run(vm *jni.VM) error {
 	if err != nil {
 		return fmt.Errorf("IsKeyguardLocked: %v", err)
 	}
-	fmt.Fprintf(&output, "keyguard locked: %v\n", locked)
+	fmt.Fprintf(output, "keyguard locked: %v\n", locked)
 
 	// Check whether the keyguard is secured by a PIN, pattern, or password.
 	secure, err := mgr.IsKeyguardSecure()
 	if err != nil {
 		return fmt.Errorf("IsKeyguardSecure: %v", err)
 	}
-	fmt.Fprintf(&output, "keyguard secure: %v\n", secure)
+	fmt.Fprintf(output, "keyguard secure: %v\n", secure)
 
 	// Check whether the device is currently locked (for the current user).
 	deviceLocked, err := mgr.IsDeviceLocked()
 	if err != nil {
 		return fmt.Errorf("IsDeviceLocked: %v", err)
 	}
-	fmt.Fprintf(&output, "device locked: %v\n", deviceLocked)
+	fmt.Fprintf(output, "device locked: %v\n", deviceLocked)
 
 	// Check whether the device has a secure lock screen.
 	deviceSecure, err := mgr.IsDeviceSecure()
 	if err != nil {
 		return fmt.Errorf("IsDeviceSecure: %v", err)
 	}
-	fmt.Fprintf(&output, "device secure: %v\n", deviceSecure)
+	fmt.Fprintf(output, "device secure: %v\n", deviceSecure)
 
 	// The keyguardDismissCallback is used with requestDismissKeyguard
 	// to receive notifications about the keyguard dismiss outcome.
@@ -92,7 +107,7 @@ func run(vm *jni.VM) error {
 	// The keyguardLockedStateListener is used to listen for changes
 	// in the keyguard locked state via:
 	//   OnLockedStateChanged(isLocked bool)
-	fmt.Fprintln(&output, "keyguard state query complete")
+	fmt.Fprintln(output, "keyguard state query complete")
 	return nil
 }
 

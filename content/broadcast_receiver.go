@@ -17,14 +17,135 @@ var (
 	_ *app.Context
 )
 
-// broadcastReceiver wraps android.content.BroadcastReceiver.
-type broadcastReceiver struct {
+// BroadcastReceiver wraps android.content.BroadcastReceiver.
+type BroadcastReceiver struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
-// GetSentFromPackage calls android.content.BroadcastReceiver.getSentFromPackage.
-func (m *broadcastReceiver) GetSentFromPackage() (string, error) {
+// AbortBroadcast calls android.content.BroadcastReceiver.abortBroadcast.
+func (m *BroadcastReceiver) AbortBroadcast() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverAbortBroadcast == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.abortBroadcast is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverAbortBroadcast,
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// ClearAbortBroadcast calls android.content.BroadcastReceiver.clearAbortBroadcast.
+func (m *BroadcastReceiver) ClearAbortBroadcast() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverClearAbortBroadcast == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.clearAbortBroadcast is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverClearAbortBroadcast,
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// GetAbortBroadcast calls android.content.BroadcastReceiver.getAbortBroadcast.
+func (m *BroadcastReceiver) GetAbortBroadcast() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverGetAbortBroadcast == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.getAbortBroadcast is not available on this device")
+			return callErr
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midBroadcastReceiverGetAbortBroadcast,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDebugUnregister calls android.content.BroadcastReceiver.getDebugUnregister.
+func (m *BroadcastReceiver) GetDebugUnregister() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverGetDebugUnregister == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.getDebugUnregister is not available on this device")
+			return callErr
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midBroadcastReceiverGetDebugUnregister,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetResultCode calls android.content.BroadcastReceiver.getResultCode.
+func (m *BroadcastReceiver) GetResultCode() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverGetResultCode == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.getResultCode is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midBroadcastReceiverGetResultCode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetResultData calls android.content.BroadcastReceiver.getResultData.
+func (m *BroadcastReceiver) GetResultData() (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +153,69 @@ func (m *broadcastReceiver) GetSentFromPackage() (string, error) {
 			callErr = err
 			return err
 		}
-		if midbroadcastReceiverGetSentFromPackage == nil {
+		if midBroadcastReceiverGetResultData == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.getResultData is not available on this device")
+			return callErr
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midBroadcastReceiverGetResultData,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetResultExtras calls android.content.BroadcastReceiver.getResultExtras.
+func (m *BroadcastReceiver) GetResultExtras(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverGetResultExtras == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.getResultExtras is not available on this device")
+			return callErr
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBroadcastReceiverGetResultExtras, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSentFromPackage calls android.content.BroadcastReceiver.getSentFromPackage.
+func (m *BroadcastReceiver) GetSentFromPackage() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverGetSentFromPackage == nil {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.getSentFromPackage is not available on this device")
 			return callErr
 		}
 		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midbroadcastReceiverGetSentFromPackage,
+			midBroadcastReceiverGetSentFromPackage,
 		)
 		if callErr != nil {
 			return callErr
@@ -50,7 +227,7 @@ func (m *broadcastReceiver) GetSentFromPackage() (string, error) {
 }
 
 // GetSentFromUid calls android.content.BroadcastReceiver.getSentFromUid.
-func (m *broadcastReceiver) GetSentFromUid() (int32, error) {
+func (m *BroadcastReceiver) GetSentFromUid() (int32, error) {
 	var result int32
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -58,13 +235,13 @@ func (m *broadcastReceiver) GetSentFromUid() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midbroadcastReceiverGetSentFromUid == nil {
+		if midBroadcastReceiverGetSentFromUid == nil {
 			callErr = fmt.Errorf("android.content.BroadcastReceiver.getSentFromUid is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midbroadcastReceiverGetSentFromUid,
+			midBroadcastReceiverGetSentFromUid,
 		)
 		if callErr != nil {
 			return callErr
@@ -74,8 +251,8 @@ func (m *broadcastReceiver) GetSentFromUid() (int32, error) {
 	return result, callErr
 }
 
-// PeekService calls android.content.BroadcastReceiver.peekService.
-func (m *broadcastReceiver) PeekService(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+// GoAsync calls android.content.BroadcastReceiver.goAsync.
+func (m *BroadcastReceiver) GoAsync() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -83,14 +260,13 @@ func (m *broadcastReceiver) PeekService(arg0 *jni.Object, arg1 *jni.Object) (*jn
 			callErr = err
 			return err
 		}
-		if midbroadcastReceiverPeekService == nil {
-			callErr = fmt.Errorf("android.content.BroadcastReceiver.peekService is not available on this device")
+		if midBroadcastReceiverGoAsync == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.goAsync is not available on this device")
 			return callErr
 		}
-
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midbroadcastReceiverPeekService, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midBroadcastReceiverGoAsync,
 		)
 		if callErr != nil {
 			return callErr
@@ -98,4 +274,264 @@ func (m *broadcastReceiver) PeekService(arg0 *jni.Object, arg1 *jni.Object) (*jn
 		return callErr
 	})
 	return result, callErr
+}
+
+// IsInitialStickyBroadcast calls android.content.BroadcastReceiver.isInitialStickyBroadcast.
+func (m *BroadcastReceiver) IsInitialStickyBroadcast() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverIsInitialStickyBroadcast == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.isInitialStickyBroadcast is not available on this device")
+			return callErr
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midBroadcastReceiverIsInitialStickyBroadcast,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsOrderedBroadcast calls android.content.BroadcastReceiver.isOrderedBroadcast.
+func (m *BroadcastReceiver) IsOrderedBroadcast() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverIsOrderedBroadcast == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.isOrderedBroadcast is not available on this device")
+			return callErr
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midBroadcastReceiverIsOrderedBroadcast,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// OnReceive calls android.content.BroadcastReceiver.onReceive.
+func (m *BroadcastReceiver) OnReceive(arg0 *jni.Object, arg1 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverOnReceive == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.onReceive is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverOnReceive, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// PeekService calls android.content.BroadcastReceiver.peekService.
+func (m *BroadcastReceiver) PeekService(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverPeekService == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.peekService is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBroadcastReceiverPeekService, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetDebugUnregister calls android.content.BroadcastReceiver.setDebugUnregister.
+func (m *BroadcastReceiver) SetDebugUnregister(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverSetDebugUnregister == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.setDebugUnregister is not available on this device")
+			return callErr
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverSetDebugUnregister, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetOrderedHint calls android.content.BroadcastReceiver.setOrderedHint.
+func (m *BroadcastReceiver) SetOrderedHint(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverSetOrderedHint == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.setOrderedHint is not available on this device")
+			return callErr
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverSetOrderedHint, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetResult calls android.content.BroadcastReceiver.setResult.
+func (m *BroadcastReceiver) SetResult(
+	arg0 int32,
+	arg1 string,
+	arg2 *jni.Object,
+) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverSetResult == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.setResult is not available on this device")
+			return callErr
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverSetResult, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetResultCode calls android.content.BroadcastReceiver.setResultCode.
+func (m *BroadcastReceiver) SetResultCode(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverSetResultCode == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.setResultCode is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverSetResultCode, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetResultData calls android.content.BroadcastReceiver.setResultData.
+func (m *BroadcastReceiver) SetResultData(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverSetResultData == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.setResultData is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverSetResultData, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetResultExtras calls android.content.BroadcastReceiver.setResultExtras.
+func (m *BroadcastReceiver) SetResultExtras(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBroadcastReceiverSetResultExtras == nil {
+			callErr = fmt.Errorf("android.content.BroadcastReceiver.setResultExtras is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midBroadcastReceiverSetResultExtras, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
 }

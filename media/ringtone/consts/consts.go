@@ -3,23 +3,23 @@
 package consts
 
 const (
-	ActionRingtonePicker     = "android.intent.action.RINGTONE_PICKER"
-	ExtraRingtoneDefaultUri  = "android.intent.extra.ringtone.DEFAULT_URI"
-	ExtraRingtoneExistingUri = "android.intent.extra.ringtone.EXISTING_URI"
-	ExtraRingtoneIncludeDrm  = "android.intent.extra.ringtone.INCLUDE_DRM"
-	ExtraRingtonePickedUri   = "android.intent.extra.ringtone.PICKED_URI"
-	ExtraRingtoneShowDefault = "android.intent.extra.ringtone.SHOW_DEFAULT"
-	ExtraRingtoneShowSilent  = "android.intent.extra.ringtone.SHOW_SILENT"
-	ExtraRingtoneTitle       = "android.intent.extra.ringtone.TITLE"
-	ExtraRingtoneType        = "android.intent.extra.ringtone.TYPE"
+	ActionRingtonePicker     string = "android.intent.action.RINGTONE_PICKER"
+	ExtraRingtoneDefaultUri  string = "android.intent.extra.ringtone.DEFAULT_URI"
+	ExtraRingtoneExistingUri string = "android.intent.extra.ringtone.EXISTING_URI"
+	ExtraRingtoneIncludeDrm  string = "android.intent.extra.ringtone.INCLUDE_DRM"
+	ExtraRingtonePickedUri   string = "android.intent.extra.ringtone.PICKED_URI"
+	ExtraRingtoneShowDefault string = "android.intent.extra.ringtone.SHOW_DEFAULT"
+	ExtraRingtoneShowSilent  string = "android.intent.extra.ringtone.SHOW_SILENT"
+	ExtraRingtoneTitle       string = "android.intent.extra.ringtone.TITLE"
+	ExtraRingtoneType        string = "android.intent.extra.ringtone.TYPE"
 )
 
 const (
-	IdColumnIndex    = 0
-	TitleColumnIndex = 1
-	TypeAlarm        = 4
-	TypeAll          = 7
-	TypeNotification = 2
-	TypeRingtone     = 1
-	UriColumnIndex   = 2
+	IdColumnIndex    int = 0
+	TitleColumnIndex int = 1
+	TypeAlarm        int = 4
+	TypeAll          int = 7
+	TypeNotification int = 2
+	TypeRingtone     int = 1
+	UriColumnIndex   int = 2
 )

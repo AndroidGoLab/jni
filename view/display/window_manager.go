@@ -17,19 +17,21 @@ var (
 	_ *app.Context
 )
 
-// windowManager wraps android.view.WindowManager.
-type windowManager struct {
+const serviceName = "window"
+
+// WindowManager wraps android.view.WindowManager.
+type WindowManager struct {
 	VM  *jni.VM
 	Ctx *app.Context
 	Obj *jni.GlobalRef
 }
 
-// NewwindowManager obtains android.view.WindowManager from the Android system service manager.
-func NewwindowManager(ctx *app.Context) (*windowManager, error) {
+// NewWindowManager obtains android.view.WindowManager from the Android system service manager.
+func NewWindowManager(ctx *app.Context) (*WindowManager, error) {
 	if ctx == nil {
-		return nil, fmt.Errorf("windowManager: nil Context")
+		return nil, fmt.Errorf("WindowManager: nil Context")
 	}
-	var mgr windowManager
+	var mgr WindowManager
 	mgr.VM = ctx.VM
 	mgr.Ctx = ctx
 
@@ -37,12 +39,12 @@ func NewwindowManager(ctx *app.Context) (*windowManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("window")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("window service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -54,8 +56,8 @@ func NewwindowManager(ctx *app.Context) (*windowManager, error) {
 }
 
 // Close releases the global reference to the underlying Java object.
-// After Close, the windowManager must not be used.
-func (m *windowManager) Close() {
+// After Close, the WindowManager must not be used.
+func (m *WindowManager) Close() {
 	if m.Obj != nil {
 		m.VM.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(m.Obj)
@@ -63,4 +65,52 @@ func (m *windowManager) Close() {
 			return nil
 		})
 	}
+}
+
+// GetDefaultDisplay calls android.view.WindowManager.getDefaultDisplay.
+func (m *WindowManager) GetDefaultDisplay() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWindowManagerGetDefaultDisplay == nil {
+			callErr = fmt.Errorf("android.view.WindowManager.getDefaultDisplay is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWindowManagerGetDefaultDisplay,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// RemoveViewImmediate calls android.view.WindowManager.removeViewImmediate.
+func (m *WindowManager) RemoveViewImmediate(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWindowManagerRemoveViewImmediate == nil {
+			callErr = fmt.Errorf("android.view.WindowManager.removeViewImmediate is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midWindowManagerRemoveViewImmediate, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
 }

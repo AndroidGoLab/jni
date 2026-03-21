@@ -154,7 +154,7 @@ func (m *ManagerWakeLock) SetReferenceCounted(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(

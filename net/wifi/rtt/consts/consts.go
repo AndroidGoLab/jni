@@ -3,21 +3,21 @@
 package consts
 
 const (
-	ActionWifiRttStateChanged                                = "android.net.wifi.rtt.action.WIFI_RTT_STATE_CHANGED"
-	CharacteristicsKeyBooleanLci                             = "key_lci"
-	CharacteristicsKeyBooleanLcr                             = "key_lcr"
-	CharacteristicsKeyBooleanNtbInitiator                    = "key_ntb_initiator"
-	CharacteristicsKeyBooleanOneSidedRtt                     = "key_one_sided_rtt"
-	CharacteristicsKeyBooleanRangingFrameProtectionSupported = "key_rnm_mfp_supported"
-	CharacteristicsKeyBooleanSecureHeLtfSupported            = "key_secure_he_ltf_supported"
-	CharacteristicsKeyBooleanStaResponder                    = "key_sta_responder"
-	CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion = "key_max_supported_secure_he_ltf_proto_ver"
+	Creator                                  int = 0
+	StatusFail                               int = 1
+	StatusResponderDoesNotSupportIeee80211mc int = 2
+	StatusSuccess                            int = 0
+	Unspecified                              int = -1
 )
 
 const (
-	Creator                                  = 0
-	StatusFail                               = 1
-	StatusResponderDoesNotSupportIeee80211mc = 2
-	StatusSuccess                            = 0
-	Unspecified                              = -1
+	ActionWifiRttStateChanged                                string = "android.net.wifi.rtt.action.WIFI_RTT_STATE_CHANGED"
+	CharacteristicsKeyBooleanLci                             string = "key_lci"
+	CharacteristicsKeyBooleanLcr                             string = "key_lcr"
+	CharacteristicsKeyBooleanNtbInitiator                    string = "key_ntb_initiator"
+	CharacteristicsKeyBooleanOneSidedRtt                     string = "key_one_sided_rtt"
+	CharacteristicsKeyBooleanRangingFrameProtectionSupported string = "key_rnm_mfp_supported"
+	CharacteristicsKeyBooleanSecureHeLtfSupported            string = "key_secure_he_ltf_supported"
+	CharacteristicsKeyBooleanStaResponder                    string = "key_sta_responder"
+	CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion string = "key_max_supported_secure_he_ltf_proto_ver"
 )

@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "storage"
+
 // Manager wraps android.os.storage.StorageManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("storage")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("storage service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -594,7 +596,11 @@ func (m *Manager) IsObbMounted(arg0 string) (bool, error) {
 }
 
 // MountObb calls android.os.storage.StorageManager.mountObb.
-func (m *Manager) MountObb(arg0 string, arg1 string, arg2 *jni.Object) (bool, error) {
+func (m *Manager) MountObb(
+	arg0 string,
+	arg1 string,
+	arg2 *jni.Object,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -668,7 +674,7 @@ func (m *Manager) SetCacheBehaviorGroup(arg0 *jni.Object, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -696,7 +702,7 @@ func (m *Manager) SetCacheBehaviorTombstone(arg0 *jni.Object, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -709,7 +715,11 @@ func (m *Manager) SetCacheBehaviorTombstone(arg0 *jni.Object, arg1 bool) error {
 }
 
 // UnmountObb calls android.os.storage.StorageManager.unmountObb.
-func (m *Manager) UnmountObb(arg0 string, arg1 bool, arg2 *jni.Object) (bool, error) {
+func (m *Manager) UnmountObb(
+	arg0 string,
+	arg1 bool,
+	arg2 *jni.Object,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -728,7 +738,7 @@ func (m *Manager) UnmountObb(arg0 string, arg1 bool, arg2 *jni.Object) (bool, er
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(

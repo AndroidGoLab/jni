@@ -89,7 +89,7 @@ func (m *PromptBuilder) SetConfirmationRequired(arg0 bool) (*jni.Object, error) 
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -175,7 +175,7 @@ func (m *PromptBuilder) SetDeviceCredentialAllowed(arg0 bool) (*jni.Object, erro
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -273,7 +273,11 @@ func (m *PromptBuilder) SetLogoRes(arg0 int32) (*jni.Object, error) {
 }
 
 // SetNegativeButton calls android.hardware.biometrics.BiometricPrompt$Builder.setNegativeButton.
-func (m *PromptBuilder) SetNegativeButton(arg0 string, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
+func (m *PromptBuilder) SetNegativeButton(
+	arg0 string,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

@@ -2,8 +2,16 @@ package: vpn
 go_import: github.com/AndroidGoLab/jni/net/vpn
 classes:
     - java_class: android.net.VpnService
-      go_type: vpnService
+      go_type: Service
       methods:
+        - java_method: isAlwaysOn
+          go_name: IsAlwaysOn
+          returns: boolean
+          error: true
+        - java_method: isLockdownEnabled
+          go_name: IsLockdownEnabled
+          returns: boolean
+          error: true
         - java_method: onBind
           go_name: OnBind
           params:

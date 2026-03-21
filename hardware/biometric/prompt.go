@@ -24,7 +24,12 @@ type Prompt struct {
 }
 
 // Authenticate4 calls android.hardware.biometrics.BiometricPrompt.authenticate.
-func (m *Prompt) Authenticate4(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Prompt) Authenticate4(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -47,7 +52,11 @@ func (m *Prompt) Authenticate4(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Obj
 }
 
 // Authenticate3_1 calls android.hardware.biometrics.BiometricPrompt.authenticate.
-func (m *Prompt) Authenticate3_1(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Prompt) Authenticate3_1(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

@@ -2,7 +2,7 @@ package: display
 go_import: github.com/AndroidGoLab/jni/view/display
 classes:
     - java_class: android.util.DisplayMetrics
-      go_type: DisplayMetrics
+      go_type: Metrics
       methods:
         - java_method: equals
           go_name: Equals1
@@ -235,10 +235,22 @@ classes:
           returns: void
           error: true
     - java_class: android.view.WindowManager
-      go_type: windowManager
+      go_type: WindowManager
       obtain: system_service
       service_name: window
       close: true
+      methods:
+        - java_method: getDefaultDisplay
+          go_name: GetDefaultDisplay
+          returns: android.view.Display
+          error: true
+        - java_method: removeViewImmediate
+          go_name: RemoveViewImmediate
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
 constants:
     - go_name: Density140
       value: "140"

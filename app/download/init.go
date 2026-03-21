@@ -16,6 +16,9 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
@@ -32,27 +35,27 @@ var (
 	midManagerGetMaxBytesOverMobile            jni.MethodID
 	midManagerGetRecommendedMaxBytesOverMobile jni.MethodID
 
-	clsQuery                  *jni.GlobalRef
-	midQuerySetFilterById     jni.MethodID
-	midQuerySetFilterByStatus jni.MethodID
+	clsManagerQuery                  *jni.GlobalRef
+	midManagerQuerySetFilterById     jni.MethodID
+	midManagerQuerySetFilterByStatus jni.MethodID
 
-	clsRequest                                  *jni.GlobalRef
-	midRequestAddRequestHeader                  jni.MethodID
-	midRequestAllowScanningByMediaScanner       jni.MethodID
-	midRequestSetAllowedNetworkTypes            jni.MethodID
-	midRequestSetAllowedOverMetered             jni.MethodID
-	midRequestSetAllowedOverRoaming             jni.MethodID
-	midRequestSetDescription                    jni.MethodID
-	midRequestSetDestinationInExternalFilesDir  jni.MethodID
-	midRequestSetDestinationInExternalPublicDir jni.MethodID
-	midRequestSetDestinationUri                 jni.MethodID
-	midRequestSetMimeType                       jni.MethodID
-	midRequestSetNotificationVisibility         jni.MethodID
-	midRequestSetRequiresCharging               jni.MethodID
-	midRequestSetRequiresDeviceIdle             jni.MethodID
-	midRequestSetShowRunningNotification        jni.MethodID
-	midRequestSetTitle                          jni.MethodID
-	midRequestSetVisibleInDownloadsUi           jni.MethodID
+	clsManagerRequest                                  *jni.GlobalRef
+	midManagerRequestAddRequestHeader                  jni.MethodID
+	midManagerRequestAllowScanningByMediaScanner       jni.MethodID
+	midManagerRequestSetAllowedNetworkTypes            jni.MethodID
+	midManagerRequestSetAllowedOverMetered             jni.MethodID
+	midManagerRequestSetAllowedOverRoaming             jni.MethodID
+	midManagerRequestSetDescription                    jni.MethodID
+	midManagerRequestSetDestinationInExternalFilesDir  jni.MethodID
+	midManagerRequestSetDestinationInExternalPublicDir jni.MethodID
+	midManagerRequestSetDestinationUri                 jni.MethodID
+	midManagerRequestSetMimeType                       jni.MethodID
+	midManagerRequestSetNotificationVisibility         jni.MethodID
+	midManagerRequestSetRequiresCharging               jni.MethodID
+	midManagerRequestSetRequiresDeviceIdle             jni.MethodID
+	midManagerRequestSetShowRunningNotification        jni.MethodID
+	midManagerRequestSetTitle                          jni.MethodID
+	midManagerRequestSetVisibleInDownloadsUi           jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -169,9 +172,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.DownloadManager$Query: %w", err)
 	}
-	clsQuery = env.NewGlobalRef(&c.Object)
+	clsManagerQuery = env.NewGlobalRef(&c.Object)
 
-	midQuerySetFilterById, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuery)), "setFilterById", "([J)Landroid/app/DownloadManager$Query;")
+	midManagerQuerySetFilterById, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "setFilterById", "([J)Landroid/app/DownloadManager$Query;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -179,7 +182,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Query.setFilterById")
 	}
 
-	midQuerySetFilterByStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuery)), "setFilterByStatus", "(I)Landroid/app/DownloadManager$Query;")
+	midManagerQuerySetFilterByStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "setFilterByStatus", "(I)Landroid/app/DownloadManager$Query;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -191,9 +194,9 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.DownloadManager$Request: %w", err)
 	}
-	clsRequest = env.NewGlobalRef(&c.Object)
+	clsManagerRequest = env.NewGlobalRef(&c.Object)
 
-	midRequestAddRequestHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "addRequestHeader", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	midManagerRequestAddRequestHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "addRequestHeader", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -201,7 +204,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.addRequestHeader")
 	}
 
-	midRequestAllowScanningByMediaScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "allowScanningByMediaScanner", "()V")
+	midManagerRequestAllowScanningByMediaScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "allowScanningByMediaScanner", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -209,7 +212,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.allowScanningByMediaScanner")
 	}
 
-	midRequestSetAllowedNetworkTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setAllowedNetworkTypes", "(I)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetAllowedNetworkTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedNetworkTypes", "(I)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -217,7 +220,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setAllowedNetworkTypes")
 	}
 
-	midRequestSetAllowedOverMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setAllowedOverMetered", "(Z)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetAllowedOverMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedOverMetered", "(Z)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -225,7 +228,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setAllowedOverMetered")
 	}
 
-	midRequestSetAllowedOverRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setAllowedOverRoaming", "(Z)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetAllowedOverRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedOverRoaming", "(Z)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -233,7 +236,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setAllowedOverRoaming")
 	}
 
-	midRequestSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setDescription", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDescription", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -241,7 +244,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setDescription")
 	}
 
-	midRequestSetDestinationInExternalFilesDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setDestinationInExternalFilesDir", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetDestinationInExternalFilesDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationInExternalFilesDir", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -249,7 +252,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setDestinationInExternalFilesDir")
 	}
 
-	midRequestSetDestinationInExternalPublicDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setDestinationInExternalPublicDir", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetDestinationInExternalPublicDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationInExternalPublicDir", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -257,7 +260,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setDestinationInExternalPublicDir")
 	}
 
-	midRequestSetDestinationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setDestinationUri", "(Landroid/net/Uri;)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetDestinationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationUri", "(Landroid/net/Uri;)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -265,7 +268,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setDestinationUri")
 	}
 
-	midRequestSetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setMimeType", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setMimeType", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -273,7 +276,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setMimeType")
 	}
 
-	midRequestSetNotificationVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setNotificationVisibility", "(I)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetNotificationVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setNotificationVisibility", "(I)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -281,7 +284,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setNotificationVisibility")
 	}
 
-	midRequestSetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setRequiresCharging", "(Z)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setRequiresCharging", "(Z)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -289,7 +292,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setRequiresCharging")
 	}
 
-	midRequestSetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setRequiresDeviceIdle", "(Z)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setRequiresDeviceIdle", "(Z)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -297,7 +300,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setRequiresDeviceIdle")
 	}
 
-	midRequestSetShowRunningNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setShowRunningNotification", "(Z)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetShowRunningNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setShowRunningNotification", "(Z)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -305,7 +308,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setShowRunningNotification")
 	}
 
-	midRequestSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setTitle", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setTitle", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -313,7 +316,7 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.app.DownloadManager$Request.setTitle")
 	}
 
-	midRequestSetVisibleInDownloadsUi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "setVisibleInDownloadsUi", "(Z)Landroid/app/DownloadManager$Request;")
+	midManagerRequestSetVisibleInDownloadsUi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setVisibleInDownloadsUi", "(Z)Landroid/app/DownloadManager$Request;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

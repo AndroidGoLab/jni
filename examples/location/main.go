@@ -11,7 +11,12 @@
 package main
 
 /*
-#include <jni.h>
+#include <android/native_activity.h>
+extern void goOnResume(ANativeActivity*);
+static void _onResume(ANativeActivity* a) { goOnResume(a); }
+extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
+static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
+static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
 */
 import "C"
 import (
@@ -22,38 +27,48 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/location"
 )
 
 func main() {}
 
-var output bytes.Buffer
+func init() { exampleui.Register(run) }
 
-//export goRun
-func goRun(cvm *C.JavaVM) {
-	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
-	if err := run(vm); err != nil {
-		fmt.Fprintf(&output, "ERROR: %v\n", err)
-	}
+//export ANativeActivity_onCreate
+func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
+	exampleui.OnCreate(
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
+	C._setCallbacks(activity)
 }
 
-//export goGetOutput
-func goGetOutput() *C.char {
-	return C.CString(output.String())
+//export goOnResume
+func goOnResume(activity *C.ANativeActivity) {
+	exampleui.OnResume(
+		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+	)
 }
 
-func run(vm *jni.VM) error {
+//export goOnNativeWindowCreated
+func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
+	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := getAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	fmt.Fprintln(&output, "=== Provider constants ===")
-	fmt.Fprintf(&output, "  GPS     = %q\n", location.GpsProvider)
-	fmt.Fprintf(&output, "  Network = %q\n", location.NetworkProvider)
-	fmt.Fprintf(&output, "  Passive = %q\n", location.PassiveProvider)
+	fmt.Fprintln(output, "=== Provider constants ===")
+	fmt.Fprintf(output, "  GPS     = %q\n", location.GpsProvider)
+	fmt.Fprintf(output, "  Network = %q\n", location.NetworkProvider)
+	fmt.Fprintf(output, "  Passive = %q\n", location.PassiveProvider)
 
 	mgr, err := location.NewManager(ctx)
 	if err != nil {
@@ -61,20 +76,20 @@ func run(vm *jni.VM) error {
 	}
 	defer mgr.Close()
 
-	fmt.Fprintln(&output, "\n=== Provider status ===")
+	fmt.Fprintln(output, "\n=== Provider status ===")
 	for _, provider := range []string{location.GpsProvider, location.NetworkProvider, location.PassiveProvider} {
 		enabled, err := mgr.IsProviderEnabled(provider)
 		if err != nil {
-			fmt.Fprintf(&output, "  IsProviderEnabled(%s): %v\n", provider, err)
+			fmt.Fprintf(output, "  IsProviderEnabled(%s): %v\n", provider, err)
 			continue
 		}
-		fmt.Fprintf(&output, "  %q enabled: %v\n", provider, enabled)
+		fmt.Fprintf(output, "  %q enabled: %v\n", provider, enabled)
 	}
 
 	// Check all providers including "fused" (Google Play Services).
 	providers := []string{location.GpsProvider, location.NetworkProvider, location.PassiveProvider, "fused"}
 
-	fmt.Fprintln(&output, "\n=== Last known location ===")
+	fmt.Fprintln(output, "\n=== Last known location ===")
 	gotLocation := false
 	for _, provider := range providers {
 		enabled, _ := mgr.IsProviderEnabled(provider)
@@ -83,11 +98,11 @@ func run(vm *jni.VM) error {
 		}
 		locObj, err := mgr.GetLastKnownLocation(provider)
 		if err != nil {
-			fmt.Fprintf(&output, "  GetLastKnownLocation(%s): %v\n", provider, err)
+			fmt.Fprintf(output, "  GetLastKnownLocation(%s): %v\n", provider, err)
 			continue
 		}
 		if locObj == nil || locObj.Ref() == 0 {
-			fmt.Fprintf(&output, "  %s: no cached location\n", provider)
+			fmt.Fprintf(output, "  %s: no cached location\n", provider)
 			continue
 		}
 		printLocation(vm, provider, locObj)
@@ -96,21 +111,21 @@ func run(vm *jni.VM) error {
 
 	// If no cached location was found, request a fresh GPS fix.
 	if !gotLocation {
-		fmt.Fprintln(&output, "\n=== Requesting fresh GPS fix (up to 30s) ===")
+		fmt.Fprintln(output, "\n=== Requesting fresh GPS fix (up to 30s) ===")
 		loc, err := requestFreshLocation(vm, mgr)
 		switch {
 		case err != nil:
-			fmt.Fprintf(&output, "  requestFreshLocation: %v\n", err)
+			fmt.Fprintf(output, "  requestFreshLocation: %v\n", err)
 		case loc != nil:
-			fmt.Fprintf(&output, "  %s: lat=%.6f lon=%.6f\n",
+			fmt.Fprintf(output, "  %s: lat=%.6f lon=%.6f\n",
 				loc.Provider, loc.Latitude, loc.Longitude)
 			gotLocation = true
 		default:
-			fmt.Fprintln(&output, "  No location received within timeout. Try again outdoors.")
+			fmt.Fprintln(output, "  No location received within timeout. Try again outdoors.")
 		}
 	}
 
-	fmt.Fprintln(&output, "\nLocation example completed successfully.")
+	fmt.Fprintln(output, "\nLocation example completed successfully.")
 	return nil
 }
 
@@ -122,10 +137,10 @@ func printLocation(vm *jni.VM, provider string, locObj *jni.Object) {
 		return err
 	})
 	if err != nil {
-		fmt.Fprintf(&output, "  ExtractLocation(%s): %v\n", provider, err)
+		fmt.Fprintf(output, "  ExtractLocation(%s): %v\n", provider, err)
 		return
 	}
-	fmt.Fprintf(&output, "  %s: lat=%.6f lon=%.6f\n",
+	fmt.Fprintf(output, "  %s: lat=%.6f lon=%.6f\n",
 		loc.Provider, loc.Latitude, loc.Longitude)
 }
 

@@ -3,9 +3,6 @@ go_import: github.com/AndroidGoLab/jni/app/download
 classes:
     - java_class: android.app.DownloadManager
       go_type: Manager
-      obtain: system_service
-      service_name: download
-      close: true
       methods:
         - java_method: addCompletedDownload
           go_name: AddCompletedDownload7
@@ -107,7 +104,7 @@ classes:
           returns: java.lang.Long
           error: true
     - java_class: android.app.DownloadManager$Query
-      go_type: Query
+      go_type: ManagerQuery
       methods:
         - java_method: setFilterById
           go_name: SetFilterById
@@ -124,7 +121,7 @@ classes:
           returns: android.app.DownloadManager$Query
           error: true
     - java_class: android.app.DownloadManager$Request
-      go_type: Request
+      go_type: ManagerRequest
       methods:
         - java_method: addRequestHeader
           go_name: AddRequestHeader

@@ -17,6 +17,8 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "phone"
+
 // Manager wraps android.telephony.TelephonyManager.
 type Manager struct {
 	VM  *jni.VM
@@ -37,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("phone")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("phone service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -697,7 +699,11 @@ func (m *Manager) GetGroupIdLevel1() (string, error) {
 }
 
 // GetIccAuthentication calls android.telephony.TelephonyManager.getIccAuthentication.
-func (m *Manager) GetIccAuthentication(arg0 int32, arg1 int32, arg2 string) (string, error) {
+func (m *Manager) GetIccAuthentication(
+	arg0 int32,
+	arg1 int32,
+	arg2 string,
+) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2094,7 +2100,14 @@ func (m *Manager) IccCloseLogicalChannel(arg0 int32) (bool, error) {
 }
 
 // IccExchangeSimIO calls android.telephony.TelephonyManager.iccExchangeSimIO.
-func (m *Manager) IccExchangeSimIO(arg0 int32, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 string) (*jni.Object, error) {
+func (m *Manager) IccExchangeSimIO(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 string,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2185,7 +2198,14 @@ func (m *Manager) IccOpenLogicalChannel2_1(arg0 string, arg1 int32) (*jni.Object
 }
 
 // IccTransmitApduBasicChannel calls android.telephony.TelephonyManager.iccTransmitApduBasicChannel.
-func (m *Manager) IccTransmitApduBasicChannel(arg0 int32, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 string) (string, error) {
+func (m *Manager) IccTransmitApduBasicChannel(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 string,
+) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2217,7 +2237,15 @@ func (m *Manager) IccTransmitApduBasicChannel(arg0 int32, arg1 int32, arg2 int32
 }
 
 // IccTransmitApduLogicalChannel calls android.telephony.TelephonyManager.iccTransmitApduLogicalChannel.
-func (m *Manager) IccTransmitApduLogicalChannel(arg0 int32, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 string) (string, error) {
+func (m *Manager) IccTransmitApduLogicalChannel(
+	arg0 int32,
+	arg1 int32,
+	arg2 int32,
+	arg3 int32,
+	arg4 int32,
+	arg5 int32,
+	arg6 string,
+) (string, error) {
 	var result string
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2857,7 +2885,11 @@ func (m *Manager) Listen(arg0 *jni.Object, arg1 int32) error {
 }
 
 // PurchasePremiumCapability calls android.telephony.TelephonyManager.purchasePremiumCapability.
-func (m *Manager) PurchasePremiumCapability(arg0 int32, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) PurchasePremiumCapability(
+	arg0 int32,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2902,7 +2934,11 @@ func (m *Manager) RebootModem() error {
 }
 
 // RegisterTelephonyCallback3 calls android.telephony.TelephonyManager.registerTelephonyCallback.
-func (m *Manager) RegisterTelephonyCallback3(arg0 int32, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) RegisterTelephonyCallback3(
+	arg0 int32,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2971,7 +3007,11 @@ func (m *Manager) RequestCellInfoUpdate(arg0 *jni.Object, arg1 *jni.Object) erro
 }
 
 // RequestNetworkScan3 calls android.telephony.TelephonyManager.requestNetworkScan.
-func (m *Manager) RequestNetworkScan3(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
+func (m *Manager) RequestNetworkScan3(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -2997,7 +3037,12 @@ func (m *Manager) RequestNetworkScan3(arg0 *jni.Object, arg1 *jni.Object, arg2 *
 }
 
 // RequestNetworkScan4_1 calls android.telephony.TelephonyManager.requestNetworkScan.
-func (m *Manager) RequestNetworkScan4_1(arg0 int32, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) (*jni.Object, error) {
+func (m *Manager) RequestNetworkScan4_1(
+	arg0 int32,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3081,7 +3126,12 @@ func (m *Manager) SendEnvelopeWithStatus(arg0 string) (string, error) {
 }
 
 // SendVisualVoicemailSms calls android.telephony.TelephonyManager.sendVisualVoicemailSms.
-func (m *Manager) SendVisualVoicemailSms(arg0 string, arg1 int32, arg2 string, arg3 *jni.Object) error {
+func (m *Manager) SendVisualVoicemailSms(
+	arg0 string,
+	arg1 int32,
+	arg2 string,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3173,7 +3223,7 @@ func (m *Manager) SetDataEnabled(arg0 bool) error {
 		}
 		var jArg0 uint8
 		if arg0 {
-			jArg0 = 1
+			jArg0 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -3201,7 +3251,7 @@ func (m *Manager) SetDataEnabledForReason(arg0 int32, arg1 bool) error {
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -3317,7 +3367,7 @@ func (m *Manager) SetNetworkSelectionModeManual2(arg0 string, arg1 bool) (bool, 
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3334,7 +3384,11 @@ func (m *Manager) SetNetworkSelectionModeManual2(arg0 string, arg1 bool) (bool, 
 }
 
 // SetNetworkSelectionModeManual3_1 calls android.telephony.TelephonyManager.setNetworkSelectionModeManual.
-func (m *Manager) SetNetworkSelectionModeManual3_1(arg0 string, arg1 bool, arg2 int32) (bool, error) {
+func (m *Manager) SetNetworkSelectionModeManual3_1(
+	arg0 string,
+	arg1 bool,
+	arg2 int32,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3353,7 +3407,7 @@ func (m *Manager) SetNetworkSelectionModeManual3_1(arg0 string, arg1 bool, arg2 
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		resultRaw, callErr := env.CallBooleanMethod(
@@ -3427,7 +3481,12 @@ func (m *Manager) SetPreferredNetworkTypeToGlobal() (bool, error) {
 }
 
 // SetPreferredOpportunisticDataSubscription calls android.telephony.TelephonyManager.setPreferredOpportunisticDataSubscription.
-func (m *Manager) SetPreferredOpportunisticDataSubscription(arg0 int32, arg1 bool, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) SetPreferredOpportunisticDataSubscription(
+	arg0 int32,
+	arg1 bool,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3442,7 +3501,7 @@ func (m *Manager) SetPreferredOpportunisticDataSubscription(arg0 int32, arg1 boo
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -3575,7 +3634,7 @@ func (m *Manager) SetVoicemailVibrationEnabled(arg0 *jni.Object, arg1 bool) erro
 
 		var jArg1 uint8
 		if arg1 {
-			jArg1 = 1
+			jArg1 = jniTrue
 		}
 
 		callErr = env.CallVoidMethod(
@@ -3634,7 +3693,11 @@ func (m *Manager) UnregisterTelephonyCallback(arg0 *jni.Object) error {
 }
 
 // UpdateAvailableNetworks calls android.telephony.TelephonyManager.updateAvailableNetworks.
-func (m *Manager) UpdateAvailableNetworks(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) error {
+func (m *Manager) UpdateAvailableNetworks(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3657,7 +3720,12 @@ func (m *Manager) UpdateAvailableNetworks(arg0 *jni.Object, arg1 *jni.Object, ar
 }
 
 // UploadCallComposerPicture4 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *Manager) UploadCallComposerPicture4(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) UploadCallComposerPicture4(
+	arg0 *jni.Object,
+	arg1 string,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -3685,7 +3753,12 @@ func (m *Manager) UploadCallComposerPicture4(arg0 *jni.Object, arg1 string, arg2
 }
 
 // UploadCallComposerPicture4_1 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *Manager) UploadCallComposerPicture4_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) error {
+func (m *Manager) UploadCallComposerPicture4_1(
+	arg0 *jni.Object,
+	arg1 string,
+	arg2 *jni.Object,
+	arg3 *jni.Object,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

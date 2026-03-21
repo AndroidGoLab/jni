@@ -3,6 +3,6 @@
 package consts
 
 const (
-	LengthLong  = 1
-	LengthShort = 0
+	LengthLong  int = 1
+	LengthShort int = 0
 )

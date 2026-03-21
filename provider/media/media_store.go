@@ -77,7 +77,11 @@ func (m *MediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*j
 }
 
 // CreateFavoriteRequest calls android.provider.MediaStore.createFavoriteRequest.
-func (m *MediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (*jni.Object, error) {
+func (m *MediaStore) CreateFavoriteRequest(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 bool,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -92,7 +96,7 @@ func (m *MediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, a
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -108,7 +112,11 @@ func (m *MediaStore) CreateFavoriteRequest(arg0 *jni.Object, arg1 *jni.Object, a
 }
 
 // CreateTrashRequest calls android.provider.MediaStore.createTrashRequest.
-func (m *MediaStore) CreateTrashRequest(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (*jni.Object, error) {
+func (m *MediaStore) CreateTrashRequest(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 bool,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -123,7 +131,7 @@ func (m *MediaStore) CreateTrashRequest(arg0 *jni.Object, arg1 *jni.Object, arg2
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
@@ -573,7 +581,11 @@ func (m *MediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1
 }
 
 // IsCurrentSystemGallery calls android.provider.MediaStore.isCurrentSystemGallery.
-func (m *MediaStore) IsCurrentSystemGallery(arg0 *jni.Object, arg1 int32, arg2 string) (bool, error) {
+func (m *MediaStore) IsCurrentSystemGallery(
+	arg0 *jni.Object,
+	arg1 int32,
+	arg2 string,
+) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -637,7 +649,11 @@ func (m *MediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, ar
 }
 
 // MarkIsFavoriteStatus calls android.provider.MediaStore.markIsFavoriteStatus.
-func (m *MediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, arg2 bool) error {
+func (m *MediaStore) MarkIsFavoriteStatus(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 bool,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -652,7 +668,7 @@ func (m *MediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, ar
 
 		var jArg2 uint8
 		if arg2 {
-			jArg2 = 1
+			jArg2 = jniTrue
 		}
 
 		callErr = env.CallStaticVoidMethod(
@@ -665,7 +681,11 @@ func (m *MediaStore) MarkIsFavoriteStatus(arg0 *jni.Object, arg1 *jni.Object, ar
 }
 
 // NotifyCloudMediaChangedEvent calls android.provider.MediaStore.notifyCloudMediaChangedEvent.
-func (m *MediaStore) NotifyCloudMediaChangedEvent(arg0 *jni.Object, arg1 string, arg2 string) error {
+func (m *MediaStore) NotifyCloudMediaChangedEvent(
+	arg0 *jni.Object,
+	arg1 string,
+	arg2 string,
+) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -698,7 +718,12 @@ func (m *MediaStore) NotifyCloudMediaChangedEvent(arg0 *jni.Object, arg1 string,
 }
 
 // OpenAssetFileDescriptor calls android.provider.MediaStore.openAssetFileDescriptor.
-func (m *MediaStore) OpenAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) OpenAssetFileDescriptor(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 string,
+	arg3 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -729,7 +754,12 @@ func (m *MediaStore) OpenAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object,
 }
 
 // OpenFileDescriptor calls android.provider.MediaStore.openFileDescriptor.
-func (m *MediaStore) OpenFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) OpenFileDescriptor(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 string,
+	arg3 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -760,7 +790,13 @@ func (m *MediaStore) OpenFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2
 }
 
 // OpenTypedAssetFileDescriptor calls android.provider.MediaStore.openTypedAssetFileDescriptor.
-func (m *MediaStore) OpenTypedAssetFileDescriptor(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 *jni.Object, arg4 *jni.Object) (*jni.Object, error) {
+func (m *MediaStore) OpenTypedAssetFileDescriptor(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 string,
+	arg3 *jni.Object,
+	arg4 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
