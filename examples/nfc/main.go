@@ -1,14 +1,8 @@
 //go:build android
 
-// Command nfc demonstrates using the NFC reader API.
-// It is built as a c-shared library and packaged into an APK.
-//
-// This example shows the NFC adapter, NDEF tag, and ISO-DEP tag
-// types along with all NFC reader mode flags and TNF type constants.
-// Most methods in this package are unexported and intended to be
-// called from within the nfc package itself or via higher-level
-// wrappers; this example shows the exported types, constants, and
-// the overall usage pattern.
+// Command nfc demonstrates using the NFC adapter API. It obtains the
+// default NfcAdapter, checks whether NFC is enabled, and queries
+// various adapter capabilities.
 package main
 
 /*
@@ -21,23 +15,23 @@ static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResu
 */
 import "C"
 import (
-	"unsafe"
 	"bytes"
 	"fmt"
+	"unsafe"
 
-	"github.com/AndroidGoLab/jni/nfc"
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
+	"github.com/AndroidGoLab/jni/nfc"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -46,75 +40,115 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// --- NFC reader mode flags ---
-	// These constants control which tag technologies are polled
-	// when enabling reader mode on the NfcAdapter.
-	fmt.Fprintln(output, "NFC reader mode flags:")
-	fmt.Fprintf(output, "  FlagReaderNfcA             = 0x%X\n", nfc.FlagReaderNfcA)
-	fmt.Fprintf(output, "  FlagReaderNfcB             = 0x%X\n", nfc.FlagReaderNfcB)
-	fmt.Fprintf(output, "  FlagReaderNfcF             = 0x%X\n", nfc.FlagReaderNfcF)
-	fmt.Fprintf(output, "  FlagReaderNfcV             = 0x%X\n", nfc.FlagReaderNfcV)
-	fmt.Fprintf(output, "  FlagReaderNfcBarcode       = 0x%X\n", nfc.FlagReaderNfcBarcode)
-	fmt.Fprintf(output, "  FlagReaderNoPlatformSounds = 0x%X\n", nfc.FlagReaderNoPlatformSounds)
-	fmt.Fprintf(output, "  FlagReaderSkipNdefCheck    = 0x%X\n", nfc.FlagReaderSkipNdefCheck)
+	ctx, err := ui.GetAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
+	}
+	defer ctx.Close()
 
-	// Combine flags for multi-technology polling.
-	flags := nfc.FlagReaderNfcA | nfc.FlagReaderNfcB | nfc.FlagReaderNoPlatformSounds
-	fmt.Fprintf(output, "\nCombined flags (NfcA + NfcB + NoPlatformSounds) = 0x%X\n", flags)
+	// Obtain the default NFC adapter via the static method
+	// NfcAdapter.getDefaultAdapter(Context).
+	adapter := nfc.Adapter{VM: vm}
+	adapterObj, err := adapter.GetDefaultAdapter(ctx.Obj)
+	if err != nil {
+		fmt.Fprintf(output, "GetDefaultAdapter: %v\n", err)
+		fmt.Fprintln(output, "NFC may not be available")
+		printConstants(output)
+		return nil
+	}
+	if adapterObj == nil || adapterObj.Ref() == 0 {
+		fmt.Fprintln(output, "NFC adapter not available")
+		fmt.Fprintln(output, "(device has no NFC hardware)")
+		printConstants(output)
+		return nil
+	}
 
-	// --- TNF (Type Name Format) constants for NDEF records ---
-	fmt.Fprintln(output, "\nTNF types:")
-	fmt.Fprintf(output, "  TnfEmpty        = %d\n", nfc.TnfEmpty)
-	fmt.Fprintf(output, "  TnfWellKnown    = %d\n", nfc.TnfWellKnown)
-	fmt.Fprintf(output, "  TnfMimeMedia    = %d\n", nfc.TnfMimeMedia)
-	fmt.Fprintf(output, "  TnfAbsoluteUri  = %d\n", nfc.TnfAbsoluteUri)
-	fmt.Fprintf(output, "  TnfExternalType = %d\n", nfc.TnfExternalType)
-	fmt.Fprintf(output, "  TnfUnknown      = %d\n", nfc.TnfUnknown)
-	fmt.Fprintf(output, "  TnfUnchanged    = %d\n", nfc.TnfUnchanged)
+	// Wrap the returned object in an Adapter struct.
+	nfcAdapter := nfc.Adapter{VM: vm, Obj: adapterObj}
+	fmt.Fprintln(output, "NFC adapter obtained")
 
-	// --- Exported types ---
-	// The nfc package exposes three main wrapper types with exported
-	// struct fields (VM and Obj). The Adapter has an exported Close():
-	//
-	//   nfc.Adapter   - wraps android.nfc.NfcAdapter
-	//     .Close()    - releases the global JNI reference
-	//
-	// The following types have exported struct fields but their methods
-	// are package-internal (unexported), designed to be called from
-	// within the nfc package or via higher-level wrappers:
-	//
-	//   nfc.NdefTag   - wraps android.nfc.tech.Ndef
-	//     .connect(), .getNdefMessageRaw(), .writeNdefMessageRaw()
-	//     .makeReadOnly(), .isWritable(), .getMaxSize(), .close()
-	//
-	//   nfc.IsoDepTag - wraps android.nfc.tech.IsoDep
-	//     .connect(), .transceive(), .setTimeoutMs()
-	//     .getMaxTransceiveLength(), .close()
-	//
-	// Unexported data classes:
-	//   tag        - fields: ID []byte, TechList []string
-	//   ndefRecord - fields: TNF int, Type/ID/Payload []byte
-	//
-	// Callback:
-	//   readerCallback{OnTag func(*jni.Object)} is registered via
-	//   registerreaderCallback to implement NfcAdapter.ReaderCallback.
+	// Check if NFC is enabled.
+	enabled, err := nfcAdapter.IsEnabled()
+	if err != nil {
+		fmt.Fprintf(output, "IsEnabled: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "NFC enabled: %v\n", enabled)
+	}
 
-	// --- Adapter lifecycle ---
-	var adapter nfc.Adapter
-	// adapter.VM and adapter.Obj would be populated by the runtime.
-	_ = adapter
+	// Check Secure NFC support and state.
+	secureSupported, err := nfcAdapter.IsSecureNfcSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsSecureNfcSupported: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Secure NFC supported: %v\n", secureSupported)
+		if secureSupported {
+			secureEnabled, err := nfcAdapter.IsSecureNfcEnabled()
+			if err != nil {
+				fmt.Fprintf(output, "IsSecureNfcEnabled: %v\n", err)
+			} else {
+				fmt.Fprintf(output, "Secure NFC enabled: %v\n", secureEnabled)
+			}
+		}
+	}
 
-	fmt.Fprintln(output, "\nNFC example complete.")
+	// Check Observe Mode support (API 35+).
+	observeSupported, err := nfcAdapter.IsObserveModeSupported()
+	if err != nil {
+		fmt.Fprintf(output, "ObserveMode: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Observe mode supported: %v\n", observeSupported)
+		if observeSupported {
+			observeEnabled, err := nfcAdapter.IsObserveModeEnabled()
+			if err != nil {
+				fmt.Fprintf(output, "IsObserveModeEnabled: %v\n", err)
+			} else {
+				fmt.Fprintf(output, "Observe mode enabled: %v\n", observeEnabled)
+			}
+		}
+	}
+
+	// Check Reader Option support.
+	readerSupported, err := nfcAdapter.IsReaderOptionSupported()
+	if err != nil {
+		fmt.Fprintf(output, "ReaderOption: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Reader option supported: %v\n", readerSupported)
+	}
+
+	// Clean up the adapter global reference.
+	vm.Do(func(env *jni.Env) error {
+		env.DeleteGlobalRef(adapterObj)
+		return nil
+	})
+
+	fmt.Fprintln(output, "")
+	printConstants(output)
+
 	return nil
+}
+
+func printConstants(output *bytes.Buffer) {
+	fmt.Fprintln(output, "Reader mode flags:")
+	fmt.Fprintf(output, "  NfcA:       0x%X\n", nfc.FlagReaderNfcA)
+	fmt.Fprintf(output, "  NfcB:       0x%X\n", nfc.FlagReaderNfcB)
+	fmt.Fprintf(output, "  NfcF:       0x%X\n", nfc.FlagReaderNfcF)
+	fmt.Fprintf(output, "  NfcV:       0x%X\n", nfc.FlagReaderNfcV)
+	fmt.Fprintf(output, "  Barcode:    0x%X\n", nfc.FlagReaderNfcBarcode)
+
+	fmt.Fprintln(output, "\nAdapter states:")
+	fmt.Fprintf(output, "  Off:        %d\n", nfc.StateOff)
+	fmt.Fprintf(output, "  TurningOn:  %d\n", nfc.StateTurningOn)
+	fmt.Fprintf(output, "  On:         %d\n", nfc.StateOn)
+	fmt.Fprintf(output, "  TurningOff: %d\n", nfc.StateTurningOff)
 }

@@ -108,9 +108,9 @@ static void _onResume(ANativeActivity* a) { goOnResume(a); }\
         sed -i '/"github\.com\/AndroidGoLab\/jni"$/a\\t"github.com/AndroidGoLab/jni/capi"' "$mainfile"
     fi
 
-    # Add "github.com/AndroidGoLab/jni/exampleui" right after the capi import
-    if ! grep -q '"github.com/AndroidGoLab/jni/exampleui"' "$mainfile"; then
-        sed -i '/"github\.com\/AndroidGoLab\/jni\/capi"$/a\\t"github.com/AndroidGoLab/jni/exampleui"' "$mainfile"
+    # Add "github.com/AndroidGoLab/jni/examples/common/ui" right after the capi import
+    if ! grep -q '"github.com/AndroidGoLab/jni/examples/common/ui"' "$mainfile"; then
+        sed -i '/"github\.com\/AndroidGoLab\/jni\/capi"$/a\\t"github.com/AndroidGoLab/jni/examples/common/ui"' "$mainfile"
     fi
 
     # ========================================================================
@@ -282,11 +282,11 @@ static void _onResume(ANativeActivity* a) { goOnResume(a); }\
     { print }
     /^func main\(\) \{\}$/ {
         print ""
-        print "func init() { exampleui.Register(run) }"
+        print "func init() { ui.Register(run) }"
         print ""
         print "//export ANativeActivity_onCreate"
         print "func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {"
-        print "\texampleui.OnCreate("
+        print "\tui.OnCreate("
         print "\t\tjni.VMFromPtr(unsafe.Pointer(activity.vm)),"
         print "\t\tjni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),"
         print "\t)"
@@ -295,7 +295,7 @@ static void _onResume(ANativeActivity* a) { goOnResume(a); }\
         print ""
         print "//export goOnResume"
         print "func goOnResume(activity *C.ANativeActivity) {"
-        print "\texampleui.OnResume("
+        print "\tui.OnResume("
         print "\t\tjni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),"
         print "\t)"
         print "}"

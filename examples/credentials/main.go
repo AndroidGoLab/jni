@@ -1,13 +1,9 @@
 //go:build android
 
-// Command credentials demonstrates the Android Credential Manager API data types.
-// It is built as a c-shared library and packaged into an APK.
-//
-// This example shows the exported data class types PasswordCredential and
-// PublicKeyCredential, which are used to represent credential data extracted
-// from JNI objects. The Manager type and its methods (createManagerRaw,
-// getCredentialRaw, createCredentialRaw, clearCredentialStateRaw) are
-// unexported and used internally by higher-level wrappers.
+// Command credentials demonstrates the Android Credential Manager API.
+// It initializes the JNI bindings, attempts to create a CredentialManager
+// instance via JNI, and reports whether the credentials framework is
+// available on the device.
 package main
 
 /*
@@ -20,23 +16,23 @@ static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResu
 */
 import "C"
 import (
-	"unsafe"
 	"bytes"
 	"fmt"
+	"unsafe"
 
-	"github.com/AndroidGoLab/jni/credentials"
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/credentials"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -45,57 +41,150 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// PasswordCredential holds data extracted from a
-	// androidx.credentials.PasswordCredential JNI object.
-	// It has two exported fields: ID and Password.
-	pwCred := credentials.PasswordCredential{
-		ID:       "user@example.com",
-		Password: "s3cret",
-	}
-	fmt.Fprintf(output, "PasswordCredential ID: %s\n", pwCred.ID)
-	fmt.Fprintf(output, "PasswordCredential Password: %s\n", pwCred.Password)
+	fmt.Fprintln(output, "=== Credential Manager ===")
 
-	// PublicKeyCredential holds data extracted from a
-	// androidx.credentials.publickeycredential.PublicKeyCredential JNI object.
-	// It has one exported field: AuthResponseJSON.
-	pkCred := credentials.PublicKeyCredential{
-		AuthResponseJSON: `{"type":"public-key","id":"abc123","response":{"clientDataJSON":"...","authenticatorData":"..."}}`,
+	ctx, err := ui.GetAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
 	}
-	fmt.Fprintf(output, "PublicKeyCredential AuthResponseJSON: %s\n", pkCred.AuthResponseJSON)
+	defer ctx.Close()
 
-	// The following types and methods are unexported (package-internal):
-	//
-	// Manager wraps androidx.credentials.CredentialManager with methods:
-	//   Manager.createManagerRaw(ctx *jni.Object) (*jni.Object, error)
-	//     Static factory method to create a CredentialManager instance.
-	//
-	//   Manager.getCredentialRaw(ctx, request *jni.Object) (*jni.Object, error)
-	//     Retrieves a credential using the given request.
-	//
-	//   Manager.createCredentialRaw(ctx, request *jni.Object) (*jni.Object, error)
-	//     Creates/saves a credential using the given request.
-	//
-	//   Manager.clearCredentialStateRaw(request *jni.Object) error
-	//     Clears the credential state.
-	//
-	// getCredentialRequestBuilder wraps GetCredentialRequest.Builder:
-	//   addCredentialOption(option *jni.Object) *jni.Object
-	//   build() *jni.Object
-	//
-	// getCredentialResponse wraps GetCredentialResponse (empty struct).
-	//
-	// extractPasswordCredential(env, obj) extracts PasswordCredential fields.
-	// extractPublicKeyCredential(env, obj) extracts PublicKeyCredential fields.
+	// Initialize JNI class and method references for the credentials package.
+	// This resolves all androidx.credentials.* classes.
+	var initErr error
+	vm.Do(func(env *jni.Env) error {
+		initErr = credentials.Init(env)
+		return nil
+	})
+
+	if initErr != nil {
+		fmt.Fprintf(output, "Init: %v\n", initErr)
+		fmt.Fprintln(output, "Credential Manager NOT available.")
+		fmt.Fprintln(output, "(Requires androidx.credentials)")
+		return nil
+	}
+	fmt.Fprintln(output, "Init: OK")
+	fmt.Fprintln(output, "JNI classes resolved:")
+	fmt.Fprintln(output, "  CredentialManager")
+	fmt.Fprintln(output, "  GetCredentialRequest$Builder")
+	fmt.Fprintln(output, "  GetCredentialResponse")
+	fmt.Fprintln(output, "  PasswordCredential")
+	fmt.Fprintln(output, "  PublicKeyCredential")
+
+	// Create a CredentialManager via the static factory.
+	// The wrapper methods are unexported, so we call
+	// CredentialManager.create(context) directly via JNI.
+	var mgrObj *jni.GlobalRef
+	var createErr error
+	vm.Do(func(env *jni.Env) error {
+		cmClass, err := env.FindClass("androidx/credentials/CredentialManager")
+		if err != nil {
+			createErr = fmt.Errorf("find class: %w", err)
+			return nil
+		}
+		createMid, err := env.GetStaticMethodID(cmClass, "create",
+			"(Landroid/content/Context;)Landroidx/credentials/CredentialManager;")
+		if err != nil {
+			createErr = fmt.Errorf("get create: %w", err)
+			return nil
+		}
+		obj, err := env.CallStaticObjectMethod(cmClass, createMid,
+			jni.ObjectValue(ctx.Obj))
+		if err != nil {
+			createErr = fmt.Errorf("call create: %w", err)
+			return nil
+		}
+		if obj != nil {
+			mgrObj = env.NewGlobalRef(obj)
+		}
+		return nil
+	})
+
+	fmt.Fprintln(output)
+	if createErr != nil {
+		fmt.Fprintf(output, "create: %v\n", createErr)
+	} else if mgrObj == nil || mgrObj.Ref() == 0 {
+		fmt.Fprintln(output, "create: returned null")
+	} else {
+		fmt.Fprintln(output, "CredentialManager.create: OK")
+		fmt.Fprintf(output, "  ref: %d\n", mgrObj.Ref())
+
+		// Attempt clearCredentialState via raw JNI.
+		// This exercises the method binding. It will fail
+		// because we pass null for the request, but it
+		// proves the JNI plumbing works.
+		vm.Do(func(env *jni.Env) error {
+			cmClass, err := env.FindClass("androidx/credentials/CredentialManager")
+			if err != nil {
+				fmt.Fprintf(output, "clearCredentialState: %v\n", err)
+				return nil
+			}
+			clearMid, err := env.GetMethodID(cmClass, "clearCredentialState",
+				"(Landroidx/credentials/ClearCredentialStateRequest;)V")
+			if err != nil {
+				fmt.Fprintf(output, "clearCredentialState: %v\n", err)
+				fmt.Fprintln(output, "  (method not found)")
+				return nil
+			}
+			err = env.CallVoidMethod(mgrObj, clearMid, jni.ObjectValue(nil))
+			if err != nil {
+				fmt.Fprintf(output, "clearCredentialState: %v\n", err)
+				fmt.Fprintln(output, "  (expected: needs request)")
+			} else {
+				fmt.Fprintln(output, "clearCredentialState: OK")
+			}
+			return nil
+		})
+
+		// Inspect the manager object's class name.
+		vm.Do(func(env *jni.Env) error {
+			cls := env.GetObjectClass(mgrObj)
+			getNameMid, err := env.GetMethodID(cls, "getClass", "()Ljava/lang/Class;")
+			if err != nil {
+				return nil
+			}
+			classObj, err := env.CallObjectMethod(mgrObj, getNameMid)
+			if err != nil || classObj == nil {
+				return nil
+			}
+			classCls := env.GetObjectClass(classObj)
+			nameMid, err := env.GetMethodID(classCls, "getName", "()Ljava/lang/String;")
+			if err != nil {
+				return nil
+			}
+			nameObj, err := env.CallObjectMethod(classObj, nameMid)
+			if err != nil || nameObj == nil {
+				return nil
+			}
+			name := env.GoString((*jni.String)(unsafe.Pointer(nameObj)))
+			fmt.Fprintf(output, "  class: %s\n", name)
+			return nil
+		})
+
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(mgrObj)
+			return nil
+		})
+	}
+
+	// Show extracted data types.
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Data types:")
+	fmt.Fprintln(output, "  PasswordCredential:")
+	fmt.Fprintln(output, "    Fields: ID, Password")
+	fmt.Fprintln(output, "  PublicKeyCredential:")
+	fmt.Fprintln(output, "    Fields: AuthResponseJSON")
+
 	return nil
 }

@@ -1,15 +1,8 @@
 //go:build android
 
 // Command wifi_rtt demonstrates using the Android Wi-Fi RTT (Round-Trip
-// Time) ranging API, wrapped by the wifi_rtt package. It is built as a
-// c-shared library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// The wifi_rtt package wraps android.net.wifi.rtt.WifiRttManager and
-// provides the RangingResult data class, status constants, and a
-// ranging request builder. Wi-Fi RTT enables precise indoor positioning
-// by measuring the round-trip time of Wi-Fi frames. It requires
-// ACCESS_FINE_LOCATION and NEARBY_WIFI_DEVICES permissions.
+// Time) ranging API. It obtains the WifiRttManager, checks whether RTT
+// ranging is available, and reports device RTT characteristics.
 package main
 
 /*
@@ -29,17 +22,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/net/wifi/rtt"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -48,18 +41,18 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -69,19 +62,89 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		if strings.Contains(err.Error(), "service not available") {
 			fmt.Fprintln(output, "WifiRttManager not available on this device")
+			fmt.Fprintln(output, "(Wi-Fi RTT requires hardware support)")
 			fmt.Fprintln(output, "")
-		} else {
-			return fmt.Errorf("rtt.NewWifiRttManager: %w", err)
+			printConstants(output)
+			return nil
 		}
+		return fmt.Errorf("WifiRttManager: %w", err)
+	}
+	defer mgr.Close()
+	fmt.Fprintln(output, "WifiRttManager OK")
+
+	// Check if RTT ranging is available.
+	avail, err := mgr.IsAvailable()
+	if err != nil {
+		fmt.Fprintf(output, "IsAvailable: %v\n", err)
 	} else {
-		fmt.Fprintln(output, "WifiRttManager obtained successfully")
-		_ = mgr
+		fmt.Fprintf(output, "RTT available: %v\n", avail)
 	}
 
-	// --- Ranging Status Constants ---
-	fmt.Fprintf(output, "StatusSuccess:                            %d\n", rtt.StatusSuccess)
-	fmt.Fprintf(output, "StatusFail:                               %d\n", rtt.StatusFail)
-	fmt.Fprintf(output, "StatusResponderDoesNotSupportIeee80211mc: %d\n", rtt.StatusResponderDoesNotSupportIeee80211mc)
+	// Query RTT characteristics (API 34+).
+	chars, err := mgr.GetRttCharacteristics()
+	if err != nil {
+		fmt.Fprintf(output, "GetRttCharacteristics: %v\n", err)
+	} else if chars == nil || chars.Ref() == 0 {
+		fmt.Fprintln(output, "No RTT characteristics returned")
+	} else {
+		fmt.Fprintln(output, "RTT characteristics:")
+
+		// Read boolean keys from the Bundle-like characteristics object.
+		vm.Do(func(env *jni.Env) error {
+			cls := env.GetObjectClass(chars)
+
+			// Try getBoolean(String key, boolean default).
+			getBoolMid, err := env.GetMethodID(cls, "getBoolean", "(Ljava/lang/String;Z)Z")
+			if err != nil {
+				// Fall back to toString().
+				toStrMid, err := env.GetMethodID(cls, "toString", "()Ljava/lang/String;")
+				if err != nil {
+					return nil
+				}
+				strObj, err := env.CallObjectMethod(chars, toStrMid)
+				if err != nil {
+					return nil
+				}
+				s := env.GoString((*jni.String)(unsafe.Pointer(strObj)))
+				fmt.Fprintf(output, "  %s\n", s)
+				return nil
+			}
+
+			boolKeys := []struct {
+				name string
+				key  string
+			}{
+				{"OneSidedRTT", rtt.CharacteristicsKeyBooleanOneSidedRtt},
+				{"LCI", rtt.CharacteristicsKeyBooleanLci},
+				{"LCR", rtt.CharacteristicsKeyBooleanLcr},
+				{"NTB Initiator", rtt.CharacteristicsKeyBooleanNtbInitiator},
+				{"STA Responder", rtt.CharacteristicsKeyBooleanStaResponder},
+			}
+			for _, k := range boolKeys {
+				jKey, _ := env.NewStringUTF(k.key)
+				val, err := env.CallBooleanMethod(chars, getBoolMid,
+					jni.ObjectValue(&jKey.Object), jni.BooleanValue(0))
+				if err != nil {
+					fmt.Fprintf(output, "  %-15s: err\n", k.name)
+					continue
+				}
+				fmt.Fprintf(output, "  %-15s: %v\n", k.name, val != 0)
+			}
+
+			env.DeleteGlobalRef(chars)
+			return nil
+		})
+	}
+
+	fmt.Fprintln(output, "")
+	printConstants(output)
 
 	return nil
+}
+
+func printConstants(output *bytes.Buffer) {
+	fmt.Fprintln(output, "Ranging status constants:")
+	fmt.Fprintf(output, "  StatusSuccess: %d\n", rtt.StatusSuccess)
+	fmt.Fprintf(output, "  StatusFail:    %d\n", rtt.StatusFail)
+	fmt.Fprintf(output, "  StatusNoMC:    %d\n", rtt.StatusResponderDoesNotSupportIeee80211mc)
 }

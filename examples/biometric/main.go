@@ -1,14 +1,9 @@
 //go:build android
 
-// Command biometric demonstrates Android biometric authentication
-// using BiometricManager. Requires API 28+. It is built as a c-shared
-// library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// The biometric package wraps android.hardware.biometrics.BiometricManager
-// and related types (BiometricPrompt, BiometricPrompt.Builder,
-// CancellationSignal). Most prompt-related types and methods are
-// unexported and intended to be wrapped by higher-level helpers.
+// Command biometric demonstrates Android BiometricManager by querying
+// the device's biometric authentication capabilities. It calls every
+// available query method: CanAuthenticate0, CanAuthenticate1_1,
+// GetLastAuthenticationTime, and GetStrings.
 package main
 
 /*
@@ -27,17 +22,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/hardware/biometric"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -46,18 +41,42 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+// Android BiometricManager.Authenticators constants.
+const (
+	authenticatorBiometricStrong  = 0x000F
+	authenticatorBiometricWeak    = 0x00FF
+	authenticatorDeviceCredential = 0x8000
+)
+
+func canAuthResultName(code int32) string {
+	switch int(code) {
+	case biometric.BiometricSuccess:
+		return "SUCCESS"
+	case biometric.BiometricErrorNoHardware:
+		return "NO_HARDWARE"
+	case biometric.BiometricErrorHwUnavailable:
+		return "HW_UNAVAILABLE"
+	case biometric.BiometricErrorNoneEnrolled:
+		return "NONE_ENROLLED"
+	case biometric.BiometricErrorSecurityUpdateRequired:
+		return "SECURITY_UPDATE_REQUIRED"
+	default:
+		return fmt.Sprintf("UNKNOWN(%d)", code)
+	}
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -69,27 +88,80 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer mgr.Close()
 
-	// Error code constants from BiometricPrompt.
-	fmt.Fprintf(output, "errors: hw_unavailable=%d, canceled=%d, lockout=%d, lockout_permanent=%d, user_canceled=%d, no_biometrics=%d\n",
-		biometric.BiometricErrorHwUnavailable, biometric.BiometricErrorCanceled,
-		biometric.BiometricErrorLockout, biometric.BiometricErrorLockoutPermanent,
-		biometric.BiometricErrorUserCanceled, biometric.BiometricErrorNoBiometrics)
+	fmt.Fprintln(output, "=== Biometric Manager ===")
 
-	// Availability check result constants from BiometricManager.canAuthenticate.
-	fmt.Fprintf(output, "availability: success=%d, no_hardware=%d, hw_unavailable=%d, none_enrolled=%d\n",
-		biometric.BiometricSuccess, biometric.BiometricErrorNoHardware,
-		biometric.BiometricErrorHwUnavailable, biometric.BiometricErrorNoneEnrolled)
+	// CanAuthenticate0 - no arguments, API 28+.
+	result, err := mgr.CanAuthenticate0()
+	if err != nil {
+		fmt.Fprintf(output, "canAuthenticate(): error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "canAuthenticate(): %s\n", canAuthResultName(result))
+	}
 
-	// The authentication flow uses unexported types:
-	//   1. biometricPromptBuilder - set title, subtitle, description,
-	//      negative button, and allowed authenticators, then build()
-	//   2. biometricPrompt - call authenticate() with a cancellation signal,
-	//      executor, and callback
-	//   3. cancellationSignal - cancel() to abort authentication
-	//
-	// The canAuthenticateRaw(authenticators) method on Manager checks
-	// whether biometric authentication is available on the device.
-	fmt.Fprintln(output, "BiometricManager created successfully")
+	// CanAuthenticate1_1 - with authenticator types, API 30+.
+	type authQuery struct {
+		name string
+		flag int32
+	}
+	queries := []authQuery{
+		{"BIOMETRIC_STRONG", authenticatorBiometricStrong},
+		{"BIOMETRIC_WEAK", authenticatorBiometricWeak},
+		{"DEVICE_CREDENTIAL", authenticatorDeviceCredential},
+		{"STRONG|CREDENTIAL", authenticatorBiometricStrong | authenticatorDeviceCredential},
+	}
+	for _, q := range queries {
+		r, err := mgr.CanAuthenticate1_1(q.flag)
+		if err != nil {
+			fmt.Fprintf(output, "canAuth(%s): error: %v\n", q.name, err)
+		} else {
+			fmt.Fprintf(output, "canAuth(%s): %s\n", q.name, canAuthResultName(r))
+		}
+	}
+
+	// GetLastAuthenticationTime - API 34+.
+	for _, q := range queries {
+		lastAuth, err := mgr.GetLastAuthenticationTime(q.flag)
+		if err != nil {
+			fmt.Fprintf(output, "lastAuth(%s): error: %v\n", q.name, err)
+		} else if lastAuth == int64(biometric.BiometricNoAuthentication) {
+			fmt.Fprintf(output, "lastAuth(%s): none\n", q.name)
+		} else {
+			fmt.Fprintf(output, "lastAuth(%s): %d ms\n", q.name, lastAuth)
+		}
+	}
+
+	// GetStrings - returns BiometricManager.Strings object, API 34+.
+	// Call for each authenticator type to see what prompts the system provides.
+	for _, q := range queries {
+		stringsObj, err := mgr.GetStrings(q.flag)
+		if err != nil {
+			fmt.Fprintf(output, "strings(%s): error: %v\n", q.name, err)
+		} else if stringsObj == nil {
+			fmt.Fprintf(output, "strings(%s): nil\n", q.name)
+		} else {
+			// The Strings object has getButtonLabel, getPromptMessage, getSettingName.
+			// Call toString() to get a human-readable summary.
+			var desc string
+			vm.Do(func(env *jni.Env) error {
+				cls := env.GetObjectClass(stringsObj)
+				mid, err := env.GetMethodID(cls, "toString", "()Ljava/lang/String;")
+				if err != nil {
+					return err
+				}
+				obj, err := env.CallObjectMethod(stringsObj, mid)
+				if err != nil {
+					return err
+				}
+				desc = env.GoString((*jni.String)(unsafe.Pointer(obj)))
+				return nil
+			})
+			if desc != "" {
+				fmt.Fprintf(output, "strings(%s): %s\n", q.name, desc)
+			} else {
+				fmt.Fprintf(output, "strings(%s): (object)\n", q.name)
+			}
+		}
+	}
 
 	return nil
 }

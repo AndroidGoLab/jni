@@ -1,13 +1,8 @@
 //go:build android
 
 // Command pm demonstrates using the PackageManager API.
-// It is built as a c-shared library and packaged into an APK.
-//
-// This example shows all system feature constants and the exported
-// PackageInfo data class. The Manager type provides methods for
-// feature detection, package queries, and activity resolution. In a
-// complete implementation, the Manager is obtained via
-// NewManager(ctx) (not yet generated).
+// It queries system feature availability and lists installed packages
+// using live JNI calls.
 package main
 
 /*
@@ -20,23 +15,23 @@ static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResu
 */
 import "C"
 import (
-	"unsafe"
 	"bytes"
 	"fmt"
+	"unsafe"
 
-	"github.com/AndroidGoLab/jni/content/pm"
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/content/pm"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -45,69 +40,207 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// --- Constants ---
-	// Feature constants for HasSystemFeature checks.
-	fmt.Fprintln(output, "System feature constants:")
-	fmt.Fprintf(output, "  FeatureCamera      = %q\n", pm.FeatureCamera)
-	fmt.Fprintf(output, "  FeatureCameraFront = %q\n", pm.FeatureCameraFront)
-	fmt.Fprintf(output, "  FeatureBluetooth   = %q\n", pm.FeatureBluetooth)
-	fmt.Fprintf(output, "  FeatureBluetoothLe = %q\n", pm.FeatureBluetoothLe)
-	fmt.Fprintf(output, "  FeatureNfc         = %q\n", pm.FeatureNfc)
-	fmt.Fprintf(output, "  FeatureLocationGps = %q\n", pm.FeatureLocationGps)
-	fmt.Fprintf(output, "  FeatureTelephony   = %q\n", pm.FeatureTelephony)
-	fmt.Fprintf(output, "  FeatureWifi        = %q\n", pm.FeatureWifi)
-	fmt.Fprintf(output, "  FeatureFingerprint = %q\n", pm.FeatureFingerprint)
-	fmt.Fprintf(output, "  FeatureUSBHost     = %q\n", pm.FeatureUsbHost)
-
-	// --- PackageInfo type ---
-	// PackageInfo wraps android.content.pm.PackageInfo with VM and Obj
-	// fields for JNI access. Its methods (DescribeContents, etc.) are
-	// called through JNI.
-	var info pm.PackageInfo
-	_ = info
-
-	// --- Manager methods ---
-	// The Manager wraps android.content.pm.PackageManager and provides:
-	//
-	//   mgr.HasSystemFeature(feature string) (bool, error) [exported]
-	//     Check whether the device has a hardware feature.
-	//     Use with feature constants like pm.FeatureCamera.
-	//
-	//   mgr.getPackageInfoRaw(pkgName string, flags int32) [unexported]
-	//     Query info about a specific installed package.
-	//     The raw JNI object is converted to PackageInfo via
-	//     extractPackageInfo.
-	//
-	//   mgr.getInstalledPackagesRaw(flags int32) [unexported]
-	//     List all installed packages.
-	//
-	//   mgr.resolveActivityRaw(intent, flags) [unexported]
-	//     Check if an Intent can be handled before starting it.
-
-	// Example: list features to check at startup.
-	featuresToCheck := []string{
-		pm.FeatureCamera,
-		pm.FeatureBluetooth,
-		pm.FeatureNfc,
-		pm.FeatureLocationGps,
-		pm.FeatureWifi,
-		pm.FeatureFingerprint,
-		pm.FeatureUsbHost,
+	ctx, err := ui.GetAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
 	}
-	fmt.Fprintf(output, "\nFeatures to check at startup: %d\n", len(featuresToCheck))
-	for _, f := range featuresToCheck {
-		fmt.Fprintf(output, "  %s\n", f)
+	defer ctx.Close()
+
+	fmt.Fprintln(output, "=== PackageManager ===")
+
+	// --- Obtain PackageManager from Context ---
+	pmObj, err := ctx.GetPackageManager()
+	if err != nil {
+		return fmt.Errorf("GetPackageManager: %w", err)
 	}
+	if pmObj == nil || pmObj.Ref() == 0 {
+		return fmt.Errorf("PackageManager is null")
+	}
+
+	// Wrap the raw JNI object in the generated PackageManager type.
+	// GetPackageManager() already returns a global reference.
+	mgr := pm.PackageManager{
+		VM:  vm,
+		Obj: pmObj,
+	}
+	fmt.Fprintln(output, "PackageManager: obtained")
+
+	// --- Check system features ---
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "System Features:")
+
+	features := []struct {
+		name  string
+		value string
+	}{
+		{"Camera", pm.FeatureCamera},
+		{"CameraFront", pm.FeatureCameraFront},
+		{"Bluetooth", pm.FeatureBluetooth},
+		{"BluetoothLE", pm.FeatureBluetoothLe},
+		{"NFC", pm.FeatureNfc},
+		{"GPS", pm.FeatureLocationGps},
+		{"Telephony", pm.FeatureTelephony},
+		{"WiFi", pm.FeatureWifi},
+		{"Fingerprint", pm.FeatureFingerprint},
+		{"USB Host", pm.FeatureUsbHost},
+		{"Touchscreen", pm.FeatureTouchscreen},
+		{"Microphone", pm.FeatureMicrophone},
+		{"Sensor Accel", pm.FeatureSensorAccelerometer},
+		{"Sensor Gyro", pm.FeatureSensorGyroscope},
+	}
+
+	for _, f := range features {
+		has, err := mgr.HasSystemFeature1(f.value)
+		if err != nil {
+			fmt.Fprintf(output, "  %-14s ERR: %v\n", f.name, err)
+		} else if has {
+			fmt.Fprintf(output, "  %-14s YES\n", f.name)
+		} else {
+			fmt.Fprintf(output, "  %-14s no\n", f.name)
+		}
+	}
+
+	// --- Get our own package info ---
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Own Package Info:")
+
+	// Get our package name from the context
+	var pkgName string
+	vm.Do(func(env *jni.Env) error {
+		ctxCls := env.GetObjectClass(ctx.Obj)
+		getPkgMid, err := env.GetMethodID(ctxCls, "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			return nil
+		}
+		pkgObj, err := env.CallObjectMethod(ctx.Obj, getPkgMid)
+		if err != nil {
+			return nil
+		}
+		pkgName = env.GoString((*jni.String)(unsafe.Pointer(pkgObj)))
+		return nil
+	})
+
+	if pkgName != "" {
+		fmt.Fprintf(output, "  Package: %s\n", pkgName)
+
+		// GetPackageInfo2_3(packageName string, flags int32) -> *jni.Object
+		infoObj, err := mgr.GetPackageInfo2_3(pkgName, 0)
+		if err != nil {
+			fmt.Fprintf(output, "  Error: %v\n", err)
+		} else if infoObj != nil && infoObj.Ref() != 0 {
+			// Wrap in PackageInfo to call exported methods
+			info := pm.PackageInfo{VM: vm, Obj: infoObj}
+
+			versionCode, err := info.GetLongVersionCode()
+			if err != nil {
+				fmt.Fprintf(output, "  VersionCode: ERR %v\n", err)
+			} else {
+				fmt.Fprintf(output, "  VersionCode: %d\n", versionCode)
+			}
+
+			// Get versionName via raw JNI (it's a field, not a method)
+			vm.Do(func(env *jni.Env) error {
+				infoCls := env.GetObjectClass(infoObj)
+				vnFid, err := env.GetFieldID(infoCls, "versionName", "Ljava/lang/String;")
+				if err != nil {
+					return nil
+				}
+				vnObj := env.GetObjectField(infoObj, vnFid)
+				if vnObj != nil && vnObj.Ref() != 0 {
+					vn := env.GoString((*jni.String)(unsafe.Pointer(vnObj)))
+					fmt.Fprintf(output, "  VersionName: %s\n", vn)
+				}
+
+				// Get packageName field
+				pnFid, err := env.GetFieldID(infoCls, "packageName", "Ljava/lang/String;")
+				if err != nil {
+					return nil
+				}
+				pnObj := env.GetObjectField(infoObj, pnFid)
+				if pnObj != nil && pnObj.Ref() != 0 {
+					pn := env.GoString((*jni.String)(unsafe.Pointer(pnObj)))
+					fmt.Fprintf(output, "  PkgName: %s\n", pn)
+				}
+				return nil
+			})
+		}
+	}
+
+	// --- List installed packages (first 10) ---
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Installed Packages:")
+
+	// GetInstalledPackages1_1(flags int32) -> *jni.Object (List<PackageInfo>)
+	listObj, err := mgr.GetInstalledPackages1_1(0)
+	if err != nil {
+		fmt.Fprintf(output, "  Error: %v\n", err)
+	} else if listObj == nil || listObj.Ref() == 0 {
+		fmt.Fprintln(output, "  (null)")
+	} else {
+		vm.Do(func(env *jni.Env) error {
+			listCls := env.GetObjectClass(listObj)
+
+			// List.size()
+			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
+			if err != nil {
+				return nil
+			}
+			size, err := env.CallIntMethod(listObj, sizeMid)
+			if err != nil {
+				return nil
+			}
+			fmt.Fprintf(output, "  Total: %d\n", size)
+
+			// List.get(int)
+			getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
+			if err != nil {
+				return nil
+			}
+
+			// Show first 10
+			limit := size
+			if limit > 10 {
+				limit = 10
+			}
+			for i := int32(0); i < limit; i++ {
+				piObj, err := env.CallObjectMethod(listObj, getMid, jni.IntValue(i))
+				if err != nil || piObj == nil {
+					continue
+				}
+
+				// Read packageName field
+				piCls := env.GetObjectClass(piObj)
+				pnFid, err := env.GetFieldID(piCls, "packageName", "Ljava/lang/String;")
+				if err != nil {
+					continue
+				}
+				pnObj := env.GetObjectField(piObj, pnFid)
+				if pnObj == nil || pnObj.Ref() == 0 {
+					continue
+				}
+				pn := env.GoString((*jni.String)(unsafe.Pointer(pnObj)))
+				fmt.Fprintf(output, "  [%d] %s\n", i, pn)
+			}
+			if size > 10 {
+				fmt.Fprintf(output, "  ... and %d more\n", size-10)
+			}
+
+			return nil
+		})
+	}
+
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "PM example complete.")
 	return nil
 }

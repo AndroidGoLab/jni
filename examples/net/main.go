@@ -1,13 +1,8 @@
 //go:build android
 
-// Command net demonstrates the ConnectivityManager JNI bindings. It is built
-// as a c-shared library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// This example obtains the ConnectivityManager system service and
-// prints the transport type constants. The package wraps
-// android.net.ConnectivityManager and provides the networkCallback
-// struct for receiving connectivity change notifications.
+// Command net demonstrates the ConnectivityManager JNI bindings. It obtains
+// the active network, checks whether it is metered, queries network
+// capabilities, and prints live connectivity information.
 package main
 
 /*
@@ -26,17 +21,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/net"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -45,18 +40,18 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -64,38 +59,205 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := net.NewConnectivityManager(ctx)
 	if err != nil {
-		return fmt.Errorf("net.NewConnectivityManager: %w", err)
+		return fmt.Errorf("ConnectivityManager: %w", err)
 	}
 	defer mgr.Close()
+	fmt.Fprintln(output, "=== ConnectivityManager ===")
 
-	// Print all transport type constants.
-	// These identify the transport mechanism of a network.
-	fmt.Fprintln(output, "Transport types:")
-	fmt.Fprintf(output, "  TransportCellular  = %d\n", net.TransportCellular)
-	fmt.Fprintf(output, "  TransportWifi      = %d\n", net.TransportWifi)
-	fmt.Fprintf(output, "  TransportBluetooth = %d\n", net.TransportBluetooth)
-	fmt.Fprintf(output, "  TransportVpn       = %d\n", net.TransportVpn)
+	// Check if the active network is metered.
+	metered, err := mgr.IsActiveNetworkMetered()
+	if err != nil {
+		fmt.Fprintf(output, "IsActiveNetworkMetered: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Active network metered: %v\n", metered)
+	}
 
-	// Package-internal Manager methods:
-	//   getActiveNetworkRaw()                    - get the active Network object
-	//   getNetworkCapabilitiesRaw(network)       - get capabilities of a network
-	//   registerDefaultNetworkCallbackRaw(cb)    - register for network changes
-	//   unregisterNetworkCallbackRaw(cb)         - unregister callback
-	//
-	// The networkCapabilities wrapper provides:
-	//   hasTransport(transport int32) bool - check if transport type is present
-	//   getLinkDown() int32               - downstream bandwidth in Kbps
-	//   getLinkUp() int32                 - upstream bandwidth in Kbps
-	//
-	// The networkCallback struct enables Go code to receive connectivity
-	// change notifications via a Java proxy:
-	//   OnAvailable(network *jni.Object)
-	//     Called when a network becomes available.
-	//   OnLost(network *jni.Object)
-	//     Called when a network is lost.
-	//   OnCapabilitiesChanged(network *jni.Object, caps *jni.Object)
-	//     Called when network capabilities change.
+	// Check if the default network is active.
+	active, err := mgr.IsDefaultNetworkActive()
+	if err != nil {
+		fmt.Fprintf(output, "IsDefaultNetworkActive: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Default network active: %v\n", active)
+	}
 
-	fmt.Fprintln(output, "ConnectivityManager ready")
+	// Get restrict background status.
+	rbStatus, err := mgr.GetRestrictBackgroundStatus()
+	if err != nil {
+		fmt.Fprintf(output, "GetRestrictBackgroundStatus: %v\n", err)
+	} else {
+		statusName := "unknown"
+		switch int(rbStatus) {
+		case net.RestrictBackgroundStatusDisabled:
+			statusName = "disabled"
+		case net.RestrictBackgroundStatusEnabled:
+			statusName = "enabled"
+		case net.RestrictBackgroundStatusWhitelisted:
+			statusName = "whitelisted"
+		}
+		fmt.Fprintf(output, "Restrict background: %s (%d)\n", statusName, rbStatus)
+	}
+
+	// Get the active network object.
+	network, err := mgr.GetActiveNetwork()
+	if err != nil {
+		fmt.Fprintf(output, "GetActiveNetwork: %v\n", err)
+	} else if network == nil || network.Ref() == 0 {
+		fmt.Fprintln(output, "No active network")
+	} else {
+		fmt.Fprintln(output, "")
+		fmt.Fprintln(output, "Active network present")
+
+		// Call toString() on the network object.
+		vm.Do(func(env *jni.Env) error {
+			cls := env.GetObjectClass(network)
+			mid, err := env.GetMethodID(cls, "toString", "()Ljava/lang/String;")
+			if err != nil {
+				return nil
+			}
+			strObj, err := env.CallObjectMethod(network, mid)
+			if err != nil {
+				return nil
+			}
+			s := env.GoString((*jni.String)(unsafe.Pointer(strObj)))
+			fmt.Fprintf(output, "  Network: %s\n", s)
+			return nil
+		})
+
+		// Get link properties.
+		linkProps, err := mgr.GetLinkProperties(network)
+		if err != nil {
+			fmt.Fprintf(output, "GetLinkProperties: %v\n", err)
+		} else if linkProps != nil && linkProps.Ref() != 0 {
+			vm.Do(func(env *jni.Env) error {
+				cls := env.GetObjectClass(linkProps)
+				mid, err := env.GetMethodID(cls, "toString", "()Ljava/lang/String;")
+				if err != nil {
+					return nil
+				}
+				strObj, err := env.CallObjectMethod(linkProps, mid)
+				if err != nil {
+					return nil
+				}
+				s := env.GoString((*jni.String)(unsafe.Pointer(strObj)))
+				fmt.Fprintf(output, "Link properties:\n  %s\n", s)
+				env.DeleteGlobalRef(linkProps)
+				return nil
+			})
+		}
+
+		// Get multipath preference.
+		multipathPref, err := mgr.GetMultipathPreference(network)
+		if err != nil {
+			fmt.Fprintf(output, "GetMultipathPreference: %v\n", err)
+		} else {
+			fmt.Fprintf(output, "Multipath preference: %d\n", multipathPref)
+		}
+
+		// Get network capabilities.
+		caps, err := mgr.GetNetworkCapabilities(network)
+		if err != nil {
+			fmt.Fprintf(output, "GetNetworkCapabilities: %v\n", err)
+		} else if caps != nil && caps.Ref() != 0 {
+			vm.Do(func(env *jni.Env) error {
+				cls := env.GetObjectClass(caps)
+				mid, err := env.GetMethodID(cls, "toString", "()Ljava/lang/String;")
+				if err != nil {
+					return nil
+				}
+				strObj, err := env.CallObjectMethod(caps, mid)
+				if err != nil {
+					return nil
+				}
+				s := env.GoString((*jni.String)(unsafe.Pointer(strObj)))
+				fmt.Fprintf(output, "Capabilities:\n  %s\n", s)
+
+				// Check individual transports.
+				hasMid, err := env.GetMethodID(cls, "hasTransport", "(I)Z")
+				if err != nil {
+					return nil
+				}
+				transports := []struct {
+					name string
+					id   int
+				}{
+					{"Cellular", net.TransportCellular},
+					{"WiFi", net.TransportWifi},
+					{"Bluetooth", net.TransportBluetooth},
+					{"Ethernet", net.TransportEthernet},
+					{"VPN", net.TransportVpn},
+					{"USB", net.TransportUsb},
+				}
+				fmt.Fprintln(output, "Transports:")
+				for _, t := range transports {
+					has, err := env.CallBooleanMethod(caps, hasMid, jni.IntValue(int32(t.id)))
+					if err != nil {
+						continue
+					}
+					fmt.Fprintf(output, "  %-10s: %v\n", t.name, has != 0)
+				}
+
+				// Check key capabilities.
+				hasCapMid, err := env.GetMethodID(cls, "hasCapability", "(I)Z")
+				if err == nil {
+					capChecks := []struct {
+						name string
+						id   int
+					}{
+						{"Internet", net.NetCapabilityInternet},
+						{"Validated", net.NetCapabilityValidated},
+						{"NotMetered", net.NetCapabilityNotMetered},
+						{"NotVPN", net.NetCapabilityNotVpn},
+						{"NotRoaming", net.NetCapabilityNotRoaming},
+						{"Trusted", net.NetCapabilityTrusted},
+					}
+					fmt.Fprintln(output, "Capabilities:")
+					for _, c := range capChecks {
+						has, err := env.CallBooleanMethod(caps, hasCapMid, jni.IntValue(int32(c.id)))
+						if err != nil {
+							continue
+						}
+						fmt.Fprintf(output, "  %-12s: %v\n", c.name, has != 0)
+					}
+				}
+
+				// Get bandwidth info.
+				downMid, err := env.GetMethodID(cls, "getLinkDownstreamBandwidthKbps", "()I")
+				if err == nil {
+					down, err := env.CallIntMethod(caps, downMid)
+					if err == nil {
+						fmt.Fprintf(output, "Downstream: %d Kbps\n", down)
+					}
+				}
+				upMid, err := env.GetMethodID(cls, "getLinkUpstreamBandwidthKbps", "()I")
+				if err == nil {
+					up, err := env.CallIntMethod(caps, upMid)
+					if err == nil {
+						fmt.Fprintf(output, "Upstream: %d Kbps\n", up)
+					}
+				}
+
+				// Get signal strength.
+				sigMid, err := env.GetMethodID(cls, "getSignalStrength", "()I")
+				if err == nil {
+					sig, err := env.CallIntMethod(caps, sigMid)
+					if err == nil {
+						fmt.Fprintf(output, "Signal strength: %d\n", sig)
+					}
+				}
+
+				env.DeleteGlobalRef(caps)
+				return nil
+			})
+		}
+
+		// Clean up network global ref.
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(network)
+			return nil
+		})
+	}
+
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Network example complete.")
 	return nil
 }

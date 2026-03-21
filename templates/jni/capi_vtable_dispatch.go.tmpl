@@ -4,23 +4,25 @@
 #define JNI_CGO_VTABLE_DISPATCH_H
 
 #include <jni.h>
+
+// The JDK and Android NDK disagree on the type of AttachCurrentThread's
+// env-out parameter: JDK uses void**, NDK uses JNIEnv**. Detect which
+// header was included and cast accordingly. The JDK header defines
+// _JAVASOFT_JNI_H_ while the NDK header does not.
+#ifdef _JAVASOFT_JNI_H_
+#define JNI_ENVPP_CAST(x) ((void**)(x))
+#else
+#define JNI_ENVPP_CAST(x) (x)
+#endif
 {{range .AllFunctions}}
 static inline {{.Returns}} {{.HelperName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{$p.CType}} {{$p.CName}}{{end}}) {
 {{- $hasVtableCast := false}}{{range .Params}}{{if .VtableCast}}{{$hasVtableCast = true}}{{end}}{{end}}
 {{- if $hasVtableCast}}
-#ifdef __ANDROID__
 {{- if .IsVoid}}
-    (*{{(index .Params 0).CName}})->{{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{$p.CName}}{{end}});
+    (*{{(index .Params 0).CName}})->{{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{if $p.VtableCast}}JNI_ENVPP_CAST({{$p.CName}}){{else}}{{$p.CName}}{{end}}{{end}});
 {{- else}}
-    return (*{{(index .Params 0).CName}})->{{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{$p.CName}}{{end}});
+    return (*{{(index .Params 0).CName}})->{{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{if $p.VtableCast}}JNI_ENVPP_CAST({{$p.CName}}){{else}}{{$p.CName}}{{end}}{{end}});
 {{- end}}
-#else
-{{- if .IsVoid}}
-    (*{{(index .Params 0).CName}})->{{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{if $p.VtableCast}}({{$p.VtableCast}}){{end}}{{$p.CName}}{{end}});
-{{- else}}
-    return (*{{(index .Params 0).CName}})->{{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{if $p.VtableCast}}({{$p.VtableCast}}){{end}}{{$p.CName}}{{end}});
-{{- end}}
-#endif
 {{- else}}
 {{- if .IsVoid}}
     (*{{(index .Params 0).CName}})->{{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{$p.CName}}{{end}});

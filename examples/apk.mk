@@ -70,7 +70,7 @@ endif
 $(BUILD)/lib/arm64-v8a/libexample.so: main.go
 	@mkdir -p $(dir $@)
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=$(CC_ARM64) \
-		CGO_CFLAGS="-Wno-incompatible-pointer-types" CGO_LDFLAGS="-llog -landroid" \
+		CGO_LDFLAGS="-llog -landroid" \
 		go build -buildmode=c-shared \
 		-o examples/$(EXAMPLE_NAME)/$@ \
 		./examples/$(EXAMPLE_NAME)/
@@ -78,7 +78,7 @@ $(BUILD)/lib/arm64-v8a/libexample.so: main.go
 $(BUILD)/lib/x86_64/libexample.so: main.go
 	@mkdir -p $(dir $@)
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=amd64 CC=$(CC_AMD64) \
-		CGO_CFLAGS="-Wno-incompatible-pointer-types" CGO_LDFLAGS="-llog -landroid" \
+		CGO_LDFLAGS="-llog -landroid" \
 		go build -buildmode=c-shared \
 		-o examples/$(EXAMPLE_NAME)/$@ \
 		./examples/$(EXAMPLE_NAME)/

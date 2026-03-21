@@ -1,13 +1,8 @@
 //go:build android
 
 // Command wifi_p2p demonstrates using the Android Wi-Fi P2P (Wi-Fi Direct)
-// API, wrapped by the wifi_p2p package. It is built as a c-shared library
-// and packaged into an APK using the shared apk.mk infrastructure.
-//
-// The wifi_p2p package wraps android.net.wifi.p2p.WifiP2pManager and
-// provides data classes for P2P devices and groups, status constants,
-// and callback types for asynchronous P2P operations. It requires
-// ACCESS_FINE_LOCATION and NEARBY_WIFI_DEVICES permissions.
+// API. It obtains the WifiP2pManager, initializes a channel, and queries
+// device capability flags.
 package main
 
 /*
@@ -26,17 +21,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/net/wifi/p2p"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -45,18 +40,18 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -64,35 +59,79 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := p2p.NewWifiP2pManager(ctx)
 	if err != nil {
-		return fmt.Errorf("p2p.NewWifiP2pManager: %w", err)
+		return fmt.Errorf("WifiP2pManager: %w", err)
 	}
 	defer mgr.Close()
+	fmt.Fprintln(output, "WifiP2pManager OK")
 
-	fmt.Fprintln(output, "WifiP2pManager obtained successfully")
+	// Print P2P state constants for reference.
+	fmt.Fprintf(output, "P2P enabled const:  %d\n", p2p.WifiP2pStateEnabled)
+	fmt.Fprintf(output, "P2P disabled const: %d\n", p2p.WifiP2pStateDisabled)
 
-	// Manager provides unexported methods for P2P operations:
-	//   initializeRaw(ctx, looper, listener)         -- initializes a P2P channel.
-	//   discoverPeersRaw(channel, listener)           -- starts peer discovery.
-	//   stopPeerDiscoveryRaw(channel, listener)       -- stops peer discovery.
-	//   connectRaw(channel, config, listener)         -- connects to a peer.
-	//   cancelConnectRaw(channel, listener)           -- cancels a pending connection.
-	//   createGroupRaw(channel, listener)             -- creates a P2P group.
-	//   removeGroupRaw(channel, listener)             -- removes the current group.
-	//   requestConnectionInfoRaw(channel, listener)   -- requests connection info.
-	//   requestPeersRaw(channel, listener)            -- requests the peer list.
+	// Initialize a P2P channel.
+	// initialize(context, looper, channelListener)
+	// We pass the app context and nil for looper (uses main looper) and listener.
+	channel, err := mgr.Initialize(ctx.Obj, nil, nil)
+	if err != nil {
+		fmt.Fprintf(output, "Initialize: %v\n", err)
+	} else if channel == nil || channel.Ref() == 0 {
+		fmt.Fprintln(output, "Initialize returned nil channel")
+	} else {
+		fmt.Fprintln(output, "P2P channel initialized")
 
-	// --- P2P Constants ---
-	fmt.Fprintf(output, "GroupOwnerBandAuto: %d\n", p2p.GroupOwnerBandAuto)
-	fmt.Fprintf(output, "GroupOwnerBand2ghz: %d\n", p2p.GroupOwnerBand2ghz)
-	fmt.Fprintf(output, "GroupOwnerBand5ghz: %d\n", p2p.GroupOwnerBand5ghz)
+		// Request P2P state via the channel.
+		// requestP2pState(channel, listener) -- requires a listener callback.
+		// Since we cannot easily create a Java callback from Go without a proxy,
+		// we just confirm the channel is valid by printing its toString.
+		vm.Do(func(env *jni.Env) error {
+			cls := env.GetObjectClass(channel)
+			mid, mErr := env.GetMethodID(cls, "toString", "()Ljava/lang/String;")
+			if mErr != nil {
+				return nil
+			}
+			strObj, cErr := env.CallObjectMethod(channel, mid)
+			if cErr != nil {
+				return nil
+			}
+			s := env.GoString((*jni.String)(unsafe.Pointer(strObj)))
+			fmt.Fprintf(output, "Channel: %s\n", s)
+			return nil
+		})
 
-	// --- Callback Types (all unexported) ---
-	// actionListener: OnSuccess, OnFailure(reason int32).
-	// peerListListener: OnPeersAvailable(peerList *jni.Object).
-	// connectionInfoListener: OnConnectionInfoAvailable(info *jni.Object).
-	// channelListener: OnChannelDisconnected.
-	//
-	// p2pConfig (unexported): wraps WifiP2pConfig, created via Newp2pConfig.
+		// Clean up channel.
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(channel)
+			return nil
+		})
+	}
+
+	// Query capability flags on the manager.
+	printBool := func(name string, fn func() (bool, error)) {
+		val, err := fn()
+		if err != nil {
+			fmt.Fprintf(output, "%s: %v\n", name, err)
+		} else {
+			fmt.Fprintf(output, "%s: %v\n", name, val)
+		}
+	}
+
+	printBool("ChannelConstrainedDiscovery", mgr.IsChannelConstrainedDiscoverySupported)
+	printBool("GroupClientRemoval", mgr.IsGroupClientRemovalSupported)
+	printBool("GroupOwnerIPv6LinkLocal", mgr.IsGroupOwnerIPv6LinkLocalAddressProvided)
+	printBool("SetVendorElements", mgr.IsSetVendorElementsSupported)
+
+	maxVE, err := mgr.GetP2pMaxAllowedVendorElementsLengthBytes()
+	if err != nil {
+		fmt.Fprintf(output, "MaxVendorElementsLen: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "MaxVendorElementsLen: %d\n", maxVE)
+	}
+
+	fmt.Fprintln(output, "\nBand constants:")
+	fmt.Fprintf(output, "  Auto: %d\n", p2p.GroupOwnerBandAuto)
+	fmt.Fprintf(output, "  2GHz: %d\n", p2p.GroupOwnerBand2ghz)
+	fmt.Fprintf(output, "  5GHz: %d\n", p2p.GroupOwnerBand5ghz)
+	fmt.Fprintf(output, "  6GHz: %d\n", p2p.GroupOwnerBand6ghz)
 
 	return nil
 }

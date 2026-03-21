@@ -2,12 +2,8 @@
 
 // Command player demonstrates using the MediaPlayer API.
 //
-// This example creates a MediaPlayer via NewPlayer and shows the
-// complete playback lifecycle: setting a data source, preparing,
-// starting, pausing, stopping, and releasing. Three callback types
-// (onCompletionListener, onErrorListener, onPreparedListener) handle
-// playback events. Most methods are unexported and designed to be
-// called from within the player package or via higher-level wrappers.
+// It creates a MediaPlayer via JNI, exercises lifecycle and query methods,
+// and prints actual results from the API.
 package main
 
 /*
@@ -26,17 +22,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/media/player"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -45,75 +41,151 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// MediaPlayer wraps android.media.MediaPlayer. The struct has
-	// exported VM and Obj fields for JNI access.
+	fmt.Fprintln(output, "=== MediaPlayer Demo ===")
+	ui.RenderOutput()
+
+	// Create a MediaPlayer via JNI new MediaPlayer().
 	var p player.MediaPlayer
-	_ = p
+	p.VM = vm
+	err := vm.Do(func(env *jni.Env) error {
+		cls, err := env.FindClass("android/media/MediaPlayer")
+		if err != nil {
+			return fmt.Errorf("find MediaPlayer: %w", err)
+		}
+		initMid, err := env.GetMethodID(cls, "<init>", "()V")
+		if err != nil {
+			return fmt.Errorf("get MediaPlayer.<init>: %w", err)
+		}
+		obj, err := env.NewObject(cls, initMid)
+		if err != nil {
+			return fmt.Errorf("new MediaPlayer: %w", err)
+		}
+		p.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return fmt.Errorf("create player: %w", err)
+	}
+	fmt.Fprintln(output, "MediaPlayer created OK")
+	ui.RenderOutput()
 
-	// --- Player methods (all unexported, called via wrappers) ---
-	//
-	// Data source:
-	//   p.setDataSourcePath(path string) error
-	//   p.setDataSourceUri(ctx, uri *jni.Object) error
-	//
-	// Preparation:
-	//   p.prepare() error       - synchronous
-	//   p.prepareAsync() error  - asynchronous
-	//
-	// Playback control:
-	//   p.start() error
-	//   p.pause() error
-	//   p.stop() error
-	//   p.seekTo(msec int32) error
-	//
-	// State queries:
-	//   p.getDuration() (int32, error)
-	//   p.getCurrentPosition() (int32, error)
-	//   p.isPlaying() (bool, error)
-	//
-	// Configuration:
-	//   p.setVolume(left, right float32) error
-	//   p.setLooping(looping bool) error
-	//
-	// Listeners (set via raw JNI proxy objects):
-	//   p.setOnCompletionListener(listener *jni.Object)
-	//   p.setOnErrorListener(listener *jni.Object)
-	//   p.setOnPreparedListener(listener *jni.Object)
-	//
-	// Lifecycle:
-	//   p.reset()    - reset to uninitialized state
-	//   p.release()  - release native resources
+	// Query GetMetrics (returns a PersistableBundle or nil).
+	metrics, err := p.GetMetrics()
+	if err != nil {
+		fmt.Fprintf(output, "GetMetrics: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetMetrics: obj=%v\n", metrics)
+	}
+	ui.RenderOutput()
 
-	// --- Callbacks (all unexported) ---
-	// Three callback types handle media player events:
-	//
-	// onCompletionListener{
-	//   OnCompletion func(mp *jni.Object)
-	// }
-	// Registered via registeronCompletionListener(env, cb).
-	//
-	// onErrorListener{
-	//   OnError func(mp *jni.Object, what int32, extra int32)
-	// }
-	// Registered via registeronErrorListener(env, cb).
-	//
-	// onPreparedListener{
-	//   OnPrepared func(mp *jni.Object)
-	// }
-	// Registered via registeronPreparedListener(env, cb).
+	// Query GetDrmInfo (returns nil when no data source is set).
+	drmInfo, err := p.GetDrmInfo()
+	if err != nil {
+		fmt.Fprintf(output, "GetDrmInfo: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetDrmInfo: obj=%v\n", drmInfo)
+	}
+	ui.RenderOutput()
 
-	fmt.Fprintf(output, "MediaPlayer created: %v\n", p)
+	// Query GetTimestamp (returns nil in idle state).
+	ts, err := p.GetTimestamp()
+	if err != nil {
+		fmt.Fprintf(output, "GetTimestamp: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetTimestamp: obj=%v\n", ts)
+	}
+	ui.RenderOutput()
+
+	// Query GetTrackInfo (returns track info array).
+	trackInfo, err := p.GetTrackInfo()
+	if err != nil {
+		fmt.Fprintf(output, "GetTrackInfo: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetTrackInfo: obj=%v\n", trackInfo)
+	}
+	ui.RenderOutput()
+
+	// Query GetPreferredDevice (nil when none set).
+	prefDev, err := p.GetPreferredDevice()
+	if err != nil {
+		fmt.Fprintf(output, "GetPreferredDevice: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetPreferredDevice: %v\n", prefDev)
+	}
+	ui.RenderOutput()
+
+	// Query GetRoutedDevice.
+	routedDev, err := p.GetRoutedDevice()
+	if err != nil {
+		fmt.Fprintf(output, "GetRoutedDevice: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetRoutedDevice: %v\n", routedDev)
+	}
+	ui.RenderOutput()
+
+	// Query GetRoutedDevices.
+	routedDevs, err := p.GetRoutedDevices()
+	if err != nil {
+		fmt.Fprintf(output, "GetRoutedDevices: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetRoutedDevices: %v\n", routedDevs)
+	}
+	ui.RenderOutput()
+
+	// Query GetSelectedTrack for audio (track type 2 = MEDIA_TRACK_TYPE_AUDIO).
+	selTrack, err := p.GetSelectedTrack(2)
+	if err != nil {
+		fmt.Fprintf(output, "GetSelectedTrack(audio): err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetSelectedTrack(audio): %d\n", selTrack)
+	}
+	ui.RenderOutput()
+
+	// Exercise SetVolume.
+	if err := p.SetVolume(0.5, 0.5); err != nil {
+		fmt.Fprintf(output, "SetVolume: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "SetVolume(0.5,0.5): OK")
+	}
+	ui.RenderOutput()
+
+	// Exercise Reset (returns player to idle state).
+	if err := p.Reset(); err != nil {
+		fmt.Fprintf(output, "Reset: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "Reset: OK")
+	}
+	ui.RenderOutput()
+
+	// Exercise Release (frees native resources).
+	if err := p.Release(); err != nil {
+		fmt.Fprintf(output, "Release: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "Release: OK")
+	}
+	ui.RenderOutput()
+
+	// Delete the global JNI reference.
+	vm.Do(func(env *jni.Env) error {
+		if p.Obj != nil {
+			env.DeleteGlobalRef(p.Obj)
+			p.Obj = nil
+		}
+		return nil
+	})
+
+	fmt.Fprintln(output, "")
 	fmt.Fprintln(output, "Player example complete.")
 	return nil
 }

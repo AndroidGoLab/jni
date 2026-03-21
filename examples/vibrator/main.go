@@ -1,12 +1,8 @@
 //go:build android
 
-// Command vibrator demonstrates using the Android Vibrator system
-// service, wrapped by the vibrator package. It is built as a c-shared
-// library and packaged into an APK using the shared apk.mk infrastructure.
-//
-// The vibrator package wraps android.os.Vibrator and provides
-// methods to check hardware support, trigger vibrations, and
-// cancel ongoing vibrations. It requires the VIBRATE permission.
+// Command vibrator demonstrates the Android Vibrator system service.
+// It queries vibrator capabilities and triggers a short vibration.
+// Requires the VIBRATE permission in AndroidManifest.xml.
 package main
 
 /*
@@ -25,17 +21,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/os/vibrator"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -44,18 +40,18 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -65,6 +61,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("vibrator.NewVibrator: %w", err)
 	}
+	defer vib.Close()
+
+	fmt.Fprintln(output, "=== Vibrator ===")
 
 	// Check if the device has a vibrator.
 	hasVib, err := vib.HasVibrator()
@@ -78,14 +77,53 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		return nil
 	}
 
-	// The Vibrator provides Vibrate methods for triggering vibrations
-	// and HasVibrator/HasAmplitudeControl for capability checking.
+	// Check amplitude control support (API 26+).
+	hasAmp, err := vib.HasAmplitudeControl()
+	if err != nil {
+		fmt.Fprintf(output, "has amplitude control: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "has amplitude control: %v\n", hasAmp)
+	}
 
-	// Vibrator also provides unexported methods:
-	//   vibrateMs(milliseconds int64)              -- vibrate for a duration.
-	//   vibratePatternMs(pattern, repeat int32)    -- vibrate with a pattern.
-	//     The pattern is a JNI long array of alternating off/on durations.
-	//     Set repeat to -1 for one-shot, or the index to repeat from.
+	// Check envelope effects support (API 36+).
+	hasEnvelope, err := vib.AreEnvelopeEffectsSupported()
+	if err != nil {
+		fmt.Fprintf(output, "envelope effects: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "envelope effects: %v\n", hasEnvelope)
+	}
+
+	// Vibrator ID (API 31+).
+	vibID, err := vib.GetId()
+	if err != nil {
+		fmt.Fprintf(output, "vibrator id: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "vibrator id: %d\n", vibID)
+	}
+
+	// Resonant frequency (API 34+).
+	freq, err := vib.GetResonantFrequency()
+	if err != nil {
+		fmt.Fprintf(output, "resonant freq: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "resonant freq: %.1f Hz\n", freq)
+	}
+
+	// Q factor (API 34+).
+	qFactor, err := vib.GetQFactor()
+	if err != nil {
+		fmt.Fprintf(output, "Q factor: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Q factor: %.2f\n", qFactor)
+	}
+
+	// Vibrate for 200ms using the deprecated but simple Vibrate1_3(long).
+	fmt.Fprintln(output, "vibrating for 200ms...")
+	if err := vib.Vibrate1_3(200); err != nil {
+		fmt.Fprintf(output, "vibrate error: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "vibration triggered!")
+	}
 
 	return nil
 }

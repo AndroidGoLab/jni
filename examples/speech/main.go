@@ -1,14 +1,10 @@
 //go:build android
 
-// Command speech demonstrates using the Android speech recognition and
-// text-to-speech APIs, wrapped by the speech package.
+// Command speech demonstrates using the Android text-to-speech
+// and speech recognition APIs via the speech package.
 //
-// The speech package provides:
-//   - Recognizer: wraps android.speech.SpeechRecognizer for speech-to-text.
-//   - TTS: wraps android.speech.tts.TextToSpeech for text-to-speech.
-//   - Error constants for speech recognition failures.
-//   - Queue mode constants for TTS playback.
-//   - Callback types for recognition events and TTS progress.
+// It creates a TTS engine, queries its state, speaks a phrase,
+// and checks speech recognition availability.
 package main
 
 /*
@@ -23,21 +19,22 @@ import "C"
 import (
 	"bytes"
 	"fmt"
+	"time"
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/speech"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -46,73 +43,203 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// --- Text-to-Speech ---
+	fmt.Fprintln(output, "=== Speech Demo ===")
+	ui.RenderOutput()
 
+	// Check speech recognition availability via the Recognizer.
+	var recognizer speech.Recognizer
+	recognizer.VM = vm
+
+	ctx, err := ui.GetAppContext(vm)
+	if err != nil {
+		fmt.Fprintf(output, "GetAppContext: %v\n", err)
+	} else {
+		available, err := recognizer.IsRecognitionAvailable(ctx.Obj)
+		if err != nil {
+			fmt.Fprintf(output, "IsRecogAvail: %v\n", err)
+		} else {
+			fmt.Fprintf(output, "RecogAvail: %v\n", available)
+		}
+
+		onDevice, err := recognizer.IsOnDeviceRecognitionAvailable(ctx.Obj)
+		if err != nil {
+			fmt.Fprintf(output, "OnDeviceRecog: %v\n", err)
+		} else {
+			fmt.Fprintf(output, "OnDeviceRecog: %v\n", onDevice)
+		}
+		ctx.Close()
+	}
+	ui.RenderOutput()
+
+	// Create TTS engine.
 	tts, err := speech.NewTTS(vm)
 	if err != nil {
-		return fmt.Errorf("speech.NewTTS: %w", err)
+		return fmt.Errorf("NewTTS: %w", err)
 	}
 	defer tts.Close()
+	fmt.Fprintln(output, "TTS engine created OK")
+	ui.RenderOutput()
 
-	fmt.Fprintln(output, "TTS engine created")
+	// Brief delay to let the TTS engine initialize.
+	time.Sleep(1 * time.Second)
 
-	// TTS provides unexported methods for speech synthesis:
-	//   speakRaw(text, queueMode, params, utteranceId) -- synthesizes speech.
-	//   stopRaw()                                      -- stops current speech.
-	//   isSpeakingRaw()                                -- checks if TTS is active.
-	//   setLanguageRaw(locale)                         -- sets the speech language.
-	//   setPitchRaw(pitch)                             -- adjusts voice pitch.
-	//   setSpeechRateRaw(rate)                         -- adjusts speech rate.
-	//   getAvailableLanguagesRaw()                     -- lists available languages.
-	//   shutdownRaw()                                  -- releases TTS resources.
-	//   setOnUtteranceProgressListenerRaw(listener)    -- registers a progress listener.
+	// Query GetDefaultEngine.
+	engine, err := tts.GetDefaultEngine()
+	if err != nil {
+		fmt.Fprintf(output, "GetDefaultEngine: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "DefaultEngine: %s\n", engine)
+	}
+	ui.RenderOutput()
 
-	// --- Speech Recognizer ---
+	// Query GetEngines (returns a Java List).
+	engines, err := tts.GetEngines()
+	if err != nil {
+		fmt.Fprintf(output, "GetEngines: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetEngines: %v\n", engines)
+	}
+	ui.RenderOutput()
 
-	// Recognizer wraps android.speech.SpeechRecognizer. It has no exported
-	// constructor; the unexported createRecognizer(ctx) static method
-	// creates the underlying Java object. Other unexported methods:
-	//   isRecognitionAvailable(ctx)    -- checks if speech recognition is available.
-	//   setRecognitionListener(listener) -- registers a recognition callback.
-	//   startListeningRaw(intent)      -- starts listening for speech.
-	//   stopListeningRaw()             -- stops the recognizer.
-	//   cancelRaw()                    -- cancels ongoing recognition.
-	//   destroyRaw()                   -- releases recognizer resources.
+	// Query IsSpeaking.
+	speaking, err := tts.IsSpeaking()
+	if err != nil {
+		fmt.Fprintf(output, "IsSpeaking: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "IsSpeaking: %v\n", speaking)
+	}
+	ui.RenderOutput()
 
-	// --- Error Constants ---
-	// These correspond to SpeechRecognizer.ERROR_* values:
-	fmt.Fprintf(output, "ErrorNetworkTimeout:          %d\n", speech.ErrorNetworkTimeout)
-	fmt.Fprintf(output, "ErrorNetwork:                 %d\n", speech.ErrorNetwork)
-	fmt.Fprintf(output, "ErrorAudio:                   %d\n", speech.ErrorAudio)
-	fmt.Fprintf(output, "ErrorServer:                  %d\n", speech.ErrorServer)
-	fmt.Fprintf(output, "ErrorClient:                  %d\n", speech.ErrorClient)
-	fmt.Fprintf(output, "ErrorSpeechTimeout:           %d\n", speech.ErrorSpeechTimeout)
-	fmt.Fprintf(output, "ErrorNoMatch:                 %d\n", speech.ErrorNoMatch)
-	fmt.Fprintf(output, "ErrorRecognizerBusy:          %d\n", speech.ErrorRecognizerBusy)
-	fmt.Fprintf(output, "ErrorInsufficientPermissions: %d\n", speech.ErrorInsufficientPermissions)
+	// Query GetDefaultLanguage (returns a Locale).
+	defLang, err := tts.GetDefaultLanguage()
+	if err != nil {
+		fmt.Fprintf(output, "GetDefaultLang: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "DefaultLang: %v\n", defLang)
+	}
+	ui.RenderOutput()
 
-	// --- TTS Queue Mode Constants ---
-	// These correspond to TextToSpeech.QUEUE_* values:
-	fmt.Fprintf(output, "QueueFlush: %d\n", speech.QueueFlush)
-	fmt.Fprintf(output, "QueueAdd:   %d\n", speech.QueueAdd)
+	// Query GetDefaultVoice.
+	defVoice, err := tts.GetDefaultVoice()
+	if err != nil {
+		fmt.Fprintf(output, "GetDefaultVoice: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "DefaultVoice: %v\n", defVoice)
+	}
+	ui.RenderOutput()
 
-	// --- Callback Types (all unexported) ---
-	// recognitionListener: OnResults, OnPartialResults, OnError,
-	//   OnReadyForSpeech, OnBeginningOfSpeech, OnEndOfSpeech,
-	//   OnRmsChanged, OnBufferReceived.
-	// ttsOnInitListener: OnInit.
-	// utteranceProgressListener: OnDone, OnError, OnStart.
+	// Query GetLanguage (currently set language).
+	lang, err := tts.GetLanguage()
+	if err != nil {
+		fmt.Fprintf(output, "GetLanguage: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Language: %v\n", lang)
+	}
+	ui.RenderOutput()
 
+	// Query GetVoice (currently set voice).
+	voice, err := tts.GetVoice()
+	if err != nil {
+		fmt.Fprintf(output, "GetVoice: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Voice: %v\n", voice)
+	}
+	ui.RenderOutput()
+
+	// Query GetAvailableLanguages.
+	availLangs, err := tts.GetAvailableLanguages()
+	if err != nil {
+		fmt.Fprintf(output, "GetAvailLangs: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "AvailLangs: %v\n", availLangs)
+	}
+	ui.RenderOutput()
+
+	// Query GetVoices.
+	voices, err := tts.GetVoices()
+	if err != nil {
+		fmt.Fprintf(output, "GetVoices: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Voices: %v\n", voices)
+	}
+	ui.RenderOutput()
+
+	// Query GetMaxSpeechInputLength (static).
+	maxLen, err := tts.GetMaxSpeechInputLength()
+	if err != nil {
+		fmt.Fprintf(output, "MaxInputLen: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "MaxInputLen: %d\n", maxLen)
+	}
+	ui.RenderOutput()
+
+	// Set pitch and speech rate.
+	pitchRC, err := tts.SetPitch(1.0)
+	if err != nil {
+		fmt.Fprintf(output, "SetPitch: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "SetPitch(1.0): rc=%d\n", pitchRC)
+	}
+
+	rateRC, err := tts.SetSpeechRate(1.0)
+	if err != nil {
+		fmt.Fprintf(output, "SetSpeechRate: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "SetSpeechRate(1.0): rc=%d\n", rateRC)
+	}
+	ui.RenderOutput()
+
+	// Speak a short phrase.
+	fmt.Fprintln(output, "Speaking: Hello from Go!")
+	ui.RenderOutput()
+
+	speakRC, err := tts.Speak4("Hello from Go!", int32(speech.QueueFlush), nil, "utt1")
+	if err != nil {
+		fmt.Fprintf(output, "Speak: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Speak result: %d\n", speakRC)
+	}
+	ui.RenderOutput()
+
+	// Wait and check IsSpeaking.
+	time.Sleep(500 * time.Millisecond)
+	speaking2, err := tts.IsSpeaking()
+	if err != nil {
+		fmt.Fprintf(output, "IsSpeaking(after): %v\n", err)
+	} else {
+		fmt.Fprintf(output, "IsSpeaking(after): %v\n", speaking2)
+	}
+	ui.RenderOutput()
+
+	// Wait for speech to finish.
+	time.Sleep(2 * time.Second)
+
+	// Stop and shutdown.
+	stopRC, err := tts.Stop()
+	if err != nil {
+		fmt.Fprintf(output, "Stop: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Stop: rc=%d\n", stopRC)
+	}
+
+	if err := tts.Shutdown(); err != nil {
+		fmt.Fprintf(output, "Shutdown: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "Shutdown: OK")
+	}
+
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Speech example complete.")
 	return nil
 }

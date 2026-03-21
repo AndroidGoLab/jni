@@ -5,24 +5,26 @@
 
 #include <jni.h>
 
+// The JDK and Android NDK disagree on the type of AttachCurrentThread's
+// env-out parameter: JDK uses void**, NDK uses JNIEnv**. Detect which
+// header was included and cast accordingly. The JDK header defines
+// _JAVASOFT_JNI_H_ while the NDK header does not.
+#ifdef _JAVASOFT_JNI_H_
+#define JNI_ENVPP_CAST(x) ((void**)(x))
+#else
+#define JNI_ENVPP_CAST(x) (x)
+#endif
+
 static inline jobject jni_AllocObject(JNIEnv* env, jclass p0) {
     return (*env)->AllocObject(env, p0);
 }
 
 static inline jint jni_AttachCurrentThread(JavaVM* vm, JNIEnv** p0, void* p1) {
-#ifdef __ANDROID__
-    return (*vm)->AttachCurrentThread(vm, p0, p1);
-#else
-    return (*vm)->AttachCurrentThread(vm, (void**)p0, p1);
-#endif
+    return (*vm)->AttachCurrentThread(vm, JNI_ENVPP_CAST(p0), p1);
 }
 
 static inline jint jni_AttachCurrentThreadAsDaemon(JavaVM* vm, JNIEnv** p0, void* p1) {
-#ifdef __ANDROID__
-    return (*vm)->AttachCurrentThreadAsDaemon(vm, p0, p1);
-#else
-    return (*vm)->AttachCurrentThreadAsDaemon(vm, (void**)p0, p1);
-#endif
+    return (*vm)->AttachCurrentThreadAsDaemon(vm, JNI_ENVPP_CAST(p0), p1);
 }
 
 static inline jboolean jni_CallBooleanMethodA(JNIEnv* env, jobject p0, jmethodID p1, const jvalue* p2) {

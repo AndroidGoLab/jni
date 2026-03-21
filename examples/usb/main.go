@@ -1,13 +1,8 @@
 //go:build android
 
 // Command usb demonstrates using the Android UsbManager system service,
-// wrapped by the usb package. It is built as a c-shared library and
-// packaged into an APK using the shared apk.mk infrastructure.
-//
-// The usb package wraps android.hardware.usb.UsbManager and related
-// classes (UsbDeviceConnection, UsbDevice, UsbInterface, UsbEndpoint).
-// It provides the Manager for enumerating devices and opening connections,
-// the Connection for data transfer, and direction/transfer type constants.
+// wrapped by the usb package. It enumerates connected USB devices and
+// accessories using live JNI calls.
 package main
 
 /*
@@ -26,17 +21,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/hardware/usb"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -45,18 +40,18 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -68,34 +63,172 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer mgr.Close()
 
-	// Manager provides unexported methods for USB device access:
-	//   getDeviceList()                        -- returns connected USB devices.
-	//   hasPermission(device)                  -- checks if app has permission.
-	//   requestPermission(device, pendingIntent) -- requests USB access.
-	//   openDevice(device)                     -- opens a device connection.
+	fmt.Fprintln(output, "=== USB Manager ===")
+	fmt.Fprintln(output, "UsbManager obtained OK")
 
-	fmt.Fprintln(output, "UsbManager obtained successfully")
+	// --- Intent Action Constants ---
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Intent actions:")
+	fmt.Fprintf(output, "  Attached:  %s\n", usb.ActionUsbDeviceAttached)
+	fmt.Fprintf(output, "  Detached:  %s\n", usb.ActionUsbDeviceDetached)
+	fmt.Fprintf(output, "  Accessory: %s\n", usb.ActionUsbAccessoryAttached)
 
-	// DeviceConnection wraps android.hardware.usb.UsbDeviceConnection,
-	// obtained via the Manager's openDevice method.
-	//
-	// DeviceConnection exported methods:
-	//   BulkTransfer4, BulkTransfer5_1, ClaimInterface,
-	//   Close, ControlTransfer7, ControlTransfer8_1,
-	//   GetFileDescriptor, GetRawDescriptors, ReleaseInterface,
-	//   RequestWait, SetConfiguration, SetInterface
+	// --- Enumerate USB devices via raw JNI ---
+	// The generated bindings don't include getDeviceList, so we call it
+	// directly through JNI. It returns HashMap<String, UsbDevice>.
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "USB Devices:")
 
-	// --- USB Intent Action Constants ---
-	fmt.Fprintf(output, "ActionUsbDeviceAttached:    %q\n", usb.ActionUsbDeviceAttached)
-	fmt.Fprintf(output, "ActionUsbDeviceDetached:    %q\n", usb.ActionUsbDeviceDetached)
-	fmt.Fprintf(output, "ActionUsbAccessoryAttached: %q\n", usb.ActionUsbAccessoryAttached)
+	var deviceCount int
+	var deviceErr error
+	vm.Do(func(env *jni.Env) error {
+		mgrCls := env.GetObjectClass(mgr.Obj)
 
-	// --- Data Classes (all unexported) ---
-	// usbDevice: Name, VendorID, ProductID, DeviceID, DeviceClass,
-	//   DeviceSubclass, DeviceProtocol, ManufacturerName, ProductName,
-	//   SerialNumber, interfaceCount.
-	// usbInterface: ID, Class, Subclass, Protocol, endpointCount.
-	// usbEndpoint: Address, Direction, Type, MaxPacket.
+		// UsbManager.getDeviceList() -> HashMap<String, UsbDevice>
+		getDeviceListMid, err := env.GetMethodID(mgrCls, "getDeviceList",
+			"()Ljava/util/HashMap;")
+		if err != nil {
+			deviceErr = fmt.Errorf("getDeviceList method: %w", err)
+			return nil
+		}
 
+		deviceMap, err := env.CallObjectMethod(mgr.Obj, getDeviceListMid)
+		if err != nil {
+			deviceErr = fmt.Errorf("getDeviceList call: %w", err)
+			return nil
+		}
+		if deviceMap == nil || deviceMap.Ref() == 0 {
+			fmt.Fprintln(output, "  (no device map)")
+			return nil
+		}
+
+		// HashMap.size()
+		mapCls := env.GetObjectClass(deviceMap)
+		sizeMid, err := env.GetMethodID(mapCls, "size", "()I")
+		if err != nil {
+			deviceErr = fmt.Errorf("HashMap.size: %w", err)
+			return nil
+		}
+		size, err := env.CallIntMethod(deviceMap, sizeMid)
+		if err != nil {
+			deviceErr = fmt.Errorf("size call: %w", err)
+			return nil
+		}
+		deviceCount = int(size)
+		fmt.Fprintf(output, "  Count: %d\n", deviceCount)
+
+		if deviceCount == 0 {
+			return nil
+		}
+
+		// HashMap.values() -> Collection
+		valuesMid, err := env.GetMethodID(mapCls, "values",
+			"()Ljava/util/Collection;")
+		if err != nil {
+			return nil
+		}
+		valuesObj, err := env.CallObjectMethod(deviceMap, valuesMid)
+		if err != nil || valuesObj == nil {
+			return nil
+		}
+
+		// Collection.toArray() -> Object[]
+		colCls := env.GetObjectClass(valuesObj)
+		toArrayMid, err := env.GetMethodID(colCls, "toArray",
+			"()[Ljava/lang/Object;")
+		if err != nil {
+			return nil
+		}
+		arrayObj, err := env.CallObjectMethod(valuesObj, toArrayMid)
+		if err != nil || arrayObj == nil {
+			return nil
+		}
+
+		arr := (*jni.ObjectArray)(unsafe.Pointer(arrayObj))
+		arrLen := env.GetArrayLength((*jni.Array)(unsafe.Pointer(arr)))
+
+		for i := int32(0); i < arrLen; i++ {
+			devObj, err := env.GetObjectArrayElement(arr, i)
+			if err != nil || devObj == nil {
+				continue
+			}
+
+			// Wrap in usb.Device to call exported methods
+			gRef := env.NewGlobalRef(devObj)
+			dev := usb.Device{VM: vm, Obj: gRef}
+
+			name, _ := dev.GetDeviceName0()
+			vid, _ := dev.GetVendorId()
+			pid, _ := dev.GetProductId()
+			cls, _ := dev.GetDeviceClass()
+			mfr, _ := dev.GetManufacturerName()
+			prod, _ := dev.GetProductName()
+			ifCount, _ := dev.GetInterfaceCount()
+
+			fmt.Fprintf(output, "  [%d] %s\n", i, name)
+			fmt.Fprintf(output, "    VID:0x%04X PID:0x%04X\n", vid, pid)
+			fmt.Fprintf(output, "    Class:%d Mfr:%q\n", cls, mfr)
+			fmt.Fprintf(output, "    Product:%q\n", prod)
+			fmt.Fprintf(output, "    Interfaces: %d\n", ifCount)
+
+			// Show interface details
+			for j := int32(0); j < ifCount; j++ {
+				ifObj, err := dev.GetInterface(j)
+				if err != nil || ifObj == nil {
+					continue
+				}
+				iface := usb.Interface{VM: vm, Obj: env.NewGlobalRef(ifObj)}
+				ifID, _ := iface.GetId()
+				ifClass, _ := iface.GetInterfaceClass()
+				ifSub, _ := iface.GetInterfaceSubclass()
+				epCount, _ := iface.GetEndpointCount()
+				fmt.Fprintf(output, "      IF%d: cls=%d sub=%d eps=%d\n",
+					ifID, ifClass, ifSub, epCount)
+			}
+		}
+
+		return nil
+	})
+
+	if deviceErr != nil {
+		fmt.Fprintf(output, "  Error: %v\n", deviceErr)
+	}
+
+	// --- Enumerate USB accessories ---
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "USB Accessories:")
+	accList, err := mgr.GetAccessoryList()
+	if err != nil {
+		fmt.Fprintf(output, "  Error: %v\n", err)
+	} else if accList == nil || accList.Ref() == 0 {
+		fmt.Fprintln(output, "  (none)")
+	} else {
+		vm.Do(func(env *jni.Env) error {
+			arr := (*jni.ObjectArray)(unsafe.Pointer(accList))
+			n := env.GetArrayLength((*jni.Array)(unsafe.Pointer(arr)))
+			fmt.Fprintf(output, "  Count: %d\n", n)
+			for i := int32(0); i < n; i++ {
+				accObj, err := env.GetObjectArrayElement(arr, i)
+				if err != nil || accObj == nil {
+					continue
+				}
+				accCls := env.GetObjectClass(accObj)
+				toStrMid, err := env.GetMethodID(accCls, "toString", "()Ljava/lang/String;")
+				if err != nil {
+					continue
+				}
+				strObj, err := env.CallObjectMethod(accObj, toStrMid)
+				if err != nil {
+					continue
+				}
+				s := env.GoString((*jni.String)(unsafe.Pointer(strObj)))
+				fmt.Fprintf(output, "  [%d] %s\n", i, s)
+			}
+			return nil
+		})
+	}
+
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "USB example complete.")
 	return nil
 }

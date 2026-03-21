@@ -1,13 +1,8 @@
 //go:build android
 
-// Command print demonstrates using the PrintManager API. It is built as a
-// c-shared library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// This example obtains the PrintManager system service and shows all
-// print job state constants. The Manager provides methods for querying
-// print jobs and starting new ones. The printJob and printJobInfo data
-// classes (unexported) hold job metadata extracted from JNI objects.
+// Command print demonstrates using the PrintManager API.
+// It obtains the PrintManager system service, queries existing print jobs,
+// and prints their details.
 package main
 
 /*
@@ -26,17 +21,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/print"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -45,80 +40,144 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+// jobStateName returns a human-readable name for a print job state.
+func jobStateName(state int) string {
+	switch state {
+	case print.StateCreated:
+		return "Created"
+	case print.StateQueued:
+		return "Queued"
+	case print.StateStarted:
+		return "Started"
+	case print.StateBlocked:
+		return "Blocked"
+	case print.StateCompleted:
+		return "Completed"
+	case print.StateFailed:
+		return "Failed"
+	case print.StateCanceled:
+		return "Canceled"
+	default:
+		return fmt.Sprintf("Unknown(%d)", state)
+	}
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	// --- Constants ---
-	// JobState is a typed constant representing print job states.
-	fmt.Fprintln(output, "Print job state constants (type JobState):")
-	fmt.Fprintf(output, "  JobCreated   = %d\n", print.StateCreated)
-	fmt.Fprintf(output, "  JobQueued    = %d\n", print.StateQueued)
-	fmt.Fprintf(output, "  JobStarted   = %d\n", print.StateStarted)
-	fmt.Fprintf(output, "  JobBlocked   = %d\n", print.StateBlocked)
-	fmt.Fprintf(output, "  JobCompleted = %d\n", print.StateCompleted)
-	fmt.Fprintf(output, "  JobFailed    = %d\n", print.StateFailed)
-	fmt.Fprintf(output, "  JobCanceled  = %d\n", print.StateCanceled)
+	fmt.Fprintln(output, "=== PrintManager ===")
 
-	// --- NewManager ---
+	// Print job state constants.
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Job state constants:")
+	fmt.Fprintf(output, "  Created:   %d\n", print.StateCreated)
+	fmt.Fprintf(output, "  Queued:    %d\n", print.StateQueued)
+	fmt.Fprintf(output, "  Started:   %d\n", print.StateStarted)
+	fmt.Fprintf(output, "  Blocked:   %d\n", print.StateBlocked)
+	fmt.Fprintf(output, "  Completed: %d\n", print.StateCompleted)
+	fmt.Fprintf(output, "  Failed:    %d\n", print.StateFailed)
+	fmt.Fprintf(output, "  Canceled:  %d\n", print.StateCanceled)
+
+	// Obtain the PrintManager system service.
 	mgr, err := print.NewManager(ctx)
 	if err != nil {
 		return fmt.Errorf("print.NewManager: %w", err)
 	}
-	_ = mgr
+	defer mgr.Close()
 
-	// --- Manager methods (unexported) ---
-	//
-	//   mgr.getPrintJobsRaw() (*jni.Object, error)
-	//     Query all print jobs visible to this application.
-	//
-	//   mgr.printRaw(jobName string, adapter, attributes *jni.Object)
-	//     Start a new print job with a PrintDocumentAdapter.
+	fmt.Fprintln(output, "\nService obtained OK")
 
-	// --- Data classes (unexported) ---
-	//
-	// printJobInfo{
-	//   Label string
-	//   State JobState
-	// }
-	// Extracted from android.print.PrintJobInfo via extractprintJobInfo.
-	//
-	// printJob{
-	//   Info printJobInfo
-	// }
-	// Extracted from android.print.PrintJob via extractprintJob.
-
-	// --- JobState typed constant ---
-	// JobState values can be used in switch statements.
-	state := print.StateCompleted
-	switch state {
-	case print.StateCreated:
-		fmt.Fprintln(output, "job: created")
-	case print.StateQueued:
-		fmt.Fprintln(output, "job: queued")
-	case print.StateStarted:
-		fmt.Fprintln(output, "job: started")
-	case print.StateBlocked:
-		fmt.Fprintln(output, "job: blocked")
-	case print.StateCompleted:
-		fmt.Fprintln(output, "job: completed")
-	case print.StateFailed:
-		fmt.Fprintln(output, "job: failed")
-	case print.StateCanceled:
-		fmt.Fprintln(output, "job: canceled")
+	// Query all print jobs visible to this application.
+	// GetPrintJobs() returns a java.util.List<PrintJob>.
+	jobsListObj, err := mgr.GetPrintJobs()
+	if err != nil {
+		fmt.Fprintf(output, "GetPrintJobs: %v\n", err)
+		return nil
 	}
+
+	err = vm.Do(func(env *jni.Env) error {
+		if jobsListObj == nil {
+			fmt.Fprintln(output, "GetPrintJobs returned nil")
+			return nil
+		}
+
+		listCls, err := env.FindClass("java/util/List")
+		if err != nil {
+			return err
+		}
+		sizeMid, err := env.GetMethodID(listCls, "size", "()I")
+		if err != nil {
+			return err
+		}
+		getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
+		if err != nil {
+			return err
+		}
+
+		jobCount, err := env.CallIntMethod(jobsListObj, sizeMid)
+		if err != nil {
+			return err
+		}
+
+		fmt.Fprintf(output, "\nPrint jobs: %d\n", jobCount)
+
+		for i := int32(0); i < jobCount; i++ {
+			elemObj, err := env.CallObjectMethod(jobsListObj, getMid, jni.IntValue(i))
+			if err != nil || elemObj == nil {
+				continue
+			}
+
+			// Wrap as a print.Job to use typed accessors.
+			job := print.Job{
+				VM:  vm,
+				Obj: env.NewGlobalRef(elemObj),
+			}
+
+			// Get PrintJobInfo from the job.
+			// GetInfo() returns a global ref internally.
+			infoObj, err := job.GetInfo()
+			if err != nil || infoObj == nil {
+				fmt.Fprintf(output, "\n  Job #%d: (no info)\n", i)
+				continue
+			}
+
+			jobInfo := print.JobInfo{
+				VM:  vm,
+				Obj: infoObj,
+			}
+
+			label, _ := jobInfo.GetLabel()
+			state, _ := jobInfo.GetState()
+			copies, _ := jobInfo.GetCopies()
+			creationTime, _ := jobInfo.GetCreationTime()
+
+			fmt.Fprintf(output, "\n  Job #%d:\n", i)
+			fmt.Fprintf(output, "    Label:    %s\n", label)
+			fmt.Fprintf(output, "    State:    %s\n", jobStateName(int(state)))
+			fmt.Fprintf(output, "    Copies:   %d\n", copies)
+			fmt.Fprintf(output, "    Created:  %d\n", creationTime)
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		fmt.Fprintf(output, "Job iteration: %v\n", err)
+	}
+
 	return nil
 }

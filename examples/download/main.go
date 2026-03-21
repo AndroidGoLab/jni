@@ -1,12 +1,8 @@
 //go:build android
 
 // Command download demonstrates using the Android DownloadManager API.
-//
-// This example obtains the DownloadManager system service using the exported
-// NewManager constructor and Close cleanup method, and shows how to use the
-// exported status constants. The actual download operations (enqueueRaw,
-// removeRaw, queryRaw) and helper types (downloadRequest, downloadQuery,
-// cursor) are unexported and used internally by higher-level wrappers.
+// It obtains the DownloadManager system service, prints status constants,
+// and queries all downloads by status.
 package main
 
 /*
@@ -24,18 +20,18 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
-	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
 	"github.com/AndroidGoLab/jni/app/download"
+	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -44,69 +40,118 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	// NewManager obtains the DownloadManager system service.
+	fmt.Fprintln(output, "=== DownloadManager ===")
+
+	// Obtain the DownloadManager system service.
 	mgr, err := download.NewManager(ctx)
 	if err != nil {
 		return fmt.Errorf("download.NewManager: %w", err)
 	}
-	// Close releases the JNI global reference; always defer it.
 	defer mgr.Close()
 
-	fmt.Fprintln(output, "DownloadManager obtained successfully")
+	fmt.Fprintln(output, "Service obtained OK")
 
-	// Exported status constants for download state queries.
-	fmt.Fprintln(output, "Download status constants:")
-	fmt.Fprintf(output, "  StatusPending:    %d\n", download.StatusPending)
-	fmt.Fprintf(output, "  StatusRunning:    %d\n", download.StatusRunning)
-	fmt.Fprintf(output, "  StatusPaused:     %d\n", download.StatusPaused)
-	fmt.Fprintf(output, "  StatusSuccessful: %d\n", download.StatusSuccessful)
-	fmt.Fprintf(output, "  StatusFailed:     %d\n", download.StatusFailed)
+	// Print status constants.
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Status constants:")
+	fmt.Fprintf(output, "  Pending:    %d\n", download.StatusPending)
+	fmt.Fprintf(output, "  Running:    %d\n", download.StatusRunning)
+	fmt.Fprintf(output, "  Paused:     %d\n", download.StatusPaused)
+	fmt.Fprintf(output, "  Successful: %d\n", download.StatusSuccessful)
+	fmt.Fprintf(output, "  Failed:     %d\n", download.StatusFailed)
 
-	// The following methods and types are unexported (package-internal):
-	//
-	// Manager methods:
-	//   mgr.enqueueRaw(request *jni.Object) (int64, error)
-	//     Enqueues a new download and returns the download ID.
-	//
-	//   mgr.removeRaw(ids []int64) (int32, error)
-	//     Removes downloads by their IDs; returns the count removed.
-	//
-	//   mgr.queryRaw(query *jni.Object) (*jni.Object, error)
-	//     Queries the download manager for download status via a cursor.
-	//
-	// downloadRequest wraps DownloadManager.Request:
-	//   NewdownloadRequest(vm *jni.VM) (*downloadRequest, error)
-	//   downloadRequest.setDestinationInExternalPublicDir(dirType, subPath string)
-	//   downloadRequest.setTitle(title *jni.Object)
-	//   downloadRequest.setDescription(description *jni.Object)
-	//   downloadRequest.setMimeType(mimeType string)
-	//
-	// downloadQuery wraps DownloadManager.Query:
-	//   NewdownloadQuery(vm *jni.VM) (*downloadQuery, error)
-	//   downloadQuery.setFilterById(ids []int64)
-	//
-	// cursor wraps android.database.Cursor:
-	//   cursor.moveToFirst() bool
-	//   cursor.getColumnIndex(columnName string) int32
-	//   cursor.getInt(columnIndex int32) int32
-	//   cursor.close()
+	// Create a DownloadManager.Query to query all downloads,
+	// then call mgr.Query() with it.
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Querying downloads...")
+
+	var queryCount int32
+	queryErr := vm.Do(func(env *jni.Env) error {
+		// Construct new DownloadManager.Query() via JNI.
+		queryCls, err := env.FindClass("android/app/DownloadManager$Query")
+		if err != nil {
+			return fmt.Errorf("find Query class: %w", err)
+		}
+		initMid, err := env.GetMethodID(queryCls, "<init>", "()V")
+		if err != nil {
+			return fmt.Errorf("get Query init: %w", err)
+		}
+		queryObj, err := env.NewObject(queryCls, initMid)
+		if err != nil {
+			return fmt.Errorf("new Query: %w", err)
+		}
+
+		// Call mgr.Query(queryObj) to get a Cursor.
+		cursorObj, err := mgr.Query(queryObj)
+		if err != nil {
+			return fmt.Errorf("mgr.Query: %w", err)
+		}
+		if cursorObj == nil {
+			fmt.Fprintln(output, "  Query returned nil cursor")
+			return nil
+		}
+
+		// Get cursor count via Cursor.getCount().
+		cursorCls, err := env.FindClass("android/database/Cursor")
+		if err != nil {
+			return fmt.Errorf("find Cursor class: %w", err)
+		}
+		getCountMid, err := env.GetMethodID(cursorCls, "getCount", "()I")
+		if err != nil {
+			return fmt.Errorf("get getCount: %w", err)
+		}
+		queryCount, err = env.CallIntMethod(cursorObj, getCountMid)
+		if err != nil {
+			return fmt.Errorf("getCount: %w", err)
+		}
+
+		// Close the cursor.
+		closeMid, err := env.GetMethodID(cursorCls, "close", "()V")
+		if err == nil {
+			_ = env.CallVoidMethod(cursorObj, closeMid)
+		}
+
+		return nil
+	})
+
+	if queryErr != nil {
+		fmt.Fprintf(output, "  Query error: %v\n", queryErr)
+	} else {
+		fmt.Fprintf(output, "  Total downloads: %d\n", queryCount)
+	}
+
+	// Print visibility constants.
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Visibility constants:")
+	fmt.Fprintf(output, "  Hidden:      %d\n", download.VisibilityHidden)
+	fmt.Fprintf(output, "  Visible:     %d\n", download.VisibilityVisible)
+	fmt.Fprintf(output, "  NotifyDone:  %d\n", download.VisibilityVisibleNotifyCompleted)
+
+	// Print column name constants.
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Column names:")
+	fmt.Fprintf(output, "  ID:     %s\n", download.ColumnId)
+	fmt.Fprintf(output, "  Title:  %s\n", download.ColumnTitle)
+	fmt.Fprintf(output, "  Status: %s\n", download.ColumnStatus)
+	fmt.Fprintf(output, "  Size:   %s\n", download.ColumnTotalSizeBytes)
+	fmt.Fprintf(output, "  URI:    %s\n", download.ColumnUri)
 
 	return nil
 }

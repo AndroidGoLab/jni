@@ -2,11 +2,8 @@
 
 // Command recorder demonstrates using the MediaRecorder API.
 //
-// This example creates a MediaRecorder via NewRecorder and shows all
-// audio source, video source, and output format constants. The full
-// recording lifecycle (configure, prepare, start, pause, resume, stop,
-// reset, release) is described along with the onErrorListener and
-// onInfoListener callbacks.
+// It creates a MediaRecorder via JNI, exercises query methods,
+// and prints actual results from the API.
 package main
 
 /*
@@ -25,17 +22,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/media/recorder"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -44,74 +41,147 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// --- Constants ---
-	fmt.Fprintln(output, "MediaRecorder error constants:")
-	fmt.Fprintf(output, "  MediaRecorderErrorUnknown = %d\n", recorder.MediaRecorderErrorUnknown)
-	fmt.Fprintf(output, "  MediaErrorServerDied      = %d\n", recorder.MediaErrorServerDied)
+	fmt.Fprintln(output, "=== MediaRecorder Demo ===")
+	ui.RenderOutput()
 
-	// The Recorder type wraps android.media.MediaRecorder with VM and
-	// Obj fields for JNI access.
+	// Create a MediaRecorder via JNI new MediaRecorder().
 	var rec recorder.MediaRecorder
-	_ = rec
-	fmt.Fprintln(output, "Recorder type available")
+	rec.VM = vm
+	err := vm.Do(func(env *jni.Env) error {
+		cls, err := env.FindClass("android/media/MediaRecorder")
+		if err != nil {
+			return fmt.Errorf("find MediaRecorder: %w", err)
+		}
+		initMid, err := env.GetMethodID(cls, "<init>", "()V")
+		if err != nil {
+			return fmt.Errorf("get MediaRecorder.<init>: %w", err)
+		}
+		obj, err := env.NewObject(cls, initMid)
+		if err != nil {
+			return fmt.Errorf("new MediaRecorder: %w", err)
+		}
+		rec.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return fmt.Errorf("create recorder: %w", err)
+	}
+	fmt.Fprintln(output, "MediaRecorder created OK")
+	ui.RenderOutput()
 
-	// --- Recorder methods (all unexported, called via wrappers) ---
-	//
-	// Configuration (order matters: sources before format):
-	//   rec.setAudioSource(recorder.AudioMic)
-	//   rec.setVideoSource(recorder.VideoCamera)
-	//   rec.setOutputFormat(recorder.FormatMPEG4)
-	//   rec.setAudioEncoder(audioEncoder int32)  // e.g. 3 for AAC
-	//   rec.setVideoEncoder(videoEncoder int32)  // e.g. 2 for H.264
-	//   rec.setOutputFile("/sdcard/Movies/recording.mp4")
-	//
-	// Quality parameters:
-	//   rec.setVideoSize(1920, 1080)
-	//   rec.setVideoFrameRate(30)
-	//   rec.setAudioSamplingRate(44100)
-	//   rec.setAudioChannels(2)
-	//   rec.setMaxDurationMs(60000)
-	//   rec.setMaxFileSize(50 * 1024 * 1024)
-	//
-	// Recording lifecycle:
-	//   rec.prepare() error
-	//   rec.start() error
-	//   rec.pause() error
-	//   rec.resume() error
-	//   rec.stop() error
-	//   rec.reset() error
-	//   rec.release()       // free native resources
-	//
-	// Monitoring:
-	//   rec.getMaxAmplitude() (int32, error)
-	//
-	// Listeners:
-	//   rec.setOnErrorListener(listener *jni.Object)
-	//   rec.setOnInfoListener(listener *jni.Object)
+	// Call static method GetAudioSourceMax.
+	maxSrc, err := rec.GetAudioSourceMax()
+	if err != nil {
+		fmt.Fprintf(output, "GetAudioSourceMax: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetAudioSourceMax: %d\n", maxSrc)
+	}
+	ui.RenderOutput()
 
-	// --- Callbacks (all unexported) ---
-	//
-	// onErrorListener{
-	//   OnError func(mr *jni.Object, what int32, extra int32)
-	// }
-	// Registered via registeronErrorListener(env, cb).
-	//
-	// onInfoListener{
-	//   OnInfo func(mr *jni.Object, what int32, extra int32)
-	// }
-	// Registered via registeronInfoListener(env, cb).
+	// Query GetPreferredDevice (nil when none set).
+	prefDev, err := rec.GetPreferredDevice()
+	if err != nil {
+		fmt.Fprintf(output, "GetPreferredDevice: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetPreferredDevice: %v\n", prefDev)
+	}
+	ui.RenderOutput()
 
+	// Query GetRoutedDevice (nil in initial state).
+	routedDev, err := rec.GetRoutedDevice()
+	if err != nil {
+		fmt.Fprintf(output, "GetRoutedDevice: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetRoutedDevice: %v\n", routedDev)
+	}
+	ui.RenderOutput()
+
+	// Query GetRoutedDevices (returns List).
+	routedDevs, err := rec.GetRoutedDevices()
+	if err != nil {
+		fmt.Fprintf(output, "GetRoutedDevices: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetRoutedDevices: %v\n", routedDevs)
+	}
+	ui.RenderOutput()
+
+	// Query GetMetrics (returns PersistableBundle).
+	metrics, err := rec.GetMetrics()
+	if err != nil {
+		fmt.Fprintf(output, "GetMetrics: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetMetrics: %v\n", metrics)
+	}
+	ui.RenderOutput()
+
+	// Query GetActiveMicrophones (returns List).
+	mics, err := rec.GetActiveMicrophones()
+	if err != nil {
+		fmt.Fprintf(output, "GetActiveMics: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetActiveMics: %v\n", mics)
+	}
+	ui.RenderOutput()
+
+	// Query GetActiveRecordingConfiguration.
+	recCfg, err := rec.GetActiveRecordingConfiguration()
+	if err != nil {
+		fmt.Fprintf(output, "GetActiveRecCfg: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetActiveRecCfg: %v\n", recCfg)
+	}
+	ui.RenderOutput()
+
+	// Query GetLogSessionId.
+	logSess, err := rec.GetLogSessionId()
+	if err != nil {
+		fmt.Fprintf(output, "GetLogSessionId: err=%v\n", err)
+	} else {
+		fmt.Fprintf(output, "GetLogSessionId: %v\n", logSess)
+	}
+	ui.RenderOutput()
+
+	// Exercise SetOrientationHint.
+	if err := rec.SetOrientationHint(0); err != nil {
+		fmt.Fprintf(output, "SetOrientHint(0): %v\n", err)
+	} else {
+		fmt.Fprintln(output, "SetOrientHint(0): OK")
+	}
+	ui.RenderOutput()
+
+	// Exercise Reset (returns recorder to initial state).
+	if err := rec.Reset(); err != nil {
+		fmt.Fprintf(output, "Reset: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "Reset: OK")
+	}
+	ui.RenderOutput()
+
+	// Clean up: release the recorder via JNI.
+	vm.Do(func(env *jni.Env) error {
+		cls := env.GetObjectClass(rec.Obj)
+		relMid, err := env.GetMethodID(cls, "release", "()V")
+		if err == nil {
+			_ = env.CallVoidMethod(rec.Obj, relMid)
+		}
+		env.DeleteGlobalRef(rec.Obj)
+		rec.Obj = nil
+		return nil
+	})
+
+	fmt.Fprintln(output, "")
+	fmt.Fprintln(output, "Recorder released")
 	fmt.Fprintln(output, "Recorder example complete.")
 	return nil
 }

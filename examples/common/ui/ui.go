@@ -1,9 +1,9 @@
 //go:build android
 
-// Package exampleui provides the shared Activity lifecycle handling for
+// Package ui provides the shared Activity lifecycle handling for
 // JNI examples. It creates a text display on NativeActivity's rendering
 // surface using Canvas via JNI — no Java code, no Android widgets.
-package exampleui
+package ui
 
 import (
 	"bytes"

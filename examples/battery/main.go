@@ -1,12 +1,9 @@
 //go:build android
 
-// Command battery demonstrates Android battery status constants. It is
-// built as a c-shared library and packaged into an APK using the
-// shared apk.mk infrastructure.
-//
-// Battery information is obtained from the sticky broadcast
-// android.intent.action.BATTERY_CHANGED via Intent extras. The battery
-// package provides typed constants for interpreting those extras.
+// Command battery demonstrates reading live battery information from
+// Android's BatteryManager system service. It calls every available
+// query method: IsCharging, GetIntProperty, GetLongProperty,
+// GetStringProperty, and ComputeChargeTimeRemaining.
 package main
 
 /*
@@ -25,17 +22,17 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/os/battery"
 )
 
 func main() {}
 
-func init() { exampleui.Register(run) }
+func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	exampleui.OnCreate(
+	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
@@ -44,60 +41,133 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	exampleui.OnResume(
+	ui.OnResume(
 		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
 	)
 }
 
 //export goOnNativeWindowCreated
 func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindow) {
-	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
+	ui.OnNativeWindowCreated(unsafe.Pointer(window))
+}
+
+func statusName(status int32) string {
+	switch int(status) {
+	case battery.BatteryStatusUnknown:
+		return "unknown"
+	case battery.BatteryStatusCharging:
+		return "charging"
+	case battery.BatteryStatusDischarging:
+		return "discharging"
+	case battery.BatteryStatusNotCharging:
+		return "not charging"
+	case battery.BatteryStatusFull:
+		return "full"
+	default:
+		return fmt.Sprintf("unknown(%d)", status)
+	}
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := exampleui.GetAppContext(vm)
+	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	// Battery status constants (android.os.BatteryManager.BATTERY_STATUS_*).
-	// The Status type is a named int for type safety.
-	fmt.Fprintf(output, "status: unknown=%d, charging=%d, discharging=%d, not_charging=%d, full=%d\n",
-		battery.BatteryStatusUnknown, battery.BatteryStatusCharging, battery.BatteryStatusDischarging,
-		battery.BatteryStatusNotCharging, battery.BatteryStatusFull)
+	mgr, err := battery.NewManager(ctx)
+	if err != nil {
+		return fmt.Errorf("battery.NewManager: %w", err)
+	}
+	defer mgr.Close()
 
-	// Plugged state constants (android.os.BatteryManager.BATTERY_PLUGGED_*).
-	fmt.Fprintf(output, "plugged: ac=%d, usb=%d, wireless=%d\n",
-		battery.BatteryPluggedAc, battery.BatteryPluggedUsb,
-		battery.BatteryPluggedWireless)
+	fmt.Fprintln(output, "=== Battery Status ===")
 
-	// In a real app, battery info is read from the BATTERY_CHANGED sticky
-	// broadcast. Register a BroadcastReceiver via app.Context.RegisterReceiverRaw
-	// or read the sticky intent directly:
-	//
-	//   intent, _ := ctx.RegisterReceiverRaw(nil, batteryFilter)
-	//   status := battery.Status(intent.GetIntExtra("status", 0))
-	//   level := intent.GetIntExtra("level", 0)
-	//   scale := intent.GetIntExtra("scale", 100)
-	//   pct := float64(level) / float64(scale) * 100
-	//
-	// Available extras: level, scale, status, temperature, voltage, plugged,
-	// health, technology, present.
+	// IsCharging - boolean convenience.
+	charging, err := mgr.IsCharging()
+	if err != nil {
+		fmt.Fprintf(output, "charging: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "charging: %v\n", charging)
+	}
 
-	// Demonstrate Status type usage.
-	status := battery.BatteryStatusCharging
-	switch status {
-	case battery.BatteryStatusUnknown:
-		fmt.Fprintln(output, "battery status: unknown")
-	case battery.BatteryStatusCharging:
-		fmt.Fprintln(output, "battery status: charging")
-	case battery.BatteryStatusDischarging:
-		fmt.Fprintln(output, "battery status: discharging")
-	case battery.BatteryStatusNotCharging:
-		fmt.Fprintln(output, "battery status: not charging")
-	case battery.BatteryStatusFull:
-		fmt.Fprintln(output, "battery status: full")
+	// GetIntProperty - battery capacity (0-100%).
+	capacity, err := mgr.GetIntProperty(int32(battery.BatteryPropertyCapacity))
+	if err != nil {
+		fmt.Fprintf(output, "capacity: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "capacity: %d%%\n", capacity)
+	}
+
+	// GetIntProperty - battery status.
+	status, err := mgr.GetIntProperty(int32(battery.BatteryPropertyStatus))
+	if err != nil {
+		fmt.Fprintf(output, "status: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "status: %s (%d)\n", statusName(status), status)
+	}
+
+	// GetIntProperty - current now (microamperes).
+	currentNow, err := mgr.GetIntProperty(int32(battery.BatteryPropertyCurrentNow))
+	if err != nil {
+		fmt.Fprintf(output, "current now: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "current now: %d uA\n", currentNow)
+	}
+
+	// GetIntProperty - current average (microamperes).
+	currentAvg, err := mgr.GetIntProperty(int32(battery.BatteryPropertyCurrentAverage))
+	if err != nil {
+		fmt.Fprintf(output, "current avg: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "current avg: %d uA\n", currentAvg)
+	}
+
+	// GetIntProperty - charge counter (microampere-hours).
+	chargeCounter, err := mgr.GetIntProperty(int32(battery.BatteryPropertyChargeCounter))
+	if err != nil {
+		fmt.Fprintf(output, "charge counter: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "charge counter: %d uAh\n", chargeCounter)
+	}
+
+	// GetLongProperty - energy counter (nanowatt-hours).
+	energy, err := mgr.GetLongProperty(int32(battery.BatteryPropertyEnergyCounter))
+	if err != nil {
+		fmt.Fprintf(output, "energy counter: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "energy counter: %d nWh\n", energy)
+	}
+
+	// GetStringProperty - query string representation of each property.
+	for _, prop := range []struct {
+		name string
+		id   int
+	}{
+		{"capacity", battery.BatteryPropertyCapacity},
+		{"charge_counter", battery.BatteryPropertyChargeCounter},
+		{"current_now", battery.BatteryPropertyCurrentNow},
+		{"current_avg", battery.BatteryPropertyCurrentAverage},
+		{"status", battery.BatteryPropertyStatus},
+		{"energy_counter", battery.BatteryPropertyEnergyCounter},
+	} {
+		s, err := mgr.GetStringProperty(int32(prop.id))
+		if err != nil {
+			fmt.Fprintf(output, "str(%s): error: %v\n", prop.name, err)
+		} else if s != "" {
+			fmt.Fprintf(output, "str(%s): %s\n", prop.name, s)
+		}
+	}
+
+	// ComputeChargeTimeRemaining (milliseconds, -1 if not charging).
+	chargeTime, err := mgr.ComputeChargeTimeRemaining()
+	if err != nil {
+		fmt.Fprintf(output, "charge time remaining: error: %v\n", err)
+	} else if chargeTime < 0 {
+		fmt.Fprintln(output, "charge time remaining: N/A")
+	} else {
+		minutes := chargeTime / 60000
+		fmt.Fprintf(output, "charge time remaining: ~%d min\n", minutes)
 	}
 
 	return nil
