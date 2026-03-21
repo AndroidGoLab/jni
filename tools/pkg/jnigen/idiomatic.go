@@ -5,76 +5,6 @@ import (
 	"strings"
 )
 
-// EnvRenderData holds all data needed for env.go.tmpl rendering.
-type EnvRenderData struct {
-	Methods []RenderMethod
-}
-
-// VMRenderData holds all data needed for vm.go.tmpl rendering.
-type VMRenderData struct {
-	Methods []RenderMethod
-}
-
-// RenderMethod is a pre-computed method ready for template rendering.
-type RenderMethod struct {
-	GoName            string
-	GoParamList       string
-	GoReturnList      string
-	Transforms        []string
-	HasReturn         bool
-	CapiName          string
-	CapiArgs          string
-	PostTransforms    []string
-	CheckException    bool
-	ZeroReturn        string
-	ReturnConversion  string
-	ReturnsError      bool
-	JNIErrorTransform bool // true if the only return is error with jni_error transform
-	Doc               string
-}
-
-// TypeFileRenderData holds all types for a single generated file.
-type TypeFileRenderData struct {
-	Types []*TypeRenderData
-}
-
-// TypeRenderData holds data for rendering a single reference type file.
-type TypeRenderData struct {
-	GoName   string
-	CType    string
-	CapiType string
-	Parent   *TypeParent
-	IsArray  bool
-	ElemType string
-}
-
-// TypeParent holds parent type information for embedding.
-type TypeParent struct {
-	GoName string
-}
-
-// ValueRenderData holds data for jvalue.go.tmpl rendering.
-type ValueRenderData struct {
-	Primitives []ValuePrimitive
-}
-
-// ValuePrimitive holds data for a single typed Value constructor.
-type ValuePrimitive struct {
-	GoName  string // e.g., "Int"
-	GoType  string // e.g., "int32"
-	CGoType string // e.g., "capi.Jint" — the capi alias for the C type
-}
-
-// TypesRenderData holds data for types.go.tmpl rendering.
-type TypesRenderData struct {
-	VersionConstants []VersionConstant
-}
-
-// VersionConstant holds a JNI version constant for re-export.
-type VersionConstant struct {
-	GoName string
-}
-
 // BuildTypesData prepares data for the types.go.tmpl template.
 func BuildTypesData(merged *MergedSpec) *TypesRenderData {
 	data := &TypesRenderData{}
@@ -86,18 +16,6 @@ func BuildTypesData(merged *MergedSpec) *TypesRenderData {
 		}
 	}
 	return data
-}
-
-// ErrorRenderData holds data for errors.go.tmpl rendering.
-type ErrorRenderData struct {
-	ErrorCodes []ErrorCode
-}
-
-// ErrorCode holds data for a single JNI error constant.
-type ErrorCode struct {
-	GoName      string
-	Value       string
-	Description string
 }
 
 // BuildEnvData prepares data for the env.go.tmpl template.
@@ -200,6 +118,7 @@ func buildRenderMethod(m MergedMethod) RenderMethod {
 	for _, p := range m.Params {
 		goParams = append(goParams, p.Name+" "+p.GoType)
 	}
+	rm.GoParams = goParams
 	rm.GoParamList = strings.Join(goParams, ", ")
 
 	// Build Go return list.

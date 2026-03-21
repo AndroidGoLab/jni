@@ -57,7 +57,7 @@ for i in "${!EXAMPLES[@]}"; do
     echo "[$n/$TOTAL] $name"
 
     dir="$SCRIPT_DIR/$name"
-    pkg="com.github.xaionaro_go.jni.examples.$name"
+    pkg="center.dx.jni.examples.$name"
     result_file="$RESULTS_DIR/$name.log"
 
     # Build
@@ -93,7 +93,7 @@ for i in "${!EXAMPLES[@]}"; do
 
     # Launch
     echo "  Running..."
-    "$ADB" shell am start -n "$pkg/com.github.xaionaro_go.jni.example.ExampleActivity" >> "$result_file" 2>&1
+    "$ADB" shell am start -n "$pkg/center.dx.jni.example.ExampleActivity" >> "$result_file" 2>&1
 
     # Wait for output (the app writes to logcat with tag GoJNI)
     # Poll for up to 30 seconds

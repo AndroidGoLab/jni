@@ -29,7 +29,7 @@ func (vm *VM) Do(fn func(env *Env) error) error {
 		return err
 	}
 	if attached {
-		defer vm.detachCurrentThread()
+		defer func() { _ = vm.detachCurrentThread() }()
 	}
 	return fn(env)
 }

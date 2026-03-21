@@ -61,59 +61,25 @@ func run(vm *jni.VM) error {
 
 	// Print all network type constants.
 	fmt.Fprintln(&output, "Network types:")
-	fmt.Fprintf(&output, "  NetworkNone       = %d\n", job.NetworkNone)
-	fmt.Fprintf(&output, "  NetworkAny        = %d\n", job.NetworkAny)
-	fmt.Fprintf(&output, "  NetworkUnmetered  = %d\n", job.NetworkUnmetered)
-	fmt.Fprintf(&output, "  NetworkNotRoaming = %d\n", job.NetworkNotRoaming)
-	fmt.Fprintf(&output, "  NetworkCellular   = %d\n", job.NetworkCellular)
+	fmt.Fprintf(&output, "  NetworkTypeNone       = %d\n", job.NetworkTypeNone)
+	fmt.Fprintf(&output, "  NetworkTypeAny        = %d\n", job.NetworkTypeAny)
+	fmt.Fprintf(&output, "  NetworkTypeUnmetered  = %d\n", job.NetworkTypeUnmetered)
+	fmt.Fprintf(&output, "  NetworkTypeNotRoaming = %d\n", job.NetworkTypeNotRoaming)
+	fmt.Fprintf(&output, "  NetworkTypeCellular   = %d\n", job.NetworkTypeCellular)
 
 	// Print backoff policy constants.
 	fmt.Fprintln(&output, "Backoff policies:")
 	fmt.Fprintf(&output, "  BackoffPolicyLinear      = %d\n", job.BackoffPolicyLinear)
 	fmt.Fprintf(&output, "  BackoffPolicyExponential = %d\n", job.BackoffPolicyExponential)
 
-	// Cancel a specific job by ID.
-	if err := sched.Cancel(42); err != nil {
-		return fmt.Errorf("Cancel: %v", err)
+	// CancelInAllNamespaces cancels all jobs in all namespaces.
+	if err := sched.CancelInAllNamespaces(); err != nil {
+		fmt.Fprintf(&output, "CancelInAllNamespaces: %v (expected on older APIs)\n", err)
+	} else {
+		fmt.Fprintln(&output, "cancelled all jobs in all namespaces")
 	}
-	fmt.Fprintln(&output, "cancelled job 42")
 
-	// Cancel all pending jobs for this application.
-	if err := sched.CancelAll(); err != nil {
-		return fmt.Errorf("CancelAll: %v", err)
-	}
-	fmt.Fprintln(&output, "cancelled all jobs")
-
-	// NewjobInfoBuilder(vm) creates a jobInfoBuilder that wraps
-	// android.app.job.JobInfo.Builder. Its package-internal methods:
-	//   setRequiredNetworkType(networkType int32)
-	//   setRequiresCharging(requiresCharging bool)
-	//   setRequiresDeviceIdle(requiresDeviceIdle bool)
-	//   setRequiresBatteryNotLow(requiresBatteryNotLow bool)
-	//   setRequiresStorageNotLow(requiresStorageNotLow bool)
-	//   setPeriodic(intervalMillis int64)
-	//   setMinimumLatency(minLatencyMillis int64)
-	//   setOverrideDeadline(maxExecutionDelayMillis int64)
-	//   setPersisted(isPersisted bool)
-	//   setBackoffCriteria(initialBackoffMillis int64, backoffPolicy int32)
-	//   build() - produces the JobInfo object
-	//
-	// Package-internal Scheduler methods:
-	//   scheduleRaw(job) - schedule a job, returns result code
-	//   getPendingJobRaw(jobId) - get a pending job by ID
-	//   getAllPendingJobsRaw() - get all pending jobs
-	//
-	// The jobInfoJava data class extracts fields from a Java JobInfo:
-	//   ID, Service, NetworkType, RequireCharging, RequireDeviceIdle,
-	//   RequireBatteryNotLow, RequireStorageNotLow, IntervalMillis,
-	//   MinLatencyMillis, MaxDelayMillis, Persisted,
-	//   InitialBackoffMillis, BackoffPolicy
-	builder, err := job.NewjobInfoBuilder(ctx.VM)
-	if err != nil {
-		return fmt.Errorf("job.NewjobInfoBuilder: %v", err)
-	}
-	_ = builder
-	fmt.Fprintln(&output, "job info builder created")
+	fmt.Fprintln(&output, "JobScheduler example complete")
 	return nil
 }
 

@@ -2,8 +2,6 @@ version: "2"
 
 run:
   timeout: 5m
-  build-tags:
-    - android
 
 linters:
   enable:
@@ -12,3 +10,8 @@ linters:
     - errcheck
     - ineffassign
     - unused
+
+issues:
+  exclude-dirs:
+    - capi
+    - examples

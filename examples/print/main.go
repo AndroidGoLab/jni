@@ -51,13 +51,13 @@ func run(vm *jni.VM) error {
 	// --- Constants ---
 	// JobState is a typed constant representing print job states.
 	fmt.Fprintln(&output, "Print job state constants (type JobState):")
-	fmt.Fprintf(&output, "  JobCreated   = %d\n", print.JobCreated)
-	fmt.Fprintf(&output, "  JobQueued    = %d\n", print.JobQueued)
-	fmt.Fprintf(&output, "  JobStarted   = %d\n", print.JobStarted)
-	fmt.Fprintf(&output, "  JobBlocked   = %d\n", print.JobBlocked)
-	fmt.Fprintf(&output, "  JobCompleted = %d\n", print.JobCompleted)
-	fmt.Fprintf(&output, "  JobFailed    = %d\n", print.JobFailed)
-	fmt.Fprintf(&output, "  JobCanceled  = %d\n", print.JobCanceled)
+	fmt.Fprintf(&output, "  JobCreated   = %d\n", print.StateCreated)
+	fmt.Fprintf(&output, "  JobQueued    = %d\n", print.StateQueued)
+	fmt.Fprintf(&output, "  JobStarted   = %d\n", print.StateStarted)
+	fmt.Fprintf(&output, "  JobBlocked   = %d\n", print.StateBlocked)
+	fmt.Fprintf(&output, "  JobCompleted = %d\n", print.StateCompleted)
+	fmt.Fprintf(&output, "  JobFailed    = %d\n", print.StateFailed)
+	fmt.Fprintf(&output, "  JobCanceled  = %d\n", print.StateCanceled)
 
 	// --- NewManager ---
 	mgr, err := print.NewManager(ctx)
@@ -89,21 +89,21 @@ func run(vm *jni.VM) error {
 
 	// --- JobState typed constant ---
 	// JobState values can be used in switch statements.
-	state := print.JobCompleted
+	state := print.StateCompleted
 	switch state {
-	case print.JobCreated:
+	case print.StateCreated:
 		fmt.Fprintln(&output, "job: created")
-	case print.JobQueued:
+	case print.StateQueued:
 		fmt.Fprintln(&output, "job: queued")
-	case print.JobStarted:
+	case print.StateStarted:
 		fmt.Fprintln(&output, "job: started")
-	case print.JobBlocked:
+	case print.StateBlocked:
 		fmt.Fprintln(&output, "job: blocked")
-	case print.JobCompleted:
+	case print.StateCompleted:
 		fmt.Fprintln(&output, "job: completed")
-	case print.JobFailed:
+	case print.StateFailed:
 		fmt.Fprintln(&output, "job: failed")
-	case print.JobCanceled:
+	case print.StateCanceled:
 		fmt.Fprintln(&output, "job: canceled")
 	}
 	return nil

@@ -41,7 +41,7 @@ func TestMerge_FamilyExpansion(t *testing.T) {
 					{Name: "method", CType: "jmethodID", GoType: "MethodID"},
 					{Name: "args", CType: "const jvalue*", GoType: "...Value"},
 				},
-				Returns: map[string]interface{}{
+				Returns: map[string]any{
 					"primitive": "{go_type}",
 					"Object":    "*Object",
 					"Void":      nil,
@@ -121,7 +121,7 @@ func TestMerge_TypeExpansionPlaceholders(t *testing.T) {
 					{Name: "obj", CType: "jobject", GoType: "*Object"},
 					{Name: "field", CType: "jfieldID", GoType: "FieldID"},
 				},
-				Returns: map[string]interface{}{
+				Returns: map[string]any{
 					"primitive": "{go_type}",
 					"Object":    "*Object",
 				},

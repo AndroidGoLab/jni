@@ -15,11 +15,6 @@ import (
 // returns a result object (or nil for void methods) and an optional error.
 type ProxyHandler func(env *Env, methodName string, args []*Object) (*Object, error)
 
-// ProxyHandlerFull is like ProxyHandler but also receives the
-// java.lang.reflect.Method object for return type inspection
-// (e.g. detecting void callbacks via method.getReturnType()).
-type ProxyHandlerFull func(env *Env, method *Object, methodName string, args []*Object) (*Object, error)
-
 // Global registry mapping callback IDs to Go handler closures.
 var (
 	proxyMu           sync.Mutex
@@ -348,79 +343,7 @@ func (e *Env) NewProxy(
 	ifaces []*Class,
 	handler func(env *Env, methodName string, args []*Object) (*Object, error),
 ) (proxy *Object, cleanup func(), err error) {
-	if len(ifaces) == 0 {
-		return nil, nil, fmt.Errorf("jni: NewProxy: at least one interface required")
-	}
-
-	if err := ensureProxyInit(e); err != nil {
-		return nil, nil, err
-	}
-
-	// Register the handler in the global map.
-	handlerID := registerProxy(handler)
-
-	// Create the GoInvocationHandler instance, passing handlerID as a jlong.
-	var idVal capi.Jvalue
-	binary.NativeEndian.PutUint64(idVal[:], uint64(handlerID))
-	invHandler := capi.NewObjectA(e.ptr, clsGoHandler, midHandlerCtr, &idVal)
-	if invHandler == 0 {
-		capi.ExceptionClear(e.ptr)
-		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxy: failed to create GoInvocationHandler")
-	}
-	defer capi.DeleteLocalRef(e.ptr, invHandler)
-
-	// Build the Class[] array for the interfaces.
-	ifaceArray := capi.NewObjectArray(e.ptr, capi.Jsize(len(ifaces)), clsClass, 0)
-	if ifaceArray == 0 {
-		capi.ExceptionClear(e.ptr)
-		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxy: failed to create interface array")
-	}
-	defer capi.DeleteLocalRef(e.ptr, capi.Object(ifaceArray))
-
-	for i, iface := range ifaces {
-		capi.SetObjectArrayElement(e.ptr, ifaceArray, capi.Jint(i), iface.ref)
-	}
-
-	// Get the class loader from the first interface.
-	// Pass &dummyJvalue instead of nil: the JNI spec does not guarantee
-	// NULL is valid for the const jvalue* parameter of Call*MethodA;
-	// OpenJ9 segfaults on NULL (eclipse-openj9/openj9#10480).
-	var dummyJvalue capi.Jvalue
-	classLoader := capi.CallObjectMethodA(e.ptr, capi.Object(ifaces[0].ref), midGetClassLoader, &dummyJvalue)
-	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
-		capi.ExceptionClear(e.ptr)
-		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxy: failed to get class loader")
-	}
-	if classLoader != 0 {
-		defer capi.DeleteLocalRef(e.ptr, classLoader)
-	}
-	// classLoader may be nil (bootstrap loader); that's valid for Proxy.newProxyInstance.
-
-	// Call Proxy.newProxyInstance(classLoader, interfaces, handler).
-	args := [3]capi.Jvalue{}
-	binary.NativeEndian.PutUint64(args[0][:], uint64(classLoader))
-	binary.NativeEndian.PutUint64(args[1][:], uint64(ifaceArray))
-	binary.NativeEndian.PutUint64(args[2][:], uint64(invHandler))
-
-	proxyObj := capi.CallStaticObjectMethodA(e.ptr, clsProxy, midNewProxyInstance, &args[0])
-	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
-		capi.ExceptionClear(e.ptr)
-		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxy: Proxy.newProxyInstance failed")
-	}
-	if proxyObj == 0 {
-		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxy: Proxy.newProxyInstance returned null")
-	}
-
-	cleanup = func() {
-		unregisterProxy(handlerID)
-	}
-
-	return &Object{ref: proxyObj}, cleanup, nil
+	return newProxyImpl(e, "NewProxy", ifaces, registerProxy(handler))
 }
 
 // NewProxyFull creates a java.lang.reflect.Proxy like NewProxy, but
@@ -433,16 +356,28 @@ func (e *Env) NewProxyFull(
 	ifaces []*Class,
 	handler ProxyHandlerFull,
 ) (proxy *Object, cleanup func(), err error) {
+	return newProxyImpl(e, "NewProxyFull", ifaces, registerProxyFull(handler))
+}
+
+// newProxyImpl contains the shared logic for NewProxy and NewProxyFull.
+// It creates a GoInvocationHandler with the given handlerID, builds the
+// interface Class[] array, obtains the ClassLoader, and calls
+// Proxy.newProxyInstance.
+func newProxyImpl(
+	e *Env,
+	funcName string,
+	ifaces []*Class,
+	handlerID int64,
+) (proxy *Object, cleanup func(), err error) {
 	if len(ifaces) == 0 {
-		return nil, nil, fmt.Errorf("jni: NewProxyFull: at least one interface required")
+		unregisterProxy(handlerID)
+		return nil, nil, fmt.Errorf("jni: %s: at least one interface required", funcName)
 	}
 
 	if err := ensureProxyInit(e); err != nil {
+		unregisterProxy(handlerID)
 		return nil, nil, err
 	}
-
-	// Register the handler in the global map.
-	handlerID := registerProxyFull(handler)
 
 	// Create the GoInvocationHandler instance, passing handlerID as a jlong.
 	var idVal capi.Jvalue
@@ -451,7 +386,7 @@ func (e *Env) NewProxyFull(
 	if invHandler == 0 {
 		capi.ExceptionClear(e.ptr)
 		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxyFull: failed to create GoInvocationHandler")
+		return nil, nil, fmt.Errorf("jni: %s: failed to create GoInvocationHandler", funcName)
 	}
 	defer capi.DeleteLocalRef(e.ptr, invHandler)
 
@@ -460,7 +395,7 @@ func (e *Env) NewProxyFull(
 	if ifaceArray == 0 {
 		capi.ExceptionClear(e.ptr)
 		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxyFull: failed to create interface array")
+		return nil, nil, fmt.Errorf("jni: %s: failed to create interface array", funcName)
 	}
 	defer capi.DeleteLocalRef(e.ptr, capi.Object(ifaceArray))
 
@@ -477,7 +412,7 @@ func (e *Env) NewProxyFull(
 	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
 		capi.ExceptionClear(e.ptr)
 		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxyFull: failed to get class loader")
+		return nil, nil, fmt.Errorf("jni: %s: failed to get class loader", funcName)
 	}
 	if classLoader != 0 {
 		defer capi.DeleteLocalRef(e.ptr, classLoader)
@@ -494,11 +429,11 @@ func (e *Env) NewProxyFull(
 	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
 		capi.ExceptionClear(e.ptr)
 		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxyFull: Proxy.newProxyInstance failed")
+		return nil, nil, fmt.Errorf("jni: %s: Proxy.newProxyInstance failed", funcName)
 	}
 	if proxyObj == 0 {
 		unregisterProxy(handlerID)
-		return nil, nil, fmt.Errorf("jni: NewProxyFull: Proxy.newProxyInstance returned null")
+		return nil, nil, fmt.Errorf("jni: %s: Proxy.newProxyInstance returned null", funcName)
 	}
 
 	cleanup = func() {

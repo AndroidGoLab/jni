@@ -171,7 +171,7 @@ func TestDiffExceptionProtocol(t *testing.T) {
 		if err != nil {
 			t.Fatalf("FindClass: %v", err)
 		}
-		env.ThrowNew(cls, "test exception")
+		_ = env.ThrowNew(cls, "test exception")
 		check(t, "exc_pending_result_some", fmt.Sprintf("%v", env.ExceptionCheck()))
 		env.ExceptionClear()
 		check(t, "exc_pending_final", fmt.Sprintf("%v", env.ExceptionCheck()))

@@ -1,4 +1,4 @@
-.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools build prove
+.PHONY: generate specs jni java clean lint test test-tools build prove
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -8,12 +8,8 @@ LIBJVM_DIR ?= $(shell find $(JDK_HOME) -name libjvm.so -printf '%h' -quit 2>/dev
 # Android SDK platform JAR for specgen.
 ANDROID_JAR ?= $(ANDROID_HOME)/platforms/android-36/android.jar
 
-# Output directory for gRPC proxy code (proto/, grpc/, cmd/jnicli/).
-# Set PROXY_DIR to a jni-proxy checkout to generate into that repo.
-PROXY_DIR ?= .
-
-# Run all generators
-generate: specs jni java proto protoc grpc cli
+# Run all generators (proto/grpc/cli generation moved to jni-proxy repo)
+generate: specs jni java
 
 # Run specgen — generates YAML specs from ref/ .class files
 specs:
@@ -26,31 +22,6 @@ jni:
 # Run javagen only — generates high-level Android API packages
 java:
 	go run ./tools/cmd/javagen/ -specs spec/java/ -overlays spec/overlays/java/ -templates templates/java/ -output . -go-module github.com/AndroidGoLab/jni
-
-# Run protogen — generates .proto files from Java API specs
-# Output goes to PROXY_DIR (set to jni-proxy checkout path).
-proto:
-	go run ./tools/cmd/protogen/ -specs spec/java/ -overlays spec/overlays/java/ -output $(PROXY_DIR)/proto/ -go-module github.com/AndroidGoLab/jni-proxy
-	@mkdir -p $(PROXY_DIR)/proto/handlestore
-	@cp spec/handlestore.proto $(PROXY_DIR)/proto/handlestore/handlestore.proto
-
-# Run protoc — compiles .proto files to Go stubs
-protoc: proto
-	@command -v protoc >/dev/null 2>&1 || { echo "protoc not found. Install: https://grpc.io/docs/protoc-installation/"; exit 1; }
-	@for dir in $(PROXY_DIR)/proto/*/; do \
-		pkg=$$(basename "$$dir"); \
-		protoc -I. --go_out=. --go_opt=paths=source_relative \
-			--go-grpc_out=. --go-grpc_opt=paths=source_relative \
-			"$$dir$$pkg.proto"; \
-	done
-
-# Run grpcgen — generates gRPC server and client wrappers
-grpc: protoc
-	go run ./tools/cmd/grpcgen/ -specs spec/java/ -overlays spec/overlays/java/ -output $(PROXY_DIR) -go-module github.com/AndroidGoLab/jni-proxy
-
-# Run cligen — generates jnicli cobra commands from Java API specs
-cli: grpc
-	go run ./tools/cmd/cligen/ -specs spec/java/ -overlays spec/overlays/java/ -output $(PROXY_DIR)/cmd/jnicli/ -go-module github.com/AndroidGoLab/jni-proxy
 
 # Remove all generated files (identified by "DO NOT EDIT" header), excluding tools/
 clean:

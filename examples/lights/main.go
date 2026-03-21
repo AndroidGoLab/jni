@@ -56,16 +56,10 @@ func run(vm *jni.VM) error {
 
 	// Print all light type constants.
 	fmt.Fprintln(&output, "Light type constants:")
-	fmt.Fprintf(&output, "  LightTypeBacklight     = %d\n", lights.LightTypeBacklight)
-	fmt.Fprintf(&output, "  LightTypeKeyboard      = %d\n", lights.LightTypeKeyboard)
-	fmt.Fprintf(&output, "  LightTypeButtons       = %d\n", lights.LightTypeButtons)
-	fmt.Fprintf(&output, "  LightTypeBattery       = %d\n", lights.LightTypeBattery)
-	fmt.Fprintf(&output, "  LightTypeNotifications = %d\n", lights.LightTypeNotifications)
-	fmt.Fprintf(&output, "  LightTypeAttention     = %d\n", lights.LightTypeAttention)
-	fmt.Fprintf(&output, "  LightTypePlayer1       = %d\n", lights.LightTypePlayer1)
-	fmt.Fprintf(&output, "  LightTypePlayer2       = %d\n", lights.LightTypePlayer2)
-	fmt.Fprintf(&output, "  LightTypePlayer3       = %d\n", lights.LightTypePlayer3)
-	fmt.Fprintf(&output, "  LightTypePlayer4       = %d\n", lights.LightTypePlayer4)
+	fmt.Fprintf(&output, "  LightTypeInput             = %d\n", lights.LightTypeInput)
+	fmt.Fprintf(&output, "  LightTypeKeyboardBacklight = %d\n", lights.LightTypeKeyboardBacklight)
+	fmt.Fprintf(&output, "  LightTypeMicrophone        = %d\n", lights.LightTypeMicrophone)
+	fmt.Fprintf(&output, "  LightTypePlayerId          = %d\n", lights.LightTypePlayerId)
 
 	// The Light data class (exported) has these fields:
 	//   ID   int    - unique light identifier

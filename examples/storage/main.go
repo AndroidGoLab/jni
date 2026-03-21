@@ -62,14 +62,8 @@ func run(vm *jni.VM) error {
 	//   getCacheSizeBytes(storageUuid)      -- current cache size.
 	//   getCacheQuotaBytes(storageUuid)     -- cache quota for the app.
 
-	// Volume is an exported data class extracted from
-	// android.os.storage.StorageVolume with the following fields:
-	var vol storage.Volume
-	fmt.Fprintf(&output, "Volume.UUID:        %q\n", vol.UUID)
-	fmt.Fprintf(&output, "Volume.State:       %q\n", vol.State)
-	fmt.Fprintf(&output, "Volume.IsPrimary:   %v\n", vol.IsPrimary)
-	fmt.Fprintf(&output, "Volume.IsRemovable: %v\n", vol.IsRemovable)
-	fmt.Fprintf(&output, "Volume.IsEmulated:  %v\n", vol.IsEmulated)
+	// The storageVolume type (unexported) wraps android.os.storage.StorageVolume
+	// with JNI methods for querying volume properties.
 
 	fmt.Fprintln(&output, "StorageManager obtained successfully")
 	fmt.Fprintln(&output, "Unexported methods: getStorageVolumes, getPrimaryStorageVolume, getAllocatableBytes, allocateBytes, getCacheSizeBytes, getCacheQuotaBytes")

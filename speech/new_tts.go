@@ -42,7 +42,7 @@ func NewTTS(vm *jni.VM) (*TTS, error) {
 // Close releases the global reference to the underlying Java object.
 func (m *TTS) Close() {
 	if m.Obj != nil {
-		m.VM.Do(func(env *jni.Env) error {
+		_ = m.VM.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(m.Obj)
 			m.Obj = nil
 			return nil

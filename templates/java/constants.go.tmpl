@@ -5,6 +5,6 @@ package {{.Package}}
 type {{.GoType}} {{.BaseType}}
 {{end}}
 const (
-{{range .Values}}	{{.GoName}} {{if $grp.GoType}}{{$grp.GoType}} {{end}}= {{.Value}}
+{{range .Values}}	{{.GoName}} {{if $grp.GoType}}{{$grp.GoType}} {{else if $grp.BaseType}}{{$grp.BaseType}} {{end}}= {{.Value}}
 {{end}})
 {{end}}

@@ -9,19 +9,19 @@ type Error int32
 
 func (e Error) Error() string {
 	switch e {
-	case 0:
+	case JNI_OK:
 		return "jni: success"
-	case -1:
+	case JNI_ERR:
 		return "jni: general error"
-	case -2:
+	case JNI_EDETACHED:
 		return "jni: thread detached"
-	case -3:
+	case JNI_EVERSION:
 		return "jni: version error"
-	case -4:
+	case JNI_ENOMEM:
 		return "jni: out of memory"
-	case -5:
+	case JNI_EEXIST:
 		return "jni: VM already exists"
-	case -6:
+	case JNI_EINVAL:
 		return "jni: invalid argument"
 	default:
 		return fmt.Sprintf("jni: unknown error %d", int32(e))

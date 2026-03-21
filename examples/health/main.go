@@ -1,12 +1,11 @@
 //go:build android
 
-// Command health demonstrates the Health Connect API record type constants.
-// It is built as a c-shared library and packaged into an APK.
+// Command health demonstrates the Health Connect API provided by the
+// generated health/connect package. It is built as a c-shared library
+// and packaged into an APK.
 //
-// This example prints all available Health Connect record types defined
-// in the health package. These constants identify different categories
-// of health data (steps, heart rate, blood pressure, etc.) that can
-// be read and written through the Health Connect API.
+// The connect.Manager wraps the HealthConnectClient and provides raw
+// methods for inserting, reading, aggregating, and deleting records.
 package main
 
 /*
@@ -17,7 +16,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/AndroidGoLab/jni/health/connect"
+	_ "github.com/AndroidGoLab/jni/health/connect"
 )
 
 func main() {}
@@ -26,29 +25,17 @@ var output bytes.Buffer
 
 //export goRun
 func goRun(cvm *C.JavaVM) {
-	// Health Connect record type constants identify the kind of
-	// health data to read or write through the Health Connect client.
-	types := []struct {
-		Name  string
-		Value connect.RecordType
-	}{
-		{"Steps", connect.Steps},
-		{"HeartRate", connect.HeartRate},
-		{"Distance", connect.Distance},
-		{"ActiveCaloriesBurned", connect.ActiveCaloriesBurned},
-		{"TotalCaloriesBurned", connect.TotalCaloriesBurned},
-		{"Weight", connect.Weight},
-		{"Height", connect.Height},
-		{"BloodPressure", connect.BloodPressure},
-		{"BloodGlucose", connect.BloodGlucose},
-		{"OxygenSaturation", connect.OxygenSaturation},
-		{"SleepSession", connect.SleepSession},
-	}
-
-	fmt.Fprintln(&output, "Health Connect record types:")
-	for _, t := range types {
-		fmt.Fprintf(&output, "  %-25s = %q\n", t.Name, t.Value)
-	}
+	// The health/connect package provides a Manager type wrapping
+	// HealthConnectClient with raw methods:
+	//   getOrCreateRaw(ctx) - obtain a HealthConnectClient
+	//   insertRecordsRaw(records) - insert health records
+	//   readRecordsRaw(request) - read health records
+	//   aggregateRaw(request) - aggregate health data
+	//   deleteRecordsRaw(recordType, timeRange) - delete records
+	//
+	// These are unexported and intended for use by higher-level wrappers.
+	fmt.Fprintln(&output, "Health Connect Manager type available")
+	fmt.Fprintln(&output, "Raw methods: getOrCreateRaw, insertRecordsRaw, readRecordsRaw, aggregateRaw, deleteRecordsRaw")
 }
 
 //export goGetOutput

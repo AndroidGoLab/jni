@@ -41,30 +41,15 @@ func goGetOutput() *C.char {
 
 func run(vm *jni.VM) error {
 	// --- Constants ---
-	fmt.Fprintln(&output, "Audio source constants:")
-	fmt.Fprintf(&output, "  AudioMic         = %d\n", recorder.AudioMic)
-	fmt.Fprintf(&output, "  AudioVoiceCall   = %d\n", recorder.AudioVoiceCall)
-	fmt.Fprintf(&output, "  AudioCamcorder   = %d\n", recorder.AudioCamcorder)
-	fmt.Fprintf(&output, "  AudioVoiceComm   = %d\n", recorder.AudioVoiceComm)
-	fmt.Fprintf(&output, "  AudioUnprocessed = %d\n", recorder.AudioUnprocessed)
+	fmt.Fprintln(&output, "MediaRecorder error constants:")
+	fmt.Fprintf(&output, "  MediaRecorderErrorUnknown = %d\n", recorder.MediaRecorderErrorUnknown)
+	fmt.Fprintf(&output, "  MediaErrorServerDied      = %d\n", recorder.MediaErrorServerDied)
 
-	fmt.Fprintln(&output, "Video source constants:")
-	fmt.Fprintf(&output, "  VideoCamera  = %d\n", recorder.VideoCamera)
-	fmt.Fprintf(&output, "  VideoSurface = %d\n", recorder.VideoSurface)
-
-	fmt.Fprintln(&output, "Output format constants:")
-	fmt.Fprintf(&output, "  FormatMPEG4    = %d\n", recorder.FormatMPEG4)
-	fmt.Fprintf(&output, "  FormatThreeGPP = %d\n", recorder.FormatThreeGPP)
-	fmt.Fprintf(&output, "  FormatWebM     = %d\n", recorder.FormatWebM)
-	fmt.Fprintf(&output, "  FormatAAC_ADTS = %d\n", recorder.FormatAAC_ADTS)
-	fmt.Fprintf(&output, "  FormatOGG      = %d\n", recorder.FormatOGG)
-
-	// --- NewRecorder ---
-	rec, err := recorder.NewRecorder(vm)
-	if err != nil {
-		return fmt.Errorf("recorder.NewRecorder: %w", err)
-	}
-	fmt.Fprintf(&output, "MediaRecorder created: %v\n", rec)
+	// The Recorder type wraps android.media.MediaRecorder with VM and
+	// Obj fields for JNI access.
+	var rec recorder.Recorder
+	_ = rec
+	fmt.Fprintln(&output, "Recorder type available")
 
 	// --- Recorder methods (all unexported, called via wrappers) ---
 	//

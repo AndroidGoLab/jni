@@ -49,7 +49,7 @@ func run(vm *jni.VM) error {
 	defer ctx.Close()
 
 	// --- Constants ---
-	fmt.Fprintf(&output, "ProtocolDNSSD = %d\n", nsd.ProtocolDNSSD)
+	fmt.Fprintf(&output, "ProtocolDnsSd = %d\n", nsd.ProtocolDnsSd)
 
 	// --- NewManager ---
 	mgr, err := nsd.NewManager(ctx)
@@ -62,10 +62,9 @@ func run(vm *jni.VM) error {
 	// NewnsdServiceInfo creates a Java NsdServiceInfo object used to
 	// describe a network service for registration and discovery.
 	// Despite the awkward name, this function is exported (capital N).
-	svcInfo, err := nsd.NewnsdServiceInfo(mgr.VM)
-	if err != nil {
-		return fmt.Errorf("nsd.NewnsdServiceInfo: %v", err)
-	}
+	// The nsd.ServiceInfo type wraps android.net.nsd.NsdServiceInfo.
+	// ServiceInfo objects are obtained via discovery/resolve callbacks.
+	var svcInfo nsd.ServiceInfo
 	_ = svcInfo
 
 	// The nsdServiceInfo type provides these unexported methods

@@ -44,7 +44,7 @@ func NewService(vm *jni.VM) (*Service, error) {
 // Close releases the global reference to the underlying Java object.
 func (m *Service) Close() {
 	if m.Obj != nil {
-		m.VM.Do(func(env *jni.Env) error {
+		_ = m.VM.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(m.Obj)
 			m.Obj = nil
 			return nil

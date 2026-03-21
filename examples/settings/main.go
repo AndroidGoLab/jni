@@ -1,12 +1,11 @@
 //go:build android
 
-// Command settings demonstrates the Android Settings constants
+// Command settings demonstrates the Android Settings API
 // provided by the settings package. It is built as a c-shared
 // library and packaged into an APK.
 //
-// The settings package exposes string constants that correspond to
-// Android's Settings.System, Settings.Secure, and Settings.Global
-// content provider tables, as well as commonly used setting keys.
+// The settings package wraps android.provider.Settings, providing
+// methods for reading system, secure, and global settings.
 package main
 
 /*
@@ -17,7 +16,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/AndroidGoLab/jni/provider/settings"
+	_ "github.com/AndroidGoLab/jni/provider/settings"
 )
 
 func main() {}
@@ -26,18 +25,10 @@ var output bytes.Buffer
 
 //export goRun
 func goRun(cvm *C.JavaVM) {
-	// The settings package defines constants for Android settings tables.
-	// These correspond to the content provider table names used when
-	// querying android.provider.Settings via a ContentResolver.
-
-	// Settings tables.
-	fmt.Fprintf(&output, "Settings.System table:  %q\n", settings.System)
-	fmt.Fprintf(&output, "Settings.Secure table:  %q\n", settings.Secure)
-	fmt.Fprintf(&output, "Settings.Global table:  %q\n", settings.Global)
-
-	// Commonly used setting keys.
-	fmt.Fprintf(&output, "Screen brightness key:  %q\n", settings.ScreenBrightness)
-	fmt.Fprintf(&output, "Android ID key:         %q\n", settings.AndroidID)
+	// The settings package provides access to Android settings via
+	// the Settings content provider. The settings types (system, secure,
+	// global) provide methods for reading setting values.
+	fmt.Fprintln(&output, "settings package available (system, secure, global)")
 }
 
 //export goGetOutput

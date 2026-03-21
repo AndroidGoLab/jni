@@ -62,42 +62,19 @@ func run(vm *jni.VM) error {
 
 	fmt.Fprintln(&output, "UsbManager obtained successfully")
 
-	// --- Connection ---
-	// Connection wraps android.hardware.usb.UsbDeviceConnection.
-	conn, err := usb.NewConnection(vm)
-	if err != nil {
-		return fmt.Errorf("usb.NewConnection: %w", err)
-	}
-	defer conn.Close()
+	// DeviceConnection wraps android.hardware.usb.UsbDeviceConnection,
+	// obtained via the Manager's openDevice method.
+	//
+	// DeviceConnection exported methods:
+	//   BulkTransfer4, BulkTransfer5_1, ClaimInterface,
+	//   Close, ControlTransfer7, ControlTransfer8_1,
+	//   GetFileDescriptor, GetRawDescriptors, ReleaseInterface,
+	//   RequestWait, SetConfiguration, SetInterface
 
-	// Connection exported methods:
-	fd, err := conn.GetFileDescriptor()
-	if err != nil {
-		return fmt.Errorf("GetFileDescriptor: %w", err)
-	}
-	fmt.Fprintf(&output, "file descriptor: %d\n", fd)
-
-	descriptors, err := conn.GetRawDescriptors()
-	if err != nil {
-		return fmt.Errorf("GetRawDescriptors: %w", err)
-	}
-	fmt.Fprintf(&output, "raw descriptors: %v\n", descriptors)
-
-	// Connection unexported methods:
-	//   claimInterface(iface, force)                   -- claims a USB interface.
-	//   releaseInterface(iface)                        -- releases a USB interface.
-	//   bulkTransferRaw(endpoint, buffer, length, timeout) -- bulk data transfer.
-	//   controlTransferRaw(requestType, request, value, index, buffer, length, timeout) -- control transfer.
-
-	// --- Direction Constants ---
-	fmt.Fprintf(&output, "DirIn:  0x%02X\n", usb.DirIn)
-	fmt.Fprintf(&output, "DirOut: 0x%02X\n", usb.DirOut)
-
-	// --- Transfer Type Constants ---
-	fmt.Fprintf(&output, "TransferControl:     %d\n", usb.TransferControl)
-	fmt.Fprintf(&output, "TransferIsochronous: %d\n", usb.TransferIsochronous)
-	fmt.Fprintf(&output, "TransferBulk:        %d\n", usb.TransferBulk)
-	fmt.Fprintf(&output, "TransferInterrupt:   %d\n", usb.TransferInterrupt)
+	// --- USB Intent Action Constants ---
+	fmt.Fprintf(&output, "ActionUsbDeviceAttached:    %q\n", usb.ActionUsbDeviceAttached)
+	fmt.Fprintf(&output, "ActionUsbDeviceDetached:    %q\n", usb.ActionUsbDeviceDetached)
+	fmt.Fprintf(&output, "ActionUsbAccessoryAttached: %q\n", usb.ActionUsbAccessoryAttached)
 
 	// --- Data Classes (all unexported) ---
 	// usbDevice: Name, VendorID, ProductID, DeviceID, DeviceClass,

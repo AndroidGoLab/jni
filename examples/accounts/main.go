@@ -58,8 +58,12 @@ func run(vm *jni.VM) error {
 
 	// Account is a data class with exported fields extracted from
 	// android.accounts.Account Java objects.
+	// Account wraps android.accounts.Account. Its fields (VM, Obj) hold
+	// references to the Java object. Name and Type are accessed via JNI
+	// methods (DescribeContents, Equals, HashCode, etc.).
 	var acct accounts.Account
-	fmt.Fprintf(&output, "Account fields: Name=%q, Type=%q\n", acct.Name, acct.Type)
+	_ = acct
+	fmt.Fprintln(&output, "Account type available with DescribeContents, Equals, HashCode methods")
 
 	fmt.Fprintln(&output, "AccountManager raw methods: getManagerRaw, getAccountsRaw, getAccountsByTypeRaw, getAuthTokenRaw, invalidateAuthTokenRaw")
 

@@ -55,21 +55,16 @@ func run(vm *jni.VM) error {
 	}
 	defer mgr.Close()
 
-	// Authenticator type constants specify which biometric strengths
-	// are acceptable (android.hardware.biometrics.BiometricManager.Authenticators).
-	fmt.Fprintf(&output, "authenticators: STRONG=0x%x, WEAK=0x%x, CREDENTIAL=0x%x\n",
-		biometric.Strong, biometric.Weak, biometric.Credential)
-
 	// Error code constants from BiometricPrompt.
-	fmt.Fprintf(&output, "errors: none=%d, hw_unavailable=%d, canceled=%d, lockout=%d, lockout_permanent=%d, user_canceled=%d, no_biometrics=%d\n",
-		biometric.ErrNone, biometric.ErrHWUnavailable, biometric.ErrCanceled,
-		biometric.ErrLockout, biometric.ErrLockoutPermanent,
-		biometric.ErrUserCanceled, biometric.ErrNoBiometrics)
+	fmt.Fprintf(&output, "errors: hw_unavailable=%d, canceled=%d, lockout=%d, lockout_permanent=%d, user_canceled=%d, no_biometrics=%d\n",
+		biometric.BiometricErrorHwUnavailable, biometric.BiometricErrorCanceled,
+		biometric.BiometricErrorLockout, biometric.BiometricErrorLockoutPermanent,
+		biometric.BiometricErrorUserCanceled, biometric.BiometricErrorNoBiometrics)
 
 	// Availability check result constants from BiometricManager.canAuthenticate.
 	fmt.Fprintf(&output, "availability: success=%d, no_hardware=%d, hw_unavailable=%d, none_enrolled=%d\n",
 		biometric.BiometricSuccess, biometric.BiometricErrorNoHardware,
-		biometric.BiometricErrorHWUnavailable, biometric.BiometricErrorNoneEnrolled)
+		biometric.BiometricErrorHwUnavailable, biometric.BiometricErrorNoneEnrolled)
 
 	// The authentication flow uses unexported types:
 	//   1. biometricPromptBuilder - set title, subtitle, description,

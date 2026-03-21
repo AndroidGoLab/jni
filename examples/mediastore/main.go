@@ -39,26 +39,10 @@ func goRun(cvm *C.JavaVM) {
 	fmt.Fprintf(&output, "  VolumeExternal        = %q\n", media.VolumeExternal)
 	fmt.Fprintf(&output, "  VolumeExternalPrimary = %q\n", media.VolumeExternalPrimary)
 
-	// Content URI constants for different media collections.
-	fmt.Fprintln(&output, "Content URIs:")
-	fmt.Fprintf(&output, "  ImagesURI    = %q\n", media.ImagesURI)
-	fmt.Fprintf(&output, "  VideoURI     = %q\n", media.VideoURI)
-	fmt.Fprintf(&output, "  AudioURI     = %q\n", media.AudioURI)
-	fmt.Fprintf(&output, "  DownloadsURI = %q\n", media.DownloadsURI)
-	fmt.Fprintf(&output, "  FilesURI     = %q\n", media.FilesURI)
-
-	// Column name constants used in ContentResolver queries.
-	fmt.Fprintln(&output, "Column names:")
-	fmt.Fprintf(&output, "  ColumnID           = %q\n", media.ColumnID)
-	fmt.Fprintf(&output, "  ColumnDisplayName  = %q\n", media.ColumnDisplayName)
-	fmt.Fprintf(&output, "  ColumnMimeType     = %q\n", media.ColumnMimeType)
-	fmt.Fprintf(&output, "  ColumnSize         = %q\n", media.ColumnSize)
-	fmt.Fprintf(&output, "  ColumnDateAdded    = %q\n", media.ColumnDateAdded)
-	fmt.Fprintf(&output, "  ColumnDateModified = %q\n", media.ColumnDateModified)
-	fmt.Fprintf(&output, "  ColumnRelativePath = %q\n", media.ColumnRelativePath)
-	fmt.Fprintf(&output, "  ColumnDuration     = %q\n", media.ColumnDuration)
-	fmt.Fprintf(&output, "  ColumnWidth        = %q\n", media.ColumnWidth)
-	fmt.Fprintf(&output, "  ColumnHeight       = %q\n", media.ColumnHeight)
+	// The mediaStore wrapper provides static methods:
+	//   getExternalVolumeNamesRaw, createWriteRequestRaw,
+	//   createTrashRequestRaw, createDeleteRequestRaw,
+	//   createFavoriteRequestRaw
 
 	// The mediaStore wrapper provides static methods:
 	//   getExternalVolumeNamesRaw(ctx)              - get external volume names

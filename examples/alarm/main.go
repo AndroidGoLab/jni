@@ -60,7 +60,7 @@ func run(vm *jni.VM) error {
 	// Alarm type constants correspond to android.app.AlarmManager fields:
 	//   RTC_WAKEUP, RTC, ELAPSED_REALTIME_WAKEUP, ELAPSED_REALTIME.
 	fmt.Fprintf(&output, "alarm types: RTC_WAKEUP=%d, RTC=%d, ELAPSED_REALTIME_WAKEUP=%d, ELAPSED_REALTIME=%d\n",
-		alarm.RTCWakeup, alarm.RTC, alarm.ElapsedRealtimeWakeup, alarm.ElapsedRealtime)
+		alarm.RtcWakeup, alarm.Rtc, alarm.ElapsedRealtimeWakeup, alarm.ElapsedRealtime)
 
 	// The following AlarmManager methods require a valid PendingIntent and
 	// cannot be called with nil. In a real app, obtain a PendingIntent via

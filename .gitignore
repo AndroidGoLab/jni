@@ -4,3 +4,4 @@
 *.so
 cover.out
 examples/test_results/
+/jnigen

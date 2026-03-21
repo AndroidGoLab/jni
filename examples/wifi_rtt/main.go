@@ -65,18 +65,9 @@ func run(vm *jni.VM) error {
 	}
 
 	// --- Ranging Status Constants ---
-	fmt.Fprintf(&output, "StatusSuccess:             %d\n", rtt.StatusSuccess)
-	fmt.Fprintf(&output, "StatusFail:                %d\n", rtt.StatusFail)
-	fmt.Fprintf(&output, "StatusResponderNotCapable: %d\n", rtt.StatusResponderNotCapable)
-
-	// --- RangingResult Data Class ---
-	var result rtt.RangingResult
-	fmt.Fprintf(&output, "RangingResult.DistanceMM:       %d\n", result.DistanceMM)
-	fmt.Fprintf(&output, "RangingResult.DistanceStdDevMM: %d\n", result.DistanceStdDevMM)
-	fmt.Fprintf(&output, "RangingResult.RSSI:             %d\n", result.RSSI)
-	fmt.Fprintf(&output, "RangingResult.NumAttempted:      %d\n", result.NumAttempted)
-	fmt.Fprintf(&output, "RangingResult.NumSuccessful:     %d\n", result.NumSuccessful)
-	fmt.Fprintf(&output, "RangingResult.Status:            %d\n", result.Status)
+	fmt.Fprintf(&output, "StatusSuccess:                            %d\n", rtt.StatusSuccess)
+	fmt.Fprintf(&output, "StatusFail:                               %d\n", rtt.StatusFail)
+	fmt.Fprintf(&output, "StatusResponderDoesNotSupportIeee80211mc: %d\n", rtt.StatusResponderDoesNotSupportIeee80211mc)
 
 	return nil
 }

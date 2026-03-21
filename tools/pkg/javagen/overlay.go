@@ -17,12 +17,6 @@ type Overlay struct {
 	ConversionFuncs map[string]ConversionOverride `yaml:"conversion_funcs"`
 }
 
-// ConversionOverride specifies custom type conversion expressions.
-type ConversionOverride struct {
-	ToGo   string `yaml:"to_go"`
-	ToJava string `yaml:"to_java"`
-}
-
 // LoadOverlay reads an overlay YAML file. If the file does not exist, an
 // empty Overlay is returned without error.
 func LoadOverlay(path string) (*Overlay, error) {

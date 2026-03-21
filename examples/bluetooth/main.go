@@ -72,7 +72,7 @@ func run(vm *jni.VM) error {
 	// typed Go values.
 	fmt.Fprintln(&output, "=== Device type constants ===")
 	fmt.Fprintf(&output, "  DeviceTypeClassic = %d\n", bluetooth.DeviceTypeClassic)
-	fmt.Fprintf(&output, "  DeviceTypeLE      = %d\n", bluetooth.DeviceTypeLE)
+	fmt.Fprintf(&output, "  DeviceTypeLe      = %d\n", bluetooth.DeviceTypeLe)
 	fmt.Fprintf(&output, "  DeviceTypeDual    = %d\n", bluetooth.DeviceTypeDual)
 
 	fmt.Fprintln(&output, "=== Bond state constants ===")
@@ -80,15 +80,10 @@ func run(vm *jni.VM) error {
 	fmt.Fprintf(&output, "  BondBonding = %d\n", bluetooth.BondBonding)
 	fmt.Fprintf(&output, "  BondBonded  = %d\n", bluetooth.BondBonded)
 
-	fmt.Fprintln(&output, "=== BLE scan mode constants ===")
-	fmt.Fprintf(&output, "  ScanModeLowPower   = %d\n", bluetooth.ScanModeLowPower)
-	fmt.Fprintf(&output, "  ScanModeBalanced   = %d\n", bluetooth.ScanModeBalanced)
-	fmt.Fprintf(&output, "  ScanModeLowLatency = %d\n", bluetooth.ScanModeLowLatency)
-
-	fmt.Fprintln(&output, "=== BLE advertise mode constants ===")
-	fmt.Fprintf(&output, "  AdvertiseModeLowPower   = %d\n", bluetooth.AdvertiseModeLowPower)
-	fmt.Fprintf(&output, "  AdvertiseModeBalanced   = %d\n", bluetooth.AdvertiseModeBalanced)
-	fmt.Fprintf(&output, "  AdvertiseModeLowLatency = %d\n", bluetooth.AdvertiseModeLowLatency)
+	fmt.Fprintln(&output, "=== Scan mode constants ===")
+	fmt.Fprintf(&output, "  ScanModeNone                    = %d\n", bluetooth.ScanModeNone)
+	fmt.Fprintf(&output, "  ScanModeConnectable             = %d\n", bluetooth.ScanModeConnectable)
+	fmt.Fprintf(&output, "  ScanModeConnectableDiscoverable = %d\n", bluetooth.ScanModeConnectableDiscoverable)
 
 	fmt.Fprintln(&output, "=== GATT characteristic property constants ===")
 	fmt.Fprintf(&output, "  PropertyRead     = %d\n", bluetooth.PropertyRead)
@@ -97,9 +92,9 @@ func run(vm *jni.VM) error {
 	fmt.Fprintf(&output, "  PropertyIndicate = %d\n", bluetooth.PropertyIndicate)
 
 	fmt.Fprintln(&output, "=== GATT status & connection state constants ===")
-	fmt.Fprintf(&output, "  GATTSuccess        = %d\n", bluetooth.GATTSuccess)
-	fmt.Fprintf(&output, "  StateDisconnected  = %d\n", bluetooth.StateDisconnected)
-	fmt.Fprintf(&output, "  StateConnected     = %d\n", bluetooth.StateConnected)
+	fmt.Fprintf(&output, "  GattSuccess       = %d\n", bluetooth.GattSuccess)
+	fmt.Fprintf(&output, "  StateDisconnected = %d\n", bluetooth.StateDisconnected)
+	fmt.Fprintf(&output, "  StateConnected    = %d\n", bluetooth.StateConnected)
 
 	// --- Adapter ---
 	adapter, err := bluetooth.NewAdapter(ctx)

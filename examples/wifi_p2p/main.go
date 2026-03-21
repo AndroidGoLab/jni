@@ -67,26 +67,10 @@ func run(vm *jni.VM) error {
 	//   requestConnectionInfoRaw(channel, listener)   -- requests connection info.
 	//   requestPeersRaw(channel, listener)            -- requests the peer list.
 
-	// --- Device Status Constants ---
-	fmt.Fprintf(&output, "StatusConnected:   %d\n", p2p.StatusConnected)
-	fmt.Fprintf(&output, "StatusInvited:     %d\n", p2p.StatusInvited)
-	fmt.Fprintf(&output, "StatusFailed:      %d\n", p2p.StatusFailed)
-	fmt.Fprintf(&output, "StatusAvailable:   %d\n", p2p.StatusAvailable)
-	fmt.Fprintf(&output, "StatusUnavailable: %d\n", p2p.StatusUnavailable)
-
-	// --- Device Data Class ---
-	// Device holds data from android.net.wifi.p2p.WifiP2pDevice:
-	var dev p2p.Device
-	fmt.Fprintf(&output, "Device.Name:    %q\n", dev.Name)
-	fmt.Fprintf(&output, "Device.Address: %q\n", dev.Address)
-	fmt.Fprintf(&output, "Device.Status:  %d\n", dev.Status)
-
-	// --- Group Data Class ---
-	// Group holds data from android.net.wifi.p2p.WifiP2pGroup:
-	var grp p2p.Group
-	fmt.Fprintf(&output, "Group.NetworkName: %q\n", grp.NetworkName)
-	fmt.Fprintf(&output, "Group.Passphrase:  %q\n", grp.Passphrase)
-	fmt.Fprintf(&output, "Group.IsOwner:     %v\n", grp.IsOwner)
+	// --- P2P Constants ---
+	fmt.Fprintf(&output, "GroupOwnerBandAuto: %d\n", p2p.GroupOwnerBandAuto)
+	fmt.Fprintf(&output, "GroupOwnerBand2ghz: %d\n", p2p.GroupOwnerBand2ghz)
+	fmt.Fprintf(&output, "GroupOwnerBand5ghz: %d\n", p2p.GroupOwnerBand5ghz)
 
 	// --- Callback Types (all unexported) ---
 	// actionListener: OnSuccess, OnFailure(reason int32).

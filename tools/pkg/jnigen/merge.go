@@ -6,97 +6,6 @@ import (
 	"strings"
 )
 
-// MergedSpec is the fully resolved specification ready for template rendering.
-type MergedSpec struct {
-	Primitives     []Primitive
-	ReferenceTypes []MergedRefType
-	OpaqueTypes    []MergedOpaqueType
-	Constants      []MergedConstant
-	CapiFunctions  []MergedCapiFunc
-	EnvMethods     []MergedMethod
-	VMMethods      []MergedMethod
-	TypeMethods    map[string][]MergedMethod
-}
-
-// MergedRefType is a reference type with both C and Go names.
-type MergedRefType struct {
-	CType    string
-	GoType   string
-	Parent   string
-	IsArray  bool
-	ElemType string
-}
-
-// MergedOpaqueType is an opaque type with Go name.
-type MergedOpaqueType struct {
-	CType    string
-	GoType   string
-	CapiType string // CamelCase of CType, for use in capi layer
-}
-
-// MergedConstant is a constant with Go name and type.
-type MergedConstant struct {
-	CName  string
-	GoName string
-	Value  string
-	GoType string
-}
-
-// MergedCapiFunc represents a function in the capi layer.
-type MergedCapiFunc struct {
-	CName      string
-	HelperName string
-	Vtable     string
-	Params     []CapiParam
-	Returns    string
-	IsVoid     bool
-}
-
-// CapiParam is a parameter in the capi layer.
-type CapiParam struct {
-	CType      string
-	CName      string
-	VtableCast string // if set, cast to this type in the vtable call
-}
-
-// MergedMethod represents a method in the idiomatic layer.
-type MergedMethod struct {
-	GoName         string
-	Receiver       string
-	Params         []GoParam     // Only non-implicit params (visible in Go signature)
-	AllParams      []CapiArgInfo // All params in C order (for capi call generation)
-	Returns        []GoReturn
-	CapiCall       string
-	CheckException bool
-	Transforms     []string
-	Defers         []string
-}
-
-// CapiArgInfo holds information needed to generate a single capi call argument.
-type CapiArgInfo struct {
-	Name       string // param name (for explicit params)
-	GoType     string // Go type
-	CType      string // original C type from overlay (e.g., "jboolean*", "const char*")
-	IsVariadic bool   // whether this is a variadic param
-	IsImplicit bool   // true if this is an implicit param
-	Implicit   string // Go expression for implicit params (e.g., "len(buf)")
-}
-
-// GoParam is a parameter in the idiomatic Go API.
-type GoParam struct {
-	Name       string
-	GoType     string
-	CType      string // original C type from overlay (e.g., "jboolean*", "const char*")
-	IsVariadic bool
-}
-
-// GoReturn is a return value in the idiomatic Go API.
-type GoReturn struct {
-	GoType    string
-	IsError   bool
-	Transform string
-}
-
 // Merge combines a Spec and Overlay into a MergedSpec.
 func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 	merged := &MergedSpec{
@@ -388,7 +297,12 @@ func expandReturnType(retPattern, suffix, cType string) string {
 	return result
 }
 
-func buildMethod(name, vtable string, fo FuncOverlay, overlay *Overlay) MergedMethod {
+func buildMethod(
+	name string,
+	vtable string,
+	fo FuncOverlay,
+	overlay *Overlay,
+) MergedMethod {
 	receiver := overlay.Receivers["env_functions"]
 	if vtable == "JavaVM" {
 		receiver = overlay.Receivers["vm_functions"]

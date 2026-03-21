@@ -12,17 +12,17 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     return JNI_VERSION_1_6;
 }
 
-// Called from ExampleActivity.onCreate — runs the example.
+// Called from ExampleActivity.nativeRun — runs the example.
 JNIEXPORT void JNICALL
-Java_go_jni_example_ExampleActivity_nativeRun(JNIEnv* env, jobject thiz) {
+Java_center_dx_jni_example_ExampleActivity_nativeRun(JNIEnv* env, jobject thiz) {
     (void)env;
     (void)thiz;
     goRun(gVM);
 }
 
-// Called from ExampleActivity.onCreate — returns captured output.
+// Called from ExampleActivity.nativeGetOutput — returns captured output.
 JNIEXPORT jstring JNICALL
-Java_go_jni_example_ExampleActivity_nativeGetOutput(JNIEnv* env, jobject thiz) {
+Java_center_dx_jni_example_ExampleActivity_nativeGetOutput(JNIEnv* env, jobject thiz) {
     (void)thiz;
     const char* out = goGetOutput();
     return (*env)->NewStringUTF(env, out ? out : "");

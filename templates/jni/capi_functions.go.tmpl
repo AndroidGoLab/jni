@@ -10,7 +10,15 @@ import "unsafe"
 var _ = unsafe.Pointer(nil)
 {{range .AllFunctions}}
 // {{.CName}} wraps the JNI {{.CName}} function via vtable dispatch.
+{{- if ge (len .Params) 3}}
+func {{.CName}}(
+{{- range $i, $p := .Params}}
+	{{$p.CName}} {{cTypeToGo $p.CType}},
+{{- end}}
+){{if not .IsVoid}} {{cTypeToGo .Returns}}{{end}} {
+{{- else}}
 func {{.CName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{$p.CName}} {{cTypeToGo $p.CType}}{{end}}){{if not .IsVoid}} {{cTypeToGo .Returns}}{{end}} {
+{{- end}}
 	{{if .IsVoid}}C.{{.HelperName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{$p.CName}}{{end}}){{else}}return C.{{.HelperName}}({{range $i, $p := .Params}}{{if $i}}, {{end}}{{$p.CName}}{{end}}){{end}}
 }
 {{end}}

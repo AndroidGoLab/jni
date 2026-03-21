@@ -1030,7 +1030,9 @@ func testAppIntent(vm *jni.VM) error {
 	}
 
 	// PutStringExtra + GetStringExtra round-trip
-	intent.PutStringExtra("key1", "value1")
+	if err := intent.PutStringExtra("key1", "value1"); err != nil {
+		return fmt.Errorf("PutStringExtra: %w", err)
+	}
 	val, err := intent.GetStringExtra("key1")
 	if err != nil {
 		return fmt.Errorf("GetStringExtra: %w", err)
@@ -1040,7 +1042,9 @@ func testAppIntent(vm *jni.VM) error {
 	}
 
 	// PutIntExtra + GetIntExtra round-trip
-	intent.PutIntExtra("num", 42)
+	if err := intent.PutIntExtra("num", 42); err != nil {
+		return fmt.Errorf("PutIntExtra: %w", err)
+	}
 	n, err := intent.GetIntExtra("num", 0)
 	if err != nil {
 		return fmt.Errorf("GetIntExtra: %w", err)
@@ -1050,7 +1054,9 @@ func testAppIntent(vm *jni.VM) error {
 	}
 
 	// PutBoolExtra + GetBoolExtra round-trip
-	intent.PutBoolExtra("flag", true)
+	if err := intent.PutBoolExtra("flag", true); err != nil {
+		return fmt.Errorf("PutBoolExtra: %w", err)
+	}
 	if b := intent.GetBoolExtra("flag", false); !b {
 		return fmt.Errorf("GetBoolExtra = false, want true")
 	}

@@ -55,36 +55,26 @@ func run(vm *jni.VM) error {
 	defer mgr.Close()
 
 	// Check if Wi-Fi is enabled.
-	enabled, err := mgr.IsEnabled()
+	enabled, err := mgr.IsWifiEnabled()
 	if err != nil {
-		return fmt.Errorf("IsEnabled: %w", err)
+		return fmt.Errorf("IsWifiEnabled: %w", err)
 	}
 	fmt.Fprintf(&output, "Wi-Fi enabled: %v\n", enabled)
 
-	// Manager also provides unexported methods:
-	//   getConnectionInfoRaw() -- returns current Wi-Fi connection info as JNI object.
-	//   getScanResultsRaw()    -- returns scan results as a JNI list object.
-	// These are intended to be wrapped by higher-level helpers that
-	// extract data into the ScanResult and ConnectionInfo structs.
+	// Manager provides methods for Wi-Fi management:
+	//   IsWifiEnabled, Is5GHzBandSupported, IsScanAlwaysAvailable,
+	//   GetConnectionInfo (returns raw JNI object), GetScanResults, etc.
 
-	// --- ScanResult Data Class ---
-	// ScanResult holds data from android.net.wifi.ScanResult:
+	// ScanResult and Info are JNI wrapper types with VM and Obj fields.
+	// ScanResult wraps android.net.wifi.ScanResult with methods like
+	//   DescribeContents, Equals, etc.
+	// Info wraps android.net.wifi.WifiInfo with methods like
+	//   GetBSSID, GetFrequency, GetSSID, GetRssi, GetLinkSpeed, etc.
 	var scan wifi.ScanResult
-	fmt.Fprintf(&output, "ScanResult.SSID:         %q\n", scan.SSID)
-	fmt.Fprintf(&output, "ScanResult.BSSID:        %q\n", scan.BSSID)
-	fmt.Fprintf(&output, "ScanResult.RSSI:         %d\n", scan.RSSI)
-	fmt.Fprintf(&output, "ScanResult.Frequency:    %d\n", scan.Frequency)
-	fmt.Fprintf(&output, "ScanResult.Capabilities: %q\n", scan.Capabilities)
-
-	// --- ConnectionInfo Data Class ---
-	// ConnectionInfo holds data from android.net.wifi.WifiInfo:
-	var info wifi.ConnectionInfo
-	fmt.Fprintf(&output, "ConnectionInfo.SSID:      %q\n", info.SSID)
-	fmt.Fprintf(&output, "ConnectionInfo.BSSID:     %q\n", info.BSSID)
-	fmt.Fprintf(&output, "ConnectionInfo.RSSI:      %d\n", info.RSSI)
-	fmt.Fprintf(&output, "ConnectionInfo.LinkSpeed: %d\n", info.LinkSpeed)
-	fmt.Fprintf(&output, "ConnectionInfo.Frequency: %d\n", info.Frequency)
-	fmt.Fprintf(&output, "ConnectionInfo.IPAddress: %d\n", info.IPAddress)
+	_ = scan
+	var info wifi.Info
+	_ = info
+	fmt.Fprintln(&output, "ScanResult and Info types available")
 
 	return nil
 }

@@ -58,9 +58,9 @@ func run(vm *jni.VM) error {
 	// These identify the transport mechanism of a network.
 	fmt.Fprintln(&output, "Transport types:")
 	fmt.Fprintf(&output, "  TransportCellular  = %d\n", net.TransportCellular)
-	fmt.Fprintf(&output, "  TransportWiFi      = %d\n", net.TransportWiFi)
+	fmt.Fprintf(&output, "  TransportWifi      = %d\n", net.TransportWifi)
 	fmt.Fprintf(&output, "  TransportBluetooth = %d\n", net.TransportBluetooth)
-	fmt.Fprintf(&output, "  TransportVPN       = %d\n", net.TransportVPN)
+	fmt.Fprintf(&output, "  TransportVpn       = %d\n", net.TransportVpn)
 
 	// Package-internal Manager methods:
 	//   getActiveNetworkRaw()                    - get the active Network object

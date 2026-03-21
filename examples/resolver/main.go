@@ -80,7 +80,10 @@ func run(vm *jni.VM) error {
 	// from content URIs opened via openFileDescriptorRaw.
 	fmt.Fprintln(&output, "ParcelFD API: getFd, detachFd")
 
-	_ = resolver.Cursor{}
+	// The Resolver and Uri types are the main exported types.
+	var r resolver.Resolver
+	var u resolver.Uri
+	_, _ = r, u
 	fmt.Fprintln(&output, "Resolver example complete.")
 	return nil
 }

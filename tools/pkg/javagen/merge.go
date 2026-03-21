@@ -5,126 +5,12 @@ import (
 	"strings"
 )
 
-// MergedSpec is the fully resolved specification ready for template rendering.
-type MergedSpec struct {
-	Package         string
-	GoImport        string
-	JavaPackageDesc string
-
-	Classes        []MergedClass
-	DataClasses    []MergedDataClass
-	Callbacks      []MergedCallback
-	ConstantGroups []MergedConstantGroup
-}
-
-// MergedClass is a resolved Java class wrapper.
-type MergedClass struct {
-	JavaClass      string
-	JavaClassSlash string
-	GoType         string
-	Obtain         string
-	ServiceName    string
-	Kind           string
-	Close          bool
-	Methods        []MergedMethod
-}
-
-// ReturnKind classifies how a method's return value should be handled
-// in the generated code.
-type ReturnKind string
-
-const (
-	ReturnVoid      ReturnKind = "void"
-	ReturnString    ReturnKind = "string"
-	ReturnBool      ReturnKind = "bool"
-	ReturnObject    ReturnKind = "object"
-	ReturnPrimitive ReturnKind = "primitive"
-)
-
-// MergedMethod is a resolved method with all computed helpers.
-type MergedMethod struct {
-	JavaMethod string
-	GoName     string
-	Static     bool
-	Params     []MergedParam
-	Returns    string
-	GoReturn   string
-	Error      bool
-	JNISig     string
-	CallSuffix string
-	ReturnKind ReturnKind
-
-	GoParamList    string
-	GoReturnList   string
-	GoReturnVars   string
-	GoReturnValues string
-	JNIArgs        string
-	HasError       bool
-}
-
-// MergedParam is a resolved parameter.
-type MergedParam struct {
-	JavaType       string
-	GoName         string
-	GoType         string
-	ConversionCode string
-	IsString       bool
-	IsBool         bool
-	IsObject       bool
-}
-
-// MergedDataClass is a resolved data class (getter extraction).
-type MergedDataClass struct {
-	JavaClass      string
-	JavaClassSlash string
-	GoType         string
-	Fields         []MergedField
-}
-
-// MergedField is a resolved field getter on a data class.
-type MergedField struct {
-	JavaMethod string // getter method name (for java_method fields)
-	JavaName   string // raw field name (for java_field direct access)
-	GoName     string
-	GoType     string
-	JNISig     string
-	CallSuffix string
-	IsField    bool // true = use GetFieldID/Get*Field, false = use GetMethodID/Call*Method
-}
-
-// MergedCallback is a resolved callback interface.
-type MergedCallback struct {
-	JavaInterface string
-	GoType        string
-	Methods       []MergedCallbackMethod
-}
-
-// MergedCallbackMethod is a resolved callback method.
-type MergedCallbackMethod struct {
-	JavaMethod string
-	GoField    string
-	Params     []MergedParam
-	GoParams   string
-}
-
-// MergedConstantGroup groups constants by their Go type.
-type MergedConstantGroup struct {
-	GoType   string
-	BaseType string
-	Values   []MergedConstant
-}
-
-// MergedConstant is a resolved constant value.
-type MergedConstant struct {
-	GoName string
-	Value  string
-}
-
 // Merge combines a Spec and Overlay into a fully resolved MergedSpec.
 func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 	merged := &MergedSpec{
-		Package:  spec.Package,
-		GoImport: spec.GoImport,
+		Package:         spec.Package,
+		GoImport:        spec.GoImport,
+		JavaPackageDesc: deriveJavaPackageDesc(spec),
 	}
 
 	// Inject spec-level intent_extras into the first class (battery pattern).
@@ -280,6 +166,7 @@ func mergeMethod(m *Method, overlay *Overlay) (*MergedMethod, error) {
 
 	isVoid := retKind == ReturnVoid
 	mm.GoParamList = buildGoParamList(params)
+	mm.GoParamListMultiLine = buildGoParamListMultiLine(params)
 	mm.GoReturnList = buildGoReturnList(goReturn, isVoid, m.Error)
 	mm.GoReturnVars = buildGoReturnVars(goReturn, isVoid)
 	mm.GoReturnValues = buildGoReturnValues(goReturn, isVoid, m.Error)
@@ -409,6 +296,24 @@ func mergeCallback(cb *Callback, overlay *Overlay) (*MergedCallback, error) {
 	return mcb, nil
 }
 
+// deriveJavaPackageDesc extracts the Java package name from the first
+// class in the spec to produce a human-readable description for the
+// doc.go package comment. Returns the Java package (e.g.
+// "android.net.wifi") or the Go package name as fallback.
+func deriveJavaPackageDesc(spec *Spec) string {
+	for _, cls := range spec.Classes {
+		if cls.JavaClass == "" {
+			continue
+		}
+		// Extract Java package from fully-qualified class name.
+		idx := strings.LastIndex(cls.JavaClass, ".")
+		if idx > 0 {
+			return cls.JavaClass[:idx]
+		}
+	}
+	return spec.Package
+}
+
 // inferBaseType guesses the Go base type from a constant value literal.
 // Quoted strings → "string", everything else → "int".
 func inferBaseType(value string) string {
@@ -449,6 +354,11 @@ func mergeConstants(constants []Constant) []MergedConstantGroup {
 			if baseType == "" {
 				baseType = c.GoType
 			}
+			// For untyped or builtin-typed constants, infer the base type
+			// from the value literal so the generated code has explicit types.
+			if baseType == "" || isBuiltinType(baseType) {
+				baseType = inferBaseType(c.Value)
+			}
 			g = &MergedConstantGroup{
 				BaseType: baseType,
 			}
@@ -477,6 +387,10 @@ func mergeConstants(constants []Constant) []MergedConstantGroup {
 	return result
 }
 
+// multiLineParamThreshold is the minimum number of parameters that triggers
+// multi-line formatting (each parameter on its own line).
+const multiLineParamThreshold = 3
+
 func buildGoParamList(params []MergedParam) string {
 	var parts []string
 	for _, p := range params {
@@ -485,7 +399,30 @@ func buildGoParamList(params []MergedParam) string {
 	return strings.Join(parts, ", ")
 }
 
-func buildGoReturnList(goReturn string, isVoid, hasError bool) string {
+// buildGoParamListMultiLine returns the parameter list formatted with each
+// parameter on its own line (for functions with 3+ parameters).
+// Returns empty string if there are fewer than multiLineParamThreshold params.
+func buildGoParamListMultiLine(params []MergedParam) string {
+	if len(params) < multiLineParamThreshold {
+		return ""
+	}
+	var sb strings.Builder
+	sb.WriteString("\n")
+	for _, p := range params {
+		sb.WriteString("\t")
+		sb.WriteString(p.GoName)
+		sb.WriteString(" ")
+		sb.WriteString(p.GoType)
+		sb.WriteString(",\n")
+	}
+	return sb.String()
+}
+
+func buildGoReturnList(
+	goReturn string,
+	isVoid bool,
+	hasError bool,
+) string {
 	switch {
 	case isVoid && hasError:
 		return "error"
@@ -505,7 +442,11 @@ func buildGoReturnVars(goReturn string, isVoid bool) string {
 	return "var result " + goReturn
 }
 
-func buildGoReturnValues(goReturn string, isVoid, hasError bool) string {
+func buildGoReturnValues(
+	goReturn string,
+	isVoid bool,
+	hasError bool,
+) string {
 	switch {
 	case isVoid && hasError:
 		return "callErr"

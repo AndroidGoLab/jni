@@ -55,19 +55,19 @@ func run(vm *jni.VM) error {
 	defer mgr.Close()
 
 	// Audio device type constants from android.media.AudioDeviceInfo.
-	fmt.Fprintf(&output, "device types: speaker=%d, mic=%d, wired_headset=%d, wired_headphones=%d, bluetooth=%d, bluetooth_le=%d, usb=%d, hdmi=%d\n",
-		audiomanager.DeviceBuiltinSpeaker, audiomanager.DeviceBuiltinMic,
-		audiomanager.DeviceWiredHeadset, audiomanager.DeviceWiredHeadphones,
-		audiomanager.DeviceBluetooth, audiomanager.DeviceBluetoothLE,
-		audiomanager.DeviceUSB, audiomanager.DeviceHDMI)
+	fmt.Fprintf(&output, "device types: speaker=%d, mic=%d, wired_headset=%d, wired_headphones=%d, bluetooth_a2dp=%d, usb=%d, hdmi=%d\n",
+		audiomanager.TypeBuiltinSpeaker, audiomanager.TypeBuiltinMic,
+		audiomanager.TypeWiredHeadset, audiomanager.TypeWiredHeadphones,
+		audiomanager.TypeBluetoothA2dp,
+		audiomanager.TypeUsbDevice, audiomanager.TypeHdmi)
 
 	// Audio focus request constants.
 	fmt.Fprintf(&output, "focus gain: gain=%d, transient=%d, transient_duck=%d\n",
-		audiomanager.FocusGain, audiomanager.FocusGainTransient,
-		audiomanager.FocusGainTransientDuck)
+		audiomanager.AudiofocusGain, audiomanager.AudiofocusGainTransient,
+		audiomanager.AudiofocusGainTransientMayDuck)
 	fmt.Fprintf(&output, "focus loss: loss=%d, transient=%d, transient_duck=%d\n",
-		audiomanager.FocusLoss, audiomanager.FocusLossTransient,
-		audiomanager.FocusLossTransientDuck)
+		audiomanager.AudiofocusLoss, audiomanager.AudiofocusLossTransient,
+		audiomanager.AudiofocusLossTransientCanDuck)
 
 	// Stream type constants for volume control.
 	fmt.Fprintf(&output, "streams: voice_call=%d, system=%d, ring=%d, music=%d, alarm=%d, notification=%d\n",
@@ -77,7 +77,7 @@ func run(vm *jni.VM) error {
 
 	// Device filter constants for getDevices.
 	fmt.Fprintf(&output, "device filters: input=%d, output=%d, all=%d\n",
-		audiomanager.DevicesInput, audiomanager.DevicesOutput, audiomanager.DevicesAll)
+		audiomanager.GetDevicesInputs, audiomanager.GetDevicesOutputs, audiomanager.GetDevicesAll)
 
 	// The Manager also provides unexported methods for:
 	//   - getDevicesRaw(flags) - enumerate audio devices

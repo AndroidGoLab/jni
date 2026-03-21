@@ -21,6 +21,8 @@ var (
 
 {{- if eq .Obtain "system_service"}}
 
+const serviceName = "{{.ServiceName}}"
+
 // {{.GoType}} wraps {{.JavaClass}}.
 type {{.GoType}} struct {
 	VM  *jni.VM
@@ -41,12 +43,12 @@ func New{{.GoType}}(ctx *app.Context) (*{{.GoType}}, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService("{{.ServiceName}}")
+		svc, err := ctx.GetSystemService(serviceName)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("{{.ServiceName}} service not available")
+			return fmt.Errorf("%s service not available", serviceName)
 		}
 		mgr.Obj = env.NewGlobalRef(svc)
 		return nil
@@ -143,7 +145,11 @@ func (m *{{.GoType}}) Close() {
 
 {{range .Methods}}
 // {{.GoName}} calls {{$.JavaClass}}.{{.JavaMethod}}.
+{{- if .GoParamListMultiLine}}
+func (m *{{$.GoType}}) {{.GoName}}({{.GoParamListMultiLine}}) {{.GoReturnList}} {
+{{- else}}
 func (m *{{$.GoType}}) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} {
+{{- end}}
 	{{.GoReturnVars}}
 	{{if .HasError}}var callErr error{{end}}
 	m.VM.Do(func(env *jni.Env) error {

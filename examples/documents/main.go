@@ -26,17 +26,12 @@ var output bytes.Buffer
 
 //export goRun
 func goRun(cvm *C.JavaVM) {
-	// Exported constants for SAF intent actions.
-	fmt.Fprintln(&output, "Intent action constants:")
-	fmt.Fprintf(&output, "  ActionOpenDocument:     %s\n", documents.ActionOpenDocument)
-	fmt.Fprintf(&output, "  ActionOpenDocumentTree: %s\n", documents.ActionOpenDocumentTree)
-	fmt.Fprintf(&output, "  ActionCreateDocument:   %s\n", documents.ActionCreateDocument)
-
-	// Exported constants for intent extras.
-	fmt.Fprintln(&output, "Intent extra constants:")
-	fmt.Fprintf(&output, "  ExtraMimeTypes:     %s\n", documents.ExtraMimeTypes)
-	fmt.Fprintf(&output, "  ExtraAllowMultiple: %s\n", documents.ExtraAllowMultiple)
-	fmt.Fprintf(&output, "  ExtraTitle:         %s\n", documents.ExtraTitle)
+	// Exported constants from DocumentsContract.
+	fmt.Fprintln(&output, "DocumentsContract constants:")
+	fmt.Fprintf(&output, "  ActionDocumentSettings: %s\n", documents.ActionDocumentSettings)
+	fmt.Fprintf(&output, "  ExtraError:             %s\n", documents.ExtraError)
+	fmt.Fprintf(&output, "  ExtraInitialUri:        %s\n", documents.ExtraInitialUri)
+	fmt.Fprintf(&output, "  ProviderInterface:      %s\n", documents.ProviderInterface)
 
 	// The following methods are all on the unexported documentsContract type
 	// and are used by higher-level Go wrappers:

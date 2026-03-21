@@ -74,27 +74,18 @@ func run(vm *jni.VM) error {
 
 	// --- Interval Type Constants ---
 	// These correspond to UsageStatsManager.INTERVAL_* values:
-	fmt.Fprintf(&output, "Daily:   %d\n", usage.Daily)
-	fmt.Fprintf(&output, "Weekly:  %d\n", usage.Weekly)
-	fmt.Fprintf(&output, "Monthly: %d\n", usage.Monthly)
-	fmt.Fprintf(&output, "Yearly:  %d\n", usage.Yearly)
+	fmt.Fprintf(&output, "IntervalDaily:   %d\n", usage.IntervalDaily)
+	fmt.Fprintf(&output, "IntervalWeekly:  %d\n", usage.IntervalWeekly)
+	fmt.Fprintf(&output, "IntervalMonthly: %d\n", usage.IntervalMonthly)
+	fmt.Fprintf(&output, "IntervalYearly:  %d\n", usage.IntervalYearly)
 
 	// --- Standby Bucket Constants ---
 	// These correspond to UsageStatsManager.STANDBY_BUCKET_* values:
-	fmt.Fprintf(&output, "StandbyActive:     %d\n", usage.StandbyActive)
-	fmt.Fprintf(&output, "StandbyWorkingSet: %d\n", usage.StandbyWorkingSet)
-	fmt.Fprintf(&output, "StandbyFrequent:   %d\n", usage.StandbyFrequent)
-	fmt.Fprintf(&output, "StandbyRare:       %d\n", usage.StandbyRare)
-	fmt.Fprintf(&output, "StandbyRestricted: %d\n", usage.StandbyRestricted)
-
-	// --- Stats Data Class ---
-	// Stats holds data extracted from android.app.usage.UsageStats:
-	var stats usage.Stats
-	fmt.Fprintf(&output, "Stats.PackageName:         %q\n", stats.PackageName)
-	fmt.Fprintf(&output, "Stats.FirstTimestamp:      %d\n", stats.FirstTimestamp)
-	fmt.Fprintf(&output, "Stats.LastTimestamp:       %d\n", stats.LastTimestamp)
-	fmt.Fprintf(&output, "Stats.TotalTimeVisible:    %d\n", stats.TotalTimeVisible)
-	fmt.Fprintf(&output, "Stats.TotalTimeForeground: %d\n", stats.TotalTimeForeground)
+	fmt.Fprintf(&output, "StandbyBucketActive:     %d\n", usage.StandbyBucketActive)
+	fmt.Fprintf(&output, "StandbyBucketWorkingSet: %d\n", usage.StandbyBucketWorkingSet)
+	fmt.Fprintf(&output, "StandbyBucketFrequent:   %d\n", usage.StandbyBucketFrequent)
+	fmt.Fprintf(&output, "StandbyBucketRare:       %d\n", usage.StandbyBucketRare)
+	fmt.Fprintf(&output, "StandbyBucketRestricted: %d\n", usage.StandbyBucketRestricted)
 
 	_ = mgr
 	return nil

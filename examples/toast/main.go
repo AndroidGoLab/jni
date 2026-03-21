@@ -56,8 +56,8 @@ func run(vm *jni.VM) error {
 	// The toast package provides duration constants matching the Android
 	// Toast.LENGTH_SHORT and Toast.LENGTH_LONG values.
 	fmt.Fprintln(&output, "=== Toast duration constants ===")
-	fmt.Fprintf(&output, "  Short (LENGTH_SHORT) = %d\n", toast.Short)
-	fmt.Fprintf(&output, "  Long  (LENGTH_LONG)  = %d\n", toast.Long)
+	fmt.Fprintf(&output, "  Short (LENGTH_SHORT) = %d\n", toast.LengthShort)
+	fmt.Fprintf(&output, "  Long  (LENGTH_LONG)  = %d\n", toast.LengthLong)
 
 	// --- Showing a toast ---
 	// The toast type wraps android.widget.Toast. Its single method is:
@@ -67,7 +67,7 @@ func run(vm *jni.VM) error {
 	// then wrap the returned object in the toast struct and call show().
 	//
 	// Example flow:
-	//   1. Call Toast.makeText(context, "Hello from Go!", toast.Short) via JNI
+	//   1. Call Toast.makeText(context, "Hello from Go!", toast.LengthShort) via JNI
 	//   2. Wrap the returned Java object
 	//   3. Call show() on the wrapper
 	err = vm.Do(func(env *jni.Env) error {
@@ -99,7 +99,7 @@ func run(vm *jni.VM) error {
 		toastObj, err := env.CallStaticObjectMethod(cls, mid,
 			jni.ObjectValue(ctx.Obj),
 			jni.ObjectValue(&msg.Object),
-			jni.IntValue(int32(toast.Short)),
+			jni.IntValue(int32(toast.LengthShort)),
 		)
 		if err != nil {
 			fmt.Fprintf(&output, "  makeText (requires UI thread): %v\n", err)
@@ -116,7 +116,7 @@ func run(vm *jni.VM) error {
 		//   env.CallStaticObjectMethod(cls, mid,
 		//       jni.ObjectValue(ctx.Obj),
 		//       jni.ObjectValue(msg.Object()),
-		//       jni.IntValue(int32(toast.Long)),
+		//       jni.IntValue(int32(toast.LengthLong)),
 		//   )
 		_ = toastObj
 

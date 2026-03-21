@@ -10,7 +10,7 @@ type Error int32
 func (e Error) Error() string {
 	switch e {
 {{- range .ErrorCodes}}
-	case {{.Value}}:
+	case {{.GoName}}:
 		return "jni: {{.Description}}"
 {{- end}}
 	default:

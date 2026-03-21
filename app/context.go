@@ -52,7 +52,7 @@ func ensureContextInit(env *jni.Env) error {
 // After Close, the Context must not be used.
 func (m *Context) Close() {
 	if m.Obj != nil {
-		m.VM.Do(func(env *jni.Env) error {
+		_ = m.VM.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(m.Obj)
 			m.Obj = nil
 			return nil
@@ -64,7 +64,7 @@ func (m *Context) Close() {
 func (m *Context) PackageManager() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	doErr := m.VM.Do(func(env *jni.Env) error {
 		if err := ensureContextInit(env); err != nil {
 			callErr = err
 			return err
@@ -81,14 +81,17 @@ func (m *Context) PackageManager() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(m.Obj, mid)
 		return callErr
 	})
-	return result, callErr
+	if callErr != nil {
+		return result, callErr
+	}
+	return result, doErr
 }
 
 // ContentResolver calls android.content.Context.getContentResolver().
 func (m *Context) ContentResolver() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	doErr := m.VM.Do(func(env *jni.Env) error {
 		if err := ensureContextInit(env); err != nil {
 			callErr = err
 			return err
@@ -105,14 +108,17 @@ func (m *Context) ContentResolver() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(m.Obj, mid)
 		return callErr
 	})
-	return result, callErr
+	if callErr != nil {
+		return result, callErr
+	}
+	return result, doErr
 }
 
 // GetSystemService calls android.content.Context.getSystemService.
 func (m *Context) GetSystemService(name string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	doErr := m.VM.Do(func(env *jni.Env) error {
 		if err := ensureContextInit(env); err != nil {
 			callErr = err
 			return err
@@ -128,5 +134,8 @@ func (m *Context) GetSystemService(name string) (*jni.Object, error) {
 		)
 		return callErr
 	})
-	return result, callErr
+	if callErr != nil {
+		return result, callErr
+	}
+	return result, doErr
 }

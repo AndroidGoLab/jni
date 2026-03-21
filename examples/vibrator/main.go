@@ -64,11 +64,8 @@ func run(vm *jni.VM) error {
 		return nil
 	}
 
-	// Cancel any ongoing vibration.
-	if err := vib.Cancel(); err != nil {
-		return fmt.Errorf("Cancel: %w", err)
-	}
-	fmt.Fprintln(&output, "vibration cancelled")
+	// The Vibrator provides Vibrate methods for triggering vibrations
+	// and HasVibrator/HasAmplitudeControl for capability checking.
 
 	// Vibrator also provides unexported methods:
 	//   vibrateMs(milliseconds int64)              -- vibrate for a duration.

@@ -4,15 +4,6 @@ package jni
 
 import "github.com/AndroidGoLab/jni/capi"
 
-// MethodID is a JNI method identifier.
-type MethodID = capi.JmethodID
-
-// FieldID is a JNI field identifier.
-type FieldID = capi.JfieldID
-
-// ObjectRefType represents the type of a JNI object reference.
-type ObjectRefType = capi.Jint
-
 // JNI version constants.
 const (
 	JNI_VERSION_1_1 = capi.JNI_VERSION_1_1

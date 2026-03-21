@@ -50,13 +50,13 @@ func run(vm *jni.VM) error {
 	// Battery status constants (android.os.BatteryManager.BATTERY_STATUS_*).
 	// The Status type is a named int for type safety.
 	fmt.Fprintf(&output, "status: unknown=%d, charging=%d, discharging=%d, not_charging=%d, full=%d\n",
-		battery.StatusUnknown, battery.StatusCharging, battery.StatusDischarging,
-		battery.StatusNotCharging, battery.StatusFull)
+		battery.BatteryStatusUnknown, battery.BatteryStatusCharging, battery.BatteryStatusDischarging,
+		battery.BatteryStatusNotCharging, battery.BatteryStatusFull)
 
 	// Plugged state constants (android.os.BatteryManager.BATTERY_PLUGGED_*).
-	fmt.Fprintf(&output, "plugged: none=%d, ac=%d, usb=%d, wireless=%d\n",
-		battery.PluggedNone, battery.PluggedAC, battery.PluggedUSB,
-		battery.PluggedWireless)
+	fmt.Fprintf(&output, "plugged: ac=%d, usb=%d, wireless=%d\n",
+		battery.BatteryPluggedAc, battery.BatteryPluggedUsb,
+		battery.BatteryPluggedWireless)
 
 	// In a real app, battery info is read from the BATTERY_CHANGED sticky
 	// broadcast. Register a BroadcastReceiver via app.Context.RegisterReceiverRaw
@@ -72,17 +72,17 @@ func run(vm *jni.VM) error {
 	// health, technology, present.
 
 	// Demonstrate Status type usage.
-	status := battery.StatusCharging
+	status := battery.BatteryStatusCharging
 	switch status {
-	case battery.StatusUnknown:
+	case battery.BatteryStatusUnknown:
 		fmt.Fprintln(&output, "battery status: unknown")
-	case battery.StatusCharging:
+	case battery.BatteryStatusCharging:
 		fmt.Fprintln(&output, "battery status: charging")
-	case battery.StatusDischarging:
+	case battery.BatteryStatusDischarging:
 		fmt.Fprintln(&output, "battery status: discharging")
-	case battery.StatusNotCharging:
+	case battery.BatteryStatusNotCharging:
 		fmt.Fprintln(&output, "battery status: not charging")
-	case battery.StatusFull:
+	case battery.BatteryStatusFull:
 		fmt.Fprintln(&output, "battery status: full")
 	}
 

@@ -46,13 +46,13 @@ func goRun(cvm *C.JavaVM) {
 
 	// --- TNF (Type Name Format) constants for NDEF records ---
 	fmt.Fprintln(&output, "\nTNF types:")
-	fmt.Fprintf(&output, "  TNFEmpty        = %d\n", nfc.TNFEmpty)
-	fmt.Fprintf(&output, "  TNFWellKnown    = %d\n", nfc.TNFWellKnown)
-	fmt.Fprintf(&output, "  TNFMimeMedia    = %d\n", nfc.TNFMimeMedia)
-	fmt.Fprintf(&output, "  TNFAbsoluteURI  = %d\n", nfc.TNFAbsoluteURI)
-	fmt.Fprintf(&output, "  TNFExternalType = %d\n", nfc.TNFExternalType)
-	fmt.Fprintf(&output, "  TNFUnknown      = %d\n", nfc.TNFUnknown)
-	fmt.Fprintf(&output, "  TNFUnchanged    = %d\n", nfc.TNFUnchanged)
+	fmt.Fprintf(&output, "  TnfEmpty        = %d\n", nfc.TnfEmpty)
+	fmt.Fprintf(&output, "  TnfWellKnown    = %d\n", nfc.TnfWellKnown)
+	fmt.Fprintf(&output, "  TnfMimeMedia    = %d\n", nfc.TnfMimeMedia)
+	fmt.Fprintf(&output, "  TnfAbsoluteUri  = %d\n", nfc.TnfAbsoluteUri)
+	fmt.Fprintf(&output, "  TnfExternalType = %d\n", nfc.TnfExternalType)
+	fmt.Fprintf(&output, "  TnfUnknown      = %d\n", nfc.TnfUnknown)
+	fmt.Fprintf(&output, "  TnfUnchanged    = %d\n", nfc.TnfUnchanged)
 
 	// --- Exported types ---
 	// The nfc package exposes three main wrapper types with exported

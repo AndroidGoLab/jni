@@ -77,15 +77,15 @@ func run(vm *jni.VM) error {
 
 	// --- Error Constants ---
 	// These correspond to SpeechRecognizer.ERROR_* values:
-	fmt.Fprintf(&output, "ErrNetworkTimeout:          %d\n", speech.ErrNetworkTimeout)
-	fmt.Fprintf(&output, "ErrNetwork:                 %d\n", speech.ErrNetwork)
-	fmt.Fprintf(&output, "ErrAudio:                   %d\n", speech.ErrAudio)
-	fmt.Fprintf(&output, "ErrServer:                  %d\n", speech.ErrServer)
-	fmt.Fprintf(&output, "ErrClient:                  %d\n", speech.ErrClient)
-	fmt.Fprintf(&output, "ErrSpeechTimeout:           %d\n", speech.ErrSpeechTimeout)
-	fmt.Fprintf(&output, "ErrNoMatch:                 %d\n", speech.ErrNoMatch)
-	fmt.Fprintf(&output, "ErrBusy:                    %d\n", speech.ErrBusy)
-	fmt.Fprintf(&output, "ErrInsufficientPermissions: %d\n", speech.ErrInsufficientPermissions)
+	fmt.Fprintf(&output, "ErrorNetworkTimeout:          %d\n", speech.ErrorNetworkTimeout)
+	fmt.Fprintf(&output, "ErrorNetwork:                 %d\n", speech.ErrorNetwork)
+	fmt.Fprintf(&output, "ErrorAudio:                   %d\n", speech.ErrorAudio)
+	fmt.Fprintf(&output, "ErrorServer:                  %d\n", speech.ErrorServer)
+	fmt.Fprintf(&output, "ErrorClient:                  %d\n", speech.ErrorClient)
+	fmt.Fprintf(&output, "ErrorSpeechTimeout:           %d\n", speech.ErrorSpeechTimeout)
+	fmt.Fprintf(&output, "ErrorNoMatch:                 %d\n", speech.ErrorNoMatch)
+	fmt.Fprintf(&output, "ErrorRecognizerBusy:          %d\n", speech.ErrorRecognizerBusy)
+	fmt.Fprintf(&output, "ErrorInsufficientPermissions: %d\n", speech.ErrorInsufficientPermissions)
 
 	// --- TTS Queue Mode Constants ---
 	// These correspond to TextToSpeech.QUEUE_* values:

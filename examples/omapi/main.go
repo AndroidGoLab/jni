@@ -49,7 +49,7 @@ func run(vm *jni.VM) error {
 	defer svc.Close()
 
 	// --- IsConnected ---
-	connected := svc.IsConnected()
+	connected, _ := svc.IsConnected()
 	fmt.Fprintf(&output, "SE service connected: %v\n", connected)
 
 	// --- Shutdown ---

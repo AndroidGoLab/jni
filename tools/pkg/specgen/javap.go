@@ -8,45 +8,12 @@ import (
 	"strings"
 )
 
-// JavapClass holds the parsed output of javap for one class.
-type JavapClass struct {
-	FullName    string // e.g. "android.app.KeyguardManager"
-	IsInterface bool
-	IsAbstract  bool
-	IsFinal     bool
-	Constants   []JavapConstant
-	Methods     []JavapMethod
-	Implements  []string
-}
-
-// JavapConstant is a public static final field.
-type JavapConstant struct {
-	Name     string // e.g. "ERROR_BAD_VALUE"
-	JavaType string // e.g. "int", "java.lang.String"
-	Value    string // e.g. "1", "gps" — extracted from ConstantValue attribute
-}
-
-// JavapMethod is a public method parsed from javap output.
-type JavapMethod struct {
-	Name       string
-	ReturnType string // "void", "int", "boolean", "java.lang.String", etc.
-	Params     []JavapParam
-	IsStatic   bool
-	Throws     bool
-}
-
-// JavapParam is a method parameter.
-type JavapParam struct {
-	JavaType string
-}
-
 var (
 	classLineRe     = regexp.MustCompile(`^public\s+(abstract\s+)?(final\s+)?(class|interface)\s+(\S+)`)
 	implementsRe    = regexp.MustCompile(`implements\s+(.+?)\s*\{?\s*$`)
 	constantRe      = regexp.MustCompile(`^\s+public static final\s+(\S+)\s+(\w+);`)
 	constantValueRe = regexp.MustCompile(`^\s+ConstantValue:\s+(\S+)\s+(.+)$`)
 	methodRe        = regexp.MustCompile(`^\s+public\s+(static\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
-	constructorRe   = regexp.MustCompile(`^\s+public\s+\S+\(([^)]*)\)(.*);\s*$`)
 )
 
 // RunJavap executes javap and parses the output for a single class.
@@ -54,9 +21,10 @@ var (
 // Uses -verbose to extract constant values from ConstantValue attributes.
 func RunJavap(classPath string, className string) (*JavapClass, error) {
 	var cmd *exec.Cmd
-	if classPath != "" {
+	switch {
+	case classPath != "":
 		cmd = exec.Command("javap", "-public", "-verbose", "-cp", classPath, className)
-	} else {
+	default:
 		// No classpath — javap uses the JDK's default (for java.* classes).
 		cmd = exec.Command("javap", "-public", "-verbose", className)
 	}
@@ -135,7 +103,6 @@ func parseJavap(output string) (*JavapClass, error) {
 		}
 
 		// Skip constructors for now (handled by obtain type).
-		_ = constructorRe
 	}
 
 	if jc.FullName == "" {

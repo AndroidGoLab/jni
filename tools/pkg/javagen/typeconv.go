@@ -225,7 +225,7 @@ func ParamConversionCode(p MergedParam) string {
 			varName, p.GoName, "err")
 	}
 	if p.IsBool {
-		return fmt.Sprintf("var %s uint8\n\t\tif %s {\n\t\t\t%s = 1\n\t\t}\n",
+		return fmt.Sprintf("var %s uint8\n\t\tif %s {\n\t\t\t%s = jniTrue\n\t\t}\n",
 			varName, p.GoName, varName)
 	}
 	return ""

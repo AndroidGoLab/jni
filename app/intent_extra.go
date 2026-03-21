@@ -40,8 +40,8 @@ func NewIntent(vm *jni.VM) (*Intent, error) {
 func (i *Intent) PutStringExtra(
 	key string,
 	value string,
-) {
-	i.VM.Do(func(env *jni.Env) error {
+) error {
+	return i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
 		mid, err := env.GetMethodID(cls, "putExtra",
 			"(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
@@ -66,8 +66,8 @@ func (i *Intent) PutStringExtra(
 func (i *Intent) PutIntExtra(
 	key string,
 	value int32,
-) {
-	i.VM.Do(func(env *jni.Env) error {
+) error {
+	return i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
 		mid, err := env.GetMethodID(cls, "putExtra",
 			"(Ljava/lang/String;I)Landroid/content/Intent;")
@@ -88,8 +88,8 @@ func (i *Intent) PutIntExtra(
 func (i *Intent) PutBoolExtra(
 	key string,
 	value bool,
-) {
-	i.VM.Do(func(env *jni.Env) error {
+) error {
+	return i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
 		mid, err := env.GetMethodID(cls, "putExtra",
 			"(Ljava/lang/String;Z)Landroid/content/Intent;")

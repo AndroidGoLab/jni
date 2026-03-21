@@ -51,9 +51,9 @@ func run(vm *jni.VM) error {
 	defer ctx.Close()
 
 	fmt.Fprintln(&output, "=== Provider constants ===")
-	fmt.Fprintf(&output, "  GPS     = %q\n", location.GPS)
-	fmt.Fprintf(&output, "  Network = %q\n", location.Network)
-	fmt.Fprintf(&output, "  Passive = %q\n", location.Passive)
+	fmt.Fprintf(&output, "  GPS     = %q\n", location.GpsProvider)
+	fmt.Fprintf(&output, "  Network = %q\n", location.NetworkProvider)
+	fmt.Fprintf(&output, "  Passive = %q\n", location.PassiveProvider)
 
 	mgr, err := location.NewManager(ctx)
 	if err != nil {
@@ -62,7 +62,7 @@ func run(vm *jni.VM) error {
 	defer mgr.Close()
 
 	fmt.Fprintln(&output, "\n=== Provider status ===")
-	for _, provider := range []string{location.GPS, location.Network, location.Passive} {
+	for _, provider := range []string{location.GpsProvider, location.NetworkProvider, location.PassiveProvider} {
 		enabled, err := mgr.IsProviderEnabled(provider)
 		if err != nil {
 			fmt.Fprintf(&output, "  IsProviderEnabled(%s): %v\n", provider, err)
@@ -72,7 +72,7 @@ func run(vm *jni.VM) error {
 	}
 
 	// Check all providers including "fused" (Google Play Services).
-	providers := []string{location.GPS, location.Network, location.Passive, "fused"}
+	providers := []string{location.GpsProvider, location.NetworkProvider, location.PassiveProvider, "fused"}
 
 	fmt.Fprintln(&output, "\n=== Last known location ===")
 	gotLocation := false
@@ -102,9 +102,8 @@ func run(vm *jni.VM) error {
 		case err != nil:
 			fmt.Fprintf(&output, "  requestFreshLocation: %v\n", err)
 		case loc != nil:
-			fmt.Fprintf(&output, "  %s: lat=%.6f lon=%.6f alt=%.1f acc=%.1f speed=%.1f bearing=%.1f time=%d\n",
-				loc.Provider, loc.Latitude, loc.Longitude,
-				loc.Altitude, loc.Accuracy, loc.Speed, loc.Bearing, loc.Time)
+			fmt.Fprintf(&output, "  %s: lat=%.6f lon=%.6f\n",
+				loc.Provider, loc.Latitude, loc.Longitude)
 			gotLocation = true
 		default:
 			fmt.Fprintln(&output, "  No location received within timeout. Try again outdoors.")
@@ -116,7 +115,7 @@ func run(vm *jni.VM) error {
 }
 
 func printLocation(vm *jni.VM, provider string, locObj *jni.Object) {
-	var loc *location.Location
+	var loc *location.ExtractedLocation
 	var err error
 	vm.Do(func(env *jni.Env) error {
 		loc, err = location.ExtractLocation(env, locObj)
@@ -126,18 +125,17 @@ func printLocation(vm *jni.VM, provider string, locObj *jni.Object) {
 		fmt.Fprintf(&output, "  ExtractLocation(%s): %v\n", provider, err)
 		return
 	}
-	fmt.Fprintf(&output, "  %s: lat=%.6f lon=%.6f alt=%.1f acc=%.1f speed=%.1f bearing=%.1f time=%d\n",
-		loc.Provider, loc.Latitude, loc.Longitude,
-		loc.Altitude, loc.Accuracy, loc.Speed, loc.Bearing, loc.Time)
+	fmt.Fprintf(&output, "  %s: lat=%.6f lon=%.6f\n",
+		loc.Provider, loc.Latitude, loc.Longitude)
 }
 
 // requestFreshLocation uses requestLocationUpdates with a JNI proxy
 // LocationListener to obtain a fresh GPS fix. It creates a HandlerThread
 // with its own Looper so callbacks can be delivered while the main thread
 // waits. Waits up to 15 seconds.
-func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.Location, error) {
+func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.ExtractedLocation, error) {
 	var mu sync.Mutex
-	var result *location.Location
+	var result *location.ExtractedLocation
 	done := make(chan struct{})
 
 	var listenerGlobal *jni.Object
@@ -246,7 +244,7 @@ func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.Location
 		if err != nil {
 			return fmt.Errorf("get requestLocationUpdates: %w", err)
 		}
-		providerStr, err := env.NewStringUTF(location.GPS)
+		providerStr, err := env.NewStringUTF(location.GpsProvider)
 		if err != nil {
 			return fmt.Errorf("new string: %w", err)
 		}

@@ -15,167 +15,341 @@ func AllocObject(env *C.JNIEnv, p0 C.jclass) C.jobject {
 }
 
 // AttachCurrentThread wraps the JNI AttachCurrentThread function via vtable dispatch.
-func AttachCurrentThread(vm *C.JavaVM, p0 **C.JNIEnv, p1 unsafe.Pointer) C.jint {
+func AttachCurrentThread(
+	vm *C.JavaVM,
+	p0 **C.JNIEnv,
+	p1 unsafe.Pointer,
+) C.jint {
 	return C.jni_AttachCurrentThread(vm, p0, p1)
 }
 
 // AttachCurrentThreadAsDaemon wraps the JNI AttachCurrentThreadAsDaemon function via vtable dispatch.
-func AttachCurrentThreadAsDaemon(vm *C.JavaVM, p0 **C.JNIEnv, p1 unsafe.Pointer) C.jint {
+func AttachCurrentThreadAsDaemon(
+	vm *C.JavaVM,
+	p0 **C.JNIEnv,
+	p1 unsafe.Pointer,
+) C.jint {
 	return C.jni_AttachCurrentThreadAsDaemon(vm, p0, p1)
 }
 
 // CallBooleanMethodA wraps the JNI CallBooleanMethodA function via vtable dispatch.
-func CallBooleanMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jboolean {
+func CallBooleanMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jboolean {
 	return C.jni_CallBooleanMethodA(env, p0, p1, p2)
 }
 
 // CallByteMethodA wraps the JNI CallByteMethodA function via vtable dispatch.
-func CallByteMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jbyte {
+func CallByteMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jbyte {
 	return C.jni_CallByteMethodA(env, p0, p1, p2)
 }
 
 // CallCharMethodA wraps the JNI CallCharMethodA function via vtable dispatch.
-func CallCharMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jchar {
+func CallCharMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jchar {
 	return C.jni_CallCharMethodA(env, p0, p1, p2)
 }
 
 // CallDoubleMethodA wraps the JNI CallDoubleMethodA function via vtable dispatch.
-func CallDoubleMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jdouble {
+func CallDoubleMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jdouble {
 	return C.jni_CallDoubleMethodA(env, p0, p1, p2)
 }
 
 // CallFloatMethodA wraps the JNI CallFloatMethodA function via vtable dispatch.
-func CallFloatMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jfloat {
+func CallFloatMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jfloat {
 	return C.jni_CallFloatMethodA(env, p0, p1, p2)
 }
 
 // CallIntMethodA wraps the JNI CallIntMethodA function via vtable dispatch.
-func CallIntMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jint {
+func CallIntMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jint {
 	return C.jni_CallIntMethodA(env, p0, p1, p2)
 }
 
 // CallLongMethodA wraps the JNI CallLongMethodA function via vtable dispatch.
-func CallLongMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jlong {
+func CallLongMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jlong {
 	return C.jni_CallLongMethodA(env, p0, p1, p2)
 }
 
 // CallNonvirtualBooleanMethodA wraps the JNI CallNonvirtualBooleanMethodA function via vtable dispatch.
-func CallNonvirtualBooleanMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jboolean {
+func CallNonvirtualBooleanMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jboolean {
 	return C.jni_CallNonvirtualBooleanMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualByteMethodA wraps the JNI CallNonvirtualByteMethodA function via vtable dispatch.
-func CallNonvirtualByteMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jbyte {
+func CallNonvirtualByteMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jbyte {
 	return C.jni_CallNonvirtualByteMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualCharMethodA wraps the JNI CallNonvirtualCharMethodA function via vtable dispatch.
-func CallNonvirtualCharMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jchar {
+func CallNonvirtualCharMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jchar {
 	return C.jni_CallNonvirtualCharMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualDoubleMethodA wraps the JNI CallNonvirtualDoubleMethodA function via vtable dispatch.
-func CallNonvirtualDoubleMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jdouble {
+func CallNonvirtualDoubleMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jdouble {
 	return C.jni_CallNonvirtualDoubleMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualFloatMethodA wraps the JNI CallNonvirtualFloatMethodA function via vtable dispatch.
-func CallNonvirtualFloatMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jfloat {
+func CallNonvirtualFloatMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jfloat {
 	return C.jni_CallNonvirtualFloatMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualIntMethodA wraps the JNI CallNonvirtualIntMethodA function via vtable dispatch.
-func CallNonvirtualIntMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jint {
+func CallNonvirtualIntMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jint {
 	return C.jni_CallNonvirtualIntMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualLongMethodA wraps the JNI CallNonvirtualLongMethodA function via vtable dispatch.
-func CallNonvirtualLongMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jlong {
+func CallNonvirtualLongMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jlong {
 	return C.jni_CallNonvirtualLongMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualObjectMethodA wraps the JNI CallNonvirtualObjectMethodA function via vtable dispatch.
-func CallNonvirtualObjectMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jobject {
+func CallNonvirtualObjectMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jobject {
 	return C.jni_CallNonvirtualObjectMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualShortMethodA wraps the JNI CallNonvirtualShortMethodA function via vtable dispatch.
-func CallNonvirtualShortMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) C.jshort {
+func CallNonvirtualShortMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) C.jshort {
 	return C.jni_CallNonvirtualShortMethodA(env, p0, p1, p2, p3)
 }
 
 // CallNonvirtualVoidMethodA wraps the JNI CallNonvirtualVoidMethodA function via vtable dispatch.
-func CallNonvirtualVoidMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jclass, p2 C.jmethodID, p3 *C.jvalue) {
+func CallNonvirtualVoidMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+	p2 C.jmethodID,
+	p3 *C.jvalue,
+) {
 	C.jni_CallNonvirtualVoidMethodA(env, p0, p1, p2, p3)
 }
 
 // CallObjectMethodA wraps the JNI CallObjectMethodA function via vtable dispatch.
-func CallObjectMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jobject {
+func CallObjectMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jobject {
 	return C.jni_CallObjectMethodA(env, p0, p1, p2)
 }
 
 // CallShortMethodA wraps the JNI CallShortMethodA function via vtable dispatch.
-func CallShortMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) C.jshort {
+func CallShortMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jshort {
 	return C.jni_CallShortMethodA(env, p0, p1, p2)
 }
 
 // CallStaticBooleanMethodA wraps the JNI CallStaticBooleanMethodA function via vtable dispatch.
-func CallStaticBooleanMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jboolean {
+func CallStaticBooleanMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jboolean {
 	return C.jni_CallStaticBooleanMethodA(env, p0, p1, p2)
 }
 
 // CallStaticByteMethodA wraps the JNI CallStaticByteMethodA function via vtable dispatch.
-func CallStaticByteMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jbyte {
+func CallStaticByteMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jbyte {
 	return C.jni_CallStaticByteMethodA(env, p0, p1, p2)
 }
 
 // CallStaticCharMethodA wraps the JNI CallStaticCharMethodA function via vtable dispatch.
-func CallStaticCharMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jchar {
+func CallStaticCharMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jchar {
 	return C.jni_CallStaticCharMethodA(env, p0, p1, p2)
 }
 
 // CallStaticDoubleMethodA wraps the JNI CallStaticDoubleMethodA function via vtable dispatch.
-func CallStaticDoubleMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jdouble {
+func CallStaticDoubleMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jdouble {
 	return C.jni_CallStaticDoubleMethodA(env, p0, p1, p2)
 }
 
 // CallStaticFloatMethodA wraps the JNI CallStaticFloatMethodA function via vtable dispatch.
-func CallStaticFloatMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jfloat {
+func CallStaticFloatMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jfloat {
 	return C.jni_CallStaticFloatMethodA(env, p0, p1, p2)
 }
 
 // CallStaticIntMethodA wraps the JNI CallStaticIntMethodA function via vtable dispatch.
-func CallStaticIntMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jint {
+func CallStaticIntMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jint {
 	return C.jni_CallStaticIntMethodA(env, p0, p1, p2)
 }
 
 // CallStaticLongMethodA wraps the JNI CallStaticLongMethodA function via vtable dispatch.
-func CallStaticLongMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jlong {
+func CallStaticLongMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jlong {
 	return C.jni_CallStaticLongMethodA(env, p0, p1, p2)
 }
 
 // CallStaticObjectMethodA wraps the JNI CallStaticObjectMethodA function via vtable dispatch.
-func CallStaticObjectMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jobject {
+func CallStaticObjectMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jobject {
 	return C.jni_CallStaticObjectMethodA(env, p0, p1, p2)
 }
 
 // CallStaticShortMethodA wraps the JNI CallStaticShortMethodA function via vtable dispatch.
-func CallStaticShortMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jshort {
+func CallStaticShortMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jshort {
 	return C.jni_CallStaticShortMethodA(env, p0, p1, p2)
 }
 
 // CallStaticVoidMethodA wraps the JNI CallStaticVoidMethodA function via vtable dispatch.
-func CallStaticVoidMethodA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) {
+func CallStaticVoidMethodA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) {
 	C.jni_CallStaticVoidMethodA(env, p0, p1, p2)
 }
 
 // CallVoidMethodA wraps the JNI CallVoidMethodA function via vtable dispatch.
-func CallVoidMethodA(env *C.JNIEnv, p0 C.jobject, p1 C.jmethodID, p2 *C.jvalue) {
+func CallVoidMethodA(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) {
 	C.jni_CallVoidMethodA(env, p0, p1, p2)
 }
 
 // DefineClass wraps the JNI DefineClass function via vtable dispatch.
-func DefineClass(env *C.JNIEnv, p0 *C.char, p1 C.jobject, p2 *C.jbyte, p3 C.jsize) C.jclass {
+func DefineClass(
+	env *C.JNIEnv,
+	p0 *C.char,
+	p1 C.jobject,
+	p2 *C.jbyte,
+	p3 C.jsize,
+) C.jclass {
 	return C.jni_DefineClass(env, p0, p1, p2, p3)
 }
 
@@ -255,47 +429,89 @@ func GetArrayLength(env *C.JNIEnv, p0 C.jarray) C.jsize {
 }
 
 // GetBooleanArrayElements wraps the JNI GetBooleanArrayElements function via vtable dispatch.
-func GetBooleanArrayElements(env *C.JNIEnv, p0 C.jbooleanArray, p1 *C.jboolean) *C.jboolean {
+func GetBooleanArrayElements(
+	env *C.JNIEnv,
+	p0 C.jbooleanArray,
+	p1 *C.jboolean,
+) *C.jboolean {
 	return C.jni_GetBooleanArrayElements(env, p0, p1)
 }
 
 // GetBooleanArrayRegion wraps the JNI GetBooleanArrayRegion function via vtable dispatch.
-func GetBooleanArrayRegion(env *C.JNIEnv, p0 C.jbooleanArray, p1 C.jsize, p2 C.jsize, p3 *C.jboolean) {
+func GetBooleanArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jbooleanArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jboolean,
+) {
 	C.jni_GetBooleanArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetBooleanField wraps the JNI GetBooleanField function via vtable dispatch.
-func GetBooleanField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jboolean {
+func GetBooleanField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jboolean {
 	return C.jni_GetBooleanField(env, p0, p1)
 }
 
 // GetByteArrayElements wraps the JNI GetByteArrayElements function via vtable dispatch.
-func GetByteArrayElements(env *C.JNIEnv, p0 C.jbyteArray, p1 *C.jboolean) *C.jbyte {
+func GetByteArrayElements(
+	env *C.JNIEnv,
+	p0 C.jbyteArray,
+	p1 *C.jboolean,
+) *C.jbyte {
 	return C.jni_GetByteArrayElements(env, p0, p1)
 }
 
 // GetByteArrayRegion wraps the JNI GetByteArrayRegion function via vtable dispatch.
-func GetByteArrayRegion(env *C.JNIEnv, p0 C.jbyteArray, p1 C.jsize, p2 C.jsize, p3 *C.jbyte) {
+func GetByteArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jbyteArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jbyte,
+) {
 	C.jni_GetByteArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetByteField wraps the JNI GetByteField function via vtable dispatch.
-func GetByteField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jbyte {
+func GetByteField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jbyte {
 	return C.jni_GetByteField(env, p0, p1)
 }
 
 // GetCharArrayElements wraps the JNI GetCharArrayElements function via vtable dispatch.
-func GetCharArrayElements(env *C.JNIEnv, p0 C.jcharArray, p1 *C.jboolean) *C.jchar {
+func GetCharArrayElements(
+	env *C.JNIEnv,
+	p0 C.jcharArray,
+	p1 *C.jboolean,
+) *C.jchar {
 	return C.jni_GetCharArrayElements(env, p0, p1)
 }
 
 // GetCharArrayRegion wraps the JNI GetCharArrayRegion function via vtable dispatch.
-func GetCharArrayRegion(env *C.JNIEnv, p0 C.jcharArray, p1 C.jsize, p2 C.jsize, p3 *C.jchar) {
+func GetCharArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jcharArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jchar,
+) {
 	C.jni_GetCharArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetCharField wraps the JNI GetCharField function via vtable dispatch.
-func GetCharField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jchar {
+func GetCharField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jchar {
 	return C.jni_GetCharField(env, p0, p1)
 }
 
@@ -310,82 +526,156 @@ func GetDirectBufferCapacity(env *C.JNIEnv, p0 C.jobject) C.jlong {
 }
 
 // GetDoubleArrayElements wraps the JNI GetDoubleArrayElements function via vtable dispatch.
-func GetDoubleArrayElements(env *C.JNIEnv, p0 C.jdoubleArray, p1 *C.jboolean) *C.jdouble {
+func GetDoubleArrayElements(
+	env *C.JNIEnv,
+	p0 C.jdoubleArray,
+	p1 *C.jboolean,
+) *C.jdouble {
 	return C.jni_GetDoubleArrayElements(env, p0, p1)
 }
 
 // GetDoubleArrayRegion wraps the JNI GetDoubleArrayRegion function via vtable dispatch.
-func GetDoubleArrayRegion(env *C.JNIEnv, p0 C.jdoubleArray, p1 C.jsize, p2 C.jsize, p3 *C.jdouble) {
+func GetDoubleArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jdoubleArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jdouble,
+) {
 	C.jni_GetDoubleArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetDoubleField wraps the JNI GetDoubleField function via vtable dispatch.
-func GetDoubleField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jdouble {
+func GetDoubleField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jdouble {
 	return C.jni_GetDoubleField(env, p0, p1)
 }
 
 // GetEnv wraps the JNI GetEnv function via vtable dispatch.
-func GetEnv(vm *C.JavaVM, p0 *unsafe.Pointer, p1 C.jint) C.jint {
+func GetEnv(
+	vm *C.JavaVM,
+	p0 *unsafe.Pointer,
+	p1 C.jint,
+) C.jint {
 	return C.jni_GetEnv(vm, p0, p1)
 }
 
 // GetFieldID wraps the JNI GetFieldID function via vtable dispatch.
-func GetFieldID(env *C.JNIEnv, p0 C.jclass, p1 *C.char, p2 *C.char) C.jfieldID {
+func GetFieldID(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 *C.char,
+	p2 *C.char,
+) C.jfieldID {
 	return C.jni_GetFieldID(env, p0, p1, p2)
 }
 
 // GetFloatArrayElements wraps the JNI GetFloatArrayElements function via vtable dispatch.
-func GetFloatArrayElements(env *C.JNIEnv, p0 C.jfloatArray, p1 *C.jboolean) *C.jfloat {
+func GetFloatArrayElements(
+	env *C.JNIEnv,
+	p0 C.jfloatArray,
+	p1 *C.jboolean,
+) *C.jfloat {
 	return C.jni_GetFloatArrayElements(env, p0, p1)
 }
 
 // GetFloatArrayRegion wraps the JNI GetFloatArrayRegion function via vtable dispatch.
-func GetFloatArrayRegion(env *C.JNIEnv, p0 C.jfloatArray, p1 C.jsize, p2 C.jsize, p3 *C.jfloat) {
+func GetFloatArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jfloatArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jfloat,
+) {
 	C.jni_GetFloatArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetFloatField wraps the JNI GetFloatField function via vtable dispatch.
-func GetFloatField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jfloat {
+func GetFloatField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jfloat {
 	return C.jni_GetFloatField(env, p0, p1)
 }
 
 // GetIntArrayElements wraps the JNI GetIntArrayElements function via vtable dispatch.
-func GetIntArrayElements(env *C.JNIEnv, p0 C.jintArray, p1 *C.jboolean) *C.jint {
+func GetIntArrayElements(
+	env *C.JNIEnv,
+	p0 C.jintArray,
+	p1 *C.jboolean,
+) *C.jint {
 	return C.jni_GetIntArrayElements(env, p0, p1)
 }
 
 // GetIntArrayRegion wraps the JNI GetIntArrayRegion function via vtable dispatch.
-func GetIntArrayRegion(env *C.JNIEnv, p0 C.jintArray, p1 C.jsize, p2 C.jsize, p3 *C.jint) {
+func GetIntArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jintArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jint,
+) {
 	C.jni_GetIntArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetIntField wraps the JNI GetIntField function via vtable dispatch.
-func GetIntField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jint {
+func GetIntField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jint {
 	return C.jni_GetIntField(env, p0, p1)
 }
 
 // GetLongArrayElements wraps the JNI GetLongArrayElements function via vtable dispatch.
-func GetLongArrayElements(env *C.JNIEnv, p0 C.jlongArray, p1 *C.jboolean) *C.jlong {
+func GetLongArrayElements(
+	env *C.JNIEnv,
+	p0 C.jlongArray,
+	p1 *C.jboolean,
+) *C.jlong {
 	return C.jni_GetLongArrayElements(env, p0, p1)
 }
 
 // GetLongArrayRegion wraps the JNI GetLongArrayRegion function via vtable dispatch.
-func GetLongArrayRegion(env *C.JNIEnv, p0 C.jlongArray, p1 C.jsize, p2 C.jsize, p3 *C.jlong) {
+func GetLongArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jlongArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jlong,
+) {
 	C.jni_GetLongArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetLongField wraps the JNI GetLongField function via vtable dispatch.
-func GetLongField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jlong {
+func GetLongField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jlong {
 	return C.jni_GetLongField(env, p0, p1)
 }
 
 // GetMethodID wraps the JNI GetMethodID function via vtable dispatch.
-func GetMethodID(env *C.JNIEnv, p0 C.jclass, p1 *C.char, p2 *C.char) C.jmethodID {
+func GetMethodID(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 *C.char,
+	p2 *C.char,
+) C.jmethodID {
 	return C.jni_GetMethodID(env, p0, p1, p2)
 }
 
 // GetObjectArrayElement wraps the JNI GetObjectArrayElement function via vtable dispatch.
-func GetObjectArrayElement(env *C.JNIEnv, p0 C.jobjectArray, p1 C.jsize) C.jobject {
+func GetObjectArrayElement(
+	env *C.JNIEnv,
+	p0 C.jobjectArray,
+	p1 C.jsize,
+) C.jobject {
 	return C.jni_GetObjectArrayElement(env, p0, p1)
 }
 
@@ -395,7 +685,11 @@ func GetObjectClass(env *C.JNIEnv, p0 C.jobject) C.jclass {
 }
 
 // GetObjectField wraps the JNI GetObjectField function via vtable dispatch.
-func GetObjectField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jobject {
+func GetObjectField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jobject {
 	return C.jni_GetObjectField(env, p0, p1)
 }
 
@@ -405,87 +699,159 @@ func GetObjectRefType(env *C.JNIEnv, p0 C.jobject) C.jobjectRefType {
 }
 
 // GetPrimitiveArrayCritical wraps the JNI GetPrimitiveArrayCritical function via vtable dispatch.
-func GetPrimitiveArrayCritical(env *C.JNIEnv, p0 C.jarray, p1 *C.jboolean) unsafe.Pointer {
+func GetPrimitiveArrayCritical(
+	env *C.JNIEnv,
+	p0 C.jarray,
+	p1 *C.jboolean,
+) unsafe.Pointer {
 	return C.jni_GetPrimitiveArrayCritical(env, p0, p1)
 }
 
 // GetShortArrayElements wraps the JNI GetShortArrayElements function via vtable dispatch.
-func GetShortArrayElements(env *C.JNIEnv, p0 C.jshortArray, p1 *C.jboolean) *C.jshort {
+func GetShortArrayElements(
+	env *C.JNIEnv,
+	p0 C.jshortArray,
+	p1 *C.jboolean,
+) *C.jshort {
 	return C.jni_GetShortArrayElements(env, p0, p1)
 }
 
 // GetShortArrayRegion wraps the JNI GetShortArrayRegion function via vtable dispatch.
-func GetShortArrayRegion(env *C.JNIEnv, p0 C.jshortArray, p1 C.jsize, p2 C.jsize, p3 *C.jshort) {
+func GetShortArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jshortArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jshort,
+) {
 	C.jni_GetShortArrayRegion(env, p0, p1, p2, p3)
 }
 
 // GetShortField wraps the JNI GetShortField function via vtable dispatch.
-func GetShortField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID) C.jshort {
+func GetShortField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+) C.jshort {
 	return C.jni_GetShortField(env, p0, p1)
 }
 
 // GetStaticBooleanField wraps the JNI GetStaticBooleanField function via vtable dispatch.
-func GetStaticBooleanField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jboolean {
+func GetStaticBooleanField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jboolean {
 	return C.jni_GetStaticBooleanField(env, p0, p1)
 }
 
 // GetStaticByteField wraps the JNI GetStaticByteField function via vtable dispatch.
-func GetStaticByteField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jbyte {
+func GetStaticByteField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jbyte {
 	return C.jni_GetStaticByteField(env, p0, p1)
 }
 
 // GetStaticCharField wraps the JNI GetStaticCharField function via vtable dispatch.
-func GetStaticCharField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jchar {
+func GetStaticCharField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jchar {
 	return C.jni_GetStaticCharField(env, p0, p1)
 }
 
 // GetStaticDoubleField wraps the JNI GetStaticDoubleField function via vtable dispatch.
-func GetStaticDoubleField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jdouble {
+func GetStaticDoubleField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jdouble {
 	return C.jni_GetStaticDoubleField(env, p0, p1)
 }
 
 // GetStaticFieldID wraps the JNI GetStaticFieldID function via vtable dispatch.
-func GetStaticFieldID(env *C.JNIEnv, p0 C.jclass, p1 *C.char, p2 *C.char) C.jfieldID {
+func GetStaticFieldID(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 *C.char,
+	p2 *C.char,
+) C.jfieldID {
 	return C.jni_GetStaticFieldID(env, p0, p1, p2)
 }
 
 // GetStaticFloatField wraps the JNI GetStaticFloatField function via vtable dispatch.
-func GetStaticFloatField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jfloat {
+func GetStaticFloatField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jfloat {
 	return C.jni_GetStaticFloatField(env, p0, p1)
 }
 
 // GetStaticIntField wraps the JNI GetStaticIntField function via vtable dispatch.
-func GetStaticIntField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jint {
+func GetStaticIntField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jint {
 	return C.jni_GetStaticIntField(env, p0, p1)
 }
 
 // GetStaticLongField wraps the JNI GetStaticLongField function via vtable dispatch.
-func GetStaticLongField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jlong {
+func GetStaticLongField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jlong {
 	return C.jni_GetStaticLongField(env, p0, p1)
 }
 
 // GetStaticMethodID wraps the JNI GetStaticMethodID function via vtable dispatch.
-func GetStaticMethodID(env *C.JNIEnv, p0 C.jclass, p1 *C.char, p2 *C.char) C.jmethodID {
+func GetStaticMethodID(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 *C.char,
+	p2 *C.char,
+) C.jmethodID {
 	return C.jni_GetStaticMethodID(env, p0, p1, p2)
 }
 
 // GetStaticObjectField wraps the JNI GetStaticObjectField function via vtable dispatch.
-func GetStaticObjectField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jobject {
+func GetStaticObjectField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jobject {
 	return C.jni_GetStaticObjectField(env, p0, p1)
 }
 
 // GetStaticShortField wraps the JNI GetStaticShortField function via vtable dispatch.
-func GetStaticShortField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID) C.jshort {
+func GetStaticShortField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+) C.jshort {
 	return C.jni_GetStaticShortField(env, p0, p1)
 }
 
 // GetStringChars wraps the JNI GetStringChars function via vtable dispatch.
-func GetStringChars(env *C.JNIEnv, p0 C.jstring, p1 *C.jboolean) *C.jchar {
+func GetStringChars(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 *C.jboolean,
+) *C.jchar {
 	return C.jni_GetStringChars(env, p0, p1)
 }
 
 // GetStringCritical wraps the JNI GetStringCritical function via vtable dispatch.
-func GetStringCritical(env *C.JNIEnv, p0 C.jstring, p1 *C.jboolean) *C.jchar {
+func GetStringCritical(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 *C.jboolean,
+) *C.jchar {
 	return C.jni_GetStringCritical(env, p0, p1)
 }
 
@@ -495,12 +861,22 @@ func GetStringLength(env *C.JNIEnv, p0 C.jstring) C.jsize {
 }
 
 // GetStringRegion wraps the JNI GetStringRegion function via vtable dispatch.
-func GetStringRegion(env *C.JNIEnv, p0 C.jstring, p1 C.jsize, p2 C.jsize, p3 *C.jchar) {
+func GetStringRegion(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jchar,
+) {
 	C.jni_GetStringRegion(env, p0, p1, p2, p3)
 }
 
 // GetStringUTFChars wraps the JNI GetStringUTFChars function via vtable dispatch.
-func GetStringUTFChars(env *C.JNIEnv, p0 C.jstring, p1 *C.jboolean) *C.char {
+func GetStringUTFChars(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 *C.jboolean,
+) *C.char {
 	return C.jni_GetStringUTFChars(env, p0, p1)
 }
 
@@ -510,7 +886,13 @@ func GetStringUTFLength(env *C.JNIEnv, p0 C.jstring) C.jsize {
 }
 
 // GetStringUTFRegion wraps the JNI GetStringUTFRegion function via vtable dispatch.
-func GetStringUTFRegion(env *C.JNIEnv, p0 C.jstring, p1 C.jsize, p2 C.jsize, p3 *C.char) {
+func GetStringUTFRegion(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.char,
+) {
 	C.jni_GetStringUTFRegion(env, p0, p1, p2, p3)
 }
 
@@ -525,17 +907,29 @@ func GetVersion(env *C.JNIEnv) C.jint {
 }
 
 // IsAssignableFrom wraps the JNI IsAssignableFrom function via vtable dispatch.
-func IsAssignableFrom(env *C.JNIEnv, p0 C.jclass, p1 C.jclass) C.jboolean {
+func IsAssignableFrom(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jclass,
+) C.jboolean {
 	return C.jni_IsAssignableFrom(env, p0, p1)
 }
 
 // IsInstanceOf wraps the JNI IsInstanceOf function via vtable dispatch.
-func IsInstanceOf(env *C.JNIEnv, p0 C.jobject, p1 C.jclass) C.jboolean {
+func IsInstanceOf(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jclass,
+) C.jboolean {
 	return C.jni_IsInstanceOf(env, p0, p1)
 }
 
 // IsSameObject wraps the JNI IsSameObject function via vtable dispatch.
-func IsSameObject(env *C.JNIEnv, p0 C.jobject, p1 C.jobject) C.jboolean {
+func IsSameObject(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jobject,
+) C.jboolean {
 	return C.jni_IsSameObject(env, p0, p1)
 }
 
@@ -565,7 +959,11 @@ func NewCharArray(env *C.JNIEnv, p0 C.jsize) C.jcharArray {
 }
 
 // NewDirectByteBuffer wraps the JNI NewDirectByteBuffer function via vtable dispatch.
-func NewDirectByteBuffer(env *C.JNIEnv, p0 unsafe.Pointer, p1 C.jlong) C.jobject {
+func NewDirectByteBuffer(
+	env *C.JNIEnv,
+	p0 unsafe.Pointer,
+	p1 C.jlong,
+) C.jobject {
 	return C.jni_NewDirectByteBuffer(env, p0, p1)
 }
 
@@ -600,12 +998,22 @@ func NewLongArray(env *C.JNIEnv, p0 C.jsize) C.jlongArray {
 }
 
 // NewObjectA wraps the JNI NewObjectA function via vtable dispatch.
-func NewObjectA(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 *C.jvalue) C.jobject {
+func NewObjectA(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 *C.jvalue,
+) C.jobject {
 	return C.jni_NewObjectA(env, p0, p1, p2)
 }
 
 // NewObjectArray wraps the JNI NewObjectArray function via vtable dispatch.
-func NewObjectArray(env *C.JNIEnv, p0 C.jsize, p1 C.jclass, p2 C.jobject) C.jobjectArray {
+func NewObjectArray(
+	env *C.JNIEnv,
+	p0 C.jsize,
+	p1 C.jclass,
+	p2 C.jobject,
+) C.jobjectArray {
 	return C.jni_NewObjectArray(env, p0, p1, p2)
 }
 
@@ -615,7 +1023,11 @@ func NewShortArray(env *C.JNIEnv, p0 C.jsize) C.jshortArray {
 }
 
 // NewString wraps the JNI NewString function via vtable dispatch.
-func NewString(env *C.JNIEnv, p0 *C.jchar, p1 C.jsize) C.jstring {
+func NewString(
+	env *C.JNIEnv,
+	p0 *C.jchar,
+	p1 C.jsize,
+) C.jstring {
 	return C.jni_NewString(env, p0, p1)
 }
 
@@ -640,202 +1052,407 @@ func PushLocalFrame(env *C.JNIEnv, p0 C.jint) C.jint {
 }
 
 // RegisterNatives wraps the JNI RegisterNatives function via vtable dispatch.
-func RegisterNatives(env *C.JNIEnv, p0 C.jclass, p1 *C.JNINativeMethod, p2 C.jint) C.jint {
+func RegisterNatives(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 *C.JNINativeMethod,
+	p2 C.jint,
+) C.jint {
 	return C.jni_RegisterNatives(env, p0, p1, p2)
 }
 
 // ReleaseBooleanArrayElements wraps the JNI ReleaseBooleanArrayElements function via vtable dispatch.
-func ReleaseBooleanArrayElements(env *C.JNIEnv, p0 C.jbooleanArray, p1 *C.jboolean, p2 C.jint) {
+func ReleaseBooleanArrayElements(
+	env *C.JNIEnv,
+	p0 C.jbooleanArray,
+	p1 *C.jboolean,
+	p2 C.jint,
+) {
 	C.jni_ReleaseBooleanArrayElements(env, p0, p1, p2)
 }
 
 // ReleaseByteArrayElements wraps the JNI ReleaseByteArrayElements function via vtable dispatch.
-func ReleaseByteArrayElements(env *C.JNIEnv, p0 C.jbyteArray, p1 *C.jbyte, p2 C.jint) {
+func ReleaseByteArrayElements(
+	env *C.JNIEnv,
+	p0 C.jbyteArray,
+	p1 *C.jbyte,
+	p2 C.jint,
+) {
 	C.jni_ReleaseByteArrayElements(env, p0, p1, p2)
 }
 
 // ReleaseCharArrayElements wraps the JNI ReleaseCharArrayElements function via vtable dispatch.
-func ReleaseCharArrayElements(env *C.JNIEnv, p0 C.jcharArray, p1 *C.jchar, p2 C.jint) {
+func ReleaseCharArrayElements(
+	env *C.JNIEnv,
+	p0 C.jcharArray,
+	p1 *C.jchar,
+	p2 C.jint,
+) {
 	C.jni_ReleaseCharArrayElements(env, p0, p1, p2)
 }
 
 // ReleaseDoubleArrayElements wraps the JNI ReleaseDoubleArrayElements function via vtable dispatch.
-func ReleaseDoubleArrayElements(env *C.JNIEnv, p0 C.jdoubleArray, p1 *C.jdouble, p2 C.jint) {
+func ReleaseDoubleArrayElements(
+	env *C.JNIEnv,
+	p0 C.jdoubleArray,
+	p1 *C.jdouble,
+	p2 C.jint,
+) {
 	C.jni_ReleaseDoubleArrayElements(env, p0, p1, p2)
 }
 
 // ReleaseFloatArrayElements wraps the JNI ReleaseFloatArrayElements function via vtable dispatch.
-func ReleaseFloatArrayElements(env *C.JNIEnv, p0 C.jfloatArray, p1 *C.jfloat, p2 C.jint) {
+func ReleaseFloatArrayElements(
+	env *C.JNIEnv,
+	p0 C.jfloatArray,
+	p1 *C.jfloat,
+	p2 C.jint,
+) {
 	C.jni_ReleaseFloatArrayElements(env, p0, p1, p2)
 }
 
 // ReleaseIntArrayElements wraps the JNI ReleaseIntArrayElements function via vtable dispatch.
-func ReleaseIntArrayElements(env *C.JNIEnv, p0 C.jintArray, p1 *C.jint, p2 C.jint) {
+func ReleaseIntArrayElements(
+	env *C.JNIEnv,
+	p0 C.jintArray,
+	p1 *C.jint,
+	p2 C.jint,
+) {
 	C.jni_ReleaseIntArrayElements(env, p0, p1, p2)
 }
 
 // ReleaseLongArrayElements wraps the JNI ReleaseLongArrayElements function via vtable dispatch.
-func ReleaseLongArrayElements(env *C.JNIEnv, p0 C.jlongArray, p1 *C.jlong, p2 C.jint) {
+func ReleaseLongArrayElements(
+	env *C.JNIEnv,
+	p0 C.jlongArray,
+	p1 *C.jlong,
+	p2 C.jint,
+) {
 	C.jni_ReleaseLongArrayElements(env, p0, p1, p2)
 }
 
 // ReleasePrimitiveArrayCritical wraps the JNI ReleasePrimitiveArrayCritical function via vtable dispatch.
-func ReleasePrimitiveArrayCritical(env *C.JNIEnv, p0 C.jarray, p1 unsafe.Pointer, p2 C.jint) {
+func ReleasePrimitiveArrayCritical(
+	env *C.JNIEnv,
+	p0 C.jarray,
+	p1 unsafe.Pointer,
+	p2 C.jint,
+) {
 	C.jni_ReleasePrimitiveArrayCritical(env, p0, p1, p2)
 }
 
 // ReleaseShortArrayElements wraps the JNI ReleaseShortArrayElements function via vtable dispatch.
-func ReleaseShortArrayElements(env *C.JNIEnv, p0 C.jshortArray, p1 *C.jshort, p2 C.jint) {
+func ReleaseShortArrayElements(
+	env *C.JNIEnv,
+	p0 C.jshortArray,
+	p1 *C.jshort,
+	p2 C.jint,
+) {
 	C.jni_ReleaseShortArrayElements(env, p0, p1, p2)
 }
 
 // ReleaseStringChars wraps the JNI ReleaseStringChars function via vtable dispatch.
-func ReleaseStringChars(env *C.JNIEnv, p0 C.jstring, p1 *C.jchar) {
+func ReleaseStringChars(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 *C.jchar,
+) {
 	C.jni_ReleaseStringChars(env, p0, p1)
 }
 
 // ReleaseStringCritical wraps the JNI ReleaseStringCritical function via vtable dispatch.
-func ReleaseStringCritical(env *C.JNIEnv, p0 C.jstring, p1 *C.jchar) {
+func ReleaseStringCritical(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 *C.jchar,
+) {
 	C.jni_ReleaseStringCritical(env, p0, p1)
 }
 
 // ReleaseStringUTFChars wraps the JNI ReleaseStringUTFChars function via vtable dispatch.
-func ReleaseStringUTFChars(env *C.JNIEnv, p0 C.jstring, p1 *C.char) {
+func ReleaseStringUTFChars(
+	env *C.JNIEnv,
+	p0 C.jstring,
+	p1 *C.char,
+) {
 	C.jni_ReleaseStringUTFChars(env, p0, p1)
 }
 
 // SetBooleanArrayRegion wraps the JNI SetBooleanArrayRegion function via vtable dispatch.
-func SetBooleanArrayRegion(env *C.JNIEnv, p0 C.jbooleanArray, p1 C.jsize, p2 C.jsize, p3 *C.jboolean) {
+func SetBooleanArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jbooleanArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jboolean,
+) {
 	C.jni_SetBooleanArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetBooleanField wraps the JNI SetBooleanField function via vtable dispatch.
-func SetBooleanField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jboolean) {
+func SetBooleanField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jboolean,
+) {
 	C.jni_SetBooleanField(env, p0, p1, p2)
 }
 
 // SetByteArrayRegion wraps the JNI SetByteArrayRegion function via vtable dispatch.
-func SetByteArrayRegion(env *C.JNIEnv, p0 C.jbyteArray, p1 C.jsize, p2 C.jsize, p3 *C.jbyte) {
+func SetByteArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jbyteArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jbyte,
+) {
 	C.jni_SetByteArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetByteField wraps the JNI SetByteField function via vtable dispatch.
-func SetByteField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jbyte) {
+func SetByteField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jbyte,
+) {
 	C.jni_SetByteField(env, p0, p1, p2)
 }
 
 // SetCharArrayRegion wraps the JNI SetCharArrayRegion function via vtable dispatch.
-func SetCharArrayRegion(env *C.JNIEnv, p0 C.jcharArray, p1 C.jsize, p2 C.jsize, p3 *C.jchar) {
+func SetCharArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jcharArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jchar,
+) {
 	C.jni_SetCharArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetCharField wraps the JNI SetCharField function via vtable dispatch.
-func SetCharField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jchar) {
+func SetCharField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jchar,
+) {
 	C.jni_SetCharField(env, p0, p1, p2)
 }
 
 // SetDoubleArrayRegion wraps the JNI SetDoubleArrayRegion function via vtable dispatch.
-func SetDoubleArrayRegion(env *C.JNIEnv, p0 C.jdoubleArray, p1 C.jsize, p2 C.jsize, p3 *C.jdouble) {
+func SetDoubleArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jdoubleArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jdouble,
+) {
 	C.jni_SetDoubleArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetDoubleField wraps the JNI SetDoubleField function via vtable dispatch.
-func SetDoubleField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jdouble) {
+func SetDoubleField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jdouble,
+) {
 	C.jni_SetDoubleField(env, p0, p1, p2)
 }
 
 // SetFloatArrayRegion wraps the JNI SetFloatArrayRegion function via vtable dispatch.
-func SetFloatArrayRegion(env *C.JNIEnv, p0 C.jfloatArray, p1 C.jsize, p2 C.jsize, p3 *C.jfloat) {
+func SetFloatArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jfloatArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jfloat,
+) {
 	C.jni_SetFloatArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetFloatField wraps the JNI SetFloatField function via vtable dispatch.
-func SetFloatField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jfloat) {
+func SetFloatField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jfloat,
+) {
 	C.jni_SetFloatField(env, p0, p1, p2)
 }
 
 // SetIntArrayRegion wraps the JNI SetIntArrayRegion function via vtable dispatch.
-func SetIntArrayRegion(env *C.JNIEnv, p0 C.jintArray, p1 C.jsize, p2 C.jsize, p3 *C.jint) {
+func SetIntArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jintArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jint,
+) {
 	C.jni_SetIntArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetIntField wraps the JNI SetIntField function via vtable dispatch.
-func SetIntField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jint) {
+func SetIntField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jint,
+) {
 	C.jni_SetIntField(env, p0, p1, p2)
 }
 
 // SetLongArrayRegion wraps the JNI SetLongArrayRegion function via vtable dispatch.
-func SetLongArrayRegion(env *C.JNIEnv, p0 C.jlongArray, p1 C.jsize, p2 C.jsize, p3 *C.jlong) {
+func SetLongArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jlongArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jlong,
+) {
 	C.jni_SetLongArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetLongField wraps the JNI SetLongField function via vtable dispatch.
-func SetLongField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jlong) {
+func SetLongField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jlong,
+) {
 	C.jni_SetLongField(env, p0, p1, p2)
 }
 
 // SetObjectArrayElement wraps the JNI SetObjectArrayElement function via vtable dispatch.
-func SetObjectArrayElement(env *C.JNIEnv, p0 C.jobjectArray, p1 C.jsize, p2 C.jobject) {
+func SetObjectArrayElement(
+	env *C.JNIEnv,
+	p0 C.jobjectArray,
+	p1 C.jsize,
+	p2 C.jobject,
+) {
 	C.jni_SetObjectArrayElement(env, p0, p1, p2)
 }
 
 // SetObjectField wraps the JNI SetObjectField function via vtable dispatch.
-func SetObjectField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jobject) {
+func SetObjectField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jobject,
+) {
 	C.jni_SetObjectField(env, p0, p1, p2)
 }
 
 // SetShortArrayRegion wraps the JNI SetShortArrayRegion function via vtable dispatch.
-func SetShortArrayRegion(env *C.JNIEnv, p0 C.jshortArray, p1 C.jsize, p2 C.jsize, p3 *C.jshort) {
+func SetShortArrayRegion(
+	env *C.JNIEnv,
+	p0 C.jshortArray,
+	p1 C.jsize,
+	p2 C.jsize,
+	p3 *C.jshort,
+) {
 	C.jni_SetShortArrayRegion(env, p0, p1, p2, p3)
 }
 
 // SetShortField wraps the JNI SetShortField function via vtable dispatch.
-func SetShortField(env *C.JNIEnv, p0 C.jobject, p1 C.jfieldID, p2 C.jshort) {
+func SetShortField(
+	env *C.JNIEnv,
+	p0 C.jobject,
+	p1 C.jfieldID,
+	p2 C.jshort,
+) {
 	C.jni_SetShortField(env, p0, p1, p2)
 }
 
 // SetStaticBooleanField wraps the JNI SetStaticBooleanField function via vtable dispatch.
-func SetStaticBooleanField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jboolean) {
+func SetStaticBooleanField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jboolean,
+) {
 	C.jni_SetStaticBooleanField(env, p0, p1, p2)
 }
 
 // SetStaticByteField wraps the JNI SetStaticByteField function via vtable dispatch.
-func SetStaticByteField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jbyte) {
+func SetStaticByteField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jbyte,
+) {
 	C.jni_SetStaticByteField(env, p0, p1, p2)
 }
 
 // SetStaticCharField wraps the JNI SetStaticCharField function via vtable dispatch.
-func SetStaticCharField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jchar) {
+func SetStaticCharField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jchar,
+) {
 	C.jni_SetStaticCharField(env, p0, p1, p2)
 }
 
 // SetStaticDoubleField wraps the JNI SetStaticDoubleField function via vtable dispatch.
-func SetStaticDoubleField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jdouble) {
+func SetStaticDoubleField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jdouble,
+) {
 	C.jni_SetStaticDoubleField(env, p0, p1, p2)
 }
 
 // SetStaticFloatField wraps the JNI SetStaticFloatField function via vtable dispatch.
-func SetStaticFloatField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jfloat) {
+func SetStaticFloatField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jfloat,
+) {
 	C.jni_SetStaticFloatField(env, p0, p1, p2)
 }
 
 // SetStaticIntField wraps the JNI SetStaticIntField function via vtable dispatch.
-func SetStaticIntField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jint) {
+func SetStaticIntField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jint,
+) {
 	C.jni_SetStaticIntField(env, p0, p1, p2)
 }
 
 // SetStaticLongField wraps the JNI SetStaticLongField function via vtable dispatch.
-func SetStaticLongField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jlong) {
+func SetStaticLongField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jlong,
+) {
 	C.jni_SetStaticLongField(env, p0, p1, p2)
 }
 
 // SetStaticObjectField wraps the JNI SetStaticObjectField function via vtable dispatch.
-func SetStaticObjectField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jobject) {
+func SetStaticObjectField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jobject,
+) {
 	C.jni_SetStaticObjectField(env, p0, p1, p2)
 }
 
 // SetStaticShortField wraps the JNI SetStaticShortField function via vtable dispatch.
-func SetStaticShortField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jshort) {
+func SetStaticShortField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jshort,
+) {
 	C.jni_SetStaticShortField(env, p0, p1, p2)
 }
 
@@ -845,17 +1462,31 @@ func Throw(env *C.JNIEnv, p0 C.jthrowable) C.jint {
 }
 
 // ThrowNew wraps the JNI ThrowNew function via vtable dispatch.
-func ThrowNew(env *C.JNIEnv, p0 C.jclass, p1 *C.char) C.jint {
+func ThrowNew(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 *C.char,
+) C.jint {
 	return C.jni_ThrowNew(env, p0, p1)
 }
 
 // ToReflectedField wraps the JNI ToReflectedField function via vtable dispatch.
-func ToReflectedField(env *C.JNIEnv, p0 C.jclass, p1 C.jfieldID, p2 C.jboolean) C.jobject {
+func ToReflectedField(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jfieldID,
+	p2 C.jboolean,
+) C.jobject {
 	return C.jni_ToReflectedField(env, p0, p1, p2)
 }
 
 // ToReflectedMethod wraps the JNI ToReflectedMethod function via vtable dispatch.
-func ToReflectedMethod(env *C.JNIEnv, p0 C.jclass, p1 C.jmethodID, p2 C.jboolean) C.jobject {
+func ToReflectedMethod(
+	env *C.JNIEnv,
+	p0 C.jclass,
+	p1 C.jmethodID,
+	p2 C.jboolean,
+) C.jobject {
 	return C.jni_ToReflectedMethod(env, p0, p1, p2)
 }
 

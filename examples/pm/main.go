@@ -33,29 +33,20 @@ func goRun(cvm *C.JavaVM) {
 	fmt.Fprintf(&output, "  FeatureCamera      = %q\n", pm.FeatureCamera)
 	fmt.Fprintf(&output, "  FeatureCameraFront = %q\n", pm.FeatureCameraFront)
 	fmt.Fprintf(&output, "  FeatureBluetooth   = %q\n", pm.FeatureBluetooth)
-	fmt.Fprintf(&output, "  FeatureBluetoothLE = %q\n", pm.FeatureBluetoothLE)
-	fmt.Fprintf(&output, "  FeatureNFC         = %q\n", pm.FeatureNFC)
-	fmt.Fprintf(&output, "  FeatureGPS         = %q\n", pm.FeatureGPS)
+	fmt.Fprintf(&output, "  FeatureBluetoothLe = %q\n", pm.FeatureBluetoothLe)
+	fmt.Fprintf(&output, "  FeatureNfc         = %q\n", pm.FeatureNfc)
+	fmt.Fprintf(&output, "  FeatureLocationGps = %q\n", pm.FeatureLocationGps)
 	fmt.Fprintf(&output, "  FeatureTelephony   = %q\n", pm.FeatureTelephony)
 	fmt.Fprintf(&output, "  FeatureWifi        = %q\n", pm.FeatureWifi)
 	fmt.Fprintf(&output, "  FeatureFingerprint = %q\n", pm.FeatureFingerprint)
-	fmt.Fprintf(&output, "  FeatureUSBHost     = %q\n", pm.FeatureUSBHost)
+	fmt.Fprintf(&output, "  FeatureUSBHost     = %q\n", pm.FeatureUsbHost)
 
-	// --- PackageInfo data class ---
-	// PackageInfo holds data extracted from android.content.pm.PackageInfo.
-	info := pm.PackageInfo{
-		PackageName:  "com.example.myapp",
-		VersionName:  "2.1.0",
-		VersionCode:  42,
-		FirstInstall: 1700000000000, // Unix millis
-		LastUpdate:   1700100000000,
-	}
-	fmt.Fprintf(&output, "\nPackageInfo:\n")
-	fmt.Fprintf(&output, "  PackageName  = %s\n", info.PackageName)
-	fmt.Fprintf(&output, "  VersionName  = %s\n", info.VersionName)
-	fmt.Fprintf(&output, "  VersionCode  = %d\n", info.VersionCode)
-	fmt.Fprintf(&output, "  FirstInstall = %d ms\n", info.FirstInstall)
-	fmt.Fprintf(&output, "  LastUpdate   = %d ms\n", info.LastUpdate)
+	// --- PackageInfo type ---
+	// PackageInfo wraps android.content.pm.PackageInfo with VM and Obj
+	// fields for JNI access. Its methods (DescribeContents, etc.) are
+	// called through JNI.
+	var info pm.PackageInfo
+	_ = info
 
 	// --- Manager methods ---
 	// The Manager wraps android.content.pm.PackageManager and provides:
@@ -79,11 +70,11 @@ func goRun(cvm *C.JavaVM) {
 	featuresToCheck := []string{
 		pm.FeatureCamera,
 		pm.FeatureBluetooth,
-		pm.FeatureNFC,
-		pm.FeatureGPS,
+		pm.FeatureNfc,
+		pm.FeatureLocationGps,
 		pm.FeatureWifi,
 		pm.FeatureFingerprint,
-		pm.FeatureUSBHost,
+		pm.FeatureUsbHost,
 	}
 	fmt.Fprintf(&output, "\nFeatures to check at startup: %d\n", len(featuresToCheck))
 	for _, f := range featuresToCheck {

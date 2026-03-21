@@ -49,7 +49,7 @@ CC_AMD64 := $(NDK_TOOLCHAIN)/x86_64-linux-android$(MIN_SDK)-clang
 BUILD        := build
 SHARED_DIR   := ../apk
 HANDLER_DIR  := ../../internal/testjvm/testdata
-PACKAGE_NAME ?= com.github.xaionaro_go.jni.examples.$(EXAMPLE_NAME)
+PACKAGE_NAME ?= center.dx.jni.examples.$(EXAMPLE_NAME)
 
 .PHONY: all build install run clean
 
@@ -87,7 +87,7 @@ $(BUILD)/AndroidManifest.xml:
 		if [ -n "$$PERM_CSV" ]; then \
 			printf '        <meta-data android:name="example.permissions" android:value="%s" />\n' "$$PERM_CSV" >> $@; \
 		fi
-	@printf '        <activity android:name="com.github.xaionaro_go.jni.example.ExampleActivity"\n' >> $@
+	@printf '        <activity android:name="center.dx.jni.example.ExampleActivity"\n' >> $@
 	@printf '                  android:exported="true">\n' >> $@
 	@printf '            <intent-filter>\n' >> $@
 	@printf '                <action android:name="android.intent.action.MAIN" />\n' >> $@
@@ -100,12 +100,15 @@ $(BUILD)/AndroidManifest.xml:
 # ---------------------------------------------------------------------------
 # Java → DEX
 # ---------------------------------------------------------------------------
-$(BUILD)/classes.dex: $(SHARED_DIR)/ExampleActivity.java $(HANDLER_DIR)/com/github/xaionaro_go/jni/internal/GoInvocationHandler.java
+EXAMPLE_ACTIVITY_JAVA := $(SHARED_DIR)/src/center/dx/jni/example/ExampleActivity.java
+HANDLER_JAVA          := $(HANDLER_DIR)/center/dx/jni/internal/GoInvocationHandler.java
+
+$(BUILD)/classes.dex: $(EXAMPLE_ACTIVITY_JAVA) $(HANDLER_JAVA)
 	@mkdir -p $(BUILD)/java
 	javac --release 17 -classpath $(PLATFORM)/android.jar \
 		-d $(BUILD)/java \
-		$(SHARED_DIR)/ExampleActivity.java \
-		$(HANDLER_DIR)/com/github/xaionaro_go/jni/internal/GoInvocationHandler.java
+		$(EXAMPLE_ACTIVITY_JAVA) \
+		$(HANDLER_JAVA)
 	$(D8) --lib $(PLATFORM)/android.jar --output $(BUILD) \
 		$$(find $(BUILD)/java -name '*.class')
 
@@ -115,6 +118,7 @@ $(BUILD)/classes.dex: $(SHARED_DIR)/ExampleActivity.java $(HANDLER_DIR)/com/gith
 $(BUILD)/lib/arm64-v8a/libexample.so: main.go jni_onload.c
 	@mkdir -p $(dir $@)
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=$(CC_ARM64) \
+		CGO_CFLAGS="-Wno-incompatible-pointer-types" CGO_LDFLAGS="-llog" \
 		go build -buildmode=c-shared \
 		-o examples/$(EXAMPLE_NAME)/$@ \
 		./examples/$(EXAMPLE_NAME)/
@@ -123,6 +127,7 @@ $(BUILD)/lib/arm64-v8a/libexample.so: main.go jni_onload.c
 $(BUILD)/lib/x86_64/libexample.so: main.go jni_onload.c
 	@mkdir -p $(dir $@)
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=amd64 CC=$(CC_AMD64) \
+		CGO_CFLAGS="-Wno-incompatible-pointer-types" CGO_LDFLAGS="-llog" \
 		go build -buildmode=c-shared \
 		-o examples/$(EXAMPLE_NAME)/$@ \
 		./examples/$(EXAMPLE_NAME)/
@@ -154,7 +159,7 @@ install: $(BUILD)/$(EXAMPLE_NAME).apk
 run: install
 	@$(foreach perm,$(EXAMPLE_PERMISSIONS), \
 		$(ADB) shell pm grant $(PACKAGE_NAME) $(perm) 2>/dev/null || true;)
-	$(ADB) shell am start -n $(PACKAGE_NAME)/com.github.xaionaro_go.jni.example.ExampleActivity
+	$(ADB) shell am start -n $(PACKAGE_NAME)/center.dx.jni.example.ExampleActivity
 
 # ---------------------------------------------------------------------------
 # Clean

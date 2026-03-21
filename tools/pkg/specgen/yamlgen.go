@@ -9,12 +9,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// PackageMapping defines how a Java package maps to a Go package.
-type PackageMapping struct {
-	JavaPrefix string // e.g. "android.app.admin"
-	Package    string // e.g. "admin"
-	GoImport   string // e.g. "github.com/AndroidGoLab/jni/app/admin"
-}
+const (
+	dirPerm  = 0o755
+	filePerm = 0o644
+)
 
 // AndroidServiceName maps known manager class names to their Android
 // Context.getSystemService() constant names.
@@ -126,7 +124,7 @@ func GenerateFromRefDir(
 		}
 	}
 
-	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+	if err := os.MkdirAll(outputDir, dirPerm); err != nil {
 		return fmt.Errorf("mkdir %s: %w", outputDir, err)
 	}
 
@@ -502,74 +500,6 @@ func inferPackageMapping(className string, goModule string) PackageMapping {
 	}
 }
 
-// ---- YAML spec types (for serialization) ----
-
-// SpecFile is the YAML output structure.
-type SpecFile struct {
-	Package   string         `yaml:"package"`
-	GoImport  string         `yaml:"go_import"`
-	Classes   []SpecClass    `yaml:"classes"`
-	Callbacks []SpecCallback `yaml:"callbacks,omitempty"`
-	Constants []SpecConstant `yaml:"constants,omitempty"`
-}
-
-// SpecClass is a class in the YAML spec.
-type SpecClass struct {
-	JavaClass     string       `yaml:"java_class"`
-	GoType        string       `yaml:"go_type"`
-	Obtain        string       `yaml:"obtain,omitempty"`
-	ServiceName   string       `yaml:"service_name,omitempty"`
-	Kind          string       `yaml:"kind,omitempty"`
-	Close         bool         `yaml:"close,omitempty"`
-	Methods       []SpecMethod `yaml:"methods,omitempty"`
-	StaticMethods []SpecMethod `yaml:"static_methods,omitempty"`
-	Fields        []SpecField  `yaml:"fields,omitempty"`
-}
-
-// SpecMethod is a method in the YAML spec.
-type SpecMethod struct {
-	JavaMethod string      `yaml:"java_method"`
-	GoName     string      `yaml:"go_name"`
-	Params     []SpecParam `yaml:"params,omitempty"`
-	Returns    string      `yaml:"returns"`
-	Error      bool        `yaml:"error"`
-}
-
-// SpecParam is a method parameter in the YAML spec.
-type SpecParam struct {
-	JavaType string `yaml:"java_type"`
-	GoName   string `yaml:"go_name"`
-}
-
-// SpecField is a data class field in the YAML spec.
-type SpecField struct {
-	JavaMethod string `yaml:"java_method"`
-	Returns    string `yaml:"returns"`
-	GoName     string `yaml:"go_name"`
-	GoType     string `yaml:"go_type"`
-}
-
-// SpecCallback is a callback interface in the YAML spec.
-type SpecCallback struct {
-	JavaInterface string               `yaml:"java_interface"`
-	GoType        string               `yaml:"go_type"`
-	Methods       []SpecCallbackMethod `yaml:"methods"`
-}
-
-// SpecCallbackMethod is a callback method in the YAML spec.
-type SpecCallbackMethod struct {
-	JavaMethod string   `yaml:"java_method"`
-	Params     []string `yaml:"params"`
-	GoField    string   `yaml:"go_field"`
-}
-
-// SpecConstant is a constant in the YAML spec.
-type SpecConstant struct {
-	GoName string `yaml:"go_name"`
-	Value  string `yaml:"value"`
-	GoType string `yaml:"go_type"`
-}
-
 // deduplicateConstants removes duplicate constants (by GoName) that
 // arise when multiple Java classes in the same Go package export
 // identically-named constants (e.g. CREATOR on Parcelable classes).
@@ -591,7 +521,7 @@ func writeSpecFile(spec *SpecFile, path string) error {
 	if err != nil {
 		return fmt.Errorf("marshal: %w", err)
 	}
-	return os.WriteFile(path, data, 0o644)
+	return os.WriteFile(path, data, filePerm)
 }
 
 // ---- Name conversion helpers ----

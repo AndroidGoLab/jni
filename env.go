@@ -35,7 +35,11 @@ func (e *Env) AllocObject(cls *Class) (*Object, error) {
 }
 
 // CallBooleanMethod wraps the JNI CallBooleanMethodA function.
-func (e *Env) CallBooleanMethod(obj *Object, method MethodID, args ...Value) (uint8, error) {
+func (e *Env) CallBooleanMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (uint8, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -54,7 +58,11 @@ func (e *Env) CallBooleanMethod(obj *Object, method MethodID, args ...Value) (ui
 }
 
 // CallByteMethod wraps the JNI CallByteMethodA function.
-func (e *Env) CallByteMethod(obj *Object, method MethodID, args ...Value) (int8, error) {
+func (e *Env) CallByteMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (int8, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -73,7 +81,11 @@ func (e *Env) CallByteMethod(obj *Object, method MethodID, args ...Value) (int8,
 }
 
 // CallCharMethod wraps the JNI CallCharMethodA function.
-func (e *Env) CallCharMethod(obj *Object, method MethodID, args ...Value) (uint16, error) {
+func (e *Env) CallCharMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (uint16, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -92,7 +104,11 @@ func (e *Env) CallCharMethod(obj *Object, method MethodID, args ...Value) (uint1
 }
 
 // CallDoubleMethod wraps the JNI CallDoubleMethodA function.
-func (e *Env) CallDoubleMethod(obj *Object, method MethodID, args ...Value) (float64, error) {
+func (e *Env) CallDoubleMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (float64, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -111,7 +127,11 @@ func (e *Env) CallDoubleMethod(obj *Object, method MethodID, args ...Value) (flo
 }
 
 // CallFloatMethod wraps the JNI CallFloatMethodA function.
-func (e *Env) CallFloatMethod(obj *Object, method MethodID, args ...Value) (float32, error) {
+func (e *Env) CallFloatMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (float32, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -130,7 +150,11 @@ func (e *Env) CallFloatMethod(obj *Object, method MethodID, args ...Value) (floa
 }
 
 // CallIntMethod wraps the JNI CallIntMethodA function.
-func (e *Env) CallIntMethod(obj *Object, method MethodID, args ...Value) (int32, error) {
+func (e *Env) CallIntMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (int32, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -149,7 +173,11 @@ func (e *Env) CallIntMethod(obj *Object, method MethodID, args ...Value) (int32,
 }
 
 // CallLongMethod wraps the JNI CallLongMethodA function.
-func (e *Env) CallLongMethod(obj *Object, method MethodID, args ...Value) (int64, error) {
+func (e *Env) CallLongMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (int64, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -168,7 +196,12 @@ func (e *Env) CallLongMethod(obj *Object, method MethodID, args ...Value) (int64
 }
 
 // CallNonvirtualBooleanMethod wraps the JNI CallNonvirtualBooleanMethodA function.
-func (e *Env) CallNonvirtualBooleanMethod(obj *Object, cls *Class, method MethodID, args ...Value) (uint8, error) {
+func (e *Env) CallNonvirtualBooleanMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (uint8, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -187,7 +220,12 @@ func (e *Env) CallNonvirtualBooleanMethod(obj *Object, cls *Class, method Method
 }
 
 // CallNonvirtualByteMethod wraps the JNI CallNonvirtualByteMethodA function.
-func (e *Env) CallNonvirtualByteMethod(obj *Object, cls *Class, method MethodID, args ...Value) (int8, error) {
+func (e *Env) CallNonvirtualByteMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int8, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -206,7 +244,12 @@ func (e *Env) CallNonvirtualByteMethod(obj *Object, cls *Class, method MethodID,
 }
 
 // CallNonvirtualCharMethod wraps the JNI CallNonvirtualCharMethodA function.
-func (e *Env) CallNonvirtualCharMethod(obj *Object, cls *Class, method MethodID, args ...Value) (uint16, error) {
+func (e *Env) CallNonvirtualCharMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (uint16, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -225,7 +268,12 @@ func (e *Env) CallNonvirtualCharMethod(obj *Object, cls *Class, method MethodID,
 }
 
 // CallNonvirtualDoubleMethod wraps the JNI CallNonvirtualDoubleMethodA function.
-func (e *Env) CallNonvirtualDoubleMethod(obj *Object, cls *Class, method MethodID, args ...Value) (float64, error) {
+func (e *Env) CallNonvirtualDoubleMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (float64, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -244,7 +292,12 @@ func (e *Env) CallNonvirtualDoubleMethod(obj *Object, cls *Class, method MethodI
 }
 
 // CallNonvirtualFloatMethod wraps the JNI CallNonvirtualFloatMethodA function.
-func (e *Env) CallNonvirtualFloatMethod(obj *Object, cls *Class, method MethodID, args ...Value) (float32, error) {
+func (e *Env) CallNonvirtualFloatMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (float32, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -263,7 +316,12 @@ func (e *Env) CallNonvirtualFloatMethod(obj *Object, cls *Class, method MethodID
 }
 
 // CallNonvirtualIntMethod wraps the JNI CallNonvirtualIntMethodA function.
-func (e *Env) CallNonvirtualIntMethod(obj *Object, cls *Class, method MethodID, args ...Value) (int32, error) {
+func (e *Env) CallNonvirtualIntMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int32, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -282,7 +340,12 @@ func (e *Env) CallNonvirtualIntMethod(obj *Object, cls *Class, method MethodID, 
 }
 
 // CallNonvirtualLongMethod wraps the JNI CallNonvirtualLongMethodA function.
-func (e *Env) CallNonvirtualLongMethod(obj *Object, cls *Class, method MethodID, args ...Value) (int64, error) {
+func (e *Env) CallNonvirtualLongMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int64, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -301,7 +364,12 @@ func (e *Env) CallNonvirtualLongMethod(obj *Object, cls *Class, method MethodID,
 }
 
 // CallNonvirtualObjectMethod wraps the JNI CallNonvirtualObjectMethodA function.
-func (e *Env) CallNonvirtualObjectMethod(obj *Object, cls *Class, method MethodID, args ...Value) (*Object, error) {
+func (e *Env) CallNonvirtualObjectMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (*Object, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -320,7 +388,12 @@ func (e *Env) CallNonvirtualObjectMethod(obj *Object, cls *Class, method MethodI
 }
 
 // CallNonvirtualShortMethod wraps the JNI CallNonvirtualShortMethodA function.
-func (e *Env) CallNonvirtualShortMethod(obj *Object, cls *Class, method MethodID, args ...Value) (int16, error) {
+func (e *Env) CallNonvirtualShortMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int16, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -339,7 +412,12 @@ func (e *Env) CallNonvirtualShortMethod(obj *Object, cls *Class, method MethodID
 }
 
 // CallNonvirtualVoidMethod wraps the JNI CallNonvirtualVoidMethodA function.
-func (e *Env) CallNonvirtualVoidMethod(obj *Object, cls *Class, method MethodID, args ...Value) error {
+func (e *Env) CallNonvirtualVoidMethod(
+	obj *Object,
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) error {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -358,7 +436,11 @@ func (e *Env) CallNonvirtualVoidMethod(obj *Object, cls *Class, method MethodID,
 }
 
 // CallObjectMethod wraps the JNI CallObjectMethodA function.
-func (e *Env) CallObjectMethod(obj *Object, method MethodID, args ...Value) (*Object, error) {
+func (e *Env) CallObjectMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (*Object, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -377,7 +459,11 @@ func (e *Env) CallObjectMethod(obj *Object, method MethodID, args ...Value) (*Ob
 }
 
 // CallShortMethod wraps the JNI CallShortMethodA function.
-func (e *Env) CallShortMethod(obj *Object, method MethodID, args ...Value) (int16, error) {
+func (e *Env) CallShortMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) (int16, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -396,7 +482,11 @@ func (e *Env) CallShortMethod(obj *Object, method MethodID, args ...Value) (int1
 }
 
 // CallStaticBooleanMethod wraps the JNI CallStaticBooleanMethodA function.
-func (e *Env) CallStaticBooleanMethod(cls *Class, method MethodID, args ...Value) (uint8, error) {
+func (e *Env) CallStaticBooleanMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (uint8, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -415,7 +505,11 @@ func (e *Env) CallStaticBooleanMethod(cls *Class, method MethodID, args ...Value
 }
 
 // CallStaticByteMethod wraps the JNI CallStaticByteMethodA function.
-func (e *Env) CallStaticByteMethod(cls *Class, method MethodID, args ...Value) (int8, error) {
+func (e *Env) CallStaticByteMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int8, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -434,7 +528,11 @@ func (e *Env) CallStaticByteMethod(cls *Class, method MethodID, args ...Value) (
 }
 
 // CallStaticCharMethod wraps the JNI CallStaticCharMethodA function.
-func (e *Env) CallStaticCharMethod(cls *Class, method MethodID, args ...Value) (uint16, error) {
+func (e *Env) CallStaticCharMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (uint16, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -453,7 +551,11 @@ func (e *Env) CallStaticCharMethod(cls *Class, method MethodID, args ...Value) (
 }
 
 // CallStaticDoubleMethod wraps the JNI CallStaticDoubleMethodA function.
-func (e *Env) CallStaticDoubleMethod(cls *Class, method MethodID, args ...Value) (float64, error) {
+func (e *Env) CallStaticDoubleMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (float64, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -472,7 +574,11 @@ func (e *Env) CallStaticDoubleMethod(cls *Class, method MethodID, args ...Value)
 }
 
 // CallStaticFloatMethod wraps the JNI CallStaticFloatMethodA function.
-func (e *Env) CallStaticFloatMethod(cls *Class, method MethodID, args ...Value) (float32, error) {
+func (e *Env) CallStaticFloatMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (float32, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -491,7 +597,11 @@ func (e *Env) CallStaticFloatMethod(cls *Class, method MethodID, args ...Value) 
 }
 
 // CallStaticIntMethod wraps the JNI CallStaticIntMethodA function.
-func (e *Env) CallStaticIntMethod(cls *Class, method MethodID, args ...Value) (int32, error) {
+func (e *Env) CallStaticIntMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int32, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -510,7 +620,11 @@ func (e *Env) CallStaticIntMethod(cls *Class, method MethodID, args ...Value) (i
 }
 
 // CallStaticLongMethod wraps the JNI CallStaticLongMethodA function.
-func (e *Env) CallStaticLongMethod(cls *Class, method MethodID, args ...Value) (int64, error) {
+func (e *Env) CallStaticLongMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int64, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -529,7 +643,11 @@ func (e *Env) CallStaticLongMethod(cls *Class, method MethodID, args ...Value) (
 }
 
 // CallStaticObjectMethod wraps the JNI CallStaticObjectMethodA function.
-func (e *Env) CallStaticObjectMethod(cls *Class, method MethodID, args ...Value) (*Object, error) {
+func (e *Env) CallStaticObjectMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (*Object, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -548,7 +666,11 @@ func (e *Env) CallStaticObjectMethod(cls *Class, method MethodID, args ...Value)
 }
 
 // CallStaticShortMethod wraps the JNI CallStaticShortMethodA function.
-func (e *Env) CallStaticShortMethod(cls *Class, method MethodID, args ...Value) (int16, error) {
+func (e *Env) CallStaticShortMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (int16, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -567,7 +689,11 @@ func (e *Env) CallStaticShortMethod(cls *Class, method MethodID, args ...Value) 
 }
 
 // CallStaticVoidMethod wraps the JNI CallStaticVoidMethodA function.
-func (e *Env) CallStaticVoidMethod(cls *Class, method MethodID, args ...Value) error {
+func (e *Env) CallStaticVoidMethod(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) error {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -586,7 +712,11 @@ func (e *Env) CallStaticVoidMethod(cls *Class, method MethodID, args ...Value) e
 }
 
 // CallVoidMethod wraps the JNI CallVoidMethodA function.
-func (e *Env) CallVoidMethod(obj *Object, method MethodID, args ...Value) error {
+func (e *Env) CallVoidMethod(
+	obj *Object,
+	method MethodID,
+	args ...Value,
+) error {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -605,7 +735,11 @@ func (e *Env) CallVoidMethod(obj *Object, method MethodID, args ...Value) error 
 }
 
 // DefineClass wraps the JNI DefineClass function.
-func (e *Env) DefineClass(name string, loader *Object, buf []byte) (*Class, error) {
+func (e *Env) DefineClass(
+	name string,
+	loader *Object,
+	buf []byte,
+) (*Class, error) {
 	cName := append([]byte(name), 0)
 	_ret := capi.DefineClass(e.ptr, (*capi.Cchar)(unsafe.Pointer(&cName[0])), loader.Ref(), (*capi.Jbyte)(unsafe.Pointer(&buf[0])), capi.Jint(len(buf)))
 	if err := jnierr.CheckException(e.ptr); err != nil {
@@ -701,7 +835,12 @@ func (e *Env) GetBooleanArrayElements(array *BooleanArray, isCopy *uint8) unsafe
 }
 
 // GetBooleanArrayRegion wraps the JNI GetBooleanArrayRegion function.
-func (e *Env) GetBooleanArrayRegion(array *BooleanArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetBooleanArrayRegion(
+	array *BooleanArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetBooleanArrayRegion(e.ptr, capi.BooleanArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jboolean)(buf))
 }
 
@@ -718,7 +857,12 @@ func (e *Env) GetByteArrayElements(array *ByteArray, isCopy *uint8) unsafe.Point
 }
 
 // GetByteArrayRegion wraps the JNI GetByteArrayRegion function.
-func (e *Env) GetByteArrayRegion(array *ByteArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetByteArrayRegion(
+	array *ByteArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetByteArrayRegion(e.ptr, capi.ByteArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jbyte)(buf))
 }
 
@@ -735,7 +879,12 @@ func (e *Env) GetCharArrayElements(array *CharArray, isCopy *uint8) unsafe.Point
 }
 
 // GetCharArrayRegion wraps the JNI GetCharArrayRegion function.
-func (e *Env) GetCharArrayRegion(array *CharArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetCharArrayRegion(
+	array *CharArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetCharArrayRegion(e.ptr, capi.CharArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jchar)(buf))
 }
 
@@ -764,7 +913,12 @@ func (e *Env) GetDoubleArrayElements(array *DoubleArray, isCopy *uint8) unsafe.P
 }
 
 // GetDoubleArrayRegion wraps the JNI GetDoubleArrayRegion function.
-func (e *Env) GetDoubleArrayRegion(array *DoubleArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetDoubleArrayRegion(
+	array *DoubleArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetDoubleArrayRegion(e.ptr, capi.DoubleArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jdouble)(buf))
 }
 
@@ -775,7 +929,11 @@ func (e *Env) GetDoubleField(obj *Object, field FieldID) float64 {
 }
 
 // GetFieldID wraps the JNI GetFieldID function.
-func (e *Env) GetFieldID(cls *Class, name string, sig string) (FieldID, error) {
+func (e *Env) GetFieldID(
+	cls *Class,
+	name string,
+	sig string,
+) (FieldID, error) {
 	cName := append([]byte(name), 0)
 	cSig := append([]byte(sig), 0)
 	_ret := capi.GetFieldID(e.ptr, capi.Class(cls.Ref()), (*capi.Cchar)(unsafe.Pointer(&cName[0])), (*capi.Cchar)(unsafe.Pointer(&cSig[0])))
@@ -792,7 +950,12 @@ func (e *Env) GetFloatArrayElements(array *FloatArray, isCopy *uint8) unsafe.Poi
 }
 
 // GetFloatArrayRegion wraps the JNI GetFloatArrayRegion function.
-func (e *Env) GetFloatArrayRegion(array *FloatArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetFloatArrayRegion(
+	array *FloatArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetFloatArrayRegion(e.ptr, capi.FloatArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jfloat)(buf))
 }
 
@@ -809,7 +972,12 @@ func (e *Env) GetIntArrayElements(array *IntArray, isCopy *uint8) unsafe.Pointer
 }
 
 // GetIntArrayRegion wraps the JNI GetIntArrayRegion function.
-func (e *Env) GetIntArrayRegion(array *IntArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetIntArrayRegion(
+	array *IntArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetIntArrayRegion(e.ptr, capi.IntArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jint)(buf))
 }
 
@@ -826,7 +994,12 @@ func (e *Env) GetLongArrayElements(array *LongArray, isCopy *uint8) unsafe.Point
 }
 
 // GetLongArrayRegion wraps the JNI GetLongArrayRegion function.
-func (e *Env) GetLongArrayRegion(array *LongArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetLongArrayRegion(
+	array *LongArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetLongArrayRegion(e.ptr, capi.LongArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jlong)(buf))
 }
 
@@ -837,7 +1010,11 @@ func (e *Env) GetLongField(obj *Object, field FieldID) int64 {
 }
 
 // GetMethodID wraps the JNI GetMethodID function.
-func (e *Env) GetMethodID(cls *Class, name string, sig string) (MethodID, error) {
+func (e *Env) GetMethodID(
+	cls *Class,
+	name string,
+	sig string,
+) (MethodID, error) {
 	cName := append([]byte(name), 0)
 	cSig := append([]byte(sig), 0)
 	_ret := capi.GetMethodID(e.ptr, capi.Class(cls.Ref()), (*capi.Cchar)(unsafe.Pointer(&cName[0])), (*capi.Cchar)(unsafe.Pointer(&cSig[0])))
@@ -887,7 +1064,12 @@ func (e *Env) GetShortArrayElements(array *ShortArray, isCopy *uint8) unsafe.Poi
 }
 
 // GetShortArrayRegion wraps the JNI GetShortArrayRegion function.
-func (e *Env) GetShortArrayRegion(array *ShortArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) GetShortArrayRegion(
+	array *ShortArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.GetShortArrayRegion(e.ptr, capi.ShortArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jshort)(buf))
 }
 
@@ -922,7 +1104,11 @@ func (e *Env) GetStaticDoubleField(cls *Class, field FieldID) float64 {
 }
 
 // GetStaticFieldID wraps the JNI GetStaticFieldID function.
-func (e *Env) GetStaticFieldID(cls *Class, name string, sig string) (FieldID, error) {
+func (e *Env) GetStaticFieldID(
+	cls *Class,
+	name string,
+	sig string,
+) (FieldID, error) {
 	cName := append([]byte(name), 0)
 	cSig := append([]byte(sig), 0)
 	_ret := capi.GetStaticFieldID(e.ptr, capi.Class(cls.Ref()), (*capi.Cchar)(unsafe.Pointer(&cName[0])), (*capi.Cchar)(unsafe.Pointer(&cSig[0])))
@@ -951,7 +1137,11 @@ func (e *Env) GetStaticLongField(cls *Class, field FieldID) int64 {
 }
 
 // GetStaticMethodID wraps the JNI GetStaticMethodID function.
-func (e *Env) GetStaticMethodID(cls *Class, name string, sig string) (MethodID, error) {
+func (e *Env) GetStaticMethodID(
+	cls *Class,
+	name string,
+	sig string,
+) (MethodID, error) {
 	cName := append([]byte(name), 0)
 	cSig := append([]byte(sig), 0)
 	_ret := capi.GetStaticMethodID(e.ptr, capi.Class(cls.Ref()), (*capi.Cchar)(unsafe.Pointer(&cName[0])), (*capi.Cchar)(unsafe.Pointer(&cSig[0])))
@@ -995,7 +1185,12 @@ func (e *Env) GetStringLength(str *String) int32 {
 }
 
 // GetStringRegion wraps the JNI GetStringRegion function.
-func (e *Env) GetStringRegion(str *String, start int32, len int32, buf []uint16) error {
+func (e *Env) GetStringRegion(
+	str *String,
+	start int32,
+	len int32,
+	buf []uint16,
+) error {
 	capi.GetStringRegion(e.ptr, capi.String(str.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jchar)(unsafe.Pointer(&buf[0])))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return err
@@ -1019,7 +1214,12 @@ func (e *Env) GetStringUTFLength(str *String) int32 {
 }
 
 // GetStringUTFRegion wraps the JNI GetStringUTFRegion function.
-func (e *Env) GetStringUTFRegion(str *String, start int32, len int32, buf []byte) error {
+func (e *Env) GetStringUTFRegion(
+	str *String,
+	start int32,
+	len int32,
+	buf []byte,
+) error {
 	capi.GetStringUTFRegion(e.ptr, capi.String(str.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Cchar)(unsafe.Pointer(&buf[0])))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return err
@@ -1136,7 +1336,11 @@ func (e *Env) NewLongArray(length int32) *LongArray {
 }
 
 // NewObject wraps the JNI NewObjectA function.
-func (e *Env) NewObject(cls *Class, method MethodID, args ...Value) (*Object, error) {
+func (e *Env) NewObject(
+	cls *Class,
+	method MethodID,
+	args ...Value,
+) (*Object, error) {
 	// _dummyJvalue ensures a non-nil jvalue pointer for zero-argument calls.
 	// The JNI spec does not guarantee NULL is valid for the const jvalue*
 	// parameter of Call<Type>MethodA; OpenJ9 rejects it as an error
@@ -1155,7 +1359,11 @@ func (e *Env) NewObject(cls *Class, method MethodID, args ...Value) (*Object, er
 }
 
 // NewObjectArray wraps the JNI NewObjectArray function.
-func (e *Env) NewObjectArray(length int32, elementClass *Class, initialElement *Object) (*ObjectArray, error) {
+func (e *Env) NewObjectArray(
+	length int32,
+	elementClass *Class,
+	initialElement *Object,
+) (*ObjectArray, error) {
 	_ret := capi.NewObjectArray(e.ptr, capi.Jint(length), capi.Class(elementClass.Ref()), initialElement.Ref())
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
@@ -1210,7 +1418,11 @@ func (e *Env) PushLocalFrame(capacity int32) error {
 }
 
 // RegisterNatives wraps the JNI RegisterNatives function.
-func (e *Env) RegisterNatives(cls *Class, methods unsafe.Pointer, nMethods int32) error {
+func (e *Env) RegisterNatives(
+	cls *Class,
+	methods unsafe.Pointer,
+	nMethods int32,
+) error {
 	rc := capi.RegisterNatives(e.ptr, capi.Class(cls.Ref()), (*capi.JNINativeMethod)(methods), capi.Jint(nMethods))
 	if rc != capi.JNI_OK {
 		return Error(rc)
@@ -1219,47 +1431,83 @@ func (e *Env) RegisterNatives(cls *Class, methods unsafe.Pointer, nMethods int32
 }
 
 // ReleaseBooleanArrayElements wraps the JNI ReleaseBooleanArrayElements function.
-func (e *Env) ReleaseBooleanArrayElements(array *BooleanArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseBooleanArrayElements(
+	array *BooleanArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseBooleanArrayElements(e.ptr, capi.BooleanArray(array.Ref()), (*capi.Jboolean)(elems), capi.Jint(mode))
 }
 
 // ReleaseByteArrayElements wraps the JNI ReleaseByteArrayElements function.
-func (e *Env) ReleaseByteArrayElements(array *ByteArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseByteArrayElements(
+	array *ByteArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseByteArrayElements(e.ptr, capi.ByteArray(array.Ref()), (*capi.Jbyte)(elems), capi.Jint(mode))
 }
 
 // ReleaseCharArrayElements wraps the JNI ReleaseCharArrayElements function.
-func (e *Env) ReleaseCharArrayElements(array *CharArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseCharArrayElements(
+	array *CharArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseCharArrayElements(e.ptr, capi.CharArray(array.Ref()), (*capi.Jchar)(elems), capi.Jint(mode))
 }
 
 // ReleaseDoubleArrayElements wraps the JNI ReleaseDoubleArrayElements function.
-func (e *Env) ReleaseDoubleArrayElements(array *DoubleArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseDoubleArrayElements(
+	array *DoubleArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseDoubleArrayElements(e.ptr, capi.DoubleArray(array.Ref()), (*capi.Jdouble)(elems), capi.Jint(mode))
 }
 
 // ReleaseFloatArrayElements wraps the JNI ReleaseFloatArrayElements function.
-func (e *Env) ReleaseFloatArrayElements(array *FloatArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseFloatArrayElements(
+	array *FloatArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseFloatArrayElements(e.ptr, capi.FloatArray(array.Ref()), (*capi.Jfloat)(elems), capi.Jint(mode))
 }
 
 // ReleaseIntArrayElements wraps the JNI ReleaseIntArrayElements function.
-func (e *Env) ReleaseIntArrayElements(array *IntArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseIntArrayElements(
+	array *IntArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseIntArrayElements(e.ptr, capi.IntArray(array.Ref()), (*capi.Jint)(elems), capi.Jint(mode))
 }
 
 // ReleaseLongArrayElements wraps the JNI ReleaseLongArrayElements function.
-func (e *Env) ReleaseLongArrayElements(array *LongArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseLongArrayElements(
+	array *LongArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseLongArrayElements(e.ptr, capi.LongArray(array.Ref()), (*capi.Jlong)(elems), capi.Jint(mode))
 }
 
 // ReleasePrimitiveArrayCritical wraps the JNI ReleasePrimitiveArrayCritical function.
-func (e *Env) ReleasePrimitiveArrayCritical(array *Array, carray unsafe.Pointer, mode int32) {
+func (e *Env) ReleasePrimitiveArrayCritical(
+	array *Array,
+	carray unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleasePrimitiveArrayCritical(e.ptr, capi.Array(array.Ref()), carray, capi.Jint(mode))
 }
 
 // ReleaseShortArrayElements wraps the JNI ReleaseShortArrayElements function.
-func (e *Env) ReleaseShortArrayElements(array *ShortArray, elems unsafe.Pointer, mode int32) {
+func (e *Env) ReleaseShortArrayElements(
+	array *ShortArray,
+	elems unsafe.Pointer,
+	mode int32,
+) {
 	capi.ReleaseShortArrayElements(e.ptr, capi.ShortArray(array.Ref()), (*capi.Jshort)(elems), capi.Jint(mode))
 }
 
@@ -1279,77 +1527,144 @@ func (e *Env) ReleaseStringUTFChars(str *String, utf unsafe.Pointer) {
 }
 
 // SetBooleanArrayRegion wraps the JNI SetBooleanArrayRegion function.
-func (e *Env) SetBooleanArrayRegion(array *BooleanArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetBooleanArrayRegion(
+	array *BooleanArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetBooleanArrayRegion(e.ptr, capi.BooleanArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jboolean)(buf))
 }
 
 // SetBooleanField wraps the JNI SetBooleanField function.
-func (e *Env) SetBooleanField(obj *Object, field FieldID, value uint8) {
+func (e *Env) SetBooleanField(
+	obj *Object,
+	field FieldID,
+	value uint8,
+) {
 	capi.SetBooleanField(e.ptr, obj.Ref(), field, capi.Jboolean(value))
 }
 
 // SetByteArrayRegion wraps the JNI SetByteArrayRegion function.
-func (e *Env) SetByteArrayRegion(array *ByteArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetByteArrayRegion(
+	array *ByteArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetByteArrayRegion(e.ptr, capi.ByteArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jbyte)(buf))
 }
 
 // SetByteField wraps the JNI SetByteField function.
-func (e *Env) SetByteField(obj *Object, field FieldID, value int8) {
+func (e *Env) SetByteField(
+	obj *Object,
+	field FieldID,
+	value int8,
+) {
 	capi.SetByteField(e.ptr, obj.Ref(), field, capi.Jbyte(value))
 }
 
 // SetCharArrayRegion wraps the JNI SetCharArrayRegion function.
-func (e *Env) SetCharArrayRegion(array *CharArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetCharArrayRegion(
+	array *CharArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetCharArrayRegion(e.ptr, capi.CharArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jchar)(buf))
 }
 
 // SetCharField wraps the JNI SetCharField function.
-func (e *Env) SetCharField(obj *Object, field FieldID, value uint16) {
+func (e *Env) SetCharField(
+	obj *Object,
+	field FieldID,
+	value uint16,
+) {
 	capi.SetCharField(e.ptr, obj.Ref(), field, capi.Jchar(value))
 }
 
 // SetDoubleArrayRegion wraps the JNI SetDoubleArrayRegion function.
-func (e *Env) SetDoubleArrayRegion(array *DoubleArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetDoubleArrayRegion(
+	array *DoubleArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetDoubleArrayRegion(e.ptr, capi.DoubleArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jdouble)(buf))
 }
 
 // SetDoubleField wraps the JNI SetDoubleField function.
-func (e *Env) SetDoubleField(obj *Object, field FieldID, value float64) {
+func (e *Env) SetDoubleField(
+	obj *Object,
+	field FieldID,
+	value float64,
+) {
 	capi.SetDoubleField(e.ptr, obj.Ref(), field, capi.Jdouble(value))
 }
 
 // SetFloatArrayRegion wraps the JNI SetFloatArrayRegion function.
-func (e *Env) SetFloatArrayRegion(array *FloatArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetFloatArrayRegion(
+	array *FloatArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetFloatArrayRegion(e.ptr, capi.FloatArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jfloat)(buf))
 }
 
 // SetFloatField wraps the JNI SetFloatField function.
-func (e *Env) SetFloatField(obj *Object, field FieldID, value float32) {
+func (e *Env) SetFloatField(
+	obj *Object,
+	field FieldID,
+	value float32,
+) {
 	capi.SetFloatField(e.ptr, obj.Ref(), field, capi.Jfloat(value))
 }
 
 // SetIntArrayRegion wraps the JNI SetIntArrayRegion function.
-func (e *Env) SetIntArrayRegion(array *IntArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetIntArrayRegion(
+	array *IntArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetIntArrayRegion(e.ptr, capi.IntArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jint)(buf))
 }
 
 // SetIntField wraps the JNI SetIntField function.
-func (e *Env) SetIntField(obj *Object, field FieldID, value int32) {
+func (e *Env) SetIntField(
+	obj *Object,
+	field FieldID,
+	value int32,
+) {
 	capi.SetIntField(e.ptr, obj.Ref(), field, capi.Jint(value))
 }
 
 // SetLongArrayRegion wraps the JNI SetLongArrayRegion function.
-func (e *Env) SetLongArrayRegion(array *LongArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetLongArrayRegion(
+	array *LongArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetLongArrayRegion(e.ptr, capi.LongArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jlong)(buf))
 }
 
 // SetLongField wraps the JNI SetLongField function.
-func (e *Env) SetLongField(obj *Object, field FieldID, value int64) {
+func (e *Env) SetLongField(
+	obj *Object,
+	field FieldID,
+	value int64,
+) {
 	capi.SetLongField(e.ptr, obj.Ref(), field, capi.Jlong(value))
 }
 
 // SetObjectArrayElement wraps the JNI SetObjectArrayElement function.
-func (e *Env) SetObjectArrayElement(array *ObjectArray, index int32, value *Object) error {
+func (e *Env) SetObjectArrayElement(
+	array *ObjectArray,
+	index int32,
+	value *Object,
+) error {
 	capi.SetObjectArrayElement(e.ptr, capi.ObjectArray(array.Ref()), capi.Jint(index), value.Ref())
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return err
@@ -1358,62 +1673,111 @@ func (e *Env) SetObjectArrayElement(array *ObjectArray, index int32, value *Obje
 }
 
 // SetObjectField wraps the JNI SetObjectField function.
-func (e *Env) SetObjectField(obj *Object, field FieldID, value *Object) {
+func (e *Env) SetObjectField(
+	obj *Object,
+	field FieldID,
+	value *Object,
+) {
 	capi.SetObjectField(e.ptr, obj.Ref(), field, value.Ref())
 }
 
 // SetShortArrayRegion wraps the JNI SetShortArrayRegion function.
-func (e *Env) SetShortArrayRegion(array *ShortArray, start int32, len int32, buf unsafe.Pointer) {
+func (e *Env) SetShortArrayRegion(
+	array *ShortArray,
+	start int32,
+	len int32,
+	buf unsafe.Pointer,
+) {
 	capi.SetShortArrayRegion(e.ptr, capi.ShortArray(array.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jshort)(buf))
 }
 
 // SetShortField wraps the JNI SetShortField function.
-func (e *Env) SetShortField(obj *Object, field FieldID, value int16) {
+func (e *Env) SetShortField(
+	obj *Object,
+	field FieldID,
+	value int16,
+) {
 	capi.SetShortField(e.ptr, obj.Ref(), field, capi.Jshort(value))
 }
 
 // SetStaticBooleanField wraps the JNI SetStaticBooleanField function.
-func (e *Env) SetStaticBooleanField(cls *Class, field FieldID, value uint8) {
+func (e *Env) SetStaticBooleanField(
+	cls *Class,
+	field FieldID,
+	value uint8,
+) {
 	capi.SetStaticBooleanField(e.ptr, capi.Class(cls.Ref()), field, capi.Jboolean(value))
 }
 
 // SetStaticByteField wraps the JNI SetStaticByteField function.
-func (e *Env) SetStaticByteField(cls *Class, field FieldID, value int8) {
+func (e *Env) SetStaticByteField(
+	cls *Class,
+	field FieldID,
+	value int8,
+) {
 	capi.SetStaticByteField(e.ptr, capi.Class(cls.Ref()), field, capi.Jbyte(value))
 }
 
 // SetStaticCharField wraps the JNI SetStaticCharField function.
-func (e *Env) SetStaticCharField(cls *Class, field FieldID, value uint16) {
+func (e *Env) SetStaticCharField(
+	cls *Class,
+	field FieldID,
+	value uint16,
+) {
 	capi.SetStaticCharField(e.ptr, capi.Class(cls.Ref()), field, capi.Jchar(value))
 }
 
 // SetStaticDoubleField wraps the JNI SetStaticDoubleField function.
-func (e *Env) SetStaticDoubleField(cls *Class, field FieldID, value float64) {
+func (e *Env) SetStaticDoubleField(
+	cls *Class,
+	field FieldID,
+	value float64,
+) {
 	capi.SetStaticDoubleField(e.ptr, capi.Class(cls.Ref()), field, capi.Jdouble(value))
 }
 
 // SetStaticFloatField wraps the JNI SetStaticFloatField function.
-func (e *Env) SetStaticFloatField(cls *Class, field FieldID, value float32) {
+func (e *Env) SetStaticFloatField(
+	cls *Class,
+	field FieldID,
+	value float32,
+) {
 	capi.SetStaticFloatField(e.ptr, capi.Class(cls.Ref()), field, capi.Jfloat(value))
 }
 
 // SetStaticIntField wraps the JNI SetStaticIntField function.
-func (e *Env) SetStaticIntField(cls *Class, field FieldID, value int32) {
+func (e *Env) SetStaticIntField(
+	cls *Class,
+	field FieldID,
+	value int32,
+) {
 	capi.SetStaticIntField(e.ptr, capi.Class(cls.Ref()), field, capi.Jint(value))
 }
 
 // SetStaticLongField wraps the JNI SetStaticLongField function.
-func (e *Env) SetStaticLongField(cls *Class, field FieldID, value int64) {
+func (e *Env) SetStaticLongField(
+	cls *Class,
+	field FieldID,
+	value int64,
+) {
 	capi.SetStaticLongField(e.ptr, capi.Class(cls.Ref()), field, capi.Jlong(value))
 }
 
 // SetStaticObjectField wraps the JNI SetStaticObjectField function.
-func (e *Env) SetStaticObjectField(cls *Class, field FieldID, value *Object) {
+func (e *Env) SetStaticObjectField(
+	cls *Class,
+	field FieldID,
+	value *Object,
+) {
 	capi.SetStaticObjectField(e.ptr, capi.Class(cls.Ref()), field, value.Ref())
 }
 
 // SetStaticShortField wraps the JNI SetStaticShortField function.
-func (e *Env) SetStaticShortField(cls *Class, field FieldID, value int16) {
+func (e *Env) SetStaticShortField(
+	cls *Class,
+	field FieldID,
+	value int16,
+) {
 	capi.SetStaticShortField(e.ptr, capi.Class(cls.Ref()), field, capi.Jshort(value))
 }
 
@@ -1437,7 +1801,11 @@ func (e *Env) ThrowNew(cls *Class, message string) error {
 }
 
 // ToReflectedField wraps the JNI ToReflectedField function.
-func (e *Env) ToReflectedField(cls *Class, field FieldID, isStatic bool) *Object {
+func (e *Env) ToReflectedField(
+	cls *Class,
+	field FieldID,
+	isStatic bool,
+) *Object {
 	var cIsStatic capi.Jboolean
 	if isStatic {
 		cIsStatic = capi.JNI_TRUE
@@ -1447,7 +1815,11 @@ func (e *Env) ToReflectedField(cls *Class, field FieldID, isStatic bool) *Object
 }
 
 // ToReflectedMethod wraps the JNI ToReflectedMethod function.
-func (e *Env) ToReflectedMethod(cls *Class, method MethodID, isStatic bool) *Object {
+func (e *Env) ToReflectedMethod(
+	cls *Class,
+	method MethodID,
+	isStatic bool,
+) *Object {
 	var cIsStatic capi.Jboolean
 	if isStatic {
 		cIsStatic = capi.JNI_TRUE
