@@ -71,6 +71,11 @@ func (m *MediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*j
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -105,6 +110,11 @@ func (m *MediaStore) CreateFavoriteRequest(
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -141,6 +151,11 @@ func (m *MediaStore) CreateTrashRequest(
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -166,6 +181,11 @@ func (m *MediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jn
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -193,6 +213,11 @@ func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -218,6 +243,11 @@ func (m *MediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, erro
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -275,6 +305,11 @@ func (m *MediaStore) GetMediaScannerUri() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -301,6 +336,11 @@ func (m *MediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -326,6 +366,11 @@ func (m *MediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -378,6 +423,11 @@ func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -404,6 +454,11 @@ func (m *MediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.O
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -429,6 +484,11 @@ func (m *MediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -748,6 +808,11 @@ func (m *MediaStore) OpenAssetFileDescriptor(
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -783,6 +848,11 @@ func (m *MediaStore) OpenFileDescriptor(
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -821,6 +891,11 @@ func (m *MediaStore) OpenTypedAssetFileDescriptor(
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -847,6 +922,11 @@ func (m *MediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -872,6 +952,11 @@ func (m *MediaStore) SetRequireOriginal(arg0 *jni.Object) (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})

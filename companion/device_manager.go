@@ -141,6 +141,11 @@ func (m *DeviceManager) BuildAssociationCancellationIntent() (*jni.Object, error
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -166,6 +171,11 @@ func (m *DeviceManager) BuildPermissionTransferUserConsentIntent(arg0 int32) (*j
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -311,6 +321,11 @@ func (m *DeviceManager) GetAssociations() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -335,6 +350,11 @@ func (m *DeviceManager) GetMyAssociations() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})

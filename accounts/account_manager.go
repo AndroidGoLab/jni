@@ -17,10 +17,54 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "account"
+
 // AccountManager wraps android.accounts.AccountManager.
 type AccountManager struct {
 	VM  *jni.VM
+	Ctx *app.Context
 	Obj *jni.GlobalRef
+}
+
+// NewAccountManager obtains android.accounts.AccountManager from the Android system service manager.
+func NewAccountManager(ctx *app.Context) (*AccountManager, error) {
+	if ctx == nil {
+		return nil, fmt.Errorf("AccountManager: nil Context")
+	}
+	var mgr AccountManager
+	mgr.VM = ctx.VM
+	mgr.Ctx = ctx
+
+	err := mgr.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		svc, err := ctx.GetSystemService(serviceName)
+		if err != nil {
+			return err
+		}
+		if svc == nil || svc.Ref() == 0 {
+			return fmt.Errorf("%s service not available", serviceName)
+		}
+		mgr.Obj = env.NewGlobalRef(svc)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &mgr, nil
+}
+
+// Close releases the global reference to the underlying Java object.
+// After Close, the AccountManager must not be used.
+func (m *AccountManager) Close() {
+	if m.Obj != nil {
+		m.VM.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(m.Obj)
+			m.Obj = nil
+			return nil
+		})
+	}
 }
 
 // AddAccountExplicitly3 calls android.accounts.AccountManager.addAccountExplicitly.
@@ -211,6 +255,11 @@ func (m *AccountManager) GetAccounts() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -240,6 +289,11 @@ func (m *AccountManager) GetAccountsByType(arg0 string) (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -276,6 +330,11 @@ func (m *AccountManager) GetAccountsByTypeForPackage(arg0 string, arg1 string) (
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -300,6 +359,11 @@ func (m *AccountManager) GetAuthenticatorTypes() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -692,6 +756,11 @@ func (m *AccountManager) Get(arg0 *jni.Object) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -742,6 +811,11 @@ func (m *AccountManager) NewChooseAccountIntent8(
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -785,6 +859,11 @@ func (m *AccountManager) NewChooseAccountIntent7_1(
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})

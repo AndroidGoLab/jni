@@ -38,7 +38,7 @@ $(BUILD)/AndroidManifest.xml:
 	@printf '    package="%s">\n' '$(PACKAGE_NAME)' >> $@
 	@$(foreach perm,$(EXAMPLE_PERMISSIONS), \
 		printf '    <uses-permission android:name="%s" />\n' '$(perm)' >> $@;)
-	@printf '    <application android:label="%s" android:hasCode="true">\n' '$(EXAMPLE_NAME)' >> $@
+	@printf '    <application android:label="%s" android:hasCode="%s">\n' '$(EXAMPLE_NAME)' '$(if $(filter true,$(EXAMPLE_NEEDS_PROXY)),true,false)' >> $@
 	@PERM_CSV="$(subst $(space),$(comma),$(EXAMPLE_PERMISSIONS))"; \
 		if [ -n "$$PERM_CSV" ]; then \
 			printf '        <meta-data android:name="example.permissions" android:value="%s" />\n' "$$PERM_CSV" >> $@; \
@@ -54,14 +54,19 @@ $(BUILD)/AndroidManifest.xml:
 	@printf '        </activity>\n' >> $@
 	@printf '    </application>\n' >> $@
 	@printf '</manifest>\n' >> $@
+# Only build classes.dex when the example needs Go→Java proxy support
+# (set EXAMPLE_NEEDS_PROXY := true in the example Makefile).
 HANDLER_JAVA  := $(HANDLER_DIR)/center/dx/jni/internal/GoInvocationHandler.java
 DISPATCH_JAVA := $(HANDLER_DIR)/center/dx/jni/internal/GoAbstractDispatch.java
+ifeq ($(EXAMPLE_NEEDS_PROXY),true)
 $(BUILD)/classes.dex: $(HANDLER_JAVA) $(DISPATCH_JAVA)
 	@mkdir -p $(BUILD)/java
 	javac --release 17 -classpath $(PLATFORM)/android.jar \
 		-d $(BUILD)/java $(HANDLER_JAVA) $(DISPATCH_JAVA)
 	$(D8) --lib $(PLATFORM)/android.jar --output $(BUILD) \
 		$$(find $(BUILD)/java -name '*.class')
+APK_DEPS += $(BUILD)/classes.dex
+endif
 $(BUILD)/lib/arm64-v8a/libexample.so: main.go
 	@mkdir -p $(dir $@)
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=$(CC_ARM64) \
@@ -78,13 +83,13 @@ $(BUILD)/lib/x86_64/libexample.so: main.go
 		-o examples/$(EXAMPLE_NAME)/$@ \
 		./examples/$(EXAMPLE_NAME)/
 	@rm -f $(@:.so=.h)
-$(BUILD)/$(EXAMPLE_NAME).apk: $(BUILD)/AndroidManifest.xml $(BUILD)/classes.dex $(BUILD)/lib/arm64-v8a/libexample.so $(BUILD)/lib/x86_64/libexample.so $(BUILD)/debug.keystore
+$(BUILD)/$(EXAMPLE_NAME).apk: $(BUILD)/AndroidManifest.xml $(APK_DEPS) $(BUILD)/lib/arm64-v8a/libexample.so $(BUILD)/lib/x86_64/libexample.so $(BUILD)/debug.keystore
 	$(AAPT2) link --manifest $(BUILD)/AndroidManifest.xml \
 		-I $(PLATFORM)/android.jar \
 		--min-sdk-version $(MIN_SDK) \
 		--target-sdk-version $(TARGET_SDK) \
 		-o $(BUILD)/base.apk
-	cd $(BUILD) && zip -j base.apk classes.dex
+	@if [ -f $(BUILD)/classes.dex ]; then cd $(BUILD) && zip -j base.apk classes.dex; fi
 	cd $(BUILD) && zip -r base.apk lib/
 	$(ZIPALIGN) -f 4 $(BUILD)/base.apk $(BUILD)/aligned.apk
 	$(APKSIGNER) sign --ks $(BUILD)/debug.keystore --ks-pass pass:android \

@@ -43,6 +43,11 @@ func (m *Uri) BuildUpon() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -443,6 +448,11 @@ func (m *Uri) GetPathSegments() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -550,6 +560,11 @@ func (m *Uri) GetQueryParameterNames() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -579,6 +594,11 @@ func (m *Uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -812,6 +832,11 @@ func (m *Uri) NormalizeScheme() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -988,6 +1013,11 @@ func (m *Uri) FromFile(arg0 *jni.Object) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -1032,6 +1062,11 @@ func (m *Uri) FromParts(
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -1061,6 +1096,11 @@ func (m *Uri) Parse(arg0 string) (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -1092,6 +1132,11 @@ func (m *Uri) WithAppendedPath(arg0 *jni.Object, arg1 string) (*jni.Object, erro
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})

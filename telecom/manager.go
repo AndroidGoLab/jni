@@ -256,6 +256,11 @@ func (m *Manager) CreateManageBlockedNumbersIntent() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -308,6 +313,11 @@ func (m *Manager) GetAdnUriForPhoneAccount(arg0 *jni.Object) (*jni.Object, error
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -332,6 +342,11 @@ func (m *Manager) GetCallCapablePhoneAccounts() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -389,6 +404,11 @@ func (m *Manager) GetDefaultOutgoingPhoneAccount(arg0 string) (*jni.Object, erro
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -441,6 +461,11 @@ func (m *Manager) GetOwnSelfManagedPhoneAccounts() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -467,6 +492,11 @@ func (m *Manager) GetPhoneAccount(arg0 *jni.Object) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -491,6 +521,11 @@ func (m *Manager) GetRegisteredPhoneAccounts() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -517,6 +552,11 @@ func (m *Manager) GetSelfManagedPhoneAccounts() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -541,6 +581,11 @@ func (m *Manager) GetSimCallManager() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -567,6 +612,11 @@ func (m *Manager) GetSimCallManagerForSubscription(arg0 int32) (*jni.Object, err
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -618,6 +668,11 @@ func (m *Manager) GetUserSelectedOutgoingPhoneAccount() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})

@@ -93,43 +93,28 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	delay := 60 * time.Second
 	triggerAt := time.Now().Add(delay)
 
-	// Schedule the alarm inside a single vm.Do so all JNI local refs
-	// (Intent, PendingIntent) remain valid on the same thread.
-	err = vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		intent, err := app.NewIntent(vm)
-		if err != nil {
-			return fmt.Errorf("new intent: %w", err)
-		}
-		if _, err := intent.SetAction("center.dx.jni.examples.alarm.FIRED"); err != nil {
-			return fmt.Errorf("set action: %w", err)
-		}
-
-		pi := app.PendingIntent{VM: vm}
-		pendingObj, err := pi.GetBroadcast(ctx.Obj, 0, intent.Obj, flagImmutable)
-		if err != nil {
-			return fmt.Errorf("getBroadcast: %w", err)
-		}
-
-		return mgr.Set(int32(alarm.RtcWakeup), triggerAt.UnixMilli(), pendingObj)
-	})
+	// All typed wrappers return GlobalRefs, so no vm.Do nesting needed.
+	intent, err := app.NewIntent(vm)
 	if err != nil {
+		return fmt.Errorf("new intent: %w", err)
+	}
+	if _, err := intent.SetAction("center.dx.jni.examples.alarm.FIRED"); err != nil {
+		return fmt.Errorf("set action: %w", err)
+	}
+
+	pi := app.PendingIntent{VM: vm}
+	pendingObj, err := pi.GetBroadcast(ctx.Obj, 0, intent.Obj, flagImmutable)
+	if err != nil {
+		return fmt.Errorf("getBroadcast: %w", err)
+	}
+
+	if err := mgr.Set(int32(alarm.RtcWakeup), triggerAt.UnixMilli(), pendingObj); err != nil {
 		return fmt.Errorf("schedule alarm: %w", err)
 	}
 	fmt.Fprintf(output, "alarm scheduled for %s\n", triggerAt.Format(time.RFC3339))
 
-	var appCtxRef *jni.GlobalRef
-	err = vm.Do(func(env *jni.Env) error {
-		appCtxObj, err := ctx.GetApplicationContext()
-		if err != nil {
-			return err
-		}
-		appCtxRef = env.NewGlobalRef(appCtxObj)
-		return nil
-	})
+	// GetApplicationContext returns a GlobalRef via the generated wrapper.
+	appCtxObj, err := ctx.GetApplicationContext()
 	if err != nil {
 		return fmt.Errorf("get app context: %w", err)
 	}
@@ -137,10 +122,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintf(output, "alarm will fire in %s\n", delay)
 	go func() {
 		time.Sleep(delay)
-		if err := postNotification(vm, appCtxRef); err != nil {
+		if err := postNotification(vm, appCtxObj); err != nil {
 			fmt.Fprintf(output, "notification error: %v\n", err)
 		}
-		if err := playAlarmRingtone(vm, appCtxRef); err != nil {
+		if err := playAlarmRingtone(vm, appCtxObj); err != nil {
 			fmt.Fprintf(output, "ringtone error: %v\n", err)
 		}
 		fmt.Fprintf(output, "alarm fired!\n")
@@ -150,7 +135,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	return nil
 }
 
-func postNotification(vm *jni.VM, appCtx *jni.GlobalRef) error {
+func postNotification(vm *jni.VM, appCtx *jni.Object) error {
 	ctx := &app.Context{VM: vm, Obj: appCtx}
 	nmgr, err := notification.NewManager(ctx)
 	if err != nil {
@@ -158,71 +143,40 @@ func postNotification(vm *jni.VM, appCtx *jni.GlobalRef) error {
 	}
 	defer nmgr.Close()
 
-	return vm.Do(func(env *jni.Env) error {
-		// Create and register notification channel.
-		channelCls, err := env.FindClass("android/app/NotificationChannel")
-		if err != nil {
-			return err
-		}
-		initMid, err := env.GetMethodID(channelCls, "<init>",
-			"(Ljava/lang/String;Ljava/lang/CharSequence;I)V")
-		if err != nil {
-			return err
-		}
-		jID, _ := env.NewStringUTF(notificationChannelID)
-		jName, _ := env.NewStringUTF(notificationChannelName)
-		ch, err := env.NewObject(channelCls, initMid,
-			jni.ObjectValue(&jID.Object),
-			jni.ObjectValue(&jName.Object),
-			jni.IntValue(int32(notification.ImportanceHigh)))
-		if err != nil {
-			return err
-		}
-		if err := nmgr.CreateNotificationChannel(ch); err != nil {
-			return err
-		}
+	// Create and register notification channel.
+	ch, err := notification.NewChannel(
+		vm, notificationChannelID, notificationChannelName,
+		int32(notification.ImportanceHigh),
+	)
+	if err != nil {
+		return fmt.Errorf("new channel: %w", err)
+	}
+	if err := nmgr.CreateNotificationChannel(ch.Obj); err != nil {
+		return fmt.Errorf("create channel: %w", err)
+	}
 
-		// Build notification.
-		bCls, err := env.FindClass("android/app/Notification$Builder")
-		if err != nil {
-			return err
-		}
-		bInit, err := env.GetMethodID(bCls, "<init>",
-			"(Landroid/content/Context;Ljava/lang/String;)V")
-		if err != nil {
-			return err
-		}
-		b, err := env.NewObject(bCls, bInit,
-			jni.ObjectValue(appCtx), jni.ObjectValue(&jID.Object))
-		if err != nil {
-			return err
-		}
-
-		setIcon, _ := env.GetMethodID(bCls, "setSmallIcon",
-			"(I)Landroid/app/Notification$Builder;")
-		_, _ = env.CallObjectMethod(b, setIcon, jni.IntValue(iconDialogInfo))
-
-		setTitle, _ := env.GetMethodID(bCls, "setContentTitle",
-			"(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;")
-		jT, _ := env.NewStringUTF("Alarm fired!")
-		_, _ = env.CallObjectMethod(b, setTitle, jni.ObjectValue(&jT.Object))
-
-		setText, _ := env.GetMethodID(bCls, "setContentText",
-			"(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;")
-		jTx, _ := env.NewStringUTF("From Go via JNI, zero Java")
-		_, _ = env.CallObjectMethod(b, setText, jni.ObjectValue(&jTx.Object))
-
-		buildMid, _ := env.GetMethodID(bCls, "build",
-			"()Landroid/app/Notification;")
-		notif, err := env.CallObjectMethod(b, buildMid)
-		if err != nil {
-			return err
-		}
-		return nmgr.Notify2(1, notif)
-	})
+	// Build notification via typed Builder wrapper.
+	b, err := notification.NewBuilder(vm, appCtx, notificationChannelID)
+	if err != nil {
+		return fmt.Errorf("new builder: %w", err)
+	}
+	if _, err := b.SetSmallIcon1_1(iconDialogInfo); err != nil {
+		return fmt.Errorf("set icon: %w", err)
+	}
+	if _, err := b.SetContentTitle("Alarm fired!"); err != nil {
+		return fmt.Errorf("set title: %w", err)
+	}
+	if _, err := b.SetContentText("From Go via JNI, zero Java"); err != nil {
+		return fmt.Errorf("set text: %w", err)
+	}
+	notif, err := b.Build()
+	if err != nil {
+		return fmt.Errorf("build notification: %w", err)
+	}
+	return nmgr.Notify2(1, notif)
 }
 
-func playAlarmRingtone(vm *jni.VM, appCtx *jni.GlobalRef) error {
+func playAlarmRingtone(vm *jni.VM, appCtx *jni.Object) error {
 	rm := ringtone.Manager{VM: vm}
 
 	uri, err := rm.GetDefaultUri(int32(ringtone.TypeAlarm))

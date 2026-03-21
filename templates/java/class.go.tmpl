@@ -190,6 +190,13 @@ func (m *{{$.GoType}}) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} {
 		{{if .HasError}}if callErr != nil {
 			return callErr
 		}{{end}}
+{{- if eq .ReturnKind "object"}}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
+{{- end}}
 {{end}}		return {{if .HasError}}callErr{{else}}nil{{end}}
 	})
 	return {{.GoReturnValues}}

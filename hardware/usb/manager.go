@@ -17,10 +17,54 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "usb"
+
 // Manager wraps android.hardware.usb.UsbManager.
 type Manager struct {
 	VM  *jni.VM
+	Ctx *app.Context
 	Obj *jni.GlobalRef
+}
+
+// NewManager obtains android.hardware.usb.UsbManager from the Android system service manager.
+func NewManager(ctx *app.Context) (*Manager, error) {
+	if ctx == nil {
+		return nil, fmt.Errorf("Manager: nil Context")
+	}
+	var mgr Manager
+	mgr.VM = ctx.VM
+	mgr.Ctx = ctx
+
+	err := mgr.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		svc, err := ctx.GetSystemService(serviceName)
+		if err != nil {
+			return err
+		}
+		if svc == nil || svc.Ref() == 0 {
+			return fmt.Errorf("%s service not available", serviceName)
+		}
+		mgr.Obj = env.NewGlobalRef(svc)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &mgr, nil
+}
+
+// Close releases the global reference to the underlying Java object.
+// After Close, the Manager must not be used.
+func (m *Manager) Close() {
+	if m.Obj != nil {
+		m.VM.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(m.Obj)
+			m.Obj = nil
+			return nil
+		})
+	}
 }
 
 // GetAccessoryList calls android.hardware.usb.UsbManager.getAccessoryList.
@@ -42,6 +86,11 @@ func (m *Manager) GetAccessoryList() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -123,6 +172,11 @@ func (m *Manager) OpenAccessory(arg0 *jni.Object) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -148,6 +202,11 @@ func (m *Manager) OpenAccessoryInputStream(arg0 *jni.Object) (*jni.Object, error
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -175,6 +234,11 @@ func (m *Manager) OpenAccessoryOutputStream(arg0 *jni.Object) (*jni.Object, erro
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -200,6 +264,11 @@ func (m *Manager) OpenDevice(arg0 *jni.Object) (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})

@@ -5,21 +5,6 @@ package job
 import "github.com/AndroidGoLab/jni/app/job/consts"
 
 const (
-	BackoffPolicyExponential                 = consts.BackoffPolicyExponential
-	BackoffPolicyLinear                      = consts.BackoffPolicyLinear
-	Creator                                  = consts.Creator
-	NetworkBytesUnknown                      = consts.NetworkBytesUnknown
-	NetworkTypeAny                           = consts.NetworkTypeAny
-	NetworkTypeCellular                      = consts.NetworkTypeCellular
-	NetworkTypeMetered                       = consts.NetworkTypeMetered
-	NetworkTypeNone                          = consts.NetworkTypeNone
-	NetworkTypeNotRoaming                    = consts.NetworkTypeNotRoaming
-	NetworkTypeUnmetered                     = consts.NetworkTypeUnmetered
-	PriorityDefault                          = consts.PriorityDefault
-	PriorityHigh                             = consts.PriorityHigh
-	PriorityLow                              = consts.PriorityLow
-	PriorityMax                              = consts.PriorityMax
-	PriorityMin                              = consts.PriorityMin
 	PendingJobReasonApp                      = consts.PendingJobReasonApp
 	PendingJobReasonAppStandby               = consts.PendingJobReasonAppStandby
 	PendingJobReasonBackgroundRestriction    = consts.PendingJobReasonBackgroundRestriction
@@ -41,6 +26,21 @@ const (
 	PendingJobReasonUser                     = consts.PendingJobReasonUser
 	ResultFailure                            = consts.ResultFailure
 	ResultSuccess                            = consts.ResultSuccess
+	BackoffPolicyExponential                 = consts.BackoffPolicyExponential
+	BackoffPolicyLinear                      = consts.BackoffPolicyLinear
+	Creator                                  = consts.Creator
+	NetworkBytesUnknown                      = consts.NetworkBytesUnknown
+	NetworkTypeAny                           = consts.NetworkTypeAny
+	NetworkTypeCellular                      = consts.NetworkTypeCellular
+	NetworkTypeMetered                       = consts.NetworkTypeMetered
+	NetworkTypeNone                          = consts.NetworkTypeNone
+	NetworkTypeNotRoaming                    = consts.NetworkTypeNotRoaming
+	NetworkTypeUnmetered                     = consts.NetworkTypeUnmetered
+	PriorityDefault                          = consts.PriorityDefault
+	PriorityHigh                             = consts.PriorityHigh
+	PriorityLow                              = consts.PriorityLow
+	PriorityMax                              = consts.PriorityMax
+	PriorityMin                              = consts.PriorityMin
 )
 
 const (

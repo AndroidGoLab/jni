@@ -23,14 +23,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsMediaProjection                   *jni.GlobalRef
-	midMediaProjectionStop               jni.MethodID
-	midMediaProjectionUnregisterCallback jni.MethodID
-
 	clsMediaProjectionManager                             *jni.GlobalRef
 	midMediaProjectionManagerCreateScreenCaptureIntent0   jni.MethodID
 	midMediaProjectionManagerCreateScreenCaptureIntent1_1 jni.MethodID
 	midMediaProjectionManagerGetMediaProjection           jni.MethodID
+
+	clsMediaProjection                   *jni.GlobalRef
+	midMediaProjectionStop               jni.MethodID
+	midMediaProjectionUnregisterCallback jni.MethodID
 
 	clsVirtualDisplay            *jni.GlobalRef
 	midVirtualDisplayGetDisplay  jni.MethodID
@@ -66,28 +66,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/media/projection/MediaProjection")
-	if err != nil {
-		return fmt.Errorf("find class android.media.projection.MediaProjection: %w", err)
-	}
-	clsMediaProjection = env.NewGlobalRef(&c.Object)
-
-	midMediaProjectionStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjection)), "stop", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.projection.MediaProjection.stop")
-	}
-
-	midMediaProjectionUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjection)), "unregisterCallback", "(Landroid/media/projection/MediaProjection$Callback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.projection.MediaProjection.unregisterCallback")
-	}
-
 	c, err = env.FindClass("android/media/projection/MediaProjectionManager")
 	if err != nil {
 		return fmt.Errorf("find class android.media.projection.MediaProjectionManager: %w", err)
@@ -116,6 +94,28 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.media.projection.MediaProjectionManager.getMediaProjection")
+	}
+
+	c, err = env.FindClass("android/media/projection/MediaProjection")
+	if err != nil {
+		return fmt.Errorf("find class android.media.projection.MediaProjection: %w", err)
+	}
+	clsMediaProjection = env.NewGlobalRef(&c.Object)
+
+	midMediaProjectionStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjection)), "stop", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.projection.MediaProjection.stop")
+	}
+
+	midMediaProjectionUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjection)), "unregisterCallback", "(Landroid/media/projection/MediaProjection$Callback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.projection.MediaProjection.unregisterCallback")
 	}
 
 	c, err = env.FindClass("android/hardware/display/VirtualDisplay")

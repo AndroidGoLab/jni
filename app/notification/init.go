@@ -23,53 +23,29 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                                    *jni.GlobalRef
-	midManagerAddAutomaticZenRule                 jni.MethodID
-	midManagerAreAutomaticZenRulesUserManaged     jni.MethodID
-	midManagerAreBubblesAllowed                   jni.MethodID
-	midManagerAreBubblesEnabled                   jni.MethodID
-	midManagerAreNotificationsEnabled             jni.MethodID
-	midManagerAreNotificationsPaused              jni.MethodID
-	midManagerCanNotifyAsPackage                  jni.MethodID
-	midManagerCanPostPromotedNotifications        jni.MethodID
-	midManagerCanUseFullScreenIntent              jni.MethodID
-	midManagerCancel1                             jni.MethodID
-	midManagerCancel2_1                           jni.MethodID
-	midManagerCancelAll                           jni.MethodID
-	midManagerCancelAsPackage                     jni.MethodID
-	midManagerCreateNotificationChannel           jni.MethodID
-	midManagerCreateNotificationChannelGroup      jni.MethodID
-	midManagerCreateNotificationChannelGroups     jni.MethodID
-	midManagerCreateNotificationChannels          jni.MethodID
-	midManagerDeleteNotificationChannel           jni.MethodID
-	midManagerDeleteNotificationChannelGroup      jni.MethodID
-	midManagerGetActiveNotifications              jni.MethodID
-	midManagerGetAutomaticZenRule                 jni.MethodID
-	midManagerGetAutomaticZenRuleState            jni.MethodID
-	midManagerGetBubblePreference                 jni.MethodID
-	midManagerGetConsolidatedNotificationPolicy   jni.MethodID
-	midManagerGetCurrentInterruptionFilter        jni.MethodID
-	midManagerGetImportance                       jni.MethodID
-	midManagerGetNotificationChannel1             jni.MethodID
-	midManagerGetNotificationChannel2_1           jni.MethodID
-	midManagerGetNotificationChannelGroup         jni.MethodID
-	midManagerGetNotificationChannelGroups        jni.MethodID
-	midManagerGetNotificationChannels             jni.MethodID
-	midManagerGetNotificationDelegate             jni.MethodID
-	midManagerGetNotificationPolicy               jni.MethodID
-	midManagerIsNotificationListenerAccessGranted jni.MethodID
-	midManagerIsNotificationPolicyAccessGranted   jni.MethodID
-	midManagerMatchesCallFilter                   jni.MethodID
-	midManagerNotify2                             jni.MethodID
-	midManagerNotify3_1                           jni.MethodID
-	midManagerNotifyAsPackage                     jni.MethodID
-	midManagerRemoveAutomaticZenRule              jni.MethodID
-	midManagerSetAutomaticZenRuleState            jni.MethodID
-	midManagerSetInterruptionFilter               jni.MethodID
-	midManagerSetNotificationDelegate             jni.MethodID
-	midManagerSetNotificationPolicy               jni.MethodID
-	midManagerShouldHideSilentStatusBarIcons      jni.MethodID
-	midManagerUpdateAutomaticZenRule              jni.MethodID
+	clsStatusBarNotification                    *jni.GlobalRef
+	midStatusBarNotificationClone0              jni.MethodID
+	midStatusBarNotificationDescribeContents    jni.MethodID
+	midStatusBarNotificationGetGroupKey         jni.MethodID
+	midStatusBarNotificationGetId               jni.MethodID
+	midStatusBarNotificationGetKey              jni.MethodID
+	midStatusBarNotificationGetNotification     jni.MethodID
+	midStatusBarNotificationGetOpPkg            jni.MethodID
+	midStatusBarNotificationGetOverrideGroupKey jni.MethodID
+	midStatusBarNotificationGetPackageName      jni.MethodID
+	midStatusBarNotificationGetPostTime         jni.MethodID
+	midStatusBarNotificationGetTag              jni.MethodID
+	midStatusBarNotificationGetUid              jni.MethodID
+	midStatusBarNotificationGetUser             jni.MethodID
+	midStatusBarNotificationGetUserId           jni.MethodID
+	midStatusBarNotificationIsAppGroup          jni.MethodID
+	midStatusBarNotificationIsClearable         jni.MethodID
+	midStatusBarNotificationIsGroup             jni.MethodID
+	midStatusBarNotificationIsOngoing           jni.MethodID
+	midStatusBarNotificationSetOverrideGroupKey jni.MethodID
+	midStatusBarNotificationToString            jni.MethodID
+	midStatusBarNotificationWriteToParcel       jni.MethodID
+	midStatusBarNotificationClone0_1            jni.MethodID
 
 	clsChannel                        *jni.GlobalRef
 	midChannelCanBubble               jni.MethodID
@@ -118,29 +94,157 @@ var (
 	midChannelToString                jni.MethodID
 	midChannelWriteToParcel           jni.MethodID
 
-	clsStatusBarNotification                    *jni.GlobalRef
-	midStatusBarNotificationClone0              jni.MethodID
-	midStatusBarNotificationDescribeContents    jni.MethodID
-	midStatusBarNotificationGetGroupKey         jni.MethodID
-	midStatusBarNotificationGetId               jni.MethodID
-	midStatusBarNotificationGetKey              jni.MethodID
-	midStatusBarNotificationGetNotification     jni.MethodID
-	midStatusBarNotificationGetOpPkg            jni.MethodID
-	midStatusBarNotificationGetOverrideGroupKey jni.MethodID
-	midStatusBarNotificationGetPackageName      jni.MethodID
-	midStatusBarNotificationGetPostTime         jni.MethodID
-	midStatusBarNotificationGetTag              jni.MethodID
-	midStatusBarNotificationGetUid              jni.MethodID
-	midStatusBarNotificationGetUser             jni.MethodID
-	midStatusBarNotificationGetUserId           jni.MethodID
-	midStatusBarNotificationIsAppGroup          jni.MethodID
-	midStatusBarNotificationIsClearable         jni.MethodID
-	midStatusBarNotificationIsGroup             jni.MethodID
-	midStatusBarNotificationIsOngoing           jni.MethodID
-	midStatusBarNotificationSetOverrideGroupKey jni.MethodID
-	midStatusBarNotificationToString            jni.MethodID
-	midStatusBarNotificationWriteToParcel       jni.MethodID
-	midStatusBarNotificationClone0_1            jni.MethodID
+	clsNotification                                         *jni.GlobalRef
+	midNotificationClone0                                   jni.MethodID
+	midNotificationDescribeContents                         jni.MethodID
+	midNotificationGetAllowSystemGeneratedContextualActions jni.MethodID
+	midNotificationGetBadgeIconType                         jni.MethodID
+	midNotificationGetBubbleMetadata                        jni.MethodID
+	midNotificationGetChannelId                             jni.MethodID
+	midNotificationGetContextualActions                     jni.MethodID
+	midNotificationGetGroup                                 jni.MethodID
+	midNotificationGetGroupAlertBehavior                    jni.MethodID
+	midNotificationGetLargeIcon                             jni.MethodID
+	midNotificationGetLocusId                               jni.MethodID
+	midNotificationGetSettingsText                          jni.MethodID
+	midNotificationGetShortCriticalText                     jni.MethodID
+	midNotificationGetShortcutId                            jni.MethodID
+	midNotificationGetSmallIcon                             jni.MethodID
+	midNotificationGetSortKey                               jni.MethodID
+	midNotificationGetTimeoutAfter                          jni.MethodID
+	midNotificationHasImage                                 jni.MethodID
+	midNotificationHasPromotableCharacteristics             jni.MethodID
+	midNotificationToString                                 jni.MethodID
+	midNotificationWriteToParcel                            jni.MethodID
+	midNotificationClone0_1                                 jni.MethodID
+
+	clsBigTextStyle                   *jni.GlobalRef
+	midBigTextStyleBigText            jni.MethodID
+	midBigTextStyleSetBigContentTitle jni.MethodID
+	midBigTextStyleSetSummaryText     jni.MethodID
+
+	clsBuilder                                         *jni.GlobalRef
+	midBuilderAddAction1                               jni.MethodID
+	midBuilderAddAction3_1                             jni.MethodID
+	midBuilderAddExtras                                jni.MethodID
+	midBuilderAddPerson1                               jni.MethodID
+	midBuilderAddPerson1_1                             jni.MethodID
+	midBuilderBuild                                    jni.MethodID
+	midBuilderCreateBigContentView                     jni.MethodID
+	midBuilderCreateContentView                        jni.MethodID
+	midBuilderCreateHeadsUpContentView                 jni.MethodID
+	midBuilderExtend                                   jni.MethodID
+	midBuilderGetExtras                                jni.MethodID
+	midBuilderGetNotification                          jni.MethodID
+	midBuilderGetStyle                                 jni.MethodID
+	midBuilderSetActions                               jni.MethodID
+	midBuilderSetAllowSystemGeneratedContextualActions jni.MethodID
+	midBuilderSetAutoCancel                            jni.MethodID
+	midBuilderSetBadgeIconType                         jni.MethodID
+	midBuilderSetBubbleMetadata                        jni.MethodID
+	midBuilderSetCategory                              jni.MethodID
+	midBuilderSetChannelId                             jni.MethodID
+	midBuilderSetChronometerCountDown                  jni.MethodID
+	midBuilderSetColor                                 jni.MethodID
+	midBuilderSetColorized                             jni.MethodID
+	midBuilderSetContent                               jni.MethodID
+	midBuilderSetContentInfo                           jni.MethodID
+	midBuilderSetContentIntent                         jni.MethodID
+	midBuilderSetContentText                           jni.MethodID
+	midBuilderSetContentTitle                          jni.MethodID
+	midBuilderSetCustomBigContentView                  jni.MethodID
+	midBuilderSetCustomContentView                     jni.MethodID
+	midBuilderSetCustomHeadsUpContentView              jni.MethodID
+	midBuilderSetDefaults                              jni.MethodID
+	midBuilderSetDeleteIntent                          jni.MethodID
+	midBuilderSetExtras                                jni.MethodID
+	midBuilderSetFlag                                  jni.MethodID
+	midBuilderSetForegroundServiceBehavior             jni.MethodID
+	midBuilderSetFullScreenIntent                      jni.MethodID
+	midBuilderSetGroup                                 jni.MethodID
+	midBuilderSetGroupAlertBehavior                    jni.MethodID
+	midBuilderSetGroupSummary                          jni.MethodID
+	midBuilderSetLargeIcon1                            jni.MethodID
+	midBuilderSetLargeIcon1_1                          jni.MethodID
+	midBuilderSetLights                                jni.MethodID
+	midBuilderSetLocalOnly                             jni.MethodID
+	midBuilderSetLocusId                               jni.MethodID
+	midBuilderSetNumber                                jni.MethodID
+	midBuilderSetOngoing                               jni.MethodID
+	midBuilderSetOnlyAlertOnce                         jni.MethodID
+	midBuilderSetPriority                              jni.MethodID
+	midBuilderSetProgress                              jni.MethodID
+	midBuilderSetPublicVersion                         jni.MethodID
+	midBuilderSetRemoteInputHistory                    jni.MethodID
+	midBuilderSetSettingsText                          jni.MethodID
+	midBuilderSetShortCriticalText                     jni.MethodID
+	midBuilderSetShortcutId                            jni.MethodID
+	midBuilderSetShowWhen                              jni.MethodID
+	midBuilderSetSmallIcon1                            jni.MethodID
+	midBuilderSetSmallIcon1_1                          jni.MethodID
+	midBuilderSetSmallIcon2_2                          jni.MethodID
+	midBuilderSetSortKey                               jni.MethodID
+	midBuilderSetSound1                                jni.MethodID
+	midBuilderSetSound2_1                              jni.MethodID
+	midBuilderSetSound2_2                              jni.MethodID
+	midBuilderSetStyle                                 jni.MethodID
+	midBuilderSetSubText                               jni.MethodID
+	midBuilderSetTicker1                               jni.MethodID
+	midBuilderSetTicker2_1                             jni.MethodID
+	midBuilderSetTimeoutAfter                          jni.MethodID
+	midBuilderSetUsesChronometer                       jni.MethodID
+	midBuilderSetVibrate                               jni.MethodID
+	midBuilderSetVisibility                            jni.MethodID
+	midBuilderSetWhen                                  jni.MethodID
+	midBuilderRecoverBuilder                           jni.MethodID
+
+	clsManager                                    *jni.GlobalRef
+	midManagerAddAutomaticZenRule                 jni.MethodID
+	midManagerAreAutomaticZenRulesUserManaged     jni.MethodID
+	midManagerAreBubblesAllowed                   jni.MethodID
+	midManagerAreBubblesEnabled                   jni.MethodID
+	midManagerAreNotificationsEnabled             jni.MethodID
+	midManagerAreNotificationsPaused              jni.MethodID
+	midManagerCanNotifyAsPackage                  jni.MethodID
+	midManagerCanPostPromotedNotifications        jni.MethodID
+	midManagerCanUseFullScreenIntent              jni.MethodID
+	midManagerCancel1                             jni.MethodID
+	midManagerCancel2_1                           jni.MethodID
+	midManagerCancelAll                           jni.MethodID
+	midManagerCancelAsPackage                     jni.MethodID
+	midManagerCreateNotificationChannel           jni.MethodID
+	midManagerCreateNotificationChannelGroup      jni.MethodID
+	midManagerCreateNotificationChannelGroups     jni.MethodID
+	midManagerCreateNotificationChannels          jni.MethodID
+	midManagerDeleteNotificationChannel           jni.MethodID
+	midManagerDeleteNotificationChannelGroup      jni.MethodID
+	midManagerGetActiveNotifications              jni.MethodID
+	midManagerGetAutomaticZenRule                 jni.MethodID
+	midManagerGetAutomaticZenRuleState            jni.MethodID
+	midManagerGetBubblePreference                 jni.MethodID
+	midManagerGetConsolidatedNotificationPolicy   jni.MethodID
+	midManagerGetCurrentInterruptionFilter        jni.MethodID
+	midManagerGetImportance                       jni.MethodID
+	midManagerGetNotificationChannel1             jni.MethodID
+	midManagerGetNotificationChannel2_1           jni.MethodID
+	midManagerGetNotificationChannelGroup         jni.MethodID
+	midManagerGetNotificationChannelGroups        jni.MethodID
+	midManagerGetNotificationChannels             jni.MethodID
+	midManagerGetNotificationDelegate             jni.MethodID
+	midManagerGetNotificationPolicy               jni.MethodID
+	midManagerIsNotificationListenerAccessGranted jni.MethodID
+	midManagerIsNotificationPolicyAccessGranted   jni.MethodID
+	midManagerMatchesCallFilter                   jni.MethodID
+	midManagerNotify2                             jni.MethodID
+	midManagerNotify3_1                           jni.MethodID
+	midManagerNotifyAsPackage                     jni.MethodID
+	midManagerRemoveAutomaticZenRule              jni.MethodID
+	midManagerSetAutomaticZenRuleState            jni.MethodID
+	midManagerSetInterruptionFilter               jni.MethodID
+	midManagerSetNotificationDelegate             jni.MethodID
+	midManagerSetNotificationPolicy               jni.MethodID
+	midManagerShouldHideSilentStatusBarIcons      jni.MethodID
+	midManagerUpdateAutomaticZenRule              jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -166,6 +270,1356 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/service/notification/StatusBarNotification")
+	if err != nil {
+		return fmt.Errorf("find class android.service.notification.StatusBarNotification: %w", err)
+	}
+	clsStatusBarNotification = env.NewGlobalRef(&c.Object)
+
+	midStatusBarNotificationClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "clone", "()Landroid/service/notification/StatusBarNotification;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.clone")
+	}
+
+	midStatusBarNotificationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.describeContents")
+	}
+
+	midStatusBarNotificationGetGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getGroupKey", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getGroupKey")
+	}
+
+	midStatusBarNotificationGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getId")
+	}
+
+	midStatusBarNotificationGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getKey", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getKey")
+	}
+
+	midStatusBarNotificationGetNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getNotification", "()Landroid/app/Notification;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getNotification")
+	}
+
+	midStatusBarNotificationGetOpPkg, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getOpPkg", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getOpPkg")
+	}
+
+	midStatusBarNotificationGetOverrideGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getOverrideGroupKey", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getOverrideGroupKey")
+	}
+
+	midStatusBarNotificationGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getPackageName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getPackageName")
+	}
+
+	midStatusBarNotificationGetPostTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getPostTime", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getPostTime")
+	}
+
+	midStatusBarNotificationGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getTag", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getTag")
+	}
+
+	midStatusBarNotificationGetUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getUid", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getUid")
+	}
+
+	midStatusBarNotificationGetUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getUser", "()Landroid/os/UserHandle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getUser")
+	}
+
+	midStatusBarNotificationGetUserId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getUserId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getUserId")
+	}
+
+	midStatusBarNotificationIsAppGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isAppGroup", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isAppGroup")
+	}
+
+	midStatusBarNotificationIsClearable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isClearable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isClearable")
+	}
+
+	midStatusBarNotificationIsGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isGroup", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isGroup")
+	}
+
+	midStatusBarNotificationIsOngoing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isOngoing", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isOngoing")
+	}
+
+	midStatusBarNotificationSetOverrideGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "setOverrideGroupKey", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.setOverrideGroupKey")
+	}
+
+	midStatusBarNotificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.toString")
+	}
+
+	midStatusBarNotificationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.writeToParcel")
+	}
+
+	midStatusBarNotificationClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "clone", "()Ljava/lang/Object;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.clone")
+	}
+
+	c, err = env.FindClass("android/app/NotificationChannel")
+	if err != nil {
+		return fmt.Errorf("find class android.app.NotificationChannel: %w", err)
+	}
+	clsChannel = env.NewGlobalRef(&c.Object)
+
+	midChannelCanBubble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBubble", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.canBubble")
+	}
+
+	midChannelCanBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBypassDnd", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.canBypassDnd")
+	}
+
+	midChannelCanShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canShowBadge", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.canShowBadge")
+	}
+
+	midChannelDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.describeContents")
+	}
+
+	midChannelEnableLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableLights", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.enableLights")
+	}
+
+	midChannelEnableVibration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableVibration", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.enableVibration")
+	}
+
+	midChannelEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.equals")
+	}
+
+	midChannelGetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getAudioAttributes", "()Landroid/media/AudioAttributes;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getAudioAttributes")
+	}
+
+	midChannelGetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getConversationId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getConversationId")
+	}
+
+	midChannelGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getDescription", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getDescription")
+	}
+
+	midChannelGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getGroup", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getGroup")
+	}
+
+	midChannelGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getId")
+	}
+
+	midChannelGetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getImportance", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getImportance")
+	}
+
+	midChannelGetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLightColor", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getLightColor")
+	}
+
+	midChannelGetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLockscreenVisibility", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getLockscreenVisibility")
+	}
+
+	midChannelGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getName")
+	}
+
+	midChannelGetParentChannelId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getParentChannelId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getParentChannelId")
+	}
+
+	midChannelGetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSound", "()Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getSound")
+	}
+
+	midChannelGetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationEffect", "()Landroid/os/VibrationEffect;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getVibrationEffect")
+	}
+
+	midChannelGetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationPattern", "()[J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.getVibrationPattern")
+	}
+
+	midChannelHasUserSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetImportance", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.hasUserSetImportance")
+	}
+
+	midChannelHasUserSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetSound", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.hasUserSetSound")
+	}
+
+	midChannelHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.hashCode")
+	}
+
+	midChannelIsBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isBlockable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.isBlockable")
+	}
+
+	midChannelIsConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isConversation", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.isConversation")
+	}
+
+	midChannelIsDemoted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isDemoted", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.isDemoted")
+	}
+
+	midChannelIsImportantConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isImportantConversation", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.isImportantConversation")
+	}
+
+	midChannelSetAllowBubbles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setAllowBubbles", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setAllowBubbles")
+	}
+
+	midChannelSetBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBlockable", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setBlockable")
+	}
+
+	midChannelSetBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBypassDnd", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setBypassDnd")
+	}
+
+	midChannelSetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setConversationId", "(Ljava/lang/String;Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setConversationId")
+	}
+
+	midChannelSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setDescription", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setDescription")
+	}
+
+	midChannelSetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setGroup", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setGroup")
+	}
+
+	midChannelSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setImportance", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setImportance")
+	}
+
+	midChannelSetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLightColor", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setLightColor")
+	}
+
+	midChannelSetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLockscreenVisibility", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setLockscreenVisibility")
+	}
+
+	midChannelSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setName", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setName")
+	}
+
+	midChannelSetShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setShowBadge", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setShowBadge")
+	}
+
+	midChannelSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setSound", "(Landroid/net/Uri;Landroid/media/AudioAttributes;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setSound")
+	}
+
+	midChannelSetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationEffect", "(Landroid/os/VibrationEffect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setVibrationEffect")
+	}
+
+	midChannelSetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationPattern", "([J)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.setVibrationPattern")
+	}
+
+	midChannelShouldShowLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldShowLights", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.shouldShowLights")
+	}
+
+	midChannelShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldVibrate", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.shouldVibrate")
+	}
+
+	midChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.toString")
+	}
+
+	midChannelWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.NotificationChannel.writeToParcel")
+	}
+
+	c, err = env.FindClass("android/app/Notification")
+	if err != nil {
+		return fmt.Errorf("find class android.app.Notification: %w", err)
+	}
+	clsNotification = env.NewGlobalRef(&c.Object)
+
+	midNotificationClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "clone", "()Landroid/app/Notification;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.clone")
+	}
+
+	midNotificationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.describeContents")
+	}
+
+	midNotificationGetAllowSystemGeneratedContextualActions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getAllowSystemGeneratedContextualActions", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getAllowSystemGeneratedContextualActions")
+	}
+
+	midNotificationGetBadgeIconType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getBadgeIconType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getBadgeIconType")
+	}
+
+	midNotificationGetBubbleMetadata, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getBubbleMetadata", "()Landroid/app/Notification$BubbleMetadata;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getBubbleMetadata")
+	}
+
+	midNotificationGetChannelId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getChannelId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getChannelId")
+	}
+
+	midNotificationGetContextualActions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getContextualActions", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getContextualActions")
+	}
+
+	midNotificationGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getGroup", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getGroup")
+	}
+
+	midNotificationGetGroupAlertBehavior, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getGroupAlertBehavior", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getGroupAlertBehavior")
+	}
+
+	midNotificationGetLargeIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getLargeIcon", "()Landroid/graphics/drawable/Icon;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getLargeIcon")
+	}
+
+	midNotificationGetLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getLocusId", "()Landroid/content/LocusId;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getLocusId")
+	}
+
+	midNotificationGetSettingsText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getSettingsText", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getSettingsText")
+	}
+
+	midNotificationGetShortCriticalText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getShortCriticalText", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getShortCriticalText")
+	}
+
+	midNotificationGetShortcutId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getShortcutId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getShortcutId")
+	}
+
+	midNotificationGetSmallIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getSmallIcon", "()Landroid/graphics/drawable/Icon;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getSmallIcon")
+	}
+
+	midNotificationGetSortKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getSortKey", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getSortKey")
+	}
+
+	midNotificationGetTimeoutAfter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "getTimeoutAfter", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.getTimeoutAfter")
+	}
+
+	midNotificationHasImage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "hasImage", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.hasImage")
+	}
+
+	midNotificationHasPromotableCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "hasPromotableCharacteristics", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.hasPromotableCharacteristics")
+	}
+
+	midNotificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.toString")
+	}
+
+	midNotificationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.writeToParcel")
+	}
+
+	midNotificationClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNotification)), "clone", "()Ljava/lang/Object;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification.clone")
+	}
+
+	c, err = env.FindClass("android/app/Notification$BigTextStyle")
+	if err != nil {
+		return fmt.Errorf("find class android.app.Notification$BigTextStyle: %w", err)
+	}
+	clsBigTextStyle = env.NewGlobalRef(&c.Object)
+
+	midBigTextStyleBigText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigTextStyle)), "bigText", "(Ljava/lang/String;)Landroid/app/Notification$BigTextStyle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$BigTextStyle.bigText")
+	}
+
+	midBigTextStyleSetBigContentTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigTextStyle)), "setBigContentTitle", "(Ljava/lang/String;)Landroid/app/Notification$BigTextStyle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$BigTextStyle.setBigContentTitle")
+	}
+
+	midBigTextStyleSetSummaryText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigTextStyle)), "setSummaryText", "(Ljava/lang/String;)Landroid/app/Notification$BigTextStyle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$BigTextStyle.setSummaryText")
+	}
+
+	c, err = env.FindClass("android/app/Notification$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.app.Notification$Builder: %w", err)
+	}
+	clsBuilder = env.NewGlobalRef(&c.Object)
+
+	midBuilderAddAction1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "addAction", "(Landroid/app/Notification$Action;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.addAction")
+	}
+
+	midBuilderAddAction3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "addAction", "(ILjava/lang/String;Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.addAction")
+	}
+
+	midBuilderAddExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "addExtras", "(Landroid/os/Bundle;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.addExtras")
+	}
+
+	midBuilderAddPerson1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "addPerson", "(Landroid/app/Person;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.addPerson")
+	}
+
+	midBuilderAddPerson1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "addPerson", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.addPerson")
+	}
+
+	midBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "build", "()Landroid/app/Notification;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.build")
+	}
+
+	midBuilderCreateBigContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "createBigContentView", "()Landroid/widget/RemoteViews;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.createBigContentView")
+	}
+
+	midBuilderCreateContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "createContentView", "()Landroid/widget/RemoteViews;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.createContentView")
+	}
+
+	midBuilderCreateHeadsUpContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "createHeadsUpContentView", "()Landroid/widget/RemoteViews;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.createHeadsUpContentView")
+	}
+
+	midBuilderExtend, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "extend", "(Landroid/app/Notification$Extender;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.extend")
+	}
+
+	midBuilderGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "getExtras", "()Landroid/os/Bundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.getExtras")
+	}
+
+	midBuilderGetNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "getNotification", "()Landroid/app/Notification;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.getNotification")
+	}
+
+	midBuilderGetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "getStyle", "()Landroid/app/Notification$Style;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.getStyle")
+	}
+
+	midBuilderSetActions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setActions", "([Landroid/app/Notification$Action;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setActions")
+	}
+
+	midBuilderSetAllowSystemGeneratedContextualActions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setAllowSystemGeneratedContextualActions", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setAllowSystemGeneratedContextualActions")
+	}
+
+	midBuilderSetAutoCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setAutoCancel", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setAutoCancel")
+	}
+
+	midBuilderSetBadgeIconType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setBadgeIconType", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setBadgeIconType")
+	}
+
+	midBuilderSetBubbleMetadata, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setBubbleMetadata", "(Landroid/app/Notification$BubbleMetadata;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setBubbleMetadata")
+	}
+
+	midBuilderSetCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setCategory", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setCategory")
+	}
+
+	midBuilderSetChannelId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setChannelId", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setChannelId")
+	}
+
+	midBuilderSetChronometerCountDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setChronometerCountDown", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setChronometerCountDown")
+	}
+
+	midBuilderSetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setColor", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setColor")
+	}
+
+	midBuilderSetColorized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setColorized", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setColorized")
+	}
+
+	midBuilderSetContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setContent", "(Landroid/widget/RemoteViews;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setContent")
+	}
+
+	midBuilderSetContentInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setContentInfo", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setContentInfo")
+	}
+
+	midBuilderSetContentIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setContentIntent", "(Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setContentIntent")
+	}
+
+	midBuilderSetContentText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setContentText", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setContentText")
+	}
+
+	midBuilderSetContentTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setContentTitle", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setContentTitle")
+	}
+
+	midBuilderSetCustomBigContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setCustomBigContentView", "(Landroid/widget/RemoteViews;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setCustomBigContentView")
+	}
+
+	midBuilderSetCustomContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setCustomContentView", "(Landroid/widget/RemoteViews;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setCustomContentView")
+	}
+
+	midBuilderSetCustomHeadsUpContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setCustomHeadsUpContentView", "(Landroid/widget/RemoteViews;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setCustomHeadsUpContentView")
+	}
+
+	midBuilderSetDefaults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setDefaults", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setDefaults")
+	}
+
+	midBuilderSetDeleteIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setDeleteIntent", "(Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setDeleteIntent")
+	}
+
+	midBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setExtras", "(Landroid/os/Bundle;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setExtras")
+	}
+
+	midBuilderSetFlag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setFlag", "(IZ)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setFlag")
+	}
+
+	midBuilderSetForegroundServiceBehavior, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setForegroundServiceBehavior", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setForegroundServiceBehavior")
+	}
+
+	midBuilderSetFullScreenIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setFullScreenIntent", "(Landroid/app/PendingIntent;Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setFullScreenIntent")
+	}
+
+	midBuilderSetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setGroup", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setGroup")
+	}
+
+	midBuilderSetGroupAlertBehavior, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setGroupAlertBehavior", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setGroupAlertBehavior")
+	}
+
+	midBuilderSetGroupSummary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setGroupSummary", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setGroupSummary")
+	}
+
+	midBuilderSetLargeIcon1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setLargeIcon", "(Landroid/graphics/Bitmap;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setLargeIcon")
+	}
+
+	midBuilderSetLargeIcon1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setLargeIcon", "(Landroid/graphics/drawable/Icon;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setLargeIcon")
+	}
+
+	midBuilderSetLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setLights", "(III)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setLights")
+	}
+
+	midBuilderSetLocalOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setLocalOnly", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setLocalOnly")
+	}
+
+	midBuilderSetLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setLocusId", "(Landroid/content/LocusId;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setLocusId")
+	}
+
+	midBuilderSetNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setNumber", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setNumber")
+	}
+
+	midBuilderSetOngoing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setOngoing", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setOngoing")
+	}
+
+	midBuilderSetOnlyAlertOnce, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setOnlyAlertOnce", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setOnlyAlertOnce")
+	}
+
+	midBuilderSetPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setPriority", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setPriority")
+	}
+
+	midBuilderSetProgress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setProgress", "(IIZ)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setProgress")
+	}
+
+	midBuilderSetPublicVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setPublicVersion", "(Landroid/app/Notification;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setPublicVersion")
+	}
+
+	midBuilderSetRemoteInputHistory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setRemoteInputHistory", "([Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setRemoteInputHistory")
+	}
+
+	midBuilderSetSettingsText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSettingsText", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSettingsText")
+	}
+
+	midBuilderSetShortCriticalText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setShortCriticalText", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setShortCriticalText")
+	}
+
+	midBuilderSetShortcutId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setShortcutId", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setShortcutId")
+	}
+
+	midBuilderSetShowWhen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setShowWhen", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setShowWhen")
+	}
+
+	midBuilderSetSmallIcon1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSmallIcon", "(Landroid/graphics/drawable/Icon;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSmallIcon")
+	}
+
+	midBuilderSetSmallIcon1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSmallIcon", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSmallIcon")
+	}
+
+	midBuilderSetSmallIcon2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSmallIcon", "(II)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSmallIcon")
+	}
+
+	midBuilderSetSortKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSortKey", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSortKey")
+	}
+
+	midBuilderSetSound1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSound", "(Landroid/net/Uri;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSound")
+	}
+
+	midBuilderSetSound2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSound", "(Landroid/net/Uri;Landroid/media/AudioAttributes;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSound")
+	}
+
+	midBuilderSetSound2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSound", "(Landroid/net/Uri;I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSound")
+	}
+
+	midBuilderSetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setStyle", "(Landroid/app/Notification$Style;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setStyle")
+	}
+
+	midBuilderSetSubText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setSubText", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setSubText")
+	}
+
+	midBuilderSetTicker1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setTicker", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setTicker")
+	}
+
+	midBuilderSetTicker2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setTicker", "(Ljava/lang/String;Landroid/widget/RemoteViews;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setTicker")
+	}
+
+	midBuilderSetTimeoutAfter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setTimeoutAfter", "(J)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setTimeoutAfter")
+	}
+
+	midBuilderSetUsesChronometer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setUsesChronometer", "(Z)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setUsesChronometer")
+	}
+
+	midBuilderSetVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setVibrate", "([J)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setVibrate")
+	}
+
+	midBuilderSetVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setVisibility", "(I)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setVisibility")
+	}
+
+	midBuilderSetWhen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setWhen", "(J)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.setWhen")
+	}
+
+	midBuilderRecoverBuilder, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "recoverBuilder", "(Landroid/content/Context;Landroid/app/Notification;)Landroid/app/Notification$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.Notification$Builder.recoverBuilder")
+	}
 
 	c, err = env.FindClass("android/app/NotificationManager")
 	if err != nil {
@@ -539,554 +1993,6 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.app.NotificationManager.updateAutomaticZenRule")
-	}
-
-	c, err = env.FindClass("android/app/NotificationChannel")
-	if err != nil {
-		return fmt.Errorf("find class android.app.NotificationChannel: %w", err)
-	}
-	clsChannel = env.NewGlobalRef(&c.Object)
-
-	midChannelCanBubble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBubble", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.canBubble")
-	}
-
-	midChannelCanBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBypassDnd", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.canBypassDnd")
-	}
-
-	midChannelCanShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canShowBadge", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.canShowBadge")
-	}
-
-	midChannelDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.describeContents")
-	}
-
-	midChannelEnableLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableLights", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.enableLights")
-	}
-
-	midChannelEnableVibration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableVibration", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.enableVibration")
-	}
-
-	midChannelEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.equals")
-	}
-
-	midChannelGetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getAudioAttributes", "()Landroid/media/AudioAttributes;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getAudioAttributes")
-	}
-
-	midChannelGetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getConversationId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getConversationId")
-	}
-
-	midChannelGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getDescription", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getDescription")
-	}
-
-	midChannelGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getGroup", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getGroup")
-	}
-
-	midChannelGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getId")
-	}
-
-	midChannelGetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getImportance", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getImportance")
-	}
-
-	midChannelGetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLightColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getLightColor")
-	}
-
-	midChannelGetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLockscreenVisibility", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getLockscreenVisibility")
-	}
-
-	midChannelGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getName")
-	}
-
-	midChannelGetParentChannelId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getParentChannelId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getParentChannelId")
-	}
-
-	midChannelGetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSound", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getSound")
-	}
-
-	midChannelGetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationEffect", "()Landroid/os/VibrationEffect;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getVibrationEffect")
-	}
-
-	midChannelGetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationPattern", "()[J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.getVibrationPattern")
-	}
-
-	midChannelHasUserSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetImportance", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.hasUserSetImportance")
-	}
-
-	midChannelHasUserSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetSound", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.hasUserSetSound")
-	}
-
-	midChannelHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.hashCode")
-	}
-
-	midChannelIsBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isBlockable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.isBlockable")
-	}
-
-	midChannelIsConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isConversation", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.isConversation")
-	}
-
-	midChannelIsDemoted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isDemoted", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.isDemoted")
-	}
-
-	midChannelIsImportantConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isImportantConversation", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.isImportantConversation")
-	}
-
-	midChannelSetAllowBubbles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setAllowBubbles", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setAllowBubbles")
-	}
-
-	midChannelSetBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBlockable", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setBlockable")
-	}
-
-	midChannelSetBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBypassDnd", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setBypassDnd")
-	}
-
-	midChannelSetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setConversationId", "(Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setConversationId")
-	}
-
-	midChannelSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setDescription", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setDescription")
-	}
-
-	midChannelSetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setGroup", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setGroup")
-	}
-
-	midChannelSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setImportance", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setImportance")
-	}
-
-	midChannelSetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLightColor", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setLightColor")
-	}
-
-	midChannelSetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLockscreenVisibility", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setLockscreenVisibility")
-	}
-
-	midChannelSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setName", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setName")
-	}
-
-	midChannelSetShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setShowBadge", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setShowBadge")
-	}
-
-	midChannelSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setSound", "(Landroid/net/Uri;Landroid/media/AudioAttributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setSound")
-	}
-
-	midChannelSetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationEffect", "(Landroid/os/VibrationEffect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setVibrationEffect")
-	}
-
-	midChannelSetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationPattern", "([J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.setVibrationPattern")
-	}
-
-	midChannelShouldShowLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldShowLights", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.shouldShowLights")
-	}
-
-	midChannelShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldVibrate", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.shouldVibrate")
-	}
-
-	midChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.toString")
-	}
-
-	midChannelWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.NotificationChannel.writeToParcel")
-	}
-
-	c, err = env.FindClass("android/service/notification/StatusBarNotification")
-	if err != nil {
-		return fmt.Errorf("find class android.service.notification.StatusBarNotification: %w", err)
-	}
-	clsStatusBarNotification = env.NewGlobalRef(&c.Object)
-
-	midStatusBarNotificationClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "clone", "()Landroid/service/notification/StatusBarNotification;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.clone")
-	}
-
-	midStatusBarNotificationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.describeContents")
-	}
-
-	midStatusBarNotificationGetGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getGroupKey", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getGroupKey")
-	}
-
-	midStatusBarNotificationGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getId")
-	}
-
-	midStatusBarNotificationGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getKey", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getKey")
-	}
-
-	midStatusBarNotificationGetNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getNotification", "()Landroid/app/Notification;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getNotification")
-	}
-
-	midStatusBarNotificationGetOpPkg, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getOpPkg", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getOpPkg")
-	}
-
-	midStatusBarNotificationGetOverrideGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getOverrideGroupKey", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getOverrideGroupKey")
-	}
-
-	midStatusBarNotificationGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getPackageName")
-	}
-
-	midStatusBarNotificationGetPostTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getPostTime", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getPostTime")
-	}
-
-	midStatusBarNotificationGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getTag", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getTag")
-	}
-
-	midStatusBarNotificationGetUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getUid", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getUid")
-	}
-
-	midStatusBarNotificationGetUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getUser", "()Landroid/os/UserHandle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getUser")
-	}
-
-	midStatusBarNotificationGetUserId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "getUserId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.getUserId")
-	}
-
-	midStatusBarNotificationIsAppGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isAppGroup", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isAppGroup")
-	}
-
-	midStatusBarNotificationIsClearable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isClearable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isClearable")
-	}
-
-	midStatusBarNotificationIsGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isGroup", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isGroup")
-	}
-
-	midStatusBarNotificationIsOngoing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "isOngoing", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.isOngoing")
-	}
-
-	midStatusBarNotificationSetOverrideGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "setOverrideGroupKey", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.setOverrideGroupKey")
-	}
-
-	midStatusBarNotificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.toString")
-	}
-
-	midStatusBarNotificationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.writeToParcel")
-	}
-
-	midStatusBarNotificationClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusBarNotification)), "clone", "()Ljava/lang/Object;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.service.notification.StatusBarNotification.clone")
 	}
 
 	return nil

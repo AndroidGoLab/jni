@@ -3,9 +3,23 @@
 package consts
 
 const (
+	Creator                                            int = 0
+	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
+	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
+	GroupOwnerBand2ghz                                 int = 1
+	GroupOwnerBand5ghz                                 int = 2
+	GroupOwnerBand6ghz                                 int = 3
+	GroupOwnerBandAuto                                 int = 0
+	GroupOwnerIntentAuto                               int = -1
+	GroupOwnerIntentMax                                int = 15
+	GroupOwnerIntentMin                                int = 0
+	P2pVersion1                                        int = 0
+	P2pVersion2                                        int = 1
+	PccModeConnectionTypeLegacyOnly                    int = 0
+	PccModeConnectionTypeLegacyOrR2                    int = 1
+	PccModeConnectionTypeR2Only                        int = 2
 	Available                                          int = 3
 	Connected                                          int = 0
-	Creator                                            int = 0
 	Failed                                             int = 2
 	Invited                                            int = 1
 	Unavailable                                        int = 4
@@ -39,20 +53,6 @@ const (
 	WifiP2pScanSocial                                  int = 1
 	WifiP2pStateDisabled                               int = 1
 	WifiP2pStateEnabled                                int = 2
-	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
-	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
-	GroupOwnerBand2ghz                                 int = 1
-	GroupOwnerBand5ghz                                 int = 2
-	GroupOwnerBand6ghz                                 int = 3
-	GroupOwnerBandAuto                                 int = 0
-	GroupOwnerIntentAuto                               int = -1
-	GroupOwnerIntentMax                                int = 15
-	GroupOwnerIntentMin                                int = 0
-	P2pVersion1                                        int = 0
-	P2pVersion2                                        int = 1
-	PccModeConnectionTypeLegacyOnly                    int = 0
-	PccModeConnectionTypeLegacyOrR2                    int = 1
-	PccModeConnectionTypeR2Only                        int = 2
 )
 
 const (

@@ -23,6 +23,21 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsScheduler                            *jni.GlobalRef
+	midSchedulerCanRunUserInitiatedJobs     jni.MethodID
+	midSchedulerCancel                      jni.MethodID
+	midSchedulerCancelAll                   jni.MethodID
+	midSchedulerCancelInAllNamespaces       jni.MethodID
+	midSchedulerEnqueue                     jni.MethodID
+	midSchedulerForNamespace                jni.MethodID
+	midSchedulerGetAllPendingJobs           jni.MethodID
+	midSchedulerGetNamespace                jni.MethodID
+	midSchedulerGetPendingJob               jni.MethodID
+	midSchedulerGetPendingJobReason         jni.MethodID
+	midSchedulerGetPendingJobReasons        jni.MethodID
+	midSchedulerGetPendingJobReasonsHistory jni.MethodID
+	midSchedulerSchedule                    jni.MethodID
+
 	clsInfo                                 *jni.GlobalRef
 	midInfoDescribeContents                 jni.MethodID
 	midInfoEquals                           jni.MethodID
@@ -95,21 +110,6 @@ var (
 	midInfoBuilderSetTriggerContentMaxDelay    jni.MethodID
 	midInfoBuilderSetTriggerContentUpdateDelay jni.MethodID
 	midInfoBuilderSetUserInitiated             jni.MethodID
-
-	clsScheduler                            *jni.GlobalRef
-	midSchedulerCanRunUserInitiatedJobs     jni.MethodID
-	midSchedulerCancel                      jni.MethodID
-	midSchedulerCancelAll                   jni.MethodID
-	midSchedulerCancelInAllNamespaces       jni.MethodID
-	midSchedulerEnqueue                     jni.MethodID
-	midSchedulerForNamespace                jni.MethodID
-	midSchedulerGetAllPendingJobs           jni.MethodID
-	midSchedulerGetNamespace                jni.MethodID
-	midSchedulerGetPendingJob               jni.MethodID
-	midSchedulerGetPendingJobReason         jni.MethodID
-	midSchedulerGetPendingJobReasons        jni.MethodID
-	midSchedulerGetPendingJobReasonsHistory jni.MethodID
-	midSchedulerSchedule                    jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -135,6 +135,116 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/app/job/JobScheduler")
+	if err != nil {
+		return fmt.Errorf("find class android.app.job.JobScheduler: %w", err)
+	}
+	clsScheduler = env.NewGlobalRef(&c.Object)
+
+	midSchedulerCanRunUserInitiatedJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "canRunUserInitiatedJobs", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.canRunUserInitiatedJobs")
+	}
+
+	midSchedulerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancel", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.cancel")
+	}
+
+	midSchedulerCancelAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancelAll", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.cancelAll")
+	}
+
+	midSchedulerCancelInAllNamespaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancelInAllNamespaces", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.cancelInAllNamespaces")
+	}
+
+	midSchedulerEnqueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "enqueue", "(Landroid/app/job/JobInfo;Landroid/app/job/JobWorkItem;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.enqueue")
+	}
+
+	midSchedulerForNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "forNamespace", "(Ljava/lang/String;)Landroid/app/job/JobScheduler;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.forNamespace")
+	}
+
+	midSchedulerGetAllPendingJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getAllPendingJobs", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getAllPendingJobs")
+	}
+
+	midSchedulerGetNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getNamespace", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getNamespace")
+	}
+
+	midSchedulerGetPendingJob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJob", "(I)Landroid/app/job/JobInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJob")
+	}
+
+	midSchedulerGetPendingJobReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReason", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReason")
+	}
+
+	midSchedulerGetPendingJobReasons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReasons", "(I)[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReasons")
+	}
+
+	midSchedulerGetPendingJobReasonsHistory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReasonsHistory", "(I)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReasonsHistory")
+	}
+
+	midSchedulerSchedule, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "schedule", "(Landroid/app/job/JobInfo;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.job.JobScheduler.schedule")
+	}
 
 	c, err = env.FindClass("android/app/job/JobInfo")
 	if err != nil {
@@ -698,116 +808,6 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.app.job.JobInfo$Builder.setUserInitiated")
-	}
-
-	c, err = env.FindClass("android/app/job/JobScheduler")
-	if err != nil {
-		return fmt.Errorf("find class android.app.job.JobScheduler: %w", err)
-	}
-	clsScheduler = env.NewGlobalRef(&c.Object)
-
-	midSchedulerCanRunUserInitiatedJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "canRunUserInitiatedJobs", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.canRunUserInitiatedJobs")
-	}
-
-	midSchedulerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancel", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.cancel")
-	}
-
-	midSchedulerCancelAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancelAll", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.cancelAll")
-	}
-
-	midSchedulerCancelInAllNamespaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancelInAllNamespaces", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.cancelInAllNamespaces")
-	}
-
-	midSchedulerEnqueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "enqueue", "(Landroid/app/job/JobInfo;Landroid/app/job/JobWorkItem;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.enqueue")
-	}
-
-	midSchedulerForNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "forNamespace", "(Ljava/lang/String;)Landroid/app/job/JobScheduler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.forNamespace")
-	}
-
-	midSchedulerGetAllPendingJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getAllPendingJobs", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getAllPendingJobs")
-	}
-
-	midSchedulerGetNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getNamespace", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getNamespace")
-	}
-
-	midSchedulerGetPendingJob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJob", "(I)Landroid/app/job/JobInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJob")
-	}
-
-	midSchedulerGetPendingJobReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReason", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReason")
-	}
-
-	midSchedulerGetPendingJobReasons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReasons", "(I)[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReasons")
-	}
-
-	midSchedulerGetPendingJobReasonsHistory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJobReasonsHistory", "(I)Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.getPendingJobReasonsHistory")
-	}
-
-	midSchedulerSchedule, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "schedule", "(Landroid/app/job/JobInfo;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.job.JobScheduler.schedule")
 	}
 
 	return nil

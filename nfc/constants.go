@@ -5,30 +5,7 @@ package nfc
 import "github.com/AndroidGoLab/jni/nfc/consts"
 
 const (
-	ActionAdapterStateChanged          = consts.ActionAdapterStateChanged
-	ActionChangeTagIntentPreference    = consts.ActionChangeTagIntentPreference
-	ActionNdefDiscovered               = consts.ActionNdefDiscovered
-	ActionPreferredPaymentChanged      = consts.ActionPreferredPaymentChanged
-	ActionTagDiscovered                = consts.ActionTagDiscovered
-	ActionTechDiscovered               = consts.ActionTechDiscovered
-	ActionTransactionDetected          = consts.ActionTransactionDetected
-	ExtraAdapterState                  = consts.ExtraAdapterState
-	ExtraAid                           = consts.ExtraAid
-	ExtraData                          = consts.ExtraData
-	ExtraId                            = consts.ExtraId
-	ExtraNdefMessages                  = consts.ExtraNdefMessages
-	ExtraPreferredPaymentChangedReason = consts.ExtraPreferredPaymentChangedReason
-	ExtraReaderPresenceCheckDelay      = consts.ExtraReaderPresenceCheckDelay
-	ExtraSecureElementName             = consts.ExtraSecureElementName
-	ExtraTag                           = consts.ExtraTag
-	MifareClassic                      = consts.MifareClassic
-	NfcForumType1                      = consts.NfcForumType1
-	NfcForumType2                      = consts.NfcForumType2
-	NfcForumType3                      = consts.NfcForumType3
-	NfcForumType4                      = consts.NfcForumType4
-)
-
-const (
+	Creator                    = consts.Creator
 	FlagListenDisable          = consts.FlagListenDisable
 	FlagListenKeep             = consts.FlagListenKeep
 	FlagListenNfcPassiveA      = consts.FlagListenNfcPassiveA
@@ -50,7 +27,6 @@ const (
 	StateOn                    = consts.StateOn
 	StateTurningOff            = consts.StateTurningOff
 	StateTurningOn             = consts.StateTurningOn
-	Creator                    = consts.Creator
 	RtdAlternativeCarrier      = consts.RtdAlternativeCarrier
 	RtdHandoverCarrier         = consts.RtdHandoverCarrier
 	RtdHandoverRequest         = consts.RtdHandoverRequest
@@ -65,4 +41,28 @@ const (
 	TnfUnchanged               = consts.TnfUnchanged
 	TnfUnknown                 = consts.TnfUnknown
 	TnfWellKnown               = consts.TnfWellKnown
+)
+
+const (
+	MifareClassic                      = consts.MifareClassic
+	NfcForumType1                      = consts.NfcForumType1
+	NfcForumType2                      = consts.NfcForumType2
+	NfcForumType3                      = consts.NfcForumType3
+	NfcForumType4                      = consts.NfcForumType4
+	ActionAdapterStateChanged          = consts.ActionAdapterStateChanged
+	ActionChangeTagIntentPreference    = consts.ActionChangeTagIntentPreference
+	ActionNdefDiscovered               = consts.ActionNdefDiscovered
+	ActionPreferredPaymentChanged      = consts.ActionPreferredPaymentChanged
+	ActionTagDiscovered                = consts.ActionTagDiscovered
+	ActionTechDiscovered               = consts.ActionTechDiscovered
+	ActionTransactionDetected          = consts.ActionTransactionDetected
+	ExtraAdapterState                  = consts.ExtraAdapterState
+	ExtraAid                           = consts.ExtraAid
+	ExtraData                          = consts.ExtraData
+	ExtraId                            = consts.ExtraId
+	ExtraNdefMessages                  = consts.ExtraNdefMessages
+	ExtraPreferredPaymentChangedReason = consts.ExtraPreferredPaymentChangedReason
+	ExtraReaderPresenceCheckDelay      = consts.ExtraReaderPresenceCheckDelay
+	ExtraSecureElementName             = consts.ExtraSecureElementName
+	ExtraTag                           = consts.ExtraTag
 )

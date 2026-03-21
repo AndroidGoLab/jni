@@ -17,10 +17,54 @@ var (
 	_ *app.Context
 )
 
+const serviceName = "download"
+
 // Manager wraps android.app.DownloadManager.
 type Manager struct {
 	VM  *jni.VM
+	Ctx *app.Context
 	Obj *jni.GlobalRef
+}
+
+// NewManager obtains android.app.DownloadManager from the Android system service manager.
+func NewManager(ctx *app.Context) (*Manager, error) {
+	if ctx == nil {
+		return nil, fmt.Errorf("Manager: nil Context")
+	}
+	var mgr Manager
+	mgr.VM = ctx.VM
+	mgr.Ctx = ctx
+
+	err := mgr.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		svc, err := ctx.GetSystemService(serviceName)
+		if err != nil {
+			return err
+		}
+		if svc == nil || svc.Ref() == 0 {
+			return fmt.Errorf("%s service not available", serviceName)
+		}
+		mgr.Obj = env.NewGlobalRef(svc)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &mgr, nil
+}
+
+// Close releases the global reference to the underlying Java object.
+// After Close, the Manager must not be used.
+func (m *Manager) Close() {
+	if m.Obj != nil {
+		m.VM.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(m.Obj)
+			m.Obj = nil
+			return nil
+		})
+	}
 }
 
 // AddCompletedDownload7 calls android.app.DownloadManager.addCompletedDownload.
@@ -225,6 +269,11 @@ func (m *Manager) GetUriForDownloadedFile(arg0 int64) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -251,6 +300,11 @@ func (m *Manager) OpenDownloadedFile(arg0 int64) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -276,6 +330,11 @@ func (m *Manager) Query(arg0 *jni.Object) (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})
@@ -329,6 +388,11 @@ func (m *Manager) GetMaxBytesOverMobile(arg0 *jni.Object) (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -354,6 +418,11 @@ func (m *Manager) GetRecommendedMaxBytesOverMobile(arg0 *jni.Object) (*jni.Objec
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			result = env.NewGlobalRef(result)
 		}
 		return callErr
 	})

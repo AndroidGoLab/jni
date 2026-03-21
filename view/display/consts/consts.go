@@ -3,6 +3,9 @@
 package consts
 
 const (
+	CompatSmallCoverScreenOptIn    int = 1
+	ScreenRecordingStateNotVisible int = 0
+	ScreenRecordingStateVisible    int = 1
 	Density140                     int = 140
 	Density180                     int = 180
 	Density200                     int = 200
@@ -45,9 +48,6 @@ const (
 	StateOnSuspend                 int = 6
 	StateUnknown                   int = 0
 	StateVr                        int = 5
-	CompatSmallCoverScreenOptIn    int = 1
-	ScreenRecordingStateNotVisible int = 0
-	ScreenRecordingStateVisible    int = 1
 )
 
 const (

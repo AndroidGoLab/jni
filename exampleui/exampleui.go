@@ -12,6 +12,7 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/graphics/pdf"
 )
 
 /*
@@ -168,180 +169,101 @@ func renderText(text string) {
 		return
 	}
 
-	vm.Do(func(env *jni.Env) error {
-		// Create Bitmap.createBitmap(width, height, ARGB_8888)
-		bitmapCls, err := env.FindClass("android/graphics/Bitmap")
-		if err != nil {
-			return err
-		}
+	// Get ARGB_8888 config for bitmap creation.
+	argb8888, err := pdf.ARGB8888(vm)
+	if err != nil {
+		return
+	}
 
-		configCls, err := env.FindClass("android/graphics/Bitmap$Config")
-		if err != nil {
-			return err
-		}
-		argb8888Fid, err := env.GetStaticFieldID(configCls, "ARGB_8888", "Landroid/graphics/Bitmap$Config;")
-		if err != nil {
-			return err
-		}
-		argb8888 := env.GetStaticObjectField(configCls, argb8888Fid)
+	// Create Bitmap.createBitmap(width, height, ARGB_8888).
+	// Static methods use a zero-value receiver for the VM reference.
+	bmpHelper := pdf.Bitmap{VM: vm}
+	bitmapObj, err := bmpHelper.CreateBitmap3_10(
+		int32(windowWidth), int32(windowHeight), argb8888,
+	)
+	if err != nil {
+		return
+	}
+	bmp := pdf.Bitmap{VM: vm, Obj: bitmapObj}
 
-		createBitmapMid, err := env.GetStaticMethodID(bitmapCls, "createBitmap",
-			"(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
-		if err != nil {
-			return err
-		}
-		bitmap, err := env.CallStaticObjectMethod(bitmapCls, createBitmapMid,
-			jni.IntValue(int32(windowWidth)),
-			jni.IntValue(int32(windowHeight)),
-			jni.ObjectValue(argb8888))
-		if err != nil {
-			return err
-		}
+	// Create Canvas from Bitmap.
+	canvas, err := pdf.NewCanvas(vm, bitmapObj)
+	if err != nil {
+		return
+	}
 
-		// Create Canvas from Bitmap
-		canvasCls, err := env.FindClass("android/graphics/Canvas")
-		if err != nil {
-			return err
-		}
-		canvasInit, err := env.GetMethodID(canvasCls, "<init>", "(Landroid/graphics/Bitmap;)V")
-		if err != nil {
-			return err
-		}
-		canvas, err := env.NewObject(canvasCls, canvasInit, jni.ObjectValue(bitmap))
-		if err != nil {
-			return err
-		}
+	// Fill background white.
+	if err := canvas.DrawColor1(colorWhite); err != nil {
+		return
+	}
 
-		// Fill background white
-		drawColorMid, err := env.GetMethodID(canvasCls, "drawColor", "(I)V")
-		if err != nil {
-			return err
-		}
-		if err := env.CallVoidMethod(canvas, drawColorMid, jni.IntValue(colorWhite)); err != nil {
-			return err
-		}
+	// Create Paint and configure it.
+	paint, err := pdf.NewPaint(vm)
+	if err != nil {
+		return
+	}
+	if err := paint.SetColor1(colorDkGray); err != nil {
+		return
+	}
+	if err := paint.SetTextSize(textSize); err != nil {
+		return
+	}
+	if err := paint.SetAntiAlias(true); err != nil {
+		return
+	}
 
-		// Create Paint
-		paintCls, err := env.FindClass("android/graphics/Paint")
-		if err != nil {
-			return err
-		}
-		paintInit, err := env.GetMethodID(paintCls, "<init>", "()V")
-		if err != nil {
-			return err
-		}
-		paint, err := env.NewObject(paintCls, paintInit)
-		if err != nil {
-			return err
-		}
+	// Set monospace typeface (best-effort; ignore errors on older APIs).
+	if monoObj, err := pdf.MonospaceTypeface(vm); err == nil && monoObj != nil {
+		_, _ = paint.SetTypeface(monoObj)
+	}
 
-		// paint.setColor(Color.DKGRAY)
-		setColorMid, err := env.GetMethodID(paintCls, "setColor", "(I)V")
-		if err != nil {
-			return err
-		}
-		if err := env.CallVoidMethod(paint, setColorMid, jni.IntValue(colorDkGray)); err != nil {
-			return err
-		}
-
-		// paint.setTextSize(40)
-		setTextSizeMid, err := env.GetMethodID(paintCls, "setTextSize", "(F)V")
-		if err != nil {
-			return err
-		}
-		if err := env.CallVoidMethod(paint, setTextSizeMid, jni.FloatValue(textSize)); err != nil {
-			return err
-		}
-
-		// paint.setAntiAlias(true)
-		setAAMid, err := env.GetMethodID(paintCls, "setAntiAlias", "(Z)V")
-		if err != nil {
-			return err
-		}
-		if err := env.CallVoidMethod(paint, setAAMid, jni.BooleanValue(1)); err != nil {
-			return err
-		}
-
-		// Set monospace typeface (best-effort; ignore errors on older APIs).
-		if typefaceCls, err := env.FindClass("android/graphics/Typeface"); err == nil {
-			if monoFid, err := env.GetStaticFieldID(typefaceCls, "MONOSPACE", "Landroid/graphics/Typeface;"); err == nil {
-				monoObj := env.GetStaticObjectField(typefaceCls, monoFid)
-				if setTypefaceMid, err := env.GetMethodID(paintCls, "setTypeface", "(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;"); err == nil {
-					_, _ = env.CallObjectMethod(paint, setTypefaceMid, jni.ObjectValue(monoObj))
-				}
-			}
-		}
-
-		// Draw each line of text
-		drawTextMid, err := env.GetMethodID(canvasCls, "drawText",
-			"(Ljava/lang/String;FFLandroid/graphics/Paint;)V")
-		if err != nil {
-			return err
-		}
-
-		lines := strings.Split(text, "\n")
-		y := topMargin
-		for _, line := range lines {
-			if line == "" {
-				y += lineHeight
-				continue
-			}
-			jLine, err := env.NewStringUTF(line)
-			if err != nil {
-				continue
-			}
-			_ = env.CallVoidMethod(canvas, drawTextMid,
-				jni.ObjectValue(&jLine.Object),
-				jni.FloatValue(leftMargin), jni.FloatValue(y),
-				jni.ObjectValue(paint))
+	// Draw each line of text.
+	lines := strings.Split(text, "\n")
+	y := topMargin
+	for _, line := range lines {
+		if line == "" {
 			y += lineHeight
-			if y > float32(windowHeight-bottomPad) {
-				break
-			}
+			continue
 		}
-
-		// Get bitmap pixels into a Go byte slice
-		pixelCount := windowWidth * windowHeight
-		intBuf := make([]int32, pixelCount)
-
-		// bitmap.getPixels(pixels, 0, width, 0, 0, width, height)
-		getPixelsMid, err := env.GetMethodID(bitmapCls, "getPixels", "([IIIIIII)V")
-		if err != nil {
-			return err
+		_ = canvas.DrawText4_2(line, leftMargin, y, paint.Obj)
+		y += lineHeight
+		if y > float32(windowHeight-bottomPad) {
+			break
 		}
+	}
+
+	// Extract bitmap pixels and blit to ANativeWindow.
+	// NewIntArray and GetIntArrayRegion require direct env access.
+	pixelCount := windowWidth * windowHeight
+	intBuf := make([]int32, pixelCount)
+
+	vm.Do(func(env *jni.Env) error {
 		pixelArray := env.NewIntArray(int32(pixelCount))
 		if pixelArray == nil {
 			return fmt.Errorf("NewIntArray returned nil")
 		}
-		if err := env.CallVoidMethod(bitmap, getPixelsMid,
-			jni.ObjectValue(&pixelArray.Object),
-			jni.IntValue(0),
-			jni.IntValue(int32(windowWidth)),
-			jni.IntValue(0), jni.IntValue(0),
-			jni.IntValue(int32(windowWidth)),
-			jni.IntValue(int32(windowHeight)),
+		if err := bmp.GetPixels(
+			&pixelArray.Object,
+			0, int32(windowWidth),
+			0, 0,
+			int32(windowWidth), int32(windowHeight),
 		); err != nil {
 			return err
 		}
-
 		env.GetIntArrayRegion(pixelArray, 0, int32(pixelCount), unsafe.Pointer(&intBuf[0]))
-
-		// Blit to ANativeWindow
-		C.renderBitmapToWindow(
-			nativeWindow,
-			unsafe.Pointer(&intBuf[0]),
-			C.int(windowWidth),
-			C.int(windowHeight),
-		)
-
-		// Recycle bitmap
-		recycleMid, err := env.GetMethodID(bitmapCls, "recycle", "()V")
-		if err == nil {
-			_ = env.CallVoidMethod(bitmap, recycleMid)
-		}
-
 		return nil
 	})
+
+	// Blit to ANativeWindow.
+	C.renderBitmapToWindow(
+		nativeWindow,
+		unsafe.Pointer(&intBuf[0]),
+		C.int(windowWidth),
+		C.int(windowHeight),
+	)
+
+	// Recycle bitmap.
+	_ = bmp.Recycle()
 }
 
 func getUngrantedPermissions(

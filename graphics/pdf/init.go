@@ -23,6 +23,59 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsRenderer                             *jni.GlobalRef
+	midRendererClose                        jni.MethodID
+	midRendererGetDocumentLinearizationType jni.MethodID
+	midRendererGetPageCount                 jni.MethodID
+	midRendererGetPdfFormType               jni.MethodID
+	midRendererOpenPage                     jni.MethodID
+	midRendererShouldScaleForPrinting       jni.MethodID
+	midRendererWrite                        jni.MethodID
+
+	clsRendererPage                            *jni.GlobalRef
+	midRendererPageApplyEdit                   jni.MethodID
+	midRendererPageClose                       jni.MethodID
+	midRendererPageGetFormWidgetInfoAtIndex    jni.MethodID
+	midRendererPageGetFormWidgetInfoAtPosition jni.MethodID
+	midRendererPageGetFormWidgetInfos0         jni.MethodID
+	midRendererPageGetFormWidgetInfos1_1       jni.MethodID
+	midRendererPageGetGotoLinks                jni.MethodID
+	midRendererPageGetHeight                   jni.MethodID
+	midRendererPageGetImageContents            jni.MethodID
+	midRendererPageGetIndex                    jni.MethodID
+	midRendererPageGetLinkContents             jni.MethodID
+	midRendererPageGetTextContents             jni.MethodID
+	midRendererPageGetWidth                    jni.MethodID
+	midRendererPageRender4                     jni.MethodID
+	midRendererPageRender4_1                   jni.MethodID
+	midRendererPageSearchText                  jni.MethodID
+	midRendererPageSelectContent               jni.MethodID
+
+	clsParcelFileDescriptor                         *jni.GlobalRef
+	midParcelFileDescriptorCanDetectErrors          jni.MethodID
+	midParcelFileDescriptorCheckError               jni.MethodID
+	midParcelFileDescriptorClose                    jni.MethodID
+	midParcelFileDescriptorCloseWithError           jni.MethodID
+	midParcelFileDescriptorDescribeContents         jni.MethodID
+	midParcelFileDescriptorDetachFd                 jni.MethodID
+	midParcelFileDescriptorDup0                     jni.MethodID
+	midParcelFileDescriptorGetFd                    jni.MethodID
+	midParcelFileDescriptorGetFileDescriptor        jni.MethodID
+	midParcelFileDescriptorGetStatSize              jni.MethodID
+	midParcelFileDescriptorToString                 jni.MethodID
+	midParcelFileDescriptorWriteToParcel            jni.MethodID
+	midParcelFileDescriptorAdoptFd                  jni.MethodID
+	midParcelFileDescriptorCreatePipe               jni.MethodID
+	midParcelFileDescriptorCreateReliablePipe       jni.MethodID
+	midParcelFileDescriptorCreateReliableSocketPair jni.MethodID
+	midParcelFileDescriptorCreateSocketPair         jni.MethodID
+	midParcelFileDescriptorDup1_1                   jni.MethodID
+	midParcelFileDescriptorFromDatagramSocket       jni.MethodID
+	midParcelFileDescriptorFromFd                   jni.MethodID
+	midParcelFileDescriptorFromSocket               jni.MethodID
+	midParcelFileDescriptorOpen                     jni.MethodID
+	midParcelFileDescriptorParseMode                jni.MethodID
+
 	clsBitmap                       *jni.GlobalRef
 	midBitmapAsShared               jni.MethodID
 	midBitmapCompress               jni.MethodID
@@ -95,58 +148,274 @@ var (
 	midBitmapCreateScaledBitmap     jni.MethodID
 	midBitmapWrapHardwareBuffer     jni.MethodID
 
-	clsParcelFileDescriptor                         *jni.GlobalRef
-	midParcelFileDescriptorCanDetectErrors          jni.MethodID
-	midParcelFileDescriptorCheckError               jni.MethodID
-	midParcelFileDescriptorClose                    jni.MethodID
-	midParcelFileDescriptorCloseWithError           jni.MethodID
-	midParcelFileDescriptorDescribeContents         jni.MethodID
-	midParcelFileDescriptorDetachFd                 jni.MethodID
-	midParcelFileDescriptorDup0                     jni.MethodID
-	midParcelFileDescriptorGetFd                    jni.MethodID
-	midParcelFileDescriptorGetFileDescriptor        jni.MethodID
-	midParcelFileDescriptorGetStatSize              jni.MethodID
-	midParcelFileDescriptorToString                 jni.MethodID
-	midParcelFileDescriptorWriteToParcel            jni.MethodID
-	midParcelFileDescriptorAdoptFd                  jni.MethodID
-	midParcelFileDescriptorCreatePipe               jni.MethodID
-	midParcelFileDescriptorCreateReliablePipe       jni.MethodID
-	midParcelFileDescriptorCreateReliableSocketPair jni.MethodID
-	midParcelFileDescriptorCreateSocketPair         jni.MethodID
-	midParcelFileDescriptorDup1_1                   jni.MethodID
-	midParcelFileDescriptorFromDatagramSocket       jni.MethodID
-	midParcelFileDescriptorFromFd                   jni.MethodID
-	midParcelFileDescriptorFromSocket               jni.MethodID
-	midParcelFileDescriptorOpen                     jni.MethodID
-	midParcelFileDescriptorParseMode                jni.MethodID
+	clsBitmapConfig        *jni.GlobalRef
+	midBitmapConfigValues  jni.MethodID
+	midBitmapConfigValueOf jni.MethodID
 
-	clsRenderer                             *jni.GlobalRef
-	midRendererClose                        jni.MethodID
-	midRendererGetDocumentLinearizationType jni.MethodID
-	midRendererGetPageCount                 jni.MethodID
-	midRendererGetPdfFormType               jni.MethodID
-	midRendererOpenPage                     jni.MethodID
-	midRendererShouldScaleForPrinting       jni.MethodID
-	midRendererWrite                        jni.MethodID
+	clsPaint                           *jni.GlobalRef
+	midPaintAscent                     jni.MethodID
+	midPaintBreakText5                 jni.MethodID
+	midPaintBreakText6_1               jni.MethodID
+	midPaintBreakText4_2               jni.MethodID
+	midPaintClearShadowLayer           jni.MethodID
+	midPaintDescent                    jni.MethodID
+	midPaintEqualsForTextMeasurement   jni.MethodID
+	midPaintGetAlpha                   jni.MethodID
+	midPaintGetBlendMode               jni.MethodID
+	midPaintGetColor                   jni.MethodID
+	midPaintGetColorFilter             jni.MethodID
+	midPaintGetColorLong               jni.MethodID
+	midPaintGetEndHyphenEdit           jni.MethodID
+	midPaintGetFillPath                jni.MethodID
+	midPaintGetFlags                   jni.MethodID
+	midPaintGetFontFeatureSettings     jni.MethodID
+	midPaintGetFontMetrics0            jni.MethodID
+	midPaintGetFontMetrics1_1          jni.MethodID
+	midPaintGetFontMetricsForLocale    jni.MethodID
+	midPaintGetFontMetricsInt0         jni.MethodID
+	midPaintGetFontMetricsInt1_1       jni.MethodID
+	midPaintGetFontMetricsInt7_2       jni.MethodID
+	midPaintGetFontMetricsInt7_3       jni.MethodID
+	midPaintGetFontMetricsIntForLocale jni.MethodID
+	midPaintGetFontSpacing             jni.MethodID
+	midPaintGetFontVariationSettings   jni.MethodID
+	midPaintGetHinting                 jni.MethodID
+	midPaintGetLetterSpacing           jni.MethodID
+	midPaintGetMaskFilter              jni.MethodID
+	midPaintGetOffsetForAdvance7       jni.MethodID
+	midPaintGetOffsetForAdvance7_1     jni.MethodID
+	midPaintGetPathEffect              jni.MethodID
+	midPaintGetRunAdvance7             jni.MethodID
+	midPaintGetRunAdvance7_1           jni.MethodID
+	midPaintGetRunCharacterAdvance9    jni.MethodID
+	midPaintGetRunCharacterAdvance9_1  jni.MethodID
+	midPaintGetShader                  jni.MethodID
+	midPaintGetShadowLayerColor        jni.MethodID
+	midPaintGetShadowLayerColorLong    jni.MethodID
+	midPaintGetShadowLayerDx           jni.MethodID
+	midPaintGetShadowLayerDy           jni.MethodID
+	midPaintGetShadowLayerRadius       jni.MethodID
+	midPaintGetStartHyphenEdit         jni.MethodID
+	midPaintGetStrikeThruPosition      jni.MethodID
+	midPaintGetStrikeThruThickness     jni.MethodID
+	midPaintGetStrokeCap               jni.MethodID
+	midPaintGetStrokeJoin              jni.MethodID
+	midPaintGetStrokeMiter             jni.MethodID
+	midPaintGetStrokeWidth             jni.MethodID
+	midPaintGetStyle                   jni.MethodID
+	midPaintGetTextAlign               jni.MethodID
+	midPaintGetTextBounds4             jni.MethodID
+	midPaintGetTextBounds4_1           jni.MethodID
+	midPaintGetTextBounds4_2           jni.MethodID
+	midPaintGetTextLocale              jni.MethodID
+	midPaintGetTextLocales             jni.MethodID
+	midPaintGetTextPath6               jni.MethodID
+	midPaintGetTextPath6_1             jni.MethodID
+	midPaintGetTextRunAdvances         jni.MethodID
+	midPaintGetTextRunCursor6          jni.MethodID
+	midPaintGetTextRunCursor6_1        jni.MethodID
+	midPaintGetTextScaleX              jni.MethodID
+	midPaintGetTextSize                jni.MethodID
+	midPaintGetTextSkewX               jni.MethodID
+	midPaintGetTextWidths4             jni.MethodID
+	midPaintGetTextWidths4_1           jni.MethodID
+	midPaintGetTextWidths2_2           jni.MethodID
+	midPaintGetTextWidths4_3           jni.MethodID
+	midPaintGetTypeface                jni.MethodID
+	midPaintGetUnderlinePosition       jni.MethodID
+	midPaintGetUnderlineThickness      jni.MethodID
+	midPaintGetWordSpacing             jni.MethodID
+	midPaintGetXfermode                jni.MethodID
+	midPaintHasGlyph                   jni.MethodID
+	midPaintIsAntiAlias                jni.MethodID
+	midPaintIsDither                   jni.MethodID
+	midPaintIsElegantTextHeight        jni.MethodID
+	midPaintIsFakeBoldText             jni.MethodID
+	midPaintIsFilterBitmap             jni.MethodID
+	midPaintIsLinearText               jni.MethodID
+	midPaintIsStrikeThruText           jni.MethodID
+	midPaintIsSubpixelText             jni.MethodID
+	midPaintIsUnderlineText            jni.MethodID
+	midPaintMeasureText3               jni.MethodID
+	midPaintMeasureText3_1             jni.MethodID
+	midPaintMeasureText1_2             jni.MethodID
+	midPaintMeasureText3_3             jni.MethodID
+	midPaintReset                      jni.MethodID
+	midPaintSet                        jni.MethodID
+	midPaintSetARGB                    jni.MethodID
+	midPaintSetAlpha                   jni.MethodID
+	midPaintSetAntiAlias               jni.MethodID
+	midPaintSetBlendMode               jni.MethodID
+	midPaintSetColor1                  jni.MethodID
+	midPaintSetColor1_1                jni.MethodID
+	midPaintSetColorFilter             jni.MethodID
+	midPaintSetDither                  jni.MethodID
+	midPaintSetElegantTextHeight       jni.MethodID
+	midPaintSetEndHyphenEdit           jni.MethodID
+	midPaintSetFakeBoldText            jni.MethodID
+	midPaintSetFilterBitmap            jni.MethodID
+	midPaintSetFlags                   jni.MethodID
+	midPaintSetFontFeatureSettings     jni.MethodID
+	midPaintSetFontVariationSettings   jni.MethodID
+	midPaintSetHinting                 jni.MethodID
+	midPaintSetLetterSpacing           jni.MethodID
+	midPaintSetLinearText              jni.MethodID
+	midPaintSetMaskFilter              jni.MethodID
+	midPaintSetPathEffect              jni.MethodID
+	midPaintSetShader                  jni.MethodID
+	midPaintSetShadowLayer4            jni.MethodID
+	midPaintSetShadowLayer4_1          jni.MethodID
+	midPaintSetStartHyphenEdit         jni.MethodID
+	midPaintSetStrikeThruText          jni.MethodID
+	midPaintSetStrokeCap               jni.MethodID
+	midPaintSetStrokeJoin              jni.MethodID
+	midPaintSetStrokeMiter             jni.MethodID
+	midPaintSetStrokeWidth             jni.MethodID
+	midPaintSetStyle                   jni.MethodID
+	midPaintSetSubpixelText            jni.MethodID
+	midPaintSetTextAlign               jni.MethodID
+	midPaintSetTextLocale              jni.MethodID
+	midPaintSetTextLocales             jni.MethodID
+	midPaintSetTextScaleX              jni.MethodID
+	midPaintSetTextSize                jni.MethodID
+	midPaintSetTextSkewX               jni.MethodID
+	midPaintSetTypeface                jni.MethodID
+	midPaintSetUnderlineText           jni.MethodID
+	midPaintSetWordSpacing             jni.MethodID
+	midPaintSetXfermode                jni.MethodID
 
-	clsRendererPage                            *jni.GlobalRef
-	midRendererPageApplyEdit                   jni.MethodID
-	midRendererPageClose                       jni.MethodID
-	midRendererPageGetFormWidgetInfoAtIndex    jni.MethodID
-	midRendererPageGetFormWidgetInfoAtPosition jni.MethodID
-	midRendererPageGetFormWidgetInfos0         jni.MethodID
-	midRendererPageGetFormWidgetInfos1_1       jni.MethodID
-	midRendererPageGetGotoLinks                jni.MethodID
-	midRendererPageGetHeight                   jni.MethodID
-	midRendererPageGetImageContents            jni.MethodID
-	midRendererPageGetIndex                    jni.MethodID
-	midRendererPageGetLinkContents             jni.MethodID
-	midRendererPageGetTextContents             jni.MethodID
-	midRendererPageGetWidth                    jni.MethodID
-	midRendererPageRender4                     jni.MethodID
-	midRendererPageRender4_1                   jni.MethodID
-	midRendererPageSearchText                  jni.MethodID
-	midRendererPageSelectContent               jni.MethodID
+	clsCanvas                       *jni.GlobalRef
+	midCanvasClipOutPath            jni.MethodID
+	midCanvasClipOutRect1           jni.MethodID
+	midCanvasClipOutRect1_1         jni.MethodID
+	midCanvasClipOutRect4_2         jni.MethodID
+	midCanvasClipOutRect4_3         jni.MethodID
+	midCanvasClipOutShader          jni.MethodID
+	midCanvasClipPath1              jni.MethodID
+	midCanvasClipPath2_1            jni.MethodID
+	midCanvasClipRect1              jni.MethodID
+	midCanvasClipRect2_1            jni.MethodID
+	midCanvasClipRect1_2            jni.MethodID
+	midCanvasClipRect2_3            jni.MethodID
+	midCanvasClipRect4_4            jni.MethodID
+	midCanvasClipRect5_5            jni.MethodID
+	midCanvasClipRect4_6            jni.MethodID
+	midCanvasClipShader             jni.MethodID
+	midCanvasConcat1                jni.MethodID
+	midCanvasConcat1_1              jni.MethodID
+	midCanvasDisableZ               jni.MethodID
+	midCanvasDrawARGB               jni.MethodID
+	midCanvasDrawArc5               jni.MethodID
+	midCanvasDrawArc8_1             jni.MethodID
+	midCanvasDrawBitmap3            jni.MethodID
+	midCanvasDrawBitmap4_1          jni.MethodID
+	midCanvasDrawBitmap4_2          jni.MethodID
+	midCanvasDrawBitmap4_3          jni.MethodID
+	midCanvasDrawBitmap9_4          jni.MethodID
+	midCanvasDrawBitmap9_5          jni.MethodID
+	midCanvasDrawBitmapMesh         jni.MethodID
+	midCanvasDrawCircle             jni.MethodID
+	midCanvasDrawColor1             jni.MethodID
+	midCanvasDrawColor2_1           jni.MethodID
+	midCanvasDrawColor2_2           jni.MethodID
+	midCanvasDrawColor1_3           jni.MethodID
+	midCanvasDrawColor2_4           jni.MethodID
+	midCanvasDrawDoubleRoundRect7   jni.MethodID
+	midCanvasDrawDoubleRoundRect5_1 jni.MethodID
+	midCanvasDrawGlyphs             jni.MethodID
+	midCanvasDrawLine               jni.MethodID
+	midCanvasDrawLines2             jni.MethodID
+	midCanvasDrawLines4_1           jni.MethodID
+	midCanvasDrawMesh               jni.MethodID
+	midCanvasDrawOval2              jni.MethodID
+	midCanvasDrawOval5_1            jni.MethodID
+	midCanvasDrawPaint              jni.MethodID
+	midCanvasDrawPatch3             jni.MethodID
+	midCanvasDrawPatch3_1           jni.MethodID
+	midCanvasDrawPath               jni.MethodID
+	midCanvasDrawPicture1           jni.MethodID
+	midCanvasDrawPicture2_1         jni.MethodID
+	midCanvasDrawPicture2_2         jni.MethodID
+	midCanvasDrawPoint              jni.MethodID
+	midCanvasDrawPoints2            jni.MethodID
+	midCanvasDrawPoints4_1          jni.MethodID
+	midCanvasDrawPosText5           jni.MethodID
+	midCanvasDrawPosText3_1         jni.MethodID
+	midCanvasDrawRGB                jni.MethodID
+	midCanvasDrawRect2              jni.MethodID
+	midCanvasDrawRect2_1            jni.MethodID
+	midCanvasDrawRect5_2            jni.MethodID
+	midCanvasDrawRegion             jni.MethodID
+	midCanvasDrawRenderNode         jni.MethodID
+	midCanvasDrawRoundRect4         jni.MethodID
+	midCanvasDrawRoundRect7_1       jni.MethodID
+	midCanvasDrawText6              jni.MethodID
+	midCanvasDrawText6_1            jni.MethodID
+	midCanvasDrawText4_2            jni.MethodID
+	midCanvasDrawText6_3            jni.MethodID
+	midCanvasDrawTextOnPath7        jni.MethodID
+	midCanvasDrawTextOnPath5_1      jni.MethodID
+	midCanvasDrawTextRun9           jni.MethodID
+	midCanvasDrawTextRun9_1         jni.MethodID
+	midCanvasDrawTextRun9_2         jni.MethodID
+	midCanvasDrawVertices           jni.MethodID
+	midCanvasEnableZ                jni.MethodID
+	midCanvasGetClipBounds0         jni.MethodID
+	midCanvasGetClipBounds1_1       jni.MethodID
+	midCanvasGetDensity             jni.MethodID
+	midCanvasGetDrawFilter          jni.MethodID
+	midCanvasGetHeight              jni.MethodID
+	midCanvasGetMatrix0             jni.MethodID
+	midCanvasGetMatrix1_1           jni.MethodID
+	midCanvasGetMaximumBitmapHeight jni.MethodID
+	midCanvasGetMaximumBitmapWidth  jni.MethodID
+	midCanvasGetSaveCount           jni.MethodID
+	midCanvasGetWidth               jni.MethodID
+	midCanvasIsHardwareAccelerated  jni.MethodID
+	midCanvasIsOpaque               jni.MethodID
+	midCanvasQuickReject1           jni.MethodID
+	midCanvasQuickReject2_1         jni.MethodID
+	midCanvasQuickReject1_2         jni.MethodID
+	midCanvasQuickReject2_3         jni.MethodID
+	midCanvasQuickReject4_4         jni.MethodID
+	midCanvasQuickReject5_5         jni.MethodID
+	midCanvasRestore                jni.MethodID
+	midCanvasRestoreToCount         jni.MethodID
+	midCanvasRotate1                jni.MethodID
+	midCanvasRotate3_1              jni.MethodID
+	midCanvasSave                   jni.MethodID
+	midCanvasSaveLayer2             jni.MethodID
+	midCanvasSaveLayer3_1           jni.MethodID
+	midCanvasSaveLayer5_2           jni.MethodID
+	midCanvasSaveLayer6_3           jni.MethodID
+	midCanvasSaveLayerAlpha2        jni.MethodID
+	midCanvasSaveLayerAlpha3_1      jni.MethodID
+	midCanvasSaveLayerAlpha5_2      jni.MethodID
+	midCanvasSaveLayerAlpha6_3      jni.MethodID
+	midCanvasScale2                 jni.MethodID
+	midCanvasScale4_1               jni.MethodID
+	midCanvasSetBitmap              jni.MethodID
+	midCanvasSetDensity             jni.MethodID
+	midCanvasSetDrawFilter          jni.MethodID
+	midCanvasSetMatrix              jni.MethodID
+	midCanvasSkew                   jni.MethodID
+	midCanvasTranslate              jni.MethodID
+
+	clsTypeface                        *jni.GlobalRef
+	midTypefaceEquals                  jni.MethodID
+	midTypefaceGetStyle                jni.MethodID
+	midTypefaceGetSystemFontFamilyName jni.MethodID
+	midTypefaceGetWeight               jni.MethodID
+	midTypefaceHashCode                jni.MethodID
+	midTypefaceIsBold                  jni.MethodID
+	midTypefaceIsItalic                jni.MethodID
+	midTypefaceCreate2                 jni.MethodID
+	midTypefaceCreate3_1               jni.MethodID
+	midTypefaceCreate2_2               jni.MethodID
+	midTypefaceCreateFromAsset         jni.MethodID
+	midTypefaceCreateFromFile1         jni.MethodID
+	midTypefaceCreateFromFile1_1       jni.MethodID
+	midTypefaceDefaultFromStyle        jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -172,6 +441,400 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/graphics/pdf/PdfRenderer")
+	if err != nil {
+		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer: %w", err)
+	}
+	clsRenderer = env.NewGlobalRef(&c.Object)
+
+	midRendererClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.close")
+	}
+
+	midRendererGetDocumentLinearizationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getDocumentLinearizationType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getDocumentLinearizationType")
+	}
+
+	midRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getPageCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPageCount")
+	}
+
+	midRendererGetPdfFormType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getPdfFormType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPdfFormType")
+	}
+
+	midRendererOpenPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.openPage")
+	}
+
+	midRendererShouldScaleForPrinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "shouldScaleForPrinting", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.shouldScaleForPrinting")
+	}
+
+	midRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.write")
+	}
+
+	c, err = env.FindClass("android/graphics/pdf/PdfRenderer$Page")
+	if err != nil {
+		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer$Page: %w", err)
+	}
+	clsRendererPage = env.NewGlobalRef(&c.Object)
+
+	midRendererPageApplyEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "applyEdit", "(Landroid/graphics/pdf/models/FormEditRecord;)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.applyEdit")
+	}
+
+	midRendererPageClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.close")
+	}
+
+	midRendererPageGetFormWidgetInfoAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfoAtIndex", "(I)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtIndex")
+	}
+
+	midRendererPageGetFormWidgetInfoAtPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfoAtPosition", "(II)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtPosition")
+	}
+
+	midRendererPageGetFormWidgetInfos0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfos", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
+	}
+
+	midRendererPageGetFormWidgetInfos1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfos", "([I)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
+	}
+
+	midRendererPageGetGotoLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getGotoLinks", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getGotoLinks")
+	}
+
+	midRendererPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getHeight", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getHeight")
+	}
+
+	midRendererPageGetImageContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getImageContents", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getImageContents")
+	}
+
+	midRendererPageGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getIndex", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getIndex")
+	}
+
+	midRendererPageGetLinkContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getLinkContents", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getLinkContents")
+	}
+
+	midRendererPageGetTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getTextContents", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getTextContents")
+	}
+
+	midRendererPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getWidth", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getWidth")
+	}
+
+	midRendererPageRender4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;Landroid/graphics/pdf/RenderParams;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
+	}
+
+	midRendererPageRender4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
+	}
+
+	midRendererPageSearchText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "searchText", "(Ljava/lang/String;)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.searchText")
+	}
+
+	midRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.selectContent")
+	}
+
+	c, err = env.FindClass("android/os/ParcelFileDescriptor")
+	if err != nil {
+		return fmt.Errorf("find class android.os.ParcelFileDescriptor: %w", err)
+	}
+	clsParcelFileDescriptor = env.NewGlobalRef(&c.Object)
+
+	midParcelFileDescriptorCanDetectErrors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "canDetectErrors", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.canDetectErrors")
+	}
+
+	midParcelFileDescriptorCheckError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "checkError", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.checkError")
+	}
+
+	midParcelFileDescriptorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.close")
+	}
+
+	midParcelFileDescriptorCloseWithError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "closeWithError", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.closeWithError")
+	}
+
+	midParcelFileDescriptorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.describeContents")
+	}
+
+	midParcelFileDescriptorDetachFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "detachFd", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.detachFd")
+	}
+
+	midParcelFileDescriptorDup0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "dup", "()Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.dup")
+	}
+
+	midParcelFileDescriptorGetFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getFd", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getFd")
+	}
+
+	midParcelFileDescriptorGetFileDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getFileDescriptor", "()Ljava/io/FileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getFileDescriptor")
+	}
+
+	midParcelFileDescriptorGetStatSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getStatSize", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getStatSize")
+	}
+
+	midParcelFileDescriptorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.toString")
+	}
+
+	midParcelFileDescriptorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.writeToParcel")
+	}
+
+	midParcelFileDescriptorAdoptFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "adoptFd", "(I)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.adoptFd")
+	}
+
+	midParcelFileDescriptorCreatePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createPipe", "()[Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createPipe")
+	}
+
+	midParcelFileDescriptorCreateReliablePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createReliablePipe", "()[Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createReliablePipe")
+	}
+
+	midParcelFileDescriptorCreateReliableSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createReliableSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createReliableSocketPair")
+	}
+
+	midParcelFileDescriptorCreateSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createSocketPair")
+	}
+
+	midParcelFileDescriptorDup1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "dup", "(Ljava/io/FileDescriptor;)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.dup")
+	}
+
+	midParcelFileDescriptorFromDatagramSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromDatagramSocket", "(Ljava/net/DatagramSocket;)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromDatagramSocket")
+	}
+
+	midParcelFileDescriptorFromFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromFd", "(I)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromFd")
+	}
+
+	midParcelFileDescriptorFromSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromSocket", "(Ljava/net/Socket;)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromSocket")
+	}
+
+	midParcelFileDescriptorOpen, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "open", "(Ljava/io/File;I)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.open")
+	}
+
+	midParcelFileDescriptorParseMode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "parseMode", "(Ljava/lang/String;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.parseMode")
+	}
 
 	c, err = env.FindClass("android/graphics/Bitmap")
 	if err != nil {
@@ -739,398 +1402,2116 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.wrapHardwareBuffer")
 	}
 
-	c, err = env.FindClass("android/os/ParcelFileDescriptor")
+	c, err = env.FindClass("android/graphics/Bitmap$Config")
 	if err != nil {
-		return fmt.Errorf("find class android.os.ParcelFileDescriptor: %w", err)
+		return fmt.Errorf("find class android.graphics.Bitmap$Config: %w", err)
 	}
-	clsParcelFileDescriptor = env.NewGlobalRef(&c.Object)
+	clsBitmapConfig = env.NewGlobalRef(&c.Object)
 
-	midParcelFileDescriptorCanDetectErrors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "canDetectErrors", "()Z")
+	midBitmapConfigValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmapConfig)), "values", "()[Landroid/graphics/Bitmap$Config;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.canDetectErrors")
+		initSkipped = append(initSkipped, "android.graphics.Bitmap$Config.values")
 	}
 
-	midParcelFileDescriptorCheckError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "checkError", "()V")
+	midBitmapConfigValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmapConfig)), "valueOf", "(Ljava/lang/String;)Landroid/graphics/Bitmap$Config;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.checkError")
+		initSkipped = append(initSkipped, "android.graphics.Bitmap$Config.valueOf")
 	}
 
-	midParcelFileDescriptorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "close", "()V")
+	c, err = env.FindClass("android/graphics/Paint")
+	if err != nil {
+		return fmt.Errorf("find class android.graphics.Paint: %w", err)
+	}
+	clsPaint = env.NewGlobalRef(&c.Object)
+
+	midPaintAscent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "ascent", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.close")
+		initSkipped = append(initSkipped, "android.graphics.Paint.ascent")
 	}
 
-	midParcelFileDescriptorCloseWithError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "closeWithError", "(Ljava/lang/String;)V")
+	midPaintBreakText5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "breakText", "([CIIF[F)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.closeWithError")
+		initSkipped = append(initSkipped, "android.graphics.Paint.breakText")
 	}
 
-	midParcelFileDescriptorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "describeContents", "()I")
+	midPaintBreakText6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "breakText", "(Ljava/lang/String;IIZF[F)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.describeContents")
+		initSkipped = append(initSkipped, "android.graphics.Paint.breakText")
 	}
 
-	midParcelFileDescriptorDetachFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "detachFd", "()I")
+	midPaintBreakText4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "breakText", "(Ljava/lang/String;ZF[F)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.detachFd")
+		initSkipped = append(initSkipped, "android.graphics.Paint.breakText")
 	}
 
-	midParcelFileDescriptorDup0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "dup", "()Landroid/os/ParcelFileDescriptor;")
+	midPaintClearShadowLayer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "clearShadowLayer", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.dup")
+		initSkipped = append(initSkipped, "android.graphics.Paint.clearShadowLayer")
 	}
 
-	midParcelFileDescriptorGetFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getFd", "()I")
+	midPaintDescent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "descent", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getFd")
+		initSkipped = append(initSkipped, "android.graphics.Paint.descent")
 	}
 
-	midParcelFileDescriptorGetFileDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getFileDescriptor", "()Ljava/io/FileDescriptor;")
+	midPaintEqualsForTextMeasurement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "equalsForTextMeasurement", "(Landroid/graphics/Paint;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getFileDescriptor")
+		initSkipped = append(initSkipped, "android.graphics.Paint.equalsForTextMeasurement")
 	}
 
-	midParcelFileDescriptorGetStatSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "getStatSize", "()J")
+	midPaintGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getAlpha", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.getStatSize")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getAlpha")
 	}
 
-	midParcelFileDescriptorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "toString", "()Ljava/lang/String;")
+	midPaintGetBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getBlendMode", "()Landroid/graphics/BlendMode;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.toString")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getBlendMode")
 	}
 
-	midParcelFileDescriptorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midPaintGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getColor", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.writeToParcel")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getColor")
 	}
 
-	midParcelFileDescriptorAdoptFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "adoptFd", "(I)Landroid/os/ParcelFileDescriptor;")
+	midPaintGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.adoptFd")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getColorFilter")
 	}
 
-	midParcelFileDescriptorCreatePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createPipe", "()[Landroid/os/ParcelFileDescriptor;")
+	midPaintGetColorLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getColorLong", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createPipe")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getColorLong")
 	}
 
-	midParcelFileDescriptorCreateReliablePipe, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createReliablePipe", "()[Landroid/os/ParcelFileDescriptor;")
+	midPaintGetEndHyphenEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getEndHyphenEdit", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createReliablePipe")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getEndHyphenEdit")
 	}
 
-	midParcelFileDescriptorCreateReliableSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createReliableSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
+	midPaintGetFillPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFillPath", "(Landroid/graphics/Path;Landroid/graphics/Path;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createReliableSocketPair")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFillPath")
 	}
 
-	midParcelFileDescriptorCreateSocketPair, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "createSocketPair", "()[Landroid/os/ParcelFileDescriptor;")
+	midPaintGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFlags", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.createSocketPair")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFlags")
 	}
 
-	midParcelFileDescriptorDup1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "dup", "(Ljava/io/FileDescriptor;)Landroid/os/ParcelFileDescriptor;")
+	midPaintGetFontFeatureSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontFeatureSettings", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.dup")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontFeatureSettings")
 	}
 
-	midParcelFileDescriptorFromDatagramSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromDatagramSocket", "(Ljava/net/DatagramSocket;)Landroid/os/ParcelFileDescriptor;")
+	midPaintGetFontMetrics0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetrics", "()Landroid/graphics/Paint$FontMetrics;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromDatagramSocket")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetrics")
 	}
 
-	midParcelFileDescriptorFromFd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromFd", "(I)Landroid/os/ParcelFileDescriptor;")
+	midPaintGetFontMetrics1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetrics", "(Landroid/graphics/Paint$FontMetrics;)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromFd")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetrics")
 	}
 
-	midParcelFileDescriptorFromSocket, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "fromSocket", "(Ljava/net/Socket;)Landroid/os/ParcelFileDescriptor;")
+	midPaintGetFontMetricsForLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetricsForLocale", "(Landroid/graphics/Paint$FontMetrics;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.fromSocket")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetricsForLocale")
 	}
 
-	midParcelFileDescriptorOpen, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "open", "(Ljava/io/File;I)Landroid/os/ParcelFileDescriptor;")
+	midPaintGetFontMetricsInt0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetricsInt", "()Landroid/graphics/Paint$FontMetricsInt;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.open")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetricsInt")
 	}
 
-	midParcelFileDescriptorParseMode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptor)), "parseMode", "(Ljava/lang/String;)I")
+	midPaintGetFontMetricsInt1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetricsInt", "(Landroid/graphics/Paint$FontMetricsInt;)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.ParcelFileDescriptor.parseMode")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetricsInt")
 	}
 
-	c, err = env.FindClass("android/graphics/pdf/PdfRenderer")
-	if err != nil {
-		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer: %w", err)
-	}
-	clsRenderer = env.NewGlobalRef(&c.Object)
-
-	midRendererClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "close", "()V")
+	midPaintGetFontMetricsInt7_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetricsInt", "([CIIIIZLandroid/graphics/Paint$FontMetricsInt;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.close")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetricsInt")
 	}
 
-	midRendererGetDocumentLinearizationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getDocumentLinearizationType", "()I")
+	midPaintGetFontMetricsInt7_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetricsInt", "(Ljava/lang/String;IIIIZLandroid/graphics/Paint$FontMetricsInt;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getDocumentLinearizationType")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetricsInt")
 	}
 
-	midRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getPageCount", "()I")
+	midPaintGetFontMetricsIntForLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontMetricsIntForLocale", "(Landroid/graphics/Paint$FontMetricsInt;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPageCount")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontMetricsIntForLocale")
 	}
 
-	midRendererGetPdfFormType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getPdfFormType", "()I")
+	midPaintGetFontSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontSpacing", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPdfFormType")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontSpacing")
 	}
 
-	midRendererOpenPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
+	midPaintGetFontVariationSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getFontVariationSettings", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.openPage")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getFontVariationSettings")
 	}
 
-	midRendererShouldScaleForPrinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "shouldScaleForPrinting", "()Z")
+	midPaintGetHinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getHinting", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.shouldScaleForPrinting")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getHinting")
 	}
 
-	midRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
+	midPaintGetLetterSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getLetterSpacing", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.write")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getLetterSpacing")
 	}
 
-	c, err = env.FindClass("android/graphics/pdf/PdfRenderer$Page")
-	if err != nil {
-		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer$Page: %w", err)
-	}
-	clsRendererPage = env.NewGlobalRef(&c.Object)
-
-	midRendererPageApplyEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "applyEdit", "(Landroid/graphics/pdf/models/FormEditRecord;)Ljava/util/List;")
+	midPaintGetMaskFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getMaskFilter", "()Landroid/graphics/MaskFilter;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.applyEdit")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getMaskFilter")
 	}
 
-	midRendererPageClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "close", "()V")
+	midPaintGetOffsetForAdvance7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getOffsetForAdvance", "([CIIIIZF)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.close")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getOffsetForAdvance")
 	}
 
-	midRendererPageGetFormWidgetInfoAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfoAtIndex", "(I)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	midPaintGetOffsetForAdvance7_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getOffsetForAdvance", "(Ljava/lang/String;IIIIZF)I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtIndex")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getOffsetForAdvance")
 	}
 
-	midRendererPageGetFormWidgetInfoAtPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfoAtPosition", "(II)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	midPaintGetPathEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getPathEffect", "()Landroid/graphics/PathEffect;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtPosition")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getPathEffect")
 	}
 
-	midRendererPageGetFormWidgetInfos0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfos", "()Ljava/util/List;")
+	midPaintGetRunAdvance7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getRunAdvance", "([CIIIIZI)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getRunAdvance")
 	}
 
-	midRendererPageGetFormWidgetInfos1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getFormWidgetInfos", "([I)Ljava/util/List;")
+	midPaintGetRunAdvance7_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getRunAdvance", "(Ljava/lang/String;IIIIZI)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getRunAdvance")
 	}
 
-	midRendererPageGetGotoLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getGotoLinks", "()Ljava/util/List;")
+	midPaintGetRunCharacterAdvance9, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getRunCharacterAdvance", "([CIIIIZI[FI)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getGotoLinks")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getRunCharacterAdvance")
 	}
 
-	midRendererPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getHeight", "()I")
+	midPaintGetRunCharacterAdvance9_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getRunCharacterAdvance", "(Ljava/lang/String;IIIIZI[FI)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getHeight")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getRunCharacterAdvance")
 	}
 
-	midRendererPageGetImageContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getImageContents", "()Ljava/util/List;")
+	midPaintGetShader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getShader", "()Landroid/graphics/Shader;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getImageContents")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getShader")
 	}
 
-	midRendererPageGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getIndex", "()I")
+	midPaintGetShadowLayerColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getShadowLayerColor", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getIndex")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getShadowLayerColor")
 	}
 
-	midRendererPageGetLinkContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getLinkContents", "()Ljava/util/List;")
+	midPaintGetShadowLayerColorLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getShadowLayerColorLong", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getLinkContents")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getShadowLayerColorLong")
 	}
 
-	midRendererPageGetTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getTextContents", "()Ljava/util/List;")
+	midPaintGetShadowLayerDx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getShadowLayerDx", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getTextContents")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getShadowLayerDx")
 	}
 
-	midRendererPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "getWidth", "()I")
+	midPaintGetShadowLayerDy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getShadowLayerDy", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getWidth")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getShadowLayerDy")
 	}
 
-	midRendererPageRender4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;Landroid/graphics/pdf/RenderParams;)V")
+	midPaintGetShadowLayerRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getShadowLayerRadius", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getShadowLayerRadius")
 	}
 
-	midRendererPageRender4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
+	midPaintGetStartHyphenEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStartHyphenEdit", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStartHyphenEdit")
 	}
 
-	midRendererPageSearchText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "searchText", "(Ljava/lang/String;)Ljava/util/List;")
+	midPaintGetStrikeThruPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStrikeThruPosition", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.searchText")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStrikeThruPosition")
 	}
 
-	midRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
+	midPaintGetStrikeThruThickness, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStrikeThruThickness", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.selectContent")
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStrikeThruThickness")
+	}
+
+	midPaintGetStrokeCap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStrokeCap", "()Landroid/graphics/Paint$Cap;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStrokeCap")
+	}
+
+	midPaintGetStrokeJoin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStrokeJoin", "()Landroid/graphics/Paint$Join;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStrokeJoin")
+	}
+
+	midPaintGetStrokeMiter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStrokeMiter", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStrokeMiter")
+	}
+
+	midPaintGetStrokeWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStrokeWidth", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStrokeWidth")
+	}
+
+	midPaintGetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getStyle", "()Landroid/graphics/Paint$Style;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getStyle")
+	}
+
+	midPaintGetTextAlign, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextAlign", "()Landroid/graphics/Paint$Align;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextAlign")
+	}
+
+	midPaintGetTextBounds4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextBounds", "([CIILandroid/graphics/Rect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextBounds")
+	}
+
+	midPaintGetTextBounds4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextBounds", "(Ljava/lang/String;IILandroid/graphics/Rect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextBounds")
+	}
+
+	midPaintGetTextBounds4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextBounds", "(Ljava/lang/String;IILandroid/graphics/Rect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextBounds")
+	}
+
+	midPaintGetTextLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextLocale", "()Ljava/util/Locale;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextLocale")
+	}
+
+	midPaintGetTextLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextLocales", "()Landroid/os/LocaleList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextLocales")
+	}
+
+	midPaintGetTextPath6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextPath", "([CIIFFLandroid/graphics/Path;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextPath")
+	}
+
+	midPaintGetTextPath6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextPath", "(Ljava/lang/String;IIFFLandroid/graphics/Path;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextPath")
+	}
+
+	midPaintGetTextRunAdvances, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextRunAdvances", "([CIIIIZ[FI)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextRunAdvances")
+	}
+
+	midPaintGetTextRunCursor6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextRunCursor", "([CIIZII)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextRunCursor")
+	}
+
+	midPaintGetTextRunCursor6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextRunCursor", "(Ljava/lang/String;IIZII)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextRunCursor")
+	}
+
+	midPaintGetTextScaleX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextScaleX", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextScaleX")
+	}
+
+	midPaintGetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextSize", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextSize")
+	}
+
+	midPaintGetTextSkewX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextSkewX", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextSkewX")
+	}
+
+	midPaintGetTextWidths4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextWidths", "([CII[F)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextWidths")
+	}
+
+	midPaintGetTextWidths4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextWidths", "(Ljava/lang/String;II[F)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextWidths")
+	}
+
+	midPaintGetTextWidths2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextWidths", "(Ljava/lang/String;[F)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextWidths")
+	}
+
+	midPaintGetTextWidths4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTextWidths", "(Ljava/lang/String;II[F)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTextWidths")
+	}
+
+	midPaintGetTypeface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getTypeface", "()Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getTypeface")
+	}
+
+	midPaintGetUnderlinePosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getUnderlinePosition", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getUnderlinePosition")
+	}
+
+	midPaintGetUnderlineThickness, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getUnderlineThickness", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getUnderlineThickness")
+	}
+
+	midPaintGetWordSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getWordSpacing", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getWordSpacing")
+	}
+
+	midPaintGetXfermode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "getXfermode", "()Landroid/graphics/Xfermode;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.getXfermode")
+	}
+
+	midPaintHasGlyph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "hasGlyph", "(Ljava/lang/String;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.hasGlyph")
+	}
+
+	midPaintIsAntiAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isAntiAlias", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isAntiAlias")
+	}
+
+	midPaintIsDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isDither", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isDither")
+	}
+
+	midPaintIsElegantTextHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isElegantTextHeight", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isElegantTextHeight")
+	}
+
+	midPaintIsFakeBoldText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isFakeBoldText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isFakeBoldText")
+	}
+
+	midPaintIsFilterBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isFilterBitmap", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isFilterBitmap")
+	}
+
+	midPaintIsLinearText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isLinearText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isLinearText")
+	}
+
+	midPaintIsStrikeThruText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isStrikeThruText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isStrikeThruText")
+	}
+
+	midPaintIsSubpixelText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isSubpixelText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isSubpixelText")
+	}
+
+	midPaintIsUnderlineText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "isUnderlineText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.isUnderlineText")
+	}
+
+	midPaintMeasureText3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "measureText", "([CII)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.measureText")
+	}
+
+	midPaintMeasureText3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "measureText", "(Ljava/lang/String;II)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.measureText")
+	}
+
+	midPaintMeasureText1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "measureText", "(Ljava/lang/String;)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.measureText")
+	}
+
+	midPaintMeasureText3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "measureText", "(Ljava/lang/String;II)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.measureText")
+	}
+
+	midPaintReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "reset", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.reset")
+	}
+
+	midPaintSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "set", "(Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.set")
+	}
+
+	midPaintSetARGB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setARGB", "(IIII)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setARGB")
+	}
+
+	midPaintSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setAlpha", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setAlpha")
+	}
+
+	midPaintSetAntiAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setAntiAlias", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setAntiAlias")
+	}
+
+	midPaintSetBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setBlendMode", "(Landroid/graphics/BlendMode;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setBlendMode")
+	}
+
+	midPaintSetColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setColor", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setColor")
+	}
+
+	midPaintSetColor1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setColor", "(J)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setColor")
+	}
+
+	midPaintSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setColorFilter", "(Landroid/graphics/ColorFilter;)Landroid/graphics/ColorFilter;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setColorFilter")
+	}
+
+	midPaintSetDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setDither", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setDither")
+	}
+
+	midPaintSetElegantTextHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setElegantTextHeight", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setElegantTextHeight")
+	}
+
+	midPaintSetEndHyphenEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setEndHyphenEdit", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setEndHyphenEdit")
+	}
+
+	midPaintSetFakeBoldText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setFakeBoldText", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setFakeBoldText")
+	}
+
+	midPaintSetFilterBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setFilterBitmap", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setFilterBitmap")
+	}
+
+	midPaintSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setFlags", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setFlags")
+	}
+
+	midPaintSetFontFeatureSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setFontFeatureSettings", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setFontFeatureSettings")
+	}
+
+	midPaintSetFontVariationSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setFontVariationSettings", "(Ljava/lang/String;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setFontVariationSettings")
+	}
+
+	midPaintSetHinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setHinting", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setHinting")
+	}
+
+	midPaintSetLetterSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setLetterSpacing", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setLetterSpacing")
+	}
+
+	midPaintSetLinearText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setLinearText", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setLinearText")
+	}
+
+	midPaintSetMaskFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setMaskFilter", "(Landroid/graphics/MaskFilter;)Landroid/graphics/MaskFilter;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setMaskFilter")
+	}
+
+	midPaintSetPathEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setPathEffect", "(Landroid/graphics/PathEffect;)Landroid/graphics/PathEffect;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setPathEffect")
+	}
+
+	midPaintSetShader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setShader", "(Landroid/graphics/Shader;)Landroid/graphics/Shader;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setShader")
+	}
+
+	midPaintSetShadowLayer4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setShadowLayer", "(FFFI)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setShadowLayer")
+	}
+
+	midPaintSetShadowLayer4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setShadowLayer", "(FFFJ)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setShadowLayer")
+	}
+
+	midPaintSetStartHyphenEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setStartHyphenEdit", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setStartHyphenEdit")
+	}
+
+	midPaintSetStrikeThruText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setStrikeThruText", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setStrikeThruText")
+	}
+
+	midPaintSetStrokeCap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setStrokeCap", "(Landroid/graphics/Paint$Cap;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setStrokeCap")
+	}
+
+	midPaintSetStrokeJoin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setStrokeJoin", "(Landroid/graphics/Paint$Join;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setStrokeJoin")
+	}
+
+	midPaintSetStrokeMiter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setStrokeMiter", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setStrokeMiter")
+	}
+
+	midPaintSetStrokeWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setStrokeWidth", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setStrokeWidth")
+	}
+
+	midPaintSetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setStyle", "(Landroid/graphics/Paint$Style;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setStyle")
+	}
+
+	midPaintSetSubpixelText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setSubpixelText", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setSubpixelText")
+	}
+
+	midPaintSetTextAlign, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setTextAlign", "(Landroid/graphics/Paint$Align;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setTextAlign")
+	}
+
+	midPaintSetTextLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setTextLocale", "(Ljava/util/Locale;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setTextLocale")
+	}
+
+	midPaintSetTextLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setTextLocales", "(Landroid/os/LocaleList;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setTextLocales")
+	}
+
+	midPaintSetTextScaleX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setTextScaleX", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setTextScaleX")
+	}
+
+	midPaintSetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setTextSize", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setTextSize")
+	}
+
+	midPaintSetTextSkewX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setTextSkewX", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setTextSkewX")
+	}
+
+	midPaintSetTypeface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setTypeface", "(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setTypeface")
+	}
+
+	midPaintSetUnderlineText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setUnderlineText", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setUnderlineText")
+	}
+
+	midPaintSetWordSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setWordSpacing", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setWordSpacing")
+	}
+
+	midPaintSetXfermode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "setXfermode", "(Landroid/graphics/Xfermode;)Landroid/graphics/Xfermode;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Paint.setXfermode")
+	}
+
+	c, err = env.FindClass("android/graphics/Canvas")
+	if err != nil {
+		return fmt.Errorf("find class android.graphics.Canvas: %w", err)
+	}
+	clsCanvas = env.NewGlobalRef(&c.Object)
+
+	midCanvasClipOutPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipOutPath", "(Landroid/graphics/Path;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipOutPath")
+	}
+
+	midCanvasClipOutRect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipOutRect", "(Landroid/graphics/Rect;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipOutRect")
+	}
+
+	midCanvasClipOutRect1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipOutRect", "(Landroid/graphics/RectF;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipOutRect")
+	}
+
+	midCanvasClipOutRect4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipOutRect", "(FFFF)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipOutRect")
+	}
+
+	midCanvasClipOutRect4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipOutRect", "(IIII)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipOutRect")
+	}
+
+	midCanvasClipOutShader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipOutShader", "(Landroid/graphics/Shader;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipOutShader")
+	}
+
+	midCanvasClipPath1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipPath", "(Landroid/graphics/Path;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipPath")
+	}
+
+	midCanvasClipPath2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipPath", "(Landroid/graphics/Path;Landroid/graphics/Region$Op;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipPath")
+	}
+
+	midCanvasClipRect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipRect", "(Landroid/graphics/Rect;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipRect")
+	}
+
+	midCanvasClipRect2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipRect", "(Landroid/graphics/Rect;Landroid/graphics/Region$Op;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipRect")
+	}
+
+	midCanvasClipRect1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipRect", "(Landroid/graphics/RectF;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipRect")
+	}
+
+	midCanvasClipRect2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipRect", "(Landroid/graphics/RectF;Landroid/graphics/Region$Op;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipRect")
+	}
+
+	midCanvasClipRect4_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipRect", "(FFFF)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipRect")
+	}
+
+	midCanvasClipRect5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipRect", "(FFFFLandroid/graphics/Region$Op;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipRect")
+	}
+
+	midCanvasClipRect4_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipRect", "(IIII)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipRect")
+	}
+
+	midCanvasClipShader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "clipShader", "(Landroid/graphics/Shader;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.clipShader")
+	}
+
+	midCanvasConcat1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "concat", "(Landroid/graphics/Matrix;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.concat")
+	}
+
+	midCanvasConcat1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "concat", "(Landroid/graphics/Matrix44;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.concat")
+	}
+
+	midCanvasDisableZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "disableZ", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.disableZ")
+	}
+
+	midCanvasDrawARGB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawARGB", "(IIII)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawARGB")
+	}
+
+	midCanvasDrawArc5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawArc", "(Landroid/graphics/RectF;FFZLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawArc")
+	}
+
+	midCanvasDrawArc8_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawArc", "(FFFFFFZLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawArc")
+	}
+
+	midCanvasDrawBitmap3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawBitmap", "(Landroid/graphics/Bitmap;Landroid/graphics/Matrix;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawBitmap")
+	}
+
+	midCanvasDrawBitmap4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawBitmap", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Rect;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawBitmap")
+	}
+
+	midCanvasDrawBitmap4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawBitmap", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/RectF;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawBitmap")
+	}
+
+	midCanvasDrawBitmap4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawBitmap", "(Landroid/graphics/Bitmap;FFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawBitmap")
+	}
+
+	midCanvasDrawBitmap9_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawBitmap", "([IIIFFIIZLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawBitmap")
+	}
+
+	midCanvasDrawBitmap9_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawBitmap", "([IIIIIIIZLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawBitmap")
+	}
+
+	midCanvasDrawBitmapMesh, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawBitmapMesh", "(Landroid/graphics/Bitmap;II[FI[IILandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawBitmapMesh")
+	}
+
+	midCanvasDrawCircle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawCircle", "(FFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawCircle")
+	}
+
+	midCanvasDrawColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawColor", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawColor")
+	}
+
+	midCanvasDrawColor2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawColor", "(ILandroid/graphics/BlendMode;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawColor")
+	}
+
+	midCanvasDrawColor2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawColor", "(ILandroid/graphics/PorterDuff$Mode;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawColor")
+	}
+
+	midCanvasDrawColor1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawColor", "(J)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawColor")
+	}
+
+	midCanvasDrawColor2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawColor", "(JLandroid/graphics/BlendMode;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawColor")
+	}
+
+	midCanvasDrawDoubleRoundRect7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawDoubleRoundRect", "(Landroid/graphics/RectF;FFLandroid/graphics/RectF;FFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawDoubleRoundRect")
+	}
+
+	midCanvasDrawDoubleRoundRect5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawDoubleRoundRect", "(Landroid/graphics/RectF;[FLandroid/graphics/RectF;[FLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawDoubleRoundRect")
+	}
+
+	midCanvasDrawGlyphs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawGlyphs", "([II[FIILandroid/graphics/fonts/Font;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawGlyphs")
+	}
+
+	midCanvasDrawLine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawLine", "(FFFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawLine")
+	}
+
+	midCanvasDrawLines2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawLines", "([FLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawLines")
+	}
+
+	midCanvasDrawLines4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawLines", "([FIILandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawLines")
+	}
+
+	midCanvasDrawMesh, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawMesh", "(Landroid/graphics/Mesh;Landroid/graphics/BlendMode;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawMesh")
+	}
+
+	midCanvasDrawOval2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawOval", "(Landroid/graphics/RectF;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawOval")
+	}
+
+	midCanvasDrawOval5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawOval", "(FFFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawOval")
+	}
+
+	midCanvasDrawPaint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPaint", "(Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPaint")
+	}
+
+	midCanvasDrawPatch3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPatch", "(Landroid/graphics/NinePatch;Landroid/graphics/Rect;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPatch")
+	}
+
+	midCanvasDrawPatch3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPatch", "(Landroid/graphics/NinePatch;Landroid/graphics/RectF;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPatch")
+	}
+
+	midCanvasDrawPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPath", "(Landroid/graphics/Path;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPath")
+	}
+
+	midCanvasDrawPicture1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPicture", "(Landroid/graphics/Picture;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPicture")
+	}
+
+	midCanvasDrawPicture2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPicture", "(Landroid/graphics/Picture;Landroid/graphics/Rect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPicture")
+	}
+
+	midCanvasDrawPicture2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPicture", "(Landroid/graphics/Picture;Landroid/graphics/RectF;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPicture")
+	}
+
+	midCanvasDrawPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPoint", "(FFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPoint")
+	}
+
+	midCanvasDrawPoints2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPoints", "([FLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPoints")
+	}
+
+	midCanvasDrawPoints4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPoints", "([FIILandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPoints")
+	}
+
+	midCanvasDrawPosText5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPosText", "([CII[FLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPosText")
+	}
+
+	midCanvasDrawPosText3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawPosText", "(Ljava/lang/String;[FLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawPosText")
+	}
+
+	midCanvasDrawRGB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRGB", "(III)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRGB")
+	}
+
+	midCanvasDrawRect2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRect", "(Landroid/graphics/Rect;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRect")
+	}
+
+	midCanvasDrawRect2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRect", "(Landroid/graphics/RectF;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRect")
+	}
+
+	midCanvasDrawRect5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRect", "(FFFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRect")
+	}
+
+	midCanvasDrawRegion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRegion", "(Landroid/graphics/Region;Landroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRegion")
+	}
+
+	midCanvasDrawRenderNode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRenderNode", "(Landroid/graphics/RenderNode;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRenderNode")
+	}
+
+	midCanvasDrawRoundRect4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRoundRect", "(Landroid/graphics/RectF;FFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRoundRect")
+	}
+
+	midCanvasDrawRoundRect7_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawRoundRect", "(FFFFFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawRoundRect")
+	}
+
+	midCanvasDrawText6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawText", "([CIIFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawText")
+	}
+
+	midCanvasDrawText6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawText", "(Ljava/lang/String;IIFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawText")
+	}
+
+	midCanvasDrawText4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawText", "(Ljava/lang/String;FFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawText")
+	}
+
+	midCanvasDrawText6_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawText", "(Ljava/lang/String;IIFFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawText")
+	}
+
+	midCanvasDrawTextOnPath7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawTextOnPath", "([CIILandroid/graphics/Path;FFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawTextOnPath")
+	}
+
+	midCanvasDrawTextOnPath5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawTextOnPath", "(Ljava/lang/String;Landroid/graphics/Path;FFLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawTextOnPath")
+	}
+
+	midCanvasDrawTextRun9, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawTextRun", "(Landroid/graphics/text/MeasuredText;IIIIFFZLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawTextRun")
+	}
+
+	midCanvasDrawTextRun9_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawTextRun", "([CIIIIFFZLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawTextRun")
+	}
+
+	midCanvasDrawTextRun9_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawTextRun", "(Ljava/lang/String;IIIIFFZLandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawTextRun")
+	}
+
+	midCanvasDrawVertices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "drawVertices", "(Landroid/graphics/Canvas$VertexMode;I[FI[FI[II[SIILandroid/graphics/Paint;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.drawVertices")
+	}
+
+	midCanvasEnableZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "enableZ", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.enableZ")
+	}
+
+	midCanvasGetClipBounds0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getClipBounds", "()Landroid/graphics/Rect;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getClipBounds")
+	}
+
+	midCanvasGetClipBounds1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getClipBounds", "(Landroid/graphics/Rect;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getClipBounds")
+	}
+
+	midCanvasGetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getDensity", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getDensity")
+	}
+
+	midCanvasGetDrawFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getDrawFilter", "()Landroid/graphics/DrawFilter;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getDrawFilter")
+	}
+
+	midCanvasGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getHeight", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getHeight")
+	}
+
+	midCanvasGetMatrix0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getMatrix", "()Landroid/graphics/Matrix;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getMatrix")
+	}
+
+	midCanvasGetMatrix1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getMatrix", "(Landroid/graphics/Matrix;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getMatrix")
+	}
+
+	midCanvasGetMaximumBitmapHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getMaximumBitmapHeight", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getMaximumBitmapHeight")
+	}
+
+	midCanvasGetMaximumBitmapWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getMaximumBitmapWidth", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getMaximumBitmapWidth")
+	}
+
+	midCanvasGetSaveCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getSaveCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getSaveCount")
+	}
+
+	midCanvasGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "getWidth", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.getWidth")
+	}
+
+	midCanvasIsHardwareAccelerated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "isHardwareAccelerated", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.isHardwareAccelerated")
+	}
+
+	midCanvasIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "isOpaque", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.isOpaque")
+	}
+
+	midCanvasQuickReject1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "quickReject", "(Landroid/graphics/Path;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.quickReject")
+	}
+
+	midCanvasQuickReject2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "quickReject", "(Landroid/graphics/Path;Landroid/graphics/Canvas$EdgeType;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.quickReject")
+	}
+
+	midCanvasQuickReject1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "quickReject", "(Landroid/graphics/RectF;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.quickReject")
+	}
+
+	midCanvasQuickReject2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "quickReject", "(Landroid/graphics/RectF;Landroid/graphics/Canvas$EdgeType;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.quickReject")
+	}
+
+	midCanvasQuickReject4_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "quickReject", "(FFFF)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.quickReject")
+	}
+
+	midCanvasQuickReject5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "quickReject", "(FFFFLandroid/graphics/Canvas$EdgeType;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.quickReject")
+	}
+
+	midCanvasRestore, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "restore", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.restore")
+	}
+
+	midCanvasRestoreToCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "restoreToCount", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.restoreToCount")
+	}
+
+	midCanvasRotate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "rotate", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.rotate")
+	}
+
+	midCanvasRotate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "rotate", "(FFF)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.rotate")
+	}
+
+	midCanvasSave, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "save", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.save")
+	}
+
+	midCanvasSaveLayer2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayer", "(Landroid/graphics/RectF;Landroid/graphics/Paint;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayer")
+	}
+
+	midCanvasSaveLayer3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayer", "(Landroid/graphics/RectF;Landroid/graphics/Paint;I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayer")
+	}
+
+	midCanvasSaveLayer5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayer", "(FFFFLandroid/graphics/Paint;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayer")
+	}
+
+	midCanvasSaveLayer6_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayer", "(FFFFLandroid/graphics/Paint;I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayer")
+	}
+
+	midCanvasSaveLayerAlpha2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayerAlpha", "(Landroid/graphics/RectF;I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayerAlpha")
+	}
+
+	midCanvasSaveLayerAlpha3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayerAlpha", "(Landroid/graphics/RectF;II)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayerAlpha")
+	}
+
+	midCanvasSaveLayerAlpha5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayerAlpha", "(FFFFI)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayerAlpha")
+	}
+
+	midCanvasSaveLayerAlpha6_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "saveLayerAlpha", "(FFFFII)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.saveLayerAlpha")
+	}
+
+	midCanvasScale2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "scale", "(FF)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.scale")
+	}
+
+	midCanvasScale4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "scale", "(FFFF)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.scale")
+	}
+
+	midCanvasSetBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "setBitmap", "(Landroid/graphics/Bitmap;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.setBitmap")
+	}
+
+	midCanvasSetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "setDensity", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.setDensity")
+	}
+
+	midCanvasSetDrawFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "setDrawFilter", "(Landroid/graphics/DrawFilter;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.setDrawFilter")
+	}
+
+	midCanvasSetMatrix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "setMatrix", "(Landroid/graphics/Matrix;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.setMatrix")
+	}
+
+	midCanvasSkew, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "skew", "(FF)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.skew")
+	}
+
+	midCanvasTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "translate", "(FF)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Canvas.translate")
+	}
+
+	c, err = env.FindClass("android/graphics/Typeface")
+	if err != nil {
+		return fmt.Errorf("find class android.graphics.Typeface: %w", err)
+	}
+	clsTypeface = env.NewGlobalRef(&c.Object)
+
+	midTypefaceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.equals")
+	}
+
+	midTypefaceGetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "getStyle", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.getStyle")
+	}
+
+	midTypefaceGetSystemFontFamilyName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "getSystemFontFamilyName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.getSystemFontFamilyName")
+	}
+
+	midTypefaceGetWeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "getWeight", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.getWeight")
+	}
+
+	midTypefaceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.hashCode")
+	}
+
+	midTypefaceIsBold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "isBold", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.isBold")
+	}
+
+	midTypefaceIsItalic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "isItalic", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.isItalic")
+	}
+
+	midTypefaceCreate2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "create", "(Landroid/graphics/Typeface;I)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.create")
+	}
+
+	midTypefaceCreate3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "create", "(Landroid/graphics/Typeface;IZ)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.create")
+	}
+
+	midTypefaceCreate2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "create", "(Ljava/lang/String;I)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.create")
+	}
+
+	midTypefaceCreateFromAsset, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "createFromAsset", "(Landroid/content/res/AssetManager;Ljava/lang/String;)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.createFromAsset")
+	}
+
+	midTypefaceCreateFromFile1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "createFromFile", "(Ljava/io/File;)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.createFromFile")
+	}
+
+	midTypefaceCreateFromFile1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "createFromFile", "(Ljava/lang/String;)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.createFromFile")
+	}
+
+	midTypefaceDefaultFromStyle, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "defaultFromStyle", "(I)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.Typeface.defaultFromStyle")
 	}
 
 	return nil

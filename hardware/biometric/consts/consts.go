@@ -3,6 +3,13 @@
 package consts
 
 const (
+	BiometricErrorHwUnavailable              int = 1
+	BiometricErrorIdentityCheckNotActive     int = 20
+	BiometricErrorNoneEnrolled               int = 11
+	BiometricErrorNotEnabledForApps          int = 21
+	BiometricErrorNoHardware                 int = 12
+	BiometricErrorSecurityUpdateRequired     int = 15
+	BiometricSuccess                         int = 0
 	AuthenticationResultTypeBiometric        int = 2
 	AuthenticationResultTypeDeviceCredential int = 1
 	BiometricAcquiredGood                    int = 0
@@ -13,22 +20,15 @@ const (
 	BiometricAcquiredTooSlow                 int = 4
 	BiometricErrorCanceled                   int = 5
 	BiometricErrorHwNotPresent               int = 12
-	BiometricErrorHwUnavailable              int = 1
-	BiometricErrorIdentityCheckNotActive     int = 20
 	BiometricErrorLockout                    int = 7
 	BiometricErrorLockoutPermanent           int = 9
-	BiometricErrorNotEnabledForApps          int = 21
 	BiometricErrorNoBiometrics               int = 11
 	BiometricErrorNoDeviceCredential         int = 14
 	BiometricErrorNoSpace                    int = 4
-	BiometricErrorSecurityUpdateRequired     int = 15
 	BiometricErrorTimeout                    int = 3
 	BiometricErrorUnableToProcess            int = 2
 	BiometricErrorUserCanceled               int = 10
 	BiometricErrorVendor                     int = 8
-	BiometricErrorNoneEnrolled               int = 11
-	BiometricErrorNoHardware                 int = 12
-	BiometricSuccess                         int = 0
 )
 
 const (

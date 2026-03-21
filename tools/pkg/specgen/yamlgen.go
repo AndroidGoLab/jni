@@ -15,43 +15,9 @@ const (
 )
 
 // AndroidServiceName maps known manager class names to their Android
-// Context.getSystemService() constant names.
-var AndroidServiceName = map[string]string{
-	"android.app.AlarmManager":                        "alarm",
-	"android.app.KeyguardManager":                     "keyguard",
-	"android.app.NotificationManager":                 "notification",
-	"android.app.admin.DevicePolicyManager":           "device_policy",
-	"android.app.blob.BlobStoreManager":               "blob_store",
-	"android.app.job.JobScheduler":                    "jobscheduler",
-	"android.app.role.RoleManager":                    "role",
-	"android.app.usage.UsageStatsManager":             "usagestats",
-	"android.bluetooth.BluetoothManager":              "bluetooth",
-	"android.companion.CompanionDeviceManager":        "companiondevice",
-	"android.content.ClipboardManager":                "clipboard",
-	"android.hardware.ConsumerIrManager":              "consumer_ir",
-	"android.hardware.camera2.CameraManager":          "camera",
-	"android.hardware.lights.LightsManager":           "lights",
-	"android.location.LocationManager":                "location",
-	"android.media.AudioManager":                      "audio",
-	"android.media.RingtoneManager":                   "",
-	"android.media.projection.MediaProjectionManager": "media_projection",
-	"android.media.session.MediaSessionManager":       "media_session",
-	"android.net.ConnectivityManager":                 "connectivity",
-	"android.net.wifi.WifiManager":                    "wifi",
-	"android.net.wifi.p2p.WifiP2pManager":             "wifip2p",
-	"android.net.wifi.rtt.WifiRttManager":             "wifirtt",
-	"android.nfc.NfcManager":                          "nfc",
-	"android.os.BatteryManager":                       "batterymanager",
-	"android.os.PowerManager":                         "power",
-	"android.os.Vibrator":                             "vibrator",
-	"android.os.storage.StorageManager":               "storage",
-	"android.print.PrintManager":                      "print",
-	"android.se.omapi.SEService":                      "",
-	"android.telecom.TelecomManager":                  "telecom",
-	"android.telephony.TelephonyManager":              "phone",
-	"android.view.WindowManager":                      "window",
-	"android.view.inputmethod.InputMethodManager":     "input_method",
-}
+// Context.getSystemService() constant names. Populated at runtime by
+// LoadServiceNames, which reflects on android.jar via the svcgen Java tool.
+var AndroidServiceName map[string]string
 
 // GenerateSpec generates a YAML spec from .class files in a directory
 // by running javap on each class.
@@ -86,6 +52,16 @@ func GenerateFromRefDir(
 	outputDir string,
 	goModule string,
 ) error {
+	// Load service name mappings from android.jar via the svcgen Java tool,
+	// so that classFromJavap can detect system-service classes.
+	if extraClassPath != "" {
+		svcNames, err := LoadServiceNames(extraClassPath)
+		if err != nil {
+			return fmt.Errorf("load service names: %w", err)
+		}
+		AndroidServiceName = svcNames
+	}
+
 	var classFiles []string
 	err := filepath.Walk(refDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -308,6 +284,9 @@ func inferClassMapping(className string, goModule string) PackageMapping {
 		"android.app.AlarmManager":                           {"alarm", "app/alarm"},
 		"android.app.DownloadManager":                        {"download", "app/download"},
 		"android.app.KeyguardManager":                        {"keyguard", "os/keyguard"},
+		"android.app.Notification":                           {"notification", "app/notification"},
+		"android.app.Notification$BigTextStyle":              {"notification", "app/notification"},
+		"android.app.Notification$Builder":                   {"notification", "app/notification"},
 		"android.app.NotificationChannel":                    {"notification", "app/notification"},
 		"android.app.NotificationManager":                    {"notification", "app/notification"},
 		"android.app.PendingIntent":                          {"app", "app"},
@@ -347,6 +326,10 @@ func inferClassMapping(className string, goModule string) PackageMapping {
 		"android.content.pm.PackageManager":                  {"pm", "content/pm"},
 		"android.database.Cursor":                            {"resolver", "content/resolver"},
 		"android.graphics.Bitmap":                            {"pdf", "graphics/pdf"},
+		"android.graphics.Bitmap$Config":                     {"pdf", "graphics/pdf"},
+		"android.graphics.Canvas":                            {"pdf", "graphics/pdf"},
+		"android.graphics.Paint":                             {"pdf", "graphics/pdf"},
+		"android.graphics.Typeface":                          {"pdf", "graphics/pdf"},
 		"android.graphics.pdf.PdfRenderer":                   {"pdf", "graphics/pdf"},
 		"android.hardware.ConsumerIrManager":                 {"ir", "hardware/ir"},
 		"android.hardware.biometrics.BiometricManager":       {"biometric", "hardware/biometric"},
@@ -517,12 +500,20 @@ func deduplicateConstants(constants []SpecConstant) []SpecConstant {
 	return result
 }
 
+const generatedFileHeader = "# Code generated by specgen. DO NOT EDIT.\n" +
+	"# To change this file, modify the generator at tools/cmd/specgen/\n" +
+	"# or the ref/ class files, then run: make specs\n\n"
+
 func writeSpecFile(spec *SpecFile, path string) error {
 	data, err := yaml.Marshal(spec)
 	if err != nil {
 		return fmt.Errorf("marshal: %w", err)
 	}
-	return os.WriteFile(path, data, filePerm)
+
+	var out []byte
+	out = append(out, generatedFileHeader...)
+	out = append(out, data...)
+	return os.WriteFile(path, out, filePerm)
 }
 
 // ---- Name conversion helpers ----
