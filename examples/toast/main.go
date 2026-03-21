@@ -31,7 +31,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/widget/toast"
 )
 
