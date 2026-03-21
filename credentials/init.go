@@ -16,17 +16,18 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                        *jni.GlobalRef
-	midManagercreateManagerRaw        jni.MethodID
-	midManagergetCredentialRaw        jni.MethodID
-	midManagercreateCredentialRaw     jni.MethodID
-	midManagerclearCredentialStateRaw jni.MethodID
+	clsManager                 *jni.GlobalRef
+	midManagercreateManagerRaw jni.MethodID
 
 	clsgetCredentialRequestBuilder                    *jni.GlobalRef
+	midgetCredentialRequestBuilderInit                jni.MethodID
 	midgetCredentialRequestBuilderaddCredentialOption jni.MethodID
 	midgetCredentialRequestBuilderbuild               jni.MethodID
 
@@ -66,22 +67,9 @@ func doInit(env *jni.Env) error {
 
 	midManagercreateManagerRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "create", "(Landroid/content/Context;)Landroidx/credentials/CredentialManager;")
 	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.CredentialManager.create: %w", err)
-	}
-
-	midManagergetCredentialRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCredential", "(Landroid/content/Context;Landroidx/credentials/GetCredentialRequest;)Landroidx/credentials/GetCredentialResponse;")
-	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.CredentialManager.getCredential: %w", err)
-	}
-
-	midManagercreateCredentialRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createCredential", "(Landroid/content/Context;Landroidx/credentials/CreateCredentialRequest;)Landroidx/credentials/CreateCredentialResponse;")
-	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.CredentialManager.createCredential: %w", err)
-	}
-
-	midManagerclearCredentialStateRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearCredentialState", "(Landroidx/credentials/ClearCredentialStateRequest;)V")
-	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.CredentialManager.clearCredentialState: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
 	}
 
 	c, err = env.FindClass("androidx/credentials/GetCredentialRequest$Builder")
@@ -89,15 +77,23 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("find class androidx.credentials.GetCredentialRequest$Builder: %w", err)
 	}
 	clsgetCredentialRequestBuilder = env.NewGlobalRef(&c.Object)
+	midgetCredentialRequestBuilderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgetCredentialRequestBuilder)), "<init>", "()V")
+	if err != nil {
+		return fmt.Errorf("get constructor androidx.credentials.GetCredentialRequest$Builder.<init>: %w", err)
+	}
 
 	midgetCredentialRequestBuilderaddCredentialOption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgetCredentialRequestBuilder)), "addCredentialOption", "(Landroidx/credentials/CredentialOption;)Landroidx/credentials/GetCredentialRequest$Builder;")
 	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.GetCredentialRequest$Builder.addCredentialOption: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
 	}
 
 	midgetCredentialRequestBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsgetCredentialRequestBuilder)), "build", "()Landroidx/credentials/GetCredentialRequest;")
 	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.GetCredentialRequest$Builder.build: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
 	}
 
 	c, err = env.FindClass("androidx/credentials/GetCredentialResponse")
@@ -114,23 +110,29 @@ func doInit(env *jni.Env) error {
 
 	midPasswordCredentialID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordCredential)), "getId", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.PasswordCredential.getId: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
 	}
 
 	midPasswordCredentialPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordCredential)), "getPassword", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.PasswordCredential.getPassword: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
 	}
 
-	c, err = env.FindClass("androidx/credentials/publickeycredential/PublicKeyCredential")
+	c, err = env.FindClass("androidx/credentials/PublicKeyCredential")
 	if err != nil {
-		return fmt.Errorf("find class androidx.credentials.publickeycredential.PublicKeyCredential: %w", err)
+		return fmt.Errorf("find class androidx.credentials.PublicKeyCredential: %w", err)
 	}
 	clsPublicKeyCredential = env.NewGlobalRef(&c.Object)
 
 	midPublicKeyCredentialAuthResponseJSON, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPublicKeyCredential)), "getAuthenticationResponseJson", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method androidx.credentials.publickeycredential.PublicKeyCredential.getAuthenticationResponseJson: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
 	}
 
 	return nil

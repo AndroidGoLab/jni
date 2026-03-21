@@ -106,6 +106,14 @@ func mergeClass(cls *Class, overlay *Overlay) (*MergedClass, error) {
 		Close:          cls.Close,
 	}
 
+	// Compute constructor JNI signature from constructor_params.
+	if cls.Obtain == "constructor" {
+		mc.ConstructorJNISig = JNISignature(cls.ConstructorParams, "void")
+		for _, p := range cls.ConstructorParams {
+			mc.ConstructorParams = append(mc.ConstructorParams, mergeParam(p, overlay))
+		}
+	}
+
 	methods := cls.AllMethods()
 	if overlay != nil && len(overlay.ExtraMethods) > 0 {
 		methods = append(methods, overlay.ExtraMethods...)

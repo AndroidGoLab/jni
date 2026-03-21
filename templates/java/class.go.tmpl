@@ -70,7 +70,11 @@ type {{.GoType}} struct {
 }
 
 // New{{.GoType}} creates a new {{.JavaClass}} instance.
+{{- if .ConstructorParams}}
+func New{{.GoType}}(vm *jni.VM, {{goParamList .ConstructorParams}}) (*{{.GoType}}, error) {
+{{- else}}
 func New{{.GoType}}(vm *jni.VM) (*{{.GoType}}, error) {
+{{- end}}
 	var t {{.GoType}}
 	t.VM = vm
 
@@ -78,7 +82,9 @@ func New{{.GoType}}(vm *jni.VM) (*{{.GoType}}, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), mid{{.GoType}}Init)
+{{range .ConstructorParams}}		{{paramConversionCode .}}
+{{end -}}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), mid{{.GoType}}Init{{jniArgs .ConstructorParams}})
 		if err != nil {
 			return err
 		}

@@ -89,6 +89,11 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintf(output, "alarm types: RTC_WAKEUP=%d, RTC=%d\n",
 		alarm.RtcWakeup, alarm.Rtc)
 
+	if !canSchedule {
+		fmt.Fprintf(output, "exact alarms not permitted\n")
+		return nil
+	}
+
 	delay := 60 * time.Second
 	triggerAt := time.Now().Add(delay)
 

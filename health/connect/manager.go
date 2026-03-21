@@ -24,108 +24,34 @@ type Manager struct {
 }
 
 // getOrCreateRaw calls androidx.health.connect.client.HealthConnectClient.getOrCreate.
-func (m *Manager) getOrCreateRaw(ctx *jni.Object) (*jni.Object, error) {
+func (m *Manager) getOrCreateRaw(context *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midManagergetOrCreateRaw == nil {
+			callErr = fmt.Errorf("androidx.health.connect.client.HealthConnectClient.getOrCreate is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsManager)),
-			midManagergetOrCreateRaw, jni.ObjectValue(ctx),
+			midManagergetOrCreateRaw, jni.ObjectValue(context),
 		)
 		if callErr != nil {
 			return callErr
 		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// insertRecordsRaw calls androidx.health.connect.client.HealthConnectClient.insertRecords.
-func (m *Manager) insertRecordsRaw(records *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerinsertRecordsRaw, jni.ObjectValue(records),
-		)
-		if callErr != nil {
-			return callErr
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
 	return result, callErr
-}
-
-// readRecordsRaw calls androidx.health.connect.client.HealthConnectClient.readRecords.
-func (m *Manager) readRecordsRaw(request *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerreadRecordsRaw, jni.ObjectValue(request),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// aggregateRaw calls androidx.health.connect.client.HealthConnectClient.aggregate.
-func (m *Manager) aggregateRaw(request *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManageraggregateRaw, jni.ObjectValue(request),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// deleteRecordsRaw calls androidx.health.connect.client.HealthConnectClient.deleteRecords.
-func (m *Manager) deleteRecordsRaw(recordType *jni.Object, timeRange *jni.Object) error {
-
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerdeleteRecordsRaw, jni.ObjectValue(recordType), jni.ObjectValue(timeRange),
-		)
-		return callErr
-	})
-	return callErr
 }

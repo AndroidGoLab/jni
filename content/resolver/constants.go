@@ -5,25 +5,6 @@ package resolver
 import "github.com/AndroidGoLab/jni/content/resolver/consts"
 
 const (
-	Empty                          = consts.Empty
-	NotifyDelete                   = consts.NotifyDelete
-	NotifyInsert                   = consts.NotifyInsert
-	NotifySkipNotifyForDescendants = consts.NotifySkipNotifyForDescendants
-	NotifySyncToNetwork            = consts.NotifySyncToNetwork
-	NotifyUpdate                   = consts.NotifyUpdate
-	QuerySortDirectionAscending    = consts.QuerySortDirectionAscending
-	QuerySortDirectionDescending   = consts.QuerySortDirectionDescending
-	SyncObserverTypeActive         = consts.SyncObserverTypeActive
-	SyncObserverTypePending        = consts.SyncObserverTypePending
-	SyncObserverTypeSettings       = consts.SyncObserverTypeSettings
-	FieldTypeBlob                  = consts.FieldTypeBlob
-	FieldTypeFloat                 = consts.FieldTypeFloat
-	FieldTypeInteger               = consts.FieldTypeInteger
-	FieldTypeNull                  = consts.FieldTypeNull
-	FieldTypeString                = consts.FieldTypeString
-)
-
-const (
 	AnyCursorItemType                  = consts.AnyCursorItemType
 	CursorDirBaseType                  = consts.CursorDirBaseType
 	CursorItemBaseType                 = consts.CursorItemBaseType
@@ -60,4 +41,22 @@ const (
 	SyncExtrasRequireCharging          = consts.SyncExtrasRequireCharging
 	SyncExtrasScheduleAsExpeditedJob   = consts.SyncExtrasScheduleAsExpeditedJob
 	SyncExtrasUpload                   = consts.SyncExtrasUpload
+)
+
+const (
+	NotifyDelete                   = consts.NotifyDelete
+	NotifyInsert                   = consts.NotifyInsert
+	NotifySkipNotifyForDescendants = consts.NotifySkipNotifyForDescendants
+	NotifySyncToNetwork            = consts.NotifySyncToNetwork
+	NotifyUpdate                   = consts.NotifyUpdate
+	QuerySortDirectionAscending    = consts.QuerySortDirectionAscending
+	QuerySortDirectionDescending   = consts.QuerySortDirectionDescending
+	SyncObserverTypeActive         = consts.SyncObserverTypeActive
+	SyncObserverTypePending        = consts.SyncObserverTypePending
+	SyncObserverTypeSettings       = consts.SyncObserverTypeSettings
+	FieldTypeBlob                  = consts.FieldTypeBlob
+	FieldTypeFloat                 = consts.FieldTypeFloat
+	FieldTypeInteger               = consts.FieldTypeInteger
+	FieldTypeNull                  = consts.FieldTypeNull
+	FieldTypeString                = consts.FieldTypeString
 )

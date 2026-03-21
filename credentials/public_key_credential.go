@@ -17,25 +17,35 @@ var (
 	_ *app.Context
 )
 
-// PublicKeyCredential holds data extracted from androidx.credentials.publickeycredential.PublicKeyCredential.
+// PublicKeyCredential wraps androidx.credentials.PublicKeyCredential.
 type PublicKeyCredential struct {
-	AuthResponseJSON string
+	VM  *jni.VM
+	Obj *jni.GlobalRef
 }
 
-// ExtractPublicKeyCredential extracts all fields from a androidx.credentials.publickeycredential.PublicKeyCredential JNI object.
-func ExtractPublicKeyCredential(env *jni.Env, obj *jni.Object) (*PublicKeyCredential, error) {
-	if err := ensureInit(env); err != nil {
-		return nil, err
-	}
-	var result PublicKeyCredential
-
-	{
-		raw, err := env.CallObjectMethod(obj, midPublicKeyCredentialAuthResponseJSON)
-		if err != nil {
-			return nil, fmt.Errorf("PublicKeyCredential.AuthResponseJSON: %w", err)
+// AuthResponseJSON calls androidx.credentials.PublicKeyCredential.getAuthenticationResponseJson.
+func (m *PublicKeyCredential) AuthResponseJSON() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
 		}
-		result.AuthResponseJSON = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
-
-	return &result, nil
+		if midPublicKeyCredentialAuthResponseJSON == nil {
+			callErr = fmt.Errorf("androidx.credentials.PublicKeyCredential.getAuthenticationResponseJson is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPublicKeyCredentialAuthResponseJSON,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
 }

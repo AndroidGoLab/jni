@@ -90,8 +90,8 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "TTS engine created OK")
 	ui.RenderOutput()
 
-	// Brief delay to let the TTS engine initialize.
-	time.Sleep(1 * time.Second)
+	// Wait for TTS engine initialization (no callback available with current constructor)
+	time.Sleep(3 * time.Second)
 
 	// Query GetDefaultEngine.
 	engine, err := tts.GetDefaultEngine()

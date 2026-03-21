@@ -27,10 +27,14 @@ type keyPairGeneratorJava struct {
 func (m *keyPairGeneratorJava) initialize(params *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyPairGeneratorJavainitialize == nil {
+			callErr = fmt.Errorf("java.security.KeyPairGenerator.initialize is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -46,10 +50,14 @@ func (m *keyPairGeneratorJava) initialize(params *jni.Object) error {
 func (m *keyPairGeneratorJava) generateKeyPair() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyPairGeneratorJavagenerateKeyPair == nil {
+			callErr = fmt.Errorf("java.security.KeyPairGenerator.generateKeyPair is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -57,6 +65,13 @@ func (m *keyPairGeneratorJava) generateKeyPair() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

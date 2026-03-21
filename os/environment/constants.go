@@ -5,15 +5,28 @@ package environment
 import "github.com/AndroidGoLab/jni/os/environment/consts"
 
 const (
-	MediaBadRemoval      = consts.MediaBadRemoval
-	MediaChecking        = consts.MediaChecking
-	MediaEjecting        = consts.MediaEjecting
-	MediaMounted         = consts.MediaMounted
-	MediaMountedReadOnly = consts.MediaMountedReadOnly
-	MediaNofs            = consts.MediaNofs
-	MediaRemoved         = consts.MediaRemoved
-	MediaShared          = consts.MediaShared
-	MediaUnknown         = consts.MediaUnknown
-	MediaUnmountable     = consts.MediaUnmountable
-	MediaUnmounted       = consts.MediaUnmounted
+	MediaBadRemoval        = consts.MediaBadRemoval
+	MediaChecking          = consts.MediaChecking
+	MediaEjecting          = consts.MediaEjecting
+	MediaMounted           = consts.MediaMounted
+	MediaMountedReadOnly   = consts.MediaMountedReadOnly
+	MediaNofs              = consts.MediaNofs
+	MediaRemoved           = consts.MediaRemoved
+	MediaShared            = consts.MediaShared
+	MediaUnknown           = consts.MediaUnknown
+	MediaUnmountable       = consts.MediaUnmountable
+	MediaUnmounted         = consts.MediaUnmounted
+	DirectoryAlarms        = consts.DirectoryAlarms
+	DirectoryAudiobooks    = consts.DirectoryAudiobooks
+	DirectoryDcim          = consts.DirectoryDcim
+	DirectoryDocuments     = consts.DirectoryDocuments
+	DirectoryDownloads     = consts.DirectoryDownloads
+	DirectoryMovies        = consts.DirectoryMovies
+	DirectoryMusic         = consts.DirectoryMusic
+	DirectoryNotifications = consts.DirectoryNotifications
+	DirectoryPictures      = consts.DirectoryPictures
+	DirectoryPodcasts      = consts.DirectoryPodcasts
+	DirectoryRecordings    = consts.DirectoryRecordings
+	DirectoryRingtones     = consts.DirectoryRingtones
+	DirectoryScreenshots   = consts.DirectoryScreenshots
 )

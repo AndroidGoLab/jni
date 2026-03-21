@@ -165,6 +165,8 @@ func loadTemplates(dir string) (*template.Template, error) {
 		"jniTypeSignature":      JNITypeSignature,
 		"resolveType":           ResolveType,
 		"paramConversionCode":   ParamConversionCode,
+		"goParamList":           buildGoParamList,
+		"jniArgs":               buildJNIArgs,
 	}
 
 	pattern := filepath.Join(dir, "*.go.tmpl")

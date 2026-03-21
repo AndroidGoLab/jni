@@ -1,0 +1,18 @@
+package: health/connect
+go_import: github.com/AndroidGoLab/jni/health/connect
+classes:
+    - java_class: androidx.health.connect.client.HealthConnectClient
+      go_type: Manager
+      methods:
+        # insertRecords, readRecords, aggregate, deleteRecords are Kotlin
+        # suspend functions and cannot be called directly via JNI (they
+        # require a kotlin.coroutines.Continuation parameter). Use the
+        # Jetpack Health Connect callback/ListenableFuture APIs instead.
+      static_methods:
+        - java_method: getOrCreate
+          go_name: getOrCreateRaw
+          params:
+            - java_type: android.content.Context
+              go_name: context
+          returns: androidx.health.connect.client.HealthConnectClient
+          error: true

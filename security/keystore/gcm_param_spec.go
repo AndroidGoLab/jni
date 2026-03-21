@@ -24,7 +24,7 @@ type gcmParamSpec struct {
 }
 
 // NewgcmParamSpec creates a new javax.crypto.spec.GCMParameterSpec instance.
-func NewgcmParamSpec(vm *jni.VM) (*gcmParamSpec, error) {
+func NewgcmParamSpec(vm *jni.VM, tagLen int32, iv *jni.Object) (*gcmParamSpec, error) {
 	var t gcmParamSpec
 	t.VM = vm
 
@@ -32,7 +32,8 @@ func NewgcmParamSpec(vm *jni.VM) (*gcmParamSpec, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsgcmParamSpec)), midgcmParamSpecInit)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsgcmParamSpec)), midgcmParamSpecInit, jni.IntValue(tagLen), jni.ObjectValue(iv))
 		if err != nil {
 			return err
 		}

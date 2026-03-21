@@ -55,4 +55,6 @@ const (
 	LanguageSwitchResultNotAttempted                = consts.LanguageSwitchResultNotAttempted
 	LanguageSwitchResultSkippedNoModel              = consts.LanguageSwitchResultSkippedNoModel
 	LanguageSwitchResultSucceeded                   = consts.LanguageSwitchResultSucceeded
+	RecognizerErrorNetwork                          = consts.RecognizerErrorNetwork
+	RecognizerErrorNetworkTimeout                   = consts.RecognizerErrorNetworkTimeout
 )

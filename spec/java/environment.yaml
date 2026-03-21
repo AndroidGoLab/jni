@@ -131,3 +131,42 @@ constants:
     - go_name: MediaUnmounted
       value: '"unmounted"'
       go_type: string
+    - go_name: DirectoryAlarms
+      value: '"Alarms"'
+      go_type: string
+    - go_name: DirectoryAudiobooks
+      value: '"Audiobooks"'
+      go_type: string
+    - go_name: DirectoryDcim
+      value: '"DCIM"'
+      go_type: string
+    - go_name: DirectoryDocuments
+      value: '"Documents"'
+      go_type: string
+    - go_name: DirectoryDownloads
+      value: '"Download"'
+      go_type: string
+    - go_name: DirectoryMovies
+      value: '"Movies"'
+      go_type: string
+    - go_name: DirectoryMusic
+      value: '"Music"'
+      go_type: string
+    - go_name: DirectoryNotifications
+      value: '"Notifications"'
+      go_type: string
+    - go_name: DirectoryPictures
+      value: '"Pictures"'
+      go_type: string
+    - go_name: DirectoryPodcasts
+      value: '"Podcasts"'
+      go_type: string
+    - go_name: DirectoryRecordings
+      value: '"Recordings"'
+      go_type: string
+    - go_name: DirectoryRingtones
+      value: '"Ringtones"'
+      go_type: string
+    - go_name: DirectoryScreenshots
+      value: '"Screenshots"'
+      go_type: string

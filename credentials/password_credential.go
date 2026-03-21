@@ -17,34 +17,62 @@ var (
 	_ *app.Context
 )
 
-// PasswordCredential holds data extracted from androidx.credentials.PasswordCredential.
+// PasswordCredential wraps androidx.credentials.PasswordCredential.
 type PasswordCredential struct {
-	ID       string
-	Password string
+	VM  *jni.VM
+	Obj *jni.GlobalRef
 }
 
-// ExtractPasswordCredential extracts all fields from a androidx.credentials.PasswordCredential JNI object.
-func ExtractPasswordCredential(env *jni.Env, obj *jni.Object) (*PasswordCredential, error) {
-	if err := ensureInit(env); err != nil {
-		return nil, err
-	}
-	var result PasswordCredential
-
-	{
-		raw, err := env.CallObjectMethod(obj, midPasswordCredentialID)
-		if err != nil {
-			return nil, fmt.Errorf("PasswordCredential.ID: %w", err)
+// ID calls androidx.credentials.PasswordCredential.getId.
+func (m *PasswordCredential) ID() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
 		}
-		result.ID = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
-
-	{
-		raw, err := env.CallObjectMethod(obj, midPasswordCredentialPassword)
-		if err != nil {
-			return nil, fmt.Errorf("PasswordCredential.Password: %w", err)
+		if midPasswordCredentialID == nil {
+			callErr = fmt.Errorf("androidx.credentials.PasswordCredential.getId is not available on this device")
+			return callErr
 		}
-		result.Password = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPasswordCredentialID,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
 
-	return &result, nil
+// Password calls androidx.credentials.PasswordCredential.getPassword.
+func (m *PasswordCredential) Password() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPasswordCredentialPassword == nil {
+			callErr = fmt.Errorf("androidx.credentials.PasswordCredential.getPassword is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPasswordCredentialPassword,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
 }

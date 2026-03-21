@@ -60,7 +60,7 @@ func doInit(env *jni.Env) error {
 	}
 	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
 {{- if eq .Obtain "constructor"}}
-	mid{{.GoType}}Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), "<init>", "()V")
+	mid{{.GoType}}Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), "<init>", "{{.ConstructorJNISig}}")
 	if err != nil {
 		return fmt.Errorf("get constructor {{.JavaClass}}.<init>: %w", err)
 	}

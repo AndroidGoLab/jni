@@ -119,21 +119,12 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			return nil
 		}
 
-		// The returned object can be wrapped in a toast struct whose
-		// show() method calls android.widget.Toast.show():
-		//
-		//   t := toast{VM: vm, Obj: env.NewGlobalRef(toastObj)}
-		//   t.show()
-		//
-		// Alternatively, create a long-duration toast:
-		//   env.CallStaticObjectMethod(cls, mid,
-		//       jni.ObjectValue(ctx.Obj),
-		//       jni.ObjectValue(msg.Object()),
-		//       jni.IntValue(int32(toast.LengthLong)),
-		//   )
-		_ = toastObj
+		t := toast.Toast{VM: vm, Obj: env.NewGlobalRef(toastObj)}
+		if err := t.Show(); err != nil {
+			return fmt.Errorf("show toast: %w", err)
+		}
 
-		fmt.Fprintln(output, "Toast created via generated API")
+		fmt.Fprintln(output, "Toast shown via generated API")
 		return nil
 	})
 	if err != nil {

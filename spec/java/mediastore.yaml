@@ -304,9 +304,6 @@ constants:
     - go_name: Authority
       value: '"media"'
       go_type: string
-    - go_name: AuthorityUri
-      value: "0"
-      go_type: int
     - go_name: ExtraAcceptOriginalMediaFormat
       value: '"android.provider.extra.ACCEPT_ORIGINAL_MEDIA_FORMAT"'
       go_type: string

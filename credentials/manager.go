@@ -24,86 +24,34 @@ type Manager struct {
 }
 
 // createManagerRaw calls androidx.credentials.CredentialManager.create.
-func (m *Manager) createManagerRaw(ctx *jni.Object) (*jni.Object, error) {
+func (m *Manager) createManagerRaw(context *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midManagercreateManagerRaw == nil {
+			callErr = fmt.Errorf("androidx.credentials.CredentialManager.create is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsManager)),
-			midManagercreateManagerRaw, jni.ObjectValue(ctx),
+			midManagercreateManagerRaw, jni.ObjectValue(context),
 		)
 		if callErr != nil {
 			return callErr
 		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// getCredentialRaw calls androidx.credentials.CredentialManager.getCredential.
-func (m *Manager) getCredentialRaw(ctx *jni.Object, request *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagergetCredentialRaw, jni.ObjectValue(ctx), jni.ObjectValue(request),
-		)
-		if callErr != nil {
-			return callErr
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
 	return result, callErr
-}
-
-// createCredentialRaw calls androidx.credentials.CredentialManager.createCredential.
-func (m *Manager) createCredentialRaw(ctx *jni.Object, request *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagercreateCredentialRaw, jni.ObjectValue(ctx), jni.ObjectValue(request),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// clearCredentialStateRaw calls androidx.credentials.CredentialManager.clearCredentialState.
-func (m *Manager) clearCredentialStateRaw(request *jni.Object) error {
-
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerclearCredentialStateRaw, jni.ObjectValue(request),
-		)
-		return callErr
-	})
-	return callErr
 }

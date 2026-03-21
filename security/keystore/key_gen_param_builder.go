@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// keyGenParamBuilder wraps android.security.keystore.KeyGenParameterSpec.Builder.
+// keyGenParamBuilder wraps android.security.keystore.KeyGenParameterSpec$Builder.
 type keyGenParamBuilder struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
-// NewkeyGenParamBuilder creates a new android.security.keystore.KeyGenParameterSpec.Builder instance.
-func NewkeyGenParamBuilder(vm *jni.VM) (*keyGenParamBuilder, error) {
+// NewkeyGenParamBuilder creates a new android.security.keystore.KeyGenParameterSpec$Builder instance.
+func NewkeyGenParamBuilder(vm *jni.VM, keystoreAlias string, purposes int32) (*keyGenParamBuilder, error) {
 	var t keyGenParamBuilder
 	t.VM = vm
 
@@ -32,7 +32,13 @@ func NewkeyGenParamBuilder(vm *jni.VM) (*keyGenParamBuilder, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clskeyGenParamBuilder)), midkeyGenParamBuilderInit)
+		jKeystoreAlias, err := env.NewStringUTF(keystoreAlias)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jKeystoreAlias.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clskeyGenParamBuilder)), midkeyGenParamBuilderInit, jni.ObjectValue(&jKeystoreAlias.Object), jni.IntValue(purposes))
 		if err != nil {
 			return err
 		}
@@ -45,213 +51,343 @@ func NewkeyGenParamBuilder(vm *jni.VM) (*keyGenParamBuilder, error) {
 	return &t, nil
 }
 
-// setKeySize calls android.security.keystore.KeyGenParameterSpec.Builder.setKeySize.
-func (m *keyGenParamBuilder) setKeySize(keySize int32) *jni.Object {
+// setKeySize calls android.security.keystore.KeyGenParameterSpec$Builder.setKeySize.
+func (m *keyGenParamBuilder) setKeySize(keySize int32) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
+		if midkeyGenParamBuildersetKeySize == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setKeySize is not available on this device")
+			return callErr
+		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetKeySize, jni.IntValue(keySize),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setBlockModes calls android.security.keystore.KeyGenParameterSpec.Builder.setBlockModes.
-func (m *keyGenParamBuilder) setBlockModes(blockModes *jni.Object) *jni.Object {
+// setBlockModes calls android.security.keystore.KeyGenParameterSpec$Builder.setBlockModes.
+func (m *keyGenParamBuilder) setBlockModes(blockModes *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
+		if midkeyGenParamBuildersetBlockModes == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setBlockModes is not available on this device")
+			return callErr
+		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetBlockModes, jni.ObjectValue(blockModes),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setEncryptionPaddings calls android.security.keystore.KeyGenParameterSpec.Builder.setEncryptionPaddings.
-func (m *keyGenParamBuilder) setEncryptionPaddings(paddings *jni.Object) *jni.Object {
+// setEncryptionPaddings calls android.security.keystore.KeyGenParameterSpec$Builder.setEncryptionPaddings.
+func (m *keyGenParamBuilder) setEncryptionPaddings(paddings *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
+		if midkeyGenParamBuildersetEncryptionPaddings == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setEncryptionPaddings is not available on this device")
+			return callErr
+		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetEncryptionPaddings, jni.ObjectValue(paddings),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setSignaturePaddings calls android.security.keystore.KeyGenParameterSpec.Builder.setSignaturePaddings.
-func (m *keyGenParamBuilder) setSignaturePaddings(paddings *jni.Object) *jni.Object {
+// setSignaturePaddings calls android.security.keystore.KeyGenParameterSpec$Builder.setSignaturePaddings.
+func (m *keyGenParamBuilder) setSignaturePaddings(paddings *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
+		if midkeyGenParamBuildersetSignaturePaddings == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setSignaturePaddings is not available on this device")
+			return callErr
+		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetSignaturePaddings, jni.ObjectValue(paddings),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setDigests calls android.security.keystore.KeyGenParameterSpec.Builder.setDigests.
-func (m *keyGenParamBuilder) setDigests(digests *jni.Object) *jni.Object {
+// setDigests calls android.security.keystore.KeyGenParameterSpec$Builder.setDigests.
+func (m *keyGenParamBuilder) setDigests(digests *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
+		if midkeyGenParamBuildersetDigests == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setDigests is not available on this device")
+			return callErr
+		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetDigests, jni.ObjectValue(digests),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setUserAuthenticationRequired calls android.security.keystore.KeyGenParameterSpec.Builder.setUserAuthenticationRequired.
-func (m *keyGenParamBuilder) setUserAuthenticationRequired(required bool) *jni.Object {
+// setUserAuthenticationRequired calls android.security.keystore.KeyGenParameterSpec$Builder.setUserAuthenticationRequired.
+func (m *keyGenParamBuilder) setUserAuthenticationRequired(required bool) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
+		}
+		if midkeyGenParamBuildersetUserAuthenticationRequired == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setUserAuthenticationRequired is not available on this device")
+			return callErr
 		}
 		var jRequired uint8
 		if required {
-			jRequired = 1
+			jRequired = jniTrue
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetUserAuthenticationRequired, jni.BooleanValue(jRequired),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setUserAuthenticationValidityDurationSeconds calls android.security.keystore.KeyGenParameterSpec.Builder.setUserAuthenticationValidityDurationSeconds.
-func (m *keyGenParamBuilder) setUserAuthenticationValidityDurationSeconds(seconds int32) *jni.Object {
+// setUserAuthenticationValidityDurationSeconds calls android.security.keystore.KeyGenParameterSpec$Builder.setUserAuthenticationValidityDurationSeconds.
+func (m *keyGenParamBuilder) setUserAuthenticationValidityDurationSeconds(seconds int32) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
+		if midkeyGenParamBuildersetUserAuthenticationValidityDurationSeconds == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setUserAuthenticationValidityDurationSeconds is not available on this device")
+			return callErr
+		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetUserAuthenticationValidityDurationSeconds, jni.IntValue(seconds),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setInvalidatedByBiometricEnrollment calls android.security.keystore.KeyGenParameterSpec.Builder.setInvalidatedByBiometricEnrollment.
-func (m *keyGenParamBuilder) setInvalidatedByBiometricEnrollment(invalidated bool) *jni.Object {
+// setInvalidatedByBiometricEnrollment calls android.security.keystore.KeyGenParameterSpec$Builder.setInvalidatedByBiometricEnrollment.
+func (m *keyGenParamBuilder) setInvalidatedByBiometricEnrollment(invalidated bool) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
+		}
+		if midkeyGenParamBuildersetInvalidatedByBiometricEnrollment == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setInvalidatedByBiometricEnrollment is not available on this device")
+			return callErr
 		}
 		var jInvalidated uint8
 		if invalidated {
-			jInvalidated = 1
+			jInvalidated = jniTrue
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetInvalidatedByBiometricEnrollment, jni.BooleanValue(jInvalidated),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setUnlockedDeviceRequired calls android.security.keystore.KeyGenParameterSpec.Builder.setUnlockedDeviceRequired.
-func (m *keyGenParamBuilder) setUnlockedDeviceRequired(required bool) *jni.Object {
+// setUnlockedDeviceRequired calls android.security.keystore.KeyGenParameterSpec$Builder.setUnlockedDeviceRequired.
+func (m *keyGenParamBuilder) setUnlockedDeviceRequired(required bool) (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
+		}
+		if midkeyGenParamBuildersetUnlockedDeviceRequired == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.setUnlockedDeviceRequired is not available on this device")
+			return callErr
 		}
 		var jRequired uint8
 		if required {
-			jRequired = 1
+			jRequired = jniTrue
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuildersetUnlockedDeviceRequired, jni.BooleanValue(jRequired),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// build calls android.security.keystore.KeyGenParameterSpec.Builder.build.
-func (m *keyGenParamBuilder) build() *jni.Object {
+// build calls android.security.keystore.KeyGenParameterSpec$Builder.build.
+func (m *keyGenParamBuilder) build() (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallObjectMethod(
+		if midkeyGenParamBuilderbuild == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyGenParameterSpec$Builder.build is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midkeyGenParamBuilderbuild,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }

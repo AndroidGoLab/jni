@@ -27,10 +27,14 @@ type keyStoreJava struct {
 func (m *keyStoreJava) load(param *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyStoreJavaload == nil {
+			callErr = fmt.Errorf("java.security.KeyStore.load is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -46,17 +50,23 @@ func (m *keyStoreJava) load(param *jni.Object) error {
 func (m *keyStoreJava) containsAlias(alias string) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyStoreJavacontainsAlias == nil {
+			callErr = fmt.Errorf("java.security.KeyStore.containsAlias is not available on this device")
+			return callErr
 		}
 		jAlias, err := env.NewStringUTF(alias)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jAlias.Object)
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midkeyStoreJavacontainsAlias, jni.ObjectValue(&jAlias.Object),
 		)
@@ -73,15 +83,20 @@ func (m *keyStoreJava) containsAlias(alias string) (bool, error) {
 func (m *keyStoreJava) deleteEntry(alias string) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyStoreJavadeleteEntry == nil {
+			callErr = fmt.Errorf("java.security.KeyStore.deleteEntry is not available on this device")
+			return callErr
 		}
 		jAlias, err := env.NewStringUTF(alias)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jAlias.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -96,10 +111,14 @@ func (m *keyStoreJava) deleteEntry(alias string) error {
 func (m *keyStoreJava) aliasesRaw() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyStoreJavaaliasesRaw == nil {
+			callErr = fmt.Errorf("java.security.KeyStore.aliases is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -108,31 +127,50 @@ func (m *keyStoreJava) aliasesRaw() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
 }
 
 // getEntry calls java.security.KeyStore.getEntry.
-func (m *keyStoreJava) getEntry(alias string, param *jni.Object) (*jni.Object, error) {
+func (m *keyStoreJava) getEntry(alias string, protParam *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyStoreJavagetEntry == nil {
+			callErr = fmt.Errorf("java.security.KeyStore.getEntry is not available on this device")
+			return callErr
 		}
 		jAlias, err := env.NewStringUTF(alias)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jAlias.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midkeyStoreJavagetEntry, jni.ObjectValue(&jAlias.Object), jni.ObjectValue(param),
+			midkeyStoreJavagetEntry, jni.ObjectValue(&jAlias.Object), jni.ObjectValue(protParam),
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

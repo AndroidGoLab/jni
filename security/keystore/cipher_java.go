@@ -27,10 +27,14 @@ type cipherJava struct {
 func (m *cipherJava) initWithKey(opmode int32, key *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcipherJavainitWithKey == nil {
+			callErr = fmt.Errorf("javax.crypto.Cipher.init is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -43,13 +47,21 @@ func (m *cipherJava) initWithKey(opmode int32, key *jni.Object) error {
 }
 
 // initWithKeyAndParams calls javax.crypto.Cipher.init.
-func (m *cipherJava) initWithKeyAndParams(opmode int32, key *jni.Object, params *jni.Object) error {
+func (m *cipherJava) initWithKeyAndParams(
+	opmode int32,
+	key *jni.Object,
+	params *jni.Object,
+) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcipherJavainitWithKeyAndParams == nil {
+			callErr = fmt.Errorf("javax.crypto.Cipher.init is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -65,10 +77,14 @@ func (m *cipherJava) initWithKeyAndParams(opmode int32, key *jni.Object, params 
 func (m *cipherJava) doFinal(input *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcipherJavadoFinal == nil {
+			callErr = fmt.Errorf("javax.crypto.Cipher.doFinal is not available on this device")
+			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
@@ -77,6 +93,13 @@ func (m *cipherJava) doFinal(input *jni.Object) (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -87,10 +110,14 @@ func (m *cipherJava) doFinal(input *jni.Object) (*jni.Object, error) {
 func (m *cipherJava) getIV() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midcipherJavagetIV == nil {
+			callErr = fmt.Errorf("javax.crypto.Cipher.getIV is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -98,6 +125,13 @@ func (m *cipherJava) getIV() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -23,19 +23,23 @@ type keyGeneratorJava struct {
 	Obj *jni.GlobalRef
 }
 
-// init calls javax.crypto.KeyGenerator.init.
-func (m *keyGeneratorJava) init(params *jni.Object) error {
+// init_ calls javax.crypto.KeyGenerator.init.
+func (m *keyGeneratorJava) init_(params *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
 		}
+		if midkeyGeneratorJavainit_ == nil {
+			callErr = fmt.Errorf("javax.crypto.KeyGenerator.init is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midkeyGeneratorJavainit, jni.ObjectValue(params),
+			midkeyGeneratorJavainit_, jni.ObjectValue(params),
 		)
 		return callErr
 	})
@@ -46,10 +50,14 @@ func (m *keyGeneratorJava) init(params *jni.Object) error {
 func (m *keyGeneratorJava) generateKey() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midkeyGeneratorJavagenerateKey == nil {
+			callErr = fmt.Errorf("javax.crypto.KeyGenerator.generateKey is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -57,6 +65,13 @@ func (m *keyGeneratorJava) generateKey() (*jni.Object, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -23,41 +23,89 @@ type getCredentialRequestBuilder struct {
 	Obj *jni.GlobalRef
 }
 
-// addCredentialOption calls androidx.credentials.GetCredentialRequest$Builder.addCredentialOption.
-func (m *getCredentialRequestBuilder) addCredentialOption(option *jni.Object) *jni.Object {
-	var result *jni.Object
+// NewgetCredentialRequestBuilder creates a new androidx.credentials.GetCredentialRequest$Builder instance.
+func NewgetCredentialRequestBuilder(vm *jni.VM) (*getCredentialRequestBuilder, error) {
+	var t getCredentialRequestBuilder
+	t.VM = vm
 
-	m.VM.Do(func(env *jni.Env) error {
+	err := vm.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
 			return err
 		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsgetCredentialRequestBuilder)), midgetCredentialRequestBuilderInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
 
-		result, _ = env.CallObjectMethod(
+// addCredentialOption calls androidx.credentials.GetCredentialRequest$Builder.addCredentialOption.
+func (m *getCredentialRequestBuilder) addCredentialOption(option *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midgetCredentialRequestBuilderaddCredentialOption == nil {
+			callErr = fmt.Errorf("androidx.credentials.GetCredentialRequest$Builder.addCredentialOption is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midgetCredentialRequestBuilderaddCredentialOption, jni.ObjectValue(option),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
 // build calls androidx.credentials.GetCredentialRequest$Builder.build.
-func (m *getCredentialRequestBuilder) build() *jni.Object {
+func (m *getCredentialRequestBuilder) build() (*jni.Object, error) {
 	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallObjectMethod(
+		if midgetCredentialRequestBuilderbuild == nil {
+			callErr = fmt.Errorf("androidx.credentials.GetCredentialRequest$Builder.build is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midgetCredentialRequestBuilderbuild,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }

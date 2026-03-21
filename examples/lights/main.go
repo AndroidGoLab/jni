@@ -92,6 +92,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 
 	mgr := lights.Manager{VM: vm, Obj: svcObj}
+	defer vm.Do(func(env *jni.Env) error {
+		env.DeleteGlobalRef(mgr.Obj)
+		return nil
+	})
 
 	fmt.Fprintln(output, "Service obtained OK")
 

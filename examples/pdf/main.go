@@ -129,6 +129,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("NewCanvas: %w", err)
 	}
+	defer vm.Do(func(env *jni.Env) error {
+		env.DeleteGlobalRef(canvas.Obj)
+		return nil
+	})
 	fmt.Fprintln(output, "Canvas created OK")
 
 	cw, _ := canvas.GetWidth()
@@ -157,6 +161,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("NewPaint: %w", err)
 	}
+	defer vm.Do(func(env *jni.Env) error {
+		env.DeleteGlobalRef(paint.Obj)
+		return nil
+	})
 	fmt.Fprintln(output, "Paint created OK")
 
 	pColor, _ := paint.GetColor()

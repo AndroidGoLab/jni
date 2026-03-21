@@ -67,7 +67,6 @@ const (
 )
 
 const (
-	AuthorityUri        = consts.AuthorityUri
 	MatchDefault        = consts.MatchDefault
 	MatchExclude        = consts.MatchExclude
 	MatchInclude        = consts.MatchInclude

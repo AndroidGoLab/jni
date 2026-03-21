@@ -16,16 +16,15 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
+// jniTrue is the JNI representation of a true boolean value.
+const jniTrue uint8 = 1
+
 var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                 *jni.GlobalRef
-	midManagergetOrCreateRaw   jni.MethodID
-	midManagerinsertRecordsRaw jni.MethodID
-	midManagerreadRecordsRaw   jni.MethodID
-	midManageraggregateRaw     jni.MethodID
-	midManagerdeleteRecordsRaw jni.MethodID
+	clsManager               *jni.GlobalRef
+	midManagergetOrCreateRaw jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -54,27 +53,9 @@ func doInit(env *jni.Env) error {
 
 	midManagergetOrCreateRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getOrCreate", "(Landroid/content/Context;)Landroidx/health/connect/client/HealthConnectClient;")
 	if err != nil {
-		return fmt.Errorf("get method androidx.health.connect.client.HealthConnectClient.getOrCreate: %w", err)
-	}
-
-	midManagerinsertRecordsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "insertRecords", "(Ljava/util/List;)Landroidx/health/connect/client/response/InsertRecordsResponse;")
-	if err != nil {
-		return fmt.Errorf("get method androidx.health.connect.client.HealthConnectClient.insertRecords: %w", err)
-	}
-
-	midManagerreadRecordsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "readRecords", "(Landroidx/health/connect/client/request/ReadRecordsRequest;)Landroidx/health/connect/client/response/ReadRecordsResponse;")
-	if err != nil {
-		return fmt.Errorf("get method androidx.health.connect.client.HealthConnectClient.readRecords: %w", err)
-	}
-
-	midManageraggregateRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "aggregate", "(Landroidx/health/connect/client/request/AggregateRequest;)Landroidx/health/connect/client/aggregate/AggregationResult;")
-	if err != nil {
-		return fmt.Errorf("get method androidx.health.connect.client.HealthConnectClient.aggregate: %w", err)
-	}
-
-	midManagerdeleteRecordsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "deleteRecords", "(Lkotlin/reflect/KClass;Landroidx/health/connect/client/time/TimeRangeFilter;)V")
-	if err != nil {
-		return fmt.Errorf("get method androidx.health.connect.client.HealthConnectClient.deleteRecords: %w", err)
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
 	}
 
 	return nil

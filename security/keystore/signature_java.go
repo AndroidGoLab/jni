@@ -24,18 +24,22 @@ type signatureJava struct {
 }
 
 // initSign calls java.security.Signature.initSign.
-func (m *signatureJava) initSign(privateKey *jni.Object) error {
+func (m *signatureJava) initSign(key *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
 		}
+		if midsignatureJavainitSign == nil {
+			callErr = fmt.Errorf("java.security.Signature.initSign is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midsignatureJavainitSign, jni.ObjectValue(privateKey),
+			midsignatureJavainitSign, jni.ObjectValue(key),
 		)
 		return callErr
 	})
@@ -43,18 +47,22 @@ func (m *signatureJava) initSign(privateKey *jni.Object) error {
 }
 
 // initVerify calls java.security.Signature.initVerify.
-func (m *signatureJava) initVerify(publicKey *jni.Object) error {
+func (m *signatureJava) initVerify(key *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
 		}
+		if midsignatureJavainitVerify == nil {
+			callErr = fmt.Errorf("java.security.Signature.initVerify is not available on this device")
+			return callErr
+		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midsignatureJavainitVerify, jni.ObjectValue(publicKey),
+			midsignatureJavainitVerify, jni.ObjectValue(key),
 		)
 		return callErr
 	})
@@ -65,10 +73,14 @@ func (m *signatureJava) initVerify(publicKey *jni.Object) error {
 func (m *signatureJava) update(data *jni.Object) error {
 
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midsignatureJavaupdate == nil {
+			callErr = fmt.Errorf("java.security.Signature.update is not available on this device")
+			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
@@ -84,10 +96,14 @@ func (m *signatureJava) update(data *jni.Object) error {
 func (m *signatureJava) sign() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
+		}
+		if midsignatureJavasign == nil {
+			callErr = fmt.Errorf("java.security.Signature.sign is not available on this device")
+			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -96,24 +112,36 @@ func (m *signatureJava) sign() (*jni.Object, error) {
 		if callErr != nil {
 			return callErr
 		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
 }
 
 // verify calls java.security.Signature.verify.
-func (m *signatureJava) verify(signature *jni.Object) (bool, error) {
+func (m *signatureJava) verify(signature_ *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
+	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
 			callErr = err
 			return err
 		}
+		if midsignatureJavaverify == nil {
+			callErr = fmt.Errorf("java.security.Signature.verify is not available on this device")
+			return callErr
+		}
 
-		resultRaw, callErr := env.CallBooleanMethod(
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
-			midsignatureJavaverify, jni.ObjectValue(signature),
+			midsignatureJavaverify, jni.ObjectValue(signature_),
 		)
 		if callErr != nil {
 			return callErr
