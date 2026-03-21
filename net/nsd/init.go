@@ -61,12 +61,6 @@ var (
 	midServiceInfoWriteToParcel    jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -96,7 +90,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
 	}
 
 	midManagerDiscoverServices5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "discoverServices", "(Ljava/lang/String;ILandroid/net/Network;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
@@ -104,7 +97,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
 	}
 
 	midManagerDiscoverServices5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "discoverServices", "(Ljava/lang/String;ILandroid/net/NetworkRequest;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
@@ -112,7 +104,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
 	}
 
 	midManagerDiscoverServices3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "discoverServices", "(Ljava/lang/String;ILandroid/net/nsd/NsdManager$DiscoveryListener;)V")
@@ -120,7 +111,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
 	}
 
 	midManagerRegisterService3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerService", "(Landroid/net/nsd/NsdServiceInfo;ILandroid/net/nsd/NsdManager$RegistrationListener;)V")
@@ -128,7 +118,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.registerService")
 	}
 
 	midManagerRegisterService4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerService", "(Landroid/net/nsd/NsdServiceInfo;ILjava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$RegistrationListener;)V")
@@ -136,7 +125,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.registerService")
 	}
 
 	midManagerRegisterServiceInfoCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerServiceInfoCallback", "(Landroid/net/nsd/NsdServiceInfo;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$ServiceInfoCallback;)V")
@@ -144,7 +132,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.registerServiceInfoCallback")
 	}
 
 	midManagerResolveService2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "resolveService", "(Landroid/net/nsd/NsdServiceInfo;Landroid/net/nsd/NsdManager$ResolveListener;)V")
@@ -152,7 +139,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.resolveService")
 	}
 
 	midManagerResolveService3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "resolveService", "(Landroid/net/nsd/NsdServiceInfo;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$ResolveListener;)V")
@@ -160,7 +146,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.resolveService")
 	}
 
 	midManagerStopServiceDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "stopServiceDiscovery", "(Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
@@ -168,7 +153,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.stopServiceDiscovery")
 	}
 
 	midManagerStopServiceResolution, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "stopServiceResolution", "(Landroid/net/nsd/NsdManager$ResolveListener;)V")
@@ -176,7 +160,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.stopServiceResolution")
 	}
 
 	midManagerUnregisterService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterService", "(Landroid/net/nsd/NsdManager$RegistrationListener;)V")
@@ -184,7 +167,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.unregisterService")
 	}
 
 	midManagerUnregisterServiceInfoCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterServiceInfoCallback", "(Landroid/net/nsd/NsdManager$ServiceInfoCallback;)V")
@@ -192,7 +174,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.unregisterServiceInfoCallback")
 	}
 
 	c, err = env.FindClass("android/net/nsd/NsdServiceInfo")
@@ -206,7 +187,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.describeContents")
 	}
 
 	midServiceInfoGetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getHost", "()Ljava/net/InetAddress;")
@@ -214,7 +194,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getHost")
 	}
 
 	midServiceInfoGetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getHostAddresses", "()Ljava/util/List;")
@@ -222,7 +201,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getHostAddresses")
 	}
 
 	midServiceInfoGetHostname, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getHostname", "()Ljava/lang/String;")
@@ -230,7 +208,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getHostname")
 	}
 
 	midServiceInfoGetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getNetwork", "()Landroid/net/Network;")
@@ -238,7 +215,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getNetwork")
 	}
 
 	midServiceInfoGetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getPort", "()I")
@@ -246,7 +222,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getPort")
 	}
 
 	midServiceInfoGetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getServiceName", "()Ljava/lang/String;")
@@ -254,7 +229,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getServiceName")
 	}
 
 	midServiceInfoGetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getServiceType", "()Ljava/lang/String;")
@@ -262,7 +236,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getServiceType")
 	}
 
 	midServiceInfoGetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "getSubtypes", "()Ljava/util/Set;")
@@ -270,7 +243,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.getSubtypes")
 	}
 
 	midServiceInfoRemoveAttribute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "removeAttribute", "(Ljava/lang/String;)V")
@@ -278,7 +250,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.removeAttribute")
 	}
 
 	midServiceInfoSetAttribute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setAttribute", "(Ljava/lang/String;Ljava/lang/String;)V")
@@ -286,7 +257,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setAttribute")
 	}
 
 	midServiceInfoSetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setHost", "(Ljava/net/InetAddress;)V")
@@ -294,7 +264,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setHost")
 	}
 
 	midServiceInfoSetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setHostAddresses", "(Ljava/util/List;)V")
@@ -302,7 +271,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setHostAddresses")
 	}
 
 	midServiceInfoSetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setNetwork", "(Landroid/net/Network;)V")
@@ -310,7 +278,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setNetwork")
 	}
 
 	midServiceInfoSetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setPort", "(I)V")
@@ -318,7 +285,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setPort")
 	}
 
 	midServiceInfoSetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setServiceName", "(Ljava/lang/String;)V")
@@ -326,7 +292,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setServiceName")
 	}
 
 	midServiceInfoSetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setServiceType", "(Ljava/lang/String;)V")
@@ -334,7 +299,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setServiceType")
 	}
 
 	midServiceInfoSetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "setSubtypes", "(Ljava/util/Set;)V")
@@ -342,7 +306,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.setSubtypes")
 	}
 
 	midServiceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "toString", "()Ljava/lang/String;")
@@ -350,7 +313,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.toString")
 	}
 
 	midServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
@@ -358,7 +320,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.nsd.NsdServiceInfo.writeToParcel")
 	}
 
 	return nil

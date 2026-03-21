@@ -41,6 +41,10 @@ static inline jobject proxy_invoke(JNIEnv *env, jobject thiz, jobject proxy,
                                    jfieldID handlerIDField, jmethodID getNameMID) {
     jlong handlerID = (*env)->GetLongField(env, thiz, handlerIDField);
     jstring name = (jstring)(*env)->CallObjectMethod(env, method, getNameMID);
+    if ((*env)->ExceptionCheck(env)) {
+        (*env)->ExceptionClear(env);
+        return NULL;
+    }
 
     const char *nameStr = (*env)->GetStringUTFChars(env, name, NULL);
     if (nameStr == NULL) {
@@ -77,6 +81,7 @@ static inline jobject proxy_invoke(JNIEnv *env, jobject thiz, jobject proxy,
             env, boolCls, "valueOf", "(Z)Ljava/lang/Boolean;");
         jobject boxed = (*env)->CallStaticObjectMethod(env, boolCls, voMid, eq);
         (*env)->DeleteLocalRef(env, boolCls);
+        if (other != NULL) (*env)->DeleteLocalRef(env, other);
         return boxed;
     }
 

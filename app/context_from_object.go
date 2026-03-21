@@ -3,12 +3,16 @@ package app
 import "github.com/AndroidGoLab/jni"
 
 // ContextFromObject wraps an existing Android Context JNI global reference
-// into an app.Context. The caller is responsible for ensuring the object
-// is a valid android.content.Context and that it is a global reference.
-// The returned Context does NOT own the reference — calling Close() is a no-op.
-func ContextFromObject(vm *jni.VM, obj *jni.GlobalRef) *Context {
-	return &Context{
-		VM:  vm,
-		Obj: obj,
+// into an app.Context. It creates its own GlobalRef so that calling Close()
+// is safe and will not affect the caller's reference.
+func ContextFromObject(vm *jni.VM, obj *jni.GlobalRef) (*Context, error) {
+	ctx := &Context{VM: vm}
+	err := vm.Do(func(env *jni.Env) error {
+		ctx.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
 	}
+	return ctx, nil
 }

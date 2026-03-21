@@ -268,29 +268,6 @@ func TestJavaClassToSlash(t *testing.T) {
 	}
 }
 
-func TestReturnConversionCode(t *testing.T) {
-	tests := []struct {
-		javaType string
-		goType   string
-		want     string
-	}{
-		{"void", "", ""},
-		{"boolean", "bool", "result != 0"},
-		{"String", "string", "env.GoString((*jni.String)(unsafe.Pointer(resultObj)))"},
-		{"int", "int32", "int32(result)"},
-		{"android.location.Location", "*jni.Object", "resultObj"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.javaType, func(t *testing.T) {
-			got := ReturnConversionCode(tt.javaType, tt.goType)
-			if got != tt.want {
-				t.Errorf("ReturnConversionCode(%q, %q) = %q, want %q",
-					tt.javaType, tt.goType, got, tt.want)
-			}
-		})
-	}
-}
-
 func TestParamConversionCode(t *testing.T) {
 	// String param should produce conversion code.
 	p := MergedParam{GoName: "name", GoType: "string", IsString: true}

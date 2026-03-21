@@ -46,7 +46,9 @@ func NewMediaProjectionManager(ctx *app.Context) (*MediaProjectionManager, error
 		if svc == nil || svc.Ref() == 0 {
 			return fmt.Errorf("%s service not available", serviceName)
 		}
-		mgr.Obj = env.NewGlobalRef(svc)
+		// GetSystemService already returns a GlobalRef, so use it directly
+		// instead of wrapping again (which would leak the original).
+		mgr.Obj = svc
 		return nil
 	})
 	if err != nil {

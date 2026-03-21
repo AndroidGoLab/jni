@@ -1063,7 +1063,11 @@ func testAppIntent(vm *jni.VM) error {
 	if err := intent.PutBoolExtra("flag", true); err != nil {
 		return fmt.Errorf("PutBoolExtra: %w", err)
 	}
-	if b := intent.GetBoolExtra("flag", false); !b {
+	b, err := intent.GetBoolExtra("flag", false)
+	if err != nil {
+		return fmt.Errorf("GetBoolExtra: %w", err)
+	}
+	if !b {
 		return fmt.Errorf("GetBoolExtra = false, want true")
 	}
 

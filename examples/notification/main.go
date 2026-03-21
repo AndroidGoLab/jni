@@ -22,7 +22,6 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/app/notification"
-	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/examples/common/ui"
 )
 
@@ -43,7 +42,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 	println("ANativeActivity_onCreate called")
 	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
-		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -51,7 +50,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 

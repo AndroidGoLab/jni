@@ -22,7 +22,6 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
-	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/app"
 )
@@ -35,7 +34,7 @@ func init() { ui.Register(run) }
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
-		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -43,7 +42,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -90,7 +89,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 
 	// Intent methods: SetAction, GetAction, SetFlags, AddFlags, etc.
-	intent.SetAction(app.ActionView)
+	if _, err := intent.SetAction(app.ActionView); err != nil {
+		return fmt.Errorf("set action: %w", err)
+	}
 	action, err := intent.GetAction()
 	if err != nil {
 		fmt.Fprintf(output, "  GetAction: %v\n", err)

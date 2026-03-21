@@ -138,7 +138,7 @@ func testAppBundle(vm *jni.VM) error {
 		}
 
 		// Validate that ExtractBundle succeeds on the live object.
-		_, err = app.ExtractBundle(env, bundle)
+		_, err = app.ExtractBundle(vm, env, bundle)
 		if err != nil {
 			return fmt.Errorf("ExtractBundle: %w", err)
 		}

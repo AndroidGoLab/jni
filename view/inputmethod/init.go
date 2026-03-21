@@ -80,12 +80,6 @@ var (
 	midInputMethodManagerViewClicked                                          jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -115,7 +109,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation")
 	}
 
 	midInputMethodManagerAcceptStylusHandwritingDelegation2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;)Z")
@@ -123,7 +116,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation")
 	}
 
 	midInputMethodManagerAcceptStylusHandwritingDelegation5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;ILjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
@@ -131,7 +123,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation")
 	}
 
 	midInputMethodManagerAcceptStylusHandwritingDelegation4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
@@ -139,7 +130,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation")
 	}
 
 	midInputMethodManagerDispatchKeyEventFromInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "dispatchKeyEventFromInputMethod", "(Landroid/view/View;Landroid/view/KeyEvent;)V")
@@ -147,7 +137,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.dispatchKeyEventFromInputMethod")
 	}
 
 	midInputMethodManagerDisplayCompletions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "displayCompletions", "(Landroid/view/View;[Landroid/view/inputmethod/CompletionInfo;)V")
@@ -155,7 +144,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.displayCompletions")
 	}
 
 	midInputMethodManagerGetCurrentInputMethodInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getCurrentInputMethodInfo", "()Landroid/view/inputmethod/InputMethodInfo;")
@@ -163,7 +151,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.getCurrentInputMethodInfo")
 	}
 
 	midInputMethodManagerGetCurrentInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getCurrentInputMethodSubtype", "()Landroid/view/inputmethod/InputMethodSubtype;")
@@ -171,7 +158,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.getCurrentInputMethodSubtype")
 	}
 
 	midInputMethodManagerGetEnabledInputMethodList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getEnabledInputMethodList", "()Ljava/util/List;")
@@ -179,7 +165,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.getEnabledInputMethodList")
 	}
 
 	midInputMethodManagerGetEnabledInputMethodSubtypeList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getEnabledInputMethodSubtypeList", "(Landroid/view/inputmethod/InputMethodInfo;Z)Ljava/util/List;")
@@ -187,7 +172,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.getEnabledInputMethodSubtypeList")
 	}
 
 	midInputMethodManagerGetInputMethodList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getInputMethodList", "()Ljava/util/List;")
@@ -195,7 +179,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.getInputMethodList")
 	}
 
 	midInputMethodManagerGetLastInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getLastInputMethodSubtype", "()Landroid/view/inputmethod/InputMethodSubtype;")
@@ -203,7 +186,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.getLastInputMethodSubtype")
 	}
 
 	midInputMethodManagerHideSoftInputFromInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "hideSoftInputFromInputMethod", "(Landroid/os/IBinder;I)V")
@@ -211,7 +193,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.hideSoftInputFromInputMethod")
 	}
 
 	midInputMethodManagerHideSoftInputFromWindow2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "hideSoftInputFromWindow", "(Landroid/os/IBinder;I)Z")
@@ -219,7 +200,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow")
 	}
 
 	midInputMethodManagerHideSoftInputFromWindow3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "hideSoftInputFromWindow", "(Landroid/os/IBinder;ILandroid/os/ResultReceiver;)Z")
@@ -227,7 +207,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow")
 	}
 
 	midInputMethodManagerHideStatusIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "hideStatusIcon", "(Landroid/os/IBinder;)V")
@@ -235,7 +214,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.hideStatusIcon")
 	}
 
 	midInputMethodManagerInvalidateInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "invalidateInput", "(Landroid/view/View;)V")
@@ -243,7 +221,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.invalidateInput")
 	}
 
 	midInputMethodManagerIsAcceptingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isAcceptingText", "()Z")
@@ -251,7 +228,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isAcceptingText")
 	}
 
 	midInputMethodManagerIsActive0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isActive", "()Z")
@@ -259,7 +235,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isActive")
 	}
 
 	midInputMethodManagerIsActive1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isActive", "(Landroid/view/View;)Z")
@@ -267,7 +242,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isActive")
 	}
 
 	midInputMethodManagerIsConnectionlessStylusHandwritingAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isConnectionlessStylusHandwritingAvailable", "()Z")
@@ -275,7 +249,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isConnectionlessStylusHandwritingAvailable")
 	}
 
 	midInputMethodManagerIsFullscreenMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isFullscreenMode", "()Z")
@@ -283,7 +256,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isFullscreenMode")
 	}
 
 	midInputMethodManagerIsInputMethodSuppressingSpellChecker, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isInputMethodSuppressingSpellChecker", "()Z")
@@ -291,7 +263,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isInputMethodSuppressingSpellChecker")
 	}
 
 	midInputMethodManagerIsStylusHandwritingAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isStylusHandwritingAvailable", "()Z")
@@ -299,7 +270,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isStylusHandwritingAvailable")
 	}
 
 	midInputMethodManagerIsWatchingCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "isWatchingCursor", "(Landroid/view/View;)Z")
@@ -307,7 +277,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.isWatchingCursor")
 	}
 
 	midInputMethodManagerPrepareStylusHandwritingDelegation1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "prepareStylusHandwritingDelegation", "(Landroid/view/View;)V")
@@ -315,7 +284,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.prepareStylusHandwritingDelegation")
 	}
 
 	midInputMethodManagerPrepareStylusHandwritingDelegation2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "prepareStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;)V")
@@ -323,7 +291,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.prepareStylusHandwritingDelegation")
 	}
 
 	midInputMethodManagerRestartInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "restartInput", "(Landroid/view/View;)V")
@@ -331,7 +298,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.restartInput")
 	}
 
 	midInputMethodManagerSendAppPrivateCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "sendAppPrivateCommand", "(Landroid/view/View;Ljava/lang/String;Landroid/os/Bundle;)V")
@@ -339,7 +305,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.sendAppPrivateCommand")
 	}
 
 	midInputMethodManagerSetAdditionalInputMethodSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "setAdditionalInputMethodSubtypes", "(Ljava/lang/String;[Landroid/view/inputmethod/InputMethodSubtype;)V")
@@ -347,7 +312,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.setAdditionalInputMethodSubtypes")
 	}
 
 	midInputMethodManagerSetCurrentInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "setCurrentInputMethodSubtype", "(Landroid/view/inputmethod/InputMethodSubtype;)Z")
@@ -355,7 +319,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.setCurrentInputMethodSubtype")
 	}
 
 	midInputMethodManagerSetExplicitlyEnabledInputMethodSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "setExplicitlyEnabledInputMethodSubtypes", "(Ljava/lang/String;[I)V")
@@ -363,7 +326,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.setExplicitlyEnabledInputMethodSubtypes")
 	}
 
 	midInputMethodManagerSetInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "setInputMethod", "(Landroid/os/IBinder;Ljava/lang/String;)V")
@@ -371,7 +333,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.setInputMethod")
 	}
 
 	midInputMethodManagerSetInputMethodAndSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "setInputMethodAndSubtype", "(Landroid/os/IBinder;Ljava/lang/String;Landroid/view/inputmethod/InputMethodSubtype;)V")
@@ -379,7 +340,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.setInputMethodAndSubtype")
 	}
 
 	midInputMethodManagerShouldOfferSwitchingToNextInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "shouldOfferSwitchingToNextInputMethod", "(Landroid/os/IBinder;)Z")
@@ -387,7 +347,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.shouldOfferSwitchingToNextInputMethod")
 	}
 
 	midInputMethodManagerShowInputMethodAndSubtypeEnabler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "showInputMethodAndSubtypeEnabler", "(Ljava/lang/String;)V")
@@ -395,7 +354,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.showInputMethodAndSubtypeEnabler")
 	}
 
 	midInputMethodManagerShowInputMethodPicker, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "showInputMethodPicker", "()V")
@@ -403,7 +361,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.showInputMethodPicker")
 	}
 
 	midInputMethodManagerShowSoftInput2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "showSoftInput", "(Landroid/view/View;I)Z")
@@ -411,7 +368,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.showSoftInput")
 	}
 
 	midInputMethodManagerShowSoftInput3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "showSoftInput", "(Landroid/view/View;ILandroid/os/ResultReceiver;)Z")
@@ -419,7 +375,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.showSoftInput")
 	}
 
 	midInputMethodManagerShowSoftInputFromInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "showSoftInputFromInputMethod", "(Landroid/os/IBinder;I)V")
@@ -427,7 +382,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.showSoftInputFromInputMethod")
 	}
 
 	midInputMethodManagerShowStatusIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "showStatusIcon", "(Landroid/os/IBinder;Ljava/lang/String;I)V")
@@ -435,7 +389,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.showStatusIcon")
 	}
 
 	midInputMethodManagerStartConnectionlessStylusHandwriting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "startConnectionlessStylusHandwriting", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;Ljava/util/concurrent/Executor;Landroid/view/inputmethod/ConnectionlessHandwritingCallback;)V")
@@ -443,7 +396,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwriting")
 	}
 
 	midInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "startConnectionlessStylusHandwritingForDelegation", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/view/inputmethod/ConnectionlessHandwritingCallback;)V")
@@ -451,7 +403,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwritingForDelegation")
 	}
 
 	midInputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "startConnectionlessStylusHandwritingForDelegation", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;Ljava/util/concurrent/Executor;Landroid/view/inputmethod/ConnectionlessHandwritingCallback;)V")
@@ -459,7 +410,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwritingForDelegation")
 	}
 
 	midInputMethodManagerStartStylusHandwriting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "startStylusHandwriting", "(Landroid/view/View;)V")
@@ -467,7 +417,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.startStylusHandwriting")
 	}
 
 	midInputMethodManagerSwitchToLastInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "switchToLastInputMethod", "(Landroid/os/IBinder;)Z")
@@ -475,7 +424,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.switchToLastInputMethod")
 	}
 
 	midInputMethodManagerSwitchToNextInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "switchToNextInputMethod", "(Landroid/os/IBinder;Z)Z")
@@ -483,7 +431,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.switchToNextInputMethod")
 	}
 
 	midInputMethodManagerToggleSoftInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "toggleSoftInput", "(II)V")
@@ -491,7 +438,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.toggleSoftInput")
 	}
 
 	midInputMethodManagerToggleSoftInputFromWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "toggleSoftInputFromWindow", "(Landroid/os/IBinder;II)V")
@@ -499,7 +445,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.toggleSoftInputFromWindow")
 	}
 
 	midInputMethodManagerUpdateCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "updateCursor", "(Landroid/view/View;IIII)V")
@@ -507,7 +452,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.updateCursor")
 	}
 
 	midInputMethodManagerUpdateCursorAnchorInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "updateCursorAnchorInfo", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;)V")
@@ -515,7 +459,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.updateCursorAnchorInfo")
 	}
 
 	midInputMethodManagerUpdateExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "updateExtractedText", "(Landroid/view/View;ILandroid/view/inputmethod/ExtractedText;)V")
@@ -523,7 +466,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.updateExtractedText")
 	}
 
 	midInputMethodManagerUpdateSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "updateSelection", "(Landroid/view/View;IIII)V")
@@ -531,7 +473,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.updateSelection")
 	}
 
 	midInputMethodManagerViewClicked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "viewClicked", "(Landroid/view/View;)V")
@@ -539,7 +480,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.view.inputmethod.InputMethodManager.viewClicked")
 	}
 
 	return nil

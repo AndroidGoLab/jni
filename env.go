@@ -3,7 +3,6 @@
 package jni
 
 import (
-	"fmt"
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni/capi"
@@ -31,6 +30,9 @@ func (e *Env) AllocObject(cls *Class) (*Object, error) {
 	_ret := capi.AllocObject(e.ptr, capi.Class(cls.Ref()))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
+	}
+	if _ret == 0 {
+		return nil, nil
 	}
 	return &Object{ref: _ret}, nil
 }
@@ -385,6 +387,9 @@ func (e *Env) CallNonvirtualObjectMethod(
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
 	}
+	if _ret == 0 {
+		return nil, nil
+	}
 	return &Object{ref: _ret}, nil
 }
 
@@ -455,6 +460,9 @@ func (e *Env) CallObjectMethod(
 	_ret := capi.CallObjectMethodA(e.ptr, obj.Ref(), method, cArgs)
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
+	}
+	if _ret == 0 {
+		return nil, nil
 	}
 	return &Object{ref: _ret}, nil
 }
@@ -663,6 +671,9 @@ func (e *Env) CallStaticObjectMethod(
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
 	}
+	if _ret == 0 {
+		return nil, nil
+	}
 	return &Object{ref: _ret}, nil
 }
 
@@ -741,13 +752,13 @@ func (e *Env) DefineClass(
 	loader *Object,
 	buf []byte,
 ) (*Class, error) {
-	if len(buf) == 0 {
-		return nil, fmt.Errorf("jni: DefineClass: empty class bytes")
-	}
 	cName := append([]byte(name), 0)
 	_ret := capi.DefineClass(e.ptr, (*capi.Cchar)(unsafe.Pointer(&cName[0])), loader.Ref(), (*capi.Jbyte)(unsafe.Pointer(&buf[0])), capi.Jint(len(buf)))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
+	}
+	if _ret == 0 {
+		return nil, nil
 	}
 	return &Class{Object{ref: capi.Object(_ret)}}, nil
 }
@@ -795,6 +806,9 @@ func (e *Env) ExceptionDescribe() {
 // ExceptionOccurred wraps the JNI ExceptionOccurred function.
 func (e *Env) ExceptionOccurred() *Throwable {
 	_ret := capi.ExceptionOccurred(e.ptr)
+	if _ret == 0 {
+		return nil
+	}
 	return &Throwable{Object{ref: capi.Object(_ret)}}
 }
 
@@ -810,6 +824,9 @@ func (e *Env) FindClass(name string) (*Class, error) {
 	_ret := capi.FindClass(e.ptr, (*capi.Cchar)(unsafe.Pointer(&cName[0])))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
+	}
+	if _ret == 0 {
+		return nil, nil
 	}
 	return &Class{Object{ref: capi.Object(_ret)}}, nil
 }
@@ -1034,18 +1051,27 @@ func (e *Env) GetObjectArrayElement(array *ObjectArray, index int32) (*Object, e
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
 	}
+	if _ret == 0 {
+		return nil, nil
+	}
 	return &Object{ref: _ret}, nil
 }
 
 // GetObjectClass wraps the JNI GetObjectClass function.
 func (e *Env) GetObjectClass(obj *Object) *Class {
 	_ret := capi.GetObjectClass(e.ptr, obj.Ref())
+	if _ret == 0 {
+		return nil
+	}
 	return &Class{Object{ref: capi.Object(_ret)}}
 }
 
 // GetObjectField wraps the JNI GetObjectField function.
 func (e *Env) GetObjectField(obj *Object, field FieldID) *Object {
 	_ret := capi.GetObjectField(e.ptr, obj.Ref(), field)
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 
@@ -1158,6 +1184,9 @@ func (e *Env) GetStaticMethodID(
 // GetStaticObjectField wraps the JNI GetStaticObjectField function.
 func (e *Env) GetStaticObjectField(cls *Class, field FieldID) *Object {
 	_ret := capi.GetStaticObjectField(e.ptr, capi.Class(cls.Ref()), field)
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 
@@ -1195,9 +1224,6 @@ func (e *Env) GetStringRegion(
 	len int32,
 	buf []uint16,
 ) error {
-	if buf == nil {
-		return nil
-	}
 	capi.GetStringRegion(e.ptr, capi.String(str.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Jchar)(unsafe.Pointer(&buf[0])))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return err
@@ -1227,9 +1253,6 @@ func (e *Env) GetStringUTFRegion(
 	len int32,
 	buf []byte,
 ) error {
-	if buf == nil {
-		return nil
-	}
 	capi.GetStringUTFRegion(e.ptr, capi.String(str.Ref()), capi.Jint(start), capi.Jint(len), (*capi.Cchar)(unsafe.Pointer(&buf[0])))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return err
@@ -1240,6 +1263,9 @@ func (e *Env) GetStringUTFRegion(
 // GetSuperclass wraps the JNI GetSuperclass function.
 func (e *Env) GetSuperclass(cls *Class) *Class {
 	_ret := capi.GetSuperclass(e.ptr, capi.Class(cls.Ref()))
+	if _ret == 0 {
+		return nil
+	}
 	return &Class{Object{ref: capi.Object(_ret)}}
 }
 
@@ -1288,60 +1314,90 @@ func (e *Env) MonitorExit(obj *Object) error {
 // NewBooleanArray wraps the JNI NewBooleanArray function.
 func (e *Env) NewBooleanArray(length int32) *BooleanArray {
 	_ret := capi.NewBooleanArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &BooleanArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
 // NewByteArray wraps the JNI NewByteArray function.
 func (e *Env) NewByteArray(length int32) *ByteArray {
 	_ret := capi.NewByteArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &ByteArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
 // NewCharArray wraps the JNI NewCharArray function.
 func (e *Env) NewCharArray(length int32) *CharArray {
 	_ret := capi.NewCharArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &CharArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
 // NewDirectByteBuffer wraps the JNI NewDirectByteBuffer function.
 func (e *Env) NewDirectByteBuffer(address unsafe.Pointer, capacity int64) *Object {
 	_ret := capi.NewDirectByteBuffer(e.ptr, address, capi.Jlong(capacity))
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 
 // NewDoubleArray wraps the JNI NewDoubleArray function.
 func (e *Env) NewDoubleArray(length int32) *DoubleArray {
 	_ret := capi.NewDoubleArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &DoubleArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
 // NewFloatArray wraps the JNI NewFloatArray function.
 func (e *Env) NewFloatArray(length int32) *FloatArray {
 	_ret := capi.NewFloatArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &FloatArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
 // NewGlobalRef wraps the JNI NewGlobalRef function.
 func (e *Env) NewGlobalRef(obj *Object) *Object {
 	_ret := capi.NewGlobalRef(e.ptr, obj.Ref())
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 
 // NewIntArray wraps the JNI NewIntArray function.
 func (e *Env) NewIntArray(length int32) *IntArray {
 	_ret := capi.NewIntArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &IntArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
 // NewLocalRef wraps the JNI NewLocalRef function.
 func (e *Env) NewLocalRef(obj *Object) *Object {
 	_ret := capi.NewLocalRef(e.ptr, obj.Ref())
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 
 // NewLongArray wraps the JNI NewLongArray function.
 func (e *Env) NewLongArray(length int32) *LongArray {
 	_ret := capi.NewLongArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &LongArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
@@ -1365,6 +1421,9 @@ func (e *Env) NewObject(
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
 	}
+	if _ret == 0 {
+		return nil, nil
+	}
 	return &Object{ref: _ret}, nil
 }
 
@@ -1378,23 +1437,29 @@ func (e *Env) NewObjectArray(
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
 	}
+	if _ret == 0 {
+		return nil, nil
+	}
 	return &ObjectArray{Array{Object{ref: capi.Object(_ret)}}}, nil
 }
 
 // NewShortArray wraps the JNI NewShortArray function.
 func (e *Env) NewShortArray(length int32) *ShortArray {
 	_ret := capi.NewShortArray(e.ptr, capi.Jint(length))
+	if _ret == 0 {
+		return nil
+	}
 	return &ShortArray{Array{Object{ref: capi.Object(_ret)}}}
 }
 
 // NewString wraps the JNI NewString function.
 func (e *Env) NewString(unicodeChars []uint16) (*String, error) {
-	if len(unicodeChars) == 0 {
-		return e.NewStringUTF("")
-	}
 	_ret := capi.NewString(e.ptr, (*capi.Jchar)(unsafe.Pointer(&unicodeChars[0])), capi.Jint(len(unicodeChars)))
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
+	}
+	if _ret == 0 {
+		return nil, nil
 	}
 	return &String{Object{ref: capi.Object(_ret)}}, nil
 }
@@ -1406,18 +1471,27 @@ func (e *Env) NewStringUTF(bytes string) (*String, error) {
 	if err := jnierr.CheckException(e.ptr); err != nil {
 		return nil, err
 	}
+	if _ret == 0 {
+		return nil, nil
+	}
 	return &String{Object{ref: capi.Object(_ret)}}, nil
 }
 
 // NewWeakGlobalRef wraps the JNI NewWeakGlobalRef function.
 func (e *Env) NewWeakGlobalRef(obj *Object) *WeakRef {
 	_ret := capi.NewWeakGlobalRef(e.ptr, obj.Ref())
+	if _ret == 0 {
+		return nil
+	}
 	return &WeakRef{Object{ref: capi.Object(_ret)}}
 }
 
 // PopLocalFrame wraps the JNI PopLocalFrame function.
 func (e *Env) PopLocalFrame(result *Object) *Object {
 	_ret := capi.PopLocalFrame(e.ptr, result.Ref())
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 
@@ -1824,6 +1898,9 @@ func (e *Env) ToReflectedField(
 		cIsStatic = capi.JNI_TRUE
 	}
 	_ret := capi.ToReflectedField(e.ptr, capi.Class(cls.Ref()), field, cIsStatic)
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 
@@ -1838,6 +1915,9 @@ func (e *Env) ToReflectedMethod(
 		cIsStatic = capi.JNI_TRUE
 	}
 	_ret := capi.ToReflectedMethod(e.ptr, capi.Class(cls.Ref()), method, cIsStatic)
+	if _ret == 0 {
+		return nil
+	}
 	return &Object{ref: _ret}
 }
 

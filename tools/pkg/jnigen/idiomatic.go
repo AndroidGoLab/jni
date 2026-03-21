@@ -179,6 +179,16 @@ func buildRenderMethod(m MergedMethod) RenderMethod {
 	// Build return conversion.
 	if rm.HasReturn && nonErrorReturn != nil {
 		rm.ReturnConversion = buildReturnConversion(nonErrorReturn.GoType, nonErrorReturn.Transform)
+		// Object-like return types can be Java null (zero ref). In Go we
+		// represent that as a nil pointer so callers can check naturally.
+		rm.NullableReturn = isNullableReturnType(nonErrorReturn.GoType)
+		if rm.NullableReturn {
+			if rm.CheckException {
+				rm.NullReturn = "nil, nil"
+			} else {
+				rm.NullReturn = "nil"
+			}
+		}
 	}
 
 	return rm
@@ -428,6 +438,23 @@ func buildReturnConversion(goType, transform string) string {
 		}
 		return "_ret"
 	}
+}
+
+// isNullableReturnType reports whether the Go return type wraps a JNI
+// reference that can be Java null (zero). When true, the generated code
+// must check _ret == 0 and return Go nil instead of a non-nil wrapper
+// around a zero ref.
+func isNullableReturnType(goType string) bool {
+	switch goType {
+	case "*Object", "*Class", "*String", "*Throwable",
+		"*Array", "*ObjectArray", "*WeakRef":
+		return true
+	}
+	// Typed arrays (*BooleanArray, *ByteArray, etc.)
+	if strings.HasPrefix(goType, "*") && strings.HasSuffix(goType, "Array") {
+		return true
+	}
+	return false
 }
 
 func zeroValue(goType string) string {

@@ -28,10 +28,12 @@ func NewChannel(vm *jni.VM, id, name string, importance int32) (*Channel, error)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jID.Object)
 		jName, err := env.NewStringUTF(name)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jName.Object)
 		obj, err := env.NewObject(
 			(*jni.Class)(unsafe.Pointer(clsChannel)),
 			mid,
@@ -43,6 +45,7 @@ func NewChannel(vm *jni.VM, id, name string, importance int32) (*Channel, error)
 			return fmt.Errorf("new NotificationChannel: %w", err)
 		}
 		ch.Obj = env.NewGlobalRef(obj)
+		env.DeleteLocalRef(obj)
 		return nil
 	})
 	if err != nil {
@@ -72,6 +75,7 @@ func NewBuilder(vm *jni.VM, context *jni.Object, channelID string) (*Builder, er
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jChannelID.Object)
 		obj, err := env.NewObject(
 			(*jni.Class)(unsafe.Pointer(clsBuilder)),
 			mid,
@@ -82,6 +86,7 @@ func NewBuilder(vm *jni.VM, context *jni.Object, channelID string) (*Builder, er
 			return fmt.Errorf("new Notification$Builder: %w", err)
 		}
 		b.Obj = env.NewGlobalRef(obj)
+		env.DeleteLocalRef(obj)
 		return nil
 	})
 	if err != nil {

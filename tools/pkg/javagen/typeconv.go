@@ -241,23 +241,6 @@ func ParamConversionCode(p MergedParam) string {
 	return ""
 }
 
-// ReturnConversionCode generates Go code to convert a JNI return value to Go.
-func ReturnConversionCode(javaType, goType string) string {
-	tc := ResolveType(javaType)
-	switch {
-	case javaType == "void":
-		return ""
-	case javaType == "boolean":
-		return "result != 0"
-	case javaType == "String" || javaType == "java.lang.String":
-		return "env.GoString((*jni.String)(unsafe.Pointer(resultObj)))"
-	case tc.IsObject:
-		return "resultObj"
-	default:
-		return fmt.Sprintf("%s(result)", goType)
-	}
-}
-
 // normalizeJNISig normalizes a pre-formatted JNI signature that may contain dots
 // instead of slashes. For example, "[Landroid.foo.Bar;" becomes "[Landroid/foo/Bar;".
 func normalizeJNISig(sig string) string {

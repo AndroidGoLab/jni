@@ -58,12 +58,6 @@ var (
 	midManagerGetStrings                jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -93,7 +87,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.authenticate")
 	}
 
 	midPromptAuthenticate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "authenticate", "(Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
@@ -101,7 +94,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.authenticate")
 	}
 
 	midPromptGetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getAllowedAuthenticators", "()I")
@@ -109,7 +101,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getAllowedAuthenticators")
 	}
 
 	midPromptGetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getContentView", "()Landroid/hardware/biometrics/PromptContentView;")
@@ -117,7 +108,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getContentView")
 	}
 
 	midPromptGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getDescription", "()Ljava/lang/CharSequence;")
@@ -125,7 +115,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getDescription")
 	}
 
 	midPromptGetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoBitmap", "()Landroid/graphics/Bitmap;")
@@ -133,7 +122,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getLogoBitmap")
 	}
 
 	midPromptGetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoDescription", "()Ljava/lang/String;")
@@ -141,7 +129,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getLogoDescription")
 	}
 
 	midPromptGetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoRes", "()I")
@@ -149,7 +136,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getLogoRes")
 	}
 
 	midPromptGetNegativeButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getNegativeButtonText", "()Ljava/lang/CharSequence;")
@@ -157,7 +143,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getNegativeButtonText")
 	}
 
 	midPromptGetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getSubtitle", "()Ljava/lang/CharSequence;")
@@ -165,7 +150,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getSubtitle")
 	}
 
 	midPromptGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getTitle", "()Ljava/lang/CharSequence;")
@@ -173,7 +157,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getTitle")
 	}
 
 	midPromptIsConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "isConfirmationRequired", "()Z")
@@ -181,7 +164,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.isConfirmationRequired")
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$Builder")
@@ -195,7 +177,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.build")
 	}
 
 	midPromptBuilderSetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setAllowedAuthenticators", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -203,7 +184,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setAllowedAuthenticators")
 	}
 
 	midPromptBuilderSetConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setConfirmationRequired", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -211,7 +191,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setConfirmationRequired")
 	}
 
 	midPromptBuilderSetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setContentView", "(Landroid/hardware/biometrics/PromptContentView;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -219,7 +198,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setContentView")
 	}
 
 	midPromptBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -227,7 +205,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setDescription")
 	}
 
 	midPromptBuilderSetDeviceCredentialAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setDeviceCredentialAllowed", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -235,7 +212,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setDeviceCredentialAllowed")
 	}
 
 	midPromptBuilderSetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoBitmap", "(Landroid/graphics/Bitmap;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -243,7 +219,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setLogoBitmap")
 	}
 
 	midPromptBuilderSetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -251,7 +226,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setLogoDescription")
 	}
 
 	midPromptBuilderSetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoRes", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -259,7 +233,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setLogoRes")
 	}
 
 	midPromptBuilderSetNegativeButton, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setNegativeButton", "(Ljava/lang/CharSequence;Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -267,7 +240,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setNegativeButton")
 	}
 
 	midPromptBuilderSetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setSubtitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -275,7 +247,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setSubtitle")
 	}
 
 	midPromptBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
@@ -283,7 +254,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setTitle")
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricManager")
@@ -297,7 +267,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.canAuthenticate")
 	}
 
 	midManagerCanAuthenticate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canAuthenticate", "(I)I")
@@ -305,7 +274,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.canAuthenticate")
 	}
 
 	midManagerGetLastAuthenticationTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLastAuthenticationTime", "(I)J")
@@ -313,7 +281,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.getLastAuthenticationTime")
 	}
 
 	midManagerGetStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStrings", "(I)Landroid/hardware/biometrics/BiometricManager$Strings;")
@@ -321,7 +288,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.getStrings")
 	}
 
 	return nil

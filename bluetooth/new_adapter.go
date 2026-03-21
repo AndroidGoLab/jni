@@ -28,11 +28,13 @@ func NewAdapter(ctx *app.Context) (*Adapter, error) {
 		if svc == nil || svc.Ref() == 0 {
 			return fmt.Errorf("bluetooth service not available")
 		}
+		defer env.DeleteGlobalRef(svc)
 
 		bmClass, err := env.FindClass("android/bluetooth/BluetoothManager")
 		if err != nil {
 			return fmt.Errorf("find BluetoothManager: %w", err)
 		}
+		defer env.DeleteLocalRef(&bmClass.Object)
 		getAdapterMid, err := env.GetMethodID(bmClass, "getAdapter",
 			"()Landroid/bluetooth/BluetoothAdapter;")
 		if err != nil {
@@ -47,6 +49,7 @@ func NewAdapter(ctx *app.Context) (*Adapter, error) {
 		}
 
 		adapter.Obj = env.NewGlobalRef(adapterObj)
+		env.DeleteLocalRef(adapterObj)
 		return nil
 	})
 	if err != nil {

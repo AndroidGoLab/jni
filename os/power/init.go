@@ -63,12 +63,6 @@ var (
 	midManagerWakeLockToString            jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -98,7 +92,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.addThermalHeadroomListener")
 	}
 
 	midManagerAddThermalHeadroomListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalHeadroomListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
@@ -106,7 +99,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.addThermalHeadroomListener")
 	}
 
 	midManagerAddThermalStatusListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
@@ -114,7 +106,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.addThermalStatusListener")
 	}
 
 	midManagerAddThermalStatusListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalStatusListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
@@ -122,7 +113,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.addThermalStatusListener")
 	}
 
 	midManagerGetBatteryDischargePrediction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getBatteryDischargePrediction", "()Ljava/time/Duration;")
@@ -130,7 +120,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.getBatteryDischargePrediction")
 	}
 
 	midManagerGetCurrentThermalStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCurrentThermalStatus", "()I")
@@ -138,7 +127,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.getCurrentThermalStatus")
 	}
 
 	midManagerGetLocationPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLocationPowerSaveMode", "()I")
@@ -146,7 +134,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.getLocationPowerSaveMode")
 	}
 
 	midManagerGetThermalHeadroom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getThermalHeadroom", "(I)F")
@@ -154,7 +141,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.getThermalHeadroom")
 	}
 
 	midManagerIsAllowedInLowPowerStandby1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAllowedInLowPowerStandby", "(I)Z")
@@ -162,7 +148,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isAllowedInLowPowerStandby")
 	}
 
 	midManagerIsAllowedInLowPowerStandby1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAllowedInLowPowerStandby", "(Ljava/lang/String;)Z")
@@ -170,7 +155,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isAllowedInLowPowerStandby")
 	}
 
 	midManagerIsBatteryDischargePredictionPersonalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isBatteryDischargePredictionPersonalized", "()Z")
@@ -178,7 +162,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isBatteryDischargePredictionPersonalized")
 	}
 
 	midManagerIsDeviceIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceIdleMode", "()Z")
@@ -186,7 +169,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isDeviceIdleMode")
 	}
 
 	midManagerIsDeviceLightIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceLightIdleMode", "()Z")
@@ -194,7 +176,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isDeviceLightIdleMode")
 	}
 
 	midManagerIsExemptFromLowPowerStandby, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isExemptFromLowPowerStandby", "()Z")
@@ -202,7 +183,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isExemptFromLowPowerStandby")
 	}
 
 	midManagerIsIgnoringBatteryOptimizations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isIgnoringBatteryOptimizations", "(Ljava/lang/String;)Z")
@@ -210,7 +190,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isIgnoringBatteryOptimizations")
 	}
 
 	midManagerIsInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInteractive", "()Z")
@@ -218,7 +197,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isInteractive")
 	}
 
 	midManagerIsLowPowerStandbyEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isLowPowerStandbyEnabled", "()Z")
@@ -226,7 +204,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isLowPowerStandbyEnabled")
 	}
 
 	midManagerIsPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPowerSaveMode", "()Z")
@@ -234,7 +211,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isPowerSaveMode")
 	}
 
 	midManagerIsRebootingUserspaceSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRebootingUserspaceSupported", "()Z")
@@ -242,7 +218,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isRebootingUserspaceSupported")
 	}
 
 	midManagerIsScreenOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isScreenOn", "()Z")
@@ -250,7 +225,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isScreenOn")
 	}
 
 	midManagerIsSustainedPerformanceModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSustainedPerformanceModeSupported", "()Z")
@@ -258,7 +232,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isSustainedPerformanceModeSupported")
 	}
 
 	midManagerIsWakeLockLevelSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isWakeLockLevelSupported", "(I)Z")
@@ -266,7 +239,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.isWakeLockLevelSupported")
 	}
 
 	midManagerNewWakeLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;")
@@ -274,7 +246,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.newWakeLock")
 	}
 
 	midManagerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "reboot", "(Ljava/lang/String;)V")
@@ -282,7 +253,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.reboot")
 	}
 
 	midManagerRemoveThermalHeadroomListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeThermalHeadroomListener", "(Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
@@ -290,7 +260,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.removeThermalHeadroomListener")
 	}
 
 	midManagerRemoveThermalStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
@@ -298,7 +267,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager.removeThermalStatusListener")
 	}
 
 	c, err = env.FindClass("android/os/PowerManager$WakeLock")
@@ -312,7 +280,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.acquire")
 	}
 
 	midManagerWakeLockAcquire1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "acquire", "(J)V")
@@ -320,7 +287,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.acquire")
 	}
 
 	midManagerWakeLockIsHeld, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "isHeld", "()Z")
@@ -328,7 +294,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.isHeld")
 	}
 
 	midManagerWakeLockRelease0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "release", "()V")
@@ -336,7 +301,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.release")
 	}
 
 	midManagerWakeLockRelease1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "release", "(I)V")
@@ -344,7 +308,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.release")
 	}
 
 	midManagerWakeLockSetReferenceCounted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setReferenceCounted", "(Z)V")
@@ -352,7 +315,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.setReferenceCounted")
 	}
 
 	midManagerWakeLockSetStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setStateListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$WakeLockStateListener;)V")
@@ -360,7 +322,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.setStateListener")
 	}
 
 	midManagerWakeLockSetWorkSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setWorkSource", "(Landroid/os/WorkSource;)V")
@@ -368,7 +329,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.setWorkSource")
 	}
 
 	midManagerWakeLockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "toString", "()Ljava/lang/String;")
@@ -376,7 +336,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.PowerManager$WakeLock.toString")
 	}
 
 	return nil

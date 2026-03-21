@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"fmt"
 	"strings"
+	"sync"
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
@@ -67,6 +68,10 @@ var (
 	activityRef      *jni.Object
 	nativeWindow     *C.ANativeWindow
 	outputBuf        bytes.Buffer
+	// OutputMu protects all reads and writes to the shared output buffer.
+	// Callers that write to the *bytes.Buffer from background goroutines
+	// must hold this lock.
+	OutputMu         sync.Mutex
 	exampleStarted   bool
 	permissionsAsked bool
 	windowWidth      int
@@ -85,7 +90,9 @@ func OnCreate(
 ) {
 	vm = cvm
 	activityRef = activity
+	OutputMu.Lock()
 	outputBuf.Reset()
+	OutputMu.Unlock()
 	exampleStarted = false
 }
 
@@ -108,7 +115,9 @@ func OnNativeWindowCreated(windowPtr unsafe.Pointer) {
 			var err error
 			needed, err = getUngrantedPermissions(env, activityRef)
 			if err != nil {
+				OutputMu.Lock()
 				fmt.Fprintf(&outputBuf, "permissions check: %v\n", err)
+				OutputMu.Unlock()
 			}
 			return nil
 		})
@@ -135,7 +144,9 @@ func startExample() {
 	go func() {
 		if runFunc != nil {
 			if err := runFunc(vm, &outputBuf); err != nil {
+				OutputMu.Lock()
 				fmt.Fprintf(&outputBuf, "ERROR: %v\n", err)
+				OutputMu.Unlock()
 			}
 		}
 		RenderOutput()
@@ -145,7 +156,9 @@ func startExample() {
 // RenderOutput re-renders the current output buffer to the screen.
 // Call from background goroutines after appending to the shared buffer.
 func RenderOutput() {
+	OutputMu.Lock()
 	text := outputBuf.String()
+	OutputMu.Unlock()
 	if text == "" {
 		text = "(no output)"
 	}
@@ -154,8 +167,15 @@ func RenderOutput() {
 
 // OnResume is called when the activity resumes (e.g. after permission dialog).
 func OnResume(activity *jni.Object) {
-	if nativeWindow != nil && outputBuf.Len() > 0 {
-		renderText(outputBuf.String())
+	OutputMu.Lock()
+	hasOutput := outputBuf.Len() > 0
+	var text string
+	if hasOutput {
+		text = outputBuf.String()
+	}
+	OutputMu.Unlock()
+	if nativeWindow != nil && hasOutput {
+		renderText(text)
 	}
 
 	// After permission dialog, try to start the example.

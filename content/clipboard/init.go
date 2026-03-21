@@ -63,12 +63,6 @@ var (
 	midClipDataItemToString           jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -98,7 +92,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.addPrimaryClipChangedListener")
 	}
 
 	midManagerClearPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "clearPrimaryClip", "()V")
@@ -106,7 +99,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.clearPrimaryClip")
 	}
 
 	midManagerGetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrimaryClip", "()Landroid/content/ClipData;")
@@ -114,7 +106,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.getPrimaryClip")
 	}
 
 	midManagerGetPrimaryClipDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrimaryClipDescription", "()Landroid/content/ClipDescription;")
@@ -122,7 +113,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.getPrimaryClipDescription")
 	}
 
 	midManagerGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getText", "()Ljava/lang/CharSequence;")
@@ -130,7 +120,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.getText")
 	}
 
 	midManagerHasPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasPrimaryClip", "()Z")
@@ -138,7 +127,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.hasPrimaryClip")
 	}
 
 	midManagerHasText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasText", "()Z")
@@ -146,7 +134,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.hasText")
 	}
 
 	midManagerRemovePrimaryClipChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removePrimaryClipChangedListener", "(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V")
@@ -154,7 +141,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.removePrimaryClipChangedListener")
 	}
 
 	midManagerSetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setPrimaryClip", "(Landroid/content/ClipData;)V")
@@ -162,7 +148,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.setPrimaryClip")
 	}
 
 	midManagerSetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setText", "(Ljava/lang/CharSequence;)V")
@@ -170,7 +155,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipboardManager.setText")
 	}
 
 	c, err = env.FindClass("android/content/ClipData")
@@ -184,7 +168,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.addItem")
 	}
 
 	midClipDataAddItem2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "addItem", "(Landroid/content/ContentResolver;Landroid/content/ClipData$Item;)V")
@@ -192,7 +175,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.addItem")
 	}
 
 	midClipDataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "describeContents", "()I")
@@ -200,7 +182,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.describeContents")
 	}
 
 	midClipDataGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "getDescription", "()Landroid/content/ClipDescription;")
@@ -208,7 +189,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.getDescription")
 	}
 
 	midClipDataGetItemAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "getItemAt", "(I)Landroid/content/ClipData$Item;")
@@ -216,7 +196,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.getItemAt")
 	}
 
 	midClipDataGetItemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "getItemCount", "()I")
@@ -224,7 +203,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.getItemCount")
 	}
 
 	midClipDataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "toString", "()Ljava/lang/String;")
@@ -232,7 +210,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.toString")
 	}
 
 	midClipDataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "writeToParcel", "(Landroid/os/Parcel;I)V")
@@ -240,7 +217,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.writeToParcel")
 	}
 
 	midClipDataNewHtmlText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newHtmlText", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/String;)Landroid/content/ClipData;")
@@ -248,7 +224,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.newHtmlText")
 	}
 
 	midClipDataNewIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newIntent", "(Ljava/lang/CharSequence;Landroid/content/Intent;)Landroid/content/ClipData;")
@@ -256,7 +231,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.newIntent")
 	}
 
 	midClipDataNewPlainText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newPlainText", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/ClipData;")
@@ -264,7 +238,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.newPlainText")
 	}
 
 	midClipDataNewRawUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newRawUri", "(Ljava/lang/CharSequence;Landroid/net/Uri;)Landroid/content/ClipData;")
@@ -272,7 +245,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.newRawUri")
 	}
 
 	midClipDataNewUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "newUri", "(Landroid/content/ContentResolver;Ljava/lang/CharSequence;Landroid/net/Uri;)Landroid/content/ClipData;")
@@ -280,7 +252,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData.newUri")
 	}
 
 	c, err = env.FindClass("android/content/ClipData$Item")
@@ -294,7 +265,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.coerceToHtmlText")
 	}
 
 	midClipDataItemCoerceToStyledText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "coerceToStyledText", "(Landroid/content/Context;)Ljava/lang/CharSequence;")
@@ -302,7 +272,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.coerceToStyledText")
 	}
 
 	midClipDataItemCoerceToText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "coerceToText", "(Landroid/content/Context;)Ljava/lang/CharSequence;")
@@ -310,7 +279,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.coerceToText")
 	}
 
 	midClipDataItemGetHtmlText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getHtmlText", "()Ljava/lang/String;")
@@ -318,7 +286,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.getHtmlText")
 	}
 
 	midClipDataItemGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getIntent", "()Landroid/content/Intent;")
@@ -326,7 +293,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.getIntent")
 	}
 
 	midClipDataItemGetIntentSender, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getIntentSender", "()Landroid/content/IntentSender;")
@@ -334,7 +300,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.getIntentSender")
 	}
 
 	midClipDataItemGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getText", "()Ljava/lang/CharSequence;")
@@ -342,7 +307,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.getText")
 	}
 
 	midClipDataItemGetTextLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getTextLinks", "()Landroid/view/textclassifier/TextLinks;")
@@ -350,7 +314,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.getTextLinks")
 	}
 
 	midClipDataItemGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "getUri", "()Landroid/net/Uri;")
@@ -358,7 +321,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.getUri")
 	}
 
 	midClipDataItemToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDataItem)), "toString", "()Ljava/lang/String;")
@@ -366,7 +328,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.content.ClipData$Item.toString")
 	}
 
 	return nil

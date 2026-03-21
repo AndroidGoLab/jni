@@ -219,7 +219,9 @@ func testLightsWrapper(vm *jni.VM) error {
 		if svc == nil || svc.Ref() == 0 {
 			return fmt.Errorf("lights service not available")
 		}
-		mgr.Obj = env.NewGlobalRef(svc)
+		// GetSystemService already returns a GlobalRef, so use it directly
+		// instead of wrapping again (which would leak the original).
+		mgr.Obj = svc
 		return nil
 	})
 	if err != nil {

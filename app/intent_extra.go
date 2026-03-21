@@ -19,6 +19,7 @@ func NewIntent(vm *jni.VM) (*Intent, error) {
 		if err != nil {
 			return fmt.Errorf("find Intent: %w", err)
 		}
+		defer env.DeleteLocalRef(&cls.Object)
 		mid, err := env.GetMethodID(cls, "<init>", "()V")
 		if err != nil {
 			return fmt.Errorf("get Intent.<init>: %w", err)
@@ -28,6 +29,7 @@ func NewIntent(vm *jni.VM) (*Intent, error) {
 			return fmt.Errorf("new Intent: %w", err)
 		}
 		intent.Obj = env.NewGlobalRef(obj)
+		env.DeleteLocalRef(obj)
 		return nil
 	})
 	if err != nil {
@@ -43,6 +45,7 @@ func (i *Intent) PutStringExtra(
 ) error {
 	return i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
+		defer env.DeleteLocalRef(&cls.Object)
 		mid, err := env.GetMethodID(cls, "putExtra",
 			"(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
 		if err != nil {
@@ -52,12 +55,17 @@ func (i *Intent) PutStringExtra(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jKey.Object)
 		jVal, err := env.NewStringUTF(value)
 		if err != nil {
 			return err
 		}
-		_, err = env.CallObjectMethod(i.Obj, mid,
+		defer env.DeleteLocalRef(&jVal.Object)
+		retObj, err := env.CallObjectMethod(i.Obj, mid,
 			jni.ObjectValue(&jKey.Object), jni.ObjectValue(&jVal.Object))
+		if retObj != nil {
+			env.DeleteLocalRef(retObj)
+		}
 		return err
 	})
 }
@@ -69,6 +77,7 @@ func (i *Intent) PutIntExtra(
 ) error {
 	return i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
+		defer env.DeleteLocalRef(&cls.Object)
 		mid, err := env.GetMethodID(cls, "putExtra",
 			"(Ljava/lang/String;I)Landroid/content/Intent;")
 		if err != nil {
@@ -78,8 +87,12 @@ func (i *Intent) PutIntExtra(
 		if err != nil {
 			return err
 		}
-		_, err = env.CallObjectMethod(i.Obj, mid,
+		defer env.DeleteLocalRef(&jKey.Object)
+		retObj, err := env.CallObjectMethod(i.Obj, mid,
 			jni.ObjectValue(&jKey.Object), jni.IntValue(value))
+		if retObj != nil {
+			env.DeleteLocalRef(retObj)
+		}
 		return err
 	})
 }
@@ -91,6 +104,7 @@ func (i *Intent) PutBoolExtra(
 ) error {
 	return i.VM.Do(func(env *jni.Env) error {
 		cls := env.GetObjectClass(i.Obj)
+		defer env.DeleteLocalRef(&cls.Object)
 		mid, err := env.GetMethodID(cls, "putExtra",
 			"(Ljava/lang/String;Z)Landroid/content/Intent;")
 		if err != nil {
@@ -100,12 +114,16 @@ func (i *Intent) PutBoolExtra(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jKey.Object)
 		var boolVal uint8
 		if value {
 			boolVal = 1
 		}
-		_, err = env.CallObjectMethod(i.Obj, mid,
+		retObj, err := env.CallObjectMethod(i.Obj, mid,
 			jni.ObjectValue(&jKey.Object), jni.BooleanValue(boolVal))
+		if retObj != nil {
+			env.DeleteLocalRef(retObj)
+		}
 		return err
 	})
 }
@@ -114,7 +132,6 @@ func (i *Intent) PutBoolExtra(
 func (i *Intent) GetBoolExtra(
 	key string,
 	defaultValue bool,
-) bool {
-	result, _ := i.GetBooleanExtra(key, defaultValue)
-	return result
+) (bool, error) {
+	return i.GetBooleanExtra(key, defaultValue)
 }

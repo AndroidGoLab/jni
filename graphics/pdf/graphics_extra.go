@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"fmt"
+	"sync"
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
@@ -33,6 +34,7 @@ func NewCanvas(vm *jni.VM, bitmap *jni.Object) (*Canvas, error) {
 			return fmt.Errorf("new Canvas: %w", err)
 		}
 		c.Obj = env.NewGlobalRef(obj)
+		env.DeleteLocalRef(obj)
 		return nil
 	})
 	if err != nil {
@@ -66,6 +68,7 @@ func NewPaint(vm *jni.VM) (*Paint, error) {
 			return fmt.Errorf("new Paint: %w", err)
 		}
 		p.Obj = env.NewGlobalRef(obj)
+		env.DeleteLocalRef(obj)
 		return nil
 	})
 	if err != nil {
@@ -74,56 +77,74 @@ func NewPaint(vm *jni.VM) (*Paint, error) {
 	return &p, nil
 }
 
+var (
+	argb8888Once sync.Once
+	argb8888Obj  *jni.Object
+	argb8888Err  error
+)
+
 // ARGB8888 returns the Bitmap.Config.ARGB_8888 enum value.
+// The result is cached as a global ref and reused across calls.
 func ARGB8888(vm *jni.VM) (*jni.Object, error) {
-	var result *jni.Object
-	err := vm.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		fid, err := env.GetStaticFieldID(
-			(*jni.Class)(unsafe.Pointer(clsBitmapConfig)),
-			"ARGB_8888",
-			"Landroid/graphics/Bitmap$Config;",
-		)
-		if err != nil {
-			return fmt.Errorf("get ARGB_8888 field: %w", err)
-		}
-		obj := env.GetStaticObjectField(
-			(*jni.Class)(unsafe.Pointer(clsBitmapConfig)),
-			fid,
-		)
-		if obj != nil {
-			result = env.NewGlobalRef(obj)
-		}
-		return nil
+	argb8888Once.Do(func() {
+		argb8888Err = vm.Do(func(env *jni.Env) error {
+			if err := ensureInit(env); err != nil {
+				return err
+			}
+			fid, err := env.GetStaticFieldID(
+				(*jni.Class)(unsafe.Pointer(clsBitmapConfig)),
+				"ARGB_8888",
+				"Landroid/graphics/Bitmap$Config;",
+			)
+			if err != nil {
+				return fmt.Errorf("get ARGB_8888 field: %w", err)
+			}
+			obj := env.GetStaticObjectField(
+				(*jni.Class)(unsafe.Pointer(clsBitmapConfig)),
+				fid,
+			)
+			if obj != nil {
+				argb8888Obj = env.NewGlobalRef(obj)
+				env.DeleteLocalRef(obj)
+			}
+			return nil
+		})
 	})
-	return result, err
+	return argb8888Obj, argb8888Err
 }
 
+var (
+	monospaceOnce sync.Once
+	monospaceObj  *jni.Object
+	monospaceErr  error
+)
+
 // MonospaceTypeface returns the Typeface.MONOSPACE static field.
+// The result is cached as a global ref and reused across calls.
 func MonospaceTypeface(vm *jni.VM) (*jni.Object, error) {
-	var result *jni.Object
-	err := vm.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		fid, err := env.GetStaticFieldID(
-			(*jni.Class)(unsafe.Pointer(clsTypeface)),
-			"MONOSPACE",
-			"Landroid/graphics/Typeface;",
-		)
-		if err != nil {
-			return fmt.Errorf("get MONOSPACE field: %w", err)
-		}
-		obj := env.GetStaticObjectField(
-			(*jni.Class)(unsafe.Pointer(clsTypeface)),
-			fid,
-		)
-		if obj != nil {
-			result = env.NewGlobalRef(obj)
-		}
-		return nil
+	monospaceOnce.Do(func() {
+		monospaceErr = vm.Do(func(env *jni.Env) error {
+			if err := ensureInit(env); err != nil {
+				return err
+			}
+			fid, err := env.GetStaticFieldID(
+				(*jni.Class)(unsafe.Pointer(clsTypeface)),
+				"MONOSPACE",
+				"Landroid/graphics/Typeface;",
+			)
+			if err != nil {
+				return fmt.Errorf("get MONOSPACE field: %w", err)
+			}
+			obj := env.GetStaticObjectField(
+				(*jni.Class)(unsafe.Pointer(clsTypeface)),
+				fid,
+			)
+			if obj != nil {
+				monospaceObj = env.NewGlobalRef(obj)
+				env.DeleteLocalRef(obj)
+			}
+			return nil
+		})
 	})
-	return result, err
+	return monospaceObj, monospaceErr
 }

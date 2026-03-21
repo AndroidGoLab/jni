@@ -41,12 +41,6 @@ var (
 	midManagerUnregisterTorchCallback                   jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -76,7 +70,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.getCameraCharacteristics")
 	}
 
 	midManagerGetCameraDeviceSetup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCameraDeviceSetup", "(Ljava/lang/String;)Landroid/hardware/camera2/CameraDevice$CameraDeviceSetup;")
@@ -84,7 +77,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.getCameraDeviceSetup")
 	}
 
 	midManagerGetCameraExtensionCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCameraExtensionCharacteristics", "(Ljava/lang/String;)Landroid/hardware/camera2/CameraExtensionCharacteristics;")
@@ -92,7 +84,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.getCameraExtensionCharacteristics")
 	}
 
 	midManagerGetCameraIdList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCameraIdList", "()[Ljava/lang/String;")
@@ -100,7 +91,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.getCameraIdList")
 	}
 
 	midManagerGetConcurrentCameraIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getConcurrentCameraIds", "()Ljava/util/Set;")
@@ -108,7 +98,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.getConcurrentCameraIds")
 	}
 
 	midManagerGetTorchStrengthLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getTorchStrengthLevel", "(Ljava/lang/String;)I")
@@ -116,7 +105,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.getTorchStrengthLevel")
 	}
 
 	midManagerIsCameraDeviceSetupSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isCameraDeviceSetupSupported", "(Ljava/lang/String;)Z")
@@ -124,7 +112,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.isCameraDeviceSetupSupported")
 	}
 
 	midManagerIsConcurrentSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isConcurrentSessionConfigurationSupported", "(Ljava/util/Map;)Z")
@@ -132,7 +119,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.isConcurrentSessionConfigurationSupported")
 	}
 
 	midManagerOpenCamera, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openCamera", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraDevice$StateCallback;)V")
@@ -140,7 +126,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.openCamera")
 	}
 
 	midManagerRegisterAvailabilityCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerAvailabilityCallback", "(Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraManager$AvailabilityCallback;)V")
@@ -148,7 +133,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.registerAvailabilityCallback")
 	}
 
 	midManagerRegisterTorchCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerTorchCallback", "(Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraManager$TorchCallback;)V")
@@ -156,7 +140,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.registerTorchCallback")
 	}
 
 	midManagerSetTorchMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setTorchMode", "(Ljava/lang/String;Z)V")
@@ -164,7 +147,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.setTorchMode")
 	}
 
 	midManagerTurnOnTorchWithStrengthLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "turnOnTorchWithStrengthLevel", "(Ljava/lang/String;I)V")
@@ -172,7 +154,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.turnOnTorchWithStrengthLevel")
 	}
 
 	midManagerUnregisterAvailabilityCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterAvailabilityCallback", "(Landroid/hardware/camera2/CameraManager$AvailabilityCallback;)V")
@@ -180,7 +161,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.unregisterAvailabilityCallback")
 	}
 
 	midManagerUnregisterTorchCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterTorchCallback", "(Landroid/hardware/camera2/CameraManager$TorchCallback;)V")
@@ -188,7 +168,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.camera2.CameraManager.unregisterTorchCallback")
 	}
 
 	return nil

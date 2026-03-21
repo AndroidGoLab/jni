@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"gopkg.in/yaml.v3"
@@ -176,7 +177,7 @@ func formatConstantValue(c JavapConstant) string {
 	}
 	switch c.JavaType {
 	case "java.lang.String":
-		return `"` + c.Value + `"`
+		return strconv.Quote(c.Value)
 	case "long":
 		// javap outputs long values with a trailing "l" suffix (e.g. "86400000l")
 		// which is not valid Go syntax — strip it.

@@ -58,12 +58,6 @@ var (
 	midLightStateBuilderSetPlayerId jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -93,7 +87,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.describeContents")
 	}
 
 	midLightEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "equals", "(Ljava/lang/Object;)Z")
@@ -101,7 +94,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.equals")
 	}
 
 	midLightGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "getId", "()I")
@@ -109,7 +101,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getId")
 	}
 
 	midLightGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "getName", "()Ljava/lang/String;")
@@ -117,7 +108,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getName")
 	}
 
 	midLightGetOrdinal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "getOrdinal", "()I")
@@ -125,7 +115,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getOrdinal")
 	}
 
 	midLightGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "getType", "()I")
@@ -133,7 +122,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.getType")
 	}
 
 	midLightHasBrightnessControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "hasBrightnessControl", "()Z")
@@ -141,7 +129,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.hasBrightnessControl")
 	}
 
 	midLightHasRgbControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "hasRgbControl", "()Z")
@@ -149,7 +136,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.hasRgbControl")
 	}
 
 	midLightHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "hashCode", "()I")
@@ -157,7 +143,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.hashCode")
 	}
 
 	midLightToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "toString", "()Ljava/lang/String;")
@@ -165,7 +150,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.toString")
 	}
 
 	midLightWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "writeToParcel", "(Landroid/os/Parcel;I)V")
@@ -173,7 +157,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.Light.writeToParcel")
 	}
 
 	c, err = env.FindClass("android/hardware/lights/LightsManager")
@@ -187,7 +170,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightsManager.getLightState")
 	}
 
 	midManagerGetLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLights", "()Ljava/util/List;")
@@ -195,7 +177,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightsManager.getLights")
 	}
 
 	midManagerOpenSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openSession", "()Landroid/hardware/lights/LightsManager$LightsSession;")
@@ -203,7 +184,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightsManager.openSession")
 	}
 
 	c, err = env.FindClass("android/hardware/lights/LightsManager$LightsSession")
@@ -217,7 +197,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightsManager$LightsSession.close")
 	}
 
 	midManagerLightsSessionRequestLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerLightsSession)), "requestLights", "(Landroid/hardware/lights/LightsRequest;)V")
@@ -225,7 +204,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightsManager$LightsSession.requestLights")
 	}
 
 	c, err = env.FindClass("android/hardware/lights/LightState")
@@ -239,7 +217,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState.describeContents")
 	}
 
 	midLightStateGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightState)), "getColor", "()I")
@@ -247,7 +224,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState.getColor")
 	}
 
 	midLightStateGetPlayerId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightState)), "getPlayerId", "()I")
@@ -255,7 +231,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState.getPlayerId")
 	}
 
 	midLightStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightState)), "toString", "()Ljava/lang/String;")
@@ -263,7 +238,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState.toString")
 	}
 
 	midLightStateWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightState)), "writeToParcel", "(Landroid/os/Parcel;I)V")
@@ -271,7 +245,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState.writeToParcel")
 	}
 
 	c, err = env.FindClass("android/hardware/lights/LightState$Builder")
@@ -285,7 +258,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState$Builder.build")
 	}
 
 	midLightStateBuilderSetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightStateBuilder)), "setColor", "(I)Landroid/hardware/lights/LightState$Builder;")
@@ -293,7 +265,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState$Builder.setColor")
 	}
 
 	midLightStateBuilderSetPlayerId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightStateBuilder)), "setPlayerId", "(I)Landroid/hardware/lights/LightState$Builder;")
@@ -301,7 +272,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.lights.LightState$Builder.setPlayerId")
 	}
 
 	return nil

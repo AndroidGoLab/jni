@@ -123,6 +123,8 @@ var proxyClassLoader capi.Object
 // the APK's ClassLoader (from Context.getClassLoader()) before creating
 // any proxies. The caller must pass a global ref (not a local ref).
 func SetProxyClassLoader(cl *Object) {
+	proxyMu.Lock()
+	defer proxyMu.Unlock()
 	if cl != nil {
 		proxyClassLoader = cl.Ref()
 	}
@@ -156,7 +158,10 @@ func findClassWithFallback(
 	}
 	capi.ExceptionClear(env)
 
-	if proxyClassLoader == 0 {
+	proxyMu.Lock()
+	cl := proxyClassLoader
+	proxyMu.Unlock()
+	if cl == 0 {
 		return 0
 	}
 
@@ -183,7 +188,7 @@ func findClassWithFallback(
 
 	var nameVal capi.Jvalue
 	binary.NativeEndian.PutUint64(nameVal[:], uint64(jName))
-	loaded := capi.CallObjectMethodA(env, proxyClassLoader, loadMID, &nameVal)
+	loaded := capi.CallObjectMethodA(env, cl, loadMID, &nameVal)
 	if capi.ExceptionCheck(env) == capi.JNI_TRUE {
 		capi.ExceptionClear(env)
 		return 0
@@ -194,7 +199,31 @@ func findClassWithFallback(
 	return 0
 }
 
-func doProxyInit(env *Env) error {
+func doProxyInit(env *Env) (retErr error) {
+	// cleanupOnError deletes any GlobalRefs created so far if we return
+	// an error partway through initialization.
+	defer func() {
+		if retErr == nil {
+			return
+		}
+		if clsProxy != 0 {
+			capi.DeleteGlobalRef(env.ptr, capi.Object(clsProxy))
+			clsProxy = 0
+		}
+		if clsClass != 0 {
+			capi.DeleteGlobalRef(env.ptr, capi.Object(clsClass))
+			clsClass = 0
+		}
+		if clsGoHandler != 0 {
+			capi.DeleteGlobalRef(env.ptr, capi.Object(clsGoHandler))
+			clsGoHandler = 0
+		}
+		if clsGoAbstractDispatch != 0 {
+			capi.DeleteGlobalRef(env.ptr, capi.Object(clsGoAbstractDispatch))
+			clsGoAbstractDispatch = 0
+		}
+	}()
+
 	// Find java.lang.reflect.Proxy
 	proxyName := newCString("java/lang/reflect/Proxy")
 	cls := capi.FindClass(env.ptr, proxyName)

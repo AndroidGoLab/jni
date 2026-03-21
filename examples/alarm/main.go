@@ -24,7 +24,6 @@ import (
 	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/app/alarm"
 	"github.com/AndroidGoLab/jni/app/notification"
-	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/examples/common/ui"
 	"github.com/AndroidGoLab/jni/media/ringtone"
 )
@@ -52,7 +51,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 	println("ANativeActivity_onCreate called")
 	ui.OnCreate(
 		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
-		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -60,7 +59,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromRef(capi.Object(uintptr(unsafe.Pointer(activity.clazz)))),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -123,12 +122,18 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	go func() {
 		time.Sleep(delay)
 		if err := postNotification(vm, appCtxObj); err != nil {
+			ui.OutputMu.Lock()
 			fmt.Fprintf(output, "notification error: %v\n", err)
+			ui.OutputMu.Unlock()
 		}
 		if err := playAlarmRingtone(vm, appCtxObj); err != nil {
+			ui.OutputMu.Lock()
 			fmt.Fprintf(output, "ringtone error: %v\n", err)
+			ui.OutputMu.Unlock()
 		}
+		ui.OutputMu.Lock()
 		fmt.Fprintf(output, "alarm fired!\n")
+		ui.OutputMu.Unlock()
 		ui.RenderOutput()
 	}()
 

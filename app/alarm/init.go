@@ -48,12 +48,6 @@ var (
 	midManagerAlarmClockInfoWriteToParcel    jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -83,7 +77,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.canScheduleExactAlarms")
 	}
 
 	midManagerCancel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancel", "(Landroid/app/AlarmManager$OnAlarmListener;)V")
@@ -91,7 +84,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.cancel")
 	}
 
 	midManagerCancel1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancel", "(Landroid/app/PendingIntent;)V")
@@ -99,7 +91,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.cancel")
 	}
 
 	midManagerCancelAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancelAll", "()V")
@@ -107,7 +98,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.cancelAll")
 	}
 
 	midManagerGetNextAlarmClock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNextAlarmClock", "()Landroid/app/AlarmManager$AlarmClockInfo;")
@@ -115,7 +105,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.getNextAlarmClock")
 	}
 
 	midManagerSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "set", "(IJLandroid/app/PendingIntent;)V")
@@ -123,7 +112,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.set")
 	}
 
 	midManagerSetAlarmClock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setAlarmClock", "(Landroid/app/AlarmManager$AlarmClockInfo;Landroid/app/PendingIntent;)V")
@@ -131,7 +119,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setAlarmClock")
 	}
 
 	midManagerSetAndAllowWhileIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setAndAllowWhileIdle", "(IJLandroid/app/PendingIntent;)V")
@@ -139,7 +126,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setAndAllowWhileIdle")
 	}
 
 	midManagerSetExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setExact", "(IJLandroid/app/PendingIntent;)V")
@@ -147,7 +133,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setExact")
 	}
 
 	midManagerSetExactAndAllowWhileIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setExactAndAllowWhileIdle", "(IJLandroid/app/PendingIntent;)V")
@@ -155,7 +140,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setExactAndAllowWhileIdle")
 	}
 
 	midManagerSetInexactRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setInexactRepeating", "(IJJLandroid/app/PendingIntent;)V")
@@ -163,7 +147,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setInexactRepeating")
 	}
 
 	midManagerSetRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setRepeating", "(IJJLandroid/app/PendingIntent;)V")
@@ -171,7 +154,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setRepeating")
 	}
 
 	midManagerSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setTime", "(J)V")
@@ -179,7 +161,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setTime")
 	}
 
 	midManagerSetTimeZone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setTimeZone", "(Ljava/lang/String;)V")
@@ -187,7 +168,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setTimeZone")
 	}
 
 	midManagerSetWindow4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setWindow", "(IJJLandroid/app/PendingIntent;)V")
@@ -195,7 +175,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setWindow")
 	}
 
 	midManagerSetWindow6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setWindow", "(IJJLjava/lang/String;Ljava/util/concurrent/Executor;Landroid/app/AlarmManager$OnAlarmListener;)V")
@@ -203,7 +182,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager.setWindow")
 	}
 
 	c, err = env.FindClass("android/app/AlarmManager$AlarmClockInfo")
@@ -217,7 +195,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager$AlarmClockInfo.describeContents")
 	}
 
 	midManagerAlarmClockInfoGetShowIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAlarmClockInfo)), "getShowIntent", "()Landroid/app/PendingIntent;")
@@ -225,7 +202,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager$AlarmClockInfo.getShowIntent")
 	}
 
 	midManagerAlarmClockInfoGetTriggerTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAlarmClockInfo)), "getTriggerTime", "()J")
@@ -233,7 +209,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager$AlarmClockInfo.getTriggerTime")
 	}
 
 	midManagerAlarmClockInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAlarmClockInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
@@ -241,7 +216,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.app.AlarmManager$AlarmClockInfo.writeToParcel")
 	}
 
 	return nil

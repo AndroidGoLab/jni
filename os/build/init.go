@@ -33,12 +33,6 @@ var (
 	clsVERSION *jni.GlobalRef
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -68,7 +62,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Build.getFingerprintedPartitions")
 	}
 
 	midBuildGetMajorSdkVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "getMajorSdkVersion", "(I)I")
@@ -76,7 +69,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Build.getMajorSdkVersion")
 	}
 
 	midBuildGetMinorSdkVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "getMinorSdkVersion", "(I)I")
@@ -84,7 +76,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Build.getMinorSdkVersion")
 	}
 
 	midBuildGetRadioVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "getRadioVersion", "()Ljava/lang/String;")
@@ -92,7 +83,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Build.getRadioVersion")
 	}
 
 	midBuildGetSerial, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "getSerial", "()Ljava/lang/String;")
@@ -100,7 +90,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Build.getSerial")
 	}
 
 	c, err = env.FindClass("android/os/Build$VERSION")

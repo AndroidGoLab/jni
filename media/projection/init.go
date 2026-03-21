@@ -42,12 +42,6 @@ var (
 	midMediaProjectionManagerGetMediaProjection           jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -77,7 +71,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.display.VirtualDisplay.getDisplay")
 	}
 
 	midVirtualDisplayGetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplay)), "getSurface", "()Landroid/view/Surface;")
@@ -85,7 +78,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.display.VirtualDisplay.getSurface")
 	}
 
 	midVirtualDisplayRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplay)), "release", "()V")
@@ -93,7 +85,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.display.VirtualDisplay.release")
 	}
 
 	midVirtualDisplayResize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplay)), "resize", "(III)V")
@@ -101,7 +92,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.display.VirtualDisplay.resize")
 	}
 
 	midVirtualDisplaySetRotation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplay)), "setRotation", "(I)V")
@@ -109,7 +99,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.display.VirtualDisplay.setRotation")
 	}
 
 	midVirtualDisplaySetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplay)), "setSurface", "(Landroid/view/Surface;)V")
@@ -117,7 +106,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.display.VirtualDisplay.setSurface")
 	}
 
 	midVirtualDisplayToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplay)), "toString", "()Ljava/lang/String;")
@@ -125,7 +113,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.display.VirtualDisplay.toString")
 	}
 
 	c, err = env.FindClass("android/media/projection/MediaProjection")
@@ -139,7 +126,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.projection.MediaProjection.stop")
 	}
 
 	midMediaProjectionUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjection)), "unregisterCallback", "(Landroid/media/projection/MediaProjection$Callback;)V")
@@ -147,7 +133,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.projection.MediaProjection.unregisterCallback")
 	}
 
 	c, err = env.FindClass("android/media/projection/MediaProjectionManager")
@@ -161,7 +146,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.projection.MediaProjectionManager.createScreenCaptureIntent")
 	}
 
 	midMediaProjectionManagerCreateScreenCaptureIntent1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "createScreenCaptureIntent", "(Landroid/media/projection/MediaProjectionConfig;)Landroid/content/Intent;")
@@ -169,7 +153,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.projection.MediaProjectionManager.createScreenCaptureIntent")
 	}
 
 	midMediaProjectionManagerGetMediaProjection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "getMediaProjection", "(ILandroid/content/Intent;)Landroid/media/projection/MediaProjection;")
@@ -177,7 +160,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.projection.MediaProjectionManager.getMediaProjection")
 	}
 
 	return nil

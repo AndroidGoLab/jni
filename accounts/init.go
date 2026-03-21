@@ -57,12 +57,6 @@ var (
 	midAccountWriteToParcel    jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -92,7 +86,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.addAccountExplicitly")
 	}
 
 	midAccountManagerAddAccountExplicitly4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "addAccountExplicitly", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;Ljava/util/Map;)Z")
@@ -100,7 +93,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.addAccountExplicitly")
 	}
 
 	midAccountManagerBlockingGetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "blockingGetAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Z)Ljava/lang/String;")
@@ -108,7 +100,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.blockingGetAuthToken")
 	}
 
 	midAccountManagerClearPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "clearPassword", "(Landroid/accounts/Account;)V")
@@ -116,7 +107,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.clearPassword")
 	}
 
 	midAccountManagerGetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;)I")
@@ -124,7 +114,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccountVisibility")
 	}
 
 	midAccountManagerGetAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccounts", "()[Landroid/accounts/Account;")
@@ -132,7 +121,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccounts")
 	}
 
 	midAccountManagerGetAccountsByType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountsByType", "(Ljava/lang/String;)[Landroid/accounts/Account;")
@@ -140,7 +128,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccountsByType")
 	}
 
 	midAccountManagerGetAccountsByTypeForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountsByTypeForPackage", "(Ljava/lang/String;Ljava/lang/String;)[Landroid/accounts/Account;")
@@ -148,7 +135,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAccountsByTypeForPackage")
 	}
 
 	midAccountManagerGetAuthenticatorTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAuthenticatorTypes", "()[Landroid/accounts/AuthenticatorDescription;")
@@ -156,7 +142,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getAuthenticatorTypes")
 	}
 
 	midAccountManagerGetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getPassword", "(Landroid/accounts/Account;)Ljava/lang/String;")
@@ -164,7 +149,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getPassword")
 	}
 
 	midAccountManagerGetPreviousName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getPreviousName", "(Landroid/accounts/Account;)Ljava/lang/String;")
@@ -172,7 +156,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getPreviousName")
 	}
 
 	midAccountManagerGetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getUserData", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
@@ -180,7 +163,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.getUserData")
 	}
 
 	midAccountManagerInvalidateAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "invalidateAuthToken", "(Ljava/lang/String;Ljava/lang/String;)V")
@@ -188,7 +170,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.invalidateAuthToken")
 	}
 
 	midAccountManagerNotifyAccountAuthenticated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "notifyAccountAuthenticated", "(Landroid/accounts/Account;)Z")
@@ -196,7 +177,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.notifyAccountAuthenticated")
 	}
 
 	midAccountManagerPeekAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "peekAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
@@ -204,7 +184,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.peekAuthToken")
 	}
 
 	midAccountManagerRemoveAccountExplicitly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "removeAccountExplicitly", "(Landroid/accounts/Account;)Z")
@@ -212,7 +191,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.removeAccountExplicitly")
 	}
 
 	midAccountManagerRemoveOnAccountsUpdatedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "removeOnAccountsUpdatedListener", "(Landroid/accounts/OnAccountsUpdateListener;)V")
@@ -220,7 +198,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.removeOnAccountsUpdatedListener")
 	}
 
 	midAccountManagerSetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;I)Z")
@@ -228,7 +205,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.setAccountVisibility")
 	}
 
 	midAccountManagerSetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
@@ -236,7 +212,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.setAuthToken")
 	}
 
 	midAccountManagerSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setPassword", "(Landroid/accounts/Account;Ljava/lang/String;)V")
@@ -244,7 +219,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.setPassword")
 	}
 
 	midAccountManagerSetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setUserData", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
@@ -252,7 +226,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.setUserData")
 	}
 
 	midAccountManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "get", "(Landroid/content/Context;)Landroid/accounts/AccountManager;")
@@ -260,7 +233,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.get")
 	}
 
 	midAccountManagerNewChooseAccountIntent8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "newChooseAccountIntent", "(Landroid/accounts/Account;Ljava/util/ArrayList;[Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
@@ -268,7 +240,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.newChooseAccountIntent")
 	}
 
 	midAccountManagerNewChooseAccountIntent7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "newChooseAccountIntent", "(Landroid/accounts/Account;Ljava/util/List;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
@@ -276,7 +247,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.AccountManager.newChooseAccountIntent")
 	}
 
 	c, err = env.FindClass("android/accounts/Account")
@@ -290,7 +260,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.Account.describeContents")
 	}
 
 	midAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "equals", "(Ljava/lang/Object;)Z")
@@ -298,7 +267,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.Account.equals")
 	}
 
 	midAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "hashCode", "()I")
@@ -306,7 +274,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.Account.hashCode")
 	}
 
 	midAccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "toString", "()Ljava/lang/String;")
@@ -314,7 +281,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.Account.toString")
 	}
 
 	midAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
@@ -322,7 +288,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.accounts.Account.writeToParcel")
 	}
 
 	return nil

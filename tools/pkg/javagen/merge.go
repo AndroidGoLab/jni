@@ -14,8 +14,11 @@ func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 	}
 
 	// Inject spec-level intent_extras into the first class (battery pattern).
+	// Make a copy to avoid mutating the input spec.
 	if len(spec.IntentExtras) > 0 && len(spec.Classes) > 0 {
-		spec.Classes[0].IntentExtras = append(spec.Classes[0].IntentExtras, spec.IntentExtras...)
+		cls := spec.Classes[0]
+		cls.IntentExtras = append(append([]IntentExtra(nil), cls.IntentExtras...), spec.IntentExtras...)
+		spec.Classes[0] = cls
 	}
 
 	for _, cls := range spec.Classes {

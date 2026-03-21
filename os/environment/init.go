@@ -43,12 +43,6 @@ var (
 	midEnvironmentIsExternalStorageRemovable1_1     jni.MethodID
 )
 
-// initSkipped records methods that were not found during init.
-// These are typically methods that do not exist on the current device's
-// Android API level. Calls to such methods will return an error at
-// invocation time instead of preventing the entire service from loading.
-var initSkipped []string
-
 func ensureInit(env *jni.Env) error {
 	initOnce.Do(func() {
 		initErr = doInit(env)
@@ -78,7 +72,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getDataDirectory")
 	}
 
 	midEnvironmentGetDownloadCacheDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getDownloadCacheDirectory", "()Ljava/io/File;")
@@ -86,7 +79,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getDownloadCacheDirectory")
 	}
 
 	midEnvironmentGetExternalStorageDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getExternalStorageDirectory", "()Ljava/io/File;")
@@ -94,7 +86,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getExternalStorageDirectory")
 	}
 
 	midEnvironmentGetExternalStoragePublicDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getExternalStoragePublicDirectory", "(Ljava/lang/String;)Ljava/io/File;")
@@ -102,7 +93,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getExternalStoragePublicDirectory")
 	}
 
 	midEnvironmentGetExternalStorageState0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getExternalStorageState", "()Ljava/lang/String;")
@@ -110,7 +100,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getExternalStorageState")
 	}
 
 	midEnvironmentGetExternalStorageState1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getExternalStorageState", "(Ljava/io/File;)Ljava/lang/String;")
@@ -118,7 +107,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getExternalStorageState")
 	}
 
 	midEnvironmentGetRootDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getRootDirectory", "()Ljava/io/File;")
@@ -126,7 +114,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getRootDirectory")
 	}
 
 	midEnvironmentGetStorageDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getStorageDirectory", "()Ljava/io/File;")
@@ -134,7 +121,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getStorageDirectory")
 	}
 
 	midEnvironmentGetStorageState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "getStorageState", "(Ljava/io/File;)Ljava/lang/String;")
@@ -142,7 +128,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.getStorageState")
 	}
 
 	midEnvironmentIsExternalStorageEmulated0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageEmulated", "()Z")
@@ -150,7 +135,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageEmulated")
 	}
 
 	midEnvironmentIsExternalStorageEmulated1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageEmulated", "(Ljava/io/File;)Z")
@@ -158,7 +142,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageEmulated")
 	}
 
 	midEnvironmentIsExternalStorageLegacy0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageLegacy", "()Z")
@@ -166,7 +149,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageLegacy")
 	}
 
 	midEnvironmentIsExternalStorageLegacy1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageLegacy", "(Ljava/io/File;)Z")
@@ -174,7 +156,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageLegacy")
 	}
 
 	midEnvironmentIsExternalStorageManager0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageManager", "()Z")
@@ -182,7 +163,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageManager")
 	}
 
 	midEnvironmentIsExternalStorageManager1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageManager", "(Ljava/io/File;)Z")
@@ -190,7 +170,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageManager")
 	}
 
 	midEnvironmentIsExternalStorageRemovable0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageRemovable", "()Z")
@@ -198,7 +177,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageRemovable")
 	}
 
 	midEnvironmentIsExternalStorageRemovable1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "isExternalStorageRemovable", "(Ljava/io/File;)Z")
@@ -206,7 +184,6 @@ func doInit(env *jni.Env) error {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.os.Environment.isExternalStorageRemovable")
 	}
 
 	return nil
