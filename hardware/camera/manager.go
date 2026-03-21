@@ -86,6 +86,7 @@ func (m *Manager) GetCameraCharacteristics(arg0 string) (*jni.Object, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -97,7 +98,9 @@ func (m *Manager) GetCameraCharacteristics(arg0 string) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -121,6 +124,7 @@ func (m *Manager) GetCameraDeviceSetup(arg0 string) (*jni.Object, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -132,7 +136,9 @@ func (m *Manager) GetCameraDeviceSetup(arg0 string) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -156,6 +162,7 @@ func (m *Manager) GetCameraExtensionCharacteristics(arg0 string) (*jni.Object, e
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -167,7 +174,9 @@ func (m *Manager) GetCameraExtensionCharacteristics(arg0 string) (*jni.Object, e
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -197,7 +206,9 @@ func (m *Manager) GetCameraIdList() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -227,7 +238,9 @@ func (m *Manager) GetConcurrentCameraIds() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -251,6 +264,7 @@ func (m *Manager) GetTorchStrengthLevel(arg0 string) (int32, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -281,6 +295,7 @@ func (m *Manager) IsCameraDeviceSetupSupported(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -345,6 +360,7 @@ func (m *Manager) OpenCamera(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -418,6 +434,7 @@ func (m *Manager) SetTorchMode(arg0 string, arg1 bool) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var jArg1 uint8
 		if arg1 {
@@ -450,6 +467,7 @@ func (m *Manager) TurnOnTorchWithStrengthLevel(arg0 string, arg1 int32) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,

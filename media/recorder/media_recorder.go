@@ -46,7 +46,9 @@ func (m *MediaRecorder) GetActiveMicrophones() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -76,7 +78,9 @@ func (m *MediaRecorder) GetActiveRecordingConfiguration() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -106,7 +110,9 @@ func (m *MediaRecorder) GetLogSessionId() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -136,7 +142,9 @@ func (m *MediaRecorder) GetMetrics() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -166,7 +174,9 @@ func (m *MediaRecorder) GetPreferredDevice() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -196,7 +206,9 @@ func (m *MediaRecorder) GetRoutedDevice() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -226,7 +238,9 @@ func (m *MediaRecorder) GetRoutedDevices() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -685,6 +699,7 @@ func (m *MediaRecorder) SetOutputFile1_2(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,

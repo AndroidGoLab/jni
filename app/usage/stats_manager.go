@@ -111,6 +111,7 @@ func (m *StatsManager) IsAppInactive(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -154,7 +155,9 @@ func (m *StatsManager) QueryConfigurations(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -189,7 +192,9 @@ func (m *StatsManager) QueryEventStats(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -220,7 +225,9 @@ func (m *StatsManager) QueryEvents1(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -251,7 +258,9 @@ func (m *StatsManager) QueryEvents2_1(arg0 int64, arg1 int64) (*jni.Object, erro
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -282,7 +291,9 @@ func (m *StatsManager) QueryEventsForSelf(arg0 int64, arg1 int64) (*jni.Object, 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -317,7 +328,9 @@ func (m *StatsManager) QueryUsageStats(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

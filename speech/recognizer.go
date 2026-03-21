@@ -236,7 +236,9 @@ func (m *Recognizer) CreateOnDeviceSpeechRecognizer(arg0 *jni.Object) (*jni.Obje
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -267,7 +269,9 @@ func (m *Recognizer) CreateSpeechRecognizer1(arg0 *jni.Object) (*jni.Object, err
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -298,7 +302,9 @@ func (m *Recognizer) CreateSpeechRecognizer2_1(arg0 *jni.Object, arg1 *jni.Objec
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -47,7 +47,9 @@ func (m *ContentResolver) AcquireContentProviderClient1(arg0 *jni.Object) (*jni.
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -71,6 +73,7 @@ func (m *ContentResolver) AcquireContentProviderClient1_1(arg0 string) (*jni.Obj
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -82,7 +85,9 @@ func (m *ContentResolver) AcquireContentProviderClient1_1(arg0 string) (*jni.Obj
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -113,7 +118,9 @@ func (m *ContentResolver) AcquireUnstableContentProviderClient1(arg0 *jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -137,6 +144,7 @@ func (m *ContentResolver) AcquireUnstableContentProviderClient1_1(arg0 string) (
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -148,7 +156,9 @@ func (m *ContentResolver) AcquireUnstableContentProviderClient1_1(arg0 string) (
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -172,6 +182,7 @@ func (m *ContentResolver) ApplyBatch(arg0 string, arg1 *jni.Object) (*jni.Object
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -183,7 +194,9 @@ func (m *ContentResolver) ApplyBatch(arg0 string, arg1 *jni.Object) (*jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -239,11 +252,13 @@ func (m *ContentResolver) Call4(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -255,7 +270,9 @@ func (m *ContentResolver) Call4(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -284,16 +301,19 @@ func (m *ContentResolver) Call4_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -305,7 +325,9 @@ func (m *ContentResolver) Call4_1(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -359,7 +381,9 @@ func (m *ContentResolver) Canonicalize(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -414,6 +438,7 @@ func (m *ContentResolver) Delete3_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -450,7 +475,9 @@ func (m *ContentResolver) GetOutgoingPersistedUriPermissions() (*jni.Object, err
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -480,7 +507,9 @@ func (m *ContentResolver) GetPersistedUriPermissions() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -505,6 +534,7 @@ func (m *ContentResolver) GetStreamTypes(arg0 *jni.Object, arg1 string) (*jni.Ob
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -516,7 +546,9 @@ func (m *ContentResolver) GetStreamTypes(arg0 *jni.Object, arg1 string) (*jni.Ob
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -568,6 +600,7 @@ func (m *ContentResolver) GetTypeInfo(arg0 string) (*jni.Object, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -579,7 +612,9 @@ func (m *ContentResolver) GetTypeInfo(arg0 string) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -610,7 +645,9 @@ func (m *ContentResolver) Insert2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Obje
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -645,7 +682,9 @@ func (m *ContentResolver) Insert3_1(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -680,7 +719,9 @@ func (m *ContentResolver) LoadThumbnail(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -818,6 +859,7 @@ func (m *ContentResolver) OpenAssetFile(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -829,7 +871,9 @@ func (m *ContentResolver) OpenAssetFile(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -854,6 +898,7 @@ func (m *ContentResolver) OpenAssetFileDescriptor2(arg0 *jni.Object, arg1 string
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -865,7 +910,9 @@ func (m *ContentResolver) OpenAssetFileDescriptor2(arg0 *jni.Object, arg1 string
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -894,6 +941,7 @@ func (m *ContentResolver) OpenAssetFileDescriptor3_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -905,7 +953,9 @@ func (m *ContentResolver) OpenAssetFileDescriptor3_1(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -934,6 +984,7 @@ func (m *ContentResolver) OpenFile(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -945,7 +996,9 @@ func (m *ContentResolver) OpenFile(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -970,6 +1023,7 @@ func (m *ContentResolver) OpenFileDescriptor2(arg0 *jni.Object, arg1 string) (*j
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -981,7 +1035,9 @@ func (m *ContentResolver) OpenFileDescriptor2(arg0 *jni.Object, arg1 string) (*j
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1010,6 +1066,7 @@ func (m *ContentResolver) OpenFileDescriptor3_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1021,7 +1078,9 @@ func (m *ContentResolver) OpenFileDescriptor3_1(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1052,7 +1111,9 @@ func (m *ContentResolver) OpenInputStream(arg0 *jni.Object) (*jni.Object, error)
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1083,7 +1144,9 @@ func (m *ContentResolver) OpenOutputStream1(arg0 *jni.Object) (*jni.Object, erro
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1108,6 +1171,7 @@ func (m *ContentResolver) OpenOutputStream2_1(arg0 *jni.Object, arg1 string) (*j
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1119,7 +1183,9 @@ func (m *ContentResolver) OpenOutputStream2_1(arg0 *jni.Object, arg1 string) (*j
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1149,6 +1215,7 @@ func (m *ContentResolver) OpenTypedAssetFile(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1160,7 +1227,9 @@ func (m *ContentResolver) OpenTypedAssetFile(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1189,6 +1258,7 @@ func (m *ContentResolver) OpenTypedAssetFileDescriptor3(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1200,7 +1270,9 @@ func (m *ContentResolver) OpenTypedAssetFileDescriptor3(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1230,6 +1302,7 @@ func (m *ContentResolver) OpenTypedAssetFileDescriptor4_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1241,7 +1314,9 @@ func (m *ContentResolver) OpenTypedAssetFileDescriptor4_1(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1277,7 +1352,9 @@ func (m *ContentResolver) Query4(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1308,11 +1385,13 @@ func (m *ContentResolver) Query5_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		jArg4, err := env.NewStringUTF(arg4)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg4.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1324,7 +1403,9 @@ func (m *ContentResolver) Query5_1(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1356,11 +1437,13 @@ func (m *ContentResolver) Query6_2(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		jArg4, err := env.NewStringUTF(arg4)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg4.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1372,7 +1455,9 @@ func (m *ContentResolver) Query6_2(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1536,7 +1621,9 @@ func (m *ContentResolver) Uncanonicalize(arg0 *jni.Object) (*jni.Object, error) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1619,6 +1706,7 @@ func (m *ContentResolver) Update4_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1655,6 +1743,7 @@ func (m *ContentResolver) AddPeriodicSync(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
@@ -1689,7 +1778,9 @@ func (m *ContentResolver) AddStatusChangeListener(arg0 int32, arg1 *jni.Object) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1714,6 +1805,7 @@ func (m *ContentResolver) CancelSync2(arg0 *jni.Object, arg1 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
@@ -1770,7 +1862,9 @@ func (m *ContentResolver) GetCurrentSync() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1800,7 +1894,9 @@ func (m *ContentResolver) GetCurrentSyncs() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1825,6 +1921,7 @@ func (m *ContentResolver) GetIsSyncable(arg0 *jni.Object, arg1 string) (int32, e
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallStaticIntMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
@@ -1883,6 +1980,7 @@ func (m *ContentResolver) GetPeriodicSyncs(arg0 *jni.Object, arg1 string) (*jni.
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
@@ -1894,7 +1992,9 @@ func (m *ContentResolver) GetPeriodicSyncs(arg0 *jni.Object, arg1 string) (*jni.
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1924,7 +2024,9 @@ func (m *ContentResolver) GetSyncAdapterTypes() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1949,6 +2051,7 @@ func (m *ContentResolver) GetSyncAutomatically(arg0 *jni.Object, arg1 string) (b
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallStaticBooleanMethod(
@@ -1982,6 +2085,7 @@ func (m *ContentResolver) IsSyncActive(arg0 *jni.Object, arg1 string) (bool, err
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallStaticBooleanMethod(
@@ -2015,6 +2119,7 @@ func (m *ContentResolver) IsSyncPending(arg0 *jni.Object, arg1 string) (bool, er
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallStaticBooleanMethod(
@@ -2052,6 +2157,7 @@ func (m *ContentResolver) RemovePeriodicSync(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
@@ -2107,6 +2213,7 @@ func (m *ContentResolver) RequestSync3(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
@@ -2162,6 +2269,7 @@ func (m *ContentResolver) SetIsSyncable(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
@@ -2221,6 +2329,7 @@ func (m *ContentResolver) SetSyncAutomatically(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -2283,7 +2392,9 @@ func (m *ContentResolver) Wrap1(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2314,7 +2425,9 @@ func (m *ContentResolver) Wrap1_1(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

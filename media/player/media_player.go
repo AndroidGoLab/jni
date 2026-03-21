@@ -45,6 +45,7 @@ func (m *MediaPlayer) AddTimedTextSource3(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -73,6 +74,7 @@ func (m *MediaPlayer) AddTimedTextSource2_1(arg0 *jni.Object, arg1 string) error
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -106,6 +108,7 @@ func (m *MediaPlayer) AddTimedTextSource4_2(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -133,11 +136,13 @@ func (m *MediaPlayer) AddTimedTextSource2_3(arg0 string, arg1 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -216,7 +221,9 @@ func (m *MediaPlayer) CreateVolumeShaper(arg0 *jni.Object) (*jni.Object, error) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -269,7 +276,9 @@ func (m *MediaPlayer) GetDrmInfo() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -293,6 +302,7 @@ func (m *MediaPlayer) GetDrmPropertyString(arg0 string) (string, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultObj *jni.Object
 		resultObj, callErr = env.CallObjectMethod(
@@ -332,6 +342,7 @@ func (m *MediaPlayer) GetKeyRequest(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -343,7 +354,9 @@ func (m *MediaPlayer) GetKeyRequest(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -373,7 +386,9 @@ func (m *MediaPlayer) GetMetrics() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -403,7 +418,9 @@ func (m *MediaPlayer) GetPreferredDevice() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -433,7 +450,9 @@ func (m *MediaPlayer) GetRoutedDevice() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -463,7 +482,9 @@ func (m *MediaPlayer) GetRoutedDevices() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -519,7 +540,9 @@ func (m *MediaPlayer) GetTimestamp() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -549,7 +572,9 @@ func (m *MediaPlayer) GetTrackInfo() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -669,7 +694,9 @@ func (m *MediaPlayer) ProvideKeyResponse(arg0 *jni.Object, arg1 *jni.Object) (*j
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1140,6 +1167,7 @@ func (m *MediaPlayer) SetDataSource1_7(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1190,11 +1218,13 @@ func (m *MediaPlayer) SetDrmPropertyString(arg0 string, arg1 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1742,7 +1772,9 @@ func (m *MediaPlayer) Create2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1777,7 +1809,9 @@ func (m *MediaPlayer) Create3_1(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1814,7 +1848,9 @@ func (m *MediaPlayer) Create5_2(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1845,7 +1881,9 @@ func (m *MediaPlayer) Create2_3(arg0 *jni.Object, arg1 int32) (*jni.Object, erro
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1881,7 +1919,9 @@ func (m *MediaPlayer) Create4_4(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

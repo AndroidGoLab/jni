@@ -234,7 +234,9 @@ func (m *Channel) GetAudioAttributes() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -425,8 +427,8 @@ func (m *Channel) GetLockscreenVisibility() (int32, error) {
 }
 
 // GetName calls android.app.NotificationChannel.getName.
-func (m *Channel) GetName() (string, error) {
-	var result string
+func (m *Channel) GetName() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -437,15 +439,20 @@ func (m *Channel) GetName() (string, error) {
 			callErr = fmt.Errorf("android.app.NotificationChannel.getName is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midChannelGetName,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -501,7 +508,9 @@ func (m *Channel) GetSound() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -531,7 +540,9 @@ func (m *Channel) GetVibrationEffect() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -561,7 +572,9 @@ func (m *Channel) GetVibrationPattern() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -853,11 +866,13 @@ func (m *Channel) SetConversationId(arg0 string, arg1 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -885,6 +900,7 @@ func (m *Channel) SetDescription(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -912,6 +928,7 @@ func (m *Channel) SetGroup(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1008,6 +1025,7 @@ func (m *Channel) SetName(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,

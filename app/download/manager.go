@@ -94,11 +94,13 @@ func (m *Manager) AddCompletedDownload7(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -109,11 +111,13 @@ func (m *Manager) AddCompletedDownload7(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		jArg4, err := env.NewStringUTF(arg4)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg4.Object)
 
 		var jArg6 uint8
 		if arg6 {
@@ -159,11 +163,13 @@ func (m *Manager) AddCompletedDownload9_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -174,11 +180,13 @@ func (m *Manager) AddCompletedDownload9_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		jArg4, err := env.NewStringUTF(arg4)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg4.Object)
 
 		var jArg6 uint8
 		if arg6 {
@@ -275,7 +283,9 @@ func (m *Manager) GetUriForDownloadedFile(arg0 int64) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -306,7 +316,9 @@ func (m *Manager) OpenDownloadedFile(arg0 int64) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -337,7 +349,9 @@ func (m *Manager) Query(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -394,7 +408,9 @@ func (m *Manager) GetMaxBytesOverMobile(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -425,7 +441,9 @@ func (m *Manager) GetRecommendedMaxBytesOverMobile(arg0 *jni.Object) (*jni.Objec
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

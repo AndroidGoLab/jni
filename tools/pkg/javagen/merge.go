@@ -192,6 +192,14 @@ func mergeParam(p Param, overlay *Overlay) MergedParam {
 	isString := p.JavaType == "String" || p.JavaType == "java.lang.String" || p.JavaType == "CharSequence" || p.JavaType == "java.lang.CharSequence"
 	isBool := p.JavaType == "boolean"
 
+	// CharSequence parameters accept Go strings: String implements
+	// CharSequence, so we create a JNI String and pass it. Override the
+	// GoType that ResolveType returns (which is *jni.Object for
+	// CharSequence) so the Go API accepts a plain string.
+	if isString && goType != "string" && p.GoType == "" {
+		goType = "string"
+	}
+
 	goName := sanitizeGoName(p.GoName)
 
 	return MergedParam{
@@ -465,7 +473,7 @@ func classifyReturn(retType string, retConv TypeConv) ReturnKind {
 	switch {
 	case retType == "void":
 		return ReturnVoid
-	case retType == "String" || retType == "java.lang.String" || retType == "java.lang.CharSequence":
+	case retType == "String" || retType == "java.lang.String":
 		return ReturnString
 	case retType == "boolean":
 		return ReturnBool

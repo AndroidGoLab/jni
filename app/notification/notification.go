@@ -46,7 +46,9 @@ func (m *Notification) Clone0() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -153,7 +155,9 @@ func (m *Notification) GetBubbleMetadata() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -210,7 +214,9 @@ func (m *Notification) GetContextualActions() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -292,7 +298,9 @@ func (m *Notification) GetLargeIcon() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -322,7 +330,9 @@ func (m *Notification) GetLocusId() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -330,8 +340,8 @@ func (m *Notification) GetLocusId() (*jni.Object, error) {
 }
 
 // GetSettingsText calls android.app.Notification.getSettingsText.
-func (m *Notification) GetSettingsText() (string, error) {
-	var result string
+func (m *Notification) GetSettingsText() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -342,15 +352,20 @@ func (m *Notification) GetSettingsText() (string, error) {
 			callErr = fmt.Errorf("android.app.Notification.getSettingsText is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNotificationGetSettingsText,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -433,7 +448,9 @@ func (m *Notification) GetSmallIcon() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -619,7 +636,9 @@ func (m *Notification) Clone0_1() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

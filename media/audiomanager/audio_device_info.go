@@ -101,7 +101,9 @@ func (m *AudioDeviceInfo) GetAudioDescriptors() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -131,7 +133,9 @@ func (m *AudioDeviceInfo) GetAudioProfiles() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -161,7 +165,9 @@ func (m *AudioDeviceInfo) GetChannelCounts() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -191,7 +197,9 @@ func (m *AudioDeviceInfo) GetChannelIndexMasks() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -221,7 +229,9 @@ func (m *AudioDeviceInfo) GetChannelMasks() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -251,7 +261,9 @@ func (m *AudioDeviceInfo) GetEncapsulationMetadataTypes() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -281,7 +293,9 @@ func (m *AudioDeviceInfo) GetEncapsulationModes() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -311,7 +325,9 @@ func (m *AudioDeviceInfo) GetEncodings() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -344,8 +360,8 @@ func (m *AudioDeviceInfo) GetId() (int32, error) {
 }
 
 // GetProductName calls android.media.AudioDeviceInfo.getProductName.
-func (m *AudioDeviceInfo) GetProductName() (string, error) {
-	var result string
+func (m *AudioDeviceInfo) GetProductName() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -356,15 +372,20 @@ func (m *AudioDeviceInfo) GetProductName() (string, error) {
 			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getProductName is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAudioDeviceInfoGetProductName,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -393,7 +414,9 @@ func (m *AudioDeviceInfo) GetSampleRates() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

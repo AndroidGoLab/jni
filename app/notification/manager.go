@@ -249,6 +249,7 @@ func (m *Manager) CanNotifyAsPackage(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -358,6 +359,7 @@ func (m *Manager) Cancel2_1(arg0 string, arg1 int32) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -411,11 +413,13 @@ func (m *Manager) CancelAsPackage(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -535,6 +539,7 @@ func (m *Manager) DeleteNotificationChannel(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -562,6 +567,7 @@ func (m *Manager) DeleteNotificationChannelGroup(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -595,7 +601,9 @@ func (m *Manager) GetActiveNotifications() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -619,6 +627,7 @@ func (m *Manager) GetAutomaticZenRule(arg0 string) (*jni.Object, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -630,7 +639,9 @@ func (m *Manager) GetAutomaticZenRule(arg0 string) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -654,6 +665,7 @@ func (m *Manager) GetAutomaticZenRuleState(arg0 string) (int32, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -715,7 +727,9 @@ func (m *Manager) GetConsolidatedNotificationPolicy() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -789,6 +803,7 @@ func (m *Manager) GetNotificationChannel1(arg0 string) (*jni.Object, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -800,7 +815,9 @@ func (m *Manager) GetNotificationChannel1(arg0 string) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -824,11 +841,13 @@ func (m *Manager) GetNotificationChannel2_1(arg0 string, arg1 string) (*jni.Obje
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -840,7 +859,9 @@ func (m *Manager) GetNotificationChannel2_1(arg0 string, arg1 string) (*jni.Obje
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -864,6 +885,7 @@ func (m *Manager) GetNotificationChannelGroup(arg0 string) (*jni.Object, error) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -875,7 +897,9 @@ func (m *Manager) GetNotificationChannelGroup(arg0 string) (*jni.Object, error) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -905,7 +929,9 @@ func (m *Manager) GetNotificationChannelGroups() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -935,7 +961,9 @@ func (m *Manager) GetNotificationChannels() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -992,7 +1020,9 @@ func (m *Manager) GetNotificationPolicy() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1126,6 +1156,7 @@ func (m *Manager) Notify3_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1158,11 +1189,13 @@ func (m *Manager) NotifyAsPackage(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1190,6 +1223,7 @@ func (m *Manager) RemoveAutomaticZenRule(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -1222,6 +1256,7 @@ func (m *Manager) SetAutomaticZenRuleState(arg0 string, arg1 *jni.Object) error 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1272,6 +1307,7 @@ func (m *Manager) SetNotificationDelegate(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1349,6 +1385,7 @@ func (m *Manager) UpdateAutomaticZenRule(arg0 string, arg1 *jni.Object) (bool, e
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(

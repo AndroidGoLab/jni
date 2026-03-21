@@ -40,6 +40,7 @@ func (m *TextToSpeech) AddEarcon2(arg0 string, arg1 *jni.Object) (int32, error) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -70,6 +71,7 @@ func (m *TextToSpeech) AddEarcon2_1(arg0 string, arg1 *jni.Object) (int32, error
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -100,11 +102,13 @@ func (m *TextToSpeech) AddEarcon2_2(arg0 string, arg1 string) (int32, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -139,11 +143,13 @@ func (m *TextToSpeech) AddEarcon3_3(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -174,6 +180,7 @@ func (m *TextToSpeech) AddSpeech2(arg0 string, arg1 *jni.Object) (int32, error) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -204,6 +211,7 @@ func (m *TextToSpeech) AddSpeech2_1(arg0 string, arg1 *jni.Object) (int32, error
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -238,11 +246,13 @@ func (m *TextToSpeech) AddSpeech3_2(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -273,11 +283,13 @@ func (m *TextToSpeech) AddSpeech2_3(arg0 string, arg1 string) (int32, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -312,11 +324,13 @@ func (m *TextToSpeech) AddSpeech3_4(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -380,7 +394,9 @@ func (m *TextToSpeech) GetAvailableLanguages() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -437,7 +453,9 @@ func (m *TextToSpeech) GetDefaultLanguage() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -467,7 +485,9 @@ func (m *TextToSpeech) GetDefaultVoice() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -497,7 +517,9 @@ func (m *TextToSpeech) GetEngines() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -528,7 +550,9 @@ func (m *TextToSpeech) GetFeatures(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -558,7 +582,9 @@ func (m *TextToSpeech) GetLanguage() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -588,7 +614,9 @@ func (m *TextToSpeech) GetVoice() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -618,7 +646,9 @@ func (m *TextToSpeech) GetVoices() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -700,11 +730,13 @@ func (m *TextToSpeech) PlayEarcon4(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg3, err := env.NewStringUTF(arg3)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -739,6 +771,7 @@ func (m *TextToSpeech) PlayEarcon3_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -804,6 +837,7 @@ func (m *TextToSpeech) PlaySilentUtterance(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -860,6 +894,7 @@ func (m *TextToSpeech) SetEngineByPackageName(arg0 string) (int32, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1073,11 +1108,13 @@ func (m *TextToSpeech) Speak4(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg3, err := env.NewStringUTF(arg3)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1112,6 +1149,7 @@ func (m *TextToSpeech) Speak3_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1172,11 +1210,13 @@ func (m *TextToSpeech) SynthesizeToFile4(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg3, err := env.NewStringUTF(arg3)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1212,11 +1252,13 @@ func (m *TextToSpeech) SynthesizeToFile4_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg3, err := env.NewStringUTF(arg3)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -1251,11 +1293,13 @@ func (m *TextToSpeech) SynthesizeToFile3_2(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,

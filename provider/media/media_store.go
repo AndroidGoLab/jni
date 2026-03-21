@@ -75,7 +75,9 @@ func (m *MediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*j
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -115,7 +117,9 @@ func (m *MediaStore) CreateFavoriteRequest(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -155,7 +159,9 @@ func (m *MediaStore) CreateTrashRequest(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -186,7 +192,9 @@ func (m *MediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jn
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -217,7 +225,9 @@ func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -248,7 +258,9 @@ func (m *MediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, erro
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -273,6 +285,7 @@ func (m *MediaStore) GetGeneration(arg0 *jni.Object, arg1 string) (int64, error)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallStaticLongMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
@@ -309,7 +322,9 @@ func (m *MediaStore) GetMediaScannerUri() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -340,7 +355,9 @@ func (m *MediaStore) GetMediaUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Objec
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -371,7 +388,9 @@ func (m *MediaStore) GetOriginalMediaFormatFileDescriptor(arg0 *jni.Object, arg1
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -427,7 +446,9 @@ func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -458,7 +479,9 @@ func (m *MediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.O
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -489,7 +512,9 @@ func (m *MediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -570,6 +595,7 @@ func (m *MediaStore) GetVersion2_1(arg0 *jni.Object, arg1 string) (string, error
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultObj *jni.Object
 		resultObj, callErr = env.CallStaticObjectMethod(
@@ -631,6 +657,7 @@ func (m *MediaStore) IsCurrentCloudMediaProviderAuthority(arg0 *jni.Object, arg1
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallStaticBooleanMethod(
@@ -668,6 +695,7 @@ func (m *MediaStore) IsCurrentSystemGallery(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallStaticBooleanMethod(
@@ -701,6 +729,7 @@ func (m *MediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, ar
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallStaticBooleanMethod(
@@ -770,11 +799,13 @@ func (m *MediaStore) NotifyCloudMediaChangedEvent(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
@@ -808,6 +839,7 @@ func (m *MediaStore) OpenAssetFileDescriptor(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
@@ -819,7 +851,9 @@ func (m *MediaStore) OpenAssetFileDescriptor(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -849,6 +883,7 @@ func (m *MediaStore) OpenFileDescriptor(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
@@ -860,7 +895,9 @@ func (m *MediaStore) OpenFileDescriptor(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -891,6 +928,7 @@ func (m *MediaStore) OpenTypedAssetFileDescriptor(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
@@ -902,7 +940,9 @@ func (m *MediaStore) OpenTypedAssetFileDescriptor(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -933,7 +973,9 @@ func (m *MediaStore) SetIncludePending(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -964,7 +1006,9 @@ func (m *MediaStore) SetRequireOriginal(arg0 *jni.Object) (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

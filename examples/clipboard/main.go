@@ -23,6 +23,28 @@ import (
 	"github.com/AndroidGoLab/jni/examples/common/ui"
 )
 
+// charSequenceToString calls CharSequence.toString() via JNI and returns the Go string.
+func charSequenceToString(vm *jni.VM, csObj *jni.Object) string {
+	if csObj == nil {
+		return ""
+	}
+	var result string
+	vm.Do(func(env *jni.Env) error {
+		cls := env.GetObjectClass(csObj)
+		mid, err := env.GetMethodID(cls, "toString", "()Ljava/lang/String;")
+		if err != nil {
+			return nil
+		}
+		strObj, err := env.CallObjectMethod(csObj, mid)
+		if err != nil {
+			return nil
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(strObj)))
+		return nil
+	})
+	return result
+}
+
 func main() {}
 
 func init() { ui.Register(run) }
@@ -78,11 +100,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	fmt.Fprintf(output, "set: %q\n", testText)
 
-	// Read it back.
-	got, err := mgr.GetText()
+	// Read it back. GetText returns a CharSequence (*jni.Object), so we
+	// call toString() to get a Go string.
+	gotObj, err := mgr.GetText()
 	if err != nil {
 		return fmt.Errorf("getText: %w", err)
 	}
+	got := charSequenceToString(vm, gotObj)
 	fmt.Fprintf(output, "got: %q\n", got)
 
 	// Verify round-trip.

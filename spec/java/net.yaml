@@ -268,7 +268,7 @@ classes:
           returns: boolean
           error: true
     - java_class: android.net.NetworkCapabilities
-      go_type: workCapabilities
+      go_type: NetworkCapabilities
       methods:
         - java_method: describeContents
           go_name: DescribeContents

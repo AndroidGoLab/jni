@@ -22,6 +22,7 @@ func NewTTS(vm *jni.VM) (*TextToSpeech, error) {
 		if err != nil {
 			return fmt.Errorf("find TextToSpeech: %w", err)
 		}
+		defer env.DeleteLocalRef(&cls.Object)
 		initMid, err := env.GetMethodID(cls, "<init>", "()V")
 		if err != nil {
 			return fmt.Errorf("get TextToSpeech.<init>: %w", err)
@@ -31,6 +32,7 @@ func NewTTS(vm *jni.VM) (*TextToSpeech, error) {
 			return fmt.Errorf("new TextToSpeech: %w", err)
 		}
 		tts.Obj = env.NewGlobalRef(obj)
+		env.DeleteLocalRef(obj)
 		return nil
 	})
 	if err != nil {

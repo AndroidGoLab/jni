@@ -136,6 +136,7 @@ func (m *DevicePolicyManager) AddCrossProfileWidgetProvider(arg0 *jni.Object, ar
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -222,6 +223,7 @@ func (m *DevicePolicyManager) AddUserRestriction(arg0 *jni.Object, arg1 string) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -249,6 +251,7 @@ func (m *DevicePolicyManager) AddUserRestrictionGlobally(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -404,6 +407,7 @@ func (m *DevicePolicyManager) ClearApplicationUserData(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -454,6 +458,7 @@ func (m *DevicePolicyManager) ClearDeviceOwnerApp(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -482,6 +487,7 @@ func (m *DevicePolicyManager) ClearPackagePersistentPreferredActivities(arg0 *jn
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -561,6 +567,7 @@ func (m *DevicePolicyManager) ClearUserRestriction(arg0 *jni.Object, arg1 string
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -588,6 +595,7 @@ func (m *DevicePolicyManager) CreateAdminSupportIntent(arg0 string) (*jni.Object
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -599,7 +607,9 @@ func (m *DevicePolicyManager) CreateAdminSupportIntent(arg0 string) (*jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -630,6 +640,7 @@ func (m *DevicePolicyManager) CreateAndManageUser(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -641,7 +652,9 @@ func (m *DevicePolicyManager) CreateAndManageUser(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -692,6 +705,7 @@ func (m *DevicePolicyManager) EnableSystemApp2_1(arg0 *jni.Object, arg1 string) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -725,6 +739,7 @@ func (m *DevicePolicyManager) GenerateKeyPair(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -736,7 +751,9 @@ func (m *DevicePolicyManager) GenerateKeyPair(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -766,7 +783,9 @@ func (m *DevicePolicyManager) GetAccountTypesWithManagementDisabled() (*jni.Obje
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -796,7 +815,9 @@ func (m *DevicePolicyManager) GetActiveAdmins() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -827,7 +848,9 @@ func (m *DevicePolicyManager) GetAffiliationIds(arg0 *jni.Object) (*jni.Object, 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -858,7 +881,9 @@ func (m *DevicePolicyManager) GetAlwaysOnVpnLockdownWhitelist(arg0 *jni.Object) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -936,6 +961,7 @@ func (m *DevicePolicyManager) GetApplicationRestrictions(arg0 *jni.Object, arg1 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -947,7 +973,9 @@ func (m *DevicePolicyManager) GetApplicationRestrictions(arg0 *jni.Object, arg1 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1139,7 +1167,9 @@ func (m *DevicePolicyManager) GetBindDeviceAdminTargetUsers(arg0 *jni.Object) (*
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1279,7 +1309,9 @@ func (m *DevicePolicyManager) GetCredentialManagerPolicy() (*jni.Object, error) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1310,7 +1342,9 @@ func (m *DevicePolicyManager) GetCrossProfileCalendarPackages(arg0 *jni.Object) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1397,7 +1431,9 @@ func (m *DevicePolicyManager) GetCrossProfilePackages(arg0 *jni.Object) (*jni.Ob
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1428,7 +1464,9 @@ func (m *DevicePolicyManager) GetCrossProfileWidgetProviders(arg0 *jni.Object) (
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1478,6 +1516,7 @@ func (m *DevicePolicyManager) GetDelegatePackages(arg0 *jni.Object, arg1 string)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1489,7 +1528,9 @@ func (m *DevicePolicyManager) GetDelegatePackages(arg0 *jni.Object, arg1 string)
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1514,6 +1555,7 @@ func (m *DevicePolicyManager) GetDelegatedScopes(arg0 *jni.Object, arg1 string) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -1525,7 +1567,9 @@ func (m *DevicePolicyManager) GetDelegatedScopes(arg0 *jni.Object, arg1 string) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1533,8 +1577,8 @@ func (m *DevicePolicyManager) GetDelegatedScopes(arg0 *jni.Object, arg1 string) 
 }
 
 // GetDeviceOwnerLockScreenInfo calls android.app.admin.DevicePolicyManager.getDeviceOwnerLockScreenInfo.
-func (m *DevicePolicyManager) GetDeviceOwnerLockScreenInfo() (string, error) {
-	var result string
+func (m *DevicePolicyManager) GetDeviceOwnerLockScreenInfo() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -1545,15 +1589,20 @@ func (m *DevicePolicyManager) GetDeviceOwnerLockScreenInfo() (string, error) {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDeviceOwnerLockScreenInfo is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetDeviceOwnerLockScreenInfo,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -1587,8 +1636,8 @@ func (m *DevicePolicyManager) GetDevicePolicyManagementRoleHolderPackage() (stri
 }
 
 // GetEndUserSessionMessage calls android.app.admin.DevicePolicyManager.getEndUserSessionMessage.
-func (m *DevicePolicyManager) GetEndUserSessionMessage(arg0 *jni.Object) (string, error) {
-	var result string
+func (m *DevicePolicyManager) GetEndUserSessionMessage(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -1600,15 +1649,20 @@ func (m *DevicePolicyManager) GetEndUserSessionMessage(arg0 *jni.Object) (string
 			return callErr
 		}
 
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetEndUserSessionMessage, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -1665,7 +1719,9 @@ func (m *DevicePolicyManager) GetFactoryResetProtectionPolicy(arg0 *jni.Object) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1750,7 +1806,9 @@ func (m *DevicePolicyManager) GetInstalledCaCerts(arg0 *jni.Object) (*jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1781,7 +1839,9 @@ func (m *DevicePolicyManager) GetKeepUninstalledPackages(arg0 *jni.Object) (*jni
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1864,7 +1924,9 @@ func (m *DevicePolicyManager) GetLockTaskPackages(arg0 *jni.Object) (*jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1872,8 +1934,8 @@ func (m *DevicePolicyManager) GetLockTaskPackages(arg0 *jni.Object) (*jni.Object
 }
 
 // GetLongSupportMessage calls android.app.admin.DevicePolicyManager.getLongSupportMessage.
-func (m *DevicePolicyManager) GetLongSupportMessage(arg0 *jni.Object) (string, error) {
-	var result string
+func (m *DevicePolicyManager) GetLongSupportMessage(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -1885,15 +1947,20 @@ func (m *DevicePolicyManager) GetLongSupportMessage(arg0 *jni.Object) (string, e
 			return callErr
 		}
 
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetLongSupportMessage, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -1922,7 +1989,9 @@ func (m *DevicePolicyManager) GetManagedProfileCallerIdAccessPolicy() (*jni.Obje
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1952,7 +2021,9 @@ func (m *DevicePolicyManager) GetManagedProfileContactsAccessPolicy() (*jni.Obje
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2008,7 +2079,9 @@ func (m *DevicePolicyManager) GetManagedSubscriptionsPolicy() (*jni.Object, erro
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2091,7 +2164,9 @@ func (m *DevicePolicyManager) GetMeteredDataDisabledPackages(arg0 *jni.Object) (
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2225,8 +2300,8 @@ func (m *DevicePolicyManager) GetOrganizationColor(arg0 *jni.Object) (int32, err
 }
 
 // GetOrganizationName calls android.app.admin.DevicePolicyManager.getOrganizationName.
-func (m *DevicePolicyManager) GetOrganizationName(arg0 *jni.Object) (string, error) {
-	var result string
+func (m *DevicePolicyManager) GetOrganizationName(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -2238,15 +2313,20 @@ func (m *DevicePolicyManager) GetOrganizationName(arg0 *jni.Object) (string, err
 			return callErr
 		}
 
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetOrganizationName, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -2276,7 +2356,9 @@ func (m *DevicePolicyManager) GetOverrideApns(arg0 *jni.Object) (*jni.Object, er
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2307,7 +2389,9 @@ func (m *DevicePolicyManager) GetParentProfileInstance(arg0 *jni.Object) (*jni.O
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2675,7 +2759,9 @@ func (m *DevicePolicyManager) GetPendingSystemUpdate(arg0 *jni.Object) (*jni.Obj
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2704,11 +2790,13 @@ func (m *DevicePolicyManager) GetPermissionGrantState(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -2772,7 +2860,9 @@ func (m *DevicePolicyManager) GetPermittedAccessibilityServices(arg0 *jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2803,7 +2893,9 @@ func (m *DevicePolicyManager) GetPermittedCrossProfileNotificationListeners(arg0
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2834,7 +2926,9 @@ func (m *DevicePolicyManager) GetPermittedInputMethods(arg0 *jni.Object) (*jni.O
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2890,7 +2984,9 @@ func (m *DevicePolicyManager) GetPreferentialNetworkServiceConfigs() (*jni.Objec
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2971,7 +3067,9 @@ func (m *DevicePolicyManager) GetResources() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3030,7 +3128,9 @@ func (m *DevicePolicyManager) GetSecondaryUsers(arg0 *jni.Object) (*jni.Object, 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3038,8 +3138,8 @@ func (m *DevicePolicyManager) GetSecondaryUsers(arg0 *jni.Object) (*jni.Object, 
 }
 
 // GetShortSupportMessage calls android.app.admin.DevicePolicyManager.getShortSupportMessage.
-func (m *DevicePolicyManager) GetShortSupportMessage(arg0 *jni.Object) (string, error) {
-	var result string
+func (m *DevicePolicyManager) GetShortSupportMessage(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -3051,23 +3151,28 @@ func (m *DevicePolicyManager) GetShortSupportMessage(arg0 *jni.Object) (string, 
 			return callErr
 		}
 
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetShortSupportMessage, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
 }
 
 // GetStartUserSessionMessage calls android.app.admin.DevicePolicyManager.getStartUserSessionMessage.
-func (m *DevicePolicyManager) GetStartUserSessionMessage(arg0 *jni.Object) (string, error) {
-	var result string
+func (m *DevicePolicyManager) GetStartUserSessionMessage(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -3079,15 +3184,20 @@ func (m *DevicePolicyManager) GetStartUserSessionMessage(arg0 *jni.Object) (stri
 			return callErr
 		}
 
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetStartUserSessionMessage, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -3169,7 +3279,9 @@ func (m *DevicePolicyManager) GetSubscriptionIds() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3199,7 +3311,9 @@ func (m *DevicePolicyManager) GetSystemUpdatePolicy() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3229,7 +3343,9 @@ func (m *DevicePolicyManager) GetTransferOwnershipBundle() (*jni.Object, error) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3260,7 +3376,9 @@ func (m *DevicePolicyManager) GetTrustAgentConfiguration(arg0 *jni.Object, arg1 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3291,7 +3409,9 @@ func (m *DevicePolicyManager) GetUserControlDisabledPackages(arg0 *jni.Object) (
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3322,7 +3442,9 @@ func (m *DevicePolicyManager) GetUserRestrictions(arg0 *jni.Object) (*jni.Object
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3352,7 +3474,9 @@ func (m *DevicePolicyManager) GetUserRestrictionsGlobally() (*jni.Object, error)
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3410,7 +3534,9 @@ func (m *DevicePolicyManager) GetWifiSsidPolicy() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3439,11 +3565,13 @@ func (m *DevicePolicyManager) GrantKeyPairToApp(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -3476,6 +3604,7 @@ func (m *DevicePolicyManager) GrantKeyPairToWifiAuth(arg0 string) (bool, error) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -3564,6 +3693,7 @@ func (m *DevicePolicyManager) HasKeyPair(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -3653,6 +3783,7 @@ func (m *DevicePolicyManager) InstallExistingPackage(arg0 *jni.Object, arg1 stri
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -3691,6 +3822,7 @@ func (m *DevicePolicyManager) InstallKeyPair4(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -3730,6 +3862,7 @@ func (m *DevicePolicyManager) InstallKeyPair5_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		var jArg4 uint8
 		if arg4 {
@@ -3774,6 +3907,7 @@ func (m *DevicePolicyManager) InstallKeyPair5_2(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -3972,6 +4106,7 @@ func (m *DevicePolicyManager) IsApplicationHidden(arg0 *jni.Object, arg1 string)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4168,6 +4303,7 @@ func (m *DevicePolicyManager) IsDeviceOwnerApp(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4228,6 +4364,7 @@ func (m *DevicePolicyManager) IsKeyPairGrantedToWifiAuth(arg0 string) (bool, err
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4260,6 +4397,7 @@ func (m *DevicePolicyManager) IsLockTaskPermitted(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4459,6 +4597,7 @@ func (m *DevicePolicyManager) IsPackageSuspended(arg0 *jni.Object, arg1 string) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4518,6 +4657,7 @@ func (m *DevicePolicyManager) IsProfileOwnerApp(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4550,6 +4690,7 @@ func (m *DevicePolicyManager) IsProvisioningAllowed(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4694,6 +4835,7 @@ func (m *DevicePolicyManager) IsUninstallBlocked(arg0 *jni.Object, arg1 string) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4814,7 +4956,9 @@ func (m *DevicePolicyManager) ListForegroundAffiliatedUsers() (*jni.Object, erro
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -4956,6 +5100,7 @@ func (m *DevicePolicyManager) RemoveCrossProfileWidgetProvider(arg0 *jni.Object,
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -4989,6 +5134,7 @@ func (m *DevicePolicyManager) RemoveKeyPair(arg0 *jni.Object, arg1 string) (bool
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -5105,6 +5251,7 @@ func (m *DevicePolicyManager) ResetPassword(arg0 string, arg1 int32) (bool, erro
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -5143,6 +5290,7 @@ func (m *DevicePolicyManager) ResetPasswordWithToken(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -5182,7 +5330,9 @@ func (m *DevicePolicyManager) RetrieveNetworkLogs(arg0 *jni.Object, arg1 int64) 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -5213,7 +5363,9 @@ func (m *DevicePolicyManager) RetrievePreRebootSecurityLogs(arg0 *jni.Object) (*
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -5244,7 +5396,9 @@ func (m *DevicePolicyManager) RetrieveSecurityLogs(arg0 *jni.Object) (*jni.Objec
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -5273,11 +5427,13 @@ func (m *DevicePolicyManager) RevokeKeyPairFromApp(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -5310,6 +5466,7 @@ func (m *DevicePolicyManager) RevokeKeyPairFromWifiAuth(arg0 string) (bool, erro
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -5347,6 +5504,7 @@ func (m *DevicePolicyManager) SetAccountManagementDisabled(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -5407,6 +5565,7 @@ func (m *DevicePolicyManager) SetAlwaysOnVpnPackage3(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -5445,6 +5604,7 @@ func (m *DevicePolicyManager) SetAlwaysOnVpnPackage4_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -5505,6 +5665,7 @@ func (m *DevicePolicyManager) SetApplicationHidden(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -5547,6 +5708,7 @@ func (m *DevicePolicyManager) SetApplicationRestrictions(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5575,6 +5737,7 @@ func (m *DevicePolicyManager) SetApplicationRestrictionsManagingPackage(arg0 *jn
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -5817,6 +5980,7 @@ func (m *DevicePolicyManager) SetCertInstallerPackage(arg0 *jni.Object, arg1 str
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6048,6 +6212,7 @@ func (m *DevicePolicyManager) SetDefaultDialerApplication(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6076,6 +6241,7 @@ func (m *DevicePolicyManager) SetDefaultSmsApplication(arg0 *jni.Object, arg1 st
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6108,6 +6274,7 @@ func (m *DevicePolicyManager) SetDelegatedScopes(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6136,6 +6303,7 @@ func (m *DevicePolicyManager) SetDeviceOwnerLockScreenInfo(arg0 *jni.Object, arg
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6164,6 +6332,7 @@ func (m *DevicePolicyManager) SetEndUserSessionMessage(arg0 *jni.Object, arg1 st
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6241,6 +6410,7 @@ func (m *DevicePolicyManager) SetGlobalPrivateDnsModeSpecifiedHost(arg0 *jni.Obj
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -6276,11 +6446,13 @@ func (m *DevicePolicyManager) SetGlobalSetting(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6337,6 +6509,7 @@ func (m *DevicePolicyManager) SetKeyPairCertificate(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg3 uint8
 		if arg3 {
@@ -6533,6 +6706,7 @@ func (m *DevicePolicyManager) SetLongSupportMessage(arg0 *jni.Object, arg1 strin
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6733,7 +6907,9 @@ func (m *DevicePolicyManager) SetMeteredDataDisabledPackages(arg0 *jni.Object, a
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -6900,6 +7076,7 @@ func (m *DevicePolicyManager) SetOrganizationId(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6928,6 +7105,7 @@ func (m *DevicePolicyManager) SetOrganizationName(arg0 *jni.Object, arg1 string)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -6999,7 +7177,9 @@ func (m *DevicePolicyManager) SetPackagesSuspended(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -7259,11 +7439,13 @@ func (m *DevicePolicyManager) SetPermissionGrantState(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -7505,6 +7687,7 @@ func (m *DevicePolicyManager) SetProfileName(arg0 *jni.Object, arg1 string) erro
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -7685,11 +7868,13 @@ func (m *DevicePolicyManager) SetSecureSetting(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -7746,6 +7931,7 @@ func (m *DevicePolicyManager) SetShortSupportMessage(arg0 *jni.Object, arg1 stri
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -7774,6 +7960,7 @@ func (m *DevicePolicyManager) SetStartUserSessionMessage(arg0 *jni.Object, arg1 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -7870,11 +8057,13 @@ func (m *DevicePolicyManager) SetSystemSetting(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		jArg2, err := env.NewStringUTF(arg2)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -7954,6 +8143,7 @@ func (m *DevicePolicyManager) SetTimeZone(arg0 *jni.Object, arg1 string) (bool, 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -8018,6 +8208,7 @@ func (m *DevicePolicyManager) SetUninstallBlocked(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var jArg2 uint8
 		if arg2 {
@@ -8355,6 +8546,7 @@ func (m *DevicePolicyManager) WipeData2_1(arg0 int32, arg1 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,

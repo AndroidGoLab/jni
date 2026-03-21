@@ -118,6 +118,7 @@ func (m *Location) Dump(arg0 *jni.Object, arg1 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -405,7 +406,9 @@ func (m *Location) GetExtras() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1577,6 +1580,7 @@ func (m *Location) SetProvider(arg0 string) error {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1774,6 +1778,7 @@ func (m *Location) Convert1_1(arg0 string) (float64, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallStaticDoubleMethod(
 			(*jni.Class)(unsafe.Pointer(clsLocation)),

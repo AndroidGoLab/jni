@@ -40,6 +40,7 @@ func (m *SharedPreferences) Contains(arg0 string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -78,7 +79,9 @@ func (m *SharedPreferences) Edit() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -102,6 +105,7 @@ func (m *SharedPreferences) GetBoolean(arg0 string, arg1 bool) (bool, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		var jArg1 uint8
 		if arg1 {
@@ -139,6 +143,7 @@ func (m *SharedPreferences) GetFloat(arg0 string, arg1 float32) (float32, error)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallFloatMethod(
 			m.Obj,
@@ -169,6 +174,7 @@ func (m *SharedPreferences) GetInt(arg0 string, arg1 int32) (int32, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
@@ -199,6 +205,7 @@ func (m *SharedPreferences) GetLong(arg0 string, arg1 int64) (int64, error) {
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallLongMethod(
 			m.Obj,
@@ -229,11 +236,13 @@ func (m *SharedPreferences) GetString(arg0 string, arg1 string) (string, error) 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultObj *jni.Object
 		resultObj, callErr = env.CallObjectMethod(
@@ -266,6 +275,7 @@ func (m *SharedPreferences) GetStringSet(arg0 string, arg1 *jni.Object) (*jni.Ob
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
@@ -277,7 +287,9 @@ func (m *SharedPreferences) GetStringSet(arg0 string, arg1 *jni.Object) (*jni.Ob
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

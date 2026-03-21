@@ -474,7 +474,9 @@ func (m *WifiP2pManager) Initialize(
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1037,6 +1039,7 @@ func (m *WifiP2pManager) SetConnectionRequestResult5_1(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg3.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,

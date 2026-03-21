@@ -143,11 +143,13 @@ func startExample() {
 
 	go func() {
 		if runFunc != nil {
-			if err := runFunc(vm, &outputBuf); err != nil {
-				OutputMu.Lock()
-				fmt.Fprintf(&outputBuf, "ERROR: %v\n", err)
-				OutputMu.Unlock()
+			var localBuf bytes.Buffer
+			if err := runFunc(vm, &localBuf); err != nil {
+				fmt.Fprintf(&localBuf, "ERROR: %v\n", err)
 			}
+			OutputMu.Lock()
+			outputBuf.Write(localBuf.Bytes())
+			OutputMu.Unlock()
 		}
 		RenderOutput()
 	}()
@@ -207,12 +209,25 @@ func renderText(text string) {
 		return
 	}
 	bmp := pdf.Bitmap{VM: vm, Obj: bitmapObj}
+	defer func() {
+		_ = bmp.Recycle()
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(bmp.Obj)
+			return nil
+		})
+	}()
 
 	// Create Canvas from Bitmap.
 	canvas, err := pdf.NewCanvas(vm, bitmapObj)
 	if err != nil {
 		return
 	}
+	defer func() {
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(canvas.Obj)
+			return nil
+		})
+	}()
 
 	// Fill background white.
 	if err := canvas.DrawColor1(colorWhite); err != nil {
@@ -224,6 +239,12 @@ func renderText(text string) {
 	if err != nil {
 		return
 	}
+	defer func() {
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(paint.Obj)
+			return nil
+		})
+	}()
 	if err := paint.SetColor1(colorDkGray); err != nil {
 		return
 	}
@@ -296,9 +317,6 @@ func renderText(text string) {
 		C.int(windowWidth),
 		C.int(windowHeight),
 	)
-
-	// Recycle bitmap.
-	_ = bmp.Recycle()
 }
 
 func getUngrantedPermissions(
@@ -333,7 +351,10 @@ func getUngrantedPermissions(
 	if err != nil {
 		return nil, nil
 	}
-	jPkg, _ := env.NewStringUTF(pkgName)
+	jPkg, err := env.NewStringUTF(pkgName)
+	if err != nil {
+		return nil, err
+	}
 	ai, err := env.CallObjectMethod(pm, getAIMid,
 		jni.ObjectValue(&jPkg.Object), jni.IntValue(pmGetMetaData))
 	if err != nil {
@@ -356,8 +377,14 @@ func getUngrantedPermissions(
 	if err != nil {
 		return nil, nil
 	}
-	jKey, _ := env.NewStringUTF("example.permissions")
-	jEmpty, _ := env.NewStringUTF("")
+	jKey, err := env.NewStringUTF("example.permissions")
+	if err != nil {
+		return nil, err
+	}
+	jEmpty, err := env.NewStringUTF("")
+	if err != nil {
+		return nil, err
+	}
 	csvObj, err := env.CallObjectMethod(metaObj, getStrMid,
 		jni.ObjectValue(&jKey.Object), jni.ObjectValue(&jEmpty.Object))
 	if err != nil {
@@ -376,7 +403,10 @@ func getUngrantedPermissions(
 		return nil, nil
 	}
 	for _, perm := range perms {
-		jPerm, _ := env.NewStringUTF(perm)
+		jPerm, err := env.NewStringUTF(perm)
+		if err != nil {
+			continue
+		}
 		result, err := env.CallIntMethod(activity, checkMid, jni.ObjectValue(&jPerm.Object))
 		if err != nil {
 			continue
@@ -408,7 +438,10 @@ func requestPermissions(
 		return
 	}
 	for i, p := range perms {
-		jP, _ := env.NewStringUTF(p)
+		jP, err := env.NewStringUTF(p)
+		if err != nil {
+			return
+		}
 		_ = env.SetObjectArrayElement(arr, int32(i), &jP.Object)
 	}
 	_ = env.CallVoidMethod(activity, reqMid,

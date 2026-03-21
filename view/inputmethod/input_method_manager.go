@@ -115,6 +115,7 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation2_1(arg0 *jni.Obje
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
@@ -154,6 +155,7 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation5_2(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -187,6 +189,7 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation4_3(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -266,7 +269,9 @@ func (m *InputMethodManager) GetCurrentInputMethodInfo() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -296,7 +301,9 @@ func (m *InputMethodManager) GetCurrentInputMethodSubtype() (*jni.Object, error)
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -326,7 +333,9 @@ func (m *InputMethodManager) GetEnabledInputMethodList() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -362,7 +371,9 @@ func (m *InputMethodManager) GetEnabledInputMethodSubtypeList(arg0 *jni.Object, 
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -392,7 +403,9 @@ func (m *InputMethodManager) GetInputMethodList() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -422,7 +435,9 @@ func (m *InputMethodManager) GetLastInputMethodSubtype() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -817,6 +832,7 @@ func (m *InputMethodManager) PrepareStylusHandwritingDelegation2_1(arg0 *jni.Obj
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -872,6 +888,7 @@ func (m *InputMethodManager) SendAppPrivateCommand(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -899,6 +916,7 @@ func (m *InputMethodManager) SetAdditionalInputMethodSubtypes(arg0 string, arg1 
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -954,6 +972,7 @@ func (m *InputMethodManager) SetExplicitlyEnabledInputMethodSubtypes(arg0 string
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -982,6 +1001,7 @@ func (m *InputMethodManager) SetInputMethod(arg0 *jni.Object, arg1 string) error
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1014,6 +1034,7 @@ func (m *InputMethodManager) SetInputMethodAndSubtype(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1069,6 +1090,7 @@ func (m *InputMethodManager) ShowInputMethodAndSubtypeEnabler(arg0 string) error
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg0.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1206,6 +1228,7 @@ func (m *InputMethodManager) ShowStatusIcon(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg1.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
@@ -1268,6 +1291,7 @@ func (m *InputMethodManager) StartConnectionlessStylusHandwritingForDelegation5(
 		if err != nil {
 			return err
 		}
+		defer env.DeleteLocalRef(&jArg2.Object)
 
 		callErr = env.CallVoidMethod(
 			m.Obj,

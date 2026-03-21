@@ -126,7 +126,9 @@ func (m *Prompt) GetContentView() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -134,8 +136,8 @@ func (m *Prompt) GetContentView() (*jni.Object, error) {
 }
 
 // GetDescription calls android.hardware.biometrics.BiometricPrompt.getDescription.
-func (m *Prompt) GetDescription() (string, error) {
-	var result string
+func (m *Prompt) GetDescription() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -146,15 +148,20 @@ func (m *Prompt) GetDescription() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getDescription is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetDescription,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -183,7 +190,9 @@ func (m *Prompt) GetLogoBitmap() (*jni.Object, error) {
 		// Convert the JNI local reference to a global reference so the
 		// returned object remains valid outside this vm.Do scope.
 		if result != nil {
-			result = env.NewGlobalRef(result)
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -243,8 +252,8 @@ func (m *Prompt) GetLogoRes() (int32, error) {
 }
 
 // GetNegativeButtonText calls android.hardware.biometrics.BiometricPrompt.getNegativeButtonText.
-func (m *Prompt) GetNegativeButtonText() (string, error) {
-	var result string
+func (m *Prompt) GetNegativeButtonText() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -255,23 +264,28 @@ func (m *Prompt) GetNegativeButtonText() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getNegativeButtonText is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetNegativeButtonText,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
 }
 
 // GetSubtitle calls android.hardware.biometrics.BiometricPrompt.getSubtitle.
-func (m *Prompt) GetSubtitle() (string, error) {
-	var result string
+func (m *Prompt) GetSubtitle() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -282,23 +296,28 @@ func (m *Prompt) GetSubtitle() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getSubtitle is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetSubtitle,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
 }
 
 // GetTitle calls android.hardware.biometrics.BiometricPrompt.getTitle.
-func (m *Prompt) GetTitle() (string, error) {
-	var result string
+func (m *Prompt) GetTitle() (*jni.Object, error) {
+	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -309,15 +328,20 @@ func (m *Prompt) GetTitle() (string, error) {
 			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt.getTitle is not available on this device")
 			return callErr
 		}
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPromptGetTitle,
 		)
 		if callErr != nil {
 			return callErr
 		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

@@ -87,8 +87,10 @@ func ResolveType(javaType string) TypeConv {
 	}
 
 	// Check String and CharSequence specifically.
-	// CharSequence uses the same Go type (string) but a different JNI
-	// descriptor, since the JVM distinguishes the two at method lookup.
+	// CharSequence is NOT treated as a string return because the JNI object
+	// may be a SpannableString, StringBuilder, etc. — calling GetStringUTFChars
+	// on those crashes. CharSequence returns are treated as *jni.Object; callers
+	// must call .toString() themselves if they want a Go string.
 	switch javaType {
 	case "String", "java.lang.String":
 		return TypeConv{
@@ -99,7 +101,7 @@ func ResolveType(javaType string) TypeConv {
 		}
 	case "CharSequence", "java.lang.CharSequence":
 		return TypeConv{
-			GoType:     "string",
+			GoType:     "*jni.Object",
 			JNISig:     "Ljava/lang/CharSequence;",
 			CallSuffix: "Object",
 			IsObject:   true,
@@ -231,8 +233,8 @@ func JNITypeSignature(javaType string) string {
 func ParamConversionCode(p MergedParam) string {
 	varName := "j" + strings.Title(p.GoName) //nolint:staticcheck // strings.Title is fine here
 	if p.IsString {
-		return fmt.Sprintf("%s, err := env.NewStringUTF(%s)\n\t\tif err != nil {\n\t\t\treturn %s\n\t\t}\n",
-			varName, p.GoName, "err")
+		return fmt.Sprintf("%s, err := env.NewStringUTF(%s)\n\t\tif err != nil {\n\t\t\treturn %s\n\t\t}\n\t\tdefer env.DeleteLocalRef(&%s.Object)\n",
+			varName, p.GoName, "err", varName)
 	}
 	if p.IsBool {
 		return fmt.Sprintf("var %s uint8\n\t\tif %s {\n\t\t\t%s = jniTrue\n\t\t}\n",
