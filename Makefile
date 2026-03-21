@@ -1,4 +1,4 @@
-.PHONY: generate specs jni java clean lint test test-tools build prove
+.PHONY: generate specs jni java clean lint test test-tools build prove examples
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -52,6 +52,26 @@ test-tools:
 prove:
 	@command -v lake >/dev/null 2>&1 || { echo "lake not found. Install elan: https://github.com/leanprover/elan"; exit 1; }
 	cd proofs && lake build
+
+# Build all example APKs (requires Android SDK + NDK)
+EXAMPLE_DIRS := $(sort $(dir $(wildcard examples/*/Makefile)))
+examples:
+	@failed=""; \
+	for d in $(EXAMPLE_DIRS); do \
+		name=$$(basename $$d); \
+		printf "  %-20s" "$$name"; \
+		if $(MAKE) -C $$d build >/dev/null 2>&1; then \
+			echo "OK"; \
+		else \
+			echo "FAIL"; \
+			failed="$$failed $$name"; \
+		fi; \
+	done; \
+	if [ -n "$$failed" ]; then \
+		echo "Failed:$$failed"; \
+		exit 1; \
+	fi; \
+	echo "All examples built."
 
 # Cross-compile libraries for android/arm64 (requires NDK toolchain)
 build:
