@@ -1,15 +1,7 @@
 //go:build android
 
 // Command session demonstrates using the Android MediaSession API
-// to query active media sessions, wrapped by the session package.
-// It is built as a c-shared library and packaged into an APK using
-// the shared apk.mk infrastructure.
-//
-// The session package wraps android.media.session.MediaSessionManager.
-// It provides a Manager obtained via NewManager, with methods for
-// querying active sessions and registering listeners for session changes.
-// The mediaController data class extracts PackageName and Tag from
-// android.media.session.MediaController objects.
+// to query active media sessions and the media key event handler.
 package main
 
 /*
@@ -29,7 +21,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/media/session"
 )
 
@@ -59,7 +50,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -67,65 +58,103 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := session.NewMediaSessionManager(ctx)
 	if err != nil {
-		return fmt.Errorf("session.NewMediaSessionManager: %w", err)
+		return fmt.Errorf("NewMediaSessionManager: %w", err)
 	}
 	defer mgr.Close()
 
-	// Manager provides unexported methods for media session control:
-	//   getActiveSessionsRaw(notificationListener)
-	//     -- returns a list of active MediaController JNI objects.
-	//     Requires MEDIA_CONTENT_CONTROL permission or notification listener access.
-	//   addOnActiveSessionsChangedListener(listener, notificationListener)
-	//     -- registers a callback for session changes.
-	//   removeOnActiveSessionsChangedListener(listener)
-	//     -- unregisters a previously added callback.
-	//
-	// The mediaController data class (unexported) extracts:
-	//   PackageName string -- the package owning the media session.
-	//   Tag         string -- the tag identifying the session.
-	//
-	// The onActiveSessionsChangedListener callback (unexported) provides:
-	//   OnChanged func(arg0 *jni.Object) -- invoked when active sessions change.
+	fmt.Fprintln(output, "=== MediaSessionManager ===")
 
-	fmt.Fprintln(output, "MediaSessionManager obtained successfully")
-	fmt.Fprintln(output, "Available raw methods: getActiveSessionsRaw, addOnActiveSessionsChangedListener, removeOnActiveSessionsChangedListener")
-	fmt.Fprintln(output, "Data class mediaController fields: PackageName, Tag")
+	// GetActiveSessions requires a NotificationListenerService
+	// ComponentName (null means only sessions owned by this app).
+	sessions, err := mgr.GetActiveSessions(nil)
+	if err != nil {
+		fmt.Fprintf(output, "GetActiveSessions: %v\n", err)
+	} else {
+		printMediaSessions(vm, output, sessions)
+	}
+
+	// Query media key event session package name (API 28+).
+	keyPkg, err := mgr.GetMediaKeyEventSessionPackageName()
+	if err != nil {
+		fmt.Fprintf(output, "MediaKeyEventPkg: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Media key handler: %s\n", keyPkg)
+	}
+
+	// Query Session2 tokens (API 28+).
+	tokens, err := mgr.GetSession2Tokens()
+	if err != nil {
+		fmt.Fprintf(output, "Session2Tokens: %v\n", err)
+	} else {
+		var tokenCount int32
+		_ = vm.Do(func(env *jni.Env) error {
+			if tokens == nil {
+				return nil
+			}
+			listCls, err := env.FindClass("java/util/List")
+			if err != nil {
+				return err
+			}
+			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
+			if err != nil {
+				return err
+			}
+			tokenCount, err = env.CallIntMethod(tokens, sizeMid)
+			return err
+		})
+		fmt.Fprintf(output, "Session2 tokens: %d\n", tokenCount)
+	}
 
 	return nil
 }
 
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
+func printMediaSessions(
+	vm *jni.VM,
+	output *bytes.Buffer,
+	listObj *jni.Object,
+) {
+	if listObj == nil {
+		fmt.Fprintln(output, "Active sessions: (null)")
+		return
+	}
 
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
+	_ = vm.Do(func(env *jni.Env) error {
+		listCls, err := env.FindClass("java/util/List")
+		if err != nil {
+			return err
+		}
+		sizeMid, err := env.GetMethodID(listCls, "size", "()I")
+		if err != nil {
+			return err
+		}
+		getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
+		if err != nil {
 			return err
 		}
 
-		atClass, err := env.FindClass("android/app/ActivityThread")
+		size, err := env.CallIntMethod(listObj, sizeMid)
 		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
+			return err
 		}
+		fmt.Fprintf(output, "Active sessions: %d\n", size)
 
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
+		for i := int32(0); i < size; i++ {
+			elem, err := env.CallObjectMethod(listObj, getMid, jni.IntValue(i))
+			if err != nil {
+				fmt.Fprintf(output, "  [%d] error: %v\n", i, err)
+				continue
+			}
 
-		ctx.Obj = env.NewGlobalRef(appObj)
+			// Wrap as MediaController to use typed methods.
+			ctrl := session.MediaController{
+				VM:  vm,
+				Obj: env.NewGlobalRef(elem),
+			}
+
+			pkg, _ := ctrl.GetPackageName()
+			tag, _ := ctrl.GetTag()
+			fmt.Fprintf(output, "  [%d] pkg=%s tag=%s\n", i, pkg, tag)
+		}
 		return nil
 	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

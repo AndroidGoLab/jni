@@ -1,14 +1,7 @@
 //go:build android
 
-// Command storage demonstrates using the Android StorageManager
-// system service, wrapped by the storage package. It is built as a
-// c-shared library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// The storage package wraps android.os.storage.StorageManager and
-// provides the Volume data class for inspecting storage volumes.
-// It supports querying storage volumes, checking allocatable bytes,
-// and managing cache quotas.
+// Command storage demonstrates the Android StorageManager API.
+// It queries the primary storage volume and displays its properties.
 package main
 
 /*
@@ -28,7 +21,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/os/storage"
 )
 
@@ -58,7 +50,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -68,57 +60,71 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("storage.NewManager: %w", err)
 	}
+	defer mgr.Close()
 
-	// Manager provides unexported methods for storage management:
-	//   getStorageVolumes()                 -- returns all storage volumes.
-	//   getPrimaryStorageVolume()           -- returns the primary storage volume.
-	//   getAllocatableBytes(storageUuid)     -- bytes available for allocation.
-	//   allocateBytes(storageUuid, bytes)   -- allocates storage space.
-	//   getCacheSizeBytes(storageUuid)      -- current cache size.
-	//   getCacheQuotaBytes(storageUuid)     -- cache quota for the app.
+	fmt.Fprintln(output, "=== Storage Info ===")
+	fmt.Fprintln(output)
 
-	// The storageVolume type (unexported) wraps android.os.storage.StorageVolume
-	// with JNI methods for querying volume properties.
-
-	fmt.Fprintln(output, "StorageManager obtained successfully")
-	fmt.Fprintln(output, "Unexported methods: getStorageVolumes, getPrimaryStorageVolume, getAllocatableBytes, allocateBytes, getCacheSizeBytes, getCacheQuotaBytes")
-
-	_ = mgr
-	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
+	// Query the primary storage volume.
+	volObj, err := mgr.GetPrimaryStorageVolume()
 	if err != nil {
-		return nil, err
+		return fmt.Errorf("getPrimaryStorageVolume: %w", err)
 	}
-	return &ctx, nil
+
+	vol := storage.Volume{VM: vm, Obj: volObj}
+
+	desc, err := vol.GetDescription(ctx.Obj)
+	if err != nil {
+		return fmt.Errorf("getDescription: %w", err)
+	}
+	fmt.Fprintf(output, "desc: %s\n", desc)
+
+	state, err := vol.GetState()
+	if err != nil {
+		return fmt.Errorf("getState: %w", err)
+	}
+	fmt.Fprintf(output, "state: %s\n", state)
+
+	isPrimary, err := vol.IsPrimary()
+	if err != nil {
+		return fmt.Errorf("isPrimary: %w", err)
+	}
+	fmt.Fprintf(output, "primary: %v\n", isPrimary)
+
+	isEmulated, err := vol.IsEmulated()
+	if err != nil {
+		return fmt.Errorf("isEmulated: %w", err)
+	}
+	fmt.Fprintf(output, "emulated: %v\n", isEmulated)
+
+	isRemovable, err := vol.IsRemovable()
+	if err != nil {
+		return fmt.Errorf("isRemovable: %w", err)
+	}
+	fmt.Fprintf(output, "removable: %v\n", isRemovable)
+
+	uuid, err := vol.GetUuid()
+	if err != nil {
+		return fmt.Errorf("getUuid: %w", err)
+	}
+	if uuid == "" {
+		uuid = "(internal)"
+	}
+	fmt.Fprintf(output, "uuid: %s\n", uuid)
+
+	mediaName, err := vol.GetMediaStoreVolumeName()
+	if err != nil {
+		return fmt.Errorf("getMediaStoreVolumeName: %w", err)
+	}
+	fmt.Fprintf(output, "media: %s\n", mediaName)
+
+	// Check filesystem encryption support.
+	checkpointOK, err := mgr.IsCheckpointSupported()
+	if err != nil {
+		fmt.Fprintf(output, "checkpoint: err\n")
+	} else {
+		fmt.Fprintf(output, "checkpoint: %v\n", checkpointOK)
+	}
+
+	return nil
 }

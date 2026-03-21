@@ -1,15 +1,7 @@
 //go:build android
 
-// Command clipboard demonstrates using the Android ClipboardManager API.
-// It is built as a c-shared library and packaged into an APK using the
-// shared apk.mk infrastructure.
-//
-// This example obtains the ClipboardManager system service and shows how the
-// exported NewManager constructor and Close cleanup method are used.
-// The clipboard package also provides unexported methods for clipboard
-// operations (setPrimaryClip, getPrimaryClip, hasPrimaryClip, addListener,
-// removeListener) and a clipChangedListener callback type with OnChanged,
-// as well as unexported clipData and clipItem helper types.
+// Command clipboard demonstrates the Android ClipboardManager API.
+// It sets text on the clipboard, reads it back, and displays the result.
 package main
 
 /*
@@ -28,9 +20,8 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/content/clipboard"
+	"github.com/AndroidGoLab/jni/exampleui"
 )
 
 func main() {}
@@ -59,93 +50,56 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	// NewManager obtains the ClipboardManager system service.
 	mgr, err := clipboard.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("clipboard.NewManager: %v", err)
+		return fmt.Errorf("clipboard.NewManager: %w", err)
 	}
-	// Close releases the JNI global reference; always defer it.
 	defer mgr.Close()
 
-	fmt.Fprintln(output, "ClipboardManager obtained successfully")
+	fmt.Fprintln(output, "=== Clipboard Demo ===")
+	fmt.Fprintln(output)
 
-	// The following methods are unexported (package-internal) and are
-	// used by higher-level Go wrappers that build on this package:
-	//
-	//   mgr.setPrimaryClip(clip *jni.Object) error
-	//     Sets the current primary clip on the clipboard.
-	//
-	//   mgr.getPrimaryClip() (*jni.Object, error)
-	//     Returns the current primary clip on the clipboard.
-	//
-	//   mgr.hasPrimaryClip() (bool, error)
-	//     Returns true if there is currently a primary clip on the clipboard.
-	//
-	//   mgr.addListener(listener *jni.Object) error
-	//     Registers a listener to be called when the primary clip changes.
-	//
-	//   mgr.removeListener(listener *jni.Object) error
-	//     Removes a previously registered clip-changed listener.
-	//
-	// The clipChangedListener struct provides a Go-friendly callback interface:
-	//
-	//   clipChangedListener{
-	//       OnChanged: func() { ... },
-	//   }
-	//
-	// It is registered via the unexported registerclipChangedListener function,
-	// which creates a Java proxy implementing
-	// ClipboardManager.OnPrimaryClipChangedListener.
-	//
-	// Additional unexported helper types:
-	//
-	//   clipData wraps android.content.ClipData with methods:
-	//     clipData.getItemAt(index int32) *jni.Object
-	//
-	//   clipItem wraps android.content.ClipData.Item with methods:
-	//     clipItem.getText() *jni.Object
+	// Check initial clipboard state.
+	hasClip, err := mgr.HasPrimaryClip()
+	if err != nil {
+		return fmt.Errorf("hasPrimaryClip: %w", err)
+	}
+	fmt.Fprintf(output, "has clip: %v\n", hasClip)
+
+	// Set text via the deprecated but simple setText API.
+	const testText = "Hello from Go JNI!"
+	if err := mgr.SetText(testText); err != nil {
+		return fmt.Errorf("setText: %w", err)
+	}
+	fmt.Fprintf(output, "set: %q\n", testText)
+
+	// Read it back.
+	got, err := mgr.GetText()
+	if err != nil {
+		return fmt.Errorf("getText: %w", err)
+	}
+	fmt.Fprintf(output, "got: %q\n", got)
+
+	// Verify round-trip.
+	fmt.Fprintln(output)
+	if got == testText {
+		fmt.Fprintln(output, "round-trip OK")
+	} else {
+		fmt.Fprintln(output, "MISMATCH!")
+	}
+
+	// Confirm clip is present after write.
+	hasClip, err = mgr.HasPrimaryClip()
+	if err != nil {
+		return fmt.Errorf("hasPrimaryClip: %w", err)
+	}
+	fmt.Fprintf(output, "has clip: %v\n", hasClip)
 
 	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

@@ -1,14 +1,7 @@
 //go:build android
 
 // Command companion demonstrates using the Android CompanionDeviceManager API.
-// It is built as a c-shared library and packaged into an APK using the
-// shared apk.mk infrastructure.
-//
-// This example obtains the CompanionDeviceManager system service using the
-// exported NewManager constructor. The companion package provides unexported
-// methods for device association (associateRaw, disassociateByIdRaw,
-// getAssociationsRaw), an unexported associationRequestBuilder type, and a
-// companionCallback type with OnDeviceFound and OnFailure callbacks.
+// It checks availability and lists existing device associations.
 package main
 
 /*
@@ -28,9 +21,8 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/companion"
+	"github.com/AndroidGoLab/jni/exampleui"
 )
 
 func main() {}
@@ -59,71 +51,109 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	// NewManager obtains the CompanionDeviceManager system service.
+	fmt.Fprintln(output, "=== CompanionDeviceManager ===")
+
 	mgr, err := companion.NewDeviceManager(ctx)
 	if err != nil {
 		if strings.Contains(err.Error(), "service not available") {
-			fmt.Fprintln(output, "CompanionDeviceManager not available on this device")
-			fmt.Fprintln(output, "")
-			fmt.Fprintln(output, "Package companion provides the following API surface:")
-			fmt.Fprintln(output, "  Manager type (wraps android.companion.CompanionDeviceManager)")
-			fmt.Fprintln(output, "    - associateRaw(request, callback, handler) error")
-			fmt.Fprintln(output, "    - disassociateByIdRaw(associationId int32) error")
-			fmt.Fprintln(output, "    - getAssociationsRaw() (*jni.Object, error)")
-			fmt.Fprintln(output, "  associationRequestBuilder type (wraps AssociationRequest.Builder)")
-			fmt.Fprintln(output, "    - setSingleDevice(bool) *jni.Object")
-			fmt.Fprintln(output, "    - addDeviceFilter(filter) *jni.Object")
-			fmt.Fprintln(output, "    - build() *jni.Object")
-			fmt.Fprintln(output, "  companionCallback (OnDeviceFound, OnFailure)")
+			fmt.Fprintln(output, "Status: NOT AVAILABLE")
+			fmt.Fprintln(output, "(CompanionDeviceManager requires API 26+)")
 			return nil
 		}
-		return fmt.Errorf("companion.NewDeviceManager: %v", err)
+		return fmt.Errorf("companion.NewDeviceManager: %w", err)
+	}
+	defer mgr.Close()
+
+	fmt.Fprintln(output, "Status: available")
+
+	// Query existing associations (returns java.util.List).
+	assocList, err := mgr.GetAssociations()
+	if err != nil {
+		fmt.Fprintf(output, "GetAssociations: %v\n", err)
+	} else {
+		var listSize int32
+		_ = vm.Do(func(env *jni.Env) error {
+			if assocList == nil {
+				return nil
+			}
+			listCls, err := env.FindClass("java/util/List")
+			if err != nil {
+				return err
+			}
+			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
+			if err != nil {
+				return err
+			}
+			listSize, err = env.CallIntMethod(assocList, sizeMid)
+			return err
+		})
+		fmt.Fprintf(output, "Associations: %d\n", listSize)
+
+		// Print each association's toString().
+		if listSize > 0 {
+			_ = vm.Do(func(env *jni.Env) error {
+				listCls, err := env.FindClass("java/util/List")
+				if err != nil {
+					return err
+				}
+				getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
+				if err != nil {
+					return err
+				}
+				objCls, err := env.FindClass("java/lang/Object")
+				if err != nil {
+					return err
+				}
+				toStrMid, err := env.GetMethodID(objCls, "toString", "()Ljava/lang/String;")
+				if err != nil {
+					return err
+				}
+
+				for i := int32(0); i < listSize; i++ {
+					elem, err := env.CallObjectMethod(assocList, getMid, jni.IntValue(i))
+					if err != nil {
+						continue
+					}
+					strObj, err := env.CallObjectMethod(elem, toStrMid)
+					if err != nil {
+						continue
+					}
+					fmt.Fprintf(output, "  [%d] %s\n", i, env.GoString((*jni.String)(unsafe.Pointer(strObj))))
+				}
+				return nil
+			})
+		}
 	}
 
-	fmt.Fprintln(output, "CompanionDeviceManager obtained successfully")
-	_ = mgr
+	// Try getMyAssociations (API 33+).
+	myAssoc, err := mgr.GetMyAssociations()
+	if err != nil {
+		fmt.Fprintf(output, "GetMyAssociations: %v\n", err)
+	} else {
+		var myCount int32
+		_ = vm.Do(func(env *jni.Env) error {
+			if myAssoc == nil {
+				return nil
+			}
+			listCls, err := env.FindClass("java/util/List")
+			if err != nil {
+				return err
+			}
+			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
+			if err != nil {
+				return err
+			}
+			myCount, err = env.CallIntMethod(myAssoc, sizeMid)
+			return err
+		})
+		fmt.Fprintf(output, "My associations: %d\n", myCount)
+	}
 
 	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

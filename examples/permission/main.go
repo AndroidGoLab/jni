@@ -1,10 +1,7 @@
 //go:build android
 
-// Command permission demonstrates the Android permission package.
-// It is built as a c-shared library and packaged into an APK.
-//
-// The permission package provides Init for initializing the JNI
-// bindings related to Android runtime permissions.
+// Command permission demonstrates checking Android runtime permissions
+// using Context.checkSelfPermission.
 package main
 
 /*
@@ -17,14 +14,16 @@ static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResu
 */
 import "C"
 import (
-	"unsafe"
 	"bytes"
 	"fmt"
+	"unsafe"
 
-	_ "github.com/AndroidGoLab/jni/content/permission"
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
+
+	// Ensure permission JNI bindings are initialized.
+	_ "github.com/AndroidGoLab/jni/content/permission"
 )
 
 func main() {}
@@ -52,10 +51,59 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
+// permissionGrantName converts the int result to a human-readable string.
+// 0 = PERMISSION_GRANTED, -1 = PERMISSION_DENIED.
+func permissionGrantName(result int32) string {
+	switch result {
+	case 0:
+		return "GRANTED"
+	case -1:
+		return "DENIED"
+	default:
+		return fmt.Sprintf("UNKNOWN(%d)", result)
+	}
+}
+
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// The content/permission package provides Init for JNI initialization.
-	// Permission checking and requesting is done via the app.Context and
-	// the Android runtime permission system.
-	fmt.Fprintln(output, "permission package available (Init for JNI setup)")
+	ctx, err := exampleui.GetAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
+	}
+	defer ctx.Close()
+
+	fmt.Fprintln(output, "=== Permission Check ===")
+
+	// Check a set of common permissions via Context.checkSelfPermission.
+	perms := []struct {
+		name  string
+		value string
+	}{
+		{"INTERNET", "android.permission.INTERNET"},
+		{"CAMERA", "android.permission.CAMERA"},
+		{"RECORD_AUDIO", "android.permission.RECORD_AUDIO"},
+		{"ACCESS_FINE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"},
+		{"READ_CONTACTS", "android.permission.READ_CONTACTS"},
+		{"WRITE_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"},
+		{"READ_PHONE_STATE", "android.permission.READ_PHONE_STATE"},
+		{"BLUETOOTH_CONNECT", "android.permission.BLUETOOTH_CONNECT"},
+	}
+
+	for _, p := range perms {
+		result, err := ctx.CheckSelfPermission(p.value)
+		if err != nil {
+			fmt.Fprintf(output, "  %-25s %v\n", p.name+":", err)
+			continue
+		}
+		fmt.Fprintf(output, "  %-25s %s\n", p.name+":", permissionGrantName(result))
+	}
+
+	// Also check the package name to verify context works.
+	pkgName, err := ctx.GetPackageName()
+	if err != nil {
+		fmt.Fprintf(output, "\nPackage: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "\nPackage: %s\n", pkgName)
+	}
+
 	return nil
 }

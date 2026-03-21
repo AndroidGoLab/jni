@@ -70,7 +70,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -220,35 +220,4 @@ func playAlarmRingtone(vm *jni.VM, appCtx *jni.Object) error {
 	}()
 
 	return nil
-}
-
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return err
-		}
-		mid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return err
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, mid)
-		if err != nil {
-			return err
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

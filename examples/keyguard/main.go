@@ -27,7 +27,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/os/keyguard"
 )
 
@@ -57,7 +56,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -65,35 +64,35 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := keyguard.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("keyguard.NewManager: %v", err)
+		return fmt.Errorf("keyguard.NewManager: %w", err)
 	}
 	defer mgr.Close()
 
 	// Check whether the keyguard (lock screen) is currently displayed.
 	locked, err := mgr.IsKeyguardLocked()
 	if err != nil {
-		return fmt.Errorf("IsKeyguardLocked: %v", err)
+		return fmt.Errorf("IsKeyguardLocked: %w", err)
 	}
 	fmt.Fprintf(output, "keyguard locked: %v\n", locked)
 
 	// Check whether the keyguard is secured by a PIN, pattern, or password.
 	secure, err := mgr.IsKeyguardSecure()
 	if err != nil {
-		return fmt.Errorf("IsKeyguardSecure: %v", err)
+		return fmt.Errorf("IsKeyguardSecure: %w", err)
 	}
 	fmt.Fprintf(output, "keyguard secure: %v\n", secure)
 
 	// Check whether the device is currently locked (for the current user).
 	deviceLocked, err := mgr.IsDeviceLocked()
 	if err != nil {
-		return fmt.Errorf("IsDeviceLocked: %v", err)
+		return fmt.Errorf("IsDeviceLocked: %w", err)
 	}
 	fmt.Fprintf(output, "device locked: %v\n", deviceLocked)
 
 	// Check whether the device has a secure lock screen.
 	deviceSecure, err := mgr.IsDeviceSecure()
 	if err != nil {
-		return fmt.Errorf("IsDeviceSecure: %v", err)
+		return fmt.Errorf("IsDeviceSecure: %w", err)
 	}
 	fmt.Fprintf(output, "device secure: %v\n", deviceSecure)
 
@@ -109,40 +108,4 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	//   OnLockedStateChanged(isLocked bool)
 	fmt.Fprintln(output, "keyguard state query complete")
 	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

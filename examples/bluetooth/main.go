@@ -46,7 +46,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/bluetooth"
 )
 
@@ -76,7 +75,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -114,13 +113,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	// --- Adapter ---
 	adapter, err := bluetooth.NewAdapter(ctx)
 	if err != nil {
-		return fmt.Errorf("bluetooth.NewAdapter: %v", err)
+		return fmt.Errorf("bluetooth.NewAdapter: %w", err)
 	}
 	defer adapter.Close()
 
 	enabled, err := adapter.IsEnabled()
 	if err != nil {
-		return fmt.Errorf("IsEnabled: %v", err)
+		return fmt.Errorf("IsEnabled: %w", err)
 	}
 	fmt.Fprintf(output, "\nBluetooth enabled: %v\n", enabled)
 	if !enabled {
@@ -130,13 +129,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	name, err := adapter.GetName()
 	if err != nil {
-		return fmt.Errorf("GetName: %v", err)
+		return fmt.Errorf("GetName: %w", err)
 	}
 	fmt.Fprintf(output, "Adapter name: %s\n", name)
 
 	addr, err := adapter.GetAddress()
 	if err != nil {
-		return fmt.Errorf("GetAddress: %v", err)
+		return fmt.Errorf("GetAddress: %w", err)
 	}
 	fmt.Fprintf(output, "Adapter address: %s\n", addr)
 
@@ -146,7 +145,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	// the Device struct (Name, Address, Type, BondState, UUIDs).
 	bonded, err := adapter.GetBondedDevices()
 	if err != nil {
-		return fmt.Errorf("GetBondedDevices: %v", err)
+		return fmt.Errorf("GetBondedDevices: %w", err)
 	}
 	fmt.Fprintf(output, "Bonded devices (raw Set): %v\n", bonded)
 
@@ -257,40 +256,4 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "\nAll bluetooth package features demonstrated.")
 
 	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

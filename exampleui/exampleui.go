@@ -12,6 +12,7 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/graphics/pdf"
 )
 
@@ -392,4 +393,41 @@ func requestPermissions(
 	}
 	_ = env.CallVoidMethod(activity, reqMid,
 		jni.ObjectValue(&arr.Object), jni.IntValue(permissionRequestCode))
+}
+
+// GetAppContext obtains an Android Context via ActivityThread.currentApplication().
+// This is the canonical way to get a Context in examples that run as NativeActivity.
+func GetAppContext(vm *jni.VM) (*app.Context, error) {
+	var ctx app.Context
+	ctx.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := app.Init(env); err != nil {
+			return err
+		}
+
+		atClass, err := env.FindClass("android/app/ActivityThread")
+		if err != nil {
+			return fmt.Errorf("find ActivityThread: %w", err)
+		}
+
+		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
+		if err != nil {
+			return fmt.Errorf("get currentApplication: %w", err)
+		}
+		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
+		if err != nil {
+			return fmt.Errorf("call currentApplication: %w", err)
+		}
+		if appObj == nil || appObj.Ref() == 0 {
+			return fmt.Errorf("currentApplication returned null")
+		}
+
+		ctx.Obj = env.NewGlobalRef(appObj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &ctx, nil
 }

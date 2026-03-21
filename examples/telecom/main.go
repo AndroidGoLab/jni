@@ -1,14 +1,7 @@
 //go:build android
 
 // Command telecom demonstrates using the Android TelecomManager
-// system service, wrapped by the telecom package. It is built as a
-// c-shared library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// The telecom package wraps android.telecom.TelecomManager and
-// provides methods for querying call state, managing calls, and
-// retrieving the default dialer package. Many operations require
-// the ANSWER_PHONE_CALLS or CALL_PHONE permissions.
+// system service, wrapped by the telecom package.
 package main
 
 /*
@@ -28,7 +21,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/telecom"
 )
 
@@ -58,7 +50,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -68,58 +60,68 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("telecom.NewManager: %w", err)
 	}
+	defer mgr.Close()
 
-	// Manager provides unexported methods for telecom operations:
-	//   isInCallRaw()                  -- checks if a call is in progress.
-	//   isInManagedCallRaw()           -- checks if a managed call is active.
-	//   getDefaultDialerPackageRaw()   -- returns the default dialer package name.
-	//   placeCallRaw(uri, extras)      -- places a phone call.
-	//   silenceRingerRaw()             -- silences the ringer.
-	//   acceptRingingCallRaw()         -- accepts an incoming call.
-	//   endCallRaw()                   -- ends the current call.
-	//
-	// These methods are intended to be wrapped by higher-level helpers
-	// that handle JNI object conversion and permission checks.
+	fmt.Fprintln(output, "=== TelecomManager ===")
 
-	fmt.Fprintln(output, "TelecomManager obtained successfully")
-	fmt.Fprintln(output, "Unexported methods: isInCallRaw, isInManagedCallRaw, getDefaultDialerPackageRaw, placeCallRaw, silenceRingerRaw, acceptRingingCallRaw, endCallRaw")
-
-	_ = mgr
-	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
+	dialer, err := mgr.GetDefaultDialerPackage()
 	if err != nil {
-		return nil, err
+		fmt.Fprintf(output, "DefaultDialer: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Default dialer: %s\n", dialer)
 	}
-	return &ctx, nil
+
+	sysDial, err := mgr.GetSystemDialerPackage()
+	if err != nil {
+		fmt.Fprintf(output, "SystemDialer: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "System dialer: %s\n", sysDial)
+	}
+
+	inCall, err := mgr.IsInCall()
+	if err != nil {
+		fmt.Fprintf(output, "IsInCall: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "In call: %v\n", inCall)
+	}
+
+	inManaged, err := mgr.IsInManagedCall()
+	if err != nil {
+		fmt.Fprintf(output, "IsInManagedCall: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "In managed call: %v\n", inManaged)
+	}
+
+	tty, err := mgr.IsTtySupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsTtySupported: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "TTY supported: %v\n", tty)
+	}
+
+	// Query call-capable phone accounts (returns java.util.List).
+	phoneAccts, err := mgr.GetCallCapablePhoneAccounts()
+	if err != nil {
+		fmt.Fprintf(output, "PhoneAccounts: %v\n", err)
+	} else {
+		var listSize int32
+		_ = vm.Do(func(env *jni.Env) error {
+			if phoneAccts == nil {
+				return nil
+			}
+			listClass, err := env.FindClass("java/util/List")
+			if err != nil {
+				return err
+			}
+			sizeMid, err := env.GetMethodID(listClass, "size", "()I")
+			if err != nil {
+				return err
+			}
+			listSize, err = env.CallIntMethod(phoneAccts, sizeMid)
+			return err
+		})
+		fmt.Fprintf(output, "Call-capable accounts: %d\n", listSize)
+	}
+
+	return nil
 }

@@ -1,14 +1,7 @@
 //go:build android
 
 // Command display demonstrates the Android Display and WindowManager API.
-// It is built as a c-shared library and packaged into an APK using the
-// shared apk.mk infrastructure.
-//
-// This package wraps android.view.WindowManager, android.view.Display, and
-// android.util.DisplayMetrics. All types in this package are unexported
-// (windowManager, display, displayMetrics), so they are not directly usable
-// from external code. This example documents their structure and methods
-// for reference.
+// It queries the default display for size, refresh rate, rotation, and state.
 package main
 
 /*
@@ -28,8 +21,7 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
-	_ "github.com/AndroidGoLab/jni/view/display"
+	"github.com/AndroidGoLab/jni/view/display"
 )
 
 func main() {}
@@ -58,89 +50,96 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	_, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
+	defer ctx.Close()
 
-	fmt.Fprintln(output, "The display package provides unexported JNI bindings for:")
-	fmt.Fprintln(output, "  - android.view.WindowManager")
-	fmt.Fprintln(output, "  - android.view.Display")
-	fmt.Fprintln(output, "  - android.util.DisplayMetrics")
+	wm, err := display.NewWindowManager(ctx)
+	if err != nil {
+		return fmt.Errorf("NewWindowManager: %w", err)
+	}
+	defer wm.Close()
+
+	// Get the default display object and wrap it.
+	dispObj, err := wm.GetDefaultDisplay()
+	if err != nil {
+		return fmt.Errorf("getDefaultDisplay: %w", err)
+	}
+	disp := display.Display{VM: vm, Obj: dispObj}
+
+	fmt.Fprintln(output, "=== Display Info ===")
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "All types are unexported and used by higher-level wrappers.")
 
-	// windowManager wraps android.view.WindowManager.
-	//
-	// Constructor (unexported):
-	//   NewwindowManager(ctx *app.Context) (*windowManager, error)
-	//     Obtains the WindowManager system service via "window".
-	//
-	// Methods (unexported):
-	//   windowManager.getDefaultDisplay() (*jni.Object, error)
-	//     Returns the default Display object.
+	name, err := disp.GetName()
+	if err != nil {
+		return fmt.Errorf("getName: %w", err)
+	}
+	fmt.Fprintf(output, "name: %s\n", name)
 
-	// display wraps android.view.Display.
-	//
-	// Methods (unexported):
-	//   display.getRotation() int32
-	//     Returns the rotation of the screen from its "natural" orientation.
-	//
-	//   display.getRefreshRate() float32
-	//     Returns the refresh rate of the display in frames per second.
-	//
-	//   display.getMetrics(metrics *jni.Object)
-	//     Fills the given DisplayMetrics with the display's metrics.
-	//
-	//   display.getRealMetrics(metrics *jni.Object)
-	//     Fills the given DisplayMetrics with the real display metrics,
-	//     including areas of the screen that are occupied by system decorations.
+	id, err := disp.GetDisplayId()
+	if err != nil {
+		return fmt.Errorf("getDisplayId: %w", err)
+	}
+	fmt.Fprintf(output, "id: %d\n", id)
 
-	// displayMetrics wraps android.util.DisplayMetrics.
-	//
-	// Constructor (unexported):
-	//   NewdisplayMetrics(vm *jni.VM) (*displayMetrics, error)
-	//     Creates a new DisplayMetrics instance.
-	//
-	// The underlying Java object has fields widthPixels, heightPixels, and
-	// densityDpi, which can be read via JNI field access after calling
-	// display.getMetrics() or display.getRealMetrics() to populate them.
+	w, err := disp.GetWidth()
+	if err != nil {
+		return fmt.Errorf("getWidth: %w", err)
+	}
+	h, err := disp.GetHeight()
+	if err != nil {
+		return fmt.Errorf("getHeight: %w", err)
+	}
+	fmt.Fprintf(output, "size: %dx%d\n", w, h)
+
+	rotation, err := disp.GetRotation()
+	if err != nil {
+		return fmt.Errorf("getRotation: %w", err)
+	}
+	fmt.Fprintf(output, "rotation: %d\n", rotation)
+
+	refreshRate, err := disp.GetRefreshRate()
+	if err != nil {
+		return fmt.Errorf("getRefreshRate: %w", err)
+	}
+	fmt.Fprintf(output, "refresh: %.1f Hz\n", refreshRate)
+
+	state, err := disp.GetState()
+	if err != nil {
+		return fmt.Errorf("getState: %w", err)
+	}
+	stateStr := "unknown"
+	switch int(state) {
+	case display.StateOff:
+		stateStr = "OFF"
+	case display.StateOn:
+		stateStr = "ON"
+	case display.StateDoze:
+		stateStr = "DOZE"
+	case display.StateDozeSuspend:
+		stateStr = "DOZE_SUSPEND"
+	case display.StateOnSuspend:
+		stateStr = "ON_SUSPEND"
+	case display.StateVr:
+		stateStr = "VR"
+	}
+	fmt.Fprintf(output, "state: %s (%d)\n", stateStr, state)
+
+	isValid, err := disp.IsValid()
+	if err != nil {
+		return fmt.Errorf("isValid: %w", err)
+	}
+	fmt.Fprintf(output, "valid: %v\n", isValid)
+
+	// Display metrics via toString.
+	metricsStr, err := disp.ToString()
+	if err != nil {
+		return fmt.Errorf("toString: %w", err)
+	}
+	fmt.Fprintln(output)
+	fmt.Fprintf(output, "raw: %s\n", metricsStr)
 
 	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

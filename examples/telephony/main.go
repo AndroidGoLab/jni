@@ -1,14 +1,7 @@
 //go:build android
 
-// Command telephony demonstrates using the Android TelephonyManager
-// system service, wrapped by the telephony package. It is built as a
-// c-shared library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// The telephony package wraps android.telephony.TelephonyManager and
-// provides methods for querying cellular network information such as
-// operator name, phone type, SIM state, roaming status, and data
-// connection state. Some methods require READ_PHONE_STATE permission.
+// Command telephony demonstrates the Android TelephonyManager API.
+// It queries phone type, SIM state, network operator, and roaming status.
 package main
 
 /*
@@ -28,7 +21,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/telephony"
 )
 
@@ -57,8 +49,71 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
+func phoneTypeName(t int32) string {
+	switch int(t) {
+	case telephony.PhoneTypeNone:
+		return "NONE"
+	case telephony.PhoneTypeGsm:
+		return "GSM"
+	case telephony.PhoneTypeCdma:
+		return "CDMA"
+	case telephony.PhoneTypeSip:
+		return "SIP"
+	default:
+		return fmt.Sprintf("(%d)", t)
+	}
+}
+
+func simStateName(s int32) string {
+	switch int(s) {
+	case telephony.SimStateUnknown:
+		return "UNKNOWN"
+	case telephony.SimStateAbsent:
+		return "ABSENT"
+	case telephony.SimStatePinRequired:
+		return "PIN_REQUIRED"
+	case telephony.SimStatePukRequired:
+		return "PUK_REQUIRED"
+	case telephony.SimStateNetworkLocked:
+		return "NETWORK_LOCKED"
+	case telephony.SimStateReady:
+		return "READY"
+	case telephony.SimStateNotReady:
+		return "NOT_READY"
+	case telephony.SimStatePermDisabled:
+		return "PERM_DISABLED"
+	case telephony.SimStateCardIoError:
+		return "CARD_IO_ERROR"
+	case telephony.SimStateCardRestricted:
+		return "CARD_RESTRICTED"
+	default:
+		return fmt.Sprintf("(%d)", s)
+	}
+}
+
+func dataStateName(s int32) string {
+	switch int(s) {
+	case telephony.DataDisconnected:
+		return "DISCONNECTED"
+	case telephony.DataConnecting:
+		return "CONNECTING"
+	case telephony.DataConnected:
+		return "CONNECTED"
+	case telephony.DataSuspended:
+		return "SUSPENDED"
+	case telephony.DataDisconnecting:
+		return "DISCONNECTING"
+	case telephony.DataHandoverInProgress:
+		return "HANDOVER"
+	case telephony.DataUnknown:
+		return "UNKNOWN"
+	default:
+		return fmt.Sprintf("(%d)", s)
+	}
+}
+
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -68,57 +123,46 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("telephony.NewManager: %w", err)
 	}
+	defer mgr.Close()
 
-	// Manager provides unexported methods for telephony queries:
-	//   getNetworkOperatorName() -- human-readable operator name (e.g. "T-Mobile").
-	//   getNetworkOperator()     -- MCC+MNC string (e.g. "310260").
-	//   getPhoneType()           -- phone radio type (GSM=1, CDMA=2, SIP=3).
-	//   getSimState()            -- SIM card state (READY=5, ABSENT=1, etc.).
-	//   isNetworkRoaming()       -- whether the device is currently roaming.
-	//   getDataState()           -- mobile data connection state.
-	//   getDataNetworkType()     -- data network type (LTE=13, NR=20, etc.).
-	//
-	// These are intended to be wrapped by higher-level helpers.
+	fmt.Fprintln(output, "=== Telephony Info ===")
+	fmt.Fprintln(output)
 
-	fmt.Fprintln(output, "TelephonyManager obtained successfully")
-	fmt.Fprintln(output, "Unexported methods: getNetworkOperatorName, getNetworkOperator, getPhoneType, getSimState, isNetworkRoaming, getDataState, getDataNetworkType")
-
-	_ = mgr
-	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
+	phoneType, err := mgr.GetPhoneType()
 	if err != nil {
-		return nil, err
+		return fmt.Errorf("getPhoneType: %w", err)
 	}
-	return &ctx, nil
+	fmt.Fprintf(output, "phone: %s\n", phoneTypeName(phoneType))
+
+	simState, err := mgr.GetSimState0()
+	if err != nil {
+		return fmt.Errorf("getSimState: %w", err)
+	}
+	fmt.Fprintf(output, "SIM: %s\n", simStateName(simState))
+
+	operatorName, err := mgr.GetNetworkOperatorName()
+	if err != nil {
+		return fmt.Errorf("getNetworkOperatorName: %w", err)
+	}
+	fmt.Fprintf(output, "operator: %s\n", operatorName)
+
+	operator, err := mgr.GetNetworkOperator()
+	if err != nil {
+		return fmt.Errorf("getNetworkOperator: %w", err)
+	}
+	fmt.Fprintf(output, "MCC+MNC: %s\n", operator)
+
+	roaming, err := mgr.IsNetworkRoaming()
+	if err != nil {
+		return fmt.Errorf("isNetworkRoaming: %w", err)
+	}
+	fmt.Fprintf(output, "roaming: %v\n", roaming)
+
+	dataState, err := mgr.GetDataState()
+	if err != nil {
+		return fmt.Errorf("getDataState: %w", err)
+	}
+	fmt.Fprintf(output, "data: %s\n", dataStateName(dataState))
+
+	return nil
 }

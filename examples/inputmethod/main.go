@@ -1,17 +1,7 @@
 //go:build android
 
 // Command inputmethod demonstrates the InputMethodManager JNI bindings.
-// It is built as a c-shared library and packaged into an APK using the
-// shared apk.mk infrastructure.
-//
-// This example obtains the InputMethodManager system service. The
-// package wraps android.view.inputmethod.InputMethodManager and provides
-// methods for programmatically showing and hiding the soft keyboard:
-//   - showSoftInput(view, flags) - show the soft keyboard for a view
-//   - hideSoftInputFromWindow(token, flags) - hide the soft keyboard
-//
-// These methods are package-internal and intended to be composed into
-// higher-level APIs. NewManager and Close are the exported entry points.
+// It lists enabled and installed input methods and reports IME state.
 package main
 
 /*
@@ -31,7 +21,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/view/inputmethod"
 )
 
@@ -61,7 +50,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
@@ -69,59 +58,103 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := inputmethod.NewInputMethodManager(ctx)
 	if err != nil {
-		return fmt.Errorf("inputmethod.NewInputMethodManager: %v", err)
+		return fmt.Errorf("NewInputMethodManager: %w", err)
 	}
 	defer mgr.Close()
 
-	fmt.Fprintln(output, "InputMethodManager obtained")
+	fmt.Fprintln(output, "=== Input Methods ===")
 
-	// The manager wraps android.view.inputmethod.InputMethodManager.
-	//
-	// Package-internal methods (for composition into higher-level APIs):
-	//   showSoftInput(view *jni.Object, flags int32) (bool, error)
-	//     Shows the soft keyboard for the given View.
-	//     flags=0 means no special behavior.
-	//
-	//   hideSoftInputFromWindow(windowToken *jni.Object, flags int32) (bool, error)
-	//     Hides the soft keyboard using the window token obtained from
-	//     view.getWindowToken(). flags=0 means no special behavior.
-	fmt.Fprintln(output, "InputMethodManager ready for keyboard control")
+	enabledList, err := mgr.GetEnabledInputMethodList()
+	if err != nil {
+		fmt.Fprintf(output, "GetEnabledList: %v\n", err)
+	} else {
+		printIMEList(vm, output, "Enabled", enabledList)
+	}
+
+	allList, err := mgr.GetInputMethodList()
+	if err != nil {
+		fmt.Fprintf(output, "GetAllList: %v\n", err)
+	} else {
+		printIMEList(vm, output, "Installed", allList)
+	}
+
+	active, err := mgr.IsActive0()
+	if err != nil {
+		fmt.Fprintf(output, "IsActive: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "IME active: %v\n", active)
+	}
+
+	accepting, err := mgr.IsAcceptingText()
+	if err != nil {
+		fmt.Fprintf(output, "IsAcceptingText: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Accepting text: %v\n", accepting)
+	}
+
+	fullscreen, err := mgr.IsFullscreenMode()
+	if err != nil {
+		fmt.Fprintf(output, "IsFullscreenMode: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "Fullscreen: %v\n", fullscreen)
+	}
 
 	return nil
 }
 
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
+func printIMEList(
+	vm *jni.VM,
+	output *bytes.Buffer,
+	label string,
+	listObj *jni.Object,
+) {
+	if listObj == nil {
+		fmt.Fprintf(output, "%s: (null)\n", label)
+		return
+	}
 
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
+	_ = vm.Do(func(env *jni.Env) error {
+		listCls, err := env.FindClass("java/util/List")
+		if err != nil {
+			return err
+		}
+		sizeMid, err := env.GetMethodID(listCls, "size", "()I")
+		if err != nil {
+			return err
+		}
+		getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
+		if err != nil {
 			return err
 		}
 
-		atClass, err := env.FindClass("android/app/ActivityThread")
+		size, err := env.CallIntMethod(listObj, sizeMid)
 		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
+			return err
+		}
+		fmt.Fprintf(output, "%s IMEs: %d\n", label, size)
+
+		objCls, err := env.FindClass("java/lang/Object")
+		if err != nil {
+			return err
+		}
+		toStrMid, err := env.GetMethodID(objCls, "toString", "()Ljava/lang/String;")
+		if err != nil {
+			return err
 		}
 
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
+		for i := int32(0); i < size; i++ {
+			elem, err := env.CallObjectMethod(listObj, getMid, jni.IntValue(i))
+			if err != nil {
+				fmt.Fprintf(output, "  [%d] err: %v\n", i, err)
+				continue
+			}
+			strObj, err := env.CallObjectMethod(elem, toStrMid)
+			if err != nil {
+				fmt.Fprintf(output, "  [%d] toString: %v\n", i, err)
+				continue
+			}
+			fmt.Fprintf(output, "  [%d] %s\n", i, env.GoString((*jni.String)(unsafe.Pointer(strObj))))
 		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
 		return nil
 	})
-	if err != nil {
-		return nil, err
-	}
-	return &ctx, nil
 }

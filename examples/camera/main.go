@@ -1,15 +1,7 @@
 //go:build android
 
 // Command camera demonstrates using the Android Camera2 CameraManager API.
-// It is built as a c-shared library and packaged into an APK using the
-// shared apk.mk infrastructure.
-//
-// This example obtains the CameraManager system service and shows how the
-// exported NewManager constructor and Close cleanup method are used.
-// The camera package also provides unexported methods for torch control
-// (setTorchMode, registerTorchCallback, unregisterTorchCallback) and a
-// torchCallback type with an OnTorchModeChanged callback, which are used
-// internally by higher-level wrappers.
+// It lists camera IDs and queries their characteristics.
 package main
 
 /*
@@ -29,7 +21,6 @@ import (
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/hardware/camera"
 )
 
@@ -58,79 +49,118 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 	exampleui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
+// cameraFacingName maps CameraCharacteristics.LENS_FACING values.
+func cameraFacingName(facing int32) string {
+	switch facing {
+	case 0:
+		return "FRONT"
+	case 1:
+		return "BACK"
+	case 2:
+		return "EXTERNAL"
+	default:
+		return fmt.Sprintf("UNKNOWN(%d)", facing)
+	}
+}
+
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	// NewManager obtains the CameraManager system service.
 	mgr, err := camera.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("camera.NewManager: %v", err)
+		return fmt.Errorf("camera.NewManager: %w", err)
 	}
-	// Close releases the JNI global reference; always defer it.
 	defer mgr.Close()
 
-	fmt.Fprintln(output, "CameraManager obtained successfully")
+	fmt.Fprintln(output, "=== Camera Devices ===")
 
-	// The following methods are unexported (package-internal) and are
-	// used by higher-level Go wrappers that build on this package:
-	//
-	//   mgr.setTorchMode(cameraId string, enabled bool) error
-	//     Turns the torch (flashlight) for the given camera on or off.
-	//
-	//   mgr.registerTorchCallback(callback *jni.Object, handler *jni.Object) error
-	//     Registers a TorchCallback to receive torch mode change events.
-	//
-	//   mgr.unregisterTorchCallback(callback *jni.Object) error
-	//     Unregisters a previously registered TorchCallback.
-	//
-	// The torchCallback struct provides a Go-friendly callback interface:
-	//
-	//   torchCallback{
-	//       OnTorchModeChanged: func(cameraId string, enabled bool) { ... },
-	//   }
-	//
-	// It is registered via the unexported registertorchCallback function,
-	// which creates a Java proxy implementing CameraManager.TorchCallback.
+	// GetCameraIdList returns a String[] array.
+	idArray, err := mgr.GetCameraIdList()
+	if err != nil {
+		return fmt.Errorf("GetCameraIdList: %w", err)
+	}
 
-	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
+	var cameraIDs []string
+	err = vm.Do(func(env *jni.Env) error {
+		if idArray == nil {
+			return nil
 		}
+		arr := (*jni.Array)(unsafe.Pointer(idArray))
+		count := env.GetArrayLength(arr)
+		objArr := (*jni.ObjectArray)(unsafe.Pointer(idArray))
 
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
+		for i := int32(0); i < count; i++ {
+			elem, err := env.GetObjectArrayElement(objArr, i)
+			if err != nil {
+				continue
+			}
+			cameraIDs = append(cameraIDs, env.GoString((*jni.String)(unsafe.Pointer(elem))))
 		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
 		return nil
 	})
 	if err != nil {
-		return nil, err
+		return fmt.Errorf("read camera IDs: %w", err)
 	}
-	return &ctx, nil
+
+	fmt.Fprintf(output, "Camera count: %d\n", len(cameraIDs))
+
+	// For each camera, get characteristics and read LENS_FACING.
+	for _, id := range cameraIDs {
+		chars, err := mgr.GetCameraCharacteristics(id)
+		if err != nil {
+			fmt.Fprintf(output, "  [%s] chars: %v\n", id, err)
+			continue
+		}
+
+		// Read LENS_FACING via CameraCharacteristics.get(Key).
+		var facing int32
+		var facingFound bool
+		_ = vm.Do(func(env *jni.Env) error {
+			charsCls := env.GetObjectClass(chars)
+			getMid, err := env.GetMethodID(charsCls, "get", "(Landroid/hardware/camera2/CameraCharacteristics$Key;)Ljava/lang/Object;")
+			if err != nil {
+				return err
+			}
+
+			// LENS_FACING is a static field on CameraCharacteristics.
+			lensFacingFid, err := env.GetStaticFieldID(charsCls, "LENS_FACING", "Landroid/hardware/camera2/CameraCharacteristics$Key;")
+			if err != nil {
+				return err
+			}
+			lensFacingKey := env.GetStaticObjectField(charsCls, lensFacingFid)
+			if lensFacingKey == nil {
+				return nil
+			}
+
+			facingObj, err := env.CallObjectMethod(chars, getMid, jni.ObjectValue(lensFacingKey))
+			if err != nil || facingObj == nil {
+				return err
+			}
+
+			// Unbox Integer to int.
+			intCls := env.GetObjectClass(facingObj)
+			intValueMid, err := env.GetMethodID(intCls, "intValue", "()I")
+			if err != nil {
+				return err
+			}
+			facing, err = env.CallIntMethod(facingObj, intValueMid)
+			if err != nil {
+				return err
+			}
+			facingFound = true
+			return nil
+		})
+
+		if facingFound {
+			fmt.Fprintf(output, "  [%s] facing: %s\n", id, cameraFacingName(facing))
+		} else {
+			fmt.Fprintf(output, "  [%s] (no facing info)\n", id)
+		}
+	}
+
+	return nil
 }

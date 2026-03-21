@@ -1,11 +1,9 @@
 //go:build android
 
-// Command health demonstrates the Health Connect API provided by the
-// generated health/connect package. It is built as a c-shared library
-// and packaged into an APK.
-//
-// The connect.Manager wraps the HealthConnectClient and provides raw
-// methods for inserting, reading, aggregating, and deleting records.
+// Command health demonstrates Health Connect availability checking.
+// Health Connect requires the androidx library and the Health Connect
+// app to be installed. This example checks whether the required
+// HealthConnectClient class is loadable and reports the status.
 package main
 
 /*
@@ -18,14 +16,14 @@ static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResu
 */
 import "C"
 import (
-	"unsafe"
 	"bytes"
 	"fmt"
+	"unsafe"
 
-	_ "github.com/AndroidGoLab/jni/health/connect"
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
+	"github.com/AndroidGoLab/jni/health/connect"
 )
 
 func main() {}
@@ -54,16 +52,38 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// The health/connect package provides a Manager type wrapping
-	// HealthConnectClient with raw methods:
-	//   getOrCreateRaw(ctx) - obtain a HealthConnectClient
-	//   insertRecordsRaw(records) - insert health records
-	//   readRecordsRaw(request) - read health records
-	//   aggregateRaw(request) - aggregate health data
-	//   deleteRecordsRaw(recordType, timeRange) - delete records
-	//
-	// These are unexported and intended for use by higher-level wrappers.
-	fmt.Fprintln(output, "Health Connect Manager type available")
-	fmt.Fprintln(output, "Raw methods: getOrCreateRaw, insertRecordsRaw, readRecordsRaw, aggregateRaw, deleteRecordsRaw")
+	fmt.Fprintln(output, "=== Health Connect ===")
+	fmt.Fprintln(output)
+
+	// Try to initialize the health/connect package, which resolves
+	// the HealthConnectClient class via JNI. If the class is not
+	// found (HealthConnect app not installed or no androidx lib),
+	// Init returns an error.
+	var initErr error
+	vm.Do(func(env *jni.Env) error {
+		initErr = connect.Init(env)
+		return nil
+	})
+
+	switch {
+	case initErr == nil:
+		fmt.Fprintln(output, "status: AVAILABLE")
+		fmt.Fprintln(output, "HealthConnectClient class loaded OK")
+		fmt.Fprintln(output)
+		fmt.Fprintln(output, "Available raw methods:")
+		fmt.Fprintln(output, "  getOrCreate(ctx)")
+		fmt.Fprintln(output, "  insertRecords(list)")
+		fmt.Fprintln(output, "  readRecords(req)")
+		fmt.Fprintln(output, "  aggregate(req)")
+		fmt.Fprintln(output, "  deleteRecords(type,range)")
+	default:
+		fmt.Fprintln(output, "status: NOT AVAILABLE")
+		fmt.Fprintf(output, "reason: %v\n", initErr)
+		fmt.Fprintln(output)
+		fmt.Fprintln(output, "Health Connect requires the")
+		fmt.Fprintln(output, "HealthConnect app or an androidx")
+		fmt.Fprintln(output, "library on the classpath.")
+	}
+
 	return nil
 }

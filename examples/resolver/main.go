@@ -1,14 +1,7 @@
 //go:build android
 
 // Command resolver demonstrates querying content providers via the
-// Android ContentResolver, wrapped by the resolver package. It is built as a
-// c-shared library and packaged into an APK using the shared apk.mk
-// infrastructure.
-//
-// The resolver package wraps android.content.ContentResolver and
-// android.database.Cursor. It provides Cursor methods for iterating
-// query results and reading column values. The Resolver and Cursor
-// types require proper resource cleanup via Close().
+// Android ContentResolver, wrapped by the resolver package.
 package main
 
 /*
@@ -27,9 +20,8 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
-	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/app"
 	"github.com/AndroidGoLab/jni/content/resolver"
+	"github.com/AndroidGoLab/jni/exampleui"
 )
 
 func main() {}
@@ -58,83 +50,99 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	ctx, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
 	defer ctx.Close()
 
-	// The resolver package wraps android.content.ContentResolver.
-	//
-	// Resolver provides unexported methods for content provider access:
-	//   queryRaw(uri, projection, selection, selectionArgs, sortOrder)
-	//     -- queries a content provider and returns a raw Cursor JNI object.
-	//   openFileDescriptorRaw(uri, mode)
-	//     -- opens a file descriptor to a content URI.
-	//
-	// These are intended to be wrapped by higher-level helpers.
+	fmt.Fprintln(output, "=== ContentResolver ===")
 
-	// Cursor wraps android.database.Cursor with exported methods
-	// for reading query results:
-	//   Close()                            -- releases the JNI global reference.
-	//   GetString(columnIndex int32)       -- reads a string column.
-	//   GetInt(columnIndex int32)          -- reads an int32 column.
-	//   GetLong(columnIndex int32)         -- reads an int64 column.
-	//   GetColumnIndex(columnName string)  -- resolves a column name to its index.
-	//
-	// The unexported moveToNext() advances the cursor to the next row.
-
-	// Demonstrate Cursor exported method signatures.
-	// In a real app, the cursor would be obtained from a query via
-	// higher-level helpers built on top of the Resolver.
-	fmt.Fprintln(output, "Resolver API: queryRaw, openFileDescriptorRaw")
-	fmt.Fprintln(output, "Cursor API: Close, GetString, GetInt, GetLong, GetColumnIndex")
-
-	// The parcelFD type (unexported) wraps android.os.ParcelFileDescriptor
-	// with methods getFd() and detachFd() for obtaining raw file descriptors
-	// from content URIs opened via openFileDescriptorRaw.
-	fmt.Fprintln(output, "ParcelFD API: getFd, detachFd")
-
-	// The Resolver and Uri types are the main exported types.
-	var r resolver.ContentResolver
-	var u resolver.Uri
-	_, _ = r, u
-	fmt.Fprintln(output, "Resolver example complete.")
-	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
-		return nil
-	})
+	// Get the ContentResolver from the app context.
+	resolverObj, err := ctx.GetContentResolver()
 	if err != nil {
-		return nil, err
+		return fmt.Errorf("GetContentResolver: %w", err)
 	}
-	return &ctx, nil
+
+	cr := resolver.ContentResolver{VM: vm, Obj: resolverObj}
+
+	// Parse a content URI for the Settings.System provider,
+	// which is accessible without special permissions.
+	uriHelper := resolver.Uri{VM: vm}
+	settingsURI, err := uriHelper.Parse("content://settings/system")
+	if err != nil {
+		return fmt.Errorf("Uri.Parse: %w", err)
+	}
+
+	// Query with a Bundle argument (API 26+): pass nil for all args.
+	cursorObj, err := cr.Query4(settingsURI, nil, nil, nil)
+	if err != nil {
+		fmt.Fprintf(output, "Query settings: %v\n", err)
+		return nil
+	}
+	if cursorObj == nil {
+		fmt.Fprintln(output, "Query returned null cursor")
+		return nil
+	}
+
+	cursor := resolver.Cursor{
+		VM:  vm,
+		Obj: cursorObj,
+	}
+	defer func() { _ = cursor.Close() }()
+
+	count, err := cursor.GetCount()
+	if err != nil {
+		return fmt.Errorf("cursor.GetCount: %w", err)
+	}
+
+	colCount, err := cursor.GetColumnCount()
+	if err != nil {
+		return fmt.Errorf("cursor.GetColumnCount: %w", err)
+	}
+
+	fmt.Fprintf(output, "Settings rows: %d\n", count)
+	fmt.Fprintf(output, "Columns: %d\n", colCount)
+
+	// Print column names.
+	for c := int32(0); c < colCount; c++ {
+		name, err := cursor.GetColumnName(c)
+		if err != nil {
+			continue
+		}
+		fmt.Fprintf(output, "  col[%d]: %s\n", c, name)
+	}
+
+	// Print first few rows.
+	maxRows := int32(5)
+	if count < maxRows {
+		maxRows = count
+	}
+
+	ok, err := cursor.MoveToFirst()
+	if err != nil || !ok {
+		return nil
+	}
+
+	fmt.Fprintf(output, "\nFirst %d rows:\n", maxRows)
+	for row := int32(0); row < maxRows; row++ {
+		var vals []string
+		for c := int32(0); c < colCount; c++ {
+			s, err := cursor.GetString(c)
+			if err != nil {
+				s = "(err)"
+			}
+			vals = append(vals, s)
+		}
+		fmt.Fprintf(output, "  %v\n", vals)
+
+		if row < maxRows-1 {
+			moved, err := cursor.MoveToNext()
+			if err != nil || !moved {
+				break
+			}
+		}
+	}
+
+	return nil
 }

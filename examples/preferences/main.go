@@ -1,12 +1,7 @@
 //go:build android
 
-// Command preferences demonstrates using the SharedPreferences API.
-// It is built as a c-shared library and packaged into an APK.
-//
-// The preferences package wraps android.content.SharedPreferences,
-// obtained from Context.getSharedPreferences(). It provides typed
-// getters (string, int, bool, float, long), key existence checks,
-// and an editor for batch writes.
+// Command preferences demonstrates the Android SharedPreferences API.
+// It writes several typed values, reads them back, and displays the results.
 package main
 
 /*
@@ -19,13 +14,13 @@ static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResu
 */
 import "C"
 import (
-	"unsafe"
 	"bytes"
 	"fmt"
+	"unsafe"
 
-	_ "github.com/AndroidGoLab/jni/content/preferences"
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/capi"
+	"github.com/AndroidGoLab/jni/content/preferences"
 	"github.com/AndroidGoLab/jni/exampleui"
 )
 
@@ -55,27 +50,97 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	// The Preferences type wraps android.content.SharedPreferences.
-	// It is obtained from Context.getSharedPreferences() and provides:
-	//
-	// Exported methods:
-	//   prefs.Close()
-	//   prefs.GetString(key, defaultVal string) (string, error)
-	//   prefs.GetInt(key string, defaultVal int32) (int32, error)
-	//   prefs.GetBool(key string, defaultVal bool) (bool, error)
-	//   prefs.GetFloat(key string, defaultVal float32) (float32, error)
-	//   prefs.GetLong(key string, defaultVal int64) (int64, error)
-	//   prefs.Contains(key string) (bool, error)
-	//
-	// Unexported editor methods:
-	//   editor.putString(key, value)
-	//   editor.putInt(key, value)
-	//   editor.putBoolean(key, value)
-	//   editor.putFloat(key, value)
-	//   editor.putLong(key, value)
-	//   editor.remove(key)
-	//   editor.clear()
-	//   editor.apply()
-	fmt.Fprintln(output, "SharedPreferences: typed getters + editor for batch writes")
+	ctx, err := exampleui.GetAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
+	}
+	defer ctx.Close()
+
+	// Context.getSharedPreferences("go_jni_demo", MODE_PRIVATE=0)
+	spObj, err := ctx.GetSharedPreferences("go_jni_demo", 0)
+	if err != nil {
+		return fmt.Errorf("getSharedPreferences: %w", err)
+	}
+
+	sp := preferences.SharedPreferences{VM: vm, Obj: spObj}
+
+	fmt.Fprintln(output, "=== SharedPreferences ===")
+	fmt.Fprintln(output)
+
+	// Write values via the editor.
+	editorObj, err := sp.Edit()
+	if err != nil {
+		return fmt.Errorf("edit: %w", err)
+	}
+	editor := preferences.SharedPreferencesEditor{VM: vm, Obj: editorObj}
+
+	if _, err := editor.PutString("greeting", "Hello from Go!"); err != nil {
+		return fmt.Errorf("putString: %w", err)
+	}
+	if _, err := editor.PutInt("counter", 42); err != nil {
+		return fmt.Errorf("putInt: %w", err)
+	}
+	if _, err := editor.PutBoolean("enabled", true); err != nil {
+		return fmt.Errorf("putBoolean: %w", err)
+	}
+	if _, err := editor.PutFloat("ratio", 3.14); err != nil {
+		return fmt.Errorf("putFloat: %w", err)
+	}
+	if _, err := editor.PutLong("timestamp", 1700000000); err != nil {
+		return fmt.Errorf("putLong: %w", err)
+	}
+
+	ok, err := editor.Commit()
+	if err != nil {
+		return fmt.Errorf("commit: %w", err)
+	}
+	fmt.Fprintf(output, "commit: %v\n", ok)
+	fmt.Fprintln(output)
+
+	// Read values back.
+	greeting, err := sp.GetString("greeting", "")
+	if err != nil {
+		return fmt.Errorf("getString: %w", err)
+	}
+	fmt.Fprintf(output, "greeting: %q\n", greeting)
+
+	counter, err := sp.GetInt("counter", 0)
+	if err != nil {
+		return fmt.Errorf("getInt: %w", err)
+	}
+	fmt.Fprintf(output, "counter: %d\n", counter)
+
+	enabled, err := sp.GetBoolean("enabled", false)
+	if err != nil {
+		return fmt.Errorf("getBoolean: %w", err)
+	}
+	fmt.Fprintf(output, "enabled: %v\n", enabled)
+
+	ratio, err := sp.GetFloat("ratio", 0)
+	if err != nil {
+		return fmt.Errorf("getFloat: %w", err)
+	}
+	fmt.Fprintf(output, "ratio: %.2f\n", ratio)
+
+	ts, err := sp.GetLong("timestamp", 0)
+	if err != nil {
+		return fmt.Errorf("getLong: %w", err)
+	}
+	fmt.Fprintf(output, "timestamp: %d\n", ts)
+
+	// Check key existence.
+	fmt.Fprintln(output)
+	has, err := sp.Contains("greeting")
+	if err != nil {
+		return fmt.Errorf("contains: %w", err)
+	}
+	fmt.Fprintf(output, "has greeting: %v\n", has)
+
+	hasMissing, err := sp.Contains("nonexistent")
+	if err != nil {
+		return fmt.Errorf("contains: %w", err)
+	}
+	fmt.Fprintf(output, "has missing: %v\n", hasMissing)
+
 	return nil
 }

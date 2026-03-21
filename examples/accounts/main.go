@@ -2,8 +2,6 @@
 
 // Command accounts demonstrates querying Android device accounts
 // using the accounts package, which wraps android.accounts.AccountManager.
-// It is built as a c-shared library and packaged into an APK using
-// the shared apk.mk infrastructure.
 package main
 
 /*
@@ -21,10 +19,9 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/accounts"
 	"github.com/AndroidGoLab/jni/capi"
 	"github.com/AndroidGoLab/jni/exampleui"
-	"github.com/AndroidGoLab/jni/accounts"
-	"github.com/AndroidGoLab/jni/app"
 )
 
 func main() {}
@@ -53,70 +50,79 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	_, err := getAppContext(vm)
+	ctx, err := exampleui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
 	}
+	defer ctx.Close()
 
-	// The accounts package wraps android.accounts.AccountManager.
-	// The Manager type provides access to device accounts through
-	// unexported methods (getAccountsRaw, getAccountsByTypeRaw,
-	// getAuthTokenRaw, invalidateAuthTokenRaw) which are intended
-	// to be wrapped by higher-level helpers.
-	//
-	// The Manager struct has exported fields:
-	//   VM  *jni.VM
-	//   Obj *jni.GlobalRef
-	//
-	// Manager is obtained via the static factory AccountManager.get(Context),
-	// exposed as the unexported getManagerRaw method.
+	mgr, err := accounts.NewAccountManager(ctx)
+	if err != nil {
+		return fmt.Errorf("NewAccountManager: %w", err)
+	}
+	defer mgr.Close()
 
-	// Account is a data class with exported fields extracted from
-	// android.accounts.Account Java objects.
-	// Account wraps android.accounts.Account. Its fields (VM, Obj) hold
-	// references to the Java object. Name and Type are accessed via JNI
-	// methods (DescribeContents, Equals, HashCode, etc.).
-	var acct accounts.Account
-	_ = acct
-	fmt.Fprintln(output, "Account type available with DescribeContents, Equals, HashCode methods")
+	fmt.Fprintln(output, "=== Device Accounts ===")
 
-	fmt.Fprintln(output, "AccountManager raw methods: getManagerRaw, getAccountsRaw, getAccountsByTypeRaw, getAuthTokenRaw, invalidateAuthTokenRaw")
+	acctArray, err := mgr.GetAccounts()
+	if err != nil {
+		fmt.Fprintf(output, "GetAccounts: %v\n", err)
+		return nil
+	}
 
-	return nil
-}
-
-// getAppContext obtains an Android Context via ActivityThread.currentApplication().
-func getAppContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
+	var acctCount int32
+	err = vm.Do(func(env *jni.Env) error {
+		if acctArray == nil {
+			return nil
 		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
-		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
-		}
-
-		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
-		if err != nil {
-			return fmt.Errorf("get currentApplication: %w", err)
-		}
-		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
-		if err != nil {
-			return fmt.Errorf("call currentApplication: %w", err)
-		}
-		if appObj == nil || appObj.Ref() == 0 {
-			return fmt.Errorf("currentApplication returned null")
-		}
-
-		ctx.Obj = env.NewGlobalRef(appObj)
+		acctCount = env.GetArrayLength((*jni.Array)(unsafe.Pointer(acctArray)))
 		return nil
 	})
 	if err != nil {
-		return nil, err
+		return fmt.Errorf("get array length: %w", err)
 	}
-	return &ctx, nil
+
+	fmt.Fprintf(output, "Account count: %d\n", acctCount)
+
+	for i := int32(0); i < acctCount; i++ {
+		acct := accounts.Account{VM: vm}
+		err := vm.Do(func(env *jni.Env) error {
+			elem, err := env.GetObjectArrayElement((*jni.ObjectArray)(unsafe.Pointer(acctArray)), i)
+			if err != nil {
+				return fmt.Errorf("get element %d: %w", i, err)
+			}
+			acct.Obj = env.NewGlobalRef(elem)
+			return nil
+		})
+		if err != nil {
+			fmt.Fprintf(output, "  [%d] error: %v\n", i, err)
+			continue
+		}
+
+		str, err := acct.ToString()
+		if err != nil {
+			fmt.Fprintf(output, "  [%d] ToString err: %v\n", i, err)
+		} else {
+			fmt.Fprintf(output, "  [%d] %s\n", i, str)
+		}
+	}
+
+	authArray, err := mgr.GetAuthenticatorTypes()
+	if err != nil {
+		fmt.Fprintf(output, "GetAuthenticatorTypes: %v\n", err)
+		return nil
+	}
+
+	var authCount int32
+	_ = vm.Do(func(env *jni.Env) error {
+		if authArray == nil {
+			return nil
+		}
+		authCount = env.GetArrayLength((*jni.Array)(unsafe.Pointer(authArray)))
+		return nil
+	})
+
+	fmt.Fprintf(output, "\nAuthenticator types: %d\n", authCount)
+
+	return nil
 }
