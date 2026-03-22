@@ -175,7 +175,7 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("Init/nsd", initTest(nsd.Init))
 	run("Init/omapi", initTest(omapi.Init))
 	run("Init/pdf", initTest(pdf.Init))
-	xfail("Init/permission", initTest(permission.Init)) // AndroidX: not in framework classpath
+	run("Init/permission", initTest(permission.Init))
 	run("Init/player", initTest(player.Init))
 	run("Init/pm", initTest(pm.Init))
 	run("Init/power", initTest(power.Init))
