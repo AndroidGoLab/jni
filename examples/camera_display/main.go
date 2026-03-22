@@ -57,9 +57,8 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 			return err
 		}
 
-		// Create a SurfaceView programmatically and set it as the
-		// activity's content view. This gives us a Surface that
-		// Camera2 accepts for preview output.
+		// Create a SurfaceView inside a FrameLayout with correct aspect
+		// ratio, then set it as the activity's content view.
 		svCls, err := env.FindClass("android/view/SurfaceView")
 		if err != nil {
 			return fmt.Errorf("find SurfaceView: %w", err)
@@ -73,13 +72,116 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 			return fmt.Errorf("new SurfaceView: %w", err)
 		}
 
-		// activity.setContentView(surfaceView)
+		// Get screen dimensions to compute aspect-correct SurfaceView size.
+		resCls, err := env.FindClass("android/content/res/Resources")
+		if err != nil {
+			return fmt.Errorf("find Resources: %w", err)
+		}
 		actCls := env.GetObjectClass(actObj)
+		getResMid, err := env.GetMethodID(actCls, "getResources", "()Landroid/content/res/Resources;")
+		if err != nil {
+			return fmt.Errorf("get getResources: %w", err)
+		}
+		res, err := env.CallObjectMethod(actObj, getResMid)
+		if err != nil {
+			return fmt.Errorf("getResources: %w", err)
+		}
+		dmCls, err := env.FindClass("android/util/DisplayMetrics")
+		if err != nil {
+			return fmt.Errorf("find DisplayMetrics: %w", err)
+		}
+		getMetricsMid, err := env.GetMethodID(resCls, "getDisplayMetrics", "()Landroid/util/DisplayMetrics;")
+		if err != nil {
+			return fmt.Errorf("get getDisplayMetrics: %w", err)
+		}
+		dm, err := env.CallObjectMethod(res, getMetricsMid)
+		if err != nil {
+			return fmt.Errorf("getDisplayMetrics: %w", err)
+		}
+		widthFid, err := env.GetFieldID(dmCls, "widthPixels", "I")
+		if err != nil {
+			return fmt.Errorf("get widthPixels: %w", err)
+		}
+		heightFid, err := env.GetFieldID(dmCls, "heightPixels", "I")
+		if err != nil {
+			return fmt.Errorf("get heightPixels: %w", err)
+		}
+		screenW := env.GetIntField(dm, widthFid)
+		screenH := env.GetIntField(dm, heightFid)
+
+		// Camera outputs landscape 16:9. In portrait, the preview is
+		// rotated so the effective aspect ratio is 9:16 (matching the
+		// phone's tall screen). Fit to screen width, scale height.
+		const cameraW, cameraH = 1080, 1920 // portrait orientation
+		cameraAR := float64(cameraW) / float64(cameraH)
+		screenAR := float64(screenW) / float64(screenH)
+
+		var viewW, viewH int32
+		if screenAR > cameraAR {
+			viewH = screenH
+			viewW = int32(float64(screenH) * cameraAR)
+		} else {
+			viewW = screenW
+			viewH = int32(float64(screenW) / cameraAR)
+		}
+
+		// Create FrameLayout as root, add SurfaceView with centered layout.
+		flCls, err := env.FindClass("android/widget/FrameLayout")
+		if err != nil {
+			return fmt.Errorf("find FrameLayout: %w", err)
+		}
+		flInit, err := env.GetMethodID(flCls, "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			return fmt.Errorf("get FrameLayout.<init>: %w", err)
+		}
+		fl, err := env.NewObject(flCls, flInit, jni.ObjectValue(actObj))
+		if err != nil {
+			return fmt.Errorf("new FrameLayout: %w", err)
+		}
+
+		// Set black background on the FrameLayout.
+		viewCls, err := env.FindClass("android/view/View")
+		if err != nil {
+			return fmt.Errorf("find View: %w", err)
+		}
+		setBgMid, err := env.GetMethodID(viewCls, "setBackgroundColor", "(I)V")
+		if err != nil {
+			return fmt.Errorf("get setBackgroundColor: %w", err)
+		}
+		env.CallVoidMethod(fl, setBgMid, jni.IntValue(-16777216)) // Color.BLACK
+
+		// Create FrameLayout.LayoutParams(viewW, viewH, Gravity.CENTER=17).
+		lpCls, err := env.FindClass("android/widget/FrameLayout$LayoutParams")
+		if err != nil {
+			return fmt.Errorf("find FrameLayout.LayoutParams: %w", err)
+		}
+		lpInit, err := env.GetMethodID(lpCls, "<init>", "(III)V")
+		if err != nil {
+			return fmt.Errorf("get LayoutParams.<init>: %w", err)
+		}
+		const gravityCenter = 17
+		lp, err := env.NewObject(lpCls, lpInit,
+			jni.IntValue(viewW), jni.IntValue(viewH), jni.IntValue(gravityCenter))
+		if err != nil {
+			return fmt.Errorf("new LayoutParams: %w", err)
+		}
+
+		// frameLayout.addView(surfaceView, layoutParams)
+		addViewMid, err := env.GetMethodID(flCls, "addView",
+			"(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V")
+		if err != nil {
+			return fmt.Errorf("get addView: %w", err)
+		}
+		if err := env.CallVoidMethod(fl, addViewMid, jni.ObjectValue(sv), jni.ObjectValue(lp)); err != nil {
+			return fmt.Errorf("addView: %w", err)
+		}
+
+		// activity.setContentView(frameLayout)
 		setContentMid, err := env.GetMethodID(actCls, "setContentView", "(Landroid/view/View;)V")
 		if err != nil {
 			return fmt.Errorf("get setContentView: %w", err)
 		}
-		if err := env.CallVoidMethod(actObj, setContentMid, jni.ObjectValue(sv)); err != nil {
+		if err := env.CallVoidMethod(actObj, setContentMid, jni.ObjectValue(fl)); err != nil {
 			return fmt.Errorf("setContentView: %w", err)
 		}
 
