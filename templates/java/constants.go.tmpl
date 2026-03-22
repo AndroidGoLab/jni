@@ -1,10 +1,20 @@
 package {{.Package}}
-
+{{if needsMathImport .ConstantGroups}}
+import "math"
+{{end}}
 {{range .ConstantGroups}}{{$grp := .}}
 {{if .GoType}}// {{.GoType}} represents a typed constant.
 type {{.GoType}} {{.BaseType}}
 {{end}}
+{{- if .ConstValues}}
 const (
-{{range .Values}}	{{.GoName}} {{if $grp.GoType}}{{$grp.GoType}} {{else if $grp.BaseType}}{{$grp.BaseType}} {{end}}= {{.Value}}
+{{range .ConstValues}}	{{.GoName}} {{if $grp.GoType}}{{$grp.GoType}} {{else if $grp.BaseType}}{{$grp.BaseType}} {{end}}= {{.Value}}
 {{end}})
+{{- end}}
+{{- if .VarValues}}
+
+var (
+{{range .VarValues}}	{{.GoName}} {{if $grp.GoType}}{{$grp.GoType}} {{else if $grp.BaseType}}{{$grp.BaseType}} {{end}}= {{.Value}}
+{{end}})
+{{- end}}
 {{end}}

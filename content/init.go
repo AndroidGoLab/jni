@@ -44,6 +44,65 @@ var (
 	midBroadcastReceiverSetResultCode            jni.MethodID
 	midBroadcastReceiverSetResultData            jni.MethodID
 	midBroadcastReceiverSetResultExtras          jni.MethodID
+
+	clsResources                           *jni.GlobalRef
+	midResourcesAddLoaders                 jni.MethodID
+	midResourcesFinishPreloading           jni.MethodID
+	midResourcesFlushLayoutCache           jni.MethodID
+	midResourcesGetAnimation               jni.MethodID
+	midResourcesGetAssets                  jni.MethodID
+	midResourcesGetBoolean                 jni.MethodID
+	midResourcesGetColor1                  jni.MethodID
+	midResourcesGetColor2_1                jni.MethodID
+	midResourcesGetColorStateList1         jni.MethodID
+	midResourcesGetColorStateList2_1       jni.MethodID
+	midResourcesGetConfiguration           jni.MethodID
+	midResourcesGetDimension               jni.MethodID
+	midResourcesGetDimensionPixelOffset    jni.MethodID
+	midResourcesGetDimensionPixelSize      jni.MethodID
+	midResourcesGetDisplayMetrics          jni.MethodID
+	midResourcesGetDrawable1               jni.MethodID
+	midResourcesGetDrawable2_1             jni.MethodID
+	midResourcesGetDrawableForDensity2     jni.MethodID
+	midResourcesGetDrawableForDensity3_1   jni.MethodID
+	midResourcesGetFloat                   jni.MethodID
+	midResourcesGetFont                    jni.MethodID
+	midResourcesGetFraction                jni.MethodID
+	midResourcesGetIdentifier              jni.MethodID
+	midResourcesGetIntArray                jni.MethodID
+	midResourcesGetInteger                 jni.MethodID
+	midResourcesGetLayout                  jni.MethodID
+	midResourcesGetMovie                   jni.MethodID
+	midResourcesGetQuantityString2         jni.MethodID
+	midResourcesGetQuantityString3_1       jni.MethodID
+	midResourcesGetQuantityText            jni.MethodID
+	midResourcesGetResourceEntryName       jni.MethodID
+	midResourcesGetResourceName            jni.MethodID
+	midResourcesGetResourcePackageName     jni.MethodID
+	midResourcesGetResourceTypeName        jni.MethodID
+	midResourcesGetString1                 jni.MethodID
+	midResourcesGetString2_1               jni.MethodID
+	midResourcesGetStringArray             jni.MethodID
+	midResourcesGetText1                   jni.MethodID
+	midResourcesGetText2_1                 jni.MethodID
+	midResourcesGetTextArray               jni.MethodID
+	midResourcesGetValue3                  jni.MethodID
+	midResourcesGetValue3_1                jni.MethodID
+	midResourcesGetValueForDensity         jni.MethodID
+	midResourcesGetXml                     jni.MethodID
+	midResourcesNewTheme                   jni.MethodID
+	midResourcesObtainAttributes           jni.MethodID
+	midResourcesObtainTypedArray           jni.MethodID
+	midResourcesOpenRawResource1           jni.MethodID
+	midResourcesOpenRawResource2_1         jni.MethodID
+	midResourcesOpenRawResourceFd          jni.MethodID
+	midResourcesParseBundleExtra           jni.MethodID
+	midResourcesParseBundleExtras          jni.MethodID
+	midResourcesRemoveLoaders              jni.MethodID
+	midResourcesUpdateConfiguration        jni.MethodID
+	midResourcesGetAttributeSetSourceResId jni.MethodID
+	midResourcesGetSystem                  jni.MethodID
+	midResourcesRegisterResourcePaths      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -204,6 +263,411 @@ func doInit(env *jni.Env) error {
 	}
 
 	midBroadcastReceiverSetResultExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResultExtras", "(Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/content/res/Resources")
+	if err != nil {
+		return fmt.Errorf("find class android.content.res.Resources: %w", err)
+	}
+	clsResources = env.NewGlobalRef(&c.Object)
+
+	midResourcesAddLoaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "addLoaders", "([Landroid/content/res/loader/ResourcesLoader;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesFinishPreloading, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "finishPreloading", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesFlushLayoutCache, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "flushLayoutCache", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetAnimation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getAnimation", "(I)Landroid/content/res/XmlResourceParser;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetAssets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getAssets", "()Landroid/content/res/AssetManager;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getBoolean", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getColor", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetColor2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getColor", "(ILandroid/content/res/Resources$Theme;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetColorStateList1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getColorStateList", "(I)Landroid/content/res/ColorStateList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetColorStateList2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getColorStateList", "(ILandroid/content/res/Resources$Theme;)Landroid/content/res/ColorStateList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getConfiguration", "()Landroid/content/res/Configuration;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDimension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDimension", "(I)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDimensionPixelOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDimensionPixelOffset", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDimensionPixelSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDimensionPixelSize", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDisplayMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDisplayMetrics", "()Landroid/util/DisplayMetrics;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDrawable1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDrawable", "(I)Landroid/graphics/drawable/Drawable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDrawable2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDrawable", "(ILandroid/content/res/Resources$Theme;)Landroid/graphics/drawable/Drawable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDrawableForDensity2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDrawableForDensity", "(II)Landroid/graphics/drawable/Drawable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetDrawableForDensity3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getDrawableForDensity", "(IILandroid/content/res/Resources$Theme;)Landroid/graphics/drawable/Drawable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetFloat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getFloat", "(I)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetFont, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getFont", "(I)Landroid/graphics/Typeface;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetFraction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getFraction", "(III)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getIdentifier", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetIntArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getIntArray", "(I)[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetInteger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getInteger", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetLayout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getLayout", "(I)Landroid/content/res/XmlResourceParser;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetMovie, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getMovie", "(I)Landroid/graphics/Movie;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetQuantityString2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getQuantityString", "(II)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetQuantityString3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getQuantityString", "(II[Ljava/lang/Object;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetQuantityText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getQuantityText", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetResourceEntryName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getResourceEntryName", "(I)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetResourceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getResourceName", "(I)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetResourcePackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getResourcePackageName", "(I)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetResourceTypeName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getResourceTypeName", "(I)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetString1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getString", "(I)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetString2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getString", "(I[Ljava/lang/Object;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetStringArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getStringArray", "(I)[Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getText", "(I)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetText2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getText", "(ILjava/lang/CharSequence;)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetTextArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getTextArray", "(I)[Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetValue3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getValue", "(ILandroid/util/TypedValue;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetValue3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getValue", "(Ljava/lang/String;Landroid/util/TypedValue;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetValueForDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getValueForDensity", "(IILandroid/util/TypedValue;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetXml, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getXml", "(I)Landroid/content/res/XmlResourceParser;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesNewTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "newTheme", "()Landroid/content/res/Resources$Theme;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesObtainAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "obtainAttributes", "(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesObtainTypedArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "obtainTypedArray", "(I)Landroid/content/res/TypedArray;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesOpenRawResource1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "openRawResource", "(I)Ljava/io/InputStream;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesOpenRawResource2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "openRawResource", "(ILandroid/util/TypedValue;)Ljava/io/InputStream;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesOpenRawResourceFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "openRawResourceFd", "(I)Landroid/content/res/AssetFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesParseBundleExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "parseBundleExtra", "(Ljava/lang/String;Landroid/util/AttributeSet;Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesParseBundleExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "parseBundleExtras", "(Landroid/content/res/XmlResourceParser;Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesRemoveLoaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "removeLoaders", "([Landroid/content/res/loader/ResourcesLoader;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesUpdateConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "updateConfiguration", "(Landroid/content/res/Configuration;Landroid/util/DisplayMetrics;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetAttributeSetSourceResId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getAttributeSetSourceResId", "(Landroid/util/AttributeSet;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesGetSystem, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getSystem", "()Landroid/content/res/Resources;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midResourcesRegisterResourcePaths, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "registerResourcePaths", "(Ljava/lang/String;Landroid/content/pm/ApplicationInfo;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

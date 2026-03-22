@@ -48,5 +48,5 @@ const (
 )
 
 const (
-	Time int = 0
+	Time int64 = 0
 )

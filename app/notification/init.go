@@ -71,6 +71,53 @@ var (
 	midManagerShouldHideSilentStatusBarIcons      jni.MethodID
 	midManagerUpdateAutomaticZenRule              jni.MethodID
 
+	clsChannel                        *jni.GlobalRef
+	midChannelCanBubble               jni.MethodID
+	midChannelCanBypassDnd            jni.MethodID
+	midChannelCanShowBadge            jni.MethodID
+	midChannelDescribeContents        jni.MethodID
+	midChannelEnableLights            jni.MethodID
+	midChannelEnableVibration         jni.MethodID
+	midChannelEquals                  jni.MethodID
+	midChannelGetAudioAttributes      jni.MethodID
+	midChannelGetConversationId       jni.MethodID
+	midChannelGetDescription          jni.MethodID
+	midChannelGetGroup                jni.MethodID
+	midChannelGetId                   jni.MethodID
+	midChannelGetImportance           jni.MethodID
+	midChannelGetLightColor           jni.MethodID
+	midChannelGetLockscreenVisibility jni.MethodID
+	midChannelGetName                 jni.MethodID
+	midChannelGetParentChannelId      jni.MethodID
+	midChannelGetSound                jni.MethodID
+	midChannelGetVibrationEffect      jni.MethodID
+	midChannelGetVibrationPattern     jni.MethodID
+	midChannelHasUserSetImportance    jni.MethodID
+	midChannelHasUserSetSound         jni.MethodID
+	midChannelHashCode                jni.MethodID
+	midChannelIsBlockable             jni.MethodID
+	midChannelIsConversation          jni.MethodID
+	midChannelIsDemoted               jni.MethodID
+	midChannelIsImportantConversation jni.MethodID
+	midChannelSetAllowBubbles         jni.MethodID
+	midChannelSetBlockable            jni.MethodID
+	midChannelSetBypassDnd            jni.MethodID
+	midChannelSetConversationId       jni.MethodID
+	midChannelSetDescription          jni.MethodID
+	midChannelSetGroup                jni.MethodID
+	midChannelSetImportance           jni.MethodID
+	midChannelSetLightColor           jni.MethodID
+	midChannelSetLockscreenVisibility jni.MethodID
+	midChannelSetName                 jni.MethodID
+	midChannelSetShowBadge            jni.MethodID
+	midChannelSetSound                jni.MethodID
+	midChannelSetVibrationEffect      jni.MethodID
+	midChannelSetVibrationPattern     jni.MethodID
+	midChannelShouldShowLights        jni.MethodID
+	midChannelShouldVibrate           jni.MethodID
+	midChannelToString                jni.MethodID
+	midChannelWriteToParcel           jni.MethodID
+
 	clsStatusBarNotification                    *jni.GlobalRef
 	midStatusBarNotificationClone0              jni.MethodID
 	midStatusBarNotificationDescribeContents    jni.MethodID
@@ -198,53 +245,6 @@ var (
 	midBuilderSetVisibility                            jni.MethodID
 	midBuilderSetWhen                                  jni.MethodID
 	midBuilderRecoverBuilder                           jni.MethodID
-
-	clsChannel                        *jni.GlobalRef
-	midChannelCanBubble               jni.MethodID
-	midChannelCanBypassDnd            jni.MethodID
-	midChannelCanShowBadge            jni.MethodID
-	midChannelDescribeContents        jni.MethodID
-	midChannelEnableLights            jni.MethodID
-	midChannelEnableVibration         jni.MethodID
-	midChannelEquals                  jni.MethodID
-	midChannelGetAudioAttributes      jni.MethodID
-	midChannelGetConversationId       jni.MethodID
-	midChannelGetDescription          jni.MethodID
-	midChannelGetGroup                jni.MethodID
-	midChannelGetId                   jni.MethodID
-	midChannelGetImportance           jni.MethodID
-	midChannelGetLightColor           jni.MethodID
-	midChannelGetLockscreenVisibility jni.MethodID
-	midChannelGetName                 jni.MethodID
-	midChannelGetParentChannelId      jni.MethodID
-	midChannelGetSound                jni.MethodID
-	midChannelGetVibrationEffect      jni.MethodID
-	midChannelGetVibrationPattern     jni.MethodID
-	midChannelHasUserSetImportance    jni.MethodID
-	midChannelHasUserSetSound         jni.MethodID
-	midChannelHashCode                jni.MethodID
-	midChannelIsBlockable             jni.MethodID
-	midChannelIsConversation          jni.MethodID
-	midChannelIsDemoted               jni.MethodID
-	midChannelIsImportantConversation jni.MethodID
-	midChannelSetAllowBubbles         jni.MethodID
-	midChannelSetBlockable            jni.MethodID
-	midChannelSetBypassDnd            jni.MethodID
-	midChannelSetConversationId       jni.MethodID
-	midChannelSetDescription          jni.MethodID
-	midChannelSetGroup                jni.MethodID
-	midChannelSetImportance           jni.MethodID
-	midChannelSetLightColor           jni.MethodID
-	midChannelSetLockscreenVisibility jni.MethodID
-	midChannelSetName                 jni.MethodID
-	midChannelSetShowBadge            jni.MethodID
-	midChannelSetSound                jni.MethodID
-	midChannelSetVibrationEffect      jni.MethodID
-	midChannelSetVibrationPattern     jni.MethodID
-	midChannelShouldShowLights        jni.MethodID
-	midChannelShouldVibrate           jni.MethodID
-	midChannelToString                jni.MethodID
-	midChannelWriteToParcel           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -587,6 +587,327 @@ func doInit(env *jni.Env) error {
 	}
 
 	midManagerUpdateAutomaticZenRule, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "updateAutomaticZenRule", "(Ljava/lang/String;Landroid/app/AutomaticZenRule;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/app/NotificationChannel")
+	if err != nil {
+		return fmt.Errorf("find class android.app.NotificationChannel: %w", err)
+	}
+	clsChannel = env.NewGlobalRef(&c.Object)
+
+	midChannelCanBubble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBubble", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelCanBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBypassDnd", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelCanShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canShowBadge", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelEnableLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableLights", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelEnableVibration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableVibration", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getAudioAttributes", "()Landroid/media/AudioAttributes;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getConversationId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getDescription", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getGroup", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getImportance", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLightColor", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLockscreenVisibility", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getName", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetParentChannelId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getParentChannelId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSound", "()Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationEffect", "()Landroid/os/VibrationEffect;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelGetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationPattern", "()[J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelHasUserSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetImportance", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelHasUserSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetSound", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelIsBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isBlockable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelIsConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isConversation", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelIsDemoted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isDemoted", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelIsImportantConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isImportantConversation", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetAllowBubbles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setAllowBubbles", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBlockable", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBypassDnd", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setConversationId", "(Ljava/lang/String;Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setDescription", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setGroup", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setImportance", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLightColor", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLockscreenVisibility", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setName", "(Ljava/lang/CharSequence;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setShowBadge", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setSound", "(Landroid/net/Uri;Landroid/media/AudioAttributes;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationEffect", "(Landroid/os/VibrationEffect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelSetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationPattern", "([J)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelShouldShowLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldShowLights", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldVibrate", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midChannelWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -1451,327 +1772,6 @@ func doInit(env *jni.Env) error {
 	}
 
 	midBuilderRecoverBuilder, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "recoverBuilder", "(Landroid/content/Context;Landroid/app/Notification;)Landroid/app/Notification$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/app/NotificationChannel")
-	if err != nil {
-		return fmt.Errorf("find class android.app.NotificationChannel: %w", err)
-	}
-	clsChannel = env.NewGlobalRef(&c.Object)
-
-	midChannelCanBubble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBubble", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelCanBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canBypassDnd", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelCanShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "canShowBadge", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelEnableLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableLights", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelEnableVibration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "enableVibration", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getAudioAttributes", "()Landroid/media/AudioAttributes;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getConversationId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getDescription", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getGroup", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getImportance", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLightColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getLockscreenVisibility", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getName", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetParentChannelId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getParentChannelId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSound", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationEffect", "()Landroid/os/VibrationEffect;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelGetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getVibrationPattern", "()[J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelHasUserSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetImportance", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelHasUserSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hasUserSetSound", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelIsBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isBlockable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelIsConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isConversation", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelIsDemoted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isDemoted", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelIsImportantConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isImportantConversation", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetAllowBubbles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setAllowBubbles", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBlockable", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setBypassDnd", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setConversationId", "(Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setDescription", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setGroup", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setImportance", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLightColor", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setLockscreenVisibility", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setName", "(Ljava/lang/CharSequence;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setShowBadge", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setSound", "(Landroid/net/Uri;Landroid/media/AudioAttributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationEffect", "(Landroid/os/VibrationEffect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelSetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "setVibrationPattern", "([J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelShouldShowLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldShowLights", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "shouldVibrate", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midChannelWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

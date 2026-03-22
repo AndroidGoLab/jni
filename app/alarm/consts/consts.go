@@ -16,9 +16,9 @@ const (
 )
 
 const (
-	IntervalDay            int = 86400000
-	IntervalFifteenMinutes int = 900000
-	IntervalHalfDay        int = 43200000
-	IntervalHalfHour       int = 1800000
-	IntervalHour           int = 3600000
+	IntervalDay            int64 = 86400000
+	IntervalFifteenMinutes int64 = 900000
+	IntervalHalfDay        int64 = 43200000
+	IntervalHalfHour       int64 = 1800000
+	IntervalHour           int64 = 3600000
 )

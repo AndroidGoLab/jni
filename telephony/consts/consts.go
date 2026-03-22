@@ -188,24 +188,24 @@ const (
 )
 
 const (
-	NetworkTypeBitmask1xrtt   int = 64
-	NetworkTypeBitmaskCdma    int = 8
-	NetworkTypeBitmaskEdge    int = 2
-	NetworkTypeBitmaskEhrpd   int = 8192
-	NetworkTypeBitmaskEvdo0   int = 16
-	NetworkTypeBitmaskEvdoA   int = 32
-	NetworkTypeBitmaskEvdoB   int = 2048
-	NetworkTypeBitmaskGprs    int = 1
-	NetworkTypeBitmaskGsm     int = 32768
-	NetworkTypeBitmaskHsdpa   int = 128
-	NetworkTypeBitmaskHspa    int = 512
-	NetworkTypeBitmaskHspap   int = 16384
-	NetworkTypeBitmaskHsupa   int = 256
-	NetworkTypeBitmaskIwlan   int = 131072
-	NetworkTypeBitmaskLte     int = 4096
-	NetworkTypeBitmaskLteCa   int = 262144
-	NetworkTypeBitmaskNr      int = 524288
-	NetworkTypeBitmaskTdScdma int = 65536
-	NetworkTypeBitmaskUmts    int = 4
-	NetworkTypeBitmaskUnknown int = 0
+	NetworkTypeBitmask1xrtt   int64 = 64
+	NetworkTypeBitmaskCdma    int64 = 8
+	NetworkTypeBitmaskEdge    int64 = 2
+	NetworkTypeBitmaskEhrpd   int64 = 8192
+	NetworkTypeBitmaskEvdo0   int64 = 16
+	NetworkTypeBitmaskEvdoA   int64 = 32
+	NetworkTypeBitmaskEvdoB   int64 = 2048
+	NetworkTypeBitmaskGprs    int64 = 1
+	NetworkTypeBitmaskGsm     int64 = 32768
+	NetworkTypeBitmaskHsdpa   int64 = 128
+	NetworkTypeBitmaskHspa    int64 = 512
+	NetworkTypeBitmaskHspap   int64 = 16384
+	NetworkTypeBitmaskHsupa   int64 = 256
+	NetworkTypeBitmaskIwlan   int64 = 131072
+	NetworkTypeBitmaskLte     int64 = 4096
+	NetworkTypeBitmaskLteCa   int64 = 262144
+	NetworkTypeBitmaskNr      int64 = 524288
+	NetworkTypeBitmaskTdScdma int64 = 65536
+	NetworkTypeBitmaskUmts    int64 = 4
+	NetworkTypeBitmaskUnknown int64 = 0
 )

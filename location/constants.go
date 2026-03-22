@@ -5,21 +5,6 @@ package location
 import "github.com/AndroidGoLab/jni/location/consts"
 
 const (
-	ConstellationBeidou  = consts.ConstellationBeidou
-	ConstellationGalileo = consts.ConstellationGalileo
-	ConstellationGlonass = consts.ConstellationGlonass
-	ConstellationGps     = consts.ConstellationGps
-	ConstellationIrnss   = consts.ConstellationIrnss
-	ConstellationQzss    = consts.ConstellationQzss
-	ConstellationSbas    = consts.ConstellationSbas
-	ConstellationUnknown = consts.ConstellationUnknown
-	Creator              = consts.Creator
-	FormatDegrees        = consts.FormatDegrees
-	FormatMinutes        = consts.FormatMinutes
-	FormatSeconds        = consts.FormatSeconds
-)
-
-const (
 	ActionGnssCapabilitiesChanged = consts.ActionGnssCapabilitiesChanged
 	ExtraGnssCapabilities         = consts.ExtraGnssCapabilities
 	ExtraLocationEnabled          = consts.ExtraLocationEnabled
@@ -37,4 +22,19 @@ const (
 	NetworkProvider               = consts.NetworkProvider
 	PassiveProvider               = consts.PassiveProvider
 	ProvidersChangedAction        = consts.ProvidersChangedAction
+)
+
+const (
+	ConstellationBeidou  = consts.ConstellationBeidou
+	ConstellationGalileo = consts.ConstellationGalileo
+	ConstellationGlonass = consts.ConstellationGlonass
+	ConstellationGps     = consts.ConstellationGps
+	ConstellationIrnss   = consts.ConstellationIrnss
+	ConstellationQzss    = consts.ConstellationQzss
+	ConstellationSbas    = consts.ConstellationSbas
+	ConstellationUnknown = consts.ConstellationUnknown
+	Creator              = consts.Creator
+	FormatDegrees        = consts.FormatDegrees
+	FormatMinutes        = consts.FormatMinutes
+	FormatSeconds        = consts.FormatSeconds
 )

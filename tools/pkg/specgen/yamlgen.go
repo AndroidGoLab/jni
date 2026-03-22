@@ -182,6 +182,10 @@ func formatConstantValue(c JavapConstant) string {
 		// javap outputs long values with a trailing "l" suffix (e.g. "86400000l")
 		// which is not valid Go syntax — strip it.
 		return strings.TrimSuffix(c.Value, "l")
+	case "float":
+		// javap outputs float values with a trailing "f" suffix (e.g. "-4.0f", "NaNf")
+		// which is not valid Go syntax — strip it.
+		return strings.TrimSuffix(c.Value, "f")
 	default:
 		return c.Value
 	}

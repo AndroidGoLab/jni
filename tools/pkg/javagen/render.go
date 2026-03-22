@@ -167,6 +167,7 @@ func loadTemplates(dir string) (*template.Template, error) {
 		"paramConversionCode":   ParamConversionCode,
 		"goParamList":           buildGoParamList,
 		"jniArgs":               buildJNIArgs,
+		"needsMathImport":       needsMathImport,
 	}
 
 	pattern := filepath.Join(dir, "*.go.tmpl")
@@ -303,11 +304,23 @@ func renderConstAliases(
 			fmt.Fprintf(&buf, "type %s = consts.%s\n\n", grp.GoType, grp.GoType)
 		}
 
-		buf.WriteString("const (\n")
-		for _, c := range grp.Values {
-			fmt.Fprintf(&buf, "\t%s = consts.%s\n", c.GoName, c.GoName)
+		constVals := grp.ConstValues()
+		if len(constVals) > 0 {
+			buf.WriteString("const (\n")
+			for _, c := range constVals {
+				fmt.Fprintf(&buf, "\t%s = consts.%s\n", c.GoName, c.GoName)
+			}
+			buf.WriteString(")\n\n")
 		}
-		buf.WriteString(")\n\n")
+
+		varVals := grp.VarValues()
+		if len(varVals) > 0 {
+			buf.WriteString("var (\n")
+			for _, c := range varVals {
+				fmt.Fprintf(&buf, "\t%s = consts.%s\n", c.GoName, c.GoName)
+			}
+			buf.WriteString(")\n\n")
+		}
 	}
 
 	src := generatedHeader + buf.String()
@@ -321,6 +334,17 @@ func renderConstAliases(
 	}
 
 	return os.WriteFile(outputPath, formatted, filePerm)
+}
+
+// needsMathImport reports whether any constant group contains values that
+// reference the math package (e.g. math.NaN(), math.Inf()).
+func needsMathImport(groups []MergedConstantGroup) bool {
+	for _, g := range groups {
+		if g.NeedsMathImport() {
+			return true
+		}
+	}
+	return false
 }
 
 func shouldRender(tmplName string, merged *MergedSpec) bool {

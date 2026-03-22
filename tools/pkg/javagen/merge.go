@@ -341,6 +341,64 @@ func inferBaseType(value string) string {
 	return "int"
 }
 
+// normalizeConstantValue converts a constant value from Java literal
+// syntax to valid Go syntax. For example, Java float literals use an
+// "f" suffix (e.g. "-4.0f", "NaNf") that must be stripped or converted
+// for Go. Returns the normalized value and whether the value requires a
+// var declaration instead of const (e.g. NaN is not a compile-time constant).
+func normalizeConstantValue(value, baseType string) (normalized string, needsVar bool) {
+	switch baseType {
+	case "float32":
+		return normalizeFloat32Value(value), isNaNValue(value)
+	case "float64":
+		return normalizeFloat64Value(value), isNaNValue(value)
+	default:
+		return value, false
+	}
+}
+
+// normalizeFloat32Value converts a Java float literal to Go syntax.
+// "-4.0f" → "-4.0", "NaNf" → "float32(math.NaN())",
+// "Infinityf" → "float32(math.Inf(1))", "-Infinityf" → "float32(math.Inf(-1))".
+func normalizeFloat32Value(value string) string {
+	v := strings.TrimSuffix(value, "f")
+	switch v {
+	case "NaN":
+		return "float32(math.NaN())"
+	case "Infinity":
+		return "float32(math.Inf(1))"
+	case "-Infinity":
+		return "float32(math.Inf(-1))"
+	default:
+		return v
+	}
+}
+
+// normalizeFloat64Value converts a Java double literal to Go syntax.
+// "NaN" → "math.NaN()", "Infinity" → "math.Inf(1)", etc.
+func normalizeFloat64Value(value string) string {
+	v := strings.TrimSuffix(value, "d")
+	switch v {
+	case "NaN":
+		return "math.NaN()"
+	case "Infinity":
+		return "math.Inf(1)"
+	case "-Infinity":
+		return "math.Inf(-1)"
+	default:
+		return v
+	}
+}
+
+// isNaNValue reports whether a constant value represents NaN or Infinity,
+// which are not valid Go compile-time constants.
+func isNaNValue(value string) bool {
+	v := strings.TrimSuffix(value, "f")
+	v = strings.TrimSuffix(v, "d")
+	v = strings.TrimPrefix(v, "-")
+	return v == "NaN" || v == "Infinity"
+}
+
 // isBuiltinType reports whether t is a Go builtin type that must not
 // be used as a named type alias (e.g. "type string string" shadows the builtin).
 func isBuiltinType(t string) bool {
@@ -372,9 +430,10 @@ func mergeConstants(constants []Constant) []MergedConstantGroup {
 			if baseType == "" {
 				baseType = c.GoType
 			}
-			// For untyped or builtin-typed constants, infer the base type
-			// from the value literal so the generated code has explicit types.
-			if baseType == "" || isBuiltinType(baseType) {
+			// For untyped constants, infer the base type from the value
+			// literal so the generated code has explicit types. When an
+			// explicit builtin type is set (e.g. float32), preserve it.
+			if baseType == "" {
 				baseType = inferBaseType(c.Value)
 			}
 			g = &MergedConstantGroup{
@@ -392,9 +451,11 @@ func mergeConstants(constants []Constant) []MergedConstantGroup {
 			groups[key] = g
 			order = append(order, key)
 		}
+		normalizedValue, needsVar := normalizeConstantValue(c.Value, g.BaseType)
 		g.Values = append(g.Values, MergedConstant{
 			GoName: c.GoName,
-			Value:  c.Value,
+			Value:  normalizedValue,
+			IsVar:  needsVar,
 		})
 	}
 

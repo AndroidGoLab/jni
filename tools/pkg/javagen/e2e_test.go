@@ -47,8 +47,8 @@ func TestAllJavaSpecs_LoadAndMerge(t *testing.T) {
 
 	t.Logf("found %d spec files", len(specs))
 
-	if len(specs) != 62 {
-		t.Errorf("expected 62 spec files, got %d", len(specs))
+	if len(specs) != 63 {
+		t.Errorf("expected 63 spec files, got %d", len(specs))
 	}
 
 	for _, specPath := range specs {
@@ -303,8 +303,8 @@ func TestGenerate_OutputFilePatterns(t *testing.T) {
 		},
 		{
 			specName:      "content",
-			expectFiles:   []string{"doc.go", "init.go", "broadcast_receiver.go"},
-			unexpectFiles: []string{"callbacks.go", "constants.go"},
+			expectFiles:   []string{"doc.go", "init.go", "broadcast_receiver.go", "constants.go"},
+			unexpectFiles: []string{"callbacks.go"},
 		},
 	}
 

@@ -42,6 +42,6 @@ const (
 )
 
 const (
-	DefaultInitialBackoffMillis int = 30000
-	MaxBackoffDelayMillis       int = 18000000
+	DefaultInitialBackoffMillis int64 = 30000
+	MaxBackoffDelayMillis       int64 = 18000000
 )

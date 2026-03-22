@@ -5,55 +5,6 @@
 package: omapi
 go_import: github.com/AndroidGoLab/jni/se/omapi
 classes:
-    - java_class: android.se.omapi.Reader
-      go_type: Reader
-      methods:
-        - java_method: closeSessions
-          go_name: CloseSessions
-          returns: void
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getSEService
-          go_name: GetSEService
-          returns: android.se.omapi.SEService
-          error: true
-        - java_method: isSecureElementPresent
-          go_name: IsSecureElementPresent
-          returns: boolean
-          error: true
-        - java_method: openSession
-          go_name: OpenSession
-          returns: android.se.omapi.Session
-          error: true
-    - java_class: android.se.omapi.SEService
-      go_type: SEService
-      methods:
-        - java_method: getReaders
-          go_name: GetReaders
-          returns: android.se.omapi.Reader[]
-          error: true
-        - java_method: getUiccReader
-          go_name: GetUiccReader
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.se.omapi.Reader
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: String
-          error: true
-        - java_method: isConnected
-          go_name: IsConnected
-          returns: boolean
-          error: true
-        - java_method: shutdown
-          go_name: Shutdown
-          returns: void
-          error: true
     - java_class: android.se.omapi.Session
       go_type: Session
       methods:
@@ -108,6 +59,55 @@ classes:
             - java_type: byte
               go_name: arg1
           returns: android.se.omapi.Channel
+          error: true
+    - java_class: android.se.omapi.Reader
+      go_type: Reader
+      methods:
+        - java_method: closeSessions
+          go_name: CloseSessions
+          returns: void
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getSEService
+          go_name: GetSEService
+          returns: android.se.omapi.SEService
+          error: true
+        - java_method: isSecureElementPresent
+          go_name: IsSecureElementPresent
+          returns: boolean
+          error: true
+        - java_method: openSession
+          go_name: OpenSession
+          returns: android.se.omapi.Session
+          error: true
+    - java_class: android.se.omapi.SEService
+      go_type: SEService
+      methods:
+        - java_method: getReaders
+          go_name: GetReaders
+          returns: android.se.omapi.Reader[]
+          error: true
+        - java_method: getUiccReader
+          go_name: GetUiccReader
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.se.omapi.Reader
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: String
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: shutdown
+          go_name: Shutdown
+          returns: void
           error: true
     - java_class: android.se.omapi.Channel
       go_type: Channel

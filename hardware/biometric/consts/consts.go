@@ -32,5 +32,5 @@ const (
 )
 
 const (
-	BiometricNoAuthentication int = -1
+	BiometricNoAuthentication int64 = -1
 )
