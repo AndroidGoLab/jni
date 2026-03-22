@@ -50,8 +50,8 @@ func init() { ui.Register(run) }
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	println("ANativeActivity_onCreate called")
 	ui.OnCreate(
-		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
-		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
+		jni.VMFromUintptr(uintptr(activity.vm)),
+		jni.ObjectFromUintptr(uintptr(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -59,7 +59,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
+		jni.ObjectFromUintptr(uintptr(activity.clazz)),
 	)
 }
 
