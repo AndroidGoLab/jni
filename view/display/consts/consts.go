@@ -5,9 +5,26 @@ package consts
 import "math"
 
 const (
-	CompatSmallCoverScreenOptIn                     int = 1
-	ScreenRecordingStateNotVisible                  int = 0
-	ScreenRecordingStateVisible                     int = 1
+	SurfaceTypeGpu                                  int = 2
+	SurfaceTypeHardware                             int = 1
+	SurfaceTypeNormal                               int = 0
+	SurfaceTypePushBuffers                          int = 3
+	DefaultDisplay                                  int = 0
+	FlagPresentation                                int = 8
+	FlagPrivate                                     int = 4
+	FlagRound                                       int = 16
+	FlagSecure                                      int = 2
+	FlagSupportsProtectedBuffers                    int = 1
+	FrameRateCategoryHigh                           int = 1
+	FrameRateCategoryNormal                         int = 0
+	InvalidDisplay                                  int = -1
+	StateDoze                                       int = 3
+	StateDozeSuspend                                int = 4
+	StateOff                                        int = 1
+	StateOn                                         int = 2
+	StateOnSuspend                                  int = 6
+	StateUnknown                                    int = 0
+	StateVr                                         int = 5
 	Density140                                      int = 140
 	Density180                                      int = 180
 	Density200                                      int = 200
@@ -34,23 +51,9 @@ const (
 	DensityXhigh                                    int = 320
 	DensityXxhigh                                   int = 480
 	DensityXxxhigh                                  int = 640
-	SurfaceTypeGpu                                  int = 2
-	SurfaceTypeHardware                             int = 1
-	SurfaceTypeNormal                               int = 0
-	SurfaceTypePushBuffers                          int = 3
-	SurfaceLifecycleDefault                         int = 0
-	SurfaceLifecycleFollowsAttachment               int = 2
-	SurfaceLifecycleFollowsVisibility               int = 1
-	ChangeFrameRateAlways                           int = 1
-	ChangeFrameRateOnlyIfSeamless                   int = 0
-	Creator                                         int = 0
-	FrameRateCompatibilityAtLeast                   int = 2
-	FrameRateCompatibilityDefault                   int = 0
-	FrameRateCompatibilityFixedSource               int = 1
-	Rotation0                                       int = 0
-	Rotation180                                     int = 2
-	Rotation270                                     int = 3
-	Rotation90                                      int = 1
+	CompatSmallCoverScreenOptIn                     int = 1
+	ScreenRecordingStateNotVisible                  int = 0
+	ScreenRecordingStateVisible                     int = 1
 	AccessibilityDataSensitiveAuto                  int = 0
 	AccessibilityDataSensitiveNo                    int = 2
 	AccessibilityDataSensitiveYes                   int = 1
@@ -178,22 +181,16 @@ const (
 	TextDirectionLtr                                int = 3
 	TextDirectionRtl                                int = 4
 	Visible                                         int = 0
-	DefaultDisplay                                  int = 0
-	FlagPresentation                                int = 8
-	FlagPrivate                                     int = 4
-	FlagRound                                       int = 16
-	FlagSecure                                      int = 2
-	FlagSupportsProtectedBuffers                    int = 1
-	FrameRateCategoryHigh                           int = 1
-	FrameRateCategoryNormal                         int = 0
-	InvalidDisplay                                  int = -1
-	StateDoze                                       int = 3
-	StateDozeSuspend                                int = 4
-	StateOff                                        int = 1
-	StateOn                                         int = 2
-	StateOnSuspend                                  int = 6
-	StateUnknown                                    int = 0
-	StateVr                                         int = 5
+	ChangeFrameRateAlways                           int = 1
+	ChangeFrameRateOnlyIfSeamless                   int = 0
+	Creator                                         int = 0
+	FrameRateCompatibilityAtLeast                   int = 2
+	FrameRateCompatibilityDefault                   int = 0
+	FrameRateCompatibilityFixedSource               int = 1
+	Rotation0                                       int = 0
+	Rotation180                                     int = 2
+	Rotation270                                     int = 3
+	Rotation90                                      int = 1
 	FocusAfterDescendants                           int = 262144
 	FocusBeforeDescendants                          int = 131072
 	FocusBlockDescendants                           int = 393216
@@ -203,6 +200,9 @@ const (
 	PersistentAnimationCache                        int = 1
 	PersistentNoCache                               int = 0
 	PersistentScrollingCache                        int = 2
+	SurfaceLifecycleDefault                         int = 0
+	SurfaceLifecycleFollowsAttachment               int = 2
+	SurfaceLifecycleFollowsVisibility               int = 1
 )
 
 const (

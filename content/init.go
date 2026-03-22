@@ -23,6 +23,28 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsBroadcastReceiver                         *jni.GlobalRef
+	midBroadcastReceiverAbortBroadcast           jni.MethodID
+	midBroadcastReceiverClearAbortBroadcast      jni.MethodID
+	midBroadcastReceiverGetAbortBroadcast        jni.MethodID
+	midBroadcastReceiverGetDebugUnregister       jni.MethodID
+	midBroadcastReceiverGetResultCode            jni.MethodID
+	midBroadcastReceiverGetResultData            jni.MethodID
+	midBroadcastReceiverGetResultExtras          jni.MethodID
+	midBroadcastReceiverGetSentFromPackage       jni.MethodID
+	midBroadcastReceiverGetSentFromUid           jni.MethodID
+	midBroadcastReceiverGoAsync                  jni.MethodID
+	midBroadcastReceiverIsInitialStickyBroadcast jni.MethodID
+	midBroadcastReceiverIsOrderedBroadcast       jni.MethodID
+	midBroadcastReceiverOnReceive                jni.MethodID
+	midBroadcastReceiverPeekService              jni.MethodID
+	midBroadcastReceiverSetDebugUnregister       jni.MethodID
+	midBroadcastReceiverSetOrderedHint           jni.MethodID
+	midBroadcastReceiverSetResult                jni.MethodID
+	midBroadcastReceiverSetResultCode            jni.MethodID
+	midBroadcastReceiverSetResultData            jni.MethodID
+	midBroadcastReceiverSetResultExtras          jni.MethodID
+
 	clsResources                           *jni.GlobalRef
 	midResourcesAddLoaders                 jni.MethodID
 	midResourcesFinishPreloading           jni.MethodID
@@ -81,28 +103,6 @@ var (
 	midResourcesGetAttributeSetSourceResId jni.MethodID
 	midResourcesGetSystem                  jni.MethodID
 	midResourcesRegisterResourcePaths      jni.MethodID
-
-	clsBroadcastReceiver                         *jni.GlobalRef
-	midBroadcastReceiverAbortBroadcast           jni.MethodID
-	midBroadcastReceiverClearAbortBroadcast      jni.MethodID
-	midBroadcastReceiverGetAbortBroadcast        jni.MethodID
-	midBroadcastReceiverGetDebugUnregister       jni.MethodID
-	midBroadcastReceiverGetResultCode            jni.MethodID
-	midBroadcastReceiverGetResultData            jni.MethodID
-	midBroadcastReceiverGetResultExtras          jni.MethodID
-	midBroadcastReceiverGetSentFromPackage       jni.MethodID
-	midBroadcastReceiverGetSentFromUid           jni.MethodID
-	midBroadcastReceiverGoAsync                  jni.MethodID
-	midBroadcastReceiverIsInitialStickyBroadcast jni.MethodID
-	midBroadcastReceiverIsOrderedBroadcast       jni.MethodID
-	midBroadcastReceiverOnReceive                jni.MethodID
-	midBroadcastReceiverPeekService              jni.MethodID
-	midBroadcastReceiverSetDebugUnregister       jni.MethodID
-	midBroadcastReceiverSetOrderedHint           jni.MethodID
-	midBroadcastReceiverSetResult                jni.MethodID
-	midBroadcastReceiverSetResultCode            jni.MethodID
-	midBroadcastReceiverSetResultData            jni.MethodID
-	midBroadcastReceiverSetResultExtras          jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -122,6 +122,152 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/content/BroadcastReceiver")
+	if err != nil {
+		return fmt.Errorf("find class android.content.BroadcastReceiver: %w", err)
+	}
+	clsBroadcastReceiver = env.NewGlobalRef(&c.Object)
+
+	midBroadcastReceiverAbortBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "abortBroadcast", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverClearAbortBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "clearAbortBroadcast", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGetAbortBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getAbortBroadcast", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGetDebugUnregister, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getDebugUnregister", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getResultCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGetResultData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getResultData", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGetResultExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getResultExtras", "(Z)Landroid/os/Bundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGetSentFromPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getSentFromPackage", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGetSentFromUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getSentFromUid", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverGoAsync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "goAsync", "()Landroid/content/BroadcastReceiver$PendingResult;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverIsInitialStickyBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "isInitialStickyBroadcast", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverIsOrderedBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "isOrderedBroadcast", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverOnReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "onReceive", "(Landroid/content/Context;Landroid/content/Intent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverPeekService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "peekService", "(Landroid/content/Context;Landroid/content/Intent;)Landroid/os/IBinder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverSetDebugUnregister, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setDebugUnregister", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverSetOrderedHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setOrderedHint", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverSetResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResult", "(ILjava/lang/String;Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverSetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResultCode", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverSetResultData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResultData", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBroadcastReceiverSetResultExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResultExtras", "(Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
 
 	c, err = env.FindClass("android/content/res/Resources")
 	if err != nil {
@@ -522,152 +668,6 @@ func doInit(env *jni.Env) error {
 	}
 
 	midResourcesRegisterResourcePaths, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "registerResourcePaths", "(Ljava/lang/String;Landroid/content/pm/ApplicationInfo;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/content/BroadcastReceiver")
-	if err != nil {
-		return fmt.Errorf("find class android.content.BroadcastReceiver: %w", err)
-	}
-	clsBroadcastReceiver = env.NewGlobalRef(&c.Object)
-
-	midBroadcastReceiverAbortBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "abortBroadcast", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverClearAbortBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "clearAbortBroadcast", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGetAbortBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getAbortBroadcast", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGetDebugUnregister, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getDebugUnregister", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getResultCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGetResultData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getResultData", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGetResultExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getResultExtras", "(Z)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGetSentFromPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getSentFromPackage", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGetSentFromUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "getSentFromUid", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverGoAsync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "goAsync", "()Landroid/content/BroadcastReceiver$PendingResult;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverIsInitialStickyBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "isInitialStickyBroadcast", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverIsOrderedBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "isOrderedBroadcast", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverOnReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "onReceive", "(Landroid/content/Context;Landroid/content/Intent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverPeekService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "peekService", "(Landroid/content/Context;Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverSetDebugUnregister, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setDebugUnregister", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverSetOrderedHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setOrderedHint", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverSetResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResult", "(ILjava/lang/String;Landroid/os/Bundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverSetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResultCode", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverSetResultData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResultData", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midBroadcastReceiverSetResultExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "setResultExtras", "(Landroid/os/Bundle;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

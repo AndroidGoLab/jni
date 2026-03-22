@@ -5,7 +5,6 @@ package speech
 import "github.com/AndroidGoLab/jni/speech/consts"
 
 const (
-	ActionTtsQueueProcessingCompleted = consts.ActionTtsQueueProcessingCompleted
 	ConfidenceScores                  = consts.ConfidenceScores
 	DetectedLanguage                  = consts.DetectedLanguage
 	LanguageDetectionConfidenceLevel  = consts.LanguageDetectionConfidenceLevel
@@ -14,26 +13,10 @@ const (
 	ResultsAlternatives               = consts.ResultsAlternatives
 	ResultsRecognition                = consts.ResultsRecognition
 	TopLocaleAlternatives             = consts.TopLocaleAlternatives
+	ActionTtsQueueProcessingCompleted = consts.ActionTtsQueueProcessingCompleted
 )
 
 const (
-	Error                                           = consts.Error
-	ErrorInvalidRequest                             = consts.ErrorInvalidRequest
-	ErrorNetwork                                    = consts.ErrorNetwork
-	ErrorNetworkTimeout                             = consts.ErrorNetworkTimeout
-	ErrorNotInstalledYet                            = consts.ErrorNotInstalledYet
-	ErrorOutput                                     = consts.ErrorOutput
-	ErrorService                                    = consts.ErrorService
-	ErrorSynthesis                                  = consts.ErrorSynthesis
-	LangAvailable                                   = consts.LangAvailable
-	LangCountryAvailable                            = consts.LangCountryAvailable
-	LangCountryVarAvailable                         = consts.LangCountryVarAvailable
-	LangMissingData                                 = consts.LangMissingData
-	LangNotSupported                                = consts.LangNotSupported
-	QueueAdd                                        = consts.QueueAdd
-	QueueFlush                                      = consts.QueueFlush
-	Stopped                                         = consts.Stopped
-	Success                                         = consts.Success
 	ErrorAudio                                      = consts.ErrorAudio
 	ErrorCannotCheckSupport                         = consts.ErrorCannotCheckSupport
 	ErrorCannotListenToDownloadEvents               = consts.ErrorCannotListenToDownloadEvents
@@ -41,6 +24,8 @@ const (
 	ErrorInsufficientPermissions                    = consts.ErrorInsufficientPermissions
 	ErrorLanguageNotSupported                       = consts.ErrorLanguageNotSupported
 	ErrorLanguageUnavailable                        = consts.ErrorLanguageUnavailable
+	ErrorNetwork                                    = consts.ErrorNetwork
+	ErrorNetworkTimeout                             = consts.ErrorNetworkTimeout
 	ErrorNoMatch                                    = consts.ErrorNoMatch
 	ErrorRecognizerBusy                             = consts.ErrorRecognizerBusy
 	ErrorServer                                     = consts.ErrorServer
@@ -55,4 +40,19 @@ const (
 	LanguageSwitchResultNotAttempted                = consts.LanguageSwitchResultNotAttempted
 	LanguageSwitchResultSkippedNoModel              = consts.LanguageSwitchResultSkippedNoModel
 	LanguageSwitchResultSucceeded                   = consts.LanguageSwitchResultSucceeded
+	Error                                           = consts.Error
+	ErrorInvalidRequest                             = consts.ErrorInvalidRequest
+	ErrorNotInstalledYet                            = consts.ErrorNotInstalledYet
+	ErrorOutput                                     = consts.ErrorOutput
+	ErrorService                                    = consts.ErrorService
+	ErrorSynthesis                                  = consts.ErrorSynthesis
+	LangAvailable                                   = consts.LangAvailable
+	LangCountryAvailable                            = consts.LangCountryAvailable
+	LangCountryVarAvailable                         = consts.LangCountryVarAvailable
+	LangMissingData                                 = consts.LangMissingData
+	LangNotSupported                                = consts.LangNotSupported
+	QueueAdd                                        = consts.QueueAdd
+	QueueFlush                                      = consts.QueueFlush
+	Stopped                                         = consts.Stopped
+	Success                                         = consts.Success
 )

@@ -5,9 +5,26 @@ package display
 import "github.com/AndroidGoLab/jni/view/display/consts"
 
 const (
-	CompatSmallCoverScreenOptIn                     = consts.CompatSmallCoverScreenOptIn
-	ScreenRecordingStateNotVisible                  = consts.ScreenRecordingStateNotVisible
-	ScreenRecordingStateVisible                     = consts.ScreenRecordingStateVisible
+	SurfaceTypeGpu                                  = consts.SurfaceTypeGpu
+	SurfaceTypeHardware                             = consts.SurfaceTypeHardware
+	SurfaceTypeNormal                               = consts.SurfaceTypeNormal
+	SurfaceTypePushBuffers                          = consts.SurfaceTypePushBuffers
+	DefaultDisplay                                  = consts.DefaultDisplay
+	FlagPresentation                                = consts.FlagPresentation
+	FlagPrivate                                     = consts.FlagPrivate
+	FlagRound                                       = consts.FlagRound
+	FlagSecure                                      = consts.FlagSecure
+	FlagSupportsProtectedBuffers                    = consts.FlagSupportsProtectedBuffers
+	FrameRateCategoryHigh                           = consts.FrameRateCategoryHigh
+	FrameRateCategoryNormal                         = consts.FrameRateCategoryNormal
+	InvalidDisplay                                  = consts.InvalidDisplay
+	StateDoze                                       = consts.StateDoze
+	StateDozeSuspend                                = consts.StateDozeSuspend
+	StateOff                                        = consts.StateOff
+	StateOn                                         = consts.StateOn
+	StateOnSuspend                                  = consts.StateOnSuspend
+	StateUnknown                                    = consts.StateUnknown
+	StateVr                                         = consts.StateVr
 	Density140                                      = consts.Density140
 	Density180                                      = consts.Density180
 	Density200                                      = consts.Density200
@@ -34,23 +51,9 @@ const (
 	DensityXhigh                                    = consts.DensityXhigh
 	DensityXxhigh                                   = consts.DensityXxhigh
 	DensityXxxhigh                                  = consts.DensityXxxhigh
-	SurfaceTypeGpu                                  = consts.SurfaceTypeGpu
-	SurfaceTypeHardware                             = consts.SurfaceTypeHardware
-	SurfaceTypeNormal                               = consts.SurfaceTypeNormal
-	SurfaceTypePushBuffers                          = consts.SurfaceTypePushBuffers
-	SurfaceLifecycleDefault                         = consts.SurfaceLifecycleDefault
-	SurfaceLifecycleFollowsAttachment               = consts.SurfaceLifecycleFollowsAttachment
-	SurfaceLifecycleFollowsVisibility               = consts.SurfaceLifecycleFollowsVisibility
-	ChangeFrameRateAlways                           = consts.ChangeFrameRateAlways
-	ChangeFrameRateOnlyIfSeamless                   = consts.ChangeFrameRateOnlyIfSeamless
-	Creator                                         = consts.Creator
-	FrameRateCompatibilityAtLeast                   = consts.FrameRateCompatibilityAtLeast
-	FrameRateCompatibilityDefault                   = consts.FrameRateCompatibilityDefault
-	FrameRateCompatibilityFixedSource               = consts.FrameRateCompatibilityFixedSource
-	Rotation0                                       = consts.Rotation0
-	Rotation180                                     = consts.Rotation180
-	Rotation270                                     = consts.Rotation270
-	Rotation90                                      = consts.Rotation90
+	CompatSmallCoverScreenOptIn                     = consts.CompatSmallCoverScreenOptIn
+	ScreenRecordingStateNotVisible                  = consts.ScreenRecordingStateNotVisible
+	ScreenRecordingStateVisible                     = consts.ScreenRecordingStateVisible
 	AccessibilityDataSensitiveAuto                  = consts.AccessibilityDataSensitiveAuto
 	AccessibilityDataSensitiveNo                    = consts.AccessibilityDataSensitiveNo
 	AccessibilityDataSensitiveYes                   = consts.AccessibilityDataSensitiveYes
@@ -178,22 +181,16 @@ const (
 	TextDirectionLtr                                = consts.TextDirectionLtr
 	TextDirectionRtl                                = consts.TextDirectionRtl
 	Visible                                         = consts.Visible
-	DefaultDisplay                                  = consts.DefaultDisplay
-	FlagPresentation                                = consts.FlagPresentation
-	FlagPrivate                                     = consts.FlagPrivate
-	FlagRound                                       = consts.FlagRound
-	FlagSecure                                      = consts.FlagSecure
-	FlagSupportsProtectedBuffers                    = consts.FlagSupportsProtectedBuffers
-	FrameRateCategoryHigh                           = consts.FrameRateCategoryHigh
-	FrameRateCategoryNormal                         = consts.FrameRateCategoryNormal
-	InvalidDisplay                                  = consts.InvalidDisplay
-	StateDoze                                       = consts.StateDoze
-	StateDozeSuspend                                = consts.StateDozeSuspend
-	StateOff                                        = consts.StateOff
-	StateOn                                         = consts.StateOn
-	StateOnSuspend                                  = consts.StateOnSuspend
-	StateUnknown                                    = consts.StateUnknown
-	StateVr                                         = consts.StateVr
+	ChangeFrameRateAlways                           = consts.ChangeFrameRateAlways
+	ChangeFrameRateOnlyIfSeamless                   = consts.ChangeFrameRateOnlyIfSeamless
+	Creator                                         = consts.Creator
+	FrameRateCompatibilityAtLeast                   = consts.FrameRateCompatibilityAtLeast
+	FrameRateCompatibilityDefault                   = consts.FrameRateCompatibilityDefault
+	FrameRateCompatibilityFixedSource               = consts.FrameRateCompatibilityFixedSource
+	Rotation0                                       = consts.Rotation0
+	Rotation180                                     = consts.Rotation180
+	Rotation270                                     = consts.Rotation270
+	Rotation90                                      = consts.Rotation90
 	FocusAfterDescendants                           = consts.FocusAfterDescendants
 	FocusBeforeDescendants                          = consts.FocusBeforeDescendants
 	FocusBlockDescendants                           = consts.FocusBlockDescendants
@@ -203,6 +200,9 @@ const (
 	PersistentAnimationCache                        = consts.PersistentAnimationCache
 	PersistentNoCache                               = consts.PersistentNoCache
 	PersistentScrollingCache                        = consts.PersistentScrollingCache
+	SurfaceLifecycleDefault                         = consts.SurfaceLifecycleDefault
+	SurfaceLifecycleFollowsAttachment               = consts.SurfaceLifecycleFollowsAttachment
+	SurfaceLifecycleFollowsVisibility               = consts.SurfaceLifecycleFollowsVisibility
 )
 
 const (

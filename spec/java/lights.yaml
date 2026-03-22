@@ -5,38 +5,6 @@
 package: lights
 go_import: github.com/AndroidGoLab/jni/hardware/lights
 classes:
-    - java_class: android.hardware.lights.LightsManager
-      go_type: Manager
-      methods:
-        - java_method: getLightState
-          go_name: GetLightState
-          params:
-            - java_type: android.hardware.lights.Light
-              go_name: arg0
-          returns: android.hardware.lights.LightState
-          error: true
-        - java_method: getLights
-          go_name: GetLights
-          returns: java.util.List<android.hardware.lights.Light>
-          error: true
-        - java_method: openSession
-          go_name: OpenSession
-          returns: android.hardware.lights.LightsManager$LightsSession
-          error: true
-    - java_class: android.hardware.lights.LightsManager$LightsSession
-      go_type: ManagerLightsSession
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: requestLights
-          go_name: RequestLights
-          params:
-            - java_type: android.hardware.lights.LightsRequest
-              go_name: arg0
-          returns: void
-          error: true
     - java_class: android.hardware.lights.LightState
       go_type: LightState
       methods:
@@ -85,6 +53,38 @@ classes:
             - java_type: int
               go_name: arg0
           returns: android.hardware.lights.LightState$Builder
+          error: true
+    - java_class: android.hardware.lights.LightsManager
+      go_type: Manager
+      methods:
+        - java_method: getLightState
+          go_name: GetLightState
+          params:
+            - java_type: android.hardware.lights.Light
+              go_name: arg0
+          returns: android.hardware.lights.LightState
+          error: true
+        - java_method: getLights
+          go_name: GetLights
+          returns: java.util.List<android.hardware.lights.Light>
+          error: true
+        - java_method: openSession
+          go_name: OpenSession
+          returns: android.hardware.lights.LightsManager$LightsSession
+          error: true
+    - java_class: android.hardware.lights.LightsManager$LightsSession
+      go_type: ManagerLightsSession
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: requestLights
+          go_name: RequestLights
+          params:
+            - java_type: android.hardware.lights.LightsRequest
+              go_name: arg0
+          returns: void
           error: true
     - java_class: android.hardware.lights.Light
       go_type: Light

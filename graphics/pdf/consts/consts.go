@@ -3,15 +3,6 @@
 package consts
 
 const (
-	AllSaveFlag                         int = 31
-	DocumentLinearizedTypeLinearized    int = 1
-	DocumentLinearizedTypeNonLinearized int = 0
-	PdfFormTypeAcroForm                 int = 1
-	PdfFormTypeNone                     int = 0
-	PdfFormTypeXfaForeground            int = 3
-	PdfFormTypeXfaFull                  int = 2
-	RenderModeForDisplay                int = 1
-	RenderModeForPrint                  int = 2
 	Bold                                int = 1
 	BoldItalic                          int = 3
 	Default                             int = 0
@@ -51,15 +42,15 @@ const (
 	TextRunFlagRightEdge                int = 16384
 	UnderlineTextFlag                   int = 8
 	VerticalTextFlag                    int = 4096
+	DocumentLinearizedTypeLinearized    int = 1
+	DocumentLinearizedTypeNonLinearized int = 0
+	PdfFormTypeAcroForm                 int = 1
+	PdfFormTypeNone                     int = 0
+	PdfFormTypeXfaForeground            int = 3
+	PdfFormTypeXfaFull                  int = 2
+	RenderModeForDisplay                int = 1
+	RenderModeForPrint                  int = 2
 	Creator                             int = 0
-	ModeAppend                          int = 33554432
-	ModeCreate                          int = 134217728
-	ModeReadOnly                        int = 268435456
-	ModeReadWrite                       int = 805306368
-	ModeTruncate                        int = 67108864
-	ModeWorldReadable                   int = 1
-	ModeWorldWriteable                  int = 2
-	ModeWriteOnly                       int = 536870912
 	DensityNone                         int = 0
 	Alpha8                              int = 0
 	Argb4444                            int = 0
@@ -68,4 +59,13 @@ const (
 	Rgba1010102                         int = 0
 	RgbaF16                             int = 0
 	Rgb565                              int = 0
+	AllSaveFlag                         int = 31
+	ModeAppend                          int = 33554432
+	ModeCreate                          int = 134217728
+	ModeReadOnly                        int = 268435456
+	ModeReadWrite                       int = 805306368
+	ModeTruncate                        int = 67108864
+	ModeWorldReadable                   int = 1
+	ModeWorldWriteable                  int = 2
+	ModeWriteOnly                       int = 536870912
 )

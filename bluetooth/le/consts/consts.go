@@ -3,6 +3,12 @@
 package consts
 
 const (
+	ExtraCallbackType   string = "android.bluetooth.le.extra.CALLBACK_TYPE"
+	ExtraErrorCode      string = "android.bluetooth.le.extra.ERROR_CODE"
+	ExtraListScanResult string = "android.bluetooth.le.extra.LIST_SCAN_RESULT"
+)
+
+const (
 	Creator                    int = 0
 	DataComplete               int = 0
 	DataTruncated              int = 2
@@ -10,10 +16,4 @@ const (
 	PhyUnused                  int = 0
 	SidNotPresent              int = 255
 	TxPowerNotPresent          int = 127
-)
-
-const (
-	ExtraCallbackType   string = "android.bluetooth.le.extra.CALLBACK_TYPE"
-	ExtraErrorCode      string = "android.bluetooth.le.extra.ERROR_CODE"
-	ExtraListScanResult string = "android.bluetooth.le.extra.LIST_SCAN_RESULT"
 )

@@ -5,15 +5,6 @@ package pdf
 import "github.com/AndroidGoLab/jni/graphics/pdf/consts"
 
 const (
-	AllSaveFlag                         = consts.AllSaveFlag
-	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
-	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
-	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
-	PdfFormTypeNone                     = consts.PdfFormTypeNone
-	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
-	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
-	RenderModeForDisplay                = consts.RenderModeForDisplay
-	RenderModeForPrint                  = consts.RenderModeForPrint
 	Bold                                = consts.Bold
 	BoldItalic                          = consts.BoldItalic
 	Default                             = consts.Default
@@ -53,15 +44,15 @@ const (
 	TextRunFlagRightEdge                = consts.TextRunFlagRightEdge
 	UnderlineTextFlag                   = consts.UnderlineTextFlag
 	VerticalTextFlag                    = consts.VerticalTextFlag
+	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
+	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
+	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
+	PdfFormTypeNone                     = consts.PdfFormTypeNone
+	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
+	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
+	RenderModeForDisplay                = consts.RenderModeForDisplay
+	RenderModeForPrint                  = consts.RenderModeForPrint
 	Creator                             = consts.Creator
-	ModeAppend                          = consts.ModeAppend
-	ModeCreate                          = consts.ModeCreate
-	ModeReadOnly                        = consts.ModeReadOnly
-	ModeReadWrite                       = consts.ModeReadWrite
-	ModeTruncate                        = consts.ModeTruncate
-	ModeWorldReadable                   = consts.ModeWorldReadable
-	ModeWorldWriteable                  = consts.ModeWorldWriteable
-	ModeWriteOnly                       = consts.ModeWriteOnly
 	DensityNone                         = consts.DensityNone
 	Alpha8                              = consts.Alpha8
 	Argb4444                            = consts.Argb4444
@@ -70,4 +61,13 @@ const (
 	Rgba1010102                         = consts.Rgba1010102
 	RgbaF16                             = consts.RgbaF16
 	Rgb565                              = consts.Rgb565
+	AllSaveFlag                         = consts.AllSaveFlag
+	ModeAppend                          = consts.ModeAppend
+	ModeCreate                          = consts.ModeCreate
+	ModeReadOnly                        = consts.ModeReadOnly
+	ModeReadWrite                       = consts.ModeReadWrite
+	ModeTruncate                        = consts.ModeTruncate
+	ModeWorldReadable                   = consts.ModeWorldReadable
+	ModeWorldWriteable                  = consts.ModeWorldWriteable
+	ModeWriteOnly                       = consts.ModeWriteOnly
 )

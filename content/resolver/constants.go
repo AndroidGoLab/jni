@@ -54,11 +54,11 @@ const (
 	SyncObserverTypeActive         = consts.SyncObserverTypeActive
 	SyncObserverTypePending        = consts.SyncObserverTypePending
 	SyncObserverTypeSettings       = consts.SyncObserverTypeSettings
-	Creator                        = consts.Creator
-	Empty                          = consts.Empty
 	FieldTypeBlob                  = consts.FieldTypeBlob
 	FieldTypeFloat                 = consts.FieldTypeFloat
 	FieldTypeInteger               = consts.FieldTypeInteger
 	FieldTypeNull                  = consts.FieldTypeNull
 	FieldTypeString                = consts.FieldTypeString
+	Creator                        = consts.Creator
+	Empty                          = consts.Empty
 )

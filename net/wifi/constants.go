@@ -5,30 +5,37 @@ package wifi
 import "github.com/AndroidGoLab/jni/net/wifi/consts"
 
 const (
-	ChannelWidth160mhz                                 = consts.ChannelWidth160mhz
-	ChannelWidth20mhz                                  = consts.ChannelWidth20mhz
-	ChannelWidth320mhz                                 = consts.ChannelWidth320mhz
-	ChannelWidth40mhz                                  = consts.ChannelWidth40mhz
-	ChannelWidth80mhz                                  = consts.ChannelWidth80mhz
-	ChannelWidth80mhzPlusMhz                           = consts.ChannelWidth80mhzPlusMhz
-	Creator                                            = consts.Creator
-	PreambleEht                                        = consts.PreambleEht
-	PreambleHe                                         = consts.PreambleHe
-	PreambleHt                                         = consts.PreambleHt
-	PreambleLegacy                                     = consts.PreambleLegacy
-	PreambleVht                                        = consts.PreambleVht
-	Unspecified                                        = consts.Unspecified
-	WifiBand24Ghz                                      = consts.WifiBand24Ghz
-	WifiBand5Ghz                                       = consts.WifiBand5Ghz
-	WifiBand60Ghz                                      = consts.WifiBand60Ghz
-	WifiBand6Ghz                                       = consts.WifiBand6Ghz
-	WifiStandard11ac                                   = consts.WifiStandard11ac
-	WifiStandard11ad                                   = consts.WifiStandard11ad
-	WifiStandard11ax                                   = consts.WifiStandard11ax
-	WifiStandard11be                                   = consts.WifiStandard11be
-	WifiStandard11n                                    = consts.WifiStandard11n
-	WifiStandardLegacy                                 = consts.WifiStandardLegacy
-	WifiStandardUnknown                                = consts.WifiStandardUnknown
+	FrequencyUnits                            = consts.FrequencyUnits
+	LinkSpeedUnits                            = consts.LinkSpeedUnits
+	ActionPickWifiNetwork                     = consts.ActionPickWifiNetwork
+	ActionRequestScanAlwaysAvailable          = consts.ActionRequestScanAlwaysAvailable
+	ActionWifiNetworkSuggestionPostConnection = consts.ActionWifiNetworkSuggestionPostConnection
+	ActionWifiScanAvailabilityChanged         = consts.ActionWifiScanAvailabilityChanged
+	ChannelDataKeyFrequencyMhz                = consts.ChannelDataKeyFrequencyMhz
+	ChannelDataKeyNumAp                       = consts.ChannelDataKeyNumAp
+	ExtraBssid                                = consts.ExtraBssid
+	ExtraNetworkInfo                          = consts.ExtraNetworkInfo
+	ExtraNetworkSuggestion                    = consts.ExtraNetworkSuggestion
+	ExtraNewRssi                              = consts.ExtraNewRssi
+	ExtraNewState                             = consts.ExtraNewState
+	ExtraPreviousWifiState                    = consts.ExtraPreviousWifiState
+	ExtraResultsUpdated                       = consts.ExtraResultsUpdated
+	ExtraScanAvailable                        = consts.ExtraScanAvailable
+	ExtraSupplicantConnected                  = consts.ExtraSupplicantConnected
+	ExtraSupplicantError                      = consts.ExtraSupplicantError
+	ExtraWifiInfo                             = consts.ExtraWifiInfo
+	ExtraWifiState                            = consts.ExtraWifiState
+	NetworkIdsChangedAction                   = consts.NetworkIdsChangedAction
+	NetworkStateChangedAction                 = consts.NetworkStateChangedAction
+	RssiChangedAction                         = consts.RssiChangedAction
+	ScanResultsAvailableAction                = consts.ScanResultsAvailableAction
+	SupplicantConnectionChangeAction          = consts.SupplicantConnectionChangeAction
+	SupplicantStateChangedAction              = consts.SupplicantStateChangedAction
+	UnknownSsid                               = consts.UnknownSsid
+	WifiStateChangedAction                    = consts.WifiStateChangedAction
+)
+
+const (
 	LinkSpeedUnknown                                   = consts.LinkSpeedUnknown
 	SecurityTypeDpp                                    = consts.SecurityTypeDpp
 	SecurityTypeEap                                    = consts.SecurityTypeEap
@@ -99,35 +106,28 @@ const (
 	WpsTimedOut                                        = consts.WpsTimedOut
 	WpsTkipOnlyProhibited                              = consts.WpsTkipOnlyProhibited
 	WpsWepProhibited                                   = consts.WpsWepProhibited
-)
-
-const (
-	FrequencyUnits                            = consts.FrequencyUnits
-	LinkSpeedUnits                            = consts.LinkSpeedUnits
-	ActionPickWifiNetwork                     = consts.ActionPickWifiNetwork
-	ActionRequestScanAlwaysAvailable          = consts.ActionRequestScanAlwaysAvailable
-	ActionWifiNetworkSuggestionPostConnection = consts.ActionWifiNetworkSuggestionPostConnection
-	ActionWifiScanAvailabilityChanged         = consts.ActionWifiScanAvailabilityChanged
-	ChannelDataKeyFrequencyMhz                = consts.ChannelDataKeyFrequencyMhz
-	ChannelDataKeyNumAp                       = consts.ChannelDataKeyNumAp
-	ExtraBssid                                = consts.ExtraBssid
-	ExtraNetworkInfo                          = consts.ExtraNetworkInfo
-	ExtraNetworkSuggestion                    = consts.ExtraNetworkSuggestion
-	ExtraNewRssi                              = consts.ExtraNewRssi
-	ExtraNewState                             = consts.ExtraNewState
-	ExtraPreviousWifiState                    = consts.ExtraPreviousWifiState
-	ExtraResultsUpdated                       = consts.ExtraResultsUpdated
-	ExtraScanAvailable                        = consts.ExtraScanAvailable
-	ExtraSupplicantConnected                  = consts.ExtraSupplicantConnected
-	ExtraSupplicantError                      = consts.ExtraSupplicantError
-	ExtraWifiInfo                             = consts.ExtraWifiInfo
-	ExtraWifiState                            = consts.ExtraWifiState
-	NetworkIdsChangedAction                   = consts.NetworkIdsChangedAction
-	NetworkStateChangedAction                 = consts.NetworkStateChangedAction
-	RssiChangedAction                         = consts.RssiChangedAction
-	ScanResultsAvailableAction                = consts.ScanResultsAvailableAction
-	SupplicantConnectionChangeAction          = consts.SupplicantConnectionChangeAction
-	SupplicantStateChangedAction              = consts.SupplicantStateChangedAction
-	UnknownSsid                               = consts.UnknownSsid
-	WifiStateChangedAction                    = consts.WifiStateChangedAction
+	ChannelWidth160mhz                                 = consts.ChannelWidth160mhz
+	ChannelWidth20mhz                                  = consts.ChannelWidth20mhz
+	ChannelWidth320mhz                                 = consts.ChannelWidth320mhz
+	ChannelWidth40mhz                                  = consts.ChannelWidth40mhz
+	ChannelWidth80mhz                                  = consts.ChannelWidth80mhz
+	ChannelWidth80mhzPlusMhz                           = consts.ChannelWidth80mhzPlusMhz
+	Creator                                            = consts.Creator
+	PreambleEht                                        = consts.PreambleEht
+	PreambleHe                                         = consts.PreambleHe
+	PreambleHt                                         = consts.PreambleHt
+	PreambleLegacy                                     = consts.PreambleLegacy
+	PreambleVht                                        = consts.PreambleVht
+	Unspecified                                        = consts.Unspecified
+	WifiBand24Ghz                                      = consts.WifiBand24Ghz
+	WifiBand5Ghz                                       = consts.WifiBand5Ghz
+	WifiBand60Ghz                                      = consts.WifiBand60Ghz
+	WifiBand6Ghz                                       = consts.WifiBand6Ghz
+	WifiStandard11ac                                   = consts.WifiStandard11ac
+	WifiStandard11ad                                   = consts.WifiStandard11ad
+	WifiStandard11ax                                   = consts.WifiStandard11ax
+	WifiStandard11be                                   = consts.WifiStandard11be
+	WifiStandard11n                                    = consts.WifiStandard11n
+	WifiStandardLegacy                                 = consts.WifiStandardLegacy
+	WifiStandardUnknown                                = consts.WifiStandardUnknown
 )

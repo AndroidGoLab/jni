@@ -23,18 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsWindowManager                    *jni.GlobalRef
-	midWindowManagerGetDefaultDisplay   jni.MethodID
-	midWindowManagerRemoveViewImmediate jni.MethodID
-
-	clsMetrics              *jni.GlobalRef
-	midMetricsEquals1       jni.MethodID
-	midMetricsEquals1_1     jni.MethodID
-	midMetricsHashCode      jni.MethodID
-	midMetricsSetTo         jni.MethodID
-	midMetricsSetToDefaults jni.MethodID
-	midMetricsToString      jni.MethodID
-
 	clsSurfaceHolder                    *jni.GlobalRef
 	midSurfaceHolderAddCallback         jni.MethodID
 	midSurfaceHolderGetSurface          jni.MethodID
@@ -50,44 +38,59 @@ var (
 	midSurfaceHolderSetType             jni.MethodID
 	midSurfaceHolderUnlockCanvasAndPost jni.MethodID
 
-	clsSurfaceView                             *jni.GlobalRef
-	midSurfaceViewApplyTransactionToFrame      jni.MethodID
-	midSurfaceViewClearChildSurfacePackage     jni.MethodID
-	midSurfaceViewDraw                         jni.MethodID
-	midSurfaceViewGatherTransparentRegion      jni.MethodID
-	midSurfaceViewGetAccessibilityClassName    jni.MethodID
-	midSurfaceViewGetChildSurfacePackage       jni.MethodID
-	midSurfaceViewGetCompositionOrder          jni.MethodID
-	midSurfaceViewGetHolder                    jni.MethodID
-	midSurfaceViewGetHostToken                 jni.MethodID
-	midSurfaceViewGetImportantForAccessibility jni.MethodID
-	midSurfaceViewGetSurfaceControl            jni.MethodID
-	midSurfaceViewHasOverlappingRendering      jni.MethodID
-	midSurfaceViewSetAlpha                     jni.MethodID
-	midSurfaceViewSetChildSurfacePackage       jni.MethodID
-	midSurfaceViewSetClipBounds                jni.MethodID
-	midSurfaceViewSetCompositionOrder          jni.MethodID
-	midSurfaceViewSetDesiredHdrHeadroom        jni.MethodID
-	midSurfaceViewSetSecure                    jni.MethodID
-	midSurfaceViewSetSurfaceLifecycle          jni.MethodID
-	midSurfaceViewSetVisibility                jni.MethodID
-	midSurfaceViewSetZOrderMediaOverlay        jni.MethodID
-	midSurfaceViewSetZOrderOnTop               jni.MethodID
+	clsDisplay                                     *jni.GlobalRef
+	midDisplayGetAppVsyncOffsetNanos               jni.MethodID
+	midDisplayGetCurrentSizeRange                  jni.MethodID
+	midDisplayGetCutout                            jni.MethodID
+	midDisplayGetDeviceProductInfo                 jni.MethodID
+	midDisplayGetDisplayId                         jni.MethodID
+	midDisplayGetFlags                             jni.MethodID
+	midDisplayGetHdrCapabilities                   jni.MethodID
+	midDisplayGetHdrSdrRatio                       jni.MethodID
+	midDisplayGetHeight                            jni.MethodID
+	midDisplayGetHighestHdrSdrRatio                jni.MethodID
+	midDisplayGetMetrics                           jni.MethodID
+	midDisplayGetMode                              jni.MethodID
+	midDisplayGetName                              jni.MethodID
+	midDisplayGetOrientation                       jni.MethodID
+	midDisplayGetOverlaySupport                    jni.MethodID
+	midDisplayGetPixelFormat                       jni.MethodID
+	midDisplayGetPreferredWideGamutColorSpace      jni.MethodID
+	midDisplayGetPresentationDeadlineNanos         jni.MethodID
+	midDisplayGetRealMetrics                       jni.MethodID
+	midDisplayGetRealSize                          jni.MethodID
+	midDisplayGetRectSize                          jni.MethodID
+	midDisplayGetRefreshRate                       jni.MethodID
+	midDisplayGetRotation                          jni.MethodID
+	midDisplayGetRoundedCorner                     jni.MethodID
+	midDisplayGetShape                             jni.MethodID
+	midDisplayGetSize                              jni.MethodID
+	midDisplayGetState                             jni.MethodID
+	midDisplayGetSuggestedFrameRate                jni.MethodID
+	midDisplayGetSupportedModes                    jni.MethodID
+	midDisplayGetSupportedRefreshRates             jni.MethodID
+	midDisplayGetWidth                             jni.MethodID
+	midDisplayHasArrSupport                        jni.MethodID
+	midDisplayIsHdr                                jni.MethodID
+	midDisplayIsHdrSdrRatioAvailable               jni.MethodID
+	midDisplayIsMinimalPostProcessingSupported     jni.MethodID
+	midDisplayIsValid                              jni.MethodID
+	midDisplayIsWideColorGamut                     jni.MethodID
+	midDisplayRegisterHdrSdrRatioChangedListener   jni.MethodID
+	midDisplayToString                             jni.MethodID
+	midDisplayUnregisterHdrSdrRatioChangedListener jni.MethodID
 
-	clsSurface                    *jni.GlobalRef
-	midSurfaceClearFrameRate      jni.MethodID
-	midSurfaceDescribeContents    jni.MethodID
-	midSurfaceIsValid             jni.MethodID
-	midSurfaceLockCanvas          jni.MethodID
-	midSurfaceLockHardwareCanvas  jni.MethodID
-	midSurfaceReadFromParcel      jni.MethodID
-	midSurfaceRelease             jni.MethodID
-	midSurfaceSetFrameRate2       jni.MethodID
-	midSurfaceSetFrameRate3_1     jni.MethodID
-	midSurfaceToString            jni.MethodID
-	midSurfaceUnlockCanvas        jni.MethodID
-	midSurfaceUnlockCanvasAndPost jni.MethodID
-	midSurfaceWriteToParcel       jni.MethodID
+	clsMetrics              *jni.GlobalRef
+	midMetricsEquals1       jni.MethodID
+	midMetricsEquals1_1     jni.MethodID
+	midMetricsHashCode      jni.MethodID
+	midMetricsSetTo         jni.MethodID
+	midMetricsSetToDefaults jni.MethodID
+	midMetricsToString      jni.MethodID
+
+	clsWindowManager                    *jni.GlobalRef
+	midWindowManagerGetDefaultDisplay   jni.MethodID
+	midWindowManagerRemoveViewImmediate jni.MethodID
 
 	clsView                                            *jni.GlobalRef
 	midViewAddChildrenForAccessibility                 jni.MethodID
@@ -714,47 +717,20 @@ var (
 	midViewResolveSize                                 jni.MethodID
 	midViewResolveSizeAndState                         jni.MethodID
 
-	clsDisplay                                     *jni.GlobalRef
-	midDisplayGetAppVsyncOffsetNanos               jni.MethodID
-	midDisplayGetCurrentSizeRange                  jni.MethodID
-	midDisplayGetCutout                            jni.MethodID
-	midDisplayGetDeviceProductInfo                 jni.MethodID
-	midDisplayGetDisplayId                         jni.MethodID
-	midDisplayGetFlags                             jni.MethodID
-	midDisplayGetHdrCapabilities                   jni.MethodID
-	midDisplayGetHdrSdrRatio                       jni.MethodID
-	midDisplayGetHeight                            jni.MethodID
-	midDisplayGetHighestHdrSdrRatio                jni.MethodID
-	midDisplayGetMetrics                           jni.MethodID
-	midDisplayGetMode                              jni.MethodID
-	midDisplayGetName                              jni.MethodID
-	midDisplayGetOrientation                       jni.MethodID
-	midDisplayGetOverlaySupport                    jni.MethodID
-	midDisplayGetPixelFormat                       jni.MethodID
-	midDisplayGetPreferredWideGamutColorSpace      jni.MethodID
-	midDisplayGetPresentationDeadlineNanos         jni.MethodID
-	midDisplayGetRealMetrics                       jni.MethodID
-	midDisplayGetRealSize                          jni.MethodID
-	midDisplayGetRectSize                          jni.MethodID
-	midDisplayGetRefreshRate                       jni.MethodID
-	midDisplayGetRotation                          jni.MethodID
-	midDisplayGetRoundedCorner                     jni.MethodID
-	midDisplayGetShape                             jni.MethodID
-	midDisplayGetSize                              jni.MethodID
-	midDisplayGetState                             jni.MethodID
-	midDisplayGetSuggestedFrameRate                jni.MethodID
-	midDisplayGetSupportedModes                    jni.MethodID
-	midDisplayGetSupportedRefreshRates             jni.MethodID
-	midDisplayGetWidth                             jni.MethodID
-	midDisplayHasArrSupport                        jni.MethodID
-	midDisplayIsHdr                                jni.MethodID
-	midDisplayIsHdrSdrRatioAvailable               jni.MethodID
-	midDisplayIsMinimalPostProcessingSupported     jni.MethodID
-	midDisplayIsValid                              jni.MethodID
-	midDisplayIsWideColorGamut                     jni.MethodID
-	midDisplayRegisterHdrSdrRatioChangedListener   jni.MethodID
-	midDisplayToString                             jni.MethodID
-	midDisplayUnregisterHdrSdrRatioChangedListener jni.MethodID
+	clsSurface                    *jni.GlobalRef
+	midSurfaceClearFrameRate      jni.MethodID
+	midSurfaceDescribeContents    jni.MethodID
+	midSurfaceIsValid             jni.MethodID
+	midSurfaceLockCanvas          jni.MethodID
+	midSurfaceLockHardwareCanvas  jni.MethodID
+	midSurfaceReadFromParcel      jni.MethodID
+	midSurfaceRelease             jni.MethodID
+	midSurfaceSetFrameRate2       jni.MethodID
+	midSurfaceSetFrameRate3_1     jni.MethodID
+	midSurfaceToString            jni.MethodID
+	midSurfaceUnlockCanvas        jni.MethodID
+	midSurfaceUnlockCanvasAndPost jni.MethodID
+	midSurfaceWriteToParcel       jni.MethodID
 
 	clsViewGroup                                       *jni.GlobalRef
 	midViewGroupAddChildrenForAccessibility            jni.MethodID
@@ -903,6 +879,30 @@ var (
 	midViewGroupUpdateViewLayout                       jni.MethodID
 	midViewGroupGetOverlay0_1                          jni.MethodID
 	midViewGroupGetChildMeasureSpec                    jni.MethodID
+
+	clsSurfaceView                             *jni.GlobalRef
+	midSurfaceViewApplyTransactionToFrame      jni.MethodID
+	midSurfaceViewClearChildSurfacePackage     jni.MethodID
+	midSurfaceViewDraw                         jni.MethodID
+	midSurfaceViewGatherTransparentRegion      jni.MethodID
+	midSurfaceViewGetAccessibilityClassName    jni.MethodID
+	midSurfaceViewGetChildSurfacePackage       jni.MethodID
+	midSurfaceViewGetCompositionOrder          jni.MethodID
+	midSurfaceViewGetHolder                    jni.MethodID
+	midSurfaceViewGetHostToken                 jni.MethodID
+	midSurfaceViewGetImportantForAccessibility jni.MethodID
+	midSurfaceViewGetSurfaceControl            jni.MethodID
+	midSurfaceViewHasOverlappingRendering      jni.MethodID
+	midSurfaceViewSetAlpha                     jni.MethodID
+	midSurfaceViewSetChildSurfacePackage       jni.MethodID
+	midSurfaceViewSetClipBounds                jni.MethodID
+	midSurfaceViewSetCompositionOrder          jni.MethodID
+	midSurfaceViewSetDesiredHdrHeadroom        jni.MethodID
+	midSurfaceViewSetSecure                    jni.MethodID
+	midSurfaceViewSetSurfaceLifecycle          jni.MethodID
+	midSurfaceViewSetVisibility                jni.MethodID
+	midSurfaceViewSetZOrderMediaOverlay        jni.MethodID
+	midSurfaceViewSetZOrderOnTop               jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -922,74 +922,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/view/WindowManager")
-	if err != nil {
-		return fmt.Errorf("find class android.view.WindowManager: %w", err)
-	}
-	clsWindowManager = env.NewGlobalRef(&c.Object)
-
-	midWindowManagerGetDefaultDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "getDefaultDisplay", "()Landroid/view/Display;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midWindowManagerRemoveViewImmediate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "removeViewImmediate", "(Landroid/view/View;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/util/DisplayMetrics")
-	if err != nil {
-		return fmt.Errorf("find class android.util.DisplayMetrics: %w", err)
-	}
-	clsMetrics = env.NewGlobalRef(&c.Object)
-
-	midMetricsEquals1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "equals", "(Landroid/util/DisplayMetrics;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMetricsEquals1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMetricsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMetricsSetTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "setTo", "(Landroid/util/DisplayMetrics;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMetricsSetToDefaults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "setToDefaults", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMetricsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
 
 	c, err = env.FindClass("android/view/SurfaceHolder")
 	if err != nil {
@@ -1088,257 +1020,354 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
-	c, err = env.FindClass("android/view/SurfaceView")
+	c, err = env.FindClass("android/view/Display")
 	if err != nil {
-		return fmt.Errorf("find class android.view.SurfaceView: %w", err)
+		return fmt.Errorf("find class android.view.Display: %w", err)
 	}
-	clsSurfaceView = env.NewGlobalRef(&c.Object)
+	clsDisplay = env.NewGlobalRef(&c.Object)
 
-	midSurfaceViewApplyTransactionToFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "applyTransactionToFrame", "(Landroid/view/SurfaceControl$Transaction;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSurfaceViewClearChildSurfacePackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "clearChildSurfacePackage", "()V")
+	midDisplayGetAppVsyncOffsetNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getAppVsyncOffsetNanos", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "draw", "(Landroid/graphics/Canvas;)V")
+	midDisplayGetCurrentSizeRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getCurrentSizeRange", "(Landroid/graphics/Point;Landroid/graphics/Point;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGatherTransparentRegion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "gatherTransparentRegion", "(Landroid/graphics/Region;)Z")
+	midDisplayGetCutout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getCutout", "()Landroid/view/DisplayCutout;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGetAccessibilityClassName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getAccessibilityClassName", "()Ljava/lang/CharSequence;")
+	midDisplayGetDeviceProductInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getDeviceProductInfo", "()Landroid/hardware/display/DeviceProductInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGetChildSurfacePackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getChildSurfacePackage", "()Landroid/view/SurfaceControlViewHost$SurfacePackage;")
+	midDisplayGetDisplayId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getDisplayId", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGetCompositionOrder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getCompositionOrder", "()I")
+	midDisplayGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getFlags", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGetHolder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getHolder", "()Landroid/view/SurfaceHolder;")
+	midDisplayGetHdrCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHdrCapabilities", "()Landroid/view/Display$HdrCapabilities;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGetHostToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getHostToken", "()Landroid/os/IBinder;")
+	midDisplayGetHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHdrSdrRatio", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGetImportantForAccessibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getImportantForAccessibility", "()I")
+	midDisplayGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHeight", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewGetSurfaceControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getSurfaceControl", "()Landroid/view/SurfaceControl;")
+	midDisplayGetHighestHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHighestHdrSdrRatio", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewHasOverlappingRendering, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "hasOverlappingRendering", "()Z")
+	midDisplayGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getMetrics", "(Landroid/util/DisplayMetrics;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setAlpha", "(F)V")
+	midDisplayGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getMode", "()Landroid/view/Display$Mode;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetChildSurfacePackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setChildSurfacePackage", "(Landroid/view/SurfaceControlViewHost$SurfacePackage;)V")
+	midDisplayGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getName", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetClipBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setClipBounds", "(Landroid/graphics/Rect;)V")
+	midDisplayGetOrientation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getOrientation", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetCompositionOrder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setCompositionOrder", "(I)V")
+	midDisplayGetOverlaySupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getOverlaySupport", "()Landroid/hardware/OverlayProperties;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetDesiredHdrHeadroom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setDesiredHdrHeadroom", "(F)V")
+	midDisplayGetPixelFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPixelFormat", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setSecure", "(Z)V")
+	midDisplayGetPreferredWideGamutColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPreferredWideGamutColorSpace", "()Landroid/graphics/ColorSpace;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetSurfaceLifecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setSurfaceLifecycle", "(I)V")
+	midDisplayGetPresentationDeadlineNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPresentationDeadlineNanos", "()J")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setVisibility", "(I)V")
+	midDisplayGetRealMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRealMetrics", "(Landroid/util/DisplayMetrics;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetZOrderMediaOverlay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setZOrderMediaOverlay", "(Z)V")
+	midDisplayGetRealSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRealSize", "(Landroid/graphics/Point;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceViewSetZOrderOnTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setZOrderOnTop", "(Z)V")
+	midDisplayGetRectSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRectSize", "(Landroid/graphics/Rect;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	c, err = env.FindClass("android/view/Surface")
-	if err != nil {
-		return fmt.Errorf("find class android.view.Surface: %w", err)
-	}
-	clsSurface = env.NewGlobalRef(&c.Object)
-
-	midSurfaceClearFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "clearFrameRate", "()V")
+	midDisplayGetRefreshRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRefreshRate", "()F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "describeContents", "()I")
+	midDisplayGetRotation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRotation", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceIsValid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "isValid", "()Z")
+	midDisplayGetRoundedCorner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRoundedCorner", "(I)Landroid/view/RoundedCorner;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceLockCanvas, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "lockCanvas", "(Landroid/graphics/Rect;)Landroid/graphics/Canvas;")
+	midDisplayGetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getShape", "()Landroid/view/DisplayShape;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceLockHardwareCanvas, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "lockHardwareCanvas", "()Landroid/graphics/Canvas;")
+	midDisplayGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSize", "(Landroid/graphics/Point;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "readFromParcel", "(Landroid/os/Parcel;)V")
+	midDisplayGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getState", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "release", "()V")
+	midDisplayGetSuggestedFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSuggestedFrameRate", "(I)F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceSetFrameRate2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "setFrameRate", "(FI)V")
+	midDisplayGetSupportedModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSupportedModes", "()[Landroid/view/Display$Mode;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceSetFrameRate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "setFrameRate", "(FII)V")
+	midDisplayGetSupportedRefreshRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSupportedRefreshRates", "()[F")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "toString", "()Ljava/lang/String;")
+	midDisplayGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getWidth", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceUnlockCanvas, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "unlockCanvas", "(Landroid/graphics/Canvas;)V")
+	midDisplayHasArrSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "hasArrSupport", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceUnlockCanvasAndPost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "unlockCanvasAndPost", "(Landroid/graphics/Canvas;)V")
+	midDisplayIsHdr, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isHdr", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midSurfaceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	midDisplayIsHdrSdrRatioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isHdrSdrRatioAvailable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDisplayIsMinimalPostProcessingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isMinimalPostProcessingSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDisplayIsValid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isValid", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDisplayIsWideColorGamut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isWideColorGamut", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDisplayRegisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "registerHdrSdrRatioChangedListener", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDisplayToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/util/DisplayMetrics")
+	if err != nil {
+		return fmt.Errorf("find class android.util.DisplayMetrics: %w", err)
+	}
+	clsMetrics = env.NewGlobalRef(&c.Object)
+
+	midMetricsEquals1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "equals", "(Landroid/util/DisplayMetrics;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMetricsEquals1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMetricsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMetricsSetTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "setTo", "(Landroid/util/DisplayMetrics;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMetricsSetToDefaults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "setToDefaults", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMetricsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/WindowManager")
+	if err != nil {
+		return fmt.Errorf("find class android.view.WindowManager: %w", err)
+	}
+	clsWindowManager = env.NewGlobalRef(&c.Object)
+
+	midWindowManagerGetDefaultDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "getDefaultDisplay", "()Landroid/view/Display;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midWindowManagerRemoveViewImmediate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "removeViewImmediate", "(Landroid/view/View;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -5712,286 +5741,97 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
-	c, err = env.FindClass("android/view/Display")
+	c, err = env.FindClass("android/view/Surface")
 	if err != nil {
-		return fmt.Errorf("find class android.view.Display: %w", err)
+		return fmt.Errorf("find class android.view.Surface: %w", err)
 	}
-	clsDisplay = env.NewGlobalRef(&c.Object)
+	clsSurface = env.NewGlobalRef(&c.Object)
 
-	midDisplayGetAppVsyncOffsetNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getAppVsyncOffsetNanos", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetCurrentSizeRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getCurrentSizeRange", "(Landroid/graphics/Point;Landroid/graphics/Point;)V")
+	midSurfaceClearFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "clearFrameRate", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetCutout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getCutout", "()Landroid/view/DisplayCutout;")
+	midSurfaceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetDeviceProductInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getDeviceProductInfo", "()Landroid/hardware/display/DeviceProductInfo;")
+	midSurfaceIsValid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "isValid", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetDisplayId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getDisplayId", "()I")
+	midSurfaceLockCanvas, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "lockCanvas", "(Landroid/graphics/Rect;)Landroid/graphics/Canvas;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getFlags", "()I")
+	midSurfaceLockHardwareCanvas, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "lockHardwareCanvas", "()Landroid/graphics/Canvas;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetHdrCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHdrCapabilities", "()Landroid/view/Display$HdrCapabilities;")
+	midSurfaceReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "readFromParcel", "(Landroid/os/Parcel;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHdrSdrRatio", "()F")
+	midSurfaceRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "release", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHeight", "()I")
+	midSurfaceSetFrameRate2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "setFrameRate", "(FI)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetHighestHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getHighestHdrSdrRatio", "()F")
+	midSurfaceSetFrameRate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "setFrameRate", "(FII)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getMetrics", "(Landroid/util/DisplayMetrics;)V")
+	midSurfaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getMode", "()Landroid/view/Display$Mode;")
+	midSurfaceUnlockCanvas, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "unlockCanvas", "(Landroid/graphics/Canvas;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getName", "()Ljava/lang/String;")
+	midSurfaceUnlockCanvasAndPost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "unlockCanvasAndPost", "(Landroid/graphics/Canvas;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midDisplayGetOrientation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getOrientation", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetOverlaySupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getOverlaySupport", "()Landroid/hardware/OverlayProperties;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetPixelFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPixelFormat", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetPreferredWideGamutColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPreferredWideGamutColorSpace", "()Landroid/graphics/ColorSpace;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetPresentationDeadlineNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getPresentationDeadlineNanos", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetRealMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRealMetrics", "(Landroid/util/DisplayMetrics;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetRealSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRealSize", "(Landroid/graphics/Point;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetRectSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRectSize", "(Landroid/graphics/Rect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetRefreshRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRefreshRate", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetRotation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRotation", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetRoundedCorner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getRoundedCorner", "(I)Landroid/view/RoundedCorner;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getShape", "()Landroid/view/DisplayShape;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSize", "(Landroid/graphics/Point;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getState", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetSuggestedFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSuggestedFrameRate", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetSupportedModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSupportedModes", "()[Landroid/view/Display$Mode;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetSupportedRefreshRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getSupportedRefreshRates", "()[F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "getWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayHasArrSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "hasArrSupport", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayIsHdr, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isHdr", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayIsHdrSdrRatioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isHdrSdrRatioAvailable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayIsMinimalPostProcessingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isMinimalPostProcessingSupported", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayIsValid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isValid", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayIsWideColorGamut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "isWideColorGamut", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayRegisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "registerHdrSdrRatioChangedListener", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer;)V")
+	midSurfaceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurface)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -7020,6 +6860,166 @@ func doInit(env *jni.Env) error {
 	}
 
 	midViewGroupGetChildMeasureSpec, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsViewGroup)), "getChildMeasureSpec", "(III)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/SurfaceView")
+	if err != nil {
+		return fmt.Errorf("find class android.view.SurfaceView: %w", err)
+	}
+	clsSurfaceView = env.NewGlobalRef(&c.Object)
+
+	midSurfaceViewApplyTransactionToFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "applyTransactionToFrame", "(Landroid/view/SurfaceControl$Transaction;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewClearChildSurfacePackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "clearChildSurfacePackage", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "draw", "(Landroid/graphics/Canvas;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGatherTransparentRegion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "gatherTransparentRegion", "(Landroid/graphics/Region;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGetAccessibilityClassName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getAccessibilityClassName", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGetChildSurfacePackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getChildSurfacePackage", "()Landroid/view/SurfaceControlViewHost$SurfacePackage;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGetCompositionOrder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getCompositionOrder", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGetHolder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getHolder", "()Landroid/view/SurfaceHolder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGetHostToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getHostToken", "()Landroid/os/IBinder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGetImportantForAccessibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getImportantForAccessibility", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewGetSurfaceControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "getSurfaceControl", "()Landroid/view/SurfaceControl;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewHasOverlappingRendering, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "hasOverlappingRendering", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setAlpha", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetChildSurfacePackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setChildSurfacePackage", "(Landroid/view/SurfaceControlViewHost$SurfacePackage;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetClipBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setClipBounds", "(Landroid/graphics/Rect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetCompositionOrder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setCompositionOrder", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetDesiredHdrHeadroom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setDesiredHdrHeadroom", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setSecure", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetSurfaceLifecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setSurfaceLifecycle", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setVisibility", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetZOrderMediaOverlay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setZOrderMediaOverlay", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurfaceViewSetZOrderOnTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceView)), "setZOrderOnTop", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

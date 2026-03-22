@@ -3,30 +3,37 @@
 package consts
 
 const (
-	ChannelWidth160mhz                                 int = 3
-	ChannelWidth20mhz                                  int = 0
-	ChannelWidth320mhz                                 int = 5
-	ChannelWidth40mhz                                  int = 1
-	ChannelWidth80mhz                                  int = 2
-	ChannelWidth80mhzPlusMhz                           int = 4
-	Creator                                            int = 0
-	PreambleEht                                        int = 4
-	PreambleHe                                         int = 3
-	PreambleHt                                         int = 1
-	PreambleLegacy                                     int = 0
-	PreambleVht                                        int = 2
-	Unspecified                                        int = -1
-	WifiBand24Ghz                                      int = 1
-	WifiBand5Ghz                                       int = 2
-	WifiBand60Ghz                                      int = 16
-	WifiBand6Ghz                                       int = 8
-	WifiStandard11ac                                   int = 5
-	WifiStandard11ad                                   int = 7
-	WifiStandard11ax                                   int = 6
-	WifiStandard11be                                   int = 8
-	WifiStandard11n                                    int = 4
-	WifiStandardLegacy                                 int = 1
-	WifiStandardUnknown                                int = 0
+	FrequencyUnits                            string = "MHz"
+	LinkSpeedUnits                            string = "Mbps"
+	ActionPickWifiNetwork                     string = "android.net.wifi.PICK_WIFI_NETWORK"
+	ActionRequestScanAlwaysAvailable          string = "android.net.wifi.action.REQUEST_SCAN_ALWAYS_AVAILABLE"
+	ActionWifiNetworkSuggestionPostConnection string = "android.net.wifi.action.WIFI_NETWORK_SUGGESTION_POST_CONNECTION"
+	ActionWifiScanAvailabilityChanged         string = "android.net.wifi.action.WIFI_SCAN_AVAILABILITY_CHANGED"
+	ChannelDataKeyFrequencyMhz                string = "CHANNEL_DATA_KEY_FREQUENCY_MHZ"
+	ChannelDataKeyNumAp                       string = "CHANNEL_DATA_KEY_NUM_AP"
+	ExtraBssid                                string = "bssid"
+	ExtraNetworkInfo                          string = "networkInfo"
+	ExtraNetworkSuggestion                    string = "android.net.wifi.extra.NETWORK_SUGGESTION"
+	ExtraNewRssi                              string = "newRssi"
+	ExtraNewState                             string = "newState"
+	ExtraPreviousWifiState                    string = "previous_wifi_state"
+	ExtraResultsUpdated                       string = "resultsUpdated"
+	ExtraScanAvailable                        string = "android.net.wifi.extra.SCAN_AVAILABLE"
+	ExtraSupplicantConnected                  string = "connected"
+	ExtraSupplicantError                      string = "supplicantError"
+	ExtraWifiInfo                             string = "wifiInfo"
+	ExtraWifiState                            string = "wifi_state"
+	NetworkIdsChangedAction                   string = "android.net.wifi.NETWORK_IDS_CHANGED"
+	NetworkStateChangedAction                 string = "android.net.wifi.STATE_CHANGE"
+	RssiChangedAction                         string = "android.net.wifi.RSSI_CHANGED"
+	ScanResultsAvailableAction                string = "android.net.wifi.SCAN_RESULTS"
+	SupplicantConnectionChangeAction          string = "android.net.wifi.supplicant.CONNECTION_CHANGE"
+	SupplicantStateChangedAction              string = "android.net.wifi.supplicant.STATE_CHANGE"
+	UnknownSsid                               string = "<unknown ssid>"
+	WifiStateChangedAction                    string = "android.net.wifi.WIFI_STATE_CHANGED"
+)
+
+const (
 	LinkSpeedUnknown                                   int = -1
 	SecurityTypeDpp                                    int = 13
 	SecurityTypeEap                                    int = 3
@@ -97,35 +104,28 @@ const (
 	WpsTimedOut                                        int = 7
 	WpsTkipOnlyProhibited                              int = 5
 	WpsWepProhibited                                   int = 4
-)
-
-const (
-	FrequencyUnits                            string = "MHz"
-	LinkSpeedUnits                            string = "Mbps"
-	ActionPickWifiNetwork                     string = "android.net.wifi.PICK_WIFI_NETWORK"
-	ActionRequestScanAlwaysAvailable          string = "android.net.wifi.action.REQUEST_SCAN_ALWAYS_AVAILABLE"
-	ActionWifiNetworkSuggestionPostConnection string = "android.net.wifi.action.WIFI_NETWORK_SUGGESTION_POST_CONNECTION"
-	ActionWifiScanAvailabilityChanged         string = "android.net.wifi.action.WIFI_SCAN_AVAILABILITY_CHANGED"
-	ChannelDataKeyFrequencyMhz                string = "CHANNEL_DATA_KEY_FREQUENCY_MHZ"
-	ChannelDataKeyNumAp                       string = "CHANNEL_DATA_KEY_NUM_AP"
-	ExtraBssid                                string = "bssid"
-	ExtraNetworkInfo                          string = "networkInfo"
-	ExtraNetworkSuggestion                    string = "android.net.wifi.extra.NETWORK_SUGGESTION"
-	ExtraNewRssi                              string = "newRssi"
-	ExtraNewState                             string = "newState"
-	ExtraPreviousWifiState                    string = "previous_wifi_state"
-	ExtraResultsUpdated                       string = "resultsUpdated"
-	ExtraScanAvailable                        string = "android.net.wifi.extra.SCAN_AVAILABLE"
-	ExtraSupplicantConnected                  string = "connected"
-	ExtraSupplicantError                      string = "supplicantError"
-	ExtraWifiInfo                             string = "wifiInfo"
-	ExtraWifiState                            string = "wifi_state"
-	NetworkIdsChangedAction                   string = "android.net.wifi.NETWORK_IDS_CHANGED"
-	NetworkStateChangedAction                 string = "android.net.wifi.STATE_CHANGE"
-	RssiChangedAction                         string = "android.net.wifi.RSSI_CHANGED"
-	ScanResultsAvailableAction                string = "android.net.wifi.SCAN_RESULTS"
-	SupplicantConnectionChangeAction          string = "android.net.wifi.supplicant.CONNECTION_CHANGE"
-	SupplicantStateChangedAction              string = "android.net.wifi.supplicant.STATE_CHANGE"
-	UnknownSsid                               string = "<unknown ssid>"
-	WifiStateChangedAction                    string = "android.net.wifi.WIFI_STATE_CHANGED"
+	ChannelWidth160mhz                                 int = 3
+	ChannelWidth20mhz                                  int = 0
+	ChannelWidth320mhz                                 int = 5
+	ChannelWidth40mhz                                  int = 1
+	ChannelWidth80mhz                                  int = 2
+	ChannelWidth80mhzPlusMhz                           int = 4
+	Creator                                            int = 0
+	PreambleEht                                        int = 4
+	PreambleHe                                         int = 3
+	PreambleHt                                         int = 1
+	PreambleLegacy                                     int = 0
+	PreambleVht                                        int = 2
+	Unspecified                                        int = -1
+	WifiBand24Ghz                                      int = 1
+	WifiBand5Ghz                                       int = 2
+	WifiBand60Ghz                                      int = 16
+	WifiBand6Ghz                                       int = 8
+	WifiStandard11ac                                   int = 5
+	WifiStandard11ad                                   int = 7
+	WifiStandard11ax                                   int = 6
+	WifiStandard11be                                   int = 8
+	WifiStandard11n                                    int = 4
+	WifiStandardLegacy                                 int = 1
+	WifiStandardUnknown                                int = 0
 )

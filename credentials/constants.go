@@ -10,10 +10,10 @@ const (
 
 const (
 	TypeUnknown            = consts.TypeUnknown
-	TypePasswordCredential = consts.TypePasswordCredential
-	TypeInterrupted        = consts.TypeInterrupted
-	TypeNoCredential       = consts.TypeNoCredential
-	TypeUserCanceled       = consts.TypeUserCanceled
-	TypeNoCreateOptions    = consts.TypeNoCreateOptions
 	SupportedElementKeys   = consts.SupportedElementKeys
+	TypeInterrupted        = consts.TypeInterrupted
+	TypeNoCreateOptions    = consts.TypeNoCreateOptions
+	TypeUserCanceled       = consts.TypeUserCanceled
+	TypeNoCredential       = consts.TypeNoCredential
+	TypePasswordCredential = consts.TypePasswordCredential
 )
