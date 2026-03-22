@@ -1,4 +1,4 @@
 EXAMPLE_NAME        := usage
-EXAMPLE_PERMISSIONS := android.permission.PACKAGE_USAGE_STATS
+EXAMPLE_PERMISSIONS :=
 
 include ../apk.mk

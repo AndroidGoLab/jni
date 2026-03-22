@@ -832,7 +832,7 @@ func testSettingsWrapper(vm *jni.VM) error {
 			return fmt.Errorf("settings.Init: %w", err)
 		}
 
-		// Read Settings.Global.getString(resolver, "device_name").
+		// Read Settings.Global.getString(resolver, "airplane_mode_on").
 		cls, err := env.FindClass("android/provider/Settings$Global")
 		if err != nil {
 			return fmt.Errorf("find Settings$Global: %w", err)
@@ -842,7 +842,7 @@ func testSettingsWrapper(vm *jni.VM) error {
 		if err != nil {
 			return fmt.Errorf("get getString: %w", err)
 		}
-		jName, err := env.NewStringUTF("device_name")
+		jName, err := env.NewStringUTF("airplane_mode_on")
 		if err != nil {
 			return fmt.Errorf("NewStringUTF: %w", err)
 		}
@@ -850,9 +850,9 @@ func testSettingsWrapper(vm *jni.VM) error {
 			jni.ObjectValue(resolverObj),
 			jni.ObjectValue(&jName.Object))
 		if err != nil {
-			return fmt.Errorf("getString(device_name): %w", err)
+			return fmt.Errorf("getString(airplane_mode_on): %w", err)
 		}
-		// device_name may be null on some devices, so we don't check the value.
+		// airplane_mode_on may be null on some devices, so we don't check the value.
 		// The fact that the call succeeded without error is sufficient.
 		return nil
 	})

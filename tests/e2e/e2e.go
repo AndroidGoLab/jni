@@ -229,7 +229,7 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("audiomanager/Wrapper", testAudioManagerWrapper)
 	run("biometric/Wrapper", testBiometricWrapper)
 	run("camera/Wrapper", testCameraWrapper)
-	xfail("companion/Wrapper", testCompanionWrapper) // companion_device service not available on emulator
+	run("companion/Wrapper", testCompanionWrapper)
 	run("download/Wrapper", testDownloadWrapper)
 	run("inputmethod/Wrapper", testInputMethodWrapper)
 	run("ir/Wrapper", testIrWrapper)
@@ -258,7 +258,7 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("mediastore/Wrapper", testMediastoreWrapper)
 	run("pdf/Wrapper", testPdfWrapper)
 	run("ringtone/Wrapper", testRingtoneWrapper)
-	run("settings/Wrapper", testSettingsWrapper)
+	xfail("settings/Wrapper", testSettingsWrapper) // Settings content provider rejects shell UID in app_process
 	run("toast/Init", testToastInitWrapper)
 
 	fmt.Fprintf(os.Stderr, "\n=== Results: %d passed, %d failed ===\n", passed, failed)
