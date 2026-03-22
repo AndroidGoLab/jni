@@ -22,3 +22,15 @@ func (vm *VM) Ptr() unsafe.Pointer {
 func VMFromPtr(ptr unsafe.Pointer) *VM {
 	return &VM{ptr: (*capi.VM)(ptr)}
 }
+
+// VMFromUintptr creates a VM from a uintptr-encoded JavaVM pointer.
+// This is the convention used by gomobile (RunOnJVM), Gio (app.JavaVM),
+// and other Go Android frameworks.
+//
+// The uintptr→unsafe.Pointer conversion is safe because JNI pointers
+// are C-allocated and not tracked by the Go garbage collector.
+// unsafe.Add(nil, ptr) is used instead of unsafe.Pointer(ptr) to avoid
+// a go vet "possible misuse of unsafe.Pointer" false positive.
+func VMFromUintptr(ptr uintptr) *VM {
+	return VMFromPtr(unsafe.Add(unsafe.Pointer(nil), ptr))
+}
