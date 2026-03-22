@@ -59,10 +59,10 @@ $(BUILD)/AndroidManifest.xml:
 HANDLER_JAVA  := $(HANDLER_DIR)/center/dx/jni/internal/GoInvocationHandler.java
 DISPATCH_JAVA := $(HANDLER_DIR)/center/dx/jni/internal/GoAbstractDispatch.java
 ifeq ($(EXAMPLE_NEEDS_PROXY),true)
-$(BUILD)/classes.dex: $(HANDLER_JAVA) $(DISPATCH_JAVA)
+$(BUILD)/classes.dex: $(HANDLER_JAVA) $(DISPATCH_JAVA) $(EXAMPLE_EXTRA_JAVA)
 	@mkdir -p $(BUILD)/java
 	javac --release 17 -classpath $(PLATFORM)/android.jar \
-		-d $(BUILD)/java $(HANDLER_JAVA) $(DISPATCH_JAVA)
+		-d $(BUILD)/java $(HANDLER_JAVA) $(DISPATCH_JAVA) $(EXAMPLE_EXTRA_JAVA)
 	$(D8) --lib $(PLATFORM)/android.jar --output $(BUILD) \
 		$$(find $(BUILD)/java -name '*.class')
 APK_DEPS += $(BUILD)/classes.dex

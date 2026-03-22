@@ -62,6 +62,9 @@ const (
 // RunFunc is the example's entry point.
 type RunFunc func(vm *jni.VM, output *bytes.Buffer) error
 
+// ActivityRef returns the NativeActivity JNI object reference.
+func ActivityRef() *jni.Object { return activityRef }
+
 var (
 	runFunc          RunFunc
 	vm               *jni.VM
