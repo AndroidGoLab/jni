@@ -4,14 +4,11 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/AndroidGoLab/jni)](https://goreportcard.com/report/github.com/AndroidGoLab/jni)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](LICENSE)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/AndroidGoLab/jni)](go.mod)
+[![Ask AI](https://img.shields.io/badge/Ask_AI-Context7-059669)](https://context7.com/androidgolab/jni)
 
 Idiomatic Go bindings for the Java Native Interface and 53 Android Java API packages, auto-generated from YAML specs to ensure full coverage and easy maintenance.
 
 For remote Android API access over gRPC, see [jni-proxy](https://github.com/AndroidGoLab/jni-proxy).
-
-## Chat with documentation
-
-[![Ask AI](https://img.shields.io/badge/Ask_AI-Context7-059669)](https://context7.com/androidgolab/jni)
 
 ## Android Interfaces for Go
 
