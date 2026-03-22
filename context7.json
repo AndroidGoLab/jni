@@ -1,4 +1,33 @@
 {
+  "$schema": "https://context7.com/schema/context7.json",
   "url": "https://context7.com/androidgolab/jni",
-  "public_key": "pk_ajlVZor26lzvjspOfyEJd"
+  "public_key": "pk_ajlVZor26lzvjspOfyEJd",
+  "projectTitle": "go-jni: Android Java API Bindings for Go",
+  "description": "Idiomatic Go bindings for 53 Android Java API packages via JNI, with typed wrappers for Bluetooth, Location, WiFi, Telephony, ContentResolver, Notifications, and more",
+  "folders": [
+    "docs",
+    "examples/gio",
+    "examples/gomobile"
+  ],
+  "excludeFolders": [
+    "ref",
+    "raw",
+    "tools",
+    "spec",
+    "templates",
+    "capi",
+    "internal",
+    "proofs",
+    "tests"
+  ],
+  "rules": [
+    "All JNI operations must run inside vm.Do(func(env *jni.Env) error { ... }) for thread safety",
+    "Local references are only valid within a vm.Do() scope; convert to GlobalRef with env.NewGlobalRef() if needed outside",
+    "Always defer mgr.Close() after creating any Manager to release the Java GlobalRef",
+    "Use env.NewStringUTF() to convert Go strings to JNI, and env.GoString() for JNI to Go",
+    "Generated packages cache method IDs via ensureInit(); prefer typed wrappers over raw JNI calls",
+    "Java exceptions are automatically converted to Go errors by all Call*Method functions",
+    "For callbacks on Java interfaces, use env.NewProxy() to create a java.lang.reflect.Proxy",
+    "Create a HandlerThread with its own Looper when registering listener callbacks"
+  ]
 }
