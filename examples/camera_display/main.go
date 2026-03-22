@@ -26,7 +26,10 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/app"
+	"github.com/AndroidGoLab/jni/content"
 	"github.com/AndroidGoLab/jni/examples/common/camera2"
+	"github.com/AndroidGoLab/jni/view/display"
 )
 
 func main() {}
@@ -59,6 +62,8 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 		// Create a SurfaceView inside a FrameLayout with correct aspect
 		// ratio, then set it as the activity's content view.
+		//
+		// TODO: needs wrapper — SurfaceView constructor not yet wrapped.
 		svCls, err := env.FindClass("android/view/SurfaceView")
 		if err != nil {
 			return fmt.Errorf("find SurfaceView: %w", err)
@@ -67,36 +72,33 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 		if err != nil {
 			return fmt.Errorf("get SurfaceView.<init>: %w", err)
 		}
-		sv, err := env.NewObject(svCls, svInit, jni.ObjectValue(actObj))
+		svLocal, err := env.NewObject(svCls, svInit, jni.ObjectValue(actObj))
 		if err != nil {
 			return fmt.Errorf("new SurfaceView: %w", err)
 		}
+		svGlobal := env.NewGlobalRef(svLocal)
+		env.DeleteLocalRef(svLocal)
+
+		sv := &display.SurfaceView{VM: vm, Obj: svGlobal}
 
 		// Get screen dimensions to compute aspect-correct SurfaceView size.
-		resCls, err := env.FindClass("android/content/res/Resources")
-		if err != nil {
-			return fmt.Errorf("find Resources: %w", err)
-		}
-		actCls := env.GetObjectClass(actObj)
-		getResMid, err := env.GetMethodID(actCls, "getResources", "()Landroid/content/res/Resources;")
-		if err != nil {
-			return fmt.Errorf("get getResources: %w", err)
-		}
-		res, err := env.CallObjectMethod(actObj, getResMid)
+		actCtx := &app.Context{VM: vm, Obj: (*jni.GlobalRef)(unsafe.Pointer(actObj))}
+		resObj, err := actCtx.GetResources()
 		if err != nil {
 			return fmt.Errorf("getResources: %w", err)
 		}
+
+		res := &content.Resources{VM: vm, Obj: (*jni.GlobalRef)(unsafe.Pointer(resObj))}
+		dmObj, err := res.GetDisplayMetrics()
+		if err != nil {
+			return fmt.Errorf("getDisplayMetrics: %w", err)
+		}
+
+		// TODO: needs wrapper — DisplayMetrics.widthPixels/heightPixels
+		// are fields, not methods; the typed wrapper does not expose them.
 		dmCls, err := env.FindClass("android/util/DisplayMetrics")
 		if err != nil {
 			return fmt.Errorf("find DisplayMetrics: %w", err)
-		}
-		getMetricsMid, err := env.GetMethodID(resCls, "getDisplayMetrics", "()Landroid/util/DisplayMetrics;")
-		if err != nil {
-			return fmt.Errorf("get getDisplayMetrics: %w", err)
-		}
-		dm, err := env.CallObjectMethod(res, getMetricsMid)
-		if err != nil {
-			return fmt.Errorf("getDisplayMetrics: %w", err)
 		}
 		widthFid, err := env.GetFieldID(dmCls, "widthPixels", "I")
 		if err != nil {
@@ -106,8 +108,8 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 		if err != nil {
 			return fmt.Errorf("get heightPixels: %w", err)
 		}
-		screenW := env.GetIntField(dm, widthFid)
-		screenH := env.GetIntField(dm, heightFid)
+		screenW := env.GetIntField(dmObj, widthFid)
+		screenH := env.GetIntField(dmObj, heightFid)
 
 		// Camera outputs landscape 16:9. In portrait, the preview is
 		// rotated so the effective aspect ratio is 9:16 (matching the
@@ -126,6 +128,8 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 		}
 
 		// Create FrameLayout as root, add SurfaceView with centered layout.
+		//
+		// TODO: needs wrapper — FrameLayout constructor not yet wrapped.
 		flCls, err := env.FindClass("android/widget/FrameLayout")
 		if err != nil {
 			return fmt.Errorf("find FrameLayout: %w", err)
@@ -134,23 +138,22 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 		if err != nil {
 			return fmt.Errorf("get FrameLayout.<init>: %w", err)
 		}
-		fl, err := env.NewObject(flCls, flInit, jni.ObjectValue(actObj))
+		flLocal, err := env.NewObject(flCls, flInit, jni.ObjectValue(actObj))
 		if err != nil {
 			return fmt.Errorf("new FrameLayout: %w", err)
 		}
+		flGlobal := env.NewGlobalRef(flLocal)
+		env.DeleteLocalRef(flLocal)
 
-		// Set black background on the FrameLayout.
-		viewCls, err := env.FindClass("android/view/View")
-		if err != nil {
-			return fmt.Errorf("find View: %w", err)
+		// Set black background on the FrameLayout (cast to View).
+		flView := &display.View{VM: vm, Obj: flGlobal}
+		if err := flView.SetBackgroundColor(-16777216); err != nil { // Color.BLACK
+			return fmt.Errorf("setBackgroundColor: %w", err)
 		}
-		setBgMid, err := env.GetMethodID(viewCls, "setBackgroundColor", "(I)V")
-		if err != nil {
-			return fmt.Errorf("get setBackgroundColor: %w", err)
-		}
-		env.CallVoidMethod(fl, setBgMid, jni.IntValue(-16777216)) // Color.BLACK
 
 		// Create FrameLayout.LayoutParams(viewW, viewH, Gravity.CENTER=17).
+		//
+		// TODO: needs wrapper — FrameLayout.LayoutParams constructor not yet wrapped.
 		lpCls, err := env.FindClass("android/widget/FrameLayout$LayoutParams")
 		if err != nil {
 			return fmt.Errorf("find FrameLayout.LayoutParams: %w", err)
@@ -166,36 +169,29 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 			return fmt.Errorf("new LayoutParams: %w", err)
 		}
 
-		// frameLayout.addView(surfaceView, layoutParams)
-		addViewMid, err := env.GetMethodID(flCls, "addView",
-			"(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V")
-		if err != nil {
-			return fmt.Errorf("get addView: %w", err)
-		}
-		if err := env.CallVoidMethod(fl, addViewMid, jni.ObjectValue(sv), jni.ObjectValue(lp)); err != nil {
+		// frameLayout.addView(surfaceView, layoutParams) — cast to ViewGroup.
+		flViewGroup := &display.ViewGroup{VM: vm, Obj: flGlobal}
+		if err := flViewGroup.AddView2_1(svGlobal, lp); err != nil {
 			return fmt.Errorf("addView: %w", err)
 		}
 
 		// activity.setContentView(frameLayout)
-		setContentMid, err := env.GetMethodID(actCls, "setContentView", "(Landroid/view/View;)V")
-		if err != nil {
-			return fmt.Errorf("get setContentView: %w", err)
-		}
-		if err := env.CallVoidMethod(actObj, setContentMid, jni.ObjectValue(fl)); err != nil {
+		act := &app.Activity{VM: vm, Obj: (*jni.GlobalRef)(unsafe.Pointer(actObj))}
+		if err := act.SetContentView1(flGlobal); err != nil {
 			return fmt.Errorf("setContentView: %w", err)
 		}
 
 		// Get SurfaceHolder from the SurfaceView.
-		getHolderMid, err := env.GetMethodID(svCls, "getHolder", "()Landroid/view/SurfaceHolder;")
-		if err != nil {
-			return fmt.Errorf("get getHolder: %w", err)
-		}
-		holder, err := env.CallObjectMethod(sv, getHolderMid)
+		holderObj, err := sv.GetHolder()
 		if err != nil {
 			return fmt.Errorf("getHolder: %w", err)
 		}
+		sh := &display.SurfaceHolder{VM: vm, Obj: (*jni.GlobalRef)(unsafe.Pointer(holderObj))}
 
 		// Register SurfaceHolder.Callback via interface proxy.
+		//
+		// TODO: needs wrapper — SurfaceHolder.Callback proxy creation
+		// requires env.NewProxy which has no typed wrapper.
 		holderCallbackCls, err := env.FindClass("android/view/SurfaceHolder$Callback")
 		if err != nil {
 			return fmt.Errorf("find SurfaceHolder.Callback: %w", err)
@@ -207,21 +203,20 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 			func(env *jni.Env, method string, args []*jni.Object) (*jni.Object, error) {
 				switch method {
 				case "surfaceCreated":
-					// args[0] is the SurfaceHolder. Get its Surface.
-					holderCls := env.GetObjectClass(args[0])
-					getSurfMid, err := env.GetMethodID(holderCls, "getSurface", "()Landroid/view/Surface;")
+					// args[0] is the SurfaceHolder. Use typed wrapper for getSurface.
+					argGlobal := env.NewGlobalRef(args[0])
+					cbHolder := &display.SurfaceHolder{
+						VM:  vm,
+						Obj: argGlobal,
+					}
+					surf, err := cbHolder.GetSurface()
 					if err != nil {
-						println("getSurface method:", err.Error())
+						println("getSurface:", err.Error())
 						return nil, nil
 					}
-					surf, err := env.CallObjectMethod(args[0], getSurfMid)
-					if err != nil {
-						println("getSurface call:", err.Error())
-						return nil, nil
-					}
-					globalSurf := env.NewGlobalRef(surf)
+					// surf is already a global ref (the wrapper converts it).
 					select {
-					case ch <- globalSurf:
+					case ch <- surf:
 					default:
 					}
 				case "surfaceDestroyed":
@@ -235,22 +230,12 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 		}
 
 		// holder.addCallback(proxy)
-		holderCls := env.GetObjectClass(holder)
-		addCallbackMid, err := env.GetMethodID(holderCls, "addCallback",
-			"(Landroid/view/SurfaceHolder$Callback;)V")
-		if err != nil {
-			return fmt.Errorf("get addCallback: %w", err)
-		}
-		if err := env.CallVoidMethod(holder, addCallbackMid, jni.ObjectValue(proxy)); err != nil {
+		if err := sh.AddCallback(proxy); err != nil {
 			return fmt.Errorf("addCallback: %w", err)
 		}
 
 		// Set fixed surface size to maintain camera aspect ratio (16:9).
-		setFixedMid, err := env.GetMethodID(holderCls, "setFixedSize", "(II)V")
-		if err != nil {
-			return fmt.Errorf("get setFixedSize: %w", err)
-		}
-		return env.CallVoidMethod(holder, setFixedMid, jni.IntValue(1920), jni.IntValue(1080))
+		return sh.SetFixedSize(1920, 1080)
 	})
 
 	C._setCallbacks(activity)
