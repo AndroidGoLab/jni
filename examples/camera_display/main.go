@@ -139,7 +139,16 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 		if err != nil {
 			return fmt.Errorf("get addCallback: %w", err)
 		}
-		return env.CallVoidMethod(holder, addCallbackMid, jni.ObjectValue(proxy))
+		if err := env.CallVoidMethod(holder, addCallbackMid, jni.ObjectValue(proxy)); err != nil {
+			return fmt.Errorf("addCallback: %w", err)
+		}
+
+		// Set fixed surface size to maintain camera aspect ratio (16:9).
+		setFixedMid, err := env.GetMethodID(holderCls, "setFixedSize", "(II)V")
+		if err != nil {
+			return fmt.Errorf("get setFixedSize: %w", err)
+		}
+		return env.CallVoidMethod(holder, setFixedMid, jni.IntValue(1920), jni.IntValue(1080))
 	})
 
 	C._setCallbacks(activity)
