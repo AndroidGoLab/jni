@@ -4,7 +4,8 @@
 // camera using the Camera2 API + MediaRecorder via JNI. It uses
 // setVideoSource(SURFACE) to get a recording surface from MediaRecorder,
 // then opens a Camera2 device via the NDK and feeds camera frames into
-// that surface. Records for 3 seconds and reports the resulting file size.
+// that surface. Records for 5 seconds at 1080p60 with CPU profiling and
+// reports the resulting file sizes.
 package main
 
 /*
@@ -153,6 +154,8 @@ import "C"
 import (
 	"bytes"
 	"fmt"
+	"os"
+	"runtime/pprof"
 	"time"
 	"unsafe"
 
@@ -290,13 +293,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err := callRecVoid("setVideoEncoder", "(I)V", jni.IntValue(videoEncoderH264)); err != nil {
 		return fmt.Errorf("setVideoEncoder: %w", err)
 	}
-	if err := callRecVoid("setVideoSize", "(II)V", jni.IntValue(640), jni.IntValue(480)); err != nil {
+	if err := callRecVoid("setVideoSize", "(II)V", jni.IntValue(1920), jni.IntValue(1080)); err != nil {
 		return fmt.Errorf("setVideoSize: %w", err)
 	}
-	if err := callRecVoid("setVideoFrameRate", "(I)V", jni.IntValue(30)); err != nil {
+	if err := callRecVoid("setVideoFrameRate", "(I)V", jni.IntValue(60)); err != nil {
 		return fmt.Errorf("setVideoFrameRate: %w", err)
 	}
-	if err := callRecVoid("setVideoEncodingBitRate", "(I)V", jni.IntValue(2_000_000)); err != nil {
+	if err := callRecVoid("setVideoEncodingBitRate", "(I)V", jni.IntValue(10_000_000)); err != nil {
 		return fmt.Errorf("setVideoEncodingBitRate: %w", err)
 	}
 
@@ -321,10 +324,22 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	ui.RenderOutput()
 
 	// 4. Prepare the recorder.
+	prepStart := time.Now()
 	if err := callRecVoid("prepare", "()V"); err != nil {
 		return fmt.Errorf("prepare: %w", err)
 	}
-	fmt.Fprintln(output, "prepare() OK")
+	prepDur := time.Since(prepStart)
+	fmt.Fprintf(output, "prepare() OK (%v)\n", prepDur)
+	ui.RenderOutput()
+
+	// Start CPU profiling.
+	profilePath := cacheDir + "/cpu.prof"
+	profFile, err := os.Create(profilePath)
+	if err != nil {
+		return fmt.Errorf("create profile: %w", err)
+	}
+	pprof.StartCPUProfile(profFile)
+	fmt.Fprintf(output, "CPU profiling started: %s\n", profilePath)
 	ui.RenderOutput()
 
 	// 5. Get the recorder's input surface as ANativeWindow.
@@ -355,10 +370,12 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	ui.RenderOutput()
 
 	// 6. Start the MediaRecorder.
+	startT := time.Now()
 	if err := callRecVoid("start", "()V"); err != nil {
 		return fmt.Errorf("start: %w", err)
 	}
-	fmt.Fprintln(output, "Recording started...")
+	startDur := time.Since(startT)
+	fmt.Fprintf(output, "Recording started (%v)\n", startDur)
 	ui.RenderOutput()
 
 	// 7. Open camera and start feeding frames.
@@ -380,15 +397,24 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Camera streaming...")
 	ui.RenderOutput()
 
-	// 8. Record for 3 seconds.
-	time.Sleep(3 * time.Second)
+	// 8. Record for 5 seconds.
+	time.Sleep(5 * time.Second)
 
 	// 9. Stop the MediaRecorder FIRST (while camera is still streaming).
+	stopT := time.Now()
 	if err := callRecVoid("stop", "()V"); err != nil {
 		fmt.Fprintf(output, "stop err: %v\n", err)
 	} else {
 		fmt.Fprintln(output, "Recording stopped")
 	}
+	stopDur := time.Since(stopT)
+	fmt.Fprintf(output, "stop took %v\n", stopDur)
+	ui.RenderOutput()
+
+	// Stop CPU profiling.
+	pprof.StopCPUProfile()
+	profFile.Close()
+	fmt.Fprintf(output, "CPU profile written: %s\n", profilePath)
 	ui.RenderOutput()
 
 	// 10. Close the camera.
@@ -406,42 +432,21 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Released resources")
 	ui.RenderOutput()
 
-	// 12. Report file size.
-	var fileSize int64
-	err = vm.Do(func(env *jni.Env) error {
-		fileCls, err := env.FindClass("java/io/File")
-		if err != nil {
-			return fmt.Errorf("find File: %w", err)
-		}
-		initMid, err := env.GetMethodID(fileCls, "<init>", "(Ljava/lang/String;)V")
-		if err != nil {
-			return fmt.Errorf("get File.<init>: %w", err)
-		}
-		jPath, err := env.NewStringUTF(outputPath)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jPath.Object)
-		fileObj, err := env.NewObject(fileCls, initMid, jni.ObjectValue(&jPath.Object))
-		if err != nil {
-			return fmt.Errorf("new File: %w", err)
-		}
-		lengthMid, err := env.GetMethodID(fileCls, "length", "()J")
-		if err != nil {
-			return fmt.Errorf("get length: %w", err)
-		}
-		fileSize, err = env.CallLongMethod(fileObj, lengthMid)
-		if err != nil {
-			return fmt.Errorf("length(): %w", err)
-		}
-		return nil
-	})
+	// 12. Report file sizes.
+	videoInfo, err := os.Stat(outputPath)
 	if err != nil {
-		return fmt.Errorf("file size: %w", err)
+		return fmt.Errorf("stat video: %w", err)
+	}
+	profInfo, err := os.Stat(profilePath)
+	if err != nil {
+		return fmt.Errorf("stat profile: %w", err)
 	}
 
-	fmt.Fprintf(output, "\nFile: %s\n", outputPath)
-	fmt.Fprintf(output, "Size: %d bytes\n", fileSize)
+	fmt.Fprintf(output, "\nVideo: %s\n", outputPath)
+	fmt.Fprintf(output, "Video size: %d bytes (%.1f MB)\n", videoInfo.Size(), float64(videoInfo.Size())/(1024*1024))
+	fmt.Fprintf(output, "CPU profile: %s\n", profilePath)
+	fmt.Fprintf(output, "Profile size: %d bytes\n", profInfo.Size())
+	fmt.Fprintf(output, "\nTiming: prepare=%v start=%v stop=%v\n", prepDur, startDur, stopDur)
 	fmt.Fprintln(output, "\nCamera record complete.")
 	return nil
 }
