@@ -23,6 +23,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsPackageInfo                     *jni.GlobalRef
+	midPackageInfoDescribeContents     jni.MethodID
+	midPackageInfoGetApexPackageName   jni.MethodID
+	midPackageInfoGetArchiveTimeMillis jni.MethodID
+	midPackageInfoGetLongVersionCode   jni.MethodID
+	midPackageInfoSetLongVersionCode   jni.MethodID
+	midPackageInfoToString             jni.MethodID
+	midPackageInfoWriteToParcel        jni.MethodID
+
 	clsPackageManager                                      *jni.GlobalRef
 	midPackageManagerAddPackageToPreferred                 jni.MethodID
 	midPackageManagerAddPermission                         jni.MethodID
@@ -183,15 +192,6 @@ var (
 	midPackageManagerUpdateInstantAppCookie                jni.MethodID
 	midPackageManagerVerifyPendingInstall                  jni.MethodID
 	midPackageManagerGetVerifiedSigningInfo                jni.MethodID
-
-	clsPackageInfo                     *jni.GlobalRef
-	midPackageInfoDescribeContents     jni.MethodID
-	midPackageInfoGetApexPackageName   jni.MethodID
-	midPackageInfoGetArchiveTimeMillis jni.MethodID
-	midPackageInfoGetLongVersionCode   jni.MethodID
-	midPackageInfoSetLongVersionCode   jni.MethodID
-	midPackageInfoToString             jni.MethodID
-	midPackageInfoWriteToParcel        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -211,6 +211,61 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/content/pm/PackageInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.content.pm.PackageInfo: %w", err)
+	}
+	clsPackageInfo = env.NewGlobalRef(&c.Object)
+
+	midPackageInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPackageInfoGetApexPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "getApexPackageName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPackageInfoGetArchiveTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "getArchiveTimeMillis", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPackageInfoGetLongVersionCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "getLongVersionCode", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPackageInfoSetLongVersionCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "setLongVersionCode", "(J)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPackageInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPackageInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
 
 	c, err = env.FindClass("android/content/pm/PackageManager")
 	if err != nil {
@@ -1325,61 +1380,6 @@ func doInit(env *jni.Env) error {
 	}
 
 	midPackageManagerGetVerifiedSigningInfo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPackageManager)), "getVerifiedSigningInfo", "(Ljava/lang/String;I)Landroid/content/pm/SigningInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/content/pm/PackageInfo")
-	if err != nil {
-		return fmt.Errorf("find class android.content.pm.PackageInfo: %w", err)
-	}
-	clsPackageInfo = env.NewGlobalRef(&c.Object)
-
-	midPackageInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midPackageInfoGetApexPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "getApexPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midPackageInfoGetArchiveTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "getArchiveTimeMillis", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midPackageInfoGetLongVersionCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "getLongVersionCode", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midPackageInfoSetLongVersionCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "setLongVersionCode", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midPackageInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midPackageInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

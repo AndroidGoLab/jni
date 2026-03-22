@@ -5,15 +5,9 @@ package p2p
 import "github.com/AndroidGoLab/jni/net/wifi/p2p/consts"
 
 const (
-	Creator                                            = consts.Creator
-	NetworkIdPersistent                                = consts.NetworkIdPersistent
-	NetworkIdTemporary                                 = consts.NetworkIdTemporary
-	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
-	SecurityTypeWpa2Psk                                = consts.SecurityTypeWpa2Psk
-	SecurityTypeWpa3Compatibility                      = consts.SecurityTypeWpa3Compatibility
-	SecurityTypeWpa3Sae                                = consts.SecurityTypeWpa3Sae
 	Available                                          = consts.Available
 	Connected                                          = consts.Connected
+	Creator                                            = consts.Creator
 	Failed                                             = consts.Failed
 	Invited                                            = consts.Invited
 	Unavailable                                        = consts.Unavailable
@@ -55,6 +49,12 @@ const (
 	WifiP2pScanSocial                                  = consts.WifiP2pScanSocial
 	WifiP2pStateDisabled                               = consts.WifiP2pStateDisabled
 	WifiP2pStateEnabled                                = consts.WifiP2pStateEnabled
+	NetworkIdPersistent                                = consts.NetworkIdPersistent
+	NetworkIdTemporary                                 = consts.NetworkIdTemporary
+	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
+	SecurityTypeWpa2Psk                                = consts.SecurityTypeWpa2Psk
+	SecurityTypeWpa3Compatibility                      = consts.SecurityTypeWpa3Compatibility
+	SecurityTypeWpa3Sae                                = consts.SecurityTypeWpa3Sae
 )
 
 const (

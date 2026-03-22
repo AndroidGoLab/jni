@@ -3,26 +3,6 @@
 package consts
 
 const (
-	Creator                        int = 0
-	Empty                          int = 0
-	NotifyDelete                   int = 16
-	NotifyInsert                   int = 4
-	NotifySkipNotifyForDescendants int = 2
-	NotifySyncToNetwork            int = 1
-	NotifyUpdate                   int = 8
-	QuerySortDirectionAscending    int = 0
-	QuerySortDirectionDescending   int = 1
-	SyncObserverTypeActive         int = 4
-	SyncObserverTypePending        int = 2
-	SyncObserverTypeSettings       int = 1
-	FieldTypeBlob                  int = 4
-	FieldTypeFloat                 int = 2
-	FieldTypeInteger               int = 1
-	FieldTypeNull                  int = 0
-	FieldTypeString                int = 3
-)
-
-const (
 	AnyCursorItemType                  string = "vnd.android.cursor.item/*"
 	CursorDirBaseType                  string = "vnd.android.cursor.dir"
 	CursorItemBaseType                 string = "vnd.android.cursor.item"
@@ -59,4 +39,24 @@ const (
 	SyncExtrasRequireCharging          string = "require_charging"
 	SyncExtrasScheduleAsExpeditedJob   string = "schedule_as_expedited_job"
 	SyncExtrasUpload                   string = "upload"
+)
+
+const (
+	NotifyDelete                   int = 16
+	NotifyInsert                   int = 4
+	NotifySkipNotifyForDescendants int = 2
+	NotifySyncToNetwork            int = 1
+	NotifyUpdate                   int = 8
+	QuerySortDirectionAscending    int = 0
+	QuerySortDirectionDescending   int = 1
+	SyncObserverTypeActive         int = 4
+	SyncObserverTypePending        int = 2
+	SyncObserverTypeSettings       int = 1
+	Creator                        int = 0
+	Empty                          int = 0
+	FieldTypeBlob                  int = 4
+	FieldTypeFloat                 int = 2
+	FieldTypeInteger               int = 1
+	FieldTypeNull                  int = 0
+	FieldTypeString                int = 3
 )

@@ -23,80 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsLocation                                      *jni.GlobalRef
-	midLocationBearingTo                             jni.MethodID
-	midLocationDescribeContents                      jni.MethodID
-	midLocationDistanceTo                            jni.MethodID
-	midLocationDump                                  jni.MethodID
-	midLocationEquals                                jni.MethodID
-	midLocationGetAccuracy                           jni.MethodID
-	midLocationGetAltitude                           jni.MethodID
-	midLocationGetBearing                            jni.MethodID
-	midLocationGetBearingAccuracyDegrees             jni.MethodID
-	midLocationGetElapsedRealtimeAgeMillis0          jni.MethodID
-	midLocationGetElapsedRealtimeAgeMillis1_1        jni.MethodID
-	midLocationGetElapsedRealtimeMillis              jni.MethodID
-	midLocationGetElapsedRealtimeNanos               jni.MethodID
-	midLocationGetElapsedRealtimeUncertaintyNanos    jni.MethodID
-	midLocationGetExtras                             jni.MethodID
-	midLocationGetLatitude                           jni.MethodID
-	midLocationGetLongitude                          jni.MethodID
-	midLocationGetMslAltitudeAccuracyMeters          jni.MethodID
-	midLocationGetMslAltitudeMeters                  jni.MethodID
-	midLocationGetProvider                           jni.MethodID
-	midLocationGetSpeed                              jni.MethodID
-	midLocationGetSpeedAccuracyMetersPerSecond       jni.MethodID
-	midLocationGetTime                               jni.MethodID
-	midLocationGetVerticalAccuracyMeters             jni.MethodID
-	midLocationHasAccuracy                           jni.MethodID
-	midLocationHasAltitude                           jni.MethodID
-	midLocationHasBearing                            jni.MethodID
-	midLocationHasBearingAccuracy                    jni.MethodID
-	midLocationHasElapsedRealtimeUncertaintyNanos    jni.MethodID
-	midLocationHasMslAltitude                        jni.MethodID
-	midLocationHasMslAltitudeAccuracy                jni.MethodID
-	midLocationHasSpeed                              jni.MethodID
-	midLocationHasSpeedAccuracy                      jni.MethodID
-	midLocationHasVerticalAccuracy                   jni.MethodID
-	midLocationHashCode                              jni.MethodID
-	midLocationIsComplete                            jni.MethodID
-	midLocationIsFromMockProvider                    jni.MethodID
-	midLocationIsMock                                jni.MethodID
-	midLocationRemoveAccuracy                        jni.MethodID
-	midLocationRemoveAltitude                        jni.MethodID
-	midLocationRemoveBearing                         jni.MethodID
-	midLocationRemoveBearingAccuracy                 jni.MethodID
-	midLocationRemoveElapsedRealtimeUncertaintyNanos jni.MethodID
-	midLocationRemoveMslAltitude                     jni.MethodID
-	midLocationRemoveMslAltitudeAccuracy             jni.MethodID
-	midLocationRemoveSpeed                           jni.MethodID
-	midLocationRemoveSpeedAccuracy                   jni.MethodID
-	midLocationRemoveVerticalAccuracy                jni.MethodID
-	midLocationReset                                 jni.MethodID
-	midLocationSet                                   jni.MethodID
-	midLocationSetAccuracy                           jni.MethodID
-	midLocationSetAltitude                           jni.MethodID
-	midLocationSetBearing                            jni.MethodID
-	midLocationSetBearingAccuracyDegrees             jni.MethodID
-	midLocationSetElapsedRealtimeNanos               jni.MethodID
-	midLocationSetElapsedRealtimeUncertaintyNanos    jni.MethodID
-	midLocationSetExtras                             jni.MethodID
-	midLocationSetLatitude                           jni.MethodID
-	midLocationSetLongitude                          jni.MethodID
-	midLocationSetMock                               jni.MethodID
-	midLocationSetMslAltitudeAccuracyMeters          jni.MethodID
-	midLocationSetMslAltitudeMeters                  jni.MethodID
-	midLocationSetProvider                           jni.MethodID
-	midLocationSetSpeed                              jni.MethodID
-	midLocationSetSpeedAccuracyMetersPerSecond       jni.MethodID
-	midLocationSetTime                               jni.MethodID
-	midLocationSetVerticalAccuracyMeters             jni.MethodID
-	midLocationToString                              jni.MethodID
-	midLocationWriteToParcel                         jni.MethodID
-	midLocationConvert2                              jni.MethodID
-	midLocationConvert1_1                            jni.MethodID
-	midLocationDistanceBetween                       jni.MethodID
-
 	clsGnssStatus                      *jni.GlobalRef
 	midGnssStatusDescribeContents      jni.MethodID
 	midGnssStatusEquals                jni.MethodID
@@ -183,6 +109,80 @@ var (
 	midManagerUnregisterGnssMeasurementsCallback       jni.MethodID
 	midManagerUnregisterGnssNavigationMessageCallback  jni.MethodID
 	midManagerUnregisterGnssStatusCallback             jni.MethodID
+
+	clsLocation                                      *jni.GlobalRef
+	midLocationBearingTo                             jni.MethodID
+	midLocationDescribeContents                      jni.MethodID
+	midLocationDistanceTo                            jni.MethodID
+	midLocationDump                                  jni.MethodID
+	midLocationEquals                                jni.MethodID
+	midLocationGetAccuracy                           jni.MethodID
+	midLocationGetAltitude                           jni.MethodID
+	midLocationGetBearing                            jni.MethodID
+	midLocationGetBearingAccuracyDegrees             jni.MethodID
+	midLocationGetElapsedRealtimeAgeMillis0          jni.MethodID
+	midLocationGetElapsedRealtimeAgeMillis1_1        jni.MethodID
+	midLocationGetElapsedRealtimeMillis              jni.MethodID
+	midLocationGetElapsedRealtimeNanos               jni.MethodID
+	midLocationGetElapsedRealtimeUncertaintyNanos    jni.MethodID
+	midLocationGetExtras                             jni.MethodID
+	midLocationGetLatitude                           jni.MethodID
+	midLocationGetLongitude                          jni.MethodID
+	midLocationGetMslAltitudeAccuracyMeters          jni.MethodID
+	midLocationGetMslAltitudeMeters                  jni.MethodID
+	midLocationGetProvider                           jni.MethodID
+	midLocationGetSpeed                              jni.MethodID
+	midLocationGetSpeedAccuracyMetersPerSecond       jni.MethodID
+	midLocationGetTime                               jni.MethodID
+	midLocationGetVerticalAccuracyMeters             jni.MethodID
+	midLocationHasAccuracy                           jni.MethodID
+	midLocationHasAltitude                           jni.MethodID
+	midLocationHasBearing                            jni.MethodID
+	midLocationHasBearingAccuracy                    jni.MethodID
+	midLocationHasElapsedRealtimeUncertaintyNanos    jni.MethodID
+	midLocationHasMslAltitude                        jni.MethodID
+	midLocationHasMslAltitudeAccuracy                jni.MethodID
+	midLocationHasSpeed                              jni.MethodID
+	midLocationHasSpeedAccuracy                      jni.MethodID
+	midLocationHasVerticalAccuracy                   jni.MethodID
+	midLocationHashCode                              jni.MethodID
+	midLocationIsComplete                            jni.MethodID
+	midLocationIsFromMockProvider                    jni.MethodID
+	midLocationIsMock                                jni.MethodID
+	midLocationRemoveAccuracy                        jni.MethodID
+	midLocationRemoveAltitude                        jni.MethodID
+	midLocationRemoveBearing                         jni.MethodID
+	midLocationRemoveBearingAccuracy                 jni.MethodID
+	midLocationRemoveElapsedRealtimeUncertaintyNanos jni.MethodID
+	midLocationRemoveMslAltitude                     jni.MethodID
+	midLocationRemoveMslAltitudeAccuracy             jni.MethodID
+	midLocationRemoveSpeed                           jni.MethodID
+	midLocationRemoveSpeedAccuracy                   jni.MethodID
+	midLocationRemoveVerticalAccuracy                jni.MethodID
+	midLocationReset                                 jni.MethodID
+	midLocationSet                                   jni.MethodID
+	midLocationSetAccuracy                           jni.MethodID
+	midLocationSetAltitude                           jni.MethodID
+	midLocationSetBearing                            jni.MethodID
+	midLocationSetBearingAccuracyDegrees             jni.MethodID
+	midLocationSetElapsedRealtimeNanos               jni.MethodID
+	midLocationSetElapsedRealtimeUncertaintyNanos    jni.MethodID
+	midLocationSetExtras                             jni.MethodID
+	midLocationSetLatitude                           jni.MethodID
+	midLocationSetLongitude                          jni.MethodID
+	midLocationSetMock                               jni.MethodID
+	midLocationSetMslAltitudeAccuracyMeters          jni.MethodID
+	midLocationSetMslAltitudeMeters                  jni.MethodID
+	midLocationSetProvider                           jni.MethodID
+	midLocationSetSpeed                              jni.MethodID
+	midLocationSetSpeedAccuracyMetersPerSecond       jni.MethodID
+	midLocationSetTime                               jni.MethodID
+	midLocationSetVerticalAccuracyMeters             jni.MethodID
+	midLocationToString                              jni.MethodID
+	midLocationWriteToParcel                         jni.MethodID
+	midLocationConvert2                              jni.MethodID
+	midLocationConvert1_1                            jni.MethodID
+	midLocationDistanceBetween                       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -202,516 +202,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/location/Location")
-	if err != nil {
-		return fmt.Errorf("find class android.location.Location: %w", err)
-	}
-	clsLocation = env.NewGlobalRef(&c.Object)
-
-	midLocationBearingTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "bearingTo", "(Landroid/location/Location;)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationDistanceTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "distanceTo", "(Landroid/location/Location;)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "dump", "(Landroid/util/Printer;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAccuracy", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAltitude", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getBearing", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getBearingAccuracyDegrees", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetElapsedRealtimeAgeMillis0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeAgeMillis", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetElapsedRealtimeAgeMillis1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeAgeMillis", "(J)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeMillis", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeNanos", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeUncertaintyNanos", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getExtras", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLatitude", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLongitude", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getMslAltitudeAccuracyMeters", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getMslAltitudeMeters", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getProvider", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getSpeed", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getSpeedAccuracyMetersPerSecond", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getTime", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationGetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getVerticalAccuracyMeters", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasAccuracy", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasAltitude", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasBearing", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasBearingAccuracy", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasElapsedRealtimeUncertaintyNanos", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasMslAltitude", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasMslAltitudeAccuracy", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasSpeed", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasSpeedAccuracy", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHasVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasVerticalAccuracy", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationIsComplete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isComplete", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationIsFromMockProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isFromMockProvider", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationIsMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isMock", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeAccuracy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeAltitude", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeBearing", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeBearingAccuracy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeElapsedRealtimeUncertaintyNanos", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeMslAltitude", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeMslAltitudeAccuracy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeSpeed", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeSpeedAccuracy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationRemoveVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeVerticalAccuracy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "reset", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "set", "(Landroid/location/Location;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setAccuracy", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setAltitude", "(D)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setBearing", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setBearingAccuracyDegrees", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setElapsedRealtimeNanos", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setElapsedRealtimeUncertaintyNanos", "(D)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setExtras", "(Landroid/os/Bundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setLatitude", "(D)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setLongitude", "(D)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMock", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMslAltitudeAccuracyMeters", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMslAltitudeMeters", "(D)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setProvider", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setSpeed", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setSpeedAccuracyMetersPerSecond", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setTime", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationSetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setVerticalAccuracyMeters", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationConvert2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "convert", "(DI)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationConvert1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "convert", "(Ljava/lang/String;)D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midLocationDistanceBetween, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "distanceBetween", "(DDDD[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
 
 	c, err = env.FindClass("android/location/GnssStatus")
 	if err != nil {
@@ -1300,6 +790,516 @@ func doInit(env *jni.Env) error {
 	}
 
 	midManagerUnregisterGnssStatusCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/location/Location")
+	if err != nil {
+		return fmt.Errorf("find class android.location.Location: %w", err)
+	}
+	clsLocation = env.NewGlobalRef(&c.Object)
+
+	midLocationBearingTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "bearingTo", "(Landroid/location/Location;)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationDistanceTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "distanceTo", "(Landroid/location/Location;)F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "dump", "(Landroid/util/Printer;Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAccuracy", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAltitude", "()D")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getBearing", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getBearingAccuracyDegrees", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetElapsedRealtimeAgeMillis0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeAgeMillis", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetElapsedRealtimeAgeMillis1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeAgeMillis", "(J)J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeMillis", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeNanos", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getElapsedRealtimeUncertaintyNanos", "()D")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getExtras", "()Landroid/os/Bundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLatitude", "()D")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLongitude", "()D")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getMslAltitudeAccuracyMeters", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getMslAltitudeMeters", "()D")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getProvider", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getSpeed", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getSpeedAccuracyMetersPerSecond", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getTime", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationGetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getVerticalAccuracyMeters", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasAccuracy", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasAltitude", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasBearing", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasBearingAccuracy", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasElapsedRealtimeUncertaintyNanos", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasMslAltitude", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasMslAltitudeAccuracy", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasSpeed", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasSpeedAccuracy", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHasVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hasVerticalAccuracy", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationIsComplete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isComplete", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationIsFromMockProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isFromMockProvider", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationIsMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "isMock", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeAccuracy", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeAltitude", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeBearing", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveBearingAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeBearingAccuracy", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeElapsedRealtimeUncertaintyNanos", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveMslAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeMslAltitude", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveMslAltitudeAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeMslAltitudeAccuracy", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeSpeed", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveSpeedAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeSpeedAccuracy", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationRemoveVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "removeVerticalAccuracy", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "reset", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "set", "(Landroid/location/Location;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setAccuracy", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setAltitude", "(D)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setBearing", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetBearingAccuracyDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setBearingAccuracyDegrees", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetElapsedRealtimeNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setElapsedRealtimeNanos", "(J)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetElapsedRealtimeUncertaintyNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setElapsedRealtimeUncertaintyNanos", "(D)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setExtras", "(Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setLatitude", "(D)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setLongitude", "(D)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetMock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMock", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetMslAltitudeAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMslAltitudeAccuracyMeters", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetMslAltitudeMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setMslAltitudeMeters", "(D)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setProvider", "(Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setSpeed", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetSpeedAccuracyMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setSpeedAccuracyMetersPerSecond", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setTime", "(J)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationSetVerticalAccuracyMeters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "setVerticalAccuracyMeters", "(F)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationConvert2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "convert", "(DI)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationConvert1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "convert", "(Ljava/lang/String;)D")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midLocationDistanceBetween, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "distanceBetween", "(DDDD[F)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

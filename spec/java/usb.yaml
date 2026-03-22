@@ -5,6 +5,189 @@
 package: usb
 go_import: github.com/AndroidGoLab/jni/hardware/usb
 classes:
+    - java_class: android.hardware.usb.UsbDeviceConnection
+      go_type: DeviceConnection
+      methods:
+        - java_method: bulkTransfer
+          go_name: BulkTransfer4
+          params:
+            - java_type: android.hardware.usb.UsbEndpoint
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: bulkTransfer
+          go_name: BulkTransfer5_1
+          params:
+            - java_type: android.hardware.usb.UsbEndpoint
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: int
+          error: true
+        - java_method: claimInterface
+          go_name: ClaimInterface
+          params:
+            - java_type: android.hardware.usb.UsbInterface
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: controlTransfer
+          go_name: ControlTransfer7
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: '[B'
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+          returns: int
+          error: true
+        - java_method: controlTransfer
+          go_name: ControlTransfer8_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: '[B'
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+            - java_type: int
+              go_name: arg7
+          returns: int
+          error: true
+        - java_method: getFileDescriptor
+          go_name: GetFileDescriptor
+          returns: int
+          error: true
+        - java_method: getRawDescriptors
+          go_name: GetRawDescriptors
+          returns: '[B'
+          error: true
+        - java_method: getSerial
+          go_name: GetSerial
+          returns: String
+          error: true
+        - java_method: releaseInterface
+          go_name: ReleaseInterface
+          params:
+            - java_type: android.hardware.usb.UsbInterface
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: requestWait
+          go_name: RequestWait0
+          returns: android.hardware.usb.UsbRequest
+          error: true
+        - java_method: requestWait
+          go_name: RequestWait1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.hardware.usb.UsbRequest
+          error: true
+        - java_method: setConfiguration
+          go_name: SetConfiguration
+          params:
+            - java_type: android.hardware.usb.UsbConfiguration
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setInterface
+          go_name: SetInterface
+          params:
+            - java_type: android.hardware.usb.UsbInterface
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.hardware.usb.UsbInterface
+      go_type: Interface
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAlternateSetting
+          go_name: GetAlternateSetting
+          returns: int
+          error: true
+        - java_method: getEndpoint
+          go_name: GetEndpoint
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.hardware.usb.UsbEndpoint
+          error: true
+        - java_method: getEndpointCount
+          go_name: GetEndpointCount
+          returns: int
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getInterfaceClass
+          go_name: GetInterfaceClass
+          returns: int
+          error: true
+        - java_method: getInterfaceProtocol
+          go_name: GetInterfaceProtocol
+          returns: int
+          error: true
+        - java_method: getInterfaceSubclass
+          go_name: GetInterfaceSubclass
+          returns: int
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.hardware.usb.UsbDevice
       go_type: Device
       methods:
@@ -187,134 +370,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.hardware.usb.UsbDeviceConnection
-      go_type: DeviceConnection
-      methods:
-        - java_method: bulkTransfer
-          go_name: BulkTransfer4
-          params:
-            - java_type: android.hardware.usb.UsbEndpoint
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: int
-          error: true
-        - java_method: bulkTransfer
-          go_name: BulkTransfer5_1
-          params:
-            - java_type: android.hardware.usb.UsbEndpoint
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-          returns: int
-          error: true
-        - java_method: claimInterface
-          go_name: ClaimInterface
-          params:
-            - java_type: android.hardware.usb.UsbInterface
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: controlTransfer
-          go_name: ControlTransfer7
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: '[B'
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: int
-              go_name: arg6
-          returns: int
-          error: true
-        - java_method: controlTransfer
-          go_name: ControlTransfer8_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: '[B'
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: int
-              go_name: arg6
-            - java_type: int
-              go_name: arg7
-          returns: int
-          error: true
-        - java_method: getFileDescriptor
-          go_name: GetFileDescriptor
-          returns: int
-          error: true
-        - java_method: getRawDescriptors
-          go_name: GetRawDescriptors
-          returns: '[B'
-          error: true
-        - java_method: getSerial
-          go_name: GetSerial
-          returns: String
-          error: true
-        - java_method: releaseInterface
-          go_name: ReleaseInterface
-          params:
-            - java_type: android.hardware.usb.UsbInterface
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: requestWait
-          go_name: RequestWait0
-          returns: android.hardware.usb.UsbRequest
-          error: true
-        - java_method: requestWait
-          go_name: RequestWait1_1
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.hardware.usb.UsbRequest
-          error: true
-        - java_method: setConfiguration
-          go_name: SetConfiguration
-          params:
-            - java_type: android.hardware.usb.UsbConfiguration
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setInterface
-          go_name: SetInterface
-          params:
-            - java_type: android.hardware.usb.UsbInterface
-              go_name: arg0
-          returns: boolean
-          error: true
     - java_class: android.hardware.usb.UsbEndpoint
       go_type: Endpoint
       methods:
@@ -349,61 +404,6 @@ classes:
         - java_method: getType
           go_name: GetType
           returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.hardware.usb.UsbInterface
-      go_type: Interface
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAlternateSetting
-          go_name: GetAlternateSetting
-          returns: int
-          error: true
-        - java_method: getEndpoint
-          go_name: GetEndpoint
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.hardware.usb.UsbEndpoint
-          error: true
-        - java_method: getEndpointCount
-          go_name: GetEndpointCount
-          returns: int
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: int
-          error: true
-        - java_method: getInterfaceClass
-          go_name: GetInterfaceClass
-          returns: int
-          error: true
-        - java_method: getInterfaceProtocol
-          go_name: GetInterfaceProtocol
-          returns: int
-          error: true
-        - java_method: getInterfaceSubclass
-          go_name: GetInterfaceSubclass
-          returns: int
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
           error: true
         - java_method: toString
           go_name: ToString

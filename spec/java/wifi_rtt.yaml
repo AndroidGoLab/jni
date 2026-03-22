@@ -5,6 +5,31 @@
 package: wifi_rtt
 go_import: github.com/AndroidGoLab/jni/net/wifi/rtt
 classes:
+    - java_class: android.net.wifi.rtt.WifiRttManager
+      go_type: WifiRttManager
+      obtain: system_service
+      service_name: wifirtt
+      close: true
+      methods:
+        - java_method: getRttCharacteristics
+          go_name: GetRttCharacteristics
+          returns: android.os.Bundle
+          error: true
+        - java_method: isAvailable
+          go_name: IsAvailable
+          returns: boolean
+          error: true
+        - java_method: startRanging
+          go_name: StartRanging
+          params:
+            - java_type: android.net.wifi.rtt.RangingRequest
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.net.wifi.rtt.RangingResultCallback
+              go_name: arg2
+          returns: void
+          error: true
     - java_class: android.net.wifi.rtt.RangingResult
       go_type: RangingResult
       methods:
@@ -148,47 +173,7 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.net.wifi.rtt.WifiRttManager
-      go_type: WifiRttManager
-      obtain: system_service
-      service_name: wifirtt
-      close: true
-      methods:
-        - java_method: getRttCharacteristics
-          go_name: GetRttCharacteristics
-          returns: android.os.Bundle
-          error: true
-        - java_method: isAvailable
-          go_name: IsAvailable
-          returns: boolean
-          error: true
-        - java_method: startRanging
-          go_name: StartRanging
-          params:
-            - java_type: android.net.wifi.rtt.RangingRequest
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.net.wifi.rtt.RangingResultCallback
-              go_name: arg2
-          returns: void
-          error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: StatusFail
-      value: "1"
-      go_type: int
-    - go_name: StatusResponderDoesNotSupportIeee80211mc
-      value: "2"
-      go_type: int
-    - go_name: StatusSuccess
-      value: "0"
-      go_type: int
-    - go_name: Unspecified
-      value: "-1"
-      go_type: int
     - go_name: ActionWifiRttStateChanged
       value: '"android.net.wifi.rtt.action.WIFI_RTT_STATE_CHANGED"'
       go_type: string
@@ -216,3 +201,18 @@ constants:
     - go_name: CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion
       value: '"key_max_supported_secure_he_ltf_proto_ver"'
       go_type: string
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: StatusFail
+      value: "1"
+      go_type: int
+    - go_name: StatusResponderDoesNotSupportIeee80211mc
+      value: "2"
+      go_type: int
+    - go_name: StatusSuccess
+      value: "0"
+      go_type: int
+    - go_name: Unspecified
+      value: "-1"
+      go_type: int

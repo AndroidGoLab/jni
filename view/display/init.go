@@ -23,10 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsWindowManager                    *jni.GlobalRef
-	midWindowManagerGetDefaultDisplay   jni.MethodID
-	midWindowManagerRemoveViewImmediate jni.MethodID
-
 	clsDisplay                                     *jni.GlobalRef
 	midDisplayGetAppVsyncOffsetNanos               jni.MethodID
 	midDisplayGetCurrentSizeRange                  jni.MethodID
@@ -69,6 +65,10 @@ var (
 	midDisplayToString                             jni.MethodID
 	midDisplayUnregisterHdrSdrRatioChangedListener jni.MethodID
 
+	clsWindowManager                    *jni.GlobalRef
+	midWindowManagerGetDefaultDisplay   jni.MethodID
+	midWindowManagerRemoveViewImmediate jni.MethodID
+
 	clsMetrics              *jni.GlobalRef
 	midMetricsEquals1       jni.MethodID
 	midMetricsEquals1_1     jni.MethodID
@@ -95,26 +95,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/view/WindowManager")
-	if err != nil {
-		return fmt.Errorf("find class android.view.WindowManager: %w", err)
-	}
-	clsWindowManager = env.NewGlobalRef(&c.Object)
-
-	midWindowManagerGetDefaultDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "getDefaultDisplay", "()Landroid/view/Display;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midWindowManagerRemoveViewImmediate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "removeViewImmediate", "(Landroid/view/View;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
 
 	c, err = env.FindClass("android/view/Display")
 	if err != nil {
@@ -396,6 +376,26 @@ func doInit(env *jni.Env) error {
 	}
 
 	midDisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/WindowManager")
+	if err != nil {
+		return fmt.Errorf("find class android.view.WindowManager: %w", err)
+	}
+	clsWindowManager = env.NewGlobalRef(&c.Object)
+
+	midWindowManagerGetDefaultDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "getDefaultDisplay", "()Landroid/view/Display;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midWindowManagerRemoveViewImmediate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWindowManager)), "removeViewImmediate", "(Landroid/view/View;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

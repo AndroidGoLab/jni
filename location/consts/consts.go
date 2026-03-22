@@ -3,10 +3,6 @@
 package consts
 
 const (
-	Creator              int = 0
-	FormatDegrees        int = 0
-	FormatMinutes        int = 1
-	FormatSeconds        int = 2
 	ConstellationBeidou  int = 5
 	ConstellationGalileo int = 6
 	ConstellationGlonass int = 3
@@ -15,6 +11,10 @@ const (
 	ConstellationQzss    int = 4
 	ConstellationSbas    int = 2
 	ConstellationUnknown int = 0
+	Creator              int = 0
+	FormatDegrees        int = 0
+	FormatMinutes        int = 1
+	FormatSeconds        int = 2
 )
 
 const (

@@ -5,12 +5,6 @@ package le
 import "github.com/AndroidGoLab/jni/bluetooth/le/consts"
 
 const (
-	ExtraCallbackType   = consts.ExtraCallbackType
-	ExtraErrorCode      = consts.ExtraErrorCode
-	ExtraListScanResult = consts.ExtraListScanResult
-)
-
-const (
 	Creator                    = consts.Creator
 	DataComplete               = consts.DataComplete
 	DataTruncated              = consts.DataTruncated
@@ -18,4 +12,10 @@ const (
 	PhyUnused                  = consts.PhyUnused
 	SidNotPresent              = consts.SidNotPresent
 	TxPowerNotPresent          = consts.TxPowerNotPresent
+)
+
+const (
+	ExtraCallbackType   = consts.ExtraCallbackType
+	ExtraErrorCode      = consts.ExtraErrorCode
+	ExtraListScanResult = consts.ExtraListScanResult
 )

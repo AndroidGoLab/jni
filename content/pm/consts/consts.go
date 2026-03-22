@@ -3,6 +3,13 @@
 package consts
 
 const (
+	Creator                                int = 0
+	InstallLocationAuto                    int = 0
+	InstallLocationInternalOnly            int = 1
+	InstallLocationPreferExternal          int = 2
+	RequestedPermissionGranted             int = 2
+	RequestedPermissionImplicit            int = 4
+	RequestedPermissionNeverForLocation    int = 65536
 	CertInputRawX509                       int = 0
 	CertInputSha256                        int = 1
 	ComponentEnabledStateDefault           int = 0
@@ -67,13 +74,6 @@ const (
 	VerificationAllow                      int = 1
 	VerificationReject                     int = -1
 	VersionCodeHighest                     int = -1
-	Creator                                int = 0
-	InstallLocationAuto                    int = 0
-	InstallLocationInternalOnly            int = 1
-	InstallLocationPreferExternal          int = 2
-	RequestedPermissionGranted             int = 2
-	RequestedPermissionImplicit            int = 4
-	RequestedPermissionNeverForLocation    int = 65536
 )
 
 const (

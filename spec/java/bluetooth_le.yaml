@@ -5,138 +5,6 @@
 package: bluetooth_le
 go_import: github.com/AndroidGoLab/jni/bluetooth/le
 classes:
-    - java_class: android.bluetooth.le.BluetoothLeAdvertiser
-      go_type: BluetoothLeAdvertiser
-      methods:
-        - java_method: startAdvertising
-          go_name: StartAdvertising3
-          params:
-            - java_type: android.bluetooth.le.AdvertiseSettings
-              go_name: arg0
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg1
-            - java_type: android.bluetooth.le.AdvertiseCallback
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: startAdvertising
-          go_name: StartAdvertising4_1
-          params:
-            - java_type: android.bluetooth.le.AdvertiseSettings
-              go_name: arg0
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg1
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg2
-            - java_type: android.bluetooth.le.AdvertiseCallback
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: startAdvertisingSet
-          go_name: StartAdvertisingSet6
-          params:
-            - java_type: android.bluetooth.le.AdvertisingSetParameters
-              go_name: arg0
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg1
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg2
-            - java_type: android.bluetooth.le.PeriodicAdvertisingParameters
-              go_name: arg3
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg4
-            - java_type: android.bluetooth.le.AdvertisingSetCallback
-              go_name: arg5
-          returns: void
-          error: true
-        - java_method: startAdvertisingSet
-          go_name: StartAdvertisingSet8_1
-          params:
-            - java_type: android.bluetooth.le.AdvertisingSetParameters
-              go_name: arg0
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg1
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg2
-            - java_type: android.bluetooth.le.PeriodicAdvertisingParameters
-              go_name: arg3
-            - java_type: android.bluetooth.le.AdvertiseData
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: int
-              go_name: arg6
-            - java_type: android.bluetooth.le.AdvertisingSetCallback
-              go_name: arg7
-          returns: void
-          error: true
-        - java_method: stopAdvertising
-          go_name: StopAdvertising
-          params:
-            - java_type: android.bluetooth.le.AdvertiseCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: stopAdvertisingSet
-          go_name: StopAdvertisingSet
-          params:
-            - java_type: android.bluetooth.le.AdvertisingSetCallback
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.bluetooth.le.BluetoothLeScanner
-      go_type: BluetoothLeScanner
-      methods:
-        - java_method: flushPendingScanResults
-          go_name: FlushPendingScanResults
-          params:
-            - java_type: android.bluetooth.le.ScanCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: startScan
-          go_name: StartScan1
-          params:
-            - java_type: android.bluetooth.le.ScanCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: startScan
-          go_name: StartScan3_1
-          params:
-            - java_type: java.util.List<android.bluetooth.le.ScanFilter>
-              go_name: arg0
-            - java_type: android.bluetooth.le.ScanSettings
-              go_name: arg1
-            - java_type: android.app.PendingIntent
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: startScan
-          go_name: StartScan3_2
-          params:
-            - java_type: java.util.List<android.bluetooth.le.ScanFilter>
-              go_name: arg0
-            - java_type: android.bluetooth.le.ScanSettings
-              go_name: arg1
-            - java_type: android.bluetooth.le.ScanCallback
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: stopScan
-          go_name: StopScan1
-          params:
-            - java_type: android.app.PendingIntent
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: stopScan
-          go_name: StopScan1_1
-          params:
-            - java_type: android.bluetooth.le.ScanCallback
-              go_name: arg0
-          returns: void
-          error: true
     - java_class: android.bluetooth.le.ScanResult
       go_type: ScanResult
       methods:
@@ -216,16 +84,139 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.bluetooth.le.BluetoothLeScanner
+      go_type: BluetoothLeScanner
+      methods:
+        - java_method: flushPendingScanResults
+          go_name: FlushPendingScanResults
+          params:
+            - java_type: android.bluetooth.le.ScanCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startScan
+          go_name: StartScan1
+          params:
+            - java_type: android.bluetooth.le.ScanCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startScan
+          go_name: StartScan3_1
+          params:
+            - java_type: java.util.List<android.bluetooth.le.ScanFilter>
+              go_name: arg0
+            - java_type: android.bluetooth.le.ScanSettings
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: startScan
+          go_name: StartScan3_2
+          params:
+            - java_type: java.util.List<android.bluetooth.le.ScanFilter>
+              go_name: arg0
+            - java_type: android.bluetooth.le.ScanSettings
+              go_name: arg1
+            - java_type: android.bluetooth.le.ScanCallback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: stopScan
+          go_name: StopScan1
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stopScan
+          go_name: StopScan1_1
+          params:
+            - java_type: android.bluetooth.le.ScanCallback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.bluetooth.le.BluetoothLeAdvertiser
+      go_type: BluetoothLeAdvertiser
+      methods:
+        - java_method: startAdvertising
+          go_name: StartAdvertising3
+          params:
+            - java_type: android.bluetooth.le.AdvertiseSettings
+              go_name: arg0
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg1
+            - java_type: android.bluetooth.le.AdvertiseCallback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: startAdvertising
+          go_name: StartAdvertising4_1
+          params:
+            - java_type: android.bluetooth.le.AdvertiseSettings
+              go_name: arg0
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg1
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg2
+            - java_type: android.bluetooth.le.AdvertiseCallback
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: startAdvertisingSet
+          go_name: StartAdvertisingSet6
+          params:
+            - java_type: android.bluetooth.le.AdvertisingSetParameters
+              go_name: arg0
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg1
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg2
+            - java_type: android.bluetooth.le.PeriodicAdvertisingParameters
+              go_name: arg3
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg4
+            - java_type: android.bluetooth.le.AdvertisingSetCallback
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: startAdvertisingSet
+          go_name: StartAdvertisingSet8_1
+          params:
+            - java_type: android.bluetooth.le.AdvertisingSetParameters
+              go_name: arg0
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg1
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg2
+            - java_type: android.bluetooth.le.PeriodicAdvertisingParameters
+              go_name: arg3
+            - java_type: android.bluetooth.le.AdvertiseData
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+            - java_type: android.bluetooth.le.AdvertisingSetCallback
+              go_name: arg7
+          returns: void
+          error: true
+        - java_method: stopAdvertising
+          go_name: StopAdvertising
+          params:
+            - java_type: android.bluetooth.le.AdvertiseCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stopAdvertisingSet
+          go_name: StopAdvertisingSet
+          params:
+            - java_type: android.bluetooth.le.AdvertisingSetCallback
+              go_name: arg0
+          returns: void
+          error: true
 constants:
-    - go_name: ExtraCallbackType
-      value: '"android.bluetooth.le.extra.CALLBACK_TYPE"'
-      go_type: string
-    - go_name: ExtraErrorCode
-      value: '"android.bluetooth.le.extra.ERROR_CODE"'
-      go_type: string
-    - go_name: ExtraListScanResult
-      value: '"android.bluetooth.le.extra.LIST_SCAN_RESULT"'
-      go_type: string
     - go_name: Creator
       value: "0"
       go_type: int
@@ -247,3 +238,12 @@ constants:
     - go_name: TxPowerNotPresent
       value: "127"
       go_type: int
+    - go_name: ExtraCallbackType
+      value: '"android.bluetooth.le.extra.CALLBACK_TYPE"'
+      go_type: string
+    - go_name: ExtraErrorCode
+      value: '"android.bluetooth.le.extra.ERROR_CODE"'
+      go_type: string
+    - go_name: ExtraListScanResult
+      value: '"android.bluetooth.le.extra.LIST_SCAN_RESULT"'
+      go_type: string

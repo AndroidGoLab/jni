@@ -28,39 +28,31 @@ classes:
           go_name: OpenSession
           returns: android.se.omapi.Session
           error: true
-    - java_class: android.se.omapi.Channel
-      go_type: Channel
+    - java_class: android.se.omapi.SEService
+      go_type: SEService
       methods:
-        - java_method: close
-          go_name: Close
-          returns: void
+        - java_method: getReaders
+          go_name: GetReaders
+          returns: android.se.omapi.Reader[]
           error: true
-        - java_method: getSelectResponse
-          go_name: GetSelectResponse
-          returns: '[B'
-          error: true
-        - java_method: getSession
-          go_name: GetSession
-          returns: android.se.omapi.Session
-          error: true
-        - java_method: isBasicChannel
-          go_name: IsBasicChannel
-          returns: boolean
-          error: true
-        - java_method: isOpen
-          go_name: IsOpen
-          returns: boolean
-          error: true
-        - java_method: selectNext
-          go_name: SelectNext
-          returns: boolean
-          error: true
-        - java_method: transmit
-          go_name: Transmit
+        - java_method: getUiccReader
+          go_name: GetUiccReader
           params:
-            - java_type: '[B'
+            - java_type: int
               go_name: arg0
-          returns: '[B'
+          returns: android.se.omapi.Reader
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: String
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: shutdown
+          go_name: Shutdown
+          returns: void
           error: true
     - java_class: android.se.omapi.Session
       go_type: Session
@@ -117,31 +109,39 @@ classes:
               go_name: arg1
           returns: android.se.omapi.Channel
           error: true
-    - java_class: android.se.omapi.SEService
-      go_type: SEService
+    - java_class: android.se.omapi.Channel
+      go_type: Channel
       methods:
-        - java_method: getReaders
-          go_name: GetReaders
-          returns: android.se.omapi.Reader[]
+        - java_method: close
+          go_name: Close
+          returns: void
           error: true
-        - java_method: getUiccReader
-          go_name: GetUiccReader
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.se.omapi.Reader
+        - java_method: getSelectResponse
+          go_name: GetSelectResponse
+          returns: '[B'
           error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: String
+        - java_method: getSession
+          go_name: GetSession
+          returns: android.se.omapi.Session
           error: true
-        - java_method: isConnected
-          go_name: IsConnected
+        - java_method: isBasicChannel
+          go_name: IsBasicChannel
           returns: boolean
           error: true
-        - java_method: shutdown
-          go_name: Shutdown
-          returns: void
+        - java_method: isOpen
+          go_name: IsOpen
+          returns: boolean
+          error: true
+        - java_method: selectNext
+          go_name: SelectNext
+          returns: boolean
+          error: true
+        - java_method: transmit
+          go_name: Transmit
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: '[B'
           error: true
 constants:
     - go_name: ActionSecureElementStateChanged

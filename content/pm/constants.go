@@ -5,6 +5,13 @@ package pm
 import "github.com/AndroidGoLab/jni/content/pm/consts"
 
 const (
+	Creator                                = consts.Creator
+	InstallLocationAuto                    = consts.InstallLocationAuto
+	InstallLocationInternalOnly            = consts.InstallLocationInternalOnly
+	InstallLocationPreferExternal          = consts.InstallLocationPreferExternal
+	RequestedPermissionGranted             = consts.RequestedPermissionGranted
+	RequestedPermissionImplicit            = consts.RequestedPermissionImplicit
+	RequestedPermissionNeverForLocation    = consts.RequestedPermissionNeverForLocation
 	CertInputRawX509                       = consts.CertInputRawX509
 	CertInputSha256                        = consts.CertInputSha256
 	ComponentEnabledStateDefault           = consts.ComponentEnabledStateDefault
@@ -69,13 +76,6 @@ const (
 	VerificationAllow                      = consts.VerificationAllow
 	VerificationReject                     = consts.VerificationReject
 	VersionCodeHighest                     = consts.VersionCodeHighest
-	Creator                                = consts.Creator
-	InstallLocationAuto                    = consts.InstallLocationAuto
-	InstallLocationInternalOnly            = consts.InstallLocationInternalOnly
-	InstallLocationPreferExternal          = consts.InstallLocationPreferExternal
-	RequestedPermissionGranted             = consts.RequestedPermissionGranted
-	RequestedPermissionImplicit            = consts.RequestedPermissionImplicit
-	RequestedPermissionNeverForLocation    = consts.RequestedPermissionNeverForLocation
 )
 
 const (

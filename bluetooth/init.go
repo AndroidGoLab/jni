@@ -23,66 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsServerSocket          *jni.GlobalRef
-	midServerSocketAccept0   jni.MethodID
-	midServerSocketAccept1_1 jni.MethodID
-	midServerSocketClose     jni.MethodID
-	midServerSocketGetPsm    jni.MethodID
-	midServerSocketToString  jni.MethodID
-
-	clsSocket                         *jni.GlobalRef
-	midSocketClose                    jni.MethodID
-	midSocketConnect                  jni.MethodID
-	midSocketGetConnectionType        jni.MethodID
-	midSocketGetInputStream           jni.MethodID
-	midSocketGetMaxReceivePacketSize  jni.MethodID
-	midSocketGetMaxTransmitPacketSize jni.MethodID
-	midSocketGetOutputStream          jni.MethodID
-	midSocketGetRemoteDevice          jni.MethodID
-	midSocketIsConnected              jni.MethodID
-	midSocketToString                 jni.MethodID
-
-	clsDevice                                          *jni.GlobalRef
-	midDeviceConnectGatt3                              jni.MethodID
-	midDeviceConnectGatt4_1                            jni.MethodID
-	midDeviceConnectGatt5_2                            jni.MethodID
-	midDeviceCreateBond                                jni.MethodID
-	midDeviceCreateInsecureL2capChannel                jni.MethodID
-	midDeviceCreateInsecureRfcommSocketToServiceRecord jni.MethodID
-	midDeviceCreateL2capChannel                        jni.MethodID
-	midDeviceCreateRfcommSocketToServiceRecord         jni.MethodID
-	midDeviceCreateUsingSocketSettings                 jni.MethodID
-	midDeviceDescribeContents                          jni.MethodID
-	midDeviceEquals                                    jni.MethodID
-	midDeviceFetchUuidsWithSdp                         jni.MethodID
-	midDeviceGetAddress                                jni.MethodID
-	midDeviceGetAddressType                            jni.MethodID
-	midDeviceGetAlias                                  jni.MethodID
-	midDeviceGetBluetoothClass                         jni.MethodID
-	midDeviceGetBondState                              jni.MethodID
-	midDeviceGetIdentityAddressWithType                jni.MethodID
-	midDeviceGetName                                   jni.MethodID
-	midDeviceGetType                                   jni.MethodID
-	midDeviceGetUuids                                  jni.MethodID
-	midDeviceHashCode                                  jni.MethodID
-	midDeviceSetAlias                                  jni.MethodID
-	midDeviceSetPairingConfirmation                    jni.MethodID
-	midDeviceSetPin                                    jni.MethodID
-	midDeviceToString                                  jni.MethodID
-	midDeviceWriteToParcel                             jni.MethodID
-
-	clsGattService                    *jni.GlobalRef
-	midGattServiceAddCharacteristic   jni.MethodID
-	midGattServiceAddService          jni.MethodID
-	midGattServiceDescribeContents    jni.MethodID
-	midGattServiceGetCharacteristic   jni.MethodID
-	midGattServiceGetCharacteristics  jni.MethodID
-	midGattServiceGetIncludedServices jni.MethodID
-	midGattServiceGetInstanceId       jni.MethodID
-	midGattServiceGetType             jni.MethodID
-	midGattServiceGetUuid             jni.MethodID
-	midGattServiceWriteToParcel       jni.MethodID
-
 	clsAdapter                                           *jni.GlobalRef
 	midAdapterCancelDiscovery                            jni.MethodID
 	midAdapterCloseProfileProxy                          jni.MethodID
@@ -127,24 +67,6 @@ var (
 	midAdapterStopLeScan                                 jni.MethodID
 	midAdapterCheckBluetoothAddress                      jni.MethodID
 
-	clsGattServer                                   *jni.GlobalRef
-	midGattServerAddService                         jni.MethodID
-	midGattServerCancelConnection                   jni.MethodID
-	midGattServerClearServices                      jni.MethodID
-	midGattServerClose                              jni.MethodID
-	midGattServerConnect                            jni.MethodID
-	midGattServerGetConnectedDevices                jni.MethodID
-	midGattServerGetConnectionState                 jni.MethodID
-	midGattServerGetDevicesMatchingConnectionStates jni.MethodID
-	midGattServerGetService                         jni.MethodID
-	midGattServerGetServices                        jni.MethodID
-	midGattServerNotifyCharacteristicChanged3       jni.MethodID
-	midGattServerNotifyCharacteristicChanged4_1     jni.MethodID
-	midGattServerReadPhy                            jni.MethodID
-	midGattServerRemoveService                      jni.MethodID
-	midGattServerSendResponse                       jni.MethodID
-	midGattServerSetPreferredPhy                    jni.MethodID
-
 	clsGatt                                   *jni.GlobalRef
 	midGattAbortReliableWrite0                jni.MethodID
 	midGattAbortReliableWrite1_1              jni.MethodID
@@ -172,6 +94,84 @@ var (
 	midGattWriteCharacteristic3_1             jni.MethodID
 	midGattWriteDescriptor1                   jni.MethodID
 	midGattWriteDescriptor2_1                 jni.MethodID
+
+	clsDevice                                          *jni.GlobalRef
+	midDeviceConnectGatt3                              jni.MethodID
+	midDeviceConnectGatt4_1                            jni.MethodID
+	midDeviceConnectGatt5_2                            jni.MethodID
+	midDeviceCreateBond                                jni.MethodID
+	midDeviceCreateInsecureL2capChannel                jni.MethodID
+	midDeviceCreateInsecureRfcommSocketToServiceRecord jni.MethodID
+	midDeviceCreateL2capChannel                        jni.MethodID
+	midDeviceCreateRfcommSocketToServiceRecord         jni.MethodID
+	midDeviceCreateUsingSocketSettings                 jni.MethodID
+	midDeviceDescribeContents                          jni.MethodID
+	midDeviceEquals                                    jni.MethodID
+	midDeviceFetchUuidsWithSdp                         jni.MethodID
+	midDeviceGetAddress                                jni.MethodID
+	midDeviceGetAddressType                            jni.MethodID
+	midDeviceGetAlias                                  jni.MethodID
+	midDeviceGetBluetoothClass                         jni.MethodID
+	midDeviceGetBondState                              jni.MethodID
+	midDeviceGetIdentityAddressWithType                jni.MethodID
+	midDeviceGetName                                   jni.MethodID
+	midDeviceGetType                                   jni.MethodID
+	midDeviceGetUuids                                  jni.MethodID
+	midDeviceHashCode                                  jni.MethodID
+	midDeviceSetAlias                                  jni.MethodID
+	midDeviceSetPairingConfirmation                    jni.MethodID
+	midDeviceSetPin                                    jni.MethodID
+	midDeviceToString                                  jni.MethodID
+	midDeviceWriteToParcel                             jni.MethodID
+
+	clsServerSocket          *jni.GlobalRef
+	midServerSocketAccept0   jni.MethodID
+	midServerSocketAccept1_1 jni.MethodID
+	midServerSocketClose     jni.MethodID
+	midServerSocketGetPsm    jni.MethodID
+	midServerSocketToString  jni.MethodID
+
+	clsSocket                         *jni.GlobalRef
+	midSocketClose                    jni.MethodID
+	midSocketConnect                  jni.MethodID
+	midSocketGetConnectionType        jni.MethodID
+	midSocketGetInputStream           jni.MethodID
+	midSocketGetMaxReceivePacketSize  jni.MethodID
+	midSocketGetMaxTransmitPacketSize jni.MethodID
+	midSocketGetOutputStream          jni.MethodID
+	midSocketGetRemoteDevice          jni.MethodID
+	midSocketIsConnected              jni.MethodID
+	midSocketToString                 jni.MethodID
+
+	clsGattService                    *jni.GlobalRef
+	midGattServiceAddCharacteristic   jni.MethodID
+	midGattServiceAddService          jni.MethodID
+	midGattServiceDescribeContents    jni.MethodID
+	midGattServiceGetCharacteristic   jni.MethodID
+	midGattServiceGetCharacteristics  jni.MethodID
+	midGattServiceGetIncludedServices jni.MethodID
+	midGattServiceGetInstanceId       jni.MethodID
+	midGattServiceGetType             jni.MethodID
+	midGattServiceGetUuid             jni.MethodID
+	midGattServiceWriteToParcel       jni.MethodID
+
+	clsGattServer                                   *jni.GlobalRef
+	midGattServerAddService                         jni.MethodID
+	midGattServerCancelConnection                   jni.MethodID
+	midGattServerClearServices                      jni.MethodID
+	midGattServerClose                              jni.MethodID
+	midGattServerConnect                            jni.MethodID
+	midGattServerGetConnectedDevices                jni.MethodID
+	midGattServerGetConnectionState                 jni.MethodID
+	midGattServerGetDevicesMatchingConnectionStates jni.MethodID
+	midGattServerGetService                         jni.MethodID
+	midGattServerGetServices                        jni.MethodID
+	midGattServerNotifyCharacteristicChanged3       jni.MethodID
+	midGattServerNotifyCharacteristicChanged4_1     jni.MethodID
+	midGattServerReadPhy                            jni.MethodID
+	midGattServerRemoveService                      jni.MethodID
+	midGattServerSendResponse                       jni.MethodID
+	midGattServerSetPreferredPhy                    jni.MethodID
 
 	clsGattCharacteristic                 *jni.GlobalRef
 	midGattCharacteristicAddDescriptor    jni.MethodID
@@ -222,394 +222,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/bluetooth/BluetoothServerSocket")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothServerSocket: %w", err)
-	}
-	clsServerSocket = env.NewGlobalRef(&c.Object)
-
-	midServerSocketAccept0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "accept", "()Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midServerSocketAccept1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "accept", "(I)Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midServerSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midServerSocketGetPsm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "getPsm", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midServerSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothSocket")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothSocket: %w", err)
-	}
-	clsSocket = env.NewGlobalRef(&c.Object)
-
-	midSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "connect", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketGetConnectionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getConnectionType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketGetInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getInputStream", "()Ljava/io/InputStream;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketGetMaxReceivePacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getMaxReceivePacketSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketGetMaxTransmitPacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getMaxTransmitPacketSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketGetOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getOutputStream", "()Ljava/io/OutputStream;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketGetRemoteDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getRemoteDevice", "()Landroid/bluetooth/BluetoothDevice;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "isConnected", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothDevice")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothDevice: %w", err)
-	}
-	clsDevice = env.NewGlobalRef(&c.Object)
-
-	midDeviceConnectGatt3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Landroid/bluetooth/BluetoothGatt;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceConnectGatt4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;I)Landroid/bluetooth/BluetoothGatt;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceConnectGatt5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;II)Landroid/bluetooth/BluetoothGatt;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceCreateBond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createBond", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceCreateInsecureL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createInsecureL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceCreateInsecureRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createInsecureRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceCreateL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceCreateRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceCreateUsingSocketSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createUsingSocketSettings", "(Landroid/bluetooth/BluetoothSocketSettings;)Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceFetchUuidsWithSdp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "fetchUuidsWithSdp", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAddress", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetAddressType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAddressType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAlias", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetBluetoothClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getBluetoothClass", "()Landroid/bluetooth/BluetoothClass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetBondState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getBondState", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetIdentityAddressWithType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getIdentityAddressWithType", "()Landroid/bluetooth/BluetoothDevice$BluetoothAddress;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceGetUuids, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getUuids", "()[Landroid/os/ParcelUuid;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceSetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setAlias", "(Ljava/lang/String;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceSetPairingConfirmation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setPairingConfirmation", "(Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceSetPin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setPin", "([B)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midDeviceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothGattService")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGattService: %w", err)
-	}
-	clsGattService = env.NewGlobalRef(&c.Object)
-
-	midGattServiceAddCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "addCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceGetCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getCharacteristic", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattCharacteristic;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceGetCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getCharacteristics", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceGetIncludedServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getIncludedServices", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceGetInstanceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getInstanceId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getUuid", "()Ljava/util/UUID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServiceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
 
 	c, err = env.FindClass("android/bluetooth/BluetoothAdapter")
 	if err != nil {
@@ -911,124 +523,6 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
-	c, err = env.FindClass("android/bluetooth/BluetoothGattServer")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGattServer: %w", err)
-	}
-	clsGattServer = env.NewGlobalRef(&c.Object)
-
-	midGattServerAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerCancelConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "cancelConnection", "(Landroid/bluetooth/BluetoothDevice;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerClearServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "clearServices", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "connect", "(Landroid/bluetooth/BluetoothDevice;Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerGetConnectedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getConnectedDevices", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerGetConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getConnectionState", "(Landroid/bluetooth/BluetoothDevice;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerGetDevicesMatchingConnectionStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getDevicesMatchingConnectionStates", "([I)Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getService", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattService;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerGetServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getServices", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerNotifyCharacteristicChanged3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerNotifyCharacteristicChanged4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z[B)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerReadPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "readPhy", "(Landroid/bluetooth/BluetoothDevice;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerRemoveService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "removeService", "(Landroid/bluetooth/BluetoothGattService;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerSendResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "sendResponse", "(Landroid/bluetooth/BluetoothDevice;III[B)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midGattServerSetPreferredPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "setPreferredPhy", "(Landroid/bluetooth/BluetoothDevice;III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
 	c, err = env.FindClass("android/bluetooth/BluetoothGatt")
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothGatt: %w", err)
@@ -1211,6 +705,512 @@ func doInit(env *jni.Env) error {
 	}
 
 	midGattWriteDescriptor2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatt)), "writeDescriptor", "(Landroid/bluetooth/BluetoothGattDescriptor;[B)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/bluetooth/BluetoothDevice")
+	if err != nil {
+		return fmt.Errorf("find class android.bluetooth.BluetoothDevice: %w", err)
+	}
+	clsDevice = env.NewGlobalRef(&c.Object)
+
+	midDeviceConnectGatt3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Landroid/bluetooth/BluetoothGatt;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceConnectGatt4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;I)Landroid/bluetooth/BluetoothGatt;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceConnectGatt5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectGatt", "(Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;II)Landroid/bluetooth/BluetoothGatt;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceCreateBond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createBond", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceCreateInsecureL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createInsecureL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceCreateInsecureRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createInsecureRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceCreateL2capChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createL2capChannel", "(I)Landroid/bluetooth/BluetoothSocket;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceCreateRfcommSocketToServiceRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createRfcommSocketToServiceRecord", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothSocket;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceCreateUsingSocketSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "createUsingSocketSettings", "(Landroid/bluetooth/BluetoothSocketSettings;)Landroid/bluetooth/BluetoothSocket;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceFetchUuidsWithSdp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "fetchUuidsWithSdp", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAddress", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetAddressType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAddressType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAlias", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetBluetoothClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getBluetoothClass", "()Landroid/bluetooth/BluetoothClass;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetBondState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getBondState", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetIdentityAddressWithType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getIdentityAddressWithType", "()Landroid/bluetooth/BluetoothDevice$BluetoothAddress;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceGetUuids, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getUuids", "()[Landroid/os/ParcelUuid;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceSetAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setAlias", "(Ljava/lang/String;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceSetPairingConfirmation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setPairingConfirmation", "(Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceSetPin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "setPin", "([B)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeviceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/bluetooth/BluetoothServerSocket")
+	if err != nil {
+		return fmt.Errorf("find class android.bluetooth.BluetoothServerSocket: %w", err)
+	}
+	clsServerSocket = env.NewGlobalRef(&c.Object)
+
+	midServerSocketAccept0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "accept", "()Landroid/bluetooth/BluetoothSocket;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midServerSocketAccept1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "accept", "(I)Landroid/bluetooth/BluetoothSocket;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midServerSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midServerSocketGetPsm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "getPsm", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midServerSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/bluetooth/BluetoothSocket")
+	if err != nil {
+		return fmt.Errorf("find class android.bluetooth.BluetoothSocket: %w", err)
+	}
+	clsSocket = env.NewGlobalRef(&c.Object)
+
+	midSocketClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "connect", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketGetConnectionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getConnectionType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketGetInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getInputStream", "()Ljava/io/InputStream;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketGetMaxReceivePacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getMaxReceivePacketSize", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketGetMaxTransmitPacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getMaxTransmitPacketSize", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketGetOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getOutputStream", "()Ljava/io/OutputStream;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketGetRemoteDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getRemoteDevice", "()Landroid/bluetooth/BluetoothDevice;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "isConnected", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/bluetooth/BluetoothGattService")
+	if err != nil {
+		return fmt.Errorf("find class android.bluetooth.BluetoothGattService: %w", err)
+	}
+	clsGattService = env.NewGlobalRef(&c.Object)
+
+	midGattServiceAddCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "addCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceGetCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getCharacteristic", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattCharacteristic;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceGetCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getCharacteristics", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceGetIncludedServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getIncludedServices", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceGetInstanceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getInstanceId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "getUuid", "()Ljava/util/UUID;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServiceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattService)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/bluetooth/BluetoothGattServer")
+	if err != nil {
+		return fmt.Errorf("find class android.bluetooth.BluetoothGattServer: %w", err)
+	}
+	clsGattServer = env.NewGlobalRef(&c.Object)
+
+	midGattServerAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerCancelConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "cancelConnection", "(Landroid/bluetooth/BluetoothDevice;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerClearServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "clearServices", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "connect", "(Landroid/bluetooth/BluetoothDevice;Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerGetConnectedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getConnectedDevices", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerGetConnectionState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getConnectionState", "(Landroid/bluetooth/BluetoothDevice;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerGetDevicesMatchingConnectionStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getDevicesMatchingConnectionStates", "([I)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getService", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattService;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerGetServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "getServices", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerNotifyCharacteristicChanged3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerNotifyCharacteristicChanged4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z[B)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerReadPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "readPhy", "(Landroid/bluetooth/BluetoothDevice;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerRemoveService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "removeService", "(Landroid/bluetooth/BluetoothGattService;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerSendResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "sendResponse", "(Landroid/bluetooth/BluetoothDevice;III[B)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midGattServerSetPreferredPhy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGattServer)), "setPreferredPhy", "(Landroid/bluetooth/BluetoothDevice;III)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

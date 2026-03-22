@@ -3,14 +3,14 @@
 package consts
 
 const (
+	Creator     int = 0
+	UuidDefault int = 0
+)
+
+const (
+	ExtraStorageVolume  string = "android.os.storage.extra.STORAGE_VOLUME"
 	ActionClearAppCache string = "android.os.storage.action.CLEAR_APP_CACHE"
 	ActionManageStorage string = "android.os.storage.action.MANAGE_STORAGE"
 	ExtraRequestedBytes string = "android.os.storage.extra.REQUESTED_BYTES"
 	ExtraUuid           string = "android.os.storage.extra.UUID"
-	ExtraStorageVolume  string = "android.os.storage.extra.STORAGE_VOLUME"
-)
-
-const (
-	UuidDefault int = 0
-	Creator     int = 0
 )
