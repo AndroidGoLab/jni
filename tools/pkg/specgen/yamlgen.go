@@ -20,6 +20,41 @@ const (
 // LoadServiceNames, which reflects on android.jar via the svcgen Java tool.
 var AndroidServiceName map[string]string
 
+// loadMappingsFromSpecs reads all existing YAML spec files from dir and
+// builds a map from Java class name → PackageMapping. This replaces the
+// manual knownMappings table: when a class was already generated into a
+// spec, its mapping is preserved automatically on re-generation.
+func loadMappingsFromSpecs(dir string) (map[string]PackageMapping, error) {
+	result := make(map[string]PackageMapping)
+	files, err := filepath.Glob(filepath.Join(dir, "*.yaml"))
+	if err != nil {
+		return result, err
+	}
+	for _, f := range files {
+		data, err := os.ReadFile(f)
+		if err != nil {
+			continue
+		}
+		var spec SpecFile
+		if err := yaml.Unmarshal(data, &spec); err != nil {
+			continue
+		}
+		if spec.Package == "" || spec.GoImport == "" {
+			continue
+		}
+		for _, cls := range spec.Classes {
+			if cls.JavaClass == "" {
+				continue
+			}
+			result[cls.JavaClass] = PackageMapping{
+				Package:  spec.Package,
+				GoImport: spec.GoImport,
+			}
+		}
+	}
+	return result, nil
+}
+
 // GenerateSpec generates a YAML spec from .class files in a directory
 // by running javap on each class.
 func GenerateSpec(
@@ -105,6 +140,13 @@ func GenerateFromRefDir(
 		return fmt.Errorf("mkdir %s: %w", outputDir, err)
 	}
 
+	// Load mappings from existing spec files so that previously
+	// generated class→package assignments are preserved automatically.
+	existingMappings, err := loadMappingsFromSpecs(outputDir)
+	if err != nil {
+		return fmt.Errorf("load existing specs: %w", err)
+	}
+
 	cp := refDir
 	if extraClassPath != "" {
 		cp = refDir + ":" + extraClassPath
@@ -115,7 +157,7 @@ func GenerateFromRefDir(
 	specs := make(map[string]*SpecFile) // key: Go package name
 
 	for parentName, entry := range topLevel {
-		mapping := inferClassMapping(parentName, goModule)
+		mapping := inferClassMapping(parentName, goModule, existingMappings)
 
 		spec, ok := specs[mapping.Package]
 		if !ok {
@@ -280,166 +322,17 @@ func hasUnsupportedParams(m JavapMethod) bool {
 }
 
 // inferClassMapping derives the Go package name from a single Java class name.
-// E.g. "android.app.AlarmManager" → package "alarm", go_import ".../app/alarm".
-func inferClassMapping(className string, goModule string) PackageMapping {
-	// Known class → package mappings (primary service classes).
-	knownMappings := map[string]struct{ pkg, goPath string }{
-		"android.accounts.AccountManager":                    {"accounts", "accounts"},
-		"android.app.Activity":                               {"app", "app"},
-		"android.app.AlarmManager":                           {"alarm", "app/alarm"},
-		"android.app.DownloadManager":                        {"download", "app/download"},
-		"android.app.KeyguardManager":                        {"keyguard", "os/keyguard"},
-		"android.app.Notification":                           {"notification", "app/notification"},
-		"android.app.Notification$BigTextStyle":              {"notification", "app/notification"},
-		"android.app.Notification$Builder":                   {"notification", "app/notification"},
-		"android.app.NotificationChannel":                    {"notification", "app/notification"},
-		"android.app.NotificationManager":                    {"notification", "app/notification"},
-		"android.app.PendingIntent":                          {"app", "app"},
-		"android.app.admin.DevicePolicyManager":              {"admin", "app/admin"},
-		"android.app.blob.BlobStoreManager":                  {"blob", "app/blob"},
-		"android.app.job.JobInfo":                            {"job", "app/job"},
-		"android.app.job.JobScheduler":                       {"job", "app/job"},
-		"android.app.role.RoleManager":                       {"role", "app/role"},
-		"android.app.usage.UsageStats":                       {"usage", "app/usage"},
-		"android.app.usage.UsageStatsManager":                {"usage", "app/usage"},
-		"android.bluetooth.BluetoothAdapter":                 {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothDevice":                  {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothGatt":                    {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothGattCharacteristic":      {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothGattDescriptor":          {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothGattServer":              {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothGattService":             {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothServerSocket":            {"bluetooth", "bluetooth"},
-		"android.bluetooth.BluetoothSocket":                  {"bluetooth", "bluetooth"},
-		"android.bluetooth.le.BluetoothLeAdvertiser":         {"bluetooth_le", "bluetooth/le"},
-		"android.bluetooth.le.BluetoothLeScanner":            {"bluetooth_le", "bluetooth/le"},
-		"android.bluetooth.le.ScanFilter":                    {"bluetooth_le", "bluetooth/le"},
-		"android.bluetooth.le.ScanResult":                    {"bluetooth_le", "bluetooth/le"},
-		"android.bluetooth.le.ScanSettings":                  {"bluetooth_le", "bluetooth/le"},
-		"android.bluetooth.le.AdvertiseData":                 {"bluetooth_le", "bluetooth/le"},
-		"android.bluetooth.le.AdvertiseSettings":             {"bluetooth_le", "bluetooth/le"},
-		"android.companion.AssociationRequest":               {"companion", "companion"},
-		"android.companion.CompanionDeviceManager":           {"companion", "companion"},
-		"android.credentials.ClearCredentialStateRequest":    {"credentials", "credentials"},
-		"android.credentials.Credential":                     {"credentials", "credentials"},
-		"android.credentials.CredentialManager":               {"credentials", "credentials"},
-		"android.credentials.CredentialOption":                {"credentials", "credentials"},
-		"android.credentials.CreateCredentialRequest":         {"credentials", "credentials"},
-		"android.credentials.CreateCredentialResponse":        {"credentials", "credentials"},
-		"android.credentials.GetCredentialRequest":            {"credentials", "credentials"},
-		"android.credentials.GetCredentialResponse":           {"credentials", "credentials"},
-		"android.content.BroadcastReceiver":                  {"content", "content"},
-		"android.content.ClipData":                           {"clipboard", "content/clipboard"},
-		"android.content.ClipboardManager":                   {"clipboard", "content/clipboard"},
-		"android.content.ContentResolver":                    {"resolver", "content/resolver"},
-		"android.content.Context":                            {"app", "app"},
-		"android.content.Intent":                             {"app", "app"},
-		"android.content.SharedPreferences":                  {"preferences", "content/preferences"},
-		"android.content.pm.PackageInfo":                     {"pm", "content/pm"},
-		"android.content.pm.PackageManager":                  {"pm", "content/pm"},
-		"android.database.Cursor":                            {"resolver", "content/resolver"},
-		"android.graphics.Bitmap":                            {"pdf", "graphics/pdf"},
-		"android.graphics.Bitmap$Config":                     {"pdf", "graphics/pdf"},
-		"android.graphics.Canvas":                            {"pdf", "graphics/pdf"},
-		"android.graphics.Paint":                             {"pdf", "graphics/pdf"},
-		"android.graphics.Typeface":                          {"pdf", "graphics/pdf"},
-		"android.graphics.pdf.PdfRenderer":                   {"pdf", "graphics/pdf"},
-		"android.health.connect.HealthConnectManager":        {"health_connect", "health/connect"},
-		"android.hardware.ConsumerIrManager":                 {"ir", "hardware/ir"},
-		"android.hardware.biometrics.BiometricManager":       {"biometric", "hardware/biometric"},
-		"android.hardware.biometrics.BiometricPrompt":        {"biometric", "hardware/biometric"},
-		"android.hardware.camera2.CameraManager":             {"camera", "hardware/camera"},
-		"android.hardware.display.VirtualDisplay":            {"projection", "media/projection"},
-		"android.hardware.lights.Light":                      {"lights", "hardware/lights"},
-		"android.hardware.lights.LightState":                 {"lights", "hardware/lights"},
-		"android.hardware.lights.LightsManager":              {"lights", "hardware/lights"},
-		"android.hardware.lights.LightsRequest":              {"lights", "hardware/lights"},
-		"android.hardware.usb.UsbDevice":                     {"usb", "hardware/usb"},
-		"android.hardware.usb.UsbDeviceConnection":           {"usb", "hardware/usb"},
-		"android.hardware.usb.UsbEndpoint":                   {"usb", "hardware/usb"},
-		"android.hardware.usb.UsbInterface":                  {"usb", "hardware/usb"},
-		"android.hardware.usb.UsbManager":                    {"usb", "hardware/usb"},
-		"android.location.GnssStatus":                        {"location", "location"},
-		"android.location.Location":                          {"location", "location"},
-		"android.location.LocationManager":                   {"location", "location"},
-		"android.location.altitude.AltitudeConverter":        {"altitude", "location/altitude"},
-		"android.media.AudioDeviceInfo":                      {"audiomanager", "media/audiomanager"},
-		"android.media.AudioFocusRequest":                    {"audiomanager", "media/audiomanager"},
-		"android.media.AudioManager":                         {"audiomanager", "media/audiomanager"},
-		"android.media.AudioRecord":                          {"audiorecord", "media/audiorecord"},
-		"android.media.MediaPlayer":                          {"player", "media/player"},
-		"android.media.MediaRecorder":                        {"recorder", "media/recorder"},
-		"android.media.Ringtone":                             {"ringtone", "media/ringtone"},
-		"android.media.RingtoneManager":                      {"ringtone", "media/ringtone"},
-		"android.media.projection.MediaProjection":           {"projection", "media/projection"},
-		"android.media.projection.MediaProjectionManager":    {"projection", "media/projection"},
-		"android.media.session.MediaController":              {"session", "media/session"},
-		"android.media.session.MediaSessionManager":          {"session", "media/session"},
-		"android.net.ConnectivityManager":                    {"net", "net"},
-		"android.net.NetworkCapabilities":                    {"net", "net"},
-		"android.net.Uri":                                    {"resolver", "content/resolver"},
-		"android.net.VpnService":                             {"vpn", "net/vpn"},
-		"android.net.nsd.NsdManager":                         {"nsd", "net/nsd"},
-		"android.net.nsd.NsdServiceInfo":                     {"nsd", "net/nsd"},
-		"android.net.wifi.ScanResult":                        {"wifi", "net/wifi"},
-		"android.net.wifi.WifiInfo":                          {"wifi", "net/wifi"},
-		"android.net.wifi.WifiManager":                       {"wifi", "net/wifi"},
-		"android.net.wifi.p2p.WifiP2pConfig":                 {"wifi_p2p", "net/wifi/p2p"},
-		"android.net.wifi.p2p.WifiP2pDevice":                 {"wifi_p2p", "net/wifi/p2p"},
-		"android.net.wifi.p2p.WifiP2pGroup":                  {"wifi_p2p", "net/wifi/p2p"},
-		"android.net.wifi.p2p.WifiP2pManager":                {"wifi_p2p", "net/wifi/p2p"},
-		"android.net.wifi.rtt.RangingRequest":                {"wifi_rtt", "net/wifi/rtt"},
-		"android.net.wifi.rtt.RangingResult":                 {"wifi_rtt", "net/wifi/rtt"},
-		"android.net.wifi.rtt.WifiRttManager":                {"wifi_rtt", "net/wifi/rtt"},
-		"android.nfc.NdefMessage":                            {"nfc", "nfc"},
-		"android.nfc.NdefRecord":                             {"nfc", "nfc"},
-		"android.nfc.NfcAdapter":                             {"nfc", "nfc"},
-		"android.nfc.Tag":                                    {"nfc", "nfc"},
-		"android.nfc.tech.IsoDep":                            {"nfc", "nfc"},
-		"android.nfc.tech.Ndef":                              {"nfc", "nfc"},
-		"android.os.BatteryManager":                          {"battery", "os/battery"},
-		"android.os.Build":                                   {"build", "os/build"},
-		"android.os.Bundle":                                  {"app", "app"},
-		"android.os.CancellationSignal":                      {"app", "app"},
-		"android.os.Environment":                             {"environment", "os/environment"},
-		"android.os.ParcelFileDescriptor":                    {"pdf", "graphics/pdf"},
-		"android.os.PowerManager":                            {"power", "os/power"},
-		"android.os.Vibrator":                                {"vibrator", "os/vibrator"},
-		"android.os.storage.StorageManager":                  {"storage", "os/storage"},
-		"android.os.storage.StorageVolume":                   {"storage", "os/storage"},
-		"android.print.PrintJob":                             {"print", "print"},
-		"android.print.PrintJobInfo":                         {"print", "print"},
-		"android.print.PrintManager":                         {"print", "print"},
-		"android.Manifest":                                   {"permission", "content/permission"},
-		"android.provider.CalendarContract":                  {"calendar", "provider/calendar"},
-		"android.provider.ContactsContract":                  {"contacts", "provider/contacts"},
-		"android.provider.DocumentsContract":                 {"documents", "provider/documents"},
-		"android.provider.MediaStore":                        {"mediastore", "provider/media"},
-		"android.provider.Settings":                          {"settings", "provider/settings"},
-		"android.se.omapi.Channel":                           {"omapi", "se/omapi"},
-		"android.se.omapi.Reader":                            {"omapi", "se/omapi"},
-		"android.se.omapi.SEService":                         {"omapi", "se/omapi"},
-		"android.se.omapi.Session":                           {"omapi", "se/omapi"},
-		"android.security.keystore.KeyGenParameterSpec":      {"keystore", "security/keystore"},
-		"android.service.notification.StatusBarNotification": {"notification", "app/notification"},
-		"android.speech.SpeechRecognizer":                    {"speech", "speech"},
-		"android.speech.tts.TextToSpeech":                    {"speech", "speech"},
-		"android.telecom.TelecomManager":                     {"telecom", "telecom"},
-		"android.telephony.TelephonyManager":                 {"telephony", "telephony"},
-		"android.util.DisplayMetrics":                        {"display", "view/display"},
-		"android.view.Display":                               {"display", "view/display"},
-		"android.view.WindowManager":                         {"display", "view/display"},
-		"android.view.inputmethod.InputMethodManager":        {"inputmethod", "view/inputmethod"},
-		"android.widget.Toast":                               {"toast", "widget/toast"},
+// It first checks existing spec files (loaded into existingMappings) so that
+// previously generated class→package assignments are preserved. Falls back to
+// prefix-based heuristics for new classes.
+func inferClassMapping(
+	className string,
+	goModule string,
+	existingMappings map[string]PackageMapping,
+) PackageMapping {
+	if m, ok := existingMappings[className]; ok {
+		return m
 	}
-
-	if m, ok := knownMappings[className]; ok {
-		return PackageMapping{
-			Package:  m.pkg,
-			GoImport: goModule + "/" + m.goPath,
-		}
-	}
-
 	return inferPackageMapping(className, goModule)
 }
 
