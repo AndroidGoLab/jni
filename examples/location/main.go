@@ -142,6 +142,22 @@ func printLocation(vm *jni.VM, provider string, locObj *jni.Object, output *byte
 		loc.Provider, loc.Latitude, loc.Longitude)
 }
 
+// deliverFirstLocation stores the first received location and signals
+// completion. Subsequent calls are no-ops (the channel is already closed).
+func deliverFirstLocation(
+	mu *sync.Mutex,
+	result **location.ExtractedLocation,
+	done chan struct{},
+	loc *location.ExtractedLocation,
+) {
+	mu.Lock()
+	defer mu.Unlock()
+	if *result == nil {
+		*result = loc
+		close(done)
+	}
+}
+
 // requestFreshLocation uses requestLocationUpdates with a JNI proxy
 // LocationListener to obtain a fresh GPS fix. It creates a HandlerThread
 // with its own Looper so callbacks can be delivered while the main thread
@@ -230,14 +246,7 @@ func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.Extracte
 
 					loc, err := location.ExtractLocation(env, locObj)
 					if err == nil && loc != nil {
-						func() {
-							mu.Lock()
-							defer mu.Unlock()
-							if result == nil {
-								result = loc
-								close(done)
-							}
-						}()
+						deliverFirstLocation(&mu, &result, done, loc)
 					}
 				}
 				return nil, nil

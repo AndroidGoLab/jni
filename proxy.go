@@ -23,25 +23,38 @@ var (
 	proxyNextID       atomic.Int64
 )
 
+// storeProxyHandler adds a handler to the global registry under the given ID.
+func storeProxyHandler(id int64, h ProxyHandler) {
+	proxyMu.Lock()
+	defer proxyMu.Unlock()
+	proxyHandlers[id] = h
+}
+
+// storeProxyHandlerFull adds a full handler to the global registry under the given ID.
+func storeProxyHandlerFull(id int64, h ProxyHandlerFull) {
+	proxyMu.Lock()
+	defer proxyMu.Unlock()
+	proxyFullHandlers[id] = h
+}
+
+// loadProxyClassLoader returns the current fallback ClassLoader reference.
+func loadProxyClassLoader() capi.Object {
+	proxyMu.Lock()
+	defer proxyMu.Unlock()
+	return proxyClassLoader
+}
+
 // registerProxy stores a handler and returns a unique ID.
 func registerProxy(h ProxyHandler) int64 {
 	id := proxyNextID.Add(1)
-	func() {
-		proxyMu.Lock()
-		defer proxyMu.Unlock()
-		proxyHandlers[id] = h
-	}()
+	storeProxyHandler(id, h)
 	return id
 }
 
 // registerProxyFull stores a full handler and returns a unique ID.
 func registerProxyFull(h ProxyHandlerFull) int64 {
 	id := proxyNextID.Add(1)
-	func() {
-		proxyMu.Lock()
-		defer proxyMu.Unlock()
-		proxyFullHandlers[id] = h
-	}()
+	storeProxyHandlerFull(id, h)
 	return id
 }
 
@@ -162,11 +175,7 @@ func findClassWithFallback(
 	}
 	capi.ExceptionClear(env)
 
-	cl := func() capi.Object {
-		proxyMu.Lock()
-		defer proxyMu.Unlock()
-		return proxyClassLoader
-	}()
+	cl := loadProxyClassLoader()
 	if cl == 0 {
 		return 0
 	}

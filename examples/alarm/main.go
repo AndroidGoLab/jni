@@ -127,24 +127,12 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	go func() {
 		time.Sleep(delay)
 		if err := postNotification(vm, appCtxObj); err != nil {
-			func() {
-				ui.OutputMu.Lock()
-				defer ui.OutputMu.Unlock()
-				fmt.Fprintf(output, "notification error: %v\n", err)
-			}()
+			ui.FormatToOutputBuf("notification error: %v\n", err)
 		}
 		if err := playAlarmRingtone(vm, appCtxObj); err != nil {
-			func() {
-				ui.OutputMu.Lock()
-				defer ui.OutputMu.Unlock()
-				fmt.Fprintf(output, "ringtone error: %v\n", err)
-			}()
+			ui.FormatToOutputBuf("ringtone error: %v\n", err)
 		}
-		func() {
-			ui.OutputMu.Lock()
-			defer ui.OutputMu.Unlock()
-			fmt.Fprintf(output, "alarm fired!\n")
-		}()
+		ui.FormatToOutputBuf("alarm fired!\n")
 		ui.RenderOutput()
 	}()
 

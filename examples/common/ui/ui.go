@@ -83,6 +83,46 @@ func Register(fn RunFunc) {
 	runFunc = fn
 }
 
+// resetOutputBuf clears the shared output buffer.
+func resetOutputBuf() {
+	OutputMu.Lock()
+	defer OutputMu.Unlock()
+	outputBuf.Reset()
+}
+
+// appendToOutputBuf writes data into the shared output buffer.
+func appendToOutputBuf(data []byte) {
+	OutputMu.Lock()
+	defer OutputMu.Unlock()
+	outputBuf.Write(data)
+}
+
+// FormatToOutputBuf formats and writes a message into the shared output buffer.
+func FormatToOutputBuf(format string, args ...any) {
+	OutputMu.Lock()
+	defer OutputMu.Unlock()
+	fmt.Fprintf(&outputBuf, format, args...)
+}
+
+// snapshotOutputBuf returns a copy of the current output buffer contents.
+func snapshotOutputBuf() string {
+	OutputMu.Lock()
+	defer OutputMu.Unlock()
+	return outputBuf.String()
+}
+
+// snapshotOutputBufIfNonEmpty returns the buffer contents and whether the
+// buffer was non-empty, under a single lock acquisition.
+func snapshotOutputBufIfNonEmpty() (text string, nonEmpty bool) {
+	OutputMu.Lock()
+	defer OutputMu.Unlock()
+	nonEmpty = outputBuf.Len() > 0
+	if nonEmpty {
+		text = outputBuf.String()
+	}
+	return text, nonEmpty
+}
+
 // OnCreate is called when the NativeActivity is created.
 func OnCreate(
 	cvm *jni.VM,
@@ -90,11 +130,7 @@ func OnCreate(
 ) {
 	vm = cvm
 	activityRef = activity
-	func() {
-		OutputMu.Lock()
-		defer OutputMu.Unlock()
-		outputBuf.Reset()
-	}()
+	resetOutputBuf()
 	exampleStarted = false
 }
 
@@ -117,11 +153,7 @@ func OnNativeWindowCreated(windowPtr unsafe.Pointer) {
 			var err error
 			needed, err = getUngrantedPermissions(env, activityRef)
 			if err != nil {
-				func() {
-					OutputMu.Lock()
-					defer OutputMu.Unlock()
-					fmt.Fprintf(&outputBuf, "permissions check: %v\n", err)
-				}()
+				FormatToOutputBuf("permissions check: %v\n", err)
 			}
 			return nil
 		})
@@ -151,11 +183,7 @@ func startExample() {
 			if err := runFunc(vm, &localBuf); err != nil {
 				fmt.Fprintf(&localBuf, "ERROR: %v\n", err)
 			}
-			func() {
-				OutputMu.Lock()
-				defer OutputMu.Unlock()
-				outputBuf.Write(localBuf.Bytes())
-			}()
+			appendToOutputBuf(localBuf.Bytes())
 		}
 		RenderOutput()
 	}()
@@ -164,11 +192,7 @@ func startExample() {
 // RenderOutput re-renders the current output buffer to the screen.
 // Call from background goroutines after appending to the shared buffer.
 func RenderOutput() {
-	text := func() string {
-		OutputMu.Lock()
-		defer OutputMu.Unlock()
-		return outputBuf.String()
-	}()
+	text := snapshotOutputBuf()
 	if text == "" {
 		text = "(no output)"
 	}
@@ -177,16 +201,7 @@ func RenderOutput() {
 
 // OnResume is called when the activity resumes (e.g. after permission dialog).
 func OnResume(activity *jni.Object) {
-	hasOutput, text := func() (bool, string) {
-		OutputMu.Lock()
-		defer OutputMu.Unlock()
-		has := outputBuf.Len() > 0
-		var t string
-		if has {
-			t = outputBuf.String()
-		}
-		return has, t
-	}()
+	text, hasOutput := snapshotOutputBufIfNonEmpty()
 	if nativeWindow != nil && hasOutput {
 		renderText(text)
 	}
