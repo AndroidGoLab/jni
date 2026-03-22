@@ -23,4 +23,47 @@ const (
 	QueryArgFileSizeOver      = consts.QueryArgFileSizeOver
 	QueryArgLastModifiedAfter = consts.QueryArgLastModifiedAfter
 	QueryArgMimeTypes         = consts.QueryArgMimeTypes
+	ColumnDisplayName         = consts.ColumnDisplayName
+	ColumnDocumentId          = consts.ColumnDocumentId
+	ColumnFlags               = consts.ColumnFlags
+	ColumnIcon                = consts.ColumnIcon
+	ColumnLastModified        = consts.ColumnLastModified
+	ColumnMimeType            = consts.ColumnMimeType
+	ColumnSize                = consts.ColumnSize
+	ColumnSummary             = consts.ColumnSummary
+	MimeTypeDir               = consts.MimeTypeDir
+	ColumnAvailableBytes      = consts.ColumnAvailableBytes
+	ColumnCapacityBytes       = consts.ColumnCapacityBytes
+	ColumnMimeTypes           = consts.ColumnMimeTypes
+	ColumnQueryArgs           = consts.ColumnQueryArgs
+	ColumnRootId              = consts.ColumnRootId
+	ColumnTitle               = consts.ColumnTitle
+	MimeTypeItem              = consts.MimeTypeItem
+)
+
+const (
+	FlagDirBlocksOpenDocumentTree = consts.FlagDirBlocksOpenDocumentTree
+	FlagDirPrefersGrid            = consts.FlagDirPrefersGrid
+	FlagDirPrefersLastModified    = consts.FlagDirPrefersLastModified
+	FlagDirSupportsCreate         = consts.FlagDirSupportsCreate
+	FlagPartial                   = consts.FlagPartial
+	FlagSupportsCopy              = consts.FlagSupportsCopy
+	FlagSupportsDelete            = consts.FlagSupportsDelete
+	FlagSupportsMetadata          = consts.FlagSupportsMetadata
+	FlagSupportsMove              = consts.FlagSupportsMove
+	FlagSupportsRemove            = consts.FlagSupportsRemove
+	FlagSupportsRename            = consts.FlagSupportsRename
+	FlagSupportsSettings          = consts.FlagSupportsSettings
+	FlagSupportsThumbnail         = consts.FlagSupportsThumbnail
+	FlagSupportsWrite             = consts.FlagSupportsWrite
+	FlagVirtualDocument           = consts.FlagVirtualDocument
+	FlagWebLinkable               = consts.FlagWebLinkable
+	Creator                       = consts.Creator
+	FlagEmpty                     = consts.FlagEmpty
+	FlagLocalOnly                 = consts.FlagLocalOnly
+	FlagSupportsCreate            = consts.FlagSupportsCreate
+	FlagSupportsEject             = consts.FlagSupportsEject
+	FlagSupportsIsChild           = consts.FlagSupportsIsChild
+	FlagSupportsRecents           = consts.FlagSupportsRecents
+	FlagSupportsSearch            = consts.FlagSupportsSearch
 )

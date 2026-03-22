@@ -21,4 +21,47 @@ const (
 	QueryArgFileSizeOver      string = "android:query-arg-file-size-over"
 	QueryArgLastModifiedAfter string = "android:query-arg-last-modified-after"
 	QueryArgMimeTypes         string = "android:query-arg-mime-types"
+	ColumnDisplayName         string = "_display_name"
+	ColumnDocumentId          string = "document_id"
+	ColumnFlags               string = "flags"
+	ColumnIcon                string = "icon"
+	ColumnLastModified        string = "last_modified"
+	ColumnMimeType            string = "mime_type"
+	ColumnSize                string = "_size"
+	ColumnSummary             string = "summary"
+	MimeTypeDir               string = "vnd.android.document/directory"
+	ColumnAvailableBytes      string = "available_bytes"
+	ColumnCapacityBytes       string = "capacity_bytes"
+	ColumnMimeTypes           string = "mime_types"
+	ColumnQueryArgs           string = "query_args"
+	ColumnRootId              string = "root_id"
+	ColumnTitle               string = "title"
+	MimeTypeItem              string = "vnd.android.document/root"
+)
+
+const (
+	FlagDirBlocksOpenDocumentTree int = 32768
+	FlagDirPrefersGrid            int = 16
+	FlagDirPrefersLastModified    int = 32
+	FlagDirSupportsCreate         int = 8
+	FlagPartial                   int = 8192
+	FlagSupportsCopy              int = 128
+	FlagSupportsDelete            int = 4
+	FlagSupportsMetadata          int = 16384
+	FlagSupportsMove              int = 256
+	FlagSupportsRemove            int = 1024
+	FlagSupportsRename            int = 64
+	FlagSupportsSettings          int = 2048
+	FlagSupportsThumbnail         int = 1
+	FlagSupportsWrite             int = 2
+	FlagVirtualDocument           int = 512
+	FlagWebLinkable               int = 4096
+	Creator                       int = 0
+	FlagEmpty                     int = 64
+	FlagLocalOnly                 int = 2
+	FlagSupportsCreate            int = 1
+	FlagSupportsEject             int = 32
+	FlagSupportsIsChild           int = 16
+	FlagSupportsRecents           int = 4
+	FlagSupportsSearch            int = 8
 )

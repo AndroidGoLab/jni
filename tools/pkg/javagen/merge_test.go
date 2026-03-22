@@ -427,6 +427,197 @@ func TestSanitizeGoName(t *testing.T) {
 	}
 }
 
+func TestMerge_ConstantTypeCollision(t *testing.T) {
+	// Simulate the bluetooth package scenario: constant "A2dp" (from
+	// BluetoothProfile.A2DP) collides with class go_type "A2dp" (from
+	// BluetoothA2dp).
+	spec := &Spec{
+		Package:  "bluetooth",
+		GoImport: "github.com/example/bluetooth",
+		Classes: []Class{
+			{
+				JavaClass:   "android.bluetooth.BluetoothA2dp",
+				GoType:      "A2dp",
+				Obtain:      "system_service",
+				ServiceName: "bluetooth_a2dp",
+			},
+			{
+				JavaClass:   "android.bluetooth.BluetoothGatt",
+				GoType:      "Gatt",
+				Obtain:      "system_service",
+				ServiceName: "bluetooth_gatt",
+			},
+		},
+		Constants: []Constant{
+			{GoName: "A2dp", Value: "2", GoType: "int"},
+			{GoName: "Gatt", Value: "7", GoType: "int"},
+			{GoName: "ExtraState", Value: `"state"`, GoType: "string"},
+		},
+	}
+
+	merged, err := Merge(spec, &Overlay{})
+	if err != nil {
+		t.Fatalf("Merge: %v", err)
+	}
+
+	// Verify colliding constants got renamed.
+	for _, grp := range merged.ConstantGroups {
+		for _, v := range grp.Values {
+			switch v.GoName {
+			case "A2dp":
+				t.Error("constant A2dp should have been renamed to A2dpConst")
+			case "Gatt":
+				t.Error("constant Gatt should have been renamed to GattConst")
+			case "A2dpConst", "GattConst":
+				// expected
+			case "ExtraState":
+				// no collision, should be unchanged
+			default:
+				t.Errorf("unexpected constant name: %q", v.GoName)
+			}
+		}
+	}
+}
+
+func TestMerge_ConstantTypeCollision_DataClass(t *testing.T) {
+	spec := &Spec{
+		Package:  "util",
+		GoImport: "github.com/example/util",
+		Classes: []Class{
+			{
+				JavaClass: "android.util.Size",
+				GoType:    "Size",
+				Kind:      "data_class",
+				Fields: []Field{
+					{JavaMethod: "getWidth", Returns: "int", GoName: "Width"},
+				},
+			},
+		},
+		Constants: []Constant{
+			{GoName: "Size", Value: "1", GoType: "int"},
+			{GoName: "Other", Value: "2", GoType: "int"},
+		},
+	}
+
+	merged, err := Merge(spec, &Overlay{})
+	if err != nil {
+		t.Fatalf("Merge: %v", err)
+	}
+
+	for _, grp := range merged.ConstantGroups {
+		for _, v := range grp.Values {
+			if v.GoName == "Size" {
+				t.Error("constant Size should have been renamed to SizeConst")
+			}
+			if v.GoName == "OtherConst" {
+				t.Error("constant Other should NOT have been renamed")
+			}
+		}
+	}
+}
+
+func TestMerge_ConstantTypeCollision_CallbackType(t *testing.T) {
+	spec := &Spec{
+		Package:  "test",
+		GoImport: "github.com/example/test",
+		Callbacks: []Callback{
+			{
+				JavaInterface: "com.example.Codec",
+				GoType:        "Codec",
+			},
+		},
+		Constants: []Constant{
+			{GoName: "Codec", Value: `"codec"`, GoType: "string"},
+		},
+	}
+
+	merged, err := Merge(spec, &Overlay{})
+	if err != nil {
+		t.Fatalf("Merge: %v", err)
+	}
+
+	for _, grp := range merged.ConstantGroups {
+		for _, v := range grp.Values {
+			if v.GoName == "Codec" {
+				t.Error("constant Codec should have been renamed to CodecConst")
+			}
+		}
+	}
+}
+
+func TestMerge_ConstantNoCollision(t *testing.T) {
+	// When no collisions exist, names should be unchanged.
+	spec := &Spec{
+		Package:  "test",
+		GoImport: "github.com/example/test",
+		Classes: []Class{
+			{
+				JavaClass:   "com.example.Manager",
+				GoType:      "Manager",
+				Obtain:      "system_service",
+				ServiceName: "mgr",
+			},
+		},
+		Constants: []Constant{
+			{GoName: "Foo", Value: "1", GoType: "int"},
+			{GoName: "Bar", Value: "2", GoType: "int"},
+		},
+	}
+
+	merged, err := Merge(spec, &Overlay{})
+	if err != nil {
+		t.Fatalf("Merge: %v", err)
+	}
+
+	for _, grp := range merged.ConstantGroups {
+		for _, v := range grp.Values {
+			if v.GoName == "FooConst" || v.GoName == "BarConst" {
+				t.Errorf("constant %q should NOT have been renamed", v.GoName)
+			}
+		}
+	}
+}
+
+func TestMerge_ConstantGroupTypeCollision(t *testing.T) {
+	// A constant group with a named type (non-builtin) that collides with
+	// a class GoType. The constant group GoType should also be detected.
+	spec := &Spec{
+		Package:  "test",
+		GoImport: "github.com/example/test",
+		Classes: []Class{
+			{
+				JavaClass:   "com.example.Transport",
+				GoType:      "Transport",
+				Obtain:      "system_service",
+				ServiceName: "transport",
+			},
+		},
+		Constants: []Constant{
+			{GoName: "WiFi", Value: "1", GoType: "Transport"},
+			{GoName: "Cell", Value: "2", GoType: "Transport"},
+			// This constant name collides with a class GoType:
+			{GoName: "Transport", Value: "0", GoType: "int"},
+		},
+	}
+
+	merged, err := Merge(spec, &Overlay{})
+	if err != nil {
+		t.Fatalf("Merge: %v", err)
+	}
+
+	for _, grp := range merged.ConstantGroups {
+		for _, v := range grp.Values {
+			if v.GoName == "Transport" {
+				t.Error("constant Transport should have been renamed to TransportConst")
+			}
+			// WiFi and Cell should NOT be renamed (no collision).
+			if v.GoName == "WiFiConst" || v.GoName == "CellConst" {
+				t.Errorf("constant %q should NOT have been renamed", v.GoName)
+			}
+		}
+	}
+}
+
 func TestBuildGoParamList(t *testing.T) {
 	params := []MergedParam{
 		{GoName: "name", GoType: "string"},

@@ -34,8 +34,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -43,7 +43,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -102,13 +102,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	ui.RenderOutput()
 
-	// Query GetEngines (returns a Java List).
-	engines, err := tts.GetEngines()
-	if err != nil {
-		fmt.Fprintf(output, "GetEngines: err=%v\n", err)
-	} else {
-		fmt.Fprintf(output, "GetEngines: %v\n", engines)
-	}
+	// Filtered: GetEngines returns generic type (List<EngineInfo>)
+	// engines, err := tts.GetEngines()
+	// if err != nil {
+	// 	fmt.Fprintf(output, "GetEngines: err=%v\n", err)
+	// } else {
+	// 	fmt.Fprintf(output, "GetEngines: %v\n", engines)
+	// }
 	ui.RenderOutput()
 
 	// Query IsSpeaking.
@@ -156,22 +156,22 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	ui.RenderOutput()
 
-	// Query GetAvailableLanguages.
-	availLangs, err := tts.GetAvailableLanguages()
-	if err != nil {
-		fmt.Fprintf(output, "GetAvailLangs: %v\n", err)
-	} else {
-		fmt.Fprintf(output, "AvailLangs: %v\n", availLangs)
-	}
+	// Filtered: GetAvailableLanguages returns generic type (Set<Locale>)
+	// availLangs, err := tts.GetAvailableLanguages()
+	// if err != nil {
+	// 	fmt.Fprintf(output, "GetAvailLangs: %v\n", err)
+	// } else {
+	// 	fmt.Fprintf(output, "AvailLangs: %v\n", availLangs)
+	// }
 	ui.RenderOutput()
 
-	// Query GetVoices.
-	voices, err := tts.GetVoices()
-	if err != nil {
-		fmt.Fprintf(output, "GetVoices: %v\n", err)
-	} else {
-		fmt.Fprintf(output, "Voices: %v\n", voices)
-	}
+	// Filtered: GetVoices returns generic type (Set<Voice>)
+	// voices, err := tts.GetVoices()
+	// if err != nil {
+	// 	fmt.Fprintf(output, "GetVoices: %v\n", err)
+	// } else {
+	// 	fmt.Fprintf(output, "Voices: %v\n", voices)
+	// }
 	ui.RenderOutput()
 
 	// Query GetMaxSpeechInputLength (static).
@@ -203,12 +203,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Speaking: Hello from Go!")
 	ui.RenderOutput()
 
-	speakRC, err := tts.Speak4("Hello from Go!", int32(speech.QueueFlush), nil, "utt1")
-	if err != nil {
-		fmt.Fprintf(output, "Speak: %v\n", err)
-	} else {
-		fmt.Fprintf(output, "Speak result: %d\n", speakRC)
-	}
+	// Filtered: Speak4 takes Bundle parameter (generic type filtering)
+	// speakRC, err := tts.Speak4("Hello from Go!", int32(speech.QueueFlush), nil, "utt1")
+	// if err != nil {
+	// 	fmt.Fprintf(output, "Speak: %v\n", err)
+	// } else {
+	// 	fmt.Fprintf(output, "Speak result: %d\n", speakRC)
+	// }
 	ui.RenderOutput()
 
 	// Wait and check IsSpeaking.

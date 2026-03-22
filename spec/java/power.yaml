@@ -160,6 +160,18 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.os.PowerManager$OnThermalHeadroomChangedListener
+      go_type: ManagerOnThermalHeadroomChangedListener
+    - java_class: android.os.PowerManager$OnThermalStatusChangedListener
+      go_type: ManagerOnThermalStatusChangedListener
+      methods:
+        - java_method: onThermalStatusChanged
+          go_name: OnThermalStatusChanged
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.os.PowerManager$WakeLock
       go_type: ManagerWakeLock
       methods:
@@ -215,6 +227,16 @@ classes:
         - java_method: toString
           go_name: ToString
           returns: String
+          error: true
+    - java_class: android.os.PowerManager$WakeLockStateListener
+      go_type: ManagerWakeLockStateListener
+      methods:
+        - java_method: onStateChanged
+          go_name: OnStateChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
           error: true
 constants:
     - go_name: AcquireCausesWakeup

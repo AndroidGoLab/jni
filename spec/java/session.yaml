@@ -48,10 +48,6 @@ classes:
           go_name: GetPlaybackState
           returns: android.media.session.PlaybackState
           error: true
-        - java_method: getQueue
-          go_name: GetQueue
-          returns: java.util.List<android.media.session.MediaSession$QueueItem>
-          error: true
         - java_method: getQueueTitle
           go_name: GetQueueTitle
           returns: java.lang.CharSequence
@@ -114,6 +110,745 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.media.session.MediaController$Callback
+      go_type: MediaControllerCallback
+      methods:
+        - java_method: onAudioInfoChanged
+          go_name: OnAudioInfoChanged
+          params:
+            - java_type: android.media.session.MediaController$PlaybackInfo
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onExtrasChanged
+          go_name: OnExtrasChanged
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onMetadataChanged
+          go_name: OnMetadataChanged
+          params:
+            - java_type: android.media.MediaMetadata
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onPlaybackStateChanged
+          go_name: OnPlaybackStateChanged
+          params:
+            - java_type: android.media.session.PlaybackState
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onQueueTitleChanged
+          go_name: OnQueueTitleChanged
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSessionDestroyed
+          go_name: OnSessionDestroyed
+          returns: void
+          error: true
+        - java_method: onSessionEvent
+          go_name: OnSessionEvent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.session.MediaController$PlaybackInfo
+      go_type: MediaControllerPlaybackInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAudioAttributes
+          go_name: GetAudioAttributes
+          returns: android.media.AudioAttributes
+          error: true
+        - java_method: getCurrentVolume
+          go_name: GetCurrentVolume
+          returns: int
+          error: true
+        - java_method: getMaxVolume
+          go_name: GetMaxVolume
+          returns: int
+          error: true
+        - java_method: getPlaybackType
+          go_name: GetPlaybackType
+          returns: int
+          error: true
+        - java_method: getVolumeControl
+          go_name: GetVolumeControl
+          returns: int
+          error: true
+        - java_method: getVolumeControlId
+          go_name: GetVolumeControlId
+          returns: String
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.session.MediaController$TransportControls
+      go_type: MediaControllerTransportControls
+      methods:
+        - java_method: fastForward
+          go_name: FastForward
+          returns: void
+          error: true
+        - java_method: pause
+          go_name: Pause
+          returns: void
+          error: true
+        - java_method: play
+          go_name: Play
+          returns: void
+          error: true
+        - java_method: playFromMediaId
+          go_name: PlayFromMediaId
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: playFromSearch
+          go_name: PlayFromSearch
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: playFromUri
+          go_name: PlayFromUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: prepare
+          go_name: Prepare
+          returns: void
+          error: true
+        - java_method: prepareFromMediaId
+          go_name: PrepareFromMediaId
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: prepareFromSearch
+          go_name: PrepareFromSearch
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: prepareFromUri
+          go_name: PrepareFromUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: rewind
+          go_name: Rewind
+          returns: void
+          error: true
+        - java_method: seekTo
+          go_name: SeekTo
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: sendCustomAction
+          go_name: SendCustomAction2
+          params:
+            - java_type: android.media.session.PlaybackState$CustomAction
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: sendCustomAction
+          go_name: SendCustomAction2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPlaybackSpeed
+          go_name: SetPlaybackSpeed
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRating
+          go_name: SetRating
+          params:
+            - java_type: android.media.Rating
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: skipToNext
+          go_name: SkipToNext
+          returns: void
+          error: true
+        - java_method: skipToPrevious
+          go_name: SkipToPrevious
+          returns: void
+          error: true
+        - java_method: skipToQueueItem
+          go_name: SkipToQueueItem
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+    - java_class: android.media.session.PlaybackState
+      go_type: PlaybackState
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getActions
+          go_name: GetActions
+          returns: long
+          error: true
+        - java_method: getActiveQueueItemId
+          go_name: GetActiveQueueItemId
+          returns: long
+          error: true
+        - java_method: getBufferedPosition
+          go_name: GetBufferedPosition
+          returns: long
+          error: true
+        - java_method: getErrorMessage
+          go_name: GetErrorMessage
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getLastPositionUpdateTime
+          go_name: GetLastPositionUpdateTime
+          returns: long
+          error: true
+        - java_method: getPlaybackSpeed
+          go_name: GetPlaybackSpeed
+          returns: float
+          error: true
+        - java_method: getPosition
+          go_name: GetPosition
+          returns: long
+          error: true
+        - java_method: getState
+          go_name: GetState
+          returns: int
+          error: true
+        - java_method: isActive
+          go_name: IsActive
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.session.PlaybackState$Builder
+      go_type: PlaybackStateBuilder
+      methods:
+        - java_method: addCustomAction
+          go_name: AddCustomAction1
+          params:
+            - java_type: android.media.session.PlaybackState$CustomAction
+              go_name: arg0
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: addCustomAction
+          go_name: AddCustomAction3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.media.session.PlaybackState
+          error: true
+        - java_method: setActions
+          go_name: SetActions
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: setActiveQueueItemId
+          go_name: SetActiveQueueItemId
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: setBufferedPosition
+          go_name: SetBufferedPosition
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: setErrorMessage
+          go_name: SetErrorMessage
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: setState
+          go_name: SetState3
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: float
+              go_name: arg2
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+        - java_method: setState
+          go_name: SetState4_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: float
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: android.media.session.PlaybackState$Builder
+          error: true
+    - java_class: android.media.session.PlaybackState$CustomAction
+      go_type: PlaybackStateCustomAction
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAction
+          go_name: GetAction
+          returns: String
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getIcon
+          go_name: GetIcon
+          returns: int
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.session.MediaSession
+      go_type: MediaSession
+      methods:
+        - java_method: getController
+          go_name: GetController
+          returns: android.media.session.MediaController
+          error: true
+        - java_method: getCurrentControllerInfo
+          go_name: GetCurrentControllerInfo
+          returns: android.media.session.MediaSessionManager$RemoteUserInfo
+          error: true
+        - java_method: getSessionToken
+          go_name: GetSessionToken
+          returns: android.media.session.MediaSession$Token
+          error: true
+        - java_method: isActive
+          go_name: IsActive
+          returns: boolean
+          error: true
+        - java_method: release
+          go_name: Release
+          returns: void
+          error: true
+        - java_method: sendSessionEvent
+          go_name: SendSessionEvent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setActive
+          go_name: SetActive
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCallback
+          go_name: SetCallback
+          params:
+            - java_type: android.media.session.MediaSession$Callback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFlags
+          go_name: SetFlags
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMediaButtonBroadcastReceiver
+          go_name: SetMediaButtonBroadcastReceiver
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMediaButtonReceiver
+          go_name: SetMediaButtonReceiver
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMetadata
+          go_name: SetMetadata
+          params:
+            - java_type: android.media.MediaMetadata
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPlaybackState
+          go_name: SetPlaybackState
+          params:
+            - java_type: android.media.session.PlaybackState
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPlaybackToLocal
+          go_name: SetPlaybackToLocal
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPlaybackToRemote
+          go_name: SetPlaybackToRemote
+          params:
+            - java_type: android.media.VolumeProvider
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setQueueTitle
+          go_name: SetQueueTitle
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRatingType
+          go_name: SetRatingType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSessionActivity
+          go_name: SetSessionActivity
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.session.MediaSession$Callback
+      go_type: MediaSessionCallback
+      methods:
+        - java_method: onCommand
+          go_name: OnCommand
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+            - java_type: android.os.ResultReceiver
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCustomAction
+          go_name: OnCustomAction
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onFastForward
+          go_name: OnFastForward
+          returns: void
+          error: true
+        - java_method: onMediaButtonEvent
+          go_name: OnMediaButtonEvent
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onPause
+          go_name: OnPause
+          returns: void
+          error: true
+        - java_method: onPlay
+          go_name: OnPlay
+          returns: void
+          error: true
+        - java_method: onPlayFromMediaId
+          go_name: OnPlayFromMediaId
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPlayFromSearch
+          go_name: OnPlayFromSearch
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPlayFromUri
+          go_name: OnPlayFromUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPrepare
+          go_name: OnPrepare
+          returns: void
+          error: true
+        - java_method: onPrepareFromMediaId
+          go_name: OnPrepareFromMediaId
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPrepareFromSearch
+          go_name: OnPrepareFromSearch
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPrepareFromUri
+          go_name: OnPrepareFromUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRewind
+          go_name: OnRewind
+          returns: void
+          error: true
+        - java_method: onSeekTo
+          go_name: OnSeekTo
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSetPlaybackSpeed
+          go_name: OnSetPlaybackSpeed
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSetRating
+          go_name: OnSetRating
+          params:
+            - java_type: android.media.Rating
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSkipToNext
+          go_name: OnSkipToNext
+          returns: void
+          error: true
+        - java_method: onSkipToPrevious
+          go_name: OnSkipToPrevious
+          returns: void
+          error: true
+        - java_method: onSkipToQueueItem
+          go_name: OnSkipToQueueItem
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onStop
+          go_name: OnStop
+          returns: void
+          error: true
+    - java_class: android.media.session.MediaSession$QueueItem
+      go_type: MediaSessionQueueItem
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: android.media.MediaDescription
+          error: true
+        - java_method: getQueueId
+          go_name: GetQueueId
+          returns: long
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.session.MediaSession$Token
+      go_type: MediaSessionToken
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.media.session.MediaSessionManager
       go_type: MediaSessionManager
       obtain: system_service
@@ -145,13 +880,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-        - java_method: getActiveSessions
-          go_name: GetActiveSessions
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: java.util.List<android.media.session.MediaController>
-          error: true
         - java_method: getMediaKeyEventSession
           go_name: GetMediaKeyEventSession
           returns: android.media.session.MediaSession$Token
@@ -159,10 +887,6 @@ classes:
         - java_method: getMediaKeyEventSessionPackageName
           go_name: GetMediaKeyEventSessionPackageName
           returns: String
-          error: true
-        - java_method: getSession2Tokens
-          go_name: GetSession2Tokens
-          returns: java.util.List<android.media.Session2Token>
           error: true
         - java_method: isTrustedForMediaControl
           go_name: IsTrustedForMediaControl
@@ -199,3 +923,160 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener
+      go_type: MediaSessionManagerOnActiveSessionsChangedListener
+    - java_class: android.media.session.MediaSessionManager$OnMediaKeyEventSessionChangedListener
+      go_type: MediaSessionManagerOnMediaKeyEventSessionChangedListener
+      methods:
+        - java_method: onMediaKeyEventSessionChanged
+          go_name: OnMediaKeyEventSessionChanged
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.media.session.MediaSession$Token
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.session.MediaSessionManager$OnSession2TokensChangedListener
+      go_type: MediaSessionManagerOnSession2TokensChangedListener
+    - java_class: android.media.session.MediaSessionManager$RemoteUserInfo
+      go_type: MediaSessionManagerRemoteUserInfo
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getPid
+          go_name: GetPid
+          returns: int
+          error: true
+        - java_method: getUid
+          go_name: GetUid
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: PlaybackTypeLocal
+      value: "1"
+      go_type: int
+    - go_name: PlaybackTypeRemote
+      value: "2"
+      go_type: int
+    - go_name: ActionFastForward
+      value: "64"
+      go_type: int64
+    - go_name: ActionPause
+      value: "2"
+      go_type: int64
+    - go_name: ActionPlay
+      value: "4"
+      go_type: int64
+    - go_name: ActionPlayFromMediaId
+      value: "1024"
+      go_type: int64
+    - go_name: ActionPlayFromSearch
+      value: "2048"
+      go_type: int64
+    - go_name: ActionPlayFromUri
+      value: "8192"
+      go_type: int64
+    - go_name: ActionPlayPause
+      value: "512"
+      go_type: int64
+    - go_name: ActionPrepare
+      value: "16384"
+      go_type: int64
+    - go_name: ActionPrepareFromMediaId
+      value: "32768"
+      go_type: int64
+    - go_name: ActionPrepareFromSearch
+      value: "65536"
+      go_type: int64
+    - go_name: ActionPrepareFromUri
+      value: "131072"
+      go_type: int64
+    - go_name: ActionRewind
+      value: "8"
+      go_type: int64
+    - go_name: ActionSeekTo
+      value: "256"
+      go_type: int64
+    - go_name: ActionSetPlaybackSpeed
+      value: "4194304"
+      go_type: int64
+    - go_name: ActionSetRating
+      value: "128"
+      go_type: int64
+    - go_name: ActionSkipToNext
+      value: "32"
+      go_type: int64
+    - go_name: ActionSkipToPrevious
+      value: "16"
+      go_type: int64
+    - go_name: ActionSkipToQueueItem
+      value: "4096"
+      go_type: int64
+    - go_name: ActionStop
+      value: "1"
+      go_type: int64
+    - go_name: PlaybackPositionUnknown
+      value: "-1"
+      go_type: int64
+    - go_name: StateBuffering
+      value: "6"
+      go_type: int
+    - go_name: StateConnecting
+      value: "8"
+      go_type: int
+    - go_name: StateError
+      value: "7"
+      go_type: int
+    - go_name: StateFastForwarding
+      value: "4"
+      go_type: int
+    - go_name: StateNone
+      value: "0"
+      go_type: int
+    - go_name: StatePaused
+      value: "2"
+      go_type: int
+    - go_name: StatePlaying
+      value: "3"
+      go_type: int
+    - go_name: StateRewinding
+      value: "5"
+      go_type: int
+    - go_name: StateSkippingToNext
+      value: "10"
+      go_type: int
+    - go_name: StateSkippingToPrevious
+      value: "9"
+      go_type: int
+    - go_name: StateSkippingToQueueItem
+      value: "11"
+      go_type: int
+    - go_name: StateStopped
+      value: "1"
+      go_type: int
+    - go_name: FlagHandlesMediaButtons
+      value: "1"
+      go_type: int
+    - go_name: FlagHandlesTransportControls
+      value: "2"
+      go_type: int
+    - go_name: UnknownId
+      value: "-1"
+      go_type: int

@@ -29,6 +29,7 @@ const (
 	Type                    = consts.Type
 	Unknown                 = consts.Unknown
 	User                    = consts.User
+	PartitionNameSystem     = consts.PartitionNameSystem
 	BaseOs                  = consts.BaseOs
 	Codename                = consts.Codename
 	Incremental             = consts.Incremental
@@ -47,6 +48,43 @@ const (
 	PreviewSdkInt         = consts.PreviewSdkInt
 	SdkInt                = consts.SdkInt
 	SdkIntFull            = consts.SdkIntFull
+	Baklava               = consts.Baklava
+	Base                  = consts.Base
+	Base11                = consts.Base11
+	Cupcake               = consts.Cupcake
+	CurDevelopment        = consts.CurDevelopment
+	Donut                 = consts.Donut
+	Eclair                = consts.Eclair
+	Eclair01              = consts.Eclair01
+	EclairMr1             = consts.EclairMr1
+	Froyo                 = consts.Froyo
+	Gingerbread           = consts.Gingerbread
+	GingerbreadMr1        = consts.GingerbreadMr1
+	Honeycomb             = consts.Honeycomb
+	HoneycombMr1          = consts.HoneycombMr1
+	HoneycombMr2          = consts.HoneycombMr2
+	IceCreamSandwich      = consts.IceCreamSandwich
+	IceCreamSandwichMr1   = consts.IceCreamSandwichMr1
+	JellyBean             = consts.JellyBean
+	JellyBeanMr1          = consts.JellyBeanMr1
+	JellyBeanMr2          = consts.JellyBeanMr2
+	Kitkat                = consts.Kitkat
+	KitkatWatch           = consts.KitkatWatch
+	Lollipop              = consts.Lollipop
+	LollipopMr1           = consts.LollipopMr1
+	M                     = consts.M
+	N                     = consts.N
+	NMr1                  = consts.NMr1
+	O                     = consts.O
+	OMr1                  = consts.OMr1
+	P                     = consts.P
+	Q                     = consts.Q
+	R                     = consts.R
+	S                     = consts.S
+	SV2                   = consts.SV2
+	Tiramisu              = consts.Tiramisu
+	UpsideDownCake        = consts.UpsideDownCake
+	VanillaIceCream       = consts.VanillaIceCream
 )
 
 const (

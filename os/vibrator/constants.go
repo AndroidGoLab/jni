@@ -5,6 +5,7 @@ package vibrator
 import "github.com/AndroidGoLab/jni/os/vibrator/consts"
 
 const (
+	Creator                       = consts.Creator
 	VibrationEffectSupportNo      = consts.VibrationEffectSupportNo
 	VibrationEffectSupportUnknown = consts.VibrationEffectSupportUnknown
 	VibrationEffectSupportYes     = consts.VibrationEffectSupportYes

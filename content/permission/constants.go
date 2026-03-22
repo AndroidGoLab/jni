@@ -340,4 +340,17 @@ const (
 	WriteSyncSettings                                     = consts.WriteSyncSettings
 	WriteSystemPreferences                                = consts.WriteSystemPreferences
 	WriteVoicemail                                        = consts.WriteVoicemail
+	Calendar                                              = consts.Calendar
+	CallLog                                               = consts.CallLog
+	Contacts                                              = consts.Contacts
+	Location                                              = consts.Location
+	Microphone                                            = consts.Microphone
+	NearbyDevices                                         = consts.NearbyDevices
+	Notifications                                         = consts.Notifications
+	Phone                                                 = consts.Phone
+	ReadMediaAural                                        = consts.ReadMediaAural
+	ReadMediaVisual                                       = consts.ReadMediaVisual
+	Sensors                                               = consts.Sensors
+	Sms                                                   = consts.Sms
+	Storage                                               = consts.Storage
 )

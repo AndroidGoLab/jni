@@ -444,38 +444,6 @@ func (m *Uri) GetPath() (string, error) {
 	return result, callErr
 }
 
-// GetPathSegments calls android.net.Uri.getPathSegments.
-func (m *Uri) GetPathSegments() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midUriGetPathSegments == nil {
-			callErr = fmt.Errorf("android.net.Uri.getPathSegments is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midUriGetPathSegments,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetPort calls android.net.Uri.getPort.
 func (m *Uri) GetPort() (int32, error) {
 	var result int32
@@ -556,76 +524,6 @@ func (m *Uri) GetQueryParameter(arg0 string) (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetQueryParameterNames calls android.net.Uri.getQueryParameterNames.
-func (m *Uri) GetQueryParameterNames() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midUriGetQueryParameterNames == nil {
-			callErr = fmt.Errorf("android.net.Uri.getQueryParameterNames is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midUriGetQueryParameterNames,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetQueryParameters calls android.net.Uri.getQueryParameters.
-func (m *Uri) GetQueryParameters(arg0 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midUriGetQueryParameters == nil {
-			callErr = fmt.Errorf("android.net.Uri.getQueryParameters is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midUriGetQueryParameters, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr

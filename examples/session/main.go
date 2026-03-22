@@ -30,8 +30,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -39,7 +39,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -63,14 +63,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "=== MediaSessionManager ===")
 
-	// GetActiveSessions requires a NotificationListenerService
-	// ComponentName (null means only sessions owned by this app).
-	sessions, err := mgr.GetActiveSessions(nil)
-	if err != nil {
-		fmt.Fprintf(output, "GetActiveSessions: %v\n", err)
-	} else {
-		printMediaSessions(vm, output, sessions)
-	}
+	// Filtered: GetActiveSessions returns generic type (List<MediaController>)
+	// sessions, err := mgr.GetActiveSessions(nil)
+	// if err != nil {
+	// 	fmt.Fprintf(output, "GetActiveSessions: %v\n", err)
+	// } else {
+	// 	printMediaSessions(vm, output, sessions)
+	// }
 
 	// Query media key event session package name (API 28+).
 	keyPkg, err := mgr.GetMediaKeyEventSessionPackageName()
@@ -80,29 +79,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintf(output, "Media key handler: %s\n", keyPkg)
 	}
 
-	// Query Session2 tokens (API 28+).
-	tokens, err := mgr.GetSession2Tokens()
-	if err != nil {
-		fmt.Fprintf(output, "Session2Tokens: %v\n", err)
-	} else {
-		var tokenCount int32
-		_ = vm.Do(func(env *jni.Env) error {
-			if tokens == nil {
-				return nil
-			}
-			listCls, err := env.FindClass("java/util/List")
-			if err != nil {
-				return err
-			}
-			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
-			if err != nil {
-				return err
-			}
-			tokenCount, err = env.CallIntMethod(tokens, sizeMid)
-			return err
-		})
-		fmt.Fprintf(output, "Session2 tokens: %d\n", tokenCount)
-	}
+	// Filtered: GetSession2Tokens returns generic type (List<Session2Token>)
+	// tokens, err := mgr.GetSession2Tokens()
+	// ...
 
 	return nil
 }

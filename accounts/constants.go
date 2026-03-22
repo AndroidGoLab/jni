@@ -33,6 +33,7 @@ const (
 	LoginAccountsChangedAction      = consts.LoginAccountsChangedAction
 	PackageNameKeyLegacyNotVisible  = consts.PackageNameKeyLegacyNotVisible
 	PackageNameKeyLegacyVisible     = consts.PackageNameKeyLegacyVisible
+	KeyCustomTokenExpiry            = consts.KeyCustomTokenExpiry
 )
 
 const (

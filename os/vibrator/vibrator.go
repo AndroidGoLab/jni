@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "vibrator"
+const serviceNameVibrator = "vibrator"
 
 // Vibrator wraps android.os.Vibrator.
 type Vibrator struct {
@@ -39,12 +39,12 @@ func NewVibrator(ctx *app.Context) (*Vibrator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameVibrator)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameVibrator)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).

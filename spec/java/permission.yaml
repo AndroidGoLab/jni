@@ -9,6 +9,8 @@ classes:
       go_type: Manifest
     - java_class: android.Manifest$permission
       go_type: Manifestpermission
+    - java_class: android.Manifest$permission_group
+      go_type: Manifestpermission_group
 constants:
     - go_name: AcceptHandover
       value: '"android.permission.ACCEPT_HANDOVER"'
@@ -1014,4 +1016,43 @@ constants:
       go_type: string
     - go_name: WriteVoicemail
       value: '"com.android.voicemail.permission.WRITE_VOICEMAIL"'
+      go_type: string
+    - go_name: Calendar
+      value: '"android.permission-group.CALENDAR"'
+      go_type: string
+    - go_name: CallLog
+      value: '"android.permission-group.CALL_LOG"'
+      go_type: string
+    - go_name: Contacts
+      value: '"android.permission-group.CONTACTS"'
+      go_type: string
+    - go_name: Location
+      value: '"android.permission-group.LOCATION"'
+      go_type: string
+    - go_name: Microphone
+      value: '"android.permission-group.MICROPHONE"'
+      go_type: string
+    - go_name: NearbyDevices
+      value: '"android.permission-group.NEARBY_DEVICES"'
+      go_type: string
+    - go_name: Notifications
+      value: '"android.permission-group.NOTIFICATIONS"'
+      go_type: string
+    - go_name: Phone
+      value: '"android.permission-group.PHONE"'
+      go_type: string
+    - go_name: ReadMediaAural
+      value: '"android.permission-group.READ_MEDIA_AURAL"'
+      go_type: string
+    - go_name: ReadMediaVisual
+      value: '"android.permission-group.READ_MEDIA_VISUAL"'
+      go_type: string
+    - go_name: Sensors
+      value: '"android.permission-group.SENSORS"'
+      go_type: string
+    - go_name: Sms
+      value: '"android.permission-group.SMS"'
+      go_type: string
+    - go_name: Storage
+      value: '"android.permission-group.STORAGE"'
       go_type: string

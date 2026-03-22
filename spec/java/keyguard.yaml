@@ -79,3 +79,49 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.app.KeyguardManager$KeyguardDismissCallback
+      go_type: ManagerKeyguardDismissCallback
+      methods:
+        - java_method: onDismissCancelled
+          go_name: OnDismissCancelled
+          returns: void
+          error: true
+        - java_method: onDismissError
+          go_name: OnDismissError
+          returns: void
+          error: true
+        - java_method: onDismissSucceeded
+          go_name: OnDismissSucceeded
+          returns: void
+          error: true
+    - java_class: android.app.KeyguardManager$KeyguardLock
+      go_type: ManagerKeyguardLock
+      methods:
+        - java_method: disableKeyguard
+          go_name: DisableKeyguard
+          returns: void
+          error: true
+        - java_method: reenableKeyguard
+          go_name: ReenableKeyguard
+          returns: void
+          error: true
+    - java_class: android.app.KeyguardManager$KeyguardLockedStateListener
+      go_type: ManagerKeyguardLockedStateListener
+      methods:
+        - java_method: onKeyguardLockedStateChanged
+          go_name: OnKeyguardLockedStateChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.app.KeyguardManager$OnKeyguardExitResult
+      go_type: ManagerOnKeyguardExitResult
+      methods:
+        - java_method: onKeyguardExitResult
+          go_name: OnKeyguardExitResult
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true

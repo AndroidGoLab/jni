@@ -27,6 +27,7 @@ const (
 	Type                    string = ""
 	Unknown                 string = "unknown"
 	User                    string = ""
+	PartitionNameSystem     string = "system"
 	BaseOs                  string = ""
 	Codename                string = ""
 	Incremental             string = ""
@@ -45,6 +46,43 @@ const (
 	PreviewSdkInt         int = 0
 	SdkInt                int = 0
 	SdkIntFull            int = 0
+	Baklava               int = 36
+	Base                  int = 1
+	Base11                int = 2
+	Cupcake               int = 3
+	CurDevelopment        int = 10000
+	Donut                 int = 4
+	Eclair                int = 5
+	Eclair01              int = 6
+	EclairMr1             int = 7
+	Froyo                 int = 8
+	Gingerbread           int = 9
+	GingerbreadMr1        int = 10
+	Honeycomb             int = 11
+	HoneycombMr1          int = 12
+	HoneycombMr2          int = 13
+	IceCreamSandwich      int = 14
+	IceCreamSandwichMr1   int = 15
+	JellyBean             int = 16
+	JellyBeanMr1          int = 17
+	JellyBeanMr2          int = 18
+	Kitkat                int = 19
+	KitkatWatch           int = 20
+	Lollipop              int = 21
+	LollipopMr1           int = 22
+	M                     int = 23
+	N                     int = 24
+	NMr1                  int = 25
+	O                     int = 26
+	OMr1                  int = 27
+	P                     int = 28
+	Q                     int = 29
+	R                     int = 30
+	S                     int = 31
+	SV2                   int = 32
+	Tiramisu              int = 33
+	UpsideDownCake        int = 34
+	VanillaIceCream       int = 35
 )
 
 const (

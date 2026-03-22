@@ -30,8 +30,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -39,7 +39,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -98,29 +98,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintf(output, "TTY supported: %v\n", tty)
 	}
 
-	// Query call-capable phone accounts (returns java.util.List).
-	phoneAccts, err := mgr.GetCallCapablePhoneAccounts()
-	if err != nil {
-		fmt.Fprintf(output, "PhoneAccounts: %v\n", err)
-	} else {
-		var listSize int32
-		_ = vm.Do(func(env *jni.Env) error {
-			if phoneAccts == nil {
-				return nil
-			}
-			listClass, err := env.FindClass("java/util/List")
-			if err != nil {
-				return err
-			}
-			sizeMid, err := env.GetMethodID(listClass, "size", "()I")
-			if err != nil {
-				return err
-			}
-			listSize, err = env.CallIntMethod(phoneAccts, sizeMid)
-			return err
-		})
-		fmt.Fprintf(output, "Call-capable accounts: %d\n", listSize)
-	}
+	// Filtered: GetCallCapablePhoneAccounts returns generic type (List<PhoneAccountHandle>)
+	// phoneAccts, err := mgr.GetCallCapablePhoneAccounts()
+	// ...
 
 	return nil
 }

@@ -15,3 +15,11 @@ const (
 	StateUninitialized    int = 0
 	Success               int = 0
 )
+
+const (
+	Channels   string = "android.media.audiorecord.channels"
+	Encoding   string = "android.media.audiorecord.encoding"
+	Latency    string = "android.media.audiorecord.latency"
+	Samplerate string = "android.media.audiorecord.samplerate"
+	Source     string = "android.media.audiorecord.source"
+)

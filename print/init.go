@@ -23,6 +23,53 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsDocumentInfo                 *jni.GlobalRef
+	midDocumentInfoDescribeContents jni.MethodID
+	midDocumentInfoEquals           jni.MethodID
+	midDocumentInfoGetContentType   jni.MethodID
+	midDocumentInfoGetDataSize      jni.MethodID
+	midDocumentInfoGetName          jni.MethodID
+	midDocumentInfoGetPageCount     jni.MethodID
+	midDocumentInfoHashCode         jni.MethodID
+	midDocumentInfoToString         jni.MethodID
+	midDocumentInfoWriteToParcel    jni.MethodID
+
+	clsDocumentInfoBuilder               *jni.GlobalRef
+	midDocumentInfoBuilderBuild          jni.MethodID
+	midDocumentInfoBuilderSetContentType jni.MethodID
+	midDocumentInfoBuilderSetPageCount   jni.MethodID
+
+	clsPageRange                 *jni.GlobalRef
+	midPageRangeDescribeContents jni.MethodID
+	midPageRangeEquals           jni.MethodID
+	midPageRangeGetEnd           jni.MethodID
+	midPageRangeGetStart         jni.MethodID
+	midPageRangeHashCode         jni.MethodID
+	midPageRangeToString         jni.MethodID
+	midPageRangeWriteToParcel    jni.MethodID
+
+	clserInfo                 *jni.GlobalRef
+	miderInfoDescribeContents jni.MethodID
+	miderInfoEquals           jni.MethodID
+	miderInfoGetCapabilities  jni.MethodID
+	miderInfoGetDescription   jni.MethodID
+	miderInfoGetId            jni.MethodID
+	miderInfoGetName          jni.MethodID
+	miderInfoGetStatus        jni.MethodID
+	miderInfoHashCode         jni.MethodID
+	miderInfoToString         jni.MethodID
+	miderInfoWriteToParcel    jni.MethodID
+
+	clserInfoBuilder                        *jni.GlobalRef
+	miderInfoBuilderBuild                   jni.MethodID
+	miderInfoBuilderSetCapabilities         jni.MethodID
+	miderInfoBuilderSetDescription          jni.MethodID
+	miderInfoBuilderSetHasCustomPrinterIcon jni.MethodID
+	miderInfoBuilderSetIconResourceId       jni.MethodID
+	miderInfoBuilderSetInfoIntent           jni.MethodID
+	miderInfoBuilderSetName                 jni.MethodID
+	miderInfoBuilderSetStatus               jni.MethodID
+
 	clsJobInfo                        *jni.GlobalRef
 	midJobInfoDescribeContents        jni.MethodID
 	midJobInfoGetAdvancedIntOption    jni.MethodID
@@ -39,10 +86,112 @@ var (
 	midJobInfoToString                jni.MethodID
 	midJobInfoWriteToParcel           jni.MethodID
 
-	clsManager                      *jni.GlobalRef
-	midManagerGetPrintJobs          jni.MethodID
-	midManagerIsPrintServiceEnabled jni.MethodID
-	midManagerPrint                 jni.MethodID
+	clsJobInfoBuilder                     *jni.GlobalRef
+	midJobInfoBuilderBuild                jni.MethodID
+	midJobInfoBuilderPutAdvancedOption2   jni.MethodID
+	midJobInfoBuilderPutAdvancedOption2_1 jni.MethodID
+	midJobInfoBuilderSetAttributes        jni.MethodID
+	midJobInfoBuilderSetCopies            jni.MethodID
+	midJobInfoBuilderSetPages             jni.MethodID
+
+	clserId                 *jni.GlobalRef
+	miderIdDescribeContents jni.MethodID
+	miderIdEquals           jni.MethodID
+	miderIdGetLocalId       jni.MethodID
+	miderIdHashCode         jni.MethodID
+	miderIdToString         jni.MethodID
+	miderIdWriteToParcel    jni.MethodID
+
+	clserCapabilitiesInfo                 *jni.GlobalRef
+	miderCapabilitiesInfoDescribeContents jni.MethodID
+	miderCapabilitiesInfoEquals           jni.MethodID
+	miderCapabilitiesInfoGetColorModes    jni.MethodID
+	miderCapabilitiesInfoGetDefaults      jni.MethodID
+	miderCapabilitiesInfoGetDuplexModes   jni.MethodID
+	miderCapabilitiesInfoGetMinMargins    jni.MethodID
+	miderCapabilitiesInfoHashCode         jni.MethodID
+	miderCapabilitiesInfoToString         jni.MethodID
+	miderCapabilitiesInfoWriteToParcel    jni.MethodID
+
+	clserCapabilitiesInfoBuilder               *jni.GlobalRef
+	miderCapabilitiesInfoBuilderAddMediaSize   jni.MethodID
+	miderCapabilitiesInfoBuilderAddResolution  jni.MethodID
+	miderCapabilitiesInfoBuilderBuild          jni.MethodID
+	miderCapabilitiesInfoBuilderSetColorModes  jni.MethodID
+	miderCapabilitiesInfoBuilderSetDuplexModes jni.MethodID
+	miderCapabilitiesInfoBuilderSetMinMargins  jni.MethodID
+
+	clsDocumentAdapter         *jni.GlobalRef
+	midDocumentAdapterOnFinish jni.MethodID
+	midDocumentAdapterOnLayout jni.MethodID
+	midDocumentAdapterOnStart  jni.MethodID
+	midDocumentAdapterOnWrite  jni.MethodID
+
+	clsDocumentAdapterLayoutResultCallback                  *jni.GlobalRef
+	midDocumentAdapterLayoutResultCallbackOnLayoutCancelled jni.MethodID
+	midDocumentAdapterLayoutResultCallbackOnLayoutFailed    jni.MethodID
+	midDocumentAdapterLayoutResultCallbackOnLayoutFinished  jni.MethodID
+
+	clsDocumentAdapterWriteResultCallback                 *jni.GlobalRef
+	midDocumentAdapterWriteResultCallbackOnWriteCancelled jni.MethodID
+	midDocumentAdapterWriteResultCallbackOnWriteFailed    jni.MethodID
+	midDocumentAdapterWriteResultCallbackOnWriteFinished  jni.MethodID
+
+	clsAttributes                 *jni.GlobalRef
+	midAttributesDescribeContents jni.MethodID
+	midAttributesEquals           jni.MethodID
+	midAttributesGetColorMode     jni.MethodID
+	midAttributesGetDuplexMode    jni.MethodID
+	midAttributesGetMediaSize     jni.MethodID
+	midAttributesGetMinMargins    jni.MethodID
+	midAttributesGetResolution    jni.MethodID
+	midAttributesHashCode         jni.MethodID
+	midAttributesToString         jni.MethodID
+	midAttributesWriteToParcel    jni.MethodID
+
+	clsAttributesBuilder              *jni.GlobalRef
+	midAttributesBuilderBuild         jni.MethodID
+	midAttributesBuilderSetColorMode  jni.MethodID
+	midAttributesBuilderSetDuplexMode jni.MethodID
+	midAttributesBuilderSetMediaSize  jni.MethodID
+	midAttributesBuilderSetMinMargins jni.MethodID
+	midAttributesBuilderSetResolution jni.MethodID
+
+	clsAttributesMargins              *jni.GlobalRef
+	midAttributesMarginsEquals        jni.MethodID
+	midAttributesMarginsGetBottomMils jni.MethodID
+	midAttributesMarginsGetLeftMils   jni.MethodID
+	midAttributesMarginsGetRightMils  jni.MethodID
+	midAttributesMarginsGetTopMils    jni.MethodID
+	midAttributesMarginsHashCode      jni.MethodID
+	midAttributesMarginsToString      jni.MethodID
+
+	clsAttributesMediaSize              *jni.GlobalRef
+	midAttributesMediaSizeAsLandscape   jni.MethodID
+	midAttributesMediaSizeAsPortrait    jni.MethodID
+	midAttributesMediaSizeEquals        jni.MethodID
+	midAttributesMediaSizeGetHeightMils jni.MethodID
+	midAttributesMediaSizeGetId         jni.MethodID
+	midAttributesMediaSizeGetLabel      jni.MethodID
+	midAttributesMediaSizeGetWidthMils  jni.MethodID
+	midAttributesMediaSizeHashCode      jni.MethodID
+	midAttributesMediaSizeIsPortrait    jni.MethodID
+	midAttributesMediaSizeToString      jni.MethodID
+
+	clsAttributesResolution                 *jni.GlobalRef
+	midAttributesResolutionEquals           jni.MethodID
+	midAttributesResolutionGetHorizontalDpi jni.MethodID
+	midAttributesResolutionGetId            jni.MethodID
+	midAttributesResolutionGetLabel         jni.MethodID
+	midAttributesResolutionGetVerticalDpi   jni.MethodID
+	midAttributesResolutionHashCode         jni.MethodID
+	midAttributesResolutionToString         jni.MethodID
+
+	clsJobId                 *jni.GlobalRef
+	midJobIdDescribeContents jni.MethodID
+	midJobIdEquals           jni.MethodID
+	midJobIdHashCode         jni.MethodID
+	midJobIdWriteToParcel    jni.MethodID
 
 	clsJob            *jni.GlobalRef
 	midJobCancel      jni.MethodID
@@ -57,6 +206,10 @@ var (
 	midJobIsQueued    jni.MethodID
 	midJobIsStarted   jni.MethodID
 	midJobRestart     jni.MethodID
+
+	clsManager                      *jni.GlobalRef
+	midManagerIsPrintServiceEnabled jni.MethodID
+	midManagerPrint                 jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -76,6 +229,295 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/print/PrintDocumentInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintDocumentInfo: %w", err)
+	}
+	clsDocumentInfo = env.NewGlobalRef(&c.Object)
+
+	midDocumentInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoGetContentType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "getContentType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoGetDataSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "getDataSize", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "getPageCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintDocumentInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintDocumentInfo$Builder: %w", err)
+	}
+	clsDocumentInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	midDocumentInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfoBuilder)), "build", "()Landroid/print/PrintDocumentInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoBuilderSetContentType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfoBuilder)), "setContentType", "(I)Landroid/print/PrintDocumentInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentInfoBuilderSetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentInfoBuilder)), "setPageCount", "(I)Landroid/print/PrintDocumentInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PageRange")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PageRange: %w", err)
+	}
+	clsPageRange = env.NewGlobalRef(&c.Object)
+
+	midPageRangeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageRange)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPageRangeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageRange)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPageRangeGetEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageRange)), "getEnd", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPageRangeGetStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageRange)), "getStart", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPageRangeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageRange)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPageRangeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageRange)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPageRangeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageRange)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrinterInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrinterInfo: %w", err)
+	}
+	clserInfo = env.NewGlobalRef(&c.Object)
+
+	miderInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoGetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "getCapabilities", "()Landroid/print/PrinterCapabilitiesInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "getDescription", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "getId", "()Landroid/print/PrinterId;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoGetStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "getStatus", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrinterInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrinterInfo$Builder: %w", err)
+	}
+	clserInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	miderInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "build", "()Landroid/print/PrinterInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoBuilderSetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "setCapabilities", "(Landroid/print/PrinterCapabilitiesInfo;)Landroid/print/PrinterInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/print/PrinterInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoBuilderSetHasCustomPrinterIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "setHasCustomPrinterIcon", "(Z)Landroid/print/PrinterInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoBuilderSetIconResourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "setIconResourceId", "(I)Landroid/print/PrinterInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoBuilderSetInfoIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "setInfoIntent", "(Landroid/app/PendingIntent;)Landroid/print/PrinterInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "setName", "(Ljava/lang/String;)Landroid/print/PrinterInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderInfoBuilderSetStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserInfoBuilder)), "setStatus", "(I)Landroid/print/PrinterInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
 
 	c, err = env.FindClass("android/print/PrintJobInfo")
 	if err != nil {
@@ -181,27 +623,645 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
-	c, err = env.FindClass("android/print/PrintManager")
+	c, err = env.FindClass("android/print/PrintJobInfo$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.print.PrintManager: %w", err)
+		return fmt.Errorf("find class android.print.PrintJobInfo$Builder: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsJobInfoBuilder = env.NewGlobalRef(&c.Object)
 
-	midManagerGetPrintJobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrintJobs", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midManagerIsPrintServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPrintServiceEnabled", "(Landroid/content/ComponentName;)Z")
+	midJobInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobInfoBuilder)), "build", "()Landroid/print/PrintJobInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
 
-	midManagerPrint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "print", "(Ljava/lang/String;Landroid/print/PrintDocumentAdapter;Landroid/print/PrintAttributes;)Landroid/print/PrintJob;")
+	midJobInfoBuilderPutAdvancedOption2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobInfoBuilder)), "putAdvancedOption", "(Ljava/lang/String;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJobInfoBuilderPutAdvancedOption2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobInfoBuilder)), "putAdvancedOption", "(Ljava/lang/String;Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJobInfoBuilderSetAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobInfoBuilder)), "setAttributes", "(Landroid/print/PrintAttributes;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJobInfoBuilderSetCopies, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobInfoBuilder)), "setCopies", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJobInfoBuilderSetPages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobInfoBuilder)), "setPages", "([Landroid/print/PageRange;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrinterId")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrinterId: %w", err)
+	}
+	clserId = env.NewGlobalRef(&c.Object)
+
+	miderIdDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserId)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderIdEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserId)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderIdGetLocalId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserId)), "getLocalId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderIdHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserId)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderIdToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserId)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderIdWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserId)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrinterCapabilitiesInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrinterCapabilitiesInfo: %w", err)
+	}
+	clserCapabilitiesInfo = env.NewGlobalRef(&c.Object)
+
+	miderCapabilitiesInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoGetColorModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "getColorModes", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoGetDefaults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "getDefaults", "()Landroid/print/PrintAttributes;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoGetDuplexModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "getDuplexModes", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoGetMinMargins, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "getMinMargins", "()Landroid/print/PrintAttributes$Margins;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrinterCapabilitiesInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrinterCapabilitiesInfo$Builder: %w", err)
+	}
+	clserCapabilitiesInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	miderCapabilitiesInfoBuilderAddMediaSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfoBuilder)), "addMediaSize", "(Landroid/print/PrintAttributes$MediaSize;Z)Landroid/print/PrinterCapabilitiesInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoBuilderAddResolution, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfoBuilder)), "addResolution", "(Landroid/print/PrintAttributes$Resolution;Z)Landroid/print/PrinterCapabilitiesInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfoBuilder)), "build", "()Landroid/print/PrinterCapabilitiesInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoBuilderSetColorModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfoBuilder)), "setColorModes", "(II)Landroid/print/PrinterCapabilitiesInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoBuilderSetDuplexModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfoBuilder)), "setDuplexModes", "(II)Landroid/print/PrinterCapabilitiesInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	miderCapabilitiesInfoBuilderSetMinMargins, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clserCapabilitiesInfoBuilder)), "setMinMargins", "(Landroid/print/PrintAttributes$Margins;)Landroid/print/PrinterCapabilitiesInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintDocumentAdapter")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintDocumentAdapter: %w", err)
+	}
+	clsDocumentAdapter = env.NewGlobalRef(&c.Object)
+
+	midDocumentAdapterOnFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapter)), "onFinish", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentAdapterOnLayout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapter)), "onLayout", "(Landroid/print/PrintAttributes;Landroid/print/PrintAttributes;Landroid/os/CancellationSignal;Landroid/print/PrintDocumentAdapter$LayoutResultCallback;Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentAdapterOnStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapter)), "onStart", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentAdapterOnWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapter)), "onWrite", "([Landroid/print/PageRange;Landroid/os/ParcelFileDescriptor;Landroid/os/CancellationSignal;Landroid/print/PrintDocumentAdapter$WriteResultCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintDocumentAdapter$LayoutResultCallback")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintDocumentAdapter$LayoutResultCallback: %w", err)
+	}
+	clsDocumentAdapterLayoutResultCallback = env.NewGlobalRef(&c.Object)
+
+	midDocumentAdapterLayoutResultCallbackOnLayoutCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapterLayoutResultCallback)), "onLayoutCancelled", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentAdapterLayoutResultCallbackOnLayoutFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapterLayoutResultCallback)), "onLayoutFailed", "(Ljava/lang/CharSequence;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentAdapterLayoutResultCallbackOnLayoutFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapterLayoutResultCallback)), "onLayoutFinished", "(Landroid/print/PrintDocumentInfo;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintDocumentAdapter$WriteResultCallback")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintDocumentAdapter$WriteResultCallback: %w", err)
+	}
+	clsDocumentAdapterWriteResultCallback = env.NewGlobalRef(&c.Object)
+
+	midDocumentAdapterWriteResultCallbackOnWriteCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapterWriteResultCallback)), "onWriteCancelled", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentAdapterWriteResultCallbackOnWriteFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapterWriteResultCallback)), "onWriteFailed", "(Ljava/lang/CharSequence;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDocumentAdapterWriteResultCallbackOnWriteFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentAdapterWriteResultCallback)), "onWriteFinished", "([Landroid/print/PageRange;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintAttributes")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintAttributes: %w", err)
+	}
+	clsAttributes = env.NewGlobalRef(&c.Object)
+
+	midAttributesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesGetColorMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "getColorMode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesGetDuplexMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "getDuplexMode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesGetMediaSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "getMediaSize", "()Landroid/print/PrintAttributes$MediaSize;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesGetMinMargins, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "getMinMargins", "()Landroid/print/PrintAttributes$Margins;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesGetResolution, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "getResolution", "()Landroid/print/PrintAttributes$Resolution;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributes)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintAttributes$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintAttributes$Builder: %w", err)
+	}
+	clsAttributesBuilder = env.NewGlobalRef(&c.Object)
+
+	midAttributesBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesBuilder)), "build", "()Landroid/print/PrintAttributes;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesBuilderSetColorMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesBuilder)), "setColorMode", "(I)Landroid/print/PrintAttributes$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesBuilderSetDuplexMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesBuilder)), "setDuplexMode", "(I)Landroid/print/PrintAttributes$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesBuilderSetMediaSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesBuilder)), "setMediaSize", "(Landroid/print/PrintAttributes$MediaSize;)Landroid/print/PrintAttributes$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesBuilderSetMinMargins, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesBuilder)), "setMinMargins", "(Landroid/print/PrintAttributes$Margins;)Landroid/print/PrintAttributes$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesBuilderSetResolution, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesBuilder)), "setResolution", "(Landroid/print/PrintAttributes$Resolution;)Landroid/print/PrintAttributes$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintAttributes$Margins")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintAttributes$Margins: %w", err)
+	}
+	clsAttributesMargins = env.NewGlobalRef(&c.Object)
+
+	midAttributesMarginsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMargins)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMarginsGetBottomMils, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMargins)), "getBottomMils", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMarginsGetLeftMils, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMargins)), "getLeftMils", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMarginsGetRightMils, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMargins)), "getRightMils", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMarginsGetTopMils, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMargins)), "getTopMils", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMarginsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMargins)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMarginsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMargins)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintAttributes$MediaSize")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintAttributes$MediaSize: %w", err)
+	}
+	clsAttributesMediaSize = env.NewGlobalRef(&c.Object)
+
+	midAttributesMediaSizeAsLandscape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "asLandscape", "()Landroid/print/PrintAttributes$MediaSize;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeAsPortrait, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "asPortrait", "()Landroid/print/PrintAttributes$MediaSize;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeGetHeightMils, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "getHeightMils", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "getId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "getLabel", "(Landroid/content/pm/PackageManager;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeGetWidthMils, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "getWidthMils", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeIsPortrait, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "isPortrait", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesMediaSizeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesMediaSize)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintAttributes$Resolution")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintAttributes$Resolution: %w", err)
+	}
+	clsAttributesResolution = env.NewGlobalRef(&c.Object)
+
+	midAttributesResolutionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesResolution)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesResolutionGetHorizontalDpi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesResolution)), "getHorizontalDpi", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesResolutionGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesResolution)), "getId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesResolutionGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesResolution)), "getLabel", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesResolutionGetVerticalDpi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesResolution)), "getVerticalDpi", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesResolutionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesResolution)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midAttributesResolutionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributesResolution)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintJobId")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintJobId: %w", err)
+	}
+	clsJobId = env.NewGlobalRef(&c.Object)
+
+	midJobIdDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobId)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJobIdEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobId)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJobIdHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobId)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJobIdWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJobId)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -292,6 +1352,26 @@ func doInit(env *jni.Env) error {
 	}
 
 	midJobRestart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJob)), "restart", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/print/PrintManager")
+	if err != nil {
+		return fmt.Errorf("find class android.print.PrintManager: %w", err)
+	}
+	clsManager = env.NewGlobalRef(&c.Object)
+
+	midManagerIsPrintServiceEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPrintServiceEnabled", "(Landroid/content/ComponentName;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midManagerPrint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "print", "(Ljava/lang/String;Landroid/print/PrintDocumentAdapter;Landroid/print/PrintAttributes;)Landroid/print/PrintJob;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

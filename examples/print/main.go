@@ -31,8 +31,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -40,7 +40,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -100,87 +100,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "\nService obtained OK")
 
-	// Query all print jobs visible to this application.
-	// GetPrintJobs() returns a java.util.List<PrintJob>.
-	jobsListObj, err := mgr.GetPrintJobs()
-	if err != nil {
-		fmt.Fprintf(output, "GetPrintJobs: %v\n", err)
-		return nil
-	}
-
-	err = vm.Do(func(env *jni.Env) error {
-		if jobsListObj == nil {
-			fmt.Fprintln(output, "GetPrintJobs returned nil")
-			return nil
-		}
-
-		listCls, err := env.FindClass("java/util/List")
-		if err != nil {
-			return err
-		}
-		sizeMid, err := env.GetMethodID(listCls, "size", "()I")
-		if err != nil {
-			return err
-		}
-		getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
-		if err != nil {
-			return err
-		}
-
-		jobCount, err := env.CallIntMethod(jobsListObj, sizeMid)
-		if err != nil {
-			return err
-		}
-
-		fmt.Fprintf(output, "\nPrint jobs: %d\n", jobCount)
-
-		for i := int32(0); i < jobCount; i++ {
-			elemObj, err := env.CallObjectMethod(jobsListObj, getMid, jni.IntValue(i))
-			if err != nil || elemObj == nil {
-				continue
-			}
-
-			// Wrap as a print.Job to use typed accessors.
-			job := print.Job{
-				VM:  vm,
-				Obj: env.NewGlobalRef(elemObj),
-			}
-
-			// Get PrintJobInfo from the job.
-			// GetInfo() returns a global ref internally.
-			infoObj, err := job.GetInfo()
-			if err != nil || infoObj == nil {
-				fmt.Fprintf(output, "\n  Job #%d: (no info)\n", i)
-				env.DeleteGlobalRef(job.Obj)
-				continue
-			}
-
-			jobInfo := print.JobInfo{
-				VM:  vm,
-				Obj: infoObj,
-			}
-
-			label, _ := jobInfo.GetLabel()
-			state, _ := jobInfo.GetState()
-			copies, _ := jobInfo.GetCopies()
-			creationTime, _ := jobInfo.GetCreationTime()
-
-			fmt.Fprintf(output, "\n  Job #%d:\n", i)
-			fmt.Fprintf(output, "    Label:    %s\n", label)
-			fmt.Fprintf(output, "    State:    %s\n", jobStateName(int(state)))
-			fmt.Fprintf(output, "    Copies:   %d\n", copies)
-			fmt.Fprintf(output, "    Created:  %d\n", creationTime)
-
-			env.DeleteGlobalRef(jobInfo.Obj)
-			env.DeleteGlobalRef(job.Obj)
-		}
-
-		return nil
-	})
-
-	if err != nil {
-		fmt.Fprintf(output, "Job iteration: %v\n", err)
-	}
+	// Filtered: GetPrintJobs returns generic type (List<PrintJob>)
+	// jobsListObj, err := mgr.GetPrintJobs()
+	// ...
 
 	return nil
 }

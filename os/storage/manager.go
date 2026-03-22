@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "storage"
+const serviceNameManager = "storage"
 
 // Manager wraps android.os.storage.StorageManager.
 type Manager struct {
@@ -39,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -296,38 +296,6 @@ func (m *Manager) GetPrimaryStorageVolume() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetRecentStorageVolumes calls android.os.storage.StorageManager.getRecentStorageVolumes.
-func (m *Manager) GetRecentStorageVolumes() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetRecentStorageVolumes == nil {
-			callErr = fmt.Errorf("android.os.storage.StorageManager.getRecentStorageVolumes is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetRecentStorageVolumes,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetStorageVolume1 calls android.os.storage.StorageManager.getStorageVolume.
 func (m *Manager) GetStorageVolume1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -378,70 +346,6 @@ func (m *Manager) GetStorageVolume1_1(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetStorageVolume1_1, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetStorageVolumes calls android.os.storage.StorageManager.getStorageVolumes.
-func (m *Manager) GetStorageVolumes() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetStorageVolumes == nil {
-			callErr = fmt.Errorf("android.os.storage.StorageManager.getStorageVolumes is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetStorageVolumes,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetStorageVolumesIncludingSharedProfiles calls android.os.storage.StorageManager.getStorageVolumesIncludingSharedProfiles.
-func (m *Manager) GetStorageVolumesIncludingSharedProfiles() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetStorageVolumesIncludingSharedProfiles == nil {
-			callErr = fmt.Errorf("android.os.storage.StorageManager.getStorageVolumesIncludingSharedProfiles is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetStorageVolumesIncludingSharedProfiles,
 		)
 		if callErr != nil {
 			return callErr

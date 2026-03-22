@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "credential"
+const serviceNameCredentialManager = "credential"
 
 // CredentialManager wraps android.credentials.CredentialManager.
 type CredentialManager struct {
@@ -39,12 +39,12 @@ func NewCredentialManager(ctx *app.Context) (*CredentialManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameCredentialManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameCredentialManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -67,121 +67,6 @@ func (m *CredentialManager) Close() {
 			return nil
 		})
 	}
-}
-
-// ClearCredentialState calls android.credentials.CredentialManager.clearCredentialState.
-func (m *CredentialManager) ClearCredentialState(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midCredentialManagerClearCredentialState == nil {
-			callErr = fmt.Errorf("android.credentials.CredentialManager.clearCredentialState is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midCredentialManagerClearCredentialState, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// CreateCredential calls android.credentials.CredentialManager.createCredential.
-func (m *CredentialManager) CreateCredential(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-	arg4 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midCredentialManagerCreateCredential == nil {
-			callErr = fmt.Errorf("android.credentials.CredentialManager.createCredential is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midCredentialManagerCreateCredential, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// GetCredential5 calls android.credentials.CredentialManager.getCredential.
-func (m *CredentialManager) GetCredential5(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-	arg4 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midCredentialManagerGetCredential5 == nil {
-			callErr = fmt.Errorf("android.credentials.CredentialManager.getCredential is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midCredentialManagerGetCredential5, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// GetCredential5_1 calls android.credentials.CredentialManager.getCredential.
-func (m *CredentialManager) GetCredential5_1(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-	arg4 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midCredentialManagerGetCredential5_1 == nil {
-			callErr = fmt.Errorf("android.credentials.CredentialManager.getCredential is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midCredentialManagerGetCredential5_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // IsEnabledCredentialProviderService calls android.credentials.CredentialManager.isEnabledCredentialProviderService.
@@ -210,34 +95,6 @@ func (m *CredentialManager) IsEnabledCredentialProviderService(arg0 *jni.Object)
 		return callErr
 	})
 	return result, callErr
-}
-
-// PrepareGetCredential calls android.credentials.CredentialManager.prepareGetCredential.
-func (m *CredentialManager) PrepareGetCredential(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midCredentialManagerPrepareGetCredential == nil {
-			callErr = fmt.Errorf("android.credentials.CredentialManager.prepareGetCredential is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midCredentialManagerPrepareGetCredential, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // RegisterCredentialDescription calls android.credentials.CredentialManager.registerCredentialDescription.

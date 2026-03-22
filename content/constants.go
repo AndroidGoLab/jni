@@ -5,5 +5,107 @@ package content
 import "github.com/AndroidGoLab/jni/content/consts"
 
 const (
-	IdNull = consts.IdNull
+	Creator                         = consts.Creator
+	DatabaseMode2lines              = consts.DatabaseMode2lines
+	DatabaseModeQueries             = consts.DatabaseModeQueries
+	ClassificationComplete          = consts.ClassificationComplete
+	ClassificationNotComplete       = consts.ClassificationNotComplete
+	ClassificationNotPerformed      = consts.ClassificationNotPerformed
+	NoMatch                         = consts.NoMatch
+	ResultApproved                  = consts.ResultApproved
+	ResultDenied                    = consts.ResultDenied
+	ResultError                     = consts.ResultError
+	ResultErrorBadRequest           = consts.ResultErrorBadRequest
+	ResultErrorInternal             = consts.ResultErrorInternal
+	ResultErrorNetwork              = consts.ResultErrorNetwork
+	ResultNoResponse                = consts.ResultNoResponse
+	ResultUnknownRequest            = consts.ResultUnknownRequest
+	Fragment                        = consts.Fragment
+	Path                            = consts.Path
+	Query                           = consts.Query
+	AlreadyInProgress               = consts.AlreadyInProgress
+	TypeBoolean                     = consts.TypeBoolean
+	TypeBundle                      = consts.TypeBundle
+	TypeBundleArray                 = consts.TypeBundleArray
+	TypeChoice                      = consts.TypeChoice
+	TypeInteger                     = consts.TypeInteger
+	TypeMultiSelect                 = consts.TypeMultiSelect
+	TypeNull                        = consts.TypeNull
+	TypeString                      = consts.TypeString
+	IdNull                          = consts.IdNull
+	ActionAllow                     = consts.ActionAllow
+	ActionBlock                     = consts.ActionBlock
+	TrimMemoryBackground            = consts.TrimMemoryBackground
+	TrimMemoryComplete              = consts.TrimMemoryComplete
+	TrimMemoryModerate              = consts.TrimMemoryModerate
+	TrimMemoryRunningCritical       = consts.TrimMemoryRunningCritical
+	TrimMemoryRunningLow            = consts.TrimMemoryRunningLow
+	TrimMemoryRunningModerate       = consts.TrimMemoryRunningModerate
+	TrimMemoryUiHidden              = consts.TrimMemoryUiHidden
+	Button1                         = consts.Button1
+	Button2                         = consts.Button2
+	Button3                         = consts.Button3
+	ButtonNegative                  = consts.ButtonNegative
+	ButtonNeutral                   = consts.ButtonNeutral
+	ButtonPositive                  = consts.ButtonPositive
+	LogSyncDetails                  = consts.LogSyncDetails
+	MatchAdjustmentMask             = consts.MatchAdjustmentMask
+	MatchAdjustmentNormal           = consts.MatchAdjustmentNormal
+	MatchCategoryEmpty              = consts.MatchCategoryEmpty
+	MatchCategoryHost               = consts.MatchCategoryHost
+	MatchCategoryMask               = consts.MatchCategoryMask
+	MatchCategoryPath               = consts.MatchCategoryPath
+	MatchCategoryPort               = consts.MatchCategoryPort
+	MatchCategoryScheme             = consts.MatchCategoryScheme
+	MatchCategorySchemeSpecificPart = consts.MatchCategorySchemeSpecificPart
+	MatchCategoryType               = consts.MatchCategoryType
+	NoMatchAction                   = consts.NoMatchAction
+	NoMatchCategory                 = consts.NoMatchCategory
+	NoMatchData                     = consts.NoMatchData
+	NoMatchType                     = consts.NoMatchType
+	SystemHighPriority              = consts.SystemHighPriority
+	SystemLowPriority               = consts.SystemLowPriority
+)
+
+const (
+	ExtraIsRemoteDevice              = consts.ExtraIsRemoteDevice
+	ExtraIsSensitive                 = consts.ExtraIsSensitive
+	MimetypeTextHtml                 = consts.MimetypeTextHtml
+	MimetypeTextIntent               = consts.MimetypeTextIntent
+	MimetypeTextPlain                = consts.MimetypeTextPlain
+	MimetypeTextUrilist              = consts.MimetypeTextUrilist
+	MimetypeUnknown                  = consts.MimetypeUnknown
+	ActionPermissionResponseReceived = consts.ActionPermissionResponseReceived
+	ActionRequestLocalApproval       = consts.ActionRequestLocalApproval
+	ActionRequestPermission          = consts.ActionRequestPermission
+	ExtraPackageName                 = consts.ExtraPackageName
+	ExtraRequestBundle               = consts.ExtraRequestBundle
+	ExtraRequestId                   = consts.ExtraRequestId
+	ExtraRequestType                 = consts.ExtraRequestType
+	ExtraResponseBundle              = consts.ExtraResponseBundle
+	MetaDataAppRestrictions          = consts.MetaDataAppRestrictions
+	RequestKeyApproveLabel           = consts.RequestKeyApproveLabel
+	RequestKeyData                   = consts.RequestKeyData
+	RequestKeyDenyLabel              = consts.RequestKeyDenyLabel
+	RequestKeyIcon                   = consts.RequestKeyIcon
+	RequestKeyId                     = consts.RequestKeyId
+	RequestKeyMessage                = consts.RequestKeyMessage
+	RequestKeyNewRequest             = consts.RequestKeyNewRequest
+	RequestKeyTitle                  = consts.RequestKeyTitle
+	RequestTypeApproval              = consts.RequestTypeApproval
+	ResponseKeyErrorCode             = consts.ResponseKeyErrorCode
+	ResponseKeyMessage               = consts.ResponseKeyMessage
+	ResponseKeyResponseTimestamp     = consts.ResponseKeyResponseTimestamp
+	ResponseKeyResult                = consts.ResponseKeyResult
+	Tag                              = consts.Tag
+	FeatureDelete                    = consts.FeatureDelete
+	FeatureDownload                  = consts.FeatureDownload
+	FeatureEdit                      = consts.FeatureEdit
+	FeaturePrint                     = consts.FeaturePrint
+	FeatureSend                      = consts.FeatureSend
+	FeatureView                      = consts.FeatureView
+)
+
+const (
+	InvalidTime = consts.InvalidTime
 )

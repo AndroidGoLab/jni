@@ -3,7 +3,40 @@
 package consts
 
 const (
-	Creator int = 0
+	Creator                    int = 0
+	UsbClassAppSpec            int = 254
+	UsbClassAudio              int = 1
+	UsbClassCdcData            int = 10
+	UsbClassComm               int = 2
+	UsbClassContentSec         int = 13
+	UsbClassCscid              int = 11
+	UsbClassHid                int = 3
+	UsbClassHub                int = 9
+	UsbClassMassStorage        int = 8
+	UsbClassMisc               int = 239
+	UsbClassPerInterface       int = 0
+	UsbClassPhysica            int = 5
+	UsbClassPrinter            int = 7
+	UsbClassStillImage         int = 6
+	UsbClassVendorSpec         int = 255
+	UsbClassVideo              int = 14
+	UsbClassWirelessController int = 224
+	UsbDirIn                   int = 128
+	UsbDirOut                  int = 0
+	UsbEndpointDirMask         int = 128
+	UsbEndpointNumberMask      int = 15
+	UsbEndpointXfertypeMask    int = 3
+	UsbEndpointXferBulk        int = 2
+	UsbEndpointXferControl     int = 0
+	UsbEndpointXferInt         int = 3
+	UsbEndpointXferIsoc        int = 1
+	UsbInterfaceSubclassBoot   int = 1
+	UsbSubclassVendorSpec      int = 255
+	UsbTypeClass               int = 32
+	UsbTypeMask                int = 96
+	UsbTypeReserved            int = 96
+	UsbTypeStandard            int = 0
+	UsbTypeVendor              int = 64
 )
 
 const (

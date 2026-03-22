@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "device_policy"
+const serviceNameDevicePolicyManager = "device_policy"
 
 // DevicePolicyManager wraps android.app.admin.DevicePolicyManager.
 type DevicePolicyManager struct {
@@ -39,12 +39,12 @@ func NewDevicePolicyManager(ctx *app.Context) (*DevicePolicyManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameDevicePolicyManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameDevicePolicyManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -792,104 +792,6 @@ func (m *DevicePolicyManager) GetAccountTypesWithManagementDisabled() (*jni.Obje
 	return result, callErr
 }
 
-// GetActiveAdmins calls android.app.admin.DevicePolicyManager.getActiveAdmins.
-func (m *DevicePolicyManager) GetActiveAdmins() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetActiveAdmins == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getActiveAdmins is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetActiveAdmins,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetAffiliationIds calls android.app.admin.DevicePolicyManager.getAffiliationIds.
-func (m *DevicePolicyManager) GetAffiliationIds(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetAffiliationIds == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAffiliationIds is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetAffiliationIds, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetAlwaysOnVpnLockdownWhitelist calls android.app.admin.DevicePolicyManager.getAlwaysOnVpnLockdownWhitelist.
-func (m *DevicePolicyManager) GetAlwaysOnVpnLockdownWhitelist(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetAlwaysOnVpnLockdownWhitelist == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getAlwaysOnVpnLockdownWhitelist is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetAlwaysOnVpnLockdownWhitelist, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetAlwaysOnVpnPackage calls android.app.admin.DevicePolicyManager.getAlwaysOnVpnPackage.
 func (m *DevicePolicyManager) GetAlwaysOnVpnPackage(arg0 *jni.Object) (string, error) {
 	var result string
@@ -1143,39 +1045,6 @@ func (m *DevicePolicyManager) GetAutoTimeZonePolicy() (int32, error) {
 	return result, callErr
 }
 
-// GetBindDeviceAdminTargetUsers calls android.app.admin.DevicePolicyManager.getBindDeviceAdminTargetUsers.
-func (m *DevicePolicyManager) GetBindDeviceAdminTargetUsers(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetBindDeviceAdminTargetUsers == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getBindDeviceAdminTargetUsers is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetBindDeviceAdminTargetUsers, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetBluetoothContactSharingDisabled calls android.app.admin.DevicePolicyManager.getBluetoothContactSharingDisabled.
 func (m *DevicePolicyManager) GetBluetoothContactSharingDisabled(arg0 *jni.Object) (bool, error) {
 	var result bool
@@ -1318,39 +1187,6 @@ func (m *DevicePolicyManager) GetCredentialManagerPolicy() (*jni.Object, error) 
 	return result, callErr
 }
 
-// GetCrossProfileCalendarPackages calls android.app.admin.DevicePolicyManager.getCrossProfileCalendarPackages.
-func (m *DevicePolicyManager) GetCrossProfileCalendarPackages(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetCrossProfileCalendarPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfileCalendarPackages is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetCrossProfileCalendarPackages, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetCrossProfileCallerIdDisabled calls android.app.admin.DevicePolicyManager.getCrossProfileCallerIdDisabled.
 func (m *DevicePolicyManager) GetCrossProfileCallerIdDisabled(arg0 *jni.Object) (bool, error) {
 	var result bool
@@ -1407,72 +1243,6 @@ func (m *DevicePolicyManager) GetCrossProfileContactsSearchDisabled(arg0 *jni.Ob
 	return result, callErr
 }
 
-// GetCrossProfilePackages calls android.app.admin.DevicePolicyManager.getCrossProfilePackages.
-func (m *DevicePolicyManager) GetCrossProfilePackages(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetCrossProfilePackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfilePackages is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetCrossProfilePackages, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetCrossProfileWidgetProviders calls android.app.admin.DevicePolicyManager.getCrossProfileWidgetProviders.
-func (m *DevicePolicyManager) GetCrossProfileWidgetProviders(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetCrossProfileWidgetProviders == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getCrossProfileWidgetProviders is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetCrossProfileWidgetProviders, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetCurrentFailedPasswordAttempts calls android.app.admin.DevicePolicyManager.getCurrentFailedPasswordAttempts.
 func (m *DevicePolicyManager) GetCurrentFailedPasswordAttempts() (int32, error) {
 	var result int32
@@ -1492,84 +1262,6 @@ func (m *DevicePolicyManager) GetCurrentFailedPasswordAttempts() (int32, error) 
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetDelegatePackages calls android.app.admin.DevicePolicyManager.getDelegatePackages.
-func (m *DevicePolicyManager) GetDelegatePackages(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetDelegatePackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDelegatePackages is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetDelegatePackages, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetDelegatedScopes calls android.app.admin.DevicePolicyManager.getDelegatedScopes.
-func (m *DevicePolicyManager) GetDelegatedScopes(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetDelegatedScopes == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getDelegatedScopes is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetDelegatedScopes, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -1776,72 +1468,6 @@ func (m *DevicePolicyManager) GetGlobalPrivateDnsMode(arg0 *jni.Object) (int32, 
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetInstalledCaCerts calls android.app.admin.DevicePolicyManager.getInstalledCaCerts.
-func (m *DevicePolicyManager) GetInstalledCaCerts(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetInstalledCaCerts == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getInstalledCaCerts is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetInstalledCaCerts, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetKeepUninstalledPackages calls android.app.admin.DevicePolicyManager.getKeepUninstalledPackages.
-func (m *DevicePolicyManager) GetKeepUninstalledPackages(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetKeepUninstalledPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getKeepUninstalledPackages is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetKeepUninstalledPackages, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2140,39 +1766,6 @@ func (m *DevicePolicyManager) GetMaximumTimeToLock(arg0 *jni.Object) (int64, err
 	return result, callErr
 }
 
-// GetMeteredDataDisabledPackages calls android.app.admin.DevicePolicyManager.getMeteredDataDisabledPackages.
-func (m *DevicePolicyManager) GetMeteredDataDisabledPackages(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetMeteredDataDisabledPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getMeteredDataDisabledPackages is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetMeteredDataDisabledPackages, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetMinimumRequiredWifiSecurityLevel calls android.app.admin.DevicePolicyManager.getMinimumRequiredWifiSecurityLevel.
 func (m *DevicePolicyManager) GetMinimumRequiredWifiSecurityLevel() (int32, error) {
 	var result int32
@@ -2316,39 +1909,6 @@ func (m *DevicePolicyManager) GetOrganizationName(arg0 *jni.Object) (*jni.Object
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetOrganizationName, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetOverrideApns calls android.app.admin.DevicePolicyManager.getOverrideApns.
-func (m *DevicePolicyManager) GetOverrideApns(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetOverrideApns == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getOverrideApns is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetOverrideApns, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2836,105 +2396,6 @@ func (m *DevicePolicyManager) GetPermissionPolicy(arg0 *jni.Object) (int32, erro
 	return result, callErr
 }
 
-// GetPermittedAccessibilityServices calls android.app.admin.DevicePolicyManager.getPermittedAccessibilityServices.
-func (m *DevicePolicyManager) GetPermittedAccessibilityServices(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetPermittedAccessibilityServices == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermittedAccessibilityServices is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetPermittedAccessibilityServices, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetPermittedCrossProfileNotificationListeners calls android.app.admin.DevicePolicyManager.getPermittedCrossProfileNotificationListeners.
-func (m *DevicePolicyManager) GetPermittedCrossProfileNotificationListeners(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetPermittedCrossProfileNotificationListeners == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermittedCrossProfileNotificationListeners is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetPermittedCrossProfileNotificationListeners, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetPermittedInputMethods calls android.app.admin.DevicePolicyManager.getPermittedInputMethods.
-func (m *DevicePolicyManager) GetPermittedInputMethods(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetPermittedInputMethods == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPermittedInputMethods is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetPermittedInputMethods, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetPersonalAppsSuspendedReasons calls android.app.admin.DevicePolicyManager.getPersonalAppsSuspendedReasons.
 func (m *DevicePolicyManager) GetPersonalAppsSuspendedReasons(arg0 *jni.Object) (int32, error) {
 	var result int32
@@ -2955,38 +2416,6 @@ func (m *DevicePolicyManager) GetPersonalAppsSuspendedReasons(arg0 *jni.Object) 
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetPreferentialNetworkServiceConfigs calls android.app.admin.DevicePolicyManager.getPreferentialNetworkServiceConfigs.
-func (m *DevicePolicyManager) GetPreferentialNetworkServiceConfigs() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetPreferentialNetworkServiceConfigs == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getPreferentialNetworkServiceConfigs is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetPreferentialNetworkServiceConfigs,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -3099,39 +2528,6 @@ func (m *DevicePolicyManager) GetScreenCaptureDisabled(arg0 *jni.Object) (bool, 
 			return callErr
 		}
 		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetSecondaryUsers calls android.app.admin.DevicePolicyManager.getSecondaryUsers.
-func (m *DevicePolicyManager) GetSecondaryUsers(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetSecondaryUsers == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getSecondaryUsers is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetSecondaryUsers, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr
@@ -3256,38 +2652,6 @@ func (m *DevicePolicyManager) GetStorageEncryptionStatus() (int32, error) {
 	return result, callErr
 }
 
-// GetSubscriptionIds calls android.app.admin.DevicePolicyManager.getSubscriptionIds.
-func (m *DevicePolicyManager) GetSubscriptionIds() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetSubscriptionIds == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getSubscriptionIds is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetSubscriptionIds,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetSystemUpdatePolicy calls android.app.admin.DevicePolicyManager.getSystemUpdatePolicy.
 func (m *DevicePolicyManager) GetSystemUpdatePolicy() (*jni.Object, error) {
 	var result *jni.Object
@@ -3336,72 +2700,6 @@ func (m *DevicePolicyManager) GetTransferOwnershipBundle() (*jni.Object, error) 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDevicePolicyManagerGetTransferOwnershipBundle,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetTrustAgentConfiguration calls android.app.admin.DevicePolicyManager.getTrustAgentConfiguration.
-func (m *DevicePolicyManager) GetTrustAgentConfiguration(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetTrustAgentConfiguration == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getTrustAgentConfiguration is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetTrustAgentConfiguration, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetUserControlDisabledPackages calls android.app.admin.DevicePolicyManager.getUserControlDisabledPackages.
-func (m *DevicePolicyManager) GetUserControlDisabledPackages(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerGetUserControlDisabledPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.getUserControlDisabledPackages is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerGetUserControlDisabledPackages, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -4933,38 +4231,6 @@ func (m *DevicePolicyManager) IsUsingUnifiedPassword(arg0 *jni.Object) (bool, er
 	return result, callErr
 }
 
-// ListForegroundAffiliatedUsers calls android.app.admin.DevicePolicyManager.listForegroundAffiliatedUsers.
-func (m *DevicePolicyManager) ListForegroundAffiliatedUsers() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerListForegroundAffiliatedUsers == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.listForegroundAffiliatedUsers is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerListForegroundAffiliatedUsers,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // LockNow0 calls android.app.admin.DevicePolicyManager.lockNow.
 func (m *DevicePolicyManager) LockNow0() error {
 
@@ -5306,105 +4572,6 @@ func (m *DevicePolicyManager) ResetPasswordWithToken(
 	return result, callErr
 }
 
-// RetrieveNetworkLogs calls android.app.admin.DevicePolicyManager.retrieveNetworkLogs.
-func (m *DevicePolicyManager) RetrieveNetworkLogs(arg0 *jni.Object, arg1 int64) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerRetrieveNetworkLogs == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.retrieveNetworkLogs is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerRetrieveNetworkLogs, jni.ObjectValue(arg0), jni.LongValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// RetrievePreRebootSecurityLogs calls android.app.admin.DevicePolicyManager.retrievePreRebootSecurityLogs.
-func (m *DevicePolicyManager) RetrievePreRebootSecurityLogs(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerRetrievePreRebootSecurityLogs == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.retrievePreRebootSecurityLogs is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerRetrievePreRebootSecurityLogs, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// RetrieveSecurityLogs calls android.app.admin.DevicePolicyManager.retrieveSecurityLogs.
-func (m *DevicePolicyManager) RetrieveSecurityLogs(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerRetrieveSecurityLogs == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.retrieveSecurityLogs is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerRetrieveSecurityLogs, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // RevokeKeyPairFromApp calls android.app.admin.DevicePolicyManager.revokeKeyPairFromApp.
 func (m *DevicePolicyManager) RevokeKeyPairFromApp(
 	arg0 *jni.Object,
@@ -5520,31 +4687,8 @@ func (m *DevicePolicyManager) SetAccountManagementDisabled(
 	return callErr
 }
 
-// SetAffiliationIds calls android.app.admin.DevicePolicyManager.setAffiliationIds.
-func (m *DevicePolicyManager) SetAffiliationIds(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetAffiliationIds == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAffiliationIds is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetAffiliationIds, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetAlwaysOnVpnPackage3 calls android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage.
-func (m *DevicePolicyManager) SetAlwaysOnVpnPackage3(
+// SetAlwaysOnVpnPackage calls android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage.
+func (m *DevicePolicyManager) SetAlwaysOnVpnPackage(
 	arg0 *jni.Object,
 	arg1 string,
 	arg2 bool,
@@ -5556,7 +4700,7 @@ func (m *DevicePolicyManager) SetAlwaysOnVpnPackage3(
 			callErr = err
 			return err
 		}
-		if midDevicePolicyManagerSetAlwaysOnVpnPackage3 == nil {
+		if midDevicePolicyManagerSetAlwaysOnVpnPackage == nil {
 			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage is not available on this device")
 			return callErr
 		}
@@ -5574,46 +4718,7 @@ func (m *DevicePolicyManager) SetAlwaysOnVpnPackage3(
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midDevicePolicyManagerSetAlwaysOnVpnPackage3, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetAlwaysOnVpnPackage4_1 calls android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage.
-func (m *DevicePolicyManager) SetAlwaysOnVpnPackage4_1(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 bool,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetAlwaysOnVpnPackage4_1 == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		var jArg2 uint8
-		if arg2 {
-			jArg2 = jniTrue
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetAlwaysOnVpnPackage4_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2), jni.ObjectValue(arg3),
+			midDevicePolicyManagerSetAlwaysOnVpnPackage, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2),
 		)
 		return callErr
 	})
@@ -6093,29 +5198,6 @@ func (m *DevicePolicyManager) SetCredentialManagerPolicy(arg0 *jni.Object) error
 	return callErr
 }
 
-// SetCrossProfileCalendarPackages calls android.app.admin.DevicePolicyManager.setCrossProfileCalendarPackages.
-func (m *DevicePolicyManager) SetCrossProfileCalendarPackages(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetCrossProfileCalendarPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCrossProfileCalendarPackages is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetCrossProfileCalendarPackages, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // SetCrossProfileCallerIdDisabled calls android.app.admin.DevicePolicyManager.setCrossProfileCallerIdDisabled.
 func (m *DevicePolicyManager) SetCrossProfileCallerIdDisabled(arg0 *jni.Object, arg1 bool) error {
 
@@ -6166,29 +5248,6 @@ func (m *DevicePolicyManager) SetCrossProfileContactsSearchDisabled(arg0 *jni.Ob
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midDevicePolicyManagerSetCrossProfileContactsSearchDisabled, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetCrossProfilePackages calls android.app.admin.DevicePolicyManager.setCrossProfilePackages.
-func (m *DevicePolicyManager) SetCrossProfilePackages(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetCrossProfilePackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setCrossProfilePackages is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetCrossProfilePackages, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -6246,39 +5305,6 @@ func (m *DevicePolicyManager) SetDefaultSmsApplication(arg0 *jni.Object, arg1 st
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midDevicePolicyManagerSetDefaultSmsApplication, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetDelegatedScopes calls android.app.admin.DevicePolicyManager.setDelegatedScopes.
-func (m *DevicePolicyManager) SetDelegatedScopes(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetDelegatedScopes == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setDelegatedScopes is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetDelegatedScopes, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -6461,73 +5487,6 @@ func (m *DevicePolicyManager) SetGlobalSetting(
 		return callErr
 	})
 	return callErr
-}
-
-// SetKeepUninstalledPackages calls android.app.admin.DevicePolicyManager.setKeepUninstalledPackages.
-func (m *DevicePolicyManager) SetKeepUninstalledPackages(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetKeepUninstalledPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setKeepUninstalledPackages is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetKeepUninstalledPackages, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetKeyPairCertificate calls android.app.admin.DevicePolicyManager.setKeyPairCertificate.
-func (m *DevicePolicyManager) SetKeyPairCertificate(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 *jni.Object,
-	arg3 bool,
-) (bool, error) {
-	var result bool
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetKeyPairCertificate == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setKeyPairCertificate is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		var jArg3 uint8
-		if arg3 {
-			jArg3 = jniTrue
-		}
-
-		var resultRaw uint8
-		resultRaw, callErr = env.CallBooleanMethod(
-			m.Obj,
-			midDevicePolicyManagerSetKeyPairCertificate, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.BooleanValue(jArg3),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
 }
 
 // SetKeyguardDisabled calls android.app.admin.DevicePolicyManager.setKeyguardDisabled.
@@ -6881,39 +5840,6 @@ func (m *DevicePolicyManager) SetMaximumTimeToLock(arg0 *jni.Object, arg1 int64)
 		return callErr
 	})
 	return callErr
-}
-
-// SetMeteredDataDisabledPackages calls android.app.admin.DevicePolicyManager.setMeteredDataDisabledPackages.
-func (m *DevicePolicyManager) SetMeteredDataDisabledPackages(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetMeteredDataDisabledPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setMeteredDataDisabledPackages is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDevicePolicyManagerSetMeteredDataDisabledPackages, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
 }
 
 // SetMinimumRequiredWifiSecurityLevel calls android.app.admin.DevicePolicyManager.setMinimumRequiredWifiSecurityLevel.
@@ -7484,90 +6410,6 @@ func (m *DevicePolicyManager) SetPermissionPolicy(arg0 *jni.Object, arg1 int32) 
 	return callErr
 }
 
-// SetPermittedAccessibilityServices calls android.app.admin.DevicePolicyManager.setPermittedAccessibilityServices.
-func (m *DevicePolicyManager) SetPermittedAccessibilityServices(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
-	var result bool
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetPermittedAccessibilityServices == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermittedAccessibilityServices is not available on this device")
-			return callErr
-		}
-
-		var resultRaw uint8
-		resultRaw, callErr = env.CallBooleanMethod(
-			m.Obj,
-			midDevicePolicyManagerSetPermittedAccessibilityServices, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// SetPermittedCrossProfileNotificationListeners calls android.app.admin.DevicePolicyManager.setPermittedCrossProfileNotificationListeners.
-func (m *DevicePolicyManager) SetPermittedCrossProfileNotificationListeners(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
-	var result bool
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetPermittedCrossProfileNotificationListeners == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermittedCrossProfileNotificationListeners is not available on this device")
-			return callErr
-		}
-
-		var resultRaw uint8
-		resultRaw, callErr = env.CallBooleanMethod(
-			m.Obj,
-			midDevicePolicyManagerSetPermittedCrossProfileNotificationListeners, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// SetPermittedInputMethods calls android.app.admin.DevicePolicyManager.setPermittedInputMethods.
-func (m *DevicePolicyManager) SetPermittedInputMethods(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
-	var result bool
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetPermittedInputMethods == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPermittedInputMethods is not available on this device")
-			return callErr
-		}
-
-		var resultRaw uint8
-		resultRaw, callErr = env.CallBooleanMethod(
-			m.Obj,
-			midDevicePolicyManagerSetPermittedInputMethods, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
 // SetPersonalAppsSuspended calls android.app.admin.DevicePolicyManager.setPersonalAppsSuspended.
 func (m *DevicePolicyManager) SetPersonalAppsSuspended(arg0 *jni.Object, arg1 bool) error {
 
@@ -7590,29 +6432,6 @@ func (m *DevicePolicyManager) SetPersonalAppsSuspended(arg0 *jni.Object, arg1 bo
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midDevicePolicyManagerSetPersonalAppsSuspended, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetPreferentialNetworkServiceConfigs calls android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceConfigs.
-func (m *DevicePolicyManager) SetPreferentialNetworkServiceConfigs(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetPreferentialNetworkServiceConfigs == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setPreferentialNetworkServiceConfigs is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetPreferentialNetworkServiceConfigs, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -8245,29 +7064,6 @@ func (m *DevicePolicyManager) SetUsbDataSignalingEnabled(arg0 bool) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midDevicePolicyManagerSetUsbDataSignalingEnabled, jni.BooleanValue(jArg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetUserControlDisabledPackages calls android.app.admin.DevicePolicyManager.setUserControlDisabledPackages.
-func (m *DevicePolicyManager) SetUserControlDisabledPackages(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDevicePolicyManagerSetUserControlDisabledPackages == nil {
-			callErr = fmt.Errorf("android.app.admin.DevicePolicyManager.setUserControlDisabledPackages is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDevicePolicyManagerSetUserControlDisabledPackages, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})

@@ -371,38 +371,6 @@ func (m *TextToSpeech) AreDefaultsEnforced() (bool, error) {
 	return result, callErr
 }
 
-// GetAvailableLanguages calls android.speech.tts.TextToSpeech.getAvailableLanguages.
-func (m *TextToSpeech) GetAvailableLanguages() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechGetAvailableLanguages == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getAvailableLanguages is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midTextToSpeechGetAvailableLanguages,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetDefaultEngine calls android.speech.tts.TextToSpeech.getDefaultEngine.
 func (m *TextToSpeech) GetDefaultEngine() (string, error) {
 	var result string
@@ -494,71 +462,6 @@ func (m *TextToSpeech) GetDefaultVoice() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetEngines calls android.speech.tts.TextToSpeech.getEngines.
-func (m *TextToSpeech) GetEngines() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechGetEngines == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getEngines is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midTextToSpeechGetEngines,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetFeatures calls android.speech.tts.TextToSpeech.getFeatures.
-func (m *TextToSpeech) GetFeatures(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechGetFeatures == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getFeatures is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midTextToSpeechGetFeatures, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetLanguage calls android.speech.tts.TextToSpeech.getLanguage.
 func (m *TextToSpeech) GetLanguage() (*jni.Object, error) {
 	var result *jni.Object
@@ -607,38 +510,6 @@ func (m *TextToSpeech) GetVoice() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midTextToSpeechGetVoice,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetVoices calls android.speech.tts.TextToSpeech.getVoices.
-func (m *TextToSpeech) GetVoices() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechGetVoices == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getVoices is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midTextToSpeechGetVoices,
 		)
 		if callErr != nil {
 			return callErr
@@ -708,8 +579,8 @@ func (m *TextToSpeech) IsSpeaking() (bool, error) {
 	return result, callErr
 }
 
-// PlayEarcon4 calls android.speech.tts.TextToSpeech.playEarcon.
-func (m *TextToSpeech) PlayEarcon4(
+// PlayEarcon calls android.speech.tts.TextToSpeech.playEarcon.
+func (m *TextToSpeech) PlayEarcon(
 	arg0 string,
 	arg1 int32,
 	arg2 *jni.Object,
@@ -722,7 +593,7 @@ func (m *TextToSpeech) PlayEarcon4(
 			callErr = err
 			return err
 		}
-		if midTextToSpeechPlayEarcon4 == nil {
+		if midTextToSpeechPlayEarcon == nil {
 			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.playEarcon is not available on this device")
 			return callErr
 		}
@@ -740,72 +611,7 @@ func (m *TextToSpeech) PlayEarcon4(
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midTextToSpeechPlayEarcon4, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// PlayEarcon3_1 calls android.speech.tts.TextToSpeech.playEarcon.
-func (m *TextToSpeech) PlayEarcon3_1(
-	arg0 string,
-	arg1 int32,
-	arg2 *jni.Object,
-) (int32, error) {
-	var result int32
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechPlayEarcon3_1 == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.playEarcon is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallIntMethod(
-			m.Obj,
-			midTextToSpeechPlayEarcon3_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// PlaySilence calls android.speech.tts.TextToSpeech.playSilence.
-func (m *TextToSpeech) PlaySilence(
-	arg0 int64,
-	arg1 int32,
-	arg2 *jni.Object,
-) (int32, error) {
-	var result int32
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechPlaySilence == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.playSilence is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallIntMethod(
-			m.Obj,
-			midTextToSpeechPlaySilence, jni.LongValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midTextToSpeechPlayEarcon, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1086,8 +892,8 @@ func (m *TextToSpeech) Shutdown() error {
 	return callErr
 }
 
-// Speak4 calls android.speech.tts.TextToSpeech.speak.
-func (m *TextToSpeech) Speak4(
+// Speak calls android.speech.tts.TextToSpeech.speak.
+func (m *TextToSpeech) Speak(
 	arg0 string,
 	arg1 int32,
 	arg2 *jni.Object,
@@ -1100,7 +906,7 @@ func (m *TextToSpeech) Speak4(
 			callErr = err
 			return err
 		}
-		if midTextToSpeechSpeak4 == nil {
+		if midTextToSpeechSpeak == nil {
 			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.speak is not available on this device")
 			return callErr
 		}
@@ -1118,42 +924,7 @@ func (m *TextToSpeech) Speak4(
 
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midTextToSpeechSpeak4, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// Speak3_1 calls android.speech.tts.TextToSpeech.speak.
-func (m *TextToSpeech) Speak3_1(
-	arg0 string,
-	arg1 int32,
-	arg2 *jni.Object,
-) (int32, error) {
-	var result int32
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechSpeak3_1 == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.speak is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallIntMethod(
-			m.Obj,
-			midTextToSpeechSpeak3_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midTextToSpeechSpeak, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1263,47 +1034,6 @@ func (m *TextToSpeech) SynthesizeToFile4_1(
 		result, callErr = env.CallIntMethod(
 			m.Obj,
 			midTextToSpeechSynthesizeToFile4_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// SynthesizeToFile3_2 calls android.speech.tts.TextToSpeech.synthesizeToFile.
-func (m *TextToSpeech) SynthesizeToFile3_2(
-	arg0 string,
-	arg1 *jni.Object,
-	arg2 string,
-) (int32, error) {
-	var result int32
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midTextToSpeechSynthesizeToFile3_2 == nil {
-			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.synthesizeToFile is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		jArg2, err := env.NewStringUTF(arg2)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg2.Object)
-
-		result, callErr = env.CallIntMethod(
-			m.Obj,
-			midTextToSpeechSynthesizeToFile3_2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object),
 		)
 		if callErr != nil {
 			return callErr

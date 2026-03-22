@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "phone"
+const serviceNameManager = "phone"
 
 // Manager wraps android.telephony.TelephonyManager.
 type Manager struct {
@@ -39,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -237,38 +237,6 @@ func (m *Manager) GetActiveModemCount() (int32, error) {
 	return result, callErr
 }
 
-// GetAllCellInfo calls android.telephony.TelephonyManager.getAllCellInfo.
-func (m *Manager) GetAllCellInfo() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetAllCellInfo == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.getAllCellInfo is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetAllCellInfo,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetAllowedNetworkTypesForReason calls android.telephony.TelephonyManager.getAllowedNetworkTypesForReason.
 func (m *Manager) GetAllowedNetworkTypesForReason(arg0 int32) (int64, error) {
 	var result int64
@@ -450,29 +418,6 @@ func (m *Manager) GetCarrierIdFromSimMccMnc() (int32, error) {
 		return callErr
 	})
 	return result, callErr
-}
-
-// GetCarrierRestrictionStatus calls android.telephony.TelephonyManager.getCarrierRestrictionStatus.
-func (m *Manager) GetCarrierRestrictionStatus(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetCarrierRestrictionStatus == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.getCarrierRestrictionStatus is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerGetCarrierRestrictionStatus, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // GetCellLocation calls android.telephony.TelephonyManager.getCellLocation.
@@ -659,38 +604,6 @@ func (m *Manager) GetDeviceSoftwareVersion() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetEquivalentHomePlmns calls android.telephony.TelephonyManager.getEquivalentHomePlmns.
-func (m *Manager) GetEquivalentHomePlmns() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetEquivalentHomePlmns == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.getEquivalentHomePlmns is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetEquivalentHomePlmns,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr
@@ -1225,29 +1138,6 @@ func (m *Manager) GetNetworkSelectionMode() (int32, error) {
 		return callErr
 	})
 	return result, callErr
-}
-
-// GetNetworkSlicingConfiguration calls android.telephony.TelephonyManager.getNetworkSlicingConfiguration.
-func (m *Manager) GetNetworkSlicingConfiguration(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetNetworkSlicingConfiguration == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.getNetworkSlicingConfiguration is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerGetNetworkSlicingConfiguration, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // GetNetworkSpecifier calls android.telephony.TelephonyManager.getNetworkSpecifier.
@@ -1984,38 +1874,6 @@ func (m *Manager) GetTypeAllocationCode1_1(arg0 int32) (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetUiccCardsInfo calls android.telephony.TelephonyManager.getUiccCardsInfo.
-func (m *Manager) GetUiccCardsInfo() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetUiccCardsInfo == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.getUiccCardsInfo is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetUiccCardsInfo,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr
@@ -3078,33 +2936,6 @@ func (m *Manager) Listen(arg0 *jni.Object, arg1 int32) error {
 	return callErr
 }
 
-// PurchasePremiumCapability calls android.telephony.TelephonyManager.purchasePremiumCapability.
-func (m *Manager) PurchasePremiumCapability(
-	arg0 int32,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerPurchasePremiumCapability == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.purchasePremiumCapability is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerPurchasePremiumCapability, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // RebootModem calls android.telephony.TelephonyManager.rebootModem.
 func (m *Manager) RebootModem() error {
 
@@ -3476,32 +3307,6 @@ func (m *Manager) SetDataEnabledForReason(arg0 int32, arg1 bool) error {
 	return callErr
 }
 
-// SetForbiddenPlmns calls android.telephony.TelephonyManager.setForbiddenPlmns.
-func (m *Manager) SetForbiddenPlmns(arg0 *jni.Object) (int32, error) {
-	var result int32
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerSetForbiddenPlmns == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.setForbiddenPlmns is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallIntMethod(
-			m.Obj,
-			midManagerSetForbiddenPlmns, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // SetLine1NumberForDisplay calls android.telephony.TelephonyManager.setLine1NumberForDisplay.
 func (m *Manager) SetLine1NumberForDisplay(arg0 string, arg1 string) (bool, error) {
 	var result bool
@@ -3703,39 +3508,6 @@ func (m *Manager) SetPreferredNetworkTypeToGlobal() (bool, error) {
 	return result, callErr
 }
 
-// SetPreferredOpportunisticDataSubscription calls android.telephony.TelephonyManager.setPreferredOpportunisticDataSubscription.
-func (m *Manager) SetPreferredOpportunisticDataSubscription(
-	arg0 int32,
-	arg1 bool,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerSetPreferredOpportunisticDataSubscription == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.setPreferredOpportunisticDataSubscription is not available on this device")
-			return callErr
-		}
-
-		var jArg1 uint8
-		if arg1 {
-			jArg1 = jniTrue
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerSetPreferredOpportunisticDataSubscription, jni.IntValue(arg0), jni.BooleanValue(jArg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // SetSignalStrengthUpdateRequest calls android.telephony.TelephonyManager.setSignalStrengthUpdateRequest.
 func (m *Manager) SetSignalStrengthUpdateRequest(arg0 *jni.Object) error {
 
@@ -3912,101 +3684,6 @@ func (m *Manager) UnregisterTelephonyCallback(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midManagerUnregisterTelephonyCallback, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// UpdateAvailableNetworks calls android.telephony.TelephonyManager.updateAvailableNetworks.
-func (m *Manager) UpdateAvailableNetworks(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerUpdateAvailableNetworks == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.updateAvailableNetworks is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerUpdateAvailableNetworks, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// UploadCallComposerPicture4 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *Manager) UploadCallComposerPicture4(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerUploadCallComposerPicture4 == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.uploadCallComposerPicture is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerUploadCallComposerPicture4, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// UploadCallComposerPicture4_1 calls android.telephony.TelephonyManager.uploadCallComposerPicture.
-func (m *Manager) UploadCallComposerPicture4_1(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerUploadCallComposerPicture4_1 == nil {
-			callErr = fmt.Errorf("android.telephony.TelephonyManager.uploadCallComposerPicture is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerUploadCallComposerPicture4_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})

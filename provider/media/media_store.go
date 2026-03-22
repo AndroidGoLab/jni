@@ -51,156 +51,6 @@ func (m *MediaStore) CanManageMedia(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
-// CreateDeleteRequest calls android.provider.MediaStore.createDeleteRequest.
-func (m *MediaStore) CreateDeleteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreCreateDeleteRequest == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.createDeleteRequest is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreCreateDeleteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// CreateFavoriteRequest calls android.provider.MediaStore.createFavoriteRequest.
-func (m *MediaStore) CreateFavoriteRequest(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 bool,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreCreateFavoriteRequest == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.createFavoriteRequest is not available on this device")
-			return callErr
-		}
-
-		var jArg2 uint8
-		if arg2 {
-			jArg2 = jniTrue
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreCreateFavoriteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// CreateTrashRequest calls android.provider.MediaStore.createTrashRequest.
-func (m *MediaStore) CreateTrashRequest(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 bool,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreCreateTrashRequest == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.createTrashRequest is not available on this device")
-			return callErr
-		}
-
-		var jArg2 uint8
-		if arg2 {
-			jArg2 = jniTrue
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreCreateTrashRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// CreateWriteRequest calls android.provider.MediaStore.createWriteRequest.
-func (m *MediaStore) CreateWriteRequest(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreCreateWriteRequest == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.createWriteRequest is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreCreateWriteRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetDocumentUri calls android.provider.MediaStore.getDocumentUri.
 func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -218,39 +68,6 @@ func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreGetDocumentUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetExternalVolumeNames calls android.provider.MediaStore.getExternalVolumeNames.
-func (m *MediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreGetExternalVolumeNames == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.getExternalVolumeNames is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreGetExternalVolumeNames, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -422,8 +239,8 @@ func (m *MediaStore) GetPickImagesMaxLimit() (int32, error) {
 	return result, callErr
 }
 
-// GetRecentExternalVolumeNames calls android.provider.MediaStore.getRecentExternalVolumeNames.
-func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
+// GetRedactedUri calls android.provider.MediaStore.getRedactedUri.
+func (m *MediaStore) GetRedactedUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -431,80 +248,14 @@ func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object
 			callErr = err
 			return err
 		}
-		if midMediaStoreGetRecentExternalVolumeNames == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.getRecentExternalVolumeNames is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreGetRecentExternalVolumeNames, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetRedactedUri2 calls android.provider.MediaStore.getRedactedUri.
-func (m *MediaStore) GetRedactedUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreGetRedactedUri2 == nil {
+		if midMediaStoreGetRedactedUri == nil {
 			callErr = fmt.Errorf("android.provider.MediaStore.getRedactedUri is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreGetRedactedUri2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetRedactedUri2_1 calls android.provider.MediaStore.getRedactedUri.
-func (m *MediaStore) GetRedactedUri2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreGetRedactedUri2_1 == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.getRedactedUri is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreGetRedactedUri2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+			midMediaStoreGetRedactedUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -743,38 +494,6 @@ func (m *MediaStore) IsSupportedCloudMediaProviderAuthority(arg0 *jni.Object, ar
 		return callErr
 	})
 	return result, callErr
-}
-
-// MarkIsFavoriteStatus calls android.provider.MediaStore.markIsFavoriteStatus.
-func (m *MediaStore) MarkIsFavoriteStatus(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 bool,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaStoreMarkIsFavoriteStatus == nil {
-			callErr = fmt.Errorf("android.provider.MediaStore.markIsFavoriteStatus is not available on this device")
-			return callErr
-		}
-
-		var jArg2 uint8
-		if arg2 {
-			jArg2 = jniTrue
-		}
-
-		callErr = env.CallStaticVoidMethod(
-			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
-			midMediaStoreMarkIsFavoriteStatus, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // NotifyCloudMediaChangedEvent calls android.provider.MediaStore.notifyCloudMediaChangedEvent.

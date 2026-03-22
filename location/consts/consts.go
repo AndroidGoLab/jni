@@ -3,6 +3,95 @@
 package consts
 
 const (
+	ConstellationBeidou           int = 5
+	ConstellationGalileo          int = 6
+	ConstellationGlonass          int = 3
+	ConstellationGps              int = 1
+	ConstellationIrnss            int = 7
+	ConstellationQzss             int = 4
+	ConstellationSbas             int = 2
+	ConstellationUnknown          int = 0
+	Creator                       int = 0
+	AccuracyCoarse                int = 2
+	AccuracyFine                  int = 1
+	AccuracyHigh                  int = 3
+	AccuracyLow                   int = 1
+	AccuracyMedium                int = 2
+	NoRequirement                 int = 0
+	PowerHigh                     int = 3
+	PowerLow                      int = 1
+	PowerMedium                   int = 2
+	PassiveInterval               int = 2147483647
+	GpsEventFirstFix              int = 3
+	GpsEventSatelliteStatus       int = 4
+	GpsEventStarted               int = 1
+	GpsEventStopped               int = 2
+	StatusParityPassed            int = 1
+	StatusParityRebuilt           int = 2
+	StatusUnknown                 int = 0
+	TypeBdsCnav1                  int = 1283
+	TypeBdsCnav2                  int = 1284
+	TypeBdsD1                     int = 1281
+	TypeBdsD2                     int = 1282
+	TypeGalF                      int = 1538
+	TypeGalI                      int = 1537
+	TypeGloL1ca                   int = 769
+	TypeGpsCnav2                  int = 260
+	TypeGpsL1ca                   int = 257
+	TypeGpsL2cnav                 int = 258
+	TypeGpsL5cnav                 int = 259
+	TypeIrnL1                     int = 1795
+	TypeIrnL5                     int = 1794
+	TypeIrnL5ca                   int = 1793
+	TypeQzsL1ca                   int = 1025
+	TypeSbs                       int = 513
+	TypeUnknown                   int = 0
+	StatusLocationDisabled        int = 2
+	StatusNotSupported            int = 0
+	StatusReady                   int = 1
+	CapabilitySupported           int = 1
+	CapabilityUnknown             int = 0
+	CapabilityUnsupported         int = 2
+	StatusNotAllowed              int = 3
+	AdrStateCycleSlip             int = 4
+	AdrStateHalfCycleReported     int = 16
+	AdrStateHalfCycleResolved     int = 8
+	AdrStateReset                 int = 2
+	AdrStateUnknown               int = 0
+	AdrStateValid                 int = 1
+	MultipathIndicatorDetected    int = 1
+	MultipathIndicatorNotDetected int = 2
+	MultipathIndicatorUnknown     int = 0
+	State2ndCodeLock              int = 65536
+	StateBdsD2BitSync             int = 256
+	StateBdsD2SubframeSync        int = 512
+	StateBitSync                  int = 2
+	StateCodeLock                 int = 1
+	StateGalE1bcCodeLock          int = 1024
+	StateGalE1bPageSync           int = 4096
+	StateGalE1c2ndCodeLock        int = 2048
+	StateGloStringSync            int = 64
+	StateGloTodDecoded            int = 128
+	StateGloTodKnown              int = 32768
+	StateMsecAmbiguous            int = 16
+	StateSbasSync                 int = 8192
+	StateSubframeSync             int = 4
+	StateSymbolSync               int = 32
+	StateTowDecoded               int = 8
+	StateTowKnown                 int = 16384
+	StateUnknown                  int = 0
+	FormatDegrees                 int = 0
+	FormatMinutes                 int = 1
+	FormatSeconds                 int = 2
+	Available                     int = 2
+	OutOfService                  int = 0
+	TemporarilyUnavailable        int = 1
+	QualityBalancedPowerAccuracy  int = 102
+	QualityHighAccuracy           int = 100
+	QualityLowPower               int = 104
+)
+
+const (
 	ActionGnssCapabilitiesChanged string = "android.location.action.GNSS_CAPABILITIES_CHANGED"
 	ExtraGnssCapabilities         string = "android.location.extra.GNSS_CAPABILITIES"
 	ExtraLocationEnabled          string = "android.location.extra.LOCATION_ENABLED"
@@ -20,19 +109,8 @@ const (
 	NetworkProvider               string = "network"
 	PassiveProvider               string = "passive"
 	ProvidersChangedAction        string = "android.location.PROVIDERS_CHANGED"
-)
-
-const (
-	ConstellationBeidou  int = 5
-	ConstellationGalileo int = 6
-	ConstellationGlonass int = 3
-	ConstellationGps     int = 1
-	ConstellationIrnss   int = 7
-	ConstellationQzss    int = 4
-	ConstellationSbas    int = 2
-	ConstellationUnknown int = 0
-	Creator              int = 0
-	FormatDegrees        int = 0
-	FormatMinutes        int = 1
-	FormatSeconds        int = 2
+	ActionInjectedSettingChanged  string = "android.location.InjectedSettingChanged"
+	ActionServiceIntent           string = "android.location.SettingInjectorService"
+	AttributesName                string = "injected-location-setting"
+	MetaDataName                  string = "android.location.SettingInjectorService"
 )

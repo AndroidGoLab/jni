@@ -31,8 +31,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -40,7 +40,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -71,88 +71,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "Status: available")
 
-	// Query existing associations (returns java.util.List).
-	assocList, err := mgr.GetAssociations()
-	if err != nil {
-		fmt.Fprintf(output, "GetAssociations: %v\n", err)
-	} else {
-		var listSize int32
-		_ = vm.Do(func(env *jni.Env) error {
-			if assocList == nil {
-				return nil
-			}
-			listCls, err := env.FindClass("java/util/List")
-			if err != nil {
-				return err
-			}
-			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
-			if err != nil {
-				return err
-			}
-			listSize, err = env.CallIntMethod(assocList, sizeMid)
-			return err
-		})
-		fmt.Fprintf(output, "Associations: %d\n", listSize)
+	// Filtered: GetAssociations returns generic type (List<String>)
+	// assocList, err := mgr.GetAssociations()
+	// ...
 
-		// Print each association's toString().
-		if listSize > 0 {
-			_ = vm.Do(func(env *jni.Env) error {
-				listCls, err := env.FindClass("java/util/List")
-				if err != nil {
-					return err
-				}
-				getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
-				if err != nil {
-					return err
-				}
-				objCls, err := env.FindClass("java/lang/Object")
-				if err != nil {
-					return err
-				}
-				toStrMid, err := env.GetMethodID(objCls, "toString", "()Ljava/lang/String;")
-				if err != nil {
-					return err
-				}
-
-				for i := int32(0); i < listSize; i++ {
-					elem, err := env.CallObjectMethod(assocList, getMid, jni.IntValue(i))
-					if err != nil {
-						continue
-					}
-					strObj, err := env.CallObjectMethod(elem, toStrMid)
-					if err != nil {
-						continue
-					}
-					fmt.Fprintf(output, "  [%d] %s\n", i, env.GoString((*jni.String)(unsafe.Pointer(strObj))))
-				}
-				return nil
-			})
-		}
-	}
-
-	// Try getMyAssociations (API 33+).
-	myAssoc, err := mgr.GetMyAssociations()
-	if err != nil {
-		fmt.Fprintf(output, "GetMyAssociations: %v\n", err)
-	} else {
-		var myCount int32
-		_ = vm.Do(func(env *jni.Env) error {
-			if myAssoc == nil {
-				return nil
-			}
-			listCls, err := env.FindClass("java/util/List")
-			if err != nil {
-				return err
-			}
-			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
-			if err != nil {
-				return err
-			}
-			myCount, err = env.CallIntMethod(myAssoc, sizeMid)
-			return err
-		})
-		fmt.Fprintf(output, "My associations: %d\n", myCount)
-	}
+	// Filtered: GetMyAssociations returns generic type (List<AssociationInfo>)
+	// myAssoc, err := mgr.GetMyAssociations()
+	// ...
 
 	return nil
 }

@@ -3,20 +3,60 @@
 package consts
 
 const (
-	ExtraEventAction   string = "android.app.usage.extra.EVENT_ACTION"
-	ExtraEventCategory string = "android.app.usage.extra.EVENT_CATEGORY"
+	AppDataTypeFileTypeApk              int = 3
+	AppDataTypeFileTypeCurrentProfile   int = 2
+	AppDataTypeFileTypeDexoptArtifact   int = 0
+	AppDataTypeFileTypeDm               int = 4
+	AppDataTypeFileTypeReferenceProfile int = 1
+	AppDataTypeLib                      int = 5
+	Creator                             int = 0
+	IntervalBest                        int = 4
+	IntervalDaily                       int = 0
+	IntervalMonthly                     int = 2
+	IntervalWeekly                      int = 1
+	IntervalYearly                      int = 3
+	StandbyBucketActive                 int = 10
+	StandbyBucketFrequent               int = 30
+	StandbyBucketRare                   int = 40
+	StandbyBucketRestricted             int = 45
+	StandbyBucketWorkingSet             int = 20
+	ActivityPaused                      int = 2
+	ActivityResumed                     int = 1
+	ActivityStopped                     int = 23
+	ConfigurationChange                 int = 5
+	DeviceShutdown                      int = 26
+	DeviceStartup                       int = 27
+	ForegroundServiceStart              int = 19
+	ForegroundServiceStop               int = 20
+	KeyguardHidden                      int = 18
+	KeyguardShown                       int = 17
+	MoveToBackground                    int = 2
+	MoveToForeground                    int = 1
+	None                                int = 0
+	ScreenInteractive                   int = 15
+	ScreenNonInteractive                int = 16
+	ShortcutInvocation                  int = 8
+	StandbyBucketChanged                int = 11
+	UserInteraction                     int = 7
+	DefaultNetworkAll                   int = -1
+	DefaultNetworkNo                    int = 1
+	DefaultNetworkYes                   int = 2
+	MeteredAll                          int = -1
+	MeteredNo                           int = 1
+	MeteredYes                          int = 2
+	RoamingAll                          int = -1
+	RoamingNo                           int = 1
+	RoamingYes                          int = 2
+	StateAll                            int = -1
+	StateDefault                        int = 1
+	StateForeground                     int = 2
+	TagNone                             int = 0
+	UidAll                              int = -1
+	UidRemoved                          int = -4
+	UidTethering                        int = -5
 )
 
 const (
-	IntervalBest            int = 4
-	IntervalDaily           int = 0
-	IntervalMonthly         int = 2
-	IntervalWeekly          int = 1
-	IntervalYearly          int = 3
-	StandbyBucketActive     int = 10
-	StandbyBucketFrequent   int = 30
-	StandbyBucketRare       int = 40
-	StandbyBucketRestricted int = 45
-	StandbyBucketWorkingSet int = 20
-	Creator                 int = 0
+	ExtraEventAction   string = "android.app.usage.extra.EVENT_ACTION"
+	ExtraEventCategory string = "android.app.usage.extra.EVENT_CATEGORY"
 )

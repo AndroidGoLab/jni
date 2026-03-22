@@ -3,16 +3,31 @@
 package consts
 
 const (
-	ExtraAssociation string = "android.companion.extra.ASSOCIATION"
-	ExtraDevice      string = "android.companion.extra.DEVICE"
+	Creator                     int = 0
+	EventBleAppeared            int = 0
+	EventBleDisappeared         int = 1
+	EventBtConnected            int = 2
+	EventBtDisconnected         int = 3
+	EventSelfManagedAppeared    int = 4
+	EventSelfManagedDisappeared int = 5
+	NoAssociation               int = -1
+	FlagCallMetadata            int = 1
+	ResultCanceled              int = 0
+	ResultDiscoveryTimeout      int = 2
+	ResultInternalError         int = 3
+	ResultOk                    int = -1
+	ResultSecurityError         int = 4
+	ResultUserRejected          int = 1
 )
 
 const (
-	FlagCallMetadata       int = 1
-	ResultCanceled         int = 0
-	ResultDiscoveryTimeout int = 2
-	ResultInternalError    int = 3
-	ResultOk               int = -1
-	ResultSecurityError    int = 4
-	ResultUserRejected     int = 1
+	ServiceInterface                   string = "android.companion.CompanionDeviceService"
+	DeviceProfileAppStreaming          string = "android.app.role.COMPANION_DEVICE_APP_STREAMING"
+	DeviceProfileAutomotiveProjection  string = "android.app.role.SYSTEM_AUTOMOTIVE_PROJECTION"
+	DeviceProfileComputer              string = "android.app.role.COMPANION_DEVICE_COMPUTER"
+	DeviceProfileGlasses               string = "android.app.role.COMPANION_DEVICE_GLASSES"
+	DeviceProfileNearbyDeviceStreaming string = "android.app.role.COMPANION_DEVICE_NEARBY_DEVICE_STREAMING"
+	DeviceProfileWatch                 string = "android.app.role.COMPANION_DEVICE_WATCH"
+	ExtraAssociation                   string = "android.companion.extra.ASSOCIATION"
+	ExtraDevice                        string = "android.companion.extra.DEVICE"
 )

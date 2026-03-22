@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "input_method"
+const serviceNameInputMethodManager = "input_method"
 
 // InputMethodManager wraps android.view.inputmethod.InputMethodManager.
 type InputMethodManager struct {
@@ -39,12 +39,12 @@ func NewInputMethodManager(ctx *app.Context) (*InputMethodManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameInputMethodManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameInputMethodManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -129,75 +129,6 @@ func (m *InputMethodManager) AcceptStylusHandwritingDelegation2_1(arg0 *jni.Obje
 		return callErr
 	})
 	return result, callErr
-}
-
-// AcceptStylusHandwritingDelegation5_2 calls android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation.
-func (m *InputMethodManager) AcceptStylusHandwritingDelegation5_2(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 int32,
-	arg3 *jni.Object,
-	arg4 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midInputMethodManagerAcceptStylusHandwritingDelegation5_2 == nil {
-			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midInputMethodManagerAcceptStylusHandwritingDelegation5_2, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// AcceptStylusHandwritingDelegation4_3 calls android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation.
-func (m *InputMethodManager) AcceptStylusHandwritingDelegation4_3(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midInputMethodManagerAcceptStylusHandwritingDelegation4_3 == nil {
-			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midInputMethodManagerAcceptStylusHandwritingDelegation4_3, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // DispatchKeyEventFromInputMethod calls android.view.inputmethod.InputMethodManager.dispatchKeyEventFromInputMethod.
@@ -294,108 +225,6 @@ func (m *InputMethodManager) GetCurrentInputMethodSubtype() (*jni.Object, error)
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInputMethodManagerGetCurrentInputMethodSubtype,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetEnabledInputMethodList calls android.view.inputmethod.InputMethodManager.getEnabledInputMethodList.
-func (m *InputMethodManager) GetEnabledInputMethodList() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midInputMethodManagerGetEnabledInputMethodList == nil {
-			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getEnabledInputMethodList is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midInputMethodManagerGetEnabledInputMethodList,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetEnabledInputMethodSubtypeList calls android.view.inputmethod.InputMethodManager.getEnabledInputMethodSubtypeList.
-func (m *InputMethodManager) GetEnabledInputMethodSubtypeList(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midInputMethodManagerGetEnabledInputMethodSubtypeList == nil {
-			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getEnabledInputMethodSubtypeList is not available on this device")
-			return callErr
-		}
-
-		var jArg1 uint8
-		if arg1 {
-			jArg1 = jniTrue
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midInputMethodManagerGetEnabledInputMethodSubtypeList, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetInputMethodList calls android.view.inputmethod.InputMethodManager.getInputMethodList.
-func (m *InputMethodManager) GetInputMethodList() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midInputMethodManagerGetInputMethodList == nil {
-			callErr = fmt.Errorf("android.view.inputmethod.InputMethodManager.getInputMethodList is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midInputMethodManagerGetInputMethodList,
 		)
 		if callErr != nil {
 			return callErr

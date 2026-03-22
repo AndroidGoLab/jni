@@ -47,8 +47,8 @@ func TestAllJavaSpecs_LoadAndMerge(t *testing.T) {
 
 	t.Logf("found %d spec files", len(specs))
 
-	if len(specs) != 65 {
-		t.Errorf("expected 65 spec files, got %d", len(specs))
+	if len(specs) != 239 {
+		t.Errorf("expected 239 spec files, got %d", len(specs))
 	}
 
 	for _, specPath := range specs {

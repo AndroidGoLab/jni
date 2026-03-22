@@ -416,51 +416,6 @@ func (m *MediaPlayer) GetDuration() (int32, error) {
 	return result, callErr
 }
 
-// GetKeyRequest calls android.media.MediaPlayer.getKeyRequest.
-func (m *MediaPlayer) GetKeyRequest(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 string,
-	arg3 int32,
-	arg4 *jni.Object,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaPlayerGetKeyRequest == nil {
-			callErr = fmt.Errorf("android.media.MediaPlayer.getKeyRequest is not available on this device")
-			return callErr
-		}
-
-		jArg2, err := env.NewStringUTF(arg2)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg2.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midMediaPlayerGetKeyRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3), jni.ObjectValue(arg4),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetMetrics calls android.media.MediaPlayer.getMetrics.
 func (m *MediaPlayer) GetMetrics() (*jni.Object, error) {
 	var result *jni.Object
@@ -573,38 +528,6 @@ func (m *MediaPlayer) GetRoutedDevice() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaPlayerGetRoutedDevice,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetRoutedDevices calls android.media.MediaPlayer.getRoutedDevices.
-func (m *MediaPlayer) GetRoutedDevices() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaPlayerGetRoutedDevices == nil {
-			callErr = fmt.Errorf("android.media.MediaPlayer.getRoutedDevices is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midMediaPlayerGetRoutedDevices,
 		)
 		if callErr != nil {
 			return callErr
@@ -1265,12 +1188,8 @@ func (m *MediaPlayer) SetDataSource2(arg0 *jni.Object, arg1 *jni.Object) error {
 	return callErr
 }
 
-// SetDataSource3_1 calls android.media.MediaPlayer.setDataSource.
-func (m *MediaPlayer) SetDataSource3_1(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
+// SetDataSource1_1 calls android.media.MediaPlayer.setDataSource.
+func (m *MediaPlayer) SetDataSource1_1(arg0 *jni.Object) error {
 
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -1278,27 +1197,22 @@ func (m *MediaPlayer) SetDataSource3_1(
 			callErr = err
 			return err
 		}
-		if midMediaPlayerSetDataSource3_1 == nil {
+		if midMediaPlayerSetDataSource1_1 == nil {
 			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midMediaPlayerSetDataSource3_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midMediaPlayerSetDataSource1_1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// SetDataSource4_2 calls android.media.MediaPlayer.setDataSource.
-func (m *MediaPlayer) SetDataSource4_2(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
+// SetDataSource1_2 calls android.media.MediaPlayer.setDataSource.
+func (m *MediaPlayer) SetDataSource1_2(arg0 *jni.Object) error {
 
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -1306,14 +1220,14 @@ func (m *MediaPlayer) SetDataSource4_2(
 			callErr = err
 			return err
 		}
-		if midMediaPlayerSetDataSource4_2 == nil {
+		if midMediaPlayerSetDataSource1_2 == nil {
 			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midMediaPlayerSetDataSource4_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midMediaPlayerSetDataSource1_2, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1343,54 +1257,8 @@ func (m *MediaPlayer) SetDataSource1_3(arg0 *jni.Object) error {
 	return callErr
 }
 
-// SetDataSource1_4 calls android.media.MediaPlayer.setDataSource.
-func (m *MediaPlayer) SetDataSource1_4(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaPlayerSetDataSource1_4 == nil {
-			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midMediaPlayerSetDataSource1_4, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetDataSource1_5 calls android.media.MediaPlayer.setDataSource.
-func (m *MediaPlayer) SetDataSource1_5(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midMediaPlayerSetDataSource1_5 == nil {
-			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midMediaPlayerSetDataSource1_5, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetDataSource3_6 calls android.media.MediaPlayer.setDataSource.
-func (m *MediaPlayer) SetDataSource3_6(
+// SetDataSource3_4 calls android.media.MediaPlayer.setDataSource.
+func (m *MediaPlayer) SetDataSource3_4(
 	arg0 *jni.Object,
 	arg1 int64,
 	arg2 int64,
@@ -1402,22 +1270,22 @@ func (m *MediaPlayer) SetDataSource3_6(
 			callErr = err
 			return err
 		}
-		if midMediaPlayerSetDataSource3_6 == nil {
+		if midMediaPlayerSetDataSource3_4 == nil {
 			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midMediaPlayerSetDataSource3_6, jni.ObjectValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2),
+			midMediaPlayerSetDataSource3_4, jni.ObjectValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// SetDataSource1_7 calls android.media.MediaPlayer.setDataSource.
-func (m *MediaPlayer) SetDataSource1_7(arg0 string) error {
+// SetDataSource1_5 calls android.media.MediaPlayer.setDataSource.
+func (m *MediaPlayer) SetDataSource1_5(arg0 string) error {
 
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -1425,7 +1293,7 @@ func (m *MediaPlayer) SetDataSource1_7(arg0 string) error {
 			callErr = err
 			return err
 		}
-		if midMediaPlayerSetDataSource1_7 == nil {
+		if midMediaPlayerSetDataSource1_5 == nil {
 			callErr = fmt.Errorf("android.media.MediaPlayer.setDataSource is not available on this device")
 			return callErr
 		}
@@ -1437,7 +1305,7 @@ func (m *MediaPlayer) SetDataSource1_7(arg0 string) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midMediaPlayerSetDataSource1_7, jni.ObjectValue(&jArg0.Object),
+			midMediaPlayerSetDataSource1_5, jni.ObjectValue(&jArg0.Object),
 		)
 		return callErr
 	})

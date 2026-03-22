@@ -184,6 +184,13 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.app.AlarmManager$OnAlarmListener
+      go_type: ManagerOnAlarmListener
+      methods:
+        - java_method: onAlarm
+          go_name: OnAlarm
+          returns: void
+          error: true
 constants:
     - go_name: ActionNextAlarmClockChanged
       value: '"android.app.action.NEXT_ALARM_CLOCK_CHANGED"'

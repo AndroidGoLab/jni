@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "account"
+const serviceNameAccountManager = "account"
 
 // AccountManager wraps android.accounts.AccountManager.
 type AccountManager struct {
@@ -39,12 +39,12 @@ func NewAccountManager(ctx *app.Context) (*AccountManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameAccountManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameAccountManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -69,8 +69,8 @@ func (m *AccountManager) Close() {
 	}
 }
 
-// AddAccountExplicitly3 calls android.accounts.AccountManager.addAccountExplicitly.
-func (m *AccountManager) AddAccountExplicitly3(
+// AddAccountExplicitly calls android.accounts.AccountManager.addAccountExplicitly.
+func (m *AccountManager) AddAccountExplicitly(
 	arg0 *jni.Object,
 	arg1 string,
 	arg2 *jni.Object,
@@ -82,7 +82,7 @@ func (m *AccountManager) AddAccountExplicitly3(
 			callErr = err
 			return err
 		}
-		if midAccountManagerAddAccountExplicitly3 == nil {
+		if midAccountManagerAddAccountExplicitly == nil {
 			callErr = fmt.Errorf("android.accounts.AccountManager.addAccountExplicitly is not available on this device")
 			return callErr
 		}
@@ -96,46 +96,7 @@ func (m *AccountManager) AddAccountExplicitly3(
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
-			midAccountManagerAddAccountExplicitly3, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// AddAccountExplicitly4_1 calls android.accounts.AccountManager.addAccountExplicitly.
-func (m *AccountManager) AddAccountExplicitly4_1(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) (bool, error) {
-	var result bool
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midAccountManagerAddAccountExplicitly4_1 == nil {
-			callErr = fmt.Errorf("android.accounts.AccountManager.addAccountExplicitly is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		var resultRaw uint8
-		resultRaw, callErr = env.CallBooleanMethod(
-			m.Obj,
-			midAccountManagerAddAccountExplicitly4_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+			midAccountManagerAddAccountExplicitly, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -789,118 +750,6 @@ func (m *AccountManager) Get(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsAccountManager)),
 			midAccountManagerGet, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// NewChooseAccountIntent8 calls android.accounts.AccountManager.newChooseAccountIntent.
-func (m *AccountManager) NewChooseAccountIntent8(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 bool,
-	arg4 string,
-	arg5 string,
-	arg6 *jni.Object,
-	arg7 *jni.Object,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midAccountManagerNewChooseAccountIntent8 == nil {
-			callErr = fmt.Errorf("android.accounts.AccountManager.newChooseAccountIntent is not available on this device")
-			return callErr
-		}
-
-		var jArg3 uint8
-		if arg3 {
-			jArg3 = jniTrue
-		}
-
-		jArg4, err := env.NewStringUTF(arg4)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg4.Object)
-
-		jArg5, err := env.NewStringUTF(arg5)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg5.Object)
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsAccountManager)),
-			midAccountManagerNewChooseAccountIntent8, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3), jni.ObjectValue(&jArg4.Object), jni.ObjectValue(&jArg5.Object), jni.ObjectValue(arg6), jni.ObjectValue(arg7),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// NewChooseAccountIntent7_1 calls android.accounts.AccountManager.newChooseAccountIntent.
-func (m *AccountManager) NewChooseAccountIntent7_1(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 string,
-	arg4 string,
-	arg5 *jni.Object,
-	arg6 *jni.Object,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midAccountManagerNewChooseAccountIntent7_1 == nil {
-			callErr = fmt.Errorf("android.accounts.AccountManager.newChooseAccountIntent is not available on this device")
-			return callErr
-		}
-
-		jArg3, err := env.NewStringUTF(arg3)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg3.Object)
-
-		jArg4, err := env.NewStringUTF(arg4)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg4.Object)
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsAccountManager)),
-			midAccountManagerNewChooseAccountIntent7_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object), jni.ObjectValue(arg5), jni.ObjectValue(arg6),
 		)
 		if callErr != nil {
 			return callErr

@@ -31,8 +31,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -40,7 +40,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -176,68 +176,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		}
 	}
 
-	// --- List installed packages (first 10) ---
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "Installed Packages:")
-
-	// GetInstalledPackages1_1(flags int32) -> *jni.Object (List<PackageInfo>)
-	listObj, err := mgr.GetInstalledPackages1_1(0)
-	if err != nil {
-		fmt.Fprintf(output, "  Error: %v\n", err)
-	} else if listObj == nil || listObj.Ref() == 0 {
-		fmt.Fprintln(output, "  (null)")
-	} else {
-		vm.Do(func(env *jni.Env) error {
-			listCls := env.GetObjectClass(listObj)
-
-			// List.size()
-			sizeMid, err := env.GetMethodID(listCls, "size", "()I")
-			if err != nil {
-				return nil
-			}
-			size, err := env.CallIntMethod(listObj, sizeMid)
-			if err != nil {
-				return nil
-			}
-			fmt.Fprintf(output, "  Total: %d\n", size)
-
-			// List.get(int)
-			getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
-			if err != nil {
-				return nil
-			}
-
-			// Show first 10
-			limit := size
-			if limit > 10 {
-				limit = 10
-			}
-			for i := int32(0); i < limit; i++ {
-				piObj, err := env.CallObjectMethod(listObj, getMid, jni.IntValue(i))
-				if err != nil || piObj == nil {
-					continue
-				}
-
-				// Read packageName field
-				piCls := env.GetObjectClass(piObj)
-				pnFid, err := env.GetFieldID(piCls, "packageName", "Ljava/lang/String;")
-				if err != nil {
-					continue
-				}
-				pnObj := env.GetObjectField(piObj, pnFid)
-				if pnObj == nil || pnObj.Ref() == 0 {
-					continue
-				}
-				pn := env.GoString((*jni.String)(unsafe.Pointer(pnObj)))
-				fmt.Fprintf(output, "  [%d] %s\n", i, pn)
-			}
-			if size > 10 {
-				fmt.Fprintf(output, "  ... and %d more\n", size-10)
-			}
-
-			return nil
-		})
-	}
+	// Filtered: GetInstalledPackages1_1 returns generic type (List<PackageInfo>)
+	// listObj, err := mgr.GetInstalledPackages1_1(0)
+	// ...
 
 	fmt.Fprintln(output, "")
 	fmt.Fprintln(output, "PM example complete.")

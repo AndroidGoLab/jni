@@ -54,6 +54,31 @@ classes:
               go_name: arg0
           returns: android.hardware.lights.LightState$Builder
           error: true
+    - java_class: android.hardware.lights.LightsRequest
+      go_type: Request
+    - java_class: android.hardware.lights.LightsRequest$Builder
+      go_type: RequestBuilder
+      methods:
+        - java_method: addLight
+          go_name: AddLight
+          params:
+            - java_type: android.hardware.lights.Light
+              go_name: arg0
+            - java_type: android.hardware.lights.LightState
+              go_name: arg1
+          returns: android.hardware.lights.LightsRequest$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.hardware.lights.LightsRequest
+          error: true
+        - java_method: clearLight
+          go_name: ClearLight
+          params:
+            - java_type: android.hardware.lights.Light
+              go_name: arg0
+          returns: android.hardware.lights.LightsRequest$Builder
+          error: true
     - java_class: android.hardware.lights.LightsManager
       go_type: Manager
       methods:
@@ -63,10 +88,6 @@ classes:
             - java_type: android.hardware.lights.Light
               go_name: arg0
           returns: android.hardware.lights.LightState
-          error: true
-        - java_method: getLights
-          go_name: GetLights
-          returns: java.util.List<android.hardware.lights.Light>
           error: true
         - java_method: openSession
           go_name: OpenSession

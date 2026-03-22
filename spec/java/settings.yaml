@@ -138,6 +138,20 @@ classes:
               go_name: arg2
           returns: boolean
           error: true
+    - java_class: android.provider.Settings$NameValueTable
+      go_type: NameValueTable
+      static_methods:
+        - java_method: getUriFor
+          go_name: GetUriFor
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+    - java_class: android.provider.Settings$Panel
+      go_type: Panel
     - java_class: android.provider.Settings$Secure
       go_type: Secure
       static_methods:
@@ -281,6 +295,8 @@ classes:
               go_name: arg2
           returns: void
           error: true
+    - java_class: android.provider.Settings$SettingNotFoundException
+      go_type: SettingNotFoundException
     - java_class: android.provider.Settings$System
       go_type: System
       static_methods:
@@ -982,6 +998,24 @@ constants:
       go_type: string
     - go_name: WindowAnimationScale
       value: '"window_animation_scale"'
+      go_type: string
+    - go_name: Name
+      value: '"name"'
+      go_type: string
+    - go_name: Value
+      value: '"value"'
+      go_type: string
+    - go_name: ActionInternetConnectivity
+      value: '"android.settings.panel.action.INTERNET_CONNECTIVITY"'
+      go_type: string
+    - go_name: ActionNfc
+      value: '"android.settings.panel.action.NFC"'
+      go_type: string
+    - go_name: ActionVolume
+      value: '"android.settings.panel.action.VOLUME"'
+      go_type: string
+    - go_name: ActionWifi
+      value: '"android.settings.panel.action.WIFI"'
       go_type: string
     - go_name: AccessibilityDisplayInversionEnabled
       value: '"accessibility_display_inversion_enabled"'

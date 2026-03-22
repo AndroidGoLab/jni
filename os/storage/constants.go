@@ -5,14 +5,22 @@ package storage
 import "github.com/AndroidGoLab/jni/os/storage/consts"
 
 const (
+	Creator               = consts.Creator
+	ErrorAlreadyMounted   = consts.ErrorAlreadyMounted
+	ErrorCouldNotMount    = consts.ErrorCouldNotMount
+	ErrorCouldNotUnmount  = consts.ErrorCouldNotUnmount
+	ErrorInternal         = consts.ErrorInternal
+	ErrorNotMounted       = consts.ErrorNotMounted
+	ErrorPermissionDenied = consts.ErrorPermissionDenied
+	Mounted               = consts.Mounted
+	Unmounted             = consts.Unmounted
+	UuidDefault           = consts.UuidDefault
+)
+
+const (
+	ExtraStorageVolume  = consts.ExtraStorageVolume
 	ActionClearAppCache = consts.ActionClearAppCache
 	ActionManageStorage = consts.ActionManageStorage
 	ExtraRequestedBytes = consts.ExtraRequestedBytes
 	ExtraUuid           = consts.ExtraUuid
-	ExtraStorageVolume  = consts.ExtraStorageVolume
-)
-
-const (
-	UuidDefault = consts.UuidDefault
-	Creator     = consts.Creator
 )

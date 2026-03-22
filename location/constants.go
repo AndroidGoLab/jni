@@ -5,6 +5,95 @@ package location
 import "github.com/AndroidGoLab/jni/location/consts"
 
 const (
+	ConstellationBeidou           = consts.ConstellationBeidou
+	ConstellationGalileo          = consts.ConstellationGalileo
+	ConstellationGlonass          = consts.ConstellationGlonass
+	ConstellationGps              = consts.ConstellationGps
+	ConstellationIrnss            = consts.ConstellationIrnss
+	ConstellationQzss             = consts.ConstellationQzss
+	ConstellationSbas             = consts.ConstellationSbas
+	ConstellationUnknown          = consts.ConstellationUnknown
+	Creator                       = consts.Creator
+	AccuracyCoarse                = consts.AccuracyCoarse
+	AccuracyFine                  = consts.AccuracyFine
+	AccuracyHigh                  = consts.AccuracyHigh
+	AccuracyLow                   = consts.AccuracyLow
+	AccuracyMedium                = consts.AccuracyMedium
+	NoRequirement                 = consts.NoRequirement
+	PowerHigh                     = consts.PowerHigh
+	PowerLow                      = consts.PowerLow
+	PowerMedium                   = consts.PowerMedium
+	PassiveInterval               = consts.PassiveInterval
+	GpsEventFirstFix              = consts.GpsEventFirstFix
+	GpsEventSatelliteStatus       = consts.GpsEventSatelliteStatus
+	GpsEventStarted               = consts.GpsEventStarted
+	GpsEventStopped               = consts.GpsEventStopped
+	StatusParityPassed            = consts.StatusParityPassed
+	StatusParityRebuilt           = consts.StatusParityRebuilt
+	StatusUnknown                 = consts.StatusUnknown
+	TypeBdsCnav1                  = consts.TypeBdsCnav1
+	TypeBdsCnav2                  = consts.TypeBdsCnav2
+	TypeBdsD1                     = consts.TypeBdsD1
+	TypeBdsD2                     = consts.TypeBdsD2
+	TypeGalF                      = consts.TypeGalF
+	TypeGalI                      = consts.TypeGalI
+	TypeGloL1ca                   = consts.TypeGloL1ca
+	TypeGpsCnav2                  = consts.TypeGpsCnav2
+	TypeGpsL1ca                   = consts.TypeGpsL1ca
+	TypeGpsL2cnav                 = consts.TypeGpsL2cnav
+	TypeGpsL5cnav                 = consts.TypeGpsL5cnav
+	TypeIrnL1                     = consts.TypeIrnL1
+	TypeIrnL5                     = consts.TypeIrnL5
+	TypeIrnL5ca                   = consts.TypeIrnL5ca
+	TypeQzsL1ca                   = consts.TypeQzsL1ca
+	TypeSbs                       = consts.TypeSbs
+	TypeUnknown                   = consts.TypeUnknown
+	StatusLocationDisabled        = consts.StatusLocationDisabled
+	StatusNotSupported            = consts.StatusNotSupported
+	StatusReady                   = consts.StatusReady
+	CapabilitySupported           = consts.CapabilitySupported
+	CapabilityUnknown             = consts.CapabilityUnknown
+	CapabilityUnsupported         = consts.CapabilityUnsupported
+	StatusNotAllowed              = consts.StatusNotAllowed
+	AdrStateCycleSlip             = consts.AdrStateCycleSlip
+	AdrStateHalfCycleReported     = consts.AdrStateHalfCycleReported
+	AdrStateHalfCycleResolved     = consts.AdrStateHalfCycleResolved
+	AdrStateReset                 = consts.AdrStateReset
+	AdrStateUnknown               = consts.AdrStateUnknown
+	AdrStateValid                 = consts.AdrStateValid
+	MultipathIndicatorDetected    = consts.MultipathIndicatorDetected
+	MultipathIndicatorNotDetected = consts.MultipathIndicatorNotDetected
+	MultipathIndicatorUnknown     = consts.MultipathIndicatorUnknown
+	State2ndCodeLock              = consts.State2ndCodeLock
+	StateBdsD2BitSync             = consts.StateBdsD2BitSync
+	StateBdsD2SubframeSync        = consts.StateBdsD2SubframeSync
+	StateBitSync                  = consts.StateBitSync
+	StateCodeLock                 = consts.StateCodeLock
+	StateGalE1bcCodeLock          = consts.StateGalE1bcCodeLock
+	StateGalE1bPageSync           = consts.StateGalE1bPageSync
+	StateGalE1c2ndCodeLock        = consts.StateGalE1c2ndCodeLock
+	StateGloStringSync            = consts.StateGloStringSync
+	StateGloTodDecoded            = consts.StateGloTodDecoded
+	StateGloTodKnown              = consts.StateGloTodKnown
+	StateMsecAmbiguous            = consts.StateMsecAmbiguous
+	StateSbasSync                 = consts.StateSbasSync
+	StateSubframeSync             = consts.StateSubframeSync
+	StateSymbolSync               = consts.StateSymbolSync
+	StateTowDecoded               = consts.StateTowDecoded
+	StateTowKnown                 = consts.StateTowKnown
+	StateUnknown                  = consts.StateUnknown
+	FormatDegrees                 = consts.FormatDegrees
+	FormatMinutes                 = consts.FormatMinutes
+	FormatSeconds                 = consts.FormatSeconds
+	Available                     = consts.Available
+	OutOfService                  = consts.OutOfService
+	TemporarilyUnavailable        = consts.TemporarilyUnavailable
+	QualityBalancedPowerAccuracy  = consts.QualityBalancedPowerAccuracy
+	QualityHighAccuracy           = consts.QualityHighAccuracy
+	QualityLowPower               = consts.QualityLowPower
+)
+
+const (
 	ActionGnssCapabilitiesChanged = consts.ActionGnssCapabilitiesChanged
 	ExtraGnssCapabilities         = consts.ExtraGnssCapabilities
 	ExtraLocationEnabled          = consts.ExtraLocationEnabled
@@ -22,19 +111,8 @@ const (
 	NetworkProvider               = consts.NetworkProvider
 	PassiveProvider               = consts.PassiveProvider
 	ProvidersChangedAction        = consts.ProvidersChangedAction
-)
-
-const (
-	ConstellationBeidou  = consts.ConstellationBeidou
-	ConstellationGalileo = consts.ConstellationGalileo
-	ConstellationGlonass = consts.ConstellationGlonass
-	ConstellationGps     = consts.ConstellationGps
-	ConstellationIrnss   = consts.ConstellationIrnss
-	ConstellationQzss    = consts.ConstellationQzss
-	ConstellationSbas    = consts.ConstellationSbas
-	ConstellationUnknown = consts.ConstellationUnknown
-	Creator              = consts.Creator
-	FormatDegrees        = consts.FormatDegrees
-	FormatMinutes        = consts.FormatMinutes
-	FormatSeconds        = consts.FormatSeconds
+	ActionInjectedSettingChanged  = consts.ActionInjectedSettingChanged
+	ActionServiceIntent           = consts.ActionServiceIntent
+	AttributesName                = consts.AttributesName
+	MetaDataName                  = consts.MetaDataName
 )

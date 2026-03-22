@@ -32,8 +32,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -41,7 +41,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -131,47 +131,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintf(output, "CanManageMedia: %v\n", canManage)
 	}
 
-	// --- GetExternalVolumeNames ---
-	fmt.Fprintln(output)
-	volNamesObj, err := ms.GetExternalVolumeNames(ctx.Obj)
-	if err != nil {
-		fmt.Fprintf(output, "GetExternalVolumeNames: %v\n", err)
-	} else if volNamesObj != nil {
-		// The result is a java.util.Set<String>. Convert to array and print.
-		fmt.Fprintln(output, "External volumes:")
-		vm.Do(func(env *jni.Env) error {
-			// Call Set.toArray() to get Object[].
-			setCls, err := env.FindClass("java/util/Set")
-			if err != nil {
-				fmt.Fprintf(output, "  find Set class: %v\n", err)
-				return nil
-			}
-			toArrayMid, err := env.GetMethodID(setCls, "toArray", "()[Ljava/lang/Object;")
-			if err != nil {
-				fmt.Fprintf(output, "  get toArray: %v\n", err)
-				return nil
-			}
-			arrObj, err := env.CallObjectMethod(volNamesObj, toArrayMid)
-			if err != nil {
-				fmt.Fprintf(output, "  toArray: %v\n", err)
-				return nil
-			}
-			if arrObj == nil {
-				fmt.Fprintln(output, "  (empty)")
-				return nil
-			}
-			arrLen := env.GetArrayLength((*jni.Array)(unsafe.Pointer(arrObj)))
-			for i := int32(0); i < arrLen; i++ {
-				elem, err := env.GetObjectArrayElement((*jni.ObjectArray)(unsafe.Pointer(arrObj)), i)
-				if err != nil || elem == nil {
-					continue
-				}
-				name := env.GoString((*jni.String)(unsafe.Pointer(elem)))
-				fmt.Fprintf(output, "  [%d] %s\n", i, name)
-			}
-			return nil
-		})
-	}
+	// Filtered: GetExternalVolumeNames returns generic type (Set<String>)
+	// volNamesObj, err := ms.GetExternalVolumeNames(ctx.Obj)
+	// ...
 
 	// --- Intent action constants ---
 	fmt.Fprintln(output)

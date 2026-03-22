@@ -35,6 +35,21 @@ var (
 	midManagerNewKeyguardLock                     jni.MethodID
 	midManagerRemoveKeyguardLockedStateListener   jni.MethodID
 	midManagerRequestDismissKeyguard              jni.MethodID
+
+	clsManagerKeyguardDismissCallback                   *jni.GlobalRef
+	midManagerKeyguardDismissCallbackOnDismissCancelled jni.MethodID
+	midManagerKeyguardDismissCallbackOnDismissError     jni.MethodID
+	midManagerKeyguardDismissCallbackOnDismissSucceeded jni.MethodID
+
+	clsManagerKeyguardLock                 *jni.GlobalRef
+	midManagerKeyguardLockDisableKeyguard  jni.MethodID
+	midManagerKeyguardLockReenableKeyguard jni.MethodID
+
+	clsManagerKeyguardLockedStateListener                             *jni.GlobalRef
+	midManagerKeyguardLockedStateListenerOnKeyguardLockedStateChanged jni.MethodID
+
+	clsManagerOnKeyguardExitResult                     *jni.GlobalRef
+	midManagerOnKeyguardExitResultOnKeyguardExitResult jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -132,6 +147,79 @@ func doInit(env *jni.Env) error {
 	}
 
 	midManagerRequestDismissKeyguard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestDismissKeyguard", "(Landroid/app/Activity;Landroid/app/KeyguardManager$KeyguardDismissCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/app/KeyguardManager$KeyguardDismissCallback")
+	if err != nil {
+		return fmt.Errorf("find class android.app.KeyguardManager$KeyguardDismissCallback: %w", err)
+	}
+	clsManagerKeyguardDismissCallback = env.NewGlobalRef(&c.Object)
+
+	midManagerKeyguardDismissCallbackOnDismissCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardDismissCallback)), "onDismissCancelled", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midManagerKeyguardDismissCallbackOnDismissError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardDismissCallback)), "onDismissError", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midManagerKeyguardDismissCallbackOnDismissSucceeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardDismissCallback)), "onDismissSucceeded", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/app/KeyguardManager$KeyguardLock")
+	if err != nil {
+		return fmt.Errorf("find class android.app.KeyguardManager$KeyguardLock: %w", err)
+	}
+	clsManagerKeyguardLock = env.NewGlobalRef(&c.Object)
+
+	midManagerKeyguardLockDisableKeyguard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardLock)), "disableKeyguard", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midManagerKeyguardLockReenableKeyguard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardLock)), "reenableKeyguard", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/app/KeyguardManager$KeyguardLockedStateListener")
+	if err != nil {
+		return fmt.Errorf("find class android.app.KeyguardManager$KeyguardLockedStateListener: %w", err)
+	}
+	clsManagerKeyguardLockedStateListener = env.NewGlobalRef(&c.Object)
+
+	midManagerKeyguardLockedStateListenerOnKeyguardLockedStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardLockedStateListener)), "onKeyguardLockedStateChanged", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/app/KeyguardManager$OnKeyguardExitResult")
+	if err != nil {
+		return fmt.Errorf("find class android.app.KeyguardManager$OnKeyguardExitResult: %w", err)
+	}
+	clsManagerOnKeyguardExitResult = env.NewGlobalRef(&c.Object)
+
+	midManagerOnKeyguardExitResultOnKeyguardExitResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnKeyguardExitResult)), "onKeyguardExitResult", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

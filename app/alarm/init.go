@@ -46,6 +46,9 @@ var (
 	midManagerAlarmClockInfoGetShowIntent    jni.MethodID
 	midManagerAlarmClockInfoGetTriggerTime   jni.MethodID
 	midManagerAlarmClockInfoWriteToParcel    jni.MethodID
+
+	clsManagerOnAlarmListener        *jni.GlobalRef
+	midManagerOnAlarmListenerOnAlarm jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -212,6 +215,19 @@ func doInit(env *jni.Env) error {
 	}
 
 	midManagerAlarmClockInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAlarmClockInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/app/AlarmManager$OnAlarmListener")
+	if err != nil {
+		return fmt.Errorf("find class android.app.AlarmManager$OnAlarmListener: %w", err)
+	}
+	clsManagerOnAlarmListener = env.NewGlobalRef(&c.Object)
+
+	midManagerOnAlarmListenerOnAlarm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnAlarmListener)), "onAlarm", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

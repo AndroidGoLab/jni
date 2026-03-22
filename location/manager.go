@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "location"
+const serviceNameManager = "location"
 
 // Manager wraps android.location.LocationManager.
 type Manager struct {
@@ -39,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -238,40 +238,8 @@ func (m *Manager) AddTestProvider2(arg0 string, arg1 *jni.Object) error {
 	return callErr
 }
 
-// AddTestProvider3_1 calls android.location.LocationManager.addTestProvider.
-func (m *Manager) AddTestProvider3_1(
-	arg0 string,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerAddTestProvider3_1 == nil {
-			callErr = fmt.Errorf("android.location.LocationManager.addTestProvider is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerAddTestProvider3_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// AddTestProvider10_2 calls android.location.LocationManager.addTestProvider.
-func (m *Manager) AddTestProvider10_2(
+// AddTestProvider10_1 calls android.location.LocationManager.addTestProvider.
+func (m *Manager) AddTestProvider10_1(
 	arg0 string,
 	arg1 bool,
 	arg2 bool,
@@ -290,7 +258,7 @@ func (m *Manager) AddTestProvider10_2(
 			callErr = err
 			return err
 		}
-		if midManagerAddTestProvider10_2 == nil {
+		if midManagerAddTestProvider10_1 == nil {
 			callErr = fmt.Errorf("android.location.LocationManager.addTestProvider is not available on this device")
 			return callErr
 		}
@@ -337,7 +305,7 @@ func (m *Manager) AddTestProvider10_2(
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midManagerAddTestProvider10_2, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.BooleanValue(jArg2), jni.BooleanValue(jArg3), jni.BooleanValue(jArg4), jni.BooleanValue(jArg5), jni.BooleanValue(jArg6), jni.BooleanValue(jArg7), jni.IntValue(arg8), jni.IntValue(arg9),
+			midManagerAddTestProvider10_1, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.BooleanValue(jArg2), jni.BooleanValue(jArg3), jni.BooleanValue(jArg4), jni.BooleanValue(jArg5), jni.BooleanValue(jArg6), jni.BooleanValue(jArg7), jni.IntValue(arg8), jni.IntValue(arg9),
 		)
 		return callErr
 	})
@@ -428,38 +396,6 @@ func (m *Manager) ClearTestProviderStatus(arg0 string) error {
 	return callErr
 }
 
-// GetAllProviders calls android.location.LocationManager.getAllProviders.
-func (m *Manager) GetAllProviders() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetAllProviders == nil {
-			callErr = fmt.Errorf("android.location.LocationManager.getAllProviders is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetAllProviders,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetBestProvider calls android.location.LocationManager.getBestProvider.
 func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 	var result string
@@ -488,105 +424,6 @@ func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetCurrentLocation5 calls android.location.LocationManager.getCurrentLocation.
-func (m *Manager) GetCurrentLocation5(
-	arg0 string,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-	arg4 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetCurrentLocation5 == nil {
-			callErr = fmt.Errorf("android.location.LocationManager.getCurrentLocation is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerGetCurrentLocation5, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// GetCurrentLocation4_1 calls android.location.LocationManager.getCurrentLocation.
-func (m *Manager) GetCurrentLocation4_1(
-	arg0 string,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetCurrentLocation4_1 == nil {
-			callErr = fmt.Errorf("android.location.LocationManager.getCurrentLocation is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midManagerGetCurrentLocation4_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// GetGnssAntennaInfos calls android.location.LocationManager.getGnssAntennaInfos.
-func (m *Manager) GetGnssAntennaInfos() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetGnssAntennaInfos == nil {
-			callErr = fmt.Errorf("android.location.LocationManager.getGnssAntennaInfos is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetGnssAntennaInfos,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr
@@ -807,81 +644,6 @@ func (m *Manager) GetProviderProperties(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetProviderProperties, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetProviders2 calls android.location.LocationManager.getProviders.
-func (m *Manager) GetProviders2(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetProviders2 == nil {
-			callErr = fmt.Errorf("android.location.LocationManager.getProviders is not available on this device")
-			return callErr
-		}
-
-		var jArg1 uint8
-		if arg1 {
-			jArg1 = jniTrue
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetProviders2, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetProviders1_1 calls android.location.LocationManager.getProviders.
-func (m *Manager) GetProviders1_1(arg0 bool) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetProviders1_1 == nil {
-			callErr = fmt.Errorf("android.location.LocationManager.getProviders is not available on this device")
-			return callErr
-		}
-		var jArg0 uint8
-		if arg0 {
-			jArg0 = jniTrue
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetProviders1_1, jni.BooleanValue(jArg0),
 		)
 		if callErr != nil {
 			return callErr

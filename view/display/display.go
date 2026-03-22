@@ -1022,29 +1022,6 @@ func (m *Display) IsWideColorGamut() (bool, error) {
 	return result, callErr
 }
 
-// RegisterHdrSdrRatioChangedListener calls android.view.Display.registerHdrSdrRatioChangedListener.
-func (m *Display) RegisterHdrSdrRatioChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDisplayRegisterHdrSdrRatioChangedListener == nil {
-			callErr = fmt.Errorf("android.view.Display.registerHdrSdrRatioChangedListener is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDisplayRegisterHdrSdrRatioChangedListener, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // ToString calls android.view.Display.toString.
 func (m *Display) ToString() (string, error) {
 	var result string
@@ -1070,27 +1047,4 @@ func (m *Display) ToString() (string, error) {
 		return callErr
 	})
 	return result, callErr
-}
-
-// UnregisterHdrSdrRatioChangedListener calls android.view.Display.unregisterHdrSdrRatioChangedListener.
-func (m *Display) UnregisterHdrSdrRatioChangedListener(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDisplayUnregisterHdrSdrRatioChangedListener == nil {
-			callErr = fmt.Errorf("android.view.Display.unregisterHdrSdrRatioChangedListener is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDisplayUnregisterHdrSdrRatioChangedListener, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
 }

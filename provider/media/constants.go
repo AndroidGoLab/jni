@@ -64,6 +64,57 @@ const (
 	VolumeExternal                          = consts.VolumeExternal
 	VolumeExternalPrimary                   = consts.VolumeExternalPrimary
 	VolumeInternal                          = consts.VolumeInternal
+	DownloadUri                             = consts.DownloadUri
+	RefererUri                              = consts.RefererUri
+	ContentType                             = consts.ContentType
+	Album                                   = consts.Album
+	AlbumArtist                             = consts.AlbumArtist
+	Artist                                  = consts.Artist
+	Author                                  = consts.Author
+	Bitrate                                 = consts.Bitrate
+	BucketDisplayName                       = consts.BucketDisplayName
+	BucketId                                = consts.BucketId
+	CaptureFramerate                        = consts.CaptureFramerate
+	CdTrackNumber                           = consts.CdTrackNumber
+	Compilation                             = consts.Compilation
+	Composer                                = consts.Composer
+	Data                                    = consts.Data
+	DateAdded                               = consts.DateAdded
+	DateExpires                             = consts.DateExpires
+	DateModified                            = consts.DateModified
+	DateTaken                               = consts.DateTaken
+	DiscNumber                              = consts.DiscNumber
+	DisplayName                             = consts.DisplayName
+	DocumentId                              = consts.DocumentId
+	Duration                                = consts.Duration
+	GenerationAdded                         = consts.GenerationAdded
+	GenerationModified                      = consts.GenerationModified
+	Genre                                   = consts.Genre
+	Height                                  = consts.Height
+	InferredDate                            = consts.InferredDate
+	InstanceId                              = consts.InstanceId
+	IsDownload                              = consts.IsDownload
+	IsDrm                                   = consts.IsDrm
+	IsFavorite                              = consts.IsFavorite
+	IsPending                               = consts.IsPending
+	IsTrashed                               = consts.IsTrashed
+	MimeType                                = consts.MimeType
+	NumTracks                               = consts.NumTracks
+	OemMetadata                             = consts.OemMetadata
+	Orientation                             = consts.Orientation
+	OriginalDocumentId                      = consts.OriginalDocumentId
+	OwnerPackageName                        = consts.OwnerPackageName
+	RelativePath                            = consts.RelativePath
+	Resolution                              = consts.Resolution
+	Size                                    = consts.Size
+	Title                                   = consts.Title
+	VolumeName                              = consts.VolumeName
+	Width                                   = consts.Width
+	Writer                                  = consts.Writer
+	Xmp                                     = consts.Xmp
+	Year                                    = consts.Year
+	DurationMillis                          = consts.DurationMillis
+	DefaultSortOrder                        = consts.DefaultSortOrder
 )
 
 const (
@@ -74,4 +125,6 @@ const (
 	MatchOnly           = consts.MatchOnly
 	PickImagesTabAlbums = consts.PickImagesTabAlbums
 	PickImagesTabImages = consts.PickImagesTabImages
+	ExternalContentUri  = consts.ExternalContentUri
+	InternalContentUri  = consts.InternalContentUri
 )

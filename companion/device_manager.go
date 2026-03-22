@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "companiondevice"
+const serviceNameDeviceManager = "companiondevice"
 
 // DeviceManager wraps android.companion.CompanionDeviceManager.
 type DeviceManager struct {
@@ -39,12 +39,12 @@ func NewDeviceManager(ctx *app.Context) (*DeviceManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameDeviceManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameDeviceManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -308,70 +308,6 @@ func (m *DeviceManager) EnableSystemDataSyncForTypes(arg0 int32, arg1 int32) err
 	return callErr
 }
 
-// GetAssociations calls android.companion.CompanionDeviceManager.getAssociations.
-func (m *DeviceManager) GetAssociations() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDeviceManagerGetAssociations == nil {
-			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.getAssociations is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDeviceManagerGetAssociations,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetMyAssociations calls android.companion.CompanionDeviceManager.getMyAssociations.
-func (m *DeviceManager) GetMyAssociations() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDeviceManagerGetMyAssociations == nil {
-			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.getMyAssociations is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midDeviceManagerGetMyAssociations,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // HasNotificationAccess calls android.companion.CompanionDeviceManager.hasNotificationAccess.
 func (m *DeviceManager) HasNotificationAccess(arg0 *jni.Object) (bool, error) {
 	var result bool
@@ -547,33 +483,6 @@ func (m *DeviceManager) StartObservingDevicePresence1_1(arg0 string) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midDeviceManagerStartObservingDevicePresence1_1, jni.ObjectValue(&jArg0.Object),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// StartSystemDataTransfer calls android.companion.CompanionDeviceManager.startSystemDataTransfer.
-func (m *DeviceManager) StartSystemDataTransfer(
-	arg0 int32,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midDeviceManagerStartSystemDataTransfer == nil {
-			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.startSystemDataTransfer is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midDeviceManagerStartSystemDataTransfer, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})

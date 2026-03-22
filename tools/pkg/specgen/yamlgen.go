@@ -532,11 +532,7 @@ func javaMethodToGoName(name string) string {
 	if len(name) == 0 {
 		return name
 	}
-	goName := strings.ToUpper(name[:1]) + name[1:]
-
-	// Append "Raw" suffix if the name starts with common patterns
-	// indicating it returns a raw JNI object (convention in this project).
-	return goName
+	return strings.ToUpper(name[:1]) + name[1:]
 }
 
 // inferGoType determines the exported Go type name for a Java class.

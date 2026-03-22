@@ -354,39 +354,6 @@ func (m *Context) CheckCallingOrSelfUriPermission(arg0 *jni.Object, arg1 int32) 
 	return result, callErr
 }
 
-// CheckCallingOrSelfUriPermissions calls android.content.Context.checkCallingOrSelfUriPermissions.
-func (m *Context) CheckCallingOrSelfUriPermissions(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContextCheckCallingOrSelfUriPermissions == nil {
-			callErr = fmt.Errorf("android.content.Context.checkCallingOrSelfUriPermissions is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midContextCheckCallingOrSelfUriPermissions, jni.ObjectValue(arg0), jni.IntValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // CheckCallingPermission calls android.content.Context.checkCallingPermission.
 func (m *Context) CheckCallingPermission(arg0 string) (int32, error) {
 	var result int32
@@ -438,39 +405,6 @@ func (m *Context) CheckCallingUriPermission(arg0 *jni.Object, arg1 int32) (int32
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// CheckCallingUriPermissions calls android.content.Context.checkCallingUriPermissions.
-func (m *Context) CheckCallingUriPermissions(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContextCheckCallingUriPermissions == nil {
-			callErr = fmt.Errorf("android.content.Context.checkCallingUriPermissions is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midContextCheckCallingUriPermissions, jni.ObjectValue(arg0), jni.IntValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -644,44 +578,6 @@ func (m *Context) CheckUriPermission6_1(
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// CheckUriPermissions calls android.content.Context.checkUriPermissions.
-func (m *Context) CheckUriPermissions(
-	arg0 *jni.Object,
-	arg1 int32,
-	arg2 int32,
-	arg3 int32,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContextCheckUriPermissions == nil {
-			callErr = fmt.Errorf("android.content.Context.checkUriPermissions is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midContextCheckUriPermissions, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -2756,34 +2652,6 @@ func (m *Context) GetSystemService(arg0 string) (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetSystemServiceName calls android.content.Context.getSystemServiceName.
-func (m *Context) GetSystemServiceName(arg0 *jni.Object) (string, error) {
-	var result string
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContextGetSystemServiceName == nil {
-			callErr = fmt.Errorf("android.content.Context.getSystemServiceName is not available on this device")
-			return callErr
-		}
-
-		var resultObj *jni.Object
-		resultObj, callErr = env.CallObjectMethod(
-			m.Obj,
-			midContextGetSystemServiceName, jni.ObjectValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetText calls android.content.Context.getText.
 func (m *Context) GetText(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
@@ -3583,29 +3451,6 @@ func (m *Context) RevokeSelfPermissionOnKill(arg0 string) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midContextRevokeSelfPermissionOnKill, jni.ObjectValue(&jArg0.Object),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// RevokeSelfPermissionsOnKill calls android.content.Context.revokeSelfPermissionsOnKill.
-func (m *Context) RevokeSelfPermissionsOnKill(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContextRevokeSelfPermissionsOnKill == nil {
-			callErr = fmt.Errorf("android.content.Context.revokeSelfPermissionsOnKill is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midContextRevokeSelfPermissionsOnKill, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

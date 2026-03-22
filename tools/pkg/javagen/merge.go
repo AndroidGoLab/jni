@@ -55,6 +55,8 @@ func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 
 	merged.ConstantGroups = mergeConstants(spec.Constants)
 
+	resolveConstantTypeCollisions(merged)
+
 	return merged, nil
 }
 
@@ -409,6 +411,43 @@ func isBuiltinType(t string) bool {
 		return true
 	}
 	return false
+}
+
+// resolveConstantTypeCollisions detects constant GoNames that collide
+// with type names (classes, data classes, callbacks, or constant group
+// type aliases) in the same package and renames the constants by
+// appending a "Const" suffix.
+func resolveConstantTypeCollisions(merged *MergedSpec) {
+	// Build a set of all type names in the package.
+	typeNames := make(map[string]struct{})
+	for _, cls := range merged.Classes {
+		typeNames[cls.GoType] = struct{}{}
+	}
+	for _, dc := range merged.DataClasses {
+		typeNames[dc.GoType] = struct{}{}
+	}
+	for _, cb := range merged.Callbacks {
+		typeNames[cb.GoType] = struct{}{}
+	}
+	for _, grp := range merged.ConstantGroups {
+		if grp.GoType != "" {
+			typeNames[grp.GoType] = struct{}{}
+		}
+	}
+
+	if len(typeNames) == 0 {
+		return
+	}
+
+	// Rename colliding constants.
+	for gi := range merged.ConstantGroups {
+		for vi := range merged.ConstantGroups[gi].Values {
+			name := merged.ConstantGroups[gi].Values[vi].GoName
+			if _, collision := typeNames[name]; collision {
+				merged.ConstantGroups[gi].Values[vi].GoName = name + "Const"
+			}
+		}
+	}
 }
 
 func mergeConstants(constants []Constant) []MergedConstantGroup {

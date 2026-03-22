@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "consumer_ir"
+const serviceNameConsumerIrManager = "consumer_ir"
 
 // ConsumerIrManager wraps android.hardware.ConsumerIrManager.
 type ConsumerIrManager struct {
@@ -39,12 +39,12 @@ func NewConsumerIrManager(ctx *app.Context) (*ConsumerIrManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameConsumerIrManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameConsumerIrManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).

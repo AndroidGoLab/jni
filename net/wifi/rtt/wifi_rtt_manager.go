@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "wifirtt"
+const serviceNameWifiRttManager = "wifirtt"
 
 // WifiRttManager wraps android.net.wifi.rtt.WifiRttManager.
 type WifiRttManager struct {
@@ -39,12 +39,12 @@ func NewWifiRttManager(ctx *app.Context) (*WifiRttManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameWifiRttManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameWifiRttManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).

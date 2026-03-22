@@ -5,20 +5,60 @@ package usage
 import "github.com/AndroidGoLab/jni/app/usage/consts"
 
 const (
-	ExtraEventAction   = consts.ExtraEventAction
-	ExtraEventCategory = consts.ExtraEventCategory
+	AppDataTypeFileTypeApk              = consts.AppDataTypeFileTypeApk
+	AppDataTypeFileTypeCurrentProfile   = consts.AppDataTypeFileTypeCurrentProfile
+	AppDataTypeFileTypeDexoptArtifact   = consts.AppDataTypeFileTypeDexoptArtifact
+	AppDataTypeFileTypeDm               = consts.AppDataTypeFileTypeDm
+	AppDataTypeFileTypeReferenceProfile = consts.AppDataTypeFileTypeReferenceProfile
+	AppDataTypeLib                      = consts.AppDataTypeLib
+	Creator                             = consts.Creator
+	IntervalBest                        = consts.IntervalBest
+	IntervalDaily                       = consts.IntervalDaily
+	IntervalMonthly                     = consts.IntervalMonthly
+	IntervalWeekly                      = consts.IntervalWeekly
+	IntervalYearly                      = consts.IntervalYearly
+	StandbyBucketActive                 = consts.StandbyBucketActive
+	StandbyBucketFrequent               = consts.StandbyBucketFrequent
+	StandbyBucketRare                   = consts.StandbyBucketRare
+	StandbyBucketRestricted             = consts.StandbyBucketRestricted
+	StandbyBucketWorkingSet             = consts.StandbyBucketWorkingSet
+	ActivityPaused                      = consts.ActivityPaused
+	ActivityResumed                     = consts.ActivityResumed
+	ActivityStopped                     = consts.ActivityStopped
+	ConfigurationChange                 = consts.ConfigurationChange
+	DeviceShutdown                      = consts.DeviceShutdown
+	DeviceStartup                       = consts.DeviceStartup
+	ForegroundServiceStart              = consts.ForegroundServiceStart
+	ForegroundServiceStop               = consts.ForegroundServiceStop
+	KeyguardHidden                      = consts.KeyguardHidden
+	KeyguardShown                       = consts.KeyguardShown
+	MoveToBackground                    = consts.MoveToBackground
+	MoveToForeground                    = consts.MoveToForeground
+	None                                = consts.None
+	ScreenInteractive                   = consts.ScreenInteractive
+	ScreenNonInteractive                = consts.ScreenNonInteractive
+	ShortcutInvocation                  = consts.ShortcutInvocation
+	StandbyBucketChanged                = consts.StandbyBucketChanged
+	UserInteraction                     = consts.UserInteraction
+	DefaultNetworkAll                   = consts.DefaultNetworkAll
+	DefaultNetworkNo                    = consts.DefaultNetworkNo
+	DefaultNetworkYes                   = consts.DefaultNetworkYes
+	MeteredAll                          = consts.MeteredAll
+	MeteredNo                           = consts.MeteredNo
+	MeteredYes                          = consts.MeteredYes
+	RoamingAll                          = consts.RoamingAll
+	RoamingNo                           = consts.RoamingNo
+	RoamingYes                          = consts.RoamingYes
+	StateAll                            = consts.StateAll
+	StateDefault                        = consts.StateDefault
+	StateForeground                     = consts.StateForeground
+	TagNone                             = consts.TagNone
+	UidAll                              = consts.UidAll
+	UidRemoved                          = consts.UidRemoved
+	UidTethering                        = consts.UidTethering
 )
 
 const (
-	IntervalBest            = consts.IntervalBest
-	IntervalDaily           = consts.IntervalDaily
-	IntervalMonthly         = consts.IntervalMonthly
-	IntervalWeekly          = consts.IntervalWeekly
-	IntervalYearly          = consts.IntervalYearly
-	StandbyBucketActive     = consts.StandbyBucketActive
-	StandbyBucketFrequent   = consts.StandbyBucketFrequent
-	StandbyBucketRare       = consts.StandbyBucketRare
-	StandbyBucketRestricted = consts.StandbyBucketRestricted
-	StandbyBucketWorkingSet = consts.StandbyBucketWorkingSet
-	Creator                 = consts.Creator
+	ExtraEventAction   = consts.ExtraEventAction
+	ExtraEventCategory = consts.ExtraEventCategory
 )

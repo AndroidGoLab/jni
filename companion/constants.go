@@ -5,16 +5,31 @@ package companion
 import "github.com/AndroidGoLab/jni/companion/consts"
 
 const (
-	ExtraAssociation = consts.ExtraAssociation
-	ExtraDevice      = consts.ExtraDevice
+	Creator                     = consts.Creator
+	EventBleAppeared            = consts.EventBleAppeared
+	EventBleDisappeared         = consts.EventBleDisappeared
+	EventBtConnected            = consts.EventBtConnected
+	EventBtDisconnected         = consts.EventBtDisconnected
+	EventSelfManagedAppeared    = consts.EventSelfManagedAppeared
+	EventSelfManagedDisappeared = consts.EventSelfManagedDisappeared
+	NoAssociation               = consts.NoAssociation
+	FlagCallMetadata            = consts.FlagCallMetadata
+	ResultCanceled              = consts.ResultCanceled
+	ResultDiscoveryTimeout      = consts.ResultDiscoveryTimeout
+	ResultInternalError         = consts.ResultInternalError
+	ResultOk                    = consts.ResultOk
+	ResultSecurityError         = consts.ResultSecurityError
+	ResultUserRejected          = consts.ResultUserRejected
 )
 
 const (
-	FlagCallMetadata       = consts.FlagCallMetadata
-	ResultCanceled         = consts.ResultCanceled
-	ResultDiscoveryTimeout = consts.ResultDiscoveryTimeout
-	ResultInternalError    = consts.ResultInternalError
-	ResultOk               = consts.ResultOk
-	ResultSecurityError    = consts.ResultSecurityError
-	ResultUserRejected     = consts.ResultUserRejected
+	ServiceInterface                   = consts.ServiceInterface
+	DeviceProfileAppStreaming          = consts.DeviceProfileAppStreaming
+	DeviceProfileAutomotiveProjection  = consts.DeviceProfileAutomotiveProjection
+	DeviceProfileComputer              = consts.DeviceProfileComputer
+	DeviceProfileGlasses               = consts.DeviceProfileGlasses
+	DeviceProfileNearbyDeviceStreaming = consts.DeviceProfileNearbyDeviceStreaming
+	DeviceProfileWatch                 = consts.DeviceProfileWatch
+	ExtraAssociation                   = consts.ExtraAssociation
+	ExtraDevice                        = consts.ExtraDevice
 )

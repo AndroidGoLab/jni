@@ -33,8 +33,26 @@ const (
 	SeekPreviousSync                         int = 0
 	VideoScalingModeScaleToFit               int = 1
 	VideoScalingModeScaleToFitWithCropping   int = 2
+	MediaTrackTypeAudio                      int = 2
+	MediaTrackTypeMetadata                   int = 5
+	MediaTrackTypeSubtitle                   int = 4
+	MediaTrackTypeTimedtext                  int = 3
+	MediaTrackTypeUnknown                    int = 0
+	MediaTrackTypeVideo                      int = 1
 )
 
 const (
 	MediaMimetypeTextSubrip string = "application/x-subrip"
+	CodecAudio              string = "android.media.mediaplayer.audio.codec"
+	CodecVideo              string = "android.media.mediaplayer.video.codec"
+	Duration                string = "android.media.mediaplayer.durationMs"
+	Errors                  string = "android.media.mediaplayer.err"
+	ErrorCode               string = "android.media.mediaplayer.errcode"
+	Frames                  string = "android.media.mediaplayer.frames"
+	FramesDropped           string = "android.media.mediaplayer.dropped"
+	Height                  string = "android.media.mediaplayer.height"
+	MimeTypeAudio           string = "android.media.mediaplayer.audio.mime"
+	MimeTypeVideo           string = "android.media.mediaplayer.video.mime"
+	Playing                 string = "android.media.mediaplayer.playingMs"
+	Width                   string = "android.media.mediaplayer.width"
 )

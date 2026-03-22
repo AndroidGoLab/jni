@@ -33,8 +33,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -42,7 +42,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -99,141 +99,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "Service obtained OK")
 
-	// GetLights - returns java.util.List<Light>.
-	lightsListObj, err := mgr.GetLights()
-	if err != nil {
-		fmt.Fprintf(output, "GetLights: %v\n", err)
-		return nil
-	}
-
-	// Iterate the List<Light> and call every getter.
-	var lightCount int32
-	err = vm.Do(func(env *jni.Env) error {
-		if lightsListObj == nil {
-			fmt.Fprintln(output, "GetLights returned nil")
-			return nil
-		}
-
-		listCls, err := env.FindClass("java/util/List")
-		if err != nil {
-			return err
-		}
-		sizeMid, err := env.GetMethodID(listCls, "size", "()I")
-		if err != nil {
-			return err
-		}
-		getMid, err := env.GetMethodID(listCls, "get", "(I)Ljava/lang/Object;")
-		if err != nil {
-			return err
-		}
-
-		lightCount, err = env.CallIntMethod(lightsListObj, sizeMid)
-		if err != nil {
-			return err
-		}
-
-		fmt.Fprintf(output, "Lights found: %d\n", lightCount)
-
-		for i := int32(0); i < lightCount; i++ {
-			elemObj, err := env.CallObjectMethod(lightsListObj, getMid, jni.IntValue(i))
-			if err != nil || elemObj == nil {
-				continue
-			}
-
-			// Wrap as a lights.Light to use typed accessors.
-			light := lights.Light{
-				VM:  vm,
-				Obj: env.NewGlobalRef(elemObj),
-			}
-
-			fmt.Fprintf(output, "\n  Light #%d:\n", i)
-
-			// GetId
-			id, err := light.GetId()
-			if err != nil {
-				fmt.Fprintf(output, "    ID: err: %v\n", err)
-			} else {
-				fmt.Fprintf(output, "    ID: %d\n", id)
-			}
-
-			// GetName
-			name, err := light.GetName()
-			if err != nil {
-				fmt.Fprintf(output, "    Name: err: %v\n", err)
-			} else {
-				fmt.Fprintf(output, "    Name: %s\n", name)
-			}
-
-			// GetType
-			typ, err := light.GetType()
-			if err != nil {
-				fmt.Fprintf(output, "    Type: err: %v\n", err)
-			} else {
-				fmt.Fprintf(output, "    Type: %s (%d)\n", lightTypeName(typ), typ)
-			}
-
-			// GetOrdinal
-			ordinal, err := light.GetOrdinal()
-			if err != nil {
-				fmt.Fprintf(output, "    Ordinal: err: %v\n", err)
-			} else {
-				fmt.Fprintf(output, "    Ordinal: %d\n", ordinal)
-			}
-
-			// HasBrightnessControl
-			hasBrightness, err := light.HasBrightnessControl()
-			if err != nil {
-				fmt.Fprintf(output, "    Brightness: err: %v\n", err)
-			} else {
-				fmt.Fprintf(output, "    Brightness: %v\n", hasBrightness)
-			}
-
-			// HasRgbControl
-			hasRgb, err := light.HasRgbControl()
-			if err != nil {
-				fmt.Fprintf(output, "    RGB: err: %v\n", err)
-			} else {
-				fmt.Fprintf(output, "    RGB: %v\n", hasRgb)
-			}
-
-			// GetLightState - returns LightState for this light.
-			stateObj, err := mgr.GetLightState(light.Obj)
-			if err != nil {
-				fmt.Fprintf(output, "    State: err: %v\n", err)
-			} else if stateObj == nil {
-				fmt.Fprintf(output, "    State: nil\n")
-			} else {
-				ls := lights.LightState{VM: vm, Obj: stateObj}
-
-				color, err := ls.GetColor()
-				if err != nil {
-					fmt.Fprintf(output, "    Color: err: %v\n", err)
-				} else {
-					fmt.Fprintf(output, "    Color: 0x%08X\n", uint32(color))
-				}
-
-				playerId, err := ls.GetPlayerId()
-				if err != nil {
-					fmt.Fprintf(output, "    PlayerID: err: %v\n", err)
-				} else {
-					fmt.Fprintf(output, "    PlayerID: %d\n", playerId)
-				}
-
-				env.DeleteGlobalRef(ls.Obj)
-			}
-
-			env.DeleteGlobalRef(light.Obj)
-		}
-
-		return nil
-	})
-	if err != nil {
-		fmt.Fprintf(output, "Light iteration: %v\n", err)
-	}
-
-	if lightCount == 0 {
-		fmt.Fprintln(output, "(No lights found)")
-	}
+	// Filtered: GetLights returns generic type (List<Light>)
+	// lightsListObj, err := mgr.GetLights()
+	// ...
+	fmt.Fprintln(output, "(GetLights filtered: returns generic type)")
 
 	return nil
 }

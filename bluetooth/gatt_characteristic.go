@@ -109,38 +109,6 @@ func (m *GattCharacteristic) GetDescriptor(arg0 *jni.Object) (*jni.Object, error
 	return result, callErr
 }
 
-// GetDescriptors calls android.bluetooth.BluetoothGattCharacteristic.getDescriptors.
-func (m *GattCharacteristic) GetDescriptors() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midGattCharacteristicGetDescriptors == nil {
-			callErr = fmt.Errorf("android.bluetooth.BluetoothGattCharacteristic.getDescriptors is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midGattCharacteristicGetDescriptors,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetFloatValue calls android.bluetooth.BluetoothGattCharacteristic.getFloatValue.
 func (m *GattCharacteristic) GetFloatValue(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object

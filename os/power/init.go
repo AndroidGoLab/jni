@@ -51,6 +51,11 @@ var (
 	midManagerRemoveThermalHeadroomListener            jni.MethodID
 	midManagerRemoveThermalStatusListener              jni.MethodID
 
+	clsManagerOnThermalHeadroomChangedListener *jni.GlobalRef
+
+	clsManagerOnThermalStatusChangedListener                       *jni.GlobalRef
+	midManagerOnThermalStatusChangedListenerOnThermalStatusChanged jni.MethodID
+
 	clsManagerWakeLock                    *jni.GlobalRef
 	midManagerWakeLockAcquire0            jni.MethodID
 	midManagerWakeLockAcquire1_1          jni.MethodID
@@ -61,6 +66,9 @@ var (
 	midManagerWakeLockSetStateListener    jni.MethodID
 	midManagerWakeLockSetWorkSource       jni.MethodID
 	midManagerWakeLockToString            jni.MethodID
+
+	clsManagerWakeLockStateListener               *jni.GlobalRef
+	midManagerWakeLockStateListenerOnStateChanged jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -269,6 +277,25 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	c, err = env.FindClass("android/os/PowerManager$OnThermalHeadroomChangedListener")
+	if err != nil {
+		return fmt.Errorf("find class android.os.PowerManager$OnThermalHeadroomChangedListener: %w", err)
+	}
+	clsManagerOnThermalHeadroomChangedListener = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/os/PowerManager$OnThermalStatusChangedListener")
+	if err != nil {
+		return fmt.Errorf("find class android.os.PowerManager$OnThermalStatusChangedListener: %w", err)
+	}
+	clsManagerOnThermalStatusChangedListener = env.NewGlobalRef(&c.Object)
+
+	midManagerOnThermalStatusChangedListenerOnThermalStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnThermalStatusChangedListener)), "onThermalStatusChanged", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	c, err = env.FindClass("android/os/PowerManager$WakeLock")
 	if err != nil {
 		return fmt.Errorf("find class android.os.PowerManager$WakeLock: %w", err)
@@ -332,6 +359,19 @@ func doInit(env *jni.Env) error {
 	}
 
 	midManagerWakeLockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/os/PowerManager$WakeLockStateListener")
+	if err != nil {
+		return fmt.Errorf("find class android.os.PowerManager$WakeLockStateListener: %w", err)
+	}
+	clsManagerWakeLockStateListener = env.NewGlobalRef(&c.Object)
+
+	midManagerWakeLockStateListenerOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLockStateListener)), "onStateChanged", "(Z)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

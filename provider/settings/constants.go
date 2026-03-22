@@ -175,6 +175,12 @@ const (
 	WifiSleepPolicy                                = consts.WifiSleepPolicy
 	WifiWatchdogOn                                 = consts.WifiWatchdogOn
 	WindowAnimationScale                           = consts.WindowAnimationScale
+	Name                                           = consts.Name
+	Value                                          = consts.Value
+	ActionInternetConnectivity                     = consts.ActionInternetConnectivity
+	ActionNfc                                      = consts.ActionNfc
+	ActionVolume                                   = consts.ActionVolume
+	ActionWifi                                     = consts.ActionWifi
 	AccessibilityDisplayInversionEnabled           = consts.AccessibilityDisplayInversionEnabled
 	AccessibilityEnabled                           = consts.AccessibilityEnabled
 	AccessibilitySpeakPassword                     = consts.AccessibilitySpeakPassword

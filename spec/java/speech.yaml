@@ -5,6 +5,213 @@
 package: speech
 go_import: github.com/AndroidGoLab/jni/speech
 classes:
+    - java_class: android.speech.AlternativeSpan
+      go_type: AlternativeSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getEndPosition
+          go_name: GetEndPosition
+          returns: int
+          error: true
+        - java_method: getStartPosition
+          go_name: GetStartPosition
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionService
+      go_type: RecognitionService
+      methods:
+        - java_method: createContext
+          go_name: CreateContext
+          params:
+            - java_type: android.content.ContextParams
+              go_name: arg0
+          returns: android.content.Context
+          error: true
+        - java_method: getMaxConcurrentSessionsCount
+          go_name: GetMaxConcurrentSessionsCount
+          returns: int
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onCheckRecognitionSupport
+          go_name: OnCheckRecognitionSupport3
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.content.AttributionSource
+              go_name: arg1
+            - java_type: android.speech.RecognitionService$SupportCallback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCheckRecognitionSupport
+          go_name: OnCheckRecognitionSupport2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.speech.RecognitionService$SupportCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onDestroy
+          go_name: OnDestroy
+          returns: void
+          error: true
+        - java_method: onTriggerModelDownload
+          go_name: OnTriggerModelDownload1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onTriggerModelDownload
+          go_name: OnTriggerModelDownload2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.content.AttributionSource
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onTriggerModelDownload
+          go_name: OnTriggerModelDownload3_2
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.content.AttributionSource
+              go_name: arg1
+            - java_type: android.speech.ModelDownloadListener
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionService$Callback
+      go_type: RecognitionServiceCallback
+      methods:
+        - java_method: beginningOfSpeech
+          go_name: BeginningOfSpeech
+          returns: void
+          error: true
+        - java_method: bufferReceived
+          go_name: BufferReceived
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: endOfSegmentedSession
+          go_name: EndOfSegmentedSession
+          returns: void
+          error: true
+        - java_method: endOfSpeech
+          go_name: EndOfSpeech
+          returns: void
+          error: true
+        - java_method: error
+          go_name: Error
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getCallingAttributionSource
+          go_name: GetCallingAttributionSource
+          returns: android.content.AttributionSource
+          error: true
+        - java_method: getCallingUid
+          go_name: GetCallingUid
+          returns: int
+          error: true
+        - java_method: languageDetection
+          go_name: LanguageDetection
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: partialResults
+          go_name: PartialResults
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: readyForSpeech
+          go_name: ReadyForSpeech
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: results
+          go_name: Results
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: rmsChanged
+          go_name: RmsChanged
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: segmentResults
+          go_name: SegmentResults
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionService$SupportCallback
+      go_type: RecognitionServiceSupportCallback
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSupportResult
+          go_name: OnSupportResult
+          params:
+            - java_type: android.speech.RecognitionSupport
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.speech.SpeechRecognizer
       go_type: Recognizer
       methods:
@@ -101,6 +308,163 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+    - java_class: android.speech.RecognitionSupportCallback
+      go_type: RecognitionSupportCallback
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSupportResult
+          go_name: OnSupportResult
+          params:
+            - java_type: android.speech.RecognitionSupport
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionSupport
+      go_type: RecognitionSupport
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionSupport$Builder
+      go_type: RecognitionSupportBuilder
+      methods:
+        - java_method: addInstalledOnDeviceLanguage
+          go_name: AddInstalledOnDeviceLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
+        - java_method: addOnlineLanguage
+          go_name: AddOnlineLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
+        - java_method: addPendingOnDeviceLanguage
+          go_name: AddPendingOnDeviceLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
+        - java_method: addSupportedOnDeviceLanguage
+          go_name: AddSupportedOnDeviceLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.speech.RecognitionSupport
+          error: true
+    - java_class: android.speech.RecognitionListener
+      go_type: RecognitionListener
+      methods:
+        - java_method: onBeginningOfSpeech
+          go_name: OnBeginningOfSpeech
+          returns: void
+          error: true
+        - java_method: onBufferReceived
+          go_name: OnBufferReceived
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onEndOfSpeech
+          go_name: OnEndOfSpeech
+          returns: void
+          error: true
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onEvent
+          go_name: OnEvent
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPartialResults
+          go_name: OnPartialResults
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onReadyForSpeech
+          go_name: OnReadyForSpeech
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onResults
+          go_name: OnResults
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onRmsChanged
+          go_name: OnRmsChanged
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.speech.RecognizerResultsIntent
+      go_type: RecognizerResultsIntent
+    - java_class: android.speech.RecognizerIntent
+      go_type: RecognizerIntent
+      static_methods:
+        - java_method: getVoiceDetailsIntent
+          go_name: GetVoiceDetailsIntent
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
     - java_class: android.speech.tts.TextToSpeech
       go_type: TextToSpeech
       methods:
@@ -195,10 +559,6 @@ classes:
           go_name: AreDefaultsEnforced
           returns: boolean
           error: true
-        - java_method: getAvailableLanguages
-          go_name: GetAvailableLanguages
-          returns: java.util.Set<java.util.Locale>
-          error: true
         - java_method: getDefaultEngine
           go_name: GetDefaultEngine
           returns: String
@@ -211,17 +571,6 @@ classes:
           go_name: GetDefaultVoice
           returns: android.speech.tts.Voice
           error: true
-        - java_method: getEngines
-          go_name: GetEngines
-          returns: java.util.List<android.speech.tts.TextToSpeech$EngineInfo>
-          error: true
-        - java_method: getFeatures
-          go_name: GetFeatures
-          params:
-            - java_type: java.util.Locale
-              go_name: arg0
-          returns: java.util.Set<java.lang.String>
-          error: true
         - java_method: getLanguage
           go_name: GetLanguage
           returns: java.util.Locale
@@ -229,10 +578,6 @@ classes:
         - java_method: getVoice
           go_name: GetVoice
           returns: android.speech.tts.Voice
-          error: true
-        - java_method: getVoices
-          go_name: GetVoices
-          returns: java.util.Set<android.speech.tts.Voice>
           error: true
         - java_method: isLanguageAvailable
           go_name: IsLanguageAvailable
@@ -246,7 +591,7 @@ classes:
           returns: boolean
           error: true
         - java_method: playEarcon
-          go_name: PlayEarcon4
+          go_name: PlayEarcon
           params:
             - java_type: String
               go_name: arg0
@@ -256,28 +601,6 @@ classes:
               go_name: arg2
             - java_type: String
               go_name: arg3
-          returns: int
-          error: true
-        - java_method: playEarcon
-          go_name: PlayEarcon3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: java.util.HashMap<java.lang.String, java.lang.String>
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: playSilence
-          go_name: PlaySilence
-          params:
-            - java_type: long
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: java.util.HashMap<java.lang.String, java.lang.String>
-              go_name: arg2
           returns: int
           error: true
         - java_method: playSilentUtterance
@@ -352,7 +675,7 @@ classes:
           returns: void
           error: true
         - java_method: speak
-          go_name: Speak4
+          go_name: Speak
           params:
             - java_type: java.lang.CharSequence
               go_name: arg0
@@ -362,17 +685,6 @@ classes:
               go_name: arg2
             - java_type: String
               go_name: arg3
-          returns: int
-          error: true
-        - java_method: speak
-          go_name: Speak3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: java.util.HashMap<java.lang.String, java.lang.String>
-              go_name: arg2
           returns: int
           error: true
         - java_method: stop
@@ -405,23 +717,188 @@ classes:
               go_name: arg3
           returns: int
           error: true
-        - java_method: synthesizeToFile
-          go_name: SynthesizeToFile3_2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.HashMap<java.lang.String, java.lang.String>
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-          returns: int
-          error: true
       static_methods:
         - java_method: getMaxSpeechInputLength
           go_name: GetMaxSpeechInputLength
           returns: int
           error: true
+    - java_class: android.speech.tts.TextToSpeech$Engine
+      go_type: TextToSpeechEngine
+    - java_class: android.speech.tts.TextToSpeech$EngineInfo
+      go_type: TextToSpeechEngineInfo
+      methods:
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.speech.tts.TextToSpeech$OnInitListener
+      go_type: TextToSpeechOnInitListener
+      methods:
+        - java_method: onInit
+          go_name: OnInit
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.speech.tts.TextToSpeech$OnUtteranceCompletedListener
+      go_type: TextToSpeechOnUtteranceCompletedListener
+      methods:
+        - java_method: onUtteranceCompleted
+          go_name: OnUtteranceCompleted
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionPart
+      go_type: RecognitionPart
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getConfidenceLevel
+          go_name: GetConfidenceLevel
+          returns: int
+          error: true
+        - java_method: getFormattedText
+          go_name: GetFormattedText
+          returns: String
+          error: true
+        - java_method: getRawText
+          go_name: GetRawText
+          returns: String
+          error: true
+        - java_method: getTimestampMillis
+          go_name: GetTimestampMillis
+          returns: long
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionPart$Builder
+      go_type: RecognitionPartBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.speech.RecognitionPart
+          error: true
+        - java_method: setConfidenceLevel
+          go_name: SetConfidenceLevel
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+        - java_method: setFormattedText
+          go_name: SetFormattedText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+        - java_method: setRawText
+          go_name: SetRawText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+        - java_method: setTimestampMillis
+          go_name: SetTimestampMillis
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+    - java_class: android.speech.AlternativeSpans
+      go_type: AlternativeSpans
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.speech.ModelDownloadListener
+      go_type: ModelDownloadListener
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onProgress
+          go_name: OnProgress
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onScheduled
+          go_name: OnScheduled
+          returns: void
+          error: true
+        - java_method: onSuccess
+          go_name: OnSuccess
+          returns: void
+          error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ServiceInterface
+      value: '"android.speech.RecognitionService"'
+      go_type: string
+    - go_name: ServiceMetaData
+      value: '"android.speech"'
+      go_type: string
     - go_name: ConfidenceScores
       value: '"confidence_scores"'
       go_type: string
@@ -515,6 +992,195 @@ constants:
     - go_name: TopLocaleAlternatives
       value: '"top_locale_alternatives"'
       go_type: string
+    - go_name: ActionVoiceSearchResults
+      value: '"android.speech.action.VOICE_SEARCH_RESULTS"'
+      go_type: string
+    - go_name: ExtraVoiceSearchResultHtml
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_HTML"'
+      go_type: string
+    - go_name: ExtraVoiceSearchResultHtmlBaseUrls
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_HTML_BASE_URLS"'
+      go_type: string
+    - go_name: ExtraVoiceSearchResultHttpHeaders
+      value: '"android.speech.extras.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS"'
+      go_type: string
+    - go_name: ExtraVoiceSearchResultStrings
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_STRINGS"'
+      go_type: string
+    - go_name: ExtraVoiceSearchResultUrls
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_URLS"'
+      go_type: string
+    - go_name: UriSchemeInline
+      value: '"inline"'
+      go_type: string
+    - go_name: ActionGetLanguageDetails
+      value: '"android.speech.action.GET_LANGUAGE_DETAILS"'
+      go_type: string
+    - go_name: ActionRecognizeSpeech
+      value: '"android.speech.action.RECOGNIZE_SPEECH"'
+      go_type: string
+    - go_name: ActionVoiceSearchHandsFree
+      value: '"android.speech.action.VOICE_SEARCH_HANDS_FREE"'
+      go_type: string
+    - go_name: ActionWebSearch
+      value: '"android.speech.action.WEB_SEARCH"'
+      go_type: string
+    - go_name: DetailsMetaData
+      value: '"android.speech.DETAILS"'
+      go_type: string
+    - go_name: ExtraAudioInjectSource
+      value: '"android.speech.extra.AUDIO_INJECT_SOURCE"'
+      go_type: string
+    - go_name: ExtraAudioSource
+      value: '"android.speech.extra.AUDIO_SOURCE"'
+      go_type: string
+    - go_name: ExtraAudioSourceChannelCount
+      value: '"android.speech.extra.AUDIO_SOURCE_CHANNEL_COUNT"'
+      go_type: string
+    - go_name: ExtraAudioSourceEncoding
+      value: '"android.speech.extra.AUDIO_SOURCE_ENCODING"'
+      go_type: string
+    - go_name: ExtraAudioSourceSamplingRate
+      value: '"android.speech.extra.AUDIO_SOURCE_SAMPLING_RATE"'
+      go_type: string
+    - go_name: ExtraBiasingStrings
+      value: '"android.speech.extra.BIASING_STRINGS"'
+      go_type: string
+    - go_name: ExtraCallingPackage
+      value: '"calling_package"'
+      go_type: string
+    - go_name: ExtraConfidenceScores
+      value: '"android.speech.extra.CONFIDENCE_SCORES"'
+      go_type: string
+    - go_name: ExtraEnableBiasingDeviceContext
+      value: '"android.speech.extra.ENABLE_BIASING_DEVICE_CONTEXT"'
+      go_type: string
+    - go_name: ExtraEnableFormatting
+      value: '"android.speech.extra.ENABLE_FORMATTING"'
+      go_type: string
+    - go_name: ExtraEnableLanguageDetection
+      value: '"android.speech.extra.ENABLE_LANGUAGE_DETECTION"'
+      go_type: string
+    - go_name: ExtraEnableLanguageSwitch
+      value: '"android.speech.extra.ENABLE_LANGUAGE_SWITCH"'
+      go_type: string
+    - go_name: ExtraHidePartialTrailingPunctuation
+      value: '"android.speech.extra.HIDE_PARTIAL_TRAILING_PUNCTUATION"'
+      go_type: string
+    - go_name: ExtraLanguage
+      value: '"android.speech.extra.LANGUAGE"'
+      go_type: string
+    - go_name: ExtraLanguageDetectionAllowedLanguages
+      value: '"android.speech.extra.LANGUAGE_DETECTION_ALLOWED_LANGUAGES"'
+      go_type: string
+    - go_name: ExtraLanguageModel
+      value: '"android.speech.extra.LANGUAGE_MODEL"'
+      go_type: string
+    - go_name: ExtraLanguagePreference
+      value: '"android.speech.extra.LANGUAGE_PREFERENCE"'
+      go_type: string
+    - go_name: ExtraLanguageSwitchAllowedLanguages
+      value: '"android.speech.extra.LANGUAGE_SWITCH_ALLOWED_LANGUAGES"'
+      go_type: string
+    - go_name: ExtraLanguageSwitchInitialActiveDurationTimeMillis
+      value: '"android.speech.extra.LANGUAGE_SWITCH_INITIAL_ACTIVE_DURATION_TIME_MILLIS"'
+      go_type: string
+    - go_name: ExtraLanguageSwitchMaxSwitches
+      value: '"android.speech.extra.LANGUAGE_SWITCH_MAX_SWITCHES"'
+      go_type: string
+    - go_name: ExtraMaskOffensiveWords
+      value: '"android.speech.extra.MASK_OFFENSIVE_WORDS"'
+      go_type: string
+    - go_name: ExtraMaxResults
+      value: '"android.speech.extra.MAX_RESULTS"'
+      go_type: string
+    - go_name: ExtraOnlyReturnLanguagePreference
+      value: '"android.speech.extra.ONLY_RETURN_LANGUAGE_PREFERENCE"'
+      go_type: string
+    - go_name: ExtraOrigin
+      value: '"android.speech.extra.ORIGIN"'
+      go_type: string
+    - go_name: ExtraPartialResults
+      value: '"android.speech.extra.PARTIAL_RESULTS"'
+      go_type: string
+    - go_name: ExtraPreferOffline
+      value: '"android.speech.extra.PREFER_OFFLINE"'
+      go_type: string
+    - go_name: ExtraPrompt
+      value: '"android.speech.extra.PROMPT"'
+      go_type: string
+    - go_name: ExtraRequestWordConfidence
+      value: '"android.speech.extra.REQUEST_WORD_CONFIDENCE"'
+      go_type: string
+    - go_name: ExtraRequestWordTiming
+      value: '"android.speech.extra.REQUEST_WORD_TIMING"'
+      go_type: string
+    - go_name: ExtraResults
+      value: '"android.speech.extra.RESULTS"'
+      go_type: string
+    - go_name: ExtraResultsPendingintent
+      value: '"android.speech.extra.RESULTS_PENDINGINTENT"'
+      go_type: string
+    - go_name: ExtraResultsPendingintentBundle
+      value: '"android.speech.extra.RESULTS_PENDINGINTENT_BUNDLE"'
+      go_type: string
+    - go_name: ExtraSecure
+      value: '"android.speech.extras.EXTRA_SECURE"'
+      go_type: string
+    - go_name: ExtraSegmentedSession
+      value: '"android.speech.extra.SEGMENTED_SESSION"'
+      go_type: string
+    - go_name: ExtraSpeechInputCompleteSilenceLengthMillis
+      value: '"android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS"'
+      go_type: string
+    - go_name: ExtraSpeechInputMinimumLengthMillis
+      value: '"android.speech.extras.SPEECH_INPUT_MINIMUM_LENGTH_MILLIS"'
+      go_type: string
+    - go_name: ExtraSpeechInputPossiblyCompleteSilenceLengthMillis
+      value: '"android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS"'
+      go_type: string
+    - go_name: ExtraSupportedLanguages
+      value: '"android.speech.extra.SUPPORTED_LANGUAGES"'
+      go_type: string
+    - go_name: ExtraWebSearchOnly
+      value: '"android.speech.extra.WEB_SEARCH_ONLY"'
+      go_type: string
+    - go_name: FormattingOptimizeLatency
+      value: '"latency"'
+      go_type: string
+    - go_name: FormattingOptimizeQuality
+      value: '"quality"'
+      go_type: string
+    - go_name: LanguageModelFreeForm
+      value: '"free_form"'
+      go_type: string
+    - go_name: LanguageModelWebSearch
+      value: '"web_search"'
+      go_type: string
+    - go_name: LanguageSwitchBalanced
+      value: '"balanced"'
+      go_type: string
+    - go_name: LanguageSwitchHighPrecision
+      value: '"high_precision"'
+      go_type: string
+    - go_name: LanguageSwitchQuickResponse
+      value: '"quick_response"'
+      go_type: string
+    - go_name: ResultAudioError
+      value: "5"
+      go_type: int
+    - go_name: ResultClientError
+      value: "2"
+      go_type: int
+    - go_name: ResultNetworkError
+      value: "4"
+      go_type: int
+    - go_name: ResultNoMatch
+      value: "1"
+      go_type: int
+    - go_name: ResultServerError
+      value: "3"
+      go_type: int
     - go_name: ActionTtsQueueProcessingCompleted
       value: '"android.speech.tts.TTS_QUEUE_PROCESSING_COMPLETED"'
       go_type: string
@@ -561,5 +1227,110 @@ constants:
       value: "-2"
       go_type: int
     - go_name: Success
+      value: "0"
+      go_type: int
+    - go_name: ActionCheckTtsData
+      value: '"android.speech.tts.engine.CHECK_TTS_DATA"'
+      go_type: string
+    - go_name: ActionGetSampleText
+      value: '"android.speech.tts.engine.GET_SAMPLE_TEXT"'
+      go_type: string
+    - go_name: ActionInstallTtsData
+      value: '"android.speech.tts.engine.INSTALL_TTS_DATA"'
+      go_type: string
+    - go_name: ActionTtsDataInstalled
+      value: '"android.speech.tts.engine.TTS_DATA_INSTALLED"'
+      go_type: string
+    - go_name: CheckVoiceDataBadData
+      value: "-1"
+      go_type: int
+    - go_name: CheckVoiceDataFail
+      value: "0"
+      go_type: int
+    - go_name: CheckVoiceDataMissingData
+      value: "-2"
+      go_type: int
+    - go_name: CheckVoiceDataMissingVolume
+      value: "-3"
+      go_type: int
+    - go_name: CheckVoiceDataPass
+      value: "1"
+      go_type: int
+    - go_name: DefaultStream
+      value: "3"
+      go_type: int
+    - go_name: ExtraAvailableVoices
+      value: '"availableVoices"'
+      go_type: string
+    - go_name: ExtraCheckVoiceDataFor
+      value: '"checkVoiceDataFor"'
+      go_type: string
+    - go_name: ExtraSampleText
+      value: '"sampleText"'
+      go_type: string
+    - go_name: ExtraTtsDataInstalled
+      value: '"dataInstalled"'
+      go_type: string
+    - go_name: ExtraUnavailableVoices
+      value: '"unavailableVoices"'
+      go_type: string
+    - go_name: ExtraVoiceDataFiles
+      value: '"dataFiles"'
+      go_type: string
+    - go_name: ExtraVoiceDataFilesInfo
+      value: '"dataFilesInfo"'
+      go_type: string
+    - go_name: ExtraVoiceDataRootDirectory
+      value: '"dataRoot"'
+      go_type: string
+    - go_name: IntentActionTtsService
+      value: '"android.intent.action.TTS_SERVICE"'
+      go_type: string
+    - go_name: KeyFeatureEmbeddedSynthesis
+      value: '"embeddedTts"'
+      go_type: string
+    - go_name: KeyFeatureNetworkRetriesCount
+      value: '"networkRetriesCount"'
+      go_type: string
+    - go_name: KeyFeatureNetworkSynthesis
+      value: '"networkTts"'
+      go_type: string
+    - go_name: KeyFeatureNetworkTimeoutMs
+      value: '"networkTimeoutMs"'
+      go_type: string
+    - go_name: KeyFeatureNotInstalled
+      value: '"notInstalled"'
+      go_type: string
+    - go_name: KeyParamPan
+      value: '"pan"'
+      go_type: string
+    - go_name: KeyParamSessionId
+      value: '"sessionId"'
+      go_type: string
+    - go_name: KeyParamStream
+      value: '"streamType"'
+      go_type: string
+    - go_name: KeyParamUtteranceId
+      value: '"utteranceId"'
+      go_type: string
+    - go_name: KeyParamVolume
+      value: '"volume"'
+      go_type: string
+    - go_name: ConfidenceLevelHigh
+      value: "5"
+      go_type: int
+    - go_name: ConfidenceLevelLow
+      value: "1"
+      go_type: int
+    - go_name: ConfidenceLevelMedium
+      value: "3"
+      go_type: int
+    - go_name: ConfidenceLevelMediumHigh
+      value: "4"
+      go_type: int
+    - go_name: ConfidenceLevelMediumLow
+      value: "2"
+      go_type: int
+    - go_name: ConfidenceLevelUnknown
       value: "0"
       go_type: int

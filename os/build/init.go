@@ -23,14 +23,24 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsBuild                           *jni.GlobalRef
-	midBuildGetFingerprintedPartitions jni.MethodID
-	midBuildGetMajorSdkVersion         jni.MethodID
-	midBuildGetMinorSdkVersion         jni.MethodID
-	midBuildGetRadioVersion            jni.MethodID
-	midBuildGetSerial                  jni.MethodID
+	clsBuild                   *jni.GlobalRef
+	midBuildGetMajorSdkVersion jni.MethodID
+	midBuildGetMinorSdkVersion jni.MethodID
+	midBuildGetRadioVersion    jni.MethodID
+	midBuildGetSerial          jni.MethodID
+
+	clsPartition                   *jni.GlobalRef
+	midPartitionEquals             jni.MethodID
+	midPartitionGetBuildTimeMillis jni.MethodID
+	midPartitionGetFingerprint     jni.MethodID
+	midPartitionGetName            jni.MethodID
+	midPartitionHashCode           jni.MethodID
 
 	clsVERSION *jni.GlobalRef
+
+	clsVERSION_CODES *jni.GlobalRef
+
+	clsVERSION_CODES_FULL *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -56,13 +66,6 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("find class android.os.Build: %w", err)
 	}
 	clsBuild = env.NewGlobalRef(&c.Object)
-
-	midBuildGetFingerprintedPartitions, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "getFingerprintedPartitions", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
 
 	midBuildGetMajorSdkVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "getMajorSdkVersion", "(I)I")
 	if err != nil {
@@ -92,11 +95,64 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	c, err = env.FindClass("android/os/Build$Partition")
+	if err != nil {
+		return fmt.Errorf("find class android.os.Build$Partition: %w", err)
+	}
+	clsPartition = env.NewGlobalRef(&c.Object)
+
+	midPartitionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPartition)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPartitionGetBuildTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPartition)), "getBuildTimeMillis", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPartitionGetFingerprint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPartition)), "getFingerprint", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPartitionGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPartition)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midPartitionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPartition)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	c, err = env.FindClass("android/os/Build$VERSION")
 	if err != nil {
 		return fmt.Errorf("find class android.os.Build$VERSION: %w", err)
 	}
 	clsVERSION = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/os/Build$VERSION_CODES")
+	if err != nil {
+		return fmt.Errorf("find class android.os.Build$VERSION_CODES: %w", err)
+	}
+	clsVERSION_CODES = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/os/Build$VERSION_CODES_FULL")
+	if err != nil {
+		return fmt.Errorf("find class android.os.Build$VERSION_CODES_FULL: %w", err)
+	}
+	clsVERSION_CODES_FULL = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

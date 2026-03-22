@@ -45,8 +45,8 @@ var (
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	vm := jni.VMFromUintptr(uintptr(activity.vm))
-	actObj := jni.ObjectFromUintptr(uintptr(activity.clazz))
+	vm := jni.VMFromPtr(unsafe.Pointer(activity.vm))
+	actObj := jni.ObjectFromPtr(unsafe.Pointer(activity.clazz))
 
 	mu.Lock()
 	globalVM = vm

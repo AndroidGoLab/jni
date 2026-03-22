@@ -23,29 +23,6 @@ type ViewGroup struct {
 	Obj *jni.GlobalRef
 }
 
-// AddChildrenForAccessibility calls android.view.ViewGroup.addChildrenForAccessibility.
-func (m *ViewGroup) AddChildrenForAccessibility(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupAddChildrenForAccessibility == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.addChildrenForAccessibility is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewGroupAddChildrenForAccessibility, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // AddExtraDataToAccessibilityNodeInfo calls android.view.ViewGroup.addExtraDataToAccessibilityNodeInfo.
 func (m *ViewGroup) AddExtraDataToAccessibilityNodeInfo(
 	arg0 *jni.Object,
@@ -79,56 +56,6 @@ func (m *ViewGroup) AddExtraDataToAccessibilityNodeInfo(
 	return callErr
 }
 
-// AddFocusables calls android.view.ViewGroup.addFocusables.
-func (m *ViewGroup) AddFocusables(
-	arg0 *jni.Object,
-	arg1 int32,
-	arg2 int32,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupAddFocusables == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.addFocusables is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewGroupAddFocusables, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// AddKeyboardNavigationClusters calls android.view.ViewGroup.addKeyboardNavigationClusters.
-func (m *ViewGroup) AddKeyboardNavigationClusters(arg0 *jni.Object, arg1 int32) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupAddKeyboardNavigationClusters == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.addKeyboardNavigationClusters is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewGroupAddKeyboardNavigationClusters, jni.ObjectValue(arg0), jni.IntValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // AddStatesFromChildren calls android.view.ViewGroup.addStatesFromChildren.
 func (m *ViewGroup) AddStatesFromChildren() (bool, error) {
 	var result bool
@@ -154,29 +81,6 @@ func (m *ViewGroup) AddStatesFromChildren() (bool, error) {
 		return callErr
 	})
 	return result, callErr
-}
-
-// AddTouchables calls android.view.ViewGroup.addTouchables.
-func (m *ViewGroup) AddTouchables(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupAddTouchables == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.addTouchables is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewGroupAddTouchables, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // AddView1 calls android.view.ViewGroup.addView.
@@ -527,34 +431,6 @@ func (m *ViewGroup) DispatchConfigurationChanged(arg0 *jni.Object) error {
 	return callErr
 }
 
-// DispatchCreateViewTranslationRequest calls android.view.ViewGroup.dispatchCreateViewTranslationRequest.
-func (m *ViewGroup) DispatchCreateViewTranslationRequest(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupDispatchCreateViewTranslationRequest == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.dispatchCreateViewTranslationRequest is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewGroupDispatchCreateViewTranslationRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // DispatchDisplayHint calls android.view.ViewGroup.dispatchDisplayHint.
 func (m *ViewGroup) DispatchDisplayHint(arg0 int32) error {
 
@@ -802,33 +678,6 @@ func (m *ViewGroup) DispatchProvideStructure(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midViewGroupDispatchProvideStructure, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// DispatchScrollCaptureSearch calls android.view.ViewGroup.dispatchScrollCaptureSearch.
-func (m *ViewGroup) DispatchScrollCaptureSearch(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupDispatchScrollCaptureSearch == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.dispatchScrollCaptureSearch is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewGroupDispatchScrollCaptureSearch, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
@@ -1091,39 +940,6 @@ func (m *ViewGroup) DispatchWindowInsetsAnimationPrepare(arg0 *jni.Object) error
 	return callErr
 }
 
-// DispatchWindowInsetsAnimationProgress calls android.view.ViewGroup.dispatchWindowInsetsAnimationProgress.
-func (m *ViewGroup) DispatchWindowInsetsAnimationProgress(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupDispatchWindowInsetsAnimationProgress == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.dispatchWindowInsetsAnimationProgress is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midViewGroupDispatchWindowInsetsAnimationProgress, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // DispatchWindowInsetsAnimationStart calls android.view.ViewGroup.dispatchWindowInsetsAnimationStart.
 func (m *ViewGroup) DispatchWindowInsetsAnimationStart(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -1289,39 +1105,6 @@ func (m *ViewGroup) FindOnBackInvokedDispatcherForChild(arg0 *jni.Object, arg1 *
 		return callErr
 	})
 	return result, callErr
-}
-
-// FindViewsWithText calls android.view.ViewGroup.findViewsWithText.
-func (m *ViewGroup) FindViewsWithText(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 int32,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGroupFindViewsWithText == nil {
-			callErr = fmt.Errorf("android.view.ViewGroup.findViewsWithText is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewGroupFindViewsWithText, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // FocusSearch calls android.view.ViewGroup.focusSearch.

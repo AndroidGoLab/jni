@@ -3,6 +3,7 @@
 package consts
 
 const (
+	Creator                       int = 0
 	VibrationEffectSupportNo      int = 2
 	VibrationEffectSupportUnknown int = 0
 	VibrationEffectSupportYes     int = 1

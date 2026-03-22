@@ -5,7 +5,40 @@ package usb
 import "github.com/AndroidGoLab/jni/hardware/usb/consts"
 
 const (
-	Creator = consts.Creator
+	Creator                    = consts.Creator
+	UsbClassAppSpec            = consts.UsbClassAppSpec
+	UsbClassAudio              = consts.UsbClassAudio
+	UsbClassCdcData            = consts.UsbClassCdcData
+	UsbClassComm               = consts.UsbClassComm
+	UsbClassContentSec         = consts.UsbClassContentSec
+	UsbClassCscid              = consts.UsbClassCscid
+	UsbClassHid                = consts.UsbClassHid
+	UsbClassHub                = consts.UsbClassHub
+	UsbClassMassStorage        = consts.UsbClassMassStorage
+	UsbClassMisc               = consts.UsbClassMisc
+	UsbClassPerInterface       = consts.UsbClassPerInterface
+	UsbClassPhysica            = consts.UsbClassPhysica
+	UsbClassPrinter            = consts.UsbClassPrinter
+	UsbClassStillImage         = consts.UsbClassStillImage
+	UsbClassVendorSpec         = consts.UsbClassVendorSpec
+	UsbClassVideo              = consts.UsbClassVideo
+	UsbClassWirelessController = consts.UsbClassWirelessController
+	UsbDirIn                   = consts.UsbDirIn
+	UsbDirOut                  = consts.UsbDirOut
+	UsbEndpointDirMask         = consts.UsbEndpointDirMask
+	UsbEndpointNumberMask      = consts.UsbEndpointNumberMask
+	UsbEndpointXfertypeMask    = consts.UsbEndpointXfertypeMask
+	UsbEndpointXferBulk        = consts.UsbEndpointXferBulk
+	UsbEndpointXferControl     = consts.UsbEndpointXferControl
+	UsbEndpointXferInt         = consts.UsbEndpointXferInt
+	UsbEndpointXferIsoc        = consts.UsbEndpointXferIsoc
+	UsbInterfaceSubclassBoot   = consts.UsbInterfaceSubclassBoot
+	UsbSubclassVendorSpec      = consts.UsbSubclassVendorSpec
+	UsbTypeClass               = consts.UsbTypeClass
+	UsbTypeMask                = consts.UsbTypeMask
+	UsbTypeReserved            = consts.UsbTypeReserved
+	UsbTypeStandard            = consts.UsbTypeStandard
+	UsbTypeVendor              = consts.UsbTypeVendor
 )
 
 const (

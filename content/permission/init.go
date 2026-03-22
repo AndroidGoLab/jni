@@ -26,6 +26,8 @@ var (
 	clsManifest *jni.GlobalRef
 
 	clsManifestpermission *jni.GlobalRef
+
+	clsManifestpermission_group *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -57,6 +59,12 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("find class android.Manifest$permission: %w", err)
 	}
 	clsManifestpermission = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/Manifest$permission_group")
+	if err != nil {
+		return fmt.Errorf("find class android.Manifest$permission_group: %w", err)
+	}
+	clsManifestpermission_group = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "blob_store"
+const serviceNameStoreManager = "blob_store"
 
 // StoreManager wraps android.app.blob.BlobStoreManager.
 type StoreManager struct {
@@ -39,12 +39,12 @@ func NewStoreManager(ctx *app.Context) (*StoreManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameStoreManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameStoreManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -224,38 +224,6 @@ func (m *StoreManager) CreateSession(arg0 *jni.Object) (int64, error) {
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetLeasedBlobs calls android.app.blob.BlobStoreManager.getLeasedBlobs.
-func (m *StoreManager) GetLeasedBlobs() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midStoreManagerGetLeasedBlobs == nil {
-			callErr = fmt.Errorf("android.app.blob.BlobStoreManager.getLeasedBlobs is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midStoreManagerGetLeasedBlobs,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

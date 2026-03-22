@@ -281,6 +281,45 @@ classes:
               go_name: arg2
           returns: android.net.Uri
           error: true
+    - java_class: android.provider.DocumentsContract$Document
+      go_type: ContractDocument
+    - java_class: android.provider.DocumentsContract$Path
+      go_type: ContractPath
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getRootId
+          go_name: GetRootId
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.provider.DocumentsContract$Root
+      go_type: ContractRoot
 constants:
     - go_name: ActionDocumentSettings
       value: '"android.provider.action.DOCUMENT_SETTINGS"'
@@ -335,4 +374,124 @@ constants:
       go_type: string
     - go_name: QueryArgMimeTypes
       value: '"android:query-arg-mime-types"'
+      go_type: string
+    - go_name: ColumnDisplayName
+      value: '"_display_name"'
+      go_type: string
+    - go_name: ColumnDocumentId
+      value: '"document_id"'
+      go_type: string
+    - go_name: ColumnFlags
+      value: '"flags"'
+      go_type: string
+    - go_name: ColumnIcon
+      value: '"icon"'
+      go_type: string
+    - go_name: ColumnLastModified
+      value: '"last_modified"'
+      go_type: string
+    - go_name: ColumnMimeType
+      value: '"mime_type"'
+      go_type: string
+    - go_name: ColumnSize
+      value: '"_size"'
+      go_type: string
+    - go_name: ColumnSummary
+      value: '"summary"'
+      go_type: string
+    - go_name: FlagDirBlocksOpenDocumentTree
+      value: "32768"
+      go_type: int
+    - go_name: FlagDirPrefersGrid
+      value: "16"
+      go_type: int
+    - go_name: FlagDirPrefersLastModified
+      value: "32"
+      go_type: int
+    - go_name: FlagDirSupportsCreate
+      value: "8"
+      go_type: int
+    - go_name: FlagPartial
+      value: "8192"
+      go_type: int
+    - go_name: FlagSupportsCopy
+      value: "128"
+      go_type: int
+    - go_name: FlagSupportsDelete
+      value: "4"
+      go_type: int
+    - go_name: FlagSupportsMetadata
+      value: "16384"
+      go_type: int
+    - go_name: FlagSupportsMove
+      value: "256"
+      go_type: int
+    - go_name: FlagSupportsRemove
+      value: "1024"
+      go_type: int
+    - go_name: FlagSupportsRename
+      value: "64"
+      go_type: int
+    - go_name: FlagSupportsSettings
+      value: "2048"
+      go_type: int
+    - go_name: FlagSupportsThumbnail
+      value: "1"
+      go_type: int
+    - go_name: FlagSupportsWrite
+      value: "2"
+      go_type: int
+    - go_name: FlagVirtualDocument
+      value: "512"
+      go_type: int
+    - go_name: FlagWebLinkable
+      value: "4096"
+      go_type: int
+    - go_name: MimeTypeDir
+      value: '"vnd.android.document/directory"'
+      go_type: string
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ColumnAvailableBytes
+      value: '"available_bytes"'
+      go_type: string
+    - go_name: ColumnCapacityBytes
+      value: '"capacity_bytes"'
+      go_type: string
+    - go_name: ColumnMimeTypes
+      value: '"mime_types"'
+      go_type: string
+    - go_name: ColumnQueryArgs
+      value: '"query_args"'
+      go_type: string
+    - go_name: ColumnRootId
+      value: '"root_id"'
+      go_type: string
+    - go_name: ColumnTitle
+      value: '"title"'
+      go_type: string
+    - go_name: FlagEmpty
+      value: "64"
+      go_type: int
+    - go_name: FlagLocalOnly
+      value: "2"
+      go_type: int
+    - go_name: FlagSupportsCreate
+      value: "1"
+      go_type: int
+    - go_name: FlagSupportsEject
+      value: "32"
+      go_type: int
+    - go_name: FlagSupportsIsChild
+      value: "16"
+      go_type: int
+    - go_name: FlagSupportsRecents
+      value: "4"
+      go_type: int
+    - go_name: FlagSupportsSearch
+      value: "8"
+      go_type: int
+    - go_name: MimeTypeItem
+      value: '"vnd.android.document/root"'
       go_type: string

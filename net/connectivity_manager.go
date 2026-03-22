@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "connectivity"
+const serviceNameConnectivityManager = "connectivity"
 
 // ConnectivityManager wraps android.net.ConnectivityManager.
 type ConnectivityManager struct {
@@ -39,12 +39,12 @@ func NewConnectivityManager(ctx *app.Context) (*ConnectivityManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameConnectivityManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameConnectivityManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).

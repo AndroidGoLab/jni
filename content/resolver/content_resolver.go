@@ -165,44 +165,6 @@ func (m *ContentResolver) AcquireUnstableContentProviderClient1_1(arg0 string) (
 	return result, callErr
 }
 
-// ApplyBatch calls android.content.ContentResolver.applyBatch.
-func (m *ContentResolver) ApplyBatch(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContentResolverApplyBatch == nil {
-			callErr = fmt.Errorf("android.content.ContentResolver.applyBatch is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midContentResolverApplyBatch, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // BulkInsert calls android.content.ContentResolver.bulkInsert.
 func (m *ContentResolver) BulkInsert(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32
@@ -446,70 +408,6 @@ func (m *ContentResolver) Delete3_1(
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetOutgoingPersistedUriPermissions calls android.content.ContentResolver.getOutgoingPersistedUriPermissions.
-func (m *ContentResolver) GetOutgoingPersistedUriPermissions() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContentResolverGetOutgoingPersistedUriPermissions == nil {
-			callErr = fmt.Errorf("android.content.ContentResolver.getOutgoingPersistedUriPermissions is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midContentResolverGetOutgoingPersistedUriPermissions,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetPersistedUriPermissions calls android.content.ContentResolver.getPersistedUriPermissions.
-func (m *ContentResolver) GetPersistedUriPermissions() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContentResolverGetPersistedUriPermissions == nil {
-			callErr = fmt.Errorf("android.content.ContentResolver.getPersistedUriPermissions is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midContentResolverGetPersistedUriPermissions,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -804,33 +702,6 @@ func (m *ContentResolver) NotifyChange3_2(
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midContentResolverNotifyChange3_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// NotifyChange3_3 calls android.content.ContentResolver.notifyChange.
-func (m *ContentResolver) NotifyChange3_3(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 int32,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContentResolverNotifyChange3_3 == nil {
-			callErr = fmt.Errorf("android.content.ContentResolver.notifyChange is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midContentResolverNotifyChange3_3, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -1871,38 +1742,6 @@ func (m *ContentResolver) GetCurrentSync() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetCurrentSyncs calls android.content.ContentResolver.getCurrentSyncs.
-func (m *ContentResolver) GetCurrentSyncs() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContentResolverGetCurrentSyncs == nil {
-			callErr = fmt.Errorf("android.content.ContentResolver.getCurrentSyncs is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
-			midContentResolverGetCurrentSyncs,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetIsSyncable calls android.content.ContentResolver.getIsSyncable.
 func (m *ContentResolver) GetIsSyncable(arg0 *jni.Object, arg1 string) (int32, error) {
 	var result int32
@@ -1957,45 +1796,6 @@ func (m *ContentResolver) GetMasterSyncAutomatically() (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetPeriodicSyncs calls android.content.ContentResolver.getPeriodicSyncs.
-func (m *ContentResolver) GetPeriodicSyncs(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midContentResolverGetPeriodicSyncs == nil {
-			callErr = fmt.Errorf("android.content.ContentResolver.getPeriodicSyncs is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsContentResolver)),
-			midContentResolverGetPeriodicSyncs, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr

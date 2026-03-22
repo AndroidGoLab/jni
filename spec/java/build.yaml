@@ -8,10 +8,6 @@ classes:
     - java_class: android.os.Build
       go_type: Build
       static_methods:
-        - java_method: getFingerprintedPartitions
-          go_name: GetFingerprintedPartitions
-          returns: java.util.List<android.os.Build$Partition>
-          error: true
         - java_method: getMajorSdkVersion
           go_name: GetMajorSdkVersion
           params:
@@ -34,8 +30,38 @@ classes:
           go_name: GetSerial
           returns: String
           error: true
+    - java_class: android.os.Build$Partition
+      go_type: Partition
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getBuildTimeMillis
+          go_name: GetBuildTimeMillis
+          returns: long
+          error: true
+        - java_method: getFingerprint
+          go_name: GetFingerprint
+          returns: String
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
     - java_class: android.os.Build$VERSION
       go_type: VERSION
+    - java_class: android.os.Build$VERSION_CODES
+      go_type: VERSION_CODES
+    - java_class: android.os.Build$VERSION_CODES_FULL
+      go_type: VERSION_CODES_FULL
 constants:
     - go_name: Board
       value: '""'
@@ -121,6 +147,9 @@ constants:
     - go_name: User
       value: '""'
       go_type: string
+    - go_name: PartitionNameSystem
+      value: '"system"'
+      go_type: string
     - go_name: BaseOs
       value: '""'
       go_type: string
@@ -157,3 +186,114 @@ constants:
     - go_name: SecurityPatch
       value: '""'
       go_type: string
+    - go_name: Baklava
+      value: "36"
+      go_type: int
+    - go_name: Base
+      value: "1"
+      go_type: int
+    - go_name: Base11
+      value: "2"
+      go_type: int
+    - go_name: Cupcake
+      value: "3"
+      go_type: int
+    - go_name: CurDevelopment
+      value: "10000"
+      go_type: int
+    - go_name: Donut
+      value: "4"
+      go_type: int
+    - go_name: Eclair
+      value: "5"
+      go_type: int
+    - go_name: Eclair01
+      value: "6"
+      go_type: int
+    - go_name: EclairMr1
+      value: "7"
+      go_type: int
+    - go_name: Froyo
+      value: "8"
+      go_type: int
+    - go_name: Gingerbread
+      value: "9"
+      go_type: int
+    - go_name: GingerbreadMr1
+      value: "10"
+      go_type: int
+    - go_name: Honeycomb
+      value: "11"
+      go_type: int
+    - go_name: HoneycombMr1
+      value: "12"
+      go_type: int
+    - go_name: HoneycombMr2
+      value: "13"
+      go_type: int
+    - go_name: IceCreamSandwich
+      value: "14"
+      go_type: int
+    - go_name: IceCreamSandwichMr1
+      value: "15"
+      go_type: int
+    - go_name: JellyBean
+      value: "16"
+      go_type: int
+    - go_name: JellyBeanMr1
+      value: "17"
+      go_type: int
+    - go_name: JellyBeanMr2
+      value: "18"
+      go_type: int
+    - go_name: Kitkat
+      value: "19"
+      go_type: int
+    - go_name: KitkatWatch
+      value: "20"
+      go_type: int
+    - go_name: Lollipop
+      value: "21"
+      go_type: int
+    - go_name: LollipopMr1
+      value: "22"
+      go_type: int
+    - go_name: M
+      value: "23"
+      go_type: int
+    - go_name: "N"
+      value: "24"
+      go_type: int
+    - go_name: NMr1
+      value: "25"
+      go_type: int
+    - go_name: O
+      value: "26"
+      go_type: int
+    - go_name: OMr1
+      value: "27"
+      go_type: int
+    - go_name: P
+      value: "28"
+      go_type: int
+    - go_name: Q
+      value: "29"
+      go_type: int
+    - go_name: R
+      value: "30"
+      go_type: int
+    - go_name: S
+      value: "31"
+      go_type: int
+    - go_name: SV2
+      value: "32"
+      go_type: int
+    - go_name: Tiramisu
+      value: "33"
+      go_type: int
+    - go_name: UpsideDownCake
+      value: "34"
+      go_type: int
+    - go_name: VanillaIceCream
+      value: "35"
+      go_type: int

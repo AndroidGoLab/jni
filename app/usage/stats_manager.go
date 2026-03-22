@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "usagestats"
+const serviceNameStatsManager = "usagestats"
 
 // StatsManager wraps android.app.usage.UsageStatsManager.
 type StatsManager struct {
@@ -39,12 +39,12 @@ func NewStatsManager(ctx *app.Context) (*StatsManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameStatsManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameStatsManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -122,80 +122,6 @@ func (m *StatsManager) IsAppInactive(arg0 string) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// QueryConfigurations calls android.app.usage.UsageStatsManager.queryConfigurations.
-func (m *StatsManager) QueryConfigurations(
-	arg0 int32,
-	arg1 int64,
-	arg2 int64,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midStatsManagerQueryConfigurations == nil {
-			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryConfigurations is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midStatsManagerQueryConfigurations, jni.IntValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// QueryEventStats calls android.app.usage.UsageStatsManager.queryEventStats.
-func (m *StatsManager) QueryEventStats(
-	arg0 int32,
-	arg1 int64,
-	arg2 int64,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midStatsManagerQueryEventStats == nil {
-			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryEventStats is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midStatsManagerQueryEventStats, jni.IntValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr
@@ -284,43 +210,6 @@ func (m *StatsManager) QueryEventsForSelf(arg0 int64, arg1 int64) (*jni.Object, 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midStatsManagerQueryEventsForSelf, jni.LongValue(arg0), jni.LongValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// QueryUsageStats calls android.app.usage.UsageStatsManager.queryUsageStats.
-func (m *StatsManager) QueryUsageStats(
-	arg0 int32,
-	arg1 int64,
-	arg2 int64,
-) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midStatsManagerQueryUsageStats == nil {
-			callErr = fmt.Errorf("android.app.usage.UsageStatsManager.queryUsageStats is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midStatsManagerQueryUsageStats, jni.IntValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2),
 		)
 		if callErr != nil {
 			return callErr

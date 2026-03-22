@@ -46,8 +46,8 @@ func (m *BluetoothLeScanner) FlushPendingScanResults(arg0 *jni.Object) error {
 	return callErr
 }
 
-// StartScan1 calls android.bluetooth.le.BluetoothLeScanner.startScan.
-func (m *BluetoothLeScanner) StartScan1(arg0 *jni.Object) error {
+// StartScan calls android.bluetooth.le.BluetoothLeScanner.startScan.
+func (m *BluetoothLeScanner) StartScan(arg0 *jni.Object) error {
 
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -55,71 +55,14 @@ func (m *BluetoothLeScanner) StartScan1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midBluetoothLeScannerStartScan1 == nil {
+		if midBluetoothLeScannerStartScan == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.startScan is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midBluetoothLeScannerStartScan1, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// StartScan3_1 calls android.bluetooth.le.BluetoothLeScanner.startScan.
-func (m *BluetoothLeScanner) StartScan3_1(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) (int32, error) {
-	var result int32
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBluetoothLeScannerStartScan3_1 == nil {
-			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.startScan is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallIntMethod(
-			m.Obj,
-			midBluetoothLeScannerStartScan3_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// StartScan3_2 calls android.bluetooth.le.BluetoothLeScanner.startScan.
-func (m *BluetoothLeScanner) StartScan3_2(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBluetoothLeScannerStartScan3_2 == nil {
-			callErr = fmt.Errorf("android.bluetooth.le.BluetoothLeScanner.startScan is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midBluetoothLeScannerStartScan3_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+			midBluetoothLeScannerStartScan, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

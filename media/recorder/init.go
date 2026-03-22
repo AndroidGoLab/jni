@@ -24,14 +24,12 @@ var (
 	initErr  error
 
 	clsMediaRecorder                                     *jni.GlobalRef
-	midMediaRecorderGetActiveMicrophones                 jni.MethodID
 	midMediaRecorderGetActiveRecordingConfiguration      jni.MethodID
 	midMediaRecorderGetLogSessionId                      jni.MethodID
 	midMediaRecorderGetMaxAmplitude                      jni.MethodID
 	midMediaRecorderGetMetrics                           jni.MethodID
 	midMediaRecorderGetPreferredDevice                   jni.MethodID
 	midMediaRecorderGetRoutedDevice                      jni.MethodID
-	midMediaRecorderGetRoutedDevices                     jni.MethodID
 	midMediaRecorderGetSurface                           jni.MethodID
 	midMediaRecorderIsPrivacySensitive                   jni.MethodID
 	midMediaRecorderPause                                jni.MethodID
@@ -80,6 +78,24 @@ var (
 	midMediaRecorderStop                                 jni.MethodID
 	midMediaRecorderUnregisterAudioRecordingCallback     jni.MethodID
 	midMediaRecorderGetAudioSourceMax                    jni.MethodID
+
+	clsMediaRecorderAudioEncoder *jni.GlobalRef
+
+	clsMediaRecorderAudioSource *jni.GlobalRef
+
+	clsMediaRecorderMetricsConstants *jni.GlobalRef
+
+	clsMediaRecorderOnErrorListener        *jni.GlobalRef
+	midMediaRecorderOnErrorListenerOnError jni.MethodID
+
+	clsMediaRecorderOnInfoListener       *jni.GlobalRef
+	midMediaRecorderOnInfoListenerOnInfo jni.MethodID
+
+	clsMediaRecorderOutputFormat *jni.GlobalRef
+
+	clsMediaRecorderVideoEncoder *jni.GlobalRef
+
+	clsMediaRecorderVideoSource *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -105,13 +121,6 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("find class android.media.MediaRecorder: %w", err)
 	}
 	clsMediaRecorder = env.NewGlobalRef(&c.Object)
-
-	midMediaRecorderGetActiveMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getActiveMicrophones", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
 
 	midMediaRecorderGetActiveRecordingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getActiveRecordingConfiguration", "()Landroid/media/AudioRecordingConfiguration;")
 	if err != nil {
@@ -149,13 +158,6 @@ func doInit(env *jni.Env) error {
 	}
 
 	midMediaRecorderGetRoutedDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getRoutedDevice", "()Landroid/media/AudioDeviceInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMediaRecorderGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getRoutedDevices", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -497,6 +499,68 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
+
+	c, err = env.FindClass("android/media/MediaRecorder$AudioEncoder")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$AudioEncoder: %w", err)
+	}
+	clsMediaRecorderAudioEncoder = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/media/MediaRecorder$AudioSource")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$AudioSource: %w", err)
+	}
+	clsMediaRecorderAudioSource = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/media/MediaRecorder$MetricsConstants")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$MetricsConstants: %w", err)
+	}
+	clsMediaRecorderMetricsConstants = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/media/MediaRecorder$OnErrorListener")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$OnErrorListener: %w", err)
+	}
+	clsMediaRecorderOnErrorListener = env.NewGlobalRef(&c.Object)
+
+	midMediaRecorderOnErrorListenerOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderOnErrorListener)), "onError", "(Landroid/media/MediaRecorder;II)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/media/MediaRecorder$OnInfoListener")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$OnInfoListener: %w", err)
+	}
+	clsMediaRecorderOnInfoListener = env.NewGlobalRef(&c.Object)
+
+	midMediaRecorderOnInfoListenerOnInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderOnInfoListener)), "onInfo", "(Landroid/media/MediaRecorder;II)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/media/MediaRecorder$OutputFormat")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$OutputFormat: %w", err)
+	}
+	clsMediaRecorderOutputFormat = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/media/MediaRecorder$VideoEncoder")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$VideoEncoder: %w", err)
+	}
+	clsMediaRecorderVideoEncoder = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/media/MediaRecorder$VideoSource")
+	if err != nil {
+		return fmt.Errorf("find class android.media.MediaRecorder$VideoSource: %w", err)
+	}
+	clsMediaRecorderVideoSource = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

@@ -129,6 +129,17 @@ classes:
               go_name: arg2
           returns: android.widget.Toast
           error: true
+    - java_class: android.widget.Toast$Callback
+      go_type: Callback
+      methods:
+        - java_method: onToastHidden
+          go_name: OnToastHidden
+          returns: void
+          error: true
+        - java_method: onToastShown
+          go_name: OnToastShown
+          returns: void
+          error: true
 constants:
     - go_name: LengthLong
       value: "1"

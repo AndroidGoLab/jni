@@ -2971,29 +2971,6 @@ func (m *Activity) OnGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
-// OnGetDirectActions calls android.app.Activity.onGetDirectActions.
-func (m *Activity) OnGetDirectActions(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midActivityOnGetDirectActions == nil {
-			callErr = fmt.Errorf("android.app.Activity.onGetDirectActions is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midActivityOnGetDirectActions, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // OnKeyDown calls android.app.Activity.onKeyDown.
 func (m *Activity) OnKeyDown(arg0 int32, arg1 *jni.Object) (bool, error) {
 	var result bool
@@ -3466,39 +3443,6 @@ func (m *Activity) OnPanelClosed(arg0 int32, arg1 *jni.Object) error {
 	return callErr
 }
 
-// OnPerformDirectAction calls android.app.Activity.onPerformDirectAction.
-func (m *Activity) OnPerformDirectAction(
-	arg0 string,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midActivityOnPerformDirectAction == nil {
-			callErr = fmt.Errorf("android.app.Activity.onPerformDirectAction is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midActivityOnPerformDirectAction, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // OnPictureInPictureModeChanged1 calls android.app.Activity.onPictureInPictureModeChanged.
 func (m *Activity) OnPictureInPictureModeChanged1(arg0 bool) error {
 
@@ -3749,33 +3693,6 @@ func (m *Activity) OnProvideAssistData(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midActivityOnProvideAssistData, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// OnProvideKeyboardShortcuts calls android.app.Activity.onProvideKeyboardShortcuts.
-func (m *Activity) OnProvideKeyboardShortcuts(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 int32,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midActivityOnProvideKeyboardShortcuts == nil {
-			callErr = fmt.Errorf("android.app.Activity.onProvideKeyboardShortcuts is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midActivityOnProvideKeyboardShortcuts, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})
@@ -4679,29 +4596,6 @@ func (m *Activity) RequestDragAndDropPermissions(arg0 *jni.Object) (*jni.Object,
 		return callErr
 	})
 	return result, callErr
-}
-
-// RequestFullscreenMode calls android.app.Activity.requestFullscreenMode.
-func (m *Activity) RequestFullscreenMode(arg0 int32, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midActivityRequestFullscreenMode == nil {
-			callErr = fmt.Errorf("android.app.Activity.requestFullscreenMode is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midActivityRequestFullscreenMode, jni.IntValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // RequestOpenInBrowserEducation calls android.app.Activity.requestOpenInBrowserEducation.

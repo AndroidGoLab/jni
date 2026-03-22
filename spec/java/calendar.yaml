@@ -25,6 +25,148 @@ classes:
               go_name: arg5
           returns: boolean
           error: true
+    - java_class: android.provider.CalendarContract$Attendees
+      go_type: ContractAttendees
+      static_methods:
+        - java_method: query
+          go_name: Query
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: java.lang.String[]
+              go_name: arg2
+          returns: android.database.Cursor
+          error: true
+    - java_class: android.provider.CalendarContract$AttendeesColumns
+      go_type: ContractAttendeesColumns
+    - java_class: android.provider.CalendarContract$CalendarAlerts
+      go_type: ContractCalendarAlerts
+    - java_class: android.provider.CalendarContract$CalendarAlertsColumns
+      go_type: ContractCalendarAlertsColumns
+    - java_class: android.provider.CalendarContract$CalendarCache
+      go_type: ContractCalendarCache
+    - java_class: android.provider.CalendarContract$CalendarCacheColumns
+      go_type: ContractCalendarCacheColumns
+    - java_class: android.provider.CalendarContract$CalendarColumns
+      go_type: ContractCalendarColumns
+    - java_class: android.provider.CalendarContract$CalendarEntity
+      go_type: ContractCalendarEntity
+      static_methods:
+        - java_method: newEntityIterator
+          go_name: NewEntityIterator
+          params:
+            - java_type: android.database.Cursor
+              go_name: arg0
+          returns: android.content.EntityIterator
+          error: true
+    - java_class: android.provider.CalendarContract$CalendarSyncColumns
+      go_type: ContractCalendarSyncColumns
+    - java_class: android.provider.CalendarContract$Calendars
+      go_type: ContractCalendars
+    - java_class: android.provider.CalendarContract$Colors
+      go_type: ContractColors
+    - java_class: android.provider.CalendarContract$ColorsColumns
+      go_type: ContractColorsColumns
+    - java_class: android.provider.CalendarContract$EventDays
+      go_type: ContractEventDays
+      static_methods:
+        - java_method: query
+          go_name: Query
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+          returns: android.database.Cursor
+          error: true
+    - java_class: android.provider.CalendarContract$EventDaysColumns
+      go_type: ContractEventDaysColumns
+    - java_class: android.provider.CalendarContract$Events
+      go_type: ContractEvents
+    - java_class: android.provider.CalendarContract$EventsColumns
+      go_type: ContractEventsColumns
+    - java_class: android.provider.CalendarContract$EventsEntity
+      go_type: ContractEventsEntity
+      static_methods:
+        - java_method: newEntityIterator
+          go_name: NewEntityIterator2
+          params:
+            - java_type: android.database.Cursor
+              go_name: arg0
+            - java_type: android.content.ContentProviderClient
+              go_name: arg1
+          returns: android.content.EntityIterator
+          error: true
+        - java_method: newEntityIterator
+          go_name: NewEntityIterator2_1
+          params:
+            - java_type: android.database.Cursor
+              go_name: arg0
+            - java_type: android.content.ContentResolver
+              go_name: arg1
+          returns: android.content.EntityIterator
+          error: true
+    - java_class: android.provider.CalendarContract$ExtendedProperties
+      go_type: ContractExtendedProperties
+    - java_class: android.provider.CalendarContract$ExtendedPropertiesColumns
+      go_type: ContractExtendedPropertiesColumns
+    - java_class: android.provider.CalendarContract$Instances
+      go_type: ContractInstances
+      static_methods:
+        - java_method: query
+          go_name: Query4
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: android.database.Cursor
+          error: true
+        - java_method: query
+          go_name: Query5_1
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+          returns: android.database.Cursor
+          error: true
+    - java_class: android.provider.CalendarContract$Reminders
+      go_type: ContractReminders
+      static_methods:
+        - java_method: query
+          go_name: Query
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: java.lang.String[]
+              go_name: arg2
+          returns: android.database.Cursor
+          error: true
+    - java_class: android.provider.CalendarContract$RemindersColumns
+      go_type: ContractRemindersColumns
+    - java_class: android.provider.CalendarContract$SyncColumns
+      go_type: ContractSyncColumns
+    - java_class: android.provider.CalendarContract$SyncState
+      go_type: ContractSyncState
 constants:
     - go_name: AccountTypeLocal
       value: '"LOCAL"'
@@ -61,4 +203,517 @@ constants:
       go_type: string
     - go_name: ExtraEventId
       value: '"id"'
+      go_type: string
+    - go_name: AttendeeEmail
+      value: '"attendeeEmail"'
+      go_type: string
+    - go_name: AttendeeIdentity
+      value: '"attendeeIdentity"'
+      go_type: string
+    - go_name: AttendeeIdNamespace
+      value: '"attendeeIdNamespace"'
+      go_type: string
+    - go_name: AttendeeName
+      value: '"attendeeName"'
+      go_type: string
+    - go_name: AttendeeRelationship
+      value: '"attendeeRelationship"'
+      go_type: string
+    - go_name: AttendeeStatus
+      value: '"attendeeStatus"'
+      go_type: string
+    - go_name: AttendeeStatusAccepted
+      value: "1"
+      go_type: int
+    - go_name: AttendeeStatusDeclined
+      value: "2"
+      go_type: int
+    - go_name: AttendeeStatusInvited
+      value: "3"
+      go_type: int
+    - go_name: AttendeeStatusNone
+      value: "0"
+      go_type: int
+    - go_name: AttendeeStatusTentative
+      value: "4"
+      go_type: int
+    - go_name: AttendeeType
+      value: '"attendeeType"'
+      go_type: string
+    - go_name: EventId
+      value: '"event_id"'
+      go_type: string
+    - go_name: RelationshipAttendee
+      value: "1"
+      go_type: int
+    - go_name: RelationshipNone
+      value: "0"
+      go_type: int
+    - go_name: RelationshipOrganizer
+      value: "2"
+      go_type: int
+    - go_name: RelationshipPerformer
+      value: "3"
+      go_type: int
+    - go_name: RelationshipSpeaker
+      value: "4"
+      go_type: int
+    - go_name: TypeNone
+      value: "0"
+      go_type: int
+    - go_name: TypeOptional
+      value: "2"
+      go_type: int
+    - go_name: TypeRequired
+      value: "1"
+      go_type: int
+    - go_name: TypeResource
+      value: "3"
+      go_type: int
+    - go_name: ContentUriByInstance
+      value: "0"
+      go_type: int
+    - go_name: AlarmTime
+      value: '"alarmTime"'
+      go_type: string
+    - go_name: Begin
+      value: '"begin"'
+      go_type: string
+    - go_name: CreationTime
+      value: '"creationTime"'
+      go_type: string
+    - go_name: DefaultSortOrder
+      value: '"begin ASC,title ASC"'
+      go_type: string
+    - go_name: End
+      value: '"end"'
+      go_type: string
+    - go_name: Minutes
+      value: '"minutes"'
+      go_type: string
+    - go_name: NotifyTime
+      value: '"notifyTime"'
+      go_type: string
+    - go_name: ReceivedTime
+      value: '"receivedTime"'
+      go_type: string
+    - go_name: State
+      value: '"state"'
+      go_type: string
+    - go_name: StateDismissed
+      value: "2"
+      go_type: int
+    - go_name: StateFired
+      value: "1"
+      go_type: int
+    - go_name: StateScheduled
+      value: "0"
+      go_type: int
+    - go_name: KeyTimezoneInstances
+      value: '"timezoneInstances"'
+      go_type: string
+    - go_name: KeyTimezoneInstancesPrevious
+      value: '"timezoneInstancesPrevious"'
+      go_type: string
+    - go_name: KeyTimezoneType
+      value: '"timezoneType"'
+      go_type: string
+    - go_name: TimezoneTypeAuto
+      value: '"auto"'
+      go_type: string
+    - go_name: TimezoneTypeHome
+      value: '"home"'
+      go_type: string
+    - go_name: Uri
+      value: "0"
+      go_type: int
+    - go_name: Key
+      value: '"key"'
+      go_type: string
+    - go_name: Value
+      value: '"value"'
+      go_type: string
+    - go_name: AllowedAttendeeTypes
+      value: '"allowedAttendeeTypes"'
+      go_type: string
+    - go_name: AllowedAvailability
+      value: '"allowedAvailability"'
+      go_type: string
+    - go_name: AllowedReminders
+      value: '"allowedReminders"'
+      go_type: string
+    - go_name: CalendarAccessLevel
+      value: '"calendar_access_level"'
+      go_type: string
+    - go_name: CalendarColor
+      value: '"calendar_color"'
+      go_type: string
+    - go_name: CalendarColorKey
+      value: '"calendar_color_index"'
+      go_type: string
+    - go_name: CalendarDisplayName
+      value: '"calendar_displayName"'
+      go_type: string
+    - go_name: CalendarTimeZone
+      value: '"calendar_timezone"'
+      go_type: string
+    - go_name: CalAccessContributor
+      value: "500"
+      go_type: int
+    - go_name: CalAccessEditor
+      value: "600"
+      go_type: int
+    - go_name: CalAccessFreebusy
+      value: "100"
+      go_type: int
+    - go_name: CalAccessNone
+      value: "0"
+      go_type: int
+    - go_name: CalAccessOverride
+      value: "400"
+      go_type: int
+    - go_name: CalAccessOwner
+      value: "700"
+      go_type: int
+    - go_name: CalAccessRead
+      value: "200"
+      go_type: int
+    - go_name: CalAccessRespond
+      value: "300"
+      go_type: int
+    - go_name: CalAccessRoot
+      value: "800"
+      go_type: int
+    - go_name: CanModifyTimeZone
+      value: '"canModifyTimeZone"'
+      go_type: string
+    - go_name: CanOrganizerRespond
+      value: '"canOrganizerRespond"'
+      go_type: string
+    - go_name: IsPrimary
+      value: '"isPrimary"'
+      go_type: string
+    - go_name: MaxReminders
+      value: '"maxReminders"'
+      go_type: string
+    - go_name: OwnerAccount
+      value: '"ownerAccount"'
+      go_type: string
+    - go_name: SyncEvents
+      value: '"sync_events"'
+      go_type: string
+    - go_name: Visible
+      value: '"visible"'
+      go_type: string
+    - go_name: CalSync1
+      value: '"cal_sync1"'
+      go_type: string
+    - go_name: CalSync10
+      value: '"cal_sync10"'
+      go_type: string
+    - go_name: CalSync2
+      value: '"cal_sync2"'
+      go_type: string
+    - go_name: CalSync3
+      value: '"cal_sync3"'
+      go_type: string
+    - go_name: CalSync4
+      value: '"cal_sync4"'
+      go_type: string
+    - go_name: CalSync5
+      value: '"cal_sync5"'
+      go_type: string
+    - go_name: CalSync6
+      value: '"cal_sync6"'
+      go_type: string
+    - go_name: CalSync7
+      value: '"cal_sync7"'
+      go_type: string
+    - go_name: CalSync8
+      value: '"cal_sync8"'
+      go_type: string
+    - go_name: CalSync9
+      value: '"cal_sync9"'
+      go_type: string
+    - go_name: CalendarLocation
+      value: '"calendar_location"'
+      go_type: string
+    - go_name: EnterpriseContentUri
+      value: "0"
+      go_type: int
+    - go_name: Name
+      value: '"name"'
+      go_type: string
+    - go_name: Color
+      value: '"color"'
+      go_type: string
+    - go_name: ColorKey
+      value: '"color_index"'
+      go_type: string
+    - go_name: ColorType
+      value: '"color_type"'
+      go_type: string
+    - go_name: TypeCalendar
+      value: "0"
+      go_type: int
+    - go_name: TypeEvent
+      value: "1"
+      go_type: int
+    - go_name: Endday
+      value: '"endDay"'
+      go_type: string
+    - go_name: Startday
+      value: '"startDay"'
+      go_type: string
+    - go_name: ContentExceptionUri
+      value: "0"
+      go_type: int
+    - go_name: AccessConfidential
+      value: "1"
+      go_type: int
+    - go_name: AccessDefault
+      value: "0"
+      go_type: int
+    - go_name: AccessLevel
+      value: '"accessLevel"'
+      go_type: string
+    - go_name: AccessPrivate
+      value: "2"
+      go_type: int
+    - go_name: AccessPublic
+      value: "3"
+      go_type: int
+    - go_name: AllDay
+      value: '"allDay"'
+      go_type: string
+    - go_name: Availability
+      value: '"availability"'
+      go_type: string
+    - go_name: AvailabilityBusy
+      value: "0"
+      go_type: int
+    - go_name: AvailabilityFree
+      value: "1"
+      go_type: int
+    - go_name: AvailabilityTentative
+      value: "2"
+      go_type: int
+    - go_name: CalendarId
+      value: '"calendar_id"'
+      go_type: string
+    - go_name: CanInviteOthers
+      value: '"canInviteOthers"'
+      go_type: string
+    - go_name: CustomAppPackage
+      value: '"customAppPackage"'
+      go_type: string
+    - go_name: CustomAppUri
+      value: '"customAppUri"'
+      go_type: string
+    - go_name: Description
+      value: '"description"'
+      go_type: string
+    - go_name: DisplayColor
+      value: '"displayColor"'
+      go_type: string
+    - go_name: Dtend
+      value: '"dtend"'
+      go_type: string
+    - go_name: Dtstart
+      value: '"dtstart"'
+      go_type: string
+    - go_name: Duration
+      value: '"duration"'
+      go_type: string
+    - go_name: EventColor
+      value: '"eventColor"'
+      go_type: string
+    - go_name: EventColorKey
+      value: '"eventColor_index"'
+      go_type: string
+    - go_name: EventEndTimezone
+      value: '"eventEndTimezone"'
+      go_type: string
+    - go_name: EventLocation
+      value: '"eventLocation"'
+      go_type: string
+    - go_name: EventTimezone
+      value: '"eventTimezone"'
+      go_type: string
+    - go_name: Exdate
+      value: '"exdate"'
+      go_type: string
+    - go_name: Exrule
+      value: '"exrule"'
+      go_type: string
+    - go_name: GuestsCanInviteOthers
+      value: '"guestsCanInviteOthers"'
+      go_type: string
+    - go_name: GuestsCanModify
+      value: '"guestsCanModify"'
+      go_type: string
+    - go_name: GuestsCanSeeGuests
+      value: '"guestsCanSeeGuests"'
+      go_type: string
+    - go_name: HasAlarm
+      value: '"hasAlarm"'
+      go_type: string
+    - go_name: HasAttendeeData
+      value: '"hasAttendeeData"'
+      go_type: string
+    - go_name: HasExtendedProperties
+      value: '"hasExtendedProperties"'
+      go_type: string
+    - go_name: IsOrganizer
+      value: '"isOrganizer"'
+      go_type: string
+    - go_name: LastDate
+      value: '"lastDate"'
+      go_type: string
+    - go_name: LastSynced
+      value: '"lastSynced"'
+      go_type: string
+    - go_name: Organizer
+      value: '"organizer"'
+      go_type: string
+    - go_name: OriginalAllDay
+      value: '"originalAllDay"'
+      go_type: string
+    - go_name: OriginalId
+      value: '"original_id"'
+      go_type: string
+    - go_name: OriginalInstanceTime
+      value: '"originalInstanceTime"'
+      go_type: string
+    - go_name: OriginalSyncId
+      value: '"original_sync_id"'
+      go_type: string
+    - go_name: Rdate
+      value: '"rdate"'
+      go_type: string
+    - go_name: Rrule
+      value: '"rrule"'
+      go_type: string
+    - go_name: SelfAttendeeStatus
+      value: '"selfAttendeeStatus"'
+      go_type: string
+    - go_name: Status
+      value: '"eventStatus"'
+      go_type: string
+    - go_name: StatusCanceled
+      value: "2"
+      go_type: int
+    - go_name: StatusConfirmed
+      value: "1"
+      go_type: int
+    - go_name: StatusTentative
+      value: "0"
+      go_type: int
+    - go_name: SyncData1
+      value: '"sync_data1"'
+      go_type: string
+    - go_name: SyncData10
+      value: '"sync_data10"'
+      go_type: string
+    - go_name: SyncData2
+      value: '"sync_data2"'
+      go_type: string
+    - go_name: SyncData3
+      value: '"sync_data3"'
+      go_type: string
+    - go_name: SyncData4
+      value: '"sync_data4"'
+      go_type: string
+    - go_name: SyncData5
+      value: '"sync_data5"'
+      go_type: string
+    - go_name: SyncData6
+      value: '"sync_data6"'
+      go_type: string
+    - go_name: SyncData7
+      value: '"sync_data7"'
+      go_type: string
+    - go_name: SyncData8
+      value: '"sync_data8"'
+      go_type: string
+    - go_name: SyncData9
+      value: '"sync_data9"'
+      go_type: string
+    - go_name: Title
+      value: '"title"'
+      go_type: string
+    - go_name: Uid2445
+      value: '"uid2445"'
+      go_type: string
+    - go_name: ContentByDayUri
+      value: "0"
+      go_type: int
+    - go_name: ContentSearchByDayUri
+      value: "0"
+      go_type: int
+    - go_name: ContentSearchUri
+      value: "0"
+      go_type: int
+    - go_name: EndDay
+      value: '"endDay"'
+      go_type: string
+    - go_name: EndMinute
+      value: '"endMinute"'
+      go_type: string
+    - go_name: EnterpriseContentByDayUri
+      value: "0"
+      go_type: int
+    - go_name: EnterpriseContentSearchByDayUri
+      value: "0"
+      go_type: int
+    - go_name: EnterpriseContentSearchUri
+      value: "0"
+      go_type: int
+    - go_name: StartDay
+      value: '"startDay"'
+      go_type: string
+    - go_name: StartMinute
+      value: '"startMinute"'
+      go_type: string
+    - go_name: Method
+      value: '"method"'
+      go_type: string
+    - go_name: MethodAlarm
+      value: "4"
+      go_type: int
+    - go_name: MethodAlert
+      value: "1"
+      go_type: int
+    - go_name: MethodDefault
+      value: "0"
+      go_type: int
+    - go_name: MethodEmail
+      value: "2"
+      go_type: int
+    - go_name: MethodSms
+      value: "3"
+      go_type: int
+    - go_name: MinutesDefault
+      value: "-1"
+      go_type: int
+    - go_name: AccountName
+      value: '"account_name"'
+      go_type: string
+    - go_name: AccountType
+      value: '"account_type"'
+      go_type: string
+    - go_name: CanPartiallyUpdate
+      value: '"canPartiallyUpdate"'
+      go_type: string
+    - go_name: Deleted
+      value: '"deleted"'
+      go_type: string
+    - go_name: Dirty
+      value: '"dirty"'
+      go_type: string
+    - go_name: Mutators
+      value: '"mutators"'
+      go_type: string
+    - go_name: SyncId
+      value: '"_sync_id"'
       go_type: string

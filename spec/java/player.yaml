@@ -102,21 +102,6 @@ classes:
           go_name: GetDuration
           returns: int
           error: true
-        - java_method: getKeyRequest
-          go_name: GetKeyRequest
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: java.util.Map<java.lang.String, java.lang.String>
-              go_name: arg4
-          returns: android.media.MediaDrm$KeyRequest
-          error: true
         - java_method: getMetrics
           go_name: GetMetrics
           returns: android.os.PersistableBundle
@@ -132,10 +117,6 @@ classes:
         - java_method: getRoutedDevice
           go_name: GetRoutedDevice
           returns: android.media.AudioDeviceInfo
-          error: true
-        - java_method: getRoutedDevices
-          go_name: GetRoutedDevices
-          returns: java.util.List<android.media.AudioDeviceInfo>
           error: true
         - java_method: getSelectedTrack
           go_name: GetSelectedTrack
@@ -287,52 +268,28 @@ classes:
           returns: void
           error: true
         - java_method: setDataSource
-          go_name: SetDataSource3_1
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-            - java_type: java.util.Map<java.lang.String, java.lang.String>
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: setDataSource
-          go_name: SetDataSource4_2
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-            - java_type: java.util.Map<java.lang.String, java.lang.String>
-              go_name: arg2
-            - java_type: java.util.List<java.net.HttpCookie>
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: setDataSource
-          go_name: SetDataSource1_3
+          go_name: SetDataSource1_1
           params:
             - java_type: android.content.res.AssetFileDescriptor
               go_name: arg0
           returns: void
           error: true
         - java_method: setDataSource
-          go_name: SetDataSource1_4
+          go_name: SetDataSource1_2
           params:
             - java_type: android.media.MediaDataSource
               go_name: arg0
           returns: void
           error: true
         - java_method: setDataSource
-          go_name: SetDataSource1_5
+          go_name: SetDataSource1_3
           params:
             - java_type: java.io.FileDescriptor
               go_name: arg0
           returns: void
           error: true
         - java_method: setDataSource
-          go_name: SetDataSource3_6
+          go_name: SetDataSource3_4
           params:
             - java_type: java.io.FileDescriptor
               go_name: arg0
@@ -343,7 +300,7 @@ classes:
           returns: void
           error: true
         - java_method: setDataSource
-          go_name: SetDataSource1_7
+          go_name: SetDataSource1_5
           params:
             - java_type: String
               go_name: arg0
@@ -603,6 +560,219 @@ classes:
               go_name: arg3
           returns: android.media.MediaPlayer
           error: true
+    - java_class: android.media.MediaPlayer$DrmInfo
+      go_type: MediaPlayerDrmInfo
+      methods:
+        - java_method: getSupportedSchemes
+          go_name: GetSupportedSchemes
+          returns: java.util.UUID[]
+          error: true
+    - java_class: android.media.MediaPlayer$MetricsConstants
+      go_type: MediaPlayerMetricsConstants
+    - java_class: android.media.MediaPlayer$NoDrmSchemeException
+      go_type: MediaPlayerNoDrmSchemeException
+    - java_class: android.media.MediaPlayer$OnBufferingUpdateListener
+      go_type: MediaPlayerOnBufferingUpdateListener
+      methods:
+        - java_method: onBufferingUpdate
+          go_name: OnBufferingUpdate
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnCompletionListener
+      go_type: MediaPlayerOnCompletionListener
+      methods:
+        - java_method: onCompletion
+          go_name: OnCompletion
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnDrmConfigHelper
+      go_type: MediaPlayerOnDrmConfigHelper
+      methods:
+        - java_method: onDrmConfig
+          go_name: OnDrmConfig
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnDrmInfoListener
+      go_type: MediaPlayerOnDrmInfoListener
+      methods:
+        - java_method: onDrmInfo
+          go_name: OnDrmInfo
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: android.media.MediaPlayer$DrmInfo
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnDrmPreparedListener
+      go_type: MediaPlayerOnDrmPreparedListener
+      methods:
+        - java_method: onDrmPrepared
+          go_name: OnDrmPrepared
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnErrorListener
+      go_type: MediaPlayerOnErrorListener
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: boolean
+          error: true
+    - java_class: android.media.MediaPlayer$OnInfoListener
+      go_type: MediaPlayerOnInfoListener
+      methods:
+        - java_method: onInfo
+          go_name: OnInfo
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: boolean
+          error: true
+    - java_class: android.media.MediaPlayer$OnMediaTimeDiscontinuityListener
+      go_type: MediaPlayerOnMediaTimeDiscontinuityListener
+      methods:
+        - java_method: onMediaTimeDiscontinuity
+          go_name: OnMediaTimeDiscontinuity
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: android.media.MediaTimestamp
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnPreparedListener
+      go_type: MediaPlayerOnPreparedListener
+      methods:
+        - java_method: onPrepared
+          go_name: OnPrepared
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnSeekCompleteListener
+      go_type: MediaPlayerOnSeekCompleteListener
+      methods:
+        - java_method: onSeekComplete
+          go_name: OnSeekComplete
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnSubtitleDataListener
+      go_type: MediaPlayerOnSubtitleDataListener
+      methods:
+        - java_method: onSubtitleData
+          go_name: OnSubtitleData
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: android.media.SubtitleData
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnTimedMetaDataAvailableListener
+      go_type: MediaPlayerOnTimedMetaDataAvailableListener
+      methods:
+        - java_method: onTimedMetaDataAvailable
+          go_name: OnTimedMetaDataAvailable
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: android.media.TimedMetaData
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnTimedTextListener
+      go_type: MediaPlayerOnTimedTextListener
+      methods:
+        - java_method: onTimedText
+          go_name: OnTimedText
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: android.media.TimedText
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$OnVideoSizeChangedListener
+      go_type: MediaPlayerOnVideoSizeChangedListener
+      methods:
+        - java_method: onVideoSizeChanged
+          go_name: OnVideoSizeChanged
+          params:
+            - java_type: android.media.MediaPlayer
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.media.MediaPlayer$ProvisioningNetworkErrorException
+      go_type: MediaPlayerProvisioningNetworkErrorException
+    - java_class: android.media.MediaPlayer$ProvisioningServerErrorException
+      go_type: MediaPlayerProvisioningServerErrorException
+    - java_class: android.media.MediaPlayer$TrackInfo
+      go_type: MediaPlayerTrackInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getFormat
+          go_name: GetFormat
+          returns: android.media.MediaFormat
+          error: true
+        - java_method: getLanguage
+          go_name: GetLanguage
+          returns: String
+          error: true
+        - java_method: getTrackType
+          go_name: GetTrackType
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
 constants:
     - go_name: MediaErrorIo
       value: "-1004"
@@ -696,4 +866,58 @@ constants:
       go_type: int
     - go_name: VideoScalingModeScaleToFitWithCropping
       value: "2"
+      go_type: int
+    - go_name: CodecAudio
+      value: '"android.media.mediaplayer.audio.codec"'
+      go_type: string
+    - go_name: CodecVideo
+      value: '"android.media.mediaplayer.video.codec"'
+      go_type: string
+    - go_name: Duration
+      value: '"android.media.mediaplayer.durationMs"'
+      go_type: string
+    - go_name: Errors
+      value: '"android.media.mediaplayer.err"'
+      go_type: string
+    - go_name: ErrorCode
+      value: '"android.media.mediaplayer.errcode"'
+      go_type: string
+    - go_name: Frames
+      value: '"android.media.mediaplayer.frames"'
+      go_type: string
+    - go_name: FramesDropped
+      value: '"android.media.mediaplayer.dropped"'
+      go_type: string
+    - go_name: Height
+      value: '"android.media.mediaplayer.height"'
+      go_type: string
+    - go_name: MimeTypeAudio
+      value: '"android.media.mediaplayer.audio.mime"'
+      go_type: string
+    - go_name: MimeTypeVideo
+      value: '"android.media.mediaplayer.video.mime"'
+      go_type: string
+    - go_name: Playing
+      value: '"android.media.mediaplayer.playingMs"'
+      go_type: string
+    - go_name: Width
+      value: '"android.media.mediaplayer.width"'
+      go_type: string
+    - go_name: MediaTrackTypeAudio
+      value: "2"
+      go_type: int
+    - go_name: MediaTrackTypeMetadata
+      value: "5"
+      go_type: int
+    - go_name: MediaTrackTypeSubtitle
+      value: "4"
+      go_type: int
+    - go_name: MediaTrackTypeTimedtext
+      value: "3"
+      go_type: int
+    - go_name: MediaTrackTypeUnknown
+      value: "0"
+      go_type: int
+    - go_name: MediaTrackTypeVideo
+      value: "1"
       go_type: int

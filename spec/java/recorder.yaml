@@ -8,10 +8,6 @@ classes:
     - java_class: android.media.MediaRecorder
       go_type: MediaRecorder
       methods:
-        - java_method: getActiveMicrophones
-          go_name: GetActiveMicrophones
-          returns: java.util.List<android.media.MicrophoneInfo>
-          error: true
         - java_method: getActiveRecordingConfiguration
           go_name: GetActiveRecordingConfiguration
           returns: android.media.AudioRecordingConfiguration
@@ -35,10 +31,6 @@ classes:
         - java_method: getRoutedDevice
           go_name: GetRoutedDevice
           returns: android.media.AudioDeviceInfo
-          error: true
-        - java_method: getRoutedDevices
-          go_name: GetRoutedDevices
-          returns: java.util.List<android.media.AudioDeviceInfo>
           error: true
         - java_method: getSurface
           go_name: GetSurface
@@ -355,6 +347,46 @@ classes:
           go_name: GetAudioSourceMax
           returns: int
           error: true
+    - java_class: android.media.MediaRecorder$AudioEncoder
+      go_type: MediaRecorderAudioEncoder
+    - java_class: android.media.MediaRecorder$AudioSource
+      go_type: MediaRecorderAudioSource
+    - java_class: android.media.MediaRecorder$MetricsConstants
+      go_type: MediaRecorderMetricsConstants
+    - java_class: android.media.MediaRecorder$OnErrorListener
+      go_type: MediaRecorderOnErrorListener
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: android.media.MediaRecorder
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.media.MediaRecorder$OnInfoListener
+      go_type: MediaRecorderOnInfoListener
+      methods:
+        - java_method: onInfo
+          go_name: OnInfo
+          params:
+            - java_type: android.media.MediaRecorder
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.media.MediaRecorder$OutputFormat
+      go_type: MediaRecorderOutputFormat
+    - java_class: android.media.MediaRecorder$VideoEncoder
+      go_type: MediaRecorderVideoEncoder
+    - java_class: android.media.MediaRecorder$VideoSource
+      go_type: MediaRecorderVideoSource
 constants:
     - go_name: MediaErrorServerDied
       value: "100"
@@ -376,4 +408,157 @@ constants:
       go_type: int
     - go_name: MediaRecorderInfoUnknown
       value: "1"
+      go_type: int
+    - go_name: Aac
+      value: "3"
+      go_type: int
+    - go_name: AacEld
+      value: "5"
+      go_type: int
+    - go_name: AmrNb
+      value: "1"
+      go_type: int
+    - go_name: AmrWb
+      value: "2"
+      go_type: int
+    - go_name: Default
+      value: "0"
+      go_type: int
+    - go_name: HeAac
+      value: "4"
+      go_type: int
+    - go_name: Opus
+      value: "7"
+      go_type: int
+    - go_name: Vorbis
+      value: "6"
+      go_type: int
+    - go_name: Camcorder
+      value: "5"
+      go_type: int
+    - go_name: Mic
+      value: "1"
+      go_type: int
+    - go_name: RemoteSubmix
+      value: "8"
+      go_type: int
+    - go_name: Unprocessed
+      value: "9"
+      go_type: int
+    - go_name: VoiceCall
+      value: "4"
+      go_type: int
+    - go_name: VoiceCommunication
+      value: "7"
+      go_type: int
+    - go_name: VoiceDownlink
+      value: "3"
+      go_type: int
+    - go_name: VoicePerformance
+      value: "10"
+      go_type: int
+    - go_name: VoiceRecognition
+      value: "6"
+      go_type: int
+    - go_name: VoiceUplink
+      value: "2"
+      go_type: int
+    - go_name: AudioBitrate
+      value: '"android.media.mediarecorder.audio-bitrate"'
+      go_type: string
+    - go_name: AudioChannels
+      value: '"android.media.mediarecorder.audio-channels"'
+      go_type: string
+    - go_name: AudioSamplerate
+      value: '"android.media.mediarecorder.audio-samplerate"'
+      go_type: string
+    - go_name: AudioTimescale
+      value: '"android.media.mediarecorder.audio-timescale"'
+      go_type: string
+    - go_name: CaptureFps
+      value: '"android.media.mediarecorder.capture-fps"'
+      go_type: string
+    - go_name: CaptureFpsEnable
+      value: '"android.media.mediarecorder.capture-fpsenable"'
+      go_type: string
+    - go_name: Framerate
+      value: '"android.media.mediarecorder.frame-rate"'
+      go_type: string
+    - go_name: Height
+      value: '"android.media.mediarecorder.height"'
+      go_type: string
+    - go_name: MovieTimescale
+      value: '"android.media.mediarecorder.movie-timescale"'
+      go_type: string
+    - go_name: Rotation
+      value: '"android.media.mediarecorder.rotation"'
+      go_type: string
+    - go_name: VideoBitrate
+      value: '"android.media.mediarecorder.video-bitrate"'
+      go_type: string
+    - go_name: VideoIframeInterval
+      value: '"android.media.mediarecorder.video-iframe-interval"'
+      go_type: string
+    - go_name: VideoLevel
+      value: '"android.media.mediarecorder.video-encoder-level"'
+      go_type: string
+    - go_name: VideoProfile
+      value: '"android.media.mediarecorder.video-encoder-profile"'
+      go_type: string
+    - go_name: VideoTimescale
+      value: '"android.media.mediarecorder.video-timescale"'
+      go_type: string
+    - go_name: Width
+      value: '"android.media.mediarecorder.width"'
+      go_type: string
+    - go_name: AacAdts
+      value: "6"
+      go_type: int
+    - go_name: Mpeg2Ts
+      value: "8"
+      go_type: int
+    - go_name: Mpeg4
+      value: "2"
+      go_type: int
+    - go_name: Ogg
+      value: "11"
+      go_type: int
+    - go_name: RawAmr
+      value: "3"
+      go_type: int
+    - go_name: ThreeGpp
+      value: "1"
+      go_type: int
+    - go_name: Webm
+      value: "9"
+      go_type: int
+    - go_name: Av1
+      value: "8"
+      go_type: int
+    - go_name: DolbyVision
+      value: "7"
+      go_type: int
+    - go_name: H263
+      value: "1"
+      go_type: int
+    - go_name: H264
+      value: "2"
+      go_type: int
+    - go_name: Hevc
+      value: "5"
+      go_type: int
+    - go_name: Mpeg4Sp
+      value: "3"
+      go_type: int
+    - go_name: Vp8
+      value: "4"
+      go_type: int
+    - go_name: Vp9
+      value: "6"
+      go_type: int
+    - go_name: Camera
+      value: "1"
+      go_type: int
+    - go_name: Surface
+      value: "2"
       go_type: int

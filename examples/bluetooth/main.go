@@ -55,8 +55,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -64,7 +64,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -139,14 +139,12 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintf(output, "Adapter address: %s\n", addr)
 
 	// --- Bonded devices (Device data class) ---
-	// GetBondedDevices returns a raw Java Set object. Each element is a
-	// BluetoothDevice whose fields can be extracted via extractDevice into
-	// the Device struct (Name, Address, Type, BondState, UUIDs).
-	bonded, err := adapter.GetBondedDevices()
-	if err != nil {
-		return fmt.Errorf("GetBondedDevices: %w", err)
-	}
-	fmt.Fprintf(output, "Bonded devices (raw Set): %v\n", bonded)
+	// Filtered: GetBondedDevices returns generic type (Set<BluetoothDevice>)
+	// bonded, err := adapter.GetBondedDevices()
+	// if err != nil {
+	// 	return fmt.Errorf("GetBondedDevices: %w", err)
+	// }
+	// fmt.Fprintf(output, "Bonded devices (raw Set): %v\n", bonded)
 
 	// --- Classic discovery (package-internal) ---
 	// startDiscovery / cancelDiscovery control the classic Bluetooth

@@ -63,6 +63,158 @@ classes:
               go_name: arg0
           returns: android.content.Intent
           error: true
+    - java_class: android.net.VpnService$Builder
+      go_type: ServiceBuilder
+      methods:
+        - java_method: addAddress
+          go_name: AddAddress2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addAddress
+          go_name: AddAddress2_1
+          params:
+            - java_type: java.net.InetAddress
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addAllowedApplication
+          go_name: AddAllowedApplication
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addDisallowedApplication
+          go_name: AddDisallowedApplication
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addDnsServer
+          go_name: AddDnsServer1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addDnsServer
+          go_name: AddDnsServer1_1
+          params:
+            - java_type: java.net.InetAddress
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addRoute
+          go_name: AddRoute1
+          params:
+            - java_type: android.net.IpPrefix
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addRoute
+          go_name: AddRoute2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addRoute
+          go_name: AddRoute2_2
+          params:
+            - java_type: java.net.InetAddress
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: addSearchDomain
+          go_name: AddSearchDomain
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: allowBypass
+          go_name: AllowBypass
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: allowFamily
+          go_name: AllowFamily
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: establish
+          go_name: Establish
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: excludeRoute
+          go_name: ExcludeRoute
+          params:
+            - java_type: android.net.IpPrefix
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: setBlocking
+          go_name: SetBlocking
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: setConfigureIntent
+          go_name: SetConfigureIntent
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: setHttpProxy
+          go_name: SetHttpProxy
+          params:
+            - java_type: android.net.ProxyInfo
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: setMetered
+          go_name: SetMetered
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: setMtu
+          go_name: SetMtu
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: setSession
+          go_name: SetSession
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
+        - java_method: setUnderlyingNetworks
+          go_name: SetUnderlyingNetworks
+          params:
+            - java_type: android.net.Network[]
+              go_name: arg0
+          returns: android.net.VpnService$Builder
+          error: true
 constants:
     - go_name: ServiceInterface
       value: '"android.net.VpnService"'

@@ -23,29 +23,6 @@ type View struct {
 	Obj *jni.GlobalRef
 }
 
-// AddChildrenForAccessibility calls android.view.View.addChildrenForAccessibility.
-func (m *View) AddChildrenForAccessibility(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewAddChildrenForAccessibility == nil {
-			callErr = fmt.Errorf("android.view.View.addChildrenForAccessibility is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewAddChildrenForAccessibility, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // AddExtraDataToAccessibilityNodeInfo calls android.view.View.addExtraDataToAccessibilityNodeInfo.
 func (m *View) AddExtraDataToAccessibilityNodeInfo(
 	arg0 *jni.Object,
@@ -73,79 +50,6 @@ func (m *View) AddExtraDataToAccessibilityNodeInfo(
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midViewAddExtraDataToAccessibilityNodeInfo, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// AddFocusables2 calls android.view.View.addFocusables.
-func (m *View) AddFocusables2(arg0 *jni.Object, arg1 int32) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewAddFocusables2 == nil {
-			callErr = fmt.Errorf("android.view.View.addFocusables is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewAddFocusables2, jni.ObjectValue(arg0), jni.IntValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// AddFocusables3_1 calls android.view.View.addFocusables.
-func (m *View) AddFocusables3_1(
-	arg0 *jni.Object,
-	arg1 int32,
-	arg2 int32,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewAddFocusables3_1 == nil {
-			callErr = fmt.Errorf("android.view.View.addFocusables is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewAddFocusables3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// AddKeyboardNavigationClusters calls android.view.View.addKeyboardNavigationClusters.
-func (m *View) AddKeyboardNavigationClusters(arg0 *jni.Object, arg1 int32) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewAddKeyboardNavigationClusters == nil {
-			callErr = fmt.Errorf("android.view.View.addKeyboardNavigationClusters is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewAddKeyboardNavigationClusters, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})
@@ -221,29 +125,6 @@ func (m *View) AddOnUnhandledKeyEventListener(arg0 *jni.Object) error {
 	return callErr
 }
 
-// AddTouchables calls android.view.View.addTouchables.
-func (m *View) AddTouchables(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewAddTouchables == nil {
-			callErr = fmt.Errorf("android.view.View.addTouchables is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewAddTouchables, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // Animate calls android.view.View.animate.
 func (m *View) Animate() (*jni.Object, error) {
 	var result *jni.Object
@@ -304,8 +185,8 @@ func (m *View) AnnounceForAccessibility(arg0 string) error {
 	return callErr
 }
 
-// Autofill1 calls android.view.View.autofill.
-func (m *View) Autofill1(arg0 *jni.Object) error {
+// Autofill calls android.view.View.autofill.
+func (m *View) Autofill(arg0 *jni.Object) error {
 
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -313,37 +194,14 @@ func (m *View) Autofill1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midViewAutofill1 == nil {
+		if midViewAutofill == nil {
 			callErr = fmt.Errorf("android.view.View.autofill is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midViewAutofill1, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// Autofill1_1 calls android.view.View.autofill.
-func (m *View) Autofill1_1(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewAutofill1_1 == nil {
-			callErr = fmt.Errorf("android.view.View.autofill is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewAutofill1_1, jni.ObjectValue(arg0),
+			midViewAutofill, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1005,34 +863,6 @@ func (m *View) DispatchConfigurationChanged(arg0 *jni.Object) error {
 	return callErr
 }
 
-// DispatchCreateViewTranslationRequest calls android.view.View.dispatchCreateViewTranslationRequest.
-func (m *View) DispatchCreateViewTranslationRequest(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewDispatchCreateViewTranslationRequest == nil {
-			callErr = fmt.Errorf("android.view.View.dispatchCreateViewTranslationRequest is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewDispatchCreateViewTranslationRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // DispatchDisplayHint calls android.view.View.dispatchDisplayHint.
 func (m *View) DispatchDisplayHint(arg0 int32) error {
 
@@ -1502,33 +1332,6 @@ func (m *View) DispatchProvideStructure(arg0 *jni.Object) error {
 	return callErr
 }
 
-// DispatchScrollCaptureSearch calls android.view.View.dispatchScrollCaptureSearch.
-func (m *View) DispatchScrollCaptureSearch(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewDispatchScrollCaptureSearch == nil {
-			callErr = fmt.Errorf("android.view.View.dispatchScrollCaptureSearch is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewDispatchScrollCaptureSearch, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // DispatchStartTemporaryDetach calls android.view.View.dispatchStartTemporaryDetach.
 func (m *View) DispatchStartTemporaryDetach() error {
 
@@ -1731,39 +1534,6 @@ func (m *View) DispatchWindowInsetsAnimationPrepare(arg0 *jni.Object) error {
 	return callErr
 }
 
-// DispatchWindowInsetsAnimationProgress calls android.view.View.dispatchWindowInsetsAnimationProgress.
-func (m *View) DispatchWindowInsetsAnimationProgress(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewDispatchWindowInsetsAnimationProgress == nil {
-			callErr = fmt.Errorf("android.view.View.dispatchWindowInsetsAnimationProgress is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midViewDispatchWindowInsetsAnimationProgress, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // DispatchWindowInsetsAnimationStart calls android.view.View.dispatchWindowInsetsAnimationStart.
 func (m *View) DispatchWindowInsetsAnimationStart(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -1951,39 +1721,6 @@ func (m *View) FindOnBackInvokedDispatcher() (*jni.Object, error) {
 		return callErr
 	})
 	return result, callErr
-}
-
-// FindViewsWithText calls android.view.View.findViewsWithText.
-func (m *View) FindViewsWithText(
-	arg0 *jni.Object,
-	arg1 string,
-	arg2 int32,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewFindViewsWithText == nil {
-			callErr = fmt.Errorf("android.view.View.findViewsWithText is not available on this device")
-			return callErr
-		}
-
-		jArg1, err := env.NewStringUTF(arg1)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg1.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewFindViewsWithText, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
 }
 
 // FocusSearch calls android.view.View.focusSearch.
@@ -3453,39 +3190,6 @@ func (m *View) GetFocusable() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetFocusables calls android.view.View.getFocusables.
-func (m *View) GetFocusables(arg0 int32) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGetFocusables == nil {
-			callErr = fmt.Errorf("android.view.View.getFocusables is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midViewGetFocusables, jni.IntValue(arg0),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -5346,38 +5050,6 @@ func (m *View) GetPointerIcon() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetPreferKeepClearRects calls android.view.View.getPreferKeepClearRects.
-func (m *View) GetPreferKeepClearRects() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGetPreferKeepClearRects == nil {
-			callErr = fmt.Errorf("android.view.View.getPreferKeepClearRects is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midViewGetPreferKeepClearRects,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetReceiveContentMimeTypes calls android.view.View.getReceiveContentMimeTypes.
 func (m *View) GetReceiveContentMimeTypes() (*jni.Object, error) {
 	var result *jni.Object
@@ -6086,38 +5758,6 @@ func (m *View) GetSupplementalDescription() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetSystemGestureExclusionRects calls android.view.View.getSystemGestureExclusionRects.
-func (m *View) GetSystemGestureExclusionRects() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGetSystemGestureExclusionRects == nil {
-			callErr = fmt.Errorf("android.view.View.getSystemGestureExclusionRects is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midViewGetSystemGestureExclusionRects,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetSystemUiVisibility calls android.view.View.getSystemUiVisibility.
 func (m *View) GetSystemUiVisibility() (int32, error) {
 	var result int32
@@ -6331,38 +5971,6 @@ func (m *View) GetTouchDelegate() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midViewGetTouchDelegate,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetTouchables calls android.view.View.getTouchables.
-func (m *View) GetTouchables() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewGetTouchables == nil {
-			callErr = fmt.Errorf("android.view.View.getTouchables is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midViewGetTouchables,
 		)
 		if callErr != nil {
 			return callErr
@@ -9251,56 +8859,6 @@ func (m *View) OnCreateInputConnection(arg0 *jni.Object) (*jni.Object, error) {
 	return result, callErr
 }
 
-// OnCreateViewTranslationRequest calls android.view.View.onCreateViewTranslationRequest.
-func (m *View) OnCreateViewTranslationRequest(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewOnCreateViewTranslationRequest == nil {
-			callErr = fmt.Errorf("android.view.View.onCreateViewTranslationRequest is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewOnCreateViewTranslationRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// OnCreateVirtualViewTranslationRequests calls android.view.View.onCreateVirtualViewTranslationRequests.
-func (m *View) OnCreateVirtualViewTranslationRequests(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewOnCreateVirtualViewTranslationRequests == nil {
-			callErr = fmt.Errorf("android.view.View.onCreateVirtualViewTranslationRequests is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewOnCreateVirtualViewTranslationRequests, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // OnDragEvent calls android.view.View.onDragEvent.
 func (m *View) OnDragEvent(arg0 *jni.Object) (bool, error) {
 	var result bool
@@ -9980,33 +9538,6 @@ func (m *View) OnScreenStateChanged(arg0 int32) error {
 	return callErr
 }
 
-// OnScrollCaptureSearch calls android.view.View.onScrollCaptureSearch.
-func (m *View) OnScrollCaptureSearch(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewOnScrollCaptureSearch == nil {
-			callErr = fmt.Errorf("android.view.View.onScrollCaptureSearch is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewOnScrollCaptureSearch, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // OnStartTemporaryDetach calls android.view.View.onStartTemporaryDetach.
 func (m *View) OnStartTemporaryDetach() error {
 
@@ -10102,29 +9633,6 @@ func (m *View) OnViewTranslationResponse(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midViewOnViewTranslationResponse, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// OnVirtualViewTranslationResponses calls android.view.View.onVirtualViewTranslationResponses.
-func (m *View) OnVirtualViewTranslationResponses(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewOnVirtualViewTranslationResponses == nil {
-			callErr = fmt.Errorf("android.view.View.onVirtualViewTranslationResponses is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewOnVirtualViewTranslationResponses, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -11257,29 +10765,6 @@ func (m *View) RestoreDefaultFocus() (bool, error) {
 	return result, callErr
 }
 
-// RestoreHierarchyState calls android.view.View.restoreHierarchyState.
-func (m *View) RestoreHierarchyState(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewRestoreHierarchyState == nil {
-			callErr = fmt.Errorf("android.view.View.restoreHierarchyState is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewRestoreHierarchyState, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // SaveAttributeDataForStyleable calls android.view.View.saveAttributeDataForStyleable.
 func (m *View) SaveAttributeDataForStyleable(
 	arg0 *jni.Object,
@@ -11304,29 +10789,6 @@ func (m *View) SaveAttributeDataForStyleable(
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midViewSaveAttributeDataForStyleable, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SaveHierarchyState calls android.view.View.saveHierarchyState.
-func (m *View) SaveHierarchyState(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewSaveHierarchyState == nil {
-			callErr = fmt.Errorf("android.view.View.saveHierarchyState is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewSaveHierarchyState, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -14134,29 +13596,6 @@ func (m *View) SetPaddingRelative(
 	return callErr
 }
 
-// SetPendingCredentialRequest calls android.view.View.setPendingCredentialRequest.
-func (m *View) SetPendingCredentialRequest(arg0 *jni.Object, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewSetPendingCredentialRequest == nil {
-			callErr = fmt.Errorf("android.view.View.setPendingCredentialRequest is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewSetPendingCredentialRequest, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // SetPivotX calls android.view.View.setPivotX.
 func (m *View) SetPivotX(arg0 float32) error {
 
@@ -14247,29 +13686,6 @@ func (m *View) SetPreferKeepClear(arg0 bool) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midViewSetPreferKeepClear, jni.BooleanValue(jArg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetPreferKeepClearRects calls android.view.View.setPreferKeepClearRects.
-func (m *View) SetPreferKeepClearRects(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewSetPreferKeepClearRects == nil {
-			callErr = fmt.Errorf("android.view.View.setPreferKeepClearRects is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewSetPreferKeepClearRects, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -15006,29 +14422,6 @@ func (m *View) SetSupplementalDescription(arg0 string) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midViewSetSupplementalDescription, jni.ObjectValue(&jArg0.Object),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// SetSystemGestureExclusionRects calls android.view.View.setSystemGestureExclusionRects.
-func (m *View) SetSystemGestureExclusionRects(arg0 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midViewSetSystemGestureExclusionRects == nil {
-			callErr = fmt.Errorf("android.view.View.setSystemGestureExclusionRects is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midViewSetSystemGestureExclusionRects, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

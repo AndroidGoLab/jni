@@ -35,8 +35,26 @@ const (
 	SeekPreviousSync                         = consts.SeekPreviousSync
 	VideoScalingModeScaleToFit               = consts.VideoScalingModeScaleToFit
 	VideoScalingModeScaleToFitWithCropping   = consts.VideoScalingModeScaleToFitWithCropping
+	MediaTrackTypeAudio                      = consts.MediaTrackTypeAudio
+	MediaTrackTypeMetadata                   = consts.MediaTrackTypeMetadata
+	MediaTrackTypeSubtitle                   = consts.MediaTrackTypeSubtitle
+	MediaTrackTypeTimedtext                  = consts.MediaTrackTypeTimedtext
+	MediaTrackTypeUnknown                    = consts.MediaTrackTypeUnknown
+	MediaTrackTypeVideo                      = consts.MediaTrackTypeVideo
 )
 
 const (
 	MediaMimetypeTextSubrip = consts.MediaMimetypeTextSubrip
+	CodecAudio              = consts.CodecAudio
+	CodecVideo              = consts.CodecVideo
+	Duration                = consts.Duration
+	Errors                  = consts.Errors
+	ErrorCode               = consts.ErrorCode
+	Frames                  = consts.Frames
+	FramesDropped           = consts.FramesDropped
+	Height                  = consts.Height
+	MimeTypeAudio           = consts.MimeTypeAudio
+	MimeTypeVideo           = consts.MimeTypeVideo
+	Playing                 = consts.Playing
+	Width                   = consts.Width
 )

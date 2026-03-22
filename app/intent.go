@@ -470,38 +470,6 @@ func (m *Intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
 	return result, callErr
 }
 
-// GetCategories calls android.content.Intent.getCategories.
-func (m *Intent) GetCategories() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentGetCategories == nil {
-			callErr = fmt.Errorf("android.content.Intent.getCategories is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentGetCategories,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetCharArrayExtra calls android.content.Intent.getCharArrayExtra.
 func (m *Intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
@@ -593,44 +561,6 @@ func (m *Intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentGetCharSequenceArrayExtra, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetCharSequenceArrayListExtra calls android.content.Intent.getCharSequenceArrayListExtra.
-func (m *Intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentGetCharSequenceArrayListExtra == nil {
-			callErr = fmt.Errorf("android.content.Intent.getCharSequenceArrayListExtra is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentGetCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1099,44 +1029,6 @@ func (m *Intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 	return result, callErr
 }
 
-// GetIntegerArrayListExtra calls android.content.Intent.getIntegerArrayListExtra.
-func (m *Intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentGetIntegerArrayListExtra == nil {
-			callErr = fmt.Errorf("android.content.Intent.getIntegerArrayListExtra is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentGetIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetLongArrayExtra calls android.content.Intent.getLongArrayExtra.
 func (m *Intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
@@ -1507,44 +1399,6 @@ func (m *Intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetStringArrayListExtra calls android.content.Intent.getStringArrayListExtra.
-func (m *Intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentGetStringArrayListExtra == nil {
-			callErr = fmt.Errorf("android.content.Intent.getStringArrayListExtra is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentGetStringArrayListExtra, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetStringExtra calls android.content.Intent.getStringExtra.
 func (m *Intent) GetStringExtra(arg0 string) (string, error) {
 	var result string
@@ -1720,44 +1574,6 @@ func (m *Intent) IsMismatchingFilter() (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// PutCharSequenceArrayListExtra calls android.content.Intent.putCharSequenceArrayListExtra.
-func (m *Intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentPutCharSequenceArrayListExtra == nil {
-			callErr = fmt.Errorf("android.content.Intent.putCharSequenceArrayListExtra is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentPutCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
 		return callErr
 	})
 	return result, callErr
@@ -2758,120 +2574,6 @@ func (m *Intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
 	return result, callErr
 }
 
-// PutIntegerArrayListExtra calls android.content.Intent.putIntegerArrayListExtra.
-func (m *Intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentPutIntegerArrayListExtra == nil {
-			callErr = fmt.Errorf("android.content.Intent.putIntegerArrayListExtra is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentPutIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// PutParcelableArrayListExtra calls android.content.Intent.putParcelableArrayListExtra.
-func (m *Intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentPutParcelableArrayListExtra == nil {
-			callErr = fmt.Errorf("android.content.Intent.putParcelableArrayListExtra is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentPutParcelableArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// PutStringArrayListExtra calls android.content.Intent.putStringArrayListExtra.
-func (m *Intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentPutStringArrayListExtra == nil {
-			callErr = fmt.Errorf("android.content.Intent.putStringArrayListExtra is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentPutStringArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // ReadFromParcel calls android.content.Intent.readFromParcel.
 func (m *Intent) ReadFromParcel(arg0 *jni.Object) error {
 
@@ -3234,39 +2936,6 @@ func (m *Intent) SetAction(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midIntentSetAction, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// SetClass calls android.content.Intent.setClass.
-func (m *Intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midIntentSetClass == nil {
-			callErr = fmt.Errorf("android.content.Intent.setClass is not available on this device")
-			return callErr
-		}
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midIntentSetClass, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr

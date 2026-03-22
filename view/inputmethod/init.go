@@ -23,18 +23,405 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsInsertModeGesture                      *jni.GlobalRef
+	midInsertModeGestureDescribeContents      jni.MethodID
+	midInsertModeGestureEquals                jni.MethodID
+	midInsertModeGestureGetCancellationSignal jni.MethodID
+	midInsertModeGestureGetInsertionPoint     jni.MethodID
+	midInsertModeGestureHashCode              jni.MethodID
+	midInsertModeGestureWriteToParcel         jni.MethodID
+
+	clsInsertModeGestureBuilder                      *jni.GlobalRef
+	midInsertModeGestureBuilderBuild                 jni.MethodID
+	midInsertModeGestureBuilderSetCancellationSignal jni.MethodID
+	midInsertModeGestureBuilderSetFallbackText       jni.MethodID
+	midInsertModeGestureBuilderSetInsertionPoint     jni.MethodID
+
+	clsInlineSuggestionsRequest                                 *jni.GlobalRef
+	midInlineSuggestionsRequestDescribeContents                 jni.MethodID
+	midInlineSuggestionsRequestEquals                           jni.MethodID
+	midInlineSuggestionsRequestGetExtras                        jni.MethodID
+	midInlineSuggestionsRequestGetHostPackageName               jni.MethodID
+	midInlineSuggestionsRequestGetInlineTooltipPresentationSpec jni.MethodID
+	midInlineSuggestionsRequestGetMaxSuggestionCount            jni.MethodID
+	midInlineSuggestionsRequestGetSupportedLocales              jni.MethodID
+	midInlineSuggestionsRequestHashCode                         jni.MethodID
+	midInlineSuggestionsRequestToString                         jni.MethodID
+	midInlineSuggestionsRequestWriteToParcel                    jni.MethodID
+
+	clsInlineSuggestionsRequestBuilder                                 *jni.GlobalRef
+	midInlineSuggestionsRequestBuilderAddInlinePresentationSpecs       jni.MethodID
+	midInlineSuggestionsRequestBuilderBuild                            jni.MethodID
+	midInlineSuggestionsRequestBuilderSetExtras                        jni.MethodID
+	midInlineSuggestionsRequestBuilderSetInlineTooltipPresentationSpec jni.MethodID
+	midInlineSuggestionsRequestBuilderSetMaxSuggestionCount            jni.MethodID
+	midInlineSuggestionsRequestBuilderSetSupportedLocales              jni.MethodID
+
+	clsInsertGesture                  *jni.GlobalRef
+	midInsertGestureDescribeContents  jni.MethodID
+	midInsertGestureEquals            jni.MethodID
+	midInsertGestureGetInsertionPoint jni.MethodID
+	midInsertGestureGetTextToInsert   jni.MethodID
+	midInsertGestureHashCode          jni.MethodID
+	midInsertGestureWriteToParcel     jni.MethodID
+
+	clsInsertGestureBuilder                  *jni.GlobalRef
+	midInsertGestureBuilderBuild             jni.MethodID
+	midInsertGestureBuilderSetFallbackText   jni.MethodID
+	midInsertGestureBuilderSetInsertionPoint jni.MethodID
+	midInsertGestureBuilderSetTextToInsert   jni.MethodID
+
+	clsInputConnection                                  *jni.GlobalRef
+	midInputConnectionBeginBatchEdit                    jni.MethodID
+	midInputConnectionClearMetaKeyStates                jni.MethodID
+	midInputConnectionCloseConnection                   jni.MethodID
+	midInputConnectionCommitCompletion                  jni.MethodID
+	midInputConnectionCommitContent                     jni.MethodID
+	midInputConnectionCommitCorrection                  jni.MethodID
+	midInputConnectionCommitText                        jni.MethodID
+	midInputConnectionDeleteSurroundingText             jni.MethodID
+	midInputConnectionDeleteSurroundingTextInCodePoints jni.MethodID
+	midInputConnectionEndBatchEdit                      jni.MethodID
+	midInputConnectionFinishComposingText               jni.MethodID
+	midInputConnectionGetCursorCapsMode                 jni.MethodID
+	midInputConnectionGetExtractedText                  jni.MethodID
+	midInputConnectionGetHandler                        jni.MethodID
+	midInputConnectionGetSelectedText                   jni.MethodID
+	midInputConnectionGetTextAfterCursor                jni.MethodID
+	midInputConnectionGetTextBeforeCursor               jni.MethodID
+	midInputConnectionPerformContextMenuAction          jni.MethodID
+	midInputConnectionPerformEditorAction               jni.MethodID
+	midInputConnectionPerformPrivateCommand             jni.MethodID
+	midInputConnectionReportFullscreenMode              jni.MethodID
+	midInputConnectionRequestCursorUpdates              jni.MethodID
+	midInputConnectionSendKeyEvent                      jni.MethodID
+	midInputConnectionSetComposingRegion                jni.MethodID
+	midInputConnectionSetComposingText                  jni.MethodID
+	midInputConnectionSetSelection                      jni.MethodID
+
+	clsInputMethodInfo                                              *jni.GlobalRef
+	midInputMethodInfoCreateImeLanguageSettingsActivityIntent       jni.MethodID
+	midInputMethodInfoCreateStylusHandwritingSettingsActivityIntent jni.MethodID
+	midInputMethodInfoDescribeContents                              jni.MethodID
+	midInputMethodInfoDump                                          jni.MethodID
+	midInputMethodInfoEquals                                        jni.MethodID
+	midInputMethodInfoGetComponent                                  jni.MethodID
+	midInputMethodInfoGetConfigChanges                              jni.MethodID
+	midInputMethodInfoGetId                                         jni.MethodID
+	midInputMethodInfoGetIsDefaultResourceId                        jni.MethodID
+	midInputMethodInfoGetPackageName                                jni.MethodID
+	midInputMethodInfoGetServiceInfo                                jni.MethodID
+	midInputMethodInfoGetServiceName                                jni.MethodID
+	midInputMethodInfoGetSettingsActivity                           jni.MethodID
+	midInputMethodInfoGetSubtypeAt                                  jni.MethodID
+	midInputMethodInfoGetSubtypeCount                               jni.MethodID
+	midInputMethodInfoHashCode                                      jni.MethodID
+	midInputMethodInfoLoadIcon                                      jni.MethodID
+	midInputMethodInfoLoadLabel                                     jni.MethodID
+	midInputMethodInfoShouldShowInInputMethodPicker                 jni.MethodID
+	midInputMethodInfoSupportsConnectionlessStylusHandwriting       jni.MethodID
+	midInputMethodInfoSupportsStylusHandwriting                     jni.MethodID
+	midInputMethodInfoSuppressesSpellChecker                        jni.MethodID
+	midInputMethodInfoToString                                      jni.MethodID
+	midInputMethodInfoWriteToParcel                                 jni.MethodID
+
+	clsEditorBoundsInfo                     *jni.GlobalRef
+	midEditorBoundsInfoDescribeContents     jni.MethodID
+	midEditorBoundsInfoEquals               jni.MethodID
+	midEditorBoundsInfoGetEditorBounds      jni.MethodID
+	midEditorBoundsInfoGetHandwritingBounds jni.MethodID
+	midEditorBoundsInfoHashCode             jni.MethodID
+	midEditorBoundsInfoToString             jni.MethodID
+	midEditorBoundsInfoWriteToParcel        jni.MethodID
+
+	clsEditorBoundsInfoBuilder                     *jni.GlobalRef
+	midEditorBoundsInfoBuilderBuild                jni.MethodID
+	midEditorBoundsInfoBuilderSetEditorBounds      jni.MethodID
+	midEditorBoundsInfoBuilderSetHandwritingBounds jni.MethodID
+
+	clsExtractedText                 *jni.GlobalRef
+	midExtractedTextDescribeContents jni.MethodID
+	midExtractedTextWriteToParcel    jni.MethodID
+
+	clsExtractedTextRequest                 *jni.GlobalRef
+	midExtractedTextRequestDescribeContents jni.MethodID
+	midExtractedTextRequestWriteToParcel    jni.MethodID
+
+	clsInlineSuggestionInfo                          *jni.GlobalRef
+	midInlineSuggestionInfoDescribeContents          jni.MethodID
+	midInlineSuggestionInfoEquals                    jni.MethodID
+	midInlineSuggestionInfoGetAutofillHints          jni.MethodID
+	midInlineSuggestionInfoGetInlinePresentationSpec jni.MethodID
+	midInlineSuggestionInfoGetSource                 jni.MethodID
+	midInlineSuggestionInfoGetType                   jni.MethodID
+	midInlineSuggestionInfoHashCode                  jni.MethodID
+	midInlineSuggestionInfoIsPinned                  jni.MethodID
+	midInlineSuggestionInfoToString                  jni.MethodID
+	midInlineSuggestionInfoWriteToParcel             jni.MethodID
+
+	clsInputBinding                   *jni.GlobalRef
+	midInputBindingDescribeContents   jni.MethodID
+	midInputBindingGetConnection      jni.MethodID
+	midInputBindingGetConnectionToken jni.MethodID
+	midInputBindingGetPid             jni.MethodID
+	midInputBindingGetUid             jni.MethodID
+	midInputBindingToString           jni.MethodID
+	midInputBindingWriteToParcel      jni.MethodID
+
+	clsPreviewableHandwritingGesture *jni.GlobalRef
+
+	clsSelectRangeGesture                      *jni.GlobalRef
+	midSelectRangeGestureDescribeContents      jni.MethodID
+	midSelectRangeGestureEquals                jni.MethodID
+	midSelectRangeGestureGetGranularity        jni.MethodID
+	midSelectRangeGestureGetSelectionEndArea   jni.MethodID
+	midSelectRangeGestureGetSelectionStartArea jni.MethodID
+	midSelectRangeGestureHashCode              jni.MethodID
+	midSelectRangeGestureWriteToParcel         jni.MethodID
+
+	clsSelectRangeGestureBuilder                      *jni.GlobalRef
+	midSelectRangeGestureBuilderBuild                 jni.MethodID
+	midSelectRangeGestureBuilderSetFallbackText       jni.MethodID
+	midSelectRangeGestureBuilderSetGranularity        jni.MethodID
+	midSelectRangeGestureBuilderSetSelectionEndArea   jni.MethodID
+	midSelectRangeGestureBuilderSetSelectionStartArea jni.MethodID
+
+	clsInputContentInfo                  *jni.GlobalRef
+	midInputContentInfoDescribeContents  jni.MethodID
+	midInputContentInfoGetContentUri     jni.MethodID
+	midInputContentInfoGetDescription    jni.MethodID
+	midInputContentInfoGetLinkUri        jni.MethodID
+	midInputContentInfoReleasePermission jni.MethodID
+	midInputContentInfoRequestPermission jni.MethodID
+	midInputContentInfoWriteToParcel     jni.MethodID
+
+	clsSurroundingText                  *jni.GlobalRef
+	midSurroundingTextDescribeContents  jni.MethodID
+	midSurroundingTextGetOffset         jni.MethodID
+	midSurroundingTextGetSelectionEnd   jni.MethodID
+	midSurroundingTextGetSelectionStart jni.MethodID
+	midSurroundingTextGetText           jni.MethodID
+	midSurroundingTextWriteToParcel     jni.MethodID
+
+	clsInlineSuggestionsResponse                 *jni.GlobalRef
+	midInlineSuggestionsResponseDescribeContents jni.MethodID
+	midInlineSuggestionsResponseEquals           jni.MethodID
+	midInlineSuggestionsResponseHashCode         jni.MethodID
+	midInlineSuggestionsResponseToString         jni.MethodID
+	midInlineSuggestionsResponseWriteToParcel    jni.MethodID
+
+	clsRemoveSpaceGesture                 *jni.GlobalRef
+	midRemoveSpaceGestureDescribeContents jni.MethodID
+	midRemoveSpaceGestureEquals           jni.MethodID
+	midRemoveSpaceGestureGetEndPoint      jni.MethodID
+	midRemoveSpaceGestureGetStartPoint    jni.MethodID
+	midRemoveSpaceGestureHashCode         jni.MethodID
+	midRemoveSpaceGestureWriteToParcel    jni.MethodID
+
+	clsRemoveSpaceGestureBuilder                *jni.GlobalRef
+	midRemoveSpaceGestureBuilderBuild           jni.MethodID
+	midRemoveSpaceGestureBuilderSetFallbackText jni.MethodID
+	midRemoveSpaceGestureBuilderSetPoints       jni.MethodID
+
+	clsJoinOrSplitGesture                    *jni.GlobalRef
+	midJoinOrSplitGestureDescribeContents    jni.MethodID
+	midJoinOrSplitGestureEquals              jni.MethodID
+	midJoinOrSplitGestureGetJoinOrSplitPoint jni.MethodID
+	midJoinOrSplitGestureHashCode            jni.MethodID
+	midJoinOrSplitGestureWriteToParcel       jni.MethodID
+
+	clsJoinOrSplitGestureBuilder                    *jni.GlobalRef
+	midJoinOrSplitGestureBuilderBuild               jni.MethodID
+	midJoinOrSplitGestureBuilderSetFallbackText     jni.MethodID
+	midJoinOrSplitGestureBuilderSetJoinOrSplitPoint jni.MethodID
+
+	clsTextBoundsInfoResult                  *jni.GlobalRef
+	midTextBoundsInfoResultGetResultCode     jni.MethodID
+	midTextBoundsInfoResultGetTextBoundsInfo jni.MethodID
+
+	clsInputMethod                         *jni.GlobalRef
+	midInputMethodAttachToken              jni.MethodID
+	midInputMethodBindInput                jni.MethodID
+	midInputMethodChangeInputMethodSubtype jni.MethodID
+	midInputMethodCreateSession            jni.MethodID
+	midInputMethodHideSoftInput            jni.MethodID
+	midInputMethodRestartInput             jni.MethodID
+	midInputMethodRevokeSession            jni.MethodID
+	midInputMethodSetSessionEnabled        jni.MethodID
+	midInputMethodShowSoftInput            jni.MethodID
+	midInputMethodStartInput               jni.MethodID
+	midInputMethodUnbindInput              jni.MethodID
+
+	clsInputMethodSessionCallback               *jni.GlobalRef
+	midInputMethodSessionCallbackSessionCreated jni.MethodID
+
+	clsCorrectionInfo                 *jni.GlobalRef
+	midCorrectionInfoDescribeContents jni.MethodID
+	midCorrectionInfoGetNewText       jni.MethodID
+	midCorrectionInfoGetOffset        jni.MethodID
+	midCorrectionInfoGetOldText       jni.MethodID
+	midCorrectionInfoToString         jni.MethodID
+	midCorrectionInfoWriteToParcel    jni.MethodID
+
+	clsInputMethodSession                           *jni.GlobalRef
+	midInputMethodSessionAppPrivateCommand          jni.MethodID
+	midInputMethodSessionDispatchGenericMotionEvent jni.MethodID
+	midInputMethodSessionDispatchKeyEvent           jni.MethodID
+	midInputMethodSessionDispatchTrackballEvent     jni.MethodID
+	midInputMethodSessionDisplayCompletions         jni.MethodID
+	midInputMethodSessionFinishInput                jni.MethodID
+	midInputMethodSessionToggleSoftInput            jni.MethodID
+	midInputMethodSessionUpdateCursor               jni.MethodID
+	midInputMethodSessionUpdateCursorAnchorInfo     jni.MethodID
+	midInputMethodSessionUpdateExtractedText        jni.MethodID
+	midInputMethodSessionUpdateSelection            jni.MethodID
+	midInputMethodSessionViewClicked                jni.MethodID
+
+	clsInputMethodSessionEventCallback              *jni.GlobalRef
+	midInputMethodSessionEventCallbackFinishedEvent jni.MethodID
+
+	clsHandwritingGesture                *jni.GlobalRef
+	midHandwritingGestureGetFallbackText jni.MethodID
+
+	clsInlineSuggestion                 *jni.GlobalRef
+	midInlineSuggestionDescribeContents jni.MethodID
+	midInlineSuggestionEquals           jni.MethodID
+	midInlineSuggestionGetInfo          jni.MethodID
+	midInlineSuggestionHashCode         jni.MethodID
+	midInlineSuggestionToString         jni.MethodID
+	midInlineSuggestionWriteToParcel    jni.MethodID
+
+	clsDeleteRangeGesture                     *jni.GlobalRef
+	midDeleteRangeGestureDescribeContents     jni.MethodID
+	midDeleteRangeGestureEquals               jni.MethodID
+	midDeleteRangeGestureGetDeletionEndArea   jni.MethodID
+	midDeleteRangeGestureGetDeletionStartArea jni.MethodID
+	midDeleteRangeGestureGetGranularity       jni.MethodID
+	midDeleteRangeGestureHashCode             jni.MethodID
+	midDeleteRangeGestureWriteToParcel        jni.MethodID
+
+	clsDeleteRangeGestureBuilder                     *jni.GlobalRef
+	midDeleteRangeGestureBuilderBuild                jni.MethodID
+	midDeleteRangeGestureBuilderSetDeletionEndArea   jni.MethodID
+	midDeleteRangeGestureBuilderSetDeletionStartArea jni.MethodID
+	midDeleteRangeGestureBuilderSetFallbackText      jni.MethodID
+	midDeleteRangeGestureBuilderSetGranularity       jni.MethodID
+
+	clsTextAppearanceInfo                         *jni.GlobalRef
+	midTextAppearanceInfoDescribeContents         jni.MethodID
+	midTextAppearanceInfoEquals                   jni.MethodID
+	midTextAppearanceInfoGetFontFeatureSettings   jni.MethodID
+	midTextAppearanceInfoGetFontVariationSettings jni.MethodID
+	midTextAppearanceInfoGetHighlightTextColor    jni.MethodID
+	midTextAppearanceInfoGetHintTextColor         jni.MethodID
+	midTextAppearanceInfoGetLetterSpacing         jni.MethodID
+	midTextAppearanceInfoGetLineBreakStyle        jni.MethodID
+	midTextAppearanceInfoGetLineBreakWordStyle    jni.MethodID
+	midTextAppearanceInfoGetLinkTextColor         jni.MethodID
+	midTextAppearanceInfoGetShadowColor           jni.MethodID
+	midTextAppearanceInfoGetShadowDx              jni.MethodID
+	midTextAppearanceInfoGetShadowDy              jni.MethodID
+	midTextAppearanceInfoGetShadowRadius          jni.MethodID
+	midTextAppearanceInfoGetSystemFontFamilyName  jni.MethodID
+	midTextAppearanceInfoGetTextColor             jni.MethodID
+	midTextAppearanceInfoGetTextFontWeight        jni.MethodID
+	midTextAppearanceInfoGetTextLocales           jni.MethodID
+	midTextAppearanceInfoGetTextScaleX            jni.MethodID
+	midTextAppearanceInfoGetTextSize              jni.MethodID
+	midTextAppearanceInfoGetTextStyle             jni.MethodID
+	midTextAppearanceInfoHashCode                 jni.MethodID
+	midTextAppearanceInfoIsAllCaps                jni.MethodID
+	midTextAppearanceInfoIsElegantTextHeight      jni.MethodID
+	midTextAppearanceInfoIsFallbackLineSpacing    jni.MethodID
+	midTextAppearanceInfoToString                 jni.MethodID
+	midTextAppearanceInfoWriteToParcel            jni.MethodID
+
+	clsTextAppearanceInfoBuilder                         *jni.GlobalRef
+	midTextAppearanceInfoBuilderBuild                    jni.MethodID
+	midTextAppearanceInfoBuilderSetAllCaps               jni.MethodID
+	midTextAppearanceInfoBuilderSetElegantTextHeight     jni.MethodID
+	midTextAppearanceInfoBuilderSetFallbackLineSpacing   jni.MethodID
+	midTextAppearanceInfoBuilderSetFontFeatureSettings   jni.MethodID
+	midTextAppearanceInfoBuilderSetFontVariationSettings jni.MethodID
+	midTextAppearanceInfoBuilderSetHighlightTextColor    jni.MethodID
+	midTextAppearanceInfoBuilderSetHintTextColor         jni.MethodID
+	midTextAppearanceInfoBuilderSetLetterSpacing         jni.MethodID
+	midTextAppearanceInfoBuilderSetLineBreakStyle        jni.MethodID
+	midTextAppearanceInfoBuilderSetLineBreakWordStyle    jni.MethodID
+	midTextAppearanceInfoBuilderSetLinkTextColor         jni.MethodID
+	midTextAppearanceInfoBuilderSetShadowColor           jni.MethodID
+	midTextAppearanceInfoBuilderSetShadowDx              jni.MethodID
+	midTextAppearanceInfoBuilderSetShadowDy              jni.MethodID
+	midTextAppearanceInfoBuilderSetShadowRadius          jni.MethodID
+	midTextAppearanceInfoBuilderSetSystemFontFamilyName  jni.MethodID
+	midTextAppearanceInfoBuilderSetTextColor             jni.MethodID
+	midTextAppearanceInfoBuilderSetTextFontWeight        jni.MethodID
+	midTextAppearanceInfoBuilderSetTextLocales           jni.MethodID
+	midTextAppearanceInfoBuilderSetTextScaleX            jni.MethodID
+	midTextAppearanceInfoBuilderSetTextSize              jni.MethodID
+	midTextAppearanceInfoBuilderSetTextStyle             jni.MethodID
+
+	clsEditorInfo                             *jni.GlobalRef
+	midEditorInfoDescribeContents             jni.MethodID
+	midEditorInfoDump                         jni.MethodID
+	midEditorInfoGetAutofillId                jni.MethodID
+	midEditorInfoGetInitialSelectedText       jni.MethodID
+	midEditorInfoGetInitialSurroundingText    jni.MethodID
+	midEditorInfoGetInitialTextAfterCursor    jni.MethodID
+	midEditorInfoGetInitialTextBeforeCursor   jni.MethodID
+	midEditorInfoGetInitialToolType           jni.MethodID
+	midEditorInfoIsStylusHandwritingEnabled   jni.MethodID
+	midEditorInfoIsWritingToolsEnabled        jni.MethodID
+	midEditorInfoMakeCompatible               jni.MethodID
+	midEditorInfoSetAutofillId                jni.MethodID
+	midEditorInfoSetInitialSurroundingSubText jni.MethodID
+	midEditorInfoSetInitialSurroundingText    jni.MethodID
+	midEditorInfoSetInitialToolType           jni.MethodID
+	midEditorInfoSetStylusHandwritingEnabled  jni.MethodID
+	midEditorInfoSetWritingToolsEnabled       jni.MethodID
+	midEditorInfoWriteToParcel                jni.MethodID
+
+	clsCursorAnchorInfo                             *jni.GlobalRef
+	midCursorAnchorInfoDescribeContents             jni.MethodID
+	midCursorAnchorInfoEquals                       jni.MethodID
+	midCursorAnchorInfoGetCharacterBounds           jni.MethodID
+	midCursorAnchorInfoGetCharacterBoundsFlags      jni.MethodID
+	midCursorAnchorInfoGetComposingText             jni.MethodID
+	midCursorAnchorInfoGetComposingTextStart        jni.MethodID
+	midCursorAnchorInfoGetEditorBoundsInfo          jni.MethodID
+	midCursorAnchorInfoGetInsertionMarkerBaseline   jni.MethodID
+	midCursorAnchorInfoGetInsertionMarkerBottom     jni.MethodID
+	midCursorAnchorInfoGetInsertionMarkerFlags      jni.MethodID
+	midCursorAnchorInfoGetInsertionMarkerHorizontal jni.MethodID
+	midCursorAnchorInfoGetInsertionMarkerTop        jni.MethodID
+	midCursorAnchorInfoGetMatrix                    jni.MethodID
+	midCursorAnchorInfoGetSelectionEnd              jni.MethodID
+	midCursorAnchorInfoGetSelectionStart            jni.MethodID
+	midCursorAnchorInfoGetTextAppearanceInfo        jni.MethodID
+	midCursorAnchorInfoHashCode                     jni.MethodID
+	midCursorAnchorInfoToString                     jni.MethodID
+	midCursorAnchorInfoWriteToParcel                jni.MethodID
+
+	clsCursorAnchorInfoBuilder                           *jni.GlobalRef
+	midCursorAnchorInfoBuilderAddCharacterBounds         jni.MethodID
+	midCursorAnchorInfoBuilderAddVisibleLineBounds       jni.MethodID
+	midCursorAnchorInfoBuilderBuild                      jni.MethodID
+	midCursorAnchorInfoBuilderClearVisibleLineBounds     jni.MethodID
+	midCursorAnchorInfoBuilderReset                      jni.MethodID
+	midCursorAnchorInfoBuilderSetComposingText           jni.MethodID
+	midCursorAnchorInfoBuilderSetEditorBoundsInfo        jni.MethodID
+	midCursorAnchorInfoBuilderSetInsertionMarkerLocation jni.MethodID
+	midCursorAnchorInfoBuilderSetMatrix                  jni.MethodID
+	midCursorAnchorInfoBuilderSetSelectionRange          jni.MethodID
+	midCursorAnchorInfoBuilderSetTextAppearanceInfo      jni.MethodID
+
 	clsInputMethodManager                                                     *jni.GlobalRef
 	midInputMethodManagerAcceptStylusHandwritingDelegation1                   jni.MethodID
 	midInputMethodManagerAcceptStylusHandwritingDelegation2_1                 jni.MethodID
-	midInputMethodManagerAcceptStylusHandwritingDelegation5_2                 jni.MethodID
-	midInputMethodManagerAcceptStylusHandwritingDelegation4_3                 jni.MethodID
 	midInputMethodManagerDispatchKeyEventFromInputMethod                      jni.MethodID
 	midInputMethodManagerDisplayCompletions                                   jni.MethodID
 	midInputMethodManagerGetCurrentInputMethodInfo                            jni.MethodID
 	midInputMethodManagerGetCurrentInputMethodSubtype                         jni.MethodID
-	midInputMethodManagerGetEnabledInputMethodList                            jni.MethodID
-	midInputMethodManagerGetEnabledInputMethodSubtypeList                     jni.MethodID
-	midInputMethodManagerGetInputMethodList                                   jni.MethodID
 	midInputMethodManagerGetLastInputMethodSubtype                            jni.MethodID
 	midInputMethodManagerHideSoftInputFromInputMethod                         jni.MethodID
 	midInputMethodManagerHideSoftInputFromWindow2                             jni.MethodID
@@ -78,6 +465,208 @@ var (
 	midInputMethodManagerUpdateExtractedText                                  jni.MethodID
 	midInputMethodManagerUpdateSelection                                      jni.MethodID
 	midInputMethodManagerViewClicked                                          jni.MethodID
+
+	clsBaseInputConnection                                  *jni.GlobalRef
+	midBaseInputConnectionBeginBatchEdit                    jni.MethodID
+	midBaseInputConnectionClearMetaKeyStates                jni.MethodID
+	midBaseInputConnectionCloseConnection                   jni.MethodID
+	midBaseInputConnectionCommitCompletion                  jni.MethodID
+	midBaseInputConnectionCommitContent                     jni.MethodID
+	midBaseInputConnectionCommitCorrection                  jni.MethodID
+	midBaseInputConnectionCommitText                        jni.MethodID
+	midBaseInputConnectionDeleteSurroundingText             jni.MethodID
+	midBaseInputConnectionDeleteSurroundingTextInCodePoints jni.MethodID
+	midBaseInputConnectionEndBatchEdit                      jni.MethodID
+	midBaseInputConnectionFinishComposingText               jni.MethodID
+	midBaseInputConnectionGetCursorCapsMode                 jni.MethodID
+	midBaseInputConnectionGetEditable                       jni.MethodID
+	midBaseInputConnectionGetExtractedText                  jni.MethodID
+	midBaseInputConnectionGetHandler                        jni.MethodID
+	midBaseInputConnectionGetSelectedText                   jni.MethodID
+	midBaseInputConnectionGetSurroundingText                jni.MethodID
+	midBaseInputConnectionGetTextAfterCursor                jni.MethodID
+	midBaseInputConnectionGetTextBeforeCursor               jni.MethodID
+	midBaseInputConnectionPerformContextMenuAction          jni.MethodID
+	midBaseInputConnectionPerformEditorAction               jni.MethodID
+	midBaseInputConnectionPerformPrivateCommand             jni.MethodID
+	midBaseInputConnectionReplaceText                       jni.MethodID
+	midBaseInputConnectionReportFullscreenMode              jni.MethodID
+	midBaseInputConnectionRequestCursorUpdates              jni.MethodID
+	midBaseInputConnectionSendKeyEvent                      jni.MethodID
+	midBaseInputConnectionSetComposingRegion                jni.MethodID
+	midBaseInputConnectionSetComposingText                  jni.MethodID
+	midBaseInputConnectionSetSelection                      jni.MethodID
+	midBaseInputConnectionTakeSnapshot                      jni.MethodID
+	midBaseInputConnectionGetComposingSpanEnd               jni.MethodID
+	midBaseInputConnectionGetComposingSpanStart             jni.MethodID
+	midBaseInputConnectionRemoveComposingSpans              jni.MethodID
+	midBaseInputConnectionSetComposingSpans                 jni.MethodID
+
+	clsDeleteGesture                 *jni.GlobalRef
+	midDeleteGestureDescribeContents jni.MethodID
+	midDeleteGestureEquals           jni.MethodID
+	midDeleteGestureGetDeletionArea  jni.MethodID
+	midDeleteGestureGetGranularity   jni.MethodID
+	midDeleteGestureHashCode         jni.MethodID
+	midDeleteGestureWriteToParcel    jni.MethodID
+
+	clsDeleteGestureBuilder                *jni.GlobalRef
+	midDeleteGestureBuilderBuild           jni.MethodID
+	midDeleteGestureBuilderSetDeletionArea jni.MethodID
+	midDeleteGestureBuilderSetFallbackText jni.MethodID
+	midDeleteGestureBuilderSetGranularity  jni.MethodID
+
+	clsConnectionlessHandwritingCallback         *jni.GlobalRef
+	midConnectionlessHandwritingCallbackOnError  jni.MethodID
+	midConnectionlessHandwritingCallbackOnResult jni.MethodID
+
+	clsTextBoundsInfo                         *jni.GlobalRef
+	midTextBoundsInfoDescribeContents         jni.MethodID
+	midTextBoundsInfoGetCharacterBidiLevel    jni.MethodID
+	midTextBoundsInfoGetCharacterBounds       jni.MethodID
+	midTextBoundsInfoGetCharacterFlags        jni.MethodID
+	midTextBoundsInfoGetEndIndex              jni.MethodID
+	midTextBoundsInfoGetGraphemeSegmentFinder jni.MethodID
+	midTextBoundsInfoGetLineSegmentFinder     jni.MethodID
+	midTextBoundsInfoGetMatrix                jni.MethodID
+	midTextBoundsInfoGetOffsetForPosition     jni.MethodID
+	midTextBoundsInfoGetRangeForRect          jni.MethodID
+	midTextBoundsInfoGetStartIndex            jni.MethodID
+	midTextBoundsInfoGetWordSegmentFinder     jni.MethodID
+	midTextBoundsInfoWriteToParcel            jni.MethodID
+
+	clsTextBoundsInfoBuilder                         *jni.GlobalRef
+	midTextBoundsInfoBuilderBuild                    jni.MethodID
+	midTextBoundsInfoBuilderClear                    jni.MethodID
+	midTextBoundsInfoBuilderSetCharacterBidiLevel    jni.MethodID
+	midTextBoundsInfoBuilderSetCharacterBounds       jni.MethodID
+	midTextBoundsInfoBuilderSetCharacterFlags        jni.MethodID
+	midTextBoundsInfoBuilderSetGraphemeSegmentFinder jni.MethodID
+	midTextBoundsInfoBuilderSetLineSegmentFinder     jni.MethodID
+	midTextBoundsInfoBuilderSetMatrix                jni.MethodID
+	midTextBoundsInfoBuilderSetStartAndEnd           jni.MethodID
+	midTextBoundsInfoBuilderSetWordSegmentFinder     jni.MethodID
+
+	clsInputConnectionWrapper                                  *jni.GlobalRef
+	midInputConnectionWrapperBeginBatchEdit                    jni.MethodID
+	midInputConnectionWrapperClearMetaKeyStates                jni.MethodID
+	midInputConnectionWrapperCloseConnection                   jni.MethodID
+	midInputConnectionWrapperCommitCompletion                  jni.MethodID
+	midInputConnectionWrapperCommitContent                     jni.MethodID
+	midInputConnectionWrapperCommitCorrection                  jni.MethodID
+	midInputConnectionWrapperCommitText2                       jni.MethodID
+	midInputConnectionWrapperCommitText3_1                     jni.MethodID
+	midInputConnectionWrapperDeleteSurroundingText             jni.MethodID
+	midInputConnectionWrapperDeleteSurroundingTextInCodePoints jni.MethodID
+	midInputConnectionWrapperEndBatchEdit                      jni.MethodID
+	midInputConnectionWrapperFinishComposingText               jni.MethodID
+	midInputConnectionWrapperGetCursorCapsMode                 jni.MethodID
+	midInputConnectionWrapperGetExtractedText                  jni.MethodID
+	midInputConnectionWrapperGetHandler                        jni.MethodID
+	midInputConnectionWrapperGetSelectedText                   jni.MethodID
+	midInputConnectionWrapperGetSurroundingText                jni.MethodID
+	midInputConnectionWrapperGetTextAfterCursor                jni.MethodID
+	midInputConnectionWrapperGetTextBeforeCursor               jni.MethodID
+	midInputConnectionWrapperPerformContextMenuAction          jni.MethodID
+	midInputConnectionWrapperPerformEditorAction               jni.MethodID
+	midInputConnectionWrapperPerformHandwritingGesture         jni.MethodID
+	midInputConnectionWrapperPerformPrivateCommand             jni.MethodID
+	midInputConnectionWrapperPerformSpellCheck                 jni.MethodID
+	midInputConnectionWrapperPreviewHandwritingGesture         jni.MethodID
+	midInputConnectionWrapperReplaceText                       jni.MethodID
+	midInputConnectionWrapperReportFullscreenMode              jni.MethodID
+	midInputConnectionWrapperRequestCursorUpdates1             jni.MethodID
+	midInputConnectionWrapperRequestCursorUpdates2_1           jni.MethodID
+	midInputConnectionWrapperSendKeyEvent                      jni.MethodID
+	midInputConnectionWrapperSetComposingRegion2               jni.MethodID
+	midInputConnectionWrapperSetComposingRegion3_1             jni.MethodID
+	midInputConnectionWrapperSetComposingText2                 jni.MethodID
+	midInputConnectionWrapperSetComposingText3_1               jni.MethodID
+	midInputConnectionWrapperSetImeConsumesInput               jni.MethodID
+	midInputConnectionWrapperSetSelection                      jni.MethodID
+	midInputConnectionWrapperSetTarget                         jni.MethodID
+	midInputConnectionWrapperTakeSnapshot                      jni.MethodID
+
+	clsTextSnapshot                    *jni.GlobalRef
+	midTextSnapshotGetCompositionEnd   jni.MethodID
+	midTextSnapshotGetCompositionStart jni.MethodID
+	midTextSnapshotGetCursorCapsMode   jni.MethodID
+	midTextSnapshotGetSelectionEnd     jni.MethodID
+	midTextSnapshotGetSelectionStart   jni.MethodID
+	midTextSnapshotGetSurroundingText  jni.MethodID
+
+	clsInputMethodSubtype                                   *jni.GlobalRef
+	midInputMethodSubtypeContainsExtraValueKey              jni.MethodID
+	midInputMethodSubtypeDescribeContents                   jni.MethodID
+	midInputMethodSubtypeEquals                             jni.MethodID
+	midInputMethodSubtypeGetDisplayName                     jni.MethodID
+	midInputMethodSubtypeGetExtraValue                      jni.MethodID
+	midInputMethodSubtypeGetExtraValueOf                    jni.MethodID
+	midInputMethodSubtypeGetIconResId                       jni.MethodID
+	midInputMethodSubtypeGetLanguageTag                     jni.MethodID
+	midInputMethodSubtypeGetLayoutDisplayName               jni.MethodID
+	midInputMethodSubtypeGetLayoutLabelNonLocalized         jni.MethodID
+	midInputMethodSubtypeGetLayoutLabelResource             jni.MethodID
+	midInputMethodSubtypeGetLocale                          jni.MethodID
+	midInputMethodSubtypeGetMode                            jni.MethodID
+	midInputMethodSubtypeGetNameOverride                    jni.MethodID
+	midInputMethodSubtypeGetNameResId                       jni.MethodID
+	midInputMethodSubtypeGetPhysicalKeyboardHintLanguageTag jni.MethodID
+	midInputMethodSubtypeGetPhysicalKeyboardHintLayoutType  jni.MethodID
+	midInputMethodSubtypeHashCode                           jni.MethodID
+	midInputMethodSubtypeIsAsciiCapable                     jni.MethodID
+	midInputMethodSubtypeIsAuxiliary                        jni.MethodID
+	midInputMethodSubtypeOverridesImplicitlyEnabledSubtype  jni.MethodID
+	midInputMethodSubtypeWriteToParcel                      jni.MethodID
+
+	clsInputMethodSubtypeInputMethodSubtypeBuilder                                     *jni.GlobalRef
+	midInputMethodSubtypeInputMethodSubtypeBuilderBuild                                jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetIsAsciiCapable                    jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetIsAuxiliary                       jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetLanguageTag                       jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetLayoutLabelNonLocalized           jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetLayoutLabelResource               jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetOverridesImplicitlyEnabledSubtype jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetPhysicalKeyboardHint              jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeExtraValue                 jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeIconResId                  jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeId                         jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeLocale                     jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeMode                       jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeNameOverride               jni.MethodID
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeNameResId                  jni.MethodID
+
+	clsSelectGesture                 *jni.GlobalRef
+	midSelectGestureDescribeContents jni.MethodID
+	midSelectGestureEquals           jni.MethodID
+	midSelectGestureGetGranularity   jni.MethodID
+	midSelectGestureGetSelectionArea jni.MethodID
+	midSelectGestureHashCode         jni.MethodID
+	midSelectGestureWriteToParcel    jni.MethodID
+
+	clsSelectGestureBuilder                 *jni.GlobalRef
+	midSelectGestureBuilderBuild            jni.MethodID
+	midSelectGestureBuilderSetFallbackText  jni.MethodID
+	midSelectGestureBuilderSetGranularity   jni.MethodID
+	midSelectGestureBuilderSetSelectionArea jni.MethodID
+
+	clsTextAttribute                 *jni.GlobalRef
+	midTextAttributeDescribeContents jni.MethodID
+	midTextAttributeGetExtras        jni.MethodID
+	midTextAttributeWriteToParcel    jni.MethodID
+
+	clsTextAttributeBuilder          *jni.GlobalRef
+	midTextAttributeBuilderBuild     jni.MethodID
+	midTextAttributeBuilderSetExtras jni.MethodID
+
+	clsCompletionInfo                 *jni.GlobalRef
+	midCompletionInfoDescribeContents jni.MethodID
+	midCompletionInfoGetId            jni.MethodID
+	midCompletionInfoGetLabel         jni.MethodID
+	midCompletionInfoGetPosition      jni.MethodID
+	midCompletionInfoGetText          jni.MethodID
+	midCompletionInfoToString         jni.MethodID
+	midCompletionInfoWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -98,6 +687,2438 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
+	c, err = env.FindClass("android/view/inputmethod/InsertModeGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InsertModeGesture: %w", err)
+	}
+	clsInsertModeGesture = env.NewGlobalRef(&c.Object)
+
+	midInsertModeGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureGetCancellationSignal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGesture)), "getCancellationSignal", "()Landroid/os/CancellationSignal;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureGetInsertionPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGesture)), "getInsertionPoint", "()Landroid/graphics/PointF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InsertModeGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InsertModeGesture$Builder: %w", err)
+	}
+	clsInsertModeGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midInsertModeGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGestureBuilder)), "build", "()Landroid/view/inputmethod/InsertModeGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureBuilderSetCancellationSignal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGestureBuilder)), "setCancellationSignal", "(Landroid/os/CancellationSignal;)Landroid/view/inputmethod/InsertModeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/InsertModeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertModeGestureBuilderSetInsertionPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertModeGestureBuilder)), "setInsertionPoint", "(Landroid/graphics/PointF;)Landroid/view/inputmethod/InsertModeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InlineSuggestionsRequest")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InlineSuggestionsRequest: %w", err)
+	}
+	clsInlineSuggestionsRequest = env.NewGlobalRef(&c.Object)
+
+	midInlineSuggestionsRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "getExtras", "()Landroid/os/Bundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestGetHostPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "getHostPackageName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestGetInlineTooltipPresentationSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "getInlineTooltipPresentationSpec", "()Landroid/widget/inline/InlinePresentationSpec;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestGetMaxSuggestionCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "getMaxSuggestionCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestGetSupportedLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "getSupportedLocales", "()Landroid/os/LocaleList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InlineSuggestionsRequest$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InlineSuggestionsRequest$Builder: %w", err)
+	}
+	clsInlineSuggestionsRequestBuilder = env.NewGlobalRef(&c.Object)
+
+	midInlineSuggestionsRequestBuilderAddInlinePresentationSpecs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequestBuilder)), "addInlinePresentationSpecs", "(Landroid/widget/inline/InlinePresentationSpec;)Landroid/view/inputmethod/InlineSuggestionsRequest$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequestBuilder)), "build", "()Landroid/view/inputmethod/InlineSuggestionsRequest;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequestBuilder)), "setExtras", "(Landroid/os/Bundle;)Landroid/view/inputmethod/InlineSuggestionsRequest$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestBuilderSetInlineTooltipPresentationSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequestBuilder)), "setInlineTooltipPresentationSpec", "(Landroid/widget/inline/InlinePresentationSpec;)Landroid/view/inputmethod/InlineSuggestionsRequest$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestBuilderSetMaxSuggestionCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequestBuilder)), "setMaxSuggestionCount", "(I)Landroid/view/inputmethod/InlineSuggestionsRequest$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsRequestBuilderSetSupportedLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsRequestBuilder)), "setSupportedLocales", "(Landroid/os/LocaleList;)Landroid/view/inputmethod/InlineSuggestionsRequest$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InsertGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InsertGesture: %w", err)
+	}
+	clsInsertGesture = env.NewGlobalRef(&c.Object)
+
+	midInsertGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureGetInsertionPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGesture)), "getInsertionPoint", "()Landroid/graphics/PointF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureGetTextToInsert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGesture)), "getTextToInsert", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InsertGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InsertGesture$Builder: %w", err)
+	}
+	clsInsertGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midInsertGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGestureBuilder)), "build", "()Landroid/view/inputmethod/InsertGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/InsertGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureBuilderSetInsertionPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGestureBuilder)), "setInsertionPoint", "(Landroid/graphics/PointF;)Landroid/view/inputmethod/InsertGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInsertGestureBuilderSetTextToInsert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsertGestureBuilder)), "setTextToInsert", "(Ljava/lang/String;)Landroid/view/inputmethod/InsertGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputConnection")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputConnection: %w", err)
+	}
+	clsInputConnection = env.NewGlobalRef(&c.Object)
+
+	midInputConnectionBeginBatchEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "beginBatchEdit", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionClearMetaKeyStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "clearMetaKeyStates", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionCloseConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "closeConnection", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionCommitCompletion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "commitCompletion", "(Landroid/view/inputmethod/CompletionInfo;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionCommitContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "commitContent", "(Landroid/view/inputmethod/InputContentInfo;ILandroid/os/Bundle;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionCommitCorrection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "commitCorrection", "(Landroid/view/inputmethod/CorrectionInfo;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionCommitText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "commitText", "(Ljava/lang/CharSequence;I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionDeleteSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "deleteSurroundingText", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionDeleteSurroundingTextInCodePoints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "deleteSurroundingTextInCodePoints", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionEndBatchEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "endBatchEdit", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionFinishComposingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "finishComposingText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionGetCursorCapsMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "getCursorCapsMode", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionGetExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "getExtractedText", "(Landroid/view/inputmethod/ExtractedTextRequest;I)Landroid/view/inputmethod/ExtractedText;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionGetHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "getHandler", "()Landroid/os/Handler;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionGetSelectedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "getSelectedText", "(I)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionGetTextAfterCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "getTextAfterCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionGetTextBeforeCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "getTextBeforeCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionPerformContextMenuAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "performContextMenuAction", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionPerformEditorAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "performEditorAction", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionPerformPrivateCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "performPrivateCommand", "(Ljava/lang/String;Landroid/os/Bundle;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionReportFullscreenMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "reportFullscreenMode", "(Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionRequestCursorUpdates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "requestCursorUpdates", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionSendKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "sendKeyEvent", "(Landroid/view/KeyEvent;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionSetComposingRegion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "setComposingRegion", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionSetComposingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "setComposingText", "(Ljava/lang/CharSequence;I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionSetSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnection)), "setSelection", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputMethodInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputMethodInfo: %w", err)
+	}
+	clsInputMethodInfo = env.NewGlobalRef(&c.Object)
+
+	midInputMethodInfoCreateImeLanguageSettingsActivityIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "createImeLanguageSettingsActivityIntent", "()Landroid/content/Intent;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoCreateStylusHandwritingSettingsActivityIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "createStylusHandwritingSettingsActivityIntent", "()Landroid/content/Intent;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "dump", "(Landroid/util/Printer;Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getComponent", "()Landroid/content/ComponentName;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetConfigChanges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getConfigChanges", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetIsDefaultResourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getIsDefaultResourceId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getPackageName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetServiceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getServiceInfo", "()Landroid/content/pm/ServiceInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getServiceName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetSettingsActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getSettingsActivity", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetSubtypeAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getSubtypeAt", "(I)Landroid/view/inputmethod/InputMethodSubtype;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoGetSubtypeCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "getSubtypeCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoLoadIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "loadIcon", "(Landroid/content/pm/PackageManager;)Landroid/graphics/drawable/Drawable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoLoadLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "loadLabel", "(Landroid/content/pm/PackageManager;)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoShouldShowInInputMethodPicker, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "shouldShowInInputMethodPicker", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoSupportsConnectionlessStylusHandwriting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "supportsConnectionlessStylusHandwriting", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoSupportsStylusHandwriting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "supportsStylusHandwriting", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoSuppressesSpellChecker, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "suppressesSpellChecker", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/EditorBoundsInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.EditorBoundsInfo: %w", err)
+	}
+	clsEditorBoundsInfo = env.NewGlobalRef(&c.Object)
+
+	midEditorBoundsInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoGetEditorBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfo)), "getEditorBounds", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoGetHandwritingBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfo)), "getHandwritingBounds", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/EditorBoundsInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.EditorBoundsInfo$Builder: %w", err)
+	}
+	clsEditorBoundsInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	midEditorBoundsInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfoBuilder)), "build", "()Landroid/view/inputmethod/EditorBoundsInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoBuilderSetEditorBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfoBuilder)), "setEditorBounds", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/EditorBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorBoundsInfoBuilderSetHandwritingBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorBoundsInfoBuilder)), "setHandwritingBounds", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/EditorBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/ExtractedText")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.ExtractedText: %w", err)
+	}
+	clsExtractedText = env.NewGlobalRef(&c.Object)
+
+	midExtractedTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractedText)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midExtractedTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractedText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/ExtractedTextRequest")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.ExtractedTextRequest: %w", err)
+	}
+	clsExtractedTextRequest = env.NewGlobalRef(&c.Object)
+
+	midExtractedTextRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractedTextRequest)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midExtractedTextRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractedTextRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InlineSuggestionInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InlineSuggestionInfo: %w", err)
+	}
+	clsInlineSuggestionInfo = env.NewGlobalRef(&c.Object)
+
+	midInlineSuggestionInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoGetAutofillHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "getAutofillHints", "()[Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoGetInlinePresentationSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "getInlinePresentationSpec", "()Landroid/widget/inline/InlinePresentationSpec;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoGetSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "getSource", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "getType", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoIsPinned, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "isPinned", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputBinding")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputBinding: %w", err)
+	}
+	clsInputBinding = env.NewGlobalRef(&c.Object)
+
+	midInputBindingDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputBinding)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputBindingGetConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputBinding)), "getConnection", "()Landroid/view/inputmethod/InputConnection;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputBindingGetConnectionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputBinding)), "getConnectionToken", "()Landroid/os/IBinder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputBindingGetPid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputBinding)), "getPid", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputBindingGetUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputBinding)), "getUid", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputBindingToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputBinding)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputBindingWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputBinding)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/PreviewableHandwritingGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.PreviewableHandwritingGesture: %w", err)
+	}
+	clsPreviewableHandwritingGesture = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/view/inputmethod/SelectRangeGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.SelectRangeGesture: %w", err)
+	}
+	clsSelectRangeGesture = env.NewGlobalRef(&c.Object)
+
+	midSelectRangeGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureGetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGesture)), "getGranularity", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureGetSelectionEndArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGesture)), "getSelectionEndArea", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureGetSelectionStartArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGesture)), "getSelectionStartArea", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/SelectRangeGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.SelectRangeGesture$Builder: %w", err)
+	}
+	clsSelectRangeGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midSelectRangeGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGestureBuilder)), "build", "()Landroid/view/inputmethod/SelectRangeGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/SelectRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureBuilderSetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGestureBuilder)), "setGranularity", "(I)Landroid/view/inputmethod/SelectRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureBuilderSetSelectionEndArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGestureBuilder)), "setSelectionEndArea", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/SelectRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectRangeGestureBuilderSetSelectionStartArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectRangeGestureBuilder)), "setSelectionStartArea", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/SelectRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputContentInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputContentInfo: %w", err)
+	}
+	clsInputContentInfo = env.NewGlobalRef(&c.Object)
+
+	midInputContentInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputContentInfoGetContentUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), "getContentUri", "()Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputContentInfoGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), "getDescription", "()Landroid/content/ClipDescription;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputContentInfoGetLinkUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), "getLinkUri", "()Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputContentInfoReleasePermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), "releasePermission", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputContentInfoRequestPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), "requestPermission", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputContentInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/SurroundingText")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.SurroundingText: %w", err)
+	}
+	clsSurroundingText = env.NewGlobalRef(&c.Object)
+
+	midSurroundingTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurroundingText)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurroundingTextGetOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurroundingText)), "getOffset", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurroundingTextGetSelectionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurroundingText)), "getSelectionEnd", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurroundingTextGetSelectionStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurroundingText)), "getSelectionStart", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurroundingTextGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurroundingText)), "getText", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSurroundingTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurroundingText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InlineSuggestionsResponse")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InlineSuggestionsResponse: %w", err)
+	}
+	clsInlineSuggestionsResponse = env.NewGlobalRef(&c.Object)
+
+	midInlineSuggestionsResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsResponse)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsResponseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsResponse)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsResponseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsResponse)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsResponseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsResponse)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionsResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestionsResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/RemoveSpaceGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.RemoveSpaceGesture: %w", err)
+	}
+	clsRemoveSpaceGesture = env.NewGlobalRef(&c.Object)
+
+	midRemoveSpaceGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midRemoveSpaceGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midRemoveSpaceGestureGetEndPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGesture)), "getEndPoint", "()Landroid/graphics/PointF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midRemoveSpaceGestureGetStartPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGesture)), "getStartPoint", "()Landroid/graphics/PointF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midRemoveSpaceGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midRemoveSpaceGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/RemoveSpaceGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.RemoveSpaceGesture$Builder: %w", err)
+	}
+	clsRemoveSpaceGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midRemoveSpaceGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGestureBuilder)), "build", "()Landroid/view/inputmethod/RemoveSpaceGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midRemoveSpaceGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/RemoveSpaceGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midRemoveSpaceGestureBuilderSetPoints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveSpaceGestureBuilder)), "setPoints", "(Landroid/graphics/PointF;Landroid/graphics/PointF;)Landroid/view/inputmethod/RemoveSpaceGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/JoinOrSplitGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.JoinOrSplitGesture: %w", err)
+	}
+	clsJoinOrSplitGesture = env.NewGlobalRef(&c.Object)
+
+	midJoinOrSplitGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJoinOrSplitGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJoinOrSplitGestureGetJoinOrSplitPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGesture)), "getJoinOrSplitPoint", "()Landroid/graphics/PointF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJoinOrSplitGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJoinOrSplitGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/JoinOrSplitGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.JoinOrSplitGesture$Builder: %w", err)
+	}
+	clsJoinOrSplitGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midJoinOrSplitGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGestureBuilder)), "build", "()Landroid/view/inputmethod/JoinOrSplitGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJoinOrSplitGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/JoinOrSplitGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midJoinOrSplitGestureBuilderSetJoinOrSplitPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinOrSplitGestureBuilder)), "setJoinOrSplitPoint", "(Landroid/graphics/PointF;)Landroid/view/inputmethod/JoinOrSplitGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextBoundsInfoResult")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextBoundsInfoResult: %w", err)
+	}
+	clsTextBoundsInfoResult = env.NewGlobalRef(&c.Object)
+
+	midTextBoundsInfoResultGetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoResult)), "getResultCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoResultGetTextBoundsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoResult)), "getTextBoundsInfo", "()Landroid/view/inputmethod/TextBoundsInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputMethod")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputMethod: %w", err)
+	}
+	clsInputMethod = env.NewGlobalRef(&c.Object)
+
+	midInputMethodAttachToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "attachToken", "(Landroid/os/IBinder;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodBindInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "bindInput", "(Landroid/view/inputmethod/InputBinding;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodChangeInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "changeInputMethodSubtype", "(Landroid/view/inputmethod/InputMethodSubtype;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodCreateSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "createSession", "(Landroid/view/inputmethod/InputMethod$SessionCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodHideSoftInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "hideSoftInput", "(ILandroid/os/ResultReceiver;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodRestartInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "restartInput", "(Landroid/view/inputmethod/InputConnection;Landroid/view/inputmethod/EditorInfo;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodRevokeSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "revokeSession", "(Landroid/view/inputmethod/InputMethodSession;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSetSessionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "setSessionEnabled", "(Landroid/view/inputmethod/InputMethodSession;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodShowSoftInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "showSoftInput", "(ILandroid/os/ResultReceiver;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodStartInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "startInput", "(Landroid/view/inputmethod/InputConnection;Landroid/view/inputmethod/EditorInfo;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodUnbindInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "unbindInput", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputMethod$SessionCallback")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputMethod$SessionCallback: %w", err)
+	}
+	clsInputMethodSessionCallback = env.NewGlobalRef(&c.Object)
+
+	midInputMethodSessionCallbackSessionCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSessionCallback)), "sessionCreated", "(Landroid/view/inputmethod/InputMethodSession;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/CorrectionInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.CorrectionInfo: %w", err)
+	}
+	clsCorrectionInfo = env.NewGlobalRef(&c.Object)
+
+	midCorrectionInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCorrectionInfoGetNewText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), "getNewText", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCorrectionInfoGetOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), "getOffset", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCorrectionInfoGetOldText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), "getOldText", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCorrectionInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCorrectionInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputMethodSession")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputMethodSession: %w", err)
+	}
+	clsInputMethodSession = env.NewGlobalRef(&c.Object)
+
+	midInputMethodSessionAppPrivateCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "appPrivateCommand", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionDispatchGenericMotionEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "dispatchGenericMotionEvent", "(ILandroid/view/MotionEvent;Landroid/view/inputmethod/InputMethodSession$EventCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionDispatchKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "dispatchKeyEvent", "(ILandroid/view/KeyEvent;Landroid/view/inputmethod/InputMethodSession$EventCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionDispatchTrackballEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "dispatchTrackballEvent", "(ILandroid/view/MotionEvent;Landroid/view/inputmethod/InputMethodSession$EventCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionDisplayCompletions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "displayCompletions", "([Landroid/view/inputmethod/CompletionInfo;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionFinishInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "finishInput", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionToggleSoftInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "toggleSoftInput", "(II)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionUpdateCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "updateCursor", "(Landroid/graphics/Rect;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionUpdateCursorAnchorInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "updateCursorAnchorInfo", "(Landroid/view/inputmethod/CursorAnchorInfo;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionUpdateExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "updateExtractedText", "(ILandroid/view/inputmethod/ExtractedText;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionUpdateSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "updateSelection", "(IIIIII)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSessionViewClicked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSession)), "viewClicked", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputMethodSession$EventCallback")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputMethodSession$EventCallback: %w", err)
+	}
+	clsInputMethodSessionEventCallback = env.NewGlobalRef(&c.Object)
+
+	midInputMethodSessionEventCallbackFinishedEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSessionEventCallback)), "finishedEvent", "(IZ)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/HandwritingGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.HandwritingGesture: %w", err)
+	}
+	clsHandwritingGesture = env.NewGlobalRef(&c.Object)
+
+	midHandwritingGestureGetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandwritingGesture)), "getFallbackText", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InlineSuggestion")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InlineSuggestion: %w", err)
+	}
+	clsInlineSuggestion = env.NewGlobalRef(&c.Object)
+
+	midInlineSuggestionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestion)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestion)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestion)), "getInfo", "()Landroid/view/inputmethod/InlineSuggestionInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestion)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestion)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInlineSuggestionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineSuggestion)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/DeleteRangeGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.DeleteRangeGesture: %w", err)
+	}
+	clsDeleteRangeGesture = env.NewGlobalRef(&c.Object)
+
+	midDeleteRangeGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureGetDeletionEndArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGesture)), "getDeletionEndArea", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureGetDeletionStartArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGesture)), "getDeletionStartArea", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureGetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGesture)), "getGranularity", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/DeleteRangeGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.DeleteRangeGesture$Builder: %w", err)
+	}
+	clsDeleteRangeGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midDeleteRangeGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGestureBuilder)), "build", "()Landroid/view/inputmethod/DeleteRangeGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureBuilderSetDeletionEndArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGestureBuilder)), "setDeletionEndArea", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/DeleteRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureBuilderSetDeletionStartArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGestureBuilder)), "setDeletionStartArea", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/DeleteRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/DeleteRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteRangeGestureBuilderSetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteRangeGestureBuilder)), "setGranularity", "(I)Landroid/view/inputmethod/DeleteRangeGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextAppearanceInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextAppearanceInfo: %w", err)
+	}
+	clsTextAppearanceInfo = env.NewGlobalRef(&c.Object)
+
+	midTextAppearanceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetFontFeatureSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getFontFeatureSettings", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetFontVariationSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getFontVariationSettings", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetHighlightTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getHighlightTextColor", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetHintTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getHintTextColor", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetLetterSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getLetterSpacing", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetLineBreakStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getLineBreakStyle", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetLineBreakWordStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getLineBreakWordStyle", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetLinkTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getLinkTextColor", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetShadowColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getShadowColor", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetShadowDx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getShadowDx", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetShadowDy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getShadowDy", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetShadowRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getShadowRadius", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetSystemFontFamilyName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getSystemFontFamilyName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getTextColor", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetTextFontWeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getTextFontWeight", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetTextLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getTextLocales", "()Landroid/os/LocaleList;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetTextScaleX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getTextScaleX", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getTextSize", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoGetTextStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "getTextStyle", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoIsAllCaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "isAllCaps", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoIsElegantTextHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "isElegantTextHeight", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoIsFallbackLineSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "isFallbackLineSpacing", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextAppearanceInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextAppearanceInfo$Builder: %w", err)
+	}
+	clsTextAppearanceInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	midTextAppearanceInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "build", "()Landroid/view/inputmethod/TextAppearanceInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetAllCaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setAllCaps", "(Z)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetElegantTextHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setElegantTextHeight", "(Z)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetFallbackLineSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setFallbackLineSpacing", "(Z)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetFontFeatureSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setFontFeatureSettings", "(Ljava/lang/String;)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetFontVariationSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setFontVariationSettings", "(Ljava/lang/String;)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetHighlightTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setHighlightTextColor", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetHintTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setHintTextColor", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetLetterSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setLetterSpacing", "(F)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetLineBreakStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setLineBreakStyle", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetLineBreakWordStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setLineBreakWordStyle", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetLinkTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setLinkTextColor", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetShadowColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setShadowColor", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetShadowDx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setShadowDx", "(F)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetShadowDy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setShadowDy", "(F)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetShadowRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setShadowRadius", "(F)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetSystemFontFamilyName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setSystemFontFamilyName", "(Ljava/lang/String;)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setTextColor", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetTextFontWeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setTextFontWeight", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetTextLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setTextLocales", "(Landroid/os/LocaleList;)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetTextScaleX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setTextScaleX", "(F)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setTextSize", "(F)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAppearanceInfoBuilderSetTextStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceInfoBuilder)), "setTextStyle", "(I)Landroid/view/inputmethod/TextAppearanceInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/EditorInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.EditorInfo: %w", err)
+	}
+	clsEditorInfo = env.NewGlobalRef(&c.Object)
+
+	midEditorInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "dump", "(Landroid/util/Printer;Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoGetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "getAutofillId", "()Landroid/view/autofill/AutofillId;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoGetInitialSelectedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "getInitialSelectedText", "(I)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoGetInitialSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "getInitialSurroundingText", "(III)Landroid/view/inputmethod/SurroundingText;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoGetInitialTextAfterCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "getInitialTextAfterCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoGetInitialTextBeforeCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "getInitialTextBeforeCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoGetInitialToolType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "getInitialToolType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoIsStylusHandwritingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "isStylusHandwritingEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoIsWritingToolsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "isWritingToolsEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoMakeCompatible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "makeCompatible", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoSetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "setAutofillId", "(Landroid/view/autofill/AutofillId;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoSetInitialSurroundingSubText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "setInitialSurroundingSubText", "(Ljava/lang/CharSequence;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoSetInitialSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "setInitialSurroundingText", "(Ljava/lang/CharSequence;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoSetInitialToolType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "setInitialToolType", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoSetStylusHandwritingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "setStylusHandwritingEnabled", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoSetWritingToolsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "setWritingToolsEnabled", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midEditorInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditorInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/CursorAnchorInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.CursorAnchorInfo: %w", err)
+	}
+	clsCursorAnchorInfo = env.NewGlobalRef(&c.Object)
+
+	midCursorAnchorInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetCharacterBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getCharacterBounds", "(I)Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetCharacterBoundsFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getCharacterBoundsFlags", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetComposingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getComposingText", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetComposingTextStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getComposingTextStart", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetEditorBoundsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getEditorBoundsInfo", "()Landroid/view/inputmethod/EditorBoundsInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetInsertionMarkerBaseline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getInsertionMarkerBaseline", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetInsertionMarkerBottom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getInsertionMarkerBottom", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetInsertionMarkerFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getInsertionMarkerFlags", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetInsertionMarkerHorizontal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getInsertionMarkerHorizontal", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetInsertionMarkerTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getInsertionMarkerTop", "()F")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetMatrix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getMatrix", "()Landroid/graphics/Matrix;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetSelectionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getSelectionEnd", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetSelectionStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getSelectionStart", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoGetTextAppearanceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "getTextAppearanceInfo", "()Landroid/view/inputmethod/TextAppearanceInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/CursorAnchorInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.CursorAnchorInfo$Builder: %w", err)
+	}
+	clsCursorAnchorInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	midCursorAnchorInfoBuilderAddCharacterBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "addCharacterBounds", "(IFFFFI)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderAddVisibleLineBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "addVisibleLineBounds", "(FFFF)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "build", "()Landroid/view/inputmethod/CursorAnchorInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderClearVisibleLineBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "clearVisibleLineBounds", "()Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "reset", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderSetComposingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "setComposingText", "(ILjava/lang/CharSequence;)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderSetEditorBoundsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "setEditorBoundsInfo", "(Landroid/view/inputmethod/EditorBoundsInfo;)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderSetInsertionMarkerLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "setInsertionMarkerLocation", "(FFFFI)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderSetMatrix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "setMatrix", "(Landroid/graphics/Matrix;)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderSetSelectionRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "setSelectionRange", "(II)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCursorAnchorInfoBuilderSetTextAppearanceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfoBuilder)), "setTextAppearanceInfo", "(Landroid/view/inputmethod/TextAppearanceInfo;)Landroid/view/inputmethod/CursorAnchorInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	c, err = env.FindClass("android/view/inputmethod/InputMethodManager")
 	if err != nil {
 		return fmt.Errorf("find class android.view.inputmethod.InputMethodManager: %w", err)
@@ -112,20 +3133,6 @@ func doInit(env *jni.Env) error {
 	}
 
 	midInputMethodManagerAcceptStylusHandwritingDelegation2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midInputMethodManagerAcceptStylusHandwritingDelegation5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;ILjava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midInputMethodManagerAcceptStylusHandwritingDelegation4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -154,27 +3161,6 @@ func doInit(env *jni.Env) error {
 	}
 
 	midInputMethodManagerGetCurrentInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getCurrentInputMethodSubtype", "()Landroid/view/inputmethod/InputMethodSubtype;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midInputMethodManagerGetEnabledInputMethodList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getEnabledInputMethodList", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midInputMethodManagerGetEnabledInputMethodSubtypeList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getEnabledInputMethodSubtypeList", "(Landroid/view/inputmethod/InputMethodInfo;Z)Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midInputMethodManagerGetInputMethodList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "getInputMethodList", "()Ljava/util/List;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -476,6 +3462,1300 @@ func doInit(env *jni.Env) error {
 	}
 
 	midInputMethodManagerViewClicked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodManager)), "viewClicked", "(Landroid/view/View;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/BaseInputConnection")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.BaseInputConnection: %w", err)
+	}
+	clsBaseInputConnection = env.NewGlobalRef(&c.Object)
+
+	midBaseInputConnectionBeginBatchEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "beginBatchEdit", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionClearMetaKeyStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "clearMetaKeyStates", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionCloseConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "closeConnection", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionCommitCompletion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "commitCompletion", "(Landroid/view/inputmethod/CompletionInfo;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionCommitContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "commitContent", "(Landroid/view/inputmethod/InputContentInfo;ILandroid/os/Bundle;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionCommitCorrection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "commitCorrection", "(Landroid/view/inputmethod/CorrectionInfo;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionCommitText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "commitText", "(Ljava/lang/CharSequence;I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionDeleteSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "deleteSurroundingText", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionDeleteSurroundingTextInCodePoints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "deleteSurroundingTextInCodePoints", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionEndBatchEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "endBatchEdit", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionFinishComposingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "finishComposingText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetCursorCapsMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getCursorCapsMode", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetEditable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getEditable", "()Landroid/text/Editable;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getExtractedText", "(Landroid/view/inputmethod/ExtractedTextRequest;I)Landroid/view/inputmethod/ExtractedText;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getHandler", "()Landroid/os/Handler;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetSelectedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getSelectedText", "(I)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getSurroundingText", "(III)Landroid/view/inputmethod/SurroundingText;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetTextAfterCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getTextAfterCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetTextBeforeCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getTextBeforeCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionPerformContextMenuAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "performContextMenuAction", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionPerformEditorAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "performEditorAction", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionPerformPrivateCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "performPrivateCommand", "(Ljava/lang/String;Landroid/os/Bundle;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionReplaceText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "replaceText", "(IILjava/lang/CharSequence;ILandroid/view/inputmethod/TextAttribute;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionReportFullscreenMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "reportFullscreenMode", "(Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionRequestCursorUpdates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "requestCursorUpdates", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionSendKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "sendKeyEvent", "(Landroid/view/KeyEvent;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionSetComposingRegion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "setComposingRegion", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionSetComposingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "setComposingText", "(Ljava/lang/CharSequence;I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionSetSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "setSelection", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionTakeSnapshot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "takeSnapshot", "()Landroid/view/inputmethod/TextSnapshot;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetComposingSpanEnd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getComposingSpanEnd", "(Landroid/text/Spannable;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionGetComposingSpanStart, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "getComposingSpanStart", "(Landroid/text/Spannable;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionRemoveComposingSpans, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "removeComposingSpans", "(Landroid/text/Spannable;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midBaseInputConnectionSetComposingSpans, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), "setComposingSpans", "(Landroid/text/Spannable;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/DeleteGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.DeleteGesture: %w", err)
+	}
+	clsDeleteGesture = env.NewGlobalRef(&c.Object)
+
+	midDeleteGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureGetDeletionArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGesture)), "getDeletionArea", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureGetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGesture)), "getGranularity", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/DeleteGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.DeleteGesture$Builder: %w", err)
+	}
+	clsDeleteGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midDeleteGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGestureBuilder)), "build", "()Landroid/view/inputmethod/DeleteGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureBuilderSetDeletionArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGestureBuilder)), "setDeletionArea", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/DeleteGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/DeleteGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midDeleteGestureBuilderSetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeleteGestureBuilder)), "setGranularity", "(I)Landroid/view/inputmethod/DeleteGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/ConnectionlessHandwritingCallback")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.ConnectionlessHandwritingCallback: %w", err)
+	}
+	clsConnectionlessHandwritingCallback = env.NewGlobalRef(&c.Object)
+
+	midConnectionlessHandwritingCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionlessHandwritingCallback)), "onError", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midConnectionlessHandwritingCallbackOnResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionlessHandwritingCallback)), "onResult", "(Ljava/lang/CharSequence;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextBoundsInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextBoundsInfo: %w", err)
+	}
+	clsTextBoundsInfo = env.NewGlobalRef(&c.Object)
+
+	midTextBoundsInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetCharacterBidiLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getCharacterBidiLevel", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetCharacterBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getCharacterBounds", "(ILandroid/graphics/RectF;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetCharacterFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getCharacterFlags", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetEndIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getEndIndex", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetGraphemeSegmentFinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getGraphemeSegmentFinder", "()Landroid/text/SegmentFinder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetLineSegmentFinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getLineSegmentFinder", "()Landroid/text/SegmentFinder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetMatrix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getMatrix", "(Landroid/graphics/Matrix;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetOffsetForPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getOffsetForPosition", "(FF)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetRangeForRect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getRangeForRect", "(Landroid/graphics/RectF;Landroid/text/SegmentFinder;Landroid/text/Layout$TextInclusionStrategy;)[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetStartIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getStartIndex", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoGetWordSegmentFinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "getWordSegmentFinder", "()Landroid/text/SegmentFinder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextBoundsInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextBoundsInfo$Builder: %w", err)
+	}
+	clsTextBoundsInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	midTextBoundsInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "build", "()Landroid/view/inputmethod/TextBoundsInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "clear", "()Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetCharacterBidiLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setCharacterBidiLevel", "([I)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetCharacterBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setCharacterBounds", "([F)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetCharacterFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setCharacterFlags", "([I)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetGraphemeSegmentFinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setGraphemeSegmentFinder", "(Landroid/text/SegmentFinder;)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetLineSegmentFinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setLineSegmentFinder", "(Landroid/text/SegmentFinder;)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetMatrix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setMatrix", "(Landroid/graphics/Matrix;)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetStartAndEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setStartAndEnd", "(II)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextBoundsInfoBuilderSetWordSegmentFinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextBoundsInfoBuilder)), "setWordSegmentFinder", "(Landroid/text/SegmentFinder;)Landroid/view/inputmethod/TextBoundsInfo$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputConnectionWrapper")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputConnectionWrapper: %w", err)
+	}
+	clsInputConnectionWrapper = env.NewGlobalRef(&c.Object)
+
+	midInputConnectionWrapperBeginBatchEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "beginBatchEdit", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperClearMetaKeyStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "clearMetaKeyStates", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperCloseConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "closeConnection", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperCommitCompletion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "commitCompletion", "(Landroid/view/inputmethod/CompletionInfo;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperCommitContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "commitContent", "(Landroid/view/inputmethod/InputContentInfo;ILandroid/os/Bundle;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperCommitCorrection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "commitCorrection", "(Landroid/view/inputmethod/CorrectionInfo;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperCommitText2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "commitText", "(Ljava/lang/CharSequence;I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperCommitText3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "commitText", "(Ljava/lang/CharSequence;ILandroid/view/inputmethod/TextAttribute;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperDeleteSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "deleteSurroundingText", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperDeleteSurroundingTextInCodePoints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "deleteSurroundingTextInCodePoints", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperEndBatchEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "endBatchEdit", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperFinishComposingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "finishComposingText", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperGetCursorCapsMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "getCursorCapsMode", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperGetExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "getExtractedText", "(Landroid/view/inputmethod/ExtractedTextRequest;I)Landroid/view/inputmethod/ExtractedText;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperGetHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "getHandler", "()Landroid/os/Handler;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperGetSelectedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "getSelectedText", "(I)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperGetSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "getSurroundingText", "(III)Landroid/view/inputmethod/SurroundingText;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperGetTextAfterCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "getTextAfterCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperGetTextBeforeCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "getTextBeforeCursor", "(II)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperPerformContextMenuAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "performContextMenuAction", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperPerformEditorAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "performEditorAction", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperPerformHandwritingGesture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "performHandwritingGesture", "(Landroid/view/inputmethod/HandwritingGesture;Ljava/util/concurrent/Executor;Ljava/util/function/IntConsumer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperPerformPrivateCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "performPrivateCommand", "(Ljava/lang/String;Landroid/os/Bundle;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperPerformSpellCheck, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "performSpellCheck", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperPreviewHandwritingGesture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "previewHandwritingGesture", "(Landroid/view/inputmethod/PreviewableHandwritingGesture;Landroid/os/CancellationSignal;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperReplaceText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "replaceText", "(IILjava/lang/CharSequence;ILandroid/view/inputmethod/TextAttribute;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperReportFullscreenMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "reportFullscreenMode", "(Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperRequestCursorUpdates1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "requestCursorUpdates", "(I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperRequestCursorUpdates2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "requestCursorUpdates", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSendKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "sendKeyEvent", "(Landroid/view/KeyEvent;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSetComposingRegion2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "setComposingRegion", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSetComposingRegion3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "setComposingRegion", "(IILandroid/view/inputmethod/TextAttribute;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSetComposingText2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "setComposingText", "(Ljava/lang/CharSequence;I)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSetComposingText3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "setComposingText", "(Ljava/lang/CharSequence;ILandroid/view/inputmethod/TextAttribute;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSetImeConsumesInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "setImeConsumesInput", "(Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSetSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "setSelection", "(II)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperSetTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "setTarget", "(Landroid/view/inputmethod/InputConnection;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputConnectionWrapperTakeSnapshot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), "takeSnapshot", "()Landroid/view/inputmethod/TextSnapshot;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextSnapshot")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextSnapshot: %w", err)
+	}
+	clsTextSnapshot = env.NewGlobalRef(&c.Object)
+
+	midTextSnapshotGetCompositionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), "getCompositionEnd", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextSnapshotGetCompositionStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), "getCompositionStart", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextSnapshotGetCursorCapsMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), "getCursorCapsMode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextSnapshotGetSelectionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), "getSelectionEnd", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextSnapshotGetSelectionStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), "getSelectionStart", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextSnapshotGetSurroundingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), "getSurroundingText", "()Landroid/view/inputmethod/SurroundingText;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputMethodSubtype")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputMethodSubtype: %w", err)
+	}
+	clsInputMethodSubtype = env.NewGlobalRef(&c.Object)
+
+	midInputMethodSubtypeContainsExtraValueKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "containsExtraValueKey", "(Ljava/lang/String;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getDisplayName", "(Landroid/content/Context;Ljava/lang/String;Landroid/content/pm/ApplicationInfo;)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetExtraValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getExtraValue", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetExtraValueOf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getExtraValueOf", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetIconResId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getIconResId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetLanguageTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getLanguageTag", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetLayoutDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getLayoutDisplayName", "(Landroid/content/Context;Landroid/content/pm/ApplicationInfo;)Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetLayoutLabelNonLocalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getLayoutLabelNonLocalized", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetLayoutLabelResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getLayoutLabelResource", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getLocale", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getMode", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetNameOverride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getNameOverride", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetNameResId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getNameResId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetPhysicalKeyboardHintLanguageTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getPhysicalKeyboardHintLanguageTag", "()Landroid/icu/util/ULocale;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeGetPhysicalKeyboardHintLayoutType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "getPhysicalKeyboardHintLayoutType", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeIsAsciiCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "isAsciiCapable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeIsAuxiliary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "isAuxiliary", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeOverridesImplicitlyEnabledSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "overridesImplicitlyEnabledSubtype", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.InputMethodSubtype$InputMethodSubtypeBuilder: %w", err)
+	}
+	clsInputMethodSubtypeInputMethodSubtypeBuilder = env.NewGlobalRef(&c.Object)
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "build", "()Landroid/view/inputmethod/InputMethodSubtype;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetIsAsciiCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setIsAsciiCapable", "(Z)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetIsAuxiliary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setIsAuxiliary", "(Z)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetLanguageTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setLanguageTag", "(Ljava/lang/String;)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetLayoutLabelNonLocalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setLayoutLabelNonLocalized", "(Ljava/lang/CharSequence;)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetLayoutLabelResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setLayoutLabelResource", "(I)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetOverridesImplicitlyEnabledSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setOverridesImplicitlyEnabledSubtype", "(Z)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetPhysicalKeyboardHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setPhysicalKeyboardHint", "(Landroid/icu/util/ULocale;Ljava/lang/String;)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeExtraValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setSubtypeExtraValue", "(Ljava/lang/String;)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeIconResId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setSubtypeIconResId", "(I)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setSubtypeId", "(I)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setSubtypeLocale", "(Ljava/lang/String;)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setSubtypeMode", "(Ljava/lang/String;)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeNameOverride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setSubtypeNameOverride", "(Ljava/lang/CharSequence;)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midInputMethodSubtypeInputMethodSubtypeBuilderSetSubtypeNameResId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodSubtypeInputMethodSubtypeBuilder)), "setSubtypeNameResId", "(I)Landroid/view/inputmethod/InputMethodSubtype$InputMethodSubtypeBuilder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/SelectGesture")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.SelectGesture: %w", err)
+	}
+	clsSelectGesture = env.NewGlobalRef(&c.Object)
+
+	midSelectGestureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGesture)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGesture)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureGetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGesture)), "getGranularity", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureGetSelectionArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGesture)), "getSelectionArea", "()Landroid/graphics/RectF;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGesture)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/SelectGesture$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.SelectGesture$Builder: %w", err)
+	}
+	clsSelectGestureBuilder = env.NewGlobalRef(&c.Object)
+
+	midSelectGestureBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGestureBuilder)), "build", "()Landroid/view/inputmethod/SelectGesture;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureBuilderSetFallbackText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGestureBuilder)), "setFallbackText", "(Ljava/lang/String;)Landroid/view/inputmethod/SelectGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureBuilderSetGranularity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGestureBuilder)), "setGranularity", "(I)Landroid/view/inputmethod/SelectGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midSelectGestureBuilderSetSelectionArea, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSelectGestureBuilder)), "setSelectionArea", "(Landroid/graphics/RectF;)Landroid/view/inputmethod/SelectGesture$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextAttribute")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextAttribute: %w", err)
+	}
+	clsTextAttribute = env.NewGlobalRef(&c.Object)
+
+	midTextAttributeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAttribute)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAttributeGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAttribute)), "getExtras", "()Landroid/os/PersistableBundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAttributeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAttribute)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/TextAttribute$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.TextAttribute$Builder: %w", err)
+	}
+	clsTextAttributeBuilder = env.NewGlobalRef(&c.Object)
+
+	midTextAttributeBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAttributeBuilder)), "build", "()Landroid/view/inputmethod/TextAttribute;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midTextAttributeBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAttributeBuilder)), "setExtras", "(Landroid/os/PersistableBundle;)Landroid/view/inputmethod/TextAttribute$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/view/inputmethod/CompletionInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.view.inputmethod.CompletionInfo: %w", err)
+	}
+	clsCompletionInfo = env.NewGlobalRef(&c.Object)
+
+	midCompletionInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCompletionInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), "getId", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCompletionInfoGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), "getLabel", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCompletionInfoGetPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), "getPosition", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCompletionInfoGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), "getText", "()Ljava/lang/CharSequence;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCompletionInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midCompletionInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

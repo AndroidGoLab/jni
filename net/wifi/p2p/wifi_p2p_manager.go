@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "wifip2p"
+const serviceNameWifiP2pManager = "wifip2p"
 
 // WifiP2pManager wraps android.net.wifi.p2p.WifiP2pManager.
 type WifiP2pManager struct {
@@ -39,12 +39,12 @@ func NewWifiP2pManager(ctx *app.Context) (*WifiP2pManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameWifiP2pManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameWifiP2pManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).

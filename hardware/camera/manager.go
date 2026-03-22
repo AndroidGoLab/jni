@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "camera"
+const serviceNameManager = "camera"
 
 // Manager wraps android.hardware.camera2.CameraManager.
 type Manager struct {
@@ -39,12 +39,12 @@ func NewManager(ctx *app.Context) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
@@ -215,38 +215,6 @@ func (m *Manager) GetCameraIdList() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetConcurrentCameraIds calls android.hardware.camera2.CameraManager.getConcurrentCameraIds.
-func (m *Manager) GetConcurrentCameraIds() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerGetConcurrentCameraIds == nil {
-			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.getConcurrentCameraIds is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midManagerGetConcurrentCameraIds,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetTorchStrengthLevel calls android.hardware.camera2.CameraManager.getTorchStrengthLevel.
 func (m *Manager) GetTorchStrengthLevel(arg0 string) (int32, error) {
 	var result int32
@@ -301,34 +269,6 @@ func (m *Manager) IsCameraDeviceSetupSupported(arg0 string) (bool, error) {
 		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
 			midManagerIsCameraDeviceSetupSupported, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		result = resultRaw != 0
-		return callErr
-	})
-	return result, callErr
-}
-
-// IsConcurrentSessionConfigurationSupported calls android.hardware.camera2.CameraManager.isConcurrentSessionConfigurationSupported.
-func (m *Manager) IsConcurrentSessionConfigurationSupported(arg0 *jni.Object) (bool, error) {
-	var result bool
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midManagerIsConcurrentSessionConfigurationSupported == nil {
-			callErr = fmt.Errorf("android.hardware.camera2.CameraManager.isConcurrentSessionConfigurationSupported is not available on this device")
-			return callErr
-		}
-
-		var resultRaw uint8
-		resultRaw, callErr = env.CallBooleanMethod(
-			m.Obj,
-			midManagerIsConcurrentSessionConfigurationSupported, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

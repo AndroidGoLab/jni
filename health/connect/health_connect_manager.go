@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "healthconnect"
+const serviceNameHealthConnectManager = "healthconnect"
 
 // HealthConnectManager wraps android.health.connect.HealthConnectManager.
 type HealthConnectManager struct {
@@ -39,12 +39,12 @@ func NewHealthConnectManager(ctx *app.Context) (*HealthConnectManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameHealthConnectManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameHealthConnectManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).

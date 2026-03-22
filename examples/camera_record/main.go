@@ -39,8 +39,8 @@ func init() { ui.Register(run) }
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	vm := jni.VMFromUintptr(uintptr(activity.vm))
-	actObj := jni.ObjectFromUintptr(uintptr(activity.clazz))
+	vm := jni.VMFromPtr(unsafe.Pointer(activity.vm))
+	actObj := jni.ObjectFromPtr(unsafe.Pointer(activity.clazz))
 	ui.OnCreate(vm, actObj)
 
 	vm.Do(func(env *jni.Env) error {
@@ -51,7 +51,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
-	ui.OnResume(jni.ObjectFromUintptr(uintptr(activity.clazz)))
+	ui.OnResume(jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)))
 }
 
 //export goOnNativeWindowCreated

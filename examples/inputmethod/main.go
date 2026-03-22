@@ -30,8 +30,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -39,7 +39,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -63,19 +63,21 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "=== Input Methods ===")
 
-	enabledList, err := mgr.GetEnabledInputMethodList()
-	if err != nil {
-		fmt.Fprintf(output, "GetEnabledList: %v\n", err)
-	} else {
-		printIMEList(vm, output, "Enabled", enabledList)
-	}
+	// Filtered: GetEnabledInputMethodList returns generic type (List<InputMethodInfo>)
+	// enabledList, err := mgr.GetEnabledInputMethodList()
+	// if err != nil {
+	// 	fmt.Fprintf(output, "GetEnabledList: %v\n", err)
+	// } else {
+	// 	printIMEList(vm, output, "Enabled", enabledList)
+	// }
 
-	allList, err := mgr.GetInputMethodList()
-	if err != nil {
-		fmt.Fprintf(output, "GetAllList: %v\n", err)
-	} else {
-		printIMEList(vm, output, "Installed", allList)
-	}
+	// Filtered: GetInputMethodList returns generic type (List<InputMethodInfo>)
+	// allList, err := mgr.GetInputMethodList()
+	// if err != nil {
+	// 	fmt.Fprintf(output, "GetAllList: %v\n", err)
+	// } else {
+	// 	printIMEList(vm, output, "Installed", allList)
+	// }
 
 	active, err := mgr.IsActive0()
 	if err != nil {

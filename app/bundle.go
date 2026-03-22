@@ -535,44 +535,6 @@ func (m *Bundle) GetCharSequenceArray(arg0 string) (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetCharSequenceArrayList calls android.os.Bundle.getCharSequenceArrayList.
-func (m *Bundle) GetCharSequenceArrayList(arg0 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundleGetCharSequenceArrayList == nil {
-			callErr = fmt.Errorf("android.os.Bundle.getCharSequenceArrayList is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midBundleGetCharSequenceArrayList, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetClassLoader calls android.os.Bundle.getClassLoader.
 func (m *Bundle) GetClassLoader() (*jni.Object, error) {
 	var result *jni.Object
@@ -689,44 +651,6 @@ func (m *Bundle) GetFloatArray(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midBundleGetFloatArray, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetIntegerArrayList calls android.os.Bundle.getIntegerArrayList.
-func (m *Bundle) GetIntegerArrayList(arg0 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundleGetIntegerArrayList == nil {
-			callErr = fmt.Errorf("android.os.Bundle.getIntegerArrayList is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midBundleGetIntegerArrayList, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -979,44 +903,6 @@ func (m *Bundle) GetSizeF(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midBundleGetSizeF, jni.ObjectValue(&jArg0.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// GetStringArrayList calls android.os.Bundle.getStringArrayList.
-func (m *Bundle) GetStringArrayList(arg0 string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundleGetStringArrayList == nil {
-			callErr = fmt.Errorf("android.os.Bundle.getStringArrayList is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midBundleGetStringArrayList, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -1313,34 +1199,6 @@ func (m *Bundle) PutCharSequenceArray(arg0 string, arg1 *jni.Object) error {
 	return callErr
 }
 
-// PutCharSequenceArrayList calls android.os.Bundle.putCharSequenceArrayList.
-func (m *Bundle) PutCharSequenceArrayList(arg0 string, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundlePutCharSequenceArrayList == nil {
-			callErr = fmt.Errorf("android.os.Bundle.putCharSequenceArrayList is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midBundlePutCharSequenceArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // PutFloat calls android.os.Bundle.putFloat.
 func (m *Bundle) PutFloat(arg0 string, arg1 float32) error {
 
@@ -1397,34 +1255,6 @@ func (m *Bundle) PutFloatArray(arg0 string, arg1 *jni.Object) error {
 	return callErr
 }
 
-// PutIntegerArrayList calls android.os.Bundle.putIntegerArrayList.
-func (m *Bundle) PutIntegerArrayList(arg0 string, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundlePutIntegerArrayList == nil {
-			callErr = fmt.Errorf("android.os.Bundle.putIntegerArrayList is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midBundlePutIntegerArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // PutParcelable calls android.os.Bundle.putParcelable.
 func (m *Bundle) PutParcelable(arg0 string, arg1 *jni.Object) error {
 
@@ -1475,34 +1305,6 @@ func (m *Bundle) PutParcelableArray(arg0 string, arg1 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midBundlePutParcelableArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// PutParcelableArrayList calls android.os.Bundle.putParcelableArrayList.
-func (m *Bundle) PutParcelableArrayList(arg0 string, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundlePutParcelableArrayList == nil {
-			callErr = fmt.Errorf("android.os.Bundle.putParcelableArrayList is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midBundlePutParcelableArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
@@ -1643,62 +1445,6 @@ func (m *Bundle) PutSizeF(arg0 string, arg1 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midBundlePutSizeF, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// PutSparseParcelableArray calls android.os.Bundle.putSparseParcelableArray.
-func (m *Bundle) PutSparseParcelableArray(arg0 string, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundlePutSparseParcelableArray == nil {
-			callErr = fmt.Errorf("android.os.Bundle.putSparseParcelableArray is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midBundlePutSparseParcelableArray, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// PutStringArrayList calls android.os.Bundle.putStringArrayList.
-func (m *Bundle) PutStringArrayList(arg0 string, arg1 *jni.Object) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midBundlePutStringArrayList == nil {
-			callErr = fmt.Errorf("android.os.Bundle.putStringArrayList is not available on this device")
-			return callErr
-		}
-		jArg0, err := env.NewStringUTF(arg0)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jArg0.Object)
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midBundlePutStringArrayList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})

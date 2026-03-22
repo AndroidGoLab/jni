@@ -17,3 +17,11 @@ const (
 	StateUninitialized    = consts.StateUninitialized
 	Success               = consts.Success
 )
+
+const (
+	Channels   = consts.Channels
+	Encoding   = consts.Encoding
+	Latency    = consts.Latency
+	Samplerate = consts.Samplerate
+	Source     = consts.Source
+)

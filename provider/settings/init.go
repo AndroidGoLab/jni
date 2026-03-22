@@ -40,6 +40,11 @@ var (
 	midGlobalPutLong     jni.MethodID
 	midGlobalPutString   jni.MethodID
 
+	clsNameValueTable          *jni.GlobalRef
+	midNameValueTableGetUriFor jni.MethodID
+
+	clsPanel *jni.GlobalRef
+
 	clsSecure                           *jni.GlobalRef
 	midSecureGetFloat2                  jni.MethodID
 	midSecureGetFloat3_1                jni.MethodID
@@ -55,6 +60,8 @@ var (
 	midSecurePutLong                    jni.MethodID
 	midSecurePutString                  jni.MethodID
 	midSecureSetLocationProviderEnabled jni.MethodID
+
+	clsSettingNotFoundException *jni.GlobalRef
 
 	clsSystem                          *jni.GlobalRef
 	midSystemCanWrite                  jni.MethodID
@@ -197,6 +204,25 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	c, err = env.FindClass("android/provider/Settings$NameValueTable")
+	if err != nil {
+		return fmt.Errorf("find class android.provider.Settings$NameValueTable: %w", err)
+	}
+	clsNameValueTable = env.NewGlobalRef(&c.Object)
+
+	midNameValueTableGetUriFor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNameValueTable)), "getUriFor", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/provider/Settings$Panel")
+	if err != nil {
+		return fmt.Errorf("find class android.provider.Settings$Panel: %w", err)
+	}
+	clsPanel = env.NewGlobalRef(&c.Object)
+
 	c, err = env.FindClass("android/provider/Settings$Secure")
 	if err != nil {
 		return fmt.Errorf("find class android.provider.Settings$Secure: %w", err)
@@ -300,6 +326,12 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
+
+	c, err = env.FindClass("android/provider/Settings$SettingNotFoundException")
+	if err != nil {
+		return fmt.Errorf("find class android.provider.Settings$SettingNotFoundException: %w", err)
+	}
+	clsSettingNotFoundException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/Settings$System")
 	if err != nil {

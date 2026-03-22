@@ -15,46 +15,6 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: createDeleteRequest
-          go_name: CreateDeleteRequest
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-            - java_type: java.util.Collection<android.net.Uri>
-              go_name: arg1
-          returns: android.app.PendingIntent
-          error: true
-        - java_method: createFavoriteRequest
-          go_name: CreateFavoriteRequest
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-            - java_type: java.util.Collection<android.net.Uri>
-              go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-          returns: android.app.PendingIntent
-          error: true
-        - java_method: createTrashRequest
-          go_name: CreateTrashRequest
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-            - java_type: java.util.Collection<android.net.Uri>
-              go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-          returns: android.app.PendingIntent
-          error: true
-        - java_method: createWriteRequest
-          go_name: CreateWriteRequest
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-            - java_type: java.util.Collection<android.net.Uri>
-              go_name: arg1
-          returns: android.app.PendingIntent
-          error: true
         - java_method: getDocumentUri
           go_name: GetDocumentUri
           params:
@@ -63,13 +23,6 @@ classes:
             - java_type: android.net.Uri
               go_name: arg1
           returns: android.net.Uri
-          error: true
-        - java_method: getExternalVolumeNames
-          go_name: GetExternalVolumeNames
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: java.util.Set<java.lang.String>
           error: true
         - java_method: getGeneration
           go_name: GetGeneration
@@ -106,30 +59,14 @@ classes:
           go_name: GetPickImagesMaxLimit
           returns: int
           error: true
-        - java_method: getRecentExternalVolumeNames
-          go_name: GetRecentExternalVolumeNames
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: java.util.Set<java.lang.String>
-          error: true
         - java_method: getRedactedUri
-          go_name: GetRedactedUri2
+          go_name: GetRedactedUri
           params:
             - java_type: android.content.ContentResolver
               go_name: arg0
             - java_type: android.net.Uri
               go_name: arg1
           returns: android.net.Uri
-          error: true
-        - java_method: getRedactedUri
-          go_name: GetRedactedUri2_1
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-            - java_type: java.util.List<android.net.Uri>
-              go_name: arg1
-          returns: java.util.List<android.net.Uri>
           error: true
         - java_method: getRequireOriginal
           go_name: GetRequireOriginal
@@ -189,17 +126,6 @@ classes:
             - java_type: String
               go_name: arg1
           returns: boolean
-          error: true
-        - java_method: markIsFavoriteStatus
-          go_name: MarkIsFavoriteStatus
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-            - java_type: java.util.Collection<android.net.Uri>
-              go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-          returns: void
           error: true
         - java_method: notifyCloudMediaChangedEvent
           go_name: NotifyCloudMediaChangedEvent
@@ -266,6 +192,76 @@ classes:
             - java_type: android.net.Uri
               go_name: arg0
           returns: android.net.Uri
+          error: true
+    - java_class: android.provider.MediaStore$Audio
+      go_type: MediaStoreAudio
+      static_methods:
+        - java_method: keyFor
+          go_name: KeyFor
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+    - java_class: android.provider.MediaStore$DownloadColumns
+      go_type: MediaStoreDownloadColumns
+    - java_class: android.provider.MediaStore$Downloads
+      go_type: MediaStoreDownloads
+      static_methods:
+        - java_method: getContentUri
+          go_name: GetContentUri1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: getContentUri
+          go_name: GetContentUri2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+    - java_class: android.provider.MediaStore$Files
+      go_type: MediaStoreFiles
+      static_methods:
+        - java_method: getContentUri
+          go_name: GetContentUri1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: getContentUri
+          go_name: GetContentUri2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+    - java_class: android.provider.MediaStore$Images
+      go_type: MediaStoreImages
+    - java_class: android.provider.MediaStore$MediaColumns
+      go_type: MediaStoreMediaColumns
+    - java_class: android.provider.MediaStore$PickerMediaColumns
+      go_type: MediaStorePickerMediaColumns
+    - java_class: android.provider.MediaStore$Video
+      go_type: MediaStoreVideo
+      static_methods:
+        - java_method: query
+          go_name: Query
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: java.lang.String[]
+              go_name: arg2
+          returns: android.database.Cursor
           error: true
 constants:
     - go_name: AccessMediaOwnerPackageNamePermission
@@ -465,4 +461,163 @@ constants:
       go_type: string
     - go_name: VolumeInternal
       value: '"internal"'
+      go_type: string
+    - go_name: DownloadUri
+      value: '"download_uri"'
+      go_type: string
+    - go_name: RefererUri
+      value: '"referer_uri"'
+      go_type: string
+    - go_name: ContentType
+      value: '"vnd.android.cursor.dir/download"'
+      go_type: string
+    - go_name: ExternalContentUri
+      value: "0"
+      go_type: int
+    - go_name: InternalContentUri
+      value: "0"
+      go_type: int
+    - go_name: Album
+      value: '"album"'
+      go_type: string
+    - go_name: AlbumArtist
+      value: '"album_artist"'
+      go_type: string
+    - go_name: Artist
+      value: '"artist"'
+      go_type: string
+    - go_name: Author
+      value: '"author"'
+      go_type: string
+    - go_name: Bitrate
+      value: '"bitrate"'
+      go_type: string
+    - go_name: BucketDisplayName
+      value: '"bucket_display_name"'
+      go_type: string
+    - go_name: BucketId
+      value: '"bucket_id"'
+      go_type: string
+    - go_name: CaptureFramerate
+      value: '"capture_framerate"'
+      go_type: string
+    - go_name: CdTrackNumber
+      value: '"cd_track_number"'
+      go_type: string
+    - go_name: Compilation
+      value: '"compilation"'
+      go_type: string
+    - go_name: Composer
+      value: '"composer"'
+      go_type: string
+    - go_name: Data
+      value: '"_data"'
+      go_type: string
+    - go_name: DateAdded
+      value: '"date_added"'
+      go_type: string
+    - go_name: DateExpires
+      value: '"date_expires"'
+      go_type: string
+    - go_name: DateModified
+      value: '"date_modified"'
+      go_type: string
+    - go_name: DateTaken
+      value: '"datetaken"'
+      go_type: string
+    - go_name: DiscNumber
+      value: '"disc_number"'
+      go_type: string
+    - go_name: DisplayName
+      value: '"_display_name"'
+      go_type: string
+    - go_name: DocumentId
+      value: '"document_id"'
+      go_type: string
+    - go_name: Duration
+      value: '"duration"'
+      go_type: string
+    - go_name: GenerationAdded
+      value: '"generation_added"'
+      go_type: string
+    - go_name: GenerationModified
+      value: '"generation_modified"'
+      go_type: string
+    - go_name: Genre
+      value: '"genre"'
+      go_type: string
+    - go_name: Height
+      value: '"height"'
+      go_type: string
+    - go_name: InferredDate
+      value: '"inferred_date"'
+      go_type: string
+    - go_name: InstanceId
+      value: '"instance_id"'
+      go_type: string
+    - go_name: IsDownload
+      value: '"is_download"'
+      go_type: string
+    - go_name: IsDrm
+      value: '"is_drm"'
+      go_type: string
+    - go_name: IsFavorite
+      value: '"is_favorite"'
+      go_type: string
+    - go_name: IsPending
+      value: '"is_pending"'
+      go_type: string
+    - go_name: IsTrashed
+      value: '"is_trashed"'
+      go_type: string
+    - go_name: MimeType
+      value: '"mime_type"'
+      go_type: string
+    - go_name: NumTracks
+      value: '"num_tracks"'
+      go_type: string
+    - go_name: OemMetadata
+      value: '"oem_metadata"'
+      go_type: string
+    - go_name: Orientation
+      value: '"orientation"'
+      go_type: string
+    - go_name: OriginalDocumentId
+      value: '"original_document_id"'
+      go_type: string
+    - go_name: OwnerPackageName
+      value: '"owner_package_name"'
+      go_type: string
+    - go_name: RelativePath
+      value: '"relative_path"'
+      go_type: string
+    - go_name: Resolution
+      value: '"resolution"'
+      go_type: string
+    - go_name: Size
+      value: '"_size"'
+      go_type: string
+    - go_name: Title
+      value: '"title"'
+      go_type: string
+    - go_name: VolumeName
+      value: '"volume_name"'
+      go_type: string
+    - go_name: Width
+      value: '"width"'
+      go_type: string
+    - go_name: Writer
+      value: '"writer"'
+      go_type: string
+    - go_name: Xmp
+      value: '"xmp"'
+      go_type: string
+    - go_name: Year
+      value: '"year"'
+      go_type: string
+    - go_name: DurationMillis
+      value: '"duration"'
+      go_type: string
+    - go_name: DefaultSortOrder
+      value: '"_display_name"'
       go_type: string

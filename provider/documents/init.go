@@ -53,6 +53,18 @@ var (
 	midContractMoveDocument                    jni.MethodID
 	midContractRemoveDocument                  jni.MethodID
 	midContractRenameDocument                  jni.MethodID
+
+	clsContractDocument *jni.GlobalRef
+
+	clsContractPath                 *jni.GlobalRef
+	midContractPathDescribeContents jni.MethodID
+	midContractPathEquals           jni.MethodID
+	midContractPathGetRootId        jni.MethodID
+	midContractPathHashCode         jni.MethodID
+	midContractPathToString         jni.MethodID
+	midContractPathWriteToParcel    jni.MethodID
+
+	clsContractRoot *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -281,6 +293,66 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
+
+	c, err = env.FindClass("android/provider/DocumentsContract$Document")
+	if err != nil {
+		return fmt.Errorf("find class android.provider.DocumentsContract$Document: %w", err)
+	}
+	clsContractDocument = env.NewGlobalRef(&c.Object)
+
+	c, err = env.FindClass("android/provider/DocumentsContract$Path")
+	if err != nil {
+		return fmt.Errorf("find class android.provider.DocumentsContract$Path: %w", err)
+	}
+	clsContractPath = env.NewGlobalRef(&c.Object)
+
+	midContractPathDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midContractPathEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midContractPathGetRootId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "getRootId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midContractPathHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midContractPathToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midContractPathWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	c, err = env.FindClass("android/provider/DocumentsContract$Root")
+	if err != nil {
+		return fmt.Errorf("find class android.provider.DocumentsContract$Root: %w", err)
+	}
+	clsContractRoot = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

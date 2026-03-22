@@ -17,7 +17,7 @@ var (
 	_ *app.Context
 )
 
-const serviceName = "window"
+const serviceNameWindowManager = "window"
 
 // WindowManager wraps android.view.WindowManager.
 type WindowManager struct {
@@ -39,12 +39,12 @@ func NewWindowManager(ctx *app.Context) (*WindowManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceNameWindowManager)
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceNameWindowManager)
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).

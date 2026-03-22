@@ -32,8 +32,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromUintptr(uintptr(activity.vm)),
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 	C._setCallbacks(activity)
 }
@@ -41,7 +41,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromUintptr(uintptr(activity.clazz)),
+		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
 	)
 }
 
@@ -133,13 +133,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	ui.RenderOutput()
 
-	// Query GetRoutedDevices.
-	routedDevs, err := p.GetRoutedDevices()
-	if err != nil {
-		fmt.Fprintf(output, "GetRoutedDevices: err=%v\n", err)
-	} else {
-		fmt.Fprintf(output, "GetRoutedDevices: %v\n", routedDevs)
-	}
+	// Filtered: GetRoutedDevices returns generic type (List<AudioDeviceInfo>)
+	// routedDevs, err := p.GetRoutedDevices()
+	// if err != nil {
+	// 	fmt.Fprintf(output, "GetRoutedDevices: err=%v\n", err)
+	// } else {
+	// 	fmt.Fprintf(output, "GetRoutedDevices: %v\n", routedDevs)
+	// }
 	ui.RenderOutput()
 
 	// Query GetSelectedTrack for audio (track type 2 = MEDIA_TRACK_TYPE_AUDIO).
