@@ -18,10 +18,10 @@ func ObjectFromRef(ref capi.Object) *Object {
 }
 
 // ObjectFromPtr wraps a raw C jobject pointer in an Object, mirroring
-// VMFromPtr. Use this from NativeActivity callbacks to avoid importing
-// the capi package:
+// VMFromPtr. Prefer ObjectFromUintptr for NativeActivity callbacks to
+// avoid go vet "possible misuse of unsafe.Pointer" warnings:
 //
-//	jni.ObjectFromPtr(unsafe.Pointer(activity.clazz))
+//	jni.ObjectFromUintptr(uintptr(activity.clazz))
 func ObjectFromPtr(ptr unsafe.Pointer) *Object {
 	return &Object{ref: capi.Object(uintptr(ptr))}
 }
