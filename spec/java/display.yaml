@@ -5,6 +5,354 @@
 package: display
 go_import: github.com/AndroidGoLab/jni/view/display
 classes:
+    - java_class: android.view.WindowManager
+      go_type: WindowManager
+      obtain: system_service
+      service_name: window
+      close: true
+      methods:
+        - java_method: getDefaultDisplay
+          go_name: GetDefaultDisplay
+          returns: android.view.Display
+          error: true
+        - java_method: removeViewImmediate
+          go_name: RemoveViewImmediate
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.util.DisplayMetrics
+      go_type: Metrics
+      methods:
+        - java_method: equals
+          go_name: Equals1
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: equals
+          go_name: Equals1_1
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: setTo
+          go_name: SetTo
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setToDefaults
+          go_name: SetToDefaults
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.view.SurfaceHolder
+      go_type: SurfaceHolder
+      methods:
+        - java_method: addCallback
+          go_name: AddCallback
+          params:
+            - java_type: android.view.SurfaceHolder$Callback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getSurface
+          go_name: GetSurface
+          returns: android.view.Surface
+          error: true
+        - java_method: getSurfaceFrame
+          go_name: GetSurfaceFrame
+          returns: android.graphics.Rect
+          error: true
+        - java_method: isCreating
+          go_name: IsCreating
+          returns: boolean
+          error: true
+        - java_method: lockCanvas
+          go_name: LockCanvas0
+          returns: android.graphics.Canvas
+          error: true
+        - java_method: lockCanvas
+          go_name: LockCanvas1_1
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: android.graphics.Canvas
+          error: true
+        - java_method: removeCallback
+          go_name: RemoveCallback
+          params:
+            - java_type: android.view.SurfaceHolder$Callback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFixedSize
+          go_name: SetFixedSize
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setFormat
+          go_name: SetFormat
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setKeepScreenOn
+          go_name: SetKeepScreenOn
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSizeFromLayout
+          go_name: SetSizeFromLayout
+          returns: void
+          error: true
+        - java_method: setType
+          go_name: SetType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unlockCanvasAndPost
+          go_name: UnlockCanvasAndPost
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.view.SurfaceView
+      go_type: SurfaceView
+      methods:
+        - java_method: applyTransactionToFrame
+          go_name: ApplyTransactionToFrame
+          params:
+            - java_type: android.view.SurfaceControl$Transaction
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: clearChildSurfacePackage
+          go_name: ClearChildSurfacePackage
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: gatherTransparentRegion
+          go_name: GatherTransparentRegion
+          params:
+            - java_type: android.graphics.Region
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAccessibilityClassName
+          go_name: GetAccessibilityClassName
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getChildSurfacePackage
+          go_name: GetChildSurfacePackage
+          returns: android.view.SurfaceControlViewHost$SurfacePackage
+          error: true
+        - java_method: getCompositionOrder
+          go_name: GetCompositionOrder
+          returns: int
+          error: true
+        - java_method: getHolder
+          go_name: GetHolder
+          returns: android.view.SurfaceHolder
+          error: true
+        - java_method: getHostToken
+          go_name: GetHostToken
+          returns: android.os.IBinder
+          error: true
+        - java_method: getImportantForAccessibility
+          go_name: GetImportantForAccessibility
+          returns: int
+          error: true
+        - java_method: getSurfaceControl
+          go_name: GetSurfaceControl
+          returns: android.view.SurfaceControl
+          error: true
+        - java_method: hasOverlappingRendering
+          go_name: HasOverlappingRendering
+          returns: boolean
+          error: true
+        - java_method: setAlpha
+          go_name: SetAlpha
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setChildSurfacePackage
+          go_name: SetChildSurfacePackage
+          params:
+            - java_type: android.view.SurfaceControlViewHost$SurfacePackage
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setClipBounds
+          go_name: SetClipBounds
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCompositionOrder
+          go_name: SetCompositionOrder
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDesiredHdrHeadroom
+          go_name: SetDesiredHdrHeadroom
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSecure
+          go_name: SetSecure
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSurfaceLifecycle
+          go_name: SetSurfaceLifecycle
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVisibility
+          go_name: SetVisibility
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setZOrderMediaOverlay
+          go_name: SetZOrderMediaOverlay
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setZOrderOnTop
+          go_name: SetZOrderOnTop
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.view.Surface
+      go_type: Surface
+      methods:
+        - java_method: clearFrameRate
+          go_name: ClearFrameRate
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: isValid
+          go_name: IsValid
+          returns: boolean
+          error: true
+        - java_method: lockCanvas
+          go_name: LockCanvas
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: android.graphics.Canvas
+          error: true
+        - java_method: lockHardwareCanvas
+          go_name: LockHardwareCanvas
+          returns: android.graphics.Canvas
+          error: true
+        - java_method: readFromParcel
+          go_name: ReadFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: release
+          go_name: Release
+          returns: void
+          error: true
+        - java_method: setFrameRate
+          go_name: SetFrameRate2
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setFrameRate
+          go_name: SetFrameRate3_1
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: unlockCanvas
+          go_name: UnlockCanvas
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unlockCanvasAndPost
+          go_name: UnlockCanvasAndPost
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.view.View
       go_type: View
       methods:
@@ -3968,224 +4316,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.view.SurfaceHolder
-      go_type: SurfaceHolder
-      methods:
-        - java_method: addCallback
-          go_name: AddCallback
-          params:
-            - java_type: android.view.SurfaceHolder$Callback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getSurface
-          go_name: GetSurface
-          returns: android.view.Surface
-          error: true
-        - java_method: getSurfaceFrame
-          go_name: GetSurfaceFrame
-          returns: android.graphics.Rect
-          error: true
-        - java_method: isCreating
-          go_name: IsCreating
-          returns: boolean
-          error: true
-        - java_method: lockCanvas
-          go_name: LockCanvas0
-          returns: android.graphics.Canvas
-          error: true
-        - java_method: lockCanvas
-          go_name: LockCanvas1_1
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: android.graphics.Canvas
-          error: true
-        - java_method: removeCallback
-          go_name: RemoveCallback
-          params:
-            - java_type: android.view.SurfaceHolder$Callback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setFixedSize
-          go_name: SetFixedSize
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setFormat
-          go_name: SetFormat
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setKeepScreenOn
-          go_name: SetKeepScreenOn
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSizeFromLayout
-          go_name: SetSizeFromLayout
-          returns: void
-          error: true
-        - java_method: setType
-          go_name: SetType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: unlockCanvasAndPost
-          go_name: UnlockCanvasAndPost
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.util.DisplayMetrics
-      go_type: Metrics
-      methods:
-        - java_method: equals
-          go_name: Equals1
-          params:
-            - java_type: android.util.DisplayMetrics
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: equals
-          go_name: Equals1_1
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: setTo
-          go_name: SetTo
-          params:
-            - java_type: android.util.DisplayMetrics
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setToDefaults
-          go_name: SetToDefaults
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.view.Surface
-      go_type: Surface
-      methods:
-        - java_method: clearFrameRate
-          go_name: ClearFrameRate
-          returns: void
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: isValid
-          go_name: IsValid
-          returns: boolean
-          error: true
-        - java_method: lockCanvas
-          go_name: LockCanvas
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: android.graphics.Canvas
-          error: true
-        - java_method: lockHardwareCanvas
-          go_name: LockHardwareCanvas
-          returns: android.graphics.Canvas
-          error: true
-        - java_method: readFromParcel
-          go_name: ReadFromParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: release
-          go_name: Release
-          returns: void
-          error: true
-        - java_method: setFrameRate
-          go_name: SetFrameRate2
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setFrameRate
-          go_name: SetFrameRate3_1
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: unlockCanvas
-          go_name: UnlockCanvas
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: unlockCanvasAndPost
-          go_name: UnlockCanvasAndPost
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.WindowManager
-      go_type: WindowManager
-      obtain: system_service
-      service_name: window
-      close: true
-      methods:
-        - java_method: getDefaultDisplay
-          go_name: GetDefaultDisplay
-          returns: android.view.Display
-          error: true
-        - java_method: removeViewImmediate
-          go_name: RemoveViewImmediate
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-          returns: void
-          error: true
     - java_class: android.view.ViewGroup
       go_type: ViewGroup
       methods:
@@ -5255,137 +5385,196 @@ classes:
               go_name: arg2
           returns: int
           error: true
-    - java_class: android.view.SurfaceView
-      go_type: SurfaceView
-      methods:
-        - java_method: applyTransactionToFrame
-          go_name: ApplyTransactionToFrame
-          params:
-            - java_type: android.view.SurfaceControl$Transaction
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: clearChildSurfacePackage
-          go_name: ClearChildSurfacePackage
-          returns: void
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: gatherTransparentRegion
-          go_name: GatherTransparentRegion
-          params:
-            - java_type: android.graphics.Region
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAccessibilityClassName
-          go_name: GetAccessibilityClassName
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getChildSurfacePackage
-          go_name: GetChildSurfacePackage
-          returns: android.view.SurfaceControlViewHost$SurfacePackage
-          error: true
-        - java_method: getCompositionOrder
-          go_name: GetCompositionOrder
-          returns: int
-          error: true
-        - java_method: getHolder
-          go_name: GetHolder
-          returns: android.view.SurfaceHolder
-          error: true
-        - java_method: getHostToken
-          go_name: GetHostToken
-          returns: android.os.IBinder
-          error: true
-        - java_method: getImportantForAccessibility
-          go_name: GetImportantForAccessibility
-          returns: int
-          error: true
-        - java_method: getSurfaceControl
-          go_name: GetSurfaceControl
-          returns: android.view.SurfaceControl
-          error: true
-        - java_method: hasOverlappingRendering
-          go_name: HasOverlappingRendering
-          returns: boolean
-          error: true
-        - java_method: setAlpha
-          go_name: SetAlpha
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setChildSurfacePackage
-          go_name: SetChildSurfacePackage
-          params:
-            - java_type: android.view.SurfaceControlViewHost$SurfacePackage
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setClipBounds
-          go_name: SetClipBounds
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCompositionOrder
-          go_name: SetCompositionOrder
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDesiredHdrHeadroom
-          go_name: SetDesiredHdrHeadroom
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSecure
-          go_name: SetSecure
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSurfaceLifecycle
-          go_name: SetSurfaceLifecycle
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setVisibility
-          go_name: SetVisibility
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setZOrderMediaOverlay
-          go_name: SetZOrderMediaOverlay
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setZOrderOnTop
-          go_name: SetZOrderOnTop
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
 constants:
+    - go_name: CompatSmallCoverScreenOptIn
+      value: "1"
+      go_type: int
+    - go_name: PropertyActivityEmbeddingAllowSystemOverride
+      value: '"android.window.PROPERTY_ACTIVITY_EMBEDDING_ALLOW_SYSTEM_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyActivityEmbeddingSplitsEnabled
+      value: '"android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"'
+      go_type: string
+    - go_name: PropertyCameraCompatAllowForceRotation
+      value: '"android.window.PROPERTY_CAMERA_COMPAT_ALLOW_FORCE_ROTATION"'
+      go_type: string
+    - go_name: PropertyCameraCompatAllowRefresh
+      value: '"android.window.PROPERTY_CAMERA_COMPAT_ALLOW_REFRESH"'
+      go_type: string
+    - go_name: PropertyCameraCompatEnableRefreshViaPause
+      value: '"android.window.PROPERTY_CAMERA_COMPAT_ENABLE_REFRESH_VIA_PAUSE"'
+      go_type: string
+    - go_name: PropertyCompatAllowDisplayOrientationOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_DISPLAY_ORIENTATION_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowIgnoringOrientationRequestWhenLoopDetected
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_IGNORING_ORIENTATION_REQUEST_WHEN_LOOP_DETECTED"'
+      go_type: string
+    - go_name: PropertyCompatAllowMinAspectRatioOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowOrientationOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowResizeableActivityOverrides
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES"'
+      go_type: string
+    - go_name: PropertyCompatAllowSandboxingViewBoundsApis
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_SANDBOXING_VIEW_BOUNDS_APIS"'
+      go_type: string
+    - go_name: PropertyCompatAllowSmallCoverScreen
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_SMALL_COVER_SCREEN"'
+      go_type: string
+    - go_name: PropertyCompatAllowUserAspectRatioFullscreenOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowUserAspectRatioOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatEnableFakeFocus
+      value: '"android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS"'
+      go_type: string
+    - go_name: PropertyCompatIgnoreRequestedOrientation
+      value: '"android.window.PROPERTY_COMPAT_IGNORE_REQUESTED_ORIENTATION"'
+      go_type: string
+    - go_name: PropertySupportsMultiInstanceSystemUi
+      value: '"android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI"'
+      go_type: string
+    - go_name: ScreenRecordingStateNotVisible
+      value: "0"
+      go_type: int
+    - go_name: ScreenRecordingStateVisible
+      value: "1"
+      go_type: int
+    - go_name: Density140
+      value: "140"
+      go_type: int
+    - go_name: Density180
+      value: "180"
+      go_type: int
+    - go_name: Density200
+      value: "200"
+      go_type: int
+    - go_name: Density220
+      value: "220"
+      go_type: int
+    - go_name: Density260
+      value: "260"
+      go_type: int
+    - go_name: Density280
+      value: "280"
+      go_type: int
+    - go_name: Density300
+      value: "300"
+      go_type: int
+    - go_name: Density340
+      value: "340"
+      go_type: int
+    - go_name: Density360
+      value: "360"
+      go_type: int
+    - go_name: Density390
+      value: "390"
+      go_type: int
+    - go_name: Density400
+      value: "400"
+      go_type: int
+    - go_name: Density420
+      value: "420"
+      go_type: int
+    - go_name: Density440
+      value: "440"
+      go_type: int
+    - go_name: Density450
+      value: "450"
+      go_type: int
+    - go_name: Density520
+      value: "520"
+      go_type: int
+    - go_name: Density560
+      value: "560"
+      go_type: int
+    - go_name: Density600
+      value: "600"
+      go_type: int
+    - go_name: DensityDefault
+      value: "160"
+      go_type: int
+    - go_name: DensityDeviceStable
+      value: "0"
+      go_type: int
+    - go_name: DensityHigh
+      value: "240"
+      go_type: int
+    - go_name: DensityLow
+      value: "120"
+      go_type: int
+    - go_name: DensityMedium
+      value: "160"
+      go_type: int
+    - go_name: DensityTv
+      value: "213"
+      go_type: int
+    - go_name: DensityXhigh
+      value: "320"
+      go_type: int
+    - go_name: DensityXxhigh
+      value: "480"
+      go_type: int
+    - go_name: DensityXxxhigh
+      value: "640"
+      go_type: int
+    - go_name: SurfaceTypeGpu
+      value: "2"
+      go_type: int
+    - go_name: SurfaceTypeHardware
+      value: "1"
+      go_type: int
+    - go_name: SurfaceTypeNormal
+      value: "0"
+      go_type: int
+    - go_name: SurfaceTypePushBuffers
+      value: "3"
+      go_type: int
+    - go_name: SurfaceLifecycleDefault
+      value: "0"
+      go_type: int
+    - go_name: SurfaceLifecycleFollowsAttachment
+      value: "2"
+      go_type: int
+    - go_name: SurfaceLifecycleFollowsVisibility
+      value: "1"
+      go_type: int
+    - go_name: ChangeFrameRateAlways
+      value: "1"
+      go_type: int
+    - go_name: ChangeFrameRateOnlyIfSeamless
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: FrameRateCompatibilityAtLeast
+      value: "2"
+      go_type: int
+    - go_name: FrameRateCompatibilityDefault
+      value: "0"
+      go_type: int
+    - go_name: FrameRateCompatibilityFixedSource
+      value: "1"
+      go_type: int
+    - go_name: Rotation0
+      value: "0"
+      go_type: int
+    - go_name: Rotation180
+      value: "2"
+      go_type: int
+    - go_name: Rotation270
+      value: "3"
+      go_type: int
+    - go_name: Rotation90
+      value: "1"
+      go_type: int
     - go_name: AccessibilityDataSensitiveAuto
       value: "0"
       go_type: int
@@ -5869,186 +6058,6 @@ constants:
     - go_name: StateVr
       value: "5"
       go_type: int
-    - go_name: SurfaceTypeGpu
-      value: "2"
-      go_type: int
-    - go_name: SurfaceTypeHardware
-      value: "1"
-      go_type: int
-    - go_name: SurfaceTypeNormal
-      value: "0"
-      go_type: int
-    - go_name: SurfaceTypePushBuffers
-      value: "3"
-      go_type: int
-    - go_name: Density140
-      value: "140"
-      go_type: int
-    - go_name: Density180
-      value: "180"
-      go_type: int
-    - go_name: Density200
-      value: "200"
-      go_type: int
-    - go_name: Density220
-      value: "220"
-      go_type: int
-    - go_name: Density260
-      value: "260"
-      go_type: int
-    - go_name: Density280
-      value: "280"
-      go_type: int
-    - go_name: Density300
-      value: "300"
-      go_type: int
-    - go_name: Density340
-      value: "340"
-      go_type: int
-    - go_name: Density360
-      value: "360"
-      go_type: int
-    - go_name: Density390
-      value: "390"
-      go_type: int
-    - go_name: Density400
-      value: "400"
-      go_type: int
-    - go_name: Density420
-      value: "420"
-      go_type: int
-    - go_name: Density440
-      value: "440"
-      go_type: int
-    - go_name: Density450
-      value: "450"
-      go_type: int
-    - go_name: Density520
-      value: "520"
-      go_type: int
-    - go_name: Density560
-      value: "560"
-      go_type: int
-    - go_name: Density600
-      value: "600"
-      go_type: int
-    - go_name: DensityDefault
-      value: "160"
-      go_type: int
-    - go_name: DensityDeviceStable
-      value: "0"
-      go_type: int
-    - go_name: DensityHigh
-      value: "240"
-      go_type: int
-    - go_name: DensityLow
-      value: "120"
-      go_type: int
-    - go_name: DensityMedium
-      value: "160"
-      go_type: int
-    - go_name: DensityTv
-      value: "213"
-      go_type: int
-    - go_name: DensityXhigh
-      value: "320"
-      go_type: int
-    - go_name: DensityXxhigh
-      value: "480"
-      go_type: int
-    - go_name: DensityXxxhigh
-      value: "640"
-      go_type: int
-    - go_name: ChangeFrameRateAlways
-      value: "1"
-      go_type: int
-    - go_name: ChangeFrameRateOnlyIfSeamless
-      value: "0"
-      go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: FrameRateCompatibilityAtLeast
-      value: "2"
-      go_type: int
-    - go_name: FrameRateCompatibilityDefault
-      value: "0"
-      go_type: int
-    - go_name: FrameRateCompatibilityFixedSource
-      value: "1"
-      go_type: int
-    - go_name: Rotation0
-      value: "0"
-      go_type: int
-    - go_name: Rotation180
-      value: "2"
-      go_type: int
-    - go_name: Rotation270
-      value: "3"
-      go_type: int
-    - go_name: Rotation90
-      value: "1"
-      go_type: int
-    - go_name: CompatSmallCoverScreenOptIn
-      value: "1"
-      go_type: int
-    - go_name: PropertyActivityEmbeddingAllowSystemOverride
-      value: '"android.window.PROPERTY_ACTIVITY_EMBEDDING_ALLOW_SYSTEM_OVERRIDE"'
-      go_type: string
-    - go_name: PropertyActivityEmbeddingSplitsEnabled
-      value: '"android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"'
-      go_type: string
-    - go_name: PropertyCameraCompatAllowForceRotation
-      value: '"android.window.PROPERTY_CAMERA_COMPAT_ALLOW_FORCE_ROTATION"'
-      go_type: string
-    - go_name: PropertyCameraCompatAllowRefresh
-      value: '"android.window.PROPERTY_CAMERA_COMPAT_ALLOW_REFRESH"'
-      go_type: string
-    - go_name: PropertyCameraCompatEnableRefreshViaPause
-      value: '"android.window.PROPERTY_CAMERA_COMPAT_ENABLE_REFRESH_VIA_PAUSE"'
-      go_type: string
-    - go_name: PropertyCompatAllowDisplayOrientationOverride
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_DISPLAY_ORIENTATION_OVERRIDE"'
-      go_type: string
-    - go_name: PropertyCompatAllowIgnoringOrientationRequestWhenLoopDetected
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_IGNORING_ORIENTATION_REQUEST_WHEN_LOOP_DETECTED"'
-      go_type: string
-    - go_name: PropertyCompatAllowMinAspectRatioOverride
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE"'
-      go_type: string
-    - go_name: PropertyCompatAllowOrientationOverride
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE"'
-      go_type: string
-    - go_name: PropertyCompatAllowResizeableActivityOverrides
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES"'
-      go_type: string
-    - go_name: PropertyCompatAllowSandboxingViewBoundsApis
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_SANDBOXING_VIEW_BOUNDS_APIS"'
-      go_type: string
-    - go_name: PropertyCompatAllowSmallCoverScreen
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_SMALL_COVER_SCREEN"'
-      go_type: string
-    - go_name: PropertyCompatAllowUserAspectRatioFullscreenOverride
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE"'
-      go_type: string
-    - go_name: PropertyCompatAllowUserAspectRatioOverride
-      value: '"android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE"'
-      go_type: string
-    - go_name: PropertyCompatEnableFakeFocus
-      value: '"android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS"'
-      go_type: string
-    - go_name: PropertyCompatIgnoreRequestedOrientation
-      value: '"android.window.PROPERTY_COMPAT_IGNORE_REQUESTED_ORIENTATION"'
-      go_type: string
-    - go_name: PropertySupportsMultiInstanceSystemUi
-      value: '"android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI"'
-      go_type: string
-    - go_name: ScreenRecordingStateNotVisible
-      value: "0"
-      go_type: int
-    - go_name: ScreenRecordingStateVisible
-      value: "1"
-      go_type: int
     - go_name: FocusAfterDescendants
       value: "262144"
       go_type: int
@@ -6075,13 +6084,4 @@ constants:
       go_type: int
     - go_name: PersistentScrollingCache
       value: "2"
-      go_type: int
-    - go_name: SurfaceLifecycleDefault
-      value: "0"
-      go_type: int
-    - go_name: SurfaceLifecycleFollowsAttachment
-      value: "2"
-      go_type: int
-    - go_name: SurfaceLifecycleFollowsVisibility
-      value: "1"
       go_type: int

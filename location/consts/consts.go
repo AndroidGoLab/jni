@@ -3,6 +3,21 @@
 package consts
 
 const (
+	ConstellationBeidou  int = 5
+	ConstellationGalileo int = 6
+	ConstellationGlonass int = 3
+	ConstellationGps     int = 1
+	ConstellationIrnss   int = 7
+	ConstellationQzss    int = 4
+	ConstellationSbas    int = 2
+	ConstellationUnknown int = 0
+	Creator              int = 0
+	FormatDegrees        int = 0
+	FormatMinutes        int = 1
+	FormatSeconds        int = 2
+)
+
+const (
 	ActionGnssCapabilitiesChanged string = "android.location.action.GNSS_CAPABILITIES_CHANGED"
 	ExtraGnssCapabilities         string = "android.location.extra.GNSS_CAPABILITIES"
 	ExtraLocationEnabled          string = "android.location.extra.LOCATION_ENABLED"
@@ -20,19 +35,4 @@ const (
 	NetworkProvider               string = "network"
 	PassiveProvider               string = "passive"
 	ProvidersChangedAction        string = "android.location.PROVIDERS_CHANGED"
-)
-
-const (
-	Creator              int = 0
-	FormatDegrees        int = 0
-	FormatMinutes        int = 1
-	FormatSeconds        int = 2
-	ConstellationBeidou  int = 5
-	ConstellationGalileo int = 6
-	ConstellationGlonass int = 3
-	ConstellationGps     int = 1
-	ConstellationIrnss   int = 7
-	ConstellationQzss    int = 4
-	ConstellationSbas    int = 2
-	ConstellationUnknown int = 0
 )

@@ -139,6 +139,14 @@ const (
 	ExtraVerificationIcon                           = consts.ExtraVerificationIcon
 	ExtraVerificationText                           = consts.ExtraVerificationText
 	IntentCategoryNotificationPreferences           = consts.IntentCategoryNotificationPreferences
+	DefaultChannelId                                = consts.DefaultChannelId
+	EditConversation                                = consts.EditConversation
+	EditImportance                                  = consts.EditImportance
+	EditLauncher                                    = consts.EditLauncher
+	EditLockedDevice                                = consts.EditLockedDevice
+	EditSound                                       = consts.EditSound
+	EditVibration                                   = consts.EditVibration
+	EditZen                                         = consts.EditZen
 	ActionAppBlockStateChanged                      = consts.ActionAppBlockStateChanged
 	ActionAutomaticZenRule                          = consts.ActionAutomaticZenRule
 	ActionAutomaticZenRuleStatusChanged             = consts.ActionAutomaticZenRuleStatusChanged
@@ -157,12 +165,4 @@ const (
 	ExtraNotificationPolicy                         = consts.ExtraNotificationPolicy
 	MetaDataAutomaticRuleType                       = consts.MetaDataAutomaticRuleType
 	MetaDataRuleInstanceLimit                       = consts.MetaDataRuleInstanceLimit
-	DefaultChannelId                                = consts.DefaultChannelId
-	EditConversation                                = consts.EditConversation
-	EditImportance                                  = consts.EditImportance
-	EditLauncher                                    = consts.EditLauncher
-	EditLockedDevice                                = consts.EditLockedDevice
-	EditSound                                       = consts.EditSound
-	EditVibration                                   = consts.EditVibration
-	EditZen                                         = consts.EditZen
 )

@@ -5,6 +5,60 @@
 package: print
 go_import: github.com/AndroidGoLab/jni/print
 classes:
+    - java_class: android.print.PrintJob
+      go_type: Job
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: android.print.PrintJobId
+          error: true
+        - java_method: getInfo
+          go_name: GetInfo
+          returns: android.print.PrintJobInfo
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isBlocked
+          go_name: IsBlocked
+          returns: boolean
+          error: true
+        - java_method: isCancelled
+          go_name: IsCancelled
+          returns: boolean
+          error: true
+        - java_method: isCompleted
+          go_name: IsCompleted
+          returns: boolean
+          error: true
+        - java_method: isFailed
+          go_name: IsFailed
+          returns: boolean
+          error: true
+        - java_method: isQueued
+          go_name: IsQueued
+          returns: boolean
+          error: true
+        - java_method: isStarted
+          go_name: IsStarted
+          returns: boolean
+          error: true
+        - java_method: restart
+          go_name: Restart
+          returns: void
+          error: true
     - java_class: android.print.PrintJobInfo
       go_type: JobInfo
       methods:
@@ -105,60 +159,6 @@ classes:
             - java_type: android.print.PrintAttributes
               go_name: arg2
           returns: android.print.PrintJob
-          error: true
-    - java_class: android.print.PrintJob
-      go_type: Job
-      methods:
-        - java_method: cancel
-          go_name: Cancel
-          returns: void
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: android.print.PrintJobId
-          error: true
-        - java_method: getInfo
-          go_name: GetInfo
-          returns: android.print.PrintJobInfo
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isBlocked
-          go_name: IsBlocked
-          returns: boolean
-          error: true
-        - java_method: isCancelled
-          go_name: IsCancelled
-          returns: boolean
-          error: true
-        - java_method: isCompleted
-          go_name: IsCompleted
-          returns: boolean
-          error: true
-        - java_method: isFailed
-          go_name: IsFailed
-          returns: boolean
-          error: true
-        - java_method: isQueued
-          go_name: IsQueued
-          returns: boolean
-          error: true
-        - java_method: isStarted
-          go_name: IsStarted
-          returns: boolean
-          error: true
-        - java_method: restart
-          go_name: Restart
-          returns: void
           error: true
 constants:
     - go_name: Creator

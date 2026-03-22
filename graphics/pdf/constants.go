@@ -5,15 +5,24 @@ package pdf
 import "github.com/AndroidGoLab/jni/graphics/pdf/consts"
 
 const (
-	Creator                             = consts.Creator
-	DensityNone                         = consts.DensityNone
-	Alpha8                              = consts.Alpha8
-	Argb4444                            = consts.Argb4444
-	Argb8888                            = consts.Argb8888
-	Hardware                            = consts.Hardware
-	Rgba1010102                         = consts.Rgba1010102
-	RgbaF16                             = consts.RgbaF16
-	Rgb565                              = consts.Rgb565
+	AllSaveFlag                         = consts.AllSaveFlag
+	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
+	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
+	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
+	PdfFormTypeNone                     = consts.PdfFormTypeNone
+	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
+	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
+	RenderModeForDisplay                = consts.RenderModeForDisplay
+	RenderModeForPrint                  = consts.RenderModeForPrint
+	Bold                                = consts.Bold
+	BoldItalic                          = consts.BoldItalic
+	Default                             = consts.Default
+	DefaultBold                         = consts.DefaultBold
+	Italic                              = consts.Italic
+	Monospace                           = consts.Monospace
+	Normal                              = consts.Normal
+	SansSerif                           = consts.SansSerif
+	Serif                               = consts.Serif
 	AntiAliasFlag                       = consts.AntiAliasFlag
 	CursorAfter                         = consts.CursorAfter
 	CursorAt                            = consts.CursorAt
@@ -44,7 +53,7 @@ const (
 	TextRunFlagRightEdge                = consts.TextRunFlagRightEdge
 	UnderlineTextFlag                   = consts.UnderlineTextFlag
 	VerticalTextFlag                    = consts.VerticalTextFlag
-	AllSaveFlag                         = consts.AllSaveFlag
+	Creator                             = consts.Creator
 	ModeAppend                          = consts.ModeAppend
 	ModeCreate                          = consts.ModeCreate
 	ModeReadOnly                        = consts.ModeReadOnly
@@ -53,21 +62,12 @@ const (
 	ModeWorldReadable                   = consts.ModeWorldReadable
 	ModeWorldWriteable                  = consts.ModeWorldWriteable
 	ModeWriteOnly                       = consts.ModeWriteOnly
-	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
-	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
-	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
-	PdfFormTypeNone                     = consts.PdfFormTypeNone
-	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
-	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
-	RenderModeForDisplay                = consts.RenderModeForDisplay
-	RenderModeForPrint                  = consts.RenderModeForPrint
-	Bold                                = consts.Bold
-	BoldItalic                          = consts.BoldItalic
-	Default                             = consts.Default
-	DefaultBold                         = consts.DefaultBold
-	Italic                              = consts.Italic
-	Monospace                           = consts.Monospace
-	Normal                              = consts.Normal
-	SansSerif                           = consts.SansSerif
-	Serif                               = consts.Serif
+	DensityNone                         = consts.DensityNone
+	Alpha8                              = consts.Alpha8
+	Argb4444                            = consts.Argb4444
+	Argb8888                            = consts.Argb8888
+	Hardware                            = consts.Hardware
+	Rgba1010102                         = consts.Rgba1010102
+	RgbaF16                             = consts.RgbaF16
+	Rgb565                              = consts.Rgb565
 )

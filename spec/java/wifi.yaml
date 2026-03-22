@@ -5,6 +5,95 @@
 package: wifi
 go_import: github.com/AndroidGoLab/jni/net/wifi
 classes:
+    - java_class: android.net.wifi.ScanResult
+      go_type: ScanResult
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAffiliatedMloLinks
+          go_name: GetAffiliatedMloLinks
+          returns: java.util.List<android.net.wifi.MloLink>
+          error: true
+        - java_method: getApMldMacAddress
+          go_name: GetApMldMacAddress
+          returns: android.net.MacAddress
+          error: true
+        - java_method: getApMloLinkId
+          go_name: GetApMloLinkId
+          returns: int
+          error: true
+        - java_method: getInformationElements
+          go_name: GetInformationElements
+          returns: java.util.List<android.net.wifi.ScanResult$InformationElement>
+          error: true
+        - java_method: getSecurityTypes
+          go_name: GetSecurityTypes
+          returns: '[I'
+          error: true
+        - java_method: getWifiSsid
+          go_name: GetWifiSsid
+          returns: android.net.wifi.WifiSsid
+          error: true
+        - java_method: getWifiStandard
+          go_name: GetWifiStandard
+          returns: int
+          error: true
+        - java_method: is80211azNtbResponder
+          go_name: Is80211azNtbResponder
+          returns: boolean
+          error: true
+        - java_method: is80211mcResponder
+          go_name: Is80211mcResponder
+          returns: boolean
+          error: true
+        - java_method: isPasspointNetwork
+          go_name: IsPasspointNetwork
+          returns: boolean
+          error: true
+        - java_method: isRangingFrameProtectionRequired
+          go_name: IsRangingFrameProtectionRequired
+          returns: boolean
+          error: true
+        - java_method: isSecureHeLtfSupported
+          go_name: IsSecureHeLtfSupported
+          returns: boolean
+          error: true
+        - java_method: isTwtResponder
+          go_name: IsTwtResponder
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: convertChannelToFrequencyMhzIfSupported
+          go_name: ConvertChannelToFrequencyMhzIfSupported
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: convertFrequencyMhzToChannelIfSupported
+          go_name: ConvertFrequencyMhzToChannelIfSupported
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
     - java_class: android.net.wifi.WifiInfo
       go_type: Info
       methods:
@@ -867,96 +956,79 @@ classes:
               go_name: arg1
           returns: int
           error: true
-    - java_class: android.net.wifi.ScanResult
-      go_type: ScanResult
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAffiliatedMloLinks
-          go_name: GetAffiliatedMloLinks
-          returns: java.util.List<android.net.wifi.MloLink>
-          error: true
-        - java_method: getApMldMacAddress
-          go_name: GetApMldMacAddress
-          returns: android.net.MacAddress
-          error: true
-        - java_method: getApMloLinkId
-          go_name: GetApMloLinkId
-          returns: int
-          error: true
-        - java_method: getInformationElements
-          go_name: GetInformationElements
-          returns: java.util.List<android.net.wifi.ScanResult$InformationElement>
-          error: true
-        - java_method: getSecurityTypes
-          go_name: GetSecurityTypes
-          returns: '[I'
-          error: true
-        - java_method: getWifiSsid
-          go_name: GetWifiSsid
-          returns: android.net.wifi.WifiSsid
-          error: true
-        - java_method: getWifiStandard
-          go_name: GetWifiStandard
-          returns: int
-          error: true
-        - java_method: is80211azNtbResponder
-          go_name: Is80211azNtbResponder
-          returns: boolean
-          error: true
-        - java_method: is80211mcResponder
-          go_name: Is80211mcResponder
-          returns: boolean
-          error: true
-        - java_method: isPasspointNetwork
-          go_name: IsPasspointNetwork
-          returns: boolean
-          error: true
-        - java_method: isRangingFrameProtectionRequired
-          go_name: IsRangingFrameProtectionRequired
-          returns: boolean
-          error: true
-        - java_method: isSecureHeLtfSupported
-          go_name: IsSecureHeLtfSupported
-          returns: boolean
-          error: true
-        - java_method: isTwtResponder
-          go_name: IsTwtResponder
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: convertChannelToFrequencyMhzIfSupported
-          go_name: ConvertChannelToFrequencyMhzIfSupported
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: convertFrequencyMhzToChannelIfSupported
-          go_name: ConvertFrequencyMhzToChannelIfSupported
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
 constants:
+    - go_name: ChannelWidth160mhz
+      value: "3"
+      go_type: int
+    - go_name: ChannelWidth20mhz
+      value: "0"
+      go_type: int
+    - go_name: ChannelWidth320mhz
+      value: "5"
+      go_type: int
+    - go_name: ChannelWidth40mhz
+      value: "1"
+      go_type: int
+    - go_name: ChannelWidth80mhz
+      value: "2"
+      go_type: int
+    - go_name: ChannelWidth80mhzPlusMhz
+      value: "4"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: PreambleEht
+      value: "4"
+      go_type: int
+    - go_name: PreambleHe
+      value: "3"
+      go_type: int
+    - go_name: PreambleHt
+      value: "1"
+      go_type: int
+    - go_name: PreambleLegacy
+      value: "0"
+      go_type: int
+    - go_name: PreambleVht
+      value: "2"
+      go_type: int
+    - go_name: Unspecified
+      value: "-1"
+      go_type: int
+    - go_name: WifiBand24Ghz
+      value: "1"
+      go_type: int
+    - go_name: WifiBand5Ghz
+      value: "2"
+      go_type: int
+    - go_name: WifiBand60Ghz
+      value: "16"
+      go_type: int
+    - go_name: WifiBand6Ghz
+      value: "8"
+      go_type: int
+    - go_name: WifiStandard11ac
+      value: "5"
+      go_type: int
+    - go_name: WifiStandard11ad
+      value: "7"
+      go_type: int
+    - go_name: WifiStandard11ax
+      value: "6"
+      go_type: int
+    - go_name: WifiStandard11be
+      value: "8"
+      go_type: int
+    - go_name: WifiStandard11n
+      value: "4"
+      go_type: int
+    - go_name: WifiStandardLegacy
+      value: "1"
+      go_type: int
+    - go_name: WifiStandardUnknown
+      value: "0"
+      go_type: int
     - go_name: FrequencyUnits
       value: '"MHz"'
       go_type: string
@@ -1250,76 +1322,4 @@ constants:
       go_type: int
     - go_name: WpsWepProhibited
       value: "4"
-      go_type: int
-    - go_name: ChannelWidth160mhz
-      value: "3"
-      go_type: int
-    - go_name: ChannelWidth20mhz
-      value: "0"
-      go_type: int
-    - go_name: ChannelWidth320mhz
-      value: "5"
-      go_type: int
-    - go_name: ChannelWidth40mhz
-      value: "1"
-      go_type: int
-    - go_name: ChannelWidth80mhz
-      value: "2"
-      go_type: int
-    - go_name: ChannelWidth80mhzPlusMhz
-      value: "4"
-      go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: PreambleEht
-      value: "4"
-      go_type: int
-    - go_name: PreambleHe
-      value: "3"
-      go_type: int
-    - go_name: PreambleHt
-      value: "1"
-      go_type: int
-    - go_name: PreambleLegacy
-      value: "0"
-      go_type: int
-    - go_name: PreambleVht
-      value: "2"
-      go_type: int
-    - go_name: Unspecified
-      value: "-1"
-      go_type: int
-    - go_name: WifiBand24Ghz
-      value: "1"
-      go_type: int
-    - go_name: WifiBand5Ghz
-      value: "2"
-      go_type: int
-    - go_name: WifiBand60Ghz
-      value: "16"
-      go_type: int
-    - go_name: WifiBand6Ghz
-      value: "8"
-      go_type: int
-    - go_name: WifiStandard11ac
-      value: "5"
-      go_type: int
-    - go_name: WifiStandard11ad
-      value: "7"
-      go_type: int
-    - go_name: WifiStandard11ax
-      value: "6"
-      go_type: int
-    - go_name: WifiStandard11be
-      value: "8"
-      go_type: int
-    - go_name: WifiStandard11n
-      value: "4"
-      go_type: int
-    - go_name: WifiStandardLegacy
-      value: "1"
-      go_type: int
-    - go_name: WifiStandardUnknown
-      value: "0"
       go_type: int

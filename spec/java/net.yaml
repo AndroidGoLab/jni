@@ -5,6 +5,94 @@
 package: net
 go_import: github.com/AndroidGoLab/jni/net
 classes:
+    - java_class: android.net.NetworkCapabilities
+      go_type: workCapabilities
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCapabilities
+          go_name: GetCapabilities
+          returns: '[I'
+          error: true
+        - java_method: getEnterpriseIds
+          go_name: GetEnterpriseIds
+          returns: '[I'
+          error: true
+        - java_method: getLinkDownstreamBandwidthKbps
+          go_name: GetLinkDownstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: getLinkUpstreamBandwidthKbps
+          go_name: GetLinkUpstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: getNetworkSpecifier
+          go_name: GetNetworkSpecifier
+          returns: android.net.NetworkSpecifier
+          error: true
+        - java_method: getOwnerUid
+          go_name: GetOwnerUid
+          returns: int
+          error: true
+        - java_method: getSignalStrength
+          go_name: GetSignalStrength
+          returns: int
+          error: true
+        - java_method: getSubscriptionIds
+          go_name: GetSubscriptionIds
+          returns: java.util.Set<java.lang.Integer>
+          error: true
+        - java_method: getTransportInfo
+          go_name: GetTransportInfo
+          returns: android.net.TransportInfo
+          error: true
+        - java_method: hasCapability
+          go_name: HasCapability
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasEnterpriseId
+          go_name: HasEnterpriseId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasTransport
+          go_name: HasTransport
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.net.ConnectivityManager
       go_type: ConnectivityManager
       obtain: system_service
@@ -267,194 +355,7 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-    - java_class: android.net.NetworkCapabilities
-      go_type: workCapabilities
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getCapabilities
-          go_name: GetCapabilities
-          returns: '[I'
-          error: true
-        - java_method: getEnterpriseIds
-          go_name: GetEnterpriseIds
-          returns: '[I'
-          error: true
-        - java_method: getLinkDownstreamBandwidthKbps
-          go_name: GetLinkDownstreamBandwidthKbps
-          returns: int
-          error: true
-        - java_method: getLinkUpstreamBandwidthKbps
-          go_name: GetLinkUpstreamBandwidthKbps
-          returns: int
-          error: true
-        - java_method: getNetworkSpecifier
-          go_name: GetNetworkSpecifier
-          returns: android.net.NetworkSpecifier
-          error: true
-        - java_method: getOwnerUid
-          go_name: GetOwnerUid
-          returns: int
-          error: true
-        - java_method: getSignalStrength
-          go_name: GetSignalStrength
-          returns: int
-          error: true
-        - java_method: getSubscriptionIds
-          go_name: GetSubscriptionIds
-          returns: java.util.Set<java.lang.Integer>
-          error: true
-        - java_method: getTransportInfo
-          go_name: GetTransportInfo
-          returns: android.net.TransportInfo
-          error: true
-        - java_method: hasCapability
-          go_name: HasCapability
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasEnterpriseId
-          go_name: HasEnterpriseId
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasTransport
-          go_name: HasTransport
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
 constants:
-    - go_name: ActionBackgroundDataSettingChanged
-      value: '"android.net.conn.BACKGROUND_DATA_SETTING_CHANGED"'
-      go_type: string
-    - go_name: ActionCaptivePortalSignIn
-      value: '"android.net.conn.CAPTIVE_PORTAL"'
-      go_type: string
-    - go_name: ActionRestrictBackgroundChanged
-      value: '"android.net.conn.RESTRICT_BACKGROUND_CHANGED"'
-      go_type: string
-    - go_name: ConnectivityAction
-      value: '"android.net.conn.CONNECTIVITY_CHANGE"'
-      go_type: string
-    - go_name: DefaultNetworkPreference
-      value: "1"
-      go_type: int
-    - go_name: ExtraCaptivePortal
-      value: '"android.net.extra.CAPTIVE_PORTAL"'
-      go_type: string
-    - go_name: ExtraCaptivePortalUrl
-      value: '"android.net.extra.CAPTIVE_PORTAL_URL"'
-      go_type: string
-    - go_name: ExtraExtraInfo
-      value: '"extraInfo"'
-      go_type: string
-    - go_name: ExtraIsFailover
-      value: '"isFailover"'
-      go_type: string
-    - go_name: ExtraNetwork
-      value: '"android.net.extra.NETWORK"'
-      go_type: string
-    - go_name: ExtraNetworkInfo
-      value: '"networkInfo"'
-      go_type: string
-    - go_name: ExtraNetworkRequest
-      value: '"android.net.extra.NETWORK_REQUEST"'
-      go_type: string
-    - go_name: ExtraNetworkType
-      value: '"networkType"'
-      go_type: string
-    - go_name: ExtraNoConnectivity
-      value: '"noConnectivity"'
-      go_type: string
-    - go_name: ExtraOtherNetworkInfo
-      value: '"otherNetwork"'
-      go_type: string
-    - go_name: ExtraReason
-      value: '"reason"'
-      go_type: string
-    - go_name: MultipathPreferenceHandover
-      value: "1"
-      go_type: int
-    - go_name: MultipathPreferencePerformance
-      value: "4"
-      go_type: int
-    - go_name: MultipathPreferenceReliability
-      value: "2"
-      go_type: int
-    - go_name: RestrictBackgroundStatusDisabled
-      value: "1"
-      go_type: int
-    - go_name: RestrictBackgroundStatusEnabled
-      value: "3"
-      go_type: int
-    - go_name: RestrictBackgroundStatusWhitelisted
-      value: "2"
-      go_type: int
-    - go_name: TypeBluetooth
-      value: "7"
-      go_type: int
-    - go_name: TypeDummy
-      value: "8"
-      go_type: int
-    - go_name: TypeEthernet
-      value: "9"
-      go_type: int
-    - go_name: TypeMobile
-      value: "0"
-      go_type: int
-    - go_name: TypeMobileDun
-      value: "4"
-      go_type: int
-    - go_name: TypeMobileHipri
-      value: "5"
-      go_type: int
-    - go_name: TypeMobileMms
-      value: "2"
-      go_type: int
-    - go_name: TypeMobileSupl
-      value: "3"
-      go_type: int
-    - go_name: TypeVpn
-      value: "17"
-      go_type: int
-    - go_name: TypeWifi
-      value: "1"
-      go_type: int
-    - go_name: TypeWimax
-      value: "6"
-      go_type: int
     - go_name: Creator
       value: "0"
       go_type: int
@@ -598,4 +499,103 @@ constants:
       go_type: int
     - go_name: TransportWifiAware
       value: "5"
+      go_type: int
+    - go_name: ActionBackgroundDataSettingChanged
+      value: '"android.net.conn.BACKGROUND_DATA_SETTING_CHANGED"'
+      go_type: string
+    - go_name: ActionCaptivePortalSignIn
+      value: '"android.net.conn.CAPTIVE_PORTAL"'
+      go_type: string
+    - go_name: ActionRestrictBackgroundChanged
+      value: '"android.net.conn.RESTRICT_BACKGROUND_CHANGED"'
+      go_type: string
+    - go_name: ConnectivityAction
+      value: '"android.net.conn.CONNECTIVITY_CHANGE"'
+      go_type: string
+    - go_name: DefaultNetworkPreference
+      value: "1"
+      go_type: int
+    - go_name: ExtraCaptivePortal
+      value: '"android.net.extra.CAPTIVE_PORTAL"'
+      go_type: string
+    - go_name: ExtraCaptivePortalUrl
+      value: '"android.net.extra.CAPTIVE_PORTAL_URL"'
+      go_type: string
+    - go_name: ExtraExtraInfo
+      value: '"extraInfo"'
+      go_type: string
+    - go_name: ExtraIsFailover
+      value: '"isFailover"'
+      go_type: string
+    - go_name: ExtraNetwork
+      value: '"android.net.extra.NETWORK"'
+      go_type: string
+    - go_name: ExtraNetworkInfo
+      value: '"networkInfo"'
+      go_type: string
+    - go_name: ExtraNetworkRequest
+      value: '"android.net.extra.NETWORK_REQUEST"'
+      go_type: string
+    - go_name: ExtraNetworkType
+      value: '"networkType"'
+      go_type: string
+    - go_name: ExtraNoConnectivity
+      value: '"noConnectivity"'
+      go_type: string
+    - go_name: ExtraOtherNetworkInfo
+      value: '"otherNetwork"'
+      go_type: string
+    - go_name: ExtraReason
+      value: '"reason"'
+      go_type: string
+    - go_name: MultipathPreferenceHandover
+      value: "1"
+      go_type: int
+    - go_name: MultipathPreferencePerformance
+      value: "4"
+      go_type: int
+    - go_name: MultipathPreferenceReliability
+      value: "2"
+      go_type: int
+    - go_name: RestrictBackgroundStatusDisabled
+      value: "1"
+      go_type: int
+    - go_name: RestrictBackgroundStatusEnabled
+      value: "3"
+      go_type: int
+    - go_name: RestrictBackgroundStatusWhitelisted
+      value: "2"
+      go_type: int
+    - go_name: TypeBluetooth
+      value: "7"
+      go_type: int
+    - go_name: TypeDummy
+      value: "8"
+      go_type: int
+    - go_name: TypeEthernet
+      value: "9"
+      go_type: int
+    - go_name: TypeMobile
+      value: "0"
+      go_type: int
+    - go_name: TypeMobileDun
+      value: "4"
+      go_type: int
+    - go_name: TypeMobileHipri
+      value: "5"
+      go_type: int
+    - go_name: TypeMobileMms
+      value: "2"
+      go_type: int
+    - go_name: TypeMobileSupl
+      value: "3"
+      go_type: int
+    - go_name: TypeVpn
+      value: "17"
+      go_type: int
+    - go_name: TypeWifi
+      value: "1"
+      go_type: int
+    - go_name: TypeWimax
+      value: "6"
       go_type: int
