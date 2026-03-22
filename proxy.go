@@ -26,27 +26,31 @@ var (
 // registerProxy stores a handler and returns a unique ID.
 func registerProxy(h ProxyHandler) int64 {
 	id := proxyNextID.Add(1)
-	proxyMu.Lock()
-	proxyHandlers[id] = h
-	proxyMu.Unlock()
+	func() {
+		proxyMu.Lock()
+		defer proxyMu.Unlock()
+		proxyHandlers[id] = h
+	}()
 	return id
 }
 
 // registerProxyFull stores a full handler and returns a unique ID.
 func registerProxyFull(h ProxyHandlerFull) int64 {
 	id := proxyNextID.Add(1)
-	proxyMu.Lock()
-	proxyFullHandlers[id] = h
-	proxyMu.Unlock()
+	func() {
+		proxyMu.Lock()
+		defer proxyMu.Unlock()
+		proxyFullHandlers[id] = h
+	}()
 	return id
 }
 
 // unregisterProxy removes a handler by ID from both registries.
 func unregisterProxy(id int64) {
 	proxyMu.Lock()
+	defer proxyMu.Unlock()
 	delete(proxyHandlers, id)
 	delete(proxyFullHandlers, id)
-	proxyMu.Unlock()
 }
 
 // RegisterProxyHandler stores a basic ProxyHandler in the global registry
@@ -66,16 +70,16 @@ func UnregisterProxyHandler(id int64) {
 // lookupProxy retrieves a handler by ID.
 func lookupProxy(id int64) (ProxyHandler, bool) {
 	proxyMu.Lock()
+	defer proxyMu.Unlock()
 	h, ok := proxyHandlers[id]
-	proxyMu.Unlock()
 	return h, ok
 }
 
 // lookupProxyFull retrieves a full handler by ID.
 func lookupProxyFull(id int64) (ProxyHandlerFull, bool) {
 	proxyMu.Lock()
+	defer proxyMu.Unlock()
 	h, ok := proxyFullHandlers[id]
-	proxyMu.Unlock()
 	return h, ok
 }
 
@@ -158,9 +162,11 @@ func findClassWithFallback(
 	}
 	capi.ExceptionClear(env)
 
-	proxyMu.Lock()
-	cl := proxyClassLoader
-	proxyMu.Unlock()
+	cl := func() capi.Object {
+		proxyMu.Lock()
+		defer proxyMu.Unlock()
+		return proxyClassLoader
+	}()
 	if cl == 0 {
 		return 0
 	}

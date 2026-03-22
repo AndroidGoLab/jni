@@ -230,12 +230,14 @@ func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.Extracte
 
 					loc, err := location.ExtractLocation(env, locObj)
 					if err == nil && loc != nil {
-						mu.Lock()
-						if result == nil {
-							result = loc
-							close(done)
-						}
-						mu.Unlock()
+						func() {
+							mu.Lock()
+							defer mu.Unlock()
+							if result == nil {
+								result = loc
+								close(done)
+							}
+						}()
 					}
 				}
 				return nil, nil

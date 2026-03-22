@@ -90,9 +90,11 @@ func OnCreate(
 ) {
 	vm = cvm
 	activityRef = activity
-	OutputMu.Lock()
-	outputBuf.Reset()
-	OutputMu.Unlock()
+	func() {
+		OutputMu.Lock()
+		defer OutputMu.Unlock()
+		outputBuf.Reset()
+	}()
 	exampleStarted = false
 }
 
@@ -115,9 +117,11 @@ func OnNativeWindowCreated(windowPtr unsafe.Pointer) {
 			var err error
 			needed, err = getUngrantedPermissions(env, activityRef)
 			if err != nil {
-				OutputMu.Lock()
-				fmt.Fprintf(&outputBuf, "permissions check: %v\n", err)
-				OutputMu.Unlock()
+				func() {
+					OutputMu.Lock()
+					defer OutputMu.Unlock()
+					fmt.Fprintf(&outputBuf, "permissions check: %v\n", err)
+				}()
 			}
 			return nil
 		})
@@ -147,9 +151,11 @@ func startExample() {
 			if err := runFunc(vm, &localBuf); err != nil {
 				fmt.Fprintf(&localBuf, "ERROR: %v\n", err)
 			}
-			OutputMu.Lock()
-			outputBuf.Write(localBuf.Bytes())
-			OutputMu.Unlock()
+			func() {
+				OutputMu.Lock()
+				defer OutputMu.Unlock()
+				outputBuf.Write(localBuf.Bytes())
+			}()
 		}
 		RenderOutput()
 	}()
@@ -158,9 +164,11 @@ func startExample() {
 // RenderOutput re-renders the current output buffer to the screen.
 // Call from background goroutines after appending to the shared buffer.
 func RenderOutput() {
-	OutputMu.Lock()
-	text := outputBuf.String()
-	OutputMu.Unlock()
+	text := func() string {
+		OutputMu.Lock()
+		defer OutputMu.Unlock()
+		return outputBuf.String()
+	}()
 	if text == "" {
 		text = "(no output)"
 	}
@@ -169,13 +177,16 @@ func RenderOutput() {
 
 // OnResume is called when the activity resumes (e.g. after permission dialog).
 func OnResume(activity *jni.Object) {
-	OutputMu.Lock()
-	hasOutput := outputBuf.Len() > 0
-	var text string
-	if hasOutput {
-		text = outputBuf.String()
-	}
-	OutputMu.Unlock()
+	hasOutput, text := func() (bool, string) {
+		OutputMu.Lock()
+		defer OutputMu.Unlock()
+		has := outputBuf.Len() > 0
+		var t string
+		if has {
+			t = outputBuf.String()
+		}
+		return has, t
+	}()
 	if nativeWindow != nil && hasOutput {
 		renderText(text)
 	}
