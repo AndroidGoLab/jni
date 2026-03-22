@@ -15,7 +15,13 @@ import (
 	"github.com/AndroidGoLab/jni"
 )
 
-const templateRecord = 3 // CameraDevice.TEMPLATE_RECORD
+// Template selects the capture request template type.
+type Template int32
+
+const (
+	TemplatePreview  Template = 1 // CameraDevice.TEMPLATE_PREVIEW
+	TemplateRecord   Template = 3 // CameraDevice.TEMPLATE_RECORD
+)
 
 // Facing selects front or back camera.
 type Facing int32
@@ -27,9 +33,10 @@ const (
 
 // Config controls camera session parameters.
 type Config struct {
-	Facing Facing
-	Width  int32 // 0 = camera default
-	Height int32 // 0 = camera default
+	Facing   Facing
+	Template Template // 0 defaults to TemplatePreview
+	Width    int32    // 0 = camera default
+	Height   int32    // 0 = camera default
 }
 
 // Session holds an active camera capture session.
@@ -419,7 +426,11 @@ func Open(vm *jni.VM, activity *jni.Object, cfg Config, targets ...*jni.Object) 
 		if err != nil {
 			return fmt.Errorf("get createCaptureRequest: %w", err)
 		}
-		builder, err := env.CallObjectMethod(s.device, createReqMid, jni.IntValue(templateRecord))
+		tmpl := cfg.Template
+		if tmpl == 0 {
+			tmpl = TemplatePreview
+		}
+		builder, err := env.CallObjectMethod(s.device, createReqMid, jni.IntValue(int32(tmpl)))
 		if err != nil {
 			return fmt.Errorf("createCaptureRequest: %w", err)
 		}

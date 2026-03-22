@@ -183,7 +183,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Recording started")
 	ui.RenderOutput()
 
-	cam, err := camera2.Open(vm, ui.ActivityRef(), camera2.Config{Facing: camera2.FacingBack}, surfObj)
+	cam, err := camera2.Open(vm, ui.ActivityRef(), camera2.Config{
+		Facing:   camera2.FacingBack,
+		Template: camera2.TemplateRecord,
+	}, surfObj)
 	if err != nil {
 		_ = rec.Stop()
 		_ = rec.Release()
